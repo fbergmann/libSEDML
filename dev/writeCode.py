@@ -378,11 +378,11 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write(' * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
   output.write(' */\n')
   output.write('{0}* \n'.format(attrib['element']))
-  output.write('{0}* create{0}()\n'.format(attrib['element']))
+  output.write('{0}::create{1}()\n'.format(loname, attrib['element']))
   output.write('{\n')
   output.write('\t{0} *temp = new {0}();\n'.format(attrib['element']))
   output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(capAttName))
-  output.write('\treturn temp;')
+  output.write('\treturn temp;\n')
   output.write('}\n\n')
 
 
@@ -390,7 +390,7 @@ def createCode(element):
   nameOfElement = element['name']
   nameOfPackage = element['package']
   sedmltypecode = element['typecode']
-  isListOf = element['hasListOf']
+  hasListOf = element['hasListOf']
   attributes = element['attribs']
   hasChildren = element['hasChildren']
   hasMath = element['hasMath']
@@ -402,7 +402,7 @@ def createCode(element):
   writeConstructors(nameOfElement, nameOfPackage, code, attributes, hasChildren, hasMath)
   writeAttributeCode(attributes, code, nameOfElement)
   generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath) 
-  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath) 
+  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasListOf, hasMath) 
   generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath) 
   writeListOfCode.createCode(element, code)
   writeCCode.createCode(element, code)

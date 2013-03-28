@@ -223,18 +223,25 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
   outFile.write(' */\n')
   outFile.write('void\n{0}::writeElements (XMLOutputStream& stream) const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSBase::writeElements(stream);\n')
+  outFile.write('\tSedBase::writeElements(stream);\n')
   if hasChildren == True:
     for i in range(0, len(attributes)):
       if attributes[i]['type'] == 'element':
         outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
-        outFile.write('\t{\n\t\t;\n\t}\n')
+        outFile.write('\t{\n\t\t')
+        outFile.write('m{0}.write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('\n\t}\n')
+      if attributes[i]['type'] == 'lo_element':
+        outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('\t{\n\t\t')
+        outFile.write('m{0}.write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('\n\t}\n')
   if hasMath == True:
     for i in range(0, len(attributes)):
       if attributes[i]['type'] == 'element' and attributes[i]['element'] == 'Math':
         outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\t{\n\t\twriteMathML(getMath(), stream, getSEDMLNamespaces());\n\t}\n')
-  outFile.write('\tSBase::writeExtensionElements(stream);\n')
+  outFile.write('\tSedBase::writeExtensionElements(stream);\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -272,7 +279,7 @@ def writeSetDocCPPCode(outFile, element):
   outFile.write(' */\n')
   outFile.write('void\n{0}::setSEDMLDocument (SEDMLDocument* d)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSBase::setSEDMLDocument(d);\n')
+  outFile.write('\tSedBase::setSEDMLDocument(d);\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -301,7 +308,7 @@ def writeEnablePkgCPPCode(outFile, element):
   outFile.write('void\n{0}::enablePackageInternal(const std::string& pkgURI,\n'.format(element))
   outFile.write('             const std::string& pkgPrefix, bool flag)\n')
   outFile.write('{\n')
-  outFile.write('\tSBase::enablePackageInternal(pkgURI, pkgPrefix, flag);\n')
+  outFile.write('\tSedBase::enablePackageInternal(pkgURI, pkgPrefix, flag);\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -310,7 +317,7 @@ def writeCreateObjectHeader(outFile):
   outFile.write('\t/**\n')
   outFile.write('\t * return the SEDML object corresponding to next XMLToken.\n')
   outFile.write('\t */\n')
-  outFile.write('\tvirtual SBase* createObject(XMLInputStream& stream);\n\n\n')
+  outFile.write('\tvirtual SedBase* createObject(XMLInputStream& stream);\n\n\n')
   writeInternalEnd(outFile)
 
 def writeAddExpectedHeader(outFile):
@@ -328,7 +335,7 @@ def writeAddExpectedCPPCode(outFile, element, attribs):
   outFile.write(' */\n')
   outFile.write('void\n{0}::addExpectedAttributes(ExpectedAttributes& attributes)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSBase::addExpectedAttributes(attributes);\n\n')
+  outFile.write('\tSedBase::addExpectedAttributes(attributes);\n\n')
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['name']))
@@ -487,7 +494,7 @@ def writeReadAttributesCPPCode(outFile, element, attribs):
   outFile.write('void\n{0}::readAttributes (const XMLAttributes& attributes,\n'.format(element))
   outFile.write('                             const ExpectedAttributes& expectedAttributes)\n')
   outFile.write('{\n')
-  outFile.write('\tSBase::readAttributes(attributes, expectedAttributes);\n\n')
+  outFile.write('\tSedBase::readAttributes(attributes, expectedAttributes);\n\n')
   outFile.write('\tbool assigned = false;\n\n')
   for i in range (0, len(attribs)):
     writeReadAttribute(outFile, attribs[i], element)
@@ -509,12 +516,12 @@ def writeWriteAttributesCPPCode(outFile, element, attribs):
   outFile.write(' */\n')
   outFile.write('\tvoid\n{0}::writeAttributes (XMLOutputStream& stream) const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSBase::writeAttributes(stream);\n\n')
+  outFile.write('\tSedBase::writeAttributes(stream);\n\n')
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
       outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))
-  outFile.write('\tSBase::writeExtensionAttributes(stream);\n\n')
+  outFile.write('\tSedBase::writeExtensionAttributes(stream);\n\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
   
@@ -624,7 +631,7 @@ def writeReadOtherXMLCPPCode(outFile, element):
   outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
   outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
   outFile.write('\t\tread = true;\n\t}\n\n')
-  outFile.write('\tif (SBase::readOtherXML(stream))\n\t{\n\t\tread = true;\n\t}\n')
+  outFile.write('\tif (SedBase::readOtherXML(stream))\n\t{\n\t\tread = true;\n\t}\n')
   outFile.write('\treturn read;\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
