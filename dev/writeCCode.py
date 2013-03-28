@@ -65,14 +65,79 @@ def writeConstructors(element, package, output):
 
 def writeAttributeFunctions(attrs, output, element):
   for i in range(0, len(attrs)):
-    writeGetFunction(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeGetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-    writeIsSetFunction(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeIsSetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-    writeSetFunction(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeSetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-    writeUnsetFunction(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeUnsetFunction(attrs[i], output, element)
+  for i in range(0, len(attrs)):
+    if attrs[i]['type'] == 'lo_element':
+      writeListOfSubElements(attrs[i], output, element)
 
+def writeListOfSubElements(attrib, output, element):
+  loname = generalFunctions.writeListOf(attrib['element'])
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('int\n')
+  output.write('{0}_add{1}({0}_t * {2}, '.format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('{0}_t * {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->add{1}({2}) : LIBSBML_INVALID_OBJECT;\n'.format(strFunctions.objAbbrev(element),attrib['element'],strFunctions.objAbbrev(attrib['element'])))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('{0}_t *\n'.format(attrib['element']))
+  output.write('{0}_create{1}({0}_t * {2})\n' .format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->create{1}() : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('ListOf_t *\n')
+  output.write('{0}_get{1}({0}_t * {2})\n'.format(element, loname, strFunctions.objAbbrev(element)))
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->getListOf{1}s() : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('{0}_t *\n'.format(attrib['element']))
+  output.write('{0}_get{1}({0}_t * {2}, '.format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('unsigned int n)\n')
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->get{1}(n) : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('{0}_t *\n'.format(attrib['element']))
+  output.write('{0}_get{1}ById({0}_t * {2}, '.format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('const char * sid)\n')
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->get{1}(sid) : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('unsigned int\n')
+  output.write('{0}_getNum{1}s({0}_t * {2})\n' .format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->getNum{1}s() : SEDML_INT_MAX;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('{0}_t *\n'.format(attrib['element']))
+  output.write('{0}_remove{1}({0}_t * {2}, '.format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('unsigned int n)\n')
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->remove{1}(n) : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('{0}_t *\n'.format(attrib['element']))
+  output.write('{0}_remove{1}ById({0}_t * {2}, '.format(element, attrib['element'], strFunctions.objAbbrev(element)))
+  output.write('const char * sid)\n')
+  output.write('{\n')
+  output.write('\treturn  ({0} != NULL) ? {0}->remove{1}(sid) : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('}\n\n')
+ # writeListOfHeader.writeGetFunctions(output, attrib['element'], True, element)
+ # writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
+ 
 
 def writeGetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
@@ -84,7 +149,7 @@ def writeGetFunction(attrib, output, element):
   else:
     attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element':
+  if attrib['type'] == 'element' or attrib['type'] == 'lo_element' :
     return
   varname = strFunctions.objAbbrev(element)
   output.write('/**\n')
@@ -187,6 +252,18 @@ def writeHasReqdAttrFunction(output, element):
   output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->hasRequiredAttributes()) : 0;\n'.format(varname))
   output.write('}\n\n\n')
 
+def writeHasReqdElementsFunction(output, element):
+  varname = strFunctions.objAbbrev(element)
+  output.write('/**\n')
+  output.write(' * write comments\n')
+  output.write(' */\n')
+  output.write('LIBSEDML_EXTERN\n')
+  output.write('int\n')
+  output.write('{0}_hasRequiredElements'.format(element))
+  output.write('({0}_t * {1})\n'.format(element, varname))
+  output.write('{\n')
+  output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->hasRequiredElements()) : 0;\n'.format(varname))
+  output.write('}\n\n\n')
     
 def writeListOfCode(output, element):
   loelement = generalFunctions.writeListOf(element)
@@ -220,6 +297,8 @@ def createCode(element, code):
   writeConstructors(element['name'], element['package'], code)
   writeAttributeFunctions(element['attribs'], code, element['name'])
   writeHasReqdAttrFunction(code, element['name'])
+  if element['hasChildren'] == True or element['hasMath'] == True:
+    writeHasReqdElementsFunction(code, element['name'])
   if element['hasListOf'] == True:
     writeListOfCode(code, element['name'])
   code.write('\n\n');

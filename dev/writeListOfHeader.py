@@ -173,18 +173,18 @@ def writeRemoveFunctions(output, element, subelement=False, topelement=""):
   
 def writeProtectedFunctions(output, element, package):
   listOf = generalFunctions.writeListOf(element)
-  generalFunctions.writeInternalStart(output)
+  generalFunctions.writeInternalStartDecl(output)
   output.write('\t/**\n')
   output.write('\t * Creates a new {0} in this {1}\n'.format(element, listOf))
   output.write('\t */\n')
   output.write('\tvirtual SedBase* createObject(XMLInputStream& stream);\n\n\n')
-  generalFunctions.writeInternalEnd(output)
-  generalFunctions.writeInternalStart(output)
+  generalFunctions.writeInternalEndDecl(output)
+  generalFunctions.writeInternalStartDecl(output)
   output.write('\t/**\n')
   output.write('\t * Write the namespace for the {0} package.\n'.format(package))
   output.write('\t */\n')
   output.write('\tvirtual void writeXMLNS(XMLOutputStream& stream) const;\n\n\n')
-  generalFunctions.writeInternalEnd(output)
+  generalFunctions.writeInternalEndDecl(output)
    
   
    

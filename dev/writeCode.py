@@ -16,9 +16,9 @@ import writeCCode
 
 def writeIncludes(fileOut, element, pkg, hasMath=False):
   fileOut.write('\n\n');
-  fileOut.write('#include <sedml/packages/{0}/sedml/{1}.h>\n'.format(pkg.lower(), element))
+  fileOut.write('#include <sedml/{1}.h>\n'.format(pkg.lower(), element))
   if hasMath == True:
-    fileOut.write('#include <sedml/math/MathML.h>\n')
+    fileOut.write('#include <sbml/math/MathML.h>\n')
   fileOut.write('\n\n');
 #  fileOut.write('#if WIN32 && !defined(CYGWIN)\n')
 #  fileOut.write('\t#define isnan _isnan\n')
@@ -306,13 +306,17 @@ def writeUnsetCode(attrib, output, element):
 # for each attribute write a set/get/isset/unset
 def writeAttributeCode(attrs, output, element):
   for i in range(0, len(attrs)):
-    writeGetCode(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeGetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
-    writeIsSetCode(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeIsSetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
-    writeSetCode(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeSetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
-    writeUnsetCode(attrs[i], output, element)
+	if attrs[i]['type'] != 'lo_element':
+		writeUnsetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
       writeListOfSubFunctions(attrs[i], output, element)
@@ -330,7 +334,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write(' in this {0} object.\n'.format(element))
   output.write(' */\n')
   output.write('const {0}*\n'.format(loname))
-  output.write('{0}::get{1}() const\n\n\n'.format(element, loname))
+  output.write('{0}::get{1}() const\n'.format(element, loname))
   output.write('{\n')
   output.write('\treturn m{0};\n'.format(capAttName))
   output.write('}\n\n\n')
@@ -348,15 +352,23 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write(' * @li LIBSEDML_OPERATION_SUCCESS\n')
   output.write(' * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
   output.write(' */\n')
-  output.write('int add{0}(const {0}* {1});\n\n\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
-  writeListOfCode.writeAddFunctions(output, attrib['element'], True, element, capAttName)
+  output.write('int\n')
+  output.write('{0}::add{1}(const {1}* {2})\n'.format(loname, attrib['element'], strFunctions.objAbbrev(attrib['element'])))
+  output.write('{\n')
+  output.write('\tif({0} == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n'.format(strFunctions.objAbbrev(attrib['element'])))
+  output.write('\tm{0}.append({1});\n'.format(capAttName,strFunctions.objAbbrev(attrib['element'])))
+  output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+  output.write('}\n\n\n')
   output.write('/**\n')
   output.write(' * Get the number of {0} objects in this {1}.\n'.format(attrib['element'], element))
   output.write(' *\n')
   output.write(' * @return the number of {0} objects in this {1}\n'.format(attrib['element'], element))
   output.write(' */\n')
-  output.write('unsigned int getNum{0}s() const;\n\n\n'.format(attrib['element']))
-  writeListOfCode.writeGetNumFunction(output, attrib['element'], True, element, capAttName)
+  output.write('unsigned int \n')
+  output.write('{0}::getNum{1}s() const\n'.format(loname, attrib['element']))
+  output.write('{\n')
+  output.write('\treturn m{0}.size();\n'.format(capAttName))
+  output.write('}\n\n')
   output.write('/**\n')
   output.write(' * Creates a new {0} object, adds it to this {1}s\n'.format(attrib['element'], element))
   output.write(' * {0} and returns the {1} object created. \n'.format(loname, attrib['element']))
@@ -365,9 +377,13 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write(' *\n')
   output.write(' * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
   output.write(' */\n')
-  output.write('{0}* create{0}();\n\n\n'.format(attrib['element']))
-  writeListOfCode.writeCreateFunction(output, attrib['element'], True, element, capAttName)
-#  writeListOfCode.writeRemoveFunctions(output, attrib['element'], True, element, capAttName)
+  output.write('{0}* \n'.format(attrib['element']))
+  output.write('{0}* create{0}()\n'.format(attrib['element']))
+  output.write('{\n')
+  output.write('\t{0} *temp = new {0}();\n'.format(attrib['element']))
+  output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(capAttName))
+  output.write('\treturn temp;')
+  output.write('}\n\n')
 
 
 def createCode(element):

@@ -9,9 +9,15 @@ import sys
 import strFunctions
 
 def writeInternalStart(outFile):
-  outFile.write('\t/** @cond doxygen-libsbml-internal */\n\n')
+  outFile.write('/** @cond doxygen-libsbml-internal */\n\n')
   
 def writeInternalEnd(outFile):
+  outFile.write('/** @endcond doxygen-libsbml-internal */\n\n\n')
+
+def writeInternalStartDecl(outFile):
+  outFile.write('\t/** @cond doxygen-libsbml-internal */\n\n')
+  
+def writeInternalEndDecl(outFile):
   outFile.write('\t/** @endcond doxygen-libsbml-internal */\n\n\n')
 
 def writeListOf(element):
@@ -324,7 +330,7 @@ def writeAddExpectedCPPCode(outFile, element, attribs):
   outFile.write('{\n')
   outFile.write('\tSBase::addExpectedAttributes(attributes);\n\n')
   for i in range (0, len(attribs)):
-    if attribs[i]['type'] != 'element':
+    if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['name']))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)

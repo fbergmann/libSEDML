@@ -25,12 +25,12 @@ def writeClassDefn(fileOut, nameOfClass, pkg, members):
 
 def writeClassEnd(fileOut, members):
   fileOut.write('protected:\n\n')
-  generalFunctions.writeInternalStart(fileOut)
+  generalFunctions.writeInternalStartDecl(fileOut)
   for i in range (0, len(members)):
     mem = members[i]
     fileOut.write('\tListOf{0}s m{0}s;\n'.format(mem['name']))
   fileOut.write('\n')
-  generalFunctions.writeInternalEnd(fileOut)
+  generalFunctions.writeInternalEndDecl(fileOut)
   fileOut.write('};\n\n\n')
  
 def writeConstructors(fileOut, nameOfClass, pkg):
@@ -209,7 +209,7 @@ def writeRequiredMethods(fileOut):
   fileOut.write('\t// overridden virtual functions for read/write/check\n')
   fileOut.write('\t//\n')
   fileOut.write('\t//---------------------------------------------------------------\n\n')
-  generalFunctions.writeInternalStart(fileOut)
+  generalFunctions.writeInternalStartDecl(fileOut)
   fileOut.write('\t/**\n')
   fileOut.write('\t * Subclasses must override this method to create, store, and then\n')
   fileOut.write('\t * return an SEDML object corresponding to the next XMLToken in the\n')
@@ -219,14 +219,14 @@ def writeRequiredMethods(fileOut):
   fileOut.write('\t * XMLInputStream or NULL if the token was not recognized.\n')
   fileOut.write('\t */\n')
   fileOut.write('\tvirtual SedBase* createObject (XMLInputStream& stream);\n\n\n')
-  generalFunctions.writeInternalEnd(fileOut)
-  generalFunctions.writeInternalStart(fileOut)
+  generalFunctions.writeInternalEndDecl(fileOut)
+  generalFunctions.writeInternalStartDecl(fileOut)
   fileOut.write('\t/**\n')
   fileOut.write('\t * Subclasses must override this method to write out their contained\n')
   fileOut.write('\t * SEDML objects as XML elements if they have their specific elements.\n')
   fileOut.write('\t */\n')
   fileOut.write('\tvirtual void writeElements (XMLOutputStream& stream) const;\n\n\n')
-  generalFunctions.writeInternalEnd(fileOut)
+  generalFunctions.writeInternalEndDecl(fileOut)
   fileOut.write('\t/**\n')
   fileOut.write('\t * Checks if this plugin object has all the required elements.\n')
   fileOut.write('\t *\n')
