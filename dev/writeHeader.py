@@ -28,18 +28,16 @@ def writeConstructors(element, package, output):
   output.write('\t * @param pkgVersion an unsigned int, the SEDML {0} Version to assign'.format(package))
   output.write(' to this {0}\n\t */\n'.format(element))
   output.write('\t{0}(unsigned int level      = '.format(element))
-  output.write('{0}Extension::getDefaultLevel(),\n'.format(package))
+  output.write('SEDML_DEFAULT_LEVEL,\n')
   output.write('\t{0}unsigned int version    = '.format(indent))
-  output.write('{0}Extension::getDefaultVersion(),\n'.format(package))
-  output.write('\t{0}unsigned int pkgVersion = '.format(indent))
-  output.write('{0}Extension::getDefaultPackageVersion());\n\n\n'.format(package))
+  output.write('SEDML_DEFAULT_VERSION);\n\n\n')
   output.write('\t/**\n\t * ' )
   output.write('Creates a new {0}'.format(element))
-  output.write(' with the given {0}PkgNamespaces object.\n'.format(package))
+  output.write(' with the given SedMLNamespaces object.\n')
   output.write('\t *\n')
-  output.write('\t * @param {0}ns the {1}PkgNamespaces object'.format(package.lower(), package))
+  output.write('\t * @param {0}ns the SedMLNamespaces object'.format(package.lower()))
   output.write('\n\t */\n')
-  output.write('\t{0}({1}PkgNamespaces* {2}ns);\n\n\n '.format(element, package, package.lower()))
+  output.write('\t{0}(SedMLNamespaces* {1}ns);\n\n\n '.format(element,package.lower()))
   output.write('\t/**\n\t * ' )
   output.write('Copy constructor for {0}.\n'.format(element))
   output.write('\t *\n')
@@ -324,15 +322,15 @@ def writeIncludes(fileOut, element, pkg):
   fileOut.write('\n\n');
   fileOut.write('#include <sedml/common/extern.h>\n')
   fileOut.write('#include <sedml/common/sedmlfwd.h>\n')
-  fileOut.write('#include <sedml/packages/{0}/common/{0}fwd.h>\n'.format(pkg.lower()))
+  fileOut.write('#include <sedml/common/{0}fwd.h>\n'.format(pkg.lower()))
   fileOut.write('\n\n');
   fileOut.write('#ifdef __cplusplus\n')
   fileOut.write('\n\n');
   fileOut.write('#include <string>\n')
   fileOut.write('\n\n');
   fileOut.write('#include <sedml/SedBase.h>\n')
-  fileOut.write('#include <sedml/ListOf.h>\n')
-  fileOut.write('#include <sedml/packages/{0}/extension/{1}Extension.h>\n'.format(pkg.lower(), pkg))
+  fileOut.write('#include <sedml/SedListOf.h>\n')
+  fileOut.write('#include <sedml/SedMLNamespaces.h>\n')
   fileOut.write('\n\n');
   fileOut.write('LIBSEDML_CPP_NAMESPACE_BEGIN\n')
   fileOut.write('\n\n');
@@ -360,7 +358,7 @@ def createHeader(element):
   nameOfElement = element['name']
   nameOfPackage = element['package']
   sedmltypecode = element['typecode']
-  isListOf = element['hasListOf']
+  isSedListOf = element['hasSedListOf']
   attributes = element['attribs']
   hasChildren = element['hasChildren']
   hasMath = element['hasMath']
@@ -370,7 +368,7 @@ def createHeader(element):
   fileHeaders.addLicence(header)
   writeIncludes(header, nameOfElement, nameOfPackage)
   writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath)
-  if isListOf == True:
+  if isSedListOf == True:
     writeListOfHeader.createHeader(element, header)
   writeCPPEnd(header)
   writeCStart(header)

@@ -17,13 +17,13 @@ import writeExtensionCode
 if len(sys.argv) != 1:
   print 'Usage: run.py'
 else:
-  package = createNewPackage.createSedML()
-  writeExtensionHeader.createHeader(package)
-  writeExtensionCode.createCode(package)
-  plugins = package['plugins']
-  for i in range(0, len(plugins)):
-    plugin = plugins[i]
-    writePluginHeader.createHeader(package, plugin)
+  #package = createNewPackage.createSedML()
+  #writeExtensionHeader.createHeader(package)
+  #writeExtensionCode.createCode(package)
+  #plugins = package['plugins']
+  #for i in range(0, len(plugins)):
+  #  plugin = plugins[i]
+  #  writePluginHeader.createHeader(package, plugin)
   element = createNewElementDictObj.createSedDocument()
   writeCode.createCode(element)
   writeHeader.createHeader(element)

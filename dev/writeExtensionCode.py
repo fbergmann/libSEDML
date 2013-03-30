@@ -114,13 +114,13 @@ def writeGetFunctions(fileOut, pkg, nameOfClass, elements):
   fileOut.write('/*\n')
   fileOut.write(' * Returns an SEDMLExtensionNamespaces<{0}Extension> object \n'.format(pkg))
   fileOut.write(' */\n')
-  fileOut.write('SEDMLNamespaces*\n')   
+  fileOut.write('SedMLNamespaces*\n')   
   fileOut.write('{0}::getSEDMLExtensionNamespaces(const std::string &uri) const\n'.format(nameOfClass))
   fileOut.write('{\n')
-  fileOut.write('\t{0}PkgNamespaces* pkgns = NULL;\n'.format(pkg))
+  fileOut.write('\tSedMLNamespaces* pkgns = NULL;\n')
   fileOut.write('\tif (uri == getXmlnsL3V1V1())\n')
   fileOut.write('\t{\n')
-  fileOut.write('\t\tpkgns = new {0}PkgNamespaces(3, 1, 1);\n'.format(pkg))
+  fileOut.write('\t\tpkgns = new SedMLNamespaces(1, 1);\n')
   fileOut.write('\t}\n')
   fileOut.write('\n\treturn pkgns;\n')
   fileOut.write('}\n\n\n')
@@ -133,7 +133,7 @@ def writeIncludes(fileOut, element, pkg, plugins):
   fileOut.write('#include <sedml/extension/SEDMLExtensionRegister.h>\n')
   fileOut.write('#include <sedml/extension/SEDMLExtensionRegistry.h>\n')
   fileOut.write('#include <sedml/extension/SedBasePluginCreator.h>\n')
-  fileOut.write('#include <sedml/extension/SEDMLDocumentPlugin.h>\n')
+  fileOut.write('#include <sedml/extension/SedMLDocumentPlugin.h>\n')
   fileOut.write('\n\n');
   fileOut.write('#include <sedml/packages/{0}/extension/{1}.h>\n'.format(pkg.lower(), element))
   for i in range (0, len(plugins)):
@@ -191,7 +191,7 @@ def writeInitFunction(fileOut, pkg, nameOfClass, plugins):
     plug = plug_ext['sbase']
     fileOut.write('\tSedBaseExtensionPoint {0}ExtPoint("core", SEDML_{1});\n'.format(plug.lower(), plug.upper()))
   fileOut.write('\n')
-  fileOut.write('\tSedBasePluginCreator<SEDMLDocumentPlugin, {0}Extension> sedmldocPluginCreator(sedmldocExtPoint, packageURIs);\n'.format(pkg))
+  fileOut.write('\tSedBasePluginCreator<SedMLDocumentPlugin, {0}Extension> sedmldocPluginCreator(sedmldocExtPoint, packageURIs);\n'.format(pkg))
   for i in range (0, len(plugins)):
     plug_ext = plugins[i]
     plug = plug_ext['sbase']
@@ -292,7 +292,7 @@ def writeRequiredMethods(fileOut, nameOfClass, pkg, elements):
     fileOut.write('};\n\n\n')
   fileOut.write('/*\n')
   fileOut.write(' * Instantiate SEDMLExtensionNamespaces<{0}>\n'.format(nameOfClass))
-  fileOut.write(' * ({0}PkgNamespaces) for DLL.\n'.format(pkg))
+  fileOut.write(' * (SedMLNamespaces) for DLL.\n')
   fileOut.write(' */\n')
   fileOut.write('template class LIBSEDML_EXTERN  SEDMLExtensionNamespaces<{0}>;\n\n\n'.format(nameOfClass))
   fileOut.write('/*------------------ (END) ----------------------------------*/\n\n')

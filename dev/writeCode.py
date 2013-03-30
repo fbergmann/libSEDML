@@ -45,7 +45,7 @@ def writeAtt(atttype, name, output, constType, pkg):
     if constType == 0:
       output.write(')\n')
     elif constType == 1:
-      output.write('level, version, pkgVersion)\n')
+      output.write('level, version)\n')
     elif constType == 2:
       output.write('{0}ns)\n'.format(pkg))	
   elif atttype == 'double':
@@ -74,20 +74,20 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('/*\n' )
   output.write(' * Creates a new {0}'.format(element))
   output.write(' with the given level, version, and package version.\n */\n')
-  output.write('{0}::{0} (unsigned int level, unsigned int version, unsigned int pkgVersion)\n'.format(element))
+  output.write('{0}::{0} (unsigned int level, unsigned int version)\n'.format(element))
   output.write('\t: SedBase(level, version)\n')
   writeAttributes(attrs, output, 1)
   output.write('{\n')
-  output.write('\t// set an SEDMLNamespaces derived object of this package\n')
-  output.write('\tsetSEDMLNamespacesAndOwn(new {0}PkgNamespaces(level, version, pkgVersion));\n'.format(package))
+  output.write('\t// set an SedMLNamespaces derived object of this package\n')
+  output.write('\tsetSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));\n'.format(package))
   if hasChildren == True or hasMath == True:
     output.write('\n\t// connect to child objects\n')
     output.write('\tconnectToChild();\n')
   output.write('}\n\n\n')
   output.write('/*\n' )
   output.write(' * Creates a new {0}'.format(element))
-  output.write(' with the given {0}PkgNamespaces object.\n */\n'.format(package))
-  output.write('{0}::{0} ({1}PkgNamespaces* {2}ns)\n'.format(element, package, package.lower()))
+  output.write(' with the given SedMLNamespaces object.\n */\n')
+  output.write('{0}::{0} (SedMLNamespaces* {1}ns)\n'.format(element, package.lower()))
   output.write('\t: SedBase({0}ns)\n'.format(package.lower()))
   writeAttributes(attrs, output, 2, package.lower())
   output.write('{\n')
@@ -96,8 +96,6 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   if hasChildren == True:
     output.write('\n\t// connect to child objects\n')
     output.write('\tconnectToChild();\n')
-  output.write('\n\t// load package extensions bound with this object (if any) \n')
-  output.write('\tloadPlugins({0}ns);\n'.format(package.lower()))
   output.write('}\n\n\n')
   output.write('/*\n' )
   output.write(' * Copy constructor for {0}.\n */\n'.format(element))
@@ -106,7 +104,7 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('{\n')
   output.write('\tif (&orig == NULL)\n')
   output.write('\t{\n')
-  output.write('\t\tthrow SEDMLConstructorException("Null argument to copy constructor");\n')
+  output.write('\t\tthrow SedMLConstructorException("Null argument to copy constructor");\n')
   output.write('\t}\n')
   output.write('\telse\n')
   output.write('\t{\n')
@@ -122,7 +120,7 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('{\n')
   output.write('\tif (&rhs == NULL)\n')
   output.write('\t{\n')
-  output.write('\t\tthrow SEDMLConstructorException("Null argument to assignment");\n')
+  output.write('\t\tthrow SedMLConstructorException("Null argument to assignment");\n')
   output.write('\t}\n')
   output.write('\telse if (&rhs != this)\n')
   output.write('\t{\n')
@@ -390,7 +388,7 @@ def createCode(element):
   nameOfElement = element['name']
   nameOfPackage = element['package']
   sedmltypecode = element['typecode']
-  hasListOf = element['hasListOf']
+  hasSedListOf = element['hasSedListOf']
   attributes = element['attribs']
   hasChildren = element['hasChildren']
   hasMath = element['hasMath']
@@ -402,7 +400,7 @@ def createCode(element):
   writeConstructors(nameOfElement, nameOfPackage, code, attributes, hasChildren, hasMath)
   writeAttributeCode(attributes, code, nameOfElement)
   generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath) 
-  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasListOf, hasMath) 
+  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath) 
   generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath) 
   writeListOfCode.createCode(element, code)
   writeCCode.createCode(element, code)

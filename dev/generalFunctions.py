@@ -24,7 +24,7 @@ def writeListOf(element):
   last = len(element)-1
   if element[last] != 's':
     element = element + 's'
-  element = 'ListOf' + element
+  element = 'SedListOf' + element
   return element
 
 def parseAttribute(attrib):
@@ -143,11 +143,11 @@ def parseAttributeForC(attrib):
   return [attName, capAttName, attType, attTypeCode, num, reqd]
 
 
-def writeGetTypeCodeHeader(outFile, isListOf):
+def writeGetTypeCodeHeader(outFile, isSedListOf):
   outFile.write('\t/**\n')
-  if isListOf == True:
+  if isSedListOf == True:
     outFile.write('\t * Returns the libSEDML type code for the SEDML objects\n')
-    outFile.write('\t * contained in this ListOf object\n')
+    outFile.write('\t * contained in this SedListOf object\n')
   else:
     outFile.write('\t * Returns the libSEDML type code for this SEDML object.\n')
   outFile.write('\t * \n')
@@ -173,31 +173,31 @@ def writeGetTypeCodeHeader(outFile, isListOf):
   outFile.write('\t * libsbmlcs.libsbml@endlink.  The names of the type codes all begin with\n')
   outFile.write('\t * the characters @c SEDML_. @endif\n')
   outFile.write('\t *\n')
-  if isListOf == True:
-    outFile.write('\t * @return the SEDML type code for the objects in this ListOf instance, or\n')
+  if isSedListOf == True:
+    outFile.write('\t * @return the SEDML type code for the objects in this SedListOf instance, or\n')
   else:
     outFile.write('\t * @return the SEDML type code for this object, or\n')
   outFile.write('\t * @link SEDMLTypeCode_t#SEDML_UNKNOWN SEDML_UNKNOWN@endlink (default).\n')
   outFile.write('\t *\n')
   outFile.write('\t * @see getElementName()\n')
   outFile.write('\t */\n')
-  if isListOf == True:
+  if isSedListOf == True:
     outFile.write('\tvirtual int getItemTypeCode () const;\n\n\n')
   else:
     outFile.write('\tvirtual int getTypeCode () const;\n\n\n')
     
-def writeGetTypeCodeCPPCode(outFile, element, sbmltc, isListOf):
+def writeGetTypeCodeCPPCode(outFile, element, sbmltc, isSedListOf):
   outFile.write('/*\n')
   outFile.write(' * Returns the libSEDML type code for this SEDML object.\n')
   outFile.write(' */\n')
   outFile.write('int\n{0}::getTypeCode () const\n'.format(element))
   outFile.write('{\n')
-  if isListOf == True:
+  if isSedListOf == True:
     outFile.write('\treturn SEDML_LIST_OF;\n')
   else:
     outFile.write('\treturn {0};\n'.format(sbmltc))
   outFile.write('}\n\n\n')
-  if isListOf == True:
+  if isSedListOf == True:
     outFile.write('/*\n')
     outFile.write(' * Returns the libSEDML type code for the objects in this LIST_OF.\n')
     outFile.write(' */\n')
@@ -240,25 +240,24 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
     for i in range(0, len(attributes)):
       if attributes[i]['type'] == 'element' and attributes[i]['element'] == 'Math':
         outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
-        outFile.write('\t{\n\t\twriteMathML(getMath(), stream, getSEDMLNamespaces());\n\t}\n')
-  outFile.write('\tSedBase::writeExtensionElements(stream);\n')
+        outFile.write('\t{\n\t\twriteMathML(getMath(), stream, getSedMLNamespaces());\n\t}\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
 def writeAcceptHeader(outFile):
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
-  outFile.write('\t * Accepts the given SEDMLVisitor.\n')
+  outFile.write('\t * Accepts the given SedMLVisitor.\n')
   outFile.write('\t */\n')
-  outFile.write('\tvirtual bool accept (SEDMLVisitor& v) const;\n\n\n')
+  outFile.write('\tvirtual bool accept (SedMLVisitor& v) const;\n\n\n')
   writeInternalEnd(outFile)
 
 def writeAcceptCPPCode(outFile, element):
   writeInternalStart(outFile)
   outFile.write('/*\n')
-  outFile.write(' * Accepts the given SEDMLVisitor.\n')
+  outFile.write(' * Accepts the given SedMLVisitor.\n')
   outFile.write(' */\n')
-  outFile.write('bool\n{0}::accept (SEDMLVisitor& v) const\n'.format(element))
+  outFile.write('bool\n{0}::accept (SedMLVisitor& v) const\n'.format(element))
   outFile.write('{\n')
   outFile.write('\treturn false;\n\n')
   outFile.write('}\n\n\n')
@@ -267,19 +266,19 @@ def writeAcceptCPPCode(outFile, element):
 def writeSetDocHeader(outFile):
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
-  outFile.write('\t * Sets the parent SEDMLDocument.\n')
+  outFile.write('\t * Sets the parent SedMLDocument.\n')
   outFile.write('\t */\n')
-  outFile.write('\tvirtual void setSEDMLDocument (SEDMLDocument* d);\n\n\n')
+  outFile.write('\tvirtual void setSedMLDocument (SedMLDocument* d);\n\n\n')
   writeInternalEnd(outFile)
 
 def writeSetDocCPPCode(outFile, element):
   writeInternalStart(outFile)
   outFile.write('/*\n')
-  outFile.write(' * Sets the parent SEDMLDocument.\n')
+  outFile.write(' * Sets the parent SedMLDocument.\n')
   outFile.write(' */\n')
-  outFile.write('void\n{0}::setSEDMLDocument (SEDMLDocument* d)\n'.format(element))
+  outFile.write('void\n{0}::setSedMLDocument (SedMLDocument* d)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase::setSEDMLDocument(d);\n')
+  outFile.write('\tSedBase::setSedMLDocument(d);\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -292,25 +291,27 @@ def writeConnectHeader(outFile):
   writeInternalEnd(outFile)
 
 def writeEnablePkgHeader(outFile):
-  writeInternalStart(outFile)
-  outFile.write('\t/**\n')
-  outFile.write('\t * Enables/Disables the given package with this element.\n')
-  outFile.write('\t */\n')
-  outFile.write('\tvirtual void enablePackageInternal(const std::string& pkgURI,\n')
-  outFile.write('\t             const std::string& pkgPrefix, bool flag);\n\n\n')
-  writeInternalEnd(outFile)
+  #writeInternalStart(outFile)
+  #outFile.write('\t/**\n')
+  #outFile.write('\t * Enables/Disables the given package with this element.\n')
+  #outFile.write('\t */\n')
+  #outFile.write('\tvirtual void enablePackageInternal(const std::string& pkgURI,\n')
+  #outFile.write('\t             const std::string& pkgPrefix, bool flag);\n\n\n')
+  #writeInternalEnd(outFile)
+  pass
 
 def writeEnablePkgCPPCode(outFile, element):
-  writeInternalStart(outFile)
-  outFile.write('/*\n')
-  outFile.write(' * Enables/Disables the given package with this element.\n')
-  outFile.write(' */\n')
-  outFile.write('void\n{0}::enablePackageInternal(const std::string& pkgURI,\n'.format(element))
-  outFile.write('             const std::string& pkgPrefix, bool flag)\n')
-  outFile.write('{\n')
-  outFile.write('\tSedBase::enablePackageInternal(pkgURI, pkgPrefix, flag);\n')
-  outFile.write('}\n\n\n')
-  writeInternalEnd(outFile)
+  #writeInternalStart(outFile)
+  #outFile.write('/*\n')
+  #outFile.write(' * Enables/Disables the given package with this element.\n')
+  #outFile.write(' */\n')
+  #outFile.write('void\n{0}::enablePackageInternal(const std::string& pkgURI,\n'.format(element))
+  #outFile.write('             const std::string& pkgPrefix, bool flag)\n')
+  #outFile.write('{\n')
+  #outFile.write('\tSedBase::enablePackageInternal(pkgURI, pkgPrefix, flag);\n')
+  #outFile.write('}\n\n\n')
+  #writeInternalEnd(outFile)
+  pass
 
 def writeCreateObjectHeader(outFile):
   writeInternalStart(outFile)
@@ -373,7 +374,7 @@ def writeReadAttribute(output, attrib, element):
     output.write('\t\t{\n')
     output.write('\t\t\tlogEmptyString(m{0}, getLevel(), getVersion(), "<{1}>");\n'.format(capAttName, element))
     output.write('\t\t}\n')
-    output.write('\t\telse if (SyntaxChecker::isValidSEDMLSId(m{0}) == false)\n'.format(capAttName))
+    output.write('\t\telse if (SyntaxChecker::isValidSBMLSId(m{0}) == false)\n'.format(capAttName))
     output.write('\t\t{\n\t\t\tlogError(InvalidIdSyntax);\n\t\t}\n')
     output.write('\t}\n\n')
   elif attrib['type'] == 'SIdRef':
@@ -391,7 +392,7 @@ def writeReadAttribute(output, attrib, element):
     output.write('\t\t{\n')
     output.write('\t\t\tlogEmptyString(m{0}, getLevel(), getVersion(), "<{1}>");\n'.format(capAttName, element))
     output.write('\t\t}\n')
-    output.write('\t\telse if (SyntaxChecker::isValidSEDMLSId(m{0}) == false)\n'.format(capAttName))
+    output.write('\t\telse if (SyntaxChecker::isValidSBMLSId(m{0}) == false)\n'.format(capAttName))
     output.write('\t\t{\n\t\t\tlogError(InvalidIdSyntax);\n\t\t}\n')
     output.write('\t}\n\n')
   elif attrib['type'] == 'UnitSIdRef':
@@ -521,12 +522,11 @@ def writeWriteAttributesCPPCode(outFile, element, attribs):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
       outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))
-  outFile.write('\tSedBase::writeExtensionAttributes(stream);\n\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
   
-def writeGetElementNameHeader(outFile, element, isListOf):
-  if isListOf == True:
+def writeGetElementNameHeader(outFile, element, isSedListOf):
+  if isSedListOf == True:
     element = writeListOf(element)
   outFile.write('\t/**\n')
   outFile.write('\t * Returns the XML element name of this object, which for {0}, is\n'.format(element))
@@ -625,8 +625,8 @@ def writeReadOtherXMLCPPCode(outFile, element):
   outFile.write('\tif (name == "math")\n\t{\n')
   outFile.write('\t\tconst XMLToken elem = stream.peek();\n')
   outFile.write('\t\tconst std::string prefix = checkMathMLNamespace(elem);\n\n')
-  outFile.write('\t\tif (stream.getSEDMLNamespaces() == NULL)\n\t\t{\n')
-  outFile.write('\t\t\tstream.setSEDMLNamespaces(new SEDMLNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
+  outFile.write('\t\tif (stream.getSedMLNamespaces() == NULL)\n\t\t{\n')
+  outFile.write('\t\t\tstream.setSedMLNamespaces(new SedMLNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
   outFile.write('\t\tdelete mMath;\n')
   outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
   outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
@@ -648,12 +648,12 @@ def writeProtectedHeaders(outFile, hasChildren=False, hasMath=False):
     writeReadOtherXMLHeader(outFile)
   writeWriteAttributesHeader(outFile)
   
-def writeCommonHeaders(outFile, element, attribs, isListOf, hasChildren=False, hasMath=False):
-  writeGetElementNameHeader(outFile, element, isListOf)
-  if isListOf == True:
+def writeCommonHeaders(outFile, element, attribs, isSedListOf, hasChildren=False, hasMath=False):
+  writeGetElementNameHeader(outFile, element, isSedListOf)
+  if isSedListOf == True:
     writeGetTypeCodeHeader(outFile, False)
-  writeGetTypeCodeHeader(outFile, isListOf)
-  if isListOf == False:
+  writeGetTypeCodeHeader(outFile, isSedListOf)
+  if isSedListOf == False:
     writeHasReqdAttribHeader(outFile, element, attribs)
   if hasChildren == True or hasMath == True:
     writeHasReqdElementsHeader(outFile, element, attribs)
@@ -667,12 +667,12 @@ def writeInternalHeaders(outFile, hasChildren=False):
     writeConnectHeader(outFile)
   writeEnablePkgHeader(outFile)
   
-def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isListOf, hasChildren=False, hasMath=False):
-  if isListOf == True:
+def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
+  if isSedListOf == True:
     element = writeListOf(element)
   writeGetElementNameCPPCode(outFile, element)
-  writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isListOf)
-  if isListOf == False:
+  writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)
+  if isSedListOf == False:
     writeHasReqdAttribCPPCode(outFile, element, attribs)
   if hasChildren == True or hasMath == True:
     writeHasReqdElementsCPPCode(outFile, element, attribs)

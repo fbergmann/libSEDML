@@ -21,7 +21,7 @@ def writeConstructors(element, package, output):
 #  output.write('LIBSEDML_EXTERN\n')
 #  output.write('{0}_t *\n'.format(element))
 #  output.write('{0}_createWithNS'.format(element))
-#  output.write('(SEDMLNamespaces_t *sedmlns);\n\n\n')
+#  output.write('(SedMLNamespaces_t *sedmlns);\n\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('void\n')
   output.write('{0}_free'.format(element))
@@ -55,7 +55,7 @@ def writeListOfSubElements(attrib, output, element):
   output.write('{0}_create{1}({0}_t * {2}' .format(element, attrib['element'], strFunctions.objAbbrev(element)))
   output.write(');\n\n\n')
   output.write('LIBSEDML_EXTERN\n')
-  output.write('ListOf_t *\n')
+  output.write('SedListOf_t *\n')
   output.write('{0}_get{1}({0}_t * {2}), '.format(element, loname, strFunctions.objAbbrev(element)))
   output.write(';\n\n\n')
   output.write('LIBSEDML_EXTERN\n')
@@ -163,11 +163,11 @@ def writeListOfHeaders(output, element):
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(element))
   output.write('{0}_getById'.format(loelement))
-  output.write('(ListOf_t * lo, const char * sid);\n\n\n')
+  output.write('(SedListOf_t * lo, const char * sid);\n\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(element))
   output.write('{0}_removeById'.format(loelement))
-  output.write('(ListOf_t * lo, const char * sid);\n\n\n')
+  output.write('(SedListOf_t * lo, const char * sid);\n\n\n')
  
 # write the header file      
 def createHeader(element, header):
@@ -176,7 +176,7 @@ def createHeader(element, header):
   writeHasReqdAttrFunction(header, element['name'])
   if element['hasChildren'] == True or element['hasMath'] == True:
     writeHasReqdElementsFunction(header, element['name'])
-  if element['hasListOf'] == True:
+  if element['hasSedListOf'] == True:
     writeListOfHeaders(header, element['name'])
  
 

@@ -16,7 +16,7 @@ def createSedDocument() :
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'DataGenerator'})
   lo5 = dict({'type': 'lo_element', 'reqd' : False, 'name':'output', 'element': 'Output'})
   attributes = [a1, a2, lo1, lo2, lo3, lo4, lo5]
-  element = dict({'name': 'SedMLDocument', 'package': 'SedML', 'typecode': 'SEDML_DOCUMENT', 'hasListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
+  element = dict({'name': 'SedMLDocument', 'package': 'SedML', 'typecode': 'SEDML_DOCUMENT', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
 
 def createSedModel() :
@@ -25,35 +25,35 @@ def createSedModel() :
   a3 = dict({'type': 'string', 'reqd' : False, 'name':'language'})
   a4 = dict({'type': 'string', 'reqd' : True, 'name':'source'})
   attributes = [a1, a2, a3, a4]
-  element = dict({'name': 'Model', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
+  element = dict({'name': 'Model', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
 
 def createSedSimulation() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   attributes = [a1, a2]
-  element = dict({'name': 'Simulation', 'package': 'SedML', 'typecode': 'SEDML_SIMULATION', 'hasListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
+  element = dict({'name': 'Simulation', 'package': 'SedML', 'typecode': 'SEDML_SIMULATION', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
 
 def createSedTask() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   attributes = [a1, a2]
-  element = dict({'name': 'Task', 'package': 'SedML', 'typecode': 'SEDML_TASK', 'hasListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
+  element = dict({'name': 'Task', 'package': 'SedML', 'typecode': 'SEDML_TASK', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
 
 def createSedDataGenerator() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   attributes = [a1, a2]
-  element = dict({'name': 'DataGenerator', 'package': 'SedML', 'typecode': 'SEDML_DATAGENERATOR', 'hasListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':True}) 
+  element = dict({'name': 'DataGenerator', 'package': 'SedML', 'typecode': 'SEDML_DATAGENERATOR', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':True}) 
   return element
 
 def createSedOutput() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   attributes = [a1, a2]
-  element = dict({'name': 'Output', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT', 'hasListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
+  element = dict({'name': 'Output', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
   
   

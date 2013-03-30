@@ -30,7 +30,7 @@ def writeConstructors(element, package, output):
 #  output.write('LIBSEDML_EXTERN\n')
 #  output.write('{0}_t *\n'.format(element))
 #  output.write('{0}_createWithNS'.format(element))
-#  output.write('(SEDMLNamespaces_t *sedmlns)\n')
+#  output.write('(SedMLNamespaces_t *sedmlns)\n')
 #  output.write('{\n')
 #  output.write('\treturn new {0}(sedmlns);\n'.format(element))
 #  output.write('}\n\n\n')
@@ -96,7 +96,7 @@ def writeListOfSubElements(attrib, output, element):
   output.write('\treturn  ({0} != NULL) ? {0}->create{1}() : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
-  output.write('ListOf_t *\n')
+  output.write('SedListOf_t *\n')
   output.write('{0}_get{1}({0}_t * {2})\n'.format(element, loname, strFunctions.objAbbrev(element)))
   output.write('{\n')
   output.write('\treturn  ({0} != NULL) ? {0}->getListOf{1}s() : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
@@ -273,7 +273,7 @@ def writeListOfCode(output, element):
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(element))
   output.write('{0}_getById'.format(loelement))
-  output.write('(ListOf_t * lo, const char * sid)\n')
+  output.write('(SedListOf_t * lo, const char * sid)\n')
   output.write('{\n')
   output.write('\tif (lo == NULL)\n')
   output.write('\t\treturn NULL;\n\n')
@@ -285,7 +285,7 @@ def writeListOfCode(output, element):
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(element))
   output.write('{0}_removeById'.format(loelement))
-  output.write('(ListOf_t * lo, const char * sid)\n')
+  output.write('(SedListOf_t * lo, const char * sid)\n')
   output.write('{\n')
   output.write('\tif (lo == NULL)\n')
   output.write('\t\treturn NULL;\n\n')
@@ -299,7 +299,7 @@ def createCode(element, code):
   writeHasReqdAttrFunction(code, element['name'])
   if element['hasChildren'] == True or element['hasMath'] == True:
     writeHasReqdElementsFunction(code, element['name'])
-  if element['hasListOf'] == True:
+  if element['hasSedListOf'] == True:
     writeListOfCode(code, element['name'])
   code.write('\n\n');
   code.write('LIBSEDML_CPP_NAMESPACE_END\n')
