@@ -238,7 +238,7 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('\n\t}\n')
   if hasMath == True:
     for i in range(0, len(attributes)):
-      if attributes[i]['type'] == 'element' and attributes[i]['element'] == 'Math':
+      if attributes[i]['type'] == 'element' and attributes[i]['name'] == 'Math':
         outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\t{\n\t\twriteMathML(getMath(), stream, getSedMLNamespaces());\n\t}\n')
   outFile.write('}\n\n\n')

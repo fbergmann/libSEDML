@@ -45,7 +45,8 @@ def createSedTask() :
 def createSedDataGenerator() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
-  attributes = [a1, a2]
+  a3 = dict({'type': 'element', 'reqd' : False, 'name':'math'})
+  attributes = [a1, a2, a3]
   element = dict({'name': 'DataGenerator', 'package': 'SedML', 'typecode': 'SEDML_DATAGENERATOR', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':True}) 
   return element
 

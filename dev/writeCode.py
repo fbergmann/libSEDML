@@ -65,9 +65,12 @@ def writeCopyAttributes(attrs, output, tabs, name):
   for i in range(0, len(attrs)):
     attName = strFunctions.cap(attrs[i]['name'])
     atttype = attrs[i]['type']
-    output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))  
+    if atttype == 'element' and attName == 'Math':
+      output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->deepCopy() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
+    else:
+      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))  
     if atttype == 'double' or atttype == 'int' or atttype == 'uint' or atttype == 'bool':
-      output.write('{0}mIsSet{1}  = {2}.mIsSet{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))    
+      output.write('{0}mIsSet{1}  = {2}.mIsSet{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
 
 
 def writeConstructors(element, package, output, attrs, hasChildren=False, hasMath=False):

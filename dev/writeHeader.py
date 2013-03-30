@@ -102,7 +102,7 @@ def writeGetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['element'] == 'Math':
+    if attrib['name'] == 'Math':
       output.write('\t/**\n')
       output.write('\t * Returns the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
@@ -135,7 +135,7 @@ def writeIsSetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['element'] == 'Math':
+    if attrib['name'] == 'Math':
       output.write('\t/**\n')
       output.write('\t * Predicate returning @c true or @c false depending on ')
       output.write('whether this\n\t * {0}\'s \"{1}\" '.format(element, attName))
@@ -171,7 +171,7 @@ def writeSetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['element'] == 'Math':
+    if attrib['name'] == 'Math':
       output.write('\t/**\n')
       output.write('\t * Sets the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
@@ -213,7 +213,7 @@ def writeUnsetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['element'] == 'Math':
+    if attrib['name'] == 'Math':
       output.write('\t/**\n')
       output.write('\t * Unsets the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
