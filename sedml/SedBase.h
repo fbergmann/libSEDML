@@ -157,7 +157,6 @@ class XMLNamespaces;
 class XMLOutputStream;
 class XMLToken;
 
-class SedBasePlugin;
 
 
 
@@ -895,82 +894,6 @@ public:
 
 
   /**
-   * Returns the integer portion of the value of the "sboTerm" attribute of
-   * this object.
-   *
-   * Beginning with SedML Level 2 Version 3, objects derived from SedBase have
-   * an optional attribute named "sboTerm" for supporting the use of the
-   * Systems Biology Ontology.  In SedML proper, the data type of the
-   * attribute is a string of the form "SBO:NNNNNNN", where "NNNNNNN" is a
-   * seven digit integer number; libSedML simplifies the representation by
-   * only storing the "NNNNNNN" integer portion.  Thus, in libSedML, the
-   * "sboTerm" attribute on SedBase has data type @c int, and SBO identifiers
-   * are stored simply as integers.  (For convenience, libSedML offers
-   * methods for returning both the integer form and a text-string form of
-   * the SBO identifier.)
-   *
-   * SBO terms are a type of optional annotation, and each different class
-   * of SedML object derived from SedBase imposes its own requirements about
-   * the values permitted for "sboTerm".  Please consult the SedML
-   * Level&nbsp;2 Version&nbsp;4 specification for more information about
-   * the use of SBO and the "sboTerm" attribute.
-   *
-   * @return the value of the "sboTerm" attribute as an integer, or @c -1
-   * if the value is not set.
-   */
-  int getSBOTerm () const;
-
-
-  /**
-   * Returns the string representation of the "sboTerm" attribute of
-   * this object.
-   *
-   * Beginning with SedML Level 2 Version 3, objects derived from SedBase have
-   * an optional attribute named "sboTerm" for supporting the use of the
-   * Systems Biology Ontology.  In SedML proper, the data type of the
-   * attribute is a string of the form "SBO:NNNNNNN", where "NNNNNNN" is a
-   * seven digit integer number; libSedML simplifies the representation by
-   * only storing the "NNNNNNN" integer portion.  Thus, in libSedML, the
-   * "sboTerm" attribute on SedBase has data type @c int, and SBO identifiers
-   * are stored simply as integers.  This method returns the entire SBO
-   * identifier as a text string in the form "SBO:NNNNNNN".
-   *
-   * SBO terms are a type of optional annotation, and each different class
-   * of SedML object derived from SedBase imposes its own requirements about
-   * the values permitted for "sboTerm".  Please consult the SedML
-   * Level&nbsp;2 Version&nbsp;4 specification for more information about
-   * the use of SBO and the "sboTerm" attribute.
-   *
-   * @return the value of the "sboTerm" attribute as a string (its value
-   * will be of the form "SBO:NNNNNNN"), or an empty string if
-   * the value is not set.
-   */
-  std::string getSBOTermID () const;
-
-
-  /**
-   * Returns the identifiers.org URL representation of the "sboTerm" attribute of
-   * this object.
-   *
-   * This method returns the entire SBO
-   * identifier as a text string in the form 
-   * "http://identifiers.org/biomodels.sbo/SBO:NNNNNNN".
-   *
-   * SBO terms are a type of optional annotation, and each different class
-   * of SedML object derived from SedBase imposes its own requirements about
-   * the values permitted for "sboTerm".  Please consult the SedML
-   * Level&nbsp;2 Version&nbsp;4 specification for more information about
-   * the use of SBO and the "sboTerm" attribute.
-   *
-   * @return the value of the "sboTerm" attribute as an identifiers.org URL
-   * (its value will be of the form 
-   * "http://identifiers.org/biomodels.sbo/SBO:NNNNNNN"), or an empty string if
-   * the value is not set.
-   */
-  std::string getSBOTermAsURL () const;
-
-
-  /**
    * Returns the line number on which this object first appears in the XML
    * representation of the SedML document.
    * 
@@ -1225,17 +1148,6 @@ public:
    * @see unsetAnnotation()
    */
   bool isSetAnnotation () const;
-
-
-  /**
-   * Predicate returning @c true if this
-   * object's "sboTerm" attribute is set.
-   *
-   * @return @c true if the "sboTerm" attribute of this SedML object is
-   * set, @c false otherwise.
-   */
-  bool isSetSBOTerm () const;
-
 
   /**
    * Sets the value of the "metaid" attribute of this object.
@@ -1873,70 +1785,6 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Sets the value of the "sboTerm" attribute.
-   *
-   * Beginning with SedML Level 2 Version 3, objects derived from SedBase have
-   * an optional attribute named "sboTerm" for supporting the use of the
-   * Systems Biology Ontology.  In SedML proper, the data type of the
-   * attribute is a string of the form "SBO:NNNNNNN", where "NNNNNNN" is a
-   * seven digit integer number; libSedML simplifies the representation by
-   * only storing the "NNNNNNN" integer portion.  Thus, in libSedML, the
-   * "sboTerm" attribute on SedBase has data type @c int, and SBO identifiers
-   * are stored simply as integers. 
-   *
-   * SBO terms are a type of optional annotation, and each different class
-   * of SedML object derived from SedBase imposes its own requirements about
-   * the values permitted for "sboTerm".  Please consult the SedML
-   * Level&nbsp;2 Version&nbsp;4 specification for more information about
-   * the use of SBO and the "sboTerm" attribute.
-   *
-   * @param value the NNNNNNN integer portion of the SBO identifier
-   *
-   * @return integer value indicating success/failure of the
-   * function.  The possible values returned by this function are:
-   * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
-   * @li @link OperationReturnValues_t#LIBSEDML_INVALID_ATTRIBUTE_VALUE LIBSEDML_INVALID_ATTRIBUTE_VALUE @endlink
-   * @li @link OperationReturnValues_t#LIBSEDML_UNEXPECTED_ATTRIBUTE LIBSEDML_UNEXPECTED_ATTRIBUTE @endlink
-   *
-   * @see setSBOTerm(@if java String sbo_id@else const std::string &sboid@endif)
-   */
-  virtual int setSBOTerm (int value);
-
-
-  /**
-   * Sets the value of the "sboTerm" attribute by string.
-   *
-   * Beginning with SedML Level 2 Version 3, objects derived from SedBase have
-   * an optional attribute named "sboTerm" for supporting the use of the
-   * Systems Biology Ontology.  In SedML proper, the data type of the
-   * attribute is a string of the form "SBO:NNNNNNN", where "NNNNNNN" is a
-   * seven digit integer number; libSedML simplifies the representation by
-   * only storing the "NNNNNNN" integer portion.  Thus, in libSedML, the
-   * "sboTerm" attribute on SedBase has data type @c int, and SBO identifiers
-   * are stored simply as integers.  This method lets you set the value of
-   * "sboTerm" as a complete string of the form "SBO:NNNNNNN", whereas
-   * setSBOTerm(int value) allows you to set it using the integer form.
-   *
-   * SBO terms are a type of optional annotation, and each different class
-   * of SedML object derived from SedBase imposes its own requirements about
-   * the values permitted for "sboTerm".  Please consult the SedML
-   * Level&nbsp;2 Version&nbsp;4 specification for more information about
-   * the use of SBO and the "sboTerm" attribute.
-   *
-   * @param sboid the SBO identifier string of the form "SBO:NNNNNNN"
-   *
-   * @return integer value indicating success/failure of the
-   * function.  The possible values returned by this function are:
-   * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
-   * @li @link OperationReturnValues_t#LIBSEDML_INVALID_ATTRIBUTE_VALUE LIBSEDML_INVALID_ATTRIBUTE_VALUE @endlink
-   * @li @link OperationReturnValues_t#LIBSEDML_UNEXPECTED_ATTRIBUTE LIBSEDML_UNEXPECTED_ATTRIBUTE @endlink
-   *
-   * @see setSBOTerm(int value)
-   */
-  virtual int setSBOTerm (const std::string &sboid);
-
-
-  /**
    * Sets the namespaces relevant of this SedML object.
    *
    * The content of @p xmlns is copied, and this object's existing
@@ -2126,16 +1974,6 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    */
   int unsetAnnotation ();
 
-
-  /**
-   * Unsets the value of the "sboTerm" attribute of this SedML object.
-   *
-   * @return integer value indicating success/failure of the
-   * function.  The possible values returned by this function are:
-   * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
-   * @li @link OperationReturnValues_t#LIBSEDML_UNEXPECTED_ATTRIBUTE LIBSEDML_UNEXPECTED_ATTRIBUTE @endlink
-   */
-  int unsetSBOTerm ();
 
   /**
    * Returns the SedML Level of the SedMLDocument object containing this
@@ -2695,8 +2533,6 @@ protected:
   SedMLNamespaces* mSedMLNamespaces;
   void*           mUserData;
 
-  int mSBOTerm;
-
   unsigned int mLine;
   unsigned int mColumn;
 
@@ -2794,20 +2630,6 @@ LIBSEDML_EXTERN
 const SedBase_t *
 SedBase_getAncestorOfType (SedBase_t *sb, int type, const char* pkgName);
 
-LIBSEDML_EXTERN
-int
-SedBase_getSBOTerm (const SedBase_t *sb);
-
-
-LIBSEDML_EXTERN
-char*
-SedBase_getSBOTermID (const SedBase_t *sb);
-
-
-LIBSEDML_EXTERN
-char*
-SedBase_getSBOTermAsURL (const SedBase_t *sb);
-
 
 LIBSEDML_EXTERN
 unsigned int
@@ -2858,24 +2680,7 @@ SedBase_isSetAnnotation (const SedBase_t *sb);
 
 LIBSEDML_EXTERN
 int
-SedBase_isSetSBOTerm(const SedBase_t *sb);
-
-
-LIBSEDML_EXTERN
-int
 SedBase_setMetaId (SedBase_t *sb, const char *metaid);
-
-
-
-
-LIBSEDML_EXTERN
-int
-SedBase_setSBOTerm (SedBase_t *sb, int value);
-
-
-LIBSEDML_EXTERN
-int
-SedBase_setSBOTermID (SedBase_t *sb, const char* sboid);
 
 
 LIBSEDML_EXTERN
@@ -2970,11 +2775,6 @@ SedBase_unsetAnnotation (SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
-int
-SedBase_unsetSBOTerm (SedBase_t *sb);
-
-
-LIBSEDML_EXTERN
 const Model_t *
 SedBase_getModel (const SedBase_t *sb);
 
@@ -3028,9 +2828,6 @@ LIBSEDML_EXTERN
 void 
 SedBase_renameSIdRefs(SedBase_t* sb, const char* oldid, const char* newid);
 
-LIBSEDML_EXTERN 
-List_t* 
-SedBase_getAllElementsFromPlugins(SedBase_t* sb);
 
 END_C_DECLS
 LIBSEDML_CPP_NAMESPACE_END

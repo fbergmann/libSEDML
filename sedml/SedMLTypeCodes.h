@@ -96,32 +96,10 @@ typedef enum
     , SEDML_DOCUMENT                   =  1
     , SEDML_MODEL                      =  2
     , SEDML_DATAGENERATOR              =  3
-    , SEDML_EVENT                      =  5
-    , SEDML_EVENT_ASSIGNMENT           =  6
-    , SEDML_FUNCTION_DEFINITION        =  7
-    , SEDML_INITIAL_ASSIGNMENT         =  8
-    , SEDML_KINETIC_LAW                =  9
-    , SEDML_LIST_OF                    = 10
-    , SEDML_PARAMETER                  = 12
-    , SEDML_REACTION                   = 13
-    , SEDML_RULE                       = 14
-    , SEDML_SPECIES                    = 15
-    , SEDML_SPECIES_REFERENCE          = 16
-    , SEDML_SPECIES_TYPE               = 17
-    , SEDML_MODIFIER_SPECIES_REFERENCE = 18
-    , SEDML_UNIT_DEFINITION            = 19
-    , SEDML_UNIT                       = 20
-    , SEDML_ALGEBRAIC_RULE             = 21
-    , SEDML_ASSIGNMENT_RULE            = 22
-    , SEDML_RATE_RULE                  = 23
-    , SEDML_SPECIES_CONCENTRATION_RULE = 24
-    , SEDML_COMPARTMENT_VOLUME_RULE    = 25
-    , SEDML_PARAMETER_RULE             = 26
-    , SEDML_TRIGGER                    = 27
-    , SEDML_DELAY                      = 28
-    , SEDML_STOICHIOMETRY_MATH         = 29
-    , SEDML_LOCAL_PARAMETER            = 30
-    , SEDML_PRIORITY                   = 31
+    , SEDML_TASK              =  4
+    , SEDML_OUTPUT             =  5
+	, SEDML_LIST_OF = 6
+    
 } SedMLTypeCode_t;
 
 

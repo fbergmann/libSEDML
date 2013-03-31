@@ -26,6 +26,7 @@
  * ---------------------------------------------------------------------- -->*/
 
 #include <sstream>
+#include <vector>
 
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
@@ -42,6 +43,7 @@
 #include <sedml/SedListOf.h>
 #include <sedml/SedBase.h>
 
+
 //#include <sbml/validator/constraints/IdList.h>
 
 
@@ -54,36 +56,12 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /** @endcond */
 
 
-/** @cond doxygen-libsbml-internal */
-
-/*
- * Used by the Destructor to delete each item in mPlugins.
- */
-struct DeletePluginEntity : public unary_function<SedBasePlugin*, void>
-{
-  void operator() (SedBasePlugin* sb) { delete sb; }
-};
-
-
-/*
- * Used by the Copy Constructor to clone each item in mPlugins.
- */
-struct ClonePluginEntity : public unary_function<SedBasePlugin*, SedBasePlugin*>
-{
-  SedBasePlugin* operator() (SedBasePlugin* sb) { 
-    if (!sb) return 0;
-    return sb->clone(); 
-  }
-};
-
-/** @endcond */
-
 
 SedBase*
 SedBase::getElementBySId(std::string id)
 {
   if (id.empty()) return NULL;
-  return getElementFromPluginsBySId(id);
+  return NULL;
 }
 
 
@@ -91,144 +69,14 @@ SedBase*
 SedBase::getElementByMetaId(std::string metaid)
 {
   if (metaid.empty()) return NULL;
-  return getElementFromPluginsByMetaId(metaid);
+  return NULL;
 }
 
 List*
 SedBase::getAllElements()
 {
-  return getAllElementsFromPlugins();
-}
-
-void
-SedBase::renameSIdRefs(std::string oldid, std::string newid)
-{
-  //No SIdRefs in SedBase
-}
-
-void
-SedBase::renameMetaIdRefs(std::string oldid, std::string newid)
-{
-  //The only thing in core that uses metaids is the annotation element.  If the metaid of an SedBase object is changed, and the annotation was in the 'sbml-official' form, the rdf:about will be changed automatically, so this function doesn't need to do anything.  However, we do need the function itself so that packages can extend it for their own purposes (such as comp, with its 'metaIdRef' attributes, and annot, which one would imagine would use something similar).
-
-  //The following code is here in case you want a hacky solution for your own package:
-  /*
-  if (oldid == newid) return;
-  if (isSetAnnotation()) {
-    string oldrdfabout = "rdf:about=\"#" + oldid;
-    string newrdfabout = "rdf:about=\"#" + newid;
-    string annot = getAnnotationString();
-    size_t place = annot.find(oldrdfabout);
-    while (place != string::npos) {
-      annot.replace(place, oldrdfabout.size(), newrdfabout);
-      place = annot.find(oldrdfabout);
-    }
-  }
-  */
-}
-
-void 
-SedBase::renameUnitSIdRefs(std::string oldid, std::string newid)
-{
-  //No UnitSIdRefs in SedBase, either.
-}
-
-/** @cond doxygen-libsbml-internal */
-SedBase*
-SedBase::getElementFromPluginsBySId(std::string id)
-{
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    SedBase* subObj = mPlugins[i]->getElementBySId(id);
-    if (subObj != NULL) return subObj;
-  }
   return NULL;
 }
-/** @endcond */
-
-
-/** @cond doxygen-libsbml-internal */
-SedBase*
-SedBase::getElementFromPluginsByMetaId(std::string metaid)
-{
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    SedBase* subObj = mPlugins[i]->getElementByMetaId(metaid);
-    if (subObj != NULL) return subObj;
-  }
-  return NULL;
-}
-/** @endcond */
-
-
-/** @cond doxygen-libsbml-internal */
-bool SedBase::hasNonstandardIdentifierBeginningWith(const std::string& prefix)
-{
-  return false;
-}
-/** @endcond */
-
-
-/** @cond doxygen-libsbml-internal */
-int 
-SedBase::prependStringToAllIdentifiers(const std::string& prefix)
-{
-  int ret;
-
-  if (isSetMetaId()) 
-  {
-    ret = setMetaId(prefix + getMetaId());
-    if (ret != LIBSEDML_OPERATION_SUCCESS) 
-    {
-      return ret;
-    }
-  }
-
-  for (unsigned int p = 0; p < getNumPlugins(); p++) 
-  {
-    ret = getPlugin(p)->prependStringToAllIdentifiers(prefix);
-    if (ret != LIBSEDML_OPERATION_SUCCESS) 
-    {
-      return ret;
-    }
-  }
-
-
-  // for historical reasons some things like Rules will
-  // return an id but not set one
-  // so if we are going to bail on this we should have done 
-  // anything else first
-
-  if (isSetId()) 
-  {
-    ret = setId(prefix + getId());
-    if (ret != LIBSEDML_OPERATION_SUCCESS) 
-    {
-      return ret;
-    }
-  }
-
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-  /** @endcond */
-  
-
-List*
-SedBase::getAllElementsFromPlugins()
-{
-  List* ret = new List();
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    List* sublist = mPlugins[i]->getAllElements();
-    if (sublist != NULL && sublist->getSize() > 0) 
-    {
-      ret->transferFrom(sublist);
-      delete sublist;
-    }
-  }
-  return ret;
-}
-
 
 /** @cond doxygen-libsbml-internal */
 /*
@@ -241,17 +89,12 @@ SedBase::SedBase (unsigned int level, unsigned int version) :
  , mSedML      ( NULL )
  , mSedMLNamespaces (NULL)
  , mUserData(NULL)
- , mSBOTerm   ( -1 )
  , mLine      ( 0 )
  , mColumn    ( 0 )
  , mParentSedMLObject (NULL)
- , mCVTerms   ( NULL )
- , mHistory   ( NULL )
  , mHasBeenDeleted (false)
  , mEmptyString ("")
  , mURI("")
- , mHistoryChanged (false)
- , mCVTermsChanged (false)
 {
   mSedMLNamespaces = new SedMLNamespaces(level, version);
 
@@ -259,11 +102,6 @@ SedBase::SedBase (unsigned int level, unsigned int version) :
   // Sets the XMLNS URI of corresponding SedML Level/Version to
   // the element namespace (mURI) of this object.
   //
-  // (NOTES) Package developers must (1) override the mSedMLNamespaces of this
-  //         object with the corresponding SedMLExtensionNamespaces (template) 
-  //         class in their packages and (2) override the element namespace (mURI)
-  //         of this object with the corresponding package's URI in the constructor
-  //         of SedBase derived class in thier packages.
   //
   setElementNamespace(mSedMLNamespaces->getURI());
 }
@@ -280,21 +118,16 @@ SedBase::SedBase (SedMLNamespaces *sbmlns) :
  , mSedML      ( NULL )
  , mSedMLNamespaces (NULL)
  , mUserData(NULL)
- , mSBOTerm   ( -1 )
  , mLine      ( 0 )
  , mColumn    ( 0 )
  , mParentSedMLObject (NULL)
- , mCVTerms   ( NULL )
- , mHistory   ( NULL )
  , mHasBeenDeleted (false)
  , mEmptyString ("")
  , mURI("")
- , mHistoryChanged (false)
- , mCVTermsChanged (false)
 {
   if (!sbmlns) 
   {
-    std::string err("SedBase::SedBase(SedMLNamespaces*, SedBaseExtensionPoint*) : SedMLNamespaces is null");
+    std::string err("SedBase::SedBase(SedMLNamespaces*) : SedMLNamespaces is null");
     throw SedMLConstructorException(err);
   }
   mSedMLNamespaces = sbmlns->clone();
@@ -343,7 +176,6 @@ SedBase::SedBase(const SedBase& orig)
    * a copy is not part of the document
    */
   this->mSedML       = NULL;
-  this->mSBOTerm    = orig.mSBOTerm;
   this->mLine       = orig.mLine;
   this->mColumn     = orig.mColumn;
   this->mParentSedMLObject = NULL;
@@ -359,46 +191,13 @@ SedBase::SedBase(const SedBase& orig)
   else
     this->mSedMLNamespaces = NULL;
 
-  if(orig.mCVTerms != NULL)
-  {
-    this->mCVTerms  = new List();
-    unsigned int i,iMax = orig.mCVTerms->getSize();
-    for(i = 0; i < iMax; ++i)
-    {
-      this->mCVTerms
-        ->add(static_cast<CVTerm*>(orig.mCVTerms->get(i))->clone());
-    }
-  }
-  else
-  {
-    this->mCVTerms = NULL;
-  }
-
-  if (orig.mHistory != NULL)
-  {
-    this->mHistory = orig.mHistory->clone();
-  }
-  else
-  {
-    this->mHistory = NULL;
-  }
-
+  
   this->mHasBeenDeleted = false;
 
   this->mURI = orig.mURI;
-
-  mPlugins.resize( orig.mPlugins.size() );
-  transform( orig.mPlugins.begin(), orig.mPlugins.end(), 
-             mPlugins.begin(), ClonePluginEntity() );
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    mPlugins[i]->connectToParent(this);
-  }
-
-  this->mHistoryChanged = orig.mHistoryChanged;
-  this->mCVTermsChanged = orig.mCVTermsChanged;
-
 }
+  
+  
 /** @endcond */
 
 
@@ -410,16 +209,7 @@ SedBase::~SedBase ()
   if (mNotes != NULL)       delete mNotes;
   if (mAnnotation != NULL)  delete mAnnotation;
   if (mSedMLNamespaces != NULL)  delete mSedMLNamespaces;
-  if (mCVTerms != NULL)
-  {  
-    unsigned int size = mCVTerms->getSize();
-    while (size--) delete static_cast<CVTerm*>( mCVTerms->remove(0) );
-    delete mCVTerms;
-  }
-  if (mHistory != NULL) delete mHistory;
-  mHasBeenDeleted = true;
 
-  for_each( mPlugins.begin(), mPlugins.end(), DeletePluginEntity() );
 }
 
 /*
@@ -450,7 +240,6 @@ SedBase& SedBase::operator=(const SedBase& rhs)
       this->mAnnotation = NULL;
 
     this->mSedML       = rhs.mSedML;
-    this->mSBOTerm    = rhs.mSBOTerm;
     this->mLine       = rhs.mLine;
     this->mColumn     = rhs.mColumn;
     this->mParentSedMLObject = rhs.mParentSedMLObject;
@@ -465,141 +254,12 @@ SedBase& SedBase::operator=(const SedBase& rhs)
       this->mSedMLNamespaces = NULL;
 
 
-    if(this->mCVTerms != NULL)
-    {  
-      unsigned int size = this->mCVTerms->getSize();
-      while (size--) delete static_cast<CVTerm*>( this->mCVTerms->remove(0) );
-      delete this->mCVTerms;
-    }
-
-    if(rhs.mCVTerms != NULL)
-    {
-      this->mCVTerms  = new List();
-      unsigned int i,iMax = rhs.mCVTerms->getSize();
-      for(i = 0; i < iMax; ++i)
-      {
-        this->mCVTerms
-          ->add(static_cast<CVTerm*>(rhs.mCVTerms->get(i))->clone());
-      }
-    }
-    else
-    {
-      this->mCVTerms = NULL;
-    }
-
-    delete this->mHistory;
-    if (rhs.mHistory != NULL)
-    {
-      this->mHistory = rhs.mHistory->clone();
-    }
-    else
-    {
-      this->mHistory = NULL;
-    }
-
-    this->mHasBeenDeleted = rhs.mHasBeenDeleted;
     this->mURI = rhs.mURI;
-    this->mHistoryChanged = rhs.mHistoryChanged;
-    this->mCVTermsChanged = rhs.mCVTermsChanged;
 
-    for_each( mPlugins.begin(), mPlugins.end(), DeletePluginEntity() );
-    mPlugins.resize( rhs.mPlugins.size() );
-    transform( rhs.mPlugins.begin(), rhs.mPlugins.end(), 
-               mPlugins.begin(), ClonePluginEntity() );
   }
 
   return *this;
 }
-
-
-/** @cond doxygen-libsbml-internal */
-/*
- * Loads SedBasePlugin derived objects corresponding to the URIs contained
- * in the given SedMLNamespaces (if any) for package extension.
- */
-void
-SedBase::loadPlugins(SedMLNamespaces *sbmlns)
-{
-  if (!sbmlns) return;
-
-  //
-  // (EXTENSION)
-  //
-  XMLNamespaces *xmlns = sbmlns->getNamespaces();
-
-  if (xmlns)
-  {
-    int numxmlns= xmlns->getLength();
-    SedBaseExtensionPoint extPoint(getPackageName(), getTypeCode());
-
-    for (int i=0; i < numxmlns; i++)
-    {
-      const std::string &uri = xmlns->getURI(i);
-      const SedMLExtension* sbmlext = SedMLExtensionRegistry::getInstance().getExtensionInternal(uri);
-
-      if (sbmlext && sbmlext->isEnabled())
-      {
-#if 0
-          cout << "[DEBUG] SedBase::loadPlugins() " << uri 
-               << " is registered in " 
-               << SedMLTypeCode_toString(getTypeCode(), getPackageName().c_str()) 
-               << endl;
-#endif
-        const std::string &prefix = xmlns->getPrefix(i);
-        const SedBasePluginCreatorBase* sbPluginCreator = sbmlext->getSedBasePluginCreator(extPoint);
-        if (sbPluginCreator)
-        {
-          // (debug)
-          //cout << "sbPluginCreator " << sbPluginCreator << endl;
-          //sbPluginCreator->createPlugin(uri,prefix);
-          // (debug)
-          SedBasePlugin* entity = sbPluginCreator->createPlugin(uri,prefix,xmlns);
-          entity->connectToParent(this);
-          mPlugins.push_back(entity);
-        }
-#if 0
-        else
-        {
-            cout << "[DEBUG] SedBase::loadPlugins() " << uri 
-                 << " is not registered in " 
-                 << SedMLTypeCode_toString(getTypeCode(), getPackageName().c_str()) 
-                 << endl;
-        }
-#endif
-      }
-      else 
-      {
-	//
-	// (NOTE)
-        //
-	// SedMLExtensionException should be thrown if the corresponding package 
-        // extension is not loaded.
-        // However, currently, no idea how to check if the uri belongs to extension
-        // package or not (e.g. XHTML namespace or other namespace can be given).
-	//
-#if 0
-        std::ostringstream errMsg;
-
-        if (sbmlext)
-        {	  
-          errMsg << "Package \"" << sbmlext->getName() << "\" (" << uri << ") for \"<" 
-                 << SedMLTypeCode_toString(getTypeCode(), getPackageName().c_str()) 
-                 << ">\" element is disabled.";
-	}
-	else
-        {
-          errMsg << "Package \"" << uri << "\" for \"<" 
-                 << SedMLTypeCode_toString(getTypeCode(), getPackageName().c_str()) 
-                 << ">\" element is not supported.";
-        }	  
-
-        throw SedMLExtensionException(errMsg.str());
-#endif
-      }
-    }
-  }
-}
-/** @endcond */
 
 
 /*
@@ -724,54 +384,9 @@ SedBase::getAnnotationString () const
 std::string 
 SedBase::getURI() const
 {
-  const string &package = getPackageName();
-  const SedMLDocument* doc = getSedMLDocument();
-
-  if (doc == NULL)
-    return getElementNamespace();
-  
-  SedMLNamespaces* sbmlns = doc->getSedMLNamespaces();
-
-  if (sbmlns == NULL)
-    return getElementNamespace();
-
-  if (package == "" || package == "core")
-    return getElementNamespace();
-
-  string packageURI = sbmlns->getNamespaces()->getURI(package);
-  if (!packageURI.empty())
-    return packageURI;
-
   return getElementNamespace();
 }
-/** @endcond */
-
-
-/** @cond doxygen-libsbml-internal */
-/*
- * This function does nothing itself--subclasses with ASTNode subelements must override this function.
- */
-void 
-SedBase::replaceSIDWithFunction(const std::string& id, const ASTNode* function)
-{
-}
-/** @endcond */
-
-/** @cond doxygen-libsbml-internal */
-/*
- * This function does nothing itself--subclasses with ASTNode subelements must override this function.
- */
-void 
-SedBase::divideAssignmentsToSIdByFunction(const std::string& id, const ASTNode* function)
-{
-}
-/** @endcond */
-
-/** @cond doxygen-libsbml-internal */
-void 
-SedBase::multiplyAssignmentsToSIdByFunction(const std::string& id, const ASTNode* function)
-{
-}
+  
 /** @endcond */
 
 void *
@@ -920,48 +535,6 @@ SedBase::getParentSedMLObject () const
   return mParentSedMLObject;
 }
 
-/*
- * @return the sboTerm as an integer.  If not set,
- * sboTerm will be -1. 
- */
-int
-SedBase::getSBOTerm () const
-{
-  return mSBOTerm;
-}
-
-
-/*
- * @return the sboTerm as a string.  If not set,
- * return an empty string.
- */
-std::string
-SedBase::getSBOTermID () const
-{
-  return SBO::intToString(mSBOTerm);
-}
-
-
-/*
- * @return the sboTerm as a identoifoers.org url.  If not set,
- * return an empty string.
- */
-std::string
-SedBase::getSBOTermAsURL () const
-{
-  std::string result = "";
-
-  if ( SBO::checkTerm(mSBOTerm) )
-  {
-    ostringstream stream;
-    stream << "http://identifiers.org/biomodels.sbo/SBO:";
-    stream << setw(7) << setfill('0') << mSBOTerm;
-    result = stream.str();
-  }
-
-  return result;
-}
-
 
 /*
  * @return the line number of this SedML object.
@@ -982,18 +555,6 @@ SedBase::getColumn () const
   return mColumn;
 }
 
-
-ModelHistory* 
-SedBase::getModelHistory() const
-{
-  return mHistory;
-}
-
-ModelHistory* 
-SedBase::getModelHistory()
-{
-  return mHistory;
-}
 
 
 /*
@@ -1061,22 +622,6 @@ SedBase::isSetAnnotation () const
 }
 
 
-/*
- * @return true if the sboTerm is set, false
- * otherwise.
- */
-bool
-SedBase::isSetSBOTerm () const
-{
-  return (mSBOTerm != -1);
-}
-
-
-bool
-SedBase::isSetModelHistory()
-{
-  return (mHistory != NULL);
-}
 
 
 /*
@@ -1210,56 +755,6 @@ SedBase::setAnnotation (const XMLNode* annotation)
     }
   }
 
-  //
-  // delete existing mCVTerms
-  //
-  // existing CVTerms (if any) needs to be deleted at any rate, otherwise
-  // unsetAnnotation() ( setAnnotation(NULL) ) doesn't work as expected.
-  // (These functions must clear all elements in an annotation.)
-  //
-  
-  /* in L3 might be a model history */
-  if (mHistory != NULL)
-  {
-    delete mHistory;
-    mHistory = NULL;
-  }
-
-  if (mCVTerms != NULL)
-  {
-    // delete existing mCVTerms (if any)
-    unsigned int size = mCVTerms->getSize();
-    while (size--) delete static_cast<CVTerm*>( mCVTerms->remove(0) );
-    delete mCVTerms;
-    mCVTerms = NULL;
-  }
-
-
-  if(mAnnotation != NULL 
-        && RDFAnnotationParser::hasCVTermRDFAnnotation(mAnnotation))
-  {
-    // parse mAnnotation (if any) and set mCVTerms 
-    mCVTerms = new List();
-    RDFAnnotationParser::parseRDFAnnotation(mAnnotation, mCVTerms);
-    mCVTermsChanged = true;
-  }
-
-  if(getLevel() > 2 && mAnnotation != NULL 
-     && RDFAnnotationParser::hasHistoryRDFAnnotation(mAnnotation))
-  {
-    // parse mAnnotation (if any) and set mHistory
-    mHistory = RDFAnnotationParser::parseRDFAnnotation(mAnnotation);
-    mHistoryChanged = true;
-  }
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    mPlugins[i]->parseAnnotation(this, mAnnotation);
-  }
-
-  
-  //mAnnotationChanged = true;
-
 
   return LIBSEDML_OPERATION_SUCCESS;
 }
@@ -1325,24 +820,10 @@ SedBase::appendAnnotation (const XMLNode* annotation)
   int success = LIBSEDML_OPERATION_FAILED;
   unsigned int duplicates = 0;
 
-  //
-  // (*NOTICE*)
-  //
-  // syncAnnotation() doesn't need to be invoked in this function because
-  // existing mCVTerm objects are properly merged in the following code.
-  //
 
   if(annotation == NULL) 
     return LIBSEDML_OPERATION_SUCCESS;
 
-  // the annotation is an rdf annotation but the object has no metaid
-  if (RDFAnnotationParser::hasRDFAnnotation(annotation) == true
-      && (RDFAnnotationParser::hasCVTermRDFAnnotation(annotation) == true
-      || RDFAnnotationParser::hasHistoryRDFAnnotation(annotation) == true)
-    && isSetMetaId() == false)
-  {
-    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-  }
 
   XMLNode* new_annotation = NULL;
   const string&  name = annotation->getName();
@@ -1371,18 +852,18 @@ SedBase::appendAnnotation (const XMLNode* annotation)
 
 
     // create a list of existing top level ns
-    IdList topLevelNs;
+    vector<string> topLevelNs;
     unsigned int i = 0;
     for(i = 0; i < mAnnotation->getNumChildren(); i++)
     {
-      topLevelNs.append(mAnnotation->getChild(i).getName());
+      topLevelNs.push_back(mAnnotation->getChild(i).getName());
     }
 
 
 
     for(i = 0; i < new_annotation->getNumChildren(); i++)
     {
-      if (topLevelNs.contains(new_annotation->getChild(i).getName()) == false)
+      if (find(topLevelNs.begin(), topLevelNs.end(), (new_annotation->getChild(i).getName())) != topLevelNs.end())
       {
         mAnnotation->addChild(new_annotation->getChild(i));
       }
@@ -1423,12 +904,6 @@ SedBase::appendAnnotation (const XMLNode* annotation)
 int
 SedBase::appendAnnotation (const std::string& annotation)
 {
-  //
-  // (*NOTICE*)
-  //
-  // syncAnnotation() doesn't need to be invoked in this function because
-  // existing mCVTerm objects are properly merged in the following code.
-  //
 
   int success = LIBSEDML_OPERATION_FAILED;
   XMLNode* annt_xmln;
@@ -1621,7 +1096,7 @@ SedBase::setNotes(const XMLNode* notes)
   if (getLevel() > 2 
     || (getLevel() == 2 && getVersion() > 1))
   {
-    if (!SyntaxChecker::hasExpectedXHTMLSyntax(mNotes, getSedMLNamespaces()))
+    if (!SyntaxChecker::hasExpectedXHTMLSyntax(mNotes, NULL /*getSedMLNamespaces()*/))
     {
       delete mNotes;
       mNotes = NULL;
@@ -1872,7 +1347,7 @@ SedBase::appendNotes(const XMLNode* notes)
       tmpNotes.addChild(addedNotes);
     }
 
-    if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmpNotes, getSedMLNamespaces()))
+    if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmpNotes, NULL /*getSedMLNamespaces()*/))
     {
       return LIBSEDML_INVALID_OBJECT;
     }
@@ -2091,52 +1566,6 @@ SedBase::appendNotes(const std::string& notes)
 }
 
 
-int
-SedBase::setModelHistory(ModelHistory * history)
-{
-  /* ModelHistory is only allowed on Model in L2
-   * but on any element in L3
-   */
-  if (getLevel() < 3)
-  {
-    if (getTypeCode() !=SEDML_MODEL)
-    {
-      return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-    }
-  }
-  // shouldnt add a history to an object with no metaid 
-  if (!isSetMetaId())
-  {
-    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-  }
-
-  if (mHistory == history) 
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (history == NULL)
-  {
-    delete mHistory;
-    mHistory = NULL;
-    mHistoryChanged = true;
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (!(history->hasRequiredAttributes()))
-  {
-    delete mHistory;
-    mHistory = NULL;
-    return LIBSEDML_INVALID_OBJECT;
-  }
-  else
-  {
-    delete mHistory;
-    mHistory = static_cast<ModelHistory*>( history->clone() );
-    mHistoryChanged = true;
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
 /** @cond doxygen-libsbml-internal */
 
 /*
@@ -2147,13 +1576,6 @@ SedBase::setSedMLDocument (SedMLDocument* d)
 {
   mSedML = d;
 
-  //
-  // (EXTENSION) 
-  //
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    mPlugins[i]->setSedMLDocument(d);
-  }
 }
 
 
@@ -2168,18 +1590,11 @@ SedBase::connectToParent (SedBase* parent)
   mParentSedMLObject = parent;
   if (mParentSedMLObject)
   {
-#if 0
-	  cout << "[DEBUG] connectToParent " << this << " (parent) " << SedMLTypeCode_toString(parent->getTypeCode(),"core")
-			   << " " << parent->getSedMLDocument() << endl;
-#endif
     setSedMLDocument(mParentSedMLObject->getSedMLDocument());
   }
   else
   {
     setSedMLDocument(0);
-  }
-  for (unsigned int p=0; p<mPlugins.size(); p++) {
-    mPlugins[p]->connectToParent(this);
   }
 }
 
@@ -2196,9 +1611,6 @@ SedBase::connectToParent (SedBase* parent)
 void
 SedBase::connectToChild()
 {
-  for (size_t p=0; p<mPlugins.size(); p++) {
-    mPlugins[p]->connectToParent(this);
-  }
 }
 
 /** @endcond */
@@ -2213,11 +1625,10 @@ SedBase::getAncestorOfType(int type, const std::string pkgName)
   SedBase *parent = getParentSedMLObject();
 
   while ( parent != NULL && 
-          !( parent->getPackageName() == "core" &&
-             parent->getTypeCode() ==SEDML_DOCUMENT )
+          !( parent->getTypeCode() ==SEDML_DOCUMENT )
         )
   {
-    if (parent->getTypeCode() == type && parent->getPackageName() == pkgName)
+    if (parent->getTypeCode() == type )
       return parent;
     else
     {
@@ -2242,11 +1653,10 @@ SedBase::getAncestorOfType(int type, const std::string pkgName) const
   const SedBase *parent = getParentSedMLObject();
 
   while ( parent != NULL && 
-          !( parent->getPackageName() == "core" &&
-             parent->getTypeCode() ==SEDML_DOCUMENT )
+          !( parent->getTypeCode() ==SEDML_DOCUMENT )
         )
   {
-    if (parent->getTypeCode() == type && parent->getPackageName() == pkgName)
+    if (parent->getTypeCode() == type )
       return parent;
     else
     {
@@ -2259,47 +1669,6 @@ SedBase::getAncestorOfType(int type, const std::string pkgName) const
   return NULL;
 
 }
-
-
-/*
- * Sets the sboTerm field to value.
- */
-int
-SedBase::setSBOTerm (int value)
-{
-  if (getLevel() < 2 || (getLevel() == 2 && getVersion() < 2))
-  {
-    mSBOTerm = -1;
-    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-  }
-  else
-  {
-    if ( !SBO::checkTerm(value) )
-    {
-      mSBOTerm = -1;
-      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-    }
-    mSBOTerm = value;
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-/*
- * Sets the sboTerm field to value converted from the given string.
- */
-int
-SedBase::setSBOTerm (const std::string &sboid)
-{
-  if (&(sboid) == NULL)
-  {
-    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-  }
-  else
-  {
-    return setSBOTerm(SBO::stringToInt(sboid));
-  }
-}
-
 
 /*
  * Sets the namespaces relevant of this SedML object.
@@ -2392,381 +1761,17 @@ SedBase::unsetAnnotation ()
 
 
 /*
- * Unsets the sboTerm of this SedML object.
- */
-int
-SedBase::unsetSBOTerm ()
-{
-  if (getLevel() < 2 || (getLevel() == 2 && getVersion() < 2))
-  {
-    mSBOTerm = -1;
-    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-  }
-  else
-  {
-    mSBOTerm = -1;
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
-/** @cond doxygen-libsbml-internal */
-void SedBase::removeDuplicatedResources(CVTerm *term, QualifierType_t type)
-{
-  int length = term->getResources()->getLength();
-  if (type == BIOLOGICAL_QUALIFIER)
-  {
-    BiolQualifierType_t biolQual = BQB_UNKNOWN;
-    for (int p = length-1; p > -1; p--)
-    {
-      biolQual = getResourceBiologicalQualifier(term->getResources()->getValue(p));
-      if (biolQual != BQB_UNKNOWN)
-      {
-        /* resource is already present
-        * - dont want to add again;
-        * so delete it from set to be added
-        */
-        term->removeResource(term->getResources()->getValue(p));
-      }
-    }
-  }
-  else if (type == MODEL_QUALIFIER)
-  {
-    ModelQualifierType_t modelQual = BQM_UNKNOWN;
-    for (int p = length-1; p > -1; p--)
-    {
-      modelQual = getResourceModelQualifier(term->getResources()->getValue(p));
-      if (modelQual != BQM_UNKNOWN)
-      {
-        /* resource is already present
-        * - dont want to add again;
-        * so delete it from set to be added
-        */
-        term->removeResource(term->getResources()->getValue(p));
-      }
-    }
-  }
-}
-/** @endcond */
-
-/** @cond doxygen-libsbml-internal */
-int SedBase::addTermToExistingBag(CVTerm *term, QualifierType_t type )
-{
-  unsigned int added = 0;
-  unsigned int length = mCVTerms->getSize();
-  
-  CVTerm* nthTerm = NULL;
-
-  if (length == 0) return added;
-
-  if (type == BIOLOGICAL_QUALIFIER)
-  {
-    BiolQualifierType_t biol = term->getBiologicalQualifierType();
-    
-    for (int n = (int)length -1; n >= 0  && added == 0; n--)
-    {
-      nthTerm = static_cast <CVTerm *>(mCVTerms->get(n));
-
-      if (nthTerm != NULL && biol == nthTerm->getBiologicalQualifierType())
-      {
-        for (int r = 0; r < term->getResources()->getLength(); r++)
-        {
-          nthTerm->addResource(
-            term->getResources()->getValue(r));
-        }
-        added = 1;
-      }
-    }
-  }
-  else if (type == MODEL_QUALIFIER)
-  {
-    ModelQualifierType_t model = term->getModelQualifierType();
-
-    for (unsigned int n = 0; n < length && added == 0; n++)
-    {
-      nthTerm = static_cast <CVTerm *>(mCVTerms->get(n));
-
-      if (nthTerm != NULL && model == nthTerm->getModelQualifierType())
-      {
-        for (int r = 0; r < term->getResources()->getLength(); r++)
-        {
-          nthTerm->addResource(
-            term->getResources()->getValue(r));
-        }
-        added = 1;
-      }
-    }
-  }
-  return added;
-}
-/** @endcond */
-
-/*
- * Adds a copy of the given CVTerm to this SedML object.
- */
-int
-SedBase::addCVTerm(CVTerm * term, bool newBag)
-{
-  unsigned int added = 0;
-  // shouldnt add a CVTerm to an object with no metaid 
-  if (!isSetMetaId())
-  {
-    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-  }
-
-  if (term == NULL)
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-  else if (!term->hasRequiredAttributes())
-  {
-    return LIBSEDML_INVALID_OBJECT;
-  }
-  
-  /* clone the term to be added so that I can adjust 
-   * which resources are actually added
-   */
-  CVTerm * copyTerm = term->clone();
-
-  if (mCVTerms == NULL)
-  {
-    mCVTerms = new List();
-    mCVTerms->add((void *) term->clone());
-  }
-  else if (mCVTerms->getSize() == 0)
-  {
-    mCVTerms->add((void *) term->clone());
-  }
-  else
-  {
-    /* check whether the resources are already listed */
-    QualifierType_t type = copyTerm->getQualifierType();
-    removeDuplicatedResources(copyTerm, type);
-
-    /* if the qualifier of the term being added is already present
-     * add to the list of resources for that qualifier
-     */
-    if (newBag == false)
-    {
-      added = addTermToExistingBag(copyTerm, type);
-    }
-
-    if (added == 0 && copyTerm->getResources()->getLength() > 0)
-    {
-      /* no matching copyTerms already in list */
-      mCVTerms->add((void *) copyTerm->clone());
-    }
-
-  }
-
-  delete copyTerm;
-  mCVTermsChanged = true;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * @return the list of CVTerms for this SedML object.
- */
-List*
-SedBase::getCVTerms()
-{
-  return mCVTerms;
-}
-
-
-/*
- * @return the list of CVTerms for this SedML object.
- */
-List*
-SedBase::getCVTerms() const
-{
-  return mCVTerms;
-}
-
-/*
- * Returns the number of CVTerm objects in the annotations of this SedML
- * object.
- * 
- * @return the number of CVTerms for this SedML object.
- */
-unsigned int 
-SedBase::getNumCVTerms()
-{
-  if (mCVTerms != NULL)
-  {
-    return mCVTerms->getSize();
-  }
-  else
-  {
-    return 0;
-  }
-}
-
-
-/*
- * Returns the nth CVTerm in the list of CVTerms of this SedML
- * object.
- * 
- * @param n unsigned int the index of the CVTerm to retrieve
- *
- * @return the nth CVTerm in the list of CVTerms for this SedML object.
- */
-CVTerm* 
-SedBase::getCVTerm(unsigned int n)
-{
-  return (mCVTerms) ? static_cast <CVTerm*> (mCVTerms->get(n)) : NULL;
-}
-
-
-/*
- * Clears the list of CVTerms of this SedML
- * object.
- */
-int 
-SedBase::unsetCVTerms()
-{
-  if (mCVTerms != NULL)
-  {  
-    unsigned int size = mCVTerms->getSize();
-    while (size--) delete static_cast<CVTerm*>( mCVTerms->remove(0) );
-    delete mCVTerms;
-    mCVTermsChanged = true;
-  }
-  mCVTerms = NULL;
-  
-  if (mCVTerms != NULL)
-    return LIBSEDML_OPERATION_FAILED;
-  else
-    return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-int 
-SedBase::unsetModelHistory()
-{
-  if (mHistory != NULL)
-    mHistoryChanged = true;
-
-  delete mHistory;
-  mHistory = NULL;
-
-  /* ModelHistory is only allowed on Model in L2
-   * but on any element in L3
-   */
-  if (getLevel() < 3 && getTypeCode() !=SEDML_MODEL)
-  {
-    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
-  }
-
-  if (mHistory != NULL)
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
-/*
- * Returns the BiologicalQualifier associated with this resource,
- * an empty string if the resource does not exist.
- *
- * @param resource string representing the resource; e.g.,
- * "http://www.geneontology.org/#GO:0005892"
- *
- * @return the BiolQualifierType_t associated with the resource
- */
-BiolQualifierType_t 
-SedBase::getResourceBiologicalQualifier(std::string resource)
-{
-  if (mCVTerms != NULL)
-  {
-    for (unsigned int n = 0; n < mCVTerms->getSize(); n++)
-    {
-      // does this term have a biological qualifier
-      if (static_cast <CVTerm *>(mCVTerms->get(n))->getQualifierType() 
-                                                              == BIOLOGICAL_QUALIFIER)
-      {
-        // check whether given resource is present
-        for (int r = 0; 
-          r < static_cast <CVTerm *>(mCVTerms->get(n))->getResources()->getLength(); r++)
-        {
-          if (resource == 
-            static_cast <CVTerm *>(mCVTerms->get(n))->getResources()->getValue(r))
-          {
-            return static_cast <CVTerm *>(mCVTerms->get(n))->getBiologicalQualifierType();
-          }
-        }
-      }
-    }
-  }
-
-  return BQB_UNKNOWN;
-}
-
-/*
- * Returns the ModelQualifier associated with this resource,
- * an empty string if the resource does not exist.
- *
- * @param resource string representing the resource; e.g.,
- * "http://www.geneontology.org/#GO:0005892"
- *
- * @return the ModelQualifierType_t associated with the resource
- */
-ModelQualifierType_t 
-SedBase::getResourceModelQualifier(std::string resource)
-{
-  if (mCVTerms != NULL)
-  {
-    for (unsigned int n = 0; n < mCVTerms->getSize(); n++)
-    {
-      // does this term have a biological qualifier
-      if (static_cast <CVTerm *>(mCVTerms->get(n))->getQualifierType() 
-                                                              == MODEL_QUALIFIER)
-      {
-        // check whether given resource is present
-        for (int r = 0; 
-          r < static_cast <CVTerm *>(mCVTerms->get(n))->getResources()->getLength(); r++)
-        {
-          if (resource == 
-            static_cast <CVTerm *>(mCVTerms->get(n))->getResources()->getValue(r))
-          {
-            return static_cast <CVTerm *>(mCVTerms->get(n))->getModelQualifierType();
-          }
-        }
-      }
-    }
-  }
-
-  return BQM_UNKNOWN;
-}
-
-
-/*
- * @return the parent Model of this SedML object.
- */
-const Model*
-SedBase::getModel () const
-{
-  return (mSedML != NULL) ? mSedML->getModel() : NULL;
-}
-
-
-/*
  * @return the SedML level of this SedML object.
  */
 unsigned int
 SedBase::getLevel () const
 {
   if (mSedML != NULL)
-    return mSedML->mLevel;
+    return mSedML->getLevel();
   else if (mSedMLNamespaces != NULL)
     return mSedMLNamespaces->getLevel();
   else
-    return SedMLDocument::getDefaultLevel();
+    return SEDML_DEFAULT_LEVEL;
 }
 
 
@@ -2777,60 +1782,12 @@ unsigned int
 SedBase::getVersion () const
 {
   if (mSedML != NULL)
-    return mSedML->mVersion;
+    return mSedML->getVersion();
   else if (mSedMLNamespaces != NULL)
     return mSedMLNamespaces->getVersion();
   else
-    return SedMLDocument::getDefaultVersion();
+    return SEDML_DEFAULT_VERSION;
 }
-
-
-/*
- * @return the version of package to which this SedML object 
- * belongs to.
- * 0 will be returned if this element belongs to Core package.
- *
- * @see getLevel()
- * @see getVersion()
- */
-unsigned int 
-SedBase::getPackageVersion () const
-{
-  const SedMLExtension* sbmlext = SedMLExtensionRegistry::getInstance().getExtensionInternal(mURI);
-
-  if (sbmlext)
-  {
-    return sbmlext->getPackageVersion(mURI);
-  }
-
-  return 0;
-}
-
-
-/*
- * Returns the name of package in which this element is defined.
- *
- */
-const std::string&
-SedBase::getPackageName () const
-{  
-  if (SedMLNamespaces::isSedMLNamespace(mURI))
-  {
-    static const std::string pkgName = "core";
-    return pkgName;
-  }
-
-  const SedMLExtension* sbmlext = SedMLExtensionRegistry::getInstance().getExtensionInternal(mURI);
-
-  if (sbmlext)
-  {
-    return sbmlext->getName();
-  }
-
-  static const std::string pkgName = "unknown";
-  return pkgName;
-}
-
 
 /*
  * @return the typecode (int) of this SedML object orSEDML_UNKNOWN
@@ -2847,331 +1804,7 @@ SedBase::getPackageName () const
 int
 SedBase::getTypeCode () const
 {
-  returnSEDML_UNKNOWN;
-}
-
-
-//
-//
-// (EXTENSION)
-//
-//
-
-
-/*
- * Returns a plugin object (extenstion interface) of package extension
- * with the given package name or URI.
- *
- * @param package the name or URI of the package
- *
- * @return the plugin object of package extension with the given package
- * name or URI. 
- */
-SedBasePlugin* 
-SedBase::getPlugin(const std::string& package)
-{
-  SedBasePlugin* sbPlugin = 0;
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    std::string uri = mPlugins[i]->getURI();
-    const SedMLExtension* sbext = SedMLExtensionRegistry::getInstance().getExtensionInternal(uri);
-    if (uri == package)
-    {
-      sbPlugin = mPlugins[i];
-      break;
-    }
-    else if (sbext && (sbext->getName() == package) )
-    {
-      sbPlugin = mPlugins[i];
-      break;
-    }
-  }
-
-  return sbPlugin;
-}
-
-
-/*
- * Returns a plugin object (extenstion interface) of package extension
- * with the given package name or URI.
- *
- * @param package the name or URI of the package
- *
- * @return the plugin object of package extension with the given package
- * name or URI. 
- */
-const SedBasePlugin* 
-SedBase::getPlugin(const std::string& package) const
-{
-  return const_cast<SedBase*>(this)->getPlugin(package);
-}
-
-
-SedBasePlugin* 
-SedBase::getPlugin(unsigned int n)
-{
-  if (n>=getNumPlugins()) return NULL;
-  return mPlugins[n];
-}
-
-
-/*
- * Returns a plugin object (extenstion interface) of package extension
- * with the given package name or URI.
- *
- * @param package the name or URI of the package
- *
- * @return the plugin object of package extension with the given package
- * name or URI. 
- */
-const SedBasePlugin* 
-SedBase::getPlugin(unsigned int n) const
-{
-  return const_cast<SedBase*>(this)->getPlugin(n);
-}
-
-
-/*
- * Returns the number of plugin objects of package extensions.
- *
- * @return the number of plugin objects of package extensions.
- */
-unsigned int 
-SedBase::getNumPlugins() const
-{
-  return (int)mPlugins.size();
-}
-
-int 
-SedBase::disablePackage(const std::string& pkgURI, const std::string& prefix)
-{
-	return enablePackage(pkgURI, prefix, false);
-}
-
-/*
- * Enables/Disables the given package with this object.
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
- * @li LIBSEDML_PKG_UNKNOWN      
- * @li LIBSEDML_PKG_VERSION_MISMATCH 
- * @li LIBSEDML_PKG_CONFLICTED_VERSION
- */
-int 
-SedBase::enablePackage(const std::string& pkgURI, const std::string& prefix, bool flag)
-{
-  //
-  // Checks if the package with the given URI is already enabled/disabled with
-  // this element.
-  //
-  if (flag)
-  {
-    if (isPackageURIEnabled(pkgURI))
-    {
-      return LIBSEDML_OPERATION_SUCCESS;
-    }
-  }
-  else
-  {
-    if (!isPackageURIEnabled(pkgURI))
-    {
-      return LIBSEDML_OPERATION_SUCCESS;
-    }
-  }
-
-  //
-  // Checks if the given pkgURI is registered in SedMLExtensionRegistry
-  //
-  if (!SedMLExtensionRegistry::getInstance().isRegistered(pkgURI))
-  {
-    return LIBSEDML_PKG_UNKNOWN;
-  }
-
-  const SedMLExtension *sbmlext = SedMLExtensionRegistry::getInstance().getExtensionInternal(pkgURI);
-
-  //
-  // Checks version conflicts of the given package
-  //
-  if (flag && isPackageEnabled(sbmlext->getName()))
-  {
-    return LIBSEDML_PKG_CONFLICTED_VERSION;
-  }
-
-  //
-  // Checks if the SedML Level and Version of the given pkgURI is 
-  // consistent with those of this object.
-  //
-  /* if we happen to be using layout in L2 we cannot do the version
-   * check since the uri has no way of telling which sbml version is being used.
-   */
-  if (sbmlext->getName() == "layout" || sbmlext->getName() == "render" ) 
-  {
-    if (sbmlext->getLevel(pkgURI)   != getLevel() )
-    {
-      return LIBSEDML_PKG_VERSION_MISMATCH;
-    }
-  }
-  else if ( (sbmlext->getLevel(pkgURI)   != getLevel()  ) ||
-       (sbmlext->getVersion(pkgURI) != getVersion()) 
-     )
-  { 
-    return LIBSEDML_PKG_VERSION_MISMATCH;
-  }
-
-  SedBase* rootElement = getRootElement();
-  rootElement->enablePackageInternal(pkgURI,prefix,flag);
-
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-/** @cond doxygen-libsbml-internal */
-/*
- * Enables/Disables the given package with this element and child
- * elements (if any).
- * (This is an internal implementation for enablePackage function)
- */
-void 
-SedBase::enablePackageInternal(const std::string& pkgURI, const std::string& pkgPrefix, bool flag)
-{
-  if (flag)
-  {
-    if (mSedMLNamespaces)
-    {
-#if 0
-      cout << "[DEBUG] SedBase::enablePackageInternal() (uri) " <<  pkgURI
-           << " (prefix) " << pkgPrefix << " (element) " << getElementName() << endl;
-#endif
-      mSedMLNamespaces->addNamespace(pkgURI,pkgPrefix);
-    }
-  
-    //
-    // enable the given package
-    //
-    const SedMLExtension* sbmlext = SedMLExtensionRegistry::getInstance().getExtensionInternal(pkgURI);
-
-    if (sbmlext)
-    {
-      SedBaseExtensionPoint extPoint(getPackageName(),getTypeCode());
-      const SedBasePluginCreatorBase* sbPluginCreator = sbmlext->getSedBasePluginCreator(extPoint);
-      if (sbPluginCreator)
-      {
-        SedBasePlugin* entity = sbPluginCreator->createPlugin(pkgURI,pkgPrefix,getNamespaces());
-        entity->connectToParent(this);
-        mPlugins.push_back(entity);
-      }
-
-    }
-  }
-  else
-  {
-    //
-    // disable the given package
-    //
-    for (size_t i=0; i < mPlugins.size(); i++)
-    {
-      std::string uri = mPlugins[i]->getURI();
-      if (pkgURI == uri)
-      {
-        mPlugins.erase( mPlugins.begin() + i );
-      }
-    }
-
-    if (mSedMLNamespaces)
-    {
-      mSedMLNamespaces->removeNamespace(pkgURI);
-    }
-  }
-
-  /* ---------------------------------------------------------
-   *
-   * (EXTENSION)
-   *
-   * ----------------------------------------------------------
-   */
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    mPlugins[i]->enablePackageInternal(pkgURI,pkgPrefix,flag);
-  }
-}
-/** @endcond */
-
-
-/*
- * Predicate returning @c true if 
- * the a package with the given URI is enabled with this object.
- *
- * @param pkgURI the URI of the package
- *
- * @return @c true if the given package is enabled with this object, @c
- * false otherwise.
- */
-bool 
-SedBase::isPackageURIEnabled(const std::string& pkgURI) const
-{
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    if (mPlugins[i]->getURI() == pkgURI) 
-      return true;
-  }
-  return false;
-}
-
-
-/*
- * Predicate returning @c true if 
- * the a package with the given URI is enabled with this object.
- *
- * @param pkgURI the URI of the package
- *
- * @return @c true if the given package is enabled with this object, @c
- * false otherwise.
- */
-bool 
-SedBase::isPkgURIEnabled(const std::string& pkgURI) const
-{  
-  return isPackageURIEnabled(pkgURI);
-}
-
-/*
- * Predicate returning @c true if
- * the given package (don't care the package version) is enabled with 
- * this object.
- *
- * @param pkgName the URI of the package
- *
- * @return @c true if the given package is enabled with this object, @c
- * false otherwise.
- */
-bool
-SedBase::isPackageEnabled(const std::string& pkgName) const
-{
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    if (mPlugins[i]->getPackageName() == pkgName)
-      return true;
-  }
-  return false;
-}
-
-/*
- * Predicate returning @c true if
- * the given package (don't care the package version) is enabled with 
- * this object.
- *
- * @param pkgName the URI of the package
- *
- * @return @c true if the given package is enabled with this object, @c
- * false otherwise.
- */
-bool
-SedBase::isPkgEnabled(const std::string& pkgName) const
-{  
-  return isPackageEnabled(pkgName);
+  return SEDML_UNKNOWN;
 }
 
 bool 
@@ -3195,11 +1828,12 @@ SedBase::matchesSedMLNamespaces(const SedBase * sb)
     SedMLNamespaces *sbmlns = getSedMLNamespaces();
     SedMLNamespaces *sbmlns_rhs = sb->getSedMLNamespaces();
 
-    if (sbmlns->getNamespaces()->containIdenticalSetNS(
-      sbmlns_rhs->getNamespaces()) == false)
-    {
-      match = false;
-    }
+	//TODO
+    //if (sbmlns->getNamespaces()->containIdenticalSetNS(
+    //  sbmlns_rhs->getNamespaces()) == false)
+    //{
+    //  match = false;
+    //}
   }
 
   return match;
@@ -3215,11 +1849,12 @@ SedBase::matchesSedMLNamespaces(const SedBase * sb) const
     SedMLNamespaces *sbmlns = getSedMLNamespaces();
     SedMLNamespaces *sbmlns_rhs = sb->getSedMLNamespaces();
 
-    if (sbmlns->getNamespaces()->containIdenticalSetNS(
-      sbmlns_rhs->getNamespaces()) == false)
-    {
-      match = false;
-    }
+	// TODO: 
+    //if (sbmlns->getNamespaces()->containIdenticalSetNS(
+    //  sbmlns_rhs->getNamespaces()) == false)
+    //{
+    //  match = false;
+    //}
   }
 
   return match;
@@ -3338,49 +1973,13 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
     //
     int numNS = 0;
 
-    if (xmlns->hasURI(SedML_XMLNS_L3V1))
-    {
-      ++numNS;
-      declaredURI.assign(SedML_XMLNS_L3V1);
-    }
 
-    if (xmlns->hasURI(SedML_XMLNS_L2V4))
-    {
-      if (numNS > 0) return false;
-      ++numNS;
-      declaredURI.assign(SedML_XMLNS_L2V4);
-    }
-
-    if (xmlns->hasURI(SedML_XMLNS_L2V3))
+    if (xmlns->hasURI(SEDML_XMLNS_L1))
     {
       // checks different SedML XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
-      declaredURI.assign(SedML_XMLNS_L2V3);
-    }
-
-    if (xmlns->hasURI(SedML_XMLNS_L2V2))
-    {
-      // checks different SedML XMLNamespaces
-      if (numNS > 0) return false;
-      ++numNS;
-      declaredURI.assign(SedML_XMLNS_L2V2);
-    }
-
-    if (xmlns->hasURI(SedML_XMLNS_L2V1))
-    {
-      // checks different SedML XMLNamespaces
-      if (numNS > 0) return false;
-      ++numNS;
-      declaredURI.assign(SedML_XMLNS_L2V1);
-    }
-
-    if (xmlns->hasURI(SedML_XMLNS_L1))
-    {
-      // checks different SedML XMLNamespaces
-      if (numNS > 0) return false;
-      ++numNS;
-      declaredURI.assign(SedML_XMLNS_L1);
+      declaredURI.assign(SEDML_XMLNS_L1);
     }
 
     // checks if the SedML Namespace is explicitly defined.
@@ -3394,158 +1993,6 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
       }
     }
   }
-
-  const std::string& pkgName = getPackageName();
-  if (&pkgName == NULL)
-  {
-	  // the pkgName was not initialized, so this is an invalid element
-	  return false;
-  }
-
-  if (pkgName == "core")
-  {
-	// we need to consider whether it should be necessary to declare the sbml namespace.
-	//if (!sedmlDeclared)
-	//  return false;
-
-    if (typecode ==SEDML_UNKNOWN)
-    {
-      valid = false;
-      return valid;
-    }
-    switch (getLevel())
-    {
-      case 1:
-        // some components didnt exist in level 1
-        if ( typecode ==SEDML_COMPARTMENT_TYPE
-          || typecode ==SEDML_CONSTRAINT
-          || typecode ==SEDML_EVENT
-          || typecode ==SEDML_EVENT_ASSIGNMENT
-          || typecode ==SEDML_FUNCTION_DEFINITION
-          || typecode ==SEDML_INITIAL_ASSIGNMENT
-          || typecode ==SEDML_SPECIES_TYPE
-          || typecode ==SEDML_MODIFIER_SPECIES_REFERENCE
-          || typecode ==SEDML_TRIGGER
-          || typecode ==SEDML_DELAY
-        || typecode ==SEDML_STOICHIOMETRY_MATH
-        || typecode ==SEDML_PRIORITY
-        || typecode ==SEDML_LOCAL_PARAMETER)
-          valid = false;
-       switch (version)
-        {
-          case 1:
-          case 2:
-            // the namespaces contains the sbml namespaces
-            // check it is the correct ns for the level/version
-            if (sedmlDeclared)
-            {
-              if (declaredURI != string(SedML_XMLNS_L1))
-              {
-                valid = false;
-              }
-            }
-            break;
-          default:
-            valid = false;
-            break;
-          }
-        break;
-      case 2:
-        if ( typecode ==SEDML_PRIORITY
-        || typecode ==SEDML_LOCAL_PARAMETER)
-          valid = false;
-        switch (version)
-        {
-          case 1:
-            // some components didnt exist in l2v1
-            if ( typecode ==SEDML_COMPARTMENT_TYPE
-              || typecode ==SEDML_CONSTRAINT
-              || typecode ==SEDML_INITIAL_ASSIGNMENT
-              || typecode ==SEDML_SPECIES_TYPE)
-              valid = false;
-            // the namespaces contains the sbml namespaces
-            // check it is the correct ns for the level/version
-            if (sedmlDeclared)
-            {
-              if (declaredURI != string(SedML_XMLNS_L2V1))
-              {
-                valid = false;
-              }
-            }
-            break;
-          case 2:
-            // the namespaces contains the sbml namespaces
-            // check it is the correct ns for the level/version
-            if (sedmlDeclared)
-            {
-              if (declaredURI != string(SedML_XMLNS_L2V2))
-              {
-                valid = false;
-              }
-            }
-            break;
-          case 3:
-            // the namespaces contains the sbml namespaces
-            // check it is the correct ns for the level/version
-            if (sedmlDeclared)
-            {
-              if (declaredURI != string(SedML_XMLNS_L2V3))
-              {
-                valid = false;
-              }
-            }
-            break;
-          case 4:
-            // the namespaces contains the sbml namespaces
-            // check it is the correct ns for the level/version
-            if (sedmlDeclared)
-            {
-              if (declaredURI != string(SedML_XMLNS_L2V4))
-              {
-                valid = false;
-              }
-            }
-            break;
-          default:
-            valid = false;
-            break;
-          }
-        break;
-      case 3:
-        // some components no longer exist in level 3
-        if ( typecode ==SEDML_COMPARTMENT_TYPE
-          || typecode ==SEDML_SPECIES_TYPE
-          || typecode ==SEDML_STOICHIOMETRY_MATH)
-          valid = false;
-        switch (version)
-        {
-          case 1:
-           // the namespaces contains the sbml namespaces
-            // check it is the correct ns for the level/version
-            if (sedmlDeclared)
-            {
-              if (declaredURI != string(SedML_XMLNS_L3V1))
-              {
-                valid = false;
-              }
-            }
-            break;
-          default:
-            valid = false;
-            break;
-        }
-        break;
-      default:
-        valid = false;
-        break;
-    }
-  }
-
-  // if this is an extension namespace, this method will return the wrong answer, 
-  // so instead return true
-  ISedMLExtensionNamespaces* test = dynamic_cast<ISedMLExtensionNamespaces*> (mSedMLNamespaces);
-  if (!valid && test != NULL)
-    return true;
 
   return valid;
 }
@@ -3634,7 +2081,7 @@ SedBase::read (XMLInputStream& stream)
    */
   if (element.getName() == "sbml")
   {
-    stream.setSedMLNamespaces(this->getSedMLNamespaces());
+    //stream.setNamespaces(this->getSedMLNamespaces());
     // need to check that any prefix on the sbmlns also occurs on element
     // remembering the horrible situation where the sbmlns might be declared
     // with more than one prefix
@@ -3739,11 +2186,6 @@ SedBase::read (XMLInputStream& stream)
 
       SedBase * object = createObject(stream);
       
-      if (!object)
-      {
-        object = createExtensionObject(stream);	
-      }
-
       if (object != NULL)
       {
         checkOrderAndLogError(object, position);
@@ -3755,16 +2197,9 @@ SedBase::read (XMLInputStream& stream)
 
         if ( !stream.isGood() ) break;
 
-        if (object->getPackageName() == "core" 
-            && object->getTypeCode() ==SEDML_SPECIES_REFERENCE 
-            && object->getLevel() > 1)
-        {
-          static_cast <SpeciesReference *> (object)->sortMath();
-        }
         checkListOfPopulated(object);
       }
-      else if ( !( storeUnknownExtElement(stream)
-                   || readOtherXML(stream)
+      else if ( !( readOtherXML(stream)
                    || readAnnotation(stream)
                    || readNotes(stream) ))
       {
@@ -3841,32 +2276,6 @@ SedBase::writeElements (XMLOutputStream& stream) const
   if (mAnnotation != NULL) stream << *mAnnotation;
 }
 
-void
-SedBase::writeExtensionElements (XMLOutputStream& stream) const
-{
-  /* ---------------------------------------------------------
-   *
-   * (EXTENSION)
-   *
-   * ----------------------------------------------------------
-   */
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    mPlugins[i]->writeElements(stream);
-  }
-
-  //  
-  // writes elements of unkown packages
-  //
-  if (getLevel() > 2)
-  {
-    stream << mElementsOfUnknownPkg;
-  }
-
-  /////////////////////////////////////////////////////////////////////////
-
-}
 /** @endcond */
 
 
@@ -3886,52 +2295,6 @@ SedBase::createObject (XMLInputStream& stream)
 }
 
 
-SedBase*
-SedBase::createExtensionObject (XMLInputStream& stream)
-{
-  SedBase* object = NULL;
-
-  /* ---------------------------------------------------------
-   *
-   * (EXTENSION)
-   *
-   * ----------------------------------------------------------
-   */
-
-  const string& uri  = stream.peek().getURI();
-  SedBasePlugin* sbext = NULL;
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    if (mPlugins[i]->getURI() == uri)
-    {
-      sbext = mPlugins[i];
-      break;
-    }
-  }
-
-  if (sbext)
-  {
-#if 0
-    std::cout << "[DEBUG] SedBase::createExtensionObject " << getElementName() 
-         << " " << uri << std::endl;
-#endif
-    object = sbext->createObject(stream);
-  }
-#if 0
-  else
-  {
-    std::cout << "[DEBUG] SedBase::createExtensionObject " << getElementName() 
-              << " " << uri << " is NULL" << std::endl;
-  }
-#endif
-
-  /////////////////////////////////////////////////////////////////////////
-
-  return object;
-} 
-
-
 /** @endcond */
 
 
@@ -3945,20 +2308,7 @@ SedBase::createExtensionObject (XMLInputStream& stream)
 bool
 SedBase::readOtherXML (XMLInputStream& stream)
 {
-  /* ---------------------------------------------------------
-   *
-   * (EXTENSION)
-   *
-   * ----------------------------------------------------------
-   */
-
   bool read = false;
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    if (mPlugins[i]->readOtherXML(this, stream))
-      read = true;
-  }
 
   return read;
 }
@@ -4008,39 +2358,6 @@ SedBase::readAnnotation (XMLInputStream& stream)
     delete mAnnotation;
     mAnnotation = new XMLNode(stream);
     checkAnnotation();
-    if(mCVTerms != NULL)
-    {
-      unsigned int size = mCVTerms->getSize();
-      while (size--) delete static_cast<CVTerm*>( mCVTerms->remove(0) );
-      delete mCVTerms; 
-    }
-    mCVTerms = new List();
-    /* might have model history on sbase objects */
-    if (getLevel() > 2 && getTypeCode()!=SEDML_MODEL)
-    {
-      delete mHistory;
-      if (RDFAnnotationParser::hasHistoryRDFAnnotation(mAnnotation))
-      {
-        mHistory = RDFAnnotationParser::parseRDFAnnotation(mAnnotation, 
-                                                getMetaId().c_str(), &(stream));
-        if (mHistory != NULL && mHistory->hasRequiredAttributes() == false)
-        {
-          logError(RDFNotCompleteModelHistory, getLevel(), getVersion(),
-            "An invalid ModelHistory element has been stored.");
-        }
-        setModelHistory(mHistory);
-      }
-      else
-      {
-        mHistory = NULL;
-      }
-    }
-    if (RDFAnnotationParser::hasCVTermRDFAnnotation(mAnnotation))
-      RDFAnnotationParser::parseRDFAnnotation(mAnnotation, mCVTerms, 
-                                              getMetaId().c_str(), &(stream));
-//    new_annotation = RDFAnnotationParser::deleteRDFAnnotation(mAnnotation);
-//    delete mAnnotation;
-//    mAnnotation = new_annotation;
     return true;
   }
 
@@ -4104,10 +2421,10 @@ SedBase::readNotes (XMLInputStream& stream)
 
     if (getSedMLDocument() != NULL)
     {
-      if (getSedMLDocument()->getNumErrors() == 0)
-      {
-        checkXHTML(mNotes);
-      }
+      //if (getSedMLDocument()->getNumErrors() == 0)
+      //{
+      //  checkXHTML(mNotes);
+      //}
     }
     return true;
   }
@@ -4164,36 +2481,6 @@ SedBase::logUnknownAttribute( const string& attribute,
 {
   ostringstream msg;
 
-  if (getPackageName() != "core")
-  {
-    if (prefix.empty() == false)
-    {
-      msg << "Attribute '" << attribute << "' is not part of the "
-          << "definition of an SedML Level " << level
-          << " Version " << version << " Package " 
-          << getPackageName() << " Version " << getPackageVersion() << " "
-          << element << " element.";
-      if (mSedML != NULL)
-      {
-        getErrorLog()->logError(UnknownPackageAttribute,
-  			      level, version, msg.str(), getLine(), getColumn());
-      }
-    }
-    else
-    {
-      msg << "Attribute '" << attribute << "' is not part of the "
-          << "definition of an SedML Level " << level
-          << " Version " << version << " "
-          << element << " element.";
-      if (mSedML != NULL)
-      {
-        getErrorLog()->logError(UnknownCoreAttribute,
-  			      level, version, msg.str(), getLine(), getColumn());
-      }
-    }
-    return;
-  }
-  else
   {
     msg << "Attribute '" << attribute << "' is not part of the "
         << "definition of an SedML Level " << level
@@ -4445,125 +2732,7 @@ SedBase::logUnknownElement( const string& element,
   bool logged = false;
   ostringstream msg;
 
-  if (level > 2 && getTypeCode() ==SEDML_LIST_OF)
-  {
-    int tc = static_cast<SedListOf*>(this)->getItemTypeCode();
-    msg << "Element '" << element << "' is not part of the definition of "
-      << this->getElementName() << ".";
-    switch (tc)
-    {
-    caseSEDML_UNIT:
-      getErrorLog()->logError(OnlyUnitsInListOfUnits, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_FUNCTION_DEFINITION:
-    
-      getErrorLog()->logError(OnlyFuncDefsInListOfFuncDefs, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_UNIT_DEFINITION:
-    
-      getErrorLog()->logError(OnlyUnitDefsInListOfUnitDefs, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_COMPARTMENT:
-    
-      getErrorLog()->logError(OnlyCompartmentsInListOfCompartments, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_SPECIES:
-    
-      getErrorLog()->logError(OnlySpeciesInListOfSpecies, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_PARAMETER:
-    
-      getErrorLog()->logError(OnlyParametersInListOfParameters, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_INITIAL_ASSIGNMENT:
-    
-      getErrorLog()->logError(OnlyInitAssignsInListOfInitAssigns, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_CONSTRAINT:
-    
-      getErrorLog()->logError(OnlyConstraintsInListOfConstraints, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_RULE:
-    
-      getErrorLog()->logError(OnlyRulesInListOfRules, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_REACTION:
-    
-      getErrorLog()->logError(OnlyReactionsInListOfReactions, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_EVENT:
-    
-      getErrorLog()->logError(OnlyEventsInListOfEvents, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_LOCAL_PARAMETER:
-    
-      getErrorLog()->logError(OnlyLocalParamsInListOfLocalParams, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    caseSEDML_EVENT_ASSIGNMENT:
-    
-      getErrorLog()->logError(OnlyEventAssignInListOfEventAssign, 
-                                level, version, msg.str(), 
-                                getLine(), getColumn());
-      logged = true;
-      break;
-    }
-  }
-
-  if (logged == false && getPackageName() != "core")
-  {
-    // put in a package message
-    // for now - want to log error from package but needs further work
-    ostringstream msg;
-
-    msg << "Element '" << element << "' is not part of the definition of '"
-        << this->getElementName() << "' in "
-        << "SedML Level " << level << " Version " << version
-        << " Package " << getPackageName() 
-        << " Version " << getPackageVersion() << ".";
-      
-    if (mSedML != NULL)
-    {
-      getErrorLog()->logError(UnrecognizedElement,
-			    level, version, msg.str(), getLine(), getColumn());
-    }
-  }
-
+  
   if (logged == false)
   {
 
@@ -4650,11 +2819,6 @@ SedBase::addExpectedAttributes(ExpectedAttributes& attributes)
   if (getLevel() > 1 )
     attributes.add("metaid");  
 
-  //
-  // sboTerm: SBOTerm { use="optional" }  (L2v3 ->)
-  //
-  if (getLevel() > 2 || (getLevel() == 2 && getVersion() > 2) )
-    attributes.add("sboTerm");  
 }
 
 
@@ -4706,10 +2870,6 @@ SedBase::readAttributes (const XMLAttributes& attributes,
         logUnknownAttribute(name, level, version, getElementName());
       }    
     }
-    else if (!prefix.empty() && (prefix != getPrefix()) && (uri != mURI) )
-    {
-      storeUnknownExtAttribute(getElementName(), attributes, i);
-    }
     else if (!expectedAttributes.hasAttribute(name))
     {
       logUnknownAttribute(name, level, version, getElementName(), prefix);
@@ -4723,7 +2883,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     if (assigned && mMetaId.empty())
     {
       logEmptyString("metaid", level, version,
-                     SedMLTypeCode_toString(getTypeCode(), getPackageName().c_str()));
+                     SedMLTypeCode_toString(getTypeCode(), ""));
     }
 
     if (isSetMetaId())
@@ -4735,153 +2895,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     }
   }
 
-  //
-  // sboTerm: SBOTerm { use="optional" }  (L2v3 ->)
-  //
-  // (NOTE) 
-  //
-  //  SBO::readTerm() must be invoked for L2V2 object in each 
-  //  readAttributes function in SedBase derived class if the sboTerm 
-  //  attribute is required in L2V2.
-  //
-  if (level > 2 || ( (level == 2) && (version > 2) ) )
-  {
-    mSBOTerm = SBO::readTerm(attributes, this->getErrorLog(), level, version,
-				getLine(), getColumn());
-  }
-
-  //
-  // (EXTENSION)
-  //
-  readExtensionAttributes(attributes, &expectedAttributes);
-}
-
-
-void
-SedBase::readExtensionAttributes (const XMLAttributes& attributes, const ExpectedAttributes* expectedAttributes)
-{
-  const_cast<XMLAttributes&>(attributes).setErrorLog(getErrorLog());
-
-  /* ---------------------------------------------------------
-   *
-   * (EXTENSION)
-   *
-   * ----------------------------------------------------------
-   */
-    const ExpectedAttributes* base = expectedAttributes  != NULL ? 
-expectedAttributes : new ExpectedAttributes();
-
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-#if 0
-    std::cout << "[DEBUG] SedBase::readExtensionAttributes " 
-              << mPlugins[i]->getURI()  << " "
-              << getElementName() << std::endl;
-#endif
-    
-    ExpectedAttributes ea(*base);
-    
-    mPlugins[i]->addExpectedAttributes(ea);
-    mPlugins[i]->readAttributes(attributes,ea);
-  }
-
-  if (expectedAttributes  == NULL )
-    delete base;
-
-  /////////////////////////////////////////////////////////////////////////
-
-}
-
-
-/**
- * Stores the given attribute to the list of ignored attributes if
- * the given attribute belongs to some unknown package.
- * Unknown attribute error will be logged if the "required" attribute
- * of the package in SedMLDocument element is "true".
- */
-void 
-SedBase::storeUnknownExtAttribute(const std::string& element,
-                                const XMLAttributes& xattr, unsigned int index)
-{
-  if (!mSedML) return;
-
-  if (element == "sbml" && xattr.getName(index) == "required")
-    return;
-
-  std::string uri = xattr.getURI(index);
-
-  //
-  // Checks if the extension package is enabled.
-  //
-  if (!mSedML->isPackageURIEnabled(uri))
-  {
-    //
-    // Checks if the extension package with the uri is unsupporeted
-    // (ignored)
-    //
-    if (mSedML->isIgnoredPackage(uri))
-    {
-      std::string name   = xattr.getName(index);
-      std::string prefix = xattr.getPrefix(index);
-      std::string value  = xattr.getValue(index);
-
-      mAttributesOfUnknownPkg.add(name,value,uri,prefix);
-
-      /* this is now caught earlier and so can be ignored here
-      if (mSedML->getPackageRequired(uri))
-      {
-        logUnknownAttribute(prefix + ":" + name, getLevel(), getVersion(), element);
-      }
-      */
-    }
-    else
-    {
-      std::string name   = xattr.getName(index);
-      std::string prefix = xattr.getPrefix(index);
-      logUnknownAttribute(prefix + ":" + name, getLevel(), getVersion(), element);
-    }
-  }
-}
-
-
-/*
- *
- */
-bool
-SedBase::storeUnknownExtElement(XMLInputStream &stream)
-{
-  string uri = stream.peek().getURI();
-
-  if (SedMLNamespaces::isSedMLNamespace(uri))
-  {
-    return false;
-  }
-  else if (mSedML->isIgnoredPackage(uri))
-  {
-    //
-    // Checks if the extension package with the uri is unknown
-    // (ignored)
-    //
-    /* do not need to do this now i have logged this as
-     * a required package that cannot be interpreted
-     
-    if (mSedML->getPackageRequired(uri))
-    {
-      const string& name   = stream.peek().getName();
-      string prefix = stream.peek().getPrefix();
-      if (!prefix.empty()) prefix += ":";
-      logUnknownElement(prefix + name, getLevel(), getVersion());
-    }
-    */
-
-    XMLNode xmlnode(stream);
-    mElementsOfUnknownPkg.addChild(xmlnode);
-
-    return true;
-  }
-
-  return false;
+  
 }
 
 /** @endcond */
@@ -4900,7 +2914,7 @@ SedBase::getPrefix() const
 
   XMLNamespaces *xmlns = getNamespaces();
   string uri = getURI();
-  if(xmlns && mSedML && !mSedML->isEnabledDefaultNS(uri))
+  if(xmlns && mSedML && false)//!mSedML->isEnabledDefaultNS(uri))
   {
     prefix = xmlns->getPrefix(uri);  
 #if 0
@@ -4996,19 +3010,7 @@ SedBase::writeAttributes (XMLOutputStream& stream) const
     stream.writeAttribute("metaid", sbmlPrefix, mMetaId);
   }
 
-  //
-  // sboTerm: SBOTerm { use="optional" }  (L2v3 ->)
-  //
-  // (NOTE) 
-  //
-  //  SBO::writeTerm() must be invoked for L2V2 object in each 
-  //  readAttributes function in SedBase derived class if the sboTerm 
-  //  attribute is required in L2V2.
-  //
-  if (level > 2 || ( (level == 2) && (version > 2) ) )
-  {
-    SBO::writeTerm(stream, mSBOTerm, sbmlPrefix);
-  }
+  
 }
 
 
@@ -5026,45 +3028,6 @@ SedBase::writeXMLNS (XMLOutputStream& stream) const
 }
 
 
-
-void
-SedBase::writeExtensionAttributes (XMLOutputStream& stream) const
-{
-  /* ---------------------------------------------------------
-   *
-   * (EXTENSION)
-   *
-   * ----------------------------------------------------------
-   */
-
-  // debug
-#if 0
-  cout << "[DEBUG] SedBase::writeExtensionAttributes() " << getTypeCode() << endl;
-#endif
-
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-#if 0
-    cout << "[DEBUG] SedBase::writeExtensionAttributes() " << i << endl;
-#endif
-    mPlugins[i]->writeAttributes(stream);
-  }
-
-  //
-  // writes attributes of unknown packages
-  //
-  for (int i=0; i < mAttributesOfUnknownPkg.getLength(); i++)
-  {
-    std::string name   = mAttributesOfUnknownPkg.getName(i);
-    std::string prefix = mAttributesOfUnknownPkg.getPrefix(i);
-    std::string value  = mAttributesOfUnknownPkg.getValue(i);
-    stream.writeAttribute(name, prefix, value); 
-  }
-
-  /////////////////////////////////////////////////////////////////////////
-}
-
-
 /** @endcond */
 
 
@@ -5075,56 +3038,12 @@ SedBase::writeExtensionAttributes (XMLOutputStream& stream) const
 void
 SedBase::syncAnnotation ()
 {
-  // look to see whether an existing history has been altered 
-  if (mHistoryChanged == false)
-  {
-    if (getModelHistory() != NULL)
-    {
-      if (getModelHistory()->hasBeenModified() == true)
-      { 
-        mHistoryChanged = true;
-      }
-    }
-  }
-  // or an existing CVTerm
-  if (mCVTermsChanged == false)
-  {
-    for (unsigned int i = 0; i < getNumCVTerms(); i++)
-    {
-      if (getCVTerm(i)->hasBeenModified() == true)
-      {
-        mCVTermsChanged = true;
-        break;
-      }
-    }
-  }
-
-  if (mHistoryChanged == true || mCVTermsChanged == true)
-  {
-    reconstructRDFAnnotation();
-    mHistoryChanged = false;
-    mCVTermsChanged = false;
-    if (getModelHistory() != NULL)
-    {
-      getModelHistory()->resetModifiedFlags();
-    }
-    for (unsigned int i = 0; i < getNumCVTerms(); i++)
-    {
-      getCVTerm(i)->resetModifiedFlags();
-    }
-  }  
 
   if (mAnnotation == NULL)
   {
     XMLToken ann_token = XMLToken(XMLTriple("annotation", "", ""), 
                                       XMLAttributes());
     mAnnotation = new XMLNode(ann_token);
-  }
-
-  // sync annotations of plugins
-  for (size_t i=0; i < mPlugins.size(); i++)
-  {
-    mPlugins[i]->syncAnnotation(this, mAnnotation);
   }
 
   // if annotation still empty delete the annotation
@@ -5134,304 +3053,6 @@ SedBase::syncAnnotation ()
     mAnnotation = NULL;
   }
 
-}
-/** @endcond */
-
-
-/** @cond doxygen-libsbml-internal */
-void
-SedBase::reconstructRDFAnnotation()
-{
-  bool hasRDF = false;
-  bool hasAdditionalRDF = false;
-
-  // determine status of existing annotation before doing anything
-  if (mAnnotation != NULL)
-  {
-    hasRDF = RDFAnnotationParser::hasRDFAnnotation(mAnnotation);
-    hasAdditionalRDF = 
-      RDFAnnotationParser::hasAdditionalRDFAnnotation(mAnnotation);
-    if (hasAdditionalRDF == false)
-    {
-      // look for bizaare case where a user has added a history annotation
-      // to an object that does not legally include history in MIRIAM compliant
-      // RDF - this needs to get written out as additional RDF
-      if (getLevel() < 3 && getTypeCode() !=SEDML_MODEL
-        && RDFAnnotationParser::hasHistoryRDFAnnotation(mAnnotation) == true)
-      {
-        hasAdditionalRDF = true;
-      }
-    }
-  }
-
-  // look at whether the user has changed the RDF elements 
-  if(mAnnotation != NULL && hasRDF)
-  {
-    XMLNode* new_annotation = NULL;
-    if (mHistoryChanged == true)
-    {
-      if (mCVTermsChanged == true)
-      {
-        new_annotation = 
-          RDFAnnotationParser::deleteRDFAnnotation(mAnnotation);
-      }
-      else
-      {
-        new_annotation = 
-          RDFAnnotationParser::deleteRDFHistoryAnnotation(mAnnotation);
-      }
-    }
-    else
-    {
-      if (mCVTermsChanged == true)
-      {
-        new_annotation = 
-          RDFAnnotationParser::deleteRDFCVTermAnnotation(mAnnotation);
-      }
-    }
-    
-    if(new_annotation != NULL)
-    {
-      *mAnnotation = *new_annotation;
-      delete new_annotation;
-    }
-  }
-
-  /* get the history and cvterm annotations from the element */
-  XMLNode * history = RDFAnnotationParser::parseOnlyModelHistory(this);
-
-  XMLNode * cvTerms = RDFAnnotationParser::parseCVTerms(this);
-
-  if (history != NULL &&  mHistoryChanged == true && mCVTermsChanged == false)
-  {
-    if (cvTerms == NULL)
-    {
-      if (mAnnotation == NULL)
-      {
-        // if there was no annotation before a user added history/cvterms
-        mAnnotation = history->clone(); //noannot.xml
-      }
-      else
-      {
-        if (mAnnotation->isEnd())
-        {
-          // if the original annotation had only history when it was removed
-          // it would have left <annotation/> as the annotation
-          // need this not to be an end element
-          mAnnotation->unsetEnd(); // histOnly.xml
-        }
-
-        if (hasAdditionalRDF)
-        {
-          // here the annotation after removing history has an RDF top level
-          // element - the history needs to go into the RDF as the first 
-          // description element
-          // <rdf><some-non-miriam-rdf> needs to become
-          // <rdf><History/><some-non-...
-          // test file histAddRDF
-          mAnnotation->getChild("RDF").insertChild(0, 
-            history->getChild("RDF").getChild("Description"));
-        }
-        else
-        {
-          // here the annotation after removing history has either an
-          // empty annotation element OR one with other top level annotations
-          // <annotation/> OR <annotation><someAnnotations/>
-          // just add the whole history RDF annotation
-          // test files histOnly + histOther
-          mAnnotation->addChild(history->getChild("RDF"));
-        }
-      }
-    }
-    else
-    {
-      // here the annotation after removing history has an RDF top level
-      // element with CVTerms and (possibly)other rdf 
-      // - the history needs to go into the first RDF decsription element
-      // that already has CVTerms 
-      // <rdf><Description-withCVTerms/><some-non-miriam-rdf> needs to become
-      // <rdf><Description with ModelHistory and CVTerms/><some-non-...
-      // NOTE: The History Description element has three children
-      // creator/created and modified
-      // test file: histCVAddRDF/histCVOnly/histCVOther
-      unsigned int noChild 
-        = history->getChild("RDF").getChild("Description").getNumChildren(); 
-      for (unsigned int i = noChild; i > 0; i--) 
-      {
-        ((mAnnotation->getChild("RDF")).getChild("Description")).insertChild(
-          0, history->getChild("RDF").getChild("Description").getChild(i-1));
-      }
-    }
-  }
-
-  if (cvTerms != NULL &&  mCVTermsChanged == true && mHistoryChanged == false)
-  {
-    if (history == NULL)
-    {
-      if (mAnnotation == NULL)
-      {
-        // if there was no annotation before a user added history/cvterms
-        mAnnotation = cvTerms->clone(); //noannot.xml
-      }
-      else
-      {
-        if (mAnnotation->isEnd())
-        {
-          // if the original annotation had only CVTerms when it was removed
-          // it would have left <annotation/> as the annotation
-          // need this not to be an end element
-          mAnnotation->unsetEnd(); // CVOnly.xml
-        }
-
-        if (hasAdditionalRDF)
-        {
-          // here the annotation after removing cvterms has an RDF top level
-          // element - the cvterms needs to go into the RDF as the first 
-          // description element
-          // <rdf><some-non-miriam-rdf> needs to become
-          // <rdf><cvterms/><some-non-...
-          // test file histAddRDF
-          mAnnotation->getChild("RDF").insertChild(0, 
-            cvTerms->getChild("RDF").getChild("Description"));
-        }
-        else
-        {
-          // here the annotation after removing CVTerms has either an
-          // empty annotation element OR one with other top level annotations
-          // <annotation/> OR <annotation><someAnnotations/>
-          // just add the whole CVTerm RDF annotation
-          // test files CVOnly + CVOther
-          mAnnotation->addChild(cvTerms->getChild("RDF"));
-        }
-      }
-    }
-    else
-    {
-      // here the annotation after removing cvterms has an RDF top level
-      // element with history and (possibly)other rdf 
-      // - the cvterms needs to go into the first RDF decsription element
-      // that already has history but after it
-      // <rdf><Description-withHistory/><some-non-miriam-rdf> needs to become
-      // <rdf><Description with History and CVTerms/><some-non-...
-      // NOTE: The History Description element has three children
-      // creator/created and modified
-      // test file: histCVAddRDF/histCVOnly/histCVOther
-      unsigned int noChild 
-        = cvTerms->getChild("RDF").getChild("Description").getNumChildren(); 
-      for (unsigned int i = 0; i < noChild; i++) 
-      {
-        ((mAnnotation->getChild("RDF")).getChild("Description")).addChild(
-          cvTerms->getChild("RDF").getChild("Description").getChild(i));
-      }
-    }
-  }
-
-  if (mCVTermsChanged == true && mHistoryChanged == true)
-  {
-    if (mAnnotation == NULL)
-    {
-      // if there was no annotation before a user changed history/cvterms
-      // need to catch case where user in fact unset history/cvterms
-      // test file noannot.xml
-      if (history != NULL)
-      {
-        mAnnotation = history->clone();
-        if (cvTerms != NULL)
-        {
-          unsigned int noChild 
-            = cvTerms->getChild("RDF").getChild("Description").getNumChildren(); 
-          for (unsigned int i = 0; i < noChild; i++) 
-          {
-            ((mAnnotation->getChild("RDF")).getChild("Description")).addChild(
-              cvTerms->getChild("RDF").getChild("Description").getChild(i));
-          }
-        }
-      }
-      else
-      {
-        if (cvTerms != NULL)
-        {
-          mAnnotation = cvTerms->clone();
-        }
-      }
-
-    }
-    else
-    {
-      if (mAnnotation->isEnd())
-      {
-        // if the original annotation had only the miriam-rdf when it was removed
-        // it would have left <annotation/> as the annotation
-        // need this not to be an end element
-        mAnnotation->unsetEnd(); 
-      }
-      
-      if (hasAdditionalRDF)
-      {
-        // here the annotation after removing miriam-rdf has an RDF top level
-        // element - the history and cvterms need to go into the RDF as the first 
-        // description element
-        // <rdf><some-non-miriam-rdf> needs to become
-        // <rdf><HistoryAndCVTerms/><some-non-...
-        if (history != NULL)
-        {
-          mAnnotation->getChild("RDF").insertChild(0, 
-            history->getChild("RDF").getChild("Description"));
-          if (cvTerms != NULL)
-          {
-            unsigned int noChild 
-              = cvTerms->getChild("RDF").getChild("Description").getNumChildren(); 
-            for (unsigned int i = 0; i < noChild; i++) 
-            {
-              ((mAnnotation->getChild("RDF")).getChild("Description")).addChild(
-                cvTerms->getChild("RDF").getChild("Description").getChild(i));
-            }
-          }
-        }
-        else
-        {
-          if (cvTerms != NULL)
-          {
-           mAnnotation->getChild("RDF").insertChild(0, 
-            cvTerms->getChild("RDF").getChild("Description"));
-         }
-        }
-      }
-      else
-      {
-        // here the annotation after removing miriam-rdf has either an
-        // empty annotation element OR one with other top level annotations
-        // <annotation/> OR <annotation><someAnnotations/>
-        // just add the whole history and cvterms 
-        if (history != NULL)
-        {
-          mAnnotation->addChild(history->getChild("RDF"));
-          if (cvTerms != NULL)
-          {
-            unsigned int noChild 
-              = cvTerms->getChild("RDF").getChild("Description").getNumChildren(); 
-            for (unsigned int i = 0; i < noChild; i++) 
-            {
-              ((mAnnotation->getChild("RDF")).getChild("Description")).addChild(
-                cvTerms->getChild("RDF").getChild("Description").getChild(i));
-            }
-          }
-        }
-        else
-        {
-          if (cvTerms != NULL)
-          {
-            mAnnotation->addChild(cvTerms->getChild("RDF"));
-          }
-        }
-        
-      }
-   }
-}
-
-
-  if (history != NULL) delete history;
-  if (cvTerms != NULL) delete cvTerms;
 }
 /** @endcond */
 
@@ -5450,21 +3071,13 @@ SedBase::checkOrderAndLogError (SedBase* object, int expected)
   {
     SedMLErrorCode_t error = IncorrectOrderInModel;
 
-    if (object->getPackageName() == "core")
+    
     {
       if (object->getTypeCode() ==SEDML_LIST_OF)
       {
         int tc = static_cast<SedListOf*>(object)->getItemTypeCode();
         //typecode (int) tc = static_cast<SedListOf*>(object)->getItemTypeCode();
 
-        if (tc ==SEDML_SPECIES_REFERENCE || tc ==SEDML_MODIFIER_SPECIES_REFERENCE)
-        {
-          error = IncorrectOrderInReaction;
-        }
-      }
-      else if (object->getTypeCode() ==SEDML_TRIGGER)
-      {
-        error = IncorrectOrderInEvent;
       }
 
       logError(error, getLevel(), getVersion());
@@ -5489,32 +3102,6 @@ SedBase::checkListOfPopulated(SedBase* object)
   //        This function may need to be extented for other elements 
   //        defined in each package extension.
   //
-  if (object->getPackageName() != "core" && 
-    object->getTypeCode() ==SEDML_LIST_OF) 
-  {
-    // for now log the empty list
-    if (static_cast <SedListOf*> (object)->size() == 0)
-    {
-      /* hack to stop an empty listOfFunctionTerms that has
-       * a defaultTerm object being logged as empty 
-       */
-      if (object->getPackageName() == "qual" &&
-        object->getElementName() == "listOfFunctionTerms")
-      {
-        // do nothing
-        // will need to check for defaultTerm but will
-        // have to pass that to the qual extension
-      }
-      else
-      {
-        ostringstream errMsg;
-        errMsg << object->getElementName() << " cannot be empty.";
-        
-        logError(NotSchemaConformant, getLevel(), getVersion(), errMsg.str());
-      }
-    }
-    return;
-  }
 
   if (object->getTypeCode() ==SEDML_LIST_OF)
   {
@@ -5527,56 +3114,11 @@ SedBase::checkListOfPopulated(SedBase* object)
 
       // By default, the error will be the EmptyListElement error, unless
       // we have a special case for which SedML has a separate error code.
-      switch (tc)
-      {
-      caseSEDML_UNIT:
-        if (object->getLevel() < 3)
-          error = EmptyListOfUnits;
-        else
-          error = EmptyUnitListElement;
-        break;
-
-      caseSEDML_SPECIES_REFERENCE:
-      caseSEDML_MODIFIER_SPECIES_REFERENCE:
-        error = EmptyListInReaction;
-        break;
-
-      caseSEDML_PARAMETER:
-        // If listOfParameters is inside a KineticLaw, we have a separate code.
-        if (this->getTypeCode() ==SEDML_KINETIC_LAW)
-        {
-          error = EmptyListInKineticLaw;
-        }
-        break;
-      caseSEDML_LOCAL_PARAMETER:
-        error = EmptyListInKineticLaw;
-        break;
-      caseSEDML_EVENT_ASSIGNMENT:
-        if (object->getLevel() > 2)
-          error = MissingEventAssignment;
-        break;
-
-      default:;
-      }
 
       logError(error, getLevel(), getVersion());
     }
   }
-  else if (object->getTypeCode() ==SEDML_KINETIC_LAW)
-  {
-    /* 
-     * if nothing has been set in the kineticLaw we assume its is empty
-     */
-    if (static_cast <KineticLaw *> (object)->isSetMath()           == 0  &&
-        static_cast <KineticLaw *> (object)->isSetFormula()        == 0  &&
-        static_cast <KineticLaw *> (object)->isSetTimeUnits()      == 0  &&
-        static_cast <KineticLaw *> (object)->isSetSubstanceUnits() == 0  &&
-        static_cast <KineticLaw *> (object)->isSetSBOTerm()        == 0  &&
-        static_cast <KineticLaw *> (object)->getNumParameters()    == 0)
-    {
-      logError(EmptyListInReaction, getLevel(), getVersion());
-    }
-  }
+  
 }
 /** @endcond */
 
@@ -6050,246 +3592,6 @@ SedBase::getElementNamespace() const
 
 /** @cond doxygen-c-only */
 
-/**
- * Adds a copy of the given CVTerm to this SedML object.
- *
- * @param sb the object to add the CVTerm to
- * @param term the CVTerm_t to assign
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_OPERATION_FAILED
- * @li LIBSEDML_UNEXPECTED_ATTRIBUTE
- * @li LIBSEDML_INVALID_OBJECT
- *
- * @note The annotation constructed from a CVTerm uses the metaid
- * of the object to identify it.  Adding a CVTerm to an object
- * where the 'metaId' attribute has not been set will fail with the
- * return value LIBSEDML_UNEXPECTED_ATTRIBUTE.
- */
-LIBSEDML_EXTERN
-int 
-SedBase_addCVTerm(SedBase_t *sb, CVTerm_t *term)
-{
-  return (sb != NULL) ? sb->addCVTerm(term) : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/**
- * Adds a copy of the given CVTerm to this SedML object creating
- * a new bBag element with the same identifier.
- *
- * @param sb the object to add the CVTerm to
- * @param term the CVTerm_t to assign
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_OPERATION_FAILED
- * @li LIBSEDML_UNEXPECTED_ATTRIBUTE
- * @li LIBSEDML_INVALID_OBJECT
- *
- * @note The annotation constructed from a CVTerm uses the metaid
- * of the object to identify it.  Adding a CVTerm to an object
- * where the 'metaId' attribute has not been set will fail with the
- * return value LIBSEDML_UNEXPECTED_ATTRIBUTE.
- */
-LIBSEDML_EXTERN
-int 
-SedBase_addCVTermNewBag(SedBase_t *sb, CVTerm_t *term)
-{
-  return (sb != NULL) ? sb->addCVTerm(term, true) : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/**
- * Returns a list of CVTerm objects in the annotations of this SedML
- * object.
- *
- * @param sb the object to getCVTerms from
- * 
- * @return the list of CVTerms for this SedML object.
- */
-LIBSEDML_EXTERN
-List_t* 
-SedBase_getCVTerms(SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->getCVTerms() : 0;
-}
-
-
-/**
- * Returns the number of CVTerm objects in the annotations of this SedML
- * object.
- *
- * @param sb the object to getCVTerms from
- * 
- * @return the number of CVTerms for this SedML object.
- */
-LIBSEDML_EXTERN
-unsigned int 
-SedBase_getNumCVTerms(SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->getNumCVTerms() :SEDML_INT_MAX;
-}
-
-/**
- * Returns the nth CVTerm in the list of CVTerms of this SedML
- * object.
- *
- * @param sb the object to getCVTerms from
- * @param n unsigned int the index of the CVTerm to retrieve
- *
- * @return the nth CVTerm in the list of CVTerms for this SedML object.
- */
-LIBSEDML_EXTERN
-CVTerm_t* 
-SedBase_getCVTerm(SedBase_t *sb, unsigned int n)
-{
-  return (sb != NULL) ? static_cast <CVTerm_t *> (sb->getCVTerm(n)) : NULL;
-}
-
-/**
- * Clears the list of CVTerms of this SedML
- * object.
- *
- * @param sb the object to clear CVTerms from
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_OPERATION_FAILED
- */
-LIBSEDML_EXTERN
-int 
-SedBase_unsetCVTerms(SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->unsetCVTerms() : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/**
- * Returns the ModelHistory of the given SedBase_t structure.
- *
- * @return the ModelHistory of the given SedBase_t structure.
- * 
- * @param m the SedBase_t structure
- */
-LIBSEDML_EXTERN
-ModelHistory_t * 
-SedBase_getModelHistory(SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->getModelHistory() : NULL;
-}
-
-/**
- * Predicate for testing whether the ModelHistory of a given SedBase_t structure is
- * assigned.
- * 
- * @param m the SedBase_t structure
- * 
- * @return nonzero if the ModelHistory of this SedBase_t structure is
- * set, zero (0) otherwise.
- */LIBSEDML_EXTERN
-int 
-SedBase_isSetModelHistory(SedBase_t *sb)
-{
-  return (sb != NULL) ? static_cast<int>( sb->isSetModelHistory() ) : 0;
-}
-
-
-/**
- * Set the ModelHistory of the given SedBase_t structure.
- * 
- * @param m the SedBase_t structure
- * @param history the ModelHistory_t structure
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_INVALID_OBJECT
- */
-LIBSEDML_EXTERN
-int 
-SedBase_setModelHistory(SedBase_t *sb, ModelHistory_t *history)
-{
-  return (sb != NULL) ? sb->setModelHistory(history) : LIBSEDML_INVALID_OBJECT;
-}
-
-/**
- * Unsets the ModelHistory of the given SedBase_t structure.
- * 
- * @param m the SedBase_t structure
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_OPERATION_FAILED
- */
-LIBSEDML_EXTERN
-int 
-SedBase_unsetModelHistory(SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->unsetModelHistory() : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/**
- * Returns the BiologicalQualifier associated with this resource,
- * BQB_UNKNOWN if the resource does not exist.
- *
- * @param sb the object to query
- * @param resource string representing the resource; e.g.,
- * "http://www.geneontology.org/#GO:0005892"
- *
- * @return the BiolQualifierType_t associated with the resource
- */
-LIBSEDML_EXTERN
-BiolQualifierType_t 
-SedBase_getResourceBiologicalQualifier(SedBase_t *sb, const char * resource)
-{
-  if (sb != NULL)
-    return (resource != NULL) ? 
-    sb->getResourceBiologicalQualifier(resource) : BQB_UNKNOWN;
-  else
-    return BQB_UNKNOWN;
-}
-
-
-/**
- * Returns the ModelQualifier associated with this resource,
- * BQM_UNKNOWN if the resource does not exist.
- *
- * @param sb the object to query
- * @param resource string representing the resource; e.g.,
- * "http://www.geneontology.org/#GO:0005892"
- *
- * @return the ModelQualifierType_t associated with the resource
- */
-LIBSEDML_EXTERN
-ModelQualifierType_t 
-SedBase_getResourceModelQualifier(SedBase_t *sb, const char * resource)
-{ 
-  if (sb != NULL)
-    return (resource != NULL) ? 
-    sb->getResourceModelQualifier(resource) : BQM_UNKNOWN;
-  else
-    return BQM_UNKNOWN;
-}
-
-
-
 
 /**
  * Returns the value of the "metaid" attribute of the given SedBase_t
@@ -6393,78 +3695,6 @@ const SedBase_t *
 SedBase_getAncestorOfType (SedBase_t *sb, int type, const char* pkgName)
 {
   return (sb != NULL) ? sb->getAncestorOfType(type, pkgName) : NULL;
-}
-
-
-/**
- * Returns the integer portion of the value of the "sboTerm" attribute of
- * the given SedBase_t structure.
- *
- * In SedML Level 2 Versions 2 and 3, the data type of the attribute is a
- * string of the form SBO:NNNNNNN, where NNNNNNN is a seven digit integer
- * number; libSedML simplifies the representation by only storing the
- * NNNNNNN integer portion.  Thus, in libSedML, the "sboTerm" attribute on
- * SedBase_t has data type @c int, and SBO identifiers are stored simply as
- * integers.  SBO terms are a type of optional annotation, and each
- * different class of SedML object derived from SedBase_t imposes its own
- * requirements about the values permitted for "sboTerm".  Please consult
- * the SedML Level 2 Version 4 specification for more information about
- * the use of SBO and the "sboTerm" attribute.
- *
- * @param sb the SedBase_t structure
- * 
- * @return the value of the "sboTerm" attribute as an integer, or @c -1
- * if the value is not set.
- */
-LIBSEDML_EXTERN
-int
-SedBase_getSBOTerm (const SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->getSBOTerm() :SEDML_INT_MAX;
-}
-
-
-/**
- * Returns the string representation of the "sboTerm" attribute of
- * this object.
- *
- * In SedML Level 2 Versions 2, 3 and 4, the data type of the attribute is a
- * string of the form SBO:NNNNNNN, where NNNNNNN is a seven digit integer
- * number; libSedML simplifies the representation by only storing the
- * NNNNNNN integer portion.  Thus, in libSedML, the "sboTerm" attribute on
- * SedBase has data type @c int, and SBO identifiers are stored simply as
- * integers.  This function recreates the string representation from the
- * stored value.  SBO terms are a type of optional annotation, and each
- * different class of SedML object derived from SedBase imposes its own
- * requirements about the values permitted for "sboTerm".  Please consult
- * the SedML Level 2 Version 4 specification for more information about
- * the use of SBO and the "sboTerm" attribute.
- *
- * @return the value of the "sboTerm" attribute as a string of the form
- * SBO:NNNNNNN, or @c NULL if the value is not set.
- */
-LIBSEDML_EXTERN
-char*
-SedBase_getSBOTermID (const SedBase_t *sb)
-{
-  return (sb != NULL && sb->isSetSBOTerm())? 
-    safe_strdup(sb->getSBOTermID().c_str()) : NULL;
-}
-
-
-/**
- * Returns the identifiers.org URL  representation of the "sboTerm" attribute of
- * this object.
- *
- * @return the value of the "sboTerm" attribute as a string of the form
- * http://identifiers.org/biomodels.sbo/SBO:NNNNNNN, or @c NULL if the value is not set.
- */
-LIBSEDML_EXTERN
-char*
-SedBase_getSBOTermAsURL (const SedBase_t *sb)
-{
-  return (sb != NULL && sb->isSetSBOTerm())? 
-    safe_strdup(sb->getSBOTermAsURL().c_str()) : NULL;
 }
 
 
@@ -6653,22 +3883,6 @@ SedBase_isSetAnnotation (const SedBase_t *sb)
 }
 
 
-/**
- * Predicate returning nonzero true or false depending on whether the given
- * structure's "sboTerm" attribute is set.
- *
- * @param sb the SedBase_t structure to query
- * 
- * @return nonzero (for true) if the "sboTerm" attribute of this SedML object
- * is set, zero (for false) otherwise.
- */
-LIBSEDML_EXTERN
-int
-SedBase_isSetSBOTerm (const SedBase_t *sb)
-{
-  return (sb != NULL) ? static_cast<int>( sb->isSetSBOTerm() ) : 0;
-}
-
 
 /**
  * Sets the value of the "metaid" attribute of the given object.
@@ -6778,79 +3992,6 @@ SedBase_setMetaId (SedBase_t *sb, const char *metaid)
 //  return (name == NULL) ? sb->unsetName() : sb->setName(name);
 //}
 
-
-/**
- * Sets the value of the "sboTerm" attribute.
- *
- * In SedML Level 2 Versions 2, 3 and 4, the data type of the SedML "sboTerm"
- * attribute is a string of the form SBO:NNNNNNN, where NNNNNNN is a seven
- * digit integer number; libSedML simplifies the representation by only
- * storing the NNNNNNN integer portion.  Thus, in libSedML, the "sboTerm"
- * attribute on SedBase_t has data type @c int, and SBO identifiers are
- * stored simply as integers.  SBO terms are a type of optional annotation,
- * and each different class of SedML object derived from SedBase_t imposes its
- * own requirements about the values permitted for "sboTerm".  Please
- * consult the SedML Level 2 Version 4 specification for more information
- * about the use of SBO and the "sboTerm" attribute.
- *
- * @param sb the SedBase_t structure
- *
- * @param value the NNNNNNN integer portion of the SBO identifier
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
- * @li LIBSEDML_UNEXPECTED_ATTRIBUTE
- */
-LIBSEDML_EXTERN
-int
-SedBase_setSBOTerm (SedBase_t *sb, int value)
-{
-  if (sb != NULL)
-    return sb->setSBOTerm(value);
-  else
-    return LIBSEDML_INVALID_OBJECT;
-}
-
-
-/*
- * Sets the value of the "sboTerm" attribute by string.
- *
- * In SedML Level 2 Versions 2, 3 and 4, the data type of the SedML "sboTerm"
- * attribute is a string of the form SBO:NNNNNNN, where NNNNNNN is a
- * seven digit integer number; libSedML simplifies the representation by
- * only storing the NNNNNNN integer portion converted from the given string.
- * Thus, in libSedML, the "sboTerm" attribute on SedBase has data type @c int,
- * and SBO identifiers are stored simply as integers.  SBO terms are a type
- * of optional annotation, and each different class of SedML object derived
- * from SedBase imposes its own requirements about the values permitted for
- * "sboTerm".  Please consult the SedML Level 2 Version 4 specification for
- * more information about the use of SBO and the "sboTerm" attribute.
- *
- * @param sb the SedBase_t structure
- *
- * @param value the SBO identifier string of the form SBO:NNNNNNN 
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
- * @li LIBSEDML_UNEXPECTED_ATTRIBUTE
- */
-LIBSEDML_EXTERN
-int
-SedBase_setSBOTermID (SedBase_t *sb, const char* sboid)
-{
-  if (sb != NULL)
-    return sb->setSBOTerm(sboid);
-  else
-    return LIBSEDML_INVALID_OBJECT;
-}
 
 
 /**
@@ -7424,43 +4565,6 @@ SedBase_unsetAnnotation (SedBase_t *sb)
 
 
 /**
- * Unsets the "sboTerm" attribute of the given object.
- *
- * @param sb the SedBase_t structure
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif@~ The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_UNEXPECTED_ATTRIBUTE
- */
-LIBSEDML_EXTERN
-int
-SedBase_unsetSBOTerm (SedBase_t *sb)
-{
-  if (sb != NULL)
-    return sb->unsetSBOTerm();
-  else
-    return LIBSEDML_INVALID_OBJECT;
-}
-
-
-/**
- * Returns the Model_t structure in which the given instance is located.
- *
- * @param sb the SedBase_t structure
- * 
- * @return the parent Model_t strucdture of the given object.
- */
-LIBSEDML_EXTERN
-const Model_t *
-SedBase_getModel (const SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->getModel() : NULL;
-}
-
-/**
  * Returns the libSedML type code for this object.
  *
  * This method MAY return the typecode of this SedML object or it MAY
@@ -7571,20 +4675,6 @@ SedBase_hasValidLevelVersionNamespaceCombination(SedBase_t *sb)
 }
 
 
-LIBSEDML_EXTERN
-int
-SedBase_getNumPlugins(SedBase_t *sb)
-{
-  return (sb != NULL) ? sb->getNumPlugins() : 0;
-}
-
-
-LIBSEDML_EXTERN
-SedBasePlugin_t* 
-SedBase_getPlugin(SedBase_t *sb, const char *package)
-{
-  return (sb != NULL) ? sb->getPlugin(package) : NULL;
-}
 
 /**
  * Sets the user data of this node. This can be used by the application
@@ -7650,54 +4740,5 @@ SedBase_getAllElements(SedBase_t* sb)
   return sb->getAllElements();
 }
 
-LIBSEDML_EXTERN 
-void 
-SedBase_renameSIdRefs(SedBase_t* sb, const char* oldid, const char* newid)
-{
-  if (sb == NULL) return;
-  return sb->renameSIdRefs(oldid, newid);
-}
-
-LIBSEDML_EXTERN 
-void 
-SedBase_renameMetaIdRefs(SedBase_t* sb, const char* oldid, const char* newid)
-{
-  if (sb == NULL) return;
-  return sb->renameMetaIdRefs(oldid, newid);
-}
-
-LIBSEDML_EXTERN 
-void 
-SedBase_renameUnitSIdRefs(SedBase_t* sb, const char* oldid, const char* newid)
-{
-  if (sb == NULL) return;
-  return sb->renameUnitSIdRefs(oldid, newid);
-}
-
-LIBSEDML_EXTERN 
-SedBase_t* 
-SedBase_getElementFromPluginsBySId(SedBase_t* sb, const char* id)
-{
-  if (sb == NULL) return NULL;
-  return sb->getElementFromPluginsBySId(id);
-}
-
-LIBSEDML_EXTERN 
-SedBase_t* 
-SedBase_getElementFromPluginsByMetaId(SedBase_t* sb, const char* metaid)
-{
-  if (sb == NULL) return NULL;
-  return sb->getElementFromPluginsByMetaId(metaid);
-}
-
-LIBSEDML_EXTERN 
-List_t* 
-SedBase_getAllElementsFromPlugins(SedBase_t* sb)
-{
-  if (sb == NULL) return NULL;
-  return sb->getAllElementsFromPlugins();
-}
-
-/** @endcond */
 
 LIBSEDML_CPP_NAMESPACE_END

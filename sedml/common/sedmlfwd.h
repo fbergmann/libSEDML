@@ -95,6 +95,26 @@ typedef CLASS_OR_STRUCT Model                     Model_t;
  */
 typedef CLASS_OR_STRUCT DataGenerator                     DataGenerator_t;
 
+
+/**
+ * @var typedef class Task Task_t
+ * @copydoc Task
+ */
+typedef CLASS_OR_STRUCT Task                     Task_t;
+
+
+/**
+ * @var typedef class Simulation Simulation_t
+ * @copydoc Simulation
+ */
+typedef CLASS_OR_STRUCT Simulation                     Simulation_t;
+
+/**
+ * @var typedef class Output Output_t
+ * @copydoc Output
+ */
+typedef CLASS_OR_STRUCT Output                     Output_t;
+
 LIBSEDML_CPP_NAMESPACE_END
 
 #undef CLASS_OR_STRUCT
