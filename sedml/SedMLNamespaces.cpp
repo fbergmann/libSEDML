@@ -30,7 +30,7 @@
 #include <iostream>
  
 #include <sedml/common/common.h>
-#include <sedml/common/operationReturnCodes.h>
+#include <sedml/common/operationReturnValues.h>
 #include <sbml/util/List.h>
 #include <sedml/SedMLNamespaces.h>
 #include <sedml/SedMLConstructorException.h>

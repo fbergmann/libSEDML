@@ -74,7 +74,7 @@
 
 
 #include <sedml/common/extern.h>
-#include <sedml/common/sbmlfwd.h>
+#include <sedml/common/sedmlfwd.h>
 
 
 #ifdef __cplusplus

@@ -34,6 +34,7 @@
 #include <sbml/xml/XMLOutputStream.h>
 
 #include <sedml/SedMLError.h>
+#include <sedml/SedMLErrorLog.h>
 #include <sedml/SedMLDocument.h>
 #include <sedml/SedMLWriter.h>
 

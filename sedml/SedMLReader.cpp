@@ -214,9 +214,9 @@ SedMLDocument*
 SedMLReader::readInternal (const char* content, bool isFile)
 {
   SedMLDocument* d = new SedMLDocument();
-  if (isFile) {
-    d->setLocationURI(string("file:") + content);
-  }
+  //if (isFile) {
+  //  d->setURI(content);
+  //}
 
   if (isFile && content != NULL && (util_file_exists(content) == false))
   {
@@ -236,19 +236,18 @@ SedMLReader::readInternal (const char* content, bool isFile)
       // different parsers to report different validation errors, we bring
       // all parsers back to the same point.
 
-      d->setModel(NULL);
 
-      for (unsigned int i = 0; i < d->getNumErrors(); ++i)      
+      for (unsigned int i = 0; i < d->getErrorLog()->getNumErrors(); ++i)      
       {
-        if (isCriticalError(d->getError(i)->getErrorId()))
+        if (isCriticalError(d->getErrorLog()->getError(i)->getErrorId()))
         {
           // If we find even one critical error, all other errors are
           // suspect and may be bogus.  Remove them.
 
-          for (int n = d->getNumErrors()-1; n >= 0; n--)      
-            if (!isCriticalError(d->getError(n)->getErrorId()))
+          for (int n = d->getErrorLog()->getNumErrors()-1; n >= 0; n--)      
+            if (!isCriticalError(d->getErrorLog()->getError(n)->getErrorId()))
             {
-              d->getErrorLog()->remove(d->getError(n)->getErrorId());
+              d->getErrorLog()->remove(d->getErrorLog()->getError(n)->getErrorId());
             }
 
           break;
@@ -277,39 +276,6 @@ SedMLReader::readInternal (const char* content, bool isFile)
       else if (strcmp_insensitive(stream.getVersion().c_str(), "1.0") != 0)
       {
         d->getErrorLog()->logError(BadXMLDecl);
-      }
-
-      if (d->getModel() == NULL)
-      {
-        d->getErrorLog()->logError(MissingModel, 
-                                   d->getLevel(), d->getVersion());
-      }
-      else if (d->getLevel() == 1)
-      {
-	// In Level 1, some listOfElements were required.
-
-        if (d->getModel()->getNumCompartments() == 0)
-        {
-          d->getErrorLog()->logError(NotSchemaConformant,
-				     d->getLevel(), d->getVersion(), 
-            "An SedML Level 1 model must contain at least one <compartment>.");
-        }
-
-        if (d->getVersion() == 1)
-        {
-          if (d->getModel()->getNumSpecies() == 0)
-          {
-            d->getErrorLog()->logError(NotSchemaConformant,
-				       d->getLevel(), d->getVersion(), 
-            "An SedML Level 1 Version 1 model must contain at least one <species>.");
-          }
-          if (d->getModel()->getNumReactions() == 0)
-          {
-            d->getErrorLog()->logError(NotSchemaConformant,
-				       d->getLevel(), d->getVersion(), 
-            "An SedML Level 1 Version 1 model must contain at least one <reaction>.");
-          }
-        }
       }
     }
   }

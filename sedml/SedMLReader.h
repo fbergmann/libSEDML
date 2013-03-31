@@ -86,7 +86,7 @@
 
 
 #include <sedml/common/extern.h>
-#include <sedml/common/sbmlfwd.h>
+#include <sedml/common/sedmlfwd.h>
 #include <sbml/util/util.h>
 
 

@@ -2228,6 +2228,13 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
   void *getUserData() const;
 
 
+  /**
+   * @return the SedMLErrorLog used to log errors during while reading and
+   * validating SedML.
+   */
+  SedMLErrorLog* getErrorLog ();
+
+  
 protected:
 
   
@@ -2320,12 +2327,6 @@ protected:
    */
   virtual int getElementPosition () const;
 
-
-  /**
-   * @return the SedMLErrorLog used to log errors during while reading and
-   * validating SedML.
-   */
-  SedMLErrorLog* getErrorLog ();
 
 
   /**

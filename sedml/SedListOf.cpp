@@ -361,7 +361,6 @@ int SedListOf::removeFromParentAndDelete()
   unsetMetaId();
   unsetName(); //Just in case
   unsetNotes();
-  unsetSBOTerm();  
   return LIBSEDML_OPERATION_SUCCESS;
 }
 

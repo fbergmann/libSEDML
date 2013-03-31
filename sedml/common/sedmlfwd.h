@@ -57,10 +57,23 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /**
- * @var typedef class SBase SBase_t
- * @copydoc SBase
+ * @var typedef class SedBase SedBase_t
+ * @copydoc SedBase
  */
 typedef CLASS_OR_STRUCT SedBase                     SedBase_t;
+
+/**
+ * @var typedef class SedMLReader SedMLReader_t
+ * @copydoc SedMLReader
+ */
+typedef CLASS_OR_STRUCT SedMLReader                     SedMLReader_t;
+
+/**
+ * @var typedef class SedMLWriter SedMLWriter_t
+ * @copydoc SedMLWriter
+ */
+typedef CLASS_OR_STRUCT SedMLWriter                     SedMLWriter_t;
+
 
 /**
  * @var typedef class SedMLNamespaces SedMLNamespaces_t
