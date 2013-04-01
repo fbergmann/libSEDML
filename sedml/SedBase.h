@@ -142,9 +142,11 @@
 #include <stdexcept>
 #include <algorithm>
 
+#include <sedml/SedMLErrorLog.h>
+
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-class SedMLErrorLog;
+//class SedMLErrorLog;
 class SedMLVisitor;
 class SedMLDocument;
 class Model;

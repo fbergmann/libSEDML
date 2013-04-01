@@ -59,6 +59,16 @@ def writeConstructors(element, package, output):
   output.write('\tvirtual ~{0}();\n\n\n '.format(element))
   return
 
+def writeInclude(attrib, output):
+  att = generalFunctions.parseAttribute(attrib)
+  attName = att[0]
+  capAttName = att[1]
+  attType = att[2]
+  attTypeCode = att[3]
+  num = att[4]
+  if attType == 'lo_element':
+    output.write('#include <sedml/{0}.h>\n'.format(capAttName))  
+
 def writeAtt(attrib, output):
   att = generalFunctions.parseAttribute(attrib)
   attName = att[0]
@@ -68,8 +78,8 @@ def writeAtt(attrib, output):
   num = att[4]
   if attType == 'string':
     output.write('\tstd::string   m{0};\n'.format(capAttName))
-  elif attType == 'element':
-    if attTypeCode == 'ASTNode*':
+  elif attType == 'element':    
+    if attTypeCode == 'ASTNode*' or attName== 'Math':
       output.write('\tASTNode*      m{0};\n'.format(capAttName))
     else:
       return
@@ -85,7 +95,12 @@ def writeAtt(attrib, output):
     output.write('\tbool          mIsSet{0};\n'.format(capAttName))
   else:
     output.write('\tFIX ME   {0};\n'.format(attName))
- 
+
+def writeAdditionalIncludes (attrs, output):
+  for i in range(0, len(attrs)):
+    writeInclude(attrs[i], output)  
+  output.write('\n\n')
+
 def writeAttributes(attrs, output):
   output.write('protected:\n\n')
   for i in range(0, len(attrs)):
@@ -102,7 +117,7 @@ def writeGetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('\t/**\n')
       output.write('\t * Returns the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
@@ -135,7 +150,7 @@ def writeIsSetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('\t/**\n')
       output.write('\t * Predicate returning @c true or @c false depending on ')
       output.write('whether this\n\t * {0}\'s \"{1}\" '.format(element, attName))
@@ -171,7 +186,7 @@ def writeSetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('\t/**\n')
       output.write('\t * Sets the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
@@ -213,7 +228,7 @@ def writeUnsetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('\t/**\n')
       output.write('\t * Unsets the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
@@ -247,11 +262,8 @@ def writeUnsetFunction(attrib, output, element):
 def writeAttributeFunctions(attrs, output, element):
   for i in range(0, len(attrs)):
     writeGetFunction(attrs[i], output, element)
-#  for i in range(0, len(attrs)):
     writeIsSetFunction(attrs[i], output, element)
-#  for i in range(0, len(attrs)):
     writeSetFunction(attrs[i], output, element)
-#  for i in range(0, len(attrs)):
     writeUnsetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
@@ -302,6 +314,7 @@ def writeListOfSubFunctions(attrib, output, element):
  
 #write class
 def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath):
+  writeAdditionalIncludes(attributes, header)
   header.write('class LIBSEDML_EXTERN {0} :'.format(nameOfElement))
   header.write(' public SedBase\n{0}\n\n'.format('{'))
   writeAttributes(attributes, header)
@@ -322,7 +335,6 @@ def writeIncludes(fileOut, element, pkg):
   fileOut.write('\n\n');
   fileOut.write('#include <sedml/common/extern.h>\n')
   fileOut.write('#include <sedml/common/sedmlfwd.h>\n')
-  fileOut.write('#include <sedml/common/{0}fwd.h>\n'.format(pkg.lower()))
   fileOut.write('\n\n');
   fileOut.write('#ifdef __cplusplus\n')
   fileOut.write('\n\n');

@@ -69,7 +69,7 @@ def parseAttribute(attrib):
     num = False
   elif attrib['type'] == 'element':
     attType = 'element'
-    if attrib['name'] == 'math':
+    if attrib['name'] == 'math' or attrib['name'] == 'Math':
       attTypeCode = 'ASTNode*'
     else:
       attTypeCode = 'element-not-done'
@@ -127,7 +127,7 @@ def parseAttributeForC(attrib):
     num = False
   elif attrib['type'] == 'element':
     attType = 'element'
-    if attrib['name'] == 'math':
+    if attrib['name'] == 'math' or attrib['name'] == 'Math':
       attTypeCode = 'ASTNode_t*'
     else:
       attTypeCode = 'element-not-done'
@@ -226,10 +226,10 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
   outFile.write('\tSedBase::writeElements(stream);\n')
   if hasChildren == True:
     for i in range(0, len(attributes)):
-      if attributes[i]['type'] == 'element':
+      if attributes[i]['type'] == 'element' and (attributes[i]['name'] != 'Math' and attributes[i]['name'] != 'math'):
         outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\t{\n\t\t')
-        outFile.write('m{0}.write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('m{0}->write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\n\t}\n')
       if attributes[i]['type'] == 'lo_element':
         outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['name'])))
@@ -238,9 +238,9 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('\n\t}\n')
   if hasMath == True:
     for i in range(0, len(attributes)):
-      if attributes[i]['type'] == 'element' and attributes[i]['name'] == 'Math':
-        outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
-        outFile.write('\t{\n\t\twriteMathML(getMath(), stream, getSedMLNamespaces());\n\t}\n')
+      if attributes[i]['type'] == 'element' and attributes[i]['name'] == 'Math' or attributes[i]['name'] == 'math':
+        outFile.write('\tif (isSet{0}() == true)\n'.format('Math'))
+        outFile.write('\t{\n\t\twriteMathML(getMath(), stream, NULL);\n\t}\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -625,11 +625,11 @@ def writeReadOtherXMLCPPCode(outFile, element):
   outFile.write('\tif (name == "math")\n\t{\n')
   outFile.write('\t\tconst XMLToken elem = stream.peek();\n')
   outFile.write('\t\tconst std::string prefix = checkMathMLNamespace(elem);\n\n')
-  outFile.write('\t\tif (stream.getSedMLNamespaces() == NULL)\n\t\t{\n')
-  outFile.write('\t\t\tstream.setSedMLNamespaces(new SedMLNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
+  #outFile.write('\t\tif (stream.getSedMLNamespaces() == NULL)\n\t\t{\n')
+  #outFile.write('\t\t\tstream.setSedMLNamespaces(new SedMLNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
   outFile.write('\t\tdelete mMath;\n')
   outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
-  outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
+  #outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
   outFile.write('\t\tread = true;\n\t}\n\n')
   outFile.write('\tif (SedBase::readOtherXML(stream))\n\t{\n\t\tread = true;\n\t}\n')
   outFile.write('\treturn read;\n')

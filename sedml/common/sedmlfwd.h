@@ -108,6 +108,33 @@ typedef CLASS_OR_STRUCT Model                     Model_t;
  */
 typedef CLASS_OR_STRUCT DataGenerator                     DataGenerator_t;
 
+/**
+ * @var typedef class SedListOfDataGenerators SedListOfDataGenerators_t
+ * @copydoc SedListOfDataGenerators
+ */
+typedef CLASS_OR_STRUCT SedListOfDataGenerators                     SedListOfDataGenerators_t;
+
+
+/**
+ * @var typedef class SedListOfModels SedListOfModels_t
+ * @copydoc SedListOfModels
+ */
+typedef CLASS_OR_STRUCT SedListOfModels                     SedListOfModels_t;
+
+
+/**
+ * @var typedef class SedListOfOutputs SedListOfOutputs_t
+ * @copydoc SedListOfOutputs
+ */
+typedef CLASS_OR_STRUCT SedListOfOutputs                     SedListOfOutputs_t;
+
+
+/**
+ * @var typedef class SedListOfTasks SedListOfTasks_t
+ * @copydoc SedListOfTasks
+ */
+typedef CLASS_OR_STRUCT SedListOfTasks                     SedListOfTasks_t;
+
 
 /**
  * @var typedef class Task Task_t

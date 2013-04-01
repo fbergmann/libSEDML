@@ -17,8 +17,11 @@ import writeCCode
 def writeIncludes(fileOut, element, pkg, hasMath=False):
   fileOut.write('\n\n');
   fileOut.write('#include <sedml/{1}.h>\n'.format(pkg.lower(), element))
+  fileOut.write('#include <sedml/SedMLTypes.h>\n'.format(pkg.lower(), element))
+  fileOut.write('#include <sbml/xml/XMLInputStream.h>\n'.format(pkg.lower(), element))
   if hasMath == True:
     fileOut.write('#include <sbml/math/MathML.h>\n')
+    fileOut.write('#include <sbml/math/ASTNode.h>\n')
   fileOut.write('\n\n');
 #  fileOut.write('#if WIN32 && !defined(CYGWIN)\n')
 #  fileOut.write('\t#define isnan _isnan\n')
@@ -253,9 +256,11 @@ def writeSetCode(attrib, output, element):
       output.write('\t\t\tstatic_cast<{0}*>({1}->clone()) : NULL;\n'.format(capAttName, attName))
     output.write('\t\tif (m{0} != NULL)\n'.format(capAttName))
     output.write('\t\t{\n')
-    if attTypeCode == 'ASTNode*':
-      output.write('\t\t\tm{0}->setParentSEDMLObject(this);\n'.format(capAttName, attName))
-    else:
+    #if attTypeCode == 'ASTNode*':
+    #  output.write('\t\t\tm{0}->setParentSEDMLObject(this);\n'.format(capAttName, attName))
+    #else:
+    #  output.write('\t\t\tm{0}->connectToParent(this);\n'.format(capAttName, attName))
+    if attTypeCode != 'ASTNode*':
       output.write('\t\t\tm{0}->connectToParent(this);\n'.format(capAttName, attName))
     output.write('\t\t}\n')
     output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
@@ -337,7 +342,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('const {0}*\n'.format(loname))
   output.write('{0}::get{1}() const\n'.format(element, loname))
   output.write('{\n')
-  output.write('\treturn m{0};\n'.format(capAttName))
+  output.write('\treturn &m{0};\n'.format(capAttName))
   output.write('}\n\n\n')
   writeListOfCode.writeRemoveFunctions(output, attrib['element'], True, element, capAttName)
   writeListOfCode.writeGetFunctions(output, attrib['element'], True, element, capAttName)
@@ -357,7 +362,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('{0}::add{1}(const {1}* {2})\n'.format(loname, attrib['element'], strFunctions.objAbbrev(attrib['element'])))
   output.write('{\n')
   output.write('\tif({0} == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n'.format(strFunctions.objAbbrev(attrib['element'])))
-  output.write('\tm{0}.append({1});\n'.format(capAttName,strFunctions.objAbbrev(attrib['element'])))
+  output.write('\tappend({0});\n'.format(strFunctions.objAbbrev(attrib['element'])))
   output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
   output.write('}\n\n\n')
   output.write('/**\n')
@@ -368,7 +373,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('unsigned int \n')
   output.write('{0}::getNum{1}s() const\n'.format(loname, attrib['element']))
   output.write('{\n')
-  output.write('\treturn m{0}.size();\n'.format(capAttName))
+  output.write('\treturn size();\n')
   output.write('}\n\n')
   output.write('/**\n')
   output.write(' * Creates a new {0} object, adds it to this {1}s\n'.format(attrib['element'], element))
@@ -382,7 +387,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('{0}::create{1}()\n'.format(loname, attrib['element']))
   output.write('{\n')
   output.write('\t{0} *temp = new {0}();\n'.format(attrib['element']))
-  output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(capAttName))
+  output.write('\tif (temp != NULL) appendAndOwn(temp);\n')
   output.write('\treturn temp;\n')
   output.write('}\n\n')
 
