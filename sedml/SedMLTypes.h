@@ -31,7 +31,7 @@
 
 #include <sedml/common/sedmlfwd.h>
 
-#include <sedml/Model.h>
+#include <sedml/SedMLModel.h>
 #include <sedml/Simulation.h>
 #include <sedml/Output.h>
 #include <sedml/DataGenerator.h>

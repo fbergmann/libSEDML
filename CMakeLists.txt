@@ -661,6 +661,9 @@ include_directories(BEFORE ${LIBSBML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_SOURCE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
 
+if (EXTRA_DEFS)
+add_definitions(${EXTRA_DEFS})
+endif()
 
 ###############################################################################
 #
@@ -726,7 +729,7 @@ if (LIBSEDML_SHARED_VERSION)
                       VERSION ${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH})
 endif()
 
-target_link_libraries(${LIBSEDML_LIBRARY} ${LIBSEDML_LIBS} ${EXTRA_LIBS})
+target_link_libraries(${LIBSEDML_LIBRARY} ${LIBSBML_LIBRARY} ${EXTRA_LIBS})
 
 INSTALL(TARGETS ${LIBSEDML_LIBRARY}
 	RUNTIME DESTINATION bin
@@ -737,7 +740,7 @@ INSTALL(TARGETS ${LIBSEDML_LIBRARY}
 endif()
 
 add_library (${LIBSEDML_LIBRARY}-static STATIC ${LIBSEDML_SOURCES} )
-target_link_libraries(${LIBSEDML_LIBRARY}-static ${LIBSEDML_LIBS} ${EXTRA_LIBS})
+target_link_libraries(${LIBSEDML_LIBRARY}-static ${LIBSBML_LIBRARY} ${EXTRA_LIBS})
 
 INSTALL(TARGETS ${LIBSEDML_LIBRARY}-static
 	RUNTIME DESTINATION bin

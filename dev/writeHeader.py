@@ -67,7 +67,7 @@ def writeInclude(attrib, output):
   attTypeCode = att[3]
   num = att[4]
   if attType == 'lo_element':
-    output.write('#include <sedml/{0}.h>\n'.format(capAttName))  
+    output.write('#include <sedml/{0}.h>\n'.format(attrib['element']))  
 
 def writeAtt(attrib, output):
   att = generalFunctions.parseAttribute(attrib)

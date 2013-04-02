@@ -16,9 +16,9 @@ import writeCCode
 
 def writeIncludes(fileOut, element, pkg, hasMath=False):
   fileOut.write('\n\n');
-  fileOut.write('#include <sedml/{1}.h>\n'.format(pkg.lower(), element))
-  fileOut.write('#include <sedml/SedMLTypes.h>\n'.format(pkg.lower(), element))
-  fileOut.write('#include <sbml/xml/XMLInputStream.h>\n'.format(pkg.lower(), element))
+  fileOut.write('#include <sedml/{0}.h>\n'.format(element))
+  fileOut.write('#include <sedml/SedMLTypes.h>\n')
+  fileOut.write('#include <sbml/xml/XMLInputStream.h>\n')
   if hasMath == True:
     fileOut.write('#include <sbml/math/MathML.h>\n')
     fileOut.write('#include <sbml/math/ASTNode.h>\n')

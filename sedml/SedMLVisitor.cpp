@@ -26,8 +26,8 @@
  * ---------------------------------------------------------------------- -->*/
 
 #include <sedml/SedMLVisitor.h>
-#include <sedml/SedMLDocument.h>
-#include <sedml/Model.h>
+#include <sedml/SedMLTypes.h>
+
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 

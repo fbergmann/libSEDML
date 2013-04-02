@@ -96,10 +96,10 @@ typedef CLASS_OR_STRUCT SedMLDocument              SedMLDocument_t;
 
 
 /**
- * @var typedef class Model Model_t
- * @copydoc Model
+ * @var typedef class SedMLModel SedMLModel_t
+ * @copydoc SedMLModel
  */
-typedef CLASS_OR_STRUCT Model                     Model_t;
+typedef CLASS_OR_STRUCT SedMLModel                     SedMLModel_t;
 
 
 /**
@@ -116,10 +116,10 @@ typedef CLASS_OR_STRUCT SedListOfDataGenerators                     SedListOfDat
 
 
 /**
- * @var typedef class SedListOfModels SedListOfModels_t
- * @copydoc SedListOfModels
+ * @var typedef class SedListOfSedMLModels SedListOfSedMLModels_t
+ * @copydoc SedListOfSedMLModels
  */
-typedef CLASS_OR_STRUCT SedListOfModels                     SedListOfModels_t;
+typedef CLASS_OR_STRUCT SedListOfSedMLModels                     SedListOfSedMLModels_t;
 
 
 /**

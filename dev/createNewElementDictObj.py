@@ -10,7 +10,7 @@ import sys
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
-  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'Model'})
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedMLModel'})
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'simulation', 'element': 'Simulation'})
   lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'Task'})
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'DataGenerator'})
@@ -25,7 +25,7 @@ def createSedModel() :
   a3 = dict({'type': 'string', 'reqd' : False, 'name':'language'})
   a4 = dict({'type': 'string', 'reqd' : True, 'name':'source'})
   attributes = [a1, a2, a3, a4]
-  element = dict({'name': 'Model', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
+  element = dict({'name': 'SedMLModel', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
 
 def createSedSimulation() :

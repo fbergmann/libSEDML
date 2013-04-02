@@ -232,7 +232,7 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('m{0}->write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\n\t}\n')
       if attributes[i]['type'] == 'lo_element':
-        outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['element'])))
         outFile.write('\t{\n\t\t')
         outFile.write('m{0}.write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\n\t}\n')
