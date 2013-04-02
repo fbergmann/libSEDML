@@ -485,6 +485,27 @@ def writeReadAttribute(output, attrib, element):
     attType = 'FIX ME'
     attTypeCode = 'FIX ME'
     num = False
+	
+def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
+  if isSedListOf:
+    return;
+  outFile.write('/**\n')
+  outFile.write(' * return the SEDML object corresponding to next XMLToken.\n')
+  outFile.write(' */\n')
+  outFile.write('SedBase*\n{0}::createObject(XMLInputStream& stream)\n'.format(element))
+  outFile.write('{\n')
+  outFile.write('\tSedBase* object = NULL;\n\n')
+  outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
+  outFile.write('\tSedBase::connectToChild();\n\n')
+  for i in range (0, len(attribs)):
+    current = attribs[i]
+    if current['type'] == 'lo_element':
+      outFile.write('\tif (name == "listOf{0}s")\n'.format(strFunctions.cap(current['name'])))	
+      outFile.write('\t{\n')	
+      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.cap(current['name'])))	
+      outFile.write('\t}\n\n')		
+  outFile.write('return object;')  
+  outFile.write('}\n\n\n')  
 
 def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
   if isSedListOf:
@@ -686,6 +707,7 @@ def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, has
     element = writeListOf(element)
   writeGetElementNameCPPCode(outFile, element)
   writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
+  writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
   writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)
   if isSedListOf == False:
     writeHasReqdAttribCPPCode(outFile, element, attribs)

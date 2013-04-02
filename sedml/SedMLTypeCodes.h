@@ -139,7 +139,7 @@ typedef enum
  */
 LIBSEDML_EXTERN
 const char *
-SedMLTypeCode_toString (int tc, const char* pkgName);
+SedMLTypeCode_toString (int tc);
 
 
 END_C_DECLS

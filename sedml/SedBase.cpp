@@ -2883,7 +2883,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     if (assigned && mMetaId.empty())
     {
       logEmptyString("metaid", level, version,
-                     SedMLTypeCode_toString(getTypeCode(), ""));
+                     SedMLTypeCode_toString(getTypeCode()));
     }
 
     if (isSetMetaId())
