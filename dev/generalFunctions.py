@@ -486,6 +486,20 @@ def writeReadAttribute(output, attrib, element):
     attTypeCode = 'FIX ME'
     num = False
 
+def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
+  if isSedListOf:
+    return;
+  outFile.write('/*\n')
+  outFile.write(' * Read values from the given XMLAttributes set into their specific fields.\n')
+  outFile.write(' */\n')
+  outFile.write('void\n{0}::connectToChild ()\n'.format(element))
+  outFile.write('{\n')
+  outFile.write('\tSedBase::connectToChild();\n\n')
+  for i in range (0, len(attribs)):
+    current = attribs[i]
+    if current['type'] == 'lo_element':
+      outFile.write('\tm{0}.connectToParent(this);\n'.format(strFunctions.cap(current['name'])))	
+  outFile.write('}\n\n\n')  
 
 def writeReadAttributesCPPCode(outFile, element, attribs):
   writeInternalStart(outFile)
@@ -671,6 +685,7 @@ def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, has
   if isSedListOf == True:
     element = writeListOf(element)
   writeGetElementNameCPPCode(outFile, element)
+  writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
   writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)
   if isSedListOf == False:
     writeHasReqdAttribCPPCode(outFile, element, attribs)
