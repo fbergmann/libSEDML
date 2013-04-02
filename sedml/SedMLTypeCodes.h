@@ -95,11 +95,12 @@ typedef enum
       SEDML_UNKNOWN                    =  0
     , SEDML_DOCUMENT                   =  1
     , SEDML_MODEL                      =  2
-    , SEDML_DATAGENERATOR              =  3
-    , SEDML_TASK              =  4
-    , SEDML_OUTPUT             =  5
-	, SEDML_LIST_OF = 6
-    
+    , SEDML_DATAGENERATOR              =  3    
+    , SEDML_TASK                       =  4
+    , SEDML_OUTPUT                     =  5
+	, SEDML_SIMULATION                 =  6
+	, SEDML_LIST_OF                    =  7
+	
 } SedMLTypeCode_t;
 
 

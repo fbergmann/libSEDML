@@ -340,7 +340,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write(' in this {0} object.\n'.format(element))
   output.write(' */\n')
   output.write('const {0}*\n'.format(loname))
-  output.write('{0}::get{1}() const\n'.format(element, loname))
+  output.write('{0}::getListOf{1}s() const\n'.format(element, attrib['element']))
   output.write('{\n')
   output.write('\treturn &m{0};\n'.format(capAttName))
   output.write('}\n\n\n')
@@ -410,7 +410,8 @@ def createCode(element):
   generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath) 
   generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath) 
   generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath) 
-  writeListOfCode.createCode(element, code)
+  if hasSedListOf:
+    writeListOfCode.createCode(element, code)
   writeCCode.createCode(element, code)
 
 #if len(sys.argv) != 2:

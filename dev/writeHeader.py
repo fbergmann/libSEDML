@@ -280,7 +280,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write(' attribute of this {0}.\n'.format(element))
   output.write('\t */\n')
   output.write('\tconst {0}*'.format(loname))
-  output.write(' get{0}() const;\n\n\n'.format(loname))
+  output.write(' getListOf{0}s() const;\n\n\n'.format(attrib['element']))
   writeListOfHeader.writeGetFunctions(output, attrib['element'], True, element)
   output.write('\t/**\n')
   output.write('\t * Adds a copy the given \"{0}\" to this {1}.\n'.format(attrib['element'], element))

@@ -98,7 +98,7 @@ def writeListOfSubElements(attrib, output, element):
   output.write('SedListOf_t *\n')
   output.write('{0}_get{1}({0}_t * {2})\n'.format(element, loname, strFunctions.objAbbrev(element)))
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->getListOf{1}s() : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
+  output.write('\treturn  ({0} != NULL) ? (SedListOf_t *){0}->getListOf{1}s() : NULL;\n'.format(strFunctions.objAbbrev(element),attrib['element']))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(attrib['element']))
