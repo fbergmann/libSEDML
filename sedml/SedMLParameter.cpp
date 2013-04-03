@@ -629,7 +629,7 @@ SedListOfSedMLParameters::createObject(XMLInputStream& stream)
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "sedMLParameter")
+	if (name == "parameter")
 	{
 		object = new SedMLParameter(getSedMLNamespaces());
 		appendAndOwn(object);

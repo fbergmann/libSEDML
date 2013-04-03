@@ -156,7 +156,7 @@ def writeRemoveFunctions(output, element, subelement=False, topelement="", name=
     output.write('}\n\n\n')
      
   
-def writeProtectedFunctions(output, element, package):
+def writeProtectedFunctions(output, element, package, name):
   listOf = generalFunctions.writeListOf(element)
   generalFunctions.writeInternalStart(output)
   output.write('/*\n')
@@ -166,7 +166,7 @@ def writeProtectedFunctions(output, element, package):
   output.write('{\n' )
   output.write('\tconst std::string& name   = stream.peek().getName();\n')
   output.write('\tSedBase* object = NULL;\n\n')
-  output.write('\tif (name == "{0}")\n'.format(strFunctions.lowerFirst(element)))
+  output.write('\tif (name == "{0}")\n'.format(name))
   output.write('\t{\n')
   output.write('\t\tobject = new {0}(getSedMLNamespaces());\n'.format(element, package.lower()))
   output.write('\t\tappendAndOwn(object);\n\t}\n\n')
@@ -199,6 +199,9 @@ def createCode(element, code):
   writeGetFunctions(code, element['name'])
   writeRemoveFunctions(code, element['name'])
   generalFunctions.writeCommonCPPCode(code, element['name'], element['typecode'],None,  True, False,False, element)
-  writeProtectedFunctions(code, element['name'], element['package'])
+  elementName = element['name']
+  if element.has_key('elementName'):
+    elementName = element['elementName']
+  writeProtectedFunctions(code, element['name'], element['package'], elementName)
 
   

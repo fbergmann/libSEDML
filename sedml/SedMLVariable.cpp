@@ -893,7 +893,7 @@ SedListOfSedMLVariables::createObject(XMLInputStream& stream)
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "sedMLVariable")
+	if (name == "variable")
 	{
 		object = new SedMLVariable(getSedMLNamespaces());
 		appendAndOwn(object);

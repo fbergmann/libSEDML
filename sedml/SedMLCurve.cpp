@@ -864,7 +864,7 @@ SedListOfSedMLCurves::createObject(XMLInputStream& stream)
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "sedMLCurve")
+	if (name == "curve")
 	{
 		object = new SedMLCurve(getSedMLNamespaces());
 		appendAndOwn(object);
