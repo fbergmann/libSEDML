@@ -7,6 +7,32 @@
 
 import sys
 
+import writeCode
+import writeHeader
+
+def createElements():
+  element = createSedDocument()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedModel()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedChange()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedSimulation()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedTask()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedDataGenerator()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedOutput()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
@@ -24,8 +50,15 @@ def createSedModel() :
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'string', 'reqd' : False, 'name':'language'})
   a4 = dict({'type': 'string', 'reqd' : True, 'name':'source'})
-  attributes = [a1, a2, a3, a4]
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'change', 'element': 'Change'})
+  attributes = [a1, a2, a3, a4, lo1]
   element = dict({'name': 'SedMLModel', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'model'}) 
+  return element
+
+def createSedChange() :
+  a1 = dict({'type': 'string', 'reqd' : True, 'name':'target'})
+  attributes = [a1]
+  element = dict({'name': 'Change', 'package': 'SedML', 'typecode': 'SEDML_CHANGE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False}) 
   return element
 
 def createSedSimulation() :

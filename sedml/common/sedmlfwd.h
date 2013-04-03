@@ -101,6 +101,12 @@ typedef CLASS_OR_STRUCT SedMLDocument              SedMLDocument_t;
  */
 typedef CLASS_OR_STRUCT SedMLModel                     SedMLModel_t;
 
+/**
+ * @var typedef class Change Change_t
+ * @copydoc Change
+ */
+typedef CLASS_OR_STRUCT Change                     Change_t;
+
 
 /**
  * @var typedef class DataGenerator DataGenerator_t

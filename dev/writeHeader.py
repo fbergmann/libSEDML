@@ -313,7 +313,7 @@ def writeListOfSubFunctions(attrib, output, element):
   writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
  
 #write class
-def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath):
+def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf):
   writeAdditionalIncludes(attributes, header)
   header.write('class LIBSEDML_EXTERN {0} :'.format(nameOfElement))
   header.write(' public SedBase\n{0}\n\n'.format('{'))
@@ -322,7 +322,7 @@ def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, ha
   writeConstructors(nameOfElement, nameOfPackage, header)
   writeAttributeFunctions(attributes, header, nameOfElement)
   generalFunctions.writeCommonHeaders(header, nameOfElement, attributes, False, hasChildren, hasMath)
-  generalFunctions.writeInternalHeaders(header, hasChildren)
+  generalFunctions.writeInternalHeaders(header, isSedListOf, hasChildren)
   header.write('protected:\n\n')
   generalFunctions.writeProtectedHeaders(header, hasChildren, hasMath)
   header.write('\n};\n\n')
@@ -370,7 +370,7 @@ def createHeader(element):
   nameOfElement = element['name']
   nameOfPackage = element['package']
   sedmltypecode = element['typecode']
-  isSedListOf = element['hasSedListOf']
+  hasSedListOf = element['hasSedListOf']
   attributes = element['attribs']
   hasChildren = element['hasChildren']
   hasMath = element['hasMath']
@@ -379,8 +379,8 @@ def createHeader(element):
   fileHeaders.addFilename(header, headerName, nameOfElement)
   fileHeaders.addLicence(header)
   writeIncludes(header, nameOfElement, nameOfPackage)
-  writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath)
-  if isSedListOf == True:
+  writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, False)
+  if hasSedListOf == True:
     writeListOfHeader.createHeader(element, header)
   writeCPPEnd(header)
   writeCStart(header)

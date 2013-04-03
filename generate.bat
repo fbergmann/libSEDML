@@ -7,5 +7,3 @@ cd /d %BASE_DIR%\out
 %PYTHON% ..\dev\run.py
 
 cd /d %BASE_DIR%
-
-pause

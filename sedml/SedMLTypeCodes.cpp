@@ -36,6 +36,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
       "(Unknown SEDML Type)"
     , "SedMLDocument"
     , "Model"
+    , "Change"
     , "DataGenerator"
     , "Task"
     , "Output"

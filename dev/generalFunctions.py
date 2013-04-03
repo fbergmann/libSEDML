@@ -282,7 +282,9 @@ def writeSetDocCPPCode(outFile, element):
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
-def writeConnectHeader(outFile):
+def writeConnectHeader(outFile, isSedListOf=False, hasChildren=False):
+  if isSedListOf or hasChildren==False:
+    return;
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
   outFile.write('\t * Connects to child elements.\n')
@@ -486,8 +488,8 @@ def writeReadAttribute(output, attrib, element):
     attTypeCode = 'FIX ME'
     num = False
 	
-def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
-  if isSedListOf:
+def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):  
+  if isSedListOf == True or hasChildren == False:
     return;
   outFile.write('/**\n')
   outFile.write(' * return the SEDML object corresponding to next XMLToken.\n')
@@ -504,11 +506,12 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
       outFile.write('\t{\n')	
       outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.cap(current['name'])))	
       outFile.write('\t}\n\n')		
-  outFile.write('return object;')  
+  outFile.write('\treturn object;\n')  
   outFile.write('}\n\n\n')  
 
-def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
-  if isSedListOf:
+def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):  
+  print 'isSedListOf={0} hasChildren={1} hasMath={2}'.format(isSedListOf, hasChildren, hasMath)
+  if isSedListOf or hasChildren == False:
     return;
   outFile.write('/*\n')
   outFile.write(' * Read values from the given XMLAttributes set into their specific fields.\n')
@@ -681,7 +684,7 @@ def writeReadOtherXMLCPPCode(outFile, element):
 
 
 def writeProtectedHeaders(outFile, hasChildren=False, hasMath=False):
-  if hasChildren == True:
+  if hasChildren:
     writeCreateObjectHeader(outFile)
   writeAddExpectedHeader(outFile)
   writeReadAttributesHeader(outFile)
@@ -700,20 +703,21 @@ def writeCommonHeaders(outFile, element, attribs, isSedListOf, hasChildren=False
     writeHasReqdElementsHeader(outFile, element, attribs)
 
 
-def writeInternalHeaders(outFile, hasChildren=False):
+def writeInternalHeaders(outFile, isSedListOf, hasChildren=False):
   writeWriteElementsHeader(outFile)
   writeAcceptHeader(outFile)
   writeSetDocHeader(outFile)
-  if hasChildren == True:
-    writeConnectHeader(outFile)
+  if hasChildren or isSedListOf:
+    writeConnectHeader(outFile, isSedListOf, hasChildren)
   writeEnablePkgHeader(outFile)
   
 def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None):
   if isSedListOf == True:
     element = writeListOf(element)
   writeGetElementNameCPPCode(outFile, element, isSedListOf, elementDict)
-  writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
-  writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
+  if hasChildren:
+    writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath)
+    writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath)
   writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)
   if isSedListOf == False:
     writeHasReqdAttribCPPCode(outFile, element, attribs)
