@@ -70,10 +70,14 @@ main (int argc, char* argv[])
   ChangeAttribute change;
   change.setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
   change.setNewValue("0.1");  
-  cout << change.toSedML();
   model->addChange(&change);
-  cout << model->getNumChanges();
+
+  // remove species 's1'
+  RemoveXML remove;
+  remove.setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
+  model->addChange(&remove);
   
+  // write the document
   writeSedML(&doc, argv[1]);  
 
   return 0;
