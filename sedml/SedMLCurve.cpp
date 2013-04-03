@@ -891,7 +891,7 @@ SedListOfSedMLCurves::writeXMLNS(XMLOutputStream& stream) const
 
 	if (prefix.empty())
 	{
-		if (getNamespaces()->hasURI(SEDML_XMLNS_L1))
+		if (!getNamespaces()->hasURI(SEDML_XMLNS_L1))
 		{
 			xmlns.add(SEDML_XMLNS_L1,prefix);
 		}

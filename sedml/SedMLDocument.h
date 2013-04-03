@@ -1104,7 +1104,16 @@ public:
    * @see SBMLDocument::getError(unsigned int n)
    */
   unsigned int getNumErrors (unsigned int severity) const;
-  
+
+protected:
+  /**
+   *
+   * Subclasses should override this method to write their xmlns attriubutes
+   * (if any) to the XMLOutputStream.  Be sure to call your parents implementation
+   * of this method as well.
+   *
+   */
+  virtual void writeXMLNS (XMLOutputStream& stream) const;  
 private: 
 
 	SedMLErrorLog mErrorLog;
