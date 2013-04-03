@@ -4,25 +4,31 @@
 # Original author(s): Frank Bergmann <fbergman@caltech.edu>
 # Organization      : California Institute of Technology
 #
-# This file is part of libSEDML.  Please visit http://sbml.org for more
+# This file is part of libSEDML.  Please visit http://sed-ml.org for more
 # information about SEDML, and the latest version of libSEDML.
 #
-# Copyright (C) 2009-2013 jointly by the following organizations:
-#     1. California Institute of Technology, Pasadena, CA, USA
-#     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-#
-# Copyright (C) 2006-2008 by the California Institute of Technology,
-#     Pasadena, CA, USA
-#
-# Copyright (C) 2002-2005 jointly by the following organizations:
-#     1. California Institute of Technology, Pasadena, CA, USA
-#     2. Japan Science and Technology Agency, Japan
-#
-# This library is free software; you can redistribute it and/or modify it
-# under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation.  A copy of the license agreement is provided
-# in the file named "LICENSE.txt" included with this software distribution
-# and also available online as http://sbml.org/software/libsedml/license.html
+# Copyright (c) 2013, Frank T. Bergmann  
+# All rights reserved.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met: 
+# 
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer. 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution. 
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 ###############################################################################
 
@@ -88,12 +94,12 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "An API library for reading/writing/manipu
 set(CPACK_PACKAGE_NAME "${PACKAGE_NAME}")
 set(CPACK_PACKAGE_VENDOR "The SEDML Team")
 set(CPACK_PACKAGE_CONTACT "LibSEDML Team <libsedml-team@caltech.edu>")
-#set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.txt")
-#set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING.txt")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR "${LIBSEDML_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${LIBSEDML_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${LIBSEDML_VERSION_PATCH}")
-set(CPACK_RPM_PACKAGE_LICENSE "LGPL")
+set(CPACK_RPM_PACKAGE_LICENSE "BSD")
 set(CPACK_RPM_PACKAGE_GROUP "Libraries/Development")
 set(CPACK_DEBIAN_PACKAGE_SECTION "Libraries")
 
@@ -621,138 +627,16 @@ if (MSVC)
   set(HAVE_SYS_TYPES_H TRUE)
 endif()
 
-
-include(CheckLibraryExists)
-check_library_exists(m sqrt "" HAVE_LIBM)
-
-# generate configuration for this system
-configure_file(
-	${CMAKE_CURRENT_SOURCE_DIR}/sedml/common/libsedml-config-common.h.cmake
-	${CMAKE_CURRENT_SOURCE_DIR}/sedml/common/libsedml-config-common.h
-	)
-
-# Replace: @PACKAGE_VERSION@ and @LIBSEDML_VERSION_NUMERIC@
-configure_file (
-  "${CMAKE_CURRENT_SOURCE_DIR}/sedml/common/libsedml-version.h.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/sedml/common/libsedml-version.h"
-  )
-
-
-###############################################################################
+##############################################################################
 #
-# mark header files for installation
-#
-foreach(dir annotation common compress conversion extension math units util validator xml  )
-
-	file(GLOB header_files "${CMAKE_CURRENT_SOURCE_DIR}/sedml/${dir}/*.h")
-	install(FILES ${header_files} DESTINATION include/sedml/${dir})
-
-endforeach(dir)
-
-file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/sedml/*.h")
-install(FILES ${files} DESTINATION include/sbml)
-
-###############################################################################
-#
-# specify include directories
-#
-include_directories(BEFORE ${CMAKE_SOURCE_DIR}/sedml)
-include_directories(BEFORE ${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${CMAKE_SOURCE_DIR})
-include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR})
-
-if (EXTRA_DEFS)
-add_definitions(${EXTRA_DEFS})
-endif()
-
-###############################################################################
-#
-# Find all sources
-#
-
-foreach (directory common sedml )
-
-	set(prefix "sedml/")
-
-	if ("${directory}" STREQUAL "sedml")
-		set(prefix "")
-	endif()
-
-
-	file(GLOB temp
-			${prefix}${directory}/*.cpp
-			${prefix}${directory}/*.c
-			${prefix}${directory}/*.h)
-
-	# create source group for IDEs
-	source_group(${directory} FILES ${temp})
-
-	# add to libsbml sources
-	set(LIBSEDML_SOURCES ${LIBSEDML_SOURCES} ${temp})
-
-endforeach()
-
-###############################################################################
-#
-# this is a directory level operation!
-#
-if (MSVC)
-if (WITH_STATIC_RUNTIME)
-	foreach(flag_var
-		CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
-		CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO
-		CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
-		CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
-
-		if(${flag_var} MATCHES "/MD")
-			string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
-		endif(${flag_var} MATCHES "/MD")
-
-
-	endforeach(flag_var)
-	add_definitions( -D_MT)
-endif(WITH_STATIC_RUNTIME)
-endif(MSVC)
-
-###############################################################################
-#
-# Build library
-#
-
-if (NOT LIBSEDML_SKIP_SHARED_LIBRARY)
-
-add_library (${LIBSEDML_LIBRARY} SHARED ${LIBSEDML_SOURCES} )
-
-if (LIBSEDML_SHARED_VERSION)
-  SET_TARGET_PROPERTIES(${LIBSEDML_LIBRARY} PROPERTIES
-                      SOVERSION ${LIBSEDML_VERSION_MAJOR}
-                      VERSION ${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH})
-endif()
-
-target_link_libraries(${LIBSEDML_LIBRARY} ${LIBSBML_LIBRARY} ${EXTRA_LIBS})
-
-INSTALL(TARGETS ${LIBSEDML_LIBRARY}
-	RUNTIME DESTINATION bin
-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
-
-endif()
-
-add_library (${LIBSEDML_LIBRARY}-static STATIC ${LIBSEDML_SOURCES} )
-target_link_libraries(${LIBSEDML_LIBRARY}-static ${LIBSBML_LIBRARY} ${EXTRA_LIBS})
-
-INSTALL(TARGETS ${LIBSEDML_LIBRARY}-static
-	RUNTIME DESTINATION bin
-	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-	ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
-
+# create library
+# 
+add_subdirectory(sedml)
 
 ##############################################################################
 #
 # create language bindings
-#
+# 
 #add_subdirectory(bindings)
 
 
@@ -780,17 +664,13 @@ INSTALL(TARGETS ${LIBSEDML_LIBRARY}-static
 # Install documentation
 #
 
-#set(DOCUMENTATION_FILES
-#        COPYING.txt
-#        FUNDING.txt
-#        LICENSE.txt
-#        NEWS.txt
-#        OLD_NEWS.txt
-#        README.txt
-#        VERSION.txt
-#)
-#
-#install(FILES ${DOCUMENTATION_FILES} DESTINATION ${MISC_PREFIX}.)
+set(DOCUMENTATION_FILES
+        LICENSE.txt
+        README.md
+        VERSION.txt
+)
+
+install(FILES ${DOCUMENTATION_FILES} DESTINATION ${MISC_PREFIX}.)
 
 
 ###############################################################################
