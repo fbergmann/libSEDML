@@ -198,7 +198,8 @@ def createCode(element, code):
   writeConstructors(element['name'], element['package'], code) 
   writeGetFunctions(code, element['name'])
   writeRemoveFunctions(code, element['name'])
-  generalFunctions.writeCommonCPPCode(code, element['name'], element['typecode'],None,  True)
+  print 'element={0}'.format(element)
+  generalFunctions.writeCommonCPPCode(code, element['name'], element['typecode'],None,  True, False,False, element)
   writeProtectedFunctions(code, element['name'], element['package'])
 
   

@@ -571,13 +571,20 @@ def writeGetElementNameHeader(outFile, element, isSedListOf):
   outFile.write('\t */\n')
   outFile.write('\tvirtual const std::string& getElementName () const;\n\n\n')
 
-def writeGetElementNameCPPCode(outFile, element):
+def writeGetElementNameCPPCode(outFile, element, isSedMLListOf=False, dict=None):
   outFile.write('/*\n')
   outFile.write(' * Returns the XML element name of this object\n')
   outFile.write(' */\n')
   outFile.write('const std::string&\n{0}::getElementName () const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tstatic const string name = "{0}";\n'.format(strFunctions.lowerFirst(element)))
+  print 'isList={0} dict={1}'.format(isSedMLListOf, dict)
+  if dict != None and dict.has_key('elementName'):
+    if isSedMLListOf:
+      outFile.write('\tstatic const string name = "listOf{0}s";\n'.format(strFunctions.cap(dict['elementName'])))
+    else:
+      outFile.write('\tstatic const string name = "{0}";\n'.format(dict['elementName']))
+  else:
+    outFile.write('\tstatic const string name = "{0}";\n'.format(strFunctions.lowerFirst(element)))
   outFile.write('\treturn name;\n')
   outFile.write('}\n\n\n')
   
@@ -702,10 +709,10 @@ def writeInternalHeaders(outFile, hasChildren=False):
     writeConnectHeader(outFile)
   writeEnablePkgHeader(outFile)
   
-def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):
+def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None):
   if isSedListOf == True:
     element = writeListOf(element)
-  writeGetElementNameCPPCode(outFile, element)
+  writeGetElementNameCPPCode(outFile, element, isSedListOf, elementDict)
   writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
   writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False)
   writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)

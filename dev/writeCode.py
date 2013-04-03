@@ -407,7 +407,7 @@ def createCode(element):
   writeIncludes(code, nameOfElement, nameOfPackage, hasMath)
   writeConstructors(nameOfElement, nameOfPackage, code, attributes, hasChildren, hasMath)
   writeAttributeCode(attributes, code, nameOfElement)
-  generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath) 
+  generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath, element) 
   generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath) 
   generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath) 
   if hasSedListOf:
