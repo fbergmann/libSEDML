@@ -40,6 +40,7 @@
 #include <sedml/SedMLModel.h>
 #include <sedml/Algorithm.h>
 #include <sedml/Simulation.h>
+#include <sedml/UniformTimeCourse.h>
 #include <sedml/Output.h>
 #include <sedml/DataGenerator.h>
 #include <sedml/Task.h>

@@ -47,6 +47,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
     , "Output"
 	, "Simulation"
 	, "Algorithm"
+	, "UniformTimeCourse"
 	, "SedListOf"
 };
 

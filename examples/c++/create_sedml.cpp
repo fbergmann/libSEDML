@@ -55,6 +55,7 @@ main (int argc, char* argv[])
   doc.setLevel(1);
   doc.setVersion(1);
   
+  {
   // create a first model referencing an sbml file
   SedMLModel *model = doc.createSedMLModel();
   model->setId("model1");
@@ -88,6 +89,48 @@ main (int argc, char* argv[])
   variable->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
   compute.setMath(SBML_parseFormula("S2 / 2"));
   model->addChange(&compute);
+  }
+  
+  // create simulation
+  UniformTimeCourse tc;
+  tc.setId("sim1");
+  tc.setInitialTime(0.0);
+  tc.setOutputStartTime(0.0);
+  tc.setOutputEndTime(10.0);
+  tc.setNumberOfPoints(1000);
+  // need to set the correct KISAO Term  
+  Algorithm* alg = tc.createAlgorithm();
+  alg->setKisaoID("KISAO:0000019");
+  // now add it to the document
+  doc.addSimulation(&tc);
+  
+  // create a task that uses the simulation and the model above
+  Task* task = doc.createTask();
+  task->setId("task1");
+  task->setModelReference("model1");
+  task->setSimulationReference("sim1");
+  
+  // add a DataGenerator to hold the output for time
+  DataGenerator* dg = doc.createDataGenerator();
+  dg->setId("time");
+  dg->setName("time");
+  SedMLVariable* var = dg->createSedMLVariable();
+  var->setId("v0");
+  var->setName("time");
+  var->setTaskReference("task1");
+  var->setSymbol("urn:sedml:symbol:time");
+  dg->setMath(SBML_parseFormula("v0"));
+  
+  // and one for S1
+  dg = doc.createDataGenerator();
+  dg->setId("S1");
+  dg->setName("S1");
+  var = dg->createSedMLVariable();
+  var->setId("v1");
+  var->setName("S1");
+  var->setTaskReference("task1");
+  var->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
+  dg->setMath(SBML_parseFormula("v1"));
   
   // write the document
   writeSedML(&doc, argv[1]);  

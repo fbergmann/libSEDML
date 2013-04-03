@@ -92,21 +92,22 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-      SEDML_UNKNOWN                    =  0
-    , SEDML_DOCUMENT                   =  1
-    , SEDML_MODEL                      =  20
-    , SEDML_CHANGE                     =  21
-    , SEDML_CHANGE_ATTRIBUTE           =  22
-    , SEDML_CHANGE_REMOVEXML           =  23
-    , SEDML_CHANGE_COMPUTECHANGE       =  24
-    , SEDML_DATAGENERATOR              =  30    
-    , SEDML_VARIABLE                   =  31
-    , SEDML_PARAMETER                  =  32
-    , SEDML_TASK                       =  40
-    , SEDML_OUTPUT                     =  50
-	, SEDML_SIMULATION                 =  60
-	, SEDML_SIMULATION_ALGORITHM       =  61
-	, SEDML_LIST_OF                    =  70
+      SEDML_UNKNOWN                      =  0
+    , SEDML_DOCUMENT                     =  1
+    , SEDML_MODEL                        =  20
+    , SEDML_CHANGE                       =  21
+    , SEDML_CHANGE_ATTRIBUTE             =  22
+    , SEDML_CHANGE_REMOVEXML             =  23
+    , SEDML_CHANGE_COMPUTECHANGE         =  24
+    , SEDML_DATAGENERATOR                =  30    
+    , SEDML_VARIABLE                     =  31
+    , SEDML_PARAMETER                    =  32
+    , SEDML_TASK                         =  40
+    , SEDML_OUTPUT                       =  50
+	, SEDML_SIMULATION                   =  60
+	, SEDML_SIMULATION_ALGORITHM         =  61
+	, SEDML_SIMULATION_UNIFORMTIMECOURSE =  62
+	, SEDML_LIST_OF                      =  70
 	
 } SedMLTypeCode_t;
 

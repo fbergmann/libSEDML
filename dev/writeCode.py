@@ -172,6 +172,17 @@ def writeGetCode(attrib, output, element):
   output.write('{\n')
   output.write('\treturn m{0};\n'.format(capAttName))
   output.write('}\n\n\n')
+  output.write('/*\n')
+  if attType == 'element' and attName != 'math':
+    output.write(' * Creates a new \"{0}\"'.format(attName))
+    output.write(' element of this {0} and returns it.\n'.format(element))
+    output.write(' */\n')
+    output.write('{0}\n'.format(attTypeCode))
+    output.write('{0}::create{1}()\n'.format(element, capAttName))
+    output.write('{\n')
+    output.write('\tm{0} = new {0}();\n'.format(capAttName))
+    output.write('\treturn m{0};\n'.format(capAttName))
+    output.write('}\n\n\n')
    
   
 def writeIsSetCode(attrib, output, element):

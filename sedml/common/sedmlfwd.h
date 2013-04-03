@@ -193,6 +193,14 @@ typedef CLASS_OR_STRUCT Task                     Task_t;
  */
 typedef CLASS_OR_STRUCT Simulation                     Simulation_t;
 
+
+/**
+ * @var typedef class UniformTimeCourse UniformTimeCourse_t
+ * @copydoc UniformTimeCourse
+ */
+typedef CLASS_OR_STRUCT UniformTimeCourse                     UniformTimeCourse_t;
+
+
 /**
  * @var typedef class Output Output_t
  * @copydoc Output
