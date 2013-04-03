@@ -45,7 +45,18 @@ def createSedDocument() :
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'DataGenerator'})
   lo5 = dict({'type': 'lo_element', 'reqd' : False, 'name':'output', 'element': 'SedMLOutput'})
   attributes = [a1, a2, lo1, lo2, lo3, lo4, lo5]
-  element = dict({'name': 'SedMLDocument', 'package': 'SedML', 'typecode': 'SEDML_DOCUMENT', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'sedML'})
+  element = dict({
+           'name': 'SedMLDocument', 
+		   'package': 'SedML', 
+		   'typecode': 'SEDML_DOCUMENT', 
+		   'hasSedListOf': False, 
+		   'attribs':attributes, 
+		   'hasChildren':True, 
+		   'hasMath':False, 
+		   'elementName':'sedML',
+		   'additionalCPPDecls':'../dev/doc_headers.h',
+		   'additionalCPPImpls':'../dev/doc_code.cpp'
+		   })
   return element
 
 def createSedModel() :

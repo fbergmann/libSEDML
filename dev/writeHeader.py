@@ -339,6 +339,8 @@ def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, ha
   generalFunctions.writeInternalHeaders(header, isSedListOf, hasChildren)
   header.write('protected:\n\n')
   generalFunctions.writeProtectedHeaders(header, hasChildren, hasMath)
+  if elementDict.has_key('additionalCPPDecls'):
+    header.write(open(elementDict['additionalCPPDecls'], 'r').read())
   header.write('\n};\n\n')
  
 # write the include files

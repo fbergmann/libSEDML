@@ -428,6 +428,8 @@ def createCode(element):
   generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath, element,baseClass)
   generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath,baseClass)
   generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath,baseClass)
+  if element.has_key('additionalCPPImpls'):
+    code.write(open(element['additionalCPPImpls'], 'r').read())
   if hasSedListOf:
     writeListOfCode.createCode(element, code)
   writeCCode.createCode(element, code)
