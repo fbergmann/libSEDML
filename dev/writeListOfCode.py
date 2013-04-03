@@ -190,7 +190,7 @@ def writeProtectedFunctions(output, element, package, name, elementDict):
   output.write('\tstd::string prefix = getPrefix();\n\n')
   output.write('\tif (prefix.empty())\n')
   output.write('\t{\n')
-  output.write('\t\tif (!getNamespaces()->hasURI(SEDML_XMLNS_L1))\n')
+  output.write('\t\tif (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1))\n')
   output.write('\t\t{\n')
   output.write('\t\t\txmlns.add(SEDML_XMLNS_L1,prefix);\n')
   output.write('\t\t}\n')
