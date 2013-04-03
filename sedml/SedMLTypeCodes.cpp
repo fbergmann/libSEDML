@@ -37,6 +37,8 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
     , "SedMLDocument"
     , "Model"
     , "Change"
+    , "ChangeAttribute"
+    , "RemoveXML"
     , "DataGenerator"
     , "Task"
     , "Output"

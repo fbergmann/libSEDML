@@ -107,6 +107,17 @@ typedef CLASS_OR_STRUCT SedMLModel                     SedMLModel_t;
  */
 typedef CLASS_OR_STRUCT Change                     Change_t;
 
+/**
+ * @var typedef class RemoveXML RemoveXML_t
+ * @copydoc RemoveXML
+ */
+typedef CLASS_OR_STRUCT RemoveXML                     RemoveXML_t;
+
+/**
+ * @var typedef class ChangeAttribute ChangeAttribute_t
+ * @copydoc ChangeAttribute
+ */
+typedef CLASS_OR_STRUCT ChangeAttribute                     ChangeAttribute_t;
 
 /**
  * @var typedef class DataGenerator DataGenerator_t

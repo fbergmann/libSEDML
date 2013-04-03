@@ -96,6 +96,8 @@ typedef enum
     , SEDML_DOCUMENT                   =  1
     , SEDML_MODEL                      =  20
     , SEDML_CHANGE                     =  21
+    , SEDML_CHANGE_ATTRIBUTE           =  22
+    , SEDML_CHANGE_REMOVEXML           =  23
     , SEDML_DATAGENERATOR              =  30    
     , SEDML_TASK                       =  40
     , SEDML_OUTPUT                     =  50

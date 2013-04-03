@@ -98,7 +98,7 @@ def writeAtt(attrib, output):
 
 def writeAdditionalIncludes (attrs, output, elementDict):
   if elementDict.has_key('baseClass'):
-    output.write('#include sedml/{0}.h\n'.format(elementDict['baseClass']))
+    output.write('#include <sedml/{0}.h>\n'.format(elementDict['baseClass']))
   for i in range(0, len(attrs)):
     writeInclude(attrs[i], output)  
   output.write('\n\n')

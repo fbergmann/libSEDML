@@ -23,6 +23,9 @@ def createElements():
   element = createSedChangeAttribute()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
+  element = createSedChangeRemoveXML()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
   element = createSedSimulation()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
@@ -62,6 +65,11 @@ def createSedChange() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'target'})
   attributes = [a1]
   element = dict({'name': 'Change', 'package': 'SedML', 'typecode': 'SEDML_CHANGE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False}) 
+  return element
+
+def createSedChangeRemoveXML() :
+  attributes = []
+  element = dict({'name': 'RemoveXML', 'package': 'SedML', 'typecode': 'SEDML_CHANGE_REMOVEXML', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'Change'}) 
   return element
 
 def createSedChangeAttribute() :
