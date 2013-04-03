@@ -847,17 +847,49 @@ SedMLDocument::getNumSedMLOutputs() const
 }
 
 /**
- * Creates a new SedMLOutput object, adds it to this SedMLDocuments
- * SedMLDocument and returns the SedMLOutput object created. 
+ * Creates a new Report object, adds it to this SedMLDocuments
+ * SedMLDocument and returns the Report object created. 
  *
- * @return a new SedMLOutput object instance
+ * @return a new Report object instance
  *
  * @see addSedMLOutput(const SedMLOutput* smlo)
  */
-SedMLOutput* 
-SedMLDocument::createSedMLOutput()
+Report* 
+SedMLDocument::createReport()
 {
-	SedMLOutput *temp = new SedMLOutput();
+	Report *temp = new Report();
+	if (temp != NULL) mOutput.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new Plot2D object, adds it to this SedMLDocuments
+ * SedMLDocument and returns the Plot2D object created. 
+ *
+ * @return a new Plot2D object instance
+ *
+ * @see addSedMLOutput(const SedMLOutput* smlo)
+ */
+Plot2D* 
+SedMLDocument::createPlot2D()
+{
+	Plot2D *temp = new Plot2D();
+	if (temp != NULL) mOutput.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new Plot3D object, adds it to this SedMLDocuments
+ * SedMLDocument and returns the Plot3D object created. 
+ *
+ * @return a new Plot3D object instance
+ *
+ * @see addSedMLOutput(const SedMLOutput* smlo)
+ */
+Plot3D* 
+SedMLDocument::createPlot3D()
+{
+	Plot3D *temp = new Plot3D();
 	if (temp != NULL) mOutput.appendAndOwn(temp);
 	return temp;
 }
@@ -1576,10 +1608,24 @@ SedMLDocument_addSedMLOutput(SedMLDocument_t * smld, SedMLOutput_t * smlo)
 }
 
 LIBSEDML_EXTERN
-SedMLOutput_t *
-SedMLDocument_createSedMLOutput(SedMLDocument_t * smld)
+Report_t *
+SedMLDocument_createReport(SedMLDocument_t * smld)
 {
-	return  (smld != NULL) ? smld->createSedMLOutput() : NULL;
+	return  (smld != NULL) ? smld->createReport() : NULL;
+}
+
+LIBSEDML_EXTERN
+Plot2D_t *
+SedMLDocument_createPlot2D(SedMLDocument_t * smld)
+{
+	return  (smld != NULL) ? smld->createPlot2D() : NULL;
+}
+
+LIBSEDML_EXTERN
+Plot3D_t *
+SedMLDocument_createPlot3D(SedMLDocument_t * smld)
+{
+	return  (smld != NULL) ? smld->createPlot3D() : NULL;
 }
 
 LIBSEDML_EXTERN

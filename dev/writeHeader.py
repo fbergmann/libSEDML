@@ -270,7 +270,7 @@ def writeUnsetFunction(attrib, output, element):
    
   
    
-def writeAttributeFunctions(attrs, output, element):
+def writeAttributeFunctions(attrs, output, element, elementDict):
   for i in range(0, len(attrs)):
     writeGetFunction(attrs[i], output, element)
     writeIsSetFunction(attrs[i], output, element)
@@ -278,10 +278,10 @@ def writeAttributeFunctions(attrs, output, element):
     writeUnsetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
-      writeListOfSubFunctions(attrs[i], output, element)
+      writeListOfSubFunctions(attrs[i], output, element, elementDict)
       
 
-def writeListOfSubFunctions(attrib, output, element):
+def writeListOfSubFunctions(attrib, output, element, elementDict):
   loname = generalFunctions.writeListOf(attrib['element'])
   output.write('\t/**\n')
   output.write('\t * Returns the  \"{0}\"'.format(loname))
@@ -312,15 +312,27 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('\t * @return the number of {0} objects in this {1}\n'.format(attrib['element'], element))
   output.write('\t */\n')
   output.write('\tunsigned int getNum{0}s() const;\n\n\n'.format(attrib['element']))
-  output.write('\t/**\n')
-  output.write('\t * Creates a new {0} object, adds it to this {1}s\n'.format(attrib['element'], element))
-  output.write('\t * {0} and returns the {1} object created. \n'.format(loname, attrib['element']))
-  output.write('\t *\n')
-  output.write('\t * @return a new {0} object instance\n'.format(attrib['element']))
-  output.write('\t *\n')
-  output.write('\t * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
-  output.write('\t */\n')
-  output.write('\t{0}* create{0}();\n\n\n'.format(attrib['element']))
+  if attrib.has_key('abstract') == False or (attrib.has_key('abstract') and attrib['abstract'] == False):
+    output.write('\t/**\n')
+    output.write('\t * Creates a new {0} object, adds it to this {1}s\n'.format(attrib['element'], element))
+    output.write('\t * {0} and returns the {1} object created. \n'.format(loname, attrib['element']))
+    output.write('\t *\n')
+    output.write('\t * @return a new {0} object instance\n'.format(attrib['element']))
+    output.write('\t *\n')
+    output.write('\t * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
+    output.write('\t */\n')
+    output.write('\t{0}* create{0}();\n\n\n'.format(attrib['element']))
+  elif attrib.has_key('concrete'):
+    for elem in attrib['concrete']:
+      output.write('\t/**\n')
+      output.write('\t * Creates a new {0} object, adds it to this {1}s\n'.format(elem['element'], element))
+      output.write('\t * {0} and returns the {1} object created. \n'.format(loname, elem['element']))
+      output.write('\t *\n')
+      output.write('\t * @return a new {0} object instance\n'.format(elem['element']))
+      output.write('\t *\n')
+      output.write('\t * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
+      output.write('\t */\n')
+      output.write('\t{0}* create{0}();\n\n\n'.format(elem['element']))
   writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
  
 #write class
@@ -334,7 +346,7 @@ def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, ha
   writeAttributes(attributes, header)
   header.write('public:\n\n')
   writeConstructors(nameOfElement, nameOfPackage, header)
-  writeAttributeFunctions(attributes, header, nameOfElement)
+  writeAttributeFunctions(attributes, header, nameOfElement, elementDict)
   generalFunctions.writeCommonHeaders(header, nameOfElement, attributes, False, hasChildren, hasMath)
   generalFunctions.writeInternalHeaders(header, isSedListOf, hasChildren)
   header.write('protected:\n\n')

@@ -400,14 +400,36 @@ public:
 
 
 	/**
-	 * Creates a new Change object, adds it to this SedMLModels
-	 * SedListOfChanges and returns the Change object created. 
+	 * Creates a new RemoveXML object, adds it to this SedMLModels
+	 * SedListOfChanges and returns the RemoveXML object created. 
 	 *
-	 * @return a new Change object instance
+	 * @return a new RemoveXML object instance
 	 *
 	 * @see addChange(const Change* c)
 	 */
-	Change* createChange();
+	RemoveXML* createRemoveXML();
+
+
+	/**
+	 * Creates a new ChangeAttribute object, adds it to this SedMLModels
+	 * SedListOfChanges and returns the ChangeAttribute object created. 
+	 *
+	 * @return a new ChangeAttribute object instance
+	 *
+	 * @see addChange(const Change* c)
+	 */
+	ChangeAttribute* createChangeAttribute();
+
+
+	/**
+	 * Creates a new ComputeChange object, adds it to this SedMLModels
+	 * SedListOfChanges and returns the ComputeChange object created. 
+	 *
+	 * @return a new ComputeChange object instance
+	 *
+	 * @see addChange(const Change* c)
+	 */
+	ComputeChange* createComputeChange();
 
 
 	/**
@@ -974,8 +996,18 @@ SedMLModel_addChange(SedMLModel_t * smlm, Change_t * c);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedMLModel_createChange(SedMLModel_t * smlm);
+RemoveXML_t *
+SedMLModel_createRemoveXML(SedMLModel_t * smlm);
+
+
+LIBSEDML_EXTERN
+ChangeAttribute_t *
+SedMLModel_createChangeAttribute(SedMLModel_t * smlm);
+
+
+LIBSEDML_EXTERN
+ComputeChange_t *
+SedMLModel_createComputeChange(SedMLModel_t * smlm);
 
 
 LIBSEDML_EXTERN

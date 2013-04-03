@@ -475,17 +475,49 @@ SedMLModel::getNumChanges() const
 }
 
 /**
- * Creates a new Change object, adds it to this SedMLModels
- * SedMLModel and returns the Change object created. 
+ * Creates a new RemoveXML object, adds it to this SedMLModels
+ * SedMLModel and returns the RemoveXML object created. 
  *
- * @return a new Change object instance
+ * @return a new RemoveXML object instance
  *
  * @see addChange(const Change* c)
  */
-Change* 
-SedMLModel::createChange()
+RemoveXML* 
+SedMLModel::createRemoveXML()
 {
-	Change *temp = new Change();
+	RemoveXML *temp = new RemoveXML();
+	if (temp != NULL) mChange.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new ChangeAttribute object, adds it to this SedMLModels
+ * SedMLModel and returns the ChangeAttribute object created. 
+ *
+ * @return a new ChangeAttribute object instance
+ *
+ * @see addChange(const Change* c)
+ */
+ChangeAttribute* 
+SedMLModel::createChangeAttribute()
+{
+	ChangeAttribute *temp = new ChangeAttribute();
+	if (temp != NULL) mChange.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new ComputeChange object, adds it to this SedMLModels
+ * SedMLModel and returns the ComputeChange object created. 
+ *
+ * @return a new ComputeChange object instance
+ *
+ * @see addChange(const Change* c)
+ */
+ComputeChange* 
+SedMLModel::createComputeChange()
+{
+	ComputeChange *temp = new ComputeChange();
 	if (temp != NULL) mChange.appendAndOwn(temp);
 	return temp;
 }
@@ -1180,10 +1212,24 @@ SedMLModel_addChange(SedMLModel_t * smlm, Change_t * c)
 }
 
 LIBSEDML_EXTERN
-Change_t *
-SedMLModel_createChange(SedMLModel_t * smlm)
+RemoveXML_t *
+SedMLModel_createRemoveXML(SedMLModel_t * smlm)
 {
-	return  (smlm != NULL) ? smlm->createChange() : NULL;
+	return  (smlm != NULL) ? smlm->createRemoveXML() : NULL;
+}
+
+LIBSEDML_EXTERN
+ChangeAttribute_t *
+SedMLModel_createChangeAttribute(SedMLModel_t * smlm)
+{
+	return  (smlm != NULL) ? smlm->createChangeAttribute() : NULL;
+}
+
+LIBSEDML_EXTERN
+ComputeChange_t *
+SedMLModel_createComputeChange(SedMLModel_t * smlm)
+{
+	return  (smlm != NULL) ? smlm->createComputeChange() : NULL;
 }
 
 LIBSEDML_EXTERN

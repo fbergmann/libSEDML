@@ -43,7 +43,18 @@ def createSedDocument() :
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedMLModel'})
   lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'Task'})
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'DataGenerator'})
-  lo5 = dict({'type': 'lo_element', 'reqd' : False, 'name':'output', 'element': 'SedMLOutput'})
+  lo5 = dict({
+              'type': 'lo_element', 
+			  'reqd' : False, 
+			  'name':'output', 
+			  'element': 'SedMLOutput',
+			  'abstract':True,
+			  'concrete': [ 
+				           dict({ 'name':'report', 'element':'Report'}),
+				           dict({ 'name':'plot2d', 'element':'Plot2D'}),
+				           dict({ 'name':'plot3D', 'element':'Plot3D'}),
+						   ]
+			  })
   attributes = [a1, a2, lo1, lo2, lo3, lo4, lo5]
   element = dict({
            'name': 'SedMLDocument', 
@@ -64,7 +75,18 @@ def createSedModel() :
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'string', 'reqd' : False, 'name':'language'})
   a4 = dict({'type': 'string', 'reqd' : True, 'name':'source'})
-  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'change', 'element': 'Change'})
+  lo1 = dict({
+              'type': 'lo_element', 
+			  'reqd' : False, 
+			  'name':'change', 
+			  'element': 'Change',
+			  'abstract':True,
+			  'concrete': [ 
+				           dict({ 'name':'removeXML', 'element':'RemoveXML'}),
+				           dict({ 'name':'changeAttribute', 'element':'ChangeAttribute'}),
+				           dict({ 'name':'computeChange', 'element':'ComputeChange'}),
+						   ]
+			  })
   attributes = [a1, a2, a3, a4, lo1]
   element = dict({'name': 'SedMLModel', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'model'})
   return element
@@ -97,7 +119,22 @@ def createSedAlgorithm() :
 def createSedChange() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'target'})
   attributes = [a1]
-  element = dict({'name': 'Change', 'package': 'SedML', 'typecode': 'SEDML_CHANGE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'change'})
+  element = dict({
+                  'name': 'Change', 
+				  'package': 'SedML', 
+				  'typecode': 'SEDML_CHANGE', 
+				  'hasSedListOf': True, 
+				  'attribs':attributes, 
+				  'hasChildren':False, 
+				  'hasMath':False, 
+				  'elementName':'change', 
+				  'abstract':True,
+				  'concrete': [ 
+				           dict({ 'name':'removeXML', 'element':'RemoveXML'}),
+				           dict({ 'name':'changeAttribute', 'element':'ChangeAttribute'}),
+				           dict({ 'name':'computeChange', 'element':'ComputeChange'}),
+						   ]
+				  })
   return element
 
 def createSedChangeRemoveXML() :
@@ -159,7 +196,22 @@ def createSedOutput() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   attributes = [a1, a2]
-  element = dict({'name': 'SedMLOutput', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'output'})
+  element = dict({
+                  'name': 'SedMLOutput', 
+				  'package': 'SedML', 
+				  'typecode': 'SEDML_OUTPUT', 
+				  'hasSedListOf': True, 
+				  'attribs':attributes, 
+				  'hasChildren':True, 
+				  'hasMath':False, 
+				  'elementName':'output',
+				  'abstract':True,
+				  'concrete': [ 
+				           dict({ 'name':'report', 'element':'Report'}),
+				           dict({ 'name':'plot2d', 'element':'Plot2D'}),
+				           dict({ 'name':'plot3D', 'element':'Plot3D'}),
+						   ]
+				  })
   return element
 
 def createSedReport() :

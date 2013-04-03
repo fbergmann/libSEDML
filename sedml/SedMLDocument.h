@@ -840,14 +840,36 @@ public:
 
 
 	/**
-	 * Creates a new SedMLOutput object, adds it to this SedMLDocuments
-	 * SedListOfSedMLOutputs and returns the SedMLOutput object created. 
+	 * Creates a new Report object, adds it to this SedMLDocuments
+	 * SedListOfSedMLOutputs and returns the Report object created. 
 	 *
-	 * @return a new SedMLOutput object instance
+	 * @return a new Report object instance
 	 *
 	 * @see addSedMLOutput(const SedMLOutput* smlo)
 	 */
-	SedMLOutput* createSedMLOutput();
+	Report* createReport();
+
+
+	/**
+	 * Creates a new Plot2D object, adds it to this SedMLDocuments
+	 * SedListOfSedMLOutputs and returns the Plot2D object created. 
+	 *
+	 * @return a new Plot2D object instance
+	 *
+	 * @see addSedMLOutput(const SedMLOutput* smlo)
+	 */
+	Plot2D* createPlot2D();
+
+
+	/**
+	 * Creates a new Plot3D object, adds it to this SedMLDocuments
+	 * SedListOfSedMLOutputs and returns the Plot3D object created. 
+	 *
+	 * @return a new Plot3D object instance
+	 *
+	 * @see addSedMLOutput(const SedMLOutput* smlo)
+	 */
+	Plot3D* createPlot3D();
 
 
 	/**
@@ -1352,8 +1374,18 @@ SedMLDocument_addSedMLOutput(SedMLDocument_t * smld, SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
-SedMLOutput_t *
-SedMLDocument_createSedMLOutput(SedMLDocument_t * smld);
+Report_t *
+SedMLDocument_createReport(SedMLDocument_t * smld);
+
+
+LIBSEDML_EXTERN
+Plot2D_t *
+SedMLDocument_createPlot2D(SedMLDocument_t * smld);
+
+
+LIBSEDML_EXTERN
+Plot3D_t *
+SedMLDocument_createPlot3D(SedMLDocument_t * smld);
 
 
 LIBSEDML_EXTERN

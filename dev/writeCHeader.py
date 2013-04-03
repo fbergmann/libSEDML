@@ -49,10 +49,17 @@ def writeListOfSubElements(attrib, output, element):
   output.write('int\n')
   output.write('{0}_add{1}({0}_t * {2}, '.format(element, attrib['element'], strFunctions.objAbbrev(element)))
   output.write('{0}_t * {1});\n\n\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
-  output.write('LIBSEDML_EXTERN\n')
-  output.write('{0}_t *\n'.format(attrib['element']))
-  output.write('{0}_create{1}({0}_t * {2}' .format(element, attrib['element'], strFunctions.objAbbrev(element)))
-  output.write(');\n\n\n')
+  if attrib.has_key('abstract') == False or (attrib.has_key('abstract') and attrib['abstract'] == False):
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('{0}_t *\n'.format(attrib['element']))
+    output.write('{0}_create{1}({0}_t * {2}' .format(element, attrib['element'], strFunctions.objAbbrev(element)))
+    output.write(');\n\n\n')
+  elif attrib.has_key('concrete'):
+    for elem in attrib['concrete']:
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('{0}_t *\n'.format(elem['element']))
+      output.write('{0}_create{1}({0}_t * {2}' .format(element, elem['element'], strFunctions.objAbbrev(element)))
+      output.write(');\n\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('SedListOf_t *\n')
   output.write('{0}_get{1}({0}_t * {2})'.format(element, loname, strFunctions.objAbbrev(element)))
