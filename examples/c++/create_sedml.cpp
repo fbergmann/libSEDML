@@ -49,14 +49,31 @@ main (int argc, char* argv[])
     return 2;
   }
 
+  // create the document
   SedMLDocument doc;
   doc.setLevel(1);
   doc.setVersion(1);
+  
+  // create a first model referencing an sbml file
   SedMLModel *model = doc.createSedMLModel();
   model->setId("model1");
   model->setSource("file.xml");
   model->setLanguage("urn:sedml:sbml");
-    
+  
+  // create a second model modifying a variable of that other sbml file
+  model = doc.createSedMLModel();
+  model->setId("model2");
+  model->setSource("model1");
+  model->setLanguage("urn:sedml:sbml");
+  
+  // change a paramerter 'k' to 0.1
+  ChangeAttribute change;
+  change.setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
+  change.setNewValue("0.1");  
+  cout << change.toSedML();
+  model->addChange(&change);
+  cout << model->getNumChanges();
+  
   writeSedML(&doc, argv[1]);  
 
   return 0;

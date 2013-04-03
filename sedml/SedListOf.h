@@ -531,7 +531,7 @@ protected:
    */
   virtual void writeAttributes (XMLOutputStream& stream) const;
 
-  virtual bool isValidTypeForList(SedBase * item) {return item->getTypeCode() == getItemTypeCode();}
+  virtual bool isValidTypeForList(SedBase * item) const; 
 
   ListItem mItems;
 

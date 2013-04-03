@@ -33,6 +33,8 @@
 
 #include <sedml/SedMLModel.h>
 #include <sedml/Change.h>
+#include <sedml/ChangeAttribute.h>
+#include <sedml/RemoveXML.h>
 #include <sedml/Simulation.h>
 #include <sedml/Output.h>
 #include <sedml/DataGenerator.h>

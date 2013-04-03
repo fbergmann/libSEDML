@@ -151,6 +151,13 @@ SedListOf::insert(int location, const SedBase* item)
   return insertAndOwn(location, item->clone());
 }
 
+bool 
+SedListOf::isValidTypeForList(SedBase * item) const
+{
+  return true;
+  //return item->getTypeCode() == getItemTypeCode();
+}
+
 /*
  * Inserts the item at the given location.  This SedListOf items assumes
  * ownership of item and will delete it.
