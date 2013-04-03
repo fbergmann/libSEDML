@@ -156,7 +156,7 @@ def writeRemoveFunctions(output, element, subelement=False, topelement="", name=
     output.write('}\n\n\n')
      
   
-def writeProtectedFunctions(output, element, package, name):
+def writeProtectedFunctions(output, element, package, name, elementDict):
   listOf = generalFunctions.writeListOf(element)
   generalFunctions.writeInternalStart(output)
   output.write('/*\n')
@@ -166,10 +166,17 @@ def writeProtectedFunctions(output, element, package, name):
   output.write('{\n' )
   output.write('\tconst std::string& name   = stream.peek().getName();\n')
   output.write('\tSedBase* object = NULL;\n\n')
-  output.write('\tif (name == "{0}")\n'.format(name))
-  output.write('\t{\n')
-  output.write('\t\tobject = new {0}(getSedMLNamespaces());\n'.format(element, package.lower()))
-  output.write('\t\tappendAndOwn(object);\n\t}\n\n')
+  if elementDict == None or elementDict.has_key('abstract') == False or (elementDict.has_key('abstract') and elementDict['abstract'] == False):
+    output.write('\tif (name == "{0}")\n'.format(name))
+    output.write('\t{\n')
+    output.write('\t\tobject = new {0}(getSedMLNamespaces());\n'.format(element))
+    output.write('\t\tappendAndOwn(object);\n\t}\n\n')
+  elif elementDict != None and elementDict.has_key('concrete'):
+    for elem in elementDict['concrete']:
+      output.write('\tif (name == "{0}")\n'.format(elem['name']))
+      output.write('\t{\n')
+      output.write('\t\tobject = new {0}(getSedMLNamespaces());\n'.format(elem['element']))
+      output.write('\t\tappendAndOwn(object);\n\t}\n\n')
   output.write('\treturn object;\n')
   output.write('}\n\n\n')
   generalFunctions.writeInternalEnd(output)
@@ -202,6 +209,6 @@ def createCode(element, code):
   elementName = element['name']
   if element.has_key('elementName'):
     elementName = element['elementName']
-  writeProtectedFunctions(code, element['name'], element['package'], elementName)
+  writeProtectedFunctions(code, element['name'], element['package'], elementName, element)
 
   

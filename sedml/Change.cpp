@@ -481,9 +481,21 @@ SedListOfChanges::createObject(XMLInputStream& stream)
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "change")
+	if (name == "removeXML")
 	{
-		object = new Change(getSedMLNamespaces());
+		object = new RemoveXML(getSedMLNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "changeAttribute")
+	{
+		object = new ChangeAttribute(getSedMLNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "computeChange")
+	{
+		object = new ComputeChange(getSedMLNamespaces());
 		appendAndOwn(object);
 	}
 

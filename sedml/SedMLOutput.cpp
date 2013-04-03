@@ -608,9 +608,21 @@ SedListOfSedMLOutputs::createObject(XMLInputStream& stream)
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "output")
+	if (name == "report")
 	{
-		object = new SedMLOutput(getSedMLNamespaces());
+		object = new Report(getSedMLNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "plot2d")
+	{
+		object = new Plot2D(getSedMLNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "plot3D")
+	{
+		object = new Plot3D(getSedMLNamespaces());
 		appendAndOwn(object);
 	}
 
