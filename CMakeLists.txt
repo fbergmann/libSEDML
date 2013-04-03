@@ -646,12 +646,12 @@ add_subdirectory(sedml)
 # Build examples if specified
 #
 
-#if(WITH_EXAMPLES)
-#
-#    # code that builds the examples
-#    add_subdirectory(examples)
-#
-#endif(WITH_EXAMPLES)
+if(WITH_EXAMPLES)
+
+    # code that builds the examples
+    add_subdirectory(examples)
+
+endif(WITH_EXAMPLES)
 #
 #
 #if(WITH_DOXYGEN)
