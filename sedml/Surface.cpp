@@ -286,7 +286,7 @@ Surface::hasRequiredAttributes () const
 void
 Surface::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	SedMLCurve::writeElements(stream);
 }
 
 

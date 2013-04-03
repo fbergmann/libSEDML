@@ -62,6 +62,7 @@ class LIBSEDML_EXTERN SedMLCurve : public SedBase
 
 protected:
 
+	std::string   mId;
 	std::string   mName;
 	bool          mLogX;
 	bool          mIsSetLogX;
@@ -126,6 +127,52 @@ public:
 
 
  	/**
+	 * Returns the value of the "id" attribute of this SedMLCurve.
+	 *
+	 * @return the value of the "id" attribute of this SedMLCurve as a string.
+	 */
+	virtual const std::string& getId() const;
+
+
+	/**
+	 * Predicate returning @c true or @c false depending on whether this
+	 * SedMLCurve's "id" attribute has been set.
+	 *
+	 * @return @c true if this SedMLCurve's "id" attribute has been set,
+	 * otherwise @c false is returned.
+	 */
+	virtual bool isSetId() const;
+
+
+	/**
+	 * Sets the value of the "id" attribute of this SedMLCurve.
+	 *
+	 * @param id; const std::string& value of the "id" attribute to be set
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	virtual int setId(const std::string& id);
+
+
+	/**
+	 * Unsets the value of the "id" attribute of this SedMLCurve.
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
+	 */
+	virtual int unsetId();
+
+
+	/**
 	 * Returns the value of the "name" attribute of this SedMLCurve.
 	 *
 	 * @return the value of the "name" attribute of this SedMLCurve as a string.
@@ -774,6 +821,11 @@ SedMLCurve_clone(SedMLCurve_t * smlc);
 
 LIBSEDML_EXTERN
 char *
+SedMLCurve_getId(SedMLCurve_t * smlc);
+
+
+LIBSEDML_EXTERN
+char *
 SedMLCurve_getName(SedMLCurve_t * smlc);
 
 
@@ -795,6 +847,11 @@ SedMLCurve_getXDataReference(SedMLCurve_t * smlc);
 LIBSEDML_EXTERN
 char *
 SedMLCurve_getYDataReference(SedMLCurve_t * smlc);
+
+
+LIBSEDML_EXTERN
+int
+SedMLCurve_isSetId(SedMLCurve_t * smlc);
 
 
 LIBSEDML_EXTERN
@@ -824,6 +881,11 @@ SedMLCurve_isSetYDataReference(SedMLCurve_t * smlc);
 
 LIBSEDML_EXTERN
 int
+SedMLCurve_setId(SedMLCurve_t * smlc, const char * id);
+
+
+LIBSEDML_EXTERN
+int
 SedMLCurve_setName(SedMLCurve_t * smlc, const char * name);
 
 
@@ -845,6 +907,11 @@ SedMLCurve_setXDataReference(SedMLCurve_t * smlc, const char * xDataReference);
 LIBSEDML_EXTERN
 int
 SedMLCurve_setYDataReference(SedMLCurve_t * smlc, const char * yDataReference);
+
+
+LIBSEDML_EXTERN
+int
+SedMLCurve_unsetId(SedMLCurve_t * smlc);
 
 
 LIBSEDML_EXTERN

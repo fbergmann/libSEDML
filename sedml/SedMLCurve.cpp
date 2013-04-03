@@ -49,6 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedMLCurve::SedMLCurve (unsigned int level, unsigned int version)
 	: SedBase(level, version)
+	, mId ("")
 	, mName ("")
 	, mLogX (false)
 	, mIsSetLogX (false)
@@ -68,6 +69,7 @@ SedMLCurve::SedMLCurve (unsigned int level, unsigned int version)
  */
 SedMLCurve::SedMLCurve (SedMLNamespaces* sedmlns)
 	: SedBase(sedmlns)
+	, mId ("")
 	, mName ("")
 	, mLogX (false)
 	, mIsSetLogX (false)
@@ -94,6 +96,7 @@ SedMLCurve::SedMLCurve (const SedMLCurve& orig)
 	}
 	else
 	{
+		mId  = orig.mId;
 		mName  = orig.mName;
 		mLogX  = orig.mLogX;
 		mIsSetLogX  = orig.mIsSetLogX;
@@ -118,6 +121,7 @@ SedMLCurve::operator=(const SedMLCurve& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
+		mId  = rhs.mId;
 		mName  = rhs.mName;
 		mLogX  = rhs.mLogX;
 		mIsSetLogX  = rhs.mIsSetLogX;
@@ -148,6 +152,17 @@ SedMLCurve::~SedMLCurve ()
 }
 
 
+/*
+ * Returns the value of the "id" attribute of this SedMLCurve.
+ */
+const std::string&
+SedMLCurve::getId() const
+{
+	return mId;
+}
+
+
+/*
 /*
  * Returns the value of the "name" attribute of this SedMLCurve.
  */
@@ -204,6 +219,16 @@ SedMLCurve::getYDataReference() const
 
 /*
 /*
+ * Returns true/false if id is set.
+ */
+bool
+SedMLCurve::isSetId() const
+{
+	return (mId.empty() == false);
+}
+
+
+/*
  * Returns true/false if name is set.
  */
 bool
@@ -250,6 +275,16 @@ bool
 SedMLCurve::isSetYDataReference() const
 {
 	return (mYDataReference.empty() == false);
+}
+
+
+/*
+ * Sets id and returns value indicating success.
+ */
+int
+SedMLCurve::setId(const std::string& id)
+{
+	return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -335,6 +370,25 @@ SedMLCurve::setYDataReference(const std::string& yDataReference)
 	{
 		mYDataReference = yDataReference;
 		return LIBSEDML_OPERATION_SUCCESS;
+	}
+}
+
+
+/*
+ * Unsets id and returns value indicating success.
+ */
+int
+SedMLCurve::unsetId()
+{
+	mId.erase();
+
+	if (mId.empty() == true)
+	{
+		return LIBSEDML_OPERATION_SUCCESS;
+	}
+	else
+	{
+		return LIBSEDML_OPERATION_FAILED;
 	}
 }
 
@@ -521,6 +575,7 @@ SedMLCurve::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
+	attributes.add("id");
 	attributes.add("name");
 	attributes.add("logX");
 	attributes.add("logY");
@@ -544,6 +599,25 @@ SedMLCurve::readAttributes (const XMLAttributes& attributes,
 	SedBase::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
+
+	//
+	// id SId  ( use = "optional" )
+	//
+	assigned = attributes.readInto("id", mId, getErrorLog(), false);
+
+	if (assigned == true)
+	{
+		// check string is not empty and correct syntax
+
+		if (mId.empty() == true)
+		{
+			logEmptyString(mId, getLevel(), getVersion(), "<SedMLCurve>");
+		}
+		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+		{
+			logError(InvalidIdSyntax);
+		}
+	}
 
 	//
 	// name string   ( use = "optional" )
@@ -623,6 +697,9 @@ SedMLCurve::readAttributes (const XMLAttributes& attributes,
 SedMLCurve::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
+
+	if (isSetId() == true)
+		stream.writeAttribute("id", getPrefix(), mId);
 
 	if (isSetName() == true)
 		stream.writeAttribute("name", getPrefix(), mName);
@@ -879,6 +956,20 @@ SedMLCurve_clone(SedMLCurve_t * smlc)
  */
 LIBSEDML_EXTERN
 char *
+SedMLCurve_getId(SedMLCurve_t * smlc)
+{
+	if (smlc == NULL)
+		return NULL;
+
+	return smlc->getId().empty() ? NULL : safe_strdup(smlc->getId().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
 SedMLCurve_getName(SedMLCurve_t * smlc)
 {
 	if (smlc == NULL)
@@ -943,6 +1034,17 @@ SedMLCurve_getYDataReference(SedMLCurve_t * smlc)
  */
 LIBSEDML_EXTERN
 int
+SedMLCurve_isSetId(SedMLCurve_t * smlc)
+{
+	return (smlc != NULL) ? static_cast<int>(smlc->isSetId()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 SedMLCurve_isSetName(SedMLCurve_t * smlc)
 {
 	return (smlc != NULL) ? static_cast<int>(smlc->isSetName()) : 0;
@@ -998,6 +1100,17 @@ SedMLCurve_isSetYDataReference(SedMLCurve_t * smlc)
  */
 LIBSEDML_EXTERN
 int
+SedMLCurve_setId(SedMLCurve_t * smlc, const char * id)
+{
+	return (smlc != NULL) ? smlc->setId(id) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 SedMLCurve_setName(SedMLCurve_t * smlc, const char * name)
 {
 	return (smlc != NULL) ? smlc->setName(name) : LIBSEDML_INVALID_OBJECT;
@@ -1045,6 +1158,17 @@ int
 SedMLCurve_setYDataReference(SedMLCurve_t * smlc, const char * yDataReference)
 {
 	return (smlc != NULL) ? smlc->setYDataReference(yDataReference) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedMLCurve_unsetId(SedMLCurve_t * smlc)
+{
+	return (smlc != NULL) ? smlc->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 

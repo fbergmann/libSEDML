@@ -226,7 +226,7 @@ ChangeAttribute::hasRequiredAttributes () const
 void
 ChangeAttribute::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Change::writeElements(stream);
 }
 
 

@@ -161,7 +161,7 @@ RemoveXML::hasRequiredAttributes () const
 void
 RemoveXML::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Change::writeElements(stream);
 }
 
 

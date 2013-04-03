@@ -49,6 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 DataSet::DataSet (unsigned int level, unsigned int version)
 	: SedBase(level, version)
+	, mId ("")
 	, mLabel ("")
 	, mName ("")
 	, mDataReference ("")
@@ -64,6 +65,7 @@ DataSet::DataSet (unsigned int level, unsigned int version)
  */
 DataSet::DataSet (SedMLNamespaces* sedmlns)
 	: SedBase(sedmlns)
+	, mId ("")
 	, mLabel ("")
 	, mName ("")
 	, mDataReference ("")
@@ -86,6 +88,7 @@ DataSet::DataSet (const DataSet& orig)
 	}
 	else
 	{
+		mId  = orig.mId;
 		mLabel  = orig.mLabel;
 		mName  = orig.mName;
 		mDataReference  = orig.mDataReference;
@@ -106,6 +109,7 @@ DataSet::operator=(const DataSet& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
+		mId  = rhs.mId;
 		mLabel  = rhs.mLabel;
 		mName  = rhs.mName;
 		mDataReference  = rhs.mDataReference;
@@ -132,6 +136,17 @@ DataSet::~DataSet ()
 }
 
 
+/*
+ * Returns the value of the "id" attribute of this DataSet.
+ */
+const std::string&
+DataSet::getId() const
+{
+	return mId;
+}
+
+
+/*
 /*
  * Returns the value of the "label" attribute of this DataSet.
  */
@@ -166,6 +181,16 @@ DataSet::getDataReference() const
 
 /*
 /*
+ * Returns true/false if id is set.
+ */
+bool
+DataSet::isSetId() const
+{
+	return (mId.empty() == false);
+}
+
+
+/*
  * Returns true/false if label is set.
  */
 bool
@@ -192,6 +217,16 @@ bool
 DataSet::isSetDataReference() const
 {
 	return (mDataReference.empty() == false);
+}
+
+
+/*
+ * Sets id and returns value indicating success.
+ */
+int
+DataSet::setId(const std::string& id)
+{
+	return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -249,6 +284,25 @@ DataSet::setDataReference(const std::string& dataReference)
 	{
 		mDataReference = dataReference;
 		return LIBSEDML_OPERATION_SUCCESS;
+	}
+}
+
+
+/*
+ * Unsets id and returns value indicating success.
+ */
+int
+DataSet::unsetId()
+{
+	mId.erase();
+
+	if (mId.empty() == true)
+	{
+		return LIBSEDML_OPERATION_SUCCESS;
+	}
+	else
+	{
+		return LIBSEDML_OPERATION_FAILED;
 	}
 }
 
@@ -339,6 +393,9 @@ DataSet::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
+	if (isSetId() == false)
+		allPresent = false;
+
 	if (isSetLabel() == false)
 		allPresent = false;
 
@@ -405,6 +462,7 @@ DataSet::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
+	attributes.add("id");
 	attributes.add("label");
 	attributes.add("name");
 	attributes.add("dataReference");
@@ -426,6 +484,25 @@ DataSet::readAttributes (const XMLAttributes& attributes,
 	SedBase::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
+
+	//
+	// id SId  ( use = "required" )
+	//
+	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+
+	if (assigned == true)
+	{
+		// check string is not empty and correct syntax
+
+		if (mId.empty() == true)
+		{
+			logEmptyString(mId, getLevel(), getVersion(), "<DataSet>");
+		}
+		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+		{
+			logError(InvalidIdSyntax);
+		}
+	}
 
 	//
 	// label string   ( use = "required" )
@@ -491,6 +568,9 @@ DataSet::readAttributes (const XMLAttributes& attributes,
 DataSet::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
+
+	if (isSetId() == true)
+		stream.writeAttribute("id", getPrefix(), mId);
 
 	if (isSetLabel() == true)
 		stream.writeAttribute("label", getPrefix(), mLabel);
@@ -741,6 +821,20 @@ DataSet_clone(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 char *
+DataSet_getId(DataSet_t * ds)
+{
+	if (ds == NULL)
+		return NULL;
+
+	return ds->getId().empty() ? NULL : safe_strdup(ds->getId().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
 DataSet_getLabel(DataSet_t * ds)
 {
 	if (ds == NULL)
@@ -783,6 +877,17 @@ DataSet_getDataReference(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
+DataSet_isSetId(DataSet_t * ds)
+{
+	return (ds != NULL) ? static_cast<int>(ds->isSetId()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 DataSet_isSetLabel(DataSet_t * ds)
 {
 	return (ds != NULL) ? static_cast<int>(ds->isSetLabel()) : 0;
@@ -816,6 +921,17 @@ DataSet_isSetDataReference(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
+DataSet_setId(DataSet_t * ds, const char * id)
+{
+	return (ds != NULL) ? ds->setId(id) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 DataSet_setLabel(DataSet_t * ds, const char * label)
 {
 	return (ds != NULL) ? ds->setLabel(label) : LIBSEDML_INVALID_OBJECT;
@@ -841,6 +957,17 @@ int
 DataSet_setDataReference(DataSet_t * ds, const char * dataReference)
 {
 	return (ds != NULL) ? ds->setDataReference(dataReference) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+DataSet_unsetId(DataSet_t * ds)
+{
+	return (ds != NULL) ? ds->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 

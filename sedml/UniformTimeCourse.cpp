@@ -417,7 +417,7 @@ UniformTimeCourse::hasRequiredAttributes () const
 void
 UniformTimeCourse::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Simulation::writeElements(stream);
 }
 
 

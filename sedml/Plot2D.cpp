@@ -340,7 +340,7 @@ Plot2D::hasRequiredElements () const
 void
 Plot2D::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Output::writeElements(stream);
 	if (getNumSedMLCurves() > 0)
 	{
 		mCurve.write(stream);

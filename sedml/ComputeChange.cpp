@@ -540,7 +540,7 @@ ComputeChange::hasRequiredElements () const
 void
 ComputeChange::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Change::writeElements(stream);
 	if (getNumSedMLVariables() > 0)
 	{
 		mVariable.write(stream);

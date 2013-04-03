@@ -340,7 +340,7 @@ Plot3D::hasRequiredElements () const
 void
 Plot3D::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Output::writeElements(stream);
 	if (getNumSurfaces() > 0)
 	{
 		mSurface.write(stream);

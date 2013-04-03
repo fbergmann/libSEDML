@@ -561,7 +561,7 @@ def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
-      outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))
+      outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))	 
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
   
@@ -734,7 +734,7 @@ def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, has
     writeHasReqdElementsCPPCode(outFile, element, attribs, baseClass)
 
 def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMath,baseClass='SedBase'):
-  writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath)
+  writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath, baseClass)
   writeAcceptCPPCode(outFile, element)
   writeSetDocCPPCode(outFile, element,baseClass)
  # writeConnectCPPCode(outFile)

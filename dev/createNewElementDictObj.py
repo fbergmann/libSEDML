@@ -207,20 +207,22 @@ def createSedPlot3D() :
   return element
   
 def createSedDataSet() :
+  a0 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'label'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'dataReference'})
-  attributes = [a1, a2, a3]
+  attributes = [a0, a1, a2, a3]
   element = dict({'name': 'DataSet', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_DATASET', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'dataSet'}) 
   return element  
 
 def createSedCurve() :
+  a0 = dict({'type': 'SId', 'reqd' : False, 'name':'id'})
   a1 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a2 = dict({'type': 'bool', 'reqd' : True, 'name':'logX'})
   a3 = dict({'type': 'bool', 'reqd' : True, 'name':'logY'})
   a4 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'xDataReference'})
   a5 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'yDataReference'})
-  attributes = [a1, a2, a3, a4, a5]
+  attributes = [a0, a1, a2, a3, a4, a5]
   element = dict({'name': 'SedMLCurve', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_CURVE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'curve'}) 
   return element  
 

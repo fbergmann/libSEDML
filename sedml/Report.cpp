@@ -340,7 +340,7 @@ Report::hasRequiredElements () const
 void
 Report::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	Output::writeElements(stream);
 	if (getNumDataSets() > 0)
 	{
 		mDataSet.write(stream);

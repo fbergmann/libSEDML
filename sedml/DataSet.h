@@ -62,6 +62,7 @@ class LIBSEDML_EXTERN DataSet : public SedBase
 
 protected:
 
+	std::string   mId;
 	std::string   mLabel;
 	std::string   mName;
 	std::string   mDataReference;
@@ -122,6 +123,52 @@ public:
 
 
  	/**
+	 * Returns the value of the "id" attribute of this DataSet.
+	 *
+	 * @return the value of the "id" attribute of this DataSet as a string.
+	 */
+	virtual const std::string& getId() const;
+
+
+	/**
+	 * Predicate returning @c true or @c false depending on whether this
+	 * DataSet's "id" attribute has been set.
+	 *
+	 * @return @c true if this DataSet's "id" attribute has been set,
+	 * otherwise @c false is returned.
+	 */
+	virtual bool isSetId() const;
+
+
+	/**
+	 * Sets the value of the "id" attribute of this DataSet.
+	 *
+	 * @param id; const std::string& value of the "id" attribute to be set
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	virtual int setId(const std::string& id);
+
+
+	/**
+	 * Unsets the value of the "id" attribute of this DataSet.
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
+	 */
+	virtual int unsetId();
+
+
+	/**
 	 * Returns the value of the "label" attribute of this DataSet.
 	 *
 	 * @return the value of the "label" attribute of this DataSet as a string.
@@ -306,6 +353,7 @@ public:
 	 * for this DataSet object have been set.
 	 *
 	 * @note The required attributes for a DataSet object are:
+	 * @li "id"
 	 * @li "label"
 	 * @li "dataReference"
 	 *
@@ -676,6 +724,11 @@ DataSet_clone(DataSet_t * ds);
 
 LIBSEDML_EXTERN
 char *
+DataSet_getId(DataSet_t * ds);
+
+
+LIBSEDML_EXTERN
+char *
 DataSet_getLabel(DataSet_t * ds);
 
 
@@ -687,6 +740,11 @@ DataSet_getName(DataSet_t * ds);
 LIBSEDML_EXTERN
 char *
 DataSet_getDataReference(DataSet_t * ds);
+
+
+LIBSEDML_EXTERN
+int
+DataSet_isSetId(DataSet_t * ds);
 
 
 LIBSEDML_EXTERN
@@ -706,6 +764,11 @@ DataSet_isSetDataReference(DataSet_t * ds);
 
 LIBSEDML_EXTERN
 int
+DataSet_setId(DataSet_t * ds, const char * id);
+
+
+LIBSEDML_EXTERN
+int
 DataSet_setLabel(DataSet_t * ds, const char * label);
 
 
@@ -717,6 +780,11 @@ DataSet_setName(DataSet_t * ds, const char * name);
 LIBSEDML_EXTERN
 int
 DataSet_setDataReference(DataSet_t * ds, const char * dataReference);
+
+
+LIBSEDML_EXTERN
+int
+DataSet_unsetId(DataSet_t * ds);
 
 
 LIBSEDML_EXTERN
