@@ -577,7 +577,6 @@ def writeGetElementNameCPPCode(outFile, element, isSedMLListOf=False, dict=None)
   outFile.write(' */\n')
   outFile.write('const std::string&\n{0}::getElementName () const\n'.format(element))
   outFile.write('{\n')
-  print 'isList={0} dict={1}'.format(isSedMLListOf, dict)
   if dict != None and dict.has_key('elementName'):
     if isSedMLListOf:
       outFile.write('\tstatic const string name = "listOf{0}s";\n'.format(strFunctions.cap(dict['elementName'])))
