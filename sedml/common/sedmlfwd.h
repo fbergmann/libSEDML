@@ -102,10 +102,31 @@ typedef CLASS_OR_STRUCT SedMLDocument              SedMLDocument_t;
 typedef CLASS_OR_STRUCT SedMLModel                     SedMLModel_t;
 
 /**
+ * @var typedef class SedMLVariable SedMLVariable_t
+ * @copydoc SedMLVariable
+ */
+typedef CLASS_OR_STRUCT SedMLVariable                     SedMLVariable_t;
+
+/**
+ * @var typedef class SedMLParameter SedMLParameter_t
+ * @copydoc SedMLParameter
+ */
+typedef CLASS_OR_STRUCT SedMLParameter                     SedMLParameter_t;
+
+
+/**
  * @var typedef class Change Change_t
  * @copydoc Change
  */
 typedef CLASS_OR_STRUCT Change                     Change_t;
+
+
+/**
+ * @var typedef class ComputeChange ComputeChange_t
+ * @copydoc ComputeChange
+ */
+typedef CLASS_OR_STRUCT ComputeChange                     ComputeChange_t;
+
 
 /**
  * @var typedef class RemoveXML RemoveXML_t

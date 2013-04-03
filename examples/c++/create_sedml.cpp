@@ -35,6 +35,7 @@
 
 #include <iostream>
 #include <sedml/SedMLTypes.h>
+#include <sbml/math/FormulaParser.h>
 
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE
@@ -76,6 +77,17 @@ main (int argc, char* argv[])
   RemoveXML remove;
   remove.setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
   model->addChange(&remove);
+  
+  // now for something tricky we want to update the initialConcentration of 'S2' to be 
+  // half what it was in the original model
+  ComputeChange compute;
+  compute.setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
+  SedMLVariable *variable = compute.createSedMLVariable();
+  variable->setId("S2");
+  variable->setModelReference("model1");
+  variable->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
+  compute.setMath(SBML_parseFormula("S2 / 2"));
+  model->addChange(&compute);
   
   // write the document
   writeSedML(&doc, argv[1]);  

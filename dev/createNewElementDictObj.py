@@ -20,10 +20,19 @@ def createElements():
   element = createSedChange()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
+  element = createSedParameter()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedVariable()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
   element = createSedChangeAttribute()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
   element = createSedChangeRemoveXML()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedComputeChange()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
   element = createSedSimulation()
@@ -61,15 +70,42 @@ def createSedModel() :
   element = dict({'name': 'SedMLModel', 'package': 'SedML', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'model'}) 
   return element
 
+def createSedVariable() :
+  a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'string', 'reqd' : False, 'name':'symbol'})
+  a4 = dict({'type': 'string', 'reqd' : False, 'name':'target'})
+  a5 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'taskReference'})
+  a6 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'modelReference'})
+  attributes = [a1, a2, a3, a4, a5, a6]
+  element = dict({'name': 'SedMLVariable', 'package': 'SedML', 'typecode': 'SEDML_VARIABLE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'variable'}) 
+  return element
+
+def createSedParameter() :
+  a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'double', 'reqd' : True, 'name':'value'})
+  attributes = [a1, a2, a3]
+  element = dict({'name': 'SedMLParameter', 'package': 'SedML', 'typecode': 'SEDML_PARAMETER', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'parameter'}) 
+  return element
+
 def createSedChange() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'target'})
   attributes = [a1]
-  element = dict({'name': 'Change', 'package': 'SedML', 'typecode': 'SEDML_CHANGE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False}) 
+  element = dict({'name': 'Change', 'package': 'SedML', 'typecode': 'SEDML_CHANGE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'change'}) 
   return element
 
 def createSedChangeRemoveXML() :
   attributes = []
   element = dict({'name': 'RemoveXML', 'package': 'SedML', 'typecode': 'SEDML_CHANGE_REMOVEXML', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'Change'}) 
+  return element
+
+def createSedComputeChange() :
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'variable', 'element': 'SedMLVariable'})
+  lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'parameter', 'element': 'SedMLParameter'})
+  a1 = dict({'type': 'element', 'reqd' : False, 'name':'math'})
+  attributes = [lo1, lo2, a1]
+  element = dict({'name': 'ComputeChange', 'package': 'SedML', 'typecode': 'SEDML_CHANGE_COMPUTECHANGE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':True, 'baseClass':'Change'}) 
   return element
 
 def createSedChangeAttribute() :
