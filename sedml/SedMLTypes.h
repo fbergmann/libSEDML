@@ -41,7 +41,13 @@
 #include <sedml/Algorithm.h>
 #include <sedml/Simulation.h>
 #include <sedml/UniformTimeCourse.h>
+#include <sedml/DataSet.h>
+#include <sedml/SedMLCurve.h>
+#include <sedml/Surface.h>
 #include <sedml/Output.h>
+#include <sedml/Report.h>
+#include <sedml/Plot2D.h>
+#include <sedml/Plot3D.h>
 #include <sedml/DataGenerator.h>
 #include <sedml/Task.h>
 #include <sedml/SedMLDocument.h>

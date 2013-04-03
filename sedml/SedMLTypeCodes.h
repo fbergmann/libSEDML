@@ -104,6 +104,12 @@ typedef enum
     , SEDML_PARAMETER                    =  32
     , SEDML_TASK                         =  40
     , SEDML_OUTPUT                       =  50
+    , SEDML_OUTPUT_DATASET               =  51
+    , SEDML_OUTPUT_CURVE                 =  52
+    , SEDML_OUTPUT_SURFACE               =  53
+    , SEDML_OUTPUT_REPORT                =  54
+    , SEDML_OUTPUT_PLOT2D                =  55
+    , SEDML_OUTPUT_PLOT3D                =  56
 	, SEDML_SIMULATION                   =  60
 	, SEDML_SIMULATION_ALGORITHM         =  61
 	, SEDML_SIMULATION_UNIFORMTIMECOURSE =  62

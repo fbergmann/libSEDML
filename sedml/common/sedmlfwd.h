@@ -207,6 +207,43 @@ typedef CLASS_OR_STRUCT UniformTimeCourse                     UniformTimeCourse_
  */
 typedef CLASS_OR_STRUCT Output                     Output_t;
 
+
+/**
+ * @var typedef class Plot3D Plot3D_t
+ * @copydoc Plot3D
+ */
+typedef CLASS_OR_STRUCT Plot3D                     Plot3D_t;
+
+/**
+ * @var typedef class Plot2D Plot2D_t
+ * @copydoc Plot2D
+ */
+typedef CLASS_OR_STRUCT Plot2D                     Plot2D_t;
+
+/**
+ * @var typedef class Report Report_t
+ * @copydoc Report
+ */
+typedef CLASS_OR_STRUCT Report                     Report_t;
+
+/**
+ * @var typedef class Surface Surface_t
+ * @copydoc Surface
+ */
+typedef CLASS_OR_STRUCT Surface                     Surface_t;
+
+/**
+ * @var typedef class SedMLCurve SedMLCurve_t
+ * @copydoc SedMLCurve
+ */
+typedef CLASS_OR_STRUCT SedMLCurve                     SedMLCurve_t;
+
+/**
+ * @var typedef class DataSet DataSet_t
+ * @copydoc DataSet
+ */
+typedef CLASS_OR_STRUCT DataSet                     DataSet_t;
+
 LIBSEDML_CPP_NAMESPACE_END
 
 #undef CLASS_OR_STRUCT

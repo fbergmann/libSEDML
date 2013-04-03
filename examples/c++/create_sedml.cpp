@@ -132,6 +132,48 @@ main (int argc, char* argv[])
   var->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
   dg->setMath(SBML_parseFormula("v1"));
   
+  // add a report
+  Report report;
+  report.setId("r1");
+  report.setName("report 1");
+  DataSet* set = report.createDataSet();
+  set->setId("ds1");
+  set->setLabel("time");
+  set->setDataReference("time");
+  set = report.createDataSet();
+  set->setId("ds2");
+  set->setLabel("S1");
+  set->setDataReference("S1");
+  doc.addOutput(&report);
+  
+  // add a 2d plot
+  Plot2D plot;
+  plot.setId("p1");
+  plot.setName("S1 Timecourse");
+  SedMLCurve* curve = plot.createSedMLCurve();
+  curve->setId("c1");
+  curve->setName("S1");
+  curve->setLogX(false);  
+  curve->setLogY(false);  
+  curve->setXDataReference("time");  
+  curve->setYDataReference("S1");  
+  doc.addOutput(&plot);
+  
+  // add a 3D Plot
+  Plot3D plot2;
+  plot2.setId("p2");
+  plot2.setName("dunno");
+  Surface* surf = plot2.createSurface();
+  surf->setId("surf1");
+  surf->setName("S1");
+  surf->setLogX(false);  
+  surf->setLogY(false);  
+  surf->setLogZ(false);  
+  surf->setXDataReference("time");  
+  surf->setYDataReference("S1");  
+  surf->setZDataReference("S1");  
+  doc.addOutput(&plot2);
+  
   // write the document
   writeSedML(&doc, argv[1]);  
 

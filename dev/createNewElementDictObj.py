@@ -53,7 +53,26 @@ def createElements():
   element = createSedOutput()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
-
+  element = createSedCurve()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedSurface()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedDataSet()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedReport()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedPlot2D()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  element = createSedPlot3D()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
+  
+  
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
@@ -168,5 +187,46 @@ def createSedOutput() :
   attributes = [a1, a2]
   element = dict({'name': 'Output', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'output'}) 
   return element
+
+def createSedReport() :
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataSet', 'element': 'DataSet'})
+  attributes = [lo1]
+  element = dict({'name': 'Report', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_REPORT', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'baseClass':'Output', 'elementName':'report'}) 
+  return element
+
+def createSedPlot2D() :
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'curve', 'element': 'SedMLCurve'})
+  attributes = [lo1]
+  element = dict({'name': 'Plot2D', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_PLOT2D', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'baseClass':'Output', 'elementName':'plot2D'}) 
+  return element
+
+def createSedPlot3D() :
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'surface', 'element': 'Surface'})
+  attributes = [lo1]
+  element = dict({'name': 'Plot3D', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_PLOT3D', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'baseClass':'Output' , 'elementName':'plot3D'}) 
+  return element
   
-  
+def createSedDataSet() :
+  a1 = dict({'type': 'string', 'reqd' : True, 'name':'label'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'dataReference'})
+  attributes = [a1, a2, a3]
+  element = dict({'name': 'DataSet', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_DATASET', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'dataSet'}) 
+  return element  
+
+def createSedCurve() :
+  a1 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a2 = dict({'type': 'bool', 'reqd' : True, 'name':'logX'})
+  a3 = dict({'type': 'bool', 'reqd' : True, 'name':'logY'})
+  a4 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'xDataReference'})
+  a5 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'yDataReference'})
+  attributes = [a1, a2, a3, a4, a5]
+  element = dict({'name': 'SedMLCurve', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_CURVE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'curve'}) 
+  return element  
+
+def createSedSurface() :
+  a1 = dict({'type': 'bool', 'reqd' : True, 'name':'logZ'})
+  a2 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'zDataReference'})
+  attributes = [a1, a2]
+  element = dict({'name': 'Surface', 'package': 'SedML', 'typecode': 'SEDML_OUTPUT_SURFACE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False,'baseClass':'SedMLCurve', 'elementName':'surface' }) 
+  return element  
