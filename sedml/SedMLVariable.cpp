@@ -155,7 +155,6 @@ SedMLVariable::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this SedMLVariable.
  */
 const std::string&
@@ -165,7 +164,6 @@ SedMLVariable::getName() const
 }
 
 
-/*
 /*
  * Returns the value of the "symbol" attribute of this SedMLVariable.
  */
@@ -177,7 +175,6 @@ SedMLVariable::getSymbol() const
 
 
 /*
-/*
  * Returns the value of the "target" attribute of this SedMLVariable.
  */
 const std::string&
@@ -187,7 +184,6 @@ SedMLVariable::getTarget() const
 }
 
 
-/*
 /*
  * Returns the value of the "taskReference" attribute of this SedMLVariable.
  */
@@ -199,7 +195,6 @@ SedMLVariable::getTaskReference() const
 
 
 /*
-/*
  * Returns the value of the "modelReference" attribute of this SedMLVariable.
  */
 const std::string&
@@ -209,7 +204,6 @@ SedMLVariable::getModelReference() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

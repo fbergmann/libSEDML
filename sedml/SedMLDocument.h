@@ -59,7 +59,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 #include <sedml/Simulation.h>
 #include <sedml/Task.h>
 #include <sedml/DataGenerator.h>
-#include <sedml/Output.h>
+#include <sedml/SedMLOutput.h>
 
 
 class LIBSEDML_EXTERN SedMLDocument : public SedBase
@@ -75,7 +75,7 @@ protected:
 	SedListOfSimulations   mSimulation;
 	SedListOfTasks   mTask;
 	SedListOfDataGenerators   mDataGenerator;
-	SedListOfOutputs   mOutput;
+	SedListOfSedMLOutputs   mOutput;
 
 
 public:
@@ -749,77 +749,77 @@ public:
 
 
 	/**
-	 * Returns the  "SedListOfOutputs" in this SedMLDocument object.
+	 * Returns the  "SedListOfSedMLOutputs" in this SedMLDocument object.
 	 *
-	 * @return the "SedListOfOutputs" attribute of this SedMLDocument.
+	 * @return the "SedListOfSedMLOutputs" attribute of this SedMLDocument.
 	 */
-	const SedListOfOutputs* getListOfOutputs() const;
+	const SedListOfSedMLOutputs* getListOfSedMLOutputs() const;
 
 
 	/**
-	 * Get a Output from the SedListOfOutputs.
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs.
 	 *
-	 * @param n the index number of the Output to get.
+	 * @param n the index number of the SedMLOutput to get.
 	 *
-	 * @return the nth Output in the SedListOfOutputs within this SedMLDocument.
+	 * @return the nth SedMLOutput in the SedListOfSedMLOutputs within this SedMLDocument.
 	 *
-	 * @see getNumOutputs()
+	 * @see getNumSedMLOutputs()
 	 */
-	Output* getOutput(unsigned int n);
+	SedMLOutput* getSedMLOutput(unsigned int n);
 
 
 	/**
-	 * Get a Output from the SedListOfOutputs.
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs.
 	 *
-	 * @param n the index number of the Output to get.
+	 * @param n the index number of the SedMLOutput to get.
 	 *
-	 * @return the nth Output in the SedListOfOutputs within this SedMLDocument.
+	 * @return the nth SedMLOutput in the SedListOfSedMLOutputs within this SedMLDocument.
 	 *
-	 * @see getNumOutputs()
+	 * @see getNumSedMLOutputs()
 	 */
-	const Output* getOutput(unsigned int n) const;
+	const SedMLOutput* getSedMLOutput(unsigned int n) const;
 
 
 	/**
-	 * Get a Output from the SedListOfOutputs
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Output to get.
+	 * of the SedMLOutput to get.
 	 *
-	 * @return the Output in the SedListOfOutputs
+	 * @return the SedMLOutput in the SedListOfSedMLOutputs
 	 * with the given id or NULL if no such
-	 * Output exists.
+	 * SedMLOutput exists.
 	 *
-	 * @see getOutput(unsigned int n)
+	 * @see getSedMLOutput(unsigned int n)
 	 *
-	 * @see getNumOutputs()
+	 * @see getNumSedMLOutputs()
 	 */
-	Output* getOutput(const std::string& sid);
+	SedMLOutput* getSedMLOutput(const std::string& sid);
 
 
 	/**
-	 * Get a Output from the SedListOfOutputs
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Output to get.
+	 * of the SedMLOutput to get.
 	 *
-	 * @return the Output in the SedListOfOutputs
+	 * @return the SedMLOutput in the SedListOfSedMLOutputs
 	 * with the given id or NULL if no such
-	 * Output exists.
+	 * SedMLOutput exists.
 	 *
-	 * @see getOutput(unsigned int n)
+	 * @see getSedMLOutput(unsigned int n)
 	 *
-	 * @see getNumOutputs()
+	 * @see getNumSedMLOutputs()
 	 */
-	const Output* getOutput(const std::string& sid) const;
+	const SedMLOutput* getSedMLOutput(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Output" to this SedMLDocument.
+	 * Adds a copy the given "SedMLOutput" to this SedMLDocument.
 	 *
-	 * @param o; the Output object to add
+	 * @param smlo; the SedMLOutput object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -828,55 +828,55 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addOutput(const Output* o);
+	int addSedMLOutput(const SedMLOutput* smlo);
 
 
 	/**
-	 * Get the number of Output objects in this SedMLDocument.
+	 * Get the number of SedMLOutput objects in this SedMLDocument.
 	 *
-	 * @return the number of Output objects in this SedMLDocument
+	 * @return the number of SedMLOutput objects in this SedMLDocument
 	 */
-	unsigned int getNumOutputs() const;
+	unsigned int getNumSedMLOutputs() const;
 
 
 	/**
-	 * Creates a new Output object, adds it to this SedMLDocuments
-	 * SedListOfOutputs and returns the Output object created. 
+	 * Creates a new SedMLOutput object, adds it to this SedMLDocuments
+	 * SedListOfSedMLOutputs and returns the SedMLOutput object created. 
 	 *
-	 * @return a new Output object instance
+	 * @return a new SedMLOutput object instance
 	 *
-	 * @see addOutput(const Output* o)
+	 * @see addSedMLOutput(const SedMLOutput* smlo)
 	 */
-	Output* createOutput();
+	SedMLOutput* createSedMLOutput();
 
 
 	/**
-	 * Removes the nth Output from the SedListOfOutputs within this SedMLDocument.
+	 * Removes the nth SedMLOutput from the SedListOfSedMLOutputs within this SedMLDocument.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the Output to remove.
+	 * @param n the index of the SedMLOutput to remove.
 	 *
-	 * @see getNumOutputs()
+	 * @see getNumSedMLOutputs()
 	 */
-	Output* removeOutput(unsigned int n);
+	SedMLOutput* removeSedMLOutput(unsigned int n);
 
 
 	/**
-	 * Removes the Output with the given identifier from the SedListOfOutputs within this SedMLDocument
+	 * Removes the SedMLOutput with the given identifier from the SedListOfSedMLOutputs within this SedMLDocument
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the Output to remove.
+	 * @param sid the identifier of the SedMLOutput to remove.
 	 *
-	 * @return the Output removed. As mentioned above, the caller owns the
+	 * @return the SedMLOutput removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	Output* removeOutput(const std::string& sid);
+	SedMLOutput* removeSedMLOutput(const std::string& sid);
 
 
 	/**
@@ -1271,42 +1271,42 @@ SedMLDocument_removeDataGeneratorById(SedMLDocument_t * smld, const char * sid);
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addOutput(SedMLDocument_t * smld, Output_t * o);
+SedMLDocument_addSedMLOutput(SedMLDocument_t * smld, SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_createOutput(SedMLDocument_t * smld);
+SedMLOutput_t *
+SedMLDocument_createSedMLOutput(SedMLDocument_t * smld);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfOutputs(SedMLDocument_t * smld);
+SedMLDocument_getSedListOfSedMLOutputs(SedMLDocument_t * smld);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_getOutput(SedMLDocument_t * smld, unsigned int n);
+SedMLOutput_t *
+SedMLDocument_getSedMLOutput(SedMLDocument_t * smld, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_getOutputById(SedMLDocument_t * smld, const char * sid);
+SedMLOutput_t *
+SedMLDocument_getSedMLOutputById(SedMLDocument_t * smld, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumOutputs(SedMLDocument_t * smld);
+SedMLDocument_getNumSedMLOutputs(SedMLDocument_t * smld);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_removeOutput(SedMLDocument_t * smld, unsigned int n);
+SedMLOutput_t *
+SedMLDocument_removeSedMLOutput(SedMLDocument_t * smld, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_removeOutputById(SedMLDocument_t * smld, const char * sid);
+SedMLOutput_t *
+SedMLDocument_removeSedMLOutputById(SedMLDocument_t * smld, const char * sid);
 
 
 LIBSEDML_EXTERN

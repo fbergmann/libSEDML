@@ -147,7 +147,6 @@ DataSet::getId() const
 
 
 /*
-/*
  * Returns the value of the "label" attribute of this DataSet.
  */
 const std::string&
@@ -157,7 +156,6 @@ DataSet::getLabel() const
 }
 
 
-/*
 /*
  * Returns the value of the "name" attribute of this DataSet.
  */
@@ -169,7 +167,6 @@ DataSet::getName() const
 
 
 /*
-/*
  * Returns the value of the "dataReference" attribute of this DataSet.
  */
 const std::string&
@@ -179,7 +176,6 @@ DataSet::getDataReference() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

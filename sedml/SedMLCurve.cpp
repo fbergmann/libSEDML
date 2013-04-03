@@ -163,7 +163,6 @@ SedMLCurve::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this SedMLCurve.
  */
 const std::string&
@@ -173,7 +172,6 @@ SedMLCurve::getName() const
 }
 
 
-/*
 /*
  * Returns the value of the "logX" attribute of this SedMLCurve.
  */
@@ -185,7 +183,6 @@ SedMLCurve::getLogX() const
 
 
 /*
-/*
  * Returns the value of the "logY" attribute of this SedMLCurve.
  */
 const bool
@@ -195,7 +192,6 @@ SedMLCurve::getLogY() const
 }
 
 
-/*
 /*
  * Returns the value of the "xDataReference" attribute of this SedMLCurve.
  */
@@ -207,7 +203,6 @@ SedMLCurve::getXDataReference() const
 
 
 /*
-/*
  * Returns the value of the "yDataReference" attribute of this SedMLCurve.
  */
 const std::string&
@@ -217,7 +212,6 @@ SedMLCurve::getYDataReference() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

@@ -155,7 +155,6 @@ Simulation::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this Simulation.
  */
 const std::string&
@@ -165,7 +164,6 @@ Simulation::getName() const
 }
 
 
-/*
 /*
  * Returns the value of the "algorithm" attribute of this Simulation.
  */

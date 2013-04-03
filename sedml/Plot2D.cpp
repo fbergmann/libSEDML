@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  * Creates a new Plot2D with the given level, version, and package version.
  */
 Plot2D::Plot2D (unsigned int level, unsigned int version)
-	: Output(level, version)
+	: SedMLOutput(level, version)
 	, mCurve (level, version)
 
 {
@@ -64,7 +64,7 @@ Plot2D::Plot2D (unsigned int level, unsigned int version)
  * Creates a new Plot2D with the given SedMLNamespaces object.
  */
 Plot2D::Plot2D (SedMLNamespaces* sedmlns)
-	: Output(sedmlns)
+	: SedMLOutput(sedmlns)
 	, mCurve (sedmlns)
 
 {
@@ -80,7 +80,7 @@ Plot2D::Plot2D (SedMLNamespaces* sedmlns)
  * Copy constructor for Plot2D.
  */
 Plot2D::Plot2D (const Plot2D& orig)
-	: Output(orig)
+	: SedMLOutput(orig)
 {
 	if (&orig == NULL)
 	{
@@ -108,7 +108,7 @@ Plot2D::operator=(const Plot2D& rhs)
 	}
 	else if (&rhs != this)
 	{
-		Output::operator=(rhs);
+		SedMLOutput::operator=(rhs);
 		mCurve  = rhs.mCurve;
 
 		// connect to child objects
@@ -275,7 +275,7 @@ Plot2D::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	Output::connectToChild();
+	SedMLOutput::connectToChild();
 
 	if (name == "listOfCurves")
 	{
@@ -292,7 +292,7 @@ Plot2D::createObject(XMLInputStream& stream)
 void
 Plot2D::connectToChild ()
 {
-	Output::connectToChild();
+	SedMLOutput::connectToChild();
 
 	mCurve.connectToParent(this);
 }
@@ -314,7 +314,7 @@ Plot2D::getTypeCode () const
 bool
 Plot2D::hasRequiredAttributes () const
 {
-	bool allPresent = Output::hasRequiredAttributes();
+	bool allPresent = SedMLOutput::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -326,7 +326,7 @@ Plot2D::hasRequiredAttributes () const
 bool
 Plot2D::hasRequiredElements () const
 {
-	bool allPresent = Output::hasRequiredElements();
+	bool allPresent = SedMLOutput::hasRequiredElements();
 
 	return allPresent;
 }
@@ -340,7 +340,7 @@ Plot2D::hasRequiredElements () const
 void
 Plot2D::writeElements (XMLOutputStream& stream) const
 {
-	Output::writeElements(stream);
+	SedMLOutput::writeElements(stream);
 	if (getNumSedMLCurves() > 0)
 	{
 		mCurve.write(stream);
@@ -375,7 +375,7 @@ Plot2D::accept (SedMLVisitor& v) const
 void
 Plot2D::setSedMLDocument (SedMLDocument* d)
 {
-	Output::setSedMLDocument(d);
+	SedMLOutput::setSedMLDocument(d);
 }
 
 
@@ -390,7 +390,7 @@ Plot2D::setSedMLDocument (SedMLDocument* d)
 void
 Plot2D::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	Output::addExpectedAttributes(attributes);
+	SedMLOutput::addExpectedAttributes(attributes);
 
 }
 
@@ -407,7 +407,7 @@ void
 Plot2D::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	Output::readAttributes(attributes, expectedAttributes);
+	SedMLOutput::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -425,7 +425,7 @@ Plot2D::readAttributes (const XMLAttributes& attributes,
 	void
 Plot2D::writeAttributes (XMLOutputStream& stream) const
 {
-	Output::writeAttributes(stream);
+	SedMLOutput::writeAttributes(stream);
 
 }
 

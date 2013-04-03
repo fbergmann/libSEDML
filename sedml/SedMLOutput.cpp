@@ -1,6 +1,6 @@
 /**
- * @file:   Output.cpp
- * @brief:  Implementation of the Output class
+ * @file:   SedMLOutput.cpp
+ * @brief:  Implementation of the SedMLOutput class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,7 +33,7 @@
  */
 
 
-#include <sedml/Output.h>
+#include <sedml/SedMLOutput.h>
 #include <sedml/SedMLTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
@@ -45,9 +45,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Output with the given level, version, and package version.
+ * Creates a new SedMLOutput with the given level, version, and package version.
  */
-Output::Output (unsigned int level, unsigned int version)
+SedMLOutput::SedMLOutput (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mName ("")
@@ -62,9 +62,9 @@ Output::Output (unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new Output with the given SedMLNamespaces object.
+ * Creates a new SedMLOutput with the given SedMLNamespaces object.
  */
-Output::Output (SedMLNamespaces* sedmlns)
+SedMLOutput::SedMLOutput (SedMLNamespaces* sedmlns)
 	: SedBase(sedmlns)
 	, mId ("")
 	, mName ("")
@@ -79,9 +79,9 @@ Output::Output (SedMLNamespaces* sedmlns)
 
 
 /*
- * Copy constructor for Output.
+ * Copy constructor for SedMLOutput.
  */
-Output::Output (const Output& orig)
+SedMLOutput::SedMLOutput (const SedMLOutput& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
@@ -100,10 +100,10 @@ Output::Output (const Output& orig)
 
 
 /*
- * Assignment for Output.
+ * Assignment for SedMLOutput.
  */
-Output&
-Output::operator=(const Output& rhs)
+SedMLOutput&
+SedMLOutput::operator=(const SedMLOutput& rhs)
 {
 	if (&rhs == NULL)
 	{
@@ -123,50 +123,48 @@ Output::operator=(const Output& rhs)
 
 
 /*
- * Clone for Output.
+ * Clone for SedMLOutput.
  */
-Output*
-Output::clone () const
+SedMLOutput*
+SedMLOutput::clone () const
 {
-	return new Output(*this);
+	return new SedMLOutput(*this);
 }
 
 
 /*
- * Destructor for Output.
+ * Destructor for SedMLOutput.
  */
-Output::~Output ()
+SedMLOutput::~SedMLOutput ()
 {
 }
 
 
 /*
- * Returns the value of the "id" attribute of this Output.
+ * Returns the value of the "id" attribute of this SedMLOutput.
  */
 const std::string&
-Output::getId() const
+SedMLOutput::getId() const
 {
 	return mId;
 }
 
 
 /*
-/*
- * Returns the value of the "name" attribute of this Output.
+ * Returns the value of the "name" attribute of this SedMLOutput.
  */
 const std::string&
-Output::getName() const
+SedMLOutput::getName() const
 {
 	return mName;
 }
 
 
 /*
-/*
  * Returns true/false if id is set.
  */
 bool
-Output::isSetId() const
+SedMLOutput::isSetId() const
 {
 	return (mId.empty() == false);
 }
@@ -176,7 +174,7 @@ Output::isSetId() const
  * Returns true/false if name is set.
  */
 bool
-Output::isSetName() const
+SedMLOutput::isSetName() const
 {
 	return (mName.empty() == false);
 }
@@ -186,7 +184,7 @@ Output::isSetName() const
  * Sets id and returns value indicating success.
  */
 int
-Output::setId(const std::string& id)
+SedMLOutput::setId(const std::string& id)
 {
 	return SyntaxChecker::checkAndSetSId(id, mId);
 }
@@ -196,7 +194,7 @@ Output::setId(const std::string& id)
  * Sets name and returns value indicating success.
  */
 int
-Output::setName(const std::string& name)
+SedMLOutput::setName(const std::string& name)
 {
 	if (&(name) == NULL)
 	{
@@ -214,7 +212,7 @@ Output::setName(const std::string& name)
  * Unsets id and returns value indicating success.
  */
 int
-Output::unsetId()
+SedMLOutput::unsetId()
 {
 	mId.erase();
 
@@ -233,7 +231,7 @@ Output::unsetId()
  * Unsets name and returns value indicating success.
  */
 int
-Output::unsetName()
+SedMLOutput::unsetName()
 {
 	mName.erase();
 
@@ -252,7 +250,7 @@ Output::unsetName()
  * Returns the XML element name of this object
  */
 const std::string&
-Output::getElementName () const
+SedMLOutput::getElementName () const
 {
 	static const string name = "output";
 	return name;
@@ -263,7 +261,7 @@ Output::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-Output::createObject(XMLInputStream& stream)
+SedMLOutput::createObject(XMLInputStream& stream)
 {
 	SedBase* object = NULL;
 
@@ -279,7 +277,7 @@ Output::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Output::connectToChild ()
+SedMLOutput::connectToChild ()
 {
 	SedBase::connectToChild();
 
@@ -290,7 +288,7 @@ Output::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Output::getTypeCode () const
+SedMLOutput::getTypeCode () const
 {
 	return SEDML_OUTPUT;
 }
@@ -300,7 +298,7 @@ Output::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Output::hasRequiredAttributes () const
+SedMLOutput::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -315,7 +313,7 @@ Output::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-Output::hasRequiredElements () const
+SedMLOutput::hasRequiredElements () const
 {
 	bool allPresent = true;
 
@@ -329,7 +327,7 @@ Output::hasRequiredElements () const
  * write contained elements
  */
 void
-Output::writeElements (XMLOutputStream& stream) const
+SedMLOutput::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -344,7 +342,7 @@ Output::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedMLVisitor.
  */
 bool
-Output::accept (SedMLVisitor& v) const
+SedMLOutput::accept (SedMLVisitor& v) const
 {
 	return false;
 
@@ -360,7 +358,7 @@ Output::accept (SedMLVisitor& v) const
  * Sets the parent SedMLDocument.
  */
 void
-Output::setSedMLDocument (SedMLDocument* d)
+SedMLOutput::setSedMLDocument (SedMLDocument* d)
 {
 	SedBase::setSedMLDocument(d);
 }
@@ -375,7 +373,7 @@ Output::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Output::addExpectedAttributes(ExpectedAttributes& attributes)
+SedMLOutput::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -393,7 +391,7 @@ Output::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Output::readAttributes (const XMLAttributes& attributes,
+SedMLOutput::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -411,7 +409,7 @@ Output::readAttributes (const XMLAttributes& attributes,
 
 		if (mId.empty() == true)
 		{
-			logEmptyString(mId, getLevel(), getVersion(), "<Output>");
+			logEmptyString(mId, getLevel(), getVersion(), "<SedMLOutput>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
@@ -430,7 +428,7 @@ Output::readAttributes (const XMLAttributes& attributes,
 
 		if (mName.empty() == true)
 		{
-			logEmptyString(mName, getLevel(), getVersion(), "<Output>");
+			logEmptyString(mName, getLevel(), getVersion(), "<SedMLOutput>");
 		}
 	}
 
@@ -446,7 +444,7 @@ Output::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Output::writeAttributes (XMLOutputStream& stream) const
+SedMLOutput::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -465,8 +463,8 @@ Output::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfOutputs::SedListOfOutputs(unsigned int level, 
-	                 unsigned int version)
+SedListOfSedMLOutputs::SedListOfSedMLOutputs(unsigned int level, 
+	                      unsigned int version)
  : SedListOf(level, version)
 {
 	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
@@ -476,7 +474,7 @@ SedListOfOutputs::SedListOfOutputs(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfOutputs::SedListOfOutputs(SedMLNamespaces* sedmlns)
+SedListOfSedMLOutputs::SedListOfSedMLOutputs(SedMLNamespaces* sedmlns)
   : SedListOf(sedmlns)
 {
 	setElementNamespace(sedmlns->getURI());
@@ -484,79 +482,79 @@ SedListOfOutputs::SedListOfOutputs(SedMLNamespaces* sedmlns)
 
 
 /*
- * Returns a deep copy of this SedListOfOutputs 
+ * Returns a deep copy of this SedListOfSedMLOutputs 
  */
-SedListOfOutputs* 
-SedListOfOutputs::clone () const
+SedListOfSedMLOutputs* 
+SedListOfSedMLOutputs::clone () const
  {
-	return new SedListOfOutputs(*this);
+	return new SedListOfSedMLOutputs(*this);
 }
 
 
 /*
- * Get a Output from the SedListOfOutputs by index.
+ * Get a SedMLOutput from the SedListOfSedMLOutputs by index.
 */
-Output*
-SedListOfOutputs::get(unsigned int n)
+SedMLOutput*
+SedListOfSedMLOutputs::get(unsigned int n)
 {
-	return static_cast<Output*>(SedListOf::get(n));
+	return static_cast<SedMLOutput*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Output from the SedListOfOutputs by index.
+ * Get a SedMLOutput from the SedListOfSedMLOutputs by index.
  */
-const Output*
-SedListOfOutputs::get(unsigned int n) const
+const SedMLOutput*
+SedListOfSedMLOutputs::get(unsigned int n) const
 {
-	return static_cast<const Output*>(SedListOf::get(n));
+	return static_cast<const SedMLOutput*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Output from the SedListOfOutputs by id.
+ * Get a SedMLOutput from the SedListOfSedMLOutputs by id.
  */
-Output*
-SedListOfOutputs::get(const std::string& sid)
+SedMLOutput*
+SedListOfSedMLOutputs::get(const std::string& sid)
 {
-	return const_cast<Output*>(
-	  static_cast<const SedListOfOutputs&>(*this).get(sid));
+	return const_cast<SedMLOutput*>(
+	  static_cast<const SedListOfSedMLOutputs&>(*this).get(sid));
 }
 
 
 /*
- * Get a Output from the SedListOfOutputs by id.
+ * Get a SedMLOutput from the SedListOfSedMLOutputs by id.
  */
-const Output*
-SedListOfOutputs::get(const std::string& sid) const
+const SedMLOutput*
+SedListOfSedMLOutputs::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Output>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <Output*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedMLOutput>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedMLOutput*> (*result);
 }
 
 
 /*
- * Removes the nth Output from this SedListOfOutputs
+ * Removes the nth SedMLOutput from this SedListOfSedMLOutputs
  */
-Output*
-SedListOfOutputs::remove(unsigned int n)
+SedMLOutput*
+SedListOfSedMLOutputs::remove(unsigned int n)
 {
-	return static_cast<Output*>(SedListOf::remove(n));
+	return static_cast<SedMLOutput*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the Output from this SedListOfOutputs with the given identifier
+ * Removes the SedMLOutput from this SedListOfSedMLOutputs with the given identifier
  */
-Output*
-SedListOfOutputs::remove(const std::string& sid)
+SedMLOutput*
+SedListOfSedMLOutputs::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Output>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedMLOutput>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -564,7 +562,7 @@ SedListOfOutputs::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <Output*> (item);
+	return static_cast <SedMLOutput*> (item);
 }
 
 
@@ -572,7 +570,7 @@ SedListOfOutputs::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfOutputs::getElementName () const
+SedListOfSedMLOutputs::getElementName () const
 {
 	static const string name = "listOfOutputs";
 	return name;
@@ -583,7 +581,7 @@ SedListOfOutputs::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfOutputs::getTypeCode () const
+SedListOfSedMLOutputs::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -593,7 +591,7 @@ SedListOfOutputs::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfOutputs::getItemTypeCode () const
+SedListOfSedMLOutputs::getItemTypeCode () const
 {
 	return SEDML_OUTPUT;
 }
@@ -602,17 +600,17 @@ SedListOfOutputs::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new Output in this SedListOfOutputs
+ * Creates a new SedMLOutput in this SedListOfSedMLOutputs
  */
 SedBase*
-SedListOfOutputs::createObject(XMLInputStream& stream)
+SedListOfSedMLOutputs::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "output")
+	if (name == "sedMLOutput")
 	{
-		object = new Output(getSedMLNamespaces());
+		object = new SedMLOutput(getSedMLNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -629,7 +627,7 @@ SedListOfOutputs::createObject(XMLInputStream& stream)
  * Write the namespace for the SedML package.
  */
 void
-SedListOfOutputs::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedMLOutputs::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -654,10 +652,10 @@ SedListOfOutputs::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Output_t *
-Output_create(unsigned int level, unsigned int version)
+SedMLOutput_t *
+SedMLOutput_create(unsigned int level, unsigned int version)
 {
-	return new Output(level, version);
+	return new SedMLOutput(level, version);
 }
 
 
@@ -666,10 +664,10 @@ Output_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Output_free(Output_t * o)
+SedMLOutput_free(SedMLOutput_t * smlo)
 {
-	if (o != NULL)
-		delete o;
+	if (smlo != NULL)
+		delete smlo;
 }
 
 
@@ -677,12 +675,12 @@ Output_free(Output_t * o)
  * write comments
  */
 LIBSEDML_EXTERN
-Output_t *
-Output_clone(Output_t * o)
+SedMLOutput_t *
+SedMLOutput_clone(SedMLOutput_t * smlo)
 {
-	if (o != NULL)
+	if (smlo != NULL)
 	{
-		return static_cast<Output_t*>(o->clone());
+		return static_cast<SedMLOutput_t*>(smlo->clone());
 	}
 	else
 	{
@@ -696,12 +694,12 @@ Output_clone(Output_t * o)
  */
 LIBSEDML_EXTERN
 char *
-Output_getId(Output_t * o)
+SedMLOutput_getId(SedMLOutput_t * smlo)
 {
-	if (o == NULL)
+	if (smlo == NULL)
 		return NULL;
 
-	return o->getId().empty() ? NULL : safe_strdup(o->getId().c_str());
+	return smlo->getId().empty() ? NULL : safe_strdup(smlo->getId().c_str());
 }
 
 
@@ -710,12 +708,12 @@ Output_getId(Output_t * o)
  */
 LIBSEDML_EXTERN
 char *
-Output_getName(Output_t * o)
+SedMLOutput_getName(SedMLOutput_t * smlo)
 {
-	if (o == NULL)
+	if (smlo == NULL)
 		return NULL;
 
-	return o->getName().empty() ? NULL : safe_strdup(o->getName().c_str());
+	return smlo->getName().empty() ? NULL : safe_strdup(smlo->getName().c_str());
 }
 
 
@@ -724,9 +722,9 @@ Output_getName(Output_t * o)
  */
 LIBSEDML_EXTERN
 int
-Output_isSetId(Output_t * o)
+SedMLOutput_isSetId(SedMLOutput_t * smlo)
 {
-	return (o != NULL) ? static_cast<int>(o->isSetId()) : 0;
+	return (smlo != NULL) ? static_cast<int>(smlo->isSetId()) : 0;
 }
 
 
@@ -735,9 +733,9 @@ Output_isSetId(Output_t * o)
  */
 LIBSEDML_EXTERN
 int
-Output_isSetName(Output_t * o)
+SedMLOutput_isSetName(SedMLOutput_t * smlo)
 {
-	return (o != NULL) ? static_cast<int>(o->isSetName()) : 0;
+	return (smlo != NULL) ? static_cast<int>(smlo->isSetName()) : 0;
 }
 
 
@@ -746,9 +744,9 @@ Output_isSetName(Output_t * o)
  */
 LIBSEDML_EXTERN
 int
-Output_setId(Output_t * o, const char * id)
+SedMLOutput_setId(SedMLOutput_t * smlo, const char * id)
 {
-	return (o != NULL) ? o->setId(id) : LIBSEDML_INVALID_OBJECT;
+	return (smlo != NULL) ? smlo->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -757,9 +755,9 @@ Output_setId(Output_t * o, const char * id)
  */
 LIBSEDML_EXTERN
 int
-Output_setName(Output_t * o, const char * name)
+SedMLOutput_setName(SedMLOutput_t * smlo, const char * name)
 {
-	return (o != NULL) ? o->setName(name) : LIBSEDML_INVALID_OBJECT;
+	return (smlo != NULL) ? smlo->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -768,9 +766,9 @@ Output_setName(Output_t * o, const char * name)
  */
 LIBSEDML_EXTERN
 int
-Output_unsetId(Output_t * o)
+SedMLOutput_unsetId(SedMLOutput_t * smlo)
 {
-	return (o != NULL) ? o->unsetId() : LIBSEDML_INVALID_OBJECT;
+	return (smlo != NULL) ? smlo->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -779,9 +777,9 @@ Output_unsetId(Output_t * o)
  */
 LIBSEDML_EXTERN
 int
-Output_unsetName(Output_t * o)
+SedMLOutput_unsetName(SedMLOutput_t * smlo)
 {
-	return (o != NULL) ? o->unsetName() : LIBSEDML_INVALID_OBJECT;
+	return (smlo != NULL) ? smlo->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -790,9 +788,9 @@ Output_unsetName(Output_t * o)
  */
 LIBSEDML_EXTERN
 int
-Output_hasRequiredAttributes(Output_t * o)
+SedMLOutput_hasRequiredAttributes(SedMLOutput_t * smlo)
 {
-	return (o != NULL) ? static_cast<int>(o->hasRequiredAttributes()) : 0;
+	return (smlo != NULL) ? static_cast<int>(smlo->hasRequiredAttributes()) : 0;
 }
 
 
@@ -801,9 +799,9 @@ Output_hasRequiredAttributes(Output_t * o)
  */
 LIBSEDML_EXTERN
 int
-Output_hasRequiredElements(Output_t * o)
+SedMLOutput_hasRequiredElements(SedMLOutput_t * smlo)
 {
-	return (o != NULL) ? static_cast<int>(o->hasRequiredElements()) : 0;
+	return (smlo != NULL) ? static_cast<int>(smlo->hasRequiredElements()) : 0;
 }
 
 
@@ -811,13 +809,13 @@ Output_hasRequiredElements(Output_t * o)
  * write comments
  */
 LIBSEDML_EXTERN
-Output_t *
-SedListOfOutputs_getById(SedListOf_t * lo, const char * sid)
+SedMLOutput_t *
+SedListOfSedMLOutputs_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedMLOutputs *>(lo)->get(sid) : NULL;
 }
 
 
@@ -825,13 +823,13 @@ SedListOfOutputs_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-Output_t *
-SedListOfOutputs_removeById(SedListOf_t * lo, const char * sid)
+SedMLOutput_t *
+SedListOfSedMLOutputs_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedMLOutputs *>(lo)->remove(sid) : NULL;
 }
 
 

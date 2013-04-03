@@ -165,7 +165,6 @@ DataGenerator::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this DataGenerator.
  */
 const std::string&
@@ -176,7 +175,6 @@ DataGenerator::getName() const
 
 
 /*
-/*
  * Returns the value of the "math" attribute of this DataGenerator.
  */
 const ASTNode*
@@ -186,7 +184,6 @@ DataGenerator::getMath() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

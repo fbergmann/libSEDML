@@ -55,11 +55,11 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Output.h>
+#include <sedml/SedMLOutput.h>
 #include <sedml/Surface.h>
 
 
-class LIBSEDML_EXTERN Plot3D : public Output
+class LIBSEDML_EXTERN Plot3D : public SedMLOutput
 {
 
 protected:

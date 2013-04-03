@@ -147,7 +147,6 @@ SedMLParameter::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this SedMLParameter.
  */
 const std::string&
@@ -158,7 +157,6 @@ SedMLParameter::getName() const
 
 
 /*
-/*
  * Returns the value of the "value" attribute of this SedMLParameter.
  */
 const double
@@ -168,7 +166,6 @@ SedMLParameter::getValue() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

@@ -135,7 +135,6 @@ Algorithm::getKisaoID() const
 
 
 /*
-/*
  * Returns true/false if kisaoID is set.
  */
 bool

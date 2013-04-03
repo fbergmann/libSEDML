@@ -163,7 +163,6 @@ UniformTimeCourse::getInitialTime() const
 
 
 /*
-/*
  * Returns the value of the "outputStartTime" attribute of this UniformTimeCourse.
  */
 const double
@@ -173,7 +172,6 @@ UniformTimeCourse::getOutputStartTime() const
 }
 
 
-/*
 /*
  * Returns the value of the "outputEndTime" attribute of this UniformTimeCourse.
  */
@@ -185,7 +183,6 @@ UniformTimeCourse::getOutputEndTime() const
 
 
 /*
-/*
  * Returns the value of the "numberOfPoints" attribute of this UniformTimeCourse.
  */
 const int
@@ -195,7 +192,6 @@ UniformTimeCourse::getNumberOfPoints() const
 }
 
 
-/*
 /*
  * Returns true/false if initialTime is set.
  */

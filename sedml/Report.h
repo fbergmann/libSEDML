@@ -55,11 +55,11 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Output.h>
+#include <sedml/SedMLOutput.h>
 #include <sedml/DataSet.h>
 
 
-class LIBSEDML_EXTERN Report : public Output
+class LIBSEDML_EXTERN Report : public SedMLOutput
 {
 
 protected:

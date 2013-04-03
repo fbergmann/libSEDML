@@ -135,7 +135,6 @@ Change::getTarget() const
 
 
 /*
-/*
  * Returns true/false if target is set.
  */
 bool

@@ -2,22 +2,22 @@
  * @file    sedmlfwd.h
  * @brief   Forward declarations for all opaque C types.
  * @author  Ben Bornstein
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -167,10 +167,10 @@ typedef CLASS_OR_STRUCT SedListOfSedMLModels                     SedListOfSedMLM
 
 
 /**
- * @var typedef class SedListOfOutputs SedListOfOutputs_t
- * @copydoc SedListOfOutputs
+ * @var typedef class SedListOfSedMLOutputs SedListOfSedMLOutputs_t
+ * @copydoc SedListOfSedMLOutputs
  */
-typedef CLASS_OR_STRUCT SedListOfOutputs                     SedListOfOutputs_t;
+typedef CLASS_OR_STRUCT SedListOfSedMLOutputs                     SedListOfSedMLOutputs_t;
 
 
 /**
@@ -202,10 +202,10 @@ typedef CLASS_OR_STRUCT UniformTimeCourse                     UniformTimeCourse_
 
 
 /**
- * @var typedef class Output Output_t
+ * @var typedef class SedMLOutput SedMLOutput_t
  * @copydoc Output
  */
-typedef CLASS_OR_STRUCT Output                     Output_t;
+typedef CLASS_OR_STRUCT SedMLOutput                     SedMLOutput_t;
 
 
 /**

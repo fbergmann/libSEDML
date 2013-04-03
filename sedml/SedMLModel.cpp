@@ -163,7 +163,6 @@ SedMLModel::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this SedMLModel.
  */
 const std::string&
@@ -173,7 +172,6 @@ SedMLModel::getName() const
 }
 
 
-/*
 /*
  * Returns the value of the "language" attribute of this SedMLModel.
  */
@@ -185,7 +183,6 @@ SedMLModel::getLanguage() const
 
 
 /*
-/*
  * Returns the value of the "source" attribute of this SedMLModel.
  */
 const std::string&
@@ -195,7 +192,6 @@ SedMLModel::getSource() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

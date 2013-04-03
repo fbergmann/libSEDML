@@ -159,7 +159,6 @@ Task::getId() const
 
 
 /*
-/*
  * Returns the value of the "name" attribute of this Task.
  */
 const std::string&
@@ -169,7 +168,6 @@ Task::getName() const
 }
 
 
-/*
 /*
  * Returns the value of the "modelReference" attribute of this Task.
  */
@@ -181,7 +179,6 @@ Task::getModelReference() const
 
 
 /*
-/*
  * Returns the value of the "simulationReference" attribute of this Task.
  */
 const std::string&
@@ -191,7 +188,6 @@ Task::getSimulationReference() const
 }
 
 
-/*
 /*
  * Returns true/false if id is set.
  */

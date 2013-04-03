@@ -135,7 +135,6 @@ ChangeAttribute::getNewValue() const
 
 
 /*
-/*
  * Returns true/false if newValue is set.
  */
 bool

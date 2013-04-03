@@ -179,7 +179,6 @@ SedMLDocument::getLevel() const
 
 
 /*
-/*
  * Returns the value of the "version" attribute of this SedMLDocument.
  */
 const int
@@ -189,7 +188,6 @@ SedMLDocument::getVersion() const
 }
 
 
-/*
 /*
  * Returns true/false if level is set.
  */
@@ -747,79 +745,79 @@ SedMLDocument::createDataGenerator()
 }
 
 /*
- * Returns the  "SedListOfOutputs" in this SedMLDocument object.
+ * Returns the  "SedListOfSedMLOutputs" in this SedMLDocument object.
  */
-const SedListOfOutputs*
-SedMLDocument::getListOfOutputs() const
+const SedListOfSedMLOutputs*
+SedMLDocument::getListOfSedMLOutputs() const
 {
 	return &mOutput;
 }
 
 
 /*
- * Removes the nth Output from the SedListOfOutputs.
+ * Removes the nth SedMLOutput from the SedListOfSedMLOutputs.
  */
-Output*
-SedMLDocument::removeOutput(unsigned int n)
+SedMLOutput*
+SedMLDocument::removeSedMLOutput(unsigned int n)
 {
 	return mOutput.remove(n);
 }
 
 
 /*
- * Removes the a Output with given id from the SedListOfOutputs.
+ * Removes the a SedMLOutput with given id from the SedListOfSedMLOutputs.
  */
-Output*
-SedMLDocument::removeOutput(const std::string& sid)
+SedMLOutput*
+SedMLDocument::removeSedMLOutput(const std::string& sid)
 {
 	return mOutput.remove(sid);
 }
 
 
 /*
- * Return the nth Output in the SedListOfOutputs within this SedMLDocument.
+ * Return the nth SedMLOutput in the SedListOfSedMLOutputs within this SedMLDocument.
  */
-Output*
-SedMLDocument::getOutput(unsigned int n)
+SedMLOutput*
+SedMLDocument::getSedMLOutput(unsigned int n)
 {
 	return mOutput.get(n);
 }
 
 
 /*
- * Return the nth Output in the SedListOfOutputs within this SedMLDocument.
+ * Return the nth SedMLOutput in the SedListOfSedMLOutputs within this SedMLDocument.
  */
-const Output*
-SedMLDocument::getOutput(unsigned int n) const
+const SedMLOutput*
+SedMLDocument::getSedMLOutput(unsigned int n) const
 {
 	return mOutput.get(n);
 }
 
 
 /*
- * Return a Output from the SedListOfOutputs by id.
+ * Return a SedMLOutput from the SedListOfSedMLOutputs by id.
  */
-Output*
-SedMLDocument::getOutput(const std::string& sid)
+SedMLOutput*
+SedMLDocument::getSedMLOutput(const std::string& sid)
 {
 	return mOutput.get(sid);
 }
 
 
 /*
- * Return a Output from the SedListOfOutputs by id.
+ * Return a SedMLOutput from the SedListOfSedMLOutputs by id.
  */
-const Output*
-SedMLDocument::getOutput(const std::string& sid) const
+const SedMLOutput*
+SedMLDocument::getSedMLOutput(const std::string& sid) const
 {
 	return mOutput.get(sid);
 }
 
 
 /**
- * Adds a copy the given "Output" to this SedMLDocument.
+ * Adds a copy the given "SedMLOutput" to this SedMLDocument.
  *
- * @param o; the Output object to add
+ * @param smlo; the SedMLOutput object to add
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
@@ -829,37 +827,37 @@ SedMLDocument::getOutput(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedMLDocument::addOutput(const Output* o)
+SedMLDocument::addSedMLOutput(const SedMLOutput* smlo)
 {
-	if(o == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mOutput.append(o);
+	if(smlo == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mOutput.append(smlo);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
 /**
- * Get the number of Output objects in this SedMLDocument.
+ * Get the number of SedMLOutput objects in this SedMLDocument.
  *
- * @return the number of Output objects in this SedMLDocument
+ * @return the number of SedMLOutput objects in this SedMLDocument
  */
 unsigned int 
-SedMLDocument::getNumOutputs() const
+SedMLDocument::getNumSedMLOutputs() const
 {
 	return mOutput.size();
 }
 
 /**
- * Creates a new Output object, adds it to this SedMLDocuments
- * SedMLDocument and returns the Output object created. 
+ * Creates a new SedMLOutput object, adds it to this SedMLDocuments
+ * SedMLDocument and returns the SedMLOutput object created. 
  *
- * @return a new Output object instance
+ * @return a new SedMLOutput object instance
  *
- * @see addOutput(const Output* o)
+ * @see addSedMLOutput(const SedMLOutput* smlo)
  */
-Output* 
-SedMLDocument::createOutput()
+SedMLOutput* 
+SedMLDocument::createSedMLOutput()
 {
-	Output *temp = new Output();
+	SedMLOutput *temp = new SedMLOutput();
 	if (temp != NULL) mOutput.appendAndOwn(temp);
 	return temp;
 }
@@ -997,7 +995,7 @@ SedMLDocument::writeElements (XMLOutputStream& stream) const
 	{
 		mDataGenerator.write(stream);
 	}
-	if (getNumOutputs() > 0)
+	if (getNumSedMLOutputs() > 0)
 	{
 		mOutput.write(stream);
 	}
@@ -1462,58 +1460,58 @@ SedMLDocument_removeDataGeneratorById(SedMLDocument_t * smld, const char * sid)
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addOutput(SedMLDocument_t * smld, Output_t * o)
+SedMLDocument_addSedMLOutput(SedMLDocument_t * smld, SedMLOutput_t * smlo)
 {
-	return  (smld != NULL) ? smld->addOutput(o) : LIBSBML_INVALID_OBJECT;
+	return  (smld != NULL) ? smld->addSedMLOutput(smlo) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_createOutput(SedMLDocument_t * smld)
+SedMLOutput_t *
+SedMLDocument_createSedMLOutput(SedMLDocument_t * smld)
 {
-	return  (smld != NULL) ? smld->createOutput() : NULL;
+	return  (smld != NULL) ? smld->createSedMLOutput() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfOutputs(SedMLDocument_t * smld)
+SedMLDocument_getSedListOfSedMLOutputs(SedMLDocument_t * smld)
 {
-	return  (smld != NULL) ? (SedListOf_t *)smld->getListOfOutputs() : NULL;
+	return  (smld != NULL) ? (SedListOf_t *)smld->getListOfSedMLOutputs() : NULL;
 }
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_getOutput(SedMLDocument_t * smld, unsigned int n)
+SedMLOutput_t *
+SedMLDocument_getSedMLOutput(SedMLDocument_t * smld, unsigned int n)
 {
-	return  (smld != NULL) ? smld->getOutput(n) : NULL;
+	return  (smld != NULL) ? smld->getSedMLOutput(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_getOutputById(SedMLDocument_t * smld, const char * sid)
+SedMLOutput_t *
+SedMLDocument_getSedMLOutputById(SedMLDocument_t * smld, const char * sid)
 {
-	return  (smld != NULL) ? smld->getOutput(sid) : NULL;
+	return  (smld != NULL) ? smld->getSedMLOutput(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumOutputs(SedMLDocument_t * smld)
+SedMLDocument_getNumSedMLOutputs(SedMLDocument_t * smld)
 {
-	return  (smld != NULL) ? smld->getNumOutputs() : SEDML_INT_MAX;
+	return  (smld != NULL) ? smld->getNumSedMLOutputs() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_removeOutput(SedMLDocument_t * smld, unsigned int n)
+SedMLOutput_t *
+SedMLDocument_removeSedMLOutput(SedMLDocument_t * smld, unsigned int n)
 {
-	return  (smld != NULL) ? smld->removeOutput(n) : NULL;
+	return  (smld != NULL) ? smld->removeSedMLOutput(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-Output_t *
-SedMLDocument_removeOutputById(SedMLDocument_t * smld, const char * sid)
+SedMLOutput_t *
+SedMLDocument_removeSedMLOutputById(SedMLDocument_t * smld, const char * sid)
 {
-	return  (smld != NULL) ? smld->removeOutput(sid) : NULL;
+	return  (smld != NULL) ? smld->removeSedMLOutput(sid) : NULL;
 }
 
 /**

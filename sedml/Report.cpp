@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  * Creates a new Report with the given level, version, and package version.
  */
 Report::Report (unsigned int level, unsigned int version)
-	: Output(level, version)
+	: SedMLOutput(level, version)
 	, mDataSet (level, version)
 
 {
@@ -64,7 +64,7 @@ Report::Report (unsigned int level, unsigned int version)
  * Creates a new Report with the given SedMLNamespaces object.
  */
 Report::Report (SedMLNamespaces* sedmlns)
-	: Output(sedmlns)
+	: SedMLOutput(sedmlns)
 	, mDataSet (sedmlns)
 
 {
@@ -80,7 +80,7 @@ Report::Report (SedMLNamespaces* sedmlns)
  * Copy constructor for Report.
  */
 Report::Report (const Report& orig)
-	: Output(orig)
+	: SedMLOutput(orig)
 {
 	if (&orig == NULL)
 	{
@@ -108,7 +108,7 @@ Report::operator=(const Report& rhs)
 	}
 	else if (&rhs != this)
 	{
-		Output::operator=(rhs);
+		SedMLOutput::operator=(rhs);
 		mDataSet  = rhs.mDataSet;
 
 		// connect to child objects
@@ -275,7 +275,7 @@ Report::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	Output::connectToChild();
+	SedMLOutput::connectToChild();
 
 	if (name == "listOfDataSets")
 	{
@@ -292,7 +292,7 @@ Report::createObject(XMLInputStream& stream)
 void
 Report::connectToChild ()
 {
-	Output::connectToChild();
+	SedMLOutput::connectToChild();
 
 	mDataSet.connectToParent(this);
 }
@@ -314,7 +314,7 @@ Report::getTypeCode () const
 bool
 Report::hasRequiredAttributes () const
 {
-	bool allPresent = Output::hasRequiredAttributes();
+	bool allPresent = SedMLOutput::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -326,7 +326,7 @@ Report::hasRequiredAttributes () const
 bool
 Report::hasRequiredElements () const
 {
-	bool allPresent = Output::hasRequiredElements();
+	bool allPresent = SedMLOutput::hasRequiredElements();
 
 	return allPresent;
 }
@@ -340,7 +340,7 @@ Report::hasRequiredElements () const
 void
 Report::writeElements (XMLOutputStream& stream) const
 {
-	Output::writeElements(stream);
+	SedMLOutput::writeElements(stream);
 	if (getNumDataSets() > 0)
 	{
 		mDataSet.write(stream);
@@ -375,7 +375,7 @@ Report::accept (SedMLVisitor& v) const
 void
 Report::setSedMLDocument (SedMLDocument* d)
 {
-	Output::setSedMLDocument(d);
+	SedMLOutput::setSedMLDocument(d);
 }
 
 
@@ -390,7 +390,7 @@ Report::setSedMLDocument (SedMLDocument* d)
 void
 Report::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	Output::addExpectedAttributes(attributes);
+	SedMLOutput::addExpectedAttributes(attributes);
 
 }
 
@@ -407,7 +407,7 @@ void
 Report::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	Output::readAttributes(attributes, expectedAttributes);
+	SedMLOutput::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -425,7 +425,7 @@ Report::readAttributes (const XMLAttributes& attributes,
 	void
 Report::writeAttributes (XMLOutputStream& stream) const
 {
-	Output::writeAttributes(stream);
+	SedMLOutput::writeAttributes(stream);
 
 }
 

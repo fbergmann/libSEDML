@@ -143,7 +143,6 @@ Surface::getLogZ() const
 
 
 /*
-/*
  * Returns the value of the "zDataReference" attribute of this Surface.
  */
 const std::string&
@@ -153,7 +152,6 @@ Surface::getZDataReference() const
 }
 
 
-/*
 /*
  * Returns true/false if logZ is set.
  */

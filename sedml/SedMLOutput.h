@@ -1,6 +1,6 @@
 /**
- * @file:   Output.h
- * @brief:  Implementation of the Output class
+ * @file:   SedMLOutput.h
+ * @brief:  Implementation of the SedMLOutput class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef Output_H__
-#define Output_H__
+#ifndef SedMLOutput_H__
+#define SedMLOutput_H__
 
 
 #include <sedml/common/extern.h>
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN Output : public SedBase
+class LIBSEDML_EXTERN SedMLOutput : public SedBase
 {
 
 protected:
@@ -69,77 +69,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new Output with the given level, version, and package version.
+	 * Creates a new SedMLOutput with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this Output
+	 * @param level an unsigned int, the SEDML Level to assign to this SedMLOutput
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this Output
+	 * @param version an unsigned int, the SEDML Version to assign to this SedMLOutput
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this Output
+	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedMLOutput
 	 */
-	Output(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	       unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedMLOutput(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	            unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new Output with the given SedMLNamespaces object.
+	 * Creates a new SedMLOutput with the given SedMLNamespaces object.
 	 *
 	 * @param sedmlns the SedMLNamespaces object
 	 */
-	Output(SedMLNamespaces* sedmlns);
+	SedMLOutput(SedMLNamespaces* sedmlns);
 
 
  	/**
-	 * Copy constructor for Output.
+	 * Copy constructor for SedMLOutput.
 	 *
-	 * @param orig; the Output instance to copy.
+	 * @param orig; the SedMLOutput instance to copy.
 	 */
-	Output(const Output& orig);
+	SedMLOutput(const SedMLOutput& orig);
 
 
  	/**
-	 * Assignment operator for Output.
+	 * Assignment operator for SedMLOutput.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	Output& operator=(const Output& rhs);
+	SedMLOutput& operator=(const SedMLOutput& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this Output object.
+	 * Creates and returns a deep copy of this SedMLOutput object.
 	 *
-	 * @return a (deep) copy of this Output object.
+	 * @return a (deep) copy of this SedMLOutput object.
 	 */
-	virtual Output* clone () const;
+	virtual SedMLOutput* clone () const;
 
 
  	/**
-	 * Destructor for Output.
+	 * Destructor for SedMLOutput.
 	 */
-	virtual ~Output();
+	virtual ~SedMLOutput();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this Output.
+	 * Returns the value of the "id" attribute of this SedMLOutput.
 	 *
-	 * @return the value of the "id" attribute of this Output as a string.
+	 * @return the value of the "id" attribute of this SedMLOutput as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Output's "id" attribute has been set.
+	 * SedMLOutput's "id" attribute has been set.
 	 *
-	 * @return @c true if this Output's "id" attribute has been set,
+	 * @return @c true if this SedMLOutput's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this Output.
+	 * Sets the value of the "id" attribute of this SedMLOutput.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -154,7 +154,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this Output.
+	 * Unsets the value of the "id" attribute of this SedMLOutput.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -167,25 +167,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this Output.
+	 * Returns the value of the "name" attribute of this SedMLOutput.
 	 *
-	 * @return the value of the "name" attribute of this Output as a string.
+	 * @return the value of the "name" attribute of this SedMLOutput as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Output's "name" attribute has been set.
+	 * SedMLOutput's "name" attribute has been set.
 	 *
-	 * @return @c true if this Output's "name" attribute has been set,
+	 * @return @c true if this SedMLOutput's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this Output.
+	 * Sets the value of the "name" attribute of this SedMLOutput.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -200,7 +200,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this Output.
+	 * Unsets the value of the "name" attribute of this SedMLOutput.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -213,10 +213,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for Output, is
-	 * always @c "output".
+	 * Returns the XML element name of this object, which for SedMLOutput, is
+	 * always @c "sedMLOutput".
 	 *
-	 * @return the name of this element, i.e. @c "output".
+	 * @return the name of this element, i.e. @c "sedMLOutput".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -256,9 +256,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this Output object have been set.
+	 * for this SedMLOutput object have been set.
 	 *
-	 * @note The required attributes for a Output object are:
+	 * @note The required attributes for a SedMLOutput object are:
 	 * @li "id"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -269,9 +269,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this Output object have been set.
+	 * for this SedMLOutput object have been set.
 	 *
-	 * @note The required elements for a Output object are:
+	 * @note The required elements for a SedMLOutput object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -375,103 +375,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfOutputs : public SedListOf
+class LIBSEDML_EXTERN SedListOfSedMLOutputs : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfOutputs with the given level, version, and package version.
+	 * Creates a new SedListOfSedMLOutputs with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfOutputs
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSedMLOutputs
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfOutputs
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSedMLOutputs
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfOutputs
+	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfSedMLOutputs
 	 */
-	SedListOfOutputs(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                 unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfSedMLOutputs(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                      unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfOutputs with the given SedMLNamespaces object.
+	 * Creates a new SedListOfSedMLOutputs with the given SedMLNamespaces object.
 	 *
 	 * @param sedmlns the SedMLNamespaces object
 	 */
-	SedListOfOutputs(SedMLNamespaces* sedmlns);
+	SedListOfSedMLOutputs(SedMLNamespaces* sedmlns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfOutputs object.
+	 * Creates and returns a deep copy of this SedListOfSedMLOutputs object.
 	 *
-	 * @return a (deep) copy of this SedListOfOutputs object.
+	 * @return a (deep) copy of this SedListOfSedMLOutputs object.
 	 */
-	virtual SedListOfOutputs* clone () const;
+	virtual SedListOfSedMLOutputs* clone () const;
 
 
  	/**
-	 * Get a Output from the SedListOfOutputs.
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs.
 	 *
-	 * @param n the index number of the Output to get.
+	 * @param n the index number of the SedMLOutput to get.
 	 *
-	 * @return the nth Output in this SedListOfOutputs.
-	 *
-	 * @see size()
-	 */
-	virtual Output* get(unsigned int n);
-
-
-	/**
-	 * Get a Output from the SedListOfOutputs.
-	 *
-	 * @param n the index number of the Output to get.
-	 *
-	 * @return the nth Output in this SedListOfOutputs.
+	 * @return the nth SedMLOutput in this SedListOfSedMLOutputs.
 	 *
 	 * @see size()
 	 */
-	virtual const Output* get(unsigned int n) const;
+	virtual SedMLOutput* get(unsigned int n);
 
 
 	/**
-	 * Get a Output from the SedListOfOutputs
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs.
+	 *
+	 * @param n the index number of the SedMLOutput to get.
+	 *
+	 * @return the nth SedMLOutput in this SedListOfSedMLOutputs.
+	 *
+	 * @see size()
+	 */
+	virtual const SedMLOutput* get(unsigned int n) const;
+
+
+	/**
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Output to get.
+	 * of the SedMLOutput to get.
 	 *
-	 * @return Output in this SedListOfOutputs
+	 * @return SedMLOutput in this SedListOfSedMLOutputs
 	 * with the given id or NULL if no such
-	 * Output exists.
+	 * SedMLOutput exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual Output* get(const std::string& sid);
+	virtual SedMLOutput* get(const std::string& sid);
 
 
 	/**
-	 * Get a Output from the SedListOfOutputs
+	 * Get a SedMLOutput from the SedListOfSedMLOutputs
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Output to get.
+	 * of the SedMLOutput to get.
 	 *
-	 * @return Output in this SedListOfOutputs
+	 * @return SedMLOutput in this SedListOfSedMLOutputs
 	 * with the given id or NULL if no such
-	 * Output exists.
+	 * SedMLOutput exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const Output* get(const std::string& sid) const;
+	virtual const SedMLOutput* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Output" to this SedListOfOutputs.
+	 * Adds a copy the given "SedMLOutput" to this SedListOfSedMLOutputs.
 	 *
-	 * @param o; the Output object to add
+	 * @param smlo; the SedMLOutput object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -480,62 +480,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addOutput(const Output* o);
+	int addSedMLOutput(const SedMLOutput* smlo);
 
 
 	/**
-	 * Get the number of Output objects in this SedListOfOutputs.
+	 * Get the number of SedMLOutput objects in this SedListOfSedMLOutputs.
 	 *
-	 * @return the number of Output objects in this SedListOfOutputs
+	 * @return the number of SedMLOutput objects in this SedListOfSedMLOutputs
 	 */
-	unsigned int getNumOutputs() const;
+	unsigned int getNumSedMLOutputs() const;
 
 
 	/**
-	 * Creates a new Output object, adds it to the
-	 * SedListOfOutputs and returns the Output object created. 
+	 * Creates a new SedMLOutput object, adds it to the
+	 * SedListOfSedMLOutputs and returns the SedMLOutput object created. 
 	 *
-	 * @return a new Output object instance
+	 * @return a new SedMLOutput object instance
 	 *
-	 * @see addOutput(const Output* o)
+	 * @see addSedMLOutput(const SedMLOutput* smlo)
 	 */
-	Output* createOutput();
+	SedMLOutput* createSedMLOutput();
 
 
 	/**
-	 * Removes the nth Output from this SedListOfOutputs
+	 * Removes the nth SedMLOutput from this SedListOfSedMLOutputs
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the Output to remove.
+	 * @param n the index of the SedMLOutput to remove.
 	 *
 	 * @see size()
 	 */
-	virtual Output* remove(unsigned int n);
+	virtual SedMLOutput* remove(unsigned int n);
 
 
 	/**
-	 * Removes the Output from this SedListOfOutputs with the given identifier
+	 * Removes the SedMLOutput from this SedListOfSedMLOutputs with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the Output to remove.
+	 * @param sid the identifier of the SedMLOutput to remove.
 	 *
-	 * @return the Output removed. As mentioned above, the caller owns the
+	 * @return the SedMLOutput removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual Output* remove(const std::string& sid);
+	virtual SedMLOutput* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfOutputs, is
-	 * always @c "sedListOfOutputs".
+	 * Returns the XML element name of this object, which for SedListOfSedMLOutputs, is
+	 * always @c "sedListOfSedMLOutputs".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfOutputs".
+	 * @return the name of this element, i.e. @c "sedListOfSedMLOutputs".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -612,7 +612,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new Output in this SedListOfOutputs
+	 * Creates a new SedMLOutput in this SedListOfSedMLOutputs
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -646,78 +646,78 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-Output_t *
-Output_create(unsigned int level, unsigned int version);
+SedMLOutput_t *
+SedMLOutput_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-Output_free(Output_t * o);
+SedMLOutput_free(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
-Output_t *
-Output_clone(Output_t * o);
-
-
-LIBSEDML_EXTERN
-char *
-Output_getId(Output_t * o);
+SedMLOutput_t *
+SedMLOutput_clone(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 char *
-Output_getName(Output_t * o);
+SedMLOutput_getId(SedMLOutput_t * smlo);
+
+
+LIBSEDML_EXTERN
+char *
+SedMLOutput_getName(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 int
-Output_isSetId(Output_t * o);
+SedMLOutput_isSetId(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 int
-Output_isSetName(Output_t * o);
+SedMLOutput_isSetName(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 int
-Output_setId(Output_t * o, const char * id);
+SedMLOutput_setId(SedMLOutput_t * smlo, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-Output_setName(Output_t * o, const char * name);
+SedMLOutput_setName(SedMLOutput_t * smlo, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-Output_unsetId(Output_t * o);
+SedMLOutput_unsetId(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 int
-Output_unsetName(Output_t * o);
+SedMLOutput_unsetName(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 int
-Output_hasRequiredAttributes(Output_t * o);
+SedMLOutput_hasRequiredAttributes(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
 int
-Output_hasRequiredElements(Output_t * o);
+SedMLOutput_hasRequiredElements(SedMLOutput_t * smlo);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedListOfOutputs_getById(SedListOf_t * lo, const char * sid);
+SedMLOutput_t *
+SedListOfSedMLOutputs_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-Output_t *
-SedListOfOutputs_removeById(SedListOf_t * lo, const char * sid);
+SedMLOutput_t *
+SedListOfSedMLOutputs_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -727,5 +727,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  Output_H__  */
+#endif /*  SedMLOutput_H__  */
 

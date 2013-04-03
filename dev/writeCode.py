@@ -35,7 +35,7 @@ def writeIncludes(fileOut, element, pkg, hasMath=False):
 # writes list of attributes
 def writeAttributes(attrs, output, constType=0, pkg=""):
   for i in range(0, len(attrs)):
-    writeAtt(attrs[i]['type'], attrs[i]['name'], output, constType, pkg)  
+    writeAtt(attrs[i]['type'], attrs[i]['name'], output, constType, pkg)
   output.write('\n')
 
 def writeAtt(atttype, name, output, constType, pkg):
@@ -50,7 +50,7 @@ def writeAtt(atttype, name, output, constType, pkg):
     elif constType == 1:
       output.write('level, version)\n')
     elif constType == 2:
-      output.write('{0}ns)\n'.format(pkg))	
+      output.write('{0}ns)\n'.format(pkg))
   elif atttype == 'double':
     output.write('\t, m{0} (numeric_limits<double>::quiet_NaN())\n'.format(strFunctions.cap(name)))
     output.write('\t, mIsSet{0} (false)\n'.format(strFunctions.cap(name)))
@@ -62,7 +62,7 @@ def writeAtt(atttype, name, output, constType, pkg):
     output.write('\t, mIsSet{0} (false)\n'.format(strFunctions.cap(name)))
   else:
     output.write('\tFIX ME   {0};\n'.format(name))
- 
+
 
 def writeCopyAttributes(attrs, output, tabs, name):
   for i in range(0, len(attrs)):
@@ -71,7 +71,7 @@ def writeCopyAttributes(attrs, output, tabs, name):
     if atttype == 'element' and attName == 'Math':
       output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->deepCopy() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     else:
-      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))  
+      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     if atttype == 'double' or atttype == 'int' or atttype == 'uint' or atttype == 'bool':
       output.write('{0}mIsSet{1}  = {2}.mIsSet{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
 
@@ -152,8 +152,8 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('{0}::~{0} ()\n'.format(element))
   output.write('{\n')
   output.write('}\n\n\n')
- 
-  
+
+
 
 def writeGetCode(attrib, output, element):
   att = generalFunctions.parseAttribute(attrib)
@@ -172,8 +172,8 @@ def writeGetCode(attrib, output, element):
   output.write('{\n')
   output.write('\treturn m{0};\n'.format(capAttName))
   output.write('}\n\n\n')
-  output.write('/*\n')
   if attType == 'element' and attName != 'math':
+    output.write('/*\n')
     output.write(' * Creates a new \"{0}\"'.format(attName))
     output.write(' element of this {0} and returns it.\n'.format(element))
     output.write(' */\n')
@@ -183,8 +183,8 @@ def writeGetCode(attrib, output, element):
     output.write('\tm{0} = new {0}();\n'.format(capAttName))
     output.write('\treturn m{0};\n'.format(capAttName))
     output.write('}\n\n\n')
-   
-  
+
+
 def writeIsSetCode(attrib, output, element):
   att = generalFunctions.parseAttribute(attrib)
   attName = att[0]
@@ -209,16 +209,16 @@ def writeIsSetCode(attrib, output, element):
   elif attType == 'boolean':
     output.write('\treturn mIsSet{0};\n'.format(capAttName))
   output.write('}\n\n\n')
-   
-  
-  
+
+
+
 def writeSetCode(attrib, output, element):
   att = generalFunctions.parseAttribute(attrib)
   attName = att[0]
   capAttName = att[1]
   attType = att[2]
   if attType == 'string':
-    attTypeCode = 'const std::string&' 
+    attTypeCode = 'const std::string&'
   else:
     attTypeCode = att[3]
   num = att[4]
@@ -279,9 +279,9 @@ def writeSetCode(attrib, output, element):
     output.write('\t\t}\n')
     output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
   output.write('}\n\n\n')
-   
-  
-  
+
+
+
 def writeUnsetCode(attrib, output, element):
   att = generalFunctions.parseAttribute(attrib)
   attName = att[0]
@@ -322,7 +322,7 @@ def writeUnsetCode(attrib, output, element):
     output.write('\tm{0} = NULL;\n'.format(capAttName))
     output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
   output.write('}\n\n\n')
-   
+
 # for each attribute write a set/get/isset/unset
 def writeAttributeCode(attrs, output, element):
   for i in range(0, len(attrs)):
@@ -425,9 +425,9 @@ def createCode(element):
   writeIncludes(code, nameOfElement, nameOfPackage, hasMath)
   writeConstructors(nameOfElement, nameOfPackage, code, attributes, hasChildren, hasMath, element)
   writeAttributeCode(attributes, code, nameOfElement)
-  generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath, element,baseClass) 
-  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath,baseClass) 
-  generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath,baseClass) 
+  generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath, element,baseClass)
+  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath,baseClass)
+  generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath,baseClass)
   if hasSedListOf:
     writeListOfCode.createCode(element, code)
   writeCCode.createCode(element, code)
@@ -437,6 +437,5 @@ def createCode(element):
 #else:
 #  element = createNewElementDictObj.createFBCObjective()
 #  createCode(element)
-  
 
-  
+

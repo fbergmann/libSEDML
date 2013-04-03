@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  * Creates a new Plot3D with the given level, version, and package version.
  */
 Plot3D::Plot3D (unsigned int level, unsigned int version)
-	: Output(level, version)
+	: SedMLOutput(level, version)
 	, mSurface (level, version)
 
 {
@@ -64,7 +64,7 @@ Plot3D::Plot3D (unsigned int level, unsigned int version)
  * Creates a new Plot3D with the given SedMLNamespaces object.
  */
 Plot3D::Plot3D (SedMLNamespaces* sedmlns)
-	: Output(sedmlns)
+	: SedMLOutput(sedmlns)
 	, mSurface (sedmlns)
 
 {
@@ -80,7 +80,7 @@ Plot3D::Plot3D (SedMLNamespaces* sedmlns)
  * Copy constructor for Plot3D.
  */
 Plot3D::Plot3D (const Plot3D& orig)
-	: Output(orig)
+	: SedMLOutput(orig)
 {
 	if (&orig == NULL)
 	{
@@ -108,7 +108,7 @@ Plot3D::operator=(const Plot3D& rhs)
 	}
 	else if (&rhs != this)
 	{
-		Output::operator=(rhs);
+		SedMLOutput::operator=(rhs);
 		mSurface  = rhs.mSurface;
 
 		// connect to child objects
@@ -275,7 +275,7 @@ Plot3D::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	Output::connectToChild();
+	SedMLOutput::connectToChild();
 
 	if (name == "listOfSurfaces")
 	{
@@ -292,7 +292,7 @@ Plot3D::createObject(XMLInputStream& stream)
 void
 Plot3D::connectToChild ()
 {
-	Output::connectToChild();
+	SedMLOutput::connectToChild();
 
 	mSurface.connectToParent(this);
 }
@@ -314,7 +314,7 @@ Plot3D::getTypeCode () const
 bool
 Plot3D::hasRequiredAttributes () const
 {
-	bool allPresent = Output::hasRequiredAttributes();
+	bool allPresent = SedMLOutput::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -326,7 +326,7 @@ Plot3D::hasRequiredAttributes () const
 bool
 Plot3D::hasRequiredElements () const
 {
-	bool allPresent = Output::hasRequiredElements();
+	bool allPresent = SedMLOutput::hasRequiredElements();
 
 	return allPresent;
 }
@@ -340,7 +340,7 @@ Plot3D::hasRequiredElements () const
 void
 Plot3D::writeElements (XMLOutputStream& stream) const
 {
-	Output::writeElements(stream);
+	SedMLOutput::writeElements(stream);
 	if (getNumSurfaces() > 0)
 	{
 		mSurface.write(stream);
@@ -375,7 +375,7 @@ Plot3D::accept (SedMLVisitor& v) const
 void
 Plot3D::setSedMLDocument (SedMLDocument* d)
 {
-	Output::setSedMLDocument(d);
+	SedMLOutput::setSedMLDocument(d);
 }
 
 
@@ -390,7 +390,7 @@ Plot3D::setSedMLDocument (SedMLDocument* d)
 void
 Plot3D::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	Output::addExpectedAttributes(attributes);
+	SedMLOutput::addExpectedAttributes(attributes);
 
 }
 
@@ -407,7 +407,7 @@ void
 Plot3D::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	Output::readAttributes(attributes, expectedAttributes);
+	SedMLOutput::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -425,7 +425,7 @@ Plot3D::readAttributes (const XMLAttributes& attributes,
 	void
 Plot3D::writeAttributes (XMLOutputStream& stream) const
 {
-	Output::writeAttributes(stream);
+	SedMLOutput::writeAttributes(stream);
 
 }
 

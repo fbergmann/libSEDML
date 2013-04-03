@@ -157,7 +157,6 @@ ComputeChange::getMath() const
 
 
 /*
-/*
  * Returns true/false if math is set.
  */
 bool
