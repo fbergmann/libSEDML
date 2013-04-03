@@ -39,8 +39,8 @@ def createElements():
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
-  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedMLModel'})
-  lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'simulation', 'element': 'Simulation'})
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'simulation', 'element': 'Simulation'})
+  lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedMLModel'})
   lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'Task'})
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'DataGenerator'})
   lo5 = dict({'type': 'lo_element', 'reqd' : False, 'name':'output', 'element': 'SedMLOutput'})

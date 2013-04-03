@@ -53,8 +53,8 @@ SedMLDocument::SedMLDocument (unsigned int level, unsigned int version)
 	, mIsSetLevel (false)
 	, mVersion (SEDML_INT_MAX)
 	, mIsSetVersion (false)
-	, mModel (level, version)
 	, mSimulation (level, version)
+	, mModel (level, version)
 	, mTask (level, version)
 	, mDataGenerator (level, version)
 	, mOutput (level, version)
@@ -77,8 +77,8 @@ SedMLDocument::SedMLDocument (SedMLNamespaces* sedmlns)
 	, mIsSetLevel (false)
 	, mVersion (SEDML_INT_MAX)
 	, mIsSetVersion (false)
-	, mModel (sedmlns)
 	, mSimulation (sedmlns)
+	, mModel (sedmlns)
 	, mTask (sedmlns)
 	, mDataGenerator (sedmlns)
 	, mOutput (sedmlns)
@@ -108,8 +108,8 @@ SedMLDocument::SedMLDocument (const SedMLDocument& orig)
 		mIsSetLevel  = orig.mIsSetLevel;
 		mVersion  = orig.mVersion;
 		mIsSetVersion  = orig.mIsSetVersion;
-		mModel  = orig.mModel;
 		mSimulation  = orig.mSimulation;
+		mModel  = orig.mModel;
 		mTask  = orig.mTask;
 		mDataGenerator  = orig.mDataGenerator;
 		mOutput  = orig.mOutput;
@@ -137,8 +137,8 @@ SedMLDocument::operator=(const SedMLDocument& rhs)
 		mIsSetLevel  = rhs.mIsSetLevel;
 		mVersion  = rhs.mVersion;
 		mIsSetVersion  = rhs.mIsSetVersion;
-		mModel  = rhs.mModel;
 		mSimulation  = rhs.mSimulation;
+		mModel  = rhs.mModel;
 		mTask  = rhs.mTask;
 		mDataGenerator  = rhs.mDataGenerator;
 		mOutput  = rhs.mOutput;
@@ -273,124 +273,6 @@ SedMLDocument::unsetVersion()
 
 
 /*
- * Returns the  "SedListOfSedMLModels" in this SedMLDocument object.
- */
-const SedListOfSedMLModels*
-SedMLDocument::getListOfSedMLModels() const
-{
-	return &mModel;
-}
-
-
-/*
- * Removes the nth SedMLModel from the SedListOfSedMLModels.
- */
-SedMLModel*
-SedMLDocument::removeSedMLModel(unsigned int n)
-{
-	return mModel.remove(n);
-}
-
-
-/*
- * Removes the a SedMLModel with given id from the SedListOfSedMLModels.
- */
-SedMLModel*
-SedMLDocument::removeSedMLModel(const std::string& sid)
-{
-	return mModel.remove(sid);
-}
-
-
-/*
- * Return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
- */
-SedMLModel*
-SedMLDocument::getSedMLModel(unsigned int n)
-{
-	return mModel.get(n);
-}
-
-
-/*
- * Return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
- */
-const SedMLModel*
-SedMLDocument::getSedMLModel(unsigned int n) const
-{
-	return mModel.get(n);
-}
-
-
-/*
- * Return a SedMLModel from the SedListOfSedMLModels by id.
- */
-SedMLModel*
-SedMLDocument::getSedMLModel(const std::string& sid)
-{
-	return mModel.get(sid);
-}
-
-
-/*
- * Return a SedMLModel from the SedListOfSedMLModels by id.
- */
-const SedMLModel*
-SedMLDocument::getSedMLModel(const std::string& sid) const
-{
-	return mModel.get(sid);
-}
-
-
-/**
- * Adds a copy the given "SedMLModel" to this SedMLDocument.
- *
- * @param smlm; the SedMLModel object to add
- *
- * @return integer value indicating success/failure of the
- * function.  @if clike The value is drawn from the
- * enumeration #OperationReturnValues_t. @endif The possible values
- * returned by this function are:
- * @li LIBSEDML_OPERATION_SUCCESS
- * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
- */
-int
-SedMLDocument::addSedMLModel(const SedMLModel* smlm)
-{
-	if(smlm == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mModel.append(smlm);
-	return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/**
- * Get the number of SedMLModel objects in this SedMLDocument.
- *
- * @return the number of SedMLModel objects in this SedMLDocument
- */
-unsigned int 
-SedMLDocument::getNumSedMLModels() const
-{
-	return mModel.size();
-}
-
-/**
- * Creates a new SedMLModel object, adds it to this SedMLDocuments
- * SedMLDocument and returns the SedMLModel object created. 
- *
- * @return a new SedMLModel object instance
- *
- * @see addSedMLModel(const SedMLModel* smlm)
- */
-SedMLModel* 
-SedMLDocument::createSedMLModel()
-{
-	SedMLModel *temp = new SedMLModel();
-	if (temp != NULL) mModel.appendAndOwn(temp);
-	return temp;
-}
-
-/*
  * Returns the  "SedListOfSimulations" in this SedMLDocument object.
  */
 const SedListOfSimulations*
@@ -505,6 +387,124 @@ SedMLDocument::createSimulation()
 {
 	Simulation *temp = new Simulation();
 	if (temp != NULL) mSimulation.appendAndOwn(temp);
+	return temp;
+}
+
+/*
+ * Returns the  "SedListOfSedMLModels" in this SedMLDocument object.
+ */
+const SedListOfSedMLModels*
+SedMLDocument::getListOfSedMLModels() const
+{
+	return &mModel;
+}
+
+
+/*
+ * Removes the nth SedMLModel from the SedListOfSedMLModels.
+ */
+SedMLModel*
+SedMLDocument::removeSedMLModel(unsigned int n)
+{
+	return mModel.remove(n);
+}
+
+
+/*
+ * Removes the a SedMLModel with given id from the SedListOfSedMLModels.
+ */
+SedMLModel*
+SedMLDocument::removeSedMLModel(const std::string& sid)
+{
+	return mModel.remove(sid);
+}
+
+
+/*
+ * Return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
+ */
+SedMLModel*
+SedMLDocument::getSedMLModel(unsigned int n)
+{
+	return mModel.get(n);
+}
+
+
+/*
+ * Return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
+ */
+const SedMLModel*
+SedMLDocument::getSedMLModel(unsigned int n) const
+{
+	return mModel.get(n);
+}
+
+
+/*
+ * Return a SedMLModel from the SedListOfSedMLModels by id.
+ */
+SedMLModel*
+SedMLDocument::getSedMLModel(const std::string& sid)
+{
+	return mModel.get(sid);
+}
+
+
+/*
+ * Return a SedMLModel from the SedListOfSedMLModels by id.
+ */
+const SedMLModel*
+SedMLDocument::getSedMLModel(const std::string& sid) const
+{
+	return mModel.get(sid);
+}
+
+
+/**
+ * Adds a copy the given "SedMLModel" to this SedMLDocument.
+ *
+ * @param smlm; the SedMLModel object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedMLDocument::addSedMLModel(const SedMLModel* smlm)
+{
+	if(smlm == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mModel.append(smlm);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedMLModel objects in this SedMLDocument.
+ *
+ * @return the number of SedMLModel objects in this SedMLDocument
+ */
+unsigned int 
+SedMLDocument::getNumSedMLModels() const
+{
+	return mModel.size();
+}
+
+/**
+ * Creates a new SedMLModel object, adds it to this SedMLDocuments
+ * SedMLDocument and returns the SedMLModel object created. 
+ *
+ * @return a new SedMLModel object instance
+ *
+ * @see addSedMLModel(const SedMLModel* smlm)
+ */
+SedMLModel* 
+SedMLDocument::createSedMLModel()
+{
+	SedMLModel *temp = new SedMLModel();
+	if (temp != NULL) mModel.appendAndOwn(temp);
 	return temp;
 }
 
@@ -885,14 +885,14 @@ SedMLDocument::createObject(XMLInputStream& stream)
 
 	SedBase::connectToChild();
 
-	if (name == "listOfModels")
-	{
-		object = &mModel;
-	}
-
 	if (name == "listOfSimulations")
 	{
 		object = &mSimulation;
+	}
+
+	if (name == "listOfModels")
+	{
+		object = &mModel;
 	}
 
 	if (name == "listOfTasks")
@@ -922,8 +922,8 @@ SedMLDocument::connectToChild ()
 {
 	SedBase::connectToChild();
 
-	mModel.connectToParent(this);
 	mSimulation.connectToParent(this);
+	mModel.connectToParent(this);
 	mTask.connectToParent(this);
 	mDataGenerator.connectToParent(this);
 	mOutput.connectToParent(this);
@@ -979,13 +979,13 @@ void
 SedMLDocument::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
-	if (getNumSedMLModels() > 0)
-	{
-		mModel.write(stream);
-	}
 	if (getNumSimulations() > 0)
 	{
 		mSimulation.write(stream);
+	}
+	if (getNumSedMLModels() > 0)
+	{
+		mModel.write(stream);
 	}
 	if (getNumTasks() > 0)
 	{
@@ -1346,62 +1346,6 @@ SedMLDocument_unsetVersion(SedMLDocument_t * smld)
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addSedMLModel(SedMLDocument_t * smld, SedMLModel_t * smlm)
-{
-	return  (smld != NULL) ? smld->addSedMLModel(smlm) : LIBSBML_INVALID_OBJECT;
-}
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_createSedMLModel(SedMLDocument_t * smld)
-{
-	return  (smld != NULL) ? smld->createSedMLModel() : NULL;
-}
-
-LIBSEDML_EXTERN
-SedListOf_t *
-SedMLDocument_getSedListOfSedMLModels(SedMLDocument_t * smld)
-{
-	return  (smld != NULL) ? (SedListOf_t *)smld->getListOfSedMLModels() : NULL;
-}
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_getSedMLModel(SedMLDocument_t * smld, unsigned int n)
-{
-	return  (smld != NULL) ? smld->getSedMLModel(n) : NULL;
-}
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_getSedMLModelById(SedMLDocument_t * smld, const char * sid)
-{
-	return  (smld != NULL) ? smld->getSedMLModel(sid) : NULL;
-}
-
-LIBSEDML_EXTERN
-unsigned int
-SedMLDocument_getNumSedMLModels(SedMLDocument_t * smld)
-{
-	return  (smld != NULL) ? smld->getNumSedMLModels() : SEDML_INT_MAX;
-}
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_removeSedMLModel(SedMLDocument_t * smld, unsigned int n)
-{
-	return  (smld != NULL) ? smld->removeSedMLModel(n) : NULL;
-}
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_removeSedMLModelById(SedMLDocument_t * smld, const char * sid)
-{
-	return  (smld != NULL) ? smld->removeSedMLModel(sid) : NULL;
-}
-
-LIBSEDML_EXTERN
-int
 SedMLDocument_addSimulation(SedMLDocument_t * smld, Simulation_t * s)
 {
 	return  (smld != NULL) ? smld->addSimulation(s) : LIBSBML_INVALID_OBJECT;
@@ -1454,6 +1398,62 @@ Simulation_t *
 SedMLDocument_removeSimulationById(SedMLDocument_t * smld, const char * sid)
 {
 	return  (smld != NULL) ? smld->removeSimulation(sid) : NULL;
+}
+
+LIBSEDML_EXTERN
+int
+SedMLDocument_addSedMLModel(SedMLDocument_t * smld, SedMLModel_t * smlm)
+{
+	return  (smld != NULL) ? smld->addSedMLModel(smlm) : LIBSBML_INVALID_OBJECT;
+}
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_createSedMLModel(SedMLDocument_t * smld)
+{
+	return  (smld != NULL) ? smld->createSedMLModel() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedListOf_t *
+SedMLDocument_getSedListOfSedMLModels(SedMLDocument_t * smld)
+{
+	return  (smld != NULL) ? (SedListOf_t *)smld->getListOfSedMLModels() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_getSedMLModel(SedMLDocument_t * smld, unsigned int n)
+{
+	return  (smld != NULL) ? smld->getSedMLModel(n) : NULL;
+}
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_getSedMLModelById(SedMLDocument_t * smld, const char * sid)
+{
+	return  (smld != NULL) ? smld->getSedMLModel(sid) : NULL;
+}
+
+LIBSEDML_EXTERN
+unsigned int
+SedMLDocument_getNumSedMLModels(SedMLDocument_t * smld)
+{
+	return  (smld != NULL) ? smld->getNumSedMLModels() : SEDML_INT_MAX;
+}
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_removeSedMLModel(SedMLDocument_t * smld, unsigned int n)
+{
+	return  (smld != NULL) ? smld->removeSedMLModel(n) : NULL;
+}
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_removeSedMLModelById(SedMLDocument_t * smld, const char * sid)
+{
+	return  (smld != NULL) ? smld->removeSedMLModel(sid) : NULL;
 }
 
 LIBSEDML_EXTERN

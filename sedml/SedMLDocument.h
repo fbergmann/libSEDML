@@ -55,8 +55,8 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/SedMLModel.h>
 #include <sedml/Simulation.h>
+#include <sedml/SedMLModel.h>
 #include <sedml/Task.h>
 #include <sedml/DataGenerator.h>
 #include <sedml/SedMLOutput.h>
@@ -71,8 +71,8 @@ protected:
 	bool          mIsSetLevel;
 	int           mVersion;
 	bool          mIsSetVersion;
-	SedListOfSedMLModels   mModel;
 	SedListOfSimulations   mSimulation;
+	SedListOfSedMLModels   mModel;
 	SedListOfTasks   mTask;
 	SedListOfDataGenerators   mDataGenerator;
 	SedListOfSedMLOutputs   mOutput;
@@ -225,137 +225,6 @@ public:
 
 
 	/**
-	 * Returns the  "SedListOfSedMLModels" in this SedMLDocument object.
-	 *
-	 * @return the "SedListOfSedMLModels" attribute of this SedMLDocument.
-	 */
-	const SedListOfSedMLModels* getListOfSedMLModels() const;
-
-
-	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels.
-	 *
-	 * @param n the index number of the SedMLModel to get.
-	 *
-	 * @return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
-	 *
-	 * @see getNumSedMLModels()
-	 */
-	SedMLModel* getSedMLModel(unsigned int n);
-
-
-	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels.
-	 *
-	 * @param n the index number of the SedMLModel to get.
-	 *
-	 * @return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
-	 *
-	 * @see getNumSedMLModels()
-	 */
-	const SedMLModel* getSedMLModel(unsigned int n) const;
-
-
-	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels
-	 * based on its identifier.
-	 *
-	 * @param sid a string representing the identifier
-	 * of the SedMLModel to get.
-	 *
-	 * @return the SedMLModel in the SedListOfSedMLModels
-	 * with the given id or NULL if no such
-	 * SedMLModel exists.
-	 *
-	 * @see getSedMLModel(unsigned int n)
-	 *
-	 * @see getNumSedMLModels()
-	 */
-	SedMLModel* getSedMLModel(const std::string& sid);
-
-
-	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels
-	 * based on its identifier.
-	 *
-	 * @param sid a string representing the identifier
-	 * of the SedMLModel to get.
-	 *
-	 * @return the SedMLModel in the SedListOfSedMLModels
-	 * with the given id or NULL if no such
-	 * SedMLModel exists.
-	 *
-	 * @see getSedMLModel(unsigned int n)
-	 *
-	 * @see getNumSedMLModels()
-	 */
-	const SedMLModel* getSedMLModel(const std::string& sid) const;
-
-
-	/**
-	 * Adds a copy the given "SedMLModel" to this SedMLDocument.
-	 *
-	 * @param smlm; the SedMLModel object to add
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
-	 */
-	int addSedMLModel(const SedMLModel* smlm);
-
-
-	/**
-	 * Get the number of SedMLModel objects in this SedMLDocument.
-	 *
-	 * @return the number of SedMLModel objects in this SedMLDocument
-	 */
-	unsigned int getNumSedMLModels() const;
-
-
-	/**
-	 * Creates a new SedMLModel object, adds it to this SedMLDocuments
-	 * SedListOfSedMLModels and returns the SedMLModel object created. 
-	 *
-	 * @return a new SedMLModel object instance
-	 *
-	 * @see addSedMLModel(const SedMLModel* smlm)
-	 */
-	SedMLModel* createSedMLModel();
-
-
-	/**
-	 * Removes the nth SedMLModel from the SedListOfSedMLModels within this SedMLDocument.
-	 * and returns a pointer to it.
-	 *
-	 * The caller owns the returned item and is responsible for deleting it.
-	 *
-	 * @param n the index of the SedMLModel to remove.
-	 *
-	 * @see getNumSedMLModels()
-	 */
-	SedMLModel* removeSedMLModel(unsigned int n);
-
-
-	/**
-	 * Removes the SedMLModel with the given identifier from the SedListOfSedMLModels within this SedMLDocument
-	 * and returns a pointer to it.
-	 *
-	 * The caller owns the returned item and is responsible for deleting it.
-	 * If none of the items in this list have the identifier @p sid, then
-	 * @c NULL is returned.
-	 *
-	 * @param sid the identifier of the SedMLModel to remove.
-	 *
-	 * @return the SedMLModel removed. As mentioned above, the caller owns the
-	 * returned item.
-	 */
-	SedMLModel* removeSedMLModel(const std::string& sid);
-
-
-	/**
 	 * Returns the  "SedListOfSimulations" in this SedMLDocument object.
 	 *
 	 * @return the "SedListOfSimulations" attribute of this SedMLDocument.
@@ -484,6 +353,137 @@ public:
 	 * returned item.
 	 */
 	Simulation* removeSimulation(const std::string& sid);
+
+
+	/**
+	 * Returns the  "SedListOfSedMLModels" in this SedMLDocument object.
+	 *
+	 * @return the "SedListOfSedMLModels" attribute of this SedMLDocument.
+	 */
+	const SedListOfSedMLModels* getListOfSedMLModels() const;
+
+
+	/**
+	 * Get a SedMLModel from the SedListOfSedMLModels.
+	 *
+	 * @param n the index number of the SedMLModel to get.
+	 *
+	 * @return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
+	 *
+	 * @see getNumSedMLModels()
+	 */
+	SedMLModel* getSedMLModel(unsigned int n);
+
+
+	/**
+	 * Get a SedMLModel from the SedListOfSedMLModels.
+	 *
+	 * @param n the index number of the SedMLModel to get.
+	 *
+	 * @return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
+	 *
+	 * @see getNumSedMLModels()
+	 */
+	const SedMLModel* getSedMLModel(unsigned int n) const;
+
+
+	/**
+	 * Get a SedMLModel from the SedListOfSedMLModels
+	 * based on its identifier.
+	 *
+	 * @param sid a string representing the identifier
+	 * of the SedMLModel to get.
+	 *
+	 * @return the SedMLModel in the SedListOfSedMLModels
+	 * with the given id or NULL if no such
+	 * SedMLModel exists.
+	 *
+	 * @see getSedMLModel(unsigned int n)
+	 *
+	 * @see getNumSedMLModels()
+	 */
+	SedMLModel* getSedMLModel(const std::string& sid);
+
+
+	/**
+	 * Get a SedMLModel from the SedListOfSedMLModels
+	 * based on its identifier.
+	 *
+	 * @param sid a string representing the identifier
+	 * of the SedMLModel to get.
+	 *
+	 * @return the SedMLModel in the SedListOfSedMLModels
+	 * with the given id or NULL if no such
+	 * SedMLModel exists.
+	 *
+	 * @see getSedMLModel(unsigned int n)
+	 *
+	 * @see getNumSedMLModels()
+	 */
+	const SedMLModel* getSedMLModel(const std::string& sid) const;
+
+
+	/**
+	 * Adds a copy the given "SedMLModel" to this SedMLDocument.
+	 *
+	 * @param smlm; the SedMLModel object to add
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	int addSedMLModel(const SedMLModel* smlm);
+
+
+	/**
+	 * Get the number of SedMLModel objects in this SedMLDocument.
+	 *
+	 * @return the number of SedMLModel objects in this SedMLDocument
+	 */
+	unsigned int getNumSedMLModels() const;
+
+
+	/**
+	 * Creates a new SedMLModel object, adds it to this SedMLDocuments
+	 * SedListOfSedMLModels and returns the SedMLModel object created. 
+	 *
+	 * @return a new SedMLModel object instance
+	 *
+	 * @see addSedMLModel(const SedMLModel* smlm)
+	 */
+	SedMLModel* createSedMLModel();
+
+
+	/**
+	 * Removes the nth SedMLModel from the SedListOfSedMLModels within this SedMLDocument.
+	 * and returns a pointer to it.
+	 *
+	 * The caller owns the returned item and is responsible for deleting it.
+	 *
+	 * @param n the index of the SedMLModel to remove.
+	 *
+	 * @see getNumSedMLModels()
+	 */
+	SedMLModel* removeSedMLModel(unsigned int n);
+
+
+	/**
+	 * Removes the SedMLModel with the given identifier from the SedListOfSedMLModels within this SedMLDocument
+	 * and returns a pointer to it.
+	 *
+	 * The caller owns the returned item and is responsible for deleting it.
+	 * If none of the items in this list have the identifier @p sid, then
+	 * @c NULL is returned.
+	 *
+	 * @param sid the identifier of the SedMLModel to remove.
+	 *
+	 * @return the SedMLModel removed. As mentioned above, the caller owns the
+	 * returned item.
+	 */
+	SedMLModel* removeSedMLModel(const std::string& sid);
 
 
 	/**
@@ -1188,46 +1188,6 @@ SedMLDocument_unsetVersion(SedMLDocument_t * smld);
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addSedMLModel(SedMLDocument_t * smld, SedMLModel_t * smlm);
-
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_createSedMLModel(SedMLDocument_t * smld);
-
-
-LIBSEDML_EXTERN
-SedListOf_t *
-SedMLDocument_getSedListOfSedMLModels(SedMLDocument_t * smld);
-
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_getSedMLModel(SedMLDocument_t * smld, unsigned int n);
-
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_getSedMLModelById(SedMLDocument_t * smld, const char * sid);
-
-
-LIBSEDML_EXTERN
-unsigned int
-SedMLDocument_getNumSedMLModels(SedMLDocument_t * smld);
-
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_removeSedMLModel(SedMLDocument_t * smld, unsigned int n);
-
-
-LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_removeSedMLModelById(SedMLDocument_t * smld, const char * sid);
-
-
-LIBSEDML_EXTERN
-int
 SedMLDocument_addSimulation(SedMLDocument_t * smld, Simulation_t * s);
 
 
@@ -1264,6 +1224,46 @@ SedMLDocument_removeSimulation(SedMLDocument_t * smld, unsigned int n);
 LIBSEDML_EXTERN
 Simulation_t *
 SedMLDocument_removeSimulationById(SedMLDocument_t * smld, const char * sid);
+
+
+LIBSEDML_EXTERN
+int
+SedMLDocument_addSedMLModel(SedMLDocument_t * smld, SedMLModel_t * smlm);
+
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_createSedMLModel(SedMLDocument_t * smld);
+
+
+LIBSEDML_EXTERN
+SedListOf_t *
+SedMLDocument_getSedListOfSedMLModels(SedMLDocument_t * smld);
+
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_getSedMLModel(SedMLDocument_t * smld, unsigned int n);
+
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_getSedMLModelById(SedMLDocument_t * smld, const char * sid);
+
+
+LIBSEDML_EXTERN
+unsigned int
+SedMLDocument_getNumSedMLModels(SedMLDocument_t * smld);
+
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_removeSedMLModel(SedMLDocument_t * smld, unsigned int n);
+
+
+LIBSEDML_EXTERN
+SedMLModel_t *
+SedMLDocument_removeSedMLModelById(SedMLDocument_t * smld, const char * sid);
 
 
 LIBSEDML_EXTERN
