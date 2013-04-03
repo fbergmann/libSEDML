@@ -20,6 +20,9 @@ def createElements():
   element = createSedChange()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
+  element = createSedChangeAttribute()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
   element = createSedSimulation()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
@@ -61,6 +64,12 @@ def createSedChange() :
   element = dict({'name': 'Change', 'package': 'SedML', 'typecode': 'SEDML_CHANGE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False}) 
   return element
 
+def createSedChangeAttribute() :
+  a1 = dict({'type': 'string', 'reqd' : True, 'name':'newValue'})
+  attributes = [a1]
+  element = dict({'name': 'ChangeAttribute', 'package': 'SedML', 'typecode': 'SEDML_CHANGE_ATTRIBUTE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'Change'}) 
+  return element
+  
 def createSedSimulation() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})

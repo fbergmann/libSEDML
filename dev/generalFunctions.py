@@ -216,14 +216,14 @@ def writeWriteElementsHeader(outFile):
   outFile.write('\tvirtual void writeElements (XMLOutputStream& stream) const;\n\n\n')
   writeInternalEnd(outFile)
 
-def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, hasMath=False):
+def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, hasMath=False, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
   outFile.write(' * write contained elements\n')
   outFile.write(' */\n')
   outFile.write('void\n{0}::writeElements (XMLOutputStream& stream) const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase::writeElements(stream);\n')
+  outFile.write('\t{0}::writeElements(stream);\n'.format(baseClass))
   if hasChildren == True:
     for i in range(0, len(attributes)):
       if attributes[i]['type'] == 'element' and (attributes[i]['name'] != 'Math' and attributes[i]['name'] != 'math'):
@@ -271,14 +271,14 @@ def writeSetDocHeader(outFile):
   outFile.write('\tvirtual void setSedMLDocument (SedMLDocument* d);\n\n\n')
   writeInternalEnd(outFile)
 
-def writeSetDocCPPCode(outFile, element):
+def writeSetDocCPPCode(outFile, element, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
   outFile.write(' * Sets the parent SedMLDocument.\n')
   outFile.write(' */\n')
   outFile.write('void\n{0}::setSedMLDocument (SedMLDocument* d)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase::setSedMLDocument(d);\n')
+  outFile.write('\t{0}::setSedMLDocument(d);\n'.format(baseClass))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -331,14 +331,14 @@ def writeAddExpectedHeader(outFile):
   outFile.write('\tvirtual void addExpectedAttributes(ExpectedAttributes& attributes);\n\n\n')
   writeInternalEnd(outFile)
   
-def writeAddExpectedCPPCode(outFile, element, attribs):
+def writeAddExpectedCPPCode(outFile, element, attribs, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
   outFile.write(' * Get the list of expected attributes for this element.\n')
   outFile.write(' */\n')
   outFile.write('void\n{0}::addExpectedAttributes(ExpectedAttributes& attributes)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase::addExpectedAttributes(attributes);\n\n')
+  outFile.write('\t{0}::addExpectedAttributes(attributes);\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['name']))
@@ -488,7 +488,7 @@ def writeReadAttribute(output, attrib, element):
     attTypeCode = 'FIX ME'
     num = False
 	
-def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):  
+def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False,baseClass='SedBase'):  
   if isSedListOf == True or hasChildren == False:
     return;
   outFile.write('/**\n')
@@ -498,7 +498,7 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
   outFile.write('{\n')
   outFile.write('\tSedBase* object = NULL;\n\n')
   outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
-  outFile.write('\tSedBase::connectToChild();\n\n')
+  outFile.write('\t{0}::connectToChild();\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     current = attribs[i]
     if current['type'] == 'lo_element':
@@ -509,8 +509,8 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
   outFile.write('\treturn object;\n')  
   outFile.write('}\n\n\n')  
 
-def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False):  
-  print 'isSedListOf={0} hasChildren={1} hasMath={2}'.format(isSedListOf, hasChildren, hasMath)
+def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, baseClass='SedBase'):  
+  #print 'isSedListOf={0} hasChildren={1} hasMath={2}'.format(isSedListOf, hasChildren, hasMath)
   if isSedListOf or hasChildren == False:
     return;
   outFile.write('/*\n')
@@ -518,14 +518,14 @@ def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, h
   outFile.write(' */\n')
   outFile.write('void\n{0}::connectToChild ()\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase::connectToChild();\n\n')
+  outFile.write('\t{0}::connectToChild();\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     current = attribs[i]
     if current['type'] == 'lo_element':
       outFile.write('\tm{0}.connectToParent(this);\n'.format(strFunctions.cap(current['name'])))	
   outFile.write('}\n\n\n')  
 
-def writeReadAttributesCPPCode(outFile, element, attribs):
+def writeReadAttributesCPPCode(outFile, element, attribs, baseClass):
   writeInternalStart(outFile)
   outFile.write('/*\n')
   outFile.write(' * Read values from the given XMLAttributes set into their specific fields.\n')
@@ -533,7 +533,7 @@ def writeReadAttributesCPPCode(outFile, element, attribs):
   outFile.write('void\n{0}::readAttributes (const XMLAttributes& attributes,\n'.format(element))
   outFile.write('                             const ExpectedAttributes& expectedAttributes)\n')
   outFile.write('{\n')
-  outFile.write('\tSedBase::readAttributes(attributes, expectedAttributes);\n\n')
+  outFile.write('\t{0}::readAttributes(attributes, expectedAttributes);\n\n'.format(baseClass))
   outFile.write('\tbool assigned = false;\n\n')
   for i in range (0, len(attribs)):
     writeReadAttribute(outFile, attribs[i], element)
@@ -548,14 +548,14 @@ def writeWriteAttributesHeader(outFile):
   outFile.write('\tvirtual void writeAttributes (XMLOutputStream& stream) const;\n\n\n')
   writeInternalEnd(outFile)
   
-def writeWriteAttributesCPPCode(outFile, element, attribs):
+def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
   outFile.write(' * Write values of XMLAttributes to the output stream.\n')
   outFile.write(' */\n')
   outFile.write('\tvoid\n{0}::writeAttributes (XMLOutputStream& stream) const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase::writeAttributes(stream);\n\n')
+  outFile.write('\t{0}::writeAttributes(stream);\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
@@ -607,13 +607,16 @@ def writeHasReqdAttribHeader(outFile, element, attribs):
   outFile.write('\t */\n')
   outFile.write('\tvirtual bool hasRequiredAttributes() const;\n\n\n')
 
-def writeHasReqdAttribCPPCode(outFile, element, attribs):
+def writeHasReqdAttribCPPCode(outFile, element, attribs, baseClass):
   outFile.write('/*\n')
   outFile.write(' * check if all the required attributes are set\n')
   outFile.write(' */\n')
   outFile.write('bool\n{0}::hasRequiredAttributes () const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tbool allPresent = true;\n\n')
+  if baseClass == 'SedBase':
+    outFile.write('\tbool allPresent = true;\n\n')
+  else:
+    outFile.write('\tbool allPresent = {0}::hasRequiredAttributes();\n\n'.format(baseClass))
   for i in range(0, len(attribs)):
     if attribs[i]['reqd'] == True and attribs[i]['type'] != 'element':
       outFile.write('\tif (isSet{0}() == false)\n'.format(strFunctions.cap(attribs[i]['name'])))
@@ -637,13 +640,16 @@ def writeHasReqdElementsHeader(outFile, element, attribs):
   outFile.write('\t */\n')
   outFile.write('\tvirtual bool hasRequiredElements() const;\n\n\n')
 
-def writeHasReqdElementsCPPCode(outFile, element, attribs):
+def writeHasReqdElementsCPPCode(outFile, element, attribs, baseClass):
   outFile.write('/*\n')
   outFile.write(' * check if all the required elements are set\n')
   outFile.write(' */\n')
   outFile.write('bool\n{0}::hasRequiredElements () const\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tbool allPresent = true;\n\n')
+  if baseClass == 'SedBase':
+    outFile.write('\tbool allPresent = true;\n\n')
+  else:
+    outFile.write('\tbool allPresent = {0}::hasRequiredElements();\n\n'.format(baseClass))
   for i in range(0, len(attribs)):
     if attribs[i]['reqd'] == True and attribs[i]['type'] == 'element':
       outFile.write('\tif (isSet{0}() == false)\n'.format(strFunctions.cap(attribs[i]['name'])))
@@ -660,7 +666,7 @@ def writeReadOtherXMLHeader(outFile):
   outFile.write('\tvirtual bool readOtherXML (XMLInputStream& stream);\n\n\n')
   writeInternalEnd(outFile)
   
-def writeReadOtherXMLCPPCode(outFile, element):
+def writeReadOtherXMLCPPCode(outFile, element, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('bool\n{0}::readOtherXML (XMLInputStream& stream)\n'.format(element))
   outFile.write('{\n')
@@ -675,7 +681,8 @@ def writeReadOtherXMLCPPCode(outFile, element):
   outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
   #outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
   outFile.write('\t\tread = true;\n\t}\n\n')
-  outFile.write('\tif (SedBase::readOtherXML(stream))\n\t{\n\t\tread = true;\n\t}\n')
+  outFile.write('\tif ({0}::readOtherXML(stream))\n'.format(baseClass))
+  outFile.write('\t\t{\n\t\tread = true;\n\t}\n')
   outFile.write('\treturn read;\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
@@ -711,29 +718,29 @@ def writeInternalHeaders(outFile, isSedListOf, hasChildren=False):
     writeConnectHeader(outFile, isSedListOf, hasChildren)
   writeEnablePkgHeader(outFile)
   
-def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None):
+def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None, baseClass='SedBase'):
   if isSedListOf == True:
     element = writeListOf(element)
   writeGetElementNameCPPCode(outFile, element, isSedListOf, elementDict)
   if hasChildren:
-    writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath)
-    writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath)
+    writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath, baseClass)
+    writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath, baseClass)
   writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)
   if isSedListOf == False:
-    writeHasReqdAttribCPPCode(outFile, element, attribs)
+    writeHasReqdAttribCPPCode(outFile, element, attribs, baseClass)
   if hasChildren == True or hasMath == True:
-    writeHasReqdElementsCPPCode(outFile, element, attribs)
+    writeHasReqdElementsCPPCode(outFile, element, attribs, baseClass)
 
-def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMath):
+def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMath,baseClass='SedBase'):
   writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath)
   writeAcceptCPPCode(outFile, element)
-  writeSetDocCPPCode(outFile, element)
+  writeSetDocCPPCode(outFile, element,baseClass)
  # writeConnectCPPCode(outFile)
   writeEnablePkgCPPCode(outFile, element)
 
-def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath):
-  writeAddExpectedCPPCode(outFile, element, attribs)
-  writeReadAttributesCPPCode(outFile, element, attribs)
+def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, baseClass):
+  writeAddExpectedCPPCode(outFile, element, attribs, baseClass)
+  writeReadAttributesCPPCode(outFile, element, attribs, baseClass)
   if hasMath == True:
-    writeReadOtherXMLCPPCode(outFile, element)
-  writeWriteAttributesCPPCode(outFile, element, attribs)
+    writeReadOtherXMLCPPCode(outFile, element, baseClass)
+  writeWriteAttributesCPPCode(outFile, element, attribs, baseClass)

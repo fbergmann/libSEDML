@@ -96,7 +96,9 @@ def writeAtt(attrib, output):
   else:
     output.write('\tFIX ME   {0};\n'.format(attName))
 
-def writeAdditionalIncludes (attrs, output):
+def writeAdditionalIncludes (attrs, output, elementDict):
+  if elementDict.has_key('baseClass'):
+    output.write('#include sedml/{0}.h\n'.format(elementDict['baseClass']))
   for i in range(0, len(attrs)):
     writeInclude(attrs[i], output)  
   output.write('\n\n')
@@ -313,10 +315,13 @@ def writeListOfSubFunctions(attrib, output, element):
   writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
  
 #write class
-def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf):
-  writeAdditionalIncludes(attributes, header)
+def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf, elementDict):
+  writeAdditionalIncludes(attributes, header, elementDict)
   header.write('class LIBSEDML_EXTERN {0} :'.format(nameOfElement))
-  header.write(' public SedBase\n{0}\n\n'.format('{'))
+  if elementDict.has_key('baseClass'):
+    header.write(' public {0}\n{1}\n\n'.format(elementDict['baseClass'], '{'))
+  else:
+    header.write(' public SedBase\n{0}\n\n'.format('{'))
   writeAttributes(attributes, header)
   header.write('public:\n\n')
   writeConstructors(nameOfElement, nameOfPackage, header)
@@ -379,7 +384,7 @@ def createHeader(element):
   fileHeaders.addFilename(header, headerName, nameOfElement)
   fileHeaders.addLicence(header)
   writeIncludes(header, nameOfElement, nameOfPackage)
-  writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, False)
+  writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, False, element)
   if hasSedListOf == True:
     writeListOfHeader.createHeader(element, header)
   writeCPPEnd(header)

@@ -76,12 +76,15 @@ def writeCopyAttributes(attrs, output, tabs, name):
       output.write('{0}mIsSet{1}  = {2}.mIsSet{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
 
 
-def writeConstructors(element, package, output, attrs, hasChildren=False, hasMath=False):
+def writeConstructors(element, package, output, attrs, hasChildren=False, hasMath=False, elementDict=None):
+  baseClass = 'SedBase'
+  if elementDict != None and elementDict.has_key('baseClass'):
+    baseClass = elementDict['baseClass']
   output.write('/*\n' )
   output.write(' * Creates a new {0}'.format(element))
   output.write(' with the given level, version, and package version.\n */\n')
   output.write('{0}::{0} (unsigned int level, unsigned int version)\n'.format(element))
-  output.write('\t: SedBase(level, version)\n')
+  output.write('\t: {0}(level, version)\n'.format(baseClass))
   writeAttributes(attrs, output, 1)
   output.write('{\n')
   output.write('\t// set an SedMLNamespaces derived object of this package\n')
@@ -94,7 +97,7 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write(' * Creates a new {0}'.format(element))
   output.write(' with the given SedMLNamespaces object.\n */\n')
   output.write('{0}::{0} (SedMLNamespaces* {1}ns)\n'.format(element, package.lower()))
-  output.write('\t: SedBase({0}ns)\n'.format(package.lower()))
+  output.write('\t: {1}({0}ns)\n'.format(package.lower(), baseClass))
   writeAttributes(attrs, output, 2, package.lower())
   output.write('{\n')
   output.write('\t// set the element namespace of this object\n')
@@ -106,7 +109,7 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('/*\n' )
   output.write(' * Copy constructor for {0}.\n */\n'.format(element))
   output.write('{0}::{0} (const {0}& orig)\n'.format(element, package, package.lower()))
-  output.write('\t: SedBase(orig)\n')
+  output.write('\t: {0}(orig)\n'.format(baseClass))
   output.write('{\n')
   output.write('\tif (&orig == NULL)\n')
   output.write('\t{\n')
@@ -130,7 +133,7 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('\t}\n')
   output.write('\telse if (&rhs != this)\n')
   output.write('\t{\n')
-  output.write('\t\tSedBase::operator=(rhs);\n')
+  output.write('\t\t{0}::operator=(rhs);\n'.format(baseClass))
   writeCopyAttributes(attrs, output, '\t\t', 'rhs')
   if hasChildren == True:
     output.write('\n\t\t// connect to child objects\n')
@@ -400,16 +403,20 @@ def createCode(element):
   attributes = element['attribs']
   hasChildren = element['hasChildren']
   hasMath = element['hasMath']
+  baseClass = 'SedBase'
+  if element != None and element.has_key('baseClass'):
+    baseClass = element['baseClass']
+
   codeName = nameOfElement + '.cpp'
   code = open(codeName, 'w')
   fileHeaders.addFilename(code, codeName, nameOfElement)
   fileHeaders.addLicence(code)
   writeIncludes(code, nameOfElement, nameOfPackage, hasMath)
-  writeConstructors(nameOfElement, nameOfPackage, code, attributes, hasChildren, hasMath)
+  writeConstructors(nameOfElement, nameOfPackage, code, attributes, hasChildren, hasMath, element)
   writeAttributeCode(attributes, code, nameOfElement)
-  generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath, element) 
-  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath) 
-  generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath) 
+  generalFunctions.writeCommonCPPCode(code, nameOfElement, sedmltypecode, attributes, False, hasChildren, hasMath, element,baseClass) 
+  generalFunctions.writeInternalCPPCode(code, nameOfElement, attributes, False, hasChildren or hasSedListOf, hasMath,baseClass) 
+  generalFunctions.writeProtectedCPPCode(code, nameOfElement, attributes, False, hasChildren, hasMath,baseClass) 
   if hasSedListOf:
     writeListOfCode.createCode(element, code)
   writeCCode.createCode(element, code)
