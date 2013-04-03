@@ -11,66 +11,29 @@ import writeCode
 import writeHeader
 
 def createElements():
-  element = createSedDocument()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedModel()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedChange()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedParameter()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedVariable()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedChangeAttribute()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedChangeRemoveXML()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedComputeChange()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedSimulation()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedUniformTimeCourse()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedAlgorithm()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedTask()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedDataGenerator()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedOutput()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedCurve()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedSurface()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedDataSet()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedReport()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedPlot2D()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
-  element = createSedPlot3D()
-  writeCode.createCode(element)
-  writeHeader.createHeader(element)
+  elements = [ createSedDocument(), 
+              createSedModel(),
+			  createSedChange(),
+			  createSedParameter(),
+			  createSedVariable(),
+			  createSedChangeAttribute(),
+			  createSedChangeRemoveXML(),
+			  createSedComputeChange(),
+			  createSedSimulation(),
+			  createSedUniformTimeCourse(),
+			  createSedAlgorithm(),
+			  createSedTask(),
+			  createSedDataGenerator(),
+			  createSedOutput(),
+			  createSedCurve(),
+			  createSedSurface(),
+			  createSedDataSet(),
+			  createSedReport(),
+			  createSedPlot2D(),
+			  createSedPlot3D() ]
+  for element in elements:
+    writeCode.createCode(element)
+    writeHeader.createHeader(element)
 
 
 def createSedDocument() :

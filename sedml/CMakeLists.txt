@@ -39,7 +39,7 @@ check_library_exists(m sqrt "" HAVE_LIBM)
 # generate configuration for this system
 configure_file(
 	${CMAKE_CURRENT_SOURCE_DIR}/common/libsedml-config-common.h.cmake
-	${CMAKE_CURRENT_SOURCE_DIR}/common/libsedml-config-common.h
+	"${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-config-common.h"
 	)
 
 # Replace: @PACKAGE_VERSION@ and @LIBSEDML_VERSION_NUMERIC@
@@ -62,6 +62,12 @@ endforeach(dir)
 
 file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 install(FILES ${files} DESTINATION include/sedml)
+
+# install generated headers
+install(FILES 
+       "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-version.h"
+       "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-config-common.h"
+        DESTINATION include/sedml/common)
 
 ###############################################################################
 #
