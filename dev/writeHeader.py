@@ -82,6 +82,7 @@ def writeAtt(attrib, output):
     if attTypeCode == 'ASTNode*' or attName== 'Math':
       output.write('\tASTNode*      m{0};\n'.format(capAttName))
     else:
+      output.write('\t{0}*      m{0};\n'.format(capAttName))
       return
   elif attType == 'lo_element':
     output.write('\t{0}   m{1};\n'.format(generalFunctions.writeListOf(attTypeCode), capAttName))
@@ -130,7 +131,15 @@ def writeGetFunction(attrib, output, element):
       output.write('\tvirtual const ASTNode*')
       output.write(' get{0}() const;\n\n\n'.format(capAttName))
     else:
-      return
+      output.write('\t/**\n')
+      output.write('\t * Returns the \"{0}\"'.format(attName))
+      output.write(' element of this {0}.\n'.format(element))
+      output.write('\t *\n')
+      output.write('\t * @return the \"{0}\"'.format(attName))
+      output.write(' element of this {0}.\n'.format(element))
+      output.write('\t */\n')
+      output.write('\tvirtual const {0}*'.format(capAttName))
+      output.write(' get{0}() const;\n\n\n'.format(capAttName))
   else:
     output.write('\t/**\n')
     output.write('\t * Returns the value of the \"{0}\"'.format(attName))
@@ -152,18 +161,15 @@ def writeIsSetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math' or attrib['name'] == 'math':
-      output.write('\t/**\n')
-      output.write('\t * Predicate returning @c true or @c false depending on ')
-      output.write('whether this\n\t * {0}\'s \"{1}\" '.format(element, attName))
-      output.write('element has been set.\n\t *\n')
-      output.write('\t * @return @c true if this {0}\'s \"{1}\"'.format(element, attName))
-      output.write(' element has been set,\n')
-      output.write('\t * otherwise @c false is returned.\n')
-      output.write('\t */\n')
-      output.write('\tvirtual bool isSet{0}() const;\n\n\n'.format(capAttName))
-    else:
-      return
+    output.write('\t/**\n')
+    output.write('\t * Predicate returning @c true or @c false depending on ')
+    output.write('whether this\n\t * {0}\'s \"{1}\" '.format(element, attName))
+    output.write('element has been set.\n\t *\n')
+    output.write('\t * @return @c true if this {0}\'s \"{1}\"'.format(element, attName))
+    output.write(' element has been set,\n')
+    output.write('\t * otherwise @c false is returned.\n')
+    output.write('\t */\n')
+    output.write('\tvirtual bool isSet{0}() const;\n\n\n'.format(capAttName))
   else:
     output.write('\t/**\n')
     output.write('\t * Predicate returning @c true or @c false depending on ')
@@ -187,25 +193,22 @@ def writeSetFunction(attrib, output, element):
   num = att[4]
   if attrib['type'] == 'lo_element':
     return
-  elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math' or attrib['name'] == 'math':
-      output.write('\t/**\n')
-      output.write('\t * Sets the \"{0}\"'.format(attName))
-      output.write(' element of this {0}.\n'.format(element))
-      output.write('\t *\n')
-      output.write('\t * @param {0}; {1} determining the value of the "resultLevel" attribute to be set.\n'.format(attName, attTypeCode))
-      output.write('\t *\n')
-      output.write('\t * @return integer value indicating success/failure of the\n')
-      output.write('\t * function.  @if clike The value is drawn from the\n')
-      output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
-      output.write('\t * returned by this function are:\n')
-      output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
-      output.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
-      output.write('\t */\n')
-      output.write('\tvirtual int set{0}('.format(capAttName))
-      output.write('{0} {1});\n\n\n'.format(attTypeCode, attName))
-    else:
-      return
+  elif attrib['type'] == 'element':    
+    output.write('\t/**\n')
+    output.write('\t * Sets the \"{0}\"'.format(attName))
+    output.write(' element of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @param {0}; {1} determining the value of the "resultLevel" attribute to be set.\n'.format(attName, attTypeCode))
+    output.write('\t *\n')
+    output.write('\t * @return integer value indicating success/failure of the\n')
+    output.write('\t * function.  @if clike The value is drawn from the\n')
+    output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write('\t * returned by this function are:\n')
+    output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
+    output.write('\t */\n')
+    output.write('\tvirtual int set{0}('.format(capAttName))
+    output.write('{0} {1});\n\n\n'.format(attTypeCode, attName))    
   else:
     output.write('\t/**\n')
     output.write('\t * Sets the value of the \"{0}\"'.format(attName))
@@ -230,21 +233,18 @@ def writeUnsetFunction(attrib, output, element):
   if attrib['type'] == 'lo_element':
     return
   elif attrib['type'] == 'element':
-    if attrib['name'] == 'Math' or attrib['name'] == 'math':
-      output.write('\t/**\n')
-      output.write('\t * Unsets the \"{0}\"'.format(attName))
-      output.write(' element of this {0}.\n'.format(element))
-      output.write('\t *\n')
-      output.write('\t * @return integer value indicating success/failure of the\n')
-      output.write('\t * function.  @if clike The value is drawn from the\n')
-      output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
-      output.write('\t * returned by this function are:\n')
-      output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
-      output.write('\t * @li LIBSEDML_OPERATION_FAILED\n')
-      output.write('\t */\n')
-      output.write('\tvirtual int unset{0}();\n\n\n'.format(capAttName))
-    else:
-      return
+    output.write('\t/**\n')
+    output.write('\t * Unsets the \"{0}\"'.format(attName))
+    output.write(' element of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @return integer value indicating success/failure of the\n')
+    output.write('\t * function.  @if clike The value is drawn from the\n')
+    output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write('\t * returned by this function are:\n')
+    output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write('\t * @li LIBSEDML_OPERATION_FAILED\n')
+    output.write('\t */\n')
+    output.write('\tvirtual int unset{0}();\n\n\n'.format(capAttName))
   else:
     output.write('\t/**\n')
     output.write('\t * Unsets the value of the \"{0}\"'.format(attName))

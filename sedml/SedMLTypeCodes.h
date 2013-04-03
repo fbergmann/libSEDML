@@ -105,6 +105,7 @@ typedef enum
     , SEDML_TASK                       =  40
     , SEDML_OUTPUT                     =  50
 	, SEDML_SIMULATION                 =  60
+	, SEDML_SIMULATION_ALGORITHM       =  61
 	, SEDML_LIST_OF                    =  70
 	
 } SedMLTypeCode_t;

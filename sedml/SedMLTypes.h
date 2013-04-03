@@ -38,6 +38,7 @@
 #include <sedml/RemoveXML.h>
 #include <sedml/ComputeChange.h>
 #include <sedml/SedMLModel.h>
+#include <sedml/Algorithm.h>
 #include <sedml/Simulation.h>
 #include <sedml/Output.h>
 #include <sedml/DataGenerator.h>

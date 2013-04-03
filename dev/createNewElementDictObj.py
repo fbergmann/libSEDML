@@ -38,6 +38,9 @@ def createElements():
   element = createSedSimulation()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
+  element = createSedAlgorithm()
+  writeCode.createCode(element)
+  writeHeader.createHeader(element)
   element = createSedTask()
   writeCode.createCode(element)
   writeHeader.createHeader(element)
@@ -89,6 +92,12 @@ def createSedParameter() :
   element = dict({'name': 'SedMLParameter', 'package': 'SedML', 'typecode': 'SEDML_PARAMETER', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'parameter'}) 
   return element
 
+def createSedAlgorithm() :
+  a1 = dict({'type': 'string', 'reqd' : True, 'name':'kisaoID'})
+  attributes = [a1]
+  element = dict({'name': 'Algorithm', 'package': 'SedML', 'typecode': 'SEDML_SIMULATION_ALGORITHM', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False}) 
+  return element
+  
 def createSedChange() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'target'})
   attributes = [a1]
@@ -117,7 +126,8 @@ def createSedChangeAttribute() :
 def createSedSimulation() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
-  attributes = [a1, a2]
+  a3 = dict({'type': 'element', 'reqd' : False, 'name':'algorithm'})
+  attributes = [a1, a2, a3]
   element = dict({'name': 'Simulation', 'package': 'SedML', 'typecode': 'SEDML_SIMULATION', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False}) 
   return element
 
@@ -131,8 +141,10 @@ def createSedTask() :
 def createSedDataGenerator() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'variable', 'element': 'SedMLVariable'})
+  lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'parameter', 'element': 'SedMLParameter'})
   a3 = dict({'type': 'element', 'reqd' : False, 'name':'math'})
-  attributes = [a1, a2, a3]
+  attributes = [a1, a2, lo1, lo2, a3]
   element = dict({'name': 'DataGenerator', 'package': 'SedML', 'typecode': 'SEDML_DATAGENERATOR', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':True}) 
   return element
 

@@ -46,6 +46,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
     , "Task"
     , "Output"
 	, "Simulation"
+	, "Algorithm"
 	, "SedListOf"
 };
 

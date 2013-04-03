@@ -122,6 +122,12 @@ typedef CLASS_OR_STRUCT Change                     Change_t;
 
 
 /**
+ * @var typedef class Algorithm Algorithm_t
+ * @copydoc Algorithm
+ */
+typedef CLASS_OR_STRUCT Algorithm                     Algorithm_t;
+
+/**
  * @var typedef class ComputeChange ComputeChange_t
  * @copydoc ComputeChange
  */
