@@ -39,13 +39,15 @@
 int
 main (int argc, char* argv[])
 {
+  SedMLDocument_t *d;
+  
   if (argc != 3)
   {
     printf("Usage: echo_sedml input-filename output-filename\n\n");
     return 2;
   }
 
-  SedMLDocument_t *d = readSedML(argv[1]);
+  d = readSedML(argv[1]);
   writeSedML(d, argv[2]);
   
   return 0;

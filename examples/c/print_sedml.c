@@ -40,6 +40,7 @@ int
 main (int argc, char* argv[])
 {
   SedMLDocument_t *doc;
+  unsigned int i;
   
   if (argc != 2)
   {
@@ -50,7 +51,7 @@ main (int argc, char* argv[])
   doc = readSedML(argv[1]);
   
   printf("The document has %d simulation(s).\n",SedMLDocument_getNumSimulations(doc));
-  for (unsigned int i = 0; i < SedMLDocument_getNumSimulations(doc); i++)
+  for (i = 0; i < SedMLDocument_getNumSimulations(doc); i++)
   {
     Simulation_t* current = SedMLDocument_getSimulation(doc,i);
     switch(SedBase_getTypeCode((SedBase_t*)current))
@@ -82,7 +83,7 @@ main (int argc, char* argv[])
   
   printf("\n");
   printf("The document has %d model(s).\n",SedMLDocument_getNumSedMLModels(doc));
-  for (unsigned int i = 0; i < SedMLDocument_getNumSedMLModels(doc); i++)
+  for (i = 0; i < SedMLDocument_getNumSedMLModels(doc); i++)
   {
     SedMLModel_t* current =  SedMLDocument_getSedMLModel(doc,i);
     printf("\tModel id=%s  language=%s source=%s numChanges=%d\n", 
@@ -94,7 +95,7 @@ main (int argc, char* argv[])
   
   printf("\n");
   printf("The document has %d task(s).\n",SedMLDocument_getNumTasks(doc));
-  for (unsigned int i = 0; i < SedMLDocument_getNumTasks(doc); ++i)
+  for (i = 0; i < SedMLDocument_getNumTasks(doc); ++i)
   {
     Task_t* current =  SedMLDocument_getTask(doc,i);
     printf("\tTask id=%s  model=%s sim=%s\n", 
@@ -105,7 +106,7 @@ main (int argc, char* argv[])
 
   printf("\n");
   printf("The document has %d datagenerators(s).\n",SedMLDocument_getNumDataGenerators(doc));
-  for (unsigned int i = 0; i < SedMLDocument_getNumDataGenerators(doc); ++i)
+  for (i = 0; i < SedMLDocument_getNumDataGenerators(doc); ++i)
   {
     DataGenerator_t* current = SedMLDocument_getDataGenerator(doc, i);
     printf("\tDG id=%s math=%s\n",
@@ -115,7 +116,7 @@ main (int argc, char* argv[])
   
   printf("\n");
   printf("The document has %d output(s).\n",SedMLDocument_getNumSedMLOutputs(doc));
-  for (unsigned int i = 0; i < SedMLDocument_getNumSedMLOutputs(doc); ++i)
+  for (i = 0; i < SedMLDocument_getNumSedMLOutputs(doc); ++i)
   {
     SedMLOutput_t* current = SedMLDocument_getSedMLOutput(doc,i);
     switch(SedBase_getTypeCode((SedBase_t*)current))
