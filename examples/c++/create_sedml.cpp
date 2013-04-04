@@ -69,17 +69,17 @@ main (int argc, char* argv[])
   model->setLanguage("urn:sedml:sbml");
 
   // change a paramerter 'k' to 0.1
-  ChangeAttribute* change = doc.createChangeAttribute();
+  ChangeAttribute* change = model->createChangeAttribute();
   change->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
   change->setNewValue("0.1");
 
   // remove species 's1'
-  RemoveXML* remove = doc.createRemoveXML();
+  RemoveXML* remove = model->createRemoveXML();
   remove->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
 
   // now for something tricky we want to update the initialConcentration of 'S2' to be
   // half what it was in the original model
-  ComputeChange* compute = doc.createComputeChange();
+  ComputeChange* compute = model->createComputeChange();
   compute->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
   SedMLVariable *variable = compute->createSedMLVariable();
   variable->setId("S2");
