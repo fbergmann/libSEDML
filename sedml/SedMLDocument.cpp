@@ -1247,7 +1247,15 @@ SedMLDocument::writeXMLNS (XMLOutputStream& stream) const
     delete xmlns;
   }
 }
-/**
+
+/*
+  * @return the Namespaces associated with this SBML object
+  */
+XMLNamespaces* 
+SedMLDocument::getNamespaces() const
+{
+  return mSedMLNamespaces->getNamespaces();
+}/**
  * write comments
  */
 LIBSEDML_EXTERN

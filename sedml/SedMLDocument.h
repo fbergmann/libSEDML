@@ -1127,6 +1127,14 @@ public:
    */
   unsigned int getNumErrors (unsigned int severity) const;
 
+  /**
+   * Returns a list of XML Namespaces associated with the XML content
+   * of this SED-ML document.
+   * 
+   * @return the XML Namespaces associated with this SED-ML object
+   */
+  virtual XMLNamespaces* getNamespaces() const;
+
 protected:
   /**
    *
