@@ -375,17 +375,17 @@ SedMLDocument::getNumSimulations() const
 }
 
 /**
- * Creates a new Simulation object, adds it to this SedMLDocuments
- * SedMLDocument and returns the Simulation object created. 
+ * Creates a new UniformTimeCourse object, adds it to this SedMLDocuments
+ * SedMLDocument and returns the UniformTimeCourse object created. 
  *
- * @return a new Simulation object instance
+ * @return a new UniformTimeCourse object instance
  *
  * @see addSimulation(const Simulation* s)
  */
-Simulation* 
-SedMLDocument::createSimulation()
+UniformTimeCourse* 
+SedMLDocument::createUniformTimeCourse()
 {
-	Simulation *temp = new Simulation();
+	UniformTimeCourse *temp = new UniformTimeCourse();
 	if (temp != NULL) mSimulation.appendAndOwn(temp);
 	return temp;
 }
@@ -1392,10 +1392,10 @@ SedMLDocument_addSimulation(SedMLDocument_t * smld, Simulation_t * s)
 }
 
 LIBSEDML_EXTERN
-Simulation_t *
-SedMLDocument_createSimulation(SedMLDocument_t * smld)
+UniformTimeCourse_t *
+SedMLDocument_createUniformTimeCourse(SedMLDocument_t * smld)
 {
-	return  (smld != NULL) ? smld->createSimulation() : NULL;
+	return  (smld != NULL) ? smld->createUniformTimeCourse() : NULL;
 }
 
 LIBSEDML_EXTERN

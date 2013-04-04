@@ -689,9 +689,9 @@ SedListOfSimulations::createObject(XMLInputStream& stream)
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
-	if (name == "simulation")
+	if (name == "uniformTimeCourse")
 	{
-		object = new Simulation(getSedMLNamespaces());
+		object = new UniformTimeCourse(getSedMLNamespaces());
 		appendAndOwn(object);
 	}
 

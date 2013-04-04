@@ -316,14 +316,14 @@ public:
 
 
 	/**
-	 * Creates a new Simulation object, adds it to this SedMLDocuments
-	 * SedListOfSimulations and returns the Simulation object created. 
+	 * Creates a new UniformTimeCourse object, adds it to this SedMLDocuments
+	 * SedListOfSimulations and returns the UniformTimeCourse object created. 
 	 *
-	 * @return a new Simulation object instance
+	 * @return a new UniformTimeCourse object instance
 	 *
 	 * @see addSimulation(const Simulation* s)
 	 */
-	Simulation* createSimulation();
+	UniformTimeCourse* createUniformTimeCourse();
 
 
 	/**
@@ -1222,8 +1222,8 @@ SedMLDocument_addSimulation(SedMLDocument_t * smld, Simulation_t * s);
 
 
 LIBSEDML_EXTERN
-Simulation_t *
-SedMLDocument_createSimulation(SedMLDocument_t * smld);
+UniformTimeCourse_t *
+SedMLDocument_createUniformTimeCourse(SedMLDocument_t * smld);
 
 
 LIBSEDML_EXTERN

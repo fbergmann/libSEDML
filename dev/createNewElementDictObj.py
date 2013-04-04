@@ -39,7 +39,16 @@ def createElements():
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
-  lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'simulation', 'element': 'Simulation'})
+  lo1 = dict({
+              'type': 'lo_element', 
+			  'reqd' : False, 
+			  'name':'simulation', 
+			  'element': 'Simulation',
+			  'abstract':True,
+			  'concrete': [ 
+				           dict({ 'name':'uniformTimeCourse', 'element':'UniformTimeCourse'}),
+						   ]
+			  })
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedMLModel'})
   lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'Task'})
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'DataGenerator'})
@@ -170,7 +179,20 @@ def createSedSimulation() :
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'element', 'reqd' : False, 'name':'algorithm'})
   attributes = [a1, a2, a3]
-  element = dict({'name': 'Simulation', 'package': 'SedML', 'typecode': 'SEDML_SIMULATION', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'simulation'})
+  element = dict({
+                  'name': 'Simulation', 
+				  'package': 'SedML', 
+				  'typecode': 'SEDML_SIMULATION', 
+				  'hasSedListOf': True, 
+				  'attribs':attributes, 
+				  'hasChildren':True, 
+				  'hasMath':False, 
+				  'elementName':'simulation',
+				  'abstract':True,
+				  'concrete': [ 
+				           dict({ 'name':'uniformTimeCourse', 'element':'UniformTimeCourse'}),
+						   ]
+				})
   return element
 
 def createSedTask() :
