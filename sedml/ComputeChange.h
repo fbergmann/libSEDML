@@ -634,6 +634,26 @@ ComputeChange_clone(ComputeChange_t * cc);
 
 
 LIBSEDML_EXTERN
+ASTNode_t*
+ComputeChange_getMath(ComputeChange_t * cc);
+
+
+LIBSEDML_EXTERN
+int
+ComputeChange_isSetMath(ComputeChange_t * cc);
+
+
+LIBSEDML_EXTERN
+int
+ComputeChange_setMath(ComputeChange_t * cc, ASTNode_t* math);
+
+
+LIBSEDML_EXTERN
+int
+ComputeChange_unsetMath(ComputeChange_t * cc);
+
+
+LIBSEDML_EXTERN
 int
 ComputeChange_addSedMLVariable(ComputeChange_t * cc, SedMLVariable_t * smlv);
 

@@ -808,6 +808,31 @@ Simulation_getName(Simulation_t * s)
  * write comments
  */
 LIBSEDML_EXTERN
+Algorithm_t*
+Simulation_getAlgorithm(Simulation_t * s)
+{
+	if (s == NULL)
+		return NULL;
+
+	return (Algorithm_t*)s->getAlgorithm();
+}
+
+
+LIBSEDML_EXTERN
+Algorithm_t*
+Simulation_createAlgorithm(Simulation_t * s)
+{
+	if (s == NULL)
+		return NULL;
+
+	return (Algorithm_t*)s->createAlgorithm();
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
 int
 Simulation_isSetId(Simulation_t * s)
 {
@@ -823,6 +848,17 @@ int
 Simulation_isSetName(Simulation_t * s)
 {
 	return (s != NULL) ? static_cast<int>(s->isSetName()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+Simulation_isSetAlgorithm(Simulation_t * s)
+{
+	return (s != NULL) ? static_cast<int>(s->isSetAlgorithm()) : 0;
 }
 
 
@@ -853,6 +889,17 @@ Simulation_setName(Simulation_t * s, const char * name)
  */
 LIBSEDML_EXTERN
 int
+Simulation_setAlgorithm(Simulation_t * s, Algorithm_t* algorithm)
+{
+	return (s != NULL) ? s->setAlgorithm(algorithm) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 Simulation_unsetId(Simulation_t * s)
 {
 	return (s != NULL) ? s->unsetId() : LIBSEDML_INVALID_OBJECT;
@@ -867,6 +914,17 @@ int
 Simulation_unsetName(Simulation_t * s)
 {
 	return (s != NULL) ? s->unsetName() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+Simulation_unsetAlgorithm(Simulation_t * s)
+{
+	return (s != NULL) ? s->unsetAlgorithm() : LIBSEDML_INVALID_OBJECT;
 }
 
 

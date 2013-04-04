@@ -726,6 +726,16 @@ Simulation_getName(Simulation_t * s);
 
 
 LIBSEDML_EXTERN
+Algorithm_t*
+Simulation_getAlgorithm(Simulation_t * s);
+
+
+LIBSEDML_EXTERN
+Algorithm_t*
+Simulation_createAlgorithm(Simulation_t * s);
+
+
+LIBSEDML_EXTERN
 int
 Simulation_isSetId(Simulation_t * s);
 
@@ -733,6 +743,11 @@ Simulation_isSetId(Simulation_t * s);
 LIBSEDML_EXTERN
 int
 Simulation_isSetName(Simulation_t * s);
+
+
+LIBSEDML_EXTERN
+int
+Simulation_isSetAlgorithm(Simulation_t * s);
 
 
 LIBSEDML_EXTERN
@@ -747,12 +762,22 @@ Simulation_setName(Simulation_t * s, const char * name);
 
 LIBSEDML_EXTERN
 int
+Simulation_setAlgorithm(Simulation_t * s, Algorithm_t* algorithm);
+
+
+LIBSEDML_EXTERN
+int
 Simulation_unsetId(Simulation_t * s);
 
 
 LIBSEDML_EXTERN
 int
 Simulation_unsetName(Simulation_t * s);
+
+
+LIBSEDML_EXTERN
+int
+Simulation_unsetAlgorithm(Simulation_t * s);
 
 
 LIBSEDML_EXTERN

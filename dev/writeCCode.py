@@ -157,29 +157,59 @@ def writeGetFunction(attrib, output, element):
   else:
     attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element' or attrib['type'] == 'lo_element' :
-    return
   varname = strFunctions.objAbbrev(element)
   output.write('/**\n')
   output.write(' * write comments\n')
   output.write(' */\n')
-  output.write('LIBSEDML_EXTERN\n')
-  output.write('{0}\n'.format(attTypeCode))
-  output.write('{0}_get{1}'.format(element, capAttName))
-  output.write('({0}_t * {1})\n'.format(element, varname))
-  output.write('{\n')
-  if attType == 'string':
-    output.write('\tif ({0} == NULL)\n'.format(varname))
-    output.write('\t\treturn NULL;\n\n')
-    output.write('\treturn {0}->get{1}().empty() ? NULL : safe_strdup({0}->get{1}().c_str());\n'.format(varname, capAttName))
-  elif num == True:
-    if attTypeCode == 'double':
-      output.write('\treturn ({0} != NULL) ? {0}->get{1}() : numeric_limits<double>::quiet_NaN();\n'.format(varname, capAttName))
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('{0}\n'.format(attTypeCode))
+    output.write('{0}_get{1}'.format(element, capAttName))
+    output.write('({0}_t * {1})\n'.format(element, varname))
+    output.write('{\n')
+    if attType == 'string':
+      output.write('\tif ({0} == NULL)\n'.format(varname))
+      output.write('\t\treturn NULL;\n\n')
+      output.write('\treturn {0}->get{1}().empty() ? NULL : safe_strdup({0}->get{1}().c_str());\n'.format(varname, capAttName))
+    elif num == True:
+      if attTypeCode == 'double':
+        output.write('\treturn ({0} != NULL) ? {0}->get{1}() : numeric_limits<double>::quiet_NaN();\n'.format(varname, capAttName))
+      else:
+        output.write('\treturn ({0} != NULL) ? {0}->get{1}() : SEDML_INT_MAX;\n'.format(varname, capAttName))
+    elif attType == 'boolean':
+      output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->get{1}()) : 0;\n'.format(varname, capAttName))
+    output.write('}\n\n\n')
+  elif attrib['type'] == 'element':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('ASTNode_t*\n')
+      output.write('{0}_get{1}'.format(element, capAttName))
+      output.write('({0}_t * {1})\n'.format(element, varname))
+      output.write('{\n')
+      output.write('\tif ({0} == NULL)\n'.format(varname))
+      output.write('\t\treturn NULL;\n\n')
+      output.write('\treturn (ASTNode_t*){0}->get{1}();\n'.format(varname, capAttName))
+      output.write('}\n\n\n')
     else:
-      output.write('\treturn ({0} != NULL) ? {0}->get{1}() : SEDML_INT_MAX;\n'.format(varname, capAttName))
-  elif attType == 'boolean':
-    output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->get{1}()) : 0;\n'.format(varname, capAttName))
-  output.write('}\n\n\n')
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('{0}_t*\n'.format(capAttName))
+      output.write('{0}_get{1}'.format(element, capAttName))
+      output.write('({0}_t * {1})\n'.format(element, varname))
+      output.write('{\n')
+      output.write('\tif ({0} == NULL)\n'.format(varname))
+      output.write('\t\treturn NULL;\n\n')
+      output.write('\treturn ({0}_t*){1}->get{2}();\n'.format(capAttName,varname, capAttName))
+      output.write('}\n\n\n')
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('{0}_t*\n'.format(capAttName))
+      output.write('{0}_create{1}'.format(element, capAttName))
+      output.write('({0}_t * {1})\n'.format(element, varname))
+      output.write('{\n')
+      output.write('\tif ({0} == NULL)\n'.format(varname))
+      output.write('\t\treturn NULL;\n\n')
+      output.write('\treturn ({0}_t*){1}->create{2}();\n'.format(capAttName,varname, capAttName))
+      output.write('}\n\n\n')
+  
  
 def writeIsSetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
@@ -188,7 +218,7 @@ def writeIsSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element':
+  if attrib['type'] == 'lo_element':
     return
   varname = strFunctions.objAbbrev(element)
   output.write('/**\n')
@@ -210,20 +240,40 @@ def writeSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element':
+  if attrib['type'] == 'lo_element':
     return
   varname = strFunctions.objAbbrev(element)
   output.write('/**\n')
   output.write(' * write comments\n')
   output.write(' */\n')
-  output.write('LIBSEDML_EXTERN\n')
-  output.write('int\n')
-  output.write('{0}_set{1}'.format(element, capAttName))
-  output.write('({0}_t * {1},'.format(element, varname))
-  output.write(' {0} {1})\n'.format(attTypeCode, attName))
-  output.write('{\n')
-  output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
-  output.write('}\n\n\n')
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('int\n')
+    output.write('{0}_set{1}'.format(element, capAttName))
+    output.write('({0}_t * {1},'.format(element, varname))
+    output.write(' {0} {1})\n'.format(attTypeCode, attName))
+    output.write('{\n')
+    output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
+    output.write('}\n\n\n')
+  elif attrib['type'] == 'element':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('int\n')
+      output.write('{0}_set{1}'.format(element, capAttName))
+      output.write('({0}_t * {1},'.format(element, varname))
+      output.write(' {0} {1})\n'.format('ASTNode_t*', attName))
+      output.write('{\n')
+      output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
+      output.write('}\n\n\n')
+    else:
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('int\n')
+      output.write('{0}_set{1}'.format(element, capAttName))
+      output.write('({0}_t * {1},'.format(element, varname))
+      output.write(' {0}_t* {1})\n'.format(capAttName, attName))
+      output.write('{\n')
+      output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
+      output.write('}\n\n\n')
     
 def writeUnsetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
@@ -232,7 +282,7 @@ def writeUnsetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element':
+  if attrib['type'] == 'lo_element':
     return
   varname = strFunctions.objAbbrev(element)
   output.write('/**\n')

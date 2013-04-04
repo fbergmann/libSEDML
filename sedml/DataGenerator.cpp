@@ -1089,6 +1089,20 @@ DataGenerator_getName(DataGenerator_t * dg)
  * write comments
  */
 LIBSEDML_EXTERN
+ASTNode_t*
+DataGenerator_getMath(DataGenerator_t * dg)
+{
+	if (dg == NULL)
+		return NULL;
+
+	return (ASTNode_t*)dg->getMath();
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
 int
 DataGenerator_isSetId(DataGenerator_t * dg)
 {
@@ -1104,6 +1118,17 @@ int
 DataGenerator_isSetName(DataGenerator_t * dg)
 {
 	return (dg != NULL) ? static_cast<int>(dg->isSetName()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+DataGenerator_isSetMath(DataGenerator_t * dg)
+{
+	return (dg != NULL) ? static_cast<int>(dg->isSetMath()) : 0;
 }
 
 
@@ -1134,6 +1159,17 @@ DataGenerator_setName(DataGenerator_t * dg, const char * name)
  */
 LIBSEDML_EXTERN
 int
+DataGenerator_setMath(DataGenerator_t * dg, ASTNode_t* math)
+{
+	return (dg != NULL) ? dg->setMath(math) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 DataGenerator_unsetId(DataGenerator_t * dg)
 {
 	return (dg != NULL) ? dg->unsetId() : LIBSEDML_INVALID_OBJECT;
@@ -1148,6 +1184,17 @@ int
 DataGenerator_unsetName(DataGenerator_t * dg)
 {
 	return (dg != NULL) ? dg->unsetName() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+DataGenerator_unsetMath(DataGenerator_t * dg)
+{
+	return (dg != NULL) ? dg->unsetMath() : LIBSEDML_INVALID_OBJECT;
 }
 
 

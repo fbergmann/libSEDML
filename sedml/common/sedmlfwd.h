@@ -244,6 +244,13 @@ typedef CLASS_OR_STRUCT SedMLCurve                     SedMLCurve_t;
  */
 typedef CLASS_OR_STRUCT DataSet                     DataSet_t;
 
+/**
+ * @var typedef class ASTNode ASTNode_t
+ * @copydoc ASTNode
+ */
+typedef CLASS_OR_STRUCT ASTNode                     ASTNode_t;
+
+
 LIBSEDML_CPP_NAMESPACE_END
 
 #undef CLASS_OR_STRUCT

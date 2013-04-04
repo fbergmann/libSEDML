@@ -710,6 +710,53 @@ ComputeChange_clone(ComputeChange_t * cc)
 }
 
 
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+ASTNode_t*
+ComputeChange_getMath(ComputeChange_t * cc)
+{
+	if (cc == NULL)
+		return NULL;
+
+	return (ASTNode_t*)cc->getMath();
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+ComputeChange_isSetMath(ComputeChange_t * cc)
+{
+	return (cc != NULL) ? static_cast<int>(cc->isSetMath()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+ComputeChange_setMath(ComputeChange_t * cc, ASTNode_t* math)
+{
+	return (cc != NULL) ? cc->setMath(math) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+ComputeChange_unsetMath(ComputeChange_t * cc)
+{
+	return (cc != NULL) ? cc->unsetMath() : LIBSEDML_INVALID_OBJECT;
+}
+
+
 LIBSEDML_EXTERN
 int
 ComputeChange_addSedMLVariable(ComputeChange_t * cc, SedMLVariable_t * smlv)

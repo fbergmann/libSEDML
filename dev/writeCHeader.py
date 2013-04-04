@@ -30,7 +30,7 @@ def writeConstructors(element, package, output):
   output.write('{0}_clone'.format(element))
   output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
 
-def writeAttributeFunctions(attrs, output, element):
+def writeAttributeFunctions(attrs, output, element, dict):
   for i in range(0, len(attrs)):
     writeGetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
@@ -99,12 +99,26 @@ def writeGetFunction(attrib, output, element):
   else:
     attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element' or attrib['type'] == 'lo_element':
-    return
-  output.write('LIBSEDML_EXTERN\n')
-  output.write('{0}\n'.format(attTypeCode))
-  output.write('{0}_get{1}'.format(element, capAttName))
-  output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('{0}\n'.format(attTypeCode))
+    output.write('{0}_get{1}'.format(element, capAttName))
+    output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
+  elif attrib['type'] == 'element':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('ASTNode_t*\n')
+      output.write('{0}_getMath'.format(element))
+      output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
+    else:
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('{0}_t*\n'.format(strFunctions.cap(attrib['name'])))
+      output.write('{0}_get{1}'.format(element, capAttName))
+      output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('{0}_t*\n'.format(strFunctions.cap(attrib['name'])))
+      output.write('{0}_create{1}'.format(element, capAttName))
+      output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
  
 def writeIsSetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
@@ -113,12 +127,11 @@ def writeIsSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element' or attrib['type'] == 'lo_element':
-    return
-  output.write('LIBSEDML_EXTERN\n')
-  output.write('int\n')
-  output.write('{0}_isSet{1}'.format(element, capAttName))
-  output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
+  if attrib['type'] != 'lo_element':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('int\n')
+    output.write('{0}_isSet{1}'.format(element, capAttName))
+    output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
     
  
 def writeSetFunction(attrib, output, element):
@@ -128,13 +141,25 @@ def writeSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element' or attrib['type'] == 'lo_element':
-    return
-  output.write('LIBSEDML_EXTERN\n')
-  output.write('int\n')
-  output.write('{0}_set{1}'.format(element, capAttName))
-  output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
-  output.write(' {0} {1});\n\n\n'.format(attTypeCode, attName))
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('int\n')
+    output.write('{0}_set{1}'.format(element, capAttName))
+    output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
+    output.write(' {0} {1});\n\n\n'.format(attTypeCode, attName))
+  elif attrib['type'] == 'element':
+    if attrib['name'] == 'Math' or attrib['name'] == 'math':
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('int\n')
+      output.write('{0}_setMath'.format(element))
+      output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
+      output.write(' ASTNode_t* {0});\n\n\n'.format(attName))
+    else:
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('int\n')
+      output.write('{0}_set{1}'.format(element, capAttName))
+      output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
+      output.write(' {0}_t* {1});\n\n\n'.format(strFunctions.cap(attName), attName))
     
 def writeUnsetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
@@ -143,7 +168,7 @@ def writeUnsetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] == 'element' or attrib['type'] == 'lo_element':
+  if attrib['type'] == 'lo_element':
     return
   output.write('LIBSEDML_EXTERN\n')
   output.write('int\n')
@@ -178,7 +203,7 @@ def writeListOfHeaders(output, element):
 # write the header file      
 def createHeader(element, header):
   writeConstructors(element['name'], element['package'], header)
-  writeAttributeFunctions(element['attribs'], header, element['name'])
+  writeAttributeFunctions(element['attribs'], header, element['name'], element)
   writeHasReqdAttrFunction(header, element['name'])
   if element['hasChildren'] == True or element['hasMath'] == True:
     writeHasReqdElementsFunction(header, element['name'])

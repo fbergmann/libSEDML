@@ -53,25 +53,25 @@ main (int argc, char* argv[])
   if ( doc->getErrorLog()->getNumFailsWithSeverity(LIBSEDML_SEV_ERROR) > 0)
   {
     cout << doc->getErrorLog()->toString();
-	return 2; 
+    return 2; 
   }
   
   cout << "The document has " << doc->getNumSimulations() << " simulation(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumSimulations(); ++i)
   {
     Simulation* current = doc->getSimulation(i);
-	switch(current->getTypeCode())
-	{
-	   case SEDML_SIMULATION_UNIFORMTIMECOURSE:
-	   {
-	      UniformTimeCourse* tc = static_cast<UniformTimeCourse*>(current);
-		  cout << "\tTimecourse id=" << tc->getId() << " start=" << tc->getOutputStartTime() << " end=" << tc->getOutputEndTime() << " numPoints=" << tc->getNumberOfPoints() << " kisao=" << (tc->isSetAlgorithm() ? tc->getAlgorithm()->getKisaoID() : std::string("none")) << endl;
-		  break;
-	   }
-	   default:
-			cout << "\tUncountered unknown simulation. " << current->getId() << endl;
-			break;
-	}
+    switch(current->getTypeCode())
+    {
+       case SEDML_SIMULATION_UNIFORMTIMECOURSE:
+       {
+          UniformTimeCourse* tc = static_cast<UniformTimeCourse*>(current);
+          cout << "\tTimecourse id=" << tc->getId() << " start=" << tc->getOutputStartTime() << " end=" << tc->getOutputEndTime() << " numPoints=" << tc->getNumberOfPoints() << " kisao=" << (tc->isSetAlgorithm() ? tc->getAlgorithm()->getKisaoID() : std::string("none")) << endl;
+          break;
+       }
+       default:
+          cout << "\tUncountered unknown simulation. " << current->getId() << endl;
+          break;
+    }
   }
   
   cout << endl;
@@ -79,7 +79,7 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < doc->getNumSedMLModels(); ++i)
   {
     SedMLModel* current = doc->getSedMLModel(i);
-	cout << "\tModel id=" << current->getId() << " language=" << current->getLanguage() << " source=" << current->getSource() << " numChanges=" << current->getNumChanges() << endl;
+    cout << "\tModel id=" << current->getId() << " language=" << current->getLanguage() << " source=" << current->getSource() << " numChanges=" << current->getNumChanges() << endl;
   }
   
   cout << endl;
@@ -87,7 +87,7 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < doc->getNumTasks(); ++i)
   {
     Task* current = doc->getTask(i);
-	cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
+    cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
   }
 
   cout << endl;
@@ -95,7 +95,7 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < doc->getNumDataGenerators(); ++i)
   {
     DataGenerator* current = doc->getDataGenerator(i);
-	cout << "\tDG id=" << current->getId() << " math=" << SBML_formulaToString(current->getMath()) << endl;
+    cout << "\tDG id=" << current->getId() << " math=" << SBML_formulaToString(current->getMath()) << endl;
   }
   
   cout << endl;
@@ -103,30 +103,30 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < doc->getNumSedMLOutputs(); ++i)
   {
     SedMLOutput* current = doc->getSedMLOutput(i);
-	switch(current->getTypeCode())
-	{
-	    case SEDML_OUTPUT_REPORT:
-		{
-			Report* r = static_cast<Report*>(current);
-			cout << "\tReport id=" << current->getId() << " numDataSets=" << r->getNumDataSets() << endl;
-			break;
-	    }
-	    case SEDML_OUTPUT_PLOT2D:
-		{
-			Plot2D* p = static_cast<Plot2D*>(current);
-			cout << "\tPlot2d id=" << current->getId() << " numCurves=" << p->getNumSedMLCurves() << endl;
-			break;
-	    }
-	    case SEDML_OUTPUT_PLOT3D:
-		{
-			Plot3D* p = static_cast<Plot3D*>(current);
-			cout << "\tPlot3d id=" << current->getId() << " numSurfaces=" << p->getNumSurfaces() << endl;
-			break;
-	    }
-		default: 
-			cout << "\tEncountered unknown output " << current->getId() << endl;
-			break;
-	}
+    switch(current->getTypeCode())
+    {
+      case SEDML_OUTPUT_REPORT:
+      {
+        Report* r = static_cast<Report*>(current);
+        cout << "\tReport id=" << current->getId() << " numDataSets=" << r->getNumDataSets() << endl;
+        break;
+      }
+      case SEDML_OUTPUT_PLOT2D:
+      {
+        Plot2D* p = static_cast<Plot2D*>(current);
+        cout << "\tPlot2d id=" << current->getId() << " numCurves=" << p->getNumSedMLCurves() << endl;
+        break;
+      }
+      case SEDML_OUTPUT_PLOT3D:
+      {
+        Plot3D* p = static_cast<Plot3D*>(current);
+        cout << "\tPlot3d id=" << current->getId() << " numSurfaces=" << p->getNumSurfaces() << endl;
+        break;
+      }
+      default: 
+        cout << "\tEncountered unknown output " << current->getId() << endl;
+        break;
+    }
   }
 
   return 0;

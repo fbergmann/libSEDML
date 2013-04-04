@@ -997,6 +997,11 @@ DataGenerator_getName(DataGenerator_t * dg);
 
 
 LIBSEDML_EXTERN
+ASTNode_t*
+DataGenerator_getMath(DataGenerator_t * dg);
+
+
+LIBSEDML_EXTERN
 int
 DataGenerator_isSetId(DataGenerator_t * dg);
 
@@ -1004,6 +1009,11 @@ DataGenerator_isSetId(DataGenerator_t * dg);
 LIBSEDML_EXTERN
 int
 DataGenerator_isSetName(DataGenerator_t * dg);
+
+
+LIBSEDML_EXTERN
+int
+DataGenerator_isSetMath(DataGenerator_t * dg);
 
 
 LIBSEDML_EXTERN
@@ -1018,12 +1028,22 @@ DataGenerator_setName(DataGenerator_t * dg, const char * name);
 
 LIBSEDML_EXTERN
 int
+DataGenerator_setMath(DataGenerator_t * dg, ASTNode_t* math);
+
+
+LIBSEDML_EXTERN
+int
 DataGenerator_unsetId(DataGenerator_t * dg);
 
 
 LIBSEDML_EXTERN
 int
 DataGenerator_unsetName(DataGenerator_t * dg);
+
+
+LIBSEDML_EXTERN
+int
+DataGenerator_unsetMath(DataGenerator_t * dg);
 
 
 LIBSEDML_EXTERN
