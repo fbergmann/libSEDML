@@ -129,7 +129,7 @@ main (int argc, char* argv[])
       case SEDML_OUTPUT_PLOT2D:
       {
         Plot2D_t* p = (Plot2D_t*)current;
-		printf("\tPlot2D id=%s numCurves=%d\n", SedMLOutput_getId(current), Plot2D_getNumCurves(p));
+		printf("\tPlot2D id=%s numCurves=%d\n", SedMLOutput_getId(current), Plot2D_getNumSedMLCurves(p));
         break;
       }
       case SEDML_OUTPUT_PLOT3D:
