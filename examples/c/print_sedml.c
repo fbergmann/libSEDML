@@ -109,8 +109,8 @@ main (int argc, char* argv[])
   {
     DataGenerator_t* current = SedMLDocument_getDataGenerator(doc, i);
     printf("\tDG id=%s math=%s\n",
-      Task_getId(current), 
-	  SBML_formulaToString(Task_getMath(current)));
+      DataGenerator_getId(current), 
+	  SBML_formulaToString(DataGenerator_getMath(current)));
   }
   
   printf("\n");
@@ -118,7 +118,7 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < SedMLDocument_getNumSedMLOutputs(doc); ++i)
   {
     SedMLOutput_t* current = SedMLDocument_getSedMLOutput(doc,i);
-    switch(current->getTypeCode())
+    switch(SedBase_getTypeCode((SedBase_t*)current))
     {
       case SEDML_OUTPUT_REPORT:
       {
