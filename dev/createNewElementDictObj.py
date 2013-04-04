@@ -60,7 +60,7 @@ def createSedDocument() :
 			  'abstract':True,
 			  'concrete': [ 
 				           dict({ 'name':'report', 'element':'Report'}),
-				           dict({ 'name':'plot2d', 'element':'Plot2D'}),
+				           dict({ 'name':'plot2D', 'element':'Plot2D'}),
 				           dict({ 'name':'plot3D', 'element':'Plot3D'}),
 						   ]
 			  })
@@ -230,7 +230,7 @@ def createSedOutput() :
 				  'abstract':True,
 				  'concrete': [ 
 				           dict({ 'name':'report', 'element':'Report'}),
-				           dict({ 'name':'plot2d', 'element':'Plot2D'}),
+				           dict({ 'name':'plot2D', 'element':'Plot2D'}),
 				           dict({ 'name':'plot3D', 'element':'Plot3D'}),
 						   ]
 				  })

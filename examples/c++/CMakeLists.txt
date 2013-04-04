@@ -43,6 +43,7 @@ foreach(example
 
 	create_sedml
 	echo_sedml
+	print_sedml
 	
 )
 	add_executable(example_cpp_${example} ${example}.cpp)

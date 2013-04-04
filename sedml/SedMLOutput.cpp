@@ -614,7 +614,7 @@ SedListOfSedMLOutputs::createObject(XMLInputStream& stream)
 		appendAndOwn(object);
 	}
 
-	if (name == "plot2d")
+	if (name == "plot2D")
 	{
 		object = new Plot2D(getSedMLNamespaces());
 		appendAndOwn(object);
