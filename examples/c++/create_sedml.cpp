@@ -89,17 +89,15 @@ main (int argc, char* argv[])
   }
 
   // create simulation
-  UniformTimeCourse tc;
-  tc.setId("sim1");
-  tc.setInitialTime(0.0);
-  tc.setOutputStartTime(0.0);
-  tc.setOutputEndTime(10.0);
-  tc.setNumberOfPoints(1000);
+  UniformTimeCourse* tc = doc.createUniformTimeCourse();
+  tc->setId("sim1");
+  tc->setInitialTime(0.0);
+  tc->setOutputStartTime(0.0);
+  tc->setOutputEndTime(10.0);
+  tc->setNumberOfPoints(1000);
   // need to set the correct KISAO Term
-  Algorithm* alg = tc.createAlgorithm();
+  Algorithm* alg = tc->createAlgorithm();
   alg->setKisaoID("KISAO:0000019");
-  // now add it to the document
-  doc.addSimulation(&tc);
 
   // create a task that uses the simulation and the model above
   Task* task = doc.createTask();
@@ -130,37 +128,35 @@ main (int argc, char* argv[])
   dg->setMath(SBML_parseFormula("v1"));
 
   // add a report
-  Report report;
-  report.setId("r1");
-  report.setName("report 1");
-  DataSet* set = report.createDataSet();
+  Report* report = doc.createReport();
+  report->setId("r1");
+  report->setName("report 1");
+  DataSet* set = report->createDataSet();
   set->setId("ds1");
   set->setLabel("time");
   set->setDataReference("time");
-  set = report.createDataSet();
+  set = report->createDataSet();
   set->setId("ds2");
   set->setLabel("S1");
   set->setDataReference("S1");
-  doc.addSedMLOutput(&report);
 
   // add a 2d plot
-  Plot2D plot;
-  plot.setId("p1");
-  plot.setName("S1 Timecourse");
-  SedMLCurve* curve = plot.createSedMLCurve();
+  Plot2D* plot = doc.createPlot2D();
+  plot->setId("p1");
+  plot->setName("S1 Timecourse");
+  SedMLCurve* curve = plot->createSedMLCurve();
   curve->setId("c1");
   curve->setName("S1");
   curve->setLogX(false);
   curve->setLogY(false);
   curve->setXDataReference("time");
   curve->setYDataReference("S1");
-  doc.addSedMLOutput(&plot);
 
   // add a 3D Plot
-  Plot3D plot2;
-  plot2.setId("p2");
-  plot2.setName("dunno");
-  Surface* surf = plot2.createSurface();
+  Plot3D* plot2 = doc.createPlot3D();
+  plot2->setId("p2");
+  plot2->setName("dunno");
+  Surface* surf = plot2->createSurface();
   surf->setId("surf1");
   surf->setName("S1");
   surf->setLogX(false);
@@ -169,7 +165,6 @@ main (int argc, char* argv[])
   surf->setXDataReference("time");
   surf->setYDataReference("S1");
   surf->setZDataReference("S1");
-  doc.addSedMLOutput(&plot2);
 
   // write the document
   writeSedML(&doc, argv[1]);
