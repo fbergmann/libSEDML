@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Libsedml : SED-ML library based on libSBML " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Libsedml</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/fbergmann/libSEDML">View on GitHub</a>
+
+          <h1 id="project_title">Libsedml</h1>
+          <h2 id="project_tagline">SED-ML library based on libSBML </h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/fbergmann/libSEDML/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/fbergmann/libSEDML/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>LibSEDML</h1>
+
+<p>Some time ago I developed <a href="http://libsedml.sf.net">libSedML</a> a C# library that fully supports <a href="http://sed-ml.org">SED-ML</a> for SBML as well as CellML models for creation of the description just as for the execution of Simulation Experiments. However, frequently the question to a C++ based library comes up. This project makes use of <a href="http://sbml.org/Software/libSBML">libSBML</a> XML layer as well as code generation as starting point to produce a library for reading and writing of SED-ML models. </p>
+
+<h2>Dependencies</h2>
+
+<p>This library requires libSBML to be present, as its XML parsing layer will be used. for that either expat, xerces-c or libXML2 needs to be available. </p>
+
+<h2>Building</h2>
+
+<p>This library uses <a href="http://cmake.org">CMake</a> to build the library, so from an initial checkout all you would need todo is to run: </p>
+
+<pre><code>mkdir build  
+cd build
+cmake -DLIBSBML_LIBRARY=&lt; path to libsbml lib&gt; -DLIBSBML_INCLUDE_DIR=&lt; path to includes &gt; ... -DEXTRA_LIBS= &lt; comma separated list of xml libraries&gt; 
+make  
+make install
+</code></pre>
+
+<p>Should libSBML be installed in a default location it will be found automatically. Note that you do need to list the xml libraries that libSBML was linked against. In most cases libSBML is compiled against libXML and have compression enabled, so your <code>EXTRA_LIBS</code> would be:</p>
+
+<pre><code>EXTRA_LIBS=xml2;bz2;z;iconv
+</code></pre>
+
+<p>note the semicolon denoting the listing of several libraries. Of course you could also enter the full path to each individual file, just to give an example, on windows I use: </p>
+
+<pre><code>EXTRA_LIBS=D:/dependencies/lib/expat.lib
+</code></pre>
+
+<p>for linking against <code>expat</code> and indicating, that libSBML was compiled without compression.</p>
+
+<h2>License</h2>
+
+<p>Copyright (c) 2013, Frank T. Bergmann<br>
+All rights reserved.</p>
+
+<p>Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met: </p>
+
+<ol>
+<li>Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer. </li>
+<li>Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation
+and/or other materials provided with the distribution. </li>
+</ol><p>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Libsedml maintained by <a href="https://github.com/fbergmann">fbergmann</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
