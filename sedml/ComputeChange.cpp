@@ -464,7 +464,7 @@ ComputeChange::getElementName () const
 SedBase*
 ComputeChange::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+	SedBase* object = Change::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 

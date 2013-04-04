@@ -271,7 +271,7 @@ Plot3D::getElementName () const
 SedBase*
 Plot3D::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+	SedBase* object = SedMLOutput::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 

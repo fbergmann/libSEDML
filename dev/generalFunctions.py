@@ -491,14 +491,17 @@ def writeReadAttribute(output, attrib, element):
     num = False
 	
 def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False,baseClass='SedBase'):  
-  if isSedListOf == True or hasChildren == False:
+  if (isSedListOf == True or hasChildren == False) and baseClass  == 'SedBase':
     return;
   outFile.write('/**\n')
   outFile.write(' * return the SEDML object corresponding to next XMLToken.\n')
   outFile.write(' */\n')
   outFile.write('SedBase*\n{0}::createObject(XMLInputStream& stream)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\tSedBase* object = NULL;\n\n')
+  if baseClass == 'SedBase':
+    outFile.write('\tSedBase* object = NULL;\n\n')
+  else:
+    outFile.write('\tSedBase* object = {0}::createObject(stream);\n\n'.format(baseClass))
   outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
   outFile.write('\t{0}::connectToChild();\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
@@ -507,7 +510,13 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
       outFile.write('\tif (name == "listOf{0}s")\n'.format(strFunctions.cap(current['name'])))	
       outFile.write('\t{\n')	
       outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.cap(current['name'])))	
-      outFile.write('\t}\n\n')		
+      outFile.write('\t}\n\n')
+    elif current['type'] == 'element' and (current['name'] !='Math' and current['name'] != 'math'):
+      outFile.write('\tif (name == "{0}")\n'.format(current['name']))	
+      outFile.write('\t{\n')	
+      outFile.write('\t\tm{0}= new {1}();\n'.format(strFunctions.cap(current['name']), current['element']))	
+      outFile.write('\t\tobject = m{0};\n'.format(strFunctions.cap(current['name'])))	
+      outFile.write('\t}\n\n')
   outFile.write('\treturn object;\n')  
   outFile.write('}\n\n\n')  
 
@@ -692,8 +701,8 @@ def writeReadOtherXMLCPPCode(outFile, element, baseClass='SedBase'):
 
 
 
-def writeProtectedHeaders(outFile, hasChildren=False, hasMath=False):
-  if hasChildren:
+def writeProtectedHeaders(outFile, hasChildren=False, hasMath=False, baseClass='SedBase'):
+  if hasChildren or baseClass != 'SedBase':
     writeCreateObjectHeader(outFile)
   writeAddExpectedHeader(outFile)
   writeReadAttributesHeader(outFile)
@@ -724,7 +733,7 @@ def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, has
   if isSedListOf == True:
     element = writeListOf(element)
   writeGetElementNameCPPCode(outFile, element, isSedListOf, elementDict)
-  if hasChildren:
+  if hasChildren or baseClass != 'SedBase':
     writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath, baseClass)
     writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath, baseClass)
   writeGetTypeCodeCPPCode(outFile, element, sbmltypecode, isSedListOf)

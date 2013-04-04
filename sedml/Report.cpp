@@ -271,7 +271,7 @@ Report::getElementName () const
 SedBase*
 Report::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+	SedBase* object = SedMLOutput::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 

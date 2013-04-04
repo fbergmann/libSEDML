@@ -213,6 +213,17 @@ protected:
 /** @cond doxygen-libsbml-internal */
 
 	/**
+	 * return the SEDML object corresponding to next XMLToken.
+	 */
+	virtual SedBase* createObject(XMLInputStream& stream);
+
+
+/** @endcond doxygen-libsbml-internal */
+
+
+/** @cond doxygen-libsbml-internal */
+
+	/**
 	 * Get the list of expected attributes for this element.
 	 */
 	virtual void addExpectedAttributes(ExpectedAttributes& attributes);

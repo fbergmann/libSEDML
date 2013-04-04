@@ -339,10 +339,10 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
 def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf, elementDict):
   writeAdditionalIncludes(attributes, header, elementDict)
   header.write('class LIBSEDML_EXTERN {0} :'.format(nameOfElement))
+  baseClass = 'SedBase'
   if elementDict.has_key('baseClass'):
-    header.write(' public {0}\n{1}\n\n'.format(elementDict['baseClass'], '{'))
-  else:
-    header.write(' public SedBase\n{0}\n\n'.format('{'))
+    baseClass = elementDict['baseClass']
+  header.write(' public {0}\n{1}\n\n'.format(baseClass, '{'))
   writeAttributes(attributes, header)
   header.write('public:\n\n')
   writeConstructors(nameOfElement, nameOfPackage, header)
@@ -350,7 +350,7 @@ def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, ha
   generalFunctions.writeCommonHeaders(header, nameOfElement, attributes, False, hasChildren, hasMath)
   generalFunctions.writeInternalHeaders(header, isSedListOf, hasChildren)
   header.write('protected:\n\n')
-  generalFunctions.writeProtectedHeaders(header, hasChildren, hasMath)
+  generalFunctions.writeProtectedHeaders(header, hasChildren, hasMath, baseClass)
   if elementDict.has_key('additionalCPPDecls'):
     header.write(open(elementDict['additionalCPPDecls'], 'r').read())
   header.write('\n};\n\n')

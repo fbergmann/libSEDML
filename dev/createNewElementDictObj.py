@@ -177,7 +177,7 @@ def createSedUniformTimeCourse() :
 def createSedSimulation() :
   a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
-  a3 = dict({'type': 'element', 'reqd' : False, 'name':'algorithm'})
+  a3 = dict({'type': 'element', 'reqd' : False, 'name':'algorithm', 'element':'Algorithm'})
   attributes = [a1, a2, a3]
   element = dict({
                   'name': 'Simulation', 

@@ -65,7 +65,7 @@ main (int argc, char* argv[])
 	   case SEDML_SIMULATION_UNIFORMTIMECOURSE:
 	   {
 	      UniformTimeCourse* tc = static_cast<UniformTimeCourse*>(current);
-		  cout << "\tTimecourse id=" << tc->getId() << " start=" << tc->getOutputStartTime() << " end=" << tc->getOutputEndTime() << " numPoints=" << tc->getNumberOfPoints() << endl;
+		  cout << "\tTimecourse id=" << tc->getId() << " start=" << tc->getOutputStartTime() << " end=" << tc->getOutputEndTime() << " numPoints=" << tc->getNumberOfPoints() << " kisao=" << (tc->isSetAlgorithm() ? tc->getAlgorithm()->getKisaoID() : std::string("none")) << endl;
 		  break;
 	   }
 	   default:

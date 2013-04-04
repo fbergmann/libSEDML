@@ -192,6 +192,22 @@ ChangeAttribute::getElementName () const
 }
 
 
+/**
+ * return the SEDML object corresponding to next XMLToken.
+ */
+SedBase*
+ChangeAttribute::createObject(XMLInputStream& stream)
+{
+	SedBase* object = Change::createObject(stream);
+
+	const string& name   = stream.peek().getName();
+
+	Change::connectToChild();
+
+	return object;
+}
+
+
 /*
  * Returns the libSEDML type code for this SEDML object.
  */

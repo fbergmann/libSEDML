@@ -346,6 +346,12 @@ Simulation::createObject(XMLInputStream& stream)
 
 	SedBase::connectToChild();
 
+	if (name == "algorithm")
+	{
+		mAlgorithm= new Algorithm();
+		object = mAlgorithm;
+	}
+
 	return object;
 }
 

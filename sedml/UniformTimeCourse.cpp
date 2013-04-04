@@ -371,6 +371,22 @@ UniformTimeCourse::getElementName () const
 }
 
 
+/**
+ * return the SEDML object corresponding to next XMLToken.
+ */
+SedBase*
+UniformTimeCourse::createObject(XMLInputStream& stream)
+{
+	SedBase* object = Simulation::createObject(stream);
+
+	const string& name   = stream.peek().getName();
+
+	Simulation::connectToChild();
+
+	return object;
+}
+
+
 /*
  * Returns the libSEDML type code for this SEDML object.
  */

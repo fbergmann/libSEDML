@@ -248,6 +248,22 @@ Surface::getElementName () const
 }
 
 
+/**
+ * return the SEDML object corresponding to next XMLToken.
+ */
+SedBase*
+Surface::createObject(XMLInputStream& stream)
+{
+	SedBase* object = SedMLCurve::createObject(stream);
+
+	const string& name   = stream.peek().getName();
+
+	SedMLCurve::connectToChild();
+
+	return object;
+}
+
+
 /*
  * Returns the libSEDML type code for this SEDML object.
  */
