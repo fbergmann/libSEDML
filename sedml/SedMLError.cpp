@@ -311,20 +311,10 @@ SedMLError::clone() const
 void
 SedMLError::print(ostream& s) const
 {
-  if (getPackage().empty() == true || getPackage() == "core")
-  {
     s << "line " << getLine() << ": ("
       << setfill('0') << setw(5) << getErrorId()
       << " [" << getSeverityAsString() << "]) "
       << getMessage() << endl;
-  }
-  else
-  {
-    s << "line " << getLine() << ": (" << getPackage() << "-"
-      << setfill('0') << setw(5) << (getErrorId() - getErrorIdOffset())
-      << " [" << getSeverityAsString() << "]) "
-      << getMessage() << endl;
-  }
 }
 /** @endcond **/
 
