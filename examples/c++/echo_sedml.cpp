@@ -34,7 +34,7 @@
 
 
 #include <iostream>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedTypes.h>
 
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE
@@ -49,7 +49,7 @@ main (int argc, char* argv[])
     return 2;
   }
 
-  SedMLDocument *d = readSedML(argv[1]);
+  SedDocument *d = readSedML(argv[1]);
   if ( d->getErrorLog()->getNumFailsWithSeverity(LIBSEDML_SEV_ERROR) > 0)
   {
     cout << d->getErrorLog()->toString();

@@ -34,7 +34,7 @@
 
 
 #include <iostream>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedTypes.h>
 
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE
@@ -49,7 +49,7 @@ main (int argc, char* argv[])
     return 2;
   }
 
-  SedMLDocument *doc = readSedML(argv[1]);
+  SedDocument *doc = readSedML(argv[1]);
   if ( doc->getErrorLog()->getNumFailsWithSeverity(LIBSEDML_SEV_ERROR) > 0)
   {
     cout << doc->getErrorLog()->toString();
@@ -59,12 +59,12 @@ main (int argc, char* argv[])
   cout << "The document has " << doc->getNumSimulations() << " simulation(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumSimulations(); ++i)
   {
-    Simulation* current = doc->getSimulation(i);
+    SedSimulation* current = doc->getSimulation(i);
     switch(current->getTypeCode())
     {
        case SEDML_SIMULATION_UNIFORMTIMECOURSE:
        {
-          UniformTimeCourse* tc = static_cast<UniformTimeCourse*>(current);
+          SedUniformTimeCourse* tc = static_cast<SedUniformTimeCourse*>(current);
           cout << "\tTimecourse id=" << tc->getId() << " start=" << tc->getOutputStartTime() << " end=" << tc->getOutputEndTime() << " numPoints=" << tc->getNumberOfPoints() << " kisao=" << (tc->isSetAlgorithm() ? tc->getAlgorithm()->getKisaoID() : std::string("none")) << endl;
           break;
        }
@@ -75,10 +75,10 @@ main (int argc, char* argv[])
   }
   
   cout << endl;
-  cout << "The document has " << doc->getNumSedMLModels() << " model(s)." << endl;
-  for (unsigned int i = 0; i < doc->getNumSedMLModels(); ++i)
+  cout << "The document has " << doc->getNumModels() << " model(s)." << endl;
+  for (unsigned int i = 0; i < doc->getNumModels(); ++i)
   {
-    SedMLModel* current = doc->getSedMLModel(i);
+    SedModel* current = doc->getModel(i);
     cout << "\tModel id=" << current->getId() << " language=" << current->getLanguage() << " source=" << current->getSource() << " numChanges=" << current->getNumChanges() << endl;
   }
   
@@ -86,7 +86,7 @@ main (int argc, char* argv[])
   cout << "The document has " << doc->getNumTasks() << " task(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumTasks(); ++i)
   {
-    Task* current = doc->getTask(i);
+    SedTask* current = doc->getTask(i);
     cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
   }
 
@@ -94,32 +94,32 @@ main (int argc, char* argv[])
   cout << "The document has " << doc->getNumDataGenerators() << " datagenerators(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumDataGenerators(); ++i)
   {
-    DataGenerator* current = doc->getDataGenerator(i);
+    SedDataGenerator* current = doc->getDataGenerator(i);
     cout << "\tDG id=" << current->getId() << " math=" << SBML_formulaToString(current->getMath()) << endl;
   }
   
   cout << endl;
-  cout << "The document has " << doc->getNumSedMLOutputs() << " output(s)." << endl;
-  for (unsigned int i = 0; i < doc->getNumSedMLOutputs(); ++i)
+  cout << "The document has " << doc->getNumOutputs() << " output(s)." << endl;
+  for (unsigned int i = 0; i < doc->getNumOutputs(); ++i)
   {
-    SedMLOutput* current = doc->getSedMLOutput(i);
+    SedOutput* current = doc->getOutput(i);
     switch(current->getTypeCode())
     {
       case SEDML_OUTPUT_REPORT:
       {
-        Report* r = static_cast<Report*>(current);
+        SedReport* r = static_cast<SedReport*>(current);
         cout << "\tReport id=" << current->getId() << " numDataSets=" << r->getNumDataSets() << endl;
         break;
       }
       case SEDML_OUTPUT_PLOT2D:
       {
-        Plot2D* p = static_cast<Plot2D*>(current);
-        cout << "\tPlot2d id=" << current->getId() << " numCurves=" << p->getNumSedMLCurves() << endl;
+        SedPlot2D* p = static_cast<SedPlot2D*>(current);
+        cout << "\tPlot2d id=" << current->getId() << " numCurves=" << p->getNumCurves() << endl;
         break;
       }
       case SEDML_OUTPUT_PLOT3D:
       {
-        Plot3D* p = static_cast<Plot3D*>(current);
+        SedPlot3D* p = static_cast<SedPlot3D*>(current);
         cout << "\tPlot3d id=" << current->getId() << " numSurfaces=" << p->getNumSurfaces() << endl;
         break;
       }

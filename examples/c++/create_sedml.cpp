@@ -34,7 +34,7 @@
 
 
 #include <iostream>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedTypes.h>
 #include <sbml/math/FormulaParser.h>
 
 using namespace std;
@@ -51,37 +51,37 @@ main (int argc, char* argv[])
   }
 
   // create the document
-  SedMLDocument doc;
+  SedDocument doc;
   doc.setLevel(1);
   doc.setVersion(1);
 
   {
   // create a first model referencing an sbml file
-  SedMLModel *model = doc.createSedMLModel();
+  SedModel *model = doc.createModel();
   model->setId("model1");
   model->setSource("file.xml");
   model->setLanguage("urn:sedml:sbml");
 
   // create a second model modifying a variable of that other sbml file
-  model = doc.createSedMLModel();
+  model = doc.createModel();
   model->setId("model2");
   model->setSource("model1");
   model->setLanguage("urn:sedml:sbml");
 
   // change a paramerter 'k' to 0.1
-  ChangeAttribute* change = model->createChangeAttribute();
+  SedChangeAttribute* change = model->createChangeAttribute();
   change->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
   change->setNewValue("0.1");
 
   // remove species 's1'
-  RemoveXML* remove = model->createRemoveXML();
+  SedRemoveXML* remove = model->createRemoveXML();
   remove->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
 
   // now for something tricky we want to update the initialConcentration of 'S2' to be
   // half what it was in the original model
-  ComputeChange* compute = model->createComputeChange();
+  SedComputeChange* compute = model->createComputeChange();
   compute->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
-  SedMLVariable *variable = compute->createSedMLVariable();
+  SedVariable *variable = compute->createVariable();
   variable->setId("S2");
   variable->setModelReference("model1");
   variable->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
@@ -89,27 +89,27 @@ main (int argc, char* argv[])
   }
 
   // create simulation
-  UniformTimeCourse* tc = doc.createUniformTimeCourse();
+  SedUniformTimeCourse* tc = doc.createUniformTimeCourse();
   tc->setId("sim1");
   tc->setInitialTime(0.0);
   tc->setOutputStartTime(0.0);
   tc->setOutputEndTime(10.0);
   tc->setNumberOfPoints(1000);
   // need to set the correct KISAO Term
-  Algorithm* alg = tc->createAlgorithm();
+  SedAlgorithm* alg = tc->createAlgorithm();
   alg->setKisaoID("KISAO:0000019");
 
   // create a task that uses the simulation and the model above
-  Task* task = doc.createTask();
+  SedTask* task = doc.createTask();
   task->setId("task1");
   task->setModelReference("model1");
   task->setSimulationReference("sim1");
 
   // add a DataGenerator to hold the output for time
-  DataGenerator* dg = doc.createDataGenerator();
+  SedDataGenerator* dg = doc.createDataGenerator();
   dg->setId("time");
   dg->setName("time");
-  SedMLVariable* var = dg->createSedMLVariable();
+  SedVariable* var = dg->createVariable();
   var->setId("v0");
   var->setName("time");
   var->setTaskReference("task1");
@@ -120,7 +120,7 @@ main (int argc, char* argv[])
   dg = doc.createDataGenerator();
   dg->setId("S1");
   dg->setName("S1");
-  var = dg->createSedMLVariable();
+  var = dg->createVariable();
   var->setId("v1");
   var->setName("S1");
   var->setTaskReference("task1");
@@ -128,10 +128,10 @@ main (int argc, char* argv[])
   dg->setMath(SBML_parseFormula("v1"));
 
   // add a report
-  Report* report = doc.createReport();
+  SedReport* report = doc.createReport();
   report->setId("r1");
   report->setName("report 1");
-  DataSet* set = report->createDataSet();
+  SedDataSet* set = report->createDataSet();
   set->setId("ds1");
   set->setLabel("time");
   set->setDataReference("time");
@@ -141,10 +141,10 @@ main (int argc, char* argv[])
   set->setDataReference("S1");
 
   // add a 2d plot
-  Plot2D* plot = doc.createPlot2D();
+  SedPlot2D* plot = doc.createPlot2D();
   plot->setId("p1");
   plot->setName("S1 Timecourse");
-  SedMLCurve* curve = plot->createSedMLCurve();
+  SedCurve* curve = plot->createCurve();
   curve->setId("c1");
   curve->setName("S1");
   curve->setLogX(false);
@@ -153,10 +153,10 @@ main (int argc, char* argv[])
   curve->setYDataReference("S1");
 
   // add a 3D Plot
-  Plot3D* plot2 = doc.createPlot3D();
+  SedPlot3D* plot2 = doc.createPlot3D();
   plot2->setId("p2");
   plot2->setName("dunno");
-  Surface* surf = plot2->createSurface();
+  SedSurface* surf = plot2->createSurface();
   surf->setId("surf1");
   surf->setName("S1");
   surf->setLogX(false);
