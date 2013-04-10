@@ -1,5 +1,5 @@
 /**
- * @file    SedMLTypeCodes.cpp
+ * @file    SedTypeCodes.cpp
  * @brief   Enumeration to identify SEDML objects at runtime
  * @author  Ben Bornstein
  * 
@@ -26,7 +26,7 @@
  * ---------------------------------------------------------------------- -->*/
 
 #include <sedml/common/common.h>
-#include <sedml/SedMLTypeCodes.h>
+#include <sedml/SedTypeCodes.h>
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
@@ -34,7 +34,7 @@ static
 const char* SEDML_TYPE_CODE_STRINGS[] =
 {
       "(Unknown SEDML Type)"
-    , "SedMLDocument"
+    , "SedDocument"
     , "Model"
     , "Change"
     , "ChangeAttribute"
@@ -65,7 +65,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
  */
 LIBSEDML_EXTERN
 const char *
-SedMLTypeCode_toString (int tc)
+SedTypeCode_toString (int tc)
 {
     int max = SEDML_LIST_OF;
 

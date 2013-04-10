@@ -1,11 +1,11 @@
 /**
- * @file   SedMLVisitor.cpp
- * @brief  Visitor Design Pattern for the SedML object tree  
+ * @file   SedVisitor.cpp
+ * @brief  Visitor Design Pattern for the Sed object tree  
  * @author Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -25,51 +25,51 @@
  * and also available online as http://sbml.org/software/libsbml/license.html
  * ---------------------------------------------------------------------- -->*/
 
-#include <sedml/SedMLVisitor.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedVisitor.h>
+#include <sedml/SedTypes.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-SedMLVisitor::~SedMLVisitor ()
+SedVisitor::~SedVisitor ()
 {
 }
 
 
 void
-SedMLVisitor::visit (const SedMLDocument& x)
+SedVisitor::visit (const SedDocument& x)
 {
   visit( static_cast<const SedBase&>(x) );
 }
 
 
 void
-SedMLVisitor::visit (const SedListOf& x, int type)
+SedVisitor::visit (const SedListOf& x, int type)
 {
   visit( static_cast<const SedBase&>(x) );
 }
 
 
 bool
-SedMLVisitor::visit (const SedBase& sb)
+SedVisitor::visit (const SedBase& sb)
 {
   return false;
 }
 
 
 void
-SedMLVisitor::leave (const SedMLDocument& x)
+SedVisitor::leave (const SedDocument& x)
 {
 }
 
 void
-SedMLVisitor::leave (const SedBase& x)
+SedVisitor::leave (const SedBase& x)
 {
 }
 
 
 void
-SedMLVisitor::leave (const SedListOf& x, int type)
+SedVisitor::leave (const SedListOf& x, int type)
 {
 }
 

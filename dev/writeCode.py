@@ -180,7 +180,7 @@ def writeGetCode(attrib, output, element):
     output.write('{0}\n'.format(attTypeCode))
     output.write('{0}::create{1}()\n'.format(element, capAttName))
     output.write('{\n')
-    output.write('\tm{0} = new {0}();\n'.format(capAttName))
+    output.write('\tm{0} = new {1}();\n'.format(capAttName, attrib['element']))
     output.write('\treturn m{0};\n'.format(capAttName))
     output.write('}\n\n\n')
 
@@ -267,7 +267,7 @@ def writeSetCode(attrib, output, element):
     if attTypeCode == 'ASTNode*':
       output.write('\t\t\t{0}->deepCopy() : NULL;\n'.format(attName))
     else:
-      output.write('\t\t\tstatic_cast<{0}*>({1}->clone()) : NULL;\n'.format(capAttName, attName))
+      output.write('\t\t\tstatic_cast<{0}*>({1}->clone()) : NULL;\n'.format(attrib['element'], attName))
     output.write('\t\tif (m{0} != NULL)\n'.format(capAttName))
     output.write('\t\t{\n')
     #if attTypeCode == 'ASTNode*':

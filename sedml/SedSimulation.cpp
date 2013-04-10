@@ -180,7 +180,7 @@ SedSimulation::getAlgorithm() const
 SedAlgorithm*
 SedSimulation::createAlgorithm()
 {
-	mAlgorithm = new Algorithm();
+	mAlgorithm = new SedAlgorithm();
 	return mAlgorithm;
 }
 
@@ -263,7 +263,7 @@ SedSimulation::setAlgorithm(SedAlgorithm* algorithm)
 	{
 		delete mAlgorithm;
 		mAlgorithm = (algorithm != NULL) ?
-			static_cast<Algorithm*>(algorithm->clone()) : NULL;
+			static_cast<SedAlgorithm*>(algorithm->clone()) : NULL;
 		if (mAlgorithm != NULL)
 		{
 			mAlgorithm->connectToParent(this);
@@ -808,24 +808,24 @@ SedSimulation_getName(SedSimulation_t * ss)
  * write comments
  */
 LIBSEDML_EXTERN
-Algorithm_t*
+SedAlgorithm_t*
 SedSimulation_getAlgorithm(SedSimulation_t * ss)
 {
 	if (ss == NULL)
 		return NULL;
 
-	return (Algorithm_t*)ss->getAlgorithm();
+	return (SedAlgorithm_t*)ss->getAlgorithm();
 }
 
 
 LIBSEDML_EXTERN
-Algorithm_t*
+SedAlgorithm_t*
 SedSimulation_createAlgorithm(SedSimulation_t * ss)
 {
 	if (ss == NULL)
 		return NULL;
 
-	return (Algorithm_t*)ss->createAlgorithm();
+	return (SedAlgorithm_t*)ss->createAlgorithm();
 }
 
 
@@ -889,7 +889,7 @@ SedSimulation_setName(SedSimulation_t * ss, const char * name)
  */
 LIBSEDML_EXTERN
 int
-SedSimulation_setAlgorithm(SedSimulation_t * ss, Algorithm_t* algorithm)
+SedSimulation_setAlgorithm(SedSimulation_t * ss, SedAlgorithm_t* algorithm)
 {
 	return (ss != NULL) ? ss->setAlgorithm(algorithm) : LIBSEDML_INVALID_OBJECT;
 }
