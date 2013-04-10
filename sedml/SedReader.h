@@ -44,12 +44,12 @@
  *
  * For convenience as well as easy access from other languages besides C++,
  * this file also defines two global functions,
- * libsbml::readSed(@if java String filename@endif)
- * and libsbml::readSedFromString(@if java String xml@endif).
+ * libsbml::readSedML(@if java String filename@endif)
+ * and libsbml::readSedMLFromString(@if java String xml@endif).
  * They are equivalent to creating an SedReader
  * object and then calling the
- * SedReader::readSed(@if java String filename@endif) or
- * SedReader::readSedFromString(@if java String xml@endif)
+ * SedReader::readSedML(@if java String filename@endif) or
+ * SedReader::readSedMLFromString(@if java String xml@endif)
  * methods, respectively.
  *
  * @section compression Support for reading compressed files
@@ -60,7 +60,7 @@
  * deliberate to invoke the functionality.  If a given Sed filename ends
  * with an extension for the @em gzip, @em zip or @em bzip2 compression
  * formats (respectively, @c .gz, @c .zip, or @c .bz2), then the methods
- * SedReader::readSed(@if java String filename@endif) and
+ * SedReader::readSedML(@if java String filename@endif) and
  * SedWriter::writeSed(@if java SedDocument d, String filename@endif)
  * will automatically decompress and compress the file while writing and
  * reading it.  If the filename has no such extension, it
@@ -122,7 +122,7 @@ public:
   /**
    * Reads an Sed document from a file.
    *
-   * This method is identical to SedReader::readSedFromFile(@if java String filename@endif).
+   * This method is identical to SedReader::readSedMLFromFile(@if java String filename@endif).
    *
    * If the file named @p filename does not exist or its content is not
    * valid Sed, one or more errors will be logged with the SedDocument
@@ -146,7 +146,7 @@ public:
    * @if clike
  @verbatim
  SedReader reader;
- SedDocument* doc  = reader.readSedFromFile(filename);
+ SedDocument* doc  = reader.readSedMLFromFile(filename);
  
  if (doc->getNumErrors() > 0)
  {
@@ -168,7 +168,7 @@ public:
  @endif@if java
  @verbatim
  SedReader reader = new SedReader();
- SedDocument doc  = reader.readSedFromFile(filename);
+ SedDocument doc  = reader.readSedMLFromFile(filename);
  
  if (doc.getNumErrors() > 0)
  {
@@ -189,7 +189,7 @@ public:
  @endif@if python
  @verbatim
  reader = SedReader()
- doc    = reader.readSedFromFile(filename)
+ doc    = reader.readSedMLFromFile(filename)
  
  if doc.getNumErrors() > 0:
    if doc.getError(0).getErrorId() == libsbml.XMLFileUnreadable:
@@ -203,7 +203,7 @@ public:
  @endif@if csharp
  @verbatim
  SedReader reader = new SedReader();
- SedDocument doc = reader.readSedFromFile(filename);
+ SedDocument doc = reader.readSedMLFromFile(filename);
 
  if (doc.getNumErrors() > 0)
  {
@@ -258,13 +258,13 @@ public:
    *
    * @see SedError
    */
-  SedDocument* readSed (const std::string& filename);
+  SedDocument* readSedML (const std::string& filename);
 
 
   /**
    * Reads an Sed document from a file.
    *
-   * This method is identical to SedReader::readSed(@if java String filename@endif).
+   * This method is identical to SedReader::readSedML(@if java String filename@endif).
    *
    * If the file named @p filename does not exist or its content is not
    * valid Sed, one or more errors will be logged with the SedDocument
@@ -288,7 +288,7 @@ public:
    * @if clike
  @verbatim
  SedReader* reader = new SedReader();
- SedDocument* doc  = reader.readSed(filename);
+ SedDocument* doc  = reader.readSedML(filename);
  
  if (doc->getNumErrors() > 0)
  {
@@ -310,7 +310,7 @@ public:
  @endif@if java
  @verbatim
  SedReader reader = new SedReader();
- SedDocument doc  = reader.readSedFromFile(filename);
+ SedDocument doc  = reader.readSedMLFromFile(filename);
  
  if (doc.getNumErrors() > 0)
  {
@@ -331,7 +331,7 @@ public:
  @endif@if python
  @verbatim
  reader = SedReader()
- doc    = reader.readSedFromFile(filename)
+ doc    = reader.readSedMLFromFile(filename)
  
  if doc.getNumErrors() > 0:
    if doc.getError(0).getErrorId() == libsbml.XMLFileUnreadable:
@@ -379,7 +379,7 @@ public:
    * @see SedError
    * @see SedDocument
    */
-  SedDocument* readSedFromFile (const std::string& filename);
+  SedDocument* readSedMLFromFile (const std::string& filename);
 
 
   /**
@@ -393,16 +393,16 @@ public:
    *
    * This method will log a fatal error if the content given in the
    * parameter @p xml is not Sed.  See the method documentation for
-   * SedReader::readSed(@if java String filename@endif)
+   * SedReader::readSedML(@if java String filename@endif)
    * for an example of code for testing the returned error code.
    *
    * @param xml a string containing a full Sed model
    *
    * @return a pointer to the SedDocument created from the Sed content.
    *
-   * @see SedReader::readSed(@if java String filename@endif)
+   * @see SedReader::readSedML(@if java String filename@endif)
    */
-  SedDocument* readSedFromString (const std::string& xml);
+  SedDocument* readSedMLFromString (const std::string& xml);
 
 
   /**
@@ -445,7 +445,7 @@ protected:
   /** @cond doxygen-libsbml-internal */
 
   /**
-   * Used by readSed() and readSedFromString().
+   * Used by readSedML() and readSedMLFromString().
    *
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
    */
@@ -492,7 +492,7 @@ SedReader_free (SedReader_t *sr);
  *
  *   sr = SedReader_create();
  *
- *   d = SedReader_readSed(reader, filename);
+ *   d = SedReader_readSedML(reader, filename);
  *
  *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
@@ -534,11 +534,11 @@ SedReader_free (SedReader_t *sr);
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSed (SedReader_t *sr, const char *filename);
+SedReader_readSedML (SedReader_t *sr, const char *filename);
 
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedFromFile (SedReader_t *sr, const char *filename);
+SedReader_readSedMLFromFile (SedReader_t *sr, const char *filename);
 
 /**
  * Reads an Sed document from the given XML string.
@@ -550,14 +550,14 @@ SedReader_readSedFromFile (SedReader_t *sr, const char *filename);
  * it will be prepended.
  *
  * This method will log a fatal error if the XML string is not Sed.  See
- * the method documentation for readSed(filename) for example error
+ * the method documentation for readSedML(filename) for example error
  * checking code.
  *
  * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedFromString (SedReader_t *sr, const char *xml);
+SedReader_readSedMLFromString (SedReader_t *sr, const char *xml);
 
 
 /**
@@ -597,12 +597,12 @@ SedReader_hasBzip2 ();
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSed (const char *filename);
+readSedML (const char *filename);
 
 
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedFromFile (const char *filename);
+readSedMLFromFile (const char *filename);
 
 
 /**
@@ -625,7 +625,7 @@ readSedFromFile (const char *filename);
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedFromString (const char *xml);
+readSedMLFromString (const char *xml);
 
 
 END_C_DECLS

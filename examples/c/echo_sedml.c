@@ -34,12 +34,12 @@
 
 
 #include <stdio.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedTypes.h>
 
 int
 main (int argc, char* argv[])
 {
-  SedMLDocument_t *d;
+  SedDocument_t *d;
   
   if (argc != 3)
   {

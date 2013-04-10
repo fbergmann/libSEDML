@@ -34,12 +34,12 @@
 
 
 #include <stdio.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedTypes.h>
 
 int
 main (int argc, char* argv[])
 {
-  SedMLDocument_t *doc;
+  SedDocument_t *doc;
   unsigned int i;
   
   if (argc != 2)
@@ -50,24 +50,24 @@ main (int argc, char* argv[])
 
   doc = readSedML(argv[1]);
   
-  printf("The document has %d simulation(s).\n",SedMLDocument_getNumSimulations(doc));
-  for (i = 0; i < SedMLDocument_getNumSimulations(doc); i++)
+  printf("The document has %d simulation(s).\n",SedDocument_getNumSimulations(doc));
+  for (i = 0; i < SedDocument_getNumSimulations(doc); i++)
   {
-    Simulation_t* current = SedMLDocument_getSimulation(doc,i);
+    SedSimulation_t* current = SedDocument_getSimulation(doc,i);
     switch(SedBase_getTypeCode((SedBase_t*)current))
     {
        case SEDML_SIMULATION_UNIFORMTIMECOURSE:
        {
-          UniformTimeCourse_t* tc = (UniformTimeCourse_t*)current;
+          SedUniformTimeCourse_t* tc = (SedUniformTimeCourse_t*)current;
           printf("\tTimecourse id=%s   start=%f end=%f numPoints=%d kisao=", 
-            Simulation_getId(current), 
-            UniformTimeCourse_getOutputStartTime(tc), 
-            UniformTimeCourse_getOutputEndTime(tc), 
-            UniformTimeCourse_getNumberOfPoints(tc)
+            SedSimulation_getId(current), 
+            SedUniformTimeCourse_getOutputStartTime(tc), 
+            SedUniformTimeCourse_getOutputEndTime(tc), 
+            SedUniformTimeCourse_getNumberOfPoints(tc)
 	  	  );
-          if (Simulation_isSetAlgorithm(current))
+          if (SedSimulation_isSetAlgorithm(current))
           {
-            printf("%s\n", Algorithm_getKisaoID(Simulation_getAlgorithm(current)));
+            printf("%s\n", SedAlgorithm_getKisaoID(SedSimulation_getAlgorithm(current)));
           }
           else
           {
@@ -76,71 +76,71 @@ main (int argc, char* argv[])
           break;
        }
        default:
-          printf("\tUncountered unknown simulation %s.\n ", Simulation_getId(current));
+          printf("\tUncountered unknown simulation %s.\n ", SedSimulation_getId(current));
           break;
     }
   }
   
   printf("\n");
-  printf("The document has %d model(s).\n",SedMLDocument_getNumSedMLModels(doc));
-  for (i = 0; i < SedMLDocument_getNumSedMLModels(doc); i++)
+  printf("The document has %d model(s).\n",SedDocument_getNumModels(doc));
+  for (i = 0; i < SedDocument_getNumModels(doc); i++)
   {
-    SedMLModel_t* current =  SedMLDocument_getSedMLModel(doc,i);
+    SedModel_t* current =  SedDocument_getModel(doc,i);
     printf("\tModel id=%s  language=%s source=%s numChanges=%d\n", 
-	       SedMLModel_getId(current), 
-	       SedMLModel_getLanguage(current), 
-	       SedMLModel_getSource(current), 
-	       SedMLModel_getNumChanges(current));
+	       SedModel_getId(current), 
+	       SedModel_getLanguage(current), 
+	       SedModel_getSource(current), 
+	       SedModel_getNumChanges(current));
   }
   
   printf("\n");
-  printf("The document has %d task(s).\n",SedMLDocument_getNumTasks(doc));
-  for (i = 0; i < SedMLDocument_getNumTasks(doc); ++i)
+  printf("The document has %d task(s).\n",SedDocument_getNumTasks(doc));
+  for (i = 0; i < SedDocument_getNumTasks(doc); ++i)
   {
-    Task_t* current =  SedMLDocument_getTask(doc,i);
+    SedTask_t* current =  SedDocument_getTask(doc,i);
     printf("\tTask id=%s  model=%s sim=%s\n", 
-	  Task_getId(current),
-	  Task_getModelReference(current),
-	  Task_getSimulationReference(current));
+	  SedTask_getId(current),
+	  SedTask_getModelReference(current),
+	  SedTask_getSimulationReference(current));
   }
 
   printf("\n");
-  printf("The document has %d datagenerators(s).\n",SedMLDocument_getNumDataGenerators(doc));
-  for (i = 0; i < SedMLDocument_getNumDataGenerators(doc); ++i)
+  printf("The document has %d datagenerators(s).\n",SedDocument_getNumDataGenerators(doc));
+  for (i = 0; i < SedDocument_getNumDataGenerators(doc); ++i)
   {
-    DataGenerator_t* current = SedMLDocument_getDataGenerator(doc, i);
+    SedDataGenerator_t* current = SedDocument_getDataGenerator(doc, i);
     printf("\tDG id=%s math=%s\n",
-      DataGenerator_getId(current), 
-	  SBML_formulaToString(DataGenerator_getMath(current)));
+      SedDataGenerator_getId(current), 
+	  SBML_formulaToString(SedDataGenerator_getMath(current)));
   }
   
   printf("\n");
-  printf("The document has %d output(s).\n",SedMLDocument_getNumSedMLOutputs(doc));
-  for (i = 0; i < SedMLDocument_getNumSedMLOutputs(doc); ++i)
+  printf("The document has %d output(s).\n",SedDocument_getNumOutputs(doc));
+  for (i = 0; i < SedDocument_getNumOutputs(doc); ++i)
   {
-    SedMLOutput_t* current = SedMLDocument_getSedMLOutput(doc,i);
+    SedOutput_t* current = SedDocument_getOutput(doc,i);
     switch(SedBase_getTypeCode((SedBase_t*)current))
     {
       case SEDML_OUTPUT_REPORT:
       {
-        Report_t* r = (Report_t*)current;
-        printf("\tReport id=%s numDataSets=%d\n", SedMLOutput_getId(current), Report_getNumDataSets(r));
+        SedReport_t* r = (SedReport_t*)current;
+        printf("\tReport id=%s numDataSets=%d\n", SedOutput_getId(current), SedReport_getNumDataSets(r));
         break;
       }
       case SEDML_OUTPUT_PLOT2D:
       {
-        Plot2D_t* p = (Plot2D_t*)current;
-		printf("\tPlot2D id=%s numCurves=%d\n", SedMLOutput_getId(current), Plot2D_getNumSedMLCurves(p));
+        SedPlot2D_t* p = (SedPlot2D_t*)current;
+		printf("\tPlot2D id=%s numCurves=%d\n", SedOutput_getId(current), SedPlot2D_getNumCurves(p));
         break;
       }
       case SEDML_OUTPUT_PLOT3D:
       {
-        Plot3D_t* p = (Plot3D_t*)current;
-		printf("\tPlot2D id=%s numSurfaces=%d\n", SedMLOutput_getId(current), Plot3D_getNumSurfaces(p));
+        SedPlot3D_t* p = (SedPlot3D_t*)current;
+		printf("\tPlot3D id=%s numSurfaces=%d\n", SedOutput_getId(current), SedPlot3D_getNumSurfaces(p));
         break;
       }
       default: 
-        printf("\tEncountered unknown output %s\n", SedMLOutput_getId(current));
+        printf("\tEncountered unknown output %s\n", SedOutput_getId(current));
         break;
     }
   }

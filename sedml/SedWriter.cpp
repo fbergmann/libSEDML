@@ -139,7 +139,7 @@ SedWriter::setProgramVersion (const std::string& version)
  * for writing.
  */
 bool
-SedWriter::writeSed (const SedDocument* d, const std::string& filename)
+SedWriter::writeSedML (const SedDocument* d, const std::string& filename)
 {
   std::ostream* stream = NULL;
 
@@ -221,7 +221,7 @@ SedWriter::writeSed (const SedDocument* d, const std::string& filename)
     return false;
   }
 
-   bool result = writeSed(d, *stream);
+   bool result = writeSedML(d, *stream);
    delete stream;
 
    return result;
@@ -236,7 +236,7 @@ SedWriter::writeSed (const SedDocument* d, const std::string& filename)
  * components fail (rare).
  */
 bool
-SedWriter::writeSed (const SedDocument* d, std::ostream& stream)
+SedWriter::writeSedML (const SedDocument* d, std::ostream& stream)
 {
   bool result = false;
 
@@ -274,7 +274,7 @@ char*
 SedWriter::writeToString (const SedDocument* d)
 {
   ostringstream stream;
-  writeSed(d, stream);
+  writeSedML(d, stream);
 
   return safe_strdup( stream.str().c_str() );
 }
@@ -282,7 +282,7 @@ SedWriter::writeToString (const SedDocument* d)
 
 LIBSEDML_EXTERN
 char*
-SedWriter::writeSedToString (const SedDocument* d)
+SedWriter::writeSedMLToString (const SedDocument* d)
 {
   return writeToString(d);
 }
@@ -291,9 +291,9 @@ SedWriter::writeSedToString (const SedDocument* d)
 
 LIBSEDML_EXTERN
 bool
-SedWriter::writeSedToFile (const SedDocument* d, const std::string& filename)
+SedWriter::writeSedMLToFile (const SedDocument* d, const std::string& filename)
 {
-  return writeSed(d, filename);
+  return writeSedML(d, filename);
 }
 
 
@@ -424,7 +424,7 @@ SedWriter_setProgramVersion (SedWriter_t *sw, const char *version)
  */
 LIBSEDML_EXTERN
 int
-SedWriter_writeSed ( SedWriter_t         *sw,
+SedWriter_writeSedML ( SedWriter_t         *sw,
                        const SedDocument_t *d,
                        const char           *filename )
 {
@@ -432,7 +432,7 @@ SedWriter_writeSed ( SedWriter_t         *sw,
     return 0;
   else
     return (filename != NULL) ? 
-      static_cast<int>( sw->writeSed(d, filename) ) : 0;
+      static_cast<int>( sw->writeSedML(d, filename) ) : 0;
 }
 
 
@@ -461,7 +461,7 @@ SedWriter_writeSed ( SedWriter_t         *sw,
  */
 LIBSEDML_EXTERN
 int
-SedWriter_writeSedToFile ( SedWriter_t         *sw,
+SedWriter_writeSedMLToFile ( SedWriter_t         *sw,
                        const SedDocument_t *d,
                        const char           *filename )
 {
@@ -469,7 +469,7 @@ SedWriter_writeSedToFile ( SedWriter_t         *sw,
     return 0;
   else
     return (filename != NULL) ? 
-      static_cast<int>( sw->writeSed(d, filename) ) : 0;
+      static_cast<int>( sw->writeSedML(d, filename) ) : 0;
 }
 
 
@@ -483,7 +483,7 @@ SedWriter_writeSedToFile ( SedWriter_t         *sw,
  */
 LIBSEDML_EXTERN
 char *
-SedWriter_writeSedToString (SedWriter_t *sw, const SedDocument_t *d)
+SedWriter_writeSedMLToString (SedWriter_t *sw, const SedDocument_t *d)
 {
   if (sw == NULL || d == NULL) 
     return 0;
@@ -524,20 +524,20 @@ SedWriter_hasBzip2 ()
  * Writes the given Sed document to filename.  This convenience function
  * is functionally equivalent to:
  *
- *   SedWriter_writeSed(SedWriter_create(), d, filename);
+ *   SedWriter_writeSedML(SedWriter_create(), d, filename);
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
  */
 LIBSEDML_EXTERN
 int
-writeSed (const SedDocument_t *d, const char *filename)
+writeSedML (const SedDocument_t *d, const char *filename)
 {
   SedWriter sw;
   if (d == NULL || filename == NULL)
     return 0;
   else
-    return static_cast<int>( sw.writeSed(d, filename) );
+    return static_cast<int>( sw.writeSedML(d, filename) );
 }
 
 
@@ -545,20 +545,20 @@ writeSed (const SedDocument_t *d, const char *filename)
  * Writes the given Sed document to filename.  This convenience function
  * is functionally equivalent to:
  *
- *   SedWriter_writeSedToFile(SedWriter_create(), d, filename);
+ *   SedWriter_writeSedMLToFile(SedWriter_create(), d, filename);
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
  */
 LIBSEDML_EXTERN
 int
-writeSedToFile (const SedDocument_t *d, const char *filename)
+writeSedMLToFile (const SedDocument_t *d, const char *filename)
 {
   SedWriter sw;
   if (d == NULL || filename == NULL)
     return 0;
   else
-    return static_cast<int>( sw.writeSed(d, filename) );
+    return static_cast<int>( sw.writeSedML(d, filename) );
 }
 
 
@@ -568,14 +568,14 @@ writeSedToFile (const SedDocument_t *d, const char *filename)
  * (with free()) when no longer needed.  This convenience function is
  * functionally equivalent to:
  *
- *   SedWriter_writeSedToString(SedWriter_create(), d);
+ *   SedWriter_writeSedMLToString(SedWriter_create(), d);
  *
  * @return the string on success and NULL if one of the underlying parser
  * components fail (rare).
  */
 LIBSEDML_EXTERN
 char *
-writeSedToString (const SedDocument_t *d)
+writeSedMLToString (const SedDocument_t *d)
 {
   SedWriter sw;
   if (d == NULL)

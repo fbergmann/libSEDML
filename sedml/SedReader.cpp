@@ -68,7 +68,7 @@ SedReader::~SedReader ()
  * identified by their unique ids, e.g.:
  *
  * <code>
- *   SedDocument* d = reader.readSed(filename);
+ *   SedDocument* d = reader.readSedML(filename);
  *
  *   if (d->getNumErrors() > 0)\n
  *   {\n
@@ -95,7 +95,7 @@ SedReader::~SedReader ()
  * @return a pointer to the SedDocument read.
  */
 SedDocument*
-SedReader::readSed (const std::string& filename)
+SedReader::readSedML (const std::string& filename)
 {
   return readInternal(filename.c_str(), true);
 }
@@ -105,7 +105,7 @@ SedReader::readSed (const std::string& filename)
  * Reads an Sed document from the given filename.
  */
 SedDocument*
-SedReader::readSedFromFile (const std::string& filename)
+SedReader::readSedMLFromFile (const std::string& filename)
 {
   return readInternal(filename.c_str(), true);
 }
@@ -121,13 +121,13 @@ SedReader::readSedFromFile (const std::string& filename)
  * it will be prepended.
  *
  * This method will log a fatal error if the XML string is not Sed.  See
- * the method documentation for readSed(filename) for example error
+ * the method documentation for readSedML(filename) for example error
  * checking code.
  *
  * @return a pointer to the SedDocument read.
  */
 SedDocument*
-SedReader::readSedFromString (const std::string& xml)
+SedReader::readSedMLFromString (const std::string& xml)
 {
   if (&xml == NULL) return NULL;
 
@@ -208,7 +208,7 @@ isCriticalError(const unsigned int errorId)
 
 /** @cond doxygen-libsbml-internal */
 /*
- * Used by readSed() and readSedFromString().
+ * Used by readSedML() and readSedMLFromString().
  */
 SedDocument*
 SedReader::readInternal (const char* content, bool isFile)
@@ -320,7 +320,7 @@ SedReader_free (SedReader_t *sr)
  *
  *   sr = SedReader_create();
  *
- *   d = SedReader_readSed(reader, filename);
+ *   d = SedReader_readSedML(reader, filename);
  *
  *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
@@ -335,10 +335,10 @@ SedReader_free (SedReader_t *sr)
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSed (SedReader_t *sr, const char *filename)
+SedReader_readSedML (SedReader_t *sr, const char *filename)
 {
   if (sr != NULL)
-    return (filename != NULL) ? sr->readSed(filename) : sr->readSed("");
+    return (filename != NULL) ? sr->readSedML(filename) : sr->readSedML("");
   else
     return NULL;
 }
@@ -355,7 +355,7 @@ SedReader_readSed (SedReader_t *sr, const char *filename)
  *
  *   sr = SedReader_create();
  *
- *   d = SedReader_readSed(reader, filename);
+ *   d = SedReader_readSedML(reader, filename);
  *
  *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
@@ -370,10 +370,10 @@ SedReader_readSed (SedReader_t *sr, const char *filename)
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedFromFile (SedReader_t *sr, const char *filename)
+SedReader_readSedMLFromFile (SedReader_t *sr, const char *filename)
 {
   if (sr != NULL)
-    return (filename != NULL) ? sr->readSed(filename) : sr->readSed("");
+    return (filename != NULL) ? sr->readSedML(filename) : sr->readSedML("");
   else
     return NULL;
 }
@@ -389,18 +389,18 @@ SedReader_readSedFromFile (SedReader_t *sr, const char *filename)
  * it will be prepended.
  *
  * This method will log a fatal error if the XML string is not Sed.  See
- * the method documentation for readSed(filename) for example error
+ * the method documentation for readSedML(filename) for example error
  * checking code.
  *
  * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedFromString (SedReader_t *sr, const char *xml)
+SedReader_readSedMLFromString (SedReader_t *sr, const char *xml)
 {
   if (sr != NULL)
-    return (xml != NULL) ? sr->readSedFromString(xml) :
-                         sr->readSedFromString("");
+    return (xml != NULL) ? sr->readSedMLFromString(xml) :
+                         sr->readSedMLFromString("");
   else
     return NULL;
 }
@@ -445,7 +445,7 @@ SedReader_hasBzip2 (void)
  *
  *   sr = SedReader_create();
  *
- *   d = SedReader_readSed(reader, filename);
+ *   d = SedReader_readSedML(reader, filename);
  *
  *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
@@ -475,10 +475,10 @@ SedReader_hasBzip2 (void)
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSed (const char *filename)
+readSedML (const char *filename)
 {
   SedReader sr;
-  return (filename != NULL) ? sr.readSed(filename) : sr.readSed("");
+  return (filename != NULL) ? sr.readSedML(filename) : sr.readSedML("");
 }
 
 
@@ -493,7 +493,7 @@ readSed (const char *filename)
  *
  *   sr = SedReader_create();
  *
- *   d = SedReader_readSed(reader, filename);
+ *   d = SedReader_readSedML(reader, filename);
  *
  *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
@@ -523,10 +523,10 @@ readSed (const char *filename)
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedFromFile (const char *filename)
+readSedMLFromFile (const char *filename)
 {
   SedReader sr;
-  return (filename != NULL) ? sr.readSed(filename) : sr.readSed("");
+  return (filename != NULL) ? sr.readSedML(filename) : sr.readSedML("");
 }
 
 
@@ -540,17 +540,17 @@ readSedFromFile (const char *filename)
  * it will be prepended.
  *
  * This method will log a fatal error if the XML string is not Sed.  See
- * the method documentation for readSed(filename) for example error
+ * the method documentation for readSedML(filename) for example error
  * checking code.
  *
  * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedFromString (const char *xml)
+readSedMLFromString (const char *xml)
 {
   SedReader sr;
-  return (xml != NULL) ? sr.readSedFromString(xml) : sr.readSedFromString("");
+  return (xml != NULL) ? sr.readSedMLFromString(xml) : sr.readSedMLFromString("");
 }
 
 LIBSEDML_CPP_NAMESPACE_END

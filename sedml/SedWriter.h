@@ -47,7 +47,7 @@
  * formats (respectively, <code>&quot;.gz&quot;</code>,
  * <code>&quot;.zip&quot;</code>, or <code>&quot;.bz2&quot;</code>),
  * then the methods
- * SedWriter::writeSed(@if java SedDocument d, String filename@endif)
+ * SedWriter::writeSedML(@if java SedDocument d, String filename@endif)
  * and SedReader::readSed(@if java String filename@endif)
  * will automatically compress and decompress the file while writing and
  * reading it.  If the filename has no such extension, it
@@ -121,7 +121,7 @@ public:
  @endverbatim
    *
    * If the program name and version are not set at some point before
-   * calling the writeSed() methods, no such comment is written out.
+   * calling the writeSedML() methods, no such comment is written out.
    *
    * @param name the name of this program (where "this program" refers to
    * program in which libSed is embedded, not libSed itself!)
@@ -150,7 +150,7 @@ public:
  @endverbatim
    *
    * If the program version and name are not set at some point before
-   * calling the writeSed() methods, no such comment is written out.
+   * calling the writeSedML() methods, no such comment is written out.
    *
    * @param version the version of this program (where "this program"
    * refers to program in which libSed is embedded, not libSed itself!)
@@ -183,7 +183,7 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  bool writeSed (const SedDocument* d, const std::string& filename);
+  bool writeSedML (const SedDocument* d, const std::string& filename);
 
 
   /**
@@ -199,7 +199,7 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  bool writeSed (const SedDocument* d, std::ostream& stream);
+  bool writeSedML (const SedDocument* d, std::ostream& stream);
 
 
   /** @cond doxygen-libsbml-internal */
@@ -241,7 +241,7 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  bool writeSedToFile (const SedDocument* d, const std::string& filename);
+  bool writeSedMLToFile (const SedDocument* d, const std::string& filename);
 
 
   /**
@@ -259,7 +259,7 @@ public:
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
-  char* writeSedToString (const SedDocument* d);
+  char* writeSedMLToString (const SedDocument* d);
 
 
   /**
@@ -391,13 +391,13 @@ SedWriter_setProgramVersion (SedWriter_t *sw, const char *version);
  */
 LIBSEDML_EXTERN
 int
-SedWriter_writeSed ( SedWriter_t         *sw,
+SedWriter_writeSedML ( SedWriter_t         *sw,
                        const SedDocument_t *d,
                        const char           *filename );
 
 LIBSEDML_EXTERN
 int
-SedWriter_writeSedToFile ( SedWriter_t         *sw,
+SedWriter_writeSedMLToFile ( SedWriter_t         *sw,
                        const SedDocument_t *d,
                        const char           *filename );
 
@@ -412,7 +412,7 @@ SedWriter_writeSedToFile ( SedWriter_t         *sw,
  */
 LIBSEDML_EXTERN
 char *
-SedWriter_writeSedToString (SedWriter_t *sw, const SedDocument_t *d);
+SedWriter_writeSedMLToString (SedWriter_t *sw, const SedDocument_t *d);
 
 
 /**
@@ -442,7 +442,7 @@ SedWriter_hasBzip2 ();
 /**
  * Writes the given Sed document @p d to the file named by @p filename.
  *
- * This function is identical to @if clike SedWriter::writeSedToFile (const SedDocument_t *d, const char *filename)@endif@if java <a href="#writeSedToFile(org.sbml.libsbml.SedDocument, java.lang.String)"><code>writeSedToFile(SedDocument d, String filename)</code></a>@endif.
+ * This function is identical to @if clike SedWriter::writeSedMLToFile (const SedDocument_t *d, const char *filename)@endif@if java <a href="#writeSedMLToFile(org.sbml.libsbml.SedDocument, java.lang.String)"><code>writeSedMLToFile(SedDocument d, String filename)</code></a>@endif.
  * 
  * @htmlinclude assuming-compressed-file.html
  *
@@ -467,7 +467,7 @@ SedWriter_hasBzip2 ();
  */
 LIBSEDML_EXTERN
 int
-writeSed (const SedDocument_t *d, const char *filename);
+writeSedML (const SedDocument_t *d, const char *filename);
 
 
 /**
@@ -475,7 +475,7 @@ writeSed (const SedDocument_t *d, const char *filename);
  * returns the string.
  *
  * This is a convenience function that uses the
- * SedWriter::writeSedToString(const SedDocument* d) method internally,
+ * SedWriter::writeSedMLToString(const SedDocument* d) method internally,
  * yet does not require the caller to create an SedWriter object first.
  *
  * @param d an SedDocument object to be written out in XML format
@@ -489,14 +489,14 @@ writeSed (const SedDocument_t *d, const char *filename);
  */
 LIBSEDML_EXTERN
 char *
-writeSedToString (const SedDocument_t *d);
+writeSedMLToString (const SedDocument_t *d);
 
 
 /**
  * Writes the given Sed document @p d to the file @p filename.
  *
  * This is a convenience function that uses the
- * SedWriter::writeSedToFile(const SedDocument* d, const std::string&
+ * SedWriter::writeSedMLToFile(const SedDocument* d, const std::string&
  * filename) method internally, yet does not require the caller to create
  * an SedWriter object first.
  *
@@ -523,7 +523,7 @@ writeSedToString (const SedDocument_t *d);
  */
 LIBSEDML_EXTERN
 int
-writeSedToFile (const SedDocument_t *d, const char *filename);
+writeSedMLToFile (const SedDocument_t *d, const char *filename);
 
 
 END_C_DECLS
