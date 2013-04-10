@@ -1,6 +1,6 @@
 /**
- * @file:   DataGenerator.h
- * @brief:  Implementation of the DataGenerator class
+ * @file:   SedDataGenerator.h
+ * @brief:  Implementation of the SedDataGenerator class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef DataGenerator_H__
-#define DataGenerator_H__
+#ifndef SedDataGenerator_H__
+#define SedDataGenerator_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,102 +49,102 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/SedMLVariable.h>
-#include <sedml/SedMLParameter.h>
+#include <sedml/SedVariable.h>
+#include <sedml/SedParameter.h>
 
 
-class LIBSEDML_EXTERN DataGenerator : public SedBase
+class LIBSEDML_EXTERN SedDataGenerator : public SedBase
 {
 
 protected:
 
 	std::string   mId;
 	std::string   mName;
-	SedListOfSedMLVariables   mVariable;
-	SedListOfSedMLParameters   mParameter;
+	SedListOfVariables   mVariable;
+	SedListOfParameters   mParameter;
 	ASTNode*      mMath;
 
 
 public:
 
 	/**
-	 * Creates a new DataGenerator with the given level, version, and package version.
+	 * Creates a new SedDataGenerator with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this DataGenerator
+	 * @param level an unsigned int, the SEDML Level to assign to this SedDataGenerator
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this DataGenerator
+	 * @param version an unsigned int, the SEDML Version to assign to this SedDataGenerator
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this DataGenerator
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedDataGenerator
 	 */
-	DataGenerator(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	              unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedDataGenerator(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                 unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new DataGenerator with the given SedMLNamespaces object.
+	 * Creates a new SedDataGenerator with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	DataGenerator(SedMLNamespaces* sedmlns);
+	SedDataGenerator(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for DataGenerator.
+	 * Copy constructor for SedDataGenerator.
 	 *
-	 * @param orig; the DataGenerator instance to copy.
+	 * @param orig; the SedDataGenerator instance to copy.
 	 */
-	DataGenerator(const DataGenerator& orig);
+	SedDataGenerator(const SedDataGenerator& orig);
 
 
  	/**
-	 * Assignment operator for DataGenerator.
+	 * Assignment operator for SedDataGenerator.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	DataGenerator& operator=(const DataGenerator& rhs);
+	SedDataGenerator& operator=(const SedDataGenerator& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this DataGenerator object.
+	 * Creates and returns a deep copy of this SedDataGenerator object.
 	 *
-	 * @return a (deep) copy of this DataGenerator object.
+	 * @return a (deep) copy of this SedDataGenerator object.
 	 */
-	virtual DataGenerator* clone () const;
+	virtual SedDataGenerator* clone () const;
 
 
  	/**
-	 * Destructor for DataGenerator.
+	 * Destructor for SedDataGenerator.
 	 */
-	virtual ~DataGenerator();
+	virtual ~SedDataGenerator();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this DataGenerator.
+	 * Returns the value of the "id" attribute of this SedDataGenerator.
 	 *
-	 * @return the value of the "id" attribute of this DataGenerator as a string.
+	 * @return the value of the "id" attribute of this SedDataGenerator as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataGenerator's "id" attribute has been set.
+	 * SedDataGenerator's "id" attribute has been set.
 	 *
-	 * @return @c true if this DataGenerator's "id" attribute has been set,
+	 * @return @c true if this SedDataGenerator's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this DataGenerator.
+	 * Sets the value of the "id" attribute of this SedDataGenerator.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -159,7 +159,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this DataGenerator.
+	 * Unsets the value of the "id" attribute of this SedDataGenerator.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -172,25 +172,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this DataGenerator.
+	 * Returns the value of the "name" attribute of this SedDataGenerator.
 	 *
-	 * @return the value of the "name" attribute of this DataGenerator as a string.
+	 * @return the value of the "name" attribute of this SedDataGenerator as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataGenerator's "name" attribute has been set.
+	 * SedDataGenerator's "name" attribute has been set.
 	 *
-	 * @return @c true if this DataGenerator's "name" attribute has been set,
+	 * @return @c true if this SedDataGenerator's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this DataGenerator.
+	 * Sets the value of the "name" attribute of this SedDataGenerator.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -205,7 +205,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this DataGenerator.
+	 * Unsets the value of the "name" attribute of this SedDataGenerator.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -218,25 +218,25 @@ public:
 
 
 	/**
-	 * Returns the "math" element of this DataGenerator.
+	 * Returns the "math" element of this SedDataGenerator.
 	 *
-	 * @return the "math" element of this DataGenerator.
+	 * @return the "math" element of this SedDataGenerator.
 	 */
 	virtual const ASTNode* getMath() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataGenerator's "math" element has been set.
+	 * SedDataGenerator's "math" element has been set.
 	 *
-	 * @return @c true if this DataGenerator's "math" element has been set,
+	 * @return @c true if this SedDataGenerator's "math" element has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetMath() const;
 
 
 	/**
-	 * Sets the "math" element of this DataGenerator.
+	 * Sets the "math" element of this SedDataGenerator.
 	 *
 	 * @param math; ASTNode* determining the value of the "resultLevel" attribute to be set.
 	 *
@@ -251,7 +251,7 @@ public:
 
 
 	/**
-	 * Unsets the "math" element of this DataGenerator.
+	 * Unsets the "math" element of this SedDataGenerator.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -264,77 +264,77 @@ public:
 
 
 	/**
-	 * Returns the  "SedListOfSedMLVariables" in this DataGenerator object.
+	 * Returns the  "SedListOfVariables" in this SedDataGenerator object.
 	 *
-	 * @return the "SedListOfSedMLVariables" attribute of this DataGenerator.
+	 * @return the "SedListOfVariables" attribute of this SedDataGenerator.
 	 */
-	const SedListOfSedMLVariables* getListOfSedMLVariables() const;
+	const SedListOfVariables* getListOfVariables() const;
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables.
+	 * Get a Variable from the SedListOfVariables.
 	 *
-	 * @param n the index number of the SedMLVariable to get.
+	 * @param n the index number of the Variable to get.
 	 *
-	 * @return the nth SedMLVariable in the SedListOfSedMLVariables within this DataGenerator.
+	 * @return the nth Variable in the SedListOfVariables within this SedDataGenerator.
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	SedMLVariable* getSedMLVariable(unsigned int n);
+	SedVariable* getVariable(unsigned int n);
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables.
+	 * Get a Variable from the SedListOfVariables.
 	 *
-	 * @param n the index number of the SedMLVariable to get.
+	 * @param n the index number of the Variable to get.
 	 *
-	 * @return the nth SedMLVariable in the SedListOfSedMLVariables within this DataGenerator.
+	 * @return the nth Variable in the SedListOfVariables within this SedDataGenerator.
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	const SedMLVariable* getSedMLVariable(unsigned int n) const;
+	const SedVariable* getVariable(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables
+	 * Get a Variable from the SedListOfVariables
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLVariable to get.
+	 * of the Variable to get.
 	 *
-	 * @return the SedMLVariable in the SedListOfSedMLVariables
+	 * @return the Variable in the SedListOfVariables
 	 * with the given id or NULL if no such
-	 * SedMLVariable exists.
+	 * Variable exists.
 	 *
-	 * @see getSedMLVariable(unsigned int n)
+	 * @see getVariable(unsigned int n)
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	SedMLVariable* getSedMLVariable(const std::string& sid);
+	SedVariable* getVariable(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables
+	 * Get a Variable from the SedListOfVariables
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLVariable to get.
+	 * of the Variable to get.
 	 *
-	 * @return the SedMLVariable in the SedListOfSedMLVariables
+	 * @return the Variable in the SedListOfVariables
 	 * with the given id or NULL if no such
-	 * SedMLVariable exists.
+	 * Variable exists.
 	 *
-	 * @see getSedMLVariable(unsigned int n)
+	 * @see getVariable(unsigned int n)
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	const SedMLVariable* getSedMLVariable(const std::string& sid) const;
+	const SedVariable* getVariable(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLVariable" to this DataGenerator.
+	 * Adds a copy the given "SedVariable" to this SedDataGenerator.
 	 *
-	 * @param smlv; the SedMLVariable object to add
+	 * @param sv; the SedVariable object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -343,129 +343,129 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLVariable(const SedMLVariable* smlv);
+	int addVariable(const SedVariable* sv);
 
 
 	/**
-	 * Get the number of SedMLVariable objects in this DataGenerator.
+	 * Get the number of SedVariable objects in this SedDataGenerator.
 	 *
-	 * @return the number of SedMLVariable objects in this DataGenerator
+	 * @return the number of SedVariable objects in this SedDataGenerator
 	 */
-	unsigned int getNumSedMLVariables() const;
+	unsigned int getNumVariables() const;
 
 
 	/**
-	 * Creates a new SedMLVariable object, adds it to this DataGenerators
-	 * SedListOfSedMLVariables and returns the SedMLVariable object created. 
+	 * Creates a new SedVariable object, adds it to this SedDataGenerators
+	 * SedListOfVariables and returns the SedVariable object created. 
 	 *
-	 * @return a new SedMLVariable object instance
+	 * @return a new SedVariable object instance
 	 *
-	 * @see addSedMLVariable(const SedMLVariable* smlv)
+	 * @see addVariable(const SedVariable* sv)
 	 */
-	SedMLVariable* createSedMLVariable();
+	SedVariable* createVariable();
 
 
 	/**
-	 * Removes the nth SedMLVariable from the SedListOfSedMLVariables within this DataGenerator.
+	 * Removes the nth Variable from the SedListOfVariables within this SedDataGenerator.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLVariable to remove.
+	 * @param n the index of the Variable to remove.
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	SedMLVariable* removeSedMLVariable(unsigned int n);
+	SedVariable* removeVariable(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLVariable with the given identifier from the SedListOfSedMLVariables within this DataGenerator
+	 * Removes the Variable with the given identifier from the SedListOfVariables within this SedDataGenerator
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLVariable to remove.
+	 * @param sid the identifier of the Variable to remove.
 	 *
-	 * @return the SedMLVariable removed. As mentioned above, the caller owns the
+	 * @return the Variable removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLVariable* removeSedMLVariable(const std::string& sid);
+	SedVariable* removeVariable(const std::string& sid);
 
 
 	/**
-	 * Returns the  "SedListOfSedMLParameters" in this DataGenerator object.
+	 * Returns the  "SedListOfParameters" in this SedDataGenerator object.
 	 *
-	 * @return the "SedListOfSedMLParameters" attribute of this DataGenerator.
+	 * @return the "SedListOfParameters" attribute of this SedDataGenerator.
 	 */
-	const SedListOfSedMLParameters* getListOfSedMLParameters() const;
+	const SedListOfParameters* getListOfParameters() const;
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters.
+	 * Get a Parameter from the SedListOfParameters.
 	 *
-	 * @param n the index number of the SedMLParameter to get.
+	 * @param n the index number of the Parameter to get.
 	 *
-	 * @return the nth SedMLParameter in the SedListOfSedMLParameters within this DataGenerator.
+	 * @return the nth Parameter in the SedListOfParameters within this SedDataGenerator.
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	SedMLParameter* getSedMLParameter(unsigned int n);
+	SedParameter* getParameter(unsigned int n);
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters.
+	 * Get a Parameter from the SedListOfParameters.
 	 *
-	 * @param n the index number of the SedMLParameter to get.
+	 * @param n the index number of the Parameter to get.
 	 *
-	 * @return the nth SedMLParameter in the SedListOfSedMLParameters within this DataGenerator.
+	 * @return the nth Parameter in the SedListOfParameters within this SedDataGenerator.
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	const SedMLParameter* getSedMLParameter(unsigned int n) const;
+	const SedParameter* getParameter(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters
+	 * Get a Parameter from the SedListOfParameters
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLParameter to get.
+	 * of the Parameter to get.
 	 *
-	 * @return the SedMLParameter in the SedListOfSedMLParameters
+	 * @return the Parameter in the SedListOfParameters
 	 * with the given id or NULL if no such
-	 * SedMLParameter exists.
+	 * Parameter exists.
 	 *
-	 * @see getSedMLParameter(unsigned int n)
+	 * @see getParameter(unsigned int n)
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	SedMLParameter* getSedMLParameter(const std::string& sid);
+	SedParameter* getParameter(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters
+	 * Get a Parameter from the SedListOfParameters
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLParameter to get.
+	 * of the Parameter to get.
 	 *
-	 * @return the SedMLParameter in the SedListOfSedMLParameters
+	 * @return the Parameter in the SedListOfParameters
 	 * with the given id or NULL if no such
-	 * SedMLParameter exists.
+	 * Parameter exists.
 	 *
-	 * @see getSedMLParameter(unsigned int n)
+	 * @see getParameter(unsigned int n)
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	const SedMLParameter* getSedMLParameter(const std::string& sid) const;
+	const SedParameter* getParameter(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLParameter" to this DataGenerator.
+	 * Adds a copy the given "SedParameter" to this SedDataGenerator.
 	 *
-	 * @param smlp; the SedMLParameter object to add
+	 * @param sp; the SedParameter object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -474,62 +474,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLParameter(const SedMLParameter* smlp);
+	int addParameter(const SedParameter* sp);
 
 
 	/**
-	 * Get the number of SedMLParameter objects in this DataGenerator.
+	 * Get the number of SedParameter objects in this SedDataGenerator.
 	 *
-	 * @return the number of SedMLParameter objects in this DataGenerator
+	 * @return the number of SedParameter objects in this SedDataGenerator
 	 */
-	unsigned int getNumSedMLParameters() const;
+	unsigned int getNumParameters() const;
 
 
 	/**
-	 * Creates a new SedMLParameter object, adds it to this DataGenerators
-	 * SedListOfSedMLParameters and returns the SedMLParameter object created. 
+	 * Creates a new SedParameter object, adds it to this SedDataGenerators
+	 * SedListOfParameters and returns the SedParameter object created. 
 	 *
-	 * @return a new SedMLParameter object instance
+	 * @return a new SedParameter object instance
 	 *
-	 * @see addSedMLParameter(const SedMLParameter* smlp)
+	 * @see addParameter(const SedParameter* sp)
 	 */
-	SedMLParameter* createSedMLParameter();
+	SedParameter* createParameter();
 
 
 	/**
-	 * Removes the nth SedMLParameter from the SedListOfSedMLParameters within this DataGenerator.
+	 * Removes the nth Parameter from the SedListOfParameters within this SedDataGenerator.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLParameter to remove.
+	 * @param n the index of the Parameter to remove.
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	SedMLParameter* removeSedMLParameter(unsigned int n);
+	SedParameter* removeParameter(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLParameter with the given identifier from the SedListOfSedMLParameters within this DataGenerator
+	 * Removes the Parameter with the given identifier from the SedListOfParameters within this SedDataGenerator
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLParameter to remove.
+	 * @param sid the identifier of the Parameter to remove.
 	 *
-	 * @return the SedMLParameter removed. As mentioned above, the caller owns the
+	 * @return the Parameter removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLParameter* removeSedMLParameter(const std::string& sid);
+	SedParameter* removeParameter(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for DataGenerator, is
-	 * always @c "dataGenerator".
+	 * Returns the XML element name of this object, which for SedDataGenerator, is
+	 * always @c "sedDataGenerator".
 	 *
-	 * @return the name of this element, i.e. @c "dataGenerator".
+	 * @return the name of this element, i.e. @c "sedDataGenerator".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -569,9 +569,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this DataGenerator object have been set.
+	 * for this SedDataGenerator object have been set.
 	 *
-	 * @note The required attributes for a DataGenerator object are:
+	 * @note The required attributes for a SedDataGenerator object are:
 	 * @li "id"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -582,9 +582,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this DataGenerator object have been set.
+	 * for this SedDataGenerator object have been set.
 	 *
-	 * @note The required elements for a DataGenerator object are:
+	 * @note The required elements for a SedDataGenerator object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -608,9 +608,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -619,9 +619,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -713,7 +713,7 @@ public:
 	 *
 	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfDataGenerators
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfDataGenerators
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfDataGenerators
 	 */
 	SedListOfDataGenerators(unsigned int level      = SEDML_DEFAULT_LEVEL,
 	                        unsigned int version    = SEDML_DEFAULT_VERSION
@@ -721,11 +721,11 @@ public:
 
 
 	/**
-	 * Creates a new SedListOfDataGenerators with the given SedMLNamespaces object.
+	 * Creates a new SedListOfDataGenerators with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfDataGenerators(SedMLNamespaces* sedmlns);
+	SedListOfDataGenerators(SedNamespaces* sedns);
 
 
  	/**
@@ -745,7 +745,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual DataGenerator* get(unsigned int n);
+	virtual SedDataGenerator* get(unsigned int n);
 
 
 	/**
@@ -757,7 +757,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual const DataGenerator* get(unsigned int n) const;
+	virtual const SedDataGenerator* get(unsigned int n) const;
 
 
 	/**
@@ -774,7 +774,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual DataGenerator* get(const std::string& sid);
+	virtual SedDataGenerator* get(const std::string& sid);
 
 
 	/**
@@ -791,7 +791,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const DataGenerator* get(const std::string& sid) const;
+	virtual const SedDataGenerator* get(const std::string& sid) const;
 
 
 	/**
@@ -806,7 +806,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addDataGenerator(const DataGenerator* dg);
+	int addDataGenerator(const SedDataGenerator* dg);
 
 
 	/**
@@ -823,9 +823,9 @@ public:
 	 *
 	 * @return a new DataGenerator object instance
 	 *
-	 * @see addDataGenerator(const DataGenerator* dg)
+	 * @see addDataGenerator(const SedDataGenerator* dg)
 	 */
-	DataGenerator* createDataGenerator();
+	SedDataGenerator* createDataGenerator();
 
 
 	/**
@@ -838,7 +838,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual DataGenerator* remove(unsigned int n);
+	virtual SedDataGenerator* remove(unsigned int n);
 
 
 	/**
@@ -854,7 +854,7 @@ public:
 	 * @return the DataGenerator removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual DataGenerator* remove(const std::string& sid);
+	virtual SedDataGenerator* remove(const std::string& sid);
 
 
 	/**
@@ -949,7 +949,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -972,178 +972,178 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-DataGenerator_create(unsigned int level, unsigned int version);
+SedDataGenerator_t *
+SedDataGenerator_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-DataGenerator_free(DataGenerator_t * dg);
+SedDataGenerator_free(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-DataGenerator_clone(DataGenerator_t * dg);
-
-
-LIBSEDML_EXTERN
-char *
-DataGenerator_getId(DataGenerator_t * dg);
+SedDataGenerator_t *
+SedDataGenerator_clone(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 char *
-DataGenerator_getName(DataGenerator_t * dg);
+SedDataGenerator_getId(SedDataGenerator_t * sdg);
+
+
+LIBSEDML_EXTERN
+char *
+SedDataGenerator_getName(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 ASTNode_t*
-DataGenerator_getMath(DataGenerator_t * dg);
+SedDataGenerator_getMath(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_isSetId(DataGenerator_t * dg);
+SedDataGenerator_isSetId(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_isSetName(DataGenerator_t * dg);
+SedDataGenerator_isSetName(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_isSetMath(DataGenerator_t * dg);
+SedDataGenerator_isSetMath(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_setId(DataGenerator_t * dg, const char * id);
+SedDataGenerator_setId(SedDataGenerator_t * sdg, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_setName(DataGenerator_t * dg, const char * name);
+SedDataGenerator_setName(SedDataGenerator_t * sdg, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_setMath(DataGenerator_t * dg, ASTNode_t* math);
+SedDataGenerator_setMath(SedDataGenerator_t * sdg, ASTNode_t* math);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_unsetId(DataGenerator_t * dg);
+SedDataGenerator_unsetId(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_unsetName(DataGenerator_t * dg);
+SedDataGenerator_unsetName(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_unsetMath(DataGenerator_t * dg);
+SedDataGenerator_unsetMath(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_addSedMLVariable(DataGenerator_t * dg, SedMLVariable_t * smlv);
+SedDataGenerator_addVariable(SedDataGenerator_t * sdg, SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-DataGenerator_createSedMLVariable(DataGenerator_t * dg);
+SedVariable_t *
+SedDataGenerator_createVariable(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-DataGenerator_getSedListOfSedMLVariables(DataGenerator_t * dg);
+SedDataGenerator_getSedListOfVariables(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-DataGenerator_getSedMLVariable(DataGenerator_t * dg, unsigned int n);
+SedVariable_t *
+SedDataGenerator_getVariable(SedDataGenerator_t * sdg, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-DataGenerator_getSedMLVariableById(DataGenerator_t * dg, const char * sid);
+SedVariable_t *
+SedDataGenerator_getVariableById(SedDataGenerator_t * sdg, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-DataGenerator_getNumSedMLVariables(DataGenerator_t * dg);
+SedDataGenerator_getNumVariables(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-DataGenerator_removeSedMLVariable(DataGenerator_t * dg, unsigned int n);
+SedVariable_t *
+SedDataGenerator_removeVariable(SedDataGenerator_t * sdg, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-DataGenerator_removeSedMLVariableById(DataGenerator_t * dg, const char * sid);
+SedVariable_t *
+SedDataGenerator_removeVariableById(SedDataGenerator_t * sdg, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_addSedMLParameter(DataGenerator_t * dg, SedMLParameter_t * smlp);
+SedDataGenerator_addParameter(SedDataGenerator_t * sdg, SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-DataGenerator_createSedMLParameter(DataGenerator_t * dg);
+SedParameter_t *
+SedDataGenerator_createParameter(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-DataGenerator_getSedListOfSedMLParameters(DataGenerator_t * dg);
+SedDataGenerator_getSedListOfParameters(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-DataGenerator_getSedMLParameter(DataGenerator_t * dg, unsigned int n);
+SedParameter_t *
+SedDataGenerator_getParameter(SedDataGenerator_t * sdg, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-DataGenerator_getSedMLParameterById(DataGenerator_t * dg, const char * sid);
+SedParameter_t *
+SedDataGenerator_getParameterById(SedDataGenerator_t * sdg, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-DataGenerator_getNumSedMLParameters(DataGenerator_t * dg);
+SedDataGenerator_getNumParameters(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-DataGenerator_removeSedMLParameter(DataGenerator_t * dg, unsigned int n);
+SedParameter_t *
+SedDataGenerator_removeParameter(SedDataGenerator_t * sdg, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-DataGenerator_removeSedMLParameterById(DataGenerator_t * dg, const char * sid);
-
-
-LIBSEDML_EXTERN
-int
-DataGenerator_hasRequiredAttributes(DataGenerator_t * dg);
+SedParameter_t *
+SedDataGenerator_removeParameterById(SedDataGenerator_t * sdg, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-DataGenerator_hasRequiredElements(DataGenerator_t * dg);
+SedDataGenerator_hasRequiredAttributes(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedListOfDataGenerators_getById(SedListOf_t * lo, const char * sid);
+int
+SedDataGenerator_hasRequiredElements(SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedListOfDataGenerators_removeById(SedListOf_t * lo, const char * sid);
+SedDataGenerator_t *
+SedListOfSedDataGenerators_getById(SedListOf_t * lo, const char * sid);
+
+
+LIBSEDML_EXTERN
+SedDataGenerator_t *
+SedListOfSedDataGenerators_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -1153,5 +1153,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  DataGenerator_H__  */
+#endif /*  SedDataGenerator_H__  */
 

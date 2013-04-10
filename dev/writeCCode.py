@@ -29,7 +29,7 @@ def writeConstructors(element, package, output):
 #  output.write('LIBSEDML_EXTERN\n')
 #  output.write('{0}_t *\n'.format(element))
 #  output.write('{0}_createWithNS'.format(element))
-#  output.write('(SedMLNamespaces_t *sedmlns)\n')
+#  output.write('(SedNamespaces_t *sedmlns)\n')
 #  output.write('{\n')
 #  output.write('\treturn new {0}(sedmlns);\n'.format(element))
 #  output.write('}\n\n\n')

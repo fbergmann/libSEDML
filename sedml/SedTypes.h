@@ -31,35 +31,36 @@
 
 #include <sedml/common/sedmlfwd.h>
 
-#include <sedml/SedMLVariable.h>
-#include <sedml/SedMLParameter.h>
-#include <sedml/Change.h>
-#include <sedml/ChangeAttribute.h>
-#include <sedml/RemoveXML.h>
-#include <sedml/ComputeChange.h>
-#include <sedml/SedMLModel.h>
-#include <sedml/Algorithm.h>
-#include <sedml/Simulation.h>
-#include <sedml/UniformTimeCourse.h>
-#include <sedml/DataSet.h>
-#include <sedml/SedMLCurve.h>
-#include <sedml/Surface.h>
-#include <sedml/SedMLOutput.h>
-#include <sedml/Report.h>
-#include <sedml/Plot2D.h>
-#include <sedml/Plot3D.h>
-#include <sedml/DataGenerator.h>
-#include <sedml/Task.h>
-#include <sedml/SedMLDocument.h>
+#include <sedml/SedVariable.h>
+#include <sedml/SedParameter.h>
+#include <sedml/SedChange.h>
+#include <sedml/SedChangeAttribute.h>
+#include <sedml/SedRemoveXML.h>
+#include <sedml/SedComputeChange.h>
+#include <sedml/SedModel.h>
+#include <sedml/SedAlgorithm.h>
+#include <sedml/SedSimulation.h>
+#include <sedml/SedUniformTimeCourse.h>
+#include <sedml/SedDataSet.h>
+#include <sedml/SedCurve.h>
+#include <sedml/SedSurface.h>
+#include <sedml/SedOutput.h>
+#include <sedml/SedReport.h>
+#include <sedml/SedPlot2D.h>
+#include <sedml/SedPlot3D.h>
+#include <sedml/SedDataGenerator.h>
+#include <sedml/SedTask.h>
+#include <sedml/SedDocument.h>
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 
 
-#include <sedml/SedMLReader.h>
-#include <sedml/SedMLWriter.h>
+#include <sedml/SedReader.h>
+#include <sedml/SedWriter.h>
 
 #include <sbml/xml/XMLError.h>
 #include <sbml/math/ASTNode.h>
 #include <sbml/math/MathML.h>
+
 #endif  /* SEDMLTypes_h */

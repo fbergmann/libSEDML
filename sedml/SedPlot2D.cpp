@@ -1,6 +1,6 @@
 /**
- * @file:   Plot2D.cpp
- * @brief:  Implementation of the Plot2D class
+ * @file:   SedPlot2D.cpp
+ * @brief:  Implementation of the SedPlot2D class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Plot2D.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedPlot2D.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,15 +45,15 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Plot2D with the given level, version, and package version.
+ * Creates a new SedPlot2D with the given level, version, and package version.
  */
-Plot2D::Plot2D (unsigned int level, unsigned int version)
-	: SedMLOutput(level, version)
+SedPlot2D::SedPlot2D (unsigned int level, unsigned int version)
+	: SedOutput(level, version)
 	, mCurve (level, version)
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
 	// connect to child objects
 	connectToChild();
@@ -61,15 +61,15 @@ Plot2D::Plot2D (unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new Plot2D with the given SedMLNamespaces object.
+ * Creates a new SedPlot2D with the given SedNamespaces object.
  */
-Plot2D::Plot2D (SedMLNamespaces* sedmlns)
-	: SedMLOutput(sedmlns)
-	, mCurve (sedmlns)
+SedPlot2D::SedPlot2D (SedNamespaces* sedns)
+	: SedOutput(sedns)
+	, mCurve (sedns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 
 	// connect to child objects
 	connectToChild();
@@ -77,14 +77,14 @@ Plot2D::Plot2D (SedMLNamespaces* sedmlns)
 
 
 /*
- * Copy constructor for Plot2D.
+ * Copy constructor for SedPlot2D.
  */
-Plot2D::Plot2D (const Plot2D& orig)
-	: SedMLOutput(orig)
+SedPlot2D::SedPlot2D (const SedPlot2D& orig)
+	: SedOutput(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -97,18 +97,18 @@ Plot2D::Plot2D (const Plot2D& orig)
 
 
 /*
- * Assignment for Plot2D.
+ * Assignment for SedPlot2D.
  */
-Plot2D&
-Plot2D::operator=(const Plot2D& rhs)
+SedPlot2D&
+SedPlot2D::operator=(const SedPlot2D& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
-		SedMLOutput::operator=(rhs);
+		SedOutput::operator=(rhs);
 		mCurve  = rhs.mCurve;
 
 		// connect to child objects
@@ -119,97 +119,97 @@ Plot2D::operator=(const Plot2D& rhs)
 
 
 /*
- * Clone for Plot2D.
+ * Clone for SedPlot2D.
  */
-Plot2D*
-Plot2D::clone () const
+SedPlot2D*
+SedPlot2D::clone () const
 {
-	return new Plot2D(*this);
+	return new SedPlot2D(*this);
 }
 
 
 /*
- * Destructor for Plot2D.
+ * Destructor for SedPlot2D.
  */
-Plot2D::~Plot2D ()
+SedPlot2D::~SedPlot2D ()
 {
 }
 
 
 /*
- * Returns the  "SedListOfSedMLCurves" in this Plot2D object.
+ * Returns the  "SedListOfSedCurves" in this SedPlot2D object.
  */
-const SedListOfSedMLCurves*
-Plot2D::getListOfSedMLCurves() const
+const SedListOfSedCurves*
+SedPlot2D::getListOfSedCurves() const
 {
 	return &mCurve;
 }
 
 
 /*
- * Removes the nth SedMLCurve from the SedListOfSedMLCurves.
+ * Removes the nth SedCurve from the SedListOfSedCurves.
  */
-SedMLCurve*
-Plot2D::removeSedMLCurve(unsigned int n)
+SedCurve*
+SedPlot2D::removeSedCurve(unsigned int n)
 {
 	return mCurve.remove(n);
 }
 
 
 /*
- * Removes the a SedMLCurve with given id from the SedListOfSedMLCurves.
+ * Removes the a SedCurve with given id from the SedListOfSedCurves.
  */
-SedMLCurve*
-Plot2D::removeSedMLCurve(const std::string& sid)
+SedCurve*
+SedPlot2D::removeSedCurve(const std::string& sid)
 {
 	return mCurve.remove(sid);
 }
 
 
 /*
- * Return the nth SedMLCurve in the SedListOfSedMLCurves within this Plot2D.
+ * Return the nth SedCurve in the SedListOfSedCurves within this SedPlot2D.
  */
-SedMLCurve*
-Plot2D::getSedMLCurve(unsigned int n)
+SedCurve*
+SedPlot2D::getSedCurve(unsigned int n)
 {
 	return mCurve.get(n);
 }
 
 
 /*
- * Return the nth SedMLCurve in the SedListOfSedMLCurves within this Plot2D.
+ * Return the nth SedCurve in the SedListOfSedCurves within this SedPlot2D.
  */
-const SedMLCurve*
-Plot2D::getSedMLCurve(unsigned int n) const
+const SedCurve*
+SedPlot2D::getSedCurve(unsigned int n) const
 {
 	return mCurve.get(n);
 }
 
 
 /*
- * Return a SedMLCurve from the SedListOfSedMLCurves by id.
+ * Return a SedCurve from the SedListOfSedCurves by id.
  */
-SedMLCurve*
-Plot2D::getSedMLCurve(const std::string& sid)
+SedCurve*
+SedPlot2D::getSedCurve(const std::string& sid)
 {
 	return mCurve.get(sid);
 }
 
 
 /*
- * Return a SedMLCurve from the SedListOfSedMLCurves by id.
+ * Return a SedCurve from the SedListOfSedCurves by id.
  */
-const SedMLCurve*
-Plot2D::getSedMLCurve(const std::string& sid) const
+const SedCurve*
+SedPlot2D::getSedCurve(const std::string& sid) const
 {
 	return mCurve.get(sid);
 }
 
 
 /**
- * Adds a copy the given "SedMLCurve" to this Plot2D.
+ * Adds a copy the given "SedCurve" to this SedPlot2D.
  *
- * @param smlc; the SedMLCurve object to add
+ * @param sc; the SedCurve object to add
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
@@ -219,37 +219,37 @@ Plot2D::getSedMLCurve(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-Plot2D::addSedMLCurve(const SedMLCurve* smlc)
+SedPlot2D::addSedCurve(const SedCurve* sc)
 {
-	if(smlc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mCurve.append(smlc);
+	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mCurve.append(sc);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
 /**
- * Get the number of SedMLCurve objects in this Plot2D.
+ * Get the number of SedCurve objects in this SedPlot2D.
  *
- * @return the number of SedMLCurve objects in this Plot2D
+ * @return the number of SedCurve objects in this SedPlot2D
  */
 unsigned int 
-Plot2D::getNumSedMLCurves() const
+SedPlot2D::getNumSedCurves() const
 {
 	return mCurve.size();
 }
 
 /**
- * Creates a new SedMLCurve object, adds it to this Plot2Ds
- * Plot2D and returns the SedMLCurve object created. 
+ * Creates a new SedCurve object, adds it to this SedPlot2Ds
+ * SedPlot2D and returns the SedCurve object created. 
  *
- * @return a new SedMLCurve object instance
+ * @return a new SedCurve object instance
  *
- * @see addSedMLCurve(const SedMLCurve* smlc)
+ * @see addSedCurve(const SedCurve* sc)
  */
-SedMLCurve* 
-Plot2D::createSedMLCurve()
+SedCurve* 
+SedPlot2D::createSedCurve()
 {
-	SedMLCurve *temp = new SedMLCurve();
+	SedCurve *temp = new SedCurve();
 	if (temp != NULL) mCurve.appendAndOwn(temp);
 	return temp;
 }
@@ -258,7 +258,7 @@ Plot2D::createSedMLCurve()
  * Returns the XML element name of this object
  */
 const std::string&
-Plot2D::getElementName () const
+SedPlot2D::getElementName () const
 {
 	static const string name = "plot2D";
 	return name;
@@ -269,13 +269,13 @@ Plot2D::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-Plot2D::createObject(XMLInputStream& stream)
+SedPlot2D::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedMLOutput::createObject(stream);
+	SedBase* object = SedOutput::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 
-	SedMLOutput::connectToChild();
+	SedOutput::connectToChild();
 
 	if (name == "listOfCurves")
 	{
@@ -290,9 +290,9 @@ Plot2D::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Plot2D::connectToChild ()
+SedPlot2D::connectToChild ()
 {
-	SedMLOutput::connectToChild();
+	SedOutput::connectToChild();
 
 	mCurve.connectToParent(this);
 }
@@ -302,7 +302,7 @@ Plot2D::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Plot2D::getTypeCode () const
+SedPlot2D::getTypeCode () const
 {
 	return SEDML_OUTPUT_PLOT2D;
 }
@@ -312,9 +312,9 @@ Plot2D::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Plot2D::hasRequiredAttributes () const
+SedPlot2D::hasRequiredAttributes () const
 {
-	bool allPresent = SedMLOutput::hasRequiredAttributes();
+	bool allPresent = SedOutput::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -324,9 +324,9 @@ Plot2D::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-Plot2D::hasRequiredElements () const
+SedPlot2D::hasRequiredElements () const
 {
-	bool allPresent = SedMLOutput::hasRequiredElements();
+	bool allPresent = SedOutput::hasRequiredElements();
 
 	return allPresent;
 }
@@ -338,10 +338,10 @@ Plot2D::hasRequiredElements () const
  * write contained elements
  */
 void
-Plot2D::writeElements (XMLOutputStream& stream) const
+SedPlot2D::writeElements (XMLOutputStream& stream) const
 {
-	SedMLOutput::writeElements(stream);
-	if (getNumSedMLCurves() > 0)
+	SedOutput::writeElements(stream);
+	if (getNumSedCurves() > 0)
 	{
 		mCurve.write(stream);
 	}
@@ -354,10 +354,10 @@ Plot2D::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Plot2D::accept (SedMLVisitor& v) const
+SedPlot2D::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -370,12 +370,12 @@ Plot2D::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Plot2D::setSedMLDocument (SedMLDocument* d)
+SedPlot2D::setSedDocument (SedDocument* d)
 {
-	SedMLOutput::setSedMLDocument(d);
+	SedOutput::setSedDocument(d);
 }
 
 
@@ -388,9 +388,9 @@ Plot2D::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Plot2D::addExpectedAttributes(ExpectedAttributes& attributes)
+SedPlot2D::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedMLOutput::addExpectedAttributes(attributes);
+	SedOutput::addExpectedAttributes(attributes);
 
 }
 
@@ -404,10 +404,10 @@ Plot2D::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Plot2D::readAttributes (const XMLAttributes& attributes,
+SedPlot2D::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	SedMLOutput::readAttributes(attributes, expectedAttributes);
+	SedOutput::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -423,9 +423,9 @@ Plot2D::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Plot2D::writeAttributes (XMLOutputStream& stream) const
+SedPlot2D::writeAttributes (XMLOutputStream& stream) const
 {
-	SedMLOutput::writeAttributes(stream);
+	SedOutput::writeAttributes(stream);
 
 }
 
@@ -437,10 +437,10 @@ Plot2D::writeAttributes (XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Plot2D_t *
-Plot2D_create(unsigned int level, unsigned int version)
+SedPlot2D_t *
+SedPlot2D_create(unsigned int level, unsigned int version)
 {
-	return new Plot2D(level, version);
+	return new SedPlot2D(level, version);
 }
 
 
@@ -449,10 +449,10 @@ Plot2D_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Plot2D_free(Plot2D_t * pd)
+SedPlot2D_free(SedPlot2D_t * spd)
 {
-	if (pd != NULL)
-		delete pd;
+	if (spd != NULL)
+		delete spd;
 }
 
 
@@ -460,12 +460,12 @@ Plot2D_free(Plot2D_t * pd)
  * write comments
  */
 LIBSEDML_EXTERN
-Plot2D_t *
-Plot2D_clone(Plot2D_t * pd)
+SedPlot2D_t *
+SedPlot2D_clone(SedPlot2D_t * spd)
 {
-	if (pd != NULL)
+	if (spd != NULL)
 	{
-		return static_cast<Plot2D_t*>(pd->clone());
+		return static_cast<SedPlot2D_t*>(spd->clone());
 	}
 	else
 	{
@@ -476,58 +476,58 @@ Plot2D_clone(Plot2D_t * pd)
 
 LIBSEDML_EXTERN
 int
-Plot2D_addSedMLCurve(Plot2D_t * pd, SedMLCurve_t * smlc)
+SedPlot2D_addSedCurve(SedPlot2D_t * spd, SedCurve_t * sc)
 {
-	return  (pd != NULL) ? pd->addSedMLCurve(smlc) : LIBSBML_INVALID_OBJECT;
+	return  (spd != NULL) ? spd->addSedCurve(sc) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_createSedMLCurve(Plot2D_t * pd)
+SedCurve_t *
+SedPlot2D_createSedCurve(SedPlot2D_t * spd)
 {
-	return  (pd != NULL) ? pd->createSedMLCurve() : NULL;
+	return  (spd != NULL) ? spd->createSedCurve() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-Plot2D_getSedListOfSedMLCurves(Plot2D_t * pd)
+SedPlot2D_getSedListOfSedCurves(SedPlot2D_t * spd)
 {
-	return  (pd != NULL) ? (SedListOf_t *)pd->getListOfSedMLCurves() : NULL;
+	return  (spd != NULL) ? (SedListOf_t *)spd->getListOfSedCurves() : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_getSedMLCurve(Plot2D_t * pd, unsigned int n)
+SedCurve_t *
+SedPlot2D_getSedCurve(SedPlot2D_t * spd, unsigned int n)
 {
-	return  (pd != NULL) ? pd->getSedMLCurve(n) : NULL;
+	return  (spd != NULL) ? spd->getSedCurve(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_getSedMLCurveById(Plot2D_t * pd, const char * sid)
+SedCurve_t *
+SedPlot2D_getSedCurveById(SedPlot2D_t * spd, const char * sid)
 {
-	return  (pd != NULL) ? pd->getSedMLCurve(sid) : NULL;
+	return  (spd != NULL) ? spd->getSedCurve(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-Plot2D_getNumSedMLCurves(Plot2D_t * pd)
+SedPlot2D_getNumSedCurves(SedPlot2D_t * spd)
 {
-	return  (pd != NULL) ? pd->getNumSedMLCurves() : SEDML_INT_MAX;
+	return  (spd != NULL) ? spd->getNumSedCurves() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_removeSedMLCurve(Plot2D_t * pd, unsigned int n)
+SedCurve_t *
+SedPlot2D_removeSedCurve(SedPlot2D_t * spd, unsigned int n)
 {
-	return  (pd != NULL) ? pd->removeSedMLCurve(n) : NULL;
+	return  (spd != NULL) ? spd->removeSedCurve(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_removeSedMLCurveById(Plot2D_t * pd, const char * sid)
+SedCurve_t *
+SedPlot2D_removeSedCurveById(SedPlot2D_t * spd, const char * sid)
 {
-	return  (pd != NULL) ? pd->removeSedMLCurve(sid) : NULL;
+	return  (spd != NULL) ? spd->removeSedCurve(sid) : NULL;
 }
 
 /**
@@ -535,9 +535,9 @@ Plot2D_removeSedMLCurveById(Plot2D_t * pd, const char * sid)
  */
 LIBSEDML_EXTERN
 int
-Plot2D_hasRequiredAttributes(Plot2D_t * pd)
+SedPlot2D_hasRequiredAttributes(SedPlot2D_t * spd)
 {
-	return (pd != NULL) ? static_cast<int>(pd->hasRequiredAttributes()) : 0;
+	return (spd != NULL) ? static_cast<int>(spd->hasRequiredAttributes()) : 0;
 }
 
 
@@ -546,9 +546,9 @@ Plot2D_hasRequiredAttributes(Plot2D_t * pd)
  */
 LIBSEDML_EXTERN
 int
-Plot2D_hasRequiredElements(Plot2D_t * pd)
+SedPlot2D_hasRequiredElements(SedPlot2D_t * spd)
 {
-	return (pd != NULL) ? static_cast<int>(pd->hasRequiredElements()) : 0;
+	return (spd != NULL) ? static_cast<int>(spd->hasRequiredElements()) : 0;
 }
 
 

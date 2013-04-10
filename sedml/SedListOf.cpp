@@ -4,8 +4,8 @@
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -28,7 +28,7 @@
 #include <algorithm>
 #include <functional>
 
-#include <sedml/SedMLVisitor.h>
+#include <sedml/SedVisitor.h>
 #include <sedml/SedListOf.h>
 #include <sedml/common/common.h>
 
@@ -47,18 +47,18 @@ SedListOf::SedListOf (unsigned int level, unsigned int version)
 : SedBase(level,version)
 {
     if (!hasValidLevelVersionNamespaceCombination())
-    throw SedMLConstructorException();
+    throw SedConstructorException();
 }
 
 
 /*
  * Creates a new SedListOf items.
  */
-SedListOf::SedListOf (SedMLNamespaces* sbmlns)
+SedListOf::SedListOf (SedNamespaces* sbmlns)
 : SedBase(sbmlns)
 {
     if (!hasValidLevelVersionNamespaceCombination())
-    throw SedMLConstructorException();
+    throw SedConstructorException();
 }
 
 
@@ -119,10 +119,10 @@ SedListOf& SedListOf::operator=(const SedListOf& rhs)
 }
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-SedListOf::accept (SedMLVisitor& v) const
+SedListOf::accept (SedVisitor& v) const
 {
   v.visit(*this, getItemTypeCode() );
   for (unsigned int n = 0 ; n < mItems.size() && mItems[n]->accept(v); ++n) ;
@@ -420,56 +420,56 @@ SedListOf::size () const
 
 
 /**
- * Used by SedListOf::setSedMLDocument().
+ * Used by SedListOf::setSedDocument().
  */
-struct SetSedMLDocument : public unary_function<SedBase*, void>
+struct SetSedDocument : public unary_function<SedBase*, void>
 {
-  SedMLDocument* d;
+  SedDocument* d;
 
-  SetSedMLDocument (SedMLDocument* d) : d(d) { }
-  void operator() (SedBase* sbase) { sbase->setSedMLDocument(d); }
+  SetSedDocument (SedDocument* d) : d(d) { }
+  void operator() (SedBase* sbase) { sbase->setSedDocument(d); }
 };
 
 
 /**
- * Used by SedListOf::setParentSedMLObject().
+ * Used by SedListOf::setParentSedObject().
  */
-struct SetParentSedMLObject : public unary_function<SedBase*, void>
+struct SetParentSedObject : public unary_function<SedBase*, void>
 {
   SedBase* sb;
 
-  SetParentSedMLObject (SedBase *sb) : sb(sb) { }
+  SetParentSedObject (SedBase *sb) : sb(sb) { }
   void operator() (SedBase* sbase) { sbase->connectToParent(sb); }
 };
 
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument of this SedML object.
+ * Sets the parent SedDocument of this Sed object.
  */
 void
-SedListOf::setSedMLDocument (SedMLDocument* d)
+SedListOf::setSedDocument (SedDocument* d)
 {
-  SedBase::setSedMLDocument(d);
-  for_each( mItems.begin(), mItems.end(), SetSedMLDocument(d) );
+  SedBase::setSedDocument(d);
+  for_each( mItems.begin(), mItems.end(), SetSedDocument(d) );
 }
 
 
 /*
- * Sets this SedML object to child SedML objects (if any).
+ * Sets this Sed object to child Sed objects (if any).
  * (Creates a child-parent relationship by the parent)
   */
 void
 SedListOf::connectToChild()
 {
-  for_each( mItems.begin(), mItems.end(), SetParentSedMLObject(this) );
+  for_each( mItems.begin(), mItems.end(), SetParentSedObject(this) );
 }
 
 /** @endcond */
 
 
 /*
- * @return the typecode (int) of this SedML object or SEDML_UNKNOWN
+ * @return the typecode (int) of this Sed object or SEDML_UNKNOWN
  * (default).
  */
 int
@@ -480,7 +480,7 @@ SedListOf::getTypeCode () const
 
 
 /*
- * @return the typecode (int) of SedML objects contained in this SedListOf or
+ * @return the typecode (int) of Sed objects contained in this SedListOf or
  * SEDML_UNKNOWN (default).
  */
 int
@@ -517,7 +517,7 @@ struct Write : public unary_function<SedBase*, void>
 /** @cond doxygen-libsbml-internal */
 /*
  * Subclasses should override this method to write out their contained
- * SedML objects as XML elements.  Be sure to call your parents
+ * Sed objects as XML elements.  Be sure to call your parents
  * implementation of this method as well.
  */
 void
@@ -766,7 +766,7 @@ SedListOf_size (const SedListOf_t *lo)
 
 
 /**
- * @return the typecode (int) of this SedML object or SEDML_UNKNOWN
+ * @return the typecode (int) of this Sed object or SEDML_UNKNOWN
  * SEDML_UNKNOWN (default).
  */
 LIBSEDML_EXTERN

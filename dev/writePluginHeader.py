@@ -39,7 +39,7 @@ def writeConstructors(fileOut, nameOfClass, pkg):
   fileOut.write('Creates a new {0}\n'.format(nameOfClass))
   fileOut.write('\t */\n')
   fileOut.write('\t{0}(const std::string& uri, const std::string& prefix, \n'.format(nameOfClass))
-  fileOut.write('\t                               SedMLNamespaces* {0}ns);\n\n\n'.format(pkg.lower()))
+  fileOut.write('\t                               SedNamespaces* {0}ns);\n\n\n'.format(pkg.lower()))
   fileOut.write('\t/**\n\t * ' )
   fileOut.write('Copy constructor for {0}.\n'.format(nameOfClass))
   fileOut.write('\t *\n')

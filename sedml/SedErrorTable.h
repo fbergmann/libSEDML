@@ -1,11 +1,11 @@
 /**
- * @file    SedMLErrorTable.h
- * @brief   Represents SedML errors and other diagnostics
+ * @file    SedErrorTable.h
+ * @brief   Represents Sed errors and other diagnostics
  * @author  Sarah Keating
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -30,7 +30,7 @@
 #include <sstream>
 
 #include <sbml/xml/XMLError.h>
-#include <sedml/SedMLError.h>
+#include <sedml/SedError.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -55,10 +55,10 @@ static const sbmlErrorTableEntry errorTable[] =
 {
   // 10000
   { UnknownError, 
-    "Encountered unknown internal libSedML error",
+    "Encountered unknown internal libSed error",
     LIBSEDML_CAT_INTERNAL, 
     LIBSEDML_SEV_FATAL,
-    "Unrecognized error encountered by libSedML" },
+    "Unrecognized error encountered by libSed" },
 
   //10101
   {
@@ -66,7 +66,7 @@ static const sbmlErrorTableEntry errorTable[] =
     "File does not use UTF-8 encoding",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An SedML XML file must use UTF-8 as the character encoding. More "
+    "An Sed XML file must use UTF-8 as the character encoding. More "
     "precisely, the 'encoding' attribute of the XML declaration at the "
     "beginning of the XML data stream cannot have a value other than "
     "'UTF-8'. An example valid declaration is "
@@ -80,9 +80,9 @@ static const sbmlErrorTableEntry errorTable[] =
     "Encountered unrecognized element",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An SedML XML document must not contain undefined elements or attributes "
-    "in the SedML namespace. Documents containing unknown elements or "
-    "attributes placed in the SedML namespace do not conform to the SedML "
+    "An Sed XML document must not contain undefined elements or attributes "
+    "in the Sed namespace. Documents containing unknown elements or "
+    "attributes placed in the Sed namespace do not conform to the Sed "
     "specification.",  
     {""}
   },
@@ -90,13 +90,13 @@ static const sbmlErrorTableEntry errorTable[] =
   //10103
   {
     NotSchemaConformant,
-    "Document does not conform to the SedML XML schema",
+    "Document does not conform to the Sed XML schema",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An SedML XML document must conform to the XML Schema for the corresponding "
-    "SedML Level, Version and Release. The XML Schema for SedML defines the "
-    "basic SedML object structure, the data types used by those objects, and the "
-    "order in which the objects may appear in an SedML document.",
+    "An Sed XML document must conform to the XML Schema for the corresponding "
+    "Sed Level, Version and Release. The XML Schema for Sed defines the "
+    "basic Sed object structure, the data types used by those objects, and the "
+    "order in which the objects may appear in an Sed document.",
     {""}
   },
 
@@ -106,7 +106,7 @@ static const sbmlErrorTableEntry errorTable[] =
     "Document is not well-formed XML",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_NOT_APPLICABLE,
-    "An SedML document must conform to the rules of XML well-formedness "
+    "An Sed document must conform to the rules of XML well-formedness "
     "defined in the XML 1.0 specification. These rules define the basic "
     "structural and syntactic constraints with which all XML documents "
     "must comply.",
@@ -125,7 +125,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "All MathML content in SedML must appear within a <math> element, and the "
+//    "All MathML content in Sed must appear within a <math> element, and the "
 //    "<math> element must be either explicitly or implicitly in the XML "
 //    "namespace \"http://www.w3.org/1998/Math/MathML\".",
 //    {"",
@@ -148,7 +148,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The only permitted MathML 2.0 elements in SedML Level 2 are "
+//    "The only permitted MathML 2.0 elements in Sed Level 2 are "
 //    "the following: <cn>, <ci>, <csymbol>, <sep>, <apply>, <piecewise>, "
 //    "<piece>, <otherwise>, <eq>, <neq>, <gt>, <lt>, <geq>, <leq>, <plus>, "
 //    "<minus>, <times>, <divide>, <power>, <root>, <abs>, <exp>, <ln>, <log>, "
@@ -179,7 +179,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "In the SedML subset of MathML 2.0, the MathML attribute "
+//    "In the Sed subset of MathML 2.0, the MathML attribute "
 //    "'encoding' is only permitted on <csymbol>. No other MathML elements may "
 //    "have an 'encoding' attribute. ",
 //    {"",
@@ -192,7 +192,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //
 //  //10204
 //  { /**
-//      * This is a rule that was not implemented in libSedML-2.3.4
+//      * This is a rule that was not implemented in libSed-2.3.4
 //      Category_* To be strictly in line with sbml specifications it should
 //      * only allow semantics on csymbol until l2v3 rel 2
 //      * BUT since no one ever applied it anyway I havent implemented
@@ -209,7 +209,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "In the SedML subset of MathML 2.0, the MathML attribute "
+//    "In the Sed subset of MathML 2.0, the MathML attribute "
 //    "'definitionURL' is only permitted on <csymbol>, <semantics> or <ci> (Level 3 only). "
 //    "No other MathML elements may have a 'definitionURL' attribute. ",
 //    {"",
@@ -232,9 +232,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "In SedML Level 2, the only values permitted for 'definitionURL' on "
+//    "In Sed Level 2, the only values permitted for 'definitionURL' on "
 //    "a <csymbol> element are \"http://www.sbml.org/sbml/symbols/time\" "
-//    "and \"http://www.sbml.org/sbml/symbols/delay\". SedML Level 3 added "
+//    "and \"http://www.sbml.org/sbml/symbols/delay\". Sed Level 3 added "
 //    "\"http://www.sbml.org/sbml/symbols/avogadro\". ", 
 //    {"",
 //     "",
@@ -256,7 +256,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "In the SedML subset of MathML 2.0, the MathML attribute "
+//    "In the Sed subset of MathML 2.0, the MathML attribute "
 //    "'type' is only permitted on the <cn> construct. No other MathML elements "
 //    "may have a 'type' attribute.",
 //    {"",
@@ -305,7 +305,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "the 'math' element of a <functionDefinition> or as the first element "
 //    "of a semantics element immediately inside inside the math element "
 //    "of a <functionDefinition>; they may not be used "
-//    "elsewhere in an SedML model.",
+//    "elsewhere in an Sed model.",
 //    {"",
 //     "",
 //     "L2V2 Sections 3.5.1 and 4.3",
@@ -445,7 +445,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "Outside of a <functionDefinition>, if a <ci> element is the first "
 //    "element within a MathML <apply>, then the <ci>'s value can only be "
 //    "chosen from the set of identifiers of <functionDefinition>s defined in "
-//    "the SedML model.",
+//    "the Sed model.",
 //    {"",
 //     "",
 //     "L2V2 Section 4.3.2",
@@ -469,7 +469,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "Outside of a <functionDefinition>, if a <ci> element is not the first "
 //    "element within a MathML <apply>, then the <ci>'s value can only be "
 //    "chosen from the set of identifiers of <species>, <compartment>, "
-//    "<parameter>, <reaction>, or (in Level 3) <speciesReference> objects defined in the SedML model. (In L2V1, the "
+//    "<parameter>, <reaction>, or (in Level 3) <speciesReference> objects defined in the Sed model. (In L2V1, the "
 //    "<ci>'s value can't be chosen from the identifiers of <reaction> objects). ",
 //    {"",
 //     "",
@@ -586,7 +586,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "The SedML attribute 'units' may only be added to MathML <cn> elements; "
+//    "The Sed attribute 'units' may only be added to MathML <cn> elements; "
 //    "no other MathML elements are permitted to have the 'units' attribute. ",
 //    {"",
 //     "",
@@ -608,9 +608,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "The value of the SedML attribute 'units' on a MathML <cn> element must "
+//    "The value of the Sed attribute 'units' on a MathML <cn> element must "
 //    "be chosen from either the set of identifiers of UnitDefinition "
-//    "objects in the model, or the set of base units defined by SedML. ",
+//    "objects in the model, or the set of base units defined by Sed. ",
 //    {"",
 //     "",
 //     "",
@@ -831,7 +831,7 @@ static const sbmlErrorTableEntry errorTable[] =
     "Invalid syntax for an 'id' attribute value",
     LIBSEDML_CAT_IDENTIFIER_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The syntax of 'id' attribute values must conform to the syntax of the SedML "
+    "The syntax of 'id' attribute values must conform to the syntax of the Sed "
     "type 'SId'.", 
     {""}
 },
@@ -851,7 +851,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "The syntax of unit identifiers (i.e., the values of the 'id' attribute "
 //    "on UnitDefinition, the 'units' attribute on Compartment, the 'units' "
 //    "attribute on Parameter, and the 'substanceUnits' attribute on Species) "
-//    "must conform to the syntax of the SedML type UnitSId.",
+//    "must conform to the syntax of the Sed type UnitSId.",
 //    {"",
 //     "",
 //     "",
@@ -927,8 +927,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //
 //  //10403
 //  {
-//    SedMLNamespaceInAnnotation,
-//    "The SedML XML namespace cannot be used in an Annotation object",
+//    SedNamespaceInAnnotation,
+//    "The Sed XML namespace cannot be used in an Annotation object",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -937,7 +937,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "Top-level elements within an annotation element cannot use any SedML "
+//    "Top-level elements within an annotation element cannot use any Sed "
 //    "namespace, whether explicitly (by declaring the namespace to be one of "
 //    "the URIs \"http://www.sbml.org/sbml/level1\", "
 //    "\"http://www.sbml.org/sbml/level2\", "
@@ -956,7 +956,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //10404
 //  {
 //    MultipleAnnotations,
-//    "Only one Annotation object is permitted under a given SedML object",
+//    "Only one Annotation object is permitted under a given Sed object",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -965,7 +965,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "A given SedML object may contain at most one <annotation> element.",
+//    "A given Sed object may contain at most one <annotation> element.",
 //    {"",
 //     "",
 //     "",
@@ -1526,7 +1526,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The system of equations created from an SedML model must not be "
+//    "The system of equations created from an Sed model must not be "
 //    "overdetermined.",
 //    {"",
 //     "",
@@ -1549,7 +1549,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    "The value of the 'sboTerm' attribute on a <model> is expected to "
-//    "be an SBO identifier (http://www.biomodels.net/SBO/).  In SedML "
+//    "be an SBO identifier (http://www.biomodels.net/SBO/).  In Sed "
 //    "Level 2 prior to Version 4 the value is expected to be a term "
 //    "derived from SBO:0000004, \"modeling framework\"; in Version 4 "
 //    "and above it is expected to be a term derived from SBO:0000231 "
@@ -1817,7 +1817,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    "The value of the 'sboTerm' attribute on a <compartment> is expected to be an SBO "
-//    "identifier (http://www.biomodels.net/SBO/). In SedML Level 2 prior "
+//    "identifier (http://www.biomodels.net/SBO/). In Sed Level 2 prior "
 //    "to Version 4 it is expected to refer to a participant "
 //    "physical type (i.e., terms derived from SBO:0000236, \"participant "
 //    "physical type\"); in Versions 4 and above it is expected to refer "
@@ -1844,7 +1844,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    "The value of the 'sboTerm' attribute on a <species> is expected to be an SBO "
-//    "identifier (http://www.biomodels.net/SBO/). In SedML Level 2 prior "
+//    "identifier (http://www.biomodels.net/SBO/). In Sed Level 2 prior "
 //    "to Version 4 it is expected to refer to a participant "
 //    "physical type (i.e., terms derived from SBO:0000236, \"participant "
 //    "physical type\"); in Versions 4 and above it is expected to refer "
@@ -1871,7 +1871,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The value of the 'sboTerm' attribute on a <compartmentType> is expected to be an SBO "
-//    "identifier (http://www.biomodels.net/SBO/). In SedML Level 2 prior "
+//    "identifier (http://www.biomodels.net/SBO/). In Sed Level 2 prior "
 //    "to Version 4 it is expected to refer to a participant "
 //    "physical type (i.e., terms derived from SBO:0000236, \"participant "
 //    "physical type\"); in Versions 4 and above it is expected to refer "
@@ -1898,7 +1898,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The value of the 'sboTerm' attribute on a <speciesType> is expected to be an SBO "
-//    "identifier (http://www.biomodels.net/SBO/). In SedML Level 2 prior "
+//    "identifier (http://www.biomodels.net/SBO/). In Sed Level 2 prior "
 //    "to Version 4 it is expected to refer to a participant "
 //    "physical type (i.e., terms derived from SBO:0000236, \"participant "
 //    "physical type\"); in Versions 4 and above it is expected to refer "
@@ -2055,7 +2055,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //10805
 //  {
 //    OnlyOneNotesElementAllowed,
-//    "Only one Notes subobject is permitted on a given SedML object",
+//    "Only one Notes subobject is permitted on a given Sed object",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -2064,7 +2064,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "A given SedML object may contain at most one <notes> element. ",
+//    "A given Sed object may contain at most one <notes> element. ",
 //    {"",
 //     "",
 //     "",
@@ -2075,8 +2075,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //
 //  //20101
 //  {
-//    InvalidNamespaceOnSedML,
-//    "Invalid XML namespace for the SedML container element",
+//    InvalidNamespaceOnSed,
+//    "Invalid XML namespace for the Sed container element",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -2085,7 +2085,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The <sbml> container element must declare the XML Namespace for SedML, "
+//    "The <sbml> container element must declare the XML Namespace for Sed, "
 //    "and this declaration must be consistent with the values of the 'level' "
 //    "and 'version' attributes on the <sbml> element. ",
 //    {"",
@@ -2108,7 +2108,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The <sbml> container element must declare the SedML Level using the "
+//    "The <sbml> container element must declare the Sed Level using the "
 //    "attribute 'level', and this declaration must be consistent with the XML "
 //    "Namespace declared for the <sbml> element.",
 //    {"",
@@ -2131,7 +2131,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The <sbml> container element must declare the SedML Version using the "
+//    "The <sbml> container element must declare the Sed Version using the "
 //    "attribute 'version', and this declaration must be consistent with the "
 //    "XML Namespace declared for the <sbml> element.", 
 //    {"",
@@ -2145,7 +2145,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //20104 
 //  {
 //    PackageNSMustMatch,
-//    "Inconsistent or invalid SedML Level/Version for the package namespace declaration",
+//    "Inconsistent or invalid Sed Level/Version for the package namespace declaration",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -2155,7 +2155,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "The <sbml> container element must declare the XML Namespace for any "
-//    "SedML Level 3 packages used within the SedML document. This declaration "
+//    "Sed Level 3 packages used within the Sed document. This declaration "
 //    "must be consistent with the values of the 'level' and 'version' attributes "
 //    "on the <sbml> element.",
 //    {"",
@@ -2212,8 +2212,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //
 //  //20108
 //  {
-//    AllowedAttributesOnSedML,
-//    "Invalid attribute found on the SedML container element",
+//    AllowedAttributesOnSed,
+//    "Invalid attribute found on the Sed container element",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -2233,8 +2233,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //
 //  //20109
 //  {
-//    L3PackageOnLowerSedML,
-//    "An L3 package ns found on the SedML container element.",
+//    L3PackageOnLowerSed,
+//    "An L3 package ns found on the Sed container element.",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
@@ -2243,7 +2243,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "It is not possible to use SedML L3 packages with earlier levels of SedML.",
+//    "It is not possible to use Sed L3 packages with earlier levels of Sed.",
 //    {"",
 //     "",
 //     "",
@@ -2264,7 +2264,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "An SedML document must contain a <model> element. ", 
+//    "An Sed document must contain a <model> element. ", 
 //    {"",
 //     "L2V1 Section 4.1",
 //     "L2V2 Section 4.1",
@@ -2389,7 +2389,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfFunctionDefinitions container object may only "
+//    "all Sed components, a ListOfFunctionDefinitions container object may only "
 //    "contain FunctionDefinition objects.",
 //    {"",
 //     "",
@@ -2412,7 +2412,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfUnitDefinitions container object may only "
+//    "all Sed components, a ListOfUnitDefinitions container object may only "
 //    "contain UnitDefinition objects.",
 //    {"",
 //     "",
@@ -2435,7 +2435,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfCompartments container object may only "
+//    "all Sed components, a ListOfCompartments container object may only "
 //    "contain Compartment objects.",
 //    {"",
 //     "",
@@ -2458,7 +2458,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfSpecies container object may only "
+//    "all Sed components, a ListOfSpecies container object may only "
 //    "contain Species objects.",
 //    {"",
 //     "",
@@ -2481,7 +2481,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfParameters container object may only "
+//    "all Sed components, a ListOfParameters container object may only "
 //    "contain Parameter objects.",
 //    {"",
 //     "",
@@ -2504,7 +2504,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfInitialAssignments container object may only "
+//    "all Sed components, a ListOfInitialAssignments container object may only "
 //    "contain InitialAssignment objects.",
 //    {"",
 //     "",
@@ -2527,7 +2527,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfRules container object may only "
+//    "all Sed components, a ListOfRules container object may only "
 //    "contain Rule objects.",
 //    {"",
 //     "",
@@ -2550,7 +2550,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfConstraints container object may only "
+//    "all Sed components, a ListOfConstraints container object may only "
 //    "contain Constraint objects.",
 //    {"",
 //     "",
@@ -2573,7 +2573,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfReactions container object may only "
+//    "all Sed components, a ListOfReactions container object may only "
 //    "contain Reaction objects.",
 //    {"",
 //     "",
@@ -2596,7 +2596,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfEvents container object may only "
+//    "all Sed components, a ListOfEvents container object may only "
 //    "contain Event objects.",
 //    {"",
 //     "",
@@ -2762,7 +2762,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "A Model object may only have the following attributes, all of "
 //    "which are optional: 'metaid', 'sboTerm', 'id', 'name', 'substanceUnits', "
 //    "'timeUnits', 'volumeUnits', 'areaUnits', 'lengthUnits', 'extentUnits' and "
-//    "'conversionFactor'. No other attributes from the SedML Level 3 Core "
+//    "'conversionFactor'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a Model object.",
 //    {"",
 //     "",
@@ -2785,7 +2785,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfFunctionDefinitions object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfFunctionDefinitions object.",
 //    {"",
 //     "",
@@ -2808,7 +2808,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfUnitDefinitions object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfUnitDefinitions object.",
 //    {"",
 //     "",
@@ -2831,7 +2831,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfCompartments object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfCompartments object.",
 //    {"",
 //     "",
@@ -2854,7 +2854,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfSpecies object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfSpecies object.",
 //    {"",
 //     "",
@@ -2877,7 +2877,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfParameters object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfParameters object.",
 //    {"",
 //     "",
@@ -2900,7 +2900,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfInitialAssignments object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfInitialAssignments object.",
 //    {"",
 //     "",
@@ -2923,7 +2923,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfRules object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfRules object.",
 //    {"",
 //     "",
@@ -2946,7 +2946,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfConstraints object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfConstraints object.",
 //    {"",
 //     "",
@@ -2969,7 +2969,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfReactions object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfReactions object.",
 //    {"",
 //     "",
@@ -2992,7 +2992,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfEvents object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfEvents object.",
 //    {"",
 //     "",
@@ -3040,8 +3040,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "Inside the <lambda> of a <functionDefinition>, if a <ci> element is the "
 //    "first element within a MathML <apply>, then the <ci>'s value can only "
-//    "be chosen from the set of identifiers of other SedML "
-//    "<functionDefinition>s defined prior to that point in the SedML model. In "
+//    "be chosen from the set of identifiers of other Sed "
+//    "<functionDefinition>s defined prior to that point in the Sed model. In "
 //    "other words, forward references to user-defined functions are not "
 //    "permitted. ",
 //    {"",
@@ -3065,7 +3065,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "Inside the <lambda> of a <functionDefinition>, the identifier of that "
-//    "<functionDefinition> cannot appear as the value of a <ci> element. SedML "
+//    "<functionDefinition> cannot appear as the value of a <ci> element. Sed "
 //    "functions are not permitted to be recursive. ",
 //    {"",
 //     "",
@@ -3158,7 +3158,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "FunctionDefinition object must have the required attribute 'id', and "
 //    "may have the optional attributes 'metaid', 'sboTerm' and 'name'. No other "
-//    "attributes from the SedML Level 3 Core namespace are permitted on a "
+//    "attributes from the Sed Level 3 Core namespace are permitted on a "
 //    "FunctionDefinition object.",
 //    {"",
 //     "",
@@ -3181,7 +3181,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "The value of the 'id' attribute in a <unitDefinition> must be of "
-//    "type 'UnitSId' and not be identical to any unit predefined in SedML. ",
+//    "type 'UnitSId' and not be identical to any unit predefined in Sed. ",
 //    // actual unit are listed in constraint 
 //    // as these vary between levels/versions
 //    {"",
@@ -3387,7 +3387,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "The value of the 'kind' attribute of a <unit> can only be one of the "
-//    "base units enumerated by 'UnitKind'; that is, the SedML unit "
+//    "base units enumerated by 'UnitKind'; that is, the Sed unit "
 //    "system is not hierarchical and user-defined units cannot be defined "
 //    "using other user-defined units. ",
 //    {"",
@@ -3401,7 +3401,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //20411
 //  {
 //    OffsetNoLongerValid,
-//    "Unit attribute 'offset' is not supported in this Level+Version of SedML",
+//    "Unit attribute 'offset' is not supported in this Level+Version of Sed",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -3410,8 +3410,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'offset' attribute on <unit> previously available in SedML Level 2 "
-//    "Version 1, has been removed as of SedML Level 2 Version 2. ",
+//    "The 'offset' attribute on <unit> previously available in Sed Level 2 "
+//    "Version 1, has been removed as of Sed Level 2 Version 2. ",
 //    {"",
 //     "",
 //     "L2V2 Section 4.4",
@@ -3423,7 +3423,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //20412
 //  {
 //    CelsiusNoLongerValid,
-//    "Unit name 'Celsius' is not defined in this Level+Version of SedML",
+//    "Unit name 'Celsius' is not defined in this Level+Version of Sed",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -3432,8 +3432,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The predefined unit 'Celsius', previously available in SedML Level 1 and "
-//    "Level 2 Version 1, has been removed as of SedML Level 2 Version 2. ",
+//    "The predefined unit 'Celsius', previously available in Sed Level 1 and "
+//    "Level 2 Version 1, has been removed as of Sed Level 2 Version 2. ",
 //    {"",
 //     "",
 //     "L2V2 Section 4.4",
@@ -3499,7 +3499,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfUnits container object may only contain "
+//    "all Sed components, a ListOfUnits container object may only contain "
 //    "Unit objects.",
 //    {"",
 //     "",
@@ -3523,7 +3523,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A UnitDefinition object must have the required attribute 'id' and "
 //    "may have the optional attributes 'metaid', 'sboTerm' and 'name'. No other "
-//    "attributes from the SedML Level 3 Core namespace are permitted on "
+//    "attributes from the Sed Level 3 Core namespace are permitted on "
 //    "a UnitDefinition object.",
 //    {"",
 //     "",
@@ -3546,7 +3546,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfUnits object may have the optional attributes 'metaid' and "
-//    "'sboTerm'. No other attributes from the SedML Level 3 Core namespace "
+//    "'sboTerm'. No other attributes from the Sed Level 3 Core namespace "
 //    "are permitted on a ListOfUnits object.",
 //    {"",
 //     "",
@@ -3570,7 +3570,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A Unit object must have the required attributes 'kind', 'exponent', "
 //    "'scale' and 'multiplier', and may have the optional attributes 'metaid' "
-//    "and 'sboTerm'. No other attributes from the SedML Level 3 Core namespace "
+//    "and 'sboTerm'. No other attributes from the Sed Level 3 Core namespace "
 //    "are permitted on a Unit object.",
 //    {"",
 //     "",
@@ -3908,7 +3908,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A Compartment object must have the required attributes 'id' and 'constant', "
 //    "and may have the optional attributes 'metaid', 'sboTerm', 'name', "
-//    "'spatialDimensions', 'size' and 'units'. No other attributes from the SedML "
+//    "'spatialDimensions', 'size' and 'units'. No other attributes from the Sed "
 //    "Level 3 Core namespace are permitted on a Compartment object.",
 //    {"",
 //     "",
@@ -4275,7 +4275,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //20615
 //  {
 //    SpatialSizeUnitsRemoved,
-//    "Attribute 'spatialSizeUnits' is not supported in this Level+Version of SedML",
+//    "Attribute 'spatialSizeUnits' is not supported in this Level+Version of Sed",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -4285,8 +4285,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'spatialSizeUnits' attribute on <species>, previously available "
-//    "in SedML Level 2 versions prior to Version 3, has been removed as "
-//    "of SedML Level 2 Version 3. ",
+//    "in Sed Level 2 versions prior to Version 3, has been removed as "
+//    "of Sed Level 2 Version 3. ",
 //    {"",
 //     "",
 //     "",
@@ -4360,7 +4360,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "'hasOnlySubstanceUnits', 'boundaryCondition' and 'constant', and may have "
 //    "the optional attributes 'metaid', 'sboTerm', 'name', 'initialAmount', "
 //    "'initialConcentration', 'substanceUnits' and 'conversionFactor'. No other "
-//    "attributes from the SedML Level 3 Core namespace are permitted on a "
+//    "attributes from the Sed Level 3 Core namespace are permitted on a "
 //    "Species object.",
 //    {"",
 //     "",
@@ -4385,7 +4385,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "The 'units' in a <Parameter> definition must be a value chosen from "
 //    "among the following: a predefined unit (e.g., 'substance', 'time', "
 //    "etc.), the identifier of a <UnitDefinition> in the model, or one of the "
-//    "base units in SedML (e.g., 'litre', 'mole', 'metre', etc.)",
+//    "base units in Sed (e.g., 'litre', 'mole', 'metre', etc.)",
 //    {"",
 //     "L2V1 Section 4.7.3",
 //     "L2V2 Section 4.9.3",
@@ -4454,7 +4454,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A Parameter object must have the required attributes 'id' and 'constant', "
 //    "and may have the optional attributes 'metaid', 'sboTerm', 'name', 'value' and "
-//    "'units'. No other attributes from the SedML Level 3 Core namespace are "
+//    "'units'. No other attributes from the Sed Level 3 Core namespace are "
 //    "permitted on a Parameter object.",
 //    {"",
 //     "",
@@ -4567,7 +4567,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "An InitialAssignment object must have the required attribute 'symbol' and "
 //    "may have the optional attributes 'metaid' and 'sboTerm'. No other attributes "
-//    "from the SedML Level 3 Core namespace are permitted on an "
+//    "from the Sed Level 3 Core namespace are permitted on an "
 //    "InitialAssignment object.",
 //    {"",
 //     "",
@@ -4748,7 +4748,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "An AssignmentRule object must have the required attribute 'variable' and "
 //    "may have the optional attributes 'metaid' and 'sboTerm'. No other attributes "
-//    "from the SedML Level 3 Core namespace are permitted on an "
+//    "from the Sed Level 3 Core namespace are permitted on an "
 //    "AssignmentRule object.",
 //    {"",
 //     "",
@@ -4772,7 +4772,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A RateRule object must have the required attribute 'variable' and "
 //    "may have the optional attributes 'metaid' and 'sboTerm'. No other attributes "
-//    "from the SedML Level 3 Core namespace are permitted on a "
+//    "from the Sed Level 3 Core namespace are permitted on a "
 //    "RateRule object.",
 //    {"",
 //     "",
@@ -4796,7 +4796,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "An AlgebraicRule object "
 //    "may have the optional attributes 'metaid' and 'sboTerm'. No other attributes "
-//    "from the SedML Level 3 Core namespace are permitted on an "
+//    "from the Sed Level 3 Core namespace are permitted on an "
 //    "AlgebraicRule object.",
 //    {"",
 //     "",
@@ -5000,7 +5000,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A Constraint object "
 //    "may have the optional attributes 'metaid' and 'sboTerm'. No other attributes "
-//    "from the SedML Level 3 Core namespace are permitted on a "
+//    "from the Sed Level 3 Core namespace are permitted on a "
 //    "Constraint object.",
 //    {"",
 //     "",
@@ -5185,7 +5185,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A Reaction object must have the required attributes 'id', 'reversible' "
 //    "and 'fast', and may have the optional attributes 'metaid', 'sboTerm', 'name' "
-//    "and 'compartment'. No other attributes from the SedML Level 3 Core "
+//    "and 'compartment'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a Reaction object.",
 //    {"",
 //     "",
@@ -5268,7 +5268,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A SpeciesReference object must have the required attributes 'species' "
 //    "and 'constant', and may have the optional attributes 'metaid', 'sboTerm', 'name' "
-//    "'id' and 'stoichiometry'. No other attributes from the SedML Level 3 Core "
+//    "'id' and 'stoichiometry'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a SpeciesReference object.",
 //    {"",
 //     "",
@@ -5292,7 +5292,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A ModifierSpeciesReference object must have the required attribute 'species' "
 //    "and may have the optional attributes 'metaid', 'sboTerm', 'id' "
-//    "and 'name'. No other attributes from the SedML Level 3 Core "
+//    "and 'name'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ModifierSpeciesReference object.",
 //    {"",
 //     "",
@@ -5400,7 +5400,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //21125
 //  {
 //    SubsUnitsNoLongerValid,
-//    "Attribute 'substanceUnits' is not supported in this Level+Version of SedML",
+//    "Attribute 'substanceUnits' is not supported in this Level+Version of Sed",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -5410,8 +5410,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'substanceUnits' attribute on <kineticLaw>, previously available in "
-//    "SedML Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 2, the substance units of a reaction "
+//    "Sed Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 2, the substance units of a reaction "
 //    "rate expression are those of the global 'substance' units of the model. ",
 //    {"",
 //     "",
@@ -5424,7 +5424,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //21126
 //  {
 //    TimeUnitsNoLongerValid,
-//    "Attribute 'timeUnits' is not supported in this Level+Version of SedML",
+//    "Attribute 'timeUnits' is not supported in this Level+Version of Sed",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -5433,9 +5433,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <kineticLaw>, previously available in SedML "
-//    "Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 2, the time units of a reaction rate "
+//    "The 'timeUnits' attribute on <kineticLaw>, previously available in Sed "
+//    "Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 2, the time units of a reaction rate "
 //    "expression are those of the global 'time' units of the model. ",
 //    {"",
 //     "",
@@ -5480,7 +5480,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfLocalParameters container object may only "
+//    "all Sed components, a ListOfLocalParameters container object may only "
 //    "contain LocalParameter objects.",
 //    {"",
 //     "",
@@ -5503,7 +5503,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfLocalParameters object may have the optional attributes 'metaid' "
-//    "and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfLocalParameters object.",
 //    {"",
 //     "",
@@ -5574,7 +5574,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A KineticLaw object may have the optional attributes 'metaid' and "
-//    "'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a KineticLaw object.",
 //    {"",
 //     "",
@@ -5597,7 +5597,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfSpeciesReferences object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfSpeciesReferences object.",
 //    {"",
 //     "",
@@ -5620,7 +5620,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfModifierSpeciesReferences object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfModifierSpeciesReferences object.",
 //    {"",
 //     "",
@@ -5644,7 +5644,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "A LocalParameter object must have the required attribute 'id' and "
 //    "may have the optional attributes 'metaid', 'sboTerm', 'name', 'value' and "
-//    "'units'. No other attributes from the SedML Level 3 Core namespace "
+//    "'units'. No other attributes from the Sed Level 3 Core namespace "
 //    "are permitted on a LocalParameter object.", 
 //    {"",
 //     "",
@@ -5935,7 +5935,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "An EventAssignment object must have the required attribute 'variable' and "
 //    "may have the optional attributes 'metaid' and 'sboTerm'. No other "
-//    "attributes from the SedML Level 3 Core namespace are permitted on "
+//    "attributes from the Sed Level 3 Core namespace are permitted on "
 //    "an EventAssignment object.", 
 //    {"",
 //     "",
@@ -6000,7 +6000,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "Apart from the general Notes and Annotation subobjects permitted on "
-//    "all SedML components, a ListOfEventAssignments container object may "
+//    "all Sed components, a ListOfEventAssignments container object may "
 //    "only contain EventAssignment objects.", 
 //    {"",
 //     "",
@@ -6023,7 +6023,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A ListOfEventAssignments object may have the optional attributes "
-//    "'metaid' and 'sboTerm'. No other attributes from the SedML Level 3 Core "
+//    "'metaid' and 'sboTerm'. No other attributes from the Sed Level 3 Core "
 //    "namespace are permitted on a ListOfEventAssignments object.", 
 //    {"",
 //     "",
@@ -6047,7 +6047,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "An Event object must have the required attribute 'useValuesFromTriggerTime' "
 //    "and in addition may have the optional attributes 'metaid', 'sboTerm', 'id', "
-//    " and 'name'. No other attributes from the SedML Level 3 "
+//    " and 'name'. No other attributes from the Sed Level 3 "
 //    "Core namespace are permitted on an Event object.", 
 //    {"",
 //     "",
@@ -6072,7 +6072,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "A Trigger object must have the required attributes 'persistent' and "
 //    "'initialValue', and in addition, may have the optional attributes 'metaid' "
 //    "and 'sboTerm'. "
-//    "No other attributes from the SedML Level 3 Core namespace are permitted "
+//    "No other attributes from the Sed Level 3 Core namespace are permitted "
 //    "on a Trigger object.", 
 //    {"",
 //     "",
@@ -6095,7 +6095,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A Delay object may have the optional attributes 'metaid' and 'sboTerm'. "
-//    "No other attributes from the SedML Level 3 Core namespace are permitted "
+//    "No other attributes from the Sed Level 3 Core namespace are permitted "
 //    "on a Delay object.", 
 //    {"",
 //     "",
@@ -6204,7 +6204,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    "A Priority object may have the optional attributes 'metaid' and 'sboTerm'. "
-//    "No other attributes from the SedML Level 3 Core namespace are permitted "
+//    "No other attributes from the Sed Level 3 Core namespace are permitted "
 //    "on a Priority object.", 
 //    {"",
 //     "",
@@ -6311,7 +6311,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "In SedML's simple symbol system, there is no separation of symbols "
+//    "In Sed's simple symbol system, there is no separation of symbols "
 //    "by class of object; consequently, inside the kinetic law mathematical "
 //    "formula, the value of a local parameter having the same identifier as "
 //    "a species or compartment or other global model entity will override "
@@ -6321,14 +6321,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //
 //
 //  /* --------------------------------------------------------------------------
-//   * Lower bound for additional error codes returned by libSedML but not
-//   * defined in SedML specifications.
+//   * Lower bound for additional error codes returned by libSed but not
+//   * defined in Sed specifications.
 //   * ----------------------------------------------------------------------- */
 //
 //  //90000
 //  {
-//    LibSedMLAdditionalCodesLowerBound,
-//    "Lower boundary of libSedML-specific diagnostic codes",
+//    LibSedAdditionalCodesLowerBound,
+//    "Lower boundary of libSed-specific diagnostic codes",
 //    LIBSEDML_CAT_INTERNAL,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6349,7 +6349,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //90001
 //  {
 //    CannotConvertToL1V1,
-//    "Cannot convert to SedML Level 1 Version 1",
+//    "Cannot convert to Sed Level 1 Version 1",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
@@ -6358,8 +6358,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "Use of SedML Level 1 Version 1 is not recommended and conversion is "
-//    "not supported by libSedML."
+//    "Use of Sed Level 1 Version 1 is not recommended and conversion is "
+//    "not supported by libSed."
 //  },
 //
 //  ////90501
@@ -6641,7 +6641,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //91001
 //  {
 //    NoEventsInL1,
-//    "SedML Level 1 does not support events",
+//    "Sed Level 1 does not support events",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6650,13 +6650,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "A model with <event> definitions cannot be represented in SedML Level 1."
+//    "A model with <event> definitions cannot be represented in Sed Level 1."
 //  },
 //
 //  //91002
 //  {
 //    NoFunctionDefinitionsInL1,
-//    "SedML Level 1 does not support function definitions",
+//    "Sed Level 1 does not support function definitions",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6665,7 +6665,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 1 does not have <functionDefinitions>. The "
+//    "Sed Level 1 does not have <functionDefinitions>. The "
 //    "<functionDefinitions> in the original model have been "
 //    "replaced by appropriate formula."
 //  },
@@ -6673,7 +6673,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //91003
 //  {
 //    NoConstraintsInL1,
-//    "SedML Level 1 does not support constraints",
+//    "Sed Level 1 does not support constraints",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6682,14 +6682,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "Conversion of a model with <constraint>s to SedML Level 1 may result "
+//    "Conversion of a model with <constraint>s to Sed Level 1 may result "
 //    "in loss of information."
 //  },
 //
 //  //91004
 //  {
 //    NoInitialAssignmentsInL1,
-//    "SedML Level 1 does not support initial assignments",
+//    "Sed Level 1 does not support initial assignments",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6698,7 +6698,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 1 does not have <initialAssignments>. The "
+//    "Sed Level 1 does not have <initialAssignments>. The "
 //    "<initialAssignments> in the original model have been "
 //    "replaced by appropriate values."
 //  },
@@ -6706,7 +6706,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //91005
 //  {
 //    NoSpeciesTypesInL1,
-//    "SedML Level 1 does not support species types",
+//    "Sed Level 1 does not support species types",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6715,13 +6715,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "<speciesType> definitions cannot be represented in SedML Level 1."
+//    "<speciesType> definitions cannot be represented in Sed Level 1."
 //  },
 //
 //  //91006
 //  {
 //    NoCompartmentTypeInL1,
-//    "SedML Level 1 does not support compartment types",
+//    "Sed Level 1 does not support compartment types",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6730,13 +6730,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "<compartmentType> definitions cannot be represented in SedML Level 1."
+//    "<compartmentType> definitions cannot be represented in Sed Level 1."
 //  },
 //
 //  //91007
 //  {
 //    NoNon3DCompartmentsInL1,
-//    "SedML Level 1 only supports three-dimensional compartments",
+//    "Sed Level 1 only supports three-dimensional compartments",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6746,13 +6746,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "A <compartment> with 'spatialDimensions' not equal to 3 cannot be "
-//    "represented in SedML Level 1."
+//    "represented in Sed Level 1."
 //  },
 //
 //  //91008
 //  {
 //    NoFancyStoichiometryMathInL1,
-//    "SedML Level 1 does not support non-integer nor non-rational stoichiometry formulas",
+//    "Sed Level 1 does not support non-integer nor non-rational stoichiometry formulas",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6762,13 +6762,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "A <speciesReference> containing a non-integer or non-rational "
-//    "<stoichiometryMath> subelement cannot be represented in SedML Level 1."
+//    "<stoichiometryMath> subelement cannot be represented in Sed Level 1."
 //  },
 //
 //  //91009
 //  {
 //    NoNonIntegerStoichiometryInL1,
-//    "SedML Level 1 does not support non-integer 'stoichiometry' attribute values",
+//    "Sed Level 1 does not support non-integer 'stoichiometry' attribute values",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6778,13 +6778,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "A <speciesReference> containing a non-integer 'stoichiometry' attribute "
-//    "value cannot be represented in SedML Level 1."
+//    "value cannot be represented in Sed Level 1."
 //  },
 //
 //  //91010
 //  {
 //    NoUnitMultipliersOrOffsetsInL1,
-//    "SedML Level 1 does not support multipliers or offsets in unit definitions",
+//    "Sed Level 1 does not support multipliers or offsets in unit definitions",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6794,13 +6794,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "A <unit> containing multipliers or offsets cannot be represented in "
-//    "SedML Level 1."
+//    "Sed Level 1."
 //  },
 //
 //  //91011
 //  {
 //    SpeciesCompartmentRequiredInL1,
-//    "In SedML Level 1, a value for 'compartment' is mandatory in species definitions",
+//    "In Sed Level 1, a value for 'compartment' is mandatory in species definitions",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6810,13 +6810,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "A <species> that does not identify its compartment cannot be "
-//    "represented in SedML Level 1."
+//    "represented in Sed Level 1."
 //  },
 //
 //  //91012
 //  {
 //    NoSpeciesSpatialSizeUnitsInL1,
-//    "SedML Level 1 does not support species 'spatialSizeUnits' settings",
+//    "Sed Level 1 does not support species 'spatialSizeUnits' settings",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6827,13 +6827,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The information represented by the value of a 'spatialSizeUnit' "
 //    "attribute on a <species> definition cannot be represented in "
-//    "SedML Level 1."
+//    "Sed Level 1."
 //  },
 //
 //  //91013
 //  {
 //    NoSBOTermsInL1,
-//    "SedML Level 1 does not support the 'sboTerm' attribute",
+//    "Sed Level 1 does not support the 'sboTerm' attribute",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6842,13 +6842,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SBO terms cannot be represented directly in SedML Level 1."
+//    "SBO terms cannot be represented directly in Sed Level 1."
 //  },
 //
 //  //91014
 //  {
 //    StrictUnitsRequiredInL1,
-//    "SedML Level 1 requires strict unit consistency",
+//    "Sed Level 1 requires strict unit consistency",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6857,7 +6857,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 4 removed the requirement that all units "
+//    "Sed Level 2 Version 4 removed the requirement that all units "
 //    "be consistent.  This model contains units that produce "
 //    "inconsistencies and thus conversion to Level 1 "
 //    "would produce an invalid model."
@@ -6866,7 +6866,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //91015
 //  {
 //    ConversionFactorNotInL1,
-//    "SedML Level 1 does not support the 'conversionFactor' attribute",
+//    "Sed Level 1 does not support the 'conversionFactor' attribute",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6883,7 +6883,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //91016
 //  {
 //    CompartmentNotOnL1Reaction,
-//    "SedML Level 1 does not support the 'compartment' attribute on Reaction objects",
+//    "Sed Level 1 does not support the 'compartment' attribute on Reaction objects",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6892,7 +6892,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 1/2 do not have the 'compartment' attribute on a "
+//    "Sed Level 1/2 do not have the 'compartment' attribute on a "
 //    "Reaction.  This information will be lost in the conversion."
 //  },
 //
@@ -6908,7 +6908,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "Conversion to SedML Level 1 requires that 'extent' units be a "
+//    "Conversion to Sed Level 1 requires that 'extent' units be a "
 //    "variant of substance",
 //  },
 //
@@ -6924,7 +6924,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "Conversion to SedML Levels 1 and 2 requires that any global units "
+//    "Conversion to Sed Levels 1 and 2 requires that any global units "
 //    "must refer to a valid unit kind or the id of "
 //    "a valid unitDefinition.",
 //  },
@@ -6932,7 +6932,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //91019
 //  {
 //    HasOnlySubstanceUnitsNotinL1,
-//    "The concept of hasOnlySubstanceUnits was not available in SedML Level 1.",
+//    "The concept of hasOnlySubstanceUnits was not available in Sed Level 1.",
 //    LIBSEDML_CAT_SEDML_L1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6943,8 +6943,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    "The concept of a Species having only substance units "
 //    "and not units of concentration cannot be correctly interpreted "
-//    "in SedML Level 1 without alteration of any mathematical formula. "
-//    "LibSedML does not do this alteration",
+//    "in Sed Level 1 without alteration of any mathematical formula. "
+//    "LibSed does not do this alteration",
 //  },
 //
 //  //91020
@@ -6968,7 +6968,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //92001
 //  {
 //    NoConstraintsInL2v1,
-//    "SedML Level 2 Version 1 does not support Constraint objects",
+//    "Sed Level 2 Version 1 does not support Constraint objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6977,14 +6977,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "Conversion of a model with <constraints> to SedML Level 2 Version 1 may "
+//    "Conversion of a model with <constraints> to Sed Level 2 Version 1 may "
 //    "result in loss of information."
 //  },
 //
 //  //92002
 //  {
 //    NoInitialAssignmentsInL2v1,
-//    "SedML Level 2 Version 1 does not support InitialAssignment objects",
+//    "Sed Level 2 Version 1 does not support InitialAssignment objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -6993,7 +6993,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 1 does not have <initialAssignments>. The "
+//    "Sed Level 2 Version 1 does not have <initialAssignments>. The "
 //    "<initialAssignments> in the original model have been "
 //    "replaced by appropriate values."
 //  },
@@ -7001,7 +7001,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //92003
 //  {
 //    NoSpeciesTypeInL2v1,
-//    "SedML Level 2 Version 1 does not support SpeciesType objects",
+//    "Sed Level 2 Version 1 does not support SpeciesType objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7010,14 +7010,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "<speciesType> definitions cannot be represented in SedML Level 2 "
+//    "<speciesType> definitions cannot be represented in Sed Level 2 "
 //    "Version 1."
 //  },
 //
 //  //92004
 //  {
 //    NoCompartmentTypeInL2v1,
-//    "SedML Level 2 Version 1 does not support CompartmentType objects",
+//    "Sed Level 2 Version 1 does not support CompartmentType objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7026,14 +7026,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "<compartmentType> definitions cannot be represented in SedML Level 2 "
+//    "<compartmentType> definitions cannot be represented in Sed Level 2 "
 //    "Version 1."
 //  },
 //
 //  //92005
 //  {
 //    NoSBOTermsInL2v1,
-//    "SedML Level 2 Version 1 does not support the 'sboTerm' attribute",
+//    "Sed Level 2 Version 1 does not support the 'sboTerm' attribute",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7042,13 +7042,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SBO terms cannot be represented directly in SedML Level 2 Version 1."
+//    "SBO terms cannot be represented directly in Sed Level 2 Version 1."
 //  },
 //
 //  //92006
 //  {
 //    NoIdOnSpeciesReferenceInL2v1,
-//    "SedML Level 2 Version 1 does not support the 'id' attribute on SpeciesReference objects",
+//    "Sed Level 2 Version 1 does not support the 'id' attribute on SpeciesReference objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7058,13 +7058,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    "The 'id' attribute value of a <speciesReference> cannot be "
-//    "represented directly in SedML Level 2 Version 1."
+//    "represented directly in Sed Level 2 Version 1."
 //  },
 //
 //  //92007
 //  {
 //    NoDelayedEventAssignmentInL2v1,
-//    "SedML Level 2 Version 1 does not support the 'useValuesFromTriggerTime' attribute",
+//    "Sed Level 2 Version 1 does not support the 'useValuesFromTriggerTime' attribute",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7076,14 +7076,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "The implication of 'useValuesFromTriggerTime=false' "
 //    "is that there is a delay between the time of trigger and the "
 //    "time of value assignments performed by the <event>.  This interpretation is "
-//    "not supported by SedML Level 2 versions prior to Version 4. "
+//    "not supported by Sed Level 2 versions prior to Version 4. "
 //    "(References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
 //  //92008
 //  {
 //    StrictUnitsRequiredInL2v1,
-//    "SedML Level 2 Version 1 requires strict unit consistency",
+//    "Sed Level 2 Version 1 requires strict unit consistency",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7092,7 +7092,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 4 removed the requirement that all units "
+//    "Sed Level 2 Version 4 removed the requirement that all units "
 //    "be consistent.  This model contains units that produce "
 //    "inconsistencies and thus conversion to Level 2 Version 1 "
 //    "would produce an invalid model."
@@ -7101,7 +7101,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //92009
 //  {
 //    IntegerSpatialDimensions,
-//    "SedML Level 2 Version 1 requires that compartments have spatial dimensions of 0-3",
+//    "Sed Level 2 Version 1 requires that compartments have spatial dimensions of 0-3",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7110,7 +7110,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "Models in SedML Level 2 Versions 1-4 can only represent compartments "
+//    "Models in Sed Level 2 Versions 1-4 can only represent compartments "
 //    "with integer values 0, 1, 2,or 3 as spatial dimensions."
 //  },
 //
@@ -7126,14 +7126,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "Conversion of a varying stoichiometry to an SedML L2 StoichiometryMath "
+//    "Conversion of a varying stoichiometry to an Sed L2 StoichiometryMath "
 //    "element is not yet supported."
 //  },
 //
 //  //92011
 //  {
 //    PriorityLostFromL3,
-//    "SedML Level 2 Version 1 does not support priorities on Event objects",
+//    "Sed Level 2 Version 1 does not support priorities on Event objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7142,13 +7142,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "Event priority is not supported in SedML Level 2."
+//    "Event priority is not supported in Sed Level 2."
 //  },
 //
 //  //92012
 //  {
 //    NonPersistentNotSupported,
-//    "SedML Level 2 Version 1 does not support the 'persistent' attribute on Trigger objects",
+//    "Sed Level 2 Version 1 does not support the 'persistent' attribute on Trigger objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7157,13 +7157,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "Non persistent events are not supported in SedML Level 2."
+//    "Non persistent events are not supported in Sed Level 2."
 //  },
 //
 //  //92013
 //  {
 //    InitialValueFalseEventNotSupported,
-//    "SedML Level 2 Version 1 does not support the 'initialValue' attribute on Trigger objects",
+//    "Sed Level 2 Version 1 does not support the 'initialValue' attribute on Trigger objects",
 //    LIBSEDML_CAT_SEDML_L2V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7182,7 +7182,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93001
 //  {
 //    SBOTermNotUniversalInL2v2,
-//    "The 'sboTerm' attribute is invalid for this component in SedML Level 2 Version 2",
+//    "The 'sboTerm' attribute is invalid for this component in Sed Level 2 Version 2",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7191,7 +7191,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "In SedML Level 2 Version 2, an 'sboTerm' attribute is only permitted on "
+//    "In Sed Level 2 Version 2, an 'sboTerm' attribute is only permitted on "
 //    "the following elements: <model>, <functionDefinition>, <parameter>, "
 //    "<initialAssignment>, <rule>, <constraint>, <reaction>, "
 //    "<speciesReference>, <kineticLaw>, <event> and <eventAssignment>."
@@ -7200,7 +7200,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93002
 //  {
 //    NoUnitOffsetInL2v2,
-//    "This Level+Version of SedML does not support the 'offset' attribute on Unit objects",
+//    "This Level+Version of Sed does not support the 'offset' attribute on Unit objects",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7209,15 +7209,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'offset' attribute on <unit> previously available in SedML Level 2 "
-//    "Version 1, has been removed as of SedML Level 2 Version 2. (References: "
+//    "The 'offset' attribute on <unit> previously available in Sed Level 2 "
+//    "Version 1, has been removed as of Sed Level 2 Version 2. (References: "
 //    "L2V2 Section 4.4.)"
 //  },
 //
 //  //93003
 //  {
 //    NoKineticLawTimeUnitsInL2v2,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7226,9 +7226,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <kineticLaw>, previously available in SedML "
-//    "Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 2, the time units of a reaction rate "
+//    "The 'timeUnits' attribute on <kineticLaw>, previously available in Sed "
+//    "Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 2, the time units of a reaction rate "
 //    "expression are those of the global 'time' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7236,7 +7236,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93004
 //  {
 //    NoKineticLawSubstanceUnitsInL2v2,
-//    "This Level+Version of SedML does not support the 'substanceUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'substanceUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7246,8 +7246,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'substanceUnits' attribute on <kineticLaw>, previously available in "
-//    "SedML Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 2, the substance units of a reaction "
+//    "Sed Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 2, the substance units of a reaction "
 //    "rate expression are those of the global 'substance' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7255,7 +7255,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93005
 //  {
 //    NoDelayedEventAssignmentInL2v2,
-//    "This Level+Version of SedML does not support the 'useValuesFromTriggerTime' attribute",
+//    "This Level+Version of Sed does not support the 'useValuesFromTriggerTime' attribute",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7267,14 +7267,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "The implication of 'useValuesFromTriggerTime=false' "
 //    "is that there is a delay between the time of trigger and the "
 //    "time of value assignments performed by the <event>.  This interpretation is "
-//    "not supported by SedML Level 2 versions prior to Version 4. "
+//    "not supported by Sed Level 2 versions prior to Version 4. "
 //    "(References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
 //  //93006
 //  {
 //    ModelSBOBranchChangedBeyondL2v2,
-//    "The allowable 'sboTerm' attribute values for Model objects differ for this SedML Level+Version",
+//    "The allowable 'sboTerm' attribute values for Model objects differ for this Sed Level+Version",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7283,7 +7283,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "In SedML Level 2 prior to Version 4 the value  of the 'sboTerm' "
+//    "In Sed Level 2 prior to Version 4 the value  of the 'sboTerm' "
 //    "attribute on a <model> is expected to be a term "
 //    "derived from SBO:0000004, \"modeling framework\"; in Version 4 "
 //    "and above it is expected to be a term derived from SBO:0000231 "
@@ -7295,7 +7295,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93007
 //  {
 //    StrictUnitsRequiredInL2v2,
-//    "SedML Level 2 Version 2 requires strict unit consistency",
+//    "Sed Level 2 Version 2 requires strict unit consistency",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7304,7 +7304,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 4 removed the requirement that all units "
+//    "Sed Level 2 Version 4 removed the requirement that all units "
 //    "be consistent.  This model contains units that produce "
 //    "inconsistencies and thus conversion to Level 2 Version 2 "
 //    "would produce an invalid model."
@@ -7313,7 +7313,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93008
 //  {
 //    StrictSBORequiredInL2v2,
-//    "SedML Level 2 Version 2 requires strict SBO term consistency",
+//    "Sed Level 2 Version 2 requires strict SBO term consistency",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7322,7 +7322,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 4 removed the requirement that all sboTerms "
+//    "Sed Level 2 Version 4 removed the requirement that all sboTerms "
 //    "be drawn from a given branch of SBO (http://www.biomodels.net/SBO/). "
 //    "This model contains sboTerms that produce "
 //    "inconsistencies and thus conversion to Level 2 Version 2 "
@@ -7336,7 +7336,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //93009
 //  {
 //    DuplicateAnnotationInvalidInL2v2,
-//    "Duplicate top-level annotations are invalid in SedML Level 2 Version 2",
+//    "Duplicate top-level annotations are invalid in Sed Level 2 Version 2",
 //    LIBSEDML_CAT_SEDML_L2V2_COMPAT,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
@@ -7345,7 +7345,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "In SedML prior to Level 2 Version 1 annotations it was permissible "
+//    "In Sed prior to Level 2 Version 1 annotations it was permissible "
 //    "to have multiple top level elements using the same namespace. "
 //    "This is no longer valid.  (References: L2V2 Section 3.3.3; "
 //    "L2V3 Section 3.2.4; L2V4 Section 3.2.4.)  Any duplicate top level "
@@ -7357,7 +7357,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //94001
 //  {
 //    NoUnitOffsetInL2v3,
-//    "This Level+Version of SedML does not support the 'offset' attribute on Unit objects",
+//    "This Level+Version of Sed does not support the 'offset' attribute on Unit objects",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7366,15 +7366,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'offset' attribute on <unit> previously available in SedML Level 2 "
-//    "Version 1, has been removed as of SedML Level 2 Version 2. (References: "
+//    "The 'offset' attribute on <unit> previously available in Sed Level 2 "
+//    "Version 1, has been removed as of Sed Level 2 Version 2. (References: "
 //    "L2V2 Section 4.4.)"
 //  },
 //
 //  //94002
 //  {
 //    NoKineticLawTimeUnitsInL2v3,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7383,9 +7383,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <kineticLaw>, previously available in SedML "
-//    "Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 3, the time units of a reaction rate "
+//    "The 'timeUnits' attribute on <kineticLaw>, previously available in Sed "
+//    "Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 3, the time units of a reaction rate "
 //    "expression are those of the global 'time' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7393,7 +7393,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //94003
 //  {
 //    NoKineticLawSubstanceUnitsInL2v3,
-//    "This Level+Version of SedML does not support the 'substanceUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'substanceUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7403,8 +7403,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'substanceUnits' attribute on <kineticLaw>, previously available in "
-//    "SedML Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 3, the substance units of a reaction "
+//    "Sed Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 3, the substance units of a reaction "
 //    "rate expression are those of the global 'substance' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7412,7 +7412,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //94004
 //  {
 //    NoSpeciesSpatialSizeUnitsInL2v3,
-//    "This Level+Version of SedML does not support the 'spatialSizeUnit' attribute on Species objects",
+//    "This Level+Version of Sed does not support the 'spatialSizeUnit' attribute on Species objects",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7422,14 +7422,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'spatialSizeUnits' attribute on <species>, previously available "
-//    "in SedML Level 2 versions prior to Version 3, has been removed as "
-//    "of SedML Level 2 Version 3. (References: L2V3 Section 4.8; L2V4 Section 4.8)"
+//    "in Sed Level 2 versions prior to Version 3, has been removed as "
+//    "of Sed Level 2 Version 3. (References: L2V3 Section 4.8; L2V4 Section 4.8)"
 //  },
 //
 //  //94005
 //  {
 //    NoEventTimeUnitsInL2v3,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on Event objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on Event objects",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7438,15 +7438,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <event>, previously available in SedML "
-//    "Level 2 versions prior to Version 3, has been removed as of SedML "
+//    "The 'timeUnits' attribute on <event>, previously available in Sed "
+//    "Level 2 versions prior to Version 3, has been removed as of Sed "
 //    "Level 2 Version 3. (References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
 //  //94006
 //  {
 //    NoDelayedEventAssignmentInL2v3,
-//    "This Level+Version of SedML does not support the 'useValuesFromTriggerTime' attribute",
+//    "This Level+Version of Sed does not support the 'useValuesFromTriggerTime' attribute",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7458,14 +7458,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "The implication of 'useValuesFromTriggerTime=false' "
 //    "is that there is a delay between the time of trigger and the "
 //    "time of value assignments performed by the <event>.  This interpretation is "
-//    "not supported by SedML Level 2 versions prior to Version 4. "
+//    "not supported by Sed Level 2 versions prior to Version 4. "
 //    "(References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
 //  //94007
 //  {
 //    ModelSBOBranchChangedBeyondL2v3,
-//    "The allowable 'sboTerm' attribute values for Model objects differ for this SedML Level+Version",
+//    "The allowable 'sboTerm' attribute values for Model objects differ for this Sed Level+Version",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7474,7 +7474,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "In SedML Level 2 prior to Version 4 the value  of the 'sboTerm' "
+//    "In Sed Level 2 prior to Version 4 the value  of the 'sboTerm' "
 //    "attribute on a <model> is expected to be a term "
 //    "derived from SBO:0000004, \"modeling framework\"; in Version 4 "
 //    "and above it is expected to be a term derived from SBO:0000231 "
@@ -7486,7 +7486,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //94008
 //  {
 //    StrictUnitsRequiredInL2v3,
-//    "SedML Level 2 Version 3 requires strict unit consistency",
+//    "Sed Level 2 Version 3 requires strict unit consistency",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7495,7 +7495,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 4 removed the requirement that all units "
+//    "Sed Level 2 Version 4 removed the requirement that all units "
 //    "be consistent.  This model contains units that produce "
 //    "inconsistencies and thus conversion to Level 2 Version 3 "
 //    "would produce an invalid model."
@@ -7504,7 +7504,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //94009
 //  {
 //    StrictSBORequiredInL2v3,
-//    "SedML Level 2 Version 3 requires strict SBO term consistency",
+//    "Sed Level 2 Version 3 requires strict SBO term consistency",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7513,7 +7513,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "SedML Level 2 Version 4 removed the requirement that all sboTerms "
+//    "Sed Level 2 Version 4 removed the requirement that all sboTerms "
 //    "be drawn from a given branch of SBO (http://www.biomodels.net/SBO/). "
 //    "This model contains sboTerms that produce "
 //    "inconsistencies and thus conversion to Level 2 Version 3 "
@@ -7523,7 +7523,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //94010
 //  {
 //    DuplicateAnnotationInvalidInL2v3,
-//    "Duplicate top-level annotations are invalid in SedML Level 2 Version 3",
+//    "Duplicate top-level annotations are invalid in Sed Level 2 Version 3",
 //    LIBSEDML_CAT_SEDML_L2V3_COMPAT,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
@@ -7532,7 +7532,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "In SedML prior to Level 2 Version 1 annotations it was permissible "
+//    "In Sed prior to Level 2 Version 1 annotations it was permissible "
 //    "to have multiple top level elements using the same namespace. "
 //    "This is no longer valid.  (References: L2V2 Section 3.3.3; "
 //    "L2V3 Section 3.2.4; L2V4 Section 3.2.4.)  Any duplicate top level "
@@ -7548,7 +7548,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //95001
 //  {
 //    NoUnitOffsetInL2v4,
-//    "This Level+Version of SedML does not support the 'offset' attribute on Unit objects",
+//    "This Level+Version of Sed does not support the 'offset' attribute on Unit objects",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7557,15 +7557,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'offset' attribute on <unit> previously available in SedML Level 2 "
-//    "Version 1, has been removed as of SedML Level 2 Version 2. (References: "
+//    "The 'offset' attribute on <unit> previously available in Sed Level 2 "
+//    "Version 1, has been removed as of Sed Level 2 Version 2. (References: "
 //    "L2V2 Section 4.4.)"
 //  },
 //
 //  //95002
 //  {
 //    NoKineticLawTimeUnitsInL2v4,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7574,9 +7574,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <kineticLaw>, previously available in SedML "
-//    "Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 3, the time units of a reaction rate "
+//    "The 'timeUnits' attribute on <kineticLaw>, previously available in Sed "
+//    "Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 3, the time units of a reaction rate "
 //    "expression are those of the global 'time' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7584,7 +7584,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //95003
 //  {
 //    NoKineticLawSubstanceUnitsInL2v4,
-//    "This Level+Version of SedML does not support the 'substanceUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'substanceUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7594,8 +7594,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'substanceUnits' attribute on <kineticLaw>, previously available in "
-//    "SedML Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 3, the substance units of a reaction "
+//    "Sed Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 3, the substance units of a reaction "
 //    "rate expression are those of the global 'substance' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7603,7 +7603,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //95004
 //  {
 //    NoSpeciesSpatialSizeUnitsInL2v4,
-//    "This Level+Version of SedML does not support the 'spatialSizeUnit' attribute on Species objects",
+//    "This Level+Version of Sed does not support the 'spatialSizeUnit' attribute on Species objects",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7613,14 +7613,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'spatialSizeUnits' attribute on <species>, previously available "
-//    "in SedML Level 2 versions prior to Version 3, has been removed as "
-//    "of SedML Level 2 Version 3. (References: L2V3 Section 4.8; L2V4 Section 4.8)"
+//    "in Sed Level 2 versions prior to Version 3, has been removed as "
+//    "of Sed Level 2 Version 3. (References: L2V3 Section 4.8; L2V4 Section 4.8)"
 //  },
 //
 //  //95005
 //  {
 //    NoEventTimeUnitsInL2v4,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on Event objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on Event objects",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7629,15 +7629,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <event>, previously available in SedML "
-//    "Level 2 versions prior to Version 3, has been removed as of SedML "
+//    "The 'timeUnits' attribute on <event>, previously available in Sed "
+//    "Level 2 versions prior to Version 3, has been removed as of Sed "
 //    "Level 2 Version 3. (References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
 //  //95006
 //  {
 //    ModelSBOBranchChangedInL2v4,
-//    "The allowable 'sboTerm' attribute values for Model objects differ for this SedML Level+Version",
+//    "The allowable 'sboTerm' attribute values for Model objects differ for this Sed Level+Version",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7646,7 +7646,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "In SedML Level 2 prior to Version 4 the value  of the 'sboTerm' "
+//    "In Sed Level 2 prior to Version 4 the value  of the 'sboTerm' "
 //    "attribute on a <model> is expected to be a term "
 //    "derived from SBO:0000004, \"modeling framework\"; in Version 4 "
 //    "and above it is expected to be a term derived from SBO:0000231 "
@@ -7658,7 +7658,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //95007
 //  {
 //    DuplicateAnnotationInvalidInL2v4,
-//    "Duplicate top-level annotations are invalid in SedML Level 2 Version 4",
+//    "Duplicate top-level annotations are invalid in Sed Level 2 Version 4",
 //    LIBSEDML_CAT_SEDML_L2V4_COMPAT,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
@@ -7667,7 +7667,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "In SedML prior to Level 2 Version 1 annotations it was permissible "
+//    "In Sed prior to Level 2 Version 1 annotations it was permissible "
 //    "to have multiple top level elements using the same namespace. "
 //    "This is no longer valid.  (References: L2V2 Section 3.3.3; "
 //    "L2V3 Section 3.2.4; L2V4 Section 3.2.4.)  Any duplicate top level "
@@ -7683,7 +7683,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //96001
 //  {
 //    NoSpeciesTypeInL3v1,
-//    "SedML Level 3 Version 1 does not support SpeciesType objects",
+//    "Sed Level 3 Version 1 does not support SpeciesType objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7692,14 +7692,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "<speciesType> definitions cannot be represented in SedML Level 3 "
+//    "<speciesType> definitions cannot be represented in Sed Level 3 "
 //    "Version 1."
 //  },
 //
 //  //96002
 //  {
 //    NoCompartmentTypeInL3v1,
-//    "SedML Level 3 Version 1 does not support CompartmentType objects",
+//    "Sed Level 3 Version 1 does not support CompartmentType objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7708,14 +7708,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "<compartmentType> definitions cannot be represented in SedML Level 3 "
+//    "<compartmentType> definitions cannot be represented in Sed Level 3 "
 //    "Version 1."
 //  },
 //
 //  //96003
 //  {
 //    NoUnitOffsetInL3v1,
-//    "This Level+Version of SedML does not support the 'offset' attribute on Unit objects",
+//    "This Level+Version of Sed does not support the 'offset' attribute on Unit objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7724,15 +7724,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'offset' attribute on <unit> previously available in SedML Level 2 "
-//    "Version 1, has been removed as of SedML Level 2 Version 2. (References: "
+//    "The 'offset' attribute on <unit> previously available in Sed Level 2 "
+//    "Version 1, has been removed as of Sed Level 2 Version 2. (References: "
 //    "L2V2 Section 4.4.)"
 //  },
 //
 //  //96004
 //  {
 //    NoKineticLawTimeUnitsInL3v1,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7741,9 +7741,9 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <kineticLaw>, previously available in SedML "
-//    "Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 3, the time units of a reaction rate "
+//    "The 'timeUnits' attribute on <kineticLaw>, previously available in Sed "
+//    "Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 3, the time units of a reaction rate "
 //    "expression are those of the global 'time' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7751,7 +7751,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //96005
 //  {
 //    NoKineticLawSubstanceUnitsInL3v1,
-//    "This Level+Version of SedML does not support the 'substanceUnits' attribute on KineticLaw objects",
+//    "This Level+Version of Sed does not support the 'substanceUnits' attribute on KineticLaw objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7761,8 +7761,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'substanceUnits' attribute on <kineticLaw>, previously available in "
-//    "SedML Level 1 and Level 2 Version 1, has been removed as of SedML Level 2 "
-//    "Version 2. In SedML Level 2 Version 3, the substance units of a reaction "
+//    "Sed Level 1 and Level 2 Version 1, has been removed as of Sed Level 2 "
+//    "Version 2. In Sed Level 2 Version 3, the substance units of a reaction "
 //    "rate expression are those of the global 'substance' units of the model. "
 //    "(References: L2V2 Section 4.13.5.)"
 //  },
@@ -7770,7 +7770,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //96006
 //  {
 //    NoSpeciesSpatialSizeUnitsInL3v1,
-//    "This Level+Version of SedML does not support the 'spatialSizeUnit' attribute on Species objects",
+//    "This Level+Version of Sed does not support the 'spatialSizeUnit' attribute on Species objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7780,14 +7780,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'spatialSizeUnits' attribute on <species>, previously available "
-//    "in SedML Level 2 versions prior to Version 3, has been removed as "
-//    "of SedML Level 2 Version 3. (References: L2V3 Section 4.8; L2V4 Section 4.8)"
+//    "in Sed Level 2 versions prior to Version 3, has been removed as "
+//    "of Sed Level 2 Version 3. (References: L2V3 Section 4.8; L2V4 Section 4.8)"
 //  },
 //
 //  //96007
 //  {
 //    NoEventTimeUnitsInL3v1,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on Event objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on Event objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7796,15 +7796,15 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'timeUnits' attribute on <event>, previously available in SedML "
-//    "Level 2 versions prior to Version 3, has been removed as of SedML "
+//    "The 'timeUnits' attribute on <event>, previously available in Sed "
+//    "Level 2 versions prior to Version 3, has been removed as of Sed "
 //    "Level 2 Version 3. (References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
 //  //96008
 //  {
 //    ModelSBOBranchChangedInL3v1,
-//    "The allowable 'sboTerm' attribute values for Model objects differ for this SedML Level+Version",
+//    "The allowable 'sboTerm' attribute values for Model objects differ for this Sed Level+Version",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7813,7 +7813,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "In SedML Level 2 prior to Version 4 the value  of the 'sboTerm' "
+//    "In Sed Level 2 prior to Version 4 the value  of the 'sboTerm' "
 //    "attribute on a <model> is expected to be a term "
 //    "derived from SBO:0000004, \"modeling framework\"; in Version 4 "
 //    "and above it is expected to be a term derived from SBO:0000231 "
@@ -7825,7 +7825,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //96009
 //  {
 //    DuplicateAnnotationInvalidInL3v1,
-//    "Duplicate top-level annotations are invalid in SedML Level 3 Version 1",
+//    "Duplicate top-level annotations are invalid in Sed Level 3 Version 1",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
@@ -7834,7 +7834,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "In SedML prior to Level 2 Version 1 annotations it was permissible "
+//    "In Sed prior to Level 2 Version 1 annotations it was permissible "
 //    "to have multiple top level elements using the same namespace. "
 //    "This is no longer valid.  (References: L2V2 Section 3.3.3; "
 //    "L2V3 Section 3.2.4; L2V4 Section 3.2.4.)  Any duplicate top level "
@@ -7846,7 +7846,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //96010
 //  {
 //    NoCompartmentOutsideInL3v1,
-//    "This Level+Version of SedML does not support the 'outside' attribute on Compartment objects",
+//    "This Level+Version of Sed does not support the 'outside' attribute on Compartment objects",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
@@ -7856,14 +7856,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'outside' attribute on <compartment>, previously available "
-//    "in SedML Level 2 has been removed as "
-//    "of SedML Level 3 Version 1."
+//    "in Sed Level 2 has been removed as "
+//    "of Sed Level 3 Version 1."
 //  },
 //
 //  //96011
 //  {
 //    NoStoichiometryMathInL3v1,
-//    "This Level+Version of SedML does not support the StoichiometryMath object",
+//    "This Level+Version of Sed does not support the StoichiometryMath object",
 //    LIBSEDML_CAT_SEDML_L3V1_COMPAT,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7872,18 +7872,18 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "Conversion of a model with <stoichiometryMath> to SedML Level 3 is not "
+//    "Conversion of a model with <stoichiometryMath> to Sed Level 3 is not "
 //    "yet supported."
 //  },
 //
 //  /* --------------------------------------------------------------------------
-//   * These are errors checked by libSedML that were never published in a spec.
+//   * These are errors checked by libSed that were never published in a spec.
 //   * ----------------------------------------------------------------------- */
 //
 //  //99101
 //  {
-//    InvalidSedMLLevelVersion,
-//    "Unknown Level+Version combination of SedML",
+//    InvalidSedLevelVersion,
+//    "Unknown Level+Version combination of Sed",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7893,14 +7893,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "The level and version specified for the document must be "
-//    "consistent with a valid published SedML specification.  These are "
+//    "consistent with a valid published Sed specification.  These are "
 //    "Level 1, Versions 1 and 2 and Level 2, Versions 1, 2, 3 and 4."
 //  },
 //
 //  //99104
 //  {
 //    AnnotationNotesNotAllowedLevel1,
-//    "Annotation objects on the SedML container element are not permitted in SedML Level 1",
+//    "Annotation objects on the Sed container element are not permitted in Sed Level 1",
 //    LIBSEDML_CAT_SEDML,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -7910,7 +7910,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The <sbml> container element cannot contain <notes> or <annotations> in "
-//    "an SedML Level 1 document."
+//    "an Sed Level 1 document."
 //  },
 //
 //  //99106
@@ -7935,7 +7935,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99107
 //  {
 //    RequiredPackagePresent,
-//    "The SedML document requires an SedML Level 3 package unavailable in this software",
+//    "The Sed document requires an Sed Level 3 package unavailable in this software",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7944,18 +7944,18 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,
-//    "Every SedML Level 3 package is identified uniquely by an XML namespace "
+//    "Every Sed Level 3 package is identified uniquely by an XML namespace "
 //    "URI and defines the attribute named 'required'. A value of required="
 //    "true indicates that interpreting the package is necessary for complete "
 //    "mathematical interpretation of the model. (L3V1 Section 4.1.2) "
-//    "This instance of libSedML version 5 cannot find the code necessary to "
+//    "This instance of libSed version 5 cannot find the code necessary to "
 //    "interpret the package information."
 //  },
 //
 //  //99108
 //  {
 //    UnrequiredPackagePresent,
-//    "The SedML document uses an SedML Level 3 package unavailable in this software",
+//    "The Sed document uses an Sed Level 3 package unavailable in this software",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -7964,10 +7964,10 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
-//    "Every SedML Level 3 package is identified uniquely by an XML namespace "
-//    "URI and defines the attribute named 'required'. LibSedML has detected "
-//    "what appears to be an SedML Level 3 package with required=false but "
-//    "this instance of libSedML-5 cannot find the code necessary to parse "
+//    "Every Sed Level 3 package is identified uniquely by an XML namespace "
+//    "URI and defines the attribute named 'required'. LibSed has detected "
+//    "what appears to be an Sed Level 3 package with required=false but "
+//    "this instance of libSed-5 cannot find the code necessary to parse "
 //    "this information."
 //  },
 //
@@ -8025,7 +8025,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99129
 //  {
 //    FormulaInLevel1KL,
-//    "Only predefined functions are allowed in SedML Level 1 formulas",
+//    "Only predefined functions are allowed in Sed Level 1 formulas",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
@@ -8066,7 +8066,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99206
 //  {
 //    TimeUnitsRemoved,
-//    "This Level+Version of SedML does not support the 'timeUnits' attribute on Event objects",
+//    "This Level+Version of Sed does not support the 'timeUnits' attribute on Event objects",
 //    LIBSEDML_CAT_GENERAL_CONSISTENCY,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
@@ -8075,8 +8075,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The 'timeUnits' attribute on <event>, previously available in SedML "
-//    "Level 2 versions prior to Version 3, has been removed as of SedML "
+//    "The 'timeUnits' attribute on <event>, previously available in Sed "
+//    "Level 2 versions prior to Version 3, has been removed as of Sed "
 //    "Level 2 Version 3. (References: L2V3 Section 4.14; L2V4 Section 4.14)"
 //  },
 //
@@ -8237,7 +8237,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
 //    "Where a component has an attribute that refers to a unit identifier, " 
-//    "that attribute must refer to a unit defined in SedML or be the id "
+//    "that attribute must refer to a unit defined in Sed or be the id "
 //    "of a UnitDefinition in the model."
 //   },
 //
@@ -8253,7 +8253,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
-//    "In order to follow the general syntax for a standard SedML RDF annotation "
+//    "In order to follow the general syntax for a standard Sed RDF annotation "
 //    "the first element of RDF element must be a Description element with an "
 //    "'about' attribute.",
 //    {"",
@@ -8276,7 +8276,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
-//    "In order to follow the general syntax for a standard SedML RDF annotation, "
+//    "In order to follow the general syntax for a standard Sed RDF annotation, "
 //    "the 'about' attribute of the Description element must be of the form "
 //    "#string. ",
 //    {"",
@@ -8299,10 +8299,10 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
-//    "In order to follow the general syntax for a standard SedML RDF annotation, "
+//    "In order to follow the general syntax for a standard Sed RDF annotation, "
 //    "the 'about' attribute of the Description element must be of the form "
 //    "#string, where the string component is equal to the value of the "
-//    "metaid attribute of the containing SedML element. ",
+//    "metaid attribute of the containing Sed element. ",
 //    {"",
 //     "",
 //     "L2V2 Section 6.3",
@@ -8323,11 +8323,11 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
-//    "LibSedML expected to read the annotation into a ModelHistory "
+//    "LibSed expected to read the annotation into a ModelHistory "
 //    "object. Unfortunately, some attributes were not present or correct "
 //    "and the resulting ModelHistory object will not correctly "
 //    "produce the annotation.  This functionality will be improved in "
-//    "later versions of libSedML. ",
+//    "later versions of libSed. ",
 //    {"",
 //     "",
 //     "L2V2 Section 6.3",
@@ -8348,11 +8348,11 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
-//    "LibSedML expected to read the annotation into a ModelHistory "
+//    "LibSed expected to read the annotation into a ModelHistory "
 //    "object. Unfortunately, some attributes were not present or correct "
 //    "and the resulting ModelHistory object is NULL. Thus it will fail to "
 //    "produce the annotation.  This functionality will be improved in "
-//    "later versions of libSedML. ",
+//    "later versions of libSed. ",
 //    {"",
 //     "",
 //     "L2V2 Section 6.3",
@@ -8466,7 +8466,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    "In situations where a mathematical expression refers to time, the units "
 //    "of time should be consistent with the global time units of the model. "
-//    "In models where the 'timeUnits' attribute has not been declared, libSedML "
+//    "In models where the 'timeUnits' attribute has not been declared, libSed "
 //    "does not yet have the functionality to verify accurately the consistency "
 //    "of the units in such expressions. "
 //  },
@@ -8485,7 +8485,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,
 //    "In situations where a mathematical expression refers to extent, the units "
 //    "of extent should be consistent with the global extent units of the model. "
-//    "In models where the 'extentUnits' attribute has not been declared, libSedML "
+//    "In models where the 'extentUnits' attribute has not been declared, libSed "
 //    "does not yet have the functionality to verify accurately the consistency "
 //    "of the units in such expressions. "
 //  },
@@ -8505,7 +8505,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    "In situations where a mathematical expression refers to a compartment, "
 //    "species or parameter, it is necessary to know the units "
 //    "of the object to establish unit consistency. "
-//    "In models where the units of an object have not been declared, libSedML "
+//    "In models where the units of an object have not been declared, libSed "
 //    "does not yet have the functionality to accurately verify the consistency "
 //    "of the units in mathematical expressions referring to that object. "
 //  },
@@ -8521,8 +8521,8 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_WARNING,   
 //    LIBSEDML_SEV_WARNING,
 //    LIBSEDML_SEV_WARNING,
-//    "The SBOTerm used is not recognized by libSedML and therefore the correct "
-//    "parentage cannot be checked. However, since libSedML is referring to a "
+//    "The SBOTerm used is not recognized by libSed and therefore the correct "
+//    "parentage cannot be checked. However, since libSed is referring to a "
 //    "snapshot of the SBO tree the term may now exist."
 //  },
 //
@@ -8548,7 +8548,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99901
 //  {   
 //    IncorrectCompartmentSpatialDimensions,   
-//    "In SedML Level 1, only three-dimensional compartments are allowed",
+//    "In Sed Level 1, only three-dimensional compartments are allowed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8558,7 +8558,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'spatialDimensions' attribute on <compartment> was not available "
-//    "in SedML Level 1. In order for the internal representation of a "
+//    "in Sed Level 1. In order for the internal representation of a "
 //    "<compartment> to be correct, the value for the spatialDimensions "
 //    "member variable should be '3'."
 //  },
@@ -8566,7 +8566,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99902
 //  {   
 //    CompartmentTypeNotValidAttribute,   
-//    "CompartmentType objects are not available in this Level+Version of SedML",
+//    "CompartmentType objects are not available in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8576,7 +8576,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,   
 //    "The 'compartmentType' attribute on <compartment> was not available "
-//    "in SedML Level 1 or SedML Level 2 Version 1. In order for the internal "
+//    "in Sed Level 1 or Sed Level 2 Version 1. In order for the internal "
 //    "representation of a <compartment> to be correct, the value for the "
 //    "compartmentType member variable should be not be set."
 //  },
@@ -8584,7 +8584,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99903
 //  {   
 //    ConstantNotValidAttribute,   
-//    "This Level+Version of SedML does not support the 'constant' attribute on this component",
+//    "This Level+Version of Sed does not support the 'constant' attribute on this component",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8594,7 +8594,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'constant' attribute on <compartment> and <parameter> was not "
-//    "available in SedML Level 1. In order for the internal representation "
+//    "available in Sed Level 1. In order for the internal representation "
 //    "of <compartment> and <parameter> to be correct, the value for the "
 //    "constant member variable should be 'false' if the <compartment> or "
 //    "<parameter> is the variable of a <rule> otherwise it can be either "
@@ -8604,7 +8604,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99904
 //  {   
 //    MetaIdNotValidAttribute,   
-//    "Attribute 'metaid' is not available in SedML Level 1",
+//    "Attribute 'metaid' is not available in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8614,7 +8614,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'metaid' attribute on all <SBase> objects was not available "
-//    "in SedML Level 1. In order for the internal "
+//    "in Sed Level 1. In order for the internal "
 //    "representation to be correct, the value for the "
 //    "'metaid' member variable should be not be set."
 //  },
@@ -8622,7 +8622,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99905
 //  {   
 //    SBOTermNotValidAttributeBeforeL2V3,   
-//    "The 'sboTerm' attribute is not available on this component before SedML Level 2 Version 3",
+//    "The 'sboTerm' attribute is not available on this component before Sed Level 2 Version 3",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8633,7 +8633,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'sboTerm' attribute on <compartment>, <compartmentType> "
 //    "<delay>, <species>, <speciesType>, <stoichiometryMath>, <trigger> "
-//    "<unit> and <unitDefinition> was not available before SedML Level 2 "
+//    "<unit> and <unitDefinition> was not available before Sed Level 2 "
 //    "Version 3. In order for the internal "
 //    "representation of these components to be correct, the value for the "
 //    "sboTerm member variable should be '-1'."
@@ -8642,7 +8642,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99906
 //  {   
 //    InvalidL1CompartmentUnits,   
-//    "Invalid units for a compartment in SedML Level 1",
+//    "Invalid units for a compartment in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8660,7 +8660,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99907
 //  {   
 //    L1V1CompartmentVolumeReqd,   
-//    "In SedML Level 1, a compartment's volume must be specified",
+//    "In Sed Level 1, a compartment's volume must be specified",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
@@ -8670,14 +8670,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "A value for the compartment 'volume' attribute must be specified "
-//    "in this Level+Version of SedML."
+//    "in this Level+Version of Sed."
 //  },
 //
 //
 //  //99908
 //  {   
 //    CompartmentTypeNotValidComponent,   
-//    "CompartmentType objects are not available in this Level+Version of SedML",
+//    "CompartmentType objects are not available in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8686,7 +8686,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,   
-//    "The <compartmentType> component was introduced in SedML Level 2 Version "
+//    "The <compartmentType> component was introduced in Sed Level 2 Version "
 //    "2. In order for the internal representation of a <model> to "
 //    "be correct, the <listOfCompartmentTypes> component should be empty."
 //  },
@@ -8694,7 +8694,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99909
 //  {   
 //    ConstraintNotValidComponent,   
-//    "Constraint objects are not available in this Level+Version of SedML",
+//    "Constraint objects are not available in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8703,7 +8703,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The <constraint> component was introduced in SedML Level 2 Version "
+//    "The <constraint> component was introduced in Sed Level 2 Version "
 //    "2. In order for the internal representation of a <model> to "
 //    "be correct, the <listOfConstraints> component should be empty."
 //  },
@@ -8711,7 +8711,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99910
 //  {   
 //    EventNotValidComponent,   
-//    "Event objects are not available in this Level+Version of SedML",
+//    "Event objects are not available in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8720,7 +8720,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The <event> component was introduced in SedML Level 2 Version "
+//    "The <event> component was introduced in Sed Level 2 Version "
 //    "1. In order for the internal representation of a <model> to "
 //    "be correct, the <listOfEvents> component should be empty."
 //  },
@@ -8739,7 +8739,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'sboTerm' attribute on <event>, <eventAssignment> "
 //    "<functionDefinition>, <kineticLaw>, <model>, <parameter>, <reaction> "
-//    "<rule> and <speciesReferenece> was not available before SedML Level 2 "
+//    "<rule> and <speciesReferenece> was not available before Sed Level 2 "
 //    "Version 2. In order for the internal "
 //    "representation of these components to be correct, the value for the "
 //    "sboTerm member variable should be '-1'."
@@ -8748,7 +8748,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99912
 //  {   
 //    FuncDefNotValidComponent,   
-//    "FunctionDefinition objects are not available in this Level+Version of SedML",
+//    "FunctionDefinition objects are not available in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8757,7 +8757,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The <functionDefinition> component was introduced in SedML Level 2 Version "
+//    "The <functionDefinition> component was introduced in Sed Level 2 Version "
 //    "1. In order for the internal representation of a <model> to "
 //    "be correct, the <listOfFunctionDefinitions> component should be empty."
 //  },
@@ -8765,7 +8765,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99913
 //  {   
 //    InitialAssignNotValidComponent,   
-//    "InitialAssignment objects are not available in this Level+Version of SedML",
+//    "InitialAssignment objects are not available in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8774,7 +8774,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The <initialAssignment> component was introduced in SedML Level 2 Version "
+//    "The <initialAssignment> component was introduced in Sed Level 2 Version "
 //    "2. In order for the internal respresentation of a <model> to "
 //    "be correct, the <listOfInitialAssignments> component should be empty."
 //  },
@@ -8782,7 +8782,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99914
 //  {   
 //    VariableNotValidAttribute,   
-//    "Attribute 'variable' is not available on this component in this Level+Version of SedML",
+//    "Attribute 'variable' is not available on this component in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8798,7 +8798,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99915
 //  {   
 //    UnitsNotValidAttribute,   
-//    "Attribute 'units' is not available on this component in this Level+Version of SedML",
+//    "Attribute 'units' is not available on this component in this Level+Version of Sed",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8808,14 +8808,14 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    "The 'units' attribute on <rule> was only applicable to a <parameterRule> "
-//    "in SedML Level 1. In order for the internal respresentation of a <rule> to "
+//    "in Sed Level 1. In order for the internal respresentation of a <rule> to "
 //    "be correct, the value for the units member variable should not be set."
 //  },
 //
 //  //99916
 //  {   
 //    ConstantSpeciesNotValidAttribute,   
-//    "Attribute 'constant' is not available on Species objects in SedML Level 1",
+//    "Attribute 'constant' is not available on Species objects in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8824,7 +8824,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'constant' attribute on <species> was not available in SedML Level "
+//    "The 'constant' attribute on <species> was not available in Sed Level "
 //    "1. In order for the internal respresentation "
 //    "of <species> to be correct, the value for the "
 //    "constant member variable should be 'false' if (1) the <species> is the "
@@ -8837,7 +8837,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99917
 //  {   
 //    SpatialSizeUnitsNotValidAttribute,   
-//    "Attribute 'spatialSizeUnits' is not available on Species objects in SedML Level 1",
+//    "Attribute 'spatialSizeUnits' is not available on Species objects in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8847,7 +8847,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'spatialSizeUnits' attribute on <species> was not available "
-//    "in SedML Level 1. In order for the internal "
+//    "in Sed Level 1. In order for the internal "
 //    "respresentation of a <species> to be correct, the value for the "
 //    "spatialSizeUnits member variable should be not be set."
 //  },
@@ -8855,7 +8855,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99918
 //  {   
 //    SpeciesTypeNotValidAttribute,   
-//    "Attribute 'speciesType' is not available on Species objects in SedML Level 1",
+//    "Attribute 'speciesType' is not available on Species objects in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8865,7 +8865,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,   
 //    "The 'speciesType' attribute on <species> was not available "
-//    "in SedML Level 1 or SedML Level 2 Version 1. In order for the internal "
+//    "in Sed Level 1 or Sed Level 2 Version 1. In order for the internal "
 //    "respresentation of a <species> to be correct, the value for the "
 //    "speciesType member variable should be not be set."
 //  },
@@ -8873,7 +8873,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99919
 //  {   
 //    HasOnlySubsUnitsNotValidAttribute,   
-//    "Attribute 'hasOnlySubstanceUnits' is not available on Species objects in SedML Level 1",
+//    "Attribute 'hasOnlySubstanceUnits' is not available on Species objects in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8883,7 +8883,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'hasOnlySubstanceUnits' attribute on <species> was not available "
-//    "in SedML Level 1. In order for the internal "
+//    "in Sed Level 1. In order for the internal "
 //    "respresentation of a <species> to be correct, the value for the "
 //    "hasOnlySubstanceUnits member variable should be 'false'."
 //  },
@@ -8891,7 +8891,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99920
 //  {   
 //    IdNotValidAttribute,   
-//    "Attribute 'id' is not available on SpeciesReference objects in SedML Level 1",
+//    "Attribute 'id' is not available on SpeciesReference objects in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8901,7 +8901,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'id' attribute on <speciesReference> was not available "
-//    "in SedML Level 1 or SedML Level 2 Version 1. In order for the internal "
+//    "in Sed Level 1 or Sed Level 2 Version 1. In order for the internal "
 //    "respresentation of a <speciesReference> to be correct, the value for the "
 //    "id member variable should be not be set."
 //  },
@@ -8909,7 +8909,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    //99921
 //  {   
 //    NameNotValidAttribute,   
-//    "Attribute 'name' is not available on SpeciesReference objects in SedML Level 1",
+//    "Attribute 'name' is not available on SpeciesReference objects in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8919,7 +8919,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    "The 'name' attribute on <speciesReference> was not available "
-//    "in SedML Level 1 or SedML Level 2 Version 1. In order for the internal "
+//    "in Sed Level 1 or Sed Level 2 Version 1. In order for the internal "
 //    "respresentation of a <speciesReference> to be correct, the value for the "
 //    "name member variable should be not be set."
 //   },
@@ -8927,7 +8927,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99922
 //  {   
 //    SpeciesTypeNotValidComponent,   
-//    "The SpeciesType object is not supported in SedML Level 1",
+//    "The SpeciesType object is not supported in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8936,7 +8936,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,   
-//    "The <speciesType> component was introduced in SedML Level 2 Version "
+//    "The <speciesType> component was introduced in Sed Level 2 Version "
 //    "2. In order for the internal respresentation of a <model> to "
 //    "be correct, the <listOfSpeciesTypes> component should be empty."
 //  },
@@ -8944,7 +8944,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99923
 //  {   
 //    StoichiometryMathNotValidComponent,   
-//    "The StoichiometryMath object is not supported in SedML Level 1",
+//    "The StoichiometryMath object is not supported in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8954,7 +8954,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_ERROR,   
 //    "The <stoichiometryMath> component on a <speciesReference> was "
-//    "introduced in SedML Level 2. "
+//    "introduced in Sed Level 2. "
 //    "In order for the internal respresentation of a <speciesReference> to "
 //    "be correct, the <stoichiometryMath> component should be 'NULL'."
 //  },
@@ -8962,7 +8962,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99924
 //  {   
 //    MultiplierNotValidAttribute,   
-//    "Attribute 'multiplier' on Unit objects is not supported in SedML Level 1",
+//    "Attribute 'multiplier' on Unit objects is not supported in Sed Level 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8971,7 +8971,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'multiplier' attribute on <unit> was not available in SedML Level 1. "
+//    "The 'multiplier' attribute on <unit> was not available in Sed Level 1. "
 //    "In order for the internal respresentation of a <unit> to "
 //    "be correct, the value for the multiplier member variable should be '1.0'."
 //  }, 
@@ -8979,7 +8979,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99925
 //  {   
 //    OffsetNotValidAttribute,   
-//    "Attribute 'offset' on Unit objects is only available in SedML Level 2 Version 1",
+//    "Attribute 'offset' on Unit objects is only available in Sed Level 2 Version 1",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -8988,7 +8988,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,   
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_NOT_APPLICABLE,
-//    "The 'offset' attribute on <unit> was only available in SedML Level 2 "
+//    "The 'offset' attribute on <unit> was only available in Sed Level 2 "
 //    "Version 1. In order for the internal respresentation of a <unit> to "
 //    "be correct, the value for the offset member variable should be '0'."
 //  }, 
@@ -9006,7 +9006,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_NOT_APPLICABLE,
 //    LIBSEDML_SEV_WARNING,
 //    "The 'spatialDimensions' attribute on <compartment> was left unset on "
-//    "the SedML Level 3 model.  Conversion will apply a default value of '3'."
+//    "the Sed Level 3 model.  Conversion will apply a default value of '3'."
 //  }, 
 //
 //  ////99927
@@ -9069,7 +9069,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //  //99996
 //  {   
 //    PackageConversionNotSupported,   
-//    "Conversion of SedML Level 3 package constructs is not yet supported",
+//    "Conversion of Sed Level 3 package constructs is not yet supported",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -9078,13 +9078,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,   
-//    "Conversion of SedML Level 3 package information is not yet supported."
+//    "Conversion of Sed Level 3 package information is not yet supported."
 //  },
 //
 //  //99997
 //  {   
 //    InvalidTargetLevelVersion,   
-//    "The requested SedML Level/Version combination is not known to exist",
+//    "The requested Sed Level/Version combination is not known to exist",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -9093,13 +9093,13 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,   
-//    "Conversion is only possible to an existing SedML Level and Version."
+//    "Conversion is only possible to an existing Sed Level and Version."
 //  },
 //
 //  //99998
 //  {   
 //    L3NotSupported,   
-//    "SedML Level 3 is not yet supported",
+//    "Sed Level 3 is not yet supported",
 //    LIBSEDML_CAT_INTERNAL_CONSISTENCY,   
 //    LIBSEDML_SEV_ERROR,   
 //    LIBSEDML_SEV_ERROR,   
@@ -9118,8 +9118,8 @@ static const sbmlErrorTableEntry errorTable[] =
 
   //99999
   {
-    SedMLCodesUpperBound,
-    "Upper boundary of libSedML-specific diagnostic codes",
+    SedCodesUpperBound,
+    "Upper boundary of libSed-specific diagnostic codes",
     LIBSEDML_CAT_INTERNAL,
     LIBSEDML_SEV_NOT_APPLICABLE,
     "Application-specific codes should begin at 100000.", 

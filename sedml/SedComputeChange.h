@@ -1,6 +1,6 @@
 /**
- * @file:   ComputeChange.h
- * @brief:  Implementation of the ComputeChange class
+ * @file:   SedComputeChange.h
+ * @brief:  Implementation of the SedComputeChange class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef ComputeChange_H__
-#define ComputeChange_H__
+#ifndef SedComputeChange_H__
+#define SedComputeChange_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,101 +49,101 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Change.h>
-#include <sedml/SedMLVariable.h>
-#include <sedml/SedMLParameter.h>
+#include <sedml/SedChange.h>
+#include <sedml/SedVariable.h>
+#include <sedml/SedParameter.h>
 
 
-class LIBSEDML_EXTERN ComputeChange : public Change
+class LIBSEDML_EXTERN SedComputeChange : public SedChange
 {
 
 protected:
 
-	SedListOfSedMLVariables   mVariable;
-	SedListOfSedMLParameters   mParameter;
+	SedListOfVariables   mVariable;
+	SedListOfParameters   mParameter;
 	ASTNode*      mMath;
 
 
 public:
 
 	/**
-	 * Creates a new ComputeChange with the given level, version, and package version.
+	 * Creates a new SedComputeChange with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this ComputeChange
+	 * @param level an unsigned int, the SEDML Level to assign to this SedComputeChange
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this ComputeChange
+	 * @param version an unsigned int, the SEDML Version to assign to this SedComputeChange
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this ComputeChange
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedComputeChange
 	 */
-	ComputeChange(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	              unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedComputeChange(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                 unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new ComputeChange with the given SedMLNamespaces object.
+	 * Creates a new SedComputeChange with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	ComputeChange(SedMLNamespaces* sedmlns);
+	SedComputeChange(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for ComputeChange.
+	 * Copy constructor for SedComputeChange.
 	 *
-	 * @param orig; the ComputeChange instance to copy.
+	 * @param orig; the SedComputeChange instance to copy.
 	 */
-	ComputeChange(const ComputeChange& orig);
+	SedComputeChange(const SedComputeChange& orig);
 
 
  	/**
-	 * Assignment operator for ComputeChange.
+	 * Assignment operator for SedComputeChange.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	ComputeChange& operator=(const ComputeChange& rhs);
+	SedComputeChange& operator=(const SedComputeChange& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this ComputeChange object.
+	 * Creates and returns a deep copy of this SedComputeChange object.
 	 *
-	 * @return a (deep) copy of this ComputeChange object.
+	 * @return a (deep) copy of this SedComputeChange object.
 	 */
-	virtual ComputeChange* clone () const;
+	virtual SedComputeChange* clone () const;
 
 
  	/**
-	 * Destructor for ComputeChange.
+	 * Destructor for SedComputeChange.
 	 */
-	virtual ~ComputeChange();
+	virtual ~SedComputeChange();
 
 
  	/**
-	 * Returns the "math" element of this ComputeChange.
+	 * Returns the "math" element of this SedComputeChange.
 	 *
-	 * @return the "math" element of this ComputeChange.
+	 * @return the "math" element of this SedComputeChange.
 	 */
 	virtual const ASTNode* getMath() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * ComputeChange's "math" element has been set.
+	 * SedComputeChange's "math" element has been set.
 	 *
-	 * @return @c true if this ComputeChange's "math" element has been set,
+	 * @return @c true if this SedComputeChange's "math" element has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetMath() const;
 
 
 	/**
-	 * Sets the "math" element of this ComputeChange.
+	 * Sets the "math" element of this SedComputeChange.
 	 *
 	 * @param math; ASTNode* determining the value of the "resultLevel" attribute to be set.
 	 *
@@ -158,7 +158,7 @@ public:
 
 
 	/**
-	 * Unsets the "math" element of this ComputeChange.
+	 * Unsets the "math" element of this SedComputeChange.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -171,77 +171,77 @@ public:
 
 
 	/**
-	 * Returns the  "SedListOfSedMLVariables" in this ComputeChange object.
+	 * Returns the  "SedListOfVariables" in this SedComputeChange object.
 	 *
-	 * @return the "SedListOfSedMLVariables" attribute of this ComputeChange.
+	 * @return the "SedListOfVariables" attribute of this SedComputeChange.
 	 */
-	const SedListOfSedMLVariables* getListOfSedMLVariables() const;
+	const SedListOfVariables* getListOfVariables() const;
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables.
+	 * Get a Variable from the SedListOfVariables.
 	 *
-	 * @param n the index number of the SedMLVariable to get.
+	 * @param n the index number of the Variable to get.
 	 *
-	 * @return the nth SedMLVariable in the SedListOfSedMLVariables within this ComputeChange.
+	 * @return the nth Variable in the SedListOfVariables within this SedComputeChange.
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	SedMLVariable* getSedMLVariable(unsigned int n);
+	SedVariable* getVariable(unsigned int n);
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables.
+	 * Get a Variable from the SedListOfVariables.
 	 *
-	 * @param n the index number of the SedMLVariable to get.
+	 * @param n the index number of the Variable to get.
 	 *
-	 * @return the nth SedMLVariable in the SedListOfSedMLVariables within this ComputeChange.
+	 * @return the nth Variable in the SedListOfVariables within this SedComputeChange.
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	const SedMLVariable* getSedMLVariable(unsigned int n) const;
+	const SedVariable* getVariable(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables
+	 * Get a Variable from the SedListOfVariables
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLVariable to get.
+	 * of the Variable to get.
 	 *
-	 * @return the SedMLVariable in the SedListOfSedMLVariables
+	 * @return the Variable in the SedListOfVariables
 	 * with the given id or NULL if no such
-	 * SedMLVariable exists.
+	 * Variable exists.
 	 *
-	 * @see getSedMLVariable(unsigned int n)
+	 * @see getVariable(unsigned int n)
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	SedMLVariable* getSedMLVariable(const std::string& sid);
+	SedVariable* getVariable(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables
+	 * Get a Variable from the SedListOfVariables
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLVariable to get.
+	 * of the Variable to get.
 	 *
-	 * @return the SedMLVariable in the SedListOfSedMLVariables
+	 * @return the Variable in the SedListOfVariables
 	 * with the given id or NULL if no such
-	 * SedMLVariable exists.
+	 * Variable exists.
 	 *
-	 * @see getSedMLVariable(unsigned int n)
+	 * @see getVariable(unsigned int n)
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	const SedMLVariable* getSedMLVariable(const std::string& sid) const;
+	const SedVariable* getVariable(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLVariable" to this ComputeChange.
+	 * Adds a copy the given "SedVariable" to this SedComputeChange.
 	 *
-	 * @param smlv; the SedMLVariable object to add
+	 * @param sv; the SedVariable object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -250,129 +250,129 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLVariable(const SedMLVariable* smlv);
+	int addVariable(const SedVariable* sv);
 
 
 	/**
-	 * Get the number of SedMLVariable objects in this ComputeChange.
+	 * Get the number of SedVariable objects in this SedComputeChange.
 	 *
-	 * @return the number of SedMLVariable objects in this ComputeChange
+	 * @return the number of SedVariable objects in this SedComputeChange
 	 */
-	unsigned int getNumSedMLVariables() const;
+	unsigned int getNumVariables() const;
 
 
 	/**
-	 * Creates a new SedMLVariable object, adds it to this ComputeChanges
-	 * SedListOfSedMLVariables and returns the SedMLVariable object created. 
+	 * Creates a new SedVariable object, adds it to this SedComputeChanges
+	 * SedListOfVariables and returns the SedVariable object created. 
 	 *
-	 * @return a new SedMLVariable object instance
+	 * @return a new SedVariable object instance
 	 *
-	 * @see addSedMLVariable(const SedMLVariable* smlv)
+	 * @see addVariable(const SedVariable* sv)
 	 */
-	SedMLVariable* createSedMLVariable();
+	SedVariable* createVariable();
 
 
 	/**
-	 * Removes the nth SedMLVariable from the SedListOfSedMLVariables within this ComputeChange.
+	 * Removes the nth Variable from the SedListOfVariables within this SedComputeChange.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLVariable to remove.
+	 * @param n the index of the Variable to remove.
 	 *
-	 * @see getNumSedMLVariables()
+	 * @see getNumVariables()
 	 */
-	SedMLVariable* removeSedMLVariable(unsigned int n);
+	SedVariable* removeVariable(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLVariable with the given identifier from the SedListOfSedMLVariables within this ComputeChange
+	 * Removes the Variable with the given identifier from the SedListOfVariables within this SedComputeChange
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLVariable to remove.
+	 * @param sid the identifier of the Variable to remove.
 	 *
-	 * @return the SedMLVariable removed. As mentioned above, the caller owns the
+	 * @return the Variable removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLVariable* removeSedMLVariable(const std::string& sid);
+	SedVariable* removeVariable(const std::string& sid);
 
 
 	/**
-	 * Returns the  "SedListOfSedMLParameters" in this ComputeChange object.
+	 * Returns the  "SedListOfParameters" in this SedComputeChange object.
 	 *
-	 * @return the "SedListOfSedMLParameters" attribute of this ComputeChange.
+	 * @return the "SedListOfParameters" attribute of this SedComputeChange.
 	 */
-	const SedListOfSedMLParameters* getListOfSedMLParameters() const;
+	const SedListOfParameters* getListOfParameters() const;
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters.
+	 * Get a Parameter from the SedListOfParameters.
 	 *
-	 * @param n the index number of the SedMLParameter to get.
+	 * @param n the index number of the Parameter to get.
 	 *
-	 * @return the nth SedMLParameter in the SedListOfSedMLParameters within this ComputeChange.
+	 * @return the nth Parameter in the SedListOfParameters within this SedComputeChange.
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	SedMLParameter* getSedMLParameter(unsigned int n);
+	SedParameter* getParameter(unsigned int n);
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters.
+	 * Get a Parameter from the SedListOfParameters.
 	 *
-	 * @param n the index number of the SedMLParameter to get.
+	 * @param n the index number of the Parameter to get.
 	 *
-	 * @return the nth SedMLParameter in the SedListOfSedMLParameters within this ComputeChange.
+	 * @return the nth Parameter in the SedListOfParameters within this SedComputeChange.
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	const SedMLParameter* getSedMLParameter(unsigned int n) const;
+	const SedParameter* getParameter(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters
+	 * Get a Parameter from the SedListOfParameters
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLParameter to get.
+	 * of the Parameter to get.
 	 *
-	 * @return the SedMLParameter in the SedListOfSedMLParameters
+	 * @return the Parameter in the SedListOfParameters
 	 * with the given id or NULL if no such
-	 * SedMLParameter exists.
+	 * Parameter exists.
 	 *
-	 * @see getSedMLParameter(unsigned int n)
+	 * @see getParameter(unsigned int n)
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	SedMLParameter* getSedMLParameter(const std::string& sid);
+	SedParameter* getParameter(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters
+	 * Get a Parameter from the SedListOfParameters
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLParameter to get.
+	 * of the Parameter to get.
 	 *
-	 * @return the SedMLParameter in the SedListOfSedMLParameters
+	 * @return the Parameter in the SedListOfParameters
 	 * with the given id or NULL if no such
-	 * SedMLParameter exists.
+	 * Parameter exists.
 	 *
-	 * @see getSedMLParameter(unsigned int n)
+	 * @see getParameter(unsigned int n)
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	const SedMLParameter* getSedMLParameter(const std::string& sid) const;
+	const SedParameter* getParameter(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLParameter" to this ComputeChange.
+	 * Adds a copy the given "SedParameter" to this SedComputeChange.
 	 *
-	 * @param smlp; the SedMLParameter object to add
+	 * @param sp; the SedParameter object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -381,62 +381,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLParameter(const SedMLParameter* smlp);
+	int addParameter(const SedParameter* sp);
 
 
 	/**
-	 * Get the number of SedMLParameter objects in this ComputeChange.
+	 * Get the number of SedParameter objects in this SedComputeChange.
 	 *
-	 * @return the number of SedMLParameter objects in this ComputeChange
+	 * @return the number of SedParameter objects in this SedComputeChange
 	 */
-	unsigned int getNumSedMLParameters() const;
+	unsigned int getNumParameters() const;
 
 
 	/**
-	 * Creates a new SedMLParameter object, adds it to this ComputeChanges
-	 * SedListOfSedMLParameters and returns the SedMLParameter object created. 
+	 * Creates a new SedParameter object, adds it to this SedComputeChanges
+	 * SedListOfParameters and returns the SedParameter object created. 
 	 *
-	 * @return a new SedMLParameter object instance
+	 * @return a new SedParameter object instance
 	 *
-	 * @see addSedMLParameter(const SedMLParameter* smlp)
+	 * @see addParameter(const SedParameter* sp)
 	 */
-	SedMLParameter* createSedMLParameter();
+	SedParameter* createParameter();
 
 
 	/**
-	 * Removes the nth SedMLParameter from the SedListOfSedMLParameters within this ComputeChange.
+	 * Removes the nth Parameter from the SedListOfParameters within this SedComputeChange.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLParameter to remove.
+	 * @param n the index of the Parameter to remove.
 	 *
-	 * @see getNumSedMLParameters()
+	 * @see getNumParameters()
 	 */
-	SedMLParameter* removeSedMLParameter(unsigned int n);
+	SedParameter* removeParameter(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLParameter with the given identifier from the SedListOfSedMLParameters within this ComputeChange
+	 * Removes the Parameter with the given identifier from the SedListOfParameters within this SedComputeChange
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLParameter to remove.
+	 * @param sid the identifier of the Parameter to remove.
 	 *
-	 * @return the SedMLParameter removed. As mentioned above, the caller owns the
+	 * @return the Parameter removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLParameter* removeSedMLParameter(const std::string& sid);
+	SedParameter* removeParameter(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for ComputeChange, is
-	 * always @c "computeChange".
+	 * Returns the XML element name of this object, which for SedComputeChange, is
+	 * always @c "sedComputeChange".
 	 *
-	 * @return the name of this element, i.e. @c "computeChange".
+	 * @return the name of this element, i.e. @c "sedComputeChange".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -476,9 +476,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this ComputeChange object have been set.
+	 * for this SedComputeChange object have been set.
 	 *
-	 * @note The required attributes for a ComputeChange object are:
+	 * @note The required attributes for a SedComputeChange object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
@@ -488,9 +488,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this ComputeChange object have been set.
+	 * for this SedComputeChange object have been set.
 	 *
-	 * @note The required elements for a ComputeChange object are:
+	 * @note The required elements for a SedComputeChange object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -514,9 +514,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -525,9 +525,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -619,128 +619,128 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-ComputeChange_t *
-ComputeChange_create(unsigned int level, unsigned int version);
+SedComputeChange_t *
+SedComputeChange_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-ComputeChange_free(ComputeChange_t * cc);
+SedComputeChange_free(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
-ComputeChange_t *
-ComputeChange_clone(ComputeChange_t * cc);
+SedComputeChange_t *
+SedComputeChange_clone(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
 ASTNode_t*
-ComputeChange_getMath(ComputeChange_t * cc);
+SedComputeChange_getMath(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_isSetMath(ComputeChange_t * cc);
+SedComputeChange_isSetMath(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_setMath(ComputeChange_t * cc, ASTNode_t* math);
+SedComputeChange_setMath(SedComputeChange_t * scc, ASTNode_t* math);
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_unsetMath(ComputeChange_t * cc);
+SedComputeChange_unsetMath(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_addSedMLVariable(ComputeChange_t * cc, SedMLVariable_t * smlv);
+SedComputeChange_addVariable(SedComputeChange_t * scc, SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_createSedMLVariable(ComputeChange_t * cc);
+SedVariable_t *
+SedComputeChange_createVariable(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-ComputeChange_getSedListOfSedMLVariables(ComputeChange_t * cc);
+SedComputeChange_getSedListOfVariables(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_getSedMLVariable(ComputeChange_t * cc, unsigned int n);
+SedVariable_t *
+SedComputeChange_getVariable(SedComputeChange_t * scc, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_getSedMLVariableById(ComputeChange_t * cc, const char * sid);
+SedVariable_t *
+SedComputeChange_getVariableById(SedComputeChange_t * scc, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-ComputeChange_getNumSedMLVariables(ComputeChange_t * cc);
+SedComputeChange_getNumVariables(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_removeSedMLVariable(ComputeChange_t * cc, unsigned int n);
+SedVariable_t *
+SedComputeChange_removeVariable(SedComputeChange_t * scc, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_removeSedMLVariableById(ComputeChange_t * cc, const char * sid);
+SedVariable_t *
+SedComputeChange_removeVariableById(SedComputeChange_t * scc, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_addSedMLParameter(ComputeChange_t * cc, SedMLParameter_t * smlp);
+SedComputeChange_addParameter(SedComputeChange_t * scc, SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_createSedMLParameter(ComputeChange_t * cc);
+SedParameter_t *
+SedComputeChange_createParameter(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-ComputeChange_getSedListOfSedMLParameters(ComputeChange_t * cc);
+SedComputeChange_getSedListOfParameters(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_getSedMLParameter(ComputeChange_t * cc, unsigned int n);
+SedParameter_t *
+SedComputeChange_getParameter(SedComputeChange_t * scc, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_getSedMLParameterById(ComputeChange_t * cc, const char * sid);
+SedParameter_t *
+SedComputeChange_getParameterById(SedComputeChange_t * scc, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-ComputeChange_getNumSedMLParameters(ComputeChange_t * cc);
+SedComputeChange_getNumParameters(SedComputeChange_t * scc);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_removeSedMLParameter(ComputeChange_t * cc, unsigned int n);
+SedParameter_t *
+SedComputeChange_removeParameter(SedComputeChange_t * scc, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_removeSedMLParameterById(ComputeChange_t * cc, const char * sid);
-
-
-LIBSEDML_EXTERN
-int
-ComputeChange_hasRequiredAttributes(ComputeChange_t * cc);
+SedParameter_t *
+SedComputeChange_removeParameterById(SedComputeChange_t * scc, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_hasRequiredElements(ComputeChange_t * cc);
+SedComputeChange_hasRequiredAttributes(SedComputeChange_t * scc);
+
+
+LIBSEDML_EXTERN
+int
+SedComputeChange_hasRequiredElements(SedComputeChange_t * scc);
 
 
 
@@ -750,5 +750,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  ComputeChange_H__  */
+#endif /*  SedComputeChange_H__  */
 

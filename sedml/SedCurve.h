@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLCurve.h
- * @brief:  Implementation of the SedMLCurve class
+ * @file:   SedCurve.h
+ * @brief:  Implementation of the SedCurve class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedMLCurve_H__
-#define SedMLCurve_H__
+#ifndef SedCurve_H__
+#define SedCurve_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN SedMLCurve : public SedBase
+class LIBSEDML_EXTERN SedCurve : public SedBase
 {
 
 protected:
@@ -75,77 +75,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new SedMLCurve with the given level, version, and package version.
+	 * Creates a new SedCurve with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedMLCurve
+	 * @param level an unsigned int, the SEDML Level to assign to this SedCurve
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedMLCurve
+	 * @param version an unsigned int, the SEDML Version to assign to this SedCurve
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedMLCurve
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedCurve
 	 */
-	SedMLCurve(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	           unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedCurve(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	         unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedMLCurve with the given SedMLNamespaces object.
+	 * Creates a new SedCurve with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedMLCurve(SedMLNamespaces* sedmlns);
+	SedCurve(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedMLCurve.
+	 * Copy constructor for SedCurve.
 	 *
-	 * @param orig; the SedMLCurve instance to copy.
+	 * @param orig; the SedCurve instance to copy.
 	 */
-	SedMLCurve(const SedMLCurve& orig);
+	SedCurve(const SedCurve& orig);
 
 
  	/**
-	 * Assignment operator for SedMLCurve.
+	 * Assignment operator for SedCurve.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedMLCurve& operator=(const SedMLCurve& rhs);
+	SedCurve& operator=(const SedCurve& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedMLCurve object.
+	 * Creates and returns a deep copy of this SedCurve object.
 	 *
-	 * @return a (deep) copy of this SedMLCurve object.
+	 * @return a (deep) copy of this SedCurve object.
 	 */
-	virtual SedMLCurve* clone () const;
+	virtual SedCurve* clone () const;
 
 
  	/**
-	 * Destructor for SedMLCurve.
+	 * Destructor for SedCurve.
 	 */
-	virtual ~SedMLCurve();
+	virtual ~SedCurve();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this SedMLCurve.
+	 * Returns the value of the "id" attribute of this SedCurve.
 	 *
-	 * @return the value of the "id" attribute of this SedMLCurve as a string.
+	 * @return the value of the "id" attribute of this SedCurve as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLCurve's "id" attribute has been set.
+	 * SedCurve's "id" attribute has been set.
 	 *
-	 * @return @c true if this SedMLCurve's "id" attribute has been set,
+	 * @return @c true if this SedCurve's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this SedMLCurve.
+	 * Sets the value of the "id" attribute of this SedCurve.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -160,7 +160,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this SedMLCurve.
+	 * Unsets the value of the "id" attribute of this SedCurve.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -173,25 +173,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this SedMLCurve.
+	 * Returns the value of the "name" attribute of this SedCurve.
 	 *
-	 * @return the value of the "name" attribute of this SedMLCurve as a string.
+	 * @return the value of the "name" attribute of this SedCurve as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLCurve's "name" attribute has been set.
+	 * SedCurve's "name" attribute has been set.
 	 *
-	 * @return @c true if this SedMLCurve's "name" attribute has been set,
+	 * @return @c true if this SedCurve's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this SedMLCurve.
+	 * Sets the value of the "name" attribute of this SedCurve.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -206,7 +206,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this SedMLCurve.
+	 * Unsets the value of the "name" attribute of this SedCurve.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -219,25 +219,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "logX" attribute of this SedMLCurve.
+	 * Returns the value of the "logX" attribute of this SedCurve.
 	 *
-	 * @return the value of the "logX" attribute of this SedMLCurve as a boolean.
+	 * @return the value of the "logX" attribute of this SedCurve as a boolean.
 	 */
 	virtual const bool getLogX() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLCurve's "logX" attribute has been set.
+	 * SedCurve's "logX" attribute has been set.
 	 *
-	 * @return @c true if this SedMLCurve's "logX" attribute has been set,
+	 * @return @c true if this SedCurve's "logX" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetLogX() const;
 
 
 	/**
-	 * Sets the value of the "logX" attribute of this SedMLCurve.
+	 * Sets the value of the "logX" attribute of this SedCurve.
 	 *
 	 * @param logX; bool value of the "logX" attribute to be set
 	 *
@@ -252,7 +252,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "logX" attribute of this SedMLCurve.
+	 * Unsets the value of the "logX" attribute of this SedCurve.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -265,25 +265,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "logY" attribute of this SedMLCurve.
+	 * Returns the value of the "logY" attribute of this SedCurve.
 	 *
-	 * @return the value of the "logY" attribute of this SedMLCurve as a boolean.
+	 * @return the value of the "logY" attribute of this SedCurve as a boolean.
 	 */
 	virtual const bool getLogY() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLCurve's "logY" attribute has been set.
+	 * SedCurve's "logY" attribute has been set.
 	 *
-	 * @return @c true if this SedMLCurve's "logY" attribute has been set,
+	 * @return @c true if this SedCurve's "logY" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetLogY() const;
 
 
 	/**
-	 * Sets the value of the "logY" attribute of this SedMLCurve.
+	 * Sets the value of the "logY" attribute of this SedCurve.
 	 *
 	 * @param logY; bool value of the "logY" attribute to be set
 	 *
@@ -298,7 +298,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "logY" attribute of this SedMLCurve.
+	 * Unsets the value of the "logY" attribute of this SedCurve.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -311,25 +311,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "xDataReference" attribute of this SedMLCurve.
+	 * Returns the value of the "xDataReference" attribute of this SedCurve.
 	 *
-	 * @return the value of the "xDataReference" attribute of this SedMLCurve as a string.
+	 * @return the value of the "xDataReference" attribute of this SedCurve as a string.
 	 */
 	virtual const std::string& getXDataReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLCurve's "xDataReference" attribute has been set.
+	 * SedCurve's "xDataReference" attribute has been set.
 	 *
-	 * @return @c true if this SedMLCurve's "xDataReference" attribute has been set,
+	 * @return @c true if this SedCurve's "xDataReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetXDataReference() const;
 
 
 	/**
-	 * Sets the value of the "xDataReference" attribute of this SedMLCurve.
+	 * Sets the value of the "xDataReference" attribute of this SedCurve.
 	 *
 	 * @param xDataReference; const std::string& value of the "xDataReference" attribute to be set
 	 *
@@ -344,7 +344,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "xDataReference" attribute of this SedMLCurve.
+	 * Unsets the value of the "xDataReference" attribute of this SedCurve.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -357,25 +357,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "yDataReference" attribute of this SedMLCurve.
+	 * Returns the value of the "yDataReference" attribute of this SedCurve.
 	 *
-	 * @return the value of the "yDataReference" attribute of this SedMLCurve as a string.
+	 * @return the value of the "yDataReference" attribute of this SedCurve as a string.
 	 */
 	virtual const std::string& getYDataReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLCurve's "yDataReference" attribute has been set.
+	 * SedCurve's "yDataReference" attribute has been set.
 	 *
-	 * @return @c true if this SedMLCurve's "yDataReference" attribute has been set,
+	 * @return @c true if this SedCurve's "yDataReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetYDataReference() const;
 
 
 	/**
-	 * Sets the value of the "yDataReference" attribute of this SedMLCurve.
+	 * Sets the value of the "yDataReference" attribute of this SedCurve.
 	 *
 	 * @param yDataReference; const std::string& value of the "yDataReference" attribute to be set
 	 *
@@ -390,7 +390,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "yDataReference" attribute of this SedMLCurve.
+	 * Unsets the value of the "yDataReference" attribute of this SedCurve.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -403,10 +403,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedMLCurve, is
-	 * always @c "sedMLCurve".
+	 * Returns the XML element name of this object, which for SedCurve, is
+	 * always @c "sedCurve".
 	 *
-	 * @return the name of this element, i.e. @c "sedMLCurve".
+	 * @return the name of this element, i.e. @c "sedCurve".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -446,9 +446,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedMLCurve object have been set.
+	 * for this SedCurve object have been set.
 	 *
-	 * @note The required attributes for a SedMLCurve object are:
+	 * @note The required attributes for a SedCurve object are:
 	 * @li "logX"
 	 * @li "logY"
 	 * @li "xDataReference"
@@ -476,9 +476,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -487,9 +487,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -534,103 +534,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfSedMLCurves : public SedListOf
+class LIBSEDML_EXTERN SedListOfCurves : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfSedMLCurves with the given level, version, and package version.
+	 * Creates a new SedListOfCurves with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSedMLCurves
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfCurves
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSedMLCurves
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfCurves
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfSedMLCurves
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfCurves
 	 */
-	SedListOfSedMLCurves(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                     unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfCurves(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfSedMLCurves with the given SedMLNamespaces object.
+	 * Creates a new SedListOfCurves with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSedMLCurves(SedMLNamespaces* sedmlns);
+	SedListOfCurves(SedNamespaces* sedns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfSedMLCurves object.
+	 * Creates and returns a deep copy of this SedListOfCurves object.
 	 *
-	 * @return a (deep) copy of this SedListOfSedMLCurves object.
+	 * @return a (deep) copy of this SedListOfCurves object.
 	 */
-	virtual SedListOfSedMLCurves* clone () const;
+	virtual SedListOfCurves* clone () const;
 
 
  	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves.
+	 * Get a Curve from the SedListOfCurves.
 	 *
-	 * @param n the index number of the SedMLCurve to get.
+	 * @param n the index number of the Curve to get.
 	 *
-	 * @return the nth SedMLCurve in this SedListOfSedMLCurves.
-	 *
-	 * @see size()
-	 */
-	virtual SedMLCurve* get(unsigned int n);
-
-
-	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves.
-	 *
-	 * @param n the index number of the SedMLCurve to get.
-	 *
-	 * @return the nth SedMLCurve in this SedListOfSedMLCurves.
+	 * @return the nth Curve in this SedListOfCurves.
 	 *
 	 * @see size()
 	 */
-	virtual const SedMLCurve* get(unsigned int n) const;
+	virtual SedCurve* get(unsigned int n);
 
 
 	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves
+	 * Get a Curve from the SedListOfCurves.
+	 *
+	 * @param n the index number of the Curve to get.
+	 *
+	 * @return the nth Curve in this SedListOfCurves.
+	 *
+	 * @see size()
+	 */
+	virtual const SedCurve* get(unsigned int n) const;
+
+
+	/**
+	 * Get a Curve from the SedListOfCurves
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLCurve to get.
+	 * of the Curve to get.
 	 *
-	 * @return SedMLCurve in this SedListOfSedMLCurves
+	 * @return Curve in this SedListOfCurves
 	 * with the given id or NULL if no such
-	 * SedMLCurve exists.
+	 * Curve exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual SedMLCurve* get(const std::string& sid);
+	virtual SedCurve* get(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves
+	 * Get a Curve from the SedListOfCurves
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLCurve to get.
+	 * of the Curve to get.
 	 *
-	 * @return SedMLCurve in this SedListOfSedMLCurves
+	 * @return Curve in this SedListOfCurves
 	 * with the given id or NULL if no such
-	 * SedMLCurve exists.
+	 * Curve exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const SedMLCurve* get(const std::string& sid) const;
+	virtual const SedCurve* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLCurve" to this SedListOfSedMLCurves.
+	 * Adds a copy the given "Curve" to this SedListOfCurves.
 	 *
-	 * @param smlc; the SedMLCurve object to add
+	 * @param c; the Curve object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -639,62 +639,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLCurve(const SedMLCurve* smlc);
+	int addCurve(const SedCurve* c);
 
 
 	/**
-	 * Get the number of SedMLCurve objects in this SedListOfSedMLCurves.
+	 * Get the number of Curve objects in this SedListOfCurves.
 	 *
-	 * @return the number of SedMLCurve objects in this SedListOfSedMLCurves
+	 * @return the number of Curve objects in this SedListOfCurves
 	 */
-	unsigned int getNumSedMLCurves() const;
+	unsigned int getNumCurves() const;
 
 
 	/**
-	 * Creates a new SedMLCurve object, adds it to the
-	 * SedListOfSedMLCurves and returns the SedMLCurve object created. 
+	 * Creates a new Curve object, adds it to the
+	 * SedListOfCurves and returns the Curve object created. 
 	 *
-	 * @return a new SedMLCurve object instance
+	 * @return a new Curve object instance
 	 *
-	 * @see addSedMLCurve(const SedMLCurve* smlc)
+	 * @see addCurve(const SedCurve* c)
 	 */
-	SedMLCurve* createSedMLCurve();
+	SedCurve* createCurve();
 
 
 	/**
-	 * Removes the nth SedMLCurve from this SedListOfSedMLCurves
+	 * Removes the nth Curve from this SedListOfCurves
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLCurve to remove.
+	 * @param n the index of the Curve to remove.
 	 *
 	 * @see size()
 	 */
-	virtual SedMLCurve* remove(unsigned int n);
+	virtual SedCurve* remove(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLCurve from this SedListOfSedMLCurves with the given identifier
+	 * Removes the Curve from this SedListOfCurves with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLCurve to remove.
+	 * @param sid the identifier of the Curve to remove.
 	 *
-	 * @return the SedMLCurve removed. As mentioned above, the caller owns the
+	 * @return the Curve removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual SedMLCurve* remove(const std::string& sid);
+	virtual SedCurve* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfSedMLCurves, is
-	 * always @c "sedListOfSedMLCurves".
+	 * Returns the XML element name of this object, which for SedListOfCurves, is
+	 * always @c "sedListOfCurves".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfSedMLCurves".
+	 * @return the name of this element, i.e. @c "sedListOfCurves".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -771,7 +771,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new SedMLCurve in this SedListOfSedMLCurves
+	 * Creates a new Curve in this SedListOfCurves
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -782,7 +782,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -805,153 +805,153 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-SedMLCurve_create(unsigned int level, unsigned int version);
+SedCurve_t *
+SedCurve_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedMLCurve_free(SedMLCurve_t * smlc);
+SedCurve_free(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-SedMLCurve_clone(SedMLCurve_t * smlc);
-
-
-LIBSEDML_EXTERN
-char *
-SedMLCurve_getId(SedMLCurve_t * smlc);
+SedCurve_t *
+SedCurve_clone(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLCurve_getName(SedMLCurve_t * smlc);
-
-
-LIBSEDML_EXTERN
-int
-SedMLCurve_getLogX(SedMLCurve_t * smlc);
-
-
-LIBSEDML_EXTERN
-int
-SedMLCurve_getLogY(SedMLCurve_t * smlc);
+SedCurve_getId(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLCurve_getXDataReference(SedMLCurve_t * smlc);
+SedCurve_getName(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_getLogX(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_getLogY(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLCurve_getYDataReference(SedMLCurve_t * smlc);
+SedCurve_getXDataReference(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+char *
+SedCurve_getYDataReference(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_isSetId(SedMLCurve_t * smlc);
+SedCurve_isSetId(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_isSetName(SedMLCurve_t * smlc);
+SedCurve_isSetName(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_isSetLogX(SedMLCurve_t * smlc);
+SedCurve_isSetLogX(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_isSetLogY(SedMLCurve_t * smlc);
+SedCurve_isSetLogY(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_isSetXDataReference(SedMLCurve_t * smlc);
+SedCurve_isSetXDataReference(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_isSetYDataReference(SedMLCurve_t * smlc);
+SedCurve_isSetYDataReference(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_setId(SedMLCurve_t * smlc, const char * id);
+SedCurve_setId(SedCurve_t * sc, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_setName(SedMLCurve_t * smlc, const char * name);
+SedCurve_setName(SedCurve_t * sc, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_setLogX(SedMLCurve_t * smlc, int logX);
+SedCurve_setLogX(SedCurve_t * sc, int logX);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_setLogY(SedMLCurve_t * smlc, int logY);
+SedCurve_setLogY(SedCurve_t * sc, int logY);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_setXDataReference(SedMLCurve_t * smlc, const char * xDataReference);
+SedCurve_setXDataReference(SedCurve_t * sc, const char * xDataReference);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_setYDataReference(SedMLCurve_t * smlc, const char * yDataReference);
+SedCurve_setYDataReference(SedCurve_t * sc, const char * yDataReference);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_unsetId(SedMLCurve_t * smlc);
+SedCurve_unsetId(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_unsetName(SedMLCurve_t * smlc);
+SedCurve_unsetName(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_unsetLogX(SedMLCurve_t * smlc);
+SedCurve_unsetLogX(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_unsetLogY(SedMLCurve_t * smlc);
+SedCurve_unsetLogY(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_unsetXDataReference(SedMLCurve_t * smlc);
+SedCurve_unsetXDataReference(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_unsetYDataReference(SedMLCurve_t * smlc);
+SedCurve_unsetYDataReference(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-SedMLCurve_hasRequiredAttributes(SedMLCurve_t * smlc);
+SedCurve_hasRequiredAttributes(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-SedListOfSedMLCurves_getById(SedListOf_t * lo, const char * sid);
+SedCurve_t *
+SedListOfSedCurves_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-SedListOfSedMLCurves_removeById(SedListOf_t * lo, const char * sid);
+SedCurve_t *
+SedListOfSedCurves_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -961,5 +961,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedMLCurve_H__  */
+#endif /*  SedCurve_H__  */
 

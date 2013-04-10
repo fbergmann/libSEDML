@@ -1,6 +1,6 @@
 /**
- * @file:   ComputeChange.cpp
- * @brief:  Implementation of the ComputeChange class
+ * @file:   SedComputeChange.cpp
+ * @brief:  Implementation of the SedComputeChange class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/ComputeChange.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedComputeChange.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/math/MathML.h>
 #include <sbml/math/ASTNode.h>
@@ -47,17 +47,17 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new ComputeChange with the given level, version, and package version.
+ * Creates a new SedComputeChange with the given level, version, and package version.
  */
-ComputeChange::ComputeChange (unsigned int level, unsigned int version)
-	: Change(level, version)
+SedComputeChange::SedComputeChange (unsigned int level, unsigned int version)
+	: SedChange(level, version)
 	, mVariable (level, version)
 	, mParameter (level, version)
 	, mMath (NULL)
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
 	// connect to child objects
 	connectToChild();
@@ -65,17 +65,17 @@ ComputeChange::ComputeChange (unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new ComputeChange with the given SedMLNamespaces object.
+ * Creates a new SedComputeChange with the given SedNamespaces object.
  */
-ComputeChange::ComputeChange (SedMLNamespaces* sedmlns)
-	: Change(sedmlns)
-	, mVariable (sedmlns)
-	, mParameter (sedmlns)
+SedComputeChange::SedComputeChange (SedNamespaces* sedns)
+	: SedChange(sedns)
+	, mVariable (sedns)
+	, mParameter (sedns)
 	, mMath (NULL)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 
 	// connect to child objects
 	connectToChild();
@@ -83,14 +83,14 @@ ComputeChange::ComputeChange (SedMLNamespaces* sedmlns)
 
 
 /*
- * Copy constructor for ComputeChange.
+ * Copy constructor for SedComputeChange.
  */
-ComputeChange::ComputeChange (const ComputeChange& orig)
-	: Change(orig)
+SedComputeChange::SedComputeChange (const SedComputeChange& orig)
+	: SedChange(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -105,18 +105,18 @@ ComputeChange::ComputeChange (const ComputeChange& orig)
 
 
 /*
- * Assignment for ComputeChange.
+ * Assignment for SedComputeChange.
  */
-ComputeChange&
-ComputeChange::operator=(const ComputeChange& rhs)
+SedComputeChange&
+SedComputeChange::operator=(const SedComputeChange& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
-		Change::operator=(rhs);
+		SedChange::operator=(rhs);
 		mVariable  = rhs.mVariable;
 		mParameter  = rhs.mParameter;
 		mMath  = rhs.mMath != NULL ? rhs.mMath->deepCopy() : NULL;
@@ -129,28 +129,28 @@ ComputeChange::operator=(const ComputeChange& rhs)
 
 
 /*
- * Clone for ComputeChange.
+ * Clone for SedComputeChange.
  */
-ComputeChange*
-ComputeChange::clone () const
+SedComputeChange*
+SedComputeChange::clone () const
 {
-	return new ComputeChange(*this);
+	return new SedComputeChange(*this);
 }
 
 
 /*
- * Destructor for ComputeChange.
+ * Destructor for SedComputeChange.
  */
-ComputeChange::~ComputeChange ()
+SedComputeChange::~SedComputeChange ()
 {
 }
 
 
 /*
- * Returns the value of the "math" attribute of this ComputeChange.
+ * Returns the value of the "math" attribute of this SedComputeChange.
  */
 const ASTNode*
-ComputeChange::getMath() const
+SedComputeChange::getMath() const
 {
 	return mMath;
 }
@@ -160,7 +160,7 @@ ComputeChange::getMath() const
  * Returns true/false if math is set.
  */
 bool
-ComputeChange::isSetMath() const
+SedComputeChange::isSetMath() const
 {
 	return (mMath != NULL);
 }
@@ -170,7 +170,7 @@ ComputeChange::isSetMath() const
  * Sets math and returns value indicating success.
  */
 int
-ComputeChange::setMath(ASTNode* math)
+SedComputeChange::setMath(ASTNode* math)
 {
 	if (mMath == math)
 	{
@@ -203,7 +203,7 @@ ComputeChange::setMath(ASTNode* math)
  * Unsets math and returns value indicating success.
  */
 int
-ComputeChange::unsetMath()
+SedComputeChange::unsetMath()
 {
 	delete mMath;
 	mMath = NULL;
@@ -212,79 +212,79 @@ ComputeChange::unsetMath()
 
 
 /*
- * Returns the  "SedListOfSedMLVariables" in this ComputeChange object.
+ * Returns the  "SedListOfSedVariables" in this SedComputeChange object.
  */
-const SedListOfSedMLVariables*
-ComputeChange::getListOfSedMLVariables() const
+const SedListOfSedVariables*
+SedComputeChange::getListOfSedVariables() const
 {
 	return &mVariable;
 }
 
 
 /*
- * Removes the nth SedMLVariable from the SedListOfSedMLVariables.
+ * Removes the nth SedVariable from the SedListOfSedVariables.
  */
-SedMLVariable*
-ComputeChange::removeSedMLVariable(unsigned int n)
+SedVariable*
+SedComputeChange::removeSedVariable(unsigned int n)
 {
 	return mVariable.remove(n);
 }
 
 
 /*
- * Removes the a SedMLVariable with given id from the SedListOfSedMLVariables.
+ * Removes the a SedVariable with given id from the SedListOfSedVariables.
  */
-SedMLVariable*
-ComputeChange::removeSedMLVariable(const std::string& sid)
+SedVariable*
+SedComputeChange::removeSedVariable(const std::string& sid)
 {
 	return mVariable.remove(sid);
 }
 
 
 /*
- * Return the nth SedMLVariable in the SedListOfSedMLVariables within this ComputeChange.
+ * Return the nth SedVariable in the SedListOfSedVariables within this SedComputeChange.
  */
-SedMLVariable*
-ComputeChange::getSedMLVariable(unsigned int n)
+SedVariable*
+SedComputeChange::getSedVariable(unsigned int n)
 {
 	return mVariable.get(n);
 }
 
 
 /*
- * Return the nth SedMLVariable in the SedListOfSedMLVariables within this ComputeChange.
+ * Return the nth SedVariable in the SedListOfSedVariables within this SedComputeChange.
  */
-const SedMLVariable*
-ComputeChange::getSedMLVariable(unsigned int n) const
+const SedVariable*
+SedComputeChange::getSedVariable(unsigned int n) const
 {
 	return mVariable.get(n);
 }
 
 
 /*
- * Return a SedMLVariable from the SedListOfSedMLVariables by id.
+ * Return a SedVariable from the SedListOfSedVariables by id.
  */
-SedMLVariable*
-ComputeChange::getSedMLVariable(const std::string& sid)
+SedVariable*
+SedComputeChange::getSedVariable(const std::string& sid)
 {
 	return mVariable.get(sid);
 }
 
 
 /*
- * Return a SedMLVariable from the SedListOfSedMLVariables by id.
+ * Return a SedVariable from the SedListOfSedVariables by id.
  */
-const SedMLVariable*
-ComputeChange::getSedMLVariable(const std::string& sid) const
+const SedVariable*
+SedComputeChange::getSedVariable(const std::string& sid) const
 {
 	return mVariable.get(sid);
 }
 
 
 /**
- * Adds a copy the given "SedMLVariable" to this ComputeChange.
+ * Adds a copy the given "SedVariable" to this SedComputeChange.
  *
- * @param smlv; the SedMLVariable object to add
+ * @param sv; the SedVariable object to add
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
@@ -294,115 +294,115 @@ ComputeChange::getSedMLVariable(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-ComputeChange::addSedMLVariable(const SedMLVariable* smlv)
+SedComputeChange::addSedVariable(const SedVariable* sv)
 {
-	if(smlv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mVariable.append(smlv);
+	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mVariable.append(sv);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
 /**
- * Get the number of SedMLVariable objects in this ComputeChange.
+ * Get the number of SedVariable objects in this SedComputeChange.
  *
- * @return the number of SedMLVariable objects in this ComputeChange
+ * @return the number of SedVariable objects in this SedComputeChange
  */
 unsigned int 
-ComputeChange::getNumSedMLVariables() const
+SedComputeChange::getNumSedVariables() const
 {
 	return mVariable.size();
 }
 
 /**
- * Creates a new SedMLVariable object, adds it to this ComputeChanges
- * ComputeChange and returns the SedMLVariable object created. 
+ * Creates a new SedVariable object, adds it to this SedComputeChanges
+ * SedComputeChange and returns the SedVariable object created. 
  *
- * @return a new SedMLVariable object instance
+ * @return a new SedVariable object instance
  *
- * @see addSedMLVariable(const SedMLVariable* smlv)
+ * @see addSedVariable(const SedVariable* sv)
  */
-SedMLVariable* 
-ComputeChange::createSedMLVariable()
+SedVariable* 
+SedComputeChange::createSedVariable()
 {
-	SedMLVariable *temp = new SedMLVariable();
+	SedVariable *temp = new SedVariable();
 	if (temp != NULL) mVariable.appendAndOwn(temp);
 	return temp;
 }
 
 /*
- * Returns the  "SedListOfSedMLParameters" in this ComputeChange object.
+ * Returns the  "SedListOfSedParameters" in this SedComputeChange object.
  */
-const SedListOfSedMLParameters*
-ComputeChange::getListOfSedMLParameters() const
+const SedListOfSedParameters*
+SedComputeChange::getListOfSedParameters() const
 {
 	return &mParameter;
 }
 
 
 /*
- * Removes the nth SedMLParameter from the SedListOfSedMLParameters.
+ * Removes the nth SedParameter from the SedListOfSedParameters.
  */
-SedMLParameter*
-ComputeChange::removeSedMLParameter(unsigned int n)
+SedParameter*
+SedComputeChange::removeSedParameter(unsigned int n)
 {
 	return mParameter.remove(n);
 }
 
 
 /*
- * Removes the a SedMLParameter with given id from the SedListOfSedMLParameters.
+ * Removes the a SedParameter with given id from the SedListOfSedParameters.
  */
-SedMLParameter*
-ComputeChange::removeSedMLParameter(const std::string& sid)
+SedParameter*
+SedComputeChange::removeSedParameter(const std::string& sid)
 {
 	return mParameter.remove(sid);
 }
 
 
 /*
- * Return the nth SedMLParameter in the SedListOfSedMLParameters within this ComputeChange.
+ * Return the nth SedParameter in the SedListOfSedParameters within this SedComputeChange.
  */
-SedMLParameter*
-ComputeChange::getSedMLParameter(unsigned int n)
+SedParameter*
+SedComputeChange::getSedParameter(unsigned int n)
 {
 	return mParameter.get(n);
 }
 
 
 /*
- * Return the nth SedMLParameter in the SedListOfSedMLParameters within this ComputeChange.
+ * Return the nth SedParameter in the SedListOfSedParameters within this SedComputeChange.
  */
-const SedMLParameter*
-ComputeChange::getSedMLParameter(unsigned int n) const
+const SedParameter*
+SedComputeChange::getSedParameter(unsigned int n) const
 {
 	return mParameter.get(n);
 }
 
 
 /*
- * Return a SedMLParameter from the SedListOfSedMLParameters by id.
+ * Return a SedParameter from the SedListOfSedParameters by id.
  */
-SedMLParameter*
-ComputeChange::getSedMLParameter(const std::string& sid)
+SedParameter*
+SedComputeChange::getSedParameter(const std::string& sid)
 {
 	return mParameter.get(sid);
 }
 
 
 /*
- * Return a SedMLParameter from the SedListOfSedMLParameters by id.
+ * Return a SedParameter from the SedListOfSedParameters by id.
  */
-const SedMLParameter*
-ComputeChange::getSedMLParameter(const std::string& sid) const
+const SedParameter*
+SedComputeChange::getSedParameter(const std::string& sid) const
 {
 	return mParameter.get(sid);
 }
 
 
 /**
- * Adds a copy the given "SedMLParameter" to this ComputeChange.
+ * Adds a copy the given "SedParameter" to this SedComputeChange.
  *
- * @param smlp; the SedMLParameter object to add
+ * @param sp; the SedParameter object to add
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
@@ -412,37 +412,37 @@ ComputeChange::getSedMLParameter(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-ComputeChange::addSedMLParameter(const SedMLParameter* smlp)
+SedComputeChange::addSedParameter(const SedParameter* sp)
 {
-	if(smlp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mParameter.append(smlp);
+	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mParameter.append(sp);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
 /**
- * Get the number of SedMLParameter objects in this ComputeChange.
+ * Get the number of SedParameter objects in this SedComputeChange.
  *
- * @return the number of SedMLParameter objects in this ComputeChange
+ * @return the number of SedParameter objects in this SedComputeChange
  */
 unsigned int 
-ComputeChange::getNumSedMLParameters() const
+SedComputeChange::getNumSedParameters() const
 {
 	return mParameter.size();
 }
 
 /**
- * Creates a new SedMLParameter object, adds it to this ComputeChanges
- * ComputeChange and returns the SedMLParameter object created. 
+ * Creates a new SedParameter object, adds it to this SedComputeChanges
+ * SedComputeChange and returns the SedParameter object created. 
  *
- * @return a new SedMLParameter object instance
+ * @return a new SedParameter object instance
  *
- * @see addSedMLParameter(const SedMLParameter* smlp)
+ * @see addSedParameter(const SedParameter* sp)
  */
-SedMLParameter* 
-ComputeChange::createSedMLParameter()
+SedParameter* 
+SedComputeChange::createSedParameter()
 {
-	SedMLParameter *temp = new SedMLParameter();
+	SedParameter *temp = new SedParameter();
 	if (temp != NULL) mParameter.appendAndOwn(temp);
 	return temp;
 }
@@ -451,7 +451,7 @@ ComputeChange::createSedMLParameter()
  * Returns the XML element name of this object
  */
 const std::string&
-ComputeChange::getElementName () const
+SedComputeChange::getElementName () const
 {
 	static const string name = "computeChange";
 	return name;
@@ -462,13 +462,13 @@ ComputeChange::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-ComputeChange::createObject(XMLInputStream& stream)
+SedComputeChange::createObject(XMLInputStream& stream)
 {
-	SedBase* object = Change::createObject(stream);
+	SedBase* object = SedChange::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 
-	Change::connectToChild();
+	SedChange::connectToChild();
 
 	if (name == "listOfVariables")
 	{
@@ -488,9 +488,9 @@ ComputeChange::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-ComputeChange::connectToChild ()
+SedComputeChange::connectToChild ()
 {
-	Change::connectToChild();
+	SedChange::connectToChild();
 
 	mVariable.connectToParent(this);
 	mParameter.connectToParent(this);
@@ -501,7 +501,7 @@ ComputeChange::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-ComputeChange::getTypeCode () const
+SedComputeChange::getTypeCode () const
 {
 	return SEDML_CHANGE_COMPUTECHANGE;
 }
@@ -511,9 +511,9 @@ ComputeChange::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-ComputeChange::hasRequiredAttributes () const
+SedComputeChange::hasRequiredAttributes () const
 {
-	bool allPresent = Change::hasRequiredAttributes();
+	bool allPresent = SedChange::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -523,9 +523,9 @@ ComputeChange::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-ComputeChange::hasRequiredElements () const
+SedComputeChange::hasRequiredElements () const
 {
-	bool allPresent = Change::hasRequiredElements();
+	bool allPresent = SedChange::hasRequiredElements();
 
 	return allPresent;
 }
@@ -537,14 +537,14 @@ ComputeChange::hasRequiredElements () const
  * write contained elements
  */
 void
-ComputeChange::writeElements (XMLOutputStream& stream) const
+SedComputeChange::writeElements (XMLOutputStream& stream) const
 {
-	Change::writeElements(stream);
-	if (getNumSedMLVariables() > 0)
+	SedChange::writeElements(stream);
+	if (getNumSedVariables() > 0)
 	{
 		mVariable.write(stream);
 	}
-	if (getNumSedMLParameters() > 0)
+	if (getNumSedParameters() > 0)
 	{
 		mParameter.write(stream);
 	}
@@ -561,10 +561,10 @@ ComputeChange::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-ComputeChange::accept (SedMLVisitor& v) const
+SedComputeChange::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -577,12 +577,12 @@ ComputeChange::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-ComputeChange::setSedMLDocument (SedMLDocument* d)
+SedComputeChange::setSedDocument (SedDocument* d)
 {
-	Change::setSedMLDocument(d);
+	SedChange::setSedDocument(d);
 }
 
 
@@ -595,9 +595,9 @@ ComputeChange::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-ComputeChange::addExpectedAttributes(ExpectedAttributes& attributes)
+SedComputeChange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	Change::addExpectedAttributes(attributes);
+	SedChange::addExpectedAttributes(attributes);
 
 }
 
@@ -611,10 +611,10 @@ ComputeChange::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-ComputeChange::readAttributes (const XMLAttributes& attributes,
+SedComputeChange::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	Change::readAttributes(attributes, expectedAttributes);
+	SedChange::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -627,7 +627,7 @@ ComputeChange::readAttributes (const XMLAttributes& attributes,
 /** @cond doxygen-libsbml-internal */
 
 bool
-ComputeChange::readOtherXML (XMLInputStream& stream)
+SedComputeChange::readOtherXML (XMLInputStream& stream)
 {
 	bool          read = false;
 	const string& name = stream.peek().getName();
@@ -642,7 +642,7 @@ ComputeChange::readOtherXML (XMLInputStream& stream)
 		read = true;
 	}
 
-	if (Change::readOtherXML(stream))
+	if (SedChange::readOtherXML(stream))
 		{
 		read = true;
 	}
@@ -659,9 +659,9 @@ ComputeChange::readOtherXML (XMLInputStream& stream)
  * Write values of XMLAttributes to the output stream.
  */
 	void
-ComputeChange::writeAttributes (XMLOutputStream& stream) const
+SedComputeChange::writeAttributes (XMLOutputStream& stream) const
 {
-	Change::writeAttributes(stream);
+	SedChange::writeAttributes(stream);
 
 }
 
@@ -673,10 +673,10 @@ ComputeChange::writeAttributes (XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-ComputeChange_t *
-ComputeChange_create(unsigned int level, unsigned int version)
+SedComputeChange_t *
+SedComputeChange_create(unsigned int level, unsigned int version)
 {
-	return new ComputeChange(level, version);
+	return new SedComputeChange(level, version);
 }
 
 
@@ -685,10 +685,10 @@ ComputeChange_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-ComputeChange_free(ComputeChange_t * cc)
+SedComputeChange_free(SedComputeChange_t * scc)
 {
-	if (cc != NULL)
-		delete cc;
+	if (scc != NULL)
+		delete scc;
 }
 
 
@@ -696,12 +696,12 @@ ComputeChange_free(ComputeChange_t * cc)
  * write comments
  */
 LIBSEDML_EXTERN
-ComputeChange_t *
-ComputeChange_clone(ComputeChange_t * cc)
+SedComputeChange_t *
+SedComputeChange_clone(SedComputeChange_t * scc)
 {
-	if (cc != NULL)
+	if (scc != NULL)
 	{
-		return static_cast<ComputeChange_t*>(cc->clone());
+		return static_cast<SedComputeChange_t*>(scc->clone());
 	}
 	else
 	{
@@ -715,12 +715,12 @@ ComputeChange_clone(ComputeChange_t * cc)
  */
 LIBSEDML_EXTERN
 ASTNode_t*
-ComputeChange_getMath(ComputeChange_t * cc)
+SedComputeChange_getMath(SedComputeChange_t * scc)
 {
-	if (cc == NULL)
+	if (scc == NULL)
 		return NULL;
 
-	return (ASTNode_t*)cc->getMath();
+	return (ASTNode_t*)scc->getMath();
 }
 
 
@@ -729,9 +729,9 @@ ComputeChange_getMath(ComputeChange_t * cc)
  */
 LIBSEDML_EXTERN
 int
-ComputeChange_isSetMath(ComputeChange_t * cc)
+SedComputeChange_isSetMath(SedComputeChange_t * scc)
 {
-	return (cc != NULL) ? static_cast<int>(cc->isSetMath()) : 0;
+	return (scc != NULL) ? static_cast<int>(scc->isSetMath()) : 0;
 }
 
 
@@ -740,9 +740,9 @@ ComputeChange_isSetMath(ComputeChange_t * cc)
  */
 LIBSEDML_EXTERN
 int
-ComputeChange_setMath(ComputeChange_t * cc, ASTNode_t* math)
+SedComputeChange_setMath(SedComputeChange_t * scc, ASTNode_t* math)
 {
-	return (cc != NULL) ? cc->setMath(math) : LIBSEDML_INVALID_OBJECT;
+	return (scc != NULL) ? scc->setMath(math) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -751,122 +751,122 @@ ComputeChange_setMath(ComputeChange_t * cc, ASTNode_t* math)
  */
 LIBSEDML_EXTERN
 int
-ComputeChange_unsetMath(ComputeChange_t * cc)
+SedComputeChange_unsetMath(SedComputeChange_t * scc)
 {
-	return (cc != NULL) ? cc->unsetMath() : LIBSEDML_INVALID_OBJECT;
+	return (scc != NULL) ? scc->unsetMath() : LIBSEDML_INVALID_OBJECT;
 }
 
 
 LIBSEDML_EXTERN
 int
-ComputeChange_addSedMLVariable(ComputeChange_t * cc, SedMLVariable_t * smlv)
+SedComputeChange_addSedVariable(SedComputeChange_t * scc, SedVariable_t * sv)
 {
-	return  (cc != NULL) ? cc->addSedMLVariable(smlv) : LIBSBML_INVALID_OBJECT;
+	return  (scc != NULL) ? scc->addSedVariable(sv) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_createSedMLVariable(ComputeChange_t * cc)
+SedVariable_t *
+SedComputeChange_createSedVariable(SedComputeChange_t * scc)
 {
-	return  (cc != NULL) ? cc->createSedMLVariable() : NULL;
+	return  (scc != NULL) ? scc->createSedVariable() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-ComputeChange_getSedListOfSedMLVariables(ComputeChange_t * cc)
+SedComputeChange_getSedListOfSedVariables(SedComputeChange_t * scc)
 {
-	return  (cc != NULL) ? (SedListOf_t *)cc->getListOfSedMLVariables() : NULL;
+	return  (scc != NULL) ? (SedListOf_t *)scc->getListOfSedVariables() : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_getSedMLVariable(ComputeChange_t * cc, unsigned int n)
+SedVariable_t *
+SedComputeChange_getSedVariable(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (cc != NULL) ? cc->getSedMLVariable(n) : NULL;
+	return  (scc != NULL) ? scc->getSedVariable(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_getSedMLVariableById(ComputeChange_t * cc, const char * sid)
+SedVariable_t *
+SedComputeChange_getSedVariableById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (cc != NULL) ? cc->getSedMLVariable(sid) : NULL;
+	return  (scc != NULL) ? scc->getSedVariable(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-ComputeChange_getNumSedMLVariables(ComputeChange_t * cc)
+SedComputeChange_getNumSedVariables(SedComputeChange_t * scc)
 {
-	return  (cc != NULL) ? cc->getNumSedMLVariables() : SEDML_INT_MAX;
+	return  (scc != NULL) ? scc->getNumSedVariables() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_removeSedMLVariable(ComputeChange_t * cc, unsigned int n)
+SedVariable_t *
+SedComputeChange_removeSedVariable(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (cc != NULL) ? cc->removeSedMLVariable(n) : NULL;
+	return  (scc != NULL) ? scc->removeSedVariable(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-ComputeChange_removeSedMLVariableById(ComputeChange_t * cc, const char * sid)
+SedVariable_t *
+SedComputeChange_removeSedVariableById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (cc != NULL) ? cc->removeSedMLVariable(sid) : NULL;
+	return  (scc != NULL) ? scc->removeSedVariable(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 int
-ComputeChange_addSedMLParameter(ComputeChange_t * cc, SedMLParameter_t * smlp)
+SedComputeChange_addSedParameter(SedComputeChange_t * scc, SedParameter_t * sp)
 {
-	return  (cc != NULL) ? cc->addSedMLParameter(smlp) : LIBSBML_INVALID_OBJECT;
+	return  (scc != NULL) ? scc->addSedParameter(sp) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_createSedMLParameter(ComputeChange_t * cc)
+SedParameter_t *
+SedComputeChange_createSedParameter(SedComputeChange_t * scc)
 {
-	return  (cc != NULL) ? cc->createSedMLParameter() : NULL;
+	return  (scc != NULL) ? scc->createSedParameter() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-ComputeChange_getSedListOfSedMLParameters(ComputeChange_t * cc)
+SedComputeChange_getSedListOfSedParameters(SedComputeChange_t * scc)
 {
-	return  (cc != NULL) ? (SedListOf_t *)cc->getListOfSedMLParameters() : NULL;
+	return  (scc != NULL) ? (SedListOf_t *)scc->getListOfSedParameters() : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_getSedMLParameter(ComputeChange_t * cc, unsigned int n)
+SedParameter_t *
+SedComputeChange_getSedParameter(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (cc != NULL) ? cc->getSedMLParameter(n) : NULL;
+	return  (scc != NULL) ? scc->getSedParameter(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_getSedMLParameterById(ComputeChange_t * cc, const char * sid)
+SedParameter_t *
+SedComputeChange_getSedParameterById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (cc != NULL) ? cc->getSedMLParameter(sid) : NULL;
+	return  (scc != NULL) ? scc->getSedParameter(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-ComputeChange_getNumSedMLParameters(ComputeChange_t * cc)
+SedComputeChange_getNumSedParameters(SedComputeChange_t * scc)
 {
-	return  (cc != NULL) ? cc->getNumSedMLParameters() : SEDML_INT_MAX;
+	return  (scc != NULL) ? scc->getNumSedParameters() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_removeSedMLParameter(ComputeChange_t * cc, unsigned int n)
+SedParameter_t *
+SedComputeChange_removeSedParameter(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (cc != NULL) ? cc->removeSedMLParameter(n) : NULL;
+	return  (scc != NULL) ? scc->removeSedParameter(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-ComputeChange_removeSedMLParameterById(ComputeChange_t * cc, const char * sid)
+SedParameter_t *
+SedComputeChange_removeSedParameterById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (cc != NULL) ? cc->removeSedMLParameter(sid) : NULL;
+	return  (scc != NULL) ? scc->removeSedParameter(sid) : NULL;
 }
 
 /**
@@ -874,9 +874,9 @@ ComputeChange_removeSedMLParameterById(ComputeChange_t * cc, const char * sid)
  */
 LIBSEDML_EXTERN
 int
-ComputeChange_hasRequiredAttributes(ComputeChange_t * cc)
+SedComputeChange_hasRequiredAttributes(SedComputeChange_t * scc)
 {
-	return (cc != NULL) ? static_cast<int>(cc->hasRequiredAttributes()) : 0;
+	return (scc != NULL) ? static_cast<int>(scc->hasRequiredAttributes()) : 0;
 }
 
 
@@ -885,9 +885,9 @@ ComputeChange_hasRequiredAttributes(ComputeChange_t * cc)
  */
 LIBSEDML_EXTERN
 int
-ComputeChange_hasRequiredElements(ComputeChange_t * cc)
+SedComputeChange_hasRequiredElements(SedComputeChange_t * scc)
 {
-	return (cc != NULL) ? static_cast<int>(cc->hasRequiredElements()) : 0;
+	return (scc != NULL) ? static_cast<int>(scc->hasRequiredElements()) : 0;
 }
 
 

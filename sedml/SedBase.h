@@ -1,11 +1,11 @@
 /**
  * @file    SedBase.h
- * @brief   Definition of SedBase, the base object of all SedML objects
+ * @brief   Definition of SedBase, the base object of all Sed objects
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -27,13 +27,13 @@
  * 
  * @class SedBase
  * @ingroup Core
- * @brief Implementation of %SedBase, the base class of most SedML objects.
+ * @brief Implementation of %SedBase, the base class of most Sed objects.
  *
- * Most components in SedML are derived from a single abstract base type,
+ * Most components in Sed are derived from a single abstract base type,
  * SedBase.  In addition to serving as the parent class for most other
- * classes of objects in SedML, this base type is designed to allow a
+ * classes of objects in Sed, this base type is designed to allow a
  * modeler or a software package to attach arbitrary information to each
- * major element or list in an SedML model.
+ * major element or list in an Sed model.
  *
  * SedBase has an optional subelement called "notes".  It is intended to
  * serve as a place for storing optional information intended to be seen by
@@ -41,8 +41,8 @@
  * formatted user comments about the model element in which the "notes"
  * element is enclosed.  There are certain conditions on the XHTML content
  * permitted inside the "notes" element; please consult the <a
- * target="_blank" href="http://sbml.org/Documents/Specifications">SedML
- * specification document</a> corresponding to the SedML Level and Version
+ * target="_blank" href="http://sbml.org/Documents/Specifications">Sed
+ * specification document</a> corresponding to the Sed Level and Version
  * of your model for more information about the requirements for "notes"
  * content.
  *
@@ -52,22 +52,22 @@
  * software-generated content @em not meant to be shown to humans.  The
  * element's content type is <a target="_blank"
  * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type
- * "any"</a>, allowing essentially arbitrary data content.  SedML places
+ * "any"</a>, allowing essentially arbitrary data content.  Sed places
  * only a few restrictions on the organization of the content; these are
  * intended to help software tools read and write the data as well as help
  * reduce conflicts between annotations added by different tools.  As is
  * the case with "notes", it is important to refer to the <a
- * target="_blank" href="http://sbml.org/Documents/Specifications">SedML
- * specification document</a> corresponding to the SedML Level and Version
+ * target="_blank" href="http://sbml.org/Documents/Specifications">Sed
+ * specification document</a> corresponding to the Sed Level and Version
  * of your model for more information about the requirements for
  * "annotation" content.
  * 
  * It is worth pointing out that the "annotation" element in the definition
  * of SedBase exists in order that software developers may attach optional
- * application-specific data to the elements in an SedML model.  However, it
+ * application-specific data to the elements in an Sed model.  However, it
  * is important that this facility not be misused.  In particular, it is
  * <em>critical</em> that data essential to a model definition or that can
- * be encoded in existing SedML elements is <em>not</em> stored in
+ * be encoded in existing Sed elements is <em>not</em> stored in
  * "annotation". Parameter values, functional dependencies between model
  * elements, etc., should not be recorded as annotations.  It is crucial to
  * keep in mind the fact that data placed in annotations can be freely
@@ -75,33 +75,33 @@
  * interpretation of a model, then software interoperability is greatly
  * impeded.
  *
- * SedML Level 2 introduced an optional SedBase attribute named "metaid" for
+ * Sed Level 2 introduced an optional SedBase attribute named "metaid" for
  * supporting metadata annotations using RDF (<a target="_blank"
  * href="http://www.w3.org/RDF/">Resource Description Format</a>). The
  * attribute value has the data type <a
  * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, the XML identifier
  * type, which means each "metaid" value must be globally unique within an
- * SedML file.  (Importantly, this uniqueness criterion applies across any
+ * Sed file.  (Importantly, this uniqueness criterion applies across any
  * attribute with type <a href="http://www.w3.org/TR/REC-xml/#id">XML
- * ID</a>, not just the "metaid" attribute used by SedML&mdash;something to
+ * ID</a>, not just the "metaid" attribute used by Sed&mdash;something to
  * be aware of if your application-specific XML content inside the
  * "annotation" subelement happens to use <a
  * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>.)  The "metaid" value
  * serves to identify a model component for purposes such as referencing
  * that component from metadata placed within "annotation" subelements.
  *
- * Beginning with SedML Level 2 Version 3, SedBase also has an optional
+ * Beginning with Sed Level 2 Version 3, SedBase also has an optional
  * attribute named "sboTerm" for supporting the use of the Systems Biology
- * Ontology.  In SedML proper, the data type of the attribute is a string of
+ * Ontology.  In Sed proper, the data type of the attribute is a string of
  * the form "SBO:NNNNNNN", where "NNNNNNN" is a seven digit integer number;
- * libSedML simplifies the representation by only storing the "NNNNNNN"
- * integer portion.  Thus, in libSedML, the "sboTerm" attribute on SedBase has
+ * libSed simplifies the representation by only storing the "NNNNNNN"
+ * integer portion.  Thus, in libSed, the "sboTerm" attribute on SedBase has
  * data type @c int, and SBO identifiers are stored simply as integers.
  * (For convenience, SedBase offers methods for returning both the integer
  * form and a text-string form of the SBO identifier.)  SBO terms are a
- * type of optional annotation, and each different class of SedML object
+ * type of optional annotation, and each different class of Sed object
  * derived from SedBase imposes its own requirements about the values
- * permitted for "sboTerm".  Please consult the SedML Level&nbsp;2
+ * permitted for "sboTerm".  Please consult the Sed Level&nbsp;2
  * Version&nbsp;4 specification for more information about the use of SBO
  * and the "sboTerm" attribute.
  *
@@ -112,7 +112,7 @@
  *
  * @section sbase-miriam Standard format for annotations linking data resources
  *
- * SedML Level 2 Versions 2, 3 and 4, and Level&nbsp;3, define a proposed
+ * Sed Level 2 Versions 2, 3 and 4, and Level&nbsp;3, define a proposed
  * regular format for encoding two particular categories of annotations:
  * (a) references to controlled vocabulary terms and database identifiers
  * which define and describe biological and biochemical entities in a
@@ -127,11 +127,11 @@
 
 #include <sedml/common/extern.h>
 #include <sedml/common/sedmlfwd.h>
-#include <sedml/SedMLTypeCodes.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedTypeCodes.h>
+#include <sedml/SedNamespaces.h>
 #include <sbml/util/List.h>
 #include <sbml/SyntaxChecker.h>
-#include <sedml/SedMLConstructorException.h>
+#include <sedml/SedConstructorException.h>
 #include <sbml/ExpectedAttributes.h>
 #include <sbml/xml/XMLNode.h>
 
@@ -142,13 +142,13 @@
 #include <stdexcept>
 #include <algorithm>
 
-#include <sedml/SedMLErrorLog.h>
+#include <sedml/SedErrorLog.h>
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-//class SedMLErrorLog;
-class SedMLVisitor;
-class SedMLDocument;
+//class SedErrorLog;
+class SedVisitor;
+class SedDocument;
 class Model;
 
 class List;
@@ -179,20 +179,20 @@ public:
    * @param rhs The object whose values are used as the basis of the
    * assignment.
    *
-   * @throws @if python ValueError @else SedMLConstructorException @endif@~
+   * @throws @if python ValueError @else SedConstructorException @endif@~
    * Thrown if the argument @p rhs is @c NULL.
    */
   SedBase& operator=(const SedBase& rhs);
 
 
   /**
-   * Accepts the given SedMLVisitor for this SedBase object.
+   * Accepts the given SedVisitor for this SedBase object.
    *
-   * @param v the SedMLVisitor instance to be used
+   * @param v the SedVisitor instance to be used
    *
    * @return the result of calling <code>v.visit()</code>.
    */
-  virtual bool accept (SedMLVisitor& v) const = 0;
+  virtual bool accept (SedVisitor& v) const = 0;
 
 
   /**
@@ -239,22 +239,22 @@ public:
   /**
    * Returns the value of the "metaid" attribute of this object.
    * 
-   * The optional attribute named "metaid", present on every major SedML
+   * The optional attribute named "metaid", present on every major Sed
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format). The attribute value has the data type
    * <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, the XML
    * identifier type, which means each "metaid" value must be globally
-   * unique within an SedML file.  (Importantly, this uniqueness criterion
+   * unique within an Sed file.  (Importantly, this uniqueness criterion
    * applies across any attribute with type <a
    * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, not just the
-   * "metaid" attribute used by SedML&mdash;something to be aware of if your
+   * "metaid" attribute used by Sed&mdash;something to be aware of if your
    * application-specific XML content inside the "annotation" subelement
    * happens to use <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>.)
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
    *  
-   * @return the meta-identifier of this SedML object.
+   * @return the meta-identifier of this Sed object.
    *
    * @see isSetMetaId()
    * @see setMetaId(const std::string& metaid)
@@ -265,22 +265,22 @@ public:
   /**
    * Returns the value of the "metaid" attribute of this object.
    * 
-   * The optional attribute named "metaid", present on every major SedML
+   * The optional attribute named "metaid", present on every major Sed
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format).  The attribute value has the data type
    * <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, the XML
    * identifier type, which means each "metaid" value must be globally
-   * unique within an SedML file.  (Importantly, this uniqueness criterion
+   * unique within an Sed file.  (Importantly, this uniqueness criterion
    * applies across any attribute with type <a
    * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, not just the
-   * "metaid" attribute used by SedML&mdash;something to be aware of if your
+   * "metaid" attribute used by Sed&mdash;something to be aware of if your
    * application-specific XML content inside the "annotation" subelement
    * happens to use <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>.)
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
    *  
-   * @return the meta-identifier of this SedML object, as a string.
+   * @return the meta-identifier of this Sed object, as a string.
    *
    * @see isSetMetaId()
    * @see setMetaId(const std::string& metaid)
@@ -294,9 +294,9 @@ public:
    *
    * Returns the value of the "id" attribute of this object, if it has one.
    * 
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  The identifier given by an object's "id" attribute value
-   * is used to identify the object within the SedML model definition.
+   * is used to identify the object within the Sed model definition.
    * Other objects can refer to the component using this identifier.  The
    * data type of "id" is always either <code>Sid</code> or
    * <code>UnitSId</code>, depending on the object in question.  Both
@@ -309,22 +309,22 @@ public:
    * </pre>
    *
    * The equality of <code>SId</code> and <code>UnitSId</code> type values
-   * in SedML is determined by an exact character sequence match; i.e.,
+   * in Sed is determined by an exact character sequence match; i.e.,
    * comparisons of these identifiers must be performed in a case-sensitive
    * manner.  This applies to all uses of <code>SId</code> and
    * <code>UnitSId</code>.
    *
-   * @return the id of this SedML object.
+   * @return the id of this Sed object.
    *
    * @note The fact that the value of attribute "id" is defined on the
-   * SedBase parent class object is a convenience provided by libSedML, and
-   * <b>does not strictly follow SedML specifications</b>.  This libSedML
+   * SedBase parent class object is a convenience provided by libSed, and
+   * <b>does not strictly follow Sed specifications</b>.  This libSed
    * implementation of SedBase allows client applications to use more
    * generalized code in some situations (for instance, when manipulating
    * objects that are all known to have identifiers), but beware that not
-   * all SedML object classes provide an "id" attribute.  LibSedML will allow
+   * all Sed object classes provide an "id" attribute.  LibSed will allow
    * the identifier to be set, but it will not read nor write "id"
-   * attributes for objects that do not possess them according to the SedML
+   * attributes for objects that do not possess them according to the Sed
    * specification for the Level and Version in use.
    *
    * @see setId(const std::string& sid)
@@ -341,12 +341,12 @@ public:
    *
    * Returns the value of the "name" attribute of this object, if it has one.
    * 
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
    * within a model.  Its purpose instead is to provide a human-readable
    * label for the component.  The data type of "name" is the type
-   * <code>string</code> defined in XML Schema.  SedML imposes no
+   * <code>string</code> defined in XML Schema.  Sed imposes no
    * restrictions as to the content of "name" attributes beyond those
    * restrictions defined by the <code>string</code> type in XML Schema.
    *
@@ -374,17 +374,17 @@ public:
    * restrictions on the uniqueness of "name" values in a model.  This
    * allows software packages leeway in assigning component identifiers.
    * 
-   * @return the name of this SedML object.
+   * @return the name of this Sed object.
    *
    * @note The fact that the "name" attribute is defined on the SedBase parent
-   * class object is a convenience provided by libSedML, and <b>does not
-   * strictly follow SedML specifications</b>.  This libSedML implementation
+   * class object is a convenience provided by libSed, and <b>does not
+   * strictly follow Sed specifications</b>.  This libSed implementation
    * of SedBase allows client applications to use more generalized code in
    * some situations (for instance, when manipulating objects that are all
-   * known to have identifiers), but beware that not all SedML object
-   * classes provide an "id" attribute.  LibSedML will allow the identifier
+   * known to have identifiers), but beware that not all Sed object
+   * classes provide an "id" attribute.  LibSed will allow the identifier
    * to be set, but it will not read nor write "id" attributes for objects
-   * that do not possess them according to the SedML specification for the
+   * that do not possess them according to the Sed specification for the
    * Level and Version in use.
    *
    * @see isSetName()
@@ -399,7 +399,7 @@ public:
    * Returns the content of the "notes" subelement of this object as
    * a tree of XMLNode objects.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -410,23 +410,23 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
    * The "notes" element content returned by this method will be in XML
-   * form, but libSedML does not provide an object model specifically for
+   * form, but libSed does not provide an object model specifically for
    * the content of notes.  Callers will need to traverse the XML tree
    * structure using the facilities available on XMLNode and related
    * objects.  For an alternative method of accessing the notes, see
    * getNotesString().
    *
-   * @return the content of the "notes" subelement of this SedML object as a
+   * @return the content of the "notes" subelement of this Sed object as a
    * tree structure composed of XMLNode objects.
    *
    * @see getNotesString()
@@ -445,7 +445,7 @@ public:
    * Returns the content of the "notes" subelement of this object as
    * a tree of XMLNode objects.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -456,23 +456,23 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
    * The "notes" element content returned by this method will be in XML
-   * form, but libSedML does not provide an object model specifically for
+   * form, but libSed does not provide an object model specifically for
    * the content of notes.  Callers will need to traverse the XML tree
    * structure using the facilities available on XMLNode and related
    * objects.  For an alternative method of accessing the notes, see
    * getNotesString().
    *
-   * @return the content of the "notes" subelement of this SedML object as a
+   * @return the content of the "notes" subelement of this Sed object as a
    * tree structure composed of XMLNode objects.
    *
    * @see getNotesString()
@@ -491,7 +491,7 @@ public:
    * Returns the content of the "notes" subelement of this object as a
    * string.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -502,12 +502,12 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
@@ -516,7 +516,7 @@ public:
    * an application's needs, one or the other method may be more
    * convenient.
    *
-   * @return the content of the "notes" subelement of this SedML object as a
+   * @return the content of the "notes" subelement of this Sed object as a
    * string.
    *
    * @see getNotes()
@@ -535,7 +535,7 @@ public:
    * Returns the content of the "notes" subelement of this object as a
    * string.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -546,12 +546,12 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
@@ -560,7 +560,7 @@ public:
    * an application's needs, one or the other method may be more
    * convenient.
    *
-   * @return the content of the "notes" subelement of this SedML object as a
+   * @return the content of the "notes" subelement of this Sed object as a
    * string.
    *
    * @see getNotes()
@@ -579,7 +579,7 @@ public:
    * Returns the content of the "annotation" subelement of this object as
    * a tree of XMLNode objects.
    *
-   * Whereas the SedML "notes" subelement is a container for content to be
+   * Whereas the Sed "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SedBase can have its own value for
@@ -588,18 +588,18 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
-   * The annotations returned by this method will be in XML form.  LibSedML
+   * The annotations returned by this method will be in XML form.  LibSed
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
    * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
    * for more information about the facilities available.
    *
-   * @return the annotation of this SedML object as a tree of XMLNode objects.
+   * @return the annotation of this Sed object as a tree of XMLNode objects.
    *
    * @see getAnnotationString()
    * @see isSetAnnotation()
@@ -616,7 +616,7 @@ public:
    * Returns the content of the "annotation" subelement of this object as
    * a tree of XMLNode objects.
    *
-   * Whereas the SedML "notes" subelement is a container for content to be
+   * Whereas the Sed "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SedBase can have its own value for
@@ -625,18 +625,18 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
-   * The annotations returned by this method will be in XML form.  LibSedML
+   * The annotations returned by this method will be in XML form.  LibSed
    * provides an object model and related interfaces for certain specific
    * kinds of annotations, namely model history information and RDF
    * content.  See the ModelHistory, CVTerm and RDFAnnotationParser classes
    * for more information about the facilities available.
    *
-   * @return the annotation of this SedML object as a tree of XMLNode objects.
+   * @return the annotation of this Sed object as a tree of XMLNode objects.
    *
    * @see getAnnotationString()
    * @see isSetAnnotation()
@@ -653,7 +653,7 @@ public:
    * Returns the content of the "annotation" subelement of this object as a
    * character string.
    *
-   * Whereas the SedML "notes" subelement is a container for content to be
+   * Whereas the Sed "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SedBase can have its own value for
@@ -662,14 +662,14 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * The annotations returned by this method will be in string form.
    *
-   * @return the annotation of this SedML object as a character string.
+   * @return the annotation of this Sed object as a character string.
    *
    * @see getAnnotation()
    * @see isSetAnnotation()
@@ -686,7 +686,7 @@ public:
    * Returns the content of the "annotation" subelement of this object as a
    * character string.
    *
-   * Whereas the SedML "notes" subelement is a container for content to be
+   * Whereas the Sed "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
    * humans.  Every object derived from SedBase can have its own value for
@@ -695,14 +695,14 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * The annotations returned by this method will be in string form.
    *
-   * @return the annotation of this SedML object as a character string.
+   * @return the annotation of this Sed object as a character string.
    *
    * @see getAnnotation()
    * @see isSetAnnotation()
@@ -716,14 +716,14 @@ public:
 
 
   /**
-   * Returns a list of the XML Namespaces declared on this SedML document.
+   * Returns a list of the XML Namespaces declared on this Sed document.
    * 
-   * The SedMLNamespaces object encapsulates SedML Level/Version/namespaces
-   * information.  It is used to communicate the SedML Level, Version, and
-   * (in SedML Level&nbsp;3) packages used in addition to SedML Level&nbsp;3
+   * The SedNamespaces object encapsulates Sed Level/Version/namespaces
+   * information.  It is used to communicate the Sed Level, Version, and
+   * (in Sed Level&nbsp;3) packages used in addition to Sed Level&nbsp;3
    * Core.
    * 
-   * @return the XML Namespaces associated with this SedML object
+   * @return the XML Namespaces associated with this Sed object
    *
    * @see getLevel()
    * @see getVersion()
@@ -732,118 +732,118 @@ public:
 
 
   /**
-   * Returns the SedMLDocument object containing @em this object instance.
+   * Returns the SedDocument object containing @em this object instance.
    *
-   * LibSedML uses the class SedMLDocument as a top-level container for
-   * storing SedML content and data associated with it (such as warnings and
-   * error messages).  An SedML model in libSedML is contained inside an
-   * SedMLDocument object.  SedMLDocument corresponds roughly to the class
-   * <i>SedML</i> defined in the SedML Level&nbsp;3 and Level&nbsp;2
-   * specifications, but it does not have a direct correspondence in SedML
-   * Level&nbsp;1.  (But, it is created by libSedML no matter whether the
+   * LibSed uses the class SedDocument as a top-level container for
+   * storing Sed content and data associated with it (such as warnings and
+   * error messages).  An Sed model in libSed is contained inside an
+   * SedDocument object.  SedDocument corresponds roughly to the class
+   * <i>Sed</i> defined in the Sed Level&nbsp;3 and Level&nbsp;2
+   * specifications, but it does not have a direct correspondence in Sed
+   * Level&nbsp;1.  (But, it is created by libSed no matter whether the
    * model is Level&nbsp;1, Level&nbsp;2 or Level&nbsp;3.)
    *
-   * This method allows the caller to obtain the SedMLDocument for the
+   * This method allows the caller to obtain the SedDocument for the
    * current object.
    * 
-   * @return the parent SedMLDocument object of this SedML object.
+   * @return the parent SedDocument object of this Sed object.
    *
-   * @see getParentSedMLObject()
+   * @see getParentSedObject()
    * @see getModel()
    */
-  const SedMLDocument* getSedMLDocument () const;
+  const SedDocument* getSedDocument () const;
 
 
   /**
-   * Returns the SedMLDocument object containing @em this object instance.
+   * Returns the SedDocument object containing @em this object instance.
    *
-   * LibSedML uses the class SedMLDocument as a top-level container for
-   * storing SedML content and data associated with it (such as warnings and
-   * error messages).  An SedML model in libSedML is contained inside an
-   * SedMLDocument object.  SedMLDocument corresponds roughly to the class
-   * <i>SedML</i> defined in the SedML Level&nbsp;3 and Level&nbsp;2
-   * specifications, but it does not have a direct correspondence in SedML
-   * Level&nbsp;1.  (But, it is created by libSedML no matter whether the
+   * LibSed uses the class SedDocument as a top-level container for
+   * storing Sed content and data associated with it (such as warnings and
+   * error messages).  An Sed model in libSed is contained inside an
+   * SedDocument object.  SedDocument corresponds roughly to the class
+   * <i>Sed</i> defined in the Sed Level&nbsp;3 and Level&nbsp;2
+   * specifications, but it does not have a direct correspondence in Sed
+   * Level&nbsp;1.  (But, it is created by libSed no matter whether the
    * model is Level&nbsp;1, Level&nbsp;2 or Level&nbsp;3.)
    *
-   * This method allows the caller to obtain the SedMLDocument for the
+   * This method allows the caller to obtain the SedDocument for the
    * current object.
    * 
-   * @return the parent SedMLDocument object of this SedML object.
+   * @return the parent SedDocument object of this Sed object.
    *
-   * @see getParentSedMLObject()
+   * @see getParentSedObject()
    * @see getModel()
    */
-  SedMLDocument* getSedMLDocument ();
+  SedDocument* getSedDocument ();
 
 
   /**
-   * Returns the parent SedML object containing this object.
+   * Returns the parent Sed object containing this object.
    *
    * This returns the immediately-containing object.  This method is
    * convenient when holding an object nested inside other objects in an
-   * SedML model.  
+   * Sed model.  
    * 
-   * @return the parent SedML object of this SedML object.
+   * @return the parent Sed object of this Sed object.
    *
-   * @see getSedMLDocument()
+   * @see getSedDocument()
    * @see getModel()
    */
-  SedBase* getParentSedMLObject();
+  SedBase* getParentSedObject();
 
 
   /**
-   * Returns the parent SedML object containing this object.
+   * Returns the parent Sed object containing this object.
    *
    * This returns the immediately-containing object.  This method is
    * convenient when holding an object nested inside other objects in an
-   * SedML model.  
+   * Sed model.  
    * 
-   * @return the parent SedML object of this SedML object.
+   * @return the parent Sed object of this Sed object.
    *
-   * @see getSedMLDocument()
+   * @see getSedDocument()
    * @see getModel()
    */
-  const SedBase* getParentSedMLObject() const;
+  const SedBase* getParentSedObject() const;
 
 
   /**
-   * Returns the first ancestor object that has the given SedML type code.
+   * Returns the first ancestor object that has the given Sed type code.
    *
-   * @if clike LibSedML attaches an identifying code to every kind of SedML
-   * object.  These are known as <em>SedML type codes</em>.  The set of
-   * possible type codes is defined in the enumeration #SedMLTypeCode_t.
+   * @if clike LibSed attaches an identifying code to every kind of Sed
+   * object.  These are known as <em>Sed type codes</em>.  The set of
+   * possible type codes is defined in the enumeration #SedTypeCode_t.
    * The names of the type codes all begin with the characters @c
-   *SEDML_. @endif@if java LibSedML attaches an identifying code to every
-   * kind of SedML object.  These are known as <em>SedML type codes</em>.  In
+   *SEDML_. @endif@if java LibSed attaches an identifying code to every
+   * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
    * other languages, the set of type codes is stored in an enumeration; in
-   * the Java language interface for libSedML, the type codes are defined as
+   * the Java language interface for libSed, the type codes are defined as
    * static integer constants in the interface class {@link
    * libsbmlConstants}.  The names of the type codes all begin with the
-   * characters @cSEDML_. @endif@if python LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the Python language interface for libSedML, the type
+   * characters @cSEDML_. @endif@if python LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the Python language interface for libSed, the type
    * codes are defined as static integer constants in the interface class
    * @link libsbml@endlink.  The names of the type codes all begin with the
-   * characters @cSEDML_. @endif@if csharp LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the C# language interface for libSedML, the type codes
+   * characters @cSEDML_. @endif@if csharp LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the C# language interface for libSed, the type codes
    * are defined as static integer constants in the interface class @link
    * libsbmlcs.libsbml libsbml@endlink.  The names of the type codes all begin with
    * the characters @cSEDML_. @endif@~
    *
    * This method searches the tree of objects that are parents of this
-   * object, and returns the first one that has the given SedML type code.
+   * object, and returns the first one that has the given Sed type code.
    * If the optional argument @p pkgName is given, it will cause the search
-   * to be limited to the SedML Level&nbsp;3 package given.
+   * to be limited to the Sed Level&nbsp;3 package given.
    *
-   * @param type the SedML type code of the object sought
+   * @param type the Sed type code of the object sought
    *
-   * @param pkgName (optional) the short name of an SedML Level&nbsp;3
+   * @param pkgName (optional) the short name of an Sed Level&nbsp;3
    * package to which the sought-after object must belong
    * 
-   * @return the ancestor SedML object of this SedML object that corresponds
-   * to the given @if clike #SedMLTypeCode_t value@else SedML object type
+   * @return the ancestor Sed object of this Sed object that corresponds
+   * to the given @if clike #SedTypeCode_t value@else Sed object type
    * code@endif, or @c NULL if no ancestor exists.
    *
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
@@ -852,42 +852,42 @@ public:
 
 
   /**
-   * Returns the first ancestor object that has the given SedML type code.
+   * Returns the first ancestor object that has the given Sed type code.
    *
-   * @if clike LibSedML attaches an identifying code to every kind of SedML
-   * object.  These are known as <em>SedML type codes</em>.  The set of
-   * possible type codes is defined in the enumeration #SedMLTypeCode_t.
+   * @if clike LibSed attaches an identifying code to every kind of Sed
+   * object.  These are known as <em>Sed type codes</em>.  The set of
+   * possible type codes is defined in the enumeration #SedTypeCode_t.
    * The names of the type codes all begin with the characters @c
-   *SEDML_. @endif@if java LibSedML attaches an identifying code to every
-   * kind of SedML object.  These are known as <em>SedML type codes</em>.  In
+   *SEDML_. @endif@if java LibSed attaches an identifying code to every
+   * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
    * other languages, the set of type codes is stored in an enumeration; in
-   * the Java language interface for libSedML, the type codes are defined as
+   * the Java language interface for libSed, the type codes are defined as
    * static integer constants in the interface class {@link
    * libsbmlConstants}.  The names of the type codes all begin with the
-   * characters @cSEDML_. @endif@if python LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the Python language interface for libSedML, the type
+   * characters @cSEDML_. @endif@if python LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the Python language interface for libSed, the type
    * codes are defined as static integer constants in the interface class
    * @link libsbml@endlink.  The names of the type codes all begin with the
-   * characters @cSEDML_. @endif@if csharp LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the C# language interface for libSedML, the type codes
+   * characters @cSEDML_. @endif@if csharp LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the C# language interface for libSed, the type codes
    * are defined as static integer constants in the interface class @link
    * libsbmlcs.libsbml libsbml@endlink.  The names of the type codes all begin with
    * the characters @cSEDML_. @endif@~
    *
    * This method searches the tree of objects that are parents of this
-   * object, and returns the first one that has the given SedML type code.
+   * object, and returns the first one that has the given Sed type code.
    * If the optional argument @p pkgName is given, it will cause the search
-   * to be limited to the SedML Level&nbsp;3 package given.
+   * to be limited to the Sed Level&nbsp;3 package given.
    *
-   * @param type the SedML type code of the object sought
+   * @param type the Sed type code of the object sought
    *
-   * @param pkgName (optional) the short name of an SedML Level&nbsp;3
+   * @param pkgName (optional) the short name of an Sed Level&nbsp;3
    * package to which the sought-after object must belong
    * 
-   * @return the ancestor SedML object of this SedML object that corresponds
-   * to the given @if clike #SedMLTypeCode_t value@else SedML object type
+   * @return the ancestor Sed object of this Sed object that corresponds
+   * to the given @if clike #SedTypeCode_t value@else Sed object type
    * code@endif, or @c NULL if no ancestor exists.
    *
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
@@ -897,11 +897,11 @@ public:
 
   /**
    * Returns the line number on which this object first appears in the XML
-   * representation of the SedML document.
+   * representation of the Sed document.
    * 
-   * @return the line number of this SedML object.
+   * @return the line number of this Sed object.
    *
-   * @note The line number for each construct in an SedML model is set upon
+   * @note The line number for each construct in an Sed model is set upon
    * reading the model.  The accuracy of the line number depends on the
    * correctness of the XML representation of the model, and on the
    * particular XML parser library being used.  The former limitation
@@ -910,8 +910,8 @@ public:
    * and consequently may not be able to establish the real line number.
    * The latter limitation is simply that different parsers seem to have
    * their own accuracy limitations, and out of all the parsers supported
-   * by libSedML, none have been 100% accurate in all situations. (At this
-   * time, libSedML supports the use of <a target="_blank"
+   * by libSed, none have been 100% accurate in all situations. (At this
+   * time, libSed supports the use of <a target="_blank"
    * href="http://xmlsoft.org">libxml2</a>, <a target="_blank"
    * href="http://expat.sourceforge.net/">Expat</a> and <a target="_blank"
    * href="http://xerces.apache.org/xerces-c/">Xerces</a>.)
@@ -923,11 +923,11 @@ public:
 
   /**
    * Returns the column number on which this object first appears in the XML
-   * representation of the SedML document.
+   * representation of the Sed document.
    * 
-   * @return the column number of this SedML object.
+   * @return the column number of this Sed object.
    * 
-   * @note The column number for each construct in an SedML model is set
+   * @note The column number for each construct in an Sed model is set
    * upon reading the model.  The accuracy of the column number depends on
    * the correctness of the XML representation of the model, and on the
    * particular XML parser library being used.  The former limitation
@@ -936,8 +936,8 @@ public:
    * and consequently may not be able to establish the real column number.
    * The latter limitation is simply that different parsers seem to have
    * their own accuracy limitations, and out of all the parsers supported
-   * by libSedML, none have been 100% accurate in all situations. (At this
-   * time, libSedML supports the use of <a target="_blank"
+   * by libSed, none have been 100% accurate in all situations. (At this
+   * time, libSed supports the use of <a target="_blank"
    * href="http://xmlsoft.org">libxml2</a>, <a target="_blank"
    * href="http://expat.sourceforge.net/">Expat</a> and <a target="_blank"
    * href="http://xerces.apache.org/xerces-c/">Xerces</a>.)
@@ -949,22 +949,22 @@ public:
   /**
    * Predicate returning @c true if this object's "metaid" attribute is set.
    *
-   * The optional attribute named "metaid", present on every major SedML
+   * The optional attribute named "metaid", present on every major Sed
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format). The attribute value has the data type
    * <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, the XML
    * identifier type, which means each "metaid" value must be globally
-   * unique within an SedML file.  (Importantly, this uniqueness criterion
+   * unique within an Sed file.  (Importantly, this uniqueness criterion
    * applies across any attribute with type <a
    * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, not just the
-   * "metaid" attribute used by SedML&mdash;something to be aware of if your
+   * "metaid" attribute used by Sed&mdash;something to be aware of if your
    * application-specific XML content inside the "annotation" subelement
    * happens to use <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>.)
    * The "metaid" value serves to identify a model component for purposes
    * such as referencing that component from metadata placed within
    * "annotation" subelements.
    *
-   * @return @c true if the "metaid" attribute of this SedML object is
+   * @return @c true if the "metaid" attribute of this Sed object is
    * set, @c false otherwise.
    *
    * @see getMetaId()
@@ -979,9 +979,9 @@ public:
    * Predicate returning @c true if this
    * object's "id" attribute is set.
    *
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  The identifier given by an object's "id" attribute value
-   * is used to identify the object within the SedML model definition.
+   * is used to identify the object within the Sed model definition.
    * Other objects can refer to the component using this identifier.  The
    * data type of "id" is always either <code>Sid</code> or
    * <code>UnitSId</code>, depending on the object in question.  Both
@@ -994,23 +994,23 @@ public:
  @endverbatim
    *
    * The equality of <code>SId</code> and <code>UnitSId</code> type values
-   * in SedML is determined by an exact character sequence match; i.e.,
+   * in Sed is determined by an exact character sequence match; i.e.,
    * comparisons of these identifiers must be performed in a case-sensitive
    * manner.  This applies to all uses of <code>SId</code> and
    * <code>UnitSId</code>.
    * 
-   * @return @c true if the "id" attribute of this SedML object is
+   * @return @c true if the "id" attribute of this Sed object is
    * set, @c false otherwise.
    * 
    * @note The fact that the value of attribute "id" is defined on the
-   * SedBase parent class object is a convenience provided by libSedML, and
-   * <b>does not strictly follow SedML specifications</b>.  This libSedML
+   * SedBase parent class object is a convenience provided by libSed, and
+   * <b>does not strictly follow Sed specifications</b>.  This libSed
    * implementation of SedBase allows client applications to use more
    * generalized code in some situations (for instance, when manipulating
    * objects that are all known to have identifiers), but beware that not
-   * all SedML object classes provide an "id" attribute.  LibSedML will allow
+   * all Sed object classes provide an "id" attribute.  LibSed will allow
    * the identifier to be set, but it will not read nor write "id"
-   * attributes for objects that do not possess them according to the SedML
+   * attributes for objects that do not possess them according to the Sed
    * specification for the Level and Version in use.
    *
    * @see getId()
@@ -1027,12 +1027,12 @@ public:
    * Predicate returning @c true if this
    * object's "name" attribute is set.
    * 
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
    * within a model.  Its purpose instead is to provide a human-readable
    * label for the component.  The data type of "name" is the type
-   * <code>string</code> defined in XML Schema.  SedML imposes no
+   * <code>string</code> defined in XML Schema.  Sed imposes no
    * restrictions as to the content of "name" attributes beyond those
    * restrictions defined by the <code>string</code> type in XML Schema.
    * 
@@ -1060,18 +1060,18 @@ public:
    * restrictions on the uniqueness of "name" values in a model.  This
    * allows software applications leeway in assigning component identifiers.
    *
-   * @return @c true if the "name" attribute of this SedML object is
+   * @return @c true if the "name" attribute of this Sed object is
    * set, @c false otherwise.
    *
    * @note The fact that the "name" attribute is defined on the SedBase parent
-   * class object is a convenience provided by libSedML, and <b>does not
-   * strictly follow SedML specifications</b>.  This libSedML implementation
+   * class object is a convenience provided by libSed, and <b>does not
+   * strictly follow Sed specifications</b>.  This libSed implementation
    * of SedBase allows client applications to use more generalized code in
    * some situations (for instance, when manipulating objects that are all
-   * known to have identifiers), but beware that not all SedML object
-   * classes provide an "id" attribute.  LibSedML will allow the identifier
+   * known to have identifiers), but beware that not all Sed object
+   * classes provide an "id" attribute.  LibSed will allow the identifier
    * to be set, but it will not read nor write "id" attributes for objects
-   * that do not possess them according to the SedML specification for the
+   * that do not possess them according to the Sed specification for the
    * Level and Version in use.
    *
    * @see getName()
@@ -1086,7 +1086,7 @@ public:
    * Predicate returning @c true if this
    * object's "notes" subelement exists and has content.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -1097,12 +1097,12 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
@@ -1133,10 +1133,10 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * @return @c true if a "annotation" subelement exists, @c false
    * otherwise.
@@ -1158,11 +1158,11 @@ public:
    * identifier conforming to the syntax defined by the XML 1.0 data type
    * <a href="http://www.w3.org/TR/REC-xml/#id">ID</a>.  Among other
    * things, this type requires that a value is unique among all the values
-   * of type XML ID in an SedMLDocument.  Although SedML only uses <a
+   * of type XML ID in an SedDocument.  Although Sed only uses <a
    * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a> for the "metaid"
    * attribute, callers should be careful if they use
    * <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>'s in XML
-   * portions of a model that are not defined by SedML, such as in the
+   * portions of a model that are not defined by Sed, such as in the
    * application-specific content of the "annotation" subelement.
    *
    * @param metaid the identifier string to use as the value of the
@@ -1184,10 +1184,10 @@ public:
   /*
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
-   * Sets the value of the "id" attribute of this SedML object to a copy
+   * Sets the value of the "id" attribute of this Sed object to a copy
    * of @p id.
    *
-   * The string @p sid is copied.  Note that SedML has strict requirements
+   * The string @p sid is copied.  Note that Sed has strict requirements
    * for the syntax of identifiers.  @htmlinclude id-syntax.html
    *
    * @param sid the string to use as the identifier of this object
@@ -1204,15 +1204,15 @@ public:
   /** @cond doxygen-libsbml-internal */
   /*
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
-   * Sets the value of the "name" attribute of this SedML object to a copy
+   * Sets the value of the "name" attribute of this Sed object to a copy
    * of @p name.
    * 
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
    * within a model.  Its purpose instead is to provide a human-readable
    * label for the component.  The data type of "name" is the type
-   * <code>string</code> defined in XML Schema.  SedML imposes no
+   * <code>string</code> defined in XML Schema.  Sed imposes no
    * restrictions as to the content of "name" attributes beyond those
    * restrictions defined by the <code>string</code> type in XML Schema.
    *
@@ -1243,14 +1243,14 @@ public:
    * @param name the new name for the object; the string will be copied
    *
    * @note The fact that the "name" attribute is defined on the SedBase parent
-   * class object is a convenience provided by libSedML, and <b>does not
-   * strictly follow SedML specifications</b>.  This libSedML implementation
+   * class object is a convenience provided by libSed, and <b>does not
+   * strictly follow Sed specifications</b>.  This libSed implementation
    * of SedBase allows client applications to use more generalized code in
    * some situations (for instance, when manipulating objects that are all
-   * known to have identifiers), but beware that not all SedML object
-   * classes provide an "id" attribute.  LibSedML will allow the identifier
+   * known to have identifiers), but beware that not all Sed object
+   * classes provide an "id" attribute.  LibSed will allow the identifier
    * to be set, but it will not read nor write "id" attributes for objects
-   * that do not possess them according to the SedML specification for the
+   * that do not possess them according to the Sed specification for the
    * Level and Version in use.
    *
    * @return integer value indicating success/failure of the
@@ -1267,7 +1267,7 @@ public:
 
 
   /**
-   * Sets the value of the "annotation" subelement of this SedML object.
+   * Sets the value of the "annotation" subelement of this Sed object.
    *
    * The content of @p annotation is copied, and any previous content of
    * this object's "annotation" subelement is deleted.
@@ -1281,10 +1281,10 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * Call this method will result in any existing content of the
    * "annotation" subelement to be discarded.  Unless you have taken steps
@@ -1313,7 +1313,7 @@ public:
 
 
   /**
-   * Sets the value of the "annotation" subelement of this SedML object.
+   * Sets the value of the "annotation" subelement of this Sed object.
    *
    * The content of @p annotation is copied, and any previous content of
    * this object's "annotation" subelement is deleted.
@@ -1327,10 +1327,10 @@ public:
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * Call this method will result in any existing content of the
    * "annotation" subelement to be discarded.  Unless you have taken steps
@@ -1372,10 +1372,10 @@ public:
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type "any"</a>,
    * allowing essentially arbitrary well-formed XML data content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * Unlike SedBase::setAnnotation(const XMLNode* annotation) or
    * SedBase::setAnnotation(const std::string& annotation), this method
@@ -1413,10 +1413,10 @@ public:
    * href="http://www.w3.org/TR/2004/REC-xml-20040204/#elemdecls">XML type "any"</a>,
    * allowing essentially arbitrary well-formed XML data content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * Unlike SedBase::setAnnotation(const XMLNode* annotation) or
    * SedBase::setAnnotation(const std::string& annotation), this method
@@ -1443,12 +1443,12 @@ public:
 
   /**
    * Removes the top-level element within the "annotation" subelement of this
-   * SedML object with the given name and optional URI.
+   * Sed object with the given name and optional URI.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * Calling this method allows a particular annotation element to be removed
    * whilst the remaining annotations remain intact.
@@ -1474,12 +1474,12 @@ public:
 
   /**
    * Replaces the given top-level element within the "annotation" 
-   * subelement of this SedML object and with the annotation element supplied.
+   * subelement of this Sed object and with the annotation element supplied.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * This method determines the name of the element to be replaced from the
    * annotation argument. Functionally it is equivalent to calling
@@ -1503,12 +1503,12 @@ public:
 
   /**
    * Replaces the given top-level element within the "annotation" 
-   * subelement of this SedML object and with the annotation element supplied.
+   * subelement of this Sed object and with the annotation element supplied.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * This method determines the name of the element to be replaced from the
    * annotation argument. Functionally it is equivalent to calling
@@ -1531,12 +1531,12 @@ public:
 
 
   /**
-   * Sets the value of the "notes" subelement of this SedML object.
+   * Sets the value of the "notes" subelement of this Sed object.
    *
    * The content of @p notes is copied, and any existing content of this
    * object's "notes" subelement is deleted.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -1547,12 +1547,12 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
@@ -1576,13 +1576,13 @@ public:
 
 
   /**
-   * Sets the value of the "notes" subelement of this SedML object to a copy
+   * Sets the value of the "notes" subelement of this Sed object to a copy
    * of the string @p notes.
    *
    * The content of @p notes is copied, and any existing content of this
    * object's "notes" subelement is deleted.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -1593,32 +1593,32 @@ public:
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
    * The following code illustrates a very simple way of setting the notes
-   * using this method.  Here, the object being annotated is the whole SedML
+   * using this method.  Here, the object being annotated is the whole Sed
    * document, but that is for illustration purposes only; you could of
-   * course use this same approach to annotate any other SedML component.
+   * course use this same approach to annotate any other Sed component.
    * @if clike
 @verbatim
-SedMLDocument* s = new SedMLDocument(3, 1);
+SedDocument* s = new SedDocument(3, 1);
 s->setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
 @endverbatim
    * @endif@if java
 @verbatim
-SedMLDocument s = new SedMLDocument(3, 1);
+SedDocument s = new SedDocument(3, 1);
 s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
 @endverbatim
    * @endif@if csharp
 @verbatim
-SedMLDocument s = new SedMLDocument(3, 1);
+SedDocument s = new SedDocument(3, 1);
 s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
 @endverbatim
    * @endif@~
@@ -1653,7 +1653,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *
    * The content of @p notes is copied.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -1664,12 +1664,12 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    * 
@@ -1698,7 +1698,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *
    * The content of the parameter @p notes is copied.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -1709,12 +1709,12 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
@@ -1740,35 +1740,35 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
   /** @cond doxygen-libsbml-internal */
   /**
-   * Sets the parent SedMLDocument of this SedML object.
+   * Sets the parent SedDocument of this Sed object.
    *
-   * @param d the SedMLDocument object to use
+   * @param d the SedDocument object to use
    *
    * @see connectToChild()
    * @if clike
    * @see enablePackageInternal()
    * @endif@~
    */
-  virtual void setSedMLDocument (SedMLDocument* d);
+  virtual void setSedDocument (SedDocument* d);
   /** @endcond */
 
 
   /** @cond doxygen-libsbml-internal */
   /**
-   * Sets the parent SedML object of this SedML object.
+   * Sets the parent Sed object of this Sed object.
    * (Creates a child-parent relationship by the child)
    * This function is called when a child element is
    * set/added/created by its parent element (e.g. by setXXX,
    * addXXX, createXXX, and connectToChild functions of the
    * parent element).
    *
-   * @param parent the SedML object to use
+   * @param parent the Sed object to use
    */
   virtual void connectToParent (SedBase* parent);
 
 
   /**
-   * Sets this SedML object to child SedML objects (if any).
+   * Sets this Sed object to child Sed objects (if any).
    * (Creates a child-parent relationship by the parent)
    *
    * Subclasses must override this function if they define
@@ -1777,7 +1777,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * constructor, copy constructor, assignment operator.
    *
    * @if clike
-   * @see setSedMLDocument()
+   * @see setSedDocument()
    * @see enablePackageInternal()
    * @endif@~
    */
@@ -1787,14 +1787,14 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Sets the namespaces relevant of this SedML object.
+   * Sets the namespaces relevant of this Sed object.
    *
    * The content of @p xmlns is copied, and this object's existing
    * namespace content is deleted.
    *
-   * The SedMLNamespaces object encapsulates SedML Level/Version/namespaces
-   * information.  It is used to communicate the SedML Level, Version, and
-   * (in Level&nbsp;3) packages used in addition to SedML Level&nbsp;3 Core.
+   * The SedNamespaces object encapsulates Sed Level/Version/namespaces
+   * information.  It is used to communicate the Sed Level, Version, and
+   * (in Level&nbsp;3) packages used in addition to Sed Level&nbsp;3 Core.
    * 
    * @param xmlns the namespaces to set
    *
@@ -1806,17 +1806,17 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Unsets the value of the "metaid" attribute of this SedML object.
+   * Unsets the value of the "metaid" attribute of this Sed object.
    *
-   * The optional attribute named "metaid", present on every major SedML
+   * The optional attribute named "metaid", present on every major Sed
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format). The attribute value has the data type
    * <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, the XML
    * identifier type, which means each "metaid" value must be globally
-   * unique within an SedML file.  (Importantly, this uniqueness criterion
+   * unique within an Sed file.  (Importantly, this uniqueness criterion
    * applies across any attribute with type <a
    * href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>, not just the
-   * "metaid" attribute used by SedML&mdash;something to be aware of if your
+   * "metaid" attribute used by Sed&mdash;something to be aware of if your
    * application-specific XML content inside the "annotation" subelement
    * happens to use <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>.)
    * The "metaid" value serves to identify a model component for purposes
@@ -1833,11 +1833,11 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Unsets the value of the "id" attribute of this SedML object.
+   * Unsets the value of the "id" attribute of this Sed object.
    *
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  The identifier given by an object's "id" attribute value
-   * is used to identify the object within the SedML model definition.
+   * is used to identify the object within the Sed model definition.
    * Other objects can refer to the component using this identifier.  The
    * data type of "id" is always either <code>Sid</code> or
    * <code>UnitSId</code>, depending on the object in question.  Both
@@ -1850,7 +1850,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * </pre>
    *
    * The equality of <code>SId</code> and <code>UnitSId</code> type values
-   * in SedML is determined by an exact character sequence match; i.e.,
+   * in Sed is determined by an exact character sequence match; i.e.,
    * comparisons of these identifiers must be performed in a case-sensitive
    * manner.  This applies to all uses of <code>SId</code> and
    * <code>UnitSId</code>.
@@ -1864,14 +1864,14 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Unsets the value of the "name" attribute of this SedML object.
+   * Unsets the value of the "name" attribute of this Sed object.
    * 
-   * Most (but not all) objects in SedML include two common attributes: "id"
+   * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
    * within a model.  Its purpose instead is to provide a human-readable
    * label for the component.  The data type of "name" is the type
-   * <code>string</code> defined in XML Schema.  SedML imposes no
+   * <code>string</code> defined in XML Schema.  Sed imposes no
    * restrictions as to the content of "name" attributes beyond those
    * restrictions defined by the <code>string</code> type in XML Schema.
    *
@@ -1908,9 +1908,9 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Unsets the value of the "notes" subelement of this SedML object.
+   * Unsets the value of the "notes" subelement of this Sed object.
    *
-   * The optional SedML element named "notes", present on every major SedML
+   * The optional Sed element named "notes", present on every major Sed
    * component type, is intended as a place for storing optional
    * information intended to be seen by humans.  An example use of the
    * "notes" element would be to contain formatted user comments about the
@@ -1921,12 +1921,12 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *
    * The format of "notes" elements must be <a target="_blank"
    * href="http://www.w3.org/TR/xhtml1/">XHTML&nbsp;1.0</a>.  To help
-   * verify the formatting of "notes" content, libSedML provides the static
+   * verify the formatting of "notes" content, libSed provides the static
    * utility method SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif); however,
    * readers are urged to consult the appropriate <a target="_blank"
-   * href="http://sbml.org/Documents/Specifications">SedML specification
+   * href="http://sbml.org/Documents/Specifications">Sed specification
    * document</a> for the Level and Version of their model for more
-   * in-depth explanations.  The SedML Level&nbsp;2 and &nbsp;3
+   * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
    *
@@ -1946,7 +1946,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Unsets the value of the "annotation" subelement of this SedML object.
+   * Unsets the value of the "annotation" subelement of this Sed object.
    *
    * Whereas the SedBase "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
@@ -1957,10 +1957,10 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * "any"</a>, allowing essentially arbitrary well-formed XML data
    * content.
    *
-   * SedML places a few restrictions on the organization of the content of
+   * Sed places a few restrictions on the organization of the content of
    * annotations; these are intended to help software tools read and write
    * the data as well as help reduce conflicts between annotations added by
-   * different tools.  Please see the SedML specifications for more details.
+   * different tools.  Please see the Sed specifications for more details.
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -1978,10 +1978,10 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Returns the SedML Level of the SedMLDocument object containing this
+   * Returns the Sed Level of the SedDocument object containing this
    * object.
    * 
-   * @return the SedML level of this SedML object.
+   * @return the Sed level of this Sed object.
    * 
    * @see getVersion()
    * @see getNamespaces()
@@ -1991,10 +1991,10 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Returns the Version within the SedML Level of the SedMLDocument object
+   * Returns the Version within the Sed Level of the SedDocument object
    * containing this object.
    * 
-   * @return the SedML version of this SedML object.
+   * @return the Sed version of this Sed object.
    *
    * @see getLevel()
    * @see getNamespaces()
@@ -2003,18 +2003,18 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Returns the libSedML type code for this object.
+   * Returns the libSed type code for this object.
    * 
-   * This method may return the type code of this SedML object, or it may
-   * return @link SedMLTypeCode_t#SedML_UNKNOWNSEDML_UNKNOWN@endlink.  This
+   * This method may return the type code of this Sed object, or it may
+   * return @link SedTypeCode_t#Sed_UNKNOWNSEDML_UNKNOWN@endlink.  This
    * is because subclasses of SedBase are not required to implement this
    * method to return a type code.  This method is meant primarily for the
-   * LibSedML C interface, in which class and subclass information is not
+   * LibSed C interface, in which class and subclass information is not
    * readily available.
    *
-   * @return the @if clike #SedMLTypeCode_t value@else SedML object type code@endif@~
-   * of this SedML object or
-   * @link SedMLTypeCode_t#SedML_UNKNOWNSEDML_UNKNOWN@endlink (the default).
+   * @return the @if clike #SedTypeCode_t value@else Sed object type code@endif@~
+   * of this Sed object or
+   * @link SedTypeCode_t#Sed_UNKNOWNSEDML_UNKNOWN@endlink (the default).
    *
    * @see getElementName()
    * @see getPackageName()
@@ -2025,10 +2025,10 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
   /**
    * Predicate returning @c true if this
    * object's level/version and namespace values correspond to a valid
-   * SedML specification.
+   * Sed specification.
    *
    * @return @c true if the level, version and namespace values of this 
-   * SedML object correspond to a valid set of values, @c false otherwise.
+   * Sed object correspond to a valid set of values, @c false otherwise.
    */
   bool hasValidLevelVersionNamespaceCombination();
 
@@ -2037,7 +2037,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * Returns the XML element name of this object.
    *
    * This is overridden by subclasses to return a string appropriate to the
-   * SedML component.  For example, Model defines it as returning @c
+   * Sed component.  For example, Model defines it as returning @c
    * "model", CompartmentType defines it as returning @c "compartmentType",
    * and so on.
    */
@@ -2045,20 +2045,20 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /**
-   * Returns a string consisting of a partial SedML corresponding to just
+   * Returns a string consisting of a partial Sed corresponding to just
    * this object.
    * 
-   * @return the partial SedML that describes this SedML object.
+   * @return the partial Sed that describes this Sed object.
    *
    * @warning This is primarily provided for testing and debugging
-   * purposes.  It may be removed in a future version of libSedML.
+   * purposes.  It may be removed in a future version of libSed.
    */
-  char* toSedML ();
+  char* toSed ();
 
 
   /** @cond doxygen-libsbml-internal */
   /**
-   * Reads (initializes) this SedML object by reading from XMLInputStream.
+   * Reads (initializes) this Sed object by reading from XMLInputStream.
    */
   void read (XMLInputStream& stream);
   /** @endcond */
@@ -2066,7 +2066,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
   /** @cond doxygen-libsbml-internal */
   /**
-   * Writes (serializes) this SedML object by writing it to XMLOutputStream.
+   * Writes (serializes) this Sed object by writing it to XMLOutputStream.
    */
   void write (XMLOutputStream& stream) const;
   /** @endcond */
@@ -2075,7 +2075,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
   /** @cond doxygen-libsbml-internal */
   /**
    * Subclasses should override this method to write out their contained
-   * SedML objects as XML elements.  Be sure to call your parents
+   * Sed objects as XML elements.  Be sure to call your parents
    * implementation of this method as well.  For example:@if clike
    * <pre>
    *   SedBase::writeElements();
@@ -2114,17 +2114,17 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
 
 
   /** @cond doxygen-libsbml-internal */
-  /* sets the SedMLnamespaces - internal use only*/
-  int setSedMLNamespaces(SedMLNamespaces * sbmlns);
+  /* sets the Sednamespaces - internal use only*/
+  int setSedNamespaces(SedNamespaces * sbmlns);
 
-  /* sets the SedMLNamaepaces and owns the given object - internal use only */
-  void setSedMLNamespacesAndOwn(SedMLNamespaces * sbmlns);
+  /* sets the SedNamaepaces and owns the given object - internal use only */
+  void setSedNamespacesAndOwn(SedNamespaces * sbmlns);
   /** @endcond */
 
 
   /** @cond doxygen-libsbml-internal */
-  /* gets the SedMLnamespaces - internal use only*/
-  virtual SedMLNamespaces * getSedMLNamespaces() const;
+  /* gets the Sednamespaces - internal use only*/
+  virtual SedNamespaces * getSedNamespaces() const;
   /** @endcond */
 
 
@@ -2163,7 +2163,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @return boolean, @c true if this object's collection of namespaces is
    * the same as @p sb's, @c false otherwise.
    */
-  bool matchesSedMLNamespaces(const SedBase * sb);
+  bool matchesSedNamespaces(const SedBase * sb);
 
 
   /**
@@ -2175,7 +2175,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @return boolean, @c true if this object's collection of namespaces is
    * the same as @p sb's, @c false otherwise.
    */
-  bool matchesSedMLNamespaces(const SedBase * sb) const;
+  bool matchesSedNamespaces(const SedBase * sb) const;
 
 
   /**
@@ -2187,7 +2187,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @return boolean, @c true if this object's collection of namespaces is
    * a subset of @p sb's, @c false otherwise.
    */
-  bool matchesRequiredSedMLNamespacesForAddition(const SedBase * sb);
+  bool matchesRequiredSedNamespacesForAddition(const SedBase * sb);
   
   
   /**
@@ -2199,7 +2199,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @return boolean, @c true if this object's collection of namespaces is
    * a subset of @p sb's, @c false otherwise.
    */
-  bool matchesRequiredSedMLNamespacesForAddition(const SedBase * sb) const;
+  bool matchesRequiredSedNamespacesForAddition(const SedBase * sb) const;
   
   
   /**
@@ -2230,10 +2230,10 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
   void *getUserData() const;
 
   /**
-   * @return the SedMLErrorLog used to log errors during while reading and
-   * validating SedML.
+   * @return the SedErrorLog used to log errors during while reading and
+   * validating Sed.
    */
-  virtual SedMLErrorLog* getErrorLog ();
+  virtual SedErrorLog* getErrorLog ();
 
   
 protected:
@@ -2250,21 +2250,21 @@ protected:
 
   /** @cond doxygen-libsbml-internal */
 
-  bool matchesCoreSedMLNamespace(const SedBase * sb);
+  bool matchesCoreSedNamespace(const SedBase * sb);
 
-  bool matchesCoreSedMLNamespace(const SedBase * sb) const;
+  bool matchesCoreSedNamespace(const SedBase * sb) const;
   
   /**
-   * Creates a new SedBase object with the given SedML level, version.
+   * Creates a new SedBase object with the given Sed level, version.
    */
   SedBase (unsigned int level, unsigned int version);
 
 
   /**
-   * Creates a new SedBase object with the given SedMLNamespaces.
+   * Creates a new SedBase object with the given SedNamespaces.
    * Only subclasses may create SedBase objects.
    */
-  SedBase (SedMLNamespaces* sbmlns);
+  SedBase (SedNamespaces* sbmlns);
 
 
   /**
@@ -2272,7 +2272,7 @@ protected:
    *
    * @param orig the object to copy.
    * 
-   * @throws @if python ValueError @else SedMLConstructorException @endif@~
+   * @throws @if python ValueError @else SedConstructorException @endif@~
    * Thrown if the argument @p orig is @c NULL.
   */
   SedBase(const SedBase& orig);
@@ -2280,10 +2280,10 @@ protected:
 
   /**
    * Subclasses should override this method to create, store, and then
-   * return an SedML object corresponding to the next XMLToken in the
+   * return an Sed object corresponding to the next XMLToken in the
    * XMLInputStream.
    *
-   * @return the SedML object corresponding to next XMLToken in the
+   * @return the Sed object corresponding to next XMLToken in the
    * XMLInputStream or @c NULL if the token was not recognized.
    */
   virtual SedBase* createObject (XMLInputStream& stream);
@@ -2292,7 +2292,7 @@ protected:
   /**
    * Predicate returning @c true if this
    * object's level/version and namespace values correspond to a valid
-   * SedML specification.
+   * Sed specification.
    *
    * @param typecode the typecode for this element
    * @param xmlns the namespaces used by this element.
@@ -2301,7 +2301,7 @@ protected:
    *        allows to use it in scenarios where the namespaces or typecode have not yet been initialized. 
    * 
    * @return @c true if the level, version and namespace values of this 
-   * SedML object correspond to a valid set of values, @c false otherwise.
+   * Sed object correspond to a valid set of values, @c false otherwise.
    */
   bool hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns);
 
@@ -2316,10 +2316,10 @@ protected:
 
 
   /**
-   * The SedML XML Schema is written such that the order of child elements
-   * is significant.  LibSedML can read elements out of order.  If you
+   * The Sed XML Schema is written such that the order of child elements
+   * is significant.  LibSed can read elements out of order.  If you
    * override this method to indicate the ordinal position of element with
-   * respect to its siblings, libSedML will log an error if the element is
+   * respect to its siblings, libSed will log an error if the element is
    * read out of order.
    *
    * @return the ordinal position of the element with respect to its
@@ -2414,7 +2414,7 @@ protected:
 
 
   /**
-   * Synchronizes the annotation of this SedML object.
+   * Synchronizes the annotation of this Sed object.
    *
    * Annotation element (XMLNode* mAnnotation) is synchronized with the 
    * current CVTerm objects (List* mCVTerm).
@@ -2425,7 +2425,7 @@ protected:
 
 
   /**
-   * Checks that the SedML element appears in the expected order.
+   * Checks that the Sed element appears in the expected order.
    *
    * If @p object is not in the expected position, an error is logged.
    */
@@ -2433,7 +2433,7 @@ protected:
 
 
   /**
-   * Checks that an SedML ListOf element is populated.  
+   * Checks that an Sed ListOf element is populated.  
    * If a listOf element has been declared with no elements, 
    * an error is logged.
    */
@@ -2463,7 +2463,7 @@ protected:
 
   /**
    * Sets the XML namespace to which this element belongs to.
-   * For example, all elements that belong to SedML Level 1 Version 1 Core
+   * For example, all elements that belong to Sed Level 1 Version 1 Core
    * must set the namespace to "http://sed-ml.org/"; 
    *
    * @return integer value indicating success/failure of the
@@ -2483,11 +2483,11 @@ protected:
 
   /**
    * Gets the URI to which this element belongs to.
-   * For example, all elements that belong to SedML Level 1 Version 1 Core
+   * For example, all elements that belong to Sed Level 1 Version 1 Core
    * must would have the URI "http://sed-ml.org/"; 
    *
    * Unlike getElementNamespace, this function first returns the URI for this 
-   * element by looking into the SedMLNamespaces object of the document with 
+   * element by looking into the SedNamespaces object of the document with 
    * the its package name. if not found it will return the result of 
    * getElementNamespace
    *
@@ -2495,8 +2495,8 @@ protected:
    *
    * @see getPackageName
    * @see getElementNamespace
-   * @see getSedMLNamespaces
-   * @see getSedMLDocument
+   * @see getSedNamespaces
+   * @see getSedDocument
    */
   std::string getURI() const;
 
@@ -2506,19 +2506,19 @@ protected:
   std::string getPrefix() const;
 
   /**
-   * Return the SedML prefix of this element. This will be the same as getPrefix()
-   * unless the element in question is an element of an SedML extension class.
+   * Return the Sed prefix of this element. This will be the same as getPrefix()
+   * unless the element in question is an element of an Sed extension class.
    */
-  std::string getSedMLPrefix() const;
+  std::string getSedPrefix() const;
 
 
 
   /**
    * Returns the root element of the node tree to which this element is connected.
    *
-   * @note The root element may not be an SedMLDocument element. For example,
+   * @note The root element may not be an SedDocument element. For example,
    * this element is the root element if this element doesn't have a parent
-   * SedML object (i.e. mParentSedMLObject is NULL)
+   * Sed object (i.e. mParentSedObject is NULL)
    *
    * @see enablePackageInternal
    */
@@ -2531,15 +2531,15 @@ protected:
   std::string     mMetaId;
   XMLNode*        mNotes;
   XMLNode*        mAnnotation;
-  SedMLDocument*   mSedML;
-  SedMLNamespaces* mSedMLNamespaces;
+  SedDocument*   mSed;
+  SedNamespaces* mSedNamespaces;
   void*           mUserData;
 
   unsigned int mLine;
   unsigned int mColumn;
 
-  /* store the parent SedML object */
-  SedBase* mParentSedMLObject;
+  /* store the parent Sed object */
+  SedBase* mParentSedObject;
 
   /* flag that allows object to know its been deleted
    * for OS where the memory is still readable after a delete
@@ -2553,7 +2553,7 @@ protected:
   // This variable can be publicly accessible by getElementNamespace function.
   //
   // For example, mURI of elements defined in L3 Core (or defined in Level 2 
-  // or before) will be the URI defined in the corresponding SedML specification
+  // or before) will be the URI defined in the corresponding Sed specification
   // (e.g. "http://www.sbml.org/sbml/level3/version1" for L3V1 Core); and mURI
   // will be "http://www.sbml.org/sbml/level3/version1/layout/version1" for 
   // elements defined in layout extension L3V1-V1.
@@ -2575,7 +2575,7 @@ private:
 
   /**
    * Stores the location (line and column) and any XML namespaces (for
-   * roundtripping) declared on this SedML (XML) element.
+   * roundtripping) declared on this Sed (XML) element.
    */
   void setSedBaseFields (const XMLToken& element);
 
@@ -2619,13 +2619,13 @@ SedBase_getMetaId (SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
-const SedMLDocument_t *
-SedBase_getSedMLDocument (SedBase_t *sb);
+const SedDocument_t *
+SedBase_getSedDocument (SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 const SedBase_t *
-SedBase_getParentSedMLObject (SedBase_t *sb);
+SedBase_getParentSedObject (SedBase_t *sb);
 
 
 LIBSEDML_EXTERN

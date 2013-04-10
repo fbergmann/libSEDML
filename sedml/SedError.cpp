@@ -1,11 +1,11 @@
 /**
- * @file    SedMLError.cpp
- * @brief   Represents SedML errors and other diagnostics
+ * @file    SedError.cpp
+ * @brief   Represents Sed errors and other diagnostics
  * @author  Michael Hucka
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -31,8 +31,8 @@
 #include <sstream>
 
 #include <sbml/xml/XMLError.h>
-#include <sedml/SedMLError.h>
-#include <sedml/SedMLErrorTable.h>
+#include <sedml/SedError.h>
+#include <sedml/SedErrorTable.h>
 
 
 /** @cond doxygen-ignored */
@@ -45,7 +45,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /** @cond doxygen-libsbml-internal **/
 /** 
- * Helper function for SedMLError().  Takes an index, SedML level and version,
+ * Helper function for SedError().  Takes an index, Sed level and version,
  * and returns the appropriate field for the severity code out of the
    errorTable entry.
  */
@@ -67,7 +67,7 @@ getSeverityForEntry(unsigned int index,
 /*
  * @return the severity as a string for the given @n code.
  */
-std::string SedMLError::stringForSeverity(unsigned int code) const
+std::string SedError::stringForSeverity(unsigned int code) const
 {
   /* it should never happen that an error ends up with a severity
    * that is not in the XMLSeverity_t enumeration
@@ -98,20 +98,20 @@ std::string SedMLError::stringForSeverity(unsigned int code) const
 }
 
 /*
- * Table of strings corresponding to the values from SedMLErrorCategory_t.
+ * Table of strings corresponding to the values from SedErrorCategory_t.
  * The enumeration starts at a number higher than 0, so each entry is keyed
  * by its enum value.
  *
  * A similar table for severity strings is currently unnecessary because
- * libSedML never returns anything more than the XMLSeverityCode_t values.
+ * libSed never returns anything more than the XMLSeverityCode_t values.
  */
 static struct sbmlCategoryString {
   unsigned int catCode;
   const char * catString;
 } sbmlCategoryStringTable[] = {
-  { LIBSEDML_CAT_SEDML,                   "General SedML conformance"    },
-  { LIBSEDML_CAT_GENERAL_CONSISTENCY,	"SedML component consistency"  },
-  { LIBSEDML_CAT_IDENTIFIER_CONSISTENCY,	"SedML identifier consistency" },
+  { LIBSEDML_CAT_SEDML,                   "General Sed conformance"    },
+  { LIBSEDML_CAT_GENERAL_CONSISTENCY,	"Sed component consistency"  },
+  { LIBSEDML_CAT_IDENTIFIER_CONSISTENCY,	"Sed identifier consistency" },
   { LIBSEDML_CAT_MATHML_CONSISTENCY,     "MathML consistency"          },
   { LIBSEDML_CAT_INTERNAL_CONSISTENCY,   "Internal consistency"        }
 };
@@ -122,7 +122,7 @@ static unsigned int sbmlCategoryStringTableSize
 /*
  * @return the category as a string for the given @n code.
  */
-std::string SedMLError::stringForCategory(unsigned int code) const
+std::string SedError::stringForCategory(unsigned int code) const
 {
   if ( code >= LIBSEDML_CAT_SEDML )
   {
@@ -137,7 +137,7 @@ std::string SedMLError::stringForCategory(unsigned int code) const
 /** @endcond **/
 
 
-SedMLError::SedMLError (  const unsigned int errorId
+SedError::SedError (  const unsigned int errorId
                       , const unsigned int level
                       , const unsigned int version 
                       , const std::string& details
@@ -160,7 +160,7 @@ SedMLError::SedMLError (  const unsigned int errorId
     return;
   }
   else if ( mErrorId > XMLErrorCodesUpperBound
-            && mErrorId < SedMLCodesUpperBound )
+            && mErrorId < SedCodesUpperBound )
   {
     unsigned int tableSize = sizeof(errorTable)/sizeof(errorTable[0]);
     unsigned int index = 0;
@@ -177,7 +177,7 @@ SedMLError::SedMLError (  const unsigned int errorId
     if ( index == 0 && mErrorId != UnknownError )
     {
       // The id is in the range of error numbers that are supposed to be in
-      // the SedML layer, but it's NOT in our table. This is an internal error.
+      // the Sed layer, but it's NOT in our table. This is an internal error.
       // Unfortunately, we don't have an error log or anywhere to report it
       // except the measure of last resort: the standard error output.
     
@@ -192,7 +192,7 @@ SedMLError::SedMLError (  const unsigned int errorId
     }
 
     // The rest of this block massages the results to account for how some
-    // internal bookkeeping is done in libSedML 3, and also to provide
+    // internal bookkeeping is done in libSed 3, and also to provide
     // additional info in the messages.
 
     mCategory     = errorTable[index].category;
@@ -217,9 +217,9 @@ SedMLError::SedMLError (  const unsigned int errorId
       // validation rules because they were assumed to be caught by a
       // schema-aware XML parser.  In L2v3, we stopped relying on this and
       // listed schema errors separately.  This poses a problem for how
-      // libSedML should errors for documents having levels/versions < L2v3.
-      // LibSedML handles this internally by using the special severity code
-      // SchemaError in SedMLErrorTable.h for those SedML level/version
+      // libSed should errors for documents having levels/versions < L2v3.
+      // LibSed handles this internally by using the special severity code
+      // SchemaError in SedErrorTable.h for those Sed level/version
       // combinations that didn't have separate validation rules, then
       // here, we translate the errors into the same basic error code and
       // add some elaboration to the error text message.
@@ -233,14 +233,14 @@ SedMLError::SedMLError (  const unsigned int errorId
       // General warnings are our internal code for non-XML-schema issues
       // that were not defined as errors in prior levels/versions, but then
       // were defined as errors at some later time.  Like with SchemaError,
-      // we use the GeneralWarning code for those cases in SedMLErrorTable.h
+      // we use the GeneralWarning code for those cases in SedErrorTable.h
       // and then here we translate them into regular warnings.
 
       mSeverity = LIBSEDML_SEV_WARNING;
-      newMsg << "[Although SedML Level " << level
+      newMsg << "[Although Sed Level " << level
              << " Version " << version << " does not explicitly define the "
              << "following as an error, other Levels and/or Versions "
-             << "of SedML do.] " << endl;
+             << "of Sed do.] " << endl;
     }
 
     // Finish updating the (full) error message.
@@ -269,7 +269,7 @@ SedMLError::SedMLError (  const unsigned int errorId
 
 
 
-  // It's not an error code in the SedML layer, so assume the caller has
+  // It's not an error code in the Sed layer, so assume the caller has
   // filled in all the relevant additional data.  (If they didn't, the
   // following merely assigns the defaults.)
   mMessage        = details;
@@ -283,7 +283,7 @@ SedMLError::SedMLError (  const unsigned int errorId
 /*
  * Copy Constructor
  */
-SedMLError::SedMLError(const SedMLError& orig) :
+SedError::SedError(const SedError& orig) :
  XMLError(orig)
 {
 }
@@ -293,23 +293,23 @@ SedMLError::SedMLError(const SedMLError& orig) :
 /*
  * clone function
  */
-SedMLError* 
-SedMLError::clone() const
+SedError* 
+SedError::clone() const
 {
-  return new SedMLError(*this);
+  return new SedError(*this);
 }
 /** @endcond **/
 
 
 /** @cond doxygen-libsbml-internal **/
 /*
- * Outputs this SedMLError to stream in the following format (and followed by
+ * Outputs this SedError to stream in the following format (and followed by
  * a newline):
  *
  *   line: (error_id [severity]) message
  */
 void
-SedMLError::print(ostream& s) const
+SedError::print(ostream& s) const
 {
     s << "line " << getLine() << ": ("
       << setfill('0') << setw(5) << getErrorId()
@@ -321,7 +321,7 @@ SedMLError::print(ostream& s) const
 
 /** @cond doxygen-libsbml-internal */
 void
-SedMLError::adjustErrorId(unsigned int offset)
+SedError::adjustErrorId(unsigned int offset)
 {
   // actually dont do this since it means a user cannot 
   // look for the specific error

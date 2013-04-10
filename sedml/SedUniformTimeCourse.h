@@ -1,6 +1,6 @@
 /**
- * @file:   UniformTimeCourse.h
- * @brief:  Implementation of the UniformTimeCourse class
+ * @file:   SedUniformTimeCourse.h
+ * @brief:  Implementation of the SedUniformTimeCourse class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef UniformTimeCourse_H__
-#define UniformTimeCourse_H__
+#ifndef SedUniformTimeCourse_H__
+#define SedUniformTimeCourse_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,16 +49,16 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Simulation.h>
+#include <sedml/SedSimulation.h>
 
 
-class LIBSEDML_EXTERN UniformTimeCourse : public Simulation
+class LIBSEDML_EXTERN SedUniformTimeCourse : public SedSimulation
 {
 
 protected:
@@ -76,77 +76,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new UniformTimeCourse with the given level, version, and package version.
+	 * Creates a new SedUniformTimeCourse with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this UniformTimeCourse
+	 * @param level an unsigned int, the SEDML Level to assign to this SedUniformTimeCourse
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this UniformTimeCourse
+	 * @param version an unsigned int, the SEDML Version to assign to this SedUniformTimeCourse
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this UniformTimeCourse
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedUniformTimeCourse
 	 */
-	UniformTimeCourse(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                  unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedUniformTimeCourse(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                     unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new UniformTimeCourse with the given SedMLNamespaces object.
+	 * Creates a new SedUniformTimeCourse with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	UniformTimeCourse(SedMLNamespaces* sedmlns);
+	SedUniformTimeCourse(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for UniformTimeCourse.
+	 * Copy constructor for SedUniformTimeCourse.
 	 *
-	 * @param orig; the UniformTimeCourse instance to copy.
+	 * @param orig; the SedUniformTimeCourse instance to copy.
 	 */
-	UniformTimeCourse(const UniformTimeCourse& orig);
+	SedUniformTimeCourse(const SedUniformTimeCourse& orig);
 
 
  	/**
-	 * Assignment operator for UniformTimeCourse.
+	 * Assignment operator for SedUniformTimeCourse.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	UniformTimeCourse& operator=(const UniformTimeCourse& rhs);
+	SedUniformTimeCourse& operator=(const SedUniformTimeCourse& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this UniformTimeCourse object.
+	 * Creates and returns a deep copy of this SedUniformTimeCourse object.
 	 *
-	 * @return a (deep) copy of this UniformTimeCourse object.
+	 * @return a (deep) copy of this SedUniformTimeCourse object.
 	 */
-	virtual UniformTimeCourse* clone () const;
+	virtual SedUniformTimeCourse* clone () const;
 
 
  	/**
-	 * Destructor for UniformTimeCourse.
+	 * Destructor for SedUniformTimeCourse.
 	 */
-	virtual ~UniformTimeCourse();
+	virtual ~SedUniformTimeCourse();
 
 
  	/**
-	 * Returns the value of the "initialTime" attribute of this UniformTimeCourse.
+	 * Returns the value of the "initialTime" attribute of this SedUniformTimeCourse.
 	 *
-	 * @return the value of the "initialTime" attribute of this UniformTimeCourse as a double.
+	 * @return the value of the "initialTime" attribute of this SedUniformTimeCourse as a double.
 	 */
 	virtual const double getInitialTime() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * UniformTimeCourse's "initialTime" attribute has been set.
+	 * SedUniformTimeCourse's "initialTime" attribute has been set.
 	 *
-	 * @return @c true if this UniformTimeCourse's "initialTime" attribute has been set,
+	 * @return @c true if this SedUniformTimeCourse's "initialTime" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetInitialTime() const;
 
 
 	/**
-	 * Sets the value of the "initialTime" attribute of this UniformTimeCourse.
+	 * Sets the value of the "initialTime" attribute of this SedUniformTimeCourse.
 	 *
 	 * @param initialTime; double value of the "initialTime" attribute to be set
 	 *
@@ -161,7 +161,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "initialTime" attribute of this UniformTimeCourse.
+	 * Unsets the value of the "initialTime" attribute of this SedUniformTimeCourse.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -174,25 +174,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "outputStartTime" attribute of this UniformTimeCourse.
+	 * Returns the value of the "outputStartTime" attribute of this SedUniformTimeCourse.
 	 *
-	 * @return the value of the "outputStartTime" attribute of this UniformTimeCourse as a double.
+	 * @return the value of the "outputStartTime" attribute of this SedUniformTimeCourse as a double.
 	 */
 	virtual const double getOutputStartTime() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * UniformTimeCourse's "outputStartTime" attribute has been set.
+	 * SedUniformTimeCourse's "outputStartTime" attribute has been set.
 	 *
-	 * @return @c true if this UniformTimeCourse's "outputStartTime" attribute has been set,
+	 * @return @c true if this SedUniformTimeCourse's "outputStartTime" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetOutputStartTime() const;
 
 
 	/**
-	 * Sets the value of the "outputStartTime" attribute of this UniformTimeCourse.
+	 * Sets the value of the "outputStartTime" attribute of this SedUniformTimeCourse.
 	 *
 	 * @param outputStartTime; double value of the "outputStartTime" attribute to be set
 	 *
@@ -207,7 +207,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "outputStartTime" attribute of this UniformTimeCourse.
+	 * Unsets the value of the "outputStartTime" attribute of this SedUniformTimeCourse.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -220,25 +220,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "outputEndTime" attribute of this UniformTimeCourse.
+	 * Returns the value of the "outputEndTime" attribute of this SedUniformTimeCourse.
 	 *
-	 * @return the value of the "outputEndTime" attribute of this UniformTimeCourse as a double.
+	 * @return the value of the "outputEndTime" attribute of this SedUniformTimeCourse as a double.
 	 */
 	virtual const double getOutputEndTime() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * UniformTimeCourse's "outputEndTime" attribute has been set.
+	 * SedUniformTimeCourse's "outputEndTime" attribute has been set.
 	 *
-	 * @return @c true if this UniformTimeCourse's "outputEndTime" attribute has been set,
+	 * @return @c true if this SedUniformTimeCourse's "outputEndTime" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetOutputEndTime() const;
 
 
 	/**
-	 * Sets the value of the "outputEndTime" attribute of this UniformTimeCourse.
+	 * Sets the value of the "outputEndTime" attribute of this SedUniformTimeCourse.
 	 *
 	 * @param outputEndTime; double value of the "outputEndTime" attribute to be set
 	 *
@@ -253,7 +253,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "outputEndTime" attribute of this UniformTimeCourse.
+	 * Unsets the value of the "outputEndTime" attribute of this SedUniformTimeCourse.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -266,25 +266,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "numberOfPoints" attribute of this UniformTimeCourse.
+	 * Returns the value of the "numberOfPoints" attribute of this SedUniformTimeCourse.
 	 *
-	 * @return the value of the "numberOfPoints" attribute of this UniformTimeCourse as a integer.
+	 * @return the value of the "numberOfPoints" attribute of this SedUniformTimeCourse as a integer.
 	 */
 	virtual const int getNumberOfPoints() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * UniformTimeCourse's "numberOfPoints" attribute has been set.
+	 * SedUniformTimeCourse's "numberOfPoints" attribute has been set.
 	 *
-	 * @return @c true if this UniformTimeCourse's "numberOfPoints" attribute has been set,
+	 * @return @c true if this SedUniformTimeCourse's "numberOfPoints" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetNumberOfPoints() const;
 
 
 	/**
-	 * Sets the value of the "numberOfPoints" attribute of this UniformTimeCourse.
+	 * Sets the value of the "numberOfPoints" attribute of this SedUniformTimeCourse.
 	 *
 	 * @param numberOfPoints; int value of the "numberOfPoints" attribute to be set
 	 *
@@ -299,7 +299,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "numberOfPoints" attribute of this UniformTimeCourse.
+	 * Unsets the value of the "numberOfPoints" attribute of this SedUniformTimeCourse.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -312,10 +312,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for UniformTimeCourse, is
-	 * always @c "uniformTimeCourse".
+	 * Returns the XML element name of this object, which for SedUniformTimeCourse, is
+	 * always @c "sedUniformTimeCourse".
 	 *
-	 * @return the name of this element, i.e. @c "uniformTimeCourse".
+	 * @return the name of this element, i.e. @c "sedUniformTimeCourse".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -355,9 +355,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this UniformTimeCourse object have been set.
+	 * for this SedUniformTimeCourse object have been set.
 	 *
-	 * @note The required attributes for a UniformTimeCourse object are:
+	 * @note The required attributes for a SedUniformTimeCourse object are:
 	 * @li "initialTime"
 	 * @li "outputStartTime"
 	 * @li "outputEndTime"
@@ -385,9 +385,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -396,9 +396,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -466,103 +466,103 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-UniformTimeCourse_t *
-UniformTimeCourse_create(unsigned int level, unsigned int version);
+SedUniformTimeCourse_t *
+SedUniformTimeCourse_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-UniformTimeCourse_free(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_free(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
-UniformTimeCourse_t *
-UniformTimeCourse_clone(UniformTimeCourse_t * utc);
-
-
-LIBSEDML_EXTERN
-double
-UniformTimeCourse_getInitialTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_t *
+SedUniformTimeCourse_clone(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 double
-UniformTimeCourse_getOutputStartTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_getInitialTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 double
-UniformTimeCourse_getOutputEndTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_getOutputStartTime(SedUniformTimeCourse_t * sutc);
+
+
+LIBSEDML_EXTERN
+double
+SedUniformTimeCourse_getOutputEndTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_getNumberOfPoints(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_getNumberOfPoints(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_isSetInitialTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_isSetInitialTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_isSetOutputStartTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_isSetOutputStartTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_isSetOutputEndTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_isSetOutputEndTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_isSetNumberOfPoints(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_isSetNumberOfPoints(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_setInitialTime(UniformTimeCourse_t * utc, double initialTime);
+SedUniformTimeCourse_setInitialTime(SedUniformTimeCourse_t * sutc, double initialTime);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_setOutputStartTime(UniformTimeCourse_t * utc, double outputStartTime);
+SedUniformTimeCourse_setOutputStartTime(SedUniformTimeCourse_t * sutc, double outputStartTime);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_setOutputEndTime(UniformTimeCourse_t * utc, double outputEndTime);
+SedUniformTimeCourse_setOutputEndTime(SedUniformTimeCourse_t * sutc, double outputEndTime);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_setNumberOfPoints(UniformTimeCourse_t * utc, int numberOfPoints);
+SedUniformTimeCourse_setNumberOfPoints(SedUniformTimeCourse_t * sutc, int numberOfPoints);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_unsetInitialTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_unsetInitialTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_unsetOutputStartTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_unsetOutputStartTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_unsetOutputEndTime(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_unsetOutputEndTime(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_unsetNumberOfPoints(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_unsetNumberOfPoints(SedUniformTimeCourse_t * sutc);
 
 
 LIBSEDML_EXTERN
 int
-UniformTimeCourse_hasRequiredAttributes(UniformTimeCourse_t * utc);
+SedUniformTimeCourse_hasRequiredAttributes(SedUniformTimeCourse_t * sutc);
 
 
 
@@ -572,5 +572,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  UniformTimeCourse_H__  */
+#endif /*  SedUniformTimeCourse_H__  */
 

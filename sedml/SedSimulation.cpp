@@ -1,6 +1,6 @@
 /**
- * @file:   Simulation.cpp
- * @brief:  Implementation of the Simulation class
+ * @file:   SedSimulation.cpp
+ * @brief:  Implementation of the SedSimulation class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Simulation.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedSimulation.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,17 +45,17 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Simulation with the given level, version, and package version.
+ * Creates a new SedSimulation with the given level, version, and package version.
  */
-Simulation::Simulation (unsigned int level, unsigned int version)
+SedSimulation::SedSimulation (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mName ("")
 	, mAlgorithm (NULL)
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
 	// connect to child objects
 	connectToChild();
@@ -63,17 +63,17 @@ Simulation::Simulation (unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new Simulation with the given SedMLNamespaces object.
+ * Creates a new SedSimulation with the given SedNamespaces object.
  */
-Simulation::Simulation (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedSimulation::SedSimulation (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mId ("")
 	, mName ("")
 	, mAlgorithm (NULL)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 
 	// connect to child objects
 	connectToChild();
@@ -81,14 +81,14 @@ Simulation::Simulation (SedMLNamespaces* sedmlns)
 
 
 /*
- * Copy constructor for Simulation.
+ * Copy constructor for SedSimulation.
  */
-Simulation::Simulation (const Simulation& orig)
+SedSimulation::SedSimulation (const SedSimulation& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -103,14 +103,14 @@ Simulation::Simulation (const Simulation& orig)
 
 
 /*
- * Assignment for Simulation.
+ * Assignment for SedSimulation.
  */
-Simulation&
-Simulation::operator=(const Simulation& rhs)
+SedSimulation&
+SedSimulation::operator=(const SedSimulation& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -127,58 +127,58 @@ Simulation::operator=(const Simulation& rhs)
 
 
 /*
- * Clone for Simulation.
+ * Clone for SedSimulation.
  */
-Simulation*
-Simulation::clone () const
+SedSimulation*
+SedSimulation::clone () const
 {
-	return new Simulation(*this);
+	return new SedSimulation(*this);
 }
 
 
 /*
- * Destructor for Simulation.
+ * Destructor for SedSimulation.
  */
-Simulation::~Simulation ()
+SedSimulation::~SedSimulation ()
 {
 }
 
 
 /*
- * Returns the value of the "id" attribute of this Simulation.
+ * Returns the value of the "id" attribute of this SedSimulation.
  */
 const std::string&
-Simulation::getId() const
+SedSimulation::getId() const
 {
 	return mId;
 }
 
 
 /*
- * Returns the value of the "name" attribute of this Simulation.
+ * Returns the value of the "name" attribute of this SedSimulation.
  */
 const std::string&
-Simulation::getName() const
+SedSimulation::getName() const
 {
 	return mName;
 }
 
 
 /*
- * Returns the value of the "algorithm" attribute of this Simulation.
+ * Returns the value of the "algorithm" attribute of this SedSimulation.
  */
-const Algorithm*
-Simulation::getAlgorithm() const
+const SedAlgorithm*
+SedSimulation::getAlgorithm() const
 {
 	return mAlgorithm;
 }
 
 
 /*
- * Creates a new "algorithm" element of this Simulation and returns it.
+ * Creates a new "algorithm" element of this SedSimulation and returns it.
  */
-Algorithm*
-Simulation::createAlgorithm()
+SedAlgorithm*
+SedSimulation::createAlgorithm()
 {
 	mAlgorithm = new Algorithm();
 	return mAlgorithm;
@@ -189,7 +189,7 @@ Simulation::createAlgorithm()
  * Returns true/false if id is set.
  */
 bool
-Simulation::isSetId() const
+SedSimulation::isSetId() const
 {
 	return (mId.empty() == false);
 }
@@ -199,7 +199,7 @@ Simulation::isSetId() const
  * Returns true/false if name is set.
  */
 bool
-Simulation::isSetName() const
+SedSimulation::isSetName() const
 {
 	return (mName.empty() == false);
 }
@@ -209,7 +209,7 @@ Simulation::isSetName() const
  * Returns true/false if algorithm is set.
  */
 bool
-Simulation::isSetAlgorithm() const
+SedSimulation::isSetAlgorithm() const
 {
 	return (mAlgorithm != NULL);
 }
@@ -219,7 +219,7 @@ Simulation::isSetAlgorithm() const
  * Sets id and returns value indicating success.
  */
 int
-Simulation::setId(const std::string& id)
+SedSimulation::setId(const std::string& id)
 {
 	return SyntaxChecker::checkAndSetSId(id, mId);
 }
@@ -229,7 +229,7 @@ Simulation::setId(const std::string& id)
  * Sets name and returns value indicating success.
  */
 int
-Simulation::setName(const std::string& name)
+SedSimulation::setName(const std::string& name)
 {
 	if (&(name) == NULL)
 	{
@@ -247,7 +247,7 @@ Simulation::setName(const std::string& name)
  * Sets algorithm and returns value indicating success.
  */
 int
-Simulation::setAlgorithm(Algorithm* algorithm)
+SedSimulation::setAlgorithm(SedAlgorithm* algorithm)
 {
 	if (mAlgorithm == algorithm)
 	{
@@ -277,7 +277,7 @@ Simulation::setAlgorithm(Algorithm* algorithm)
  * Unsets id and returns value indicating success.
  */
 int
-Simulation::unsetId()
+SedSimulation::unsetId()
 {
 	mId.erase();
 
@@ -296,7 +296,7 @@ Simulation::unsetId()
  * Unsets name and returns value indicating success.
  */
 int
-Simulation::unsetName()
+SedSimulation::unsetName()
 {
 	mName.erase();
 
@@ -315,7 +315,7 @@ Simulation::unsetName()
  * Unsets algorithm and returns value indicating success.
  */
 int
-Simulation::unsetAlgorithm()
+SedSimulation::unsetAlgorithm()
 {
 	delete mAlgorithm;
 	mAlgorithm = NULL;
@@ -327,7 +327,7 @@ Simulation::unsetAlgorithm()
  * Returns the XML element name of this object
  */
 const std::string&
-Simulation::getElementName () const
+SedSimulation::getElementName () const
 {
 	static const string name = "simulation";
 	return name;
@@ -338,7 +338,7 @@ Simulation::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-Simulation::createObject(XMLInputStream& stream)
+SedSimulation::createObject(XMLInputStream& stream)
 {
 	SedBase* object = NULL;
 
@@ -348,7 +348,7 @@ Simulation::createObject(XMLInputStream& stream)
 
 	if (name == "algorithm")
 	{
-		mAlgorithm= new Algorithm();
+		mAlgorithm= new SedAlgorithm();
 		object = mAlgorithm;
 	}
 
@@ -360,7 +360,7 @@ Simulation::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Simulation::connectToChild ()
+SedSimulation::connectToChild ()
 {
 	SedBase::connectToChild();
 
@@ -371,7 +371,7 @@ Simulation::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Simulation::getTypeCode () const
+SedSimulation::getTypeCode () const
 {
 	return SEDML_SIMULATION;
 }
@@ -381,7 +381,7 @@ Simulation::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Simulation::hasRequiredAttributes () const
+SedSimulation::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -396,7 +396,7 @@ Simulation::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-Simulation::hasRequiredElements () const
+SedSimulation::hasRequiredElements () const
 {
 	bool allPresent = true;
 
@@ -410,7 +410,7 @@ Simulation::hasRequiredElements () const
  * write contained elements
  */
 void
-Simulation::writeElements (XMLOutputStream& stream) const
+SedSimulation::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 	if (isSetAlgorithm() == true)
@@ -426,10 +426,10 @@ Simulation::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Simulation::accept (SedMLVisitor& v) const
+SedSimulation::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -442,12 +442,12 @@ Simulation::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Simulation::setSedMLDocument (SedMLDocument* d)
+SedSimulation::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -460,7 +460,7 @@ Simulation::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Simulation::addExpectedAttributes(ExpectedAttributes& attributes)
+SedSimulation::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -478,7 +478,7 @@ Simulation::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Simulation::readAttributes (const XMLAttributes& attributes,
+SedSimulation::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -496,7 +496,7 @@ Simulation::readAttributes (const XMLAttributes& attributes,
 
 		if (mId.empty() == true)
 		{
-			logEmptyString(mId, getLevel(), getVersion(), "<Simulation>");
+			logEmptyString(mId, getLevel(), getVersion(), "<SedSimulation>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
@@ -515,7 +515,7 @@ Simulation::readAttributes (const XMLAttributes& attributes,
 
 		if (mName.empty() == true)
 		{
-			logEmptyString(mName, getLevel(), getVersion(), "<Simulation>");
+			logEmptyString(mName, getLevel(), getVersion(), "<SedSimulation>");
 		}
 	}
 
@@ -531,7 +531,7 @@ Simulation::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Simulation::writeAttributes (XMLOutputStream& stream) const
+SedSimulation::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -550,98 +550,98 @@ Simulation::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSimulations::SedListOfSimulations(unsigned int level, 
-	                     unsigned int version)
+SedListOfSedSimulations::SedListOfSedSimulations(unsigned int level, 
+	                        unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfSimulations::SedListOfSimulations(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedSimulations::SedListOfSedSimulations(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfSimulations 
+ * Returns a deep copy of this SedListOfSedSimulations 
  */
-SedListOfSimulations* 
-SedListOfSimulations::clone () const
+SedListOfSedSimulations* 
+SedListOfSedSimulations::clone () const
  {
-	return new SedListOfSimulations(*this);
+	return new SedListOfSedSimulations(*this);
 }
 
 
 /*
- * Get a Simulation from the SedListOfSimulations by index.
+ * Get a SedSimulation from the SedListOfSedSimulations by index.
 */
-Simulation*
-SedListOfSimulations::get(unsigned int n)
+SedSimulation*
+SedListOfSedSimulations::get(unsigned int n)
 {
-	return static_cast<Simulation*>(SedListOf::get(n));
+	return static_cast<SedSimulation*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Simulation from the SedListOfSimulations by index.
+ * Get a SedSimulation from the SedListOfSedSimulations by index.
  */
-const Simulation*
-SedListOfSimulations::get(unsigned int n) const
+const SedSimulation*
+SedListOfSedSimulations::get(unsigned int n) const
 {
-	return static_cast<const Simulation*>(SedListOf::get(n));
+	return static_cast<const SedSimulation*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Simulation from the SedListOfSimulations by id.
+ * Get a SedSimulation from the SedListOfSedSimulations by id.
  */
-Simulation*
-SedListOfSimulations::get(const std::string& sid)
+SedSimulation*
+SedListOfSedSimulations::get(const std::string& sid)
 {
-	return const_cast<Simulation*>(
-	  static_cast<const SedListOfSimulations&>(*this).get(sid));
+	return const_cast<SedSimulation*>(
+	  static_cast<const SedListOfSedSimulations&>(*this).get(sid));
 }
 
 
 /*
- * Get a Simulation from the SedListOfSimulations by id.
+ * Get a SedSimulation from the SedListOfSedSimulations by id.
  */
-const Simulation*
-SedListOfSimulations::get(const std::string& sid) const
+const SedSimulation*
+SedListOfSedSimulations::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Simulation>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <Simulation*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSimulation>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedSimulation*> (*result);
 }
 
 
 /*
- * Removes the nth Simulation from this SedListOfSimulations
+ * Removes the nth SedSimulation from this SedListOfSedSimulations
  */
-Simulation*
-SedListOfSimulations::remove(unsigned int n)
+SedSimulation*
+SedListOfSedSimulations::remove(unsigned int n)
 {
-	return static_cast<Simulation*>(SedListOf::remove(n));
+	return static_cast<SedSimulation*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the Simulation from this SedListOfSimulations with the given identifier
+ * Removes the SedSimulation from this SedListOfSedSimulations with the given identifier
  */
-Simulation*
-SedListOfSimulations::remove(const std::string& sid)
+SedSimulation*
+SedListOfSedSimulations::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Simulation>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSimulation>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -649,7 +649,7 @@ SedListOfSimulations::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <Simulation*> (item);
+	return static_cast <SedSimulation*> (item);
 }
 
 
@@ -657,7 +657,7 @@ SedListOfSimulations::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSimulations::getElementName () const
+SedListOfSedSimulations::getElementName () const
 {
 	static const string name = "listOfSimulations";
 	return name;
@@ -668,7 +668,7 @@ SedListOfSimulations::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSimulations::getTypeCode () const
+SedListOfSedSimulations::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -678,7 +678,7 @@ SedListOfSimulations::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSimulations::getItemTypeCode () const
+SedListOfSedSimulations::getItemTypeCode () const
 {
 	return SEDML_SIMULATION;
 }
@@ -687,17 +687,17 @@ SedListOfSimulations::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new Simulation in this SedListOfSimulations
+ * Creates a new SedSimulation in this SedListOfSedSimulations
  */
 SedBase*
-SedListOfSimulations::createObject(XMLInputStream& stream)
+SedListOfSedSimulations::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "uniformTimeCourse")
 	{
-		object = new UniformTimeCourse(getSedMLNamespaces());
+		object = new SedUniformTimeCourse(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -711,10 +711,10 @@ SedListOfSimulations::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfSimulations::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedSimulations::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -739,10 +739,10 @@ SedListOfSimulations::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Simulation_t *
-Simulation_create(unsigned int level, unsigned int version)
+SedSimulation_t *
+SedSimulation_create(unsigned int level, unsigned int version)
 {
-	return new Simulation(level, version);
+	return new SedSimulation(level, version);
 }
 
 
@@ -751,10 +751,10 @@ Simulation_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Simulation_free(Simulation_t * s)
+SedSimulation_free(SedSimulation_t * ss)
 {
-	if (s != NULL)
-		delete s;
+	if (ss != NULL)
+		delete ss;
 }
 
 
@@ -762,12 +762,12 @@ Simulation_free(Simulation_t * s)
  * write comments
  */
 LIBSEDML_EXTERN
-Simulation_t *
-Simulation_clone(Simulation_t * s)
+SedSimulation_t *
+SedSimulation_clone(SedSimulation_t * ss)
 {
-	if (s != NULL)
+	if (ss != NULL)
 	{
-		return static_cast<Simulation_t*>(s->clone());
+		return static_cast<SedSimulation_t*>(ss->clone());
 	}
 	else
 	{
@@ -781,12 +781,12 @@ Simulation_clone(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 char *
-Simulation_getId(Simulation_t * s)
+SedSimulation_getId(SedSimulation_t * ss)
 {
-	if (s == NULL)
+	if (ss == NULL)
 		return NULL;
 
-	return s->getId().empty() ? NULL : safe_strdup(s->getId().c_str());
+	return ss->getId().empty() ? NULL : safe_strdup(ss->getId().c_str());
 }
 
 
@@ -795,12 +795,12 @@ Simulation_getId(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 char *
-Simulation_getName(Simulation_t * s)
+SedSimulation_getName(SedSimulation_t * ss)
 {
-	if (s == NULL)
+	if (ss == NULL)
 		return NULL;
 
-	return s->getName().empty() ? NULL : safe_strdup(s->getName().c_str());
+	return ss->getName().empty() ? NULL : safe_strdup(ss->getName().c_str());
 }
 
 
@@ -809,23 +809,23 @@ Simulation_getName(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 Algorithm_t*
-Simulation_getAlgorithm(Simulation_t * s)
+SedSimulation_getAlgorithm(SedSimulation_t * ss)
 {
-	if (s == NULL)
+	if (ss == NULL)
 		return NULL;
 
-	return (Algorithm_t*)s->getAlgorithm();
+	return (Algorithm_t*)ss->getAlgorithm();
 }
 
 
 LIBSEDML_EXTERN
 Algorithm_t*
-Simulation_createAlgorithm(Simulation_t * s)
+SedSimulation_createAlgorithm(SedSimulation_t * ss)
 {
-	if (s == NULL)
+	if (ss == NULL)
 		return NULL;
 
-	return (Algorithm_t*)s->createAlgorithm();
+	return (Algorithm_t*)ss->createAlgorithm();
 }
 
 
@@ -834,9 +834,9 @@ Simulation_createAlgorithm(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_isSetId(Simulation_t * s)
+SedSimulation_isSetId(SedSimulation_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->isSetId()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->isSetId()) : 0;
 }
 
 
@@ -845,9 +845,9 @@ Simulation_isSetId(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_isSetName(Simulation_t * s)
+SedSimulation_isSetName(SedSimulation_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->isSetName()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->isSetName()) : 0;
 }
 
 
@@ -856,9 +856,9 @@ Simulation_isSetName(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_isSetAlgorithm(Simulation_t * s)
+SedSimulation_isSetAlgorithm(SedSimulation_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->isSetAlgorithm()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->isSetAlgorithm()) : 0;
 }
 
 
@@ -867,9 +867,9 @@ Simulation_isSetAlgorithm(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_setId(Simulation_t * s, const char * id)
+SedSimulation_setId(SedSimulation_t * ss, const char * id)
 {
-	return (s != NULL) ? s->setId(id) : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -878,9 +878,9 @@ Simulation_setId(Simulation_t * s, const char * id)
  */
 LIBSEDML_EXTERN
 int
-Simulation_setName(Simulation_t * s, const char * name)
+SedSimulation_setName(SedSimulation_t * ss, const char * name)
 {
-	return (s != NULL) ? s->setName(name) : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -889,9 +889,9 @@ Simulation_setName(Simulation_t * s, const char * name)
  */
 LIBSEDML_EXTERN
 int
-Simulation_setAlgorithm(Simulation_t * s, Algorithm_t* algorithm)
+SedSimulation_setAlgorithm(SedSimulation_t * ss, Algorithm_t* algorithm)
 {
-	return (s != NULL) ? s->setAlgorithm(algorithm) : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->setAlgorithm(algorithm) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -900,9 +900,9 @@ Simulation_setAlgorithm(Simulation_t * s, Algorithm_t* algorithm)
  */
 LIBSEDML_EXTERN
 int
-Simulation_unsetId(Simulation_t * s)
+SedSimulation_unsetId(SedSimulation_t * ss)
 {
-	return (s != NULL) ? s->unsetId() : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -911,9 +911,9 @@ Simulation_unsetId(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_unsetName(Simulation_t * s)
+SedSimulation_unsetName(SedSimulation_t * ss)
 {
-	return (s != NULL) ? s->unsetName() : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -922,9 +922,9 @@ Simulation_unsetName(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_unsetAlgorithm(Simulation_t * s)
+SedSimulation_unsetAlgorithm(SedSimulation_t * ss)
 {
-	return (s != NULL) ? s->unsetAlgorithm() : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->unsetAlgorithm() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -933,9 +933,9 @@ Simulation_unsetAlgorithm(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_hasRequiredAttributes(Simulation_t * s)
+SedSimulation_hasRequiredAttributes(SedSimulation_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->hasRequiredAttributes()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->hasRequiredAttributes()) : 0;
 }
 
 
@@ -944,9 +944,9 @@ Simulation_hasRequiredAttributes(Simulation_t * s)
  */
 LIBSEDML_EXTERN
 int
-Simulation_hasRequiredElements(Simulation_t * s)
+SedSimulation_hasRequiredElements(SedSimulation_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->hasRequiredElements()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->hasRequiredElements()) : 0;
 }
 
 
@@ -954,13 +954,13 @@ Simulation_hasRequiredElements(Simulation_t * s)
  * write comments
  */
 LIBSEDML_EXTERN
-Simulation_t *
-SedListOfSimulations_getById(SedListOf_t * lo, const char * sid)
+SedSimulation_t *
+SedListOfSedSimulations_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSimulations *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedSimulations *>(lo)->get(sid) : NULL;
 }
 
 
@@ -968,13 +968,13 @@ SedListOfSimulations_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-Simulation_t *
-SedListOfSimulations_removeById(SedListOf_t * lo, const char * sid)
+SedSimulation_t *
+SedListOfSedSimulations_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSimulations *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedSimulations *>(lo)->remove(sid) : NULL;
 }
 
 

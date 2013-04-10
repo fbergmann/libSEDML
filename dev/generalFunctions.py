@@ -73,7 +73,10 @@ def parseAttribute(attrib):
       attTypeCode = 'ASTNode*'
     else:
       #attTypeCode = 'element-not-done'
-      attTypeCode = '{0}*'.format(strFunctions.cap(attrib['name']))
+      if attrib.has_key('element'):
+	    attTypeCode = '{0}*'.format(attrib['element'])
+      else:
+        attTypeCode = '{0}*'.format(strFunctions.cap(attrib['name']))
     num = False
   elif attrib['type'] == 'lo_element':
     attType = 'lo_element'
@@ -249,17 +252,17 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
 def writeAcceptHeader(outFile):
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
-  outFile.write('\t * Accepts the given SedMLVisitor.\n')
+  outFile.write('\t * Accepts the given SedVisitor.\n')
   outFile.write('\t */\n')
-  outFile.write('\tvirtual bool accept (SedMLVisitor& v) const;\n\n\n')
+  outFile.write('\tvirtual bool accept (SedVisitor& v) const;\n\n\n')
   writeInternalEnd(outFile)
 
 def writeAcceptCPPCode(outFile, element):
   writeInternalStart(outFile)
   outFile.write('/*\n')
-  outFile.write(' * Accepts the given SedMLVisitor.\n')
+  outFile.write(' * Accepts the given SedVisitor.\n')
   outFile.write(' */\n')
-  outFile.write('bool\n{0}::accept (SedMLVisitor& v) const\n'.format(element))
+  outFile.write('bool\n{0}::accept (SedVisitor& v) const\n'.format(element))
   outFile.write('{\n')
   outFile.write('\treturn false;\n\n')
   outFile.write('}\n\n\n')
@@ -268,19 +271,19 @@ def writeAcceptCPPCode(outFile, element):
 def writeSetDocHeader(outFile):
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
-  outFile.write('\t * Sets the parent SedMLDocument.\n')
+  outFile.write('\t * Sets the parent SedDocument.\n')
   outFile.write('\t */\n')
-  outFile.write('\tvirtual void setSedMLDocument (SedMLDocument* d);\n\n\n')
+  outFile.write('\tvirtual void setSedDocument (SedDocument* d);\n\n\n')
   writeInternalEnd(outFile)
 
 def writeSetDocCPPCode(outFile, element, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
-  outFile.write(' * Sets the parent SedMLDocument.\n')
+  outFile.write(' * Sets the parent SedDocument.\n')
   outFile.write(' */\n')
-  outFile.write('void\n{0}::setSedMLDocument (SedMLDocument* d)\n'.format(element))
+  outFile.write('void\n{0}::setSedDocument (SedDocument* d)\n'.format(element))
   outFile.write('{\n')
-  outFile.write('\t{0}::setSedMLDocument(d);\n'.format(baseClass))
+  outFile.write('\t{0}::setSedDocument(d);\n'.format(baseClass))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -585,14 +588,14 @@ def writeGetElementNameHeader(outFile, element, isSedListOf):
   outFile.write('\t */\n')
   outFile.write('\tvirtual const std::string& getElementName () const;\n\n\n')
 
-def writeGetElementNameCPPCode(outFile, element, isSedMLListOf=False, dict=None):
+def writeGetElementNameCPPCode(outFile, element, isSedListOf=False, dict=None):
   outFile.write('/*\n')
   outFile.write(' * Returns the XML element name of this object\n')
   outFile.write(' */\n')
   outFile.write('const std::string&\n{0}::getElementName () const\n'.format(element))
   outFile.write('{\n')
   if dict != None and dict.has_key('elementName'):
-    if isSedMLListOf:
+    if isSedListOf:
       outFile.write('\tstatic const string name = "listOf{0}s";\n'.format(strFunctions.cap(dict['elementName'])))
     else:
       outFile.write('\tstatic const string name = "{0}";\n'.format(dict['elementName']))
@@ -686,8 +689,8 @@ def writeReadOtherXMLCPPCode(outFile, element, baseClass='SedBase'):
   outFile.write('\tif (name == "math")\n\t{\n')
   outFile.write('\t\tconst XMLToken elem = stream.peek();\n')
   outFile.write('\t\tconst std::string prefix = checkMathMLNamespace(elem);\n\n')
-  #outFile.write('\t\tif (stream.getSedMLNamespaces() == NULL)\n\t\t{\n')
-  #outFile.write('\t\t\tstream.setSedMLNamespaces(new SedMLNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
+  #outFile.write('\t\tif (stream.getSedNamespaces() == NULL)\n\t\t{\n')
+  #outFile.write('\t\t\tstream.setSedNamespaces(new SedNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
   outFile.write('\t\tdelete mMath;\n')
   outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
   #outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')

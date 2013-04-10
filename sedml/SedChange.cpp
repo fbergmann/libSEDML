@@ -1,6 +1,6 @@
 /**
- * @file:   Change.cpp
- * @brief:  Implementation of the Change class
+ * @file:   SedChange.cpp
+ * @brief:  Implementation of the SedChange class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Change.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedChange.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,40 +45,40 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Change with the given level, version, and package version.
+ * Creates a new SedChange with the given level, version, and package version.
  */
-Change::Change (unsigned int level, unsigned int version)
+SedChange::SedChange (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mTarget ("")
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new Change with the given SedMLNamespaces object.
+ * Creates a new SedChange with the given SedNamespaces object.
  */
-Change::Change (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedChange::SedChange (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mTarget ("")
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for Change.
+ * Copy constructor for SedChange.
  */
-Change::Change (const Change& orig)
+SedChange::SedChange (const SedChange& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -88,14 +88,14 @@ Change::Change (const Change& orig)
 
 
 /*
- * Assignment for Change.
+ * Assignment for SedChange.
  */
-Change&
-Change::operator=(const Change& rhs)
+SedChange&
+SedChange::operator=(const SedChange& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -107,28 +107,28 @@ Change::operator=(const Change& rhs)
 
 
 /*
- * Clone for Change.
+ * Clone for SedChange.
  */
-Change*
-Change::clone () const
+SedChange*
+SedChange::clone () const
 {
-	return new Change(*this);
+	return new SedChange(*this);
 }
 
 
 /*
- * Destructor for Change.
+ * Destructor for SedChange.
  */
-Change::~Change ()
+SedChange::~SedChange ()
 {
 }
 
 
 /*
- * Returns the value of the "target" attribute of this Change.
+ * Returns the value of the "target" attribute of this SedChange.
  */
 const std::string&
-Change::getTarget() const
+SedChange::getTarget() const
 {
 	return mTarget;
 }
@@ -138,7 +138,7 @@ Change::getTarget() const
  * Returns true/false if target is set.
  */
 bool
-Change::isSetTarget() const
+SedChange::isSetTarget() const
 {
 	return (mTarget.empty() == false);
 }
@@ -148,7 +148,7 @@ Change::isSetTarget() const
  * Sets target and returns value indicating success.
  */
 int
-Change::setTarget(const std::string& target)
+SedChange::setTarget(const std::string& target)
 {
 	if (&(target) == NULL)
 	{
@@ -166,7 +166,7 @@ Change::setTarget(const std::string& target)
  * Unsets target and returns value indicating success.
  */
 int
-Change::unsetTarget()
+SedChange::unsetTarget()
 {
 	mTarget.erase();
 
@@ -185,7 +185,7 @@ Change::unsetTarget()
  * Returns the XML element name of this object
  */
 const std::string&
-Change::getElementName () const
+SedChange::getElementName () const
 {
 	static const string name = "change";
 	return name;
@@ -196,7 +196,7 @@ Change::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Change::getTypeCode () const
+SedChange::getTypeCode () const
 {
 	return SEDML_CHANGE;
 }
@@ -206,7 +206,7 @@ Change::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Change::hasRequiredAttributes () const
+SedChange::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -223,7 +223,7 @@ Change::hasRequiredAttributes () const
  * write contained elements
  */
 void
-Change::writeElements (XMLOutputStream& stream) const
+SedChange::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -235,10 +235,10 @@ Change::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Change::accept (SedMLVisitor& v) const
+SedChange::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -251,12 +251,12 @@ Change::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Change::setSedMLDocument (SedMLDocument* d)
+SedChange::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -269,7 +269,7 @@ Change::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Change::addExpectedAttributes(ExpectedAttributes& attributes)
+SedChange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -286,7 +286,7 @@ Change::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Change::readAttributes (const XMLAttributes& attributes,
+SedChange::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -304,7 +304,7 @@ Change::readAttributes (const XMLAttributes& attributes,
 
 		if (mTarget.empty() == true)
 		{
-			logEmptyString(mTarget, getLevel(), getVersion(), "<Change>");
+			logEmptyString(mTarget, getLevel(), getVersion(), "<SedChange>");
 		}
 	}
 
@@ -320,7 +320,7 @@ Change::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Change::writeAttributes (XMLOutputStream& stream) const
+SedChange::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -336,98 +336,98 @@ Change::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfChanges::SedListOfChanges(unsigned int level, 
-	                 unsigned int version)
+SedListOfSedChanges::SedListOfSedChanges(unsigned int level, 
+	                    unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfChanges::SedListOfChanges(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedChanges::SedListOfSedChanges(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfChanges 
+ * Returns a deep copy of this SedListOfSedChanges 
  */
-SedListOfChanges* 
-SedListOfChanges::clone () const
+SedListOfSedChanges* 
+SedListOfSedChanges::clone () const
  {
-	return new SedListOfChanges(*this);
+	return new SedListOfSedChanges(*this);
 }
 
 
 /*
- * Get a Change from the SedListOfChanges by index.
+ * Get a SedChange from the SedListOfSedChanges by index.
 */
-Change*
-SedListOfChanges::get(unsigned int n)
+SedChange*
+SedListOfSedChanges::get(unsigned int n)
 {
-	return static_cast<Change*>(SedListOf::get(n));
+	return static_cast<SedChange*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Change from the SedListOfChanges by index.
+ * Get a SedChange from the SedListOfSedChanges by index.
  */
-const Change*
-SedListOfChanges::get(unsigned int n) const
+const SedChange*
+SedListOfSedChanges::get(unsigned int n) const
 {
-	return static_cast<const Change*>(SedListOf::get(n));
+	return static_cast<const SedChange*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Change from the SedListOfChanges by id.
+ * Get a SedChange from the SedListOfSedChanges by id.
  */
-Change*
-SedListOfChanges::get(const std::string& sid)
+SedChange*
+SedListOfSedChanges::get(const std::string& sid)
 {
-	return const_cast<Change*>(
-	  static_cast<const SedListOfChanges&>(*this).get(sid));
+	return const_cast<SedChange*>(
+	  static_cast<const SedListOfSedChanges&>(*this).get(sid));
 }
 
 
 /*
- * Get a Change from the SedListOfChanges by id.
+ * Get a SedChange from the SedListOfSedChanges by id.
  */
-const Change*
-SedListOfChanges::get(const std::string& sid) const
+const SedChange*
+SedListOfSedChanges::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Change>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <Change*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedChange>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedChange*> (*result);
 }
 
 
 /*
- * Removes the nth Change from this SedListOfChanges
+ * Removes the nth SedChange from this SedListOfSedChanges
  */
-Change*
-SedListOfChanges::remove(unsigned int n)
+SedChange*
+SedListOfSedChanges::remove(unsigned int n)
 {
-	return static_cast<Change*>(SedListOf::remove(n));
+	return static_cast<SedChange*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the Change from this SedListOfChanges with the given identifier
+ * Removes the SedChange from this SedListOfSedChanges with the given identifier
  */
-Change*
-SedListOfChanges::remove(const std::string& sid)
+SedChange*
+SedListOfSedChanges::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Change>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedChange>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -435,7 +435,7 @@ SedListOfChanges::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <Change*> (item);
+	return static_cast <SedChange*> (item);
 }
 
 
@@ -443,7 +443,7 @@ SedListOfChanges::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfChanges::getElementName () const
+SedListOfSedChanges::getElementName () const
 {
 	static const string name = "listOfChanges";
 	return name;
@@ -454,7 +454,7 @@ SedListOfChanges::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfChanges::getTypeCode () const
+SedListOfSedChanges::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -464,7 +464,7 @@ SedListOfChanges::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfChanges::getItemTypeCode () const
+SedListOfSedChanges::getItemTypeCode () const
 {
 	return SEDML_CHANGE;
 }
@@ -473,29 +473,29 @@ SedListOfChanges::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new Change in this SedListOfChanges
+ * Creates a new SedChange in this SedListOfSedChanges
  */
 SedBase*
-SedListOfChanges::createObject(XMLInputStream& stream)
+SedListOfSedChanges::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "removeXML")
 	{
-		object = new RemoveXML(getSedMLNamespaces());
+		object = new SedRemoveXML(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
 	if (name == "changeAttribute")
 	{
-		object = new ChangeAttribute(getSedMLNamespaces());
+		object = new SedChangeAttribute(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
 	if (name == "computeChange")
 	{
-		object = new ComputeChange(getSedMLNamespaces());
+		object = new SedComputeChange(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -509,10 +509,10 @@ SedListOfChanges::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfChanges::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedChanges::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -537,10 +537,10 @@ SedListOfChanges::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Change_t *
-Change_create(unsigned int level, unsigned int version)
+SedChange_t *
+SedChange_create(unsigned int level, unsigned int version)
 {
-	return new Change(level, version);
+	return new SedChange(level, version);
 }
 
 
@@ -549,10 +549,10 @@ Change_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Change_free(Change_t * c)
+SedChange_free(SedChange_t * sc)
 {
-	if (c != NULL)
-		delete c;
+	if (sc != NULL)
+		delete sc;
 }
 
 
@@ -560,12 +560,12 @@ Change_free(Change_t * c)
  * write comments
  */
 LIBSEDML_EXTERN
-Change_t *
-Change_clone(Change_t * c)
+SedChange_t *
+SedChange_clone(SedChange_t * sc)
 {
-	if (c != NULL)
+	if (sc != NULL)
 	{
-		return static_cast<Change_t*>(c->clone());
+		return static_cast<SedChange_t*>(sc->clone());
 	}
 	else
 	{
@@ -579,12 +579,12 @@ Change_clone(Change_t * c)
  */
 LIBSEDML_EXTERN
 char *
-Change_getTarget(Change_t * c)
+SedChange_getTarget(SedChange_t * sc)
 {
-	if (c == NULL)
+	if (sc == NULL)
 		return NULL;
 
-	return c->getTarget().empty() ? NULL : safe_strdup(c->getTarget().c_str());
+	return sc->getTarget().empty() ? NULL : safe_strdup(sc->getTarget().c_str());
 }
 
 
@@ -593,9 +593,9 @@ Change_getTarget(Change_t * c)
  */
 LIBSEDML_EXTERN
 int
-Change_isSetTarget(Change_t * c)
+SedChange_isSetTarget(SedChange_t * sc)
 {
-	return (c != NULL) ? static_cast<int>(c->isSetTarget()) : 0;
+	return (sc != NULL) ? static_cast<int>(sc->isSetTarget()) : 0;
 }
 
 
@@ -604,9 +604,9 @@ Change_isSetTarget(Change_t * c)
  */
 LIBSEDML_EXTERN
 int
-Change_setTarget(Change_t * c, const char * target)
+SedChange_setTarget(SedChange_t * sc, const char * target)
 {
-	return (c != NULL) ? c->setTarget(target) : LIBSEDML_INVALID_OBJECT;
+	return (sc != NULL) ? sc->setTarget(target) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -615,9 +615,9 @@ Change_setTarget(Change_t * c, const char * target)
  */
 LIBSEDML_EXTERN
 int
-Change_unsetTarget(Change_t * c)
+SedChange_unsetTarget(SedChange_t * sc)
 {
-	return (c != NULL) ? c->unsetTarget() : LIBSEDML_INVALID_OBJECT;
+	return (sc != NULL) ? sc->unsetTarget() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -626,9 +626,9 @@ Change_unsetTarget(Change_t * c)
  */
 LIBSEDML_EXTERN
 int
-Change_hasRequiredAttributes(Change_t * c)
+SedChange_hasRequiredAttributes(SedChange_t * sc)
 {
-	return (c != NULL) ? static_cast<int>(c->hasRequiredAttributes()) : 0;
+	return (sc != NULL) ? static_cast<int>(sc->hasRequiredAttributes()) : 0;
 }
 
 
@@ -636,13 +636,13 @@ Change_hasRequiredAttributes(Change_t * c)
  * write comments
  */
 LIBSEDML_EXTERN
-Change_t *
-SedListOfChanges_getById(SedListOf_t * lo, const char * sid)
+SedChange_t *
+SedListOfSedChanges_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfChanges *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedChanges *>(lo)->get(sid) : NULL;
 }
 
 
@@ -650,13 +650,13 @@ SedListOfChanges_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-Change_t *
-SedListOfChanges_removeById(SedListOf_t * lo, const char * sid)
+SedChange_t *
+SedListOfSedChanges_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfChanges *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedChanges *>(lo)->remove(sid) : NULL;
 }
 
 

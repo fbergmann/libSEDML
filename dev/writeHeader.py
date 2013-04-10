@@ -33,11 +33,11 @@ def writeConstructors(element, package, output):
   output.write('SEDML_DEFAULT_VERSION);\n\n\n')
   output.write('\t/**\n\t * ' )
   output.write('Creates a new {0}'.format(element))
-  output.write(' with the given SedMLNamespaces object.\n')
+  output.write(' with the given SedNamespaces object.\n')
   output.write('\t *\n')
-  output.write('\t * @param {0}ns the SedMLNamespaces object'.format(package.lower()))
+  output.write('\t * @param {0}ns the SedNamespaces object'.format(package.lower()))
   output.write('\n\t */\n')
-  output.write('\t{0}(SedMLNamespaces* {1}ns);\n\n\n '.format(element,package.lower()))
+  output.write('\t{0}(SedNamespaces* {1}ns);\n\n\n '.format(element,package.lower()))
   output.write('\t/**\n\t * ' )
   output.write('Copy constructor for {0}.\n'.format(element))
   output.write('\t *\n')
@@ -82,10 +82,10 @@ def writeAtt(attrib, output):
     if attTypeCode == 'ASTNode*' or attName== 'Math':
       output.write('\tASTNode*      m{0};\n'.format(capAttName))
     else:
-      output.write('\t{0}*      m{0};\n'.format(capAttName))
+      output.write('\t{0}*      m{1};\n'.format(attrib['element'], capAttName))
       return
   elif attType == 'lo_element':
-    output.write('\t{0}   m{1};\n'.format(generalFunctions.writeListOf(attTypeCode), capAttName))
+    output.write('\t{0}   m{1};\n'.format(generalFunctions.writeListOf(capAttName), capAttName))
   elif num == True:
     while len(attTypeCode) < 13:
       attTypeCode = attTypeCode + ' '
@@ -138,16 +138,16 @@ def writeGetFunction(attrib, output, element):
       output.write('\t * @return the \"{0}\"'.format(attName))
       output.write(' element of this {0}.\n'.format(element))
       output.write('\t */\n')
-      output.write('\tvirtual const {0}*'.format(capAttName))
+      output.write('\tvirtual const {0}*'.format(attrib['element']))
       output.write(' get{0}() const;\n\n\n'.format(capAttName))
       output.write('\t/**\n')
-      output.write('\t * Creates a new \"{0}\"'.format(attName))
+      output.write('\t * Creates a new \"{0}\"'.format(attrib['element']))
       output.write(' and sets it for this {0}.\n'.format(element))
       output.write('\t *\n')
-      output.write('\t * @return the created \"{0}\"'.format(attName))
+      output.write('\t * @return the created \"{0}\"'.format(attrib['element']))
       output.write(' element of this {0}.\n'.format(element))
       output.write('\t */\n')
-      output.write('\tvirtual {0}*'.format(capAttName))
+      output.write('\tvirtual {0}*'.format(attrib['element']))
       output.write(' create{0}();\n\n\n'.format(capAttName))
   else:
     output.write('\t/**\n')
@@ -282,7 +282,7 @@ def writeAttributeFunctions(attrs, output, element, elementDict):
       
 
 def writeListOfSubFunctions(attrib, output, element, elementDict):
-  loname = generalFunctions.writeListOf(attrib['element'])
+  loname = generalFunctions.writeListOf(strFunctions.cap(attrib['name']))
   output.write('\t/**\n')
   output.write('\t * Returns the  \"{0}\"'.format(loname))
   output.write(' in this {0} object.\n'.format(element))
@@ -291,8 +291,8 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
   output.write(' attribute of this {0}.\n'.format(element))
   output.write('\t */\n')
   output.write('\tconst {0}*'.format(loname))
-  output.write(' getListOf{0}s() const;\n\n\n'.format(attrib['element']))
-  writeListOfHeader.writeGetFunctions(output, attrib['element'], True, element)
+  output.write(' getListOf{0}s() const;\n\n\n'.format(strFunctions.cap(attrib['name'])))
+  writeListOfHeader.writeGetFunctions(output, strFunctions.cap(attrib['name']), attrib['element'], True, element)
   output.write('\t/**\n')
   output.write('\t * Adds a copy the given \"{0}\" to this {1}.\n'.format(attrib['element'], element))
   output.write('\t *\n')
@@ -305,13 +305,13 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
   output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
   output.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
   output.write('\t */\n')
-  output.write('\tint add{0}(const {0}* {1});\n\n\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
+  output.write('\tint add{0}(const {1}* {2});\n\n\n'.format(strFunctions.cap(attrib['name']), attrib['element'], strFunctions.objAbbrev(attrib['element'])))
   output.write('\t/**\n')
   output.write('\t * Get the number of {0} objects in this {1}.\n'.format(attrib['element'], element))
   output.write('\t *\n')
   output.write('\t * @return the number of {0} objects in this {1}\n'.format(attrib['element'], element))
   output.write('\t */\n')
-  output.write('\tunsigned int getNum{0}s() const;\n\n\n'.format(attrib['element']))
+  output.write('\tunsigned int getNum{0}s() const;\n\n\n'.format(strFunctions.cap(attrib['name'])))
   if attrib.has_key('abstract') == False or (attrib.has_key('abstract') and attrib['abstract'] == False):
     output.write('\t/**\n')
     output.write('\t * Creates a new {0} object, adds it to this {1}s\n'.format(attrib['element'], element))
@@ -319,9 +319,9 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
     output.write('\t *\n')
     output.write('\t * @return a new {0} object instance\n'.format(attrib['element']))
     output.write('\t *\n')
-    output.write('\t * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
+    output.write('\t * @see add{0}(const {1}* {2})\n'.format(strFunctions.cap(attrib['name']), attrib['element'], strFunctions.objAbbrev(attrib['element'])))
     output.write('\t */\n')
-    output.write('\t{0}* create{0}();\n\n\n'.format(attrib['element']))
+    output.write('\t{0}* create{1}();\n\n\n'.format(attrib['element'], strFunctions.cap(attrib['name'])))
   elif attrib.has_key('concrete'):
     for elem in attrib['concrete']:
       output.write('\t/**\n')
@@ -332,8 +332,8 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
       output.write('\t *\n')
       output.write('\t * @see add{0}(const {0}* {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
       output.write('\t */\n')
-      output.write('\t{0}* create{0}();\n\n\n'.format(elem['element']))
-  writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
+      output.write('\t{0}* create{1}();\n\n\n'.format(elem['element'], strFunctions.cap(elem['name'])))
+  writeListOfHeader.writeRemoveFunctions(output, strFunctions.cap(attrib['name']), attrib['element'], True, element)
  
 #write class
 def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf, elementDict):
@@ -370,7 +370,7 @@ def writeIncludes(fileOut, element, pkg):
   fileOut.write('\n\n');
   fileOut.write('#include <sedml/SedBase.h>\n')
   fileOut.write('#include <sedml/SedListOf.h>\n')
-  fileOut.write('#include <sedml/SedMLNamespaces.h>\n')
+  fileOut.write('#include <sedml/SedNamespaces.h>\n')
   fileOut.write('\n\n');
   fileOut.write('LIBSEDML_CPP_NAMESPACE_BEGIN\n')
   fileOut.write('\n\n');

@@ -1,11 +1,11 @@
 /**
- * @file    SedMLNamespaces.h
- * @brief   SedMLNamespaces class to store level/version and namespace 
+ * @file    SedNamespaces.h
+ * @brief   SedNamespaces class to store level/version and namespace 
  * @author  Sarah Keating
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -25,41 +25,41 @@
  * and also available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class SedMLNamespaces
+ * @class SedNamespaces
  * @ingroup Core
- * @brief Class to store SedML level, version and namespace information.
+ * @brief Class to store Sed level, version and namespace information.
  *
  * @htmlinclude not-sbml-warning.html
  *
  * There are differences in the definitions of components between different
- * SedML Levels, as well as Versions within Levels.  For example, the
+ * Sed Levels, as well as Versions within Levels.  For example, the
  * "sboTerm" attribute was not introduced until Level&nbsp;2
- * Version&nbsp;2, and then only on certain component classes; the SedML
+ * Version&nbsp;2, and then only on certain component classes; the Sed
  * Level&nbsp;2 Version&nbsp;3 specification moved the "sboTerm" attribute
  * to the SBase class, thereby allowing nearly all components to have SBO
- * annotations.  As a result of differences such as those, libSedML needs to
- * track the SedML Level and Version of every object created.
+ * annotations.  As a result of differences such as those, libSed needs to
+ * track the Sed Level and Version of every object created.
  * 
- * The purpose of the SedMLNamespaces object class is to make it easier to
- * communicate SedML Level and Version data between libSedML constructors and
- * other methods.  The SedMLNamespaces object class tracks 3-tuples
- * (triples) consisting of SedML Level, Version, and the corresponding SedML
+ * The purpose of the SedNamespaces object class is to make it easier to
+ * communicate Sed Level and Version data between libSed constructors and
+ * other methods.  The SedNamespaces object class tracks 3-tuples
+ * (triples) consisting of Sed Level, Version, and the corresponding Sed
  * XML namespace.
  *
- * The plural name (SedMLNamespaces) is not a mistake, because in SedML
+ * The plural name (SedNamespaces) is not a mistake, because in Sed
  * Level&nbsp;3, objects may have extensions added by Level&nbsp;3 packages
  * used by a given model and therefore may have multiple namespaces
- * associated with them; however, until the introduction of SedML
- * Level&nbsp;3, the SedMLNamespaces object only records one SedML
+ * associated with them; however, until the introduction of Sed
+ * Level&nbsp;3, the SedNamespaces object only records one Sed
  * Level/Version/namespace combination at a time.  Most constructors for
- * SedML objects in libSedML take a SedMLNamespaces object as an argument,
+ * Sed objects in libSed take a SedNamespaces object as an argument,
  * thereby allowing the constructor to produce the proper combination of
- * attributes and other internal data structures for the given SedML Level
+ * attributes and other internal data structures for the given Sed Level
  * and Version.
  */
 
-#ifndef SedMLNamespaces_h
-#define SedMLNamespaces_h
+#ifndef SedNamespaces_h
+#define SedNamespaces_h
 
 #include <sbml/xml/XMLNamespaces.h>
 #include <sedml/common/common.h>
@@ -84,209 +84,209 @@ static const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-class LIBSEDML_EXTERN SedMLNamespaces
+class LIBSEDML_EXTERN SedNamespaces
 {
 public:
 
   /**
-   * Creates a new SedMLNamespaces object corresponding to the given SedML
+   * Creates a new SedNamespaces object corresponding to the given Sed
    * @p level and @p version.
    *
-   * SedMLNamespaces objects are used in libSedML to communicate SedML Level
+   * SedNamespaces objects are used in libSed to communicate Sed Level
    * and Version data between constructors and other methods.  The
-   * SedMLNamespaces object class tracks 3-tuples (triples) consisting of
-   * SedML Level, Version, and the corresponding SedML XML namespace.  Most
-   * constructors for SedML objects in libSedML take a SedMLNamespaces object
+   * SedNamespaces object class tracks 3-tuples (triples) consisting of
+   * Sed Level, Version, and the corresponding Sed XML namespace.  Most
+   * constructors for Sed objects in libSed take a SedNamespaces object
    * as an argument, thereby allowing the constructor to produce the proper
    * combination of attributes and other internal data structures for the
-   * given SedML Level and Version.
+   * given Sed Level and Version.
    *
-   * The plural name (SedMLNamespaces) is not a mistake, because in SedML
+   * The plural name (SedNamespaces) is not a mistake, because in Sed
    * Level&nbsp;3, objects may have extensions added by Level&nbsp;3
    * packages used by a given model and therefore may have multiple
    * namespaces associated with them; however, until the introduction of
-   * SedML Level&nbsp;3, the SedMLNamespaces object only records one SedML
+   * Sed Level&nbsp;3, the SedNamespaces object only records one Sed
    * Level/Version/namespace combination at a time.  Most constructors for
-   * SedML objects in libSedML take a SedMLNamespaces object as an argument,
+   * Sed objects in libSed take a SedNamespaces object as an argument,
    * thereby allowing the constructor to produce the proper combination of
-   * attributes and other internal data structures for the given SedML Level
+   * attributes and other internal data structures for the given Sed Level
    * and Version.
    *
-   * @param level the SedML level
-   * @param version the SedML version
+   * @param level the Sed level
+   * @param version the Sed version
    * 
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
    */
-  SedMLNamespaces(unsigned int level = SEDML_DEFAULT_LEVEL, 
+  SedNamespaces(unsigned int level = SEDML_DEFAULT_LEVEL, 
                  unsigned int version = SEDML_DEFAULT_VERSION);
 
   /**
-   * Destroys this SedMLNamespaces object.
+   * Destroys this SedNamespaces object.
    */
-  virtual ~SedMLNamespaces();
+  virtual ~SedNamespaces();
 
   
   /**
-   * Copy constructor; creates a copy of a SedMLNamespaces.
+   * Copy constructor; creates a copy of a SedNamespaces.
    * 
-   * @param orig the SedMLNamespaces instance to copy.
+   * @param orig the SedNamespaces instance to copy.
    *
-   * @throws @if python ValueError @else SedMLConstructorException @endif@~
+   * @throws @if python ValueError @else SedConstructorException @endif@~
    * Thrown if the argument @p orig is @c NULL.
    */
-  SedMLNamespaces(const SedMLNamespaces& orig);
+  SedNamespaces(const SedNamespaces& orig);
 
 
   /**
-   * Assignment operator for SedMLNamespaces.
+   * Assignment operator for SedNamespaces.
    *
-   * @throws @if python ValueError @else SedMLConstructorException @endif@~
+   * @throws @if python ValueError @else SedConstructorException @endif@~
    * Thrown if the argument @p rhs is @c NULL.
    */
-  SedMLNamespaces& operator=(const SedMLNamespaces& rhs);
+  SedNamespaces& operator=(const SedNamespaces& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this SedMLNamespaces.
+   * Creates and returns a deep copy of this SedNamespaces.
    * 
-   * @return a (deep) copy of this SedMLNamespaces.
+   * @return a (deep) copy of this SedNamespaces.
    */
-  virtual SedMLNamespaces* clone () const;
+  virtual SedNamespaces* clone () const;
 
 
   /**
-   * Returns a string representing the SedML XML namespace for the 
-   * given @p level and @p version of SedML.
+   * Returns a string representing the Sed XML namespace for the 
+   * given @p level and @p version of Sed.
    *
-   * @param level the SedML level
-   * @param version the SedML version
+   * @param level the Sed level
+   * @param version the Sed version
    *
-   * @return a string representing the SedML namespace that reflects the
-   * SedML Level and Version specified.
+   * @return a string representing the Sed namespace that reflects the
+   * Sed Level and Version specified.
    *
    * @if notclike @note Because this is a @em static method, the
-   * non-C++ language interfaces for libSedML will contain two variants.  One
-   * will be a static method on the class (i.e., SedMLNamespaces), and the
+   * non-C++ language interfaces for libSed will contain two variants.  One
+   * will be a static method on the class (i.e., SedNamespaces), and the
    * other will be a standalone top-level function with the name
-   * SedMLNamespaces_getSedMLNamespaceURI(). They are functionally
+   * SedNamespaces_getSedNamespaceURI(). They are functionally
    * identical. @endif@~
    */
-  static std::string getSedMLNamespaceURI(unsigned int level,
+  static std::string getSedNamespaceURI(unsigned int level,
                                          unsigned int version);
   
   /**
-   * Returns a list of all supported SedMLNamespaces in this version of 
+   * Returns a list of all supported SedNamespaces in this version of 
    * libsbml. 
    * 
-   * @return a list with supported SedML namespaces. 
+   * @return a list with supported Sed namespaces. 
    *
    * @if notclike @note Because this is a @em static method, the
-   * non-C++ language interfaces for libSedML will contain two variants.  One
-   * will be a static method on the class (i.e., SedMLNamespaces), and the
+   * non-C++ language interfaces for libSed will contain two variants.  One
+   * will be a static method on the class (i.e., SedNamespaces), and the
    * other will be a standalone top-level function with the name
-   * SedMLNamespaces_getSupportedNamespaces(). They are functionally
+   * SedNamespaces_getSupportedNamespaces(). They are functionally
    * identical. @endif@~
    */
   static const List* getSupportedNamespaces();
 
 
   /**
-   * Returns a string representing the SedML XML namespace of this
+   * Returns a string representing the Sed XML namespace of this
    * object.
    *
-   * @return a string representing the SedML namespace that reflects the
-   * SedML Level and Version of this object.
+   * @return a string representing the Sed namespace that reflects the
+   * Sed Level and Version of this object.
    */
   virtual std::string getURI() const;
 
   
   /**
-   * Get the SedML Level of this SedMLNamespaces object.
+   * Get the Sed Level of this SedNamespaces object.
    *
-   * @return the SedML Level of this SedMLNamespaces object.
+   * @return the Sed Level of this SedNamespaces object.
    */
   unsigned int getLevel();
 
 
   /**
-   * Get the SedML Level of this SedMLNamespaces object.
+   * Get the Sed Level of this SedNamespaces object.
    *
-   * @return the SedML Level of this SedMLNamespaces object.
+   * @return the Sed Level of this SedNamespaces object.
    */
   unsigned int getLevel() const;
 
 
   /**
-   * Get the SedML Version of this SedMLNamespaces object.
+   * Get the Sed Version of this SedNamespaces object.
    *
-   * @return the SedML Version of this SedMLNamespaces object.
+   * @return the Sed Version of this SedNamespaces object.
    */
   unsigned int getVersion();
 
 
   /**
-   * Get the SedML Version of this SedMLNamespaces object.
+   * Get the Sed Version of this SedNamespaces object.
    *
-   * @return the SedML Version of this SedMLNamespaces object.
+   * @return the Sed Version of this SedNamespaces object.
    */
   unsigned int getVersion() const;
 
 
   /**
-   * Get the XML namespaces list for this SedMLNamespaces object.
+   * Get the XML namespaces list for this SedNamespaces object.
    * 
-   * The plural is not a mistake, because in SedML Level&nbsp;3, objects may
+   * The plural is not a mistake, because in Sed Level&nbsp;3, objects may
    * have extensions added by Level&nbsp;3 packages used by a given model,
    * and therefore there may be multiple XML namespaces involved too.
-   * However, until the introduction of SedML Level&nbsp;3, the
-   * SedMLNamespaces object only records one SedML Level/Version/namespace
+   * However, until the introduction of Sed Level&nbsp;3, the
+   * SedNamespaces object only records one Sed Level/Version/namespace
    * combination at a time, and so this method will also only return
    * a list of one item.
    *
-   * @return the XML namespaces of this SedMLNamespaces object.
+   * @return the XML namespaces of this SedNamespaces object.
    */
   XMLNamespaces * getNamespaces();
 
 
   /**
-   * Get the XML namespaces list for this SedMLNamespaces object.
+   * Get the XML namespaces list for this SedNamespaces object.
    * 
-   * The plural is not a mistake, because in SedML Level&nbsp;3, objects may
+   * The plural is not a mistake, because in Sed Level&nbsp;3, objects may
    * have extensions added by Level&nbsp;3 packages used by a given model,
    * and therefore there may be multiple XML namespaces involved too.
-   * However, until the introduction of SedML Level&nbsp;3, the
-   * SedMLNamespaces object only records one SedML Level/Version/namespace
+   * However, until the introduction of Sed Level&nbsp;3, the
+   * SedNamespaces object only records one Sed Level/Version/namespace
    * combination at a time, and so this method will also only return
    * a list of one item.
    *
-   * @return the XML namespaces of this SedMLNamespaces object.
+   * @return the XML namespaces of this SedNamespaces object.
    */
   const XMLNamespaces * getNamespaces() const;
 
 
   /**
    * Add the given XML namespaces list to the set of namespaces within this
-   * SedMLNamespaces object.
+   * SedNamespaces object.
    *
    * The following code gives an example of how one could add the XHTML
    * namespace to the list of namespaces recorded by the top-level
    * <code>&lt;sbml&gt;</code> element of a model.  It gives the new
    * namespace a prefix of <code>html</code>.  @if clike
    * @verbatim
-SedMLDocument *sd;
+SedDocument *sd;
 try 
 {
-    sd = new SedMLDocument(3, 1);
+    sd = new SedDocument(3, 1);
 } 
-catch (SedMLConstructorException e)
+catch (SedConstructorException e)
 {
     // Here, have code to handle a truly exceptional situation. Candidate
-    // causes include invalid combinations of SedML Level and Version
+    // causes include invalid combinations of Sed Level and Version
     // (impossible if hardwired as given here), running out of memory, and
     // unknown system exceptions.
 }
 
-SedMLNamespaces sn = sd->getNamespaces();
+SedNamespaces sn = sd->getNamespaces();
 if (sn != NULL)
 {
     sn->add("http://www.w3.org/1999/xhtml", "html");
@@ -298,20 +298,20 @@ else
 @endverbatim
    * @endif@if java
 @verbatim
-SedMLDocument sd;
+SedDocument sd;
 try 
 {
-    sd = new SedMLDocument(3, 1);
+    sd = new SedDocument(3, 1);
 } 
-catch (SedMLConstructorException e)
+catch (SedConstructorException e)
 {
     // Here, have code to handle a truly exceptional situation. Candidate
-    // causes include invalid combinations of SedML Level and Version
+    // causes include invalid combinations of Sed Level and Version
     // (impossible if hardwired as given here), running out of memory, and
     // unknown system exceptions.
 }
 
-SedMLNamespaces sn = sd.getNamespaces();
+SedNamespaces sn = sd.getNamespaces();
 if (sn != null)
 {
     sn.add("http://www.w3.org/1999/xhtml", "html");
@@ -325,10 +325,10 @@ else
 @verbatim
 sbmlDoc = None
 try:
-  sbmlDoc = SedMLDocument(3, 1)
+  sbmlDoc = SedDocument(3, 1)
 except ValueError:
   # Do something to handle exceptional situation.  Candidate
-  # causes include invalid combinations of SedML Level and Version
+  # causes include invalid combinations of Sed Level and Version
   # (impossible if hardwired as given here), running out of memory, and
   # unknown system exceptions.
 
@@ -342,15 +342,15 @@ if status != LIBSEDML_OPERATION_SUCCESS:
 @endverbatim
    * @endif@if csharp
 @verbatim
-SedMLDocument sd = null;
+SedDocument sd = null;
 try
 {
-    sd = new SedMLDocument(3, 1);
+    sd = new SedDocument(3, 1);
 }
-catch (SedMLConstructorException e)
+catch (SedConstructorException e)
 {
     // Here, have code to handle a truly exceptional situation.
-    // Candidate causes include invalid combinations of SedML
+    // Candidate causes include invalid combinations of Sed
     // Level and Version (impossible if hardwired as given here),
     // running out of memory, and unknown system exceptions.
 }
@@ -382,7 +382,7 @@ else
 
   /**
    * Add an XML namespace (a pair of URI and prefix) to the set of namespaces
-   * within this SedMLNamespaces object.
+   * within this SedNamespaces object.
    * 
    * @param uri    the XML namespace to be added.
    * @param prefix the prefix of the namespace to be added.
@@ -400,7 +400,7 @@ else
 
   /**
    * Removes an XML namespace from the set of namespaces within this 
-   * SedMLNamespaces object.
+   * SedNamespaces object.
    * 
    * @param uri    the XML namespace to be added.
    *
@@ -416,20 +416,20 @@ else
 
   /**
    * Predicate returning @c true if the given
-   * URL is one of SedML XML namespaces.
+   * URL is one of Sed XML namespaces.
    *
    * @param uri the URI of namespace
    *
-   * @return @c true if the "uri" is one of SedML namespaces, @c false otherwise.
+   * @return @c true if the "uri" is one of Sed namespaces, @c false otherwise.
    *
    * @if notclike @note Because this is a @em static method, the
-   * non-C++ language interfaces for libSedML will contain two variants.  One
-   * will be a static method on the class (i.e., SedMLNamespaces), and the
+   * non-C++ language interfaces for libSed will contain two variants.  One
+   * will be a static method on the class (i.e., SedNamespaces), and the
    * other will be a standalone top-level function with the name
-   * SedMLNamespaces_isSedMLNamespace(). They are functionally
+   * SedNamespaces_isSedNamespace(). They are functionally
    * identical. @endif@~
    */
-  static bool isSedMLNamespace(const std::string& uri);
+  static bool isSedNamespace(const std::string& uri);
 
 
   /**
@@ -455,7 +455,7 @@ else
 protected:  
   /** @cond doxygen-libsbml-internal */
 
-  void initSedMLNamespace();
+  void initSedNamespace();
 
   unsigned int    mLevel;
   unsigned int    mVersion;
@@ -479,42 +479,42 @@ BEGIN_C_DECLS
  * --------------------------------------------------------------------------*/
 
 LIBSEDML_EXTERN
-SedMLNamespaces_t *
-SedMLNamespaces_create(unsigned int level, unsigned int version);
+SedNamespaces_t *
+SedNamespaces_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLNamespaces_getLevel(SedMLNamespaces_t *sbmlns);
+SedNamespaces_getLevel(SedNamespaces_t *sbmlns);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLNamespaces_getVersion(SedMLNamespaces_t *sbmlns);
+SedNamespaces_getVersion(SedNamespaces_t *sbmlns);
 
 
 LIBSEDML_EXTERN
 XMLNamespaces_t *
-SedMLNamespaces_getNamespaces(SedMLNamespaces_t *sbmlns);
+SedNamespaces_getNamespaces(SedNamespaces_t *sbmlns);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLNamespaces_getSedMLNamespaceURI(unsigned int level, unsigned int version);
+SedNamespaces_getSedNamespaceURI(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 int
-SedMLNamespaces_addNamespaces(SedMLNamespaces_t *sbmlns,
+SedNamespaces_addNamespaces(SedNamespaces_t *sbmlns,
                              const XMLNamespaces_t * xmlns);
 
 
 LIBSEDML_EXTERN
-SedMLNamespaces_t **
-SedMLNamespaces_getSupportedNamespaces(int *length);
+SedNamespaces_t **
+SedNamespaces_getSupportedNamespaces(int *length);
 
 END_C_DECLS
 LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /* !SWIG */
-#endif  /* SedMLNamespaces_h */
+#endif  /* SedNamespaces_h */

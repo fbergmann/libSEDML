@@ -1,6 +1,6 @@
 /**
- * @file:   Surface.cpp
- * @brief:  Implementation of the Surface class
+ * @file:   SedSurface.cpp
+ * @brief:  Implementation of the SedSurface class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Surface.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedSurface.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,44 +45,44 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Surface with the given level, version, and package version.
+ * Creates a new SedSurface with the given level, version, and package version.
  */
-Surface::Surface (unsigned int level, unsigned int version)
-	: SedMLCurve(level, version)
+SedSurface::SedSurface (unsigned int level, unsigned int version)
+	: SedCurve(level, version)
 	, mLogZ (false)
 	, mIsSetLogZ (false)
 	, mZDataReference ("")
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new Surface with the given SedMLNamespaces object.
+ * Creates a new SedSurface with the given SedNamespaces object.
  */
-Surface::Surface (SedMLNamespaces* sedmlns)
-	: SedMLCurve(sedmlns)
+SedSurface::SedSurface (SedNamespaces* sedns)
+	: SedCurve(sedns)
 	, mLogZ (false)
 	, mIsSetLogZ (false)
 	, mZDataReference ("")
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for Surface.
+ * Copy constructor for SedSurface.
  */
-Surface::Surface (const Surface& orig)
-	: SedMLCurve(orig)
+SedSurface::SedSurface (const SedSurface& orig)
+	: SedCurve(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -94,18 +94,18 @@ Surface::Surface (const Surface& orig)
 
 
 /*
- * Assignment for Surface.
+ * Assignment for SedSurface.
  */
-Surface&
-Surface::operator=(const Surface& rhs)
+SedSurface&
+SedSurface::operator=(const SedSurface& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
-		SedMLCurve::operator=(rhs);
+		SedCurve::operator=(rhs);
 		mLogZ  = rhs.mLogZ;
 		mIsSetLogZ  = rhs.mIsSetLogZ;
 		mZDataReference  = rhs.mZDataReference;
@@ -115,38 +115,38 @@ Surface::operator=(const Surface& rhs)
 
 
 /*
- * Clone for Surface.
+ * Clone for SedSurface.
  */
-Surface*
-Surface::clone () const
+SedSurface*
+SedSurface::clone () const
 {
-	return new Surface(*this);
+	return new SedSurface(*this);
 }
 
 
 /*
- * Destructor for Surface.
+ * Destructor for SedSurface.
  */
-Surface::~Surface ()
+SedSurface::~SedSurface ()
 {
 }
 
 
 /*
- * Returns the value of the "logZ" attribute of this Surface.
+ * Returns the value of the "logZ" attribute of this SedSurface.
  */
 const bool
-Surface::getLogZ() const
+SedSurface::getLogZ() const
 {
 	return mLogZ;
 }
 
 
 /*
- * Returns the value of the "zDataReference" attribute of this Surface.
+ * Returns the value of the "zDataReference" attribute of this SedSurface.
  */
 const std::string&
-Surface::getZDataReference() const
+SedSurface::getZDataReference() const
 {
 	return mZDataReference;
 }
@@ -156,7 +156,7 @@ Surface::getZDataReference() const
  * Returns true/false if logZ is set.
  */
 bool
-Surface::isSetLogZ() const
+SedSurface::isSetLogZ() const
 {
 	return mIsSetLogZ;
 }
@@ -166,7 +166,7 @@ Surface::isSetLogZ() const
  * Returns true/false if zDataReference is set.
  */
 bool
-Surface::isSetZDataReference() const
+SedSurface::isSetZDataReference() const
 {
 	return (mZDataReference.empty() == false);
 }
@@ -176,7 +176,7 @@ Surface::isSetZDataReference() const
  * Sets logZ and returns value indicating success.
  */
 int
-Surface::setLogZ(bool logZ)
+SedSurface::setLogZ(bool logZ)
 {
 	mLogZ = logZ;
 	mIsSetLogZ = true;
@@ -188,7 +188,7 @@ Surface::setLogZ(bool logZ)
  * Sets zDataReference and returns value indicating success.
  */
 int
-Surface::setZDataReference(const std::string& zDataReference)
+SedSurface::setZDataReference(const std::string& zDataReference)
 {
 	if (&(zDataReference) == NULL)
 	{
@@ -210,7 +210,7 @@ Surface::setZDataReference(const std::string& zDataReference)
  * Unsets logZ and returns value indicating success.
  */
 int
-Surface::unsetLogZ()
+SedSurface::unsetLogZ()
 {
 	mLogZ = false;
 	mIsSetLogZ = false;
@@ -222,7 +222,7 @@ Surface::unsetLogZ()
  * Unsets zDataReference and returns value indicating success.
  */
 int
-Surface::unsetZDataReference()
+SedSurface::unsetZDataReference()
 {
 	mZDataReference.erase();
 
@@ -241,7 +241,7 @@ Surface::unsetZDataReference()
  * Returns the XML element name of this object
  */
 const std::string&
-Surface::getElementName () const
+SedSurface::getElementName () const
 {
 	static const string name = "surface";
 	return name;
@@ -252,13 +252,13 @@ Surface::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-Surface::createObject(XMLInputStream& stream)
+SedSurface::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedMLCurve::createObject(stream);
+	SedBase* object = SedCurve::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 
-	SedMLCurve::connectToChild();
+	SedCurve::connectToChild();
 
 	return object;
 }
@@ -268,7 +268,7 @@ Surface::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Surface::getTypeCode () const
+SedSurface::getTypeCode () const
 {
 	return SEDML_OUTPUT_SURFACE;
 }
@@ -278,9 +278,9 @@ Surface::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Surface::hasRequiredAttributes () const
+SedSurface::hasRequiredAttributes () const
 {
-	bool allPresent = SedMLCurve::hasRequiredAttributes();
+	bool allPresent = SedCurve::hasRequiredAttributes();
 
 	if (isSetLogZ() == false)
 		allPresent = false;
@@ -298,9 +298,9 @@ Surface::hasRequiredAttributes () const
  * write contained elements
  */
 void
-Surface::writeElements (XMLOutputStream& stream) const
+SedSurface::writeElements (XMLOutputStream& stream) const
 {
-	SedMLCurve::writeElements(stream);
+	SedCurve::writeElements(stream);
 }
 
 
@@ -310,10 +310,10 @@ Surface::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Surface::accept (SedMLVisitor& v) const
+SedSurface::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -326,12 +326,12 @@ Surface::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Surface::setSedMLDocument (SedMLDocument* d)
+SedSurface::setSedDocument (SedDocument* d)
 {
-	SedMLCurve::setSedMLDocument(d);
+	SedCurve::setSedDocument(d);
 }
 
 
@@ -344,9 +344,9 @@ Surface::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Surface::addExpectedAttributes(ExpectedAttributes& attributes)
+SedSurface::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedMLCurve::addExpectedAttributes(attributes);
+	SedCurve::addExpectedAttributes(attributes);
 
 	attributes.add("logZ");
 	attributes.add("zDataReference");
@@ -362,10 +362,10 @@ Surface::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Surface::readAttributes (const XMLAttributes& attributes,
+SedSurface::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	SedMLCurve::readAttributes(attributes, expectedAttributes);
+	SedCurve::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -385,7 +385,7 @@ Surface::readAttributes (const XMLAttributes& attributes,
 
 		if (mZDataReference.empty() == true)
 		{
-			logEmptyString(mZDataReference, getLevel(), getVersion(), "<Surface>");
+			logEmptyString(mZDataReference, getLevel(), getVersion(), "<SedSurface>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mZDataReference) == false)
 		{
@@ -405,9 +405,9 @@ Surface::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Surface::writeAttributes (XMLOutputStream& stream) const
+SedSurface::writeAttributes (XMLOutputStream& stream) const
 {
-	SedMLCurve::writeAttributes(stream);
+	SedCurve::writeAttributes(stream);
 
 	if (isSetLogZ() == true)
 		stream.writeAttribute("logZ", getPrefix(), mLogZ);
@@ -424,98 +424,98 @@ Surface::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSurfaces::SedListOfSurfaces(unsigned int level, 
-	                  unsigned int version)
+SedListOfSedSurfaces::SedListOfSedSurfaces(unsigned int level, 
+	                     unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfSurfaces::SedListOfSurfaces(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedSurfaces::SedListOfSedSurfaces(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfSurfaces 
+ * Returns a deep copy of this SedListOfSedSurfaces 
  */
-SedListOfSurfaces* 
-SedListOfSurfaces::clone () const
+SedListOfSedSurfaces* 
+SedListOfSedSurfaces::clone () const
  {
-	return new SedListOfSurfaces(*this);
+	return new SedListOfSedSurfaces(*this);
 }
 
 
 /*
- * Get a Surface from the SedListOfSurfaces by index.
+ * Get a SedSurface from the SedListOfSedSurfaces by index.
 */
-Surface*
-SedListOfSurfaces::get(unsigned int n)
+SedSurface*
+SedListOfSedSurfaces::get(unsigned int n)
 {
-	return static_cast<Surface*>(SedListOf::get(n));
+	return static_cast<SedSurface*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Surface from the SedListOfSurfaces by index.
+ * Get a SedSurface from the SedListOfSedSurfaces by index.
  */
-const Surface*
-SedListOfSurfaces::get(unsigned int n) const
+const SedSurface*
+SedListOfSedSurfaces::get(unsigned int n) const
 {
-	return static_cast<const Surface*>(SedListOf::get(n));
+	return static_cast<const SedSurface*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Surface from the SedListOfSurfaces by id.
+ * Get a SedSurface from the SedListOfSedSurfaces by id.
  */
-Surface*
-SedListOfSurfaces::get(const std::string& sid)
+SedSurface*
+SedListOfSedSurfaces::get(const std::string& sid)
 {
-	return const_cast<Surface*>(
-	  static_cast<const SedListOfSurfaces&>(*this).get(sid));
+	return const_cast<SedSurface*>(
+	  static_cast<const SedListOfSedSurfaces&>(*this).get(sid));
 }
 
 
 /*
- * Get a Surface from the SedListOfSurfaces by id.
+ * Get a SedSurface from the SedListOfSedSurfaces by id.
  */
-const Surface*
-SedListOfSurfaces::get(const std::string& sid) const
+const SedSurface*
+SedListOfSedSurfaces::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Surface>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <Surface*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSurface>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedSurface*> (*result);
 }
 
 
 /*
- * Removes the nth Surface from this SedListOfSurfaces
+ * Removes the nth SedSurface from this SedListOfSedSurfaces
  */
-Surface*
-SedListOfSurfaces::remove(unsigned int n)
+SedSurface*
+SedListOfSedSurfaces::remove(unsigned int n)
 {
-	return static_cast<Surface*>(SedListOf::remove(n));
+	return static_cast<SedSurface*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the Surface from this SedListOfSurfaces with the given identifier
+ * Removes the SedSurface from this SedListOfSedSurfaces with the given identifier
  */
-Surface*
-SedListOfSurfaces::remove(const std::string& sid)
+SedSurface*
+SedListOfSedSurfaces::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Surface>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSurface>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -523,7 +523,7 @@ SedListOfSurfaces::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <Surface*> (item);
+	return static_cast <SedSurface*> (item);
 }
 
 
@@ -531,7 +531,7 @@ SedListOfSurfaces::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSurfaces::getElementName () const
+SedListOfSedSurfaces::getElementName () const
 {
 	static const string name = "listOfSurfaces";
 	return name;
@@ -542,7 +542,7 @@ SedListOfSurfaces::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSurfaces::getTypeCode () const
+SedListOfSedSurfaces::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -552,7 +552,7 @@ SedListOfSurfaces::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSurfaces::getItemTypeCode () const
+SedListOfSedSurfaces::getItemTypeCode () const
 {
 	return SEDML_OUTPUT_SURFACE;
 }
@@ -561,17 +561,17 @@ SedListOfSurfaces::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new Surface in this SedListOfSurfaces
+ * Creates a new SedSurface in this SedListOfSedSurfaces
  */
 SedBase*
-SedListOfSurfaces::createObject(XMLInputStream& stream)
+SedListOfSedSurfaces::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "surface")
 	{
-		object = new Surface(getSedMLNamespaces());
+		object = new SedSurface(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -585,10 +585,10 @@ SedListOfSurfaces::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfSurfaces::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedSurfaces::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -613,10 +613,10 @@ SedListOfSurfaces::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Surface_t *
-Surface_create(unsigned int level, unsigned int version)
+SedSurface_t *
+SedSurface_create(unsigned int level, unsigned int version)
 {
-	return new Surface(level, version);
+	return new SedSurface(level, version);
 }
 
 
@@ -625,10 +625,10 @@ Surface_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Surface_free(Surface_t * s)
+SedSurface_free(SedSurface_t * ss)
 {
-	if (s != NULL)
-		delete s;
+	if (ss != NULL)
+		delete ss;
 }
 
 
@@ -636,12 +636,12 @@ Surface_free(Surface_t * s)
  * write comments
  */
 LIBSEDML_EXTERN
-Surface_t *
-Surface_clone(Surface_t * s)
+SedSurface_t *
+SedSurface_clone(SedSurface_t * ss)
 {
-	if (s != NULL)
+	if (ss != NULL)
 	{
-		return static_cast<Surface_t*>(s->clone());
+		return static_cast<SedSurface_t*>(ss->clone());
 	}
 	else
 	{
@@ -655,9 +655,9 @@ Surface_clone(Surface_t * s)
  */
 LIBSEDML_EXTERN
 int
-Surface_getLogZ(Surface_t * s)
+SedSurface_getLogZ(SedSurface_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->getLogZ()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->getLogZ()) : 0;
 }
 
 
@@ -666,12 +666,12 @@ Surface_getLogZ(Surface_t * s)
  */
 LIBSEDML_EXTERN
 char *
-Surface_getZDataReference(Surface_t * s)
+SedSurface_getZDataReference(SedSurface_t * ss)
 {
-	if (s == NULL)
+	if (ss == NULL)
 		return NULL;
 
-	return s->getZDataReference().empty() ? NULL : safe_strdup(s->getZDataReference().c_str());
+	return ss->getZDataReference().empty() ? NULL : safe_strdup(ss->getZDataReference().c_str());
 }
 
 
@@ -680,9 +680,9 @@ Surface_getZDataReference(Surface_t * s)
  */
 LIBSEDML_EXTERN
 int
-Surface_isSetLogZ(Surface_t * s)
+SedSurface_isSetLogZ(SedSurface_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->isSetLogZ()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->isSetLogZ()) : 0;
 }
 
 
@@ -691,9 +691,9 @@ Surface_isSetLogZ(Surface_t * s)
  */
 LIBSEDML_EXTERN
 int
-Surface_isSetZDataReference(Surface_t * s)
+SedSurface_isSetZDataReference(SedSurface_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->isSetZDataReference()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->isSetZDataReference()) : 0;
 }
 
 
@@ -702,9 +702,9 @@ Surface_isSetZDataReference(Surface_t * s)
  */
 LIBSEDML_EXTERN
 int
-Surface_setLogZ(Surface_t * s, int logZ)
+SedSurface_setLogZ(SedSurface_t * ss, int logZ)
 {
-	return (s != NULL) ? s->setLogZ(logZ) : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->setLogZ(logZ) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -713,9 +713,9 @@ Surface_setLogZ(Surface_t * s, int logZ)
  */
 LIBSEDML_EXTERN
 int
-Surface_setZDataReference(Surface_t * s, const char * zDataReference)
+SedSurface_setZDataReference(SedSurface_t * ss, const char * zDataReference)
 {
-	return (s != NULL) ? s->setZDataReference(zDataReference) : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->setZDataReference(zDataReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -724,9 +724,9 @@ Surface_setZDataReference(Surface_t * s, const char * zDataReference)
  */
 LIBSEDML_EXTERN
 int
-Surface_unsetLogZ(Surface_t * s)
+SedSurface_unsetLogZ(SedSurface_t * ss)
 {
-	return (s != NULL) ? s->unsetLogZ() : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->unsetLogZ() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -735,9 +735,9 @@ Surface_unsetLogZ(Surface_t * s)
  */
 LIBSEDML_EXTERN
 int
-Surface_unsetZDataReference(Surface_t * s)
+SedSurface_unsetZDataReference(SedSurface_t * ss)
 {
-	return (s != NULL) ? s->unsetZDataReference() : LIBSEDML_INVALID_OBJECT;
+	return (ss != NULL) ? ss->unsetZDataReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -746,9 +746,9 @@ Surface_unsetZDataReference(Surface_t * s)
  */
 LIBSEDML_EXTERN
 int
-Surface_hasRequiredAttributes(Surface_t * s)
+SedSurface_hasRequiredAttributes(SedSurface_t * ss)
 {
-	return (s != NULL) ? static_cast<int>(s->hasRequiredAttributes()) : 0;
+	return (ss != NULL) ? static_cast<int>(ss->hasRequiredAttributes()) : 0;
 }
 
 
@@ -756,13 +756,13 @@ Surface_hasRequiredAttributes(Surface_t * s)
  * write comments
  */
 LIBSEDML_EXTERN
-Surface_t *
-SedListOfSurfaces_getById(SedListOf_t * lo, const char * sid)
+SedSurface_t *
+SedListOfSedSurfaces_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSurfaces *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedSurfaces *>(lo)->get(sid) : NULL;
 }
 
 
@@ -770,13 +770,13 @@ SedListOfSurfaces_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-Surface_t *
-SedListOfSurfaces_removeById(SedListOf_t * lo, const char * sid)
+SedSurface_t *
+SedListOfSedSurfaces_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSurfaces *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedSurfaces *>(lo)->remove(sid) : NULL;
 }
 
 

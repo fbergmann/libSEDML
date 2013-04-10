@@ -8,7 +8,7 @@ public:
    * 
    * @see SBMLDocument::getNumErrors()
    */
-  virtual SedMLErrorLog* getErrorLog ();
+  virtual SedErrorLog* getErrorLog ();
 
 
   /**
@@ -20,7 +20,7 @@ public:
    * 
    * @see SBMLDocument::getNumErrors()
    */
-  const SedMLErrorLog* getErrorLog () const;
+  const SedErrorLog* getErrorLog () const;
 
   /**
    * Returns the nth error or warning encountered during parsing,
@@ -37,7 +37,7 @@ public:
    *
    * @see SBMLDocument::getNumErrors()
    */
-  const SedMLError* getError (unsigned int n) const;
+  const SedError* getError (unsigned int n) const;
 
 
   /**
@@ -82,4 +82,4 @@ protected:
   virtual void writeXMLNS (XMLOutputStream& stream) const;  
 private: 
 
-	SedMLErrorLog mErrorLog;
+	SedErrorLog mErrorLog;

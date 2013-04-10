@@ -1,11 +1,11 @@
 /**
- * @file    SedMLTypeCodes.h
- * @brief   Enumeration to identify SedML objects at runtime
+ * @file    SedTypeCodes.h
+ * @brief   Enumeration to identify Sed objects at runtime
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -25,8 +25,8 @@
  * and also available online as http://sbml.org/software/libsbml/license.html
  * ---------------------------------------------------------------------- -->*/
 
-#ifndef SedMLTypeCodes_h
-#define SedMLTypeCodes_h
+#ifndef SedTypeCodes_h
+#define SedTypeCodes_h
 
 
 #include <sedml/common/libsedml-config.h>
@@ -37,7 +37,7 @@ BEGIN_C_DECLS
 
 
 /**
- * An enumeration of SedML types to help identify SedML objects at runtime.
+ * An enumeration of Sed types to help identify Sed objects at runtime.
  * Abstract types do not have a typecode since they cannot be instantiated.
  *
  * (NOTES)
@@ -47,11 +47,11 @@ BEGIN_C_DECLS
  *     - virtual int SedBase::getTypeCode() const;
  *     - virtual int ListOf::getItemTypeCode() const;
  *
- *    (In libSedML 5, the type of return values in these functions have been changed
+ *    (In libSed 5, the type of return values in these functions have been changed
  *     from typecode (int) to int for extensibility.)
  *
  *  - Each pacakge extension must define similar enum type for each SedBase subclass
- *    (e.g. SedMLLayoutTypeCode_t for the layout extension, SedMLGroupTypeCode_t for
+ *    (e.g. SedLayoutTypeCode_t for the layout extension, SedGroupTypeCode_t for
  *          group extension).
  *
  *  - The value of each typecode can be duplicated between those of different 
@@ -115,48 +115,48 @@ typedef enum
 	, SEDML_SIMULATION_UNIFORMTIMECOURSE =  62
 	, SEDML_LIST_OF                      =  70
 	
-} SedMLTypeCode_t;
+} SedTypeCode_t;
 
 
 
 /**
- * This method takes an SedML type code and returns a string representing
+ * This method takes an Sed type code and returns a string representing
  * the code.
  *
- * @if clike LibSedML attaches an identifying code to every kind of SedML
- * object.  These are known as <em>SedML type codes</em>.  The set of
- * possible type codes is defined in the enumeration #SedMLTypeCode_t.
+ * @if clike LibSed attaches an identifying code to every kind of Sed
+ * object.  These are known as <em>Sed type codes</em>.  The set of
+ * possible type codes is defined in the enumeration #SedTypeCode_t.
  * The names of the type codes all begin with the characters @c
- * SEDML_. @endif@if java LibSedML attaches an identifying code to every
- * kind of SedML object.  These are known as <em>SedML type codes</em>.  In
+ * SEDML_. @endif@if java LibSed attaches an identifying code to every
+ * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
  * other languages, the set of type codes is stored in an enumeration; in
- * the Java language interface for libSedML, the type codes are defined as
+ * the Java language interface for libSed, the type codes are defined as
  * static integer constants in the interface class {@link
  * libsbmlConstants}.  The names of the type codes all begin with the
- * characters @c SEDML_. @endif@if python LibSedML attaches an identifying
- * code to every kind of SedML object.  These are known as <em>SedML type
- * codes</em>.  In the Python language interface for libSedML, the type
+ * characters @c SEDML_. @endif@if python LibSed attaches an identifying
+ * code to every kind of Sed object.  These are known as <em>Sed type
+ * codes</em>.  In the Python language interface for libSed, the type
  * codes are defined as static integer constants in the interface class
  * @link libsbml@endlink.  The names of the type codes all begin with the
- * characters @c SEDML_. @endif@if csharp LibSedML attaches an identifying
- * code to every kind of SedML object.  These are known as <em>SedML type
- * codes</em>.  In the C# language interface for libSedML, the type codes
+ * characters @c SEDML_. @endif@if csharp LibSed attaches an identifying
+ * code to every kind of Sed object.  These are known as <em>Sed type
+ * codes</em>.  In the C# language interface for libSed, the type codes
  * are defined as static integer constants in the interface class @link
  * libsbml@endlink.  The names of the type codes all begin with
  * the characters @c SEDML_. @endif@~
  *
  * @return a human readable name for the given
- * @if clike #SedMLTypeCode_t value@else SedML type code@endif.
+ * @if clike #SedTypeCode_t value@else Sed type code@endif.
  *
  * @note The caller does not own the returned string and is therefore not
  * allowed to modify it.
  */
 LIBSEDML_EXTERN
 const char *
-SedMLTypeCode_toString (int tc);
+SedTypeCode_toString (int tc);
 
 
 END_C_DECLS
 LIBSEDML_CPP_NAMESPACE_END
 
-#endif  /* SedMLTypeCodes_h */
+#endif  /* SedTypeCodes_h */

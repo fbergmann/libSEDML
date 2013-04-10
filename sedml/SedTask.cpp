@@ -1,6 +1,6 @@
 /**
- * @file:   Task.cpp
- * @brief:  Implementation of the Task class
+ * @file:   SedTask.cpp
+ * @brief:  Implementation of the SedTask class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Task.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedTask.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,9 +45,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Task with the given level, version, and package version.
+ * Creates a new SedTask with the given level, version, and package version.
  */
-Task::Task (unsigned int level, unsigned int version)
+SedTask::SedTask (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mName ("")
@@ -55,8 +55,8 @@ Task::Task (unsigned int level, unsigned int version)
 	, mSimulationReference ("")
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
 	// connect to child objects
 	connectToChild();
@@ -64,10 +64,10 @@ Task::Task (unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new Task with the given SedMLNamespaces object.
+ * Creates a new SedTask with the given SedNamespaces object.
  */
-Task::Task (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedTask::SedTask (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mId ("")
 	, mName ("")
 	, mModelReference ("")
@@ -75,7 +75,7 @@ Task::Task (SedMLNamespaces* sedmlns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 
 	// connect to child objects
 	connectToChild();
@@ -83,14 +83,14 @@ Task::Task (SedMLNamespaces* sedmlns)
 
 
 /*
- * Copy constructor for Task.
+ * Copy constructor for SedTask.
  */
-Task::Task (const Task& orig)
+SedTask::SedTask (const SedTask& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -106,14 +106,14 @@ Task::Task (const Task& orig)
 
 
 /*
- * Assignment for Task.
+ * Assignment for SedTask.
  */
-Task&
-Task::operator=(const Task& rhs)
+SedTask&
+SedTask::operator=(const SedTask& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -131,58 +131,58 @@ Task::operator=(const Task& rhs)
 
 
 /*
- * Clone for Task.
+ * Clone for SedTask.
  */
-Task*
-Task::clone () const
+SedTask*
+SedTask::clone () const
 {
-	return new Task(*this);
+	return new SedTask(*this);
 }
 
 
 /*
- * Destructor for Task.
+ * Destructor for SedTask.
  */
-Task::~Task ()
+SedTask::~SedTask ()
 {
 }
 
 
 /*
- * Returns the value of the "id" attribute of this Task.
+ * Returns the value of the "id" attribute of this SedTask.
  */
 const std::string&
-Task::getId() const
+SedTask::getId() const
 {
 	return mId;
 }
 
 
 /*
- * Returns the value of the "name" attribute of this Task.
+ * Returns the value of the "name" attribute of this SedTask.
  */
 const std::string&
-Task::getName() const
+SedTask::getName() const
 {
 	return mName;
 }
 
 
 /*
- * Returns the value of the "modelReference" attribute of this Task.
+ * Returns the value of the "modelReference" attribute of this SedTask.
  */
 const std::string&
-Task::getModelReference() const
+SedTask::getModelReference() const
 {
 	return mModelReference;
 }
 
 
 /*
- * Returns the value of the "simulationReference" attribute of this Task.
+ * Returns the value of the "simulationReference" attribute of this SedTask.
  */
 const std::string&
-Task::getSimulationReference() const
+SedTask::getSimulationReference() const
 {
 	return mSimulationReference;
 }
@@ -192,7 +192,7 @@ Task::getSimulationReference() const
  * Returns true/false if id is set.
  */
 bool
-Task::isSetId() const
+SedTask::isSetId() const
 {
 	return (mId.empty() == false);
 }
@@ -202,7 +202,7 @@ Task::isSetId() const
  * Returns true/false if name is set.
  */
 bool
-Task::isSetName() const
+SedTask::isSetName() const
 {
 	return (mName.empty() == false);
 }
@@ -212,7 +212,7 @@ Task::isSetName() const
  * Returns true/false if modelReference is set.
  */
 bool
-Task::isSetModelReference() const
+SedTask::isSetModelReference() const
 {
 	return (mModelReference.empty() == false);
 }
@@ -222,7 +222,7 @@ Task::isSetModelReference() const
  * Returns true/false if simulationReference is set.
  */
 bool
-Task::isSetSimulationReference() const
+SedTask::isSetSimulationReference() const
 {
 	return (mSimulationReference.empty() == false);
 }
@@ -232,7 +232,7 @@ Task::isSetSimulationReference() const
  * Sets id and returns value indicating success.
  */
 int
-Task::setId(const std::string& id)
+SedTask::setId(const std::string& id)
 {
 	return SyntaxChecker::checkAndSetSId(id, mId);
 }
@@ -242,7 +242,7 @@ Task::setId(const std::string& id)
  * Sets name and returns value indicating success.
  */
 int
-Task::setName(const std::string& name)
+SedTask::setName(const std::string& name)
 {
 	if (&(name) == NULL)
 	{
@@ -260,7 +260,7 @@ Task::setName(const std::string& name)
  * Sets modelReference and returns value indicating success.
  */
 int
-Task::setModelReference(const std::string& modelReference)
+SedTask::setModelReference(const std::string& modelReference)
 {
 	if (&(modelReference) == NULL)
 	{
@@ -282,7 +282,7 @@ Task::setModelReference(const std::string& modelReference)
  * Sets simulationReference and returns value indicating success.
  */
 int
-Task::setSimulationReference(const std::string& simulationReference)
+SedTask::setSimulationReference(const std::string& simulationReference)
 {
 	if (&(simulationReference) == NULL)
 	{
@@ -304,7 +304,7 @@ Task::setSimulationReference(const std::string& simulationReference)
  * Unsets id and returns value indicating success.
  */
 int
-Task::unsetId()
+SedTask::unsetId()
 {
 	mId.erase();
 
@@ -323,7 +323,7 @@ Task::unsetId()
  * Unsets name and returns value indicating success.
  */
 int
-Task::unsetName()
+SedTask::unsetName()
 {
 	mName.erase();
 
@@ -342,7 +342,7 @@ Task::unsetName()
  * Unsets modelReference and returns value indicating success.
  */
 int
-Task::unsetModelReference()
+SedTask::unsetModelReference()
 {
 	mModelReference.erase();
 
@@ -361,7 +361,7 @@ Task::unsetModelReference()
  * Unsets simulationReference and returns value indicating success.
  */
 int
-Task::unsetSimulationReference()
+SedTask::unsetSimulationReference()
 {
 	mSimulationReference.erase();
 
@@ -380,7 +380,7 @@ Task::unsetSimulationReference()
  * Returns the XML element name of this object
  */
 const std::string&
-Task::getElementName () const
+SedTask::getElementName () const
 {
 	static const string name = "task";
 	return name;
@@ -391,7 +391,7 @@ Task::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-Task::createObject(XMLInputStream& stream)
+SedTask::createObject(XMLInputStream& stream)
 {
 	SedBase* object = NULL;
 
@@ -407,7 +407,7 @@ Task::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Task::connectToChild ()
+SedTask::connectToChild ()
 {
 	SedBase::connectToChild();
 
@@ -418,7 +418,7 @@ Task::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Task::getTypeCode () const
+SedTask::getTypeCode () const
 {
 	return SEDML_TASK;
 }
@@ -428,7 +428,7 @@ Task::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Task::hasRequiredAttributes () const
+SedTask::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -443,7 +443,7 @@ Task::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-Task::hasRequiredElements () const
+SedTask::hasRequiredElements () const
 {
 	bool allPresent = true;
 
@@ -457,7 +457,7 @@ Task::hasRequiredElements () const
  * write contained elements
  */
 void
-Task::writeElements (XMLOutputStream& stream) const
+SedTask::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -469,10 +469,10 @@ Task::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Task::accept (SedMLVisitor& v) const
+SedTask::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -485,12 +485,12 @@ Task::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Task::setSedMLDocument (SedMLDocument* d)
+SedTask::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -503,7 +503,7 @@ Task::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Task::addExpectedAttributes(ExpectedAttributes& attributes)
+SedTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -523,7 +523,7 @@ Task::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Task::readAttributes (const XMLAttributes& attributes,
+SedTask::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -541,7 +541,7 @@ Task::readAttributes (const XMLAttributes& attributes,
 
 		if (mId.empty() == true)
 		{
-			logEmptyString(mId, getLevel(), getVersion(), "<Task>");
+			logEmptyString(mId, getLevel(), getVersion(), "<SedTask>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
@@ -560,7 +560,7 @@ Task::readAttributes (const XMLAttributes& attributes,
 
 		if (mName.empty() == true)
 		{
-			logEmptyString(mName, getLevel(), getVersion(), "<Task>");
+			logEmptyString(mName, getLevel(), getVersion(), "<SedTask>");
 		}
 	}
 
@@ -575,7 +575,7 @@ Task::readAttributes (const XMLAttributes& attributes,
 
 		if (mModelReference.empty() == true)
 		{
-			logEmptyString(mModelReference, getLevel(), getVersion(), "<Task>");
+			logEmptyString(mModelReference, getLevel(), getVersion(), "<SedTask>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
 		{
@@ -594,7 +594,7 @@ Task::readAttributes (const XMLAttributes& attributes,
 
 		if (mSimulationReference.empty() == true)
 		{
-			logEmptyString(mSimulationReference, getLevel(), getVersion(), "<Task>");
+			logEmptyString(mSimulationReference, getLevel(), getVersion(), "<SedTask>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mSimulationReference) == false)
 		{
@@ -614,7 +614,7 @@ Task::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Task::writeAttributes (XMLOutputStream& stream) const
+SedTask::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -639,98 +639,98 @@ Task::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfTasks::SedListOfTasks(unsigned int level, 
-	               unsigned int version)
+SedListOfSedTasks::SedListOfSedTasks(unsigned int level, 
+	                  unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfTasks::SedListOfTasks(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedTasks::SedListOfSedTasks(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfTasks 
+ * Returns a deep copy of this SedListOfSedTasks 
  */
-SedListOfTasks* 
-SedListOfTasks::clone () const
+SedListOfSedTasks* 
+SedListOfSedTasks::clone () const
  {
-	return new SedListOfTasks(*this);
+	return new SedListOfSedTasks(*this);
 }
 
 
 /*
- * Get a Task from the SedListOfTasks by index.
+ * Get a SedTask from the SedListOfSedTasks by index.
 */
-Task*
-SedListOfTasks::get(unsigned int n)
+SedTask*
+SedListOfSedTasks::get(unsigned int n)
 {
-	return static_cast<Task*>(SedListOf::get(n));
+	return static_cast<SedTask*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Task from the SedListOfTasks by index.
+ * Get a SedTask from the SedListOfSedTasks by index.
  */
-const Task*
-SedListOfTasks::get(unsigned int n) const
+const SedTask*
+SedListOfSedTasks::get(unsigned int n) const
 {
-	return static_cast<const Task*>(SedListOf::get(n));
+	return static_cast<const SedTask*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a Task from the SedListOfTasks by id.
+ * Get a SedTask from the SedListOfSedTasks by id.
  */
-Task*
-SedListOfTasks::get(const std::string& sid)
+SedTask*
+SedListOfSedTasks::get(const std::string& sid)
 {
-	return const_cast<Task*>(
-	  static_cast<const SedListOfTasks&>(*this).get(sid));
+	return const_cast<SedTask*>(
+	  static_cast<const SedListOfSedTasks&>(*this).get(sid));
 }
 
 
 /*
- * Get a Task from the SedListOfTasks by id.
+ * Get a SedTask from the SedListOfSedTasks by id.
  */
-const Task*
-SedListOfTasks::get(const std::string& sid) const
+const SedTask*
+SedListOfSedTasks::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Task>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <Task*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedTask>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedTask*> (*result);
 }
 
 
 /*
- * Removes the nth Task from this SedListOfTasks
+ * Removes the nth SedTask from this SedListOfSedTasks
  */
-Task*
-SedListOfTasks::remove(unsigned int n)
+SedTask*
+SedListOfSedTasks::remove(unsigned int n)
 {
-	return static_cast<Task*>(SedListOf::remove(n));
+	return static_cast<SedTask*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the Task from this SedListOfTasks with the given identifier
+ * Removes the SedTask from this SedListOfSedTasks with the given identifier
  */
-Task*
-SedListOfTasks::remove(const std::string& sid)
+SedTask*
+SedListOfSedTasks::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<Task>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedTask>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -738,7 +738,7 @@ SedListOfTasks::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <Task*> (item);
+	return static_cast <SedTask*> (item);
 }
 
 
@@ -746,7 +746,7 @@ SedListOfTasks::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfTasks::getElementName () const
+SedListOfSedTasks::getElementName () const
 {
 	static const string name = "listOfTasks";
 	return name;
@@ -757,7 +757,7 @@ SedListOfTasks::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfTasks::getTypeCode () const
+SedListOfSedTasks::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -767,7 +767,7 @@ SedListOfTasks::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfTasks::getItemTypeCode () const
+SedListOfSedTasks::getItemTypeCode () const
 {
 	return SEDML_TASK;
 }
@@ -776,17 +776,17 @@ SedListOfTasks::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new Task in this SedListOfTasks
+ * Creates a new SedTask in this SedListOfSedTasks
  */
 SedBase*
-SedListOfTasks::createObject(XMLInputStream& stream)
+SedListOfSedTasks::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "task")
 	{
-		object = new Task(getSedMLNamespaces());
+		object = new SedTask(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -800,10 +800,10 @@ SedListOfTasks::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfTasks::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedTasks::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -828,10 +828,10 @@ SedListOfTasks::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Task_t *
-Task_create(unsigned int level, unsigned int version)
+SedTask_t *
+SedTask_create(unsigned int level, unsigned int version)
 {
-	return new Task(level, version);
+	return new SedTask(level, version);
 }
 
 
@@ -840,10 +840,10 @@ Task_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Task_free(Task_t * t)
+SedTask_free(SedTask_t * st)
 {
-	if (t != NULL)
-		delete t;
+	if (st != NULL)
+		delete st;
 }
 
 
@@ -851,12 +851,12 @@ Task_free(Task_t * t)
  * write comments
  */
 LIBSEDML_EXTERN
-Task_t *
-Task_clone(Task_t * t)
+SedTask_t *
+SedTask_clone(SedTask_t * st)
 {
-	if (t != NULL)
+	if (st != NULL)
 	{
-		return static_cast<Task_t*>(t->clone());
+		return static_cast<SedTask_t*>(st->clone());
 	}
 	else
 	{
@@ -870,12 +870,12 @@ Task_clone(Task_t * t)
  */
 LIBSEDML_EXTERN
 char *
-Task_getId(Task_t * t)
+SedTask_getId(SedTask_t * st)
 {
-	if (t == NULL)
+	if (st == NULL)
 		return NULL;
 
-	return t->getId().empty() ? NULL : safe_strdup(t->getId().c_str());
+	return st->getId().empty() ? NULL : safe_strdup(st->getId().c_str());
 }
 
 
@@ -884,12 +884,12 @@ Task_getId(Task_t * t)
  */
 LIBSEDML_EXTERN
 char *
-Task_getName(Task_t * t)
+SedTask_getName(SedTask_t * st)
 {
-	if (t == NULL)
+	if (st == NULL)
 		return NULL;
 
-	return t->getName().empty() ? NULL : safe_strdup(t->getName().c_str());
+	return st->getName().empty() ? NULL : safe_strdup(st->getName().c_str());
 }
 
 
@@ -898,12 +898,12 @@ Task_getName(Task_t * t)
  */
 LIBSEDML_EXTERN
 char *
-Task_getModelReference(Task_t * t)
+SedTask_getModelReference(SedTask_t * st)
 {
-	if (t == NULL)
+	if (st == NULL)
 		return NULL;
 
-	return t->getModelReference().empty() ? NULL : safe_strdup(t->getModelReference().c_str());
+	return st->getModelReference().empty() ? NULL : safe_strdup(st->getModelReference().c_str());
 }
 
 
@@ -912,12 +912,12 @@ Task_getModelReference(Task_t * t)
  */
 LIBSEDML_EXTERN
 char *
-Task_getSimulationReference(Task_t * t)
+SedTask_getSimulationReference(SedTask_t * st)
 {
-	if (t == NULL)
+	if (st == NULL)
 		return NULL;
 
-	return t->getSimulationReference().empty() ? NULL : safe_strdup(t->getSimulationReference().c_str());
+	return st->getSimulationReference().empty() ? NULL : safe_strdup(st->getSimulationReference().c_str());
 }
 
 
@@ -926,9 +926,9 @@ Task_getSimulationReference(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_isSetId(Task_t * t)
+SedTask_isSetId(SedTask_t * st)
 {
-	return (t != NULL) ? static_cast<int>(t->isSetId()) : 0;
+	return (st != NULL) ? static_cast<int>(st->isSetId()) : 0;
 }
 
 
@@ -937,9 +937,9 @@ Task_isSetId(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_isSetName(Task_t * t)
+SedTask_isSetName(SedTask_t * st)
 {
-	return (t != NULL) ? static_cast<int>(t->isSetName()) : 0;
+	return (st != NULL) ? static_cast<int>(st->isSetName()) : 0;
 }
 
 
@@ -948,9 +948,9 @@ Task_isSetName(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_isSetModelReference(Task_t * t)
+SedTask_isSetModelReference(SedTask_t * st)
 {
-	return (t != NULL) ? static_cast<int>(t->isSetModelReference()) : 0;
+	return (st != NULL) ? static_cast<int>(st->isSetModelReference()) : 0;
 }
 
 
@@ -959,9 +959,9 @@ Task_isSetModelReference(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_isSetSimulationReference(Task_t * t)
+SedTask_isSetSimulationReference(SedTask_t * st)
 {
-	return (t != NULL) ? static_cast<int>(t->isSetSimulationReference()) : 0;
+	return (st != NULL) ? static_cast<int>(st->isSetSimulationReference()) : 0;
 }
 
 
@@ -970,9 +970,9 @@ Task_isSetSimulationReference(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_setId(Task_t * t, const char * id)
+SedTask_setId(SedTask_t * st, const char * id)
 {
-	return (t != NULL) ? t->setId(id) : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -981,9 +981,9 @@ Task_setId(Task_t * t, const char * id)
  */
 LIBSEDML_EXTERN
 int
-Task_setName(Task_t * t, const char * name)
+SedTask_setName(SedTask_t * st, const char * name)
 {
-	return (t != NULL) ? t->setName(name) : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -992,9 +992,9 @@ Task_setName(Task_t * t, const char * name)
  */
 LIBSEDML_EXTERN
 int
-Task_setModelReference(Task_t * t, const char * modelReference)
+SedTask_setModelReference(SedTask_t * st, const char * modelReference)
 {
-	return (t != NULL) ? t->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1003,9 +1003,9 @@ Task_setModelReference(Task_t * t, const char * modelReference)
  */
 LIBSEDML_EXTERN
 int
-Task_setSimulationReference(Task_t * t, const char * simulationReference)
+SedTask_setSimulationReference(SedTask_t * st, const char * simulationReference)
 {
-	return (t != NULL) ? t->setSimulationReference(simulationReference) : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->setSimulationReference(simulationReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1014,9 +1014,9 @@ Task_setSimulationReference(Task_t * t, const char * simulationReference)
  */
 LIBSEDML_EXTERN
 int
-Task_unsetId(Task_t * t)
+SedTask_unsetId(SedTask_t * st)
 {
-	return (t != NULL) ? t->unsetId() : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1025,9 +1025,9 @@ Task_unsetId(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_unsetName(Task_t * t)
+SedTask_unsetName(SedTask_t * st)
 {
-	return (t != NULL) ? t->unsetName() : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1036,9 +1036,9 @@ Task_unsetName(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_unsetModelReference(Task_t * t)
+SedTask_unsetModelReference(SedTask_t * st)
 {
-	return (t != NULL) ? t->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1047,9 +1047,9 @@ Task_unsetModelReference(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_unsetSimulationReference(Task_t * t)
+SedTask_unsetSimulationReference(SedTask_t * st)
 {
-	return (t != NULL) ? t->unsetSimulationReference() : LIBSEDML_INVALID_OBJECT;
+	return (st != NULL) ? st->unsetSimulationReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1058,9 +1058,9 @@ Task_unsetSimulationReference(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_hasRequiredAttributes(Task_t * t)
+SedTask_hasRequiredAttributes(SedTask_t * st)
 {
-	return (t != NULL) ? static_cast<int>(t->hasRequiredAttributes()) : 0;
+	return (st != NULL) ? static_cast<int>(st->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1069,9 +1069,9 @@ Task_hasRequiredAttributes(Task_t * t)
  */
 LIBSEDML_EXTERN
 int
-Task_hasRequiredElements(Task_t * t)
+SedTask_hasRequiredElements(SedTask_t * st)
 {
-	return (t != NULL) ? static_cast<int>(t->hasRequiredElements()) : 0;
+	return (st != NULL) ? static_cast<int>(st->hasRequiredElements()) : 0;
 }
 
 
@@ -1079,13 +1079,13 @@ Task_hasRequiredElements(Task_t * t)
  * write comments
  */
 LIBSEDML_EXTERN
-Task_t *
-SedListOfTasks_getById(SedListOf_t * lo, const char * sid)
+SedTask_t *
+SedListOfSedTasks_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedTasks *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1093,13 +1093,13 @@ SedListOfTasks_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-Task_t *
-SedListOfTasks_removeById(SedListOf_t * lo, const char * sid)
+SedTask_t *
+SedListOfSedTasks_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedTasks *>(lo)->remove(sid) : NULL;
 }
 
 

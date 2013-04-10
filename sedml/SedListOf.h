@@ -1,11 +1,11 @@
 /**
  * @file    SedListOf.h
  * @author  Wraps List and inherits from SedBase
- * @author  SedML Team <sbml-team@caltech.edu>
+ * @author  Sed Team <sbml-team@caltech.edu>
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -27,20 +27,20 @@
  *
  * @class SedListOf
  * @ingroup Core
- * @brief Parent class for the various SedML "SedListOfXYZ" classes.
+ * @brief Parent class for the various Sed "SedListOfXYZ" classes.
  *
  * @htmlinclude not-sbml-warning.html
  *
- * SedML defines various SedListOf___ classes that are containers used for
- * organizing the main components of an SedML model.  All are derived from
+ * Sed defines various SedListOf___ classes that are containers used for
+ * organizing the main components of an Sed model.  All are derived from
  * the abstract class SedBase, and inherit the attributes and subelements of
  * SedBase, such as "metaid" as and "annotation".  The SedListOf___ classes do
  * not add any attributes of their own.
  *
- * The SedListOf class in libSedML is a utility class that serves as the parent
+ * The SedListOf class in libSed is a utility class that serves as the parent
  * class for implementing the SedListOf__ classes.  It provides methods for
- * working generically with the various SedML lists of objects in a program.
- * LibSedML uses this separate list class rather than ordinary
+ * working generically with the various Sed lists of objects in a program.
+ * LibSed uses this separate list class rather than ordinary
  * @if clike C&#43;&#43; @endif@if java Java@endif@if python Python@endif@~ lists,
  * so that it can provide the methods and features associated with SedBase.
  *
@@ -65,7 +65,7 @@
 
 #include <sedml/common/extern.h>
 #include <sedml/common/sedmlfwd.h>
-#include <sedml/SedMLTypeCodes.h>
+#include <sedml/SedTypeCodes.h>
 
 
 #ifdef __cplusplus
@@ -79,7 +79,7 @@
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-class SedMLVisitor;
+class SedVisitor;
 
 
 /** @cond doxygen-libsbml-internal */
@@ -107,10 +107,10 @@ public:
   /**
    * Creates a new SedListOf object.
    *
-   * @param level the SedML Level; if not assigned, defaults to the
+   * @param level the Sed Level; if not assigned, defaults to the
    * value of SEDML_DEFAULT_LEVEL.
    * 
-   * @param version the Version within the SedML Level; if not assigned,
+   * @param version the Version within the Sed Level; if not assigned,
    * defaults to the value of SEDML_DEFAULT_VERSION.
    * 
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
@@ -120,11 +120,11 @@ public:
           
 
   /**
-   * Creates a new SedListOf with SedMLNamespaces object.
+   * Creates a new SedListOf with SedNamespaces object.
    *
    * @param sbmlns the set of namespaces that this SedListOf should contain.
    */
-  SedListOf (SedMLNamespaces* sbmlns);
+  SedListOf (SedNamespaces* sbmlns);
 
 
   /**
@@ -148,15 +148,15 @@ public:
 
 
   /**
-   * Accepts the given SedMLVisitor.
+   * Accepts the given SedVisitor.
    *
-   * @param v the SedMLVisitor instance to be used.
+   * @param v the SedVisitor instance to be used.
    * 
    * @return the result of calling <code>v.visit()</code>, which indicates
    * whether the Visitor would like to visit the next item in the
    * list.
    */
-  virtual bool accept (SedMLVisitor& v) const;
+  virtual bool accept (SedVisitor& v) const;
 
 
   /**
@@ -388,16 +388,16 @@ public:
   /** @cond doxygen-libsbml-internal */
 
   /**
-   * Sets the parent SedMLDocument of this SedML object.
+   * Sets the parent SedDocument of this Sed object.
    *
-   * @param d the SedMLDocument that should become the parent of this
+   * @param d the SedDocument that should become the parent of this
    * SedListOf.
    */
-  virtual void setSedMLDocument (SedMLDocument* d);
+  virtual void setSedDocument (SedDocument* d);
 
 
   /**
-   * Sets this SedML object to child SedML objects (if any).
+   * Sets this Sed object to child Sed objects (if any).
    * (Creates a child-parent relationship by the parent)
    *
    * Subclasses must override this function if they define
@@ -405,7 +405,7 @@ public:
    * Basically, this function needs to be called in
    * constructor, copy constructor and assignment operator.
    *
-   * @see setSedMLDocument
+   * @see setSedDocument
    * @see enablePackageInternal
    */
   virtual void connectToChild ();
@@ -414,32 +414,32 @@ public:
   /** @endcond */
 
   /**
-   * Returns the libSedML type code for this object, namely, @c
+   * Returns the libSed type code for this object, namely, @c
    * SEDML_LIST_OF.
    * 
-   * @if clike LibSedML attaches an identifying code to every kind of SedML
-   * object.  These are known as <em>SedML type codes</em>.  The set of
-   * possible type codes is defined in the enumeration #SedMLTypeCode_t.
+   * @if clike LibSed attaches an identifying code to every kind of Sed
+   * object.  These are known as <em>Sed type codes</em>.  The set of
+   * possible type codes is defined in the enumeration #SedTypeCode_t.
    * The names of the type codes all begin with the characters @c
-   * SEDML_. @endif@if java LibSedML attaches an identifying code to every
-   * kind of SedML object.  These are known as <em>SedML type codes</em>.  In
+   * SEDML_. @endif@if java LibSed attaches an identifying code to every
+   * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
    * other languages, the set of type codes is stored in an enumeration; in
-   * the Java language interface for libSedML, the type codes are defined as
+   * the Java language interface for libSed, the type codes are defined as
    * static integer constants in the interface class {@link
    * libsbmlConstants}.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if python LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the Python language interface for libSedML, the type
+   * characters @c SEDML_. @endif@if python LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the Python language interface for libSed, the type
    * codes are defined as static integer constants in the interface class
    * @link libsbml@endlink.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if csharp LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the C# language interface for libSedML, the type codes
+   * characters @c SEDML_. @endif@if csharp LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the C# language interface for libSed, the type codes
    * are defined as static integer constants in the interface class @link
    * libsbmlcs.libsbml@endlink.  The names of the type codes all begin with
    * the characters @c SEDML_. @endif@~
    *
-   * @return the SedML type code for this object, or @link SedMLTypeCode_t#SedML_UNKNOWN SEDML_UNKNOWN@endlink (default).
+   * @return the Sed type code for this object, or @link SedTypeCode_t#Sed_UNKNOWN SEDML_UNKNOWN@endlink (default).
    *
    * @see getElementName()
    */
@@ -449,30 +449,30 @@ public:
   /**
    * Get the type code of the objects contained in this SedListOf.
    * 
-   * @if clike LibSedML attaches an identifying code to every kind of SedML
-   * object.  These are known as <em>SedML type codes</em>.  The set of
-   * possible type codes is defined in the enumeration #SedMLTypeCode_t.
+   * @if clike LibSed attaches an identifying code to every kind of Sed
+   * object.  These are known as <em>Sed type codes</em>.  The set of
+   * possible type codes is defined in the enumeration #SedTypeCode_t.
    * The names of the type codes all begin with the characters @c
-   * SEDML_. @endif@if java LibSedML attaches an identifying code to every
-   * kind of SedML object.  These are known as <em>SedML type codes</em>.  In
+   * SEDML_. @endif@if java LibSed attaches an identifying code to every
+   * kind of Sed object.  These are known as <em>Sed type codes</em>.  In
    * other languages, the set of type codes is stored in an enumeration; in
-   * the Java language interface for libSedML, the type codes are defined as
+   * the Java language interface for libSed, the type codes are defined as
    * static integer constants in the interface class {@link
    * libsbmlConstants}.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if python LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the Python language interface for libSedML, the type
+   * characters @c SEDML_. @endif@if python LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the Python language interface for libSed, the type
    * codes are defined as static integer constants in the interface class
    * @link libsbml@endlink.  The names of the type codes all begin with the
-   * characters @c SEDML_. @endif@if csharp LibSedML attaches an identifying
-   * code to every kind of SedML object.  These are known as <em>SedML type
-   * codes</em>.  In the C# language interface for libSedML, the type codes
+   * characters @c SEDML_. @endif@if csharp LibSed attaches an identifying
+   * code to every kind of Sed object.  These are known as <em>Sed type
+   * codes</em>.  In the C# language interface for libSed, the type codes
    * are defined as static integer constants in the interface class @link
    * libsbmlcs.libsbml@endlink.  The names of the type codes all begin with
    * the characters @c SEDML_. @endif@~
    * 
-   * @return the SedML type code for the objects contained in this SedListOf
-   * instance, or @link SedMLTypeCode_t#SedML_UNKNOWN SEDML_UNKNOWN@endlink (default).
+   * @return the Sed type code for the objects contained in this SedListOf
+   * instance, or @link SedTypeCode_t#Sed_UNKNOWN SEDML_UNKNOWN@endlink (default).
    */
   virtual int getItemTypeCode () const;
 
@@ -489,7 +489,7 @@ public:
   /** @cond doxygen-libsbml-internal */
   /**
    * Subclasses should override this method to write out their contained
-   * SedML objects as XML elements.  Be sure to call your parents
+   * Sed objects as XML elements.  Be sure to call your parents
    * implementation of this method as well.
    */
   virtual void writeElements (XMLOutputStream& stream) const;
@@ -663,7 +663,7 @@ unsigned int
 SedListOf_size (const SedListOf_t *lo);
 
 /**
- * @return the int of SedML objects contained in this SedListOf or
+ * @return the int of Sed objects contained in this SedListOf or
  * SEDML_UNKNOWN (default).
  */
 LIBSEDML_EXTERN

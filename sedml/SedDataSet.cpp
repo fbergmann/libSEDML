@@ -1,6 +1,6 @@
 /**
- * @file:   DataSet.cpp
- * @brief:  Implementation of the DataSet class
+ * @file:   SedDataSet.cpp
+ * @brief:  Implementation of the SedDataSet class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/DataSet.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedDataSet.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,9 +45,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new DataSet with the given level, version, and package version.
+ * Creates a new SedDataSet with the given level, version, and package version.
  */
-DataSet::DataSet (unsigned int level, unsigned int version)
+SedDataSet::SedDataSet (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mLabel ("")
@@ -55,16 +55,16 @@ DataSet::DataSet (unsigned int level, unsigned int version)
 	, mDataReference ("")
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new DataSet with the given SedMLNamespaces object.
+ * Creates a new SedDataSet with the given SedNamespaces object.
  */
-DataSet::DataSet (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedDataSet::SedDataSet (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mId ("")
 	, mLabel ("")
 	, mName ("")
@@ -72,19 +72,19 @@ DataSet::DataSet (SedMLNamespaces* sedmlns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for DataSet.
+ * Copy constructor for SedDataSet.
  */
-DataSet::DataSet (const DataSet& orig)
+SedDataSet::SedDataSet (const SedDataSet& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -97,14 +97,14 @@ DataSet::DataSet (const DataSet& orig)
 
 
 /*
- * Assignment for DataSet.
+ * Assignment for SedDataSet.
  */
-DataSet&
-DataSet::operator=(const DataSet& rhs)
+SedDataSet&
+SedDataSet::operator=(const SedDataSet& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -119,58 +119,58 @@ DataSet::operator=(const DataSet& rhs)
 
 
 /*
- * Clone for DataSet.
+ * Clone for SedDataSet.
  */
-DataSet*
-DataSet::clone () const
+SedDataSet*
+SedDataSet::clone () const
 {
-	return new DataSet(*this);
+	return new SedDataSet(*this);
 }
 
 
 /*
- * Destructor for DataSet.
+ * Destructor for SedDataSet.
  */
-DataSet::~DataSet ()
+SedDataSet::~SedDataSet ()
 {
 }
 
 
 /*
- * Returns the value of the "id" attribute of this DataSet.
+ * Returns the value of the "id" attribute of this SedDataSet.
  */
 const std::string&
-DataSet::getId() const
+SedDataSet::getId() const
 {
 	return mId;
 }
 
 
 /*
- * Returns the value of the "label" attribute of this DataSet.
+ * Returns the value of the "label" attribute of this SedDataSet.
  */
 const std::string&
-DataSet::getLabel() const
+SedDataSet::getLabel() const
 {
 	return mLabel;
 }
 
 
 /*
- * Returns the value of the "name" attribute of this DataSet.
+ * Returns the value of the "name" attribute of this SedDataSet.
  */
 const std::string&
-DataSet::getName() const
+SedDataSet::getName() const
 {
 	return mName;
 }
 
 
 /*
- * Returns the value of the "dataReference" attribute of this DataSet.
+ * Returns the value of the "dataReference" attribute of this SedDataSet.
  */
 const std::string&
-DataSet::getDataReference() const
+SedDataSet::getDataReference() const
 {
 	return mDataReference;
 }
@@ -180,7 +180,7 @@ DataSet::getDataReference() const
  * Returns true/false if id is set.
  */
 bool
-DataSet::isSetId() const
+SedDataSet::isSetId() const
 {
 	return (mId.empty() == false);
 }
@@ -190,7 +190,7 @@ DataSet::isSetId() const
  * Returns true/false if label is set.
  */
 bool
-DataSet::isSetLabel() const
+SedDataSet::isSetLabel() const
 {
 	return (mLabel.empty() == false);
 }
@@ -200,7 +200,7 @@ DataSet::isSetLabel() const
  * Returns true/false if name is set.
  */
 bool
-DataSet::isSetName() const
+SedDataSet::isSetName() const
 {
 	return (mName.empty() == false);
 }
@@ -210,7 +210,7 @@ DataSet::isSetName() const
  * Returns true/false if dataReference is set.
  */
 bool
-DataSet::isSetDataReference() const
+SedDataSet::isSetDataReference() const
 {
 	return (mDataReference.empty() == false);
 }
@@ -220,7 +220,7 @@ DataSet::isSetDataReference() const
  * Sets id and returns value indicating success.
  */
 int
-DataSet::setId(const std::string& id)
+SedDataSet::setId(const std::string& id)
 {
 	return SyntaxChecker::checkAndSetSId(id, mId);
 }
@@ -230,7 +230,7 @@ DataSet::setId(const std::string& id)
  * Sets label and returns value indicating success.
  */
 int
-DataSet::setLabel(const std::string& label)
+SedDataSet::setLabel(const std::string& label)
 {
 	if (&(label) == NULL)
 	{
@@ -248,7 +248,7 @@ DataSet::setLabel(const std::string& label)
  * Sets name and returns value indicating success.
  */
 int
-DataSet::setName(const std::string& name)
+SedDataSet::setName(const std::string& name)
 {
 	if (&(name) == NULL)
 	{
@@ -266,7 +266,7 @@ DataSet::setName(const std::string& name)
  * Sets dataReference and returns value indicating success.
  */
 int
-DataSet::setDataReference(const std::string& dataReference)
+SedDataSet::setDataReference(const std::string& dataReference)
 {
 	if (&(dataReference) == NULL)
 	{
@@ -288,7 +288,7 @@ DataSet::setDataReference(const std::string& dataReference)
  * Unsets id and returns value indicating success.
  */
 int
-DataSet::unsetId()
+SedDataSet::unsetId()
 {
 	mId.erase();
 
@@ -307,7 +307,7 @@ DataSet::unsetId()
  * Unsets label and returns value indicating success.
  */
 int
-DataSet::unsetLabel()
+SedDataSet::unsetLabel()
 {
 	mLabel.erase();
 
@@ -326,7 +326,7 @@ DataSet::unsetLabel()
  * Unsets name and returns value indicating success.
  */
 int
-DataSet::unsetName()
+SedDataSet::unsetName()
 {
 	mName.erase();
 
@@ -345,7 +345,7 @@ DataSet::unsetName()
  * Unsets dataReference and returns value indicating success.
  */
 int
-DataSet::unsetDataReference()
+SedDataSet::unsetDataReference()
 {
 	mDataReference.erase();
 
@@ -364,7 +364,7 @@ DataSet::unsetDataReference()
  * Returns the XML element name of this object
  */
 const std::string&
-DataSet::getElementName () const
+SedDataSet::getElementName () const
 {
 	static const string name = "dataSet";
 	return name;
@@ -375,7 +375,7 @@ DataSet::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-DataSet::getTypeCode () const
+SedDataSet::getTypeCode () const
 {
 	return SEDML_OUTPUT_DATASET;
 }
@@ -385,7 +385,7 @@ DataSet::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-DataSet::hasRequiredAttributes () const
+SedDataSet::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -408,7 +408,7 @@ DataSet::hasRequiredAttributes () const
  * write contained elements
  */
 void
-DataSet::writeElements (XMLOutputStream& stream) const
+SedDataSet::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -420,10 +420,10 @@ DataSet::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-DataSet::accept (SedMLVisitor& v) const
+SedDataSet::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -436,12 +436,12 @@ DataSet::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-DataSet::setSedMLDocument (SedMLDocument* d)
+SedDataSet::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -454,7 +454,7 @@ DataSet::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-DataSet::addExpectedAttributes(ExpectedAttributes& attributes)
+SedDataSet::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -474,7 +474,7 @@ DataSet::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-DataSet::readAttributes (const XMLAttributes& attributes,
+SedDataSet::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -492,7 +492,7 @@ DataSet::readAttributes (const XMLAttributes& attributes,
 
 		if (mId.empty() == true)
 		{
-			logEmptyString(mId, getLevel(), getVersion(), "<DataSet>");
+			logEmptyString(mId, getLevel(), getVersion(), "<SedDataSet>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
@@ -511,7 +511,7 @@ DataSet::readAttributes (const XMLAttributes& attributes,
 
 		if (mLabel.empty() == true)
 		{
-			logEmptyString(mLabel, getLevel(), getVersion(), "<DataSet>");
+			logEmptyString(mLabel, getLevel(), getVersion(), "<SedDataSet>");
 		}
 	}
 
@@ -526,7 +526,7 @@ DataSet::readAttributes (const XMLAttributes& attributes,
 
 		if (mName.empty() == true)
 		{
-			logEmptyString(mName, getLevel(), getVersion(), "<DataSet>");
+			logEmptyString(mName, getLevel(), getVersion(), "<SedDataSet>");
 		}
 	}
 
@@ -541,7 +541,7 @@ DataSet::readAttributes (const XMLAttributes& attributes,
 
 		if (mDataReference.empty() == true)
 		{
-			logEmptyString(mDataReference, getLevel(), getVersion(), "<DataSet>");
+			logEmptyString(mDataReference, getLevel(), getVersion(), "<SedDataSet>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mDataReference) == false)
 		{
@@ -561,7 +561,7 @@ DataSet::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-DataSet::writeAttributes (XMLOutputStream& stream) const
+SedDataSet::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -586,98 +586,98 @@ DataSet::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfDataSets::SedListOfDataSets(unsigned int level, 
-	                  unsigned int version)
+SedListOfSedDataSets::SedListOfSedDataSets(unsigned int level, 
+	                     unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfDataSets::SedListOfDataSets(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedDataSets::SedListOfSedDataSets(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfDataSets 
+ * Returns a deep copy of this SedListOfSedDataSets 
  */
-SedListOfDataSets* 
-SedListOfDataSets::clone () const
+SedListOfSedDataSets* 
+SedListOfSedDataSets::clone () const
  {
-	return new SedListOfDataSets(*this);
+	return new SedListOfSedDataSets(*this);
 }
 
 
 /*
- * Get a DataSet from the SedListOfDataSets by index.
+ * Get a SedDataSet from the SedListOfSedDataSets by index.
 */
-DataSet*
-SedListOfDataSets::get(unsigned int n)
+SedDataSet*
+SedListOfSedDataSets::get(unsigned int n)
 {
-	return static_cast<DataSet*>(SedListOf::get(n));
+	return static_cast<SedDataSet*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a DataSet from the SedListOfDataSets by index.
+ * Get a SedDataSet from the SedListOfSedDataSets by index.
  */
-const DataSet*
-SedListOfDataSets::get(unsigned int n) const
+const SedDataSet*
+SedListOfSedDataSets::get(unsigned int n) const
 {
-	return static_cast<const DataSet*>(SedListOf::get(n));
+	return static_cast<const SedDataSet*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a DataSet from the SedListOfDataSets by id.
+ * Get a SedDataSet from the SedListOfSedDataSets by id.
  */
-DataSet*
-SedListOfDataSets::get(const std::string& sid)
+SedDataSet*
+SedListOfSedDataSets::get(const std::string& sid)
 {
-	return const_cast<DataSet*>(
-	  static_cast<const SedListOfDataSets&>(*this).get(sid));
+	return const_cast<SedDataSet*>(
+	  static_cast<const SedListOfSedDataSets&>(*this).get(sid));
 }
 
 
 /*
- * Get a DataSet from the SedListOfDataSets by id.
+ * Get a SedDataSet from the SedListOfSedDataSets by id.
  */
-const DataSet*
-SedListOfDataSets::get(const std::string& sid) const
+const SedDataSet*
+SedListOfSedDataSets::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<DataSet>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <DataSet*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedDataSet>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedDataSet*> (*result);
 }
 
 
 /*
- * Removes the nth DataSet from this SedListOfDataSets
+ * Removes the nth SedDataSet from this SedListOfSedDataSets
  */
-DataSet*
-SedListOfDataSets::remove(unsigned int n)
+SedDataSet*
+SedListOfSedDataSets::remove(unsigned int n)
 {
-	return static_cast<DataSet*>(SedListOf::remove(n));
+	return static_cast<SedDataSet*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the DataSet from this SedListOfDataSets with the given identifier
+ * Removes the SedDataSet from this SedListOfSedDataSets with the given identifier
  */
-DataSet*
-SedListOfDataSets::remove(const std::string& sid)
+SedDataSet*
+SedListOfSedDataSets::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<DataSet>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedDataSet>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -685,7 +685,7 @@ SedListOfDataSets::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <DataSet*> (item);
+	return static_cast <SedDataSet*> (item);
 }
 
 
@@ -693,7 +693,7 @@ SedListOfDataSets::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfDataSets::getElementName () const
+SedListOfSedDataSets::getElementName () const
 {
 	static const string name = "listOfDataSets";
 	return name;
@@ -704,7 +704,7 @@ SedListOfDataSets::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfDataSets::getTypeCode () const
+SedListOfSedDataSets::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -714,7 +714,7 @@ SedListOfDataSets::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfDataSets::getItemTypeCode () const
+SedListOfSedDataSets::getItemTypeCode () const
 {
 	return SEDML_OUTPUT_DATASET;
 }
@@ -723,17 +723,17 @@ SedListOfDataSets::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new DataSet in this SedListOfDataSets
+ * Creates a new SedDataSet in this SedListOfSedDataSets
  */
 SedBase*
-SedListOfDataSets::createObject(XMLInputStream& stream)
+SedListOfSedDataSets::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "dataSet")
 	{
-		object = new DataSet(getSedMLNamespaces());
+		object = new SedDataSet(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -747,10 +747,10 @@ SedListOfDataSets::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfDataSets::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedDataSets::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -775,10 +775,10 @@ SedListOfDataSets::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-DataSet_t *
-DataSet_create(unsigned int level, unsigned int version)
+SedDataSet_t *
+SedDataSet_create(unsigned int level, unsigned int version)
 {
-	return new DataSet(level, version);
+	return new SedDataSet(level, version);
 }
 
 
@@ -787,10 +787,10 @@ DataSet_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-DataSet_free(DataSet_t * ds)
+SedDataSet_free(SedDataSet_t * sds)
 {
-	if (ds != NULL)
-		delete ds;
+	if (sds != NULL)
+		delete sds;
 }
 
 
@@ -798,12 +798,12 @@ DataSet_free(DataSet_t * ds)
  * write comments
  */
 LIBSEDML_EXTERN
-DataSet_t *
-DataSet_clone(DataSet_t * ds)
+SedDataSet_t *
+SedDataSet_clone(SedDataSet_t * sds)
 {
-	if (ds != NULL)
+	if (sds != NULL)
 	{
-		return static_cast<DataSet_t*>(ds->clone());
+		return static_cast<SedDataSet_t*>(sds->clone());
 	}
 	else
 	{
@@ -817,12 +817,12 @@ DataSet_clone(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 char *
-DataSet_getId(DataSet_t * ds)
+SedDataSet_getId(SedDataSet_t * sds)
 {
-	if (ds == NULL)
+	if (sds == NULL)
 		return NULL;
 
-	return ds->getId().empty() ? NULL : safe_strdup(ds->getId().c_str());
+	return sds->getId().empty() ? NULL : safe_strdup(sds->getId().c_str());
 }
 
 
@@ -831,12 +831,12 @@ DataSet_getId(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 char *
-DataSet_getLabel(DataSet_t * ds)
+SedDataSet_getLabel(SedDataSet_t * sds)
 {
-	if (ds == NULL)
+	if (sds == NULL)
 		return NULL;
 
-	return ds->getLabel().empty() ? NULL : safe_strdup(ds->getLabel().c_str());
+	return sds->getLabel().empty() ? NULL : safe_strdup(sds->getLabel().c_str());
 }
 
 
@@ -845,12 +845,12 @@ DataSet_getLabel(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 char *
-DataSet_getName(DataSet_t * ds)
+SedDataSet_getName(SedDataSet_t * sds)
 {
-	if (ds == NULL)
+	if (sds == NULL)
 		return NULL;
 
-	return ds->getName().empty() ? NULL : safe_strdup(ds->getName().c_str());
+	return sds->getName().empty() ? NULL : safe_strdup(sds->getName().c_str());
 }
 
 
@@ -859,12 +859,12 @@ DataSet_getName(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 char *
-DataSet_getDataReference(DataSet_t * ds)
+SedDataSet_getDataReference(SedDataSet_t * sds)
 {
-	if (ds == NULL)
+	if (sds == NULL)
 		return NULL;
 
-	return ds->getDataReference().empty() ? NULL : safe_strdup(ds->getDataReference().c_str());
+	return sds->getDataReference().empty() ? NULL : safe_strdup(sds->getDataReference().c_str());
 }
 
 
@@ -873,9 +873,9 @@ DataSet_getDataReference(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_isSetId(DataSet_t * ds)
+SedDataSet_isSetId(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? static_cast<int>(ds->isSetId()) : 0;
+	return (sds != NULL) ? static_cast<int>(sds->isSetId()) : 0;
 }
 
 
@@ -884,9 +884,9 @@ DataSet_isSetId(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_isSetLabel(DataSet_t * ds)
+SedDataSet_isSetLabel(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? static_cast<int>(ds->isSetLabel()) : 0;
+	return (sds != NULL) ? static_cast<int>(sds->isSetLabel()) : 0;
 }
 
 
@@ -895,9 +895,9 @@ DataSet_isSetLabel(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_isSetName(DataSet_t * ds)
+SedDataSet_isSetName(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? static_cast<int>(ds->isSetName()) : 0;
+	return (sds != NULL) ? static_cast<int>(sds->isSetName()) : 0;
 }
 
 
@@ -906,9 +906,9 @@ DataSet_isSetName(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_isSetDataReference(DataSet_t * ds)
+SedDataSet_isSetDataReference(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? static_cast<int>(ds->isSetDataReference()) : 0;
+	return (sds != NULL) ? static_cast<int>(sds->isSetDataReference()) : 0;
 }
 
 
@@ -917,9 +917,9 @@ DataSet_isSetDataReference(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_setId(DataSet_t * ds, const char * id)
+SedDataSet_setId(SedDataSet_t * sds, const char * id)
 {
-	return (ds != NULL) ? ds->setId(id) : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -928,9 +928,9 @@ DataSet_setId(DataSet_t * ds, const char * id)
  */
 LIBSEDML_EXTERN
 int
-DataSet_setLabel(DataSet_t * ds, const char * label)
+SedDataSet_setLabel(SedDataSet_t * sds, const char * label)
 {
-	return (ds != NULL) ? ds->setLabel(label) : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->setLabel(label) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -939,9 +939,9 @@ DataSet_setLabel(DataSet_t * ds, const char * label)
  */
 LIBSEDML_EXTERN
 int
-DataSet_setName(DataSet_t * ds, const char * name)
+SedDataSet_setName(SedDataSet_t * sds, const char * name)
 {
-	return (ds != NULL) ? ds->setName(name) : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -950,9 +950,9 @@ DataSet_setName(DataSet_t * ds, const char * name)
  */
 LIBSEDML_EXTERN
 int
-DataSet_setDataReference(DataSet_t * ds, const char * dataReference)
+SedDataSet_setDataReference(SedDataSet_t * sds, const char * dataReference)
 {
-	return (ds != NULL) ? ds->setDataReference(dataReference) : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->setDataReference(dataReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -961,9 +961,9 @@ DataSet_setDataReference(DataSet_t * ds, const char * dataReference)
  */
 LIBSEDML_EXTERN
 int
-DataSet_unsetId(DataSet_t * ds)
+SedDataSet_unsetId(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? ds->unsetId() : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -972,9 +972,9 @@ DataSet_unsetId(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_unsetLabel(DataSet_t * ds)
+SedDataSet_unsetLabel(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? ds->unsetLabel() : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->unsetLabel() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -983,9 +983,9 @@ DataSet_unsetLabel(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_unsetName(DataSet_t * ds)
+SedDataSet_unsetName(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? ds->unsetName() : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -994,9 +994,9 @@ DataSet_unsetName(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_unsetDataReference(DataSet_t * ds)
+SedDataSet_unsetDataReference(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? ds->unsetDataReference() : LIBSEDML_INVALID_OBJECT;
+	return (sds != NULL) ? sds->unsetDataReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1005,9 +1005,9 @@ DataSet_unsetDataReference(DataSet_t * ds)
  */
 LIBSEDML_EXTERN
 int
-DataSet_hasRequiredAttributes(DataSet_t * ds)
+SedDataSet_hasRequiredAttributes(SedDataSet_t * sds)
 {
-	return (ds != NULL) ? static_cast<int>(ds->hasRequiredAttributes()) : 0;
+	return (sds != NULL) ? static_cast<int>(sds->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1015,13 +1015,13 @@ DataSet_hasRequiredAttributes(DataSet_t * ds)
  * write comments
  */
 LIBSEDML_EXTERN
-DataSet_t *
-SedListOfDataSets_getById(SedListOf_t * lo, const char * sid)
+SedDataSet_t *
+SedListOfSedDataSets_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfDataSets *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedDataSets *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1029,13 +1029,13 @@ SedListOfDataSets_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-DataSet_t *
-SedListOfDataSets_removeById(SedListOf_t * lo, const char * sid)
+SedDataSet_t *
+SedListOfSedDataSets_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfDataSets *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedDataSets *>(lo)->remove(sid) : NULL;
 }
 
 

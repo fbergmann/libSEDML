@@ -1,11 +1,11 @@
 /**
- * @file    SedMLWriter.cpp
- * @brief   Writes an SedML Document to file or in-memory string
+ * @file    SedWriter.cpp
+ * @brief   Writes an Sed Document to file or in-memory string
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -33,10 +33,10 @@
 #include <sedml/common/common.h>
 #include <sbml/xml/XMLOutputStream.h>
 
-#include <sedml/SedMLError.h>
-#include <sedml/SedMLErrorLog.h>
-#include <sedml/SedMLDocument.h>
-#include <sedml/SedMLWriter.h>
+#include <sedml/SedError.h>
+#include <sedml/SedErrorLog.h>
+#include <sedml/SedDocument.h>
+#include <sedml/SedWriter.h>
 
 #include <sbml/compress/CompressCommon.h>
 #include <sbml/compress/OutputCompressor.h>
@@ -50,24 +50,24 @@ using namespace std;
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /*
- * Creates a new SedMLWriter.
+ * Creates a new SedWriter.
  */
-SedMLWriter::SedMLWriter ()
+SedWriter::SedWriter ()
 {
 }
 
 
 /*
- * Destroys this SedMLWriter.
+ * Destroys this SedWriter.
  */
-SedMLWriter::~SedMLWriter ()
+SedWriter::~SedWriter ()
 {
 }
 
 
 /*
  * Sets the name of this program. i.\ e.\ the one about to write out the
- * SedMLDocument.  If the program name and version are set
+ * SedDocument.  If the program name and version are set
  * (setProgramVersion()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -75,7 +75,7 @@ SedMLWriter::~SedMLWriter ()
  *   on yyyy-MM-dd HH:mm with libsbml version <libsbml version>. -->
  */
 int
-SedMLWriter::setProgramName (const std::string& name)
+SedWriter::setProgramName (const std::string& name)
 {
   if (&(name) == NULL)
   {
@@ -91,7 +91,7 @@ SedMLWriter::setProgramName (const std::string& name)
 
 /*
  * Sets the version of this program. i.\ e.\ the one about to write out the
- * SedMLDocument.  If the program version and name are set
+ * SedDocument.  If the program version and name are set
  * (setProgramName()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -99,7 +99,7 @@ SedMLWriter::setProgramName (const std::string& name)
  *   on yyyy-MM-dd HH:mm with libsbml version <libsbml version>. -->
  */
 int
-SedMLWriter::setProgramVersion (const std::string& version)
+SedWriter::setProgramVersion (const std::string& version)
 {
   if (&(version) == NULL)
   {
@@ -114,7 +114,7 @@ SedMLWriter::setProgramVersion (const std::string& version)
 
 
 /*
- * Writes the given SedML document to filename.
+ * Writes the given Sed document to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
@@ -126,20 +126,20 @@ SedMLWriter::setProgramVersion (const std::string& version)
  * or @em test.zip. Also, the filename in the archive will be @em test.sbml if the
  * given filename is @em test.sbml.zip.
  *
- * @note To create a gzip/zip file, underlying libSedML needs to be linked with zlib at 
- * compile time. Also, underlying libSedML needs to be linked with bzip2 to create a 
+ * @note To create a gzip/zip file, underlying libSed needs to be linked with zlib at 
+ * compile time. Also, underlying libSed needs to be linked with bzip2 to create a 
  * bzip2 file.
  * File unwritable error will be logged and @c false will be returned if a compressed 
- * file name is given and underlying libSedML is not linked with the corresponding 
+ * file name is given and underlying libSed is not linked with the corresponding 
  * required library.
- * SedMLWriter::hasZlib() and SedMLWriter::hasBzip2() can be used to check whether
- * underlying libSedML is linked with the library.
+ * SedWriter::hasZlib() and SedWriter::hasBzip2() can be used to check whether
+ * underlying libSed is linked with the library.
  *
  * @return true on success and false if the filename could not be opened
  * for writing.
  */
 bool
-SedMLWriter::writeSedML (const SedMLDocument* d, const std::string& filename)
+SedWriter::writeSed (const SedDocument* d, const std::string& filename)
 {
   std::ostream* stream = NULL;
 
@@ -194,21 +194,21 @@ SedMLWriter::writeSedML (const SedMLDocument* d, const std::string& filename)
   }
   catch ( ZlibNotLinked& )
   {
-    // libSedML is not linked with zlib.
-    XMLErrorLog *log = (const_cast<SedMLDocument *>(d))->getErrorLog();
+    // libSed is not linked with zlib.
+    XMLErrorLog *log = (const_cast<SedDocument *>(d))->getErrorLog();
     std::ostringstream oss;
     oss << "Tried to write " << filename << ". Writing a gzip/zip file is not enabled because "
-        << "underlying libSedML is not linked with zlib."; 
+        << "underlying libSed is not linked with zlib."; 
     log->add(XMLError( XMLFileUnwritable, oss.str(), 0, 0) );
     return false;
   } 
   catch ( Bzip2NotLinked& )
   {
-    // libSedML is not linked with bzip2.
-    XMLErrorLog *log = (const_cast<SedMLDocument *>(d))->getErrorLog();
+    // libSed is not linked with bzip2.
+    XMLErrorLog *log = (const_cast<SedDocument *>(d))->getErrorLog();
     std::ostringstream oss;
     oss << "Tried to write " << filename << ". Writing a bzip2 file is not enabled because "
-        << "underlying libSedML is not linked with bzip2."; 
+        << "underlying libSed is not linked with bzip2."; 
     log->add(XMLError( XMLFileUnwritable, oss.str(), 0, 0) );
     return false;
   } 
@@ -216,12 +216,12 @@ SedMLWriter::writeSedML (const SedMLDocument* d, const std::string& filename)
 
   if ( stream == NULL || stream->fail() || stream->bad())
   {
-    SedMLErrorLog *log = (const_cast<SedMLDocument *>(d))->getErrorLog();
+    SedErrorLog *log = (const_cast<SedDocument *>(d))->getErrorLog();
     log->logError(XMLFileUnwritable);
     return false;
   }
 
-   bool result = writeSedML(d, *stream);
+   bool result = writeSed(d, *stream);
    delete stream;
 
    return result;
@@ -230,13 +230,13 @@ SedMLWriter::writeSedML (const SedMLDocument* d, const std::string& filename)
 
 
 /*
- * Writes the given SedML document to the output stream.
+ * Writes the given Sed document to the output stream.
  *
  * @return true on success and false if one of the underlying parser
  * components fail (rare).
  */
 bool
-SedMLWriter::writeSedML (const SedMLDocument* d, std::ostream& stream)
+SedWriter::writeSed (const SedDocument* d, std::ostream& stream)
 {
   bool result = false;
 
@@ -252,7 +252,7 @@ SedMLWriter::writeSedML (const SedMLDocument* d, std::ostream& stream)
   }
   catch (ios_base::failure&)
   {
-    SedMLErrorLog *log = (const_cast<SedMLDocument *>(d))->getErrorLog();
+    SedErrorLog *log = (const_cast<SedDocument *>(d))->getErrorLog();
     log->logError(XMLFileOperationError);
   }
 
@@ -262,7 +262,7 @@ SedMLWriter::writeSedML (const SedMLDocument* d, std::ostream& stream)
 
 /** @cond doxygen-libsbml-internal */
 /*
- * Writes the given SedML document to an in-memory string and returns a
+ * Writes the given Sed document to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.
  *
@@ -271,10 +271,10 @@ SedMLWriter::writeSedML (const SedMLDocument* d, std::ostream& stream)
  */
 LIBSEDML_EXTERN
 char*
-SedMLWriter::writeToString (const SedMLDocument* d)
+SedWriter::writeToString (const SedDocument* d)
 {
   ostringstream stream;
-  writeSedML(d, stream);
+  writeSed(d, stream);
 
   return safe_strdup( stream.str().c_str() );
 }
@@ -282,7 +282,7 @@ SedMLWriter::writeToString (const SedMLDocument* d)
 
 LIBSEDML_EXTERN
 char*
-SedMLWriter::writeSedMLToString (const SedMLDocument* d)
+SedWriter::writeSedToString (const SedDocument* d)
 {
   return writeToString(d);
 }
@@ -291,20 +291,20 @@ SedMLWriter::writeSedMLToString (const SedMLDocument* d)
 
 LIBSEDML_EXTERN
 bool
-SedMLWriter::writeSedMLToFile (const SedMLDocument* d, const std::string& filename)
+SedWriter::writeSedToFile (const SedDocument* d, const std::string& filename)
 {
-  return writeSedML(d, filename);
+  return writeSed(d, filename);
 }
 
 
 /*
  * Predicate returning @c true if
- * underlying libSedML is linked with zlib.
+ * underlying libSed is linked with zlib.
  *
- * @return @c true if libSedML is linked with zlib, @c false otherwise.
+ * @return @c true if libSed is linked with zlib, @c false otherwise.
  */
 bool 
-SedMLWriter::hasZlib() 
+SedWriter::hasZlib() 
 {
   return LIBSEDML_CPP_NAMESPACE ::hasZlib();
 }
@@ -312,12 +312,12 @@ SedMLWriter::hasZlib()
 
 /*
  * Predicate returning @c true if
- * underlying libSedML is linked with bzip2.
+ * underlying libSed is linked with bzip2.
  *
- * @return @c true if libSedML is linked with bzip2, @c false otherwise.
+ * @return @c true if libSed is linked with bzip2, @c false otherwise.
  */
 bool 
-SedMLWriter::hasBzip2() 
+SedWriter::hasBzip2() 
 {
   return LIBSEDML_CPP_NAMESPACE ::hasBzip2();
 }
@@ -325,22 +325,22 @@ SedMLWriter::hasBzip2()
 
 
 /**
- * Creates a new SedMLWriter and returns a pointer to it.
+ * Creates a new SedWriter and returns a pointer to it.
  */
 LIBSEDML_EXTERN
-SedMLWriter_t *
-SedMLWriter_create ()
+SedWriter_t *
+SedWriter_create ()
 {
-  return new(nothrow) SedMLWriter;
+  return new(nothrow) SedWriter;
 }
 
 
 /**
- * Frees the given SedMLWriter.
+ * Frees the given SedWriter.
  */
 LIBSEDML_EXTERN
 void
-SedMLWriter_free (SedMLWriter_t *sw)
+SedWriter_free (SedWriter_t *sw)
 {
   delete sw;
 }
@@ -348,7 +348,7 @@ SedMLWriter_free (SedMLWriter_t *sw)
 
 /**
  * Sets the name of this program. i.\ e.\  the one about to write out the
- * SedMLDocument.  If the program name and version are set
+ * SedDocument.  If the program name and version are set
  * (setProgramVersion()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -363,7 +363,7 @@ SedMLWriter_free (SedMLWriter_t *sw)
  */
 LIBSEDML_EXTERN
 int
-SedMLWriter_setProgramName (SedMLWriter_t *sw, const char *name)
+SedWriter_setProgramName (SedWriter_t *sw, const char *name)
 {
   if (sw != NULL)
     return (name == NULL) ? sw->setProgramName("") : sw->setProgramName(name);
@@ -374,7 +374,7 @@ SedMLWriter_setProgramName (SedMLWriter_t *sw, const char *name)
 
 /**
  * Sets the version of this program. i.\ e.\ the one about to write out the
- * SedMLDocument.  If the program version and name are set
+ * SedDocument.  If the program version and name are set
  * (setProgramName()), the following XML comment, intended for human
  * consumption, will be written at the beginning of the document:
  *
@@ -389,7 +389,7 @@ SedMLWriter_setProgramName (SedMLWriter_t *sw, const char *name)
  */
 LIBSEDML_EXTERN
 int
-SedMLWriter_setProgramVersion (SedMLWriter_t *sw, const char *version)
+SedWriter_setProgramVersion (SedWriter_t *sw, const char *version)
 {
   if (sw != NULL)
     return (version == NULL) ? sw->setProgramVersion("") :
@@ -400,7 +400,7 @@ SedMLWriter_setProgramVersion (SedMLWriter_t *sw, const char *version)
 
 
 /**
- * Writes the given SedML document to filename.
+ * Writes the given Sed document to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
@@ -412,32 +412,32 @@ SedMLWriter_setProgramVersion (SedMLWriter_t *sw, const char *version)
  * or @em test.zip. Also, the filename in the archive will be @em test.sbml if the
  * given filename is @em test.sbml.zip.
  *
- * @note To create a gzip/zip file, libSedML needs to be linked with zlib at 
- * compile time. Also, libSedML needs to be linked with bzip2 to create a bzip2 file.
+ * @note To create a gzip/zip file, libSed needs to be linked with zlib at 
+ * compile time. Also, libSed needs to be linked with bzip2 to create a bzip2 file.
  * File unwritable error will be logged and @c zero will be returned if a compressed 
- * file name is given and libSedML is not linked with the required library.
- * SedMLWriter_hasZlib() and SedMLWriter_hasBzip2() can be used to check whether
- * libSedML was linked with the library at compile time.
+ * file name is given and libSed is not linked with the required library.
+ * SedWriter_hasZlib() and SedWriter_hasBzip2() can be used to check whether
+ * libSed was linked with the library at compile time.
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
  */
 LIBSEDML_EXTERN
 int
-SedMLWriter_writeSedML ( SedMLWriter_t         *sw,
-                       const SedMLDocument_t *d,
+SedWriter_writeSed ( SedWriter_t         *sw,
+                       const SedDocument_t *d,
                        const char           *filename )
 {
   if (sw == NULL || d == NULL) 
     return 0;
   else
     return (filename != NULL) ? 
-      static_cast<int>( sw->writeSedML(d, filename) ) : 0;
+      static_cast<int>( sw->writeSed(d, filename) ) : 0;
 }
 
 
 /**
- * Writes the given SedML document to filename.
+ * Writes the given Sed document to filename.
  *
  * If the filename ends with @em .gz, the file will be compressed by @em gzip.
  * Similary, if the filename ends with @em .zip or @em .bz2, the file will be
@@ -449,32 +449,32 @@ SedMLWriter_writeSedML ( SedMLWriter_t         *sw,
  * or @em test.zip. Also, the filename in the archive will be @em test.sbml if the
  * given filename is @em test.sbml.zip.
  *
- * @note To create a gzip/zip file, libSedML needs to be linked with zlib at 
- * compile time. Also, libSedML needs to be linked with bzip2 to create a bzip2 file.
+ * @note To create a gzip/zip file, libSed needs to be linked with zlib at 
+ * compile time. Also, libSed needs to be linked with bzip2 to create a bzip2 file.
  * File unwritable error will be logged and @c zero will be returned if a compressed 
- * file name is given and libSedML is not linked with the required library.
- * SedMLWriter_hasZlib() and SedMLWriter_hasBzip2() can be used to check whether
- * libSedML was linked with the library at compile time.
+ * file name is given and libSed is not linked with the required library.
+ * SedWriter_hasZlib() and SedWriter_hasBzip2() can be used to check whether
+ * libSed was linked with the library at compile time.
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
  */
 LIBSEDML_EXTERN
 int
-SedMLWriter_writeSedMLToFile ( SedMLWriter_t         *sw,
-                       const SedMLDocument_t *d,
+SedWriter_writeSedToFile ( SedWriter_t         *sw,
+                       const SedDocument_t *d,
                        const char           *filename )
 {
   if (sw == NULL || d == NULL) 
     return 0;
   else
     return (filename != NULL) ? 
-      static_cast<int>( sw->writeSedML(d, filename) ) : 0;
+      static_cast<int>( sw->writeSed(d, filename) ) : 0;
 }
 
 
 /**
- * Writes the given SedML document to an in-memory string and returns a
+ * Writes the given Sed document to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.
  *
@@ -483,7 +483,7 @@ SedMLWriter_writeSedMLToFile ( SedMLWriter_t         *sw,
  */
 LIBSEDML_EXTERN
 char *
-SedMLWriter_writeSedMLToString (SedMLWriter_t *sw, const SedMLDocument_t *d)
+SedWriter_writeSedToString (SedWriter_t *sw, const SedDocument_t *d)
 {
   if (sw == NULL || d == NULL) 
     return 0;
@@ -494,90 +494,90 @@ SedMLWriter_writeSedMLToString (SedMLWriter_t *sw, const SedMLDocument_t *d)
 
 /**
  * Predicate returning @c non-zero or @c zero depending on whether
- * libSedML is linked with zlib at compile time.
+ * libSed is linked with zlib at compile time.
  *
  * @return @c non-zero if zlib is linked, @c zero otherwise.
  */
 LIBSEDML_EXTERN
 int
-SedMLWriter_hasZlib ()
+SedWriter_hasZlib ()
 {
-  return static_cast<int>( SedMLWriter::hasZlib() );
+  return static_cast<int>( SedWriter::hasZlib() );
 }
 
 
 /**
  * Predicate returning @c non-zero or @c zero depending on whether
- * libSedML is linked with bzip2 at compile time.
+ * libSed is linked with bzip2 at compile time.
  *
  * @return @c non-zero if bzip2 is linked, @c zero otherwise.
  */
 LIBSEDML_EXTERN
 int
-SedMLWriter_hasBzip2 ()
+SedWriter_hasBzip2 ()
 {
-   return static_cast<int>( SedMLWriter::hasBzip2() );
+   return static_cast<int>( SedWriter::hasBzip2() );
 }
 
 
 /**
- * Writes the given SedML document to filename.  This convenience function
+ * Writes the given Sed document to filename.  This convenience function
  * is functionally equivalent to:
  *
- *   SedMLWriter_writeSedML(SedMLWriter_create(), d, filename);
+ *   SedWriter_writeSed(SedWriter_create(), d, filename);
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
  */
 LIBSEDML_EXTERN
 int
-writeSedML (const SedMLDocument_t *d, const char *filename)
+writeSed (const SedDocument_t *d, const char *filename)
 {
-  SedMLWriter sw;
+  SedWriter sw;
   if (d == NULL || filename == NULL)
     return 0;
   else
-    return static_cast<int>( sw.writeSedML(d, filename) );
+    return static_cast<int>( sw.writeSed(d, filename) );
 }
 
 
 /**
- * Writes the given SedML document to filename.  This convenience function
+ * Writes the given Sed document to filename.  This convenience function
  * is functionally equivalent to:
  *
- *   SedMLWriter_writeSedMLToFile(SedMLWriter_create(), d, filename);
+ *   SedWriter_writeSedToFile(SedWriter_create(), d, filename);
  *
  * @return non-zero on success and zero if the filename could not be opened
  * for writing.
  */
 LIBSEDML_EXTERN
 int
-writeSedMLToFile (const SedMLDocument_t *d, const char *filename)
+writeSedToFile (const SedDocument_t *d, const char *filename)
 {
-  SedMLWriter sw;
+  SedWriter sw;
   if (d == NULL || filename == NULL)
     return 0;
   else
-    return static_cast<int>( sw.writeSedML(d, filename) );
+    return static_cast<int>( sw.writeSed(d, filename) );
 }
 
 
 /**
- * Writes the given SedML document to an in-memory string and returns a
+ * Writes the given Sed document to an in-memory string and returns a
  * pointer to it.  The string is owned by the caller and should be freed
  * (with free()) when no longer needed.  This convenience function is
  * functionally equivalent to:
  *
- *   SedMLWriter_writeSedMLToString(SedMLWriter_create(), d);
+ *   SedWriter_writeSedToString(SedWriter_create(), d);
  *
  * @return the string on success and NULL if one of the underlying parser
  * components fail (rare).
  */
 LIBSEDML_EXTERN
 char *
-writeSedMLToString (const SedMLDocument_t *d)
+writeSedToString (const SedDocument_t *d)
 {
-  SedMLWriter sw;
+  SedWriter sw;
   if (d == NULL)
     return NULL;
   else

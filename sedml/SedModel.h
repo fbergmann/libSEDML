@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLModel.h
- * @brief:  Implementation of the SedMLModel class
+ * @file:   SedModel.h
+ * @brief:  Implementation of the SedModel class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedMLModel_H__
-#define SedMLModel_H__
+#ifndef SedModel_H__
+#define SedModel_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,16 +49,16 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Change.h>
+#include <sedml/SedChange.h>
 
 
-class LIBSEDML_EXTERN SedMLModel : public SedBase
+class LIBSEDML_EXTERN SedModel : public SedBase
 {
 
 protected:
@@ -73,77 +73,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new SedMLModel with the given level, version, and package version.
+	 * Creates a new SedModel with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedMLModel
+	 * @param level an unsigned int, the SEDML Level to assign to this SedModel
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedMLModel
+	 * @param version an unsigned int, the SEDML Version to assign to this SedModel
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedMLModel
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedModel
 	 */
-	SedMLModel(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	           unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedModel(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	         unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedMLModel with the given SedMLNamespaces object.
+	 * Creates a new SedModel with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedMLModel(SedMLNamespaces* sedmlns);
+	SedModel(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedMLModel.
+	 * Copy constructor for SedModel.
 	 *
-	 * @param orig; the SedMLModel instance to copy.
+	 * @param orig; the SedModel instance to copy.
 	 */
-	SedMLModel(const SedMLModel& orig);
+	SedModel(const SedModel& orig);
 
 
  	/**
-	 * Assignment operator for SedMLModel.
+	 * Assignment operator for SedModel.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedMLModel& operator=(const SedMLModel& rhs);
+	SedModel& operator=(const SedModel& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedMLModel object.
+	 * Creates and returns a deep copy of this SedModel object.
 	 *
-	 * @return a (deep) copy of this SedMLModel object.
+	 * @return a (deep) copy of this SedModel object.
 	 */
-	virtual SedMLModel* clone () const;
+	virtual SedModel* clone () const;
 
 
  	/**
-	 * Destructor for SedMLModel.
+	 * Destructor for SedModel.
 	 */
-	virtual ~SedMLModel();
+	virtual ~SedModel();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this SedMLModel.
+	 * Returns the value of the "id" attribute of this SedModel.
 	 *
-	 * @return the value of the "id" attribute of this SedMLModel as a string.
+	 * @return the value of the "id" attribute of this SedModel as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLModel's "id" attribute has been set.
+	 * SedModel's "id" attribute has been set.
 	 *
-	 * @return @c true if this SedMLModel's "id" attribute has been set,
+	 * @return @c true if this SedModel's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this SedMLModel.
+	 * Sets the value of the "id" attribute of this SedModel.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -158,7 +158,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this SedMLModel.
+	 * Unsets the value of the "id" attribute of this SedModel.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -171,25 +171,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this SedMLModel.
+	 * Returns the value of the "name" attribute of this SedModel.
 	 *
-	 * @return the value of the "name" attribute of this SedMLModel as a string.
+	 * @return the value of the "name" attribute of this SedModel as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLModel's "name" attribute has been set.
+	 * SedModel's "name" attribute has been set.
 	 *
-	 * @return @c true if this SedMLModel's "name" attribute has been set,
+	 * @return @c true if this SedModel's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this SedMLModel.
+	 * Sets the value of the "name" attribute of this SedModel.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -204,7 +204,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this SedMLModel.
+	 * Unsets the value of the "name" attribute of this SedModel.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -217,25 +217,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "language" attribute of this SedMLModel.
+	 * Returns the value of the "language" attribute of this SedModel.
 	 *
-	 * @return the value of the "language" attribute of this SedMLModel as a string.
+	 * @return the value of the "language" attribute of this SedModel as a string.
 	 */
 	virtual const std::string& getLanguage() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLModel's "language" attribute has been set.
+	 * SedModel's "language" attribute has been set.
 	 *
-	 * @return @c true if this SedMLModel's "language" attribute has been set,
+	 * @return @c true if this SedModel's "language" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetLanguage() const;
 
 
 	/**
-	 * Sets the value of the "language" attribute of this SedMLModel.
+	 * Sets the value of the "language" attribute of this SedModel.
 	 *
 	 * @param language; const std::string& value of the "language" attribute to be set
 	 *
@@ -250,7 +250,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "language" attribute of this SedMLModel.
+	 * Unsets the value of the "language" attribute of this SedModel.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -263,25 +263,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "source" attribute of this SedMLModel.
+	 * Returns the value of the "source" attribute of this SedModel.
 	 *
-	 * @return the value of the "source" attribute of this SedMLModel as a string.
+	 * @return the value of the "source" attribute of this SedModel as a string.
 	 */
 	virtual const std::string& getSource() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLModel's "source" attribute has been set.
+	 * SedModel's "source" attribute has been set.
 	 *
-	 * @return @c true if this SedMLModel's "source" attribute has been set,
+	 * @return @c true if this SedModel's "source" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetSource() const;
 
 
 	/**
-	 * Sets the value of the "source" attribute of this SedMLModel.
+	 * Sets the value of the "source" attribute of this SedModel.
 	 *
 	 * @param source; const std::string& value of the "source" attribute to be set
 	 *
@@ -296,7 +296,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "source" attribute of this SedMLModel.
+	 * Unsets the value of the "source" attribute of this SedModel.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -309,9 +309,9 @@ public:
 
 
 	/**
-	 * Returns the  "SedListOfChanges" in this SedMLModel object.
+	 * Returns the  "SedListOfChanges" in this SedModel object.
 	 *
-	 * @return the "SedListOfChanges" attribute of this SedMLModel.
+	 * @return the "SedListOfChanges" attribute of this SedModel.
 	 */
 	const SedListOfChanges* getListOfChanges() const;
 
@@ -321,11 +321,11 @@ public:
 	 *
 	 * @param n the index number of the Change to get.
 	 *
-	 * @return the nth Change in the SedListOfChanges within this SedMLModel.
+	 * @return the nth Change in the SedListOfChanges within this SedModel.
 	 *
 	 * @see getNumChanges()
 	 */
-	Change* getChange(unsigned int n);
+	SedChange* getChange(unsigned int n);
 
 
 	/**
@@ -333,11 +333,11 @@ public:
 	 *
 	 * @param n the index number of the Change to get.
 	 *
-	 * @return the nth Change in the SedListOfChanges within this SedMLModel.
+	 * @return the nth Change in the SedListOfChanges within this SedModel.
 	 *
 	 * @see getNumChanges()
 	 */
-	const Change* getChange(unsigned int n) const;
+	const SedChange* getChange(unsigned int n) const;
 
 
 	/**
@@ -355,7 +355,7 @@ public:
 	 *
 	 * @see getNumChanges()
 	 */
-	Change* getChange(const std::string& sid);
+	SedChange* getChange(const std::string& sid);
 
 
 	/**
@@ -373,13 +373,13 @@ public:
 	 *
 	 * @see getNumChanges()
 	 */
-	const Change* getChange(const std::string& sid) const;
+	const SedChange* getChange(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Change" to this SedMLModel.
+	 * Adds a copy the given "SedChange" to this SedModel.
 	 *
-	 * @param c; the Change object to add
+	 * @param sc; the SedChange object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -388,52 +388,52 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addChange(const Change* c);
+	int addChange(const SedChange* sc);
 
 
 	/**
-	 * Get the number of Change objects in this SedMLModel.
+	 * Get the number of SedChange objects in this SedModel.
 	 *
-	 * @return the number of Change objects in this SedMLModel
+	 * @return the number of SedChange objects in this SedModel
 	 */
 	unsigned int getNumChanges() const;
 
 
 	/**
-	 * Creates a new RemoveXML object, adds it to this SedMLModels
-	 * SedListOfChanges and returns the RemoveXML object created. 
+	 * Creates a new SedRemoveXML object, adds it to this SedModels
+	 * SedListOfChanges and returns the SedRemoveXML object created. 
 	 *
-	 * @return a new RemoveXML object instance
+	 * @return a new SedRemoveXML object instance
 	 *
-	 * @see addChange(const Change* c)
+	 * @see addSedChange(const SedChange* sc)
 	 */
-	RemoveXML* createRemoveXML();
+	SedRemoveXML* createRemoveXML();
 
 
 	/**
-	 * Creates a new ChangeAttribute object, adds it to this SedMLModels
-	 * SedListOfChanges and returns the ChangeAttribute object created. 
+	 * Creates a new SedChangeAttribute object, adds it to this SedModels
+	 * SedListOfChanges and returns the SedChangeAttribute object created. 
 	 *
-	 * @return a new ChangeAttribute object instance
+	 * @return a new SedChangeAttribute object instance
 	 *
-	 * @see addChange(const Change* c)
+	 * @see addSedChange(const SedChange* sc)
 	 */
-	ChangeAttribute* createChangeAttribute();
+	SedChangeAttribute* createChangeAttribute();
 
 
 	/**
-	 * Creates a new ComputeChange object, adds it to this SedMLModels
-	 * SedListOfChanges and returns the ComputeChange object created. 
+	 * Creates a new SedComputeChange object, adds it to this SedModels
+	 * SedListOfChanges and returns the SedComputeChange object created. 
 	 *
-	 * @return a new ComputeChange object instance
+	 * @return a new SedComputeChange object instance
 	 *
-	 * @see addChange(const Change* c)
+	 * @see addSedChange(const SedChange* sc)
 	 */
-	ComputeChange* createComputeChange();
+	SedComputeChange* createComputeChange();
 
 
 	/**
-	 * Removes the nth Change from the SedListOfChanges within this SedMLModel.
+	 * Removes the nth Change from the SedListOfChanges within this SedModel.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -442,11 +442,11 @@ public:
 	 *
 	 * @see getNumChanges()
 	 */
-	Change* removeChange(unsigned int n);
+	SedChange* removeChange(unsigned int n);
 
 
 	/**
-	 * Removes the Change with the given identifier from the SedListOfChanges within this SedMLModel
+	 * Removes the Change with the given identifier from the SedListOfChanges within this SedModel
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -458,14 +458,14 @@ public:
 	 * @return the Change removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	Change* removeChange(const std::string& sid);
+	SedChange* removeChange(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedMLModel, is
-	 * always @c "sedMLModel".
+	 * Returns the XML element name of this object, which for SedModel, is
+	 * always @c "sedModel".
 	 *
-	 * @return the name of this element, i.e. @c "sedMLModel".
+	 * @return the name of this element, i.e. @c "sedModel".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -505,9 +505,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedMLModel object have been set.
+	 * for this SedModel object have been set.
 	 *
-	 * @note The required attributes for a SedMLModel object are:
+	 * @note The required attributes for a SedModel object are:
 	 * @li "id"
 	 * @li "source"
 	 *
@@ -519,9 +519,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this SedMLModel object have been set.
+	 * for this SedModel object have been set.
 	 *
-	 * @note The required elements for a SedMLModel object are:
+	 * @note The required elements for a SedModel object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -545,9 +545,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -556,9 +556,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -625,103 +625,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfSedMLModels : public SedListOf
+class LIBSEDML_EXTERN SedListOfModels : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfSedMLModels with the given level, version, and package version.
+	 * Creates a new SedListOfModels with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSedMLModels
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfModels
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSedMLModels
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfModels
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfSedMLModels
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfModels
 	 */
-	SedListOfSedMLModels(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                     unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfModels(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfSedMLModels with the given SedMLNamespaces object.
+	 * Creates a new SedListOfModels with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSedMLModels(SedMLNamespaces* sedmlns);
+	SedListOfModels(SedNamespaces* sedns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfSedMLModels object.
+	 * Creates and returns a deep copy of this SedListOfModels object.
 	 *
-	 * @return a (deep) copy of this SedListOfSedMLModels object.
+	 * @return a (deep) copy of this SedListOfModels object.
 	 */
-	virtual SedListOfSedMLModels* clone () const;
+	virtual SedListOfModels* clone () const;
 
 
  	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels.
+	 * Get a Model from the SedListOfModels.
 	 *
-	 * @param n the index number of the SedMLModel to get.
+	 * @param n the index number of the Model to get.
 	 *
-	 * @return the nth SedMLModel in this SedListOfSedMLModels.
-	 *
-	 * @see size()
-	 */
-	virtual SedMLModel* get(unsigned int n);
-
-
-	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels.
-	 *
-	 * @param n the index number of the SedMLModel to get.
-	 *
-	 * @return the nth SedMLModel in this SedListOfSedMLModels.
+	 * @return the nth Model in this SedListOfModels.
 	 *
 	 * @see size()
 	 */
-	virtual const SedMLModel* get(unsigned int n) const;
+	virtual SedModel* get(unsigned int n);
 
 
 	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels
+	 * Get a Model from the SedListOfModels.
+	 *
+	 * @param n the index number of the Model to get.
+	 *
+	 * @return the nth Model in this SedListOfModels.
+	 *
+	 * @see size()
+	 */
+	virtual const SedModel* get(unsigned int n) const;
+
+
+	/**
+	 * Get a Model from the SedListOfModels
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLModel to get.
+	 * of the Model to get.
 	 *
-	 * @return SedMLModel in this SedListOfSedMLModels
+	 * @return Model in this SedListOfModels
 	 * with the given id or NULL if no such
-	 * SedMLModel exists.
+	 * Model exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual SedMLModel* get(const std::string& sid);
+	virtual SedModel* get(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels
+	 * Get a Model from the SedListOfModels
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLModel to get.
+	 * of the Model to get.
 	 *
-	 * @return SedMLModel in this SedListOfSedMLModels
+	 * @return Model in this SedListOfModels
 	 * with the given id or NULL if no such
-	 * SedMLModel exists.
+	 * Model exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const SedMLModel* get(const std::string& sid) const;
+	virtual const SedModel* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLModel" to this SedListOfSedMLModels.
+	 * Adds a copy the given "Model" to this SedListOfModels.
 	 *
-	 * @param smlm; the SedMLModel object to add
+	 * @param m; the Model object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -730,62 +730,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLModel(const SedMLModel* smlm);
+	int addModel(const SedModel* m);
 
 
 	/**
-	 * Get the number of SedMLModel objects in this SedListOfSedMLModels.
+	 * Get the number of Model objects in this SedListOfModels.
 	 *
-	 * @return the number of SedMLModel objects in this SedListOfSedMLModels
+	 * @return the number of Model objects in this SedListOfModels
 	 */
-	unsigned int getNumSedMLModels() const;
+	unsigned int getNumModels() const;
 
 
 	/**
-	 * Creates a new SedMLModel object, adds it to the
-	 * SedListOfSedMLModels and returns the SedMLModel object created. 
+	 * Creates a new Model object, adds it to the
+	 * SedListOfModels and returns the Model object created. 
 	 *
-	 * @return a new SedMLModel object instance
+	 * @return a new Model object instance
 	 *
-	 * @see addSedMLModel(const SedMLModel* smlm)
+	 * @see addModel(const SedModel* m)
 	 */
-	SedMLModel* createSedMLModel();
+	SedModel* createModel();
 
 
 	/**
-	 * Removes the nth SedMLModel from this SedListOfSedMLModels
+	 * Removes the nth Model from this SedListOfModels
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLModel to remove.
+	 * @param n the index of the Model to remove.
 	 *
 	 * @see size()
 	 */
-	virtual SedMLModel* remove(unsigned int n);
+	virtual SedModel* remove(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLModel from this SedListOfSedMLModels with the given identifier
+	 * Removes the Model from this SedListOfModels with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLModel to remove.
+	 * @param sid the identifier of the Model to remove.
 	 *
-	 * @return the SedMLModel removed. As mentioned above, the caller owns the
+	 * @return the Model removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual SedMLModel* remove(const std::string& sid);
+	virtual SedModel* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfSedMLModels, is
-	 * always @c "sedListOfSedMLModels".
+	 * Returns the XML element name of this object, which for SedListOfModels, is
+	 * always @c "sedListOfModels".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfSedMLModels".
+	 * @return the name of this element, i.e. @c "sedListOfModels".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -862,7 +862,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new SedMLModel in this SedListOfSedMLModels
+	 * Creates a new Model in this SedListOfModels
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -873,7 +873,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -896,168 +896,168 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLModel_create(unsigned int level, unsigned int version);
+SedModel_t *
+SedModel_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedMLModel_free(SedMLModel_t * smlm);
+SedModel_free(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLModel_clone(SedMLModel_t * smlm);
-
-
-LIBSEDML_EXTERN
-char *
-SedMLModel_getId(SedMLModel_t * smlm);
+SedModel_t *
+SedModel_clone(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLModel_getName(SedMLModel_t * smlm);
+SedModel_getId(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLModel_getLanguage(SedMLModel_t * smlm);
+SedModel_getName(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLModel_getSource(SedMLModel_t * smlm);
+SedModel_getLanguage(SedModel_t * sm);
+
+
+LIBSEDML_EXTERN
+char *
+SedModel_getSource(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_isSetId(SedMLModel_t * smlm);
+SedModel_isSetId(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_isSetName(SedMLModel_t * smlm);
+SedModel_isSetName(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_isSetLanguage(SedMLModel_t * smlm);
+SedModel_isSetLanguage(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_isSetSource(SedMLModel_t * smlm);
+SedModel_isSetSource(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_setId(SedMLModel_t * smlm, const char * id);
+SedModel_setId(SedModel_t * sm, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_setName(SedMLModel_t * smlm, const char * name);
+SedModel_setName(SedModel_t * sm, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_setLanguage(SedMLModel_t * smlm, const char * language);
+SedModel_setLanguage(SedModel_t * sm, const char * language);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_setSource(SedMLModel_t * smlm, const char * source);
+SedModel_setSource(SedModel_t * sm, const char * source);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_unsetId(SedMLModel_t * smlm);
+SedModel_unsetId(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_unsetName(SedMLModel_t * smlm);
+SedModel_unsetName(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_unsetLanguage(SedMLModel_t * smlm);
+SedModel_unsetLanguage(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_unsetSource(SedMLModel_t * smlm);
+SedModel_unsetSource(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_addChange(SedMLModel_t * smlm, Change_t * c);
+SedModel_addChange(SedModel_t * sm, SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
-RemoveXML_t *
-SedMLModel_createRemoveXML(SedMLModel_t * smlm);
+SedRemoveXML_t *
+SedModel_createRemoveXML(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-ChangeAttribute_t *
-SedMLModel_createChangeAttribute(SedMLModel_t * smlm);
+SedChangeAttribute_t *
+SedModel_createChangeAttribute(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-ComputeChange_t *
-SedMLModel_createComputeChange(SedMLModel_t * smlm);
+SedComputeChange_t *
+SedModel_createComputeChange(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLModel_getSedListOfChanges(SedMLModel_t * smlm);
+SedModel_getSedListOfChanges(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedMLModel_getChange(SedMLModel_t * smlm, unsigned int n);
+SedChange_t *
+SedModel_getChange(SedModel_t * sm, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedMLModel_getChangeById(SedMLModel_t * smlm, const char * sid);
+SedChange_t *
+SedModel_getChangeById(SedModel_t * sm, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLModel_getNumChanges(SedMLModel_t * smlm);
+SedModel_getNumChanges(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedMLModel_removeChange(SedMLModel_t * smlm, unsigned int n);
+SedChange_t *
+SedModel_removeChange(SedModel_t * sm, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedMLModel_removeChangeById(SedMLModel_t * smlm, const char * sid);
-
-
-LIBSEDML_EXTERN
-int
-SedMLModel_hasRequiredAttributes(SedMLModel_t * smlm);
+SedChange_t *
+SedModel_removeChangeById(SedModel_t * sm, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedMLModel_hasRequiredElements(SedMLModel_t * smlm);
+SedModel_hasRequiredAttributes(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedListOfSedMLModels_getById(SedListOf_t * lo, const char * sid);
+int
+SedModel_hasRequiredElements(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedListOfSedMLModels_removeById(SedListOf_t * lo, const char * sid);
+SedModel_t *
+SedListOfSedModels_getById(SedListOf_t * lo, const char * sid);
+
+
+LIBSEDML_EXTERN
+SedModel_t *
+SedListOfSedModels_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -1067,5 +1067,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedMLModel_H__  */
+#endif /*  SedModel_H__  */
 

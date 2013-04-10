@@ -1,6 +1,6 @@
 /**
- * @file:   Surface.h
- * @brief:  Implementation of the Surface class
+ * @file:   SedSurface.h
+ * @brief:  Implementation of the SedSurface class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef Surface_H__
-#define Surface_H__
+#ifndef SedSurface_H__
+#define SedSurface_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,16 +49,16 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/SedMLCurve.h>
+#include <sedml/SedCurve.h>
 
 
-class LIBSEDML_EXTERN Surface : public SedMLCurve
+class LIBSEDML_EXTERN SedSurface : public SedCurve
 {
 
 protected:
@@ -71,77 +71,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new Surface with the given level, version, and package version.
+	 * Creates a new SedSurface with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this Surface
+	 * @param level an unsigned int, the SEDML Level to assign to this SedSurface
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this Surface
+	 * @param version an unsigned int, the SEDML Version to assign to this SedSurface
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this Surface
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedSurface
 	 */
-	Surface(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	        unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedSurface(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	           unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new Surface with the given SedMLNamespaces object.
+	 * Creates a new SedSurface with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	Surface(SedMLNamespaces* sedmlns);
+	SedSurface(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for Surface.
+	 * Copy constructor for SedSurface.
 	 *
-	 * @param orig; the Surface instance to copy.
+	 * @param orig; the SedSurface instance to copy.
 	 */
-	Surface(const Surface& orig);
+	SedSurface(const SedSurface& orig);
 
 
  	/**
-	 * Assignment operator for Surface.
+	 * Assignment operator for SedSurface.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	Surface& operator=(const Surface& rhs);
+	SedSurface& operator=(const SedSurface& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this Surface object.
+	 * Creates and returns a deep copy of this SedSurface object.
 	 *
-	 * @return a (deep) copy of this Surface object.
+	 * @return a (deep) copy of this SedSurface object.
 	 */
-	virtual Surface* clone () const;
+	virtual SedSurface* clone () const;
 
 
  	/**
-	 * Destructor for Surface.
+	 * Destructor for SedSurface.
 	 */
-	virtual ~Surface();
+	virtual ~SedSurface();
 
 
  	/**
-	 * Returns the value of the "logZ" attribute of this Surface.
+	 * Returns the value of the "logZ" attribute of this SedSurface.
 	 *
-	 * @return the value of the "logZ" attribute of this Surface as a boolean.
+	 * @return the value of the "logZ" attribute of this SedSurface as a boolean.
 	 */
 	virtual const bool getLogZ() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Surface's "logZ" attribute has been set.
+	 * SedSurface's "logZ" attribute has been set.
 	 *
-	 * @return @c true if this Surface's "logZ" attribute has been set,
+	 * @return @c true if this SedSurface's "logZ" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetLogZ() const;
 
 
 	/**
-	 * Sets the value of the "logZ" attribute of this Surface.
+	 * Sets the value of the "logZ" attribute of this SedSurface.
 	 *
 	 * @param logZ; bool value of the "logZ" attribute to be set
 	 *
@@ -156,7 +156,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "logZ" attribute of this Surface.
+	 * Unsets the value of the "logZ" attribute of this SedSurface.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -169,25 +169,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "zDataReference" attribute of this Surface.
+	 * Returns the value of the "zDataReference" attribute of this SedSurface.
 	 *
-	 * @return the value of the "zDataReference" attribute of this Surface as a string.
+	 * @return the value of the "zDataReference" attribute of this SedSurface as a string.
 	 */
 	virtual const std::string& getZDataReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Surface's "zDataReference" attribute has been set.
+	 * SedSurface's "zDataReference" attribute has been set.
 	 *
-	 * @return @c true if this Surface's "zDataReference" attribute has been set,
+	 * @return @c true if this SedSurface's "zDataReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetZDataReference() const;
 
 
 	/**
-	 * Sets the value of the "zDataReference" attribute of this Surface.
+	 * Sets the value of the "zDataReference" attribute of this SedSurface.
 	 *
 	 * @param zDataReference; const std::string& value of the "zDataReference" attribute to be set
 	 *
@@ -202,7 +202,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "zDataReference" attribute of this Surface.
+	 * Unsets the value of the "zDataReference" attribute of this SedSurface.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -215,10 +215,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for Surface, is
-	 * always @c "surface".
+	 * Returns the XML element name of this object, which for SedSurface, is
+	 * always @c "sedSurface".
 	 *
-	 * @return the name of this element, i.e. @c "surface".
+	 * @return the name of this element, i.e. @c "sedSurface".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -258,9 +258,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this Surface object have been set.
+	 * for this SedSurface object have been set.
 	 *
-	 * @note The required attributes for a Surface object are:
+	 * @note The required attributes for a SedSurface object are:
 	 * @li "logZ"
 	 * @li "zDataReference"
 	 *
@@ -286,9 +286,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -297,9 +297,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -367,7 +367,7 @@ public:
 	 *
 	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSurfaces
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfSurfaces
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfSurfaces
 	 */
 	SedListOfSurfaces(unsigned int level      = SEDML_DEFAULT_LEVEL,
 	                  unsigned int version    = SEDML_DEFAULT_VERSION
@@ -375,11 +375,11 @@ public:
 
 
 	/**
-	 * Creates a new SedListOfSurfaces with the given SedMLNamespaces object.
+	 * Creates a new SedListOfSurfaces with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSurfaces(SedMLNamespaces* sedmlns);
+	SedListOfSurfaces(SedNamespaces* sedns);
 
 
  	/**
@@ -399,7 +399,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual Surface* get(unsigned int n);
+	virtual SedSurface* get(unsigned int n);
 
 
 	/**
@@ -411,7 +411,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual const Surface* get(unsigned int n) const;
+	virtual const SedSurface* get(unsigned int n) const;
 
 
 	/**
@@ -428,7 +428,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual Surface* get(const std::string& sid);
+	virtual SedSurface* get(const std::string& sid);
 
 
 	/**
@@ -445,7 +445,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const Surface* get(const std::string& sid) const;
+	virtual const SedSurface* get(const std::string& sid) const;
 
 
 	/**
@@ -460,7 +460,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSurface(const Surface* s);
+	int addSurface(const SedSurface* s);
 
 
 	/**
@@ -477,9 +477,9 @@ public:
 	 *
 	 * @return a new Surface object instance
 	 *
-	 * @see addSurface(const Surface* s)
+	 * @see addSurface(const SedSurface* s)
 	 */
-	Surface* createSurface();
+	SedSurface* createSurface();
 
 
 	/**
@@ -492,7 +492,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual Surface* remove(unsigned int n);
+	virtual SedSurface* remove(unsigned int n);
 
 
 	/**
@@ -508,7 +508,7 @@ public:
 	 * @return the Surface removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual Surface* remove(const std::string& sid);
+	virtual SedSurface* remove(const std::string& sid);
 
 
 	/**
@@ -603,7 +603,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -626,73 +626,73 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-Surface_t *
-Surface_create(unsigned int level, unsigned int version);
+SedSurface_t *
+SedSurface_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-Surface_free(Surface_t * s);
+SedSurface_free(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
-Surface_t *
-Surface_clone(Surface_t * s);
+SedSurface_t *
+SedSurface_clone(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 int
-Surface_getLogZ(Surface_t * s);
+SedSurface_getLogZ(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 char *
-Surface_getZDataReference(Surface_t * s);
+SedSurface_getZDataReference(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 int
-Surface_isSetLogZ(Surface_t * s);
+SedSurface_isSetLogZ(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 int
-Surface_isSetZDataReference(Surface_t * s);
+SedSurface_isSetZDataReference(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 int
-Surface_setLogZ(Surface_t * s, int logZ);
+SedSurface_setLogZ(SedSurface_t * ss, int logZ);
 
 
 LIBSEDML_EXTERN
 int
-Surface_setZDataReference(Surface_t * s, const char * zDataReference);
+SedSurface_setZDataReference(SedSurface_t * ss, const char * zDataReference);
 
 
 LIBSEDML_EXTERN
 int
-Surface_unsetLogZ(Surface_t * s);
+SedSurface_unsetLogZ(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 int
-Surface_unsetZDataReference(Surface_t * s);
+SedSurface_unsetZDataReference(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
 int
-Surface_hasRequiredAttributes(Surface_t * s);
+SedSurface_hasRequiredAttributes(SedSurface_t * ss);
 
 
 LIBSEDML_EXTERN
-Surface_t *
-SedListOfSurfaces_getById(SedListOf_t * lo, const char * sid);
+SedSurface_t *
+SedListOfSedSurfaces_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-Surface_t *
-SedListOfSurfaces_removeById(SedListOf_t * lo, const char * sid);
+SedSurface_t *
+SedListOfSedSurfaces_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -702,5 +702,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  Surface_H__  */
+#endif /*  SedSurface_H__  */
 

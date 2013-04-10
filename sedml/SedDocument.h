@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLDocument.h
- * @brief:  Implementation of the SedMLDocument class
+ * @file:   SedDocument.h
+ * @brief:  Implementation of the SedDocument class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedMLDocument_H__
-#define SedMLDocument_H__
+#ifndef SedDocument_H__
+#define SedDocument_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,20 +49,20 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Simulation.h>
-#include <sedml/SedMLModel.h>
-#include <sedml/Task.h>
-#include <sedml/DataGenerator.h>
-#include <sedml/SedMLOutput.h>
+#include <sedml/SedSimulation.h>
+#include <sedml/SedModel.h>
+#include <sedml/SedTask.h>
+#include <sedml/SedDataGenerator.h>
+#include <sedml/SedOutput.h>
 
 
-class LIBSEDML_EXTERN SedMLDocument : public SedBase
+class LIBSEDML_EXTERN SedDocument : public SedBase
 {
 
 protected:
@@ -72,86 +72,86 @@ protected:
 	int           mVersion;
 	bool          mIsSetVersion;
 	SedListOfSimulations   mSimulation;
-	SedListOfSedMLModels   mModel;
+	SedListOfModels   mModel;
 	SedListOfTasks   mTask;
 	SedListOfDataGenerators   mDataGenerator;
-	SedListOfSedMLOutputs   mOutput;
+	SedListOfOutputs   mOutput;
 
 
 public:
 
 	/**
-	 * Creates a new SedMLDocument with the given level, version, and package version.
+	 * Creates a new SedDocument with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedMLDocument
+	 * @param level an unsigned int, the SEDML Level to assign to this SedDocument
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedMLDocument
+	 * @param version an unsigned int, the SEDML Version to assign to this SedDocument
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedMLDocument
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedDocument
 	 */
-	SedMLDocument(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	              unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedDocument(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	            unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedMLDocument with the given SedMLNamespaces object.
+	 * Creates a new SedDocument with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedMLDocument(SedMLNamespaces* sedmlns);
+	SedDocument(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedMLDocument.
+	 * Copy constructor for SedDocument.
 	 *
-	 * @param orig; the SedMLDocument instance to copy.
+	 * @param orig; the SedDocument instance to copy.
 	 */
-	SedMLDocument(const SedMLDocument& orig);
+	SedDocument(const SedDocument& orig);
 
 
  	/**
-	 * Assignment operator for SedMLDocument.
+	 * Assignment operator for SedDocument.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedMLDocument& operator=(const SedMLDocument& rhs);
+	SedDocument& operator=(const SedDocument& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedMLDocument object.
+	 * Creates and returns a deep copy of this SedDocument object.
 	 *
-	 * @return a (deep) copy of this SedMLDocument object.
+	 * @return a (deep) copy of this SedDocument object.
 	 */
-	virtual SedMLDocument* clone () const;
+	virtual SedDocument* clone () const;
 
 
  	/**
-	 * Destructor for SedMLDocument.
+	 * Destructor for SedDocument.
 	 */
-	virtual ~SedMLDocument();
+	virtual ~SedDocument();
 
 
  	/**
-	 * Returns the value of the "level" attribute of this SedMLDocument.
+	 * Returns the value of the "level" attribute of this SedDocument.
 	 *
-	 * @return the value of the "level" attribute of this SedMLDocument as a integer.
+	 * @return the value of the "level" attribute of this SedDocument as a integer.
 	 */
 	virtual const int getLevel() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLDocument's "level" attribute has been set.
+	 * SedDocument's "level" attribute has been set.
 	 *
-	 * @return @c true if this SedMLDocument's "level" attribute has been set,
+	 * @return @c true if this SedDocument's "level" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetLevel() const;
 
 
 	/**
-	 * Sets the value of the "level" attribute of this SedMLDocument.
+	 * Sets the value of the "level" attribute of this SedDocument.
 	 *
 	 * @param level; int value of the "level" attribute to be set
 	 *
@@ -166,7 +166,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "level" attribute of this SedMLDocument.
+	 * Unsets the value of the "level" attribute of this SedDocument.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -179,25 +179,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "version" attribute of this SedMLDocument.
+	 * Returns the value of the "version" attribute of this SedDocument.
 	 *
-	 * @return the value of the "version" attribute of this SedMLDocument as a integer.
+	 * @return the value of the "version" attribute of this SedDocument as a integer.
 	 */
 	virtual const int getVersion() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLDocument's "version" attribute has been set.
+	 * SedDocument's "version" attribute has been set.
 	 *
-	 * @return @c true if this SedMLDocument's "version" attribute has been set,
+	 * @return @c true if this SedDocument's "version" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetVersion() const;
 
 
 	/**
-	 * Sets the value of the "version" attribute of this SedMLDocument.
+	 * Sets the value of the "version" attribute of this SedDocument.
 	 *
 	 * @param version; int value of the "version" attribute to be set
 	 *
@@ -212,7 +212,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "version" attribute of this SedMLDocument.
+	 * Unsets the value of the "version" attribute of this SedDocument.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -225,9 +225,9 @@ public:
 
 
 	/**
-	 * Returns the  "SedListOfSimulations" in this SedMLDocument object.
+	 * Returns the  "SedListOfSimulations" in this SedDocument object.
 	 *
-	 * @return the "SedListOfSimulations" attribute of this SedMLDocument.
+	 * @return the "SedListOfSimulations" attribute of this SedDocument.
 	 */
 	const SedListOfSimulations* getListOfSimulations() const;
 
@@ -237,11 +237,11 @@ public:
 	 *
 	 * @param n the index number of the Simulation to get.
 	 *
-	 * @return the nth Simulation in the SedListOfSimulations within this SedMLDocument.
+	 * @return the nth Simulation in the SedListOfSimulations within this SedDocument.
 	 *
 	 * @see getNumSimulations()
 	 */
-	Simulation* getSimulation(unsigned int n);
+	SedSimulation* getSimulation(unsigned int n);
 
 
 	/**
@@ -249,11 +249,11 @@ public:
 	 *
 	 * @param n the index number of the Simulation to get.
 	 *
-	 * @return the nth Simulation in the SedListOfSimulations within this SedMLDocument.
+	 * @return the nth Simulation in the SedListOfSimulations within this SedDocument.
 	 *
 	 * @see getNumSimulations()
 	 */
-	const Simulation* getSimulation(unsigned int n) const;
+	const SedSimulation* getSimulation(unsigned int n) const;
 
 
 	/**
@@ -271,7 +271,7 @@ public:
 	 *
 	 * @see getNumSimulations()
 	 */
-	Simulation* getSimulation(const std::string& sid);
+	SedSimulation* getSimulation(const std::string& sid);
 
 
 	/**
@@ -289,13 +289,13 @@ public:
 	 *
 	 * @see getNumSimulations()
 	 */
-	const Simulation* getSimulation(const std::string& sid) const;
+	const SedSimulation* getSimulation(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Simulation" to this SedMLDocument.
+	 * Adds a copy the given "SedSimulation" to this SedDocument.
 	 *
-	 * @param s; the Simulation object to add
+	 * @param ss; the SedSimulation object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -304,30 +304,30 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSimulation(const Simulation* s);
+	int addSimulation(const SedSimulation* ss);
 
 
 	/**
-	 * Get the number of Simulation objects in this SedMLDocument.
+	 * Get the number of SedSimulation objects in this SedDocument.
 	 *
-	 * @return the number of Simulation objects in this SedMLDocument
+	 * @return the number of SedSimulation objects in this SedDocument
 	 */
 	unsigned int getNumSimulations() const;
 
 
 	/**
-	 * Creates a new UniformTimeCourse object, adds it to this SedMLDocuments
-	 * SedListOfSimulations and returns the UniformTimeCourse object created. 
+	 * Creates a new SedUniformTimeCourse object, adds it to this SedDocuments
+	 * SedListOfSimulations and returns the SedUniformTimeCourse object created. 
 	 *
-	 * @return a new UniformTimeCourse object instance
+	 * @return a new SedUniformTimeCourse object instance
 	 *
-	 * @see addSimulation(const Simulation* s)
+	 * @see addSedSimulation(const SedSimulation* ss)
 	 */
-	UniformTimeCourse* createUniformTimeCourse();
+	SedUniformTimeCourse* createUniformTimeCourse();
 
 
 	/**
-	 * Removes the nth Simulation from the SedListOfSimulations within this SedMLDocument.
+	 * Removes the nth Simulation from the SedListOfSimulations within this SedDocument.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -336,11 +336,11 @@ public:
 	 *
 	 * @see getNumSimulations()
 	 */
-	Simulation* removeSimulation(unsigned int n);
+	SedSimulation* removeSimulation(unsigned int n);
 
 
 	/**
-	 * Removes the Simulation with the given identifier from the SedListOfSimulations within this SedMLDocument
+	 * Removes the Simulation with the given identifier from the SedListOfSimulations within this SedDocument
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -352,81 +352,81 @@ public:
 	 * @return the Simulation removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	Simulation* removeSimulation(const std::string& sid);
+	SedSimulation* removeSimulation(const std::string& sid);
 
 
 	/**
-	 * Returns the  "SedListOfSedMLModels" in this SedMLDocument object.
+	 * Returns the  "SedListOfModels" in this SedDocument object.
 	 *
-	 * @return the "SedListOfSedMLModels" attribute of this SedMLDocument.
+	 * @return the "SedListOfModels" attribute of this SedDocument.
 	 */
-	const SedListOfSedMLModels* getListOfSedMLModels() const;
+	const SedListOfModels* getListOfModels() const;
 
 
 	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels.
+	 * Get a Model from the SedListOfModels.
 	 *
-	 * @param n the index number of the SedMLModel to get.
+	 * @param n the index number of the Model to get.
 	 *
-	 * @return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
+	 * @return the nth Model in the SedListOfModels within this SedDocument.
 	 *
-	 * @see getNumSedMLModels()
+	 * @see getNumModels()
 	 */
-	SedMLModel* getSedMLModel(unsigned int n);
+	SedModel* getModel(unsigned int n);
 
 
 	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels.
+	 * Get a Model from the SedListOfModels.
 	 *
-	 * @param n the index number of the SedMLModel to get.
+	 * @param n the index number of the Model to get.
 	 *
-	 * @return the nth SedMLModel in the SedListOfSedMLModels within this SedMLDocument.
+	 * @return the nth Model in the SedListOfModels within this SedDocument.
 	 *
-	 * @see getNumSedMLModels()
+	 * @see getNumModels()
 	 */
-	const SedMLModel* getSedMLModel(unsigned int n) const;
+	const SedModel* getModel(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels
+	 * Get a Model from the SedListOfModels
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLModel to get.
+	 * of the Model to get.
 	 *
-	 * @return the SedMLModel in the SedListOfSedMLModels
+	 * @return the Model in the SedListOfModels
 	 * with the given id or NULL if no such
-	 * SedMLModel exists.
+	 * Model exists.
 	 *
-	 * @see getSedMLModel(unsigned int n)
+	 * @see getModel(unsigned int n)
 	 *
-	 * @see getNumSedMLModels()
+	 * @see getNumModels()
 	 */
-	SedMLModel* getSedMLModel(const std::string& sid);
+	SedModel* getModel(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLModel from the SedListOfSedMLModels
+	 * Get a Model from the SedListOfModels
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLModel to get.
+	 * of the Model to get.
 	 *
-	 * @return the SedMLModel in the SedListOfSedMLModels
+	 * @return the Model in the SedListOfModels
 	 * with the given id or NULL if no such
-	 * SedMLModel exists.
+	 * Model exists.
 	 *
-	 * @see getSedMLModel(unsigned int n)
+	 * @see getModel(unsigned int n)
 	 *
-	 * @see getNumSedMLModels()
+	 * @see getNumModels()
 	 */
-	const SedMLModel* getSedMLModel(const std::string& sid) const;
+	const SedModel* getModel(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLModel" to this SedMLDocument.
+	 * Adds a copy the given "SedModel" to this SedDocument.
 	 *
-	 * @param smlm; the SedMLModel object to add
+	 * @param sm; the SedModel object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -435,61 +435,61 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLModel(const SedMLModel* smlm);
+	int addModel(const SedModel* sm);
 
 
 	/**
-	 * Get the number of SedMLModel objects in this SedMLDocument.
+	 * Get the number of SedModel objects in this SedDocument.
 	 *
-	 * @return the number of SedMLModel objects in this SedMLDocument
+	 * @return the number of SedModel objects in this SedDocument
 	 */
-	unsigned int getNumSedMLModels() const;
+	unsigned int getNumModels() const;
 
 
 	/**
-	 * Creates a new SedMLModel object, adds it to this SedMLDocuments
-	 * SedListOfSedMLModels and returns the SedMLModel object created. 
+	 * Creates a new SedModel object, adds it to this SedDocuments
+	 * SedListOfModels and returns the SedModel object created. 
 	 *
-	 * @return a new SedMLModel object instance
+	 * @return a new SedModel object instance
 	 *
-	 * @see addSedMLModel(const SedMLModel* smlm)
+	 * @see addModel(const SedModel* sm)
 	 */
-	SedMLModel* createSedMLModel();
+	SedModel* createModel();
 
 
 	/**
-	 * Removes the nth SedMLModel from the SedListOfSedMLModels within this SedMLDocument.
+	 * Removes the nth Model from the SedListOfModels within this SedDocument.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLModel to remove.
+	 * @param n the index of the Model to remove.
 	 *
-	 * @see getNumSedMLModels()
+	 * @see getNumModels()
 	 */
-	SedMLModel* removeSedMLModel(unsigned int n);
+	SedModel* removeModel(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLModel with the given identifier from the SedListOfSedMLModels within this SedMLDocument
+	 * Removes the Model with the given identifier from the SedListOfModels within this SedDocument
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLModel to remove.
+	 * @param sid the identifier of the Model to remove.
 	 *
-	 * @return the SedMLModel removed. As mentioned above, the caller owns the
+	 * @return the Model removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLModel* removeSedMLModel(const std::string& sid);
+	SedModel* removeModel(const std::string& sid);
 
 
 	/**
-	 * Returns the  "SedListOfTasks" in this SedMLDocument object.
+	 * Returns the  "SedListOfTasks" in this SedDocument object.
 	 *
-	 * @return the "SedListOfTasks" attribute of this SedMLDocument.
+	 * @return the "SedListOfTasks" attribute of this SedDocument.
 	 */
 	const SedListOfTasks* getListOfTasks() const;
 
@@ -499,11 +499,11 @@ public:
 	 *
 	 * @param n the index number of the Task to get.
 	 *
-	 * @return the nth Task in the SedListOfTasks within this SedMLDocument.
+	 * @return the nth Task in the SedListOfTasks within this SedDocument.
 	 *
 	 * @see getNumTasks()
 	 */
-	Task* getTask(unsigned int n);
+	SedTask* getTask(unsigned int n);
 
 
 	/**
@@ -511,11 +511,11 @@ public:
 	 *
 	 * @param n the index number of the Task to get.
 	 *
-	 * @return the nth Task in the SedListOfTasks within this SedMLDocument.
+	 * @return the nth Task in the SedListOfTasks within this SedDocument.
 	 *
 	 * @see getNumTasks()
 	 */
-	const Task* getTask(unsigned int n) const;
+	const SedTask* getTask(unsigned int n) const;
 
 
 	/**
@@ -533,7 +533,7 @@ public:
 	 *
 	 * @see getNumTasks()
 	 */
-	Task* getTask(const std::string& sid);
+	SedTask* getTask(const std::string& sid);
 
 
 	/**
@@ -551,13 +551,13 @@ public:
 	 *
 	 * @see getNumTasks()
 	 */
-	const Task* getTask(const std::string& sid) const;
+	const SedTask* getTask(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Task" to this SedMLDocument.
+	 * Adds a copy the given "SedTask" to this SedDocument.
 	 *
-	 * @param t; the Task object to add
+	 * @param st; the SedTask object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -566,30 +566,30 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addTask(const Task* t);
+	int addTask(const SedTask* st);
 
 
 	/**
-	 * Get the number of Task objects in this SedMLDocument.
+	 * Get the number of SedTask objects in this SedDocument.
 	 *
-	 * @return the number of Task objects in this SedMLDocument
+	 * @return the number of SedTask objects in this SedDocument
 	 */
 	unsigned int getNumTasks() const;
 
 
 	/**
-	 * Creates a new Task object, adds it to this SedMLDocuments
-	 * SedListOfTasks and returns the Task object created. 
+	 * Creates a new SedTask object, adds it to this SedDocuments
+	 * SedListOfTasks and returns the SedTask object created. 
 	 *
-	 * @return a new Task object instance
+	 * @return a new SedTask object instance
 	 *
-	 * @see addTask(const Task* t)
+	 * @see addTask(const SedTask* st)
 	 */
-	Task* createTask();
+	SedTask* createTask();
 
 
 	/**
-	 * Removes the nth Task from the SedListOfTasks within this SedMLDocument.
+	 * Removes the nth Task from the SedListOfTasks within this SedDocument.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -598,11 +598,11 @@ public:
 	 *
 	 * @see getNumTasks()
 	 */
-	Task* removeTask(unsigned int n);
+	SedTask* removeTask(unsigned int n);
 
 
 	/**
-	 * Removes the Task with the given identifier from the SedListOfTasks within this SedMLDocument
+	 * Removes the Task with the given identifier from the SedListOfTasks within this SedDocument
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -614,13 +614,13 @@ public:
 	 * @return the Task removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	Task* removeTask(const std::string& sid);
+	SedTask* removeTask(const std::string& sid);
 
 
 	/**
-	 * Returns the  "SedListOfDataGenerators" in this SedMLDocument object.
+	 * Returns the  "SedListOfDataGenerators" in this SedDocument object.
 	 *
-	 * @return the "SedListOfDataGenerators" attribute of this SedMLDocument.
+	 * @return the "SedListOfDataGenerators" attribute of this SedDocument.
 	 */
 	const SedListOfDataGenerators* getListOfDataGenerators() const;
 
@@ -630,11 +630,11 @@ public:
 	 *
 	 * @param n the index number of the DataGenerator to get.
 	 *
-	 * @return the nth DataGenerator in the SedListOfDataGenerators within this SedMLDocument.
+	 * @return the nth DataGenerator in the SedListOfDataGenerators within this SedDocument.
 	 *
 	 * @see getNumDataGenerators()
 	 */
-	DataGenerator* getDataGenerator(unsigned int n);
+	SedDataGenerator* getDataGenerator(unsigned int n);
 
 
 	/**
@@ -642,11 +642,11 @@ public:
 	 *
 	 * @param n the index number of the DataGenerator to get.
 	 *
-	 * @return the nth DataGenerator in the SedListOfDataGenerators within this SedMLDocument.
+	 * @return the nth DataGenerator in the SedListOfDataGenerators within this SedDocument.
 	 *
 	 * @see getNumDataGenerators()
 	 */
-	const DataGenerator* getDataGenerator(unsigned int n) const;
+	const SedDataGenerator* getDataGenerator(unsigned int n) const;
 
 
 	/**
@@ -664,7 +664,7 @@ public:
 	 *
 	 * @see getNumDataGenerators()
 	 */
-	DataGenerator* getDataGenerator(const std::string& sid);
+	SedDataGenerator* getDataGenerator(const std::string& sid);
 
 
 	/**
@@ -682,13 +682,13 @@ public:
 	 *
 	 * @see getNumDataGenerators()
 	 */
-	const DataGenerator* getDataGenerator(const std::string& sid) const;
+	const SedDataGenerator* getDataGenerator(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "DataGenerator" to this SedMLDocument.
+	 * Adds a copy the given "SedDataGenerator" to this SedDocument.
 	 *
-	 * @param dg; the DataGenerator object to add
+	 * @param sdg; the SedDataGenerator object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -697,30 +697,30 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addDataGenerator(const DataGenerator* dg);
+	int addDataGenerator(const SedDataGenerator* sdg);
 
 
 	/**
-	 * Get the number of DataGenerator objects in this SedMLDocument.
+	 * Get the number of SedDataGenerator objects in this SedDocument.
 	 *
-	 * @return the number of DataGenerator objects in this SedMLDocument
+	 * @return the number of SedDataGenerator objects in this SedDocument
 	 */
 	unsigned int getNumDataGenerators() const;
 
 
 	/**
-	 * Creates a new DataGenerator object, adds it to this SedMLDocuments
-	 * SedListOfDataGenerators and returns the DataGenerator object created. 
+	 * Creates a new SedDataGenerator object, adds it to this SedDocuments
+	 * SedListOfDataGenerators and returns the SedDataGenerator object created. 
 	 *
-	 * @return a new DataGenerator object instance
+	 * @return a new SedDataGenerator object instance
 	 *
-	 * @see addDataGenerator(const DataGenerator* dg)
+	 * @see addDataGenerator(const SedDataGenerator* sdg)
 	 */
-	DataGenerator* createDataGenerator();
+	SedDataGenerator* createDataGenerator();
 
 
 	/**
-	 * Removes the nth DataGenerator from the SedListOfDataGenerators within this SedMLDocument.
+	 * Removes the nth DataGenerator from the SedListOfDataGenerators within this SedDocument.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -729,11 +729,11 @@ public:
 	 *
 	 * @see getNumDataGenerators()
 	 */
-	DataGenerator* removeDataGenerator(unsigned int n);
+	SedDataGenerator* removeDataGenerator(unsigned int n);
 
 
 	/**
-	 * Removes the DataGenerator with the given identifier from the SedListOfDataGenerators within this SedMLDocument
+	 * Removes the DataGenerator with the given identifier from the SedListOfDataGenerators within this SedDocument
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
@@ -745,81 +745,81 @@ public:
 	 * @return the DataGenerator removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	DataGenerator* removeDataGenerator(const std::string& sid);
+	SedDataGenerator* removeDataGenerator(const std::string& sid);
 
 
 	/**
-	 * Returns the  "SedListOfSedMLOutputs" in this SedMLDocument object.
+	 * Returns the  "SedListOfOutputs" in this SedDocument object.
 	 *
-	 * @return the "SedListOfSedMLOutputs" attribute of this SedMLDocument.
+	 * @return the "SedListOfOutputs" attribute of this SedDocument.
 	 */
-	const SedListOfSedMLOutputs* getListOfSedMLOutputs() const;
+	const SedListOfOutputs* getListOfOutputs() const;
 
 
 	/**
-	 * Get a SedMLOutput from the SedListOfSedMLOutputs.
+	 * Get a Output from the SedListOfOutputs.
 	 *
-	 * @param n the index number of the SedMLOutput to get.
+	 * @param n the index number of the Output to get.
 	 *
-	 * @return the nth SedMLOutput in the SedListOfSedMLOutputs within this SedMLDocument.
+	 * @return the nth Output in the SedListOfOutputs within this SedDocument.
 	 *
-	 * @see getNumSedMLOutputs()
+	 * @see getNumOutputs()
 	 */
-	SedMLOutput* getSedMLOutput(unsigned int n);
+	SedOutput* getOutput(unsigned int n);
 
 
 	/**
-	 * Get a SedMLOutput from the SedListOfSedMLOutputs.
+	 * Get a Output from the SedListOfOutputs.
 	 *
-	 * @param n the index number of the SedMLOutput to get.
+	 * @param n the index number of the Output to get.
 	 *
-	 * @return the nth SedMLOutput in the SedListOfSedMLOutputs within this SedMLDocument.
+	 * @return the nth Output in the SedListOfOutputs within this SedDocument.
 	 *
-	 * @see getNumSedMLOutputs()
+	 * @see getNumOutputs()
 	 */
-	const SedMLOutput* getSedMLOutput(unsigned int n) const;
+	const SedOutput* getOutput(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLOutput from the SedListOfSedMLOutputs
+	 * Get a Output from the SedListOfOutputs
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLOutput to get.
+	 * of the Output to get.
 	 *
-	 * @return the SedMLOutput in the SedListOfSedMLOutputs
+	 * @return the Output in the SedListOfOutputs
 	 * with the given id or NULL if no such
-	 * SedMLOutput exists.
+	 * Output exists.
 	 *
-	 * @see getSedMLOutput(unsigned int n)
+	 * @see getOutput(unsigned int n)
 	 *
-	 * @see getNumSedMLOutputs()
+	 * @see getNumOutputs()
 	 */
-	SedMLOutput* getSedMLOutput(const std::string& sid);
+	SedOutput* getOutput(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLOutput from the SedListOfSedMLOutputs
+	 * Get a Output from the SedListOfOutputs
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLOutput to get.
+	 * of the Output to get.
 	 *
-	 * @return the SedMLOutput in the SedListOfSedMLOutputs
+	 * @return the Output in the SedListOfOutputs
 	 * with the given id or NULL if no such
-	 * SedMLOutput exists.
+	 * Output exists.
 	 *
-	 * @see getSedMLOutput(unsigned int n)
+	 * @see getOutput(unsigned int n)
 	 *
-	 * @see getNumSedMLOutputs()
+	 * @see getNumOutputs()
 	 */
-	const SedMLOutput* getSedMLOutput(const std::string& sid) const;
+	const SedOutput* getOutput(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLOutput" to this SedMLDocument.
+	 * Adds a copy the given "SedOutput" to this SedDocument.
 	 *
-	 * @param smlo; the SedMLOutput object to add
+	 * @param so; the SedOutput object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -828,84 +828,84 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLOutput(const SedMLOutput* smlo);
+	int addOutput(const SedOutput* so);
 
 
 	/**
-	 * Get the number of SedMLOutput objects in this SedMLDocument.
+	 * Get the number of SedOutput objects in this SedDocument.
 	 *
-	 * @return the number of SedMLOutput objects in this SedMLDocument
+	 * @return the number of SedOutput objects in this SedDocument
 	 */
-	unsigned int getNumSedMLOutputs() const;
+	unsigned int getNumOutputs() const;
 
 
 	/**
-	 * Creates a new Report object, adds it to this SedMLDocuments
-	 * SedListOfSedMLOutputs and returns the Report object created. 
+	 * Creates a new SedReport object, adds it to this SedDocuments
+	 * SedListOfOutputs and returns the SedReport object created. 
 	 *
-	 * @return a new Report object instance
+	 * @return a new SedReport object instance
 	 *
-	 * @see addSedMLOutput(const SedMLOutput* smlo)
+	 * @see addSedOutput(const SedOutput* so)
 	 */
-	Report* createReport();
+	SedReport* createReport();
 
 
 	/**
-	 * Creates a new Plot2D object, adds it to this SedMLDocuments
-	 * SedListOfSedMLOutputs and returns the Plot2D object created. 
+	 * Creates a new SedPlot2D object, adds it to this SedDocuments
+	 * SedListOfOutputs and returns the SedPlot2D object created. 
 	 *
-	 * @return a new Plot2D object instance
+	 * @return a new SedPlot2D object instance
 	 *
-	 * @see addSedMLOutput(const SedMLOutput* smlo)
+	 * @see addSedOutput(const SedOutput* so)
 	 */
-	Plot2D* createPlot2D();
+	SedPlot2D* createPlot2D();
 
 
 	/**
-	 * Creates a new Plot3D object, adds it to this SedMLDocuments
-	 * SedListOfSedMLOutputs and returns the Plot3D object created. 
+	 * Creates a new SedPlot3D object, adds it to this SedDocuments
+	 * SedListOfOutputs and returns the SedPlot3D object created. 
 	 *
-	 * @return a new Plot3D object instance
+	 * @return a new SedPlot3D object instance
 	 *
-	 * @see addSedMLOutput(const SedMLOutput* smlo)
+	 * @see addSedOutput(const SedOutput* so)
 	 */
-	Plot3D* createPlot3D();
+	SedPlot3D* createPlot3D();
 
 
 	/**
-	 * Removes the nth SedMLOutput from the SedListOfSedMLOutputs within this SedMLDocument.
+	 * Removes the nth Output from the SedListOfOutputs within this SedDocument.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLOutput to remove.
+	 * @param n the index of the Output to remove.
 	 *
-	 * @see getNumSedMLOutputs()
+	 * @see getNumOutputs()
 	 */
-	SedMLOutput* removeSedMLOutput(unsigned int n);
+	SedOutput* removeOutput(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLOutput with the given identifier from the SedListOfSedMLOutputs within this SedMLDocument
+	 * Removes the Output with the given identifier from the SedListOfOutputs within this SedDocument
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLOutput to remove.
+	 * @param sid the identifier of the Output to remove.
 	 *
-	 * @return the SedMLOutput removed. As mentioned above, the caller owns the
+	 * @return the Output removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLOutput* removeSedMLOutput(const std::string& sid);
+	SedOutput* removeOutput(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedMLDocument, is
-	 * always @c "sedMLDocument".
+	 * Returns the XML element name of this object, which for SedDocument, is
+	 * always @c "sedDocument".
 	 *
-	 * @return the name of this element, i.e. @c "sedMLDocument".
+	 * @return the name of this element, i.e. @c "sedDocument".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -945,9 +945,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedMLDocument object have been set.
+	 * for this SedDocument object have been set.
 	 *
-	 * @note The required attributes for a SedMLDocument object are:
+	 * @note The required attributes for a SedDocument object are:
 	 * @li "level"
 	 * @li "version"
 	 *
@@ -959,9 +959,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this SedMLDocument object have been set.
+	 * for this SedDocument object have been set.
 	 *
-	 * @note The required elements for a SedMLDocument object are:
+	 * @note The required elements for a SedDocument object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -985,9 +985,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -996,9 +996,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -1072,7 +1072,7 @@ public:
    * 
    * @see SBMLDocument::getNumErrors()
    */
-  virtual SedMLErrorLog* getErrorLog ();
+  virtual SedErrorLog* getErrorLog ();
 
 
   /**
@@ -1084,7 +1084,7 @@ public:
    * 
    * @see SBMLDocument::getNumErrors()
    */
-  const SedMLErrorLog* getErrorLog () const;
+  const SedErrorLog* getErrorLog () const;
 
   /**
    * Returns the nth error or warning encountered during parsing,
@@ -1101,7 +1101,7 @@ public:
    *
    * @see SBMLDocument::getNumErrors()
    */
-  const SedMLError* getError (unsigned int n) const;
+  const SedError* getError (unsigned int n) const;
 
 
   /**
@@ -1146,7 +1146,7 @@ protected:
   virtual void writeXMLNS (XMLOutputStream& stream) const;  
 private: 
 
-	SedMLErrorLog mErrorLog;
+	SedErrorLog mErrorLog;
 
 };
 
@@ -1162,278 +1162,278 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedMLDocument_t *
-SedMLDocument_create(unsigned int level, unsigned int version);
+SedDocument_t *
+SedDocument_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedMLDocument_free(SedMLDocument_t * smld);
+SedDocument_free(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-SedMLDocument_t *
-SedMLDocument_clone(SedMLDocument_t * smld);
-
-
-LIBSEDML_EXTERN
-int
-SedMLDocument_getLevel(SedMLDocument_t * smld);
+SedDocument_t *
+SedDocument_clone(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_getVersion(SedMLDocument_t * smld);
+SedDocument_getLevel(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_isSetLevel(SedMLDocument_t * smld);
+SedDocument_getVersion(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_isSetVersion(SedMLDocument_t * smld);
+SedDocument_isSetLevel(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_setLevel(SedMLDocument_t * smld, int level);
+SedDocument_isSetVersion(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_setVersion(SedMLDocument_t * smld, int version);
+SedDocument_setLevel(SedDocument_t * sd, int level);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_unsetLevel(SedMLDocument_t * smld);
+SedDocument_setVersion(SedDocument_t * sd, int version);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_unsetVersion(SedMLDocument_t * smld);
+SedDocument_unsetLevel(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addSimulation(SedMLDocument_t * smld, Simulation_t * s);
+SedDocument_unsetVersion(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-UniformTimeCourse_t *
-SedMLDocument_createUniformTimeCourse(SedMLDocument_t * smld);
+int
+SedDocument_addSimulation(SedDocument_t * sd, SedSimulation_t * ss);
+
+
+LIBSEDML_EXTERN
+SedUniformTimeCourse_t *
+SedDocument_createUniformTimeCourse(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfSimulations(SedMLDocument_t * smld);
+SedDocument_getSedListOfSimulations(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-Simulation_t *
-SedMLDocument_getSimulation(SedMLDocument_t * smld, unsigned int n);
+SedSimulation_t *
+SedDocument_getSimulation(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Simulation_t *
-SedMLDocument_getSimulationById(SedMLDocument_t * smld, const char * sid);
+SedSimulation_t *
+SedDocument_getSimulationById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumSimulations(SedMLDocument_t * smld);
+SedDocument_getNumSimulations(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-Simulation_t *
-SedMLDocument_removeSimulation(SedMLDocument_t * smld, unsigned int n);
+SedSimulation_t *
+SedDocument_removeSimulation(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Simulation_t *
-SedMLDocument_removeSimulationById(SedMLDocument_t * smld, const char * sid);
+SedSimulation_t *
+SedDocument_removeSimulationById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addSedMLModel(SedMLDocument_t * smld, SedMLModel_t * smlm);
+SedDocument_addModel(SedDocument_t * sd, SedModel_t * sm);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_createSedMLModel(SedMLDocument_t * smld);
+SedModel_t *
+SedDocument_createModel(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfSedMLModels(SedMLDocument_t * smld);
+SedDocument_getSedListOfModels(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_getSedMLModel(SedMLDocument_t * smld, unsigned int n);
+SedModel_t *
+SedDocument_getModel(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_getSedMLModelById(SedMLDocument_t * smld, const char * sid);
+SedModel_t *
+SedDocument_getModelById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumSedMLModels(SedMLDocument_t * smld);
+SedDocument_getNumModels(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_removeSedMLModel(SedMLDocument_t * smld, unsigned int n);
+SedModel_t *
+SedDocument_removeModel(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLModel_t *
-SedMLDocument_removeSedMLModelById(SedMLDocument_t * smld, const char * sid);
+SedModel_t *
+SedDocument_removeModelById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addTask(SedMLDocument_t * smld, Task_t * t);
+SedDocument_addTask(SedDocument_t * sd, SedTask_t * st);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedMLDocument_createTask(SedMLDocument_t * smld);
+SedTask_t *
+SedDocument_createTask(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfTasks(SedMLDocument_t * smld);
+SedDocument_getSedListOfTasks(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedMLDocument_getTask(SedMLDocument_t * smld, unsigned int n);
+SedTask_t *
+SedDocument_getTask(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedMLDocument_getTaskById(SedMLDocument_t * smld, const char * sid);
+SedTask_t *
+SedDocument_getTaskById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumTasks(SedMLDocument_t * smld);
+SedDocument_getNumTasks(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedMLDocument_removeTask(SedMLDocument_t * smld, unsigned int n);
+SedTask_t *
+SedDocument_removeTask(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedMLDocument_removeTaskById(SedMLDocument_t * smld, const char * sid);
+SedTask_t *
+SedDocument_removeTaskById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addDataGenerator(SedMLDocument_t * smld, DataGenerator_t * dg);
+SedDocument_addDataGenerator(SedDocument_t * sd, SedDataGenerator_t * sdg);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedMLDocument_createDataGenerator(SedMLDocument_t * smld);
+SedDataGenerator_t *
+SedDocument_createDataGenerator(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfDataGenerators(SedMLDocument_t * smld);
+SedDocument_getSedListOfDataGenerators(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedMLDocument_getDataGenerator(SedMLDocument_t * smld, unsigned int n);
+SedDataGenerator_t *
+SedDocument_getDataGenerator(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedMLDocument_getDataGeneratorById(SedMLDocument_t * smld, const char * sid);
+SedDataGenerator_t *
+SedDocument_getDataGeneratorById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumDataGenerators(SedMLDocument_t * smld);
+SedDocument_getNumDataGenerators(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedMLDocument_removeDataGenerator(SedMLDocument_t * smld, unsigned int n);
+SedDataGenerator_t *
+SedDocument_removeDataGenerator(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-DataGenerator_t *
-SedMLDocument_removeDataGeneratorById(SedMLDocument_t * smld, const char * sid);
+SedDataGenerator_t *
+SedDocument_removeDataGeneratorById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_addSedMLOutput(SedMLDocument_t * smld, SedMLOutput_t * smlo);
+SedDocument_addOutput(SedDocument_t * sd, SedOutput_t * so);
 
 
 LIBSEDML_EXTERN
-Report_t *
-SedMLDocument_createReport(SedMLDocument_t * smld);
+SedReport_t *
+SedDocument_createReport(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-Plot2D_t *
-SedMLDocument_createPlot2D(SedMLDocument_t * smld);
+SedPlot2D_t *
+SedDocument_createPlot2D(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-Plot3D_t *
-SedMLDocument_createPlot3D(SedMLDocument_t * smld);
+SedPlot3D_t *
+SedDocument_createPlot3D(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedMLDocument_getSedListOfSedMLOutputs(SedMLDocument_t * smld);
+SedDocument_getSedListOfOutputs(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-SedMLOutput_t *
-SedMLDocument_getSedMLOutput(SedMLDocument_t * smld, unsigned int n);
+SedOutput_t *
+SedDocument_getOutput(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLOutput_t *
-SedMLDocument_getSedMLOutputById(SedMLDocument_t * smld, const char * sid);
+SedOutput_t *
+SedDocument_getOutputById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedMLDocument_getNumSedMLOutputs(SedMLDocument_t * smld);
+SedDocument_getNumOutputs(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN
-SedMLOutput_t *
-SedMLDocument_removeSedMLOutput(SedMLDocument_t * smld, unsigned int n);
+SedOutput_t *
+SedDocument_removeOutput(SedDocument_t * sd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLOutput_t *
-SedMLDocument_removeSedMLOutputById(SedMLDocument_t * smld, const char * sid);
-
-
-LIBSEDML_EXTERN
-int
-SedMLDocument_hasRequiredAttributes(SedMLDocument_t * smld);
+SedOutput_t *
+SedDocument_removeOutputById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedMLDocument_hasRequiredElements(SedMLDocument_t * smld);
+SedDocument_hasRequiredAttributes(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+int
+SedDocument_hasRequiredElements(SedDocument_t * sd);
 
 
 
@@ -1443,5 +1443,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedMLDocument_H__  */
+#endif /*  SedDocument_H__  */
 

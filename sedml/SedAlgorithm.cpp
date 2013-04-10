@@ -1,6 +1,6 @@
 /**
- * @file:   Algorithm.cpp
- * @brief:  Implementation of the Algorithm class
+ * @file:   SedAlgorithm.cpp
+ * @brief:  Implementation of the SedAlgorithm class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Algorithm.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedAlgorithm.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,40 +45,40 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Algorithm with the given level, version, and package version.
+ * Creates a new SedAlgorithm with the given level, version, and package version.
  */
-Algorithm::Algorithm (unsigned int level, unsigned int version)
+SedAlgorithm::SedAlgorithm (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mKisaoID ("")
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new Algorithm with the given SedMLNamespaces object.
+ * Creates a new SedAlgorithm with the given SedNamespaces object.
  */
-Algorithm::Algorithm (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedAlgorithm::SedAlgorithm (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mKisaoID ("")
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for Algorithm.
+ * Copy constructor for SedAlgorithm.
  */
-Algorithm::Algorithm (const Algorithm& orig)
+SedAlgorithm::SedAlgorithm (const SedAlgorithm& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -88,14 +88,14 @@ Algorithm::Algorithm (const Algorithm& orig)
 
 
 /*
- * Assignment for Algorithm.
+ * Assignment for SedAlgorithm.
  */
-Algorithm&
-Algorithm::operator=(const Algorithm& rhs)
+SedAlgorithm&
+SedAlgorithm::operator=(const SedAlgorithm& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -107,28 +107,28 @@ Algorithm::operator=(const Algorithm& rhs)
 
 
 /*
- * Clone for Algorithm.
+ * Clone for SedAlgorithm.
  */
-Algorithm*
-Algorithm::clone () const
+SedAlgorithm*
+SedAlgorithm::clone () const
 {
-	return new Algorithm(*this);
+	return new SedAlgorithm(*this);
 }
 
 
 /*
- * Destructor for Algorithm.
+ * Destructor for SedAlgorithm.
  */
-Algorithm::~Algorithm ()
+SedAlgorithm::~SedAlgorithm ()
 {
 }
 
 
 /*
- * Returns the value of the "kisaoID" attribute of this Algorithm.
+ * Returns the value of the "kisaoID" attribute of this SedAlgorithm.
  */
 const std::string&
-Algorithm::getKisaoID() const
+SedAlgorithm::getKisaoID() const
 {
 	return mKisaoID;
 }
@@ -138,7 +138,7 @@ Algorithm::getKisaoID() const
  * Returns true/false if kisaoID is set.
  */
 bool
-Algorithm::isSetKisaoID() const
+SedAlgorithm::isSetKisaoID() const
 {
 	return (mKisaoID.empty() == false);
 }
@@ -148,7 +148,7 @@ Algorithm::isSetKisaoID() const
  * Sets kisaoID and returns value indicating success.
  */
 int
-Algorithm::setKisaoID(const std::string& kisaoID)
+SedAlgorithm::setKisaoID(const std::string& kisaoID)
 {
 	if (&(kisaoID) == NULL)
 	{
@@ -166,7 +166,7 @@ Algorithm::setKisaoID(const std::string& kisaoID)
  * Unsets kisaoID and returns value indicating success.
  */
 int
-Algorithm::unsetKisaoID()
+SedAlgorithm::unsetKisaoID()
 {
 	mKisaoID.erase();
 
@@ -185,7 +185,7 @@ Algorithm::unsetKisaoID()
  * Returns the XML element name of this object
  */
 const std::string&
-Algorithm::getElementName () const
+SedAlgorithm::getElementName () const
 {
 	static const string name = "algorithm";
 	return name;
@@ -196,7 +196,7 @@ Algorithm::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Algorithm::getTypeCode () const
+SedAlgorithm::getTypeCode () const
 {
 	return SEDML_SIMULATION_ALGORITHM;
 }
@@ -206,7 +206,7 @@ Algorithm::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Algorithm::hasRequiredAttributes () const
+SedAlgorithm::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -223,7 +223,7 @@ Algorithm::hasRequiredAttributes () const
  * write contained elements
  */
 void
-Algorithm::writeElements (XMLOutputStream& stream) const
+SedAlgorithm::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -235,10 +235,10 @@ Algorithm::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Algorithm::accept (SedMLVisitor& v) const
+SedAlgorithm::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -251,12 +251,12 @@ Algorithm::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Algorithm::setSedMLDocument (SedMLDocument* d)
+SedAlgorithm::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -269,7 +269,7 @@ Algorithm::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Algorithm::addExpectedAttributes(ExpectedAttributes& attributes)
+SedAlgorithm::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -286,7 +286,7 @@ Algorithm::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Algorithm::readAttributes (const XMLAttributes& attributes,
+SedAlgorithm::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -304,7 +304,7 @@ Algorithm::readAttributes (const XMLAttributes& attributes,
 
 		if (mKisaoID.empty() == true)
 		{
-			logEmptyString(mKisaoID, getLevel(), getVersion(), "<Algorithm>");
+			logEmptyString(mKisaoID, getLevel(), getVersion(), "<SedAlgorithm>");
 		}
 	}
 
@@ -320,7 +320,7 @@ Algorithm::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Algorithm::writeAttributes (XMLOutputStream& stream) const
+SedAlgorithm::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -337,10 +337,10 @@ Algorithm::writeAttributes (XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Algorithm_t *
-Algorithm_create(unsigned int level, unsigned int version)
+SedAlgorithm_t *
+SedAlgorithm_create(unsigned int level, unsigned int version)
 {
-	return new Algorithm(level, version);
+	return new SedAlgorithm(level, version);
 }
 
 
@@ -349,10 +349,10 @@ Algorithm_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Algorithm_free(Algorithm_t * a)
+SedAlgorithm_free(SedAlgorithm_t * sa)
 {
-	if (a != NULL)
-		delete a;
+	if (sa != NULL)
+		delete sa;
 }
 
 
@@ -360,12 +360,12 @@ Algorithm_free(Algorithm_t * a)
  * write comments
  */
 LIBSEDML_EXTERN
-Algorithm_t *
-Algorithm_clone(Algorithm_t * a)
+SedAlgorithm_t *
+SedAlgorithm_clone(SedAlgorithm_t * sa)
 {
-	if (a != NULL)
+	if (sa != NULL)
 	{
-		return static_cast<Algorithm_t*>(a->clone());
+		return static_cast<SedAlgorithm_t*>(sa->clone());
 	}
 	else
 	{
@@ -379,12 +379,12 @@ Algorithm_clone(Algorithm_t * a)
  */
 LIBSEDML_EXTERN
 char *
-Algorithm_getKisaoID(Algorithm_t * a)
+SedAlgorithm_getKisaoID(SedAlgorithm_t * sa)
 {
-	if (a == NULL)
+	if (sa == NULL)
 		return NULL;
 
-	return a->getKisaoID().empty() ? NULL : safe_strdup(a->getKisaoID().c_str());
+	return sa->getKisaoID().empty() ? NULL : safe_strdup(sa->getKisaoID().c_str());
 }
 
 
@@ -393,9 +393,9 @@ Algorithm_getKisaoID(Algorithm_t * a)
  */
 LIBSEDML_EXTERN
 int
-Algorithm_isSetKisaoID(Algorithm_t * a)
+SedAlgorithm_isSetKisaoID(SedAlgorithm_t * sa)
 {
-	return (a != NULL) ? static_cast<int>(a->isSetKisaoID()) : 0;
+	return (sa != NULL) ? static_cast<int>(sa->isSetKisaoID()) : 0;
 }
 
 
@@ -404,9 +404,9 @@ Algorithm_isSetKisaoID(Algorithm_t * a)
  */
 LIBSEDML_EXTERN
 int
-Algorithm_setKisaoID(Algorithm_t * a, const char * kisaoID)
+SedAlgorithm_setKisaoID(SedAlgorithm_t * sa, const char * kisaoID)
 {
-	return (a != NULL) ? a->setKisaoID(kisaoID) : LIBSEDML_INVALID_OBJECT;
+	return (sa != NULL) ? sa->setKisaoID(kisaoID) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -415,9 +415,9 @@ Algorithm_setKisaoID(Algorithm_t * a, const char * kisaoID)
  */
 LIBSEDML_EXTERN
 int
-Algorithm_unsetKisaoID(Algorithm_t * a)
+SedAlgorithm_unsetKisaoID(SedAlgorithm_t * sa)
 {
-	return (a != NULL) ? a->unsetKisaoID() : LIBSEDML_INVALID_OBJECT;
+	return (sa != NULL) ? sa->unsetKisaoID() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -426,9 +426,9 @@ Algorithm_unsetKisaoID(Algorithm_t * a)
  */
 LIBSEDML_EXTERN
 int
-Algorithm_hasRequiredAttributes(Algorithm_t * a)
+SedAlgorithm_hasRequiredAttributes(SedAlgorithm_t * sa)
 {
-	return (a != NULL) ? static_cast<int>(a->hasRequiredAttributes()) : 0;
+	return (sa != NULL) ? static_cast<int>(sa->hasRequiredAttributes()) : 0;
 }
 
 

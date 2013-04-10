@@ -1,13 +1,13 @@
 /**
- * @file    SedMLErrorLog.h
- * @brief   Stores errors (and messages) encountered while processing SedML.
+ * @file    SedErrorLog.h
+ * @brief   Stores errors (and messages) encountered while processing Sed.
  * @author  Ben Bornstein
  * @author  Michael Hucka
  *
  *
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -27,53 +27,53 @@
  * and also available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class SedMLErrorLog
+ * @class SedErrorLog
  * @ingroup Core
- * @brief Log of errors and other events encountered during SedML processing.
+ * @brief Log of errors and other events encountered during Sed processing.
  *
  * @htmlinclude not-sbml-warning.html
  *
- * The error log is a list.  Each SedMLDocument maintains its own
- * SedMLErrorLog.  When a libSedML operation on SedML content results in an
- * error, or when there is something worth noting about the SedML content,
- * the issue is reported as an SedMLError object stored in the SedMLErrorLog
+ * The error log is a list.  Each SedDocument maintains its own
+ * SedErrorLog.  When a libSed operation on Sed content results in an
+ * error, or when there is something worth noting about the Sed content,
+ * the issue is reported as an SedError object stored in the SedErrorLog
  * list.
  *
- * SedMLErrorLog is derived from XMLErrorLog, an object class that serves
+ * SedErrorLog is derived from XMLErrorLog, an object class that serves
  * exactly the same purpose but for the XML parsing layer.  XMLErrorLog
  * provides crucial methods such as
  * @if java XMLErrorLog::getNumErrors()@else getNumErrors()@endif@~
- * for determining how many SedMLError or XMLError objects are in the log.
- * SedMLErrorLog inherits these methods.
+ * for determining how many SedError or XMLError objects are in the log.
+ * SedErrorLog inherits these methods.
  *
- * The general approach to working with SedMLErrorLog in user programs
- * involves first obtaining a pointer to a log from a libSedML object such
- * as SedMLDocument.  Callers should then use
+ * The general approach to working with SedErrorLog in user programs
+ * involves first obtaining a pointer to a log from a libSed object such
+ * as SedDocument.  Callers should then use
  * @if java XMLErrorLog::getNumErrors()@else getNumErrors() @endif@~ to inquire how
  * many objects there are in the list.  (The answer may be 0.)  If there is
- * at least one SedMLError object in the SedMLErrorLog instance, callers can
+ * at least one SedError object in the SedErrorLog instance, callers can
  * then iterate over the list using
- * SedMLErrorLog::getError(@if java long n@endif)@if clike const@endif,
- * using methods provided by the SedMLError class to find out the error code
+ * SedErrorLog::getError(@if java long n@endif)@if clike const@endif,
+ * using methods provided by the SedError class to find out the error code
  * and associated information such as the error severity, the message, and
  * the line number in the input.
  *
  * If you wish to simply print the error strings for a human to read, an
- * easier and more direct way might be to use SedMLDocument::printErrors().
+ * easier and more direct way might be to use SedDocument::printErrors().
  *
- * @see SedMLError
+ * @see SedError
  * @see XMLErrorLog
  * @see XMLError
  */
 
-#ifndef SedMLErrorLog_h
-#define SedMLErrorLog_h
+#ifndef SedErrorLog_h
+#define SedErrorLog_h
 
 
 #include <sedml/common/extern.h>
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
-#include <sedml/SedMLError.h>
+#include <sedml/SedError.h>
 
 
 #ifdef __cplusplus
@@ -82,12 +82,12 @@
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-class LIBSEDML_EXTERN SedMLErrorLog : public XMLErrorLog
+class LIBSEDML_EXTERN SedErrorLog : public XMLErrorLog
 {
 public:
 
   /**
-   * Returns the <i>n</i>th SedMLError object in this log.
+   * Returns the <i>n</i>th SedError object in this log.
    *
    * Index @p n is counted from 0.  Callers should first inquire about the
    * number of items in the log by using the
@@ -98,31 +98,31 @@ public:
    * @param n the index number of the error to retrieve (with 0 being the
    * first error).
    *
-   * @return the <i>n</i>th SedMLError in this log, or @c NULL if @p n is
+   * @return the <i>n</i>th SedError in this log, or @c NULL if @p n is
    * greater than or equal to
    * @if java XMLErrorLog::getNumErrors()@else getNumErrors()@endif.
    *
    * @see getNumErrors()
    */
-  const SedMLError* getError (unsigned int n) const;
+  const SedError* getError (unsigned int n) const;
 
 
   /**
    * Returns the number of errors that have been logged with the given
    * severity code.
    *
-   * LibSedML associates severity levels with every SedMLError object to
+   * LibSed associates severity levels with every SedError object to
    * provide an indication of how serious the problem is.  Severities range
    * from informational diagnostics to fatal (irrecoverable) errors.  Given
-   * an SedMLError object instance, a caller can interrogate it for its
-   * severity level using methods such as SedMLError::getSeverity(),
-   * SedMLError::isFatal(), and so on.  The present method encapsulates
-   * iteration and interrogation of all objects in an SedMLErrorLog, making
+   * an SedError object instance, a caller can interrogate it for its
+   * severity level using methods such as SedError::getSeverity(),
+   * SedError::isFatal(), and so on.  The present method encapsulates
+   * iteration and interrogation of all objects in an SedErrorLog, making
    * it easy to check for the presence of error objects with specific
    * severity levels.
    *
    * @if clike @param severity a value from
-   * #SedMLErrorSeverity_t @endif@if java @param severity a
+   * #SedErrorSeverity_t @endif@if java @param severity a
    * value from the set of <code>LIBSEDML_SEV_</code> constants defined by
    * the interface class <code><a
    * href="libsbmlConstants.html">libsbmlConstants</a></code> @endif@if python @param severity a
@@ -139,18 +139,18 @@ public:
    * Returns the number of errors that have been logged with the given
    * severity code.
    *
-   * LibSedML associates severity levels with every SedMLError object to
+   * LibSed associates severity levels with every SedError object to
    * provide an indication of how serious the problem is.  Severities range
    * from informational diagnostics to fatal (irrecoverable) errors.  Given
-   * an SedMLError object instance, a caller can interrogate it for its
-   * severity level using methods such as SedMLError::getSeverity(),
-   * SedMLError::isFatal(), and so on.  The present method encapsulates
-   * iteration and interrogation of all objects in an SedMLErrorLog, making
+   * an SedError object instance, a caller can interrogate it for its
+   * severity level using methods such as SedError::getSeverity(),
+   * SedError::isFatal(), and so on.  The present method encapsulates
+   * iteration and interrogation of all objects in an SedErrorLog, making
    * it easy to check for the presence of error objects with specific
    * severity levels.
    *
    * @if clike @param severity a value from
-   * #SedMLErrorSeverity_t @endif@if java @param severity a
+   * #SedErrorSeverity_t @endif@if java @param severity a
    * value from the set of <code>LIBSEDML_SEV_</code> constants defined by
    * the interface class <code><a
    * href="libsbmlConstants.html">libsbmlConstants</a></code> @endif@if python @param severity a
@@ -167,29 +167,29 @@ public:
   /** @cond doxygen-libsbml-internal */
 
   /**
-   * Creates a new, empty SedMLErrorLog.
+   * Creates a new, empty SedErrorLog.
    */
-  SedMLErrorLog ();
+  SedErrorLog ();
 
 
   /**
-   * Destroys this SedMLErrorLog.
+   * Destroys this SedErrorLog.
    */
-  virtual ~SedMLErrorLog ();
+  virtual ~SedErrorLog ();
 
 
   /**
-   * Convenience function that combines creating an SedMLError object and
+   * Convenience function that combines creating an SedError object and
    * adding it to the log.
    *
    * @param errorId an unsigned int, the identification number of the error.
    *
-   * @param level an unsigned int, the SedML Level
+   * @param level an unsigned int, the Sed Level
    *
-   * @param version an unsigned int, the SedML Level's Version
+   * @param version an unsigned int, the Sed Level's Version
    * 
    * @param details a string containing additional details about the error.
-   * If the error code in @p errorId is one that is recognized by SedMLError,
+   * If the error code in @p errorId is one that is recognized by SedError,
    * the given message is @em appended to a predefined message associated
    * with the given code.  If the error code is not recognized, the message
    * is stored as-is as the text of the error.
@@ -234,37 +234,37 @@ public:
 
 
   /**
-   * Adds the given SedMLError to the log.
+   * Adds the given SedError to the log.
    *
-   * @param error SedMLError, the error to be logged.
+   * @param error SedError, the error to be logged.
    */
-  void add (const SedMLError& error);
+  void add (const SedError& error);
 
 
   /** @cond doxygen-cpp-only */
 
   /**
-   * Adds (copies) the SedMLErrors in the given SedMLError list to this
-   * SedMLErrorLog.
+   * Adds (copies) the SedErrors in the given SedError list to this
+   * SedErrorLog.
    *
-   * @param errors list, a list of SedMLError to be added to the log.
+   * @param errors list, a list of SedError to be added to the log.
    */
-  void add (const std::list<SedMLError>& errors);
+  void add (const std::list<SedError>& errors);
 
 
   /**
-   * Adds (copies) the SedMLErrors in the given SedMLError vector to this
-   * SedMLErrorLog.
+   * Adds (copies) the SedErrors in the given SedError vector to this
+   * SedErrorLog.
    *
-   * @param errors vector, a vector of SedMLError to be added to the log.
+   * @param errors vector, a vector of SedError to be added to the log.
    */
-  void add (const std::vector<SedMLError>& errors);
+  void add (const std::vector<SedError>& errors);
 
   /** @endcond */
 
 
   /**
-   * Removes an error having errorId from the SedMLError list.
+   * Removes an error having errorId from the SedError list.
    *  
    * Only the first item will be removed if there are multiple errors
    * with the given errorId.
@@ -275,7 +275,7 @@ public:
 
 
   /**
-   * Returns true if SedMLErrorLog contains an errorId
+   * Returns true if SedErrorLog contains an errorId
    *
    * @param errorId the error identifier of the error to be found.
    */
@@ -288,4 +288,4 @@ public:
 LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /* __cplusplus */
-#endif  /* SedMLErrorLog_h */
+#endif  /* SedErrorLog_h */

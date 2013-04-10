@@ -1,6 +1,6 @@
 /**
- * @file:   Task.h
- * @brief:  Implementation of the Task class
+ * @file:   SedTask.h
+ * @brief:  Implementation of the SedTask class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef Task_H__
-#define Task_H__
+#ifndef SedTask_H__
+#define SedTask_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN Task : public SedBase
+class LIBSEDML_EXTERN SedTask : public SedBase
 {
 
 protected:
@@ -71,77 +71,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new Task with the given level, version, and package version.
+	 * Creates a new SedTask with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this Task
+	 * @param level an unsigned int, the SEDML Level to assign to this SedTask
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this Task
+	 * @param version an unsigned int, the SEDML Version to assign to this SedTask
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this Task
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedTask
 	 */
-	Task(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	     unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedTask(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	        unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new Task with the given SedMLNamespaces object.
+	 * Creates a new SedTask with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	Task(SedMLNamespaces* sedmlns);
+	SedTask(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for Task.
+	 * Copy constructor for SedTask.
 	 *
-	 * @param orig; the Task instance to copy.
+	 * @param orig; the SedTask instance to copy.
 	 */
-	Task(const Task& orig);
+	SedTask(const SedTask& orig);
 
 
  	/**
-	 * Assignment operator for Task.
+	 * Assignment operator for SedTask.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	Task& operator=(const Task& rhs);
+	SedTask& operator=(const SedTask& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this Task object.
+	 * Creates and returns a deep copy of this SedTask object.
 	 *
-	 * @return a (deep) copy of this Task object.
+	 * @return a (deep) copy of this SedTask object.
 	 */
-	virtual Task* clone () const;
+	virtual SedTask* clone () const;
 
 
  	/**
-	 * Destructor for Task.
+	 * Destructor for SedTask.
 	 */
-	virtual ~Task();
+	virtual ~SedTask();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this Task.
+	 * Returns the value of the "id" attribute of this SedTask.
 	 *
-	 * @return the value of the "id" attribute of this Task as a string.
+	 * @return the value of the "id" attribute of this SedTask as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Task's "id" attribute has been set.
+	 * SedTask's "id" attribute has been set.
 	 *
-	 * @return @c true if this Task's "id" attribute has been set,
+	 * @return @c true if this SedTask's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this Task.
+	 * Sets the value of the "id" attribute of this SedTask.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -156,7 +156,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this Task.
+	 * Unsets the value of the "id" attribute of this SedTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -169,25 +169,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this Task.
+	 * Returns the value of the "name" attribute of this SedTask.
 	 *
-	 * @return the value of the "name" attribute of this Task as a string.
+	 * @return the value of the "name" attribute of this SedTask as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Task's "name" attribute has been set.
+	 * SedTask's "name" attribute has been set.
 	 *
-	 * @return @c true if this Task's "name" attribute has been set,
+	 * @return @c true if this SedTask's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this Task.
+	 * Sets the value of the "name" attribute of this SedTask.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -202,7 +202,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this Task.
+	 * Unsets the value of the "name" attribute of this SedTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -215,25 +215,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "modelReference" attribute of this Task.
+	 * Returns the value of the "modelReference" attribute of this SedTask.
 	 *
-	 * @return the value of the "modelReference" attribute of this Task as a string.
+	 * @return the value of the "modelReference" attribute of this SedTask as a string.
 	 */
 	virtual const std::string& getModelReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Task's "modelReference" attribute has been set.
+	 * SedTask's "modelReference" attribute has been set.
 	 *
-	 * @return @c true if this Task's "modelReference" attribute has been set,
+	 * @return @c true if this SedTask's "modelReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetModelReference() const;
 
 
 	/**
-	 * Sets the value of the "modelReference" attribute of this Task.
+	 * Sets the value of the "modelReference" attribute of this SedTask.
 	 *
 	 * @param modelReference; const std::string& value of the "modelReference" attribute to be set
 	 *
@@ -248,7 +248,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "modelReference" attribute of this Task.
+	 * Unsets the value of the "modelReference" attribute of this SedTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -261,25 +261,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "simulationReference" attribute of this Task.
+	 * Returns the value of the "simulationReference" attribute of this SedTask.
 	 *
-	 * @return the value of the "simulationReference" attribute of this Task as a string.
+	 * @return the value of the "simulationReference" attribute of this SedTask as a string.
 	 */
 	virtual const std::string& getSimulationReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Task's "simulationReference" attribute has been set.
+	 * SedTask's "simulationReference" attribute has been set.
 	 *
-	 * @return @c true if this Task's "simulationReference" attribute has been set,
+	 * @return @c true if this SedTask's "simulationReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetSimulationReference() const;
 
 
 	/**
-	 * Sets the value of the "simulationReference" attribute of this Task.
+	 * Sets the value of the "simulationReference" attribute of this SedTask.
 	 *
 	 * @param simulationReference; const std::string& value of the "simulationReference" attribute to be set
 	 *
@@ -294,7 +294,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "simulationReference" attribute of this Task.
+	 * Unsets the value of the "simulationReference" attribute of this SedTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -307,10 +307,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for Task, is
-	 * always @c "task".
+	 * Returns the XML element name of this object, which for SedTask, is
+	 * always @c "sedTask".
 	 *
-	 * @return the name of this element, i.e. @c "task".
+	 * @return the name of this element, i.e. @c "sedTask".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -350,9 +350,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this Task object have been set.
+	 * for this SedTask object have been set.
 	 *
-	 * @note The required attributes for a Task object are:
+	 * @note The required attributes for a SedTask object are:
 	 * @li "id"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -363,9 +363,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this Task object have been set.
+	 * for this SedTask object have been set.
 	 *
-	 * @note The required elements for a Task object are:
+	 * @note The required elements for a SedTask object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -389,9 +389,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -400,9 +400,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -481,7 +481,7 @@ public:
 	 *
 	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfTasks
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfTasks
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfTasks
 	 */
 	SedListOfTasks(unsigned int level      = SEDML_DEFAULT_LEVEL,
 	               unsigned int version    = SEDML_DEFAULT_VERSION
@@ -489,11 +489,11 @@ public:
 
 
 	/**
-	 * Creates a new SedListOfTasks with the given SedMLNamespaces object.
+	 * Creates a new SedListOfTasks with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfTasks(SedMLNamespaces* sedmlns);
+	SedListOfTasks(SedNamespaces* sedns);
 
 
  	/**
@@ -513,7 +513,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual Task* get(unsigned int n);
+	virtual SedTask* get(unsigned int n);
 
 
 	/**
@@ -525,7 +525,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual const Task* get(unsigned int n) const;
+	virtual const SedTask* get(unsigned int n) const;
 
 
 	/**
@@ -542,7 +542,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual Task* get(const std::string& sid);
+	virtual SedTask* get(const std::string& sid);
 
 
 	/**
@@ -559,7 +559,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const Task* get(const std::string& sid) const;
+	virtual const SedTask* get(const std::string& sid) const;
 
 
 	/**
@@ -574,7 +574,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addTask(const Task* t);
+	int addTask(const SedTask* t);
 
 
 	/**
@@ -591,9 +591,9 @@ public:
 	 *
 	 * @return a new Task object instance
 	 *
-	 * @see addTask(const Task* t)
+	 * @see addTask(const SedTask* t)
 	 */
-	Task* createTask();
+	SedTask* createTask();
 
 
 	/**
@@ -606,7 +606,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual Task* remove(unsigned int n);
+	virtual SedTask* remove(unsigned int n);
 
 
 	/**
@@ -622,7 +622,7 @@ public:
 	 * @return the Task removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual Task* remove(const std::string& sid);
+	virtual SedTask* remove(const std::string& sid);
 
 
 	/**
@@ -717,7 +717,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -740,118 +740,118 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-Task_t *
-Task_create(unsigned int level, unsigned int version);
+SedTask_t *
+SedTask_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-Task_free(Task_t * t);
+SedTask_free(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
-Task_t *
-Task_clone(Task_t * t);
-
-
-LIBSEDML_EXTERN
-char *
-Task_getId(Task_t * t);
+SedTask_t *
+SedTask_clone(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 char *
-Task_getName(Task_t * t);
+SedTask_getId(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 char *
-Task_getModelReference(Task_t * t);
+SedTask_getName(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 char *
-Task_getSimulationReference(Task_t * t);
+SedTask_getModelReference(SedTask_t * st);
+
+
+LIBSEDML_EXTERN
+char *
+SedTask_getSimulationReference(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_isSetId(Task_t * t);
+SedTask_isSetId(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_isSetName(Task_t * t);
+SedTask_isSetName(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_isSetModelReference(Task_t * t);
+SedTask_isSetModelReference(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_isSetSimulationReference(Task_t * t);
+SedTask_isSetSimulationReference(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_setId(Task_t * t, const char * id);
+SedTask_setId(SedTask_t * st, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-Task_setName(Task_t * t, const char * name);
+SedTask_setName(SedTask_t * st, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-Task_setModelReference(Task_t * t, const char * modelReference);
+SedTask_setModelReference(SedTask_t * st, const char * modelReference);
 
 
 LIBSEDML_EXTERN
 int
-Task_setSimulationReference(Task_t * t, const char * simulationReference);
+SedTask_setSimulationReference(SedTask_t * st, const char * simulationReference);
 
 
 LIBSEDML_EXTERN
 int
-Task_unsetId(Task_t * t);
+SedTask_unsetId(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_unsetName(Task_t * t);
+SedTask_unsetName(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_unsetModelReference(Task_t * t);
+SedTask_unsetModelReference(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_unsetSimulationReference(Task_t * t);
+SedTask_unsetSimulationReference(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_hasRequiredAttributes(Task_t * t);
+SedTask_hasRequiredAttributes(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
 int
-Task_hasRequiredElements(Task_t * t);
+SedTask_hasRequiredElements(SedTask_t * st);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedListOfTasks_getById(SedListOf_t * lo, const char * sid);
+SedTask_t *
+SedListOfSedTasks_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-Task_t *
-SedListOfTasks_removeById(SedListOf_t * lo, const char * sid);
+SedTask_t *
+SedListOfSedTasks_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -861,5 +861,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  Task_H__  */
+#endif /*  SedTask_H__  */
 

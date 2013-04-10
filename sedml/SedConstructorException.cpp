@@ -1,6 +1,6 @@
 /**
- * @file    SedMLConstructorException.cpp
- * @brief   Implementation of SedMLConstructorException, the exception class for constructor exceptions
+ * @file    SedConstructorException.cpp
+ * @brief   Implementation of SedConstructorException, the exception class for constructor exceptions
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
@@ -26,9 +26,9 @@
  * ------------------------------------------------------------------------ -->
  */
 
-#include <sedml/SedMLConstructorException.h>
+#include <sedml/SedConstructorException.h>
 
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 #include <sbml/xml/XMLNamespaces.h>
 #include <sbml/xml/XMLOutputStream.h>
 
@@ -40,21 +40,21 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /** @cond doxygen-libsbml-internal */
 
-SedMLConstructorException::SedMLConstructorException(std::string errmsg) :
+SedConstructorException::SedConstructorException(std::string errmsg) :
       std::invalid_argument("Level/version/namespaces combination is invalid")
-    , mSedMLErrMsg(errmsg)
+    , mSedErrMsg(errmsg)
 {
 }
 
-SedMLConstructorException::SedMLConstructorException (std::string errmsg, std::string sbmlErrMsg) :
+SedConstructorException::SedConstructorException (std::string errmsg, std::string sbmlErrMsg) :
     std::invalid_argument(errmsg)
-  , mSedMLErrMsg(sbmlErrMsg)
+  , mSedErrMsg(sbmlErrMsg)
 {
 }
 
-SedMLConstructorException::SedMLConstructorException (std::string elementName, SedMLNamespaces* sbmlns) :
+SedConstructorException::SedConstructorException (std::string elementName, SedNamespaces* sbmlns) :
     std::invalid_argument("Level/version/namespaces combination is invalid")
-  , mSedMLErrMsg(elementName)
+  , mSedErrMsg(elementName)
 {
   if (sbmlns == NULL) return;
   
@@ -65,11 +65,11 @@ SedMLConstructorException::SedMLConstructorException (std::string elementName, S
   std::ostringstream oss;
   XMLOutputStream xos(oss);
   xos << *xmlns;
-  mSedMLErrMsg.append(oss.str());
+  mSedErrMsg.append(oss.str());
   
 }
 
-SedMLConstructorException::~SedMLConstructorException() throw()
+SedConstructorException::~SedConstructorException() throw()
 {
 }
 

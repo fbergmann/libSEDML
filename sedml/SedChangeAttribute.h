@@ -1,6 +1,6 @@
 /**
- * @file:   ChangeAttribute.h
- * @brief:  Implementation of the ChangeAttribute class
+ * @file:   SedChangeAttribute.h
+ * @brief:  Implementation of the SedChangeAttribute class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef ChangeAttribute_H__
-#define ChangeAttribute_H__
+#ifndef SedChangeAttribute_H__
+#define SedChangeAttribute_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,16 +49,16 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Change.h>
+#include <sedml/SedChange.h>
 
 
-class LIBSEDML_EXTERN ChangeAttribute : public Change
+class LIBSEDML_EXTERN SedChangeAttribute : public SedChange
 {
 
 protected:
@@ -69,77 +69,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new ChangeAttribute with the given level, version, and package version.
+	 * Creates a new SedChangeAttribute with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this ChangeAttribute
+	 * @param level an unsigned int, the SEDML Level to assign to this SedChangeAttribute
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this ChangeAttribute
+	 * @param version an unsigned int, the SEDML Version to assign to this SedChangeAttribute
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this ChangeAttribute
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedChangeAttribute
 	 */
-	ChangeAttribute(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedChangeAttribute(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                   unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new ChangeAttribute with the given SedMLNamespaces object.
+	 * Creates a new SedChangeAttribute with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	ChangeAttribute(SedMLNamespaces* sedmlns);
+	SedChangeAttribute(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for ChangeAttribute.
+	 * Copy constructor for SedChangeAttribute.
 	 *
-	 * @param orig; the ChangeAttribute instance to copy.
+	 * @param orig; the SedChangeAttribute instance to copy.
 	 */
-	ChangeAttribute(const ChangeAttribute& orig);
+	SedChangeAttribute(const SedChangeAttribute& orig);
 
 
  	/**
-	 * Assignment operator for ChangeAttribute.
+	 * Assignment operator for SedChangeAttribute.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	ChangeAttribute& operator=(const ChangeAttribute& rhs);
+	SedChangeAttribute& operator=(const SedChangeAttribute& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this ChangeAttribute object.
+	 * Creates and returns a deep copy of this SedChangeAttribute object.
 	 *
-	 * @return a (deep) copy of this ChangeAttribute object.
+	 * @return a (deep) copy of this SedChangeAttribute object.
 	 */
-	virtual ChangeAttribute* clone () const;
+	virtual SedChangeAttribute* clone () const;
 
 
  	/**
-	 * Destructor for ChangeAttribute.
+	 * Destructor for SedChangeAttribute.
 	 */
-	virtual ~ChangeAttribute();
+	virtual ~SedChangeAttribute();
 
 
  	/**
-	 * Returns the value of the "newValue" attribute of this ChangeAttribute.
+	 * Returns the value of the "newValue" attribute of this SedChangeAttribute.
 	 *
-	 * @return the value of the "newValue" attribute of this ChangeAttribute as a string.
+	 * @return the value of the "newValue" attribute of this SedChangeAttribute as a string.
 	 */
 	virtual const std::string& getNewValue() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * ChangeAttribute's "newValue" attribute has been set.
+	 * SedChangeAttribute's "newValue" attribute has been set.
 	 *
-	 * @return @c true if this ChangeAttribute's "newValue" attribute has been set,
+	 * @return @c true if this SedChangeAttribute's "newValue" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetNewValue() const;
 
 
 	/**
-	 * Sets the value of the "newValue" attribute of this ChangeAttribute.
+	 * Sets the value of the "newValue" attribute of this SedChangeAttribute.
 	 *
 	 * @param newValue; const std::string& value of the "newValue" attribute to be set
 	 *
@@ -154,7 +154,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "newValue" attribute of this ChangeAttribute.
+	 * Unsets the value of the "newValue" attribute of this SedChangeAttribute.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -167,10 +167,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for ChangeAttribute, is
-	 * always @c "changeAttribute".
+	 * Returns the XML element name of this object, which for SedChangeAttribute, is
+	 * always @c "sedChangeAttribute".
 	 *
-	 * @return the name of this element, i.e. @c "changeAttribute".
+	 * @return the name of this element, i.e. @c "sedChangeAttribute".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -210,9 +210,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this ChangeAttribute object have been set.
+	 * for this SedChangeAttribute object have been set.
 	 *
-	 * @note The required attributes for a ChangeAttribute object are:
+	 * @note The required attributes for a SedChangeAttribute object are:
 	 * @li "newValue"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -237,9 +237,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -248,9 +248,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -318,43 +318,43 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-ChangeAttribute_t *
-ChangeAttribute_create(unsigned int level, unsigned int version);
+SedChangeAttribute_t *
+SedChangeAttribute_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-ChangeAttribute_free(ChangeAttribute_t * ca);
+SedChangeAttribute_free(SedChangeAttribute_t * sca);
 
 
 LIBSEDML_EXTERN
-ChangeAttribute_t *
-ChangeAttribute_clone(ChangeAttribute_t * ca);
+SedChangeAttribute_t *
+SedChangeAttribute_clone(SedChangeAttribute_t * sca);
 
 
 LIBSEDML_EXTERN
 char *
-ChangeAttribute_getNewValue(ChangeAttribute_t * ca);
+SedChangeAttribute_getNewValue(SedChangeAttribute_t * sca);
 
 
 LIBSEDML_EXTERN
 int
-ChangeAttribute_isSetNewValue(ChangeAttribute_t * ca);
+SedChangeAttribute_isSetNewValue(SedChangeAttribute_t * sca);
 
 
 LIBSEDML_EXTERN
 int
-ChangeAttribute_setNewValue(ChangeAttribute_t * ca, const char * newValue);
+SedChangeAttribute_setNewValue(SedChangeAttribute_t * sca, const char * newValue);
 
 
 LIBSEDML_EXTERN
 int
-ChangeAttribute_unsetNewValue(ChangeAttribute_t * ca);
+SedChangeAttribute_unsetNewValue(SedChangeAttribute_t * sca);
 
 
 LIBSEDML_EXTERN
 int
-ChangeAttribute_hasRequiredAttributes(ChangeAttribute_t * ca);
+SedChangeAttribute_hasRequiredAttributes(SedChangeAttribute_t * sca);
 
 
 
@@ -364,5 +364,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  ChangeAttribute_H__  */
+#endif /*  SedChangeAttribute_H__  */
 

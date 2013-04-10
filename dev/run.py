@@ -17,7 +17,7 @@ import writeExtensionCode
 if len(sys.argv) != 1:
   print 'Usage: run.py'
 else:
-  #package = createNewPackage.createSedML()
+  #package = createNewPackage.createSed()
   #writeExtensionHeader.createHeader(package)
   #writeExtensionCode.createCode(package)
   #plugins = package['plugins']

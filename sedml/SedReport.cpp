@@ -1,6 +1,6 @@
 /**
- * @file:   Report.cpp
- * @brief:  Implementation of the Report class
+ * @file:   SedReport.cpp
+ * @brief:  Implementation of the SedReport class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/Report.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedReport.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,15 +45,15 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new Report with the given level, version, and package version.
+ * Creates a new SedReport with the given level, version, and package version.
  */
-Report::Report (unsigned int level, unsigned int version)
-	: SedMLOutput(level, version)
+SedReport::SedReport (unsigned int level, unsigned int version)
+	: SedOutput(level, version)
 	, mDataSet (level, version)
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
 	// connect to child objects
 	connectToChild();
@@ -61,15 +61,15 @@ Report::Report (unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new Report with the given SedMLNamespaces object.
+ * Creates a new SedReport with the given SedNamespaces object.
  */
-Report::Report (SedMLNamespaces* sedmlns)
-	: SedMLOutput(sedmlns)
-	, mDataSet (sedmlns)
+SedReport::SedReport (SedNamespaces* sedns)
+	: SedOutput(sedns)
+	, mDataSet (sedns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 
 	// connect to child objects
 	connectToChild();
@@ -77,14 +77,14 @@ Report::Report (SedMLNamespaces* sedmlns)
 
 
 /*
- * Copy constructor for Report.
+ * Copy constructor for SedReport.
  */
-Report::Report (const Report& orig)
-	: SedMLOutput(orig)
+SedReport::SedReport (const SedReport& orig)
+	: SedOutput(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -97,18 +97,18 @@ Report::Report (const Report& orig)
 
 
 /*
- * Assignment for Report.
+ * Assignment for SedReport.
  */
-Report&
-Report::operator=(const Report& rhs)
+SedReport&
+SedReport::operator=(const SedReport& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
-		SedMLOutput::operator=(rhs);
+		SedOutput::operator=(rhs);
 		mDataSet  = rhs.mDataSet;
 
 		// connect to child objects
@@ -119,97 +119,97 @@ Report::operator=(const Report& rhs)
 
 
 /*
- * Clone for Report.
+ * Clone for SedReport.
  */
-Report*
-Report::clone () const
+SedReport*
+SedReport::clone () const
 {
-	return new Report(*this);
+	return new SedReport(*this);
 }
 
 
 /*
- * Destructor for Report.
+ * Destructor for SedReport.
  */
-Report::~Report ()
+SedReport::~SedReport ()
 {
 }
 
 
 /*
- * Returns the  "SedListOfDataSets" in this Report object.
+ * Returns the  "SedListOfSedDataSets" in this SedReport object.
  */
-const SedListOfDataSets*
-Report::getListOfDataSets() const
+const SedListOfSedDataSets*
+SedReport::getListOfSedDataSets() const
 {
 	return &mDataSet;
 }
 
 
 /*
- * Removes the nth DataSet from the SedListOfDataSets.
+ * Removes the nth SedDataSet from the SedListOfSedDataSets.
  */
-DataSet*
-Report::removeDataSet(unsigned int n)
+SedDataSet*
+SedReport::removeSedDataSet(unsigned int n)
 {
 	return mDataSet.remove(n);
 }
 
 
 /*
- * Removes the a DataSet with given id from the SedListOfDataSets.
+ * Removes the a SedDataSet with given id from the SedListOfSedDataSets.
  */
-DataSet*
-Report::removeDataSet(const std::string& sid)
+SedDataSet*
+SedReport::removeSedDataSet(const std::string& sid)
 {
 	return mDataSet.remove(sid);
 }
 
 
 /*
- * Return the nth DataSet in the SedListOfDataSets within this Report.
+ * Return the nth SedDataSet in the SedListOfSedDataSets within this SedReport.
  */
-DataSet*
-Report::getDataSet(unsigned int n)
+SedDataSet*
+SedReport::getSedDataSet(unsigned int n)
 {
 	return mDataSet.get(n);
 }
 
 
 /*
- * Return the nth DataSet in the SedListOfDataSets within this Report.
+ * Return the nth SedDataSet in the SedListOfSedDataSets within this SedReport.
  */
-const DataSet*
-Report::getDataSet(unsigned int n) const
+const SedDataSet*
+SedReport::getSedDataSet(unsigned int n) const
 {
 	return mDataSet.get(n);
 }
 
 
 /*
- * Return a DataSet from the SedListOfDataSets by id.
+ * Return a SedDataSet from the SedListOfSedDataSets by id.
  */
-DataSet*
-Report::getDataSet(const std::string& sid)
+SedDataSet*
+SedReport::getSedDataSet(const std::string& sid)
 {
 	return mDataSet.get(sid);
 }
 
 
 /*
- * Return a DataSet from the SedListOfDataSets by id.
+ * Return a SedDataSet from the SedListOfSedDataSets by id.
  */
-const DataSet*
-Report::getDataSet(const std::string& sid) const
+const SedDataSet*
+SedReport::getSedDataSet(const std::string& sid) const
 {
 	return mDataSet.get(sid);
 }
 
 
 /**
- * Adds a copy the given "DataSet" to this Report.
+ * Adds a copy the given "SedDataSet" to this SedReport.
  *
- * @param ds; the DataSet object to add
+ * @param sds; the SedDataSet object to add
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
@@ -219,37 +219,37 @@ Report::getDataSet(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-Report::addDataSet(const DataSet* ds)
+SedReport::addSedDataSet(const SedDataSet* sds)
 {
-	if(ds == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mDataSet.append(ds);
+	if(sds == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mDataSet.append(sds);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
 /**
- * Get the number of DataSet objects in this Report.
+ * Get the number of SedDataSet objects in this SedReport.
  *
- * @return the number of DataSet objects in this Report
+ * @return the number of SedDataSet objects in this SedReport
  */
 unsigned int 
-Report::getNumDataSets() const
+SedReport::getNumSedDataSets() const
 {
 	return mDataSet.size();
 }
 
 /**
- * Creates a new DataSet object, adds it to this Reports
- * Report and returns the DataSet object created. 
+ * Creates a new SedDataSet object, adds it to this SedReports
+ * SedReport and returns the SedDataSet object created. 
  *
- * @return a new DataSet object instance
+ * @return a new SedDataSet object instance
  *
- * @see addDataSet(const DataSet* ds)
+ * @see addSedDataSet(const SedDataSet* sds)
  */
-DataSet* 
-Report::createDataSet()
+SedDataSet* 
+SedReport::createSedDataSet()
 {
-	DataSet *temp = new DataSet();
+	SedDataSet *temp = new SedDataSet();
 	if (temp != NULL) mDataSet.appendAndOwn(temp);
 	return temp;
 }
@@ -258,7 +258,7 @@ Report::createDataSet()
  * Returns the XML element name of this object
  */
 const std::string&
-Report::getElementName () const
+SedReport::getElementName () const
 {
 	static const string name = "report";
 	return name;
@@ -269,13 +269,13 @@ Report::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-Report::createObject(XMLInputStream& stream)
+SedReport::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedMLOutput::createObject(stream);
+	SedBase* object = SedOutput::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 
-	SedMLOutput::connectToChild();
+	SedOutput::connectToChild();
 
 	if (name == "listOfDataSets")
 	{
@@ -290,9 +290,9 @@ Report::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Report::connectToChild ()
+SedReport::connectToChild ()
 {
-	SedMLOutput::connectToChild();
+	SedOutput::connectToChild();
 
 	mDataSet.connectToParent(this);
 }
@@ -302,7 +302,7 @@ Report::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-Report::getTypeCode () const
+SedReport::getTypeCode () const
 {
 	return SEDML_OUTPUT_REPORT;
 }
@@ -312,9 +312,9 @@ Report::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-Report::hasRequiredAttributes () const
+SedReport::hasRequiredAttributes () const
 {
-	bool allPresent = SedMLOutput::hasRequiredAttributes();
+	bool allPresent = SedOutput::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -324,9 +324,9 @@ Report::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-Report::hasRequiredElements () const
+SedReport::hasRequiredElements () const
 {
-	bool allPresent = SedMLOutput::hasRequiredElements();
+	bool allPresent = SedOutput::hasRequiredElements();
 
 	return allPresent;
 }
@@ -338,10 +338,10 @@ Report::hasRequiredElements () const
  * write contained elements
  */
 void
-Report::writeElements (XMLOutputStream& stream) const
+SedReport::writeElements (XMLOutputStream& stream) const
 {
-	SedMLOutput::writeElements(stream);
-	if (getNumDataSets() > 0)
+	SedOutput::writeElements(stream);
+	if (getNumSedDataSets() > 0)
 	{
 		mDataSet.write(stream);
 	}
@@ -354,10 +354,10 @@ Report::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-Report::accept (SedMLVisitor& v) const
+SedReport::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -370,12 +370,12 @@ Report::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-Report::setSedMLDocument (SedMLDocument* d)
+SedReport::setSedDocument (SedDocument* d)
 {
-	SedMLOutput::setSedMLDocument(d);
+	SedOutput::setSedDocument(d);
 }
 
 
@@ -388,9 +388,9 @@ Report::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-Report::addExpectedAttributes(ExpectedAttributes& attributes)
+SedReport::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedMLOutput::addExpectedAttributes(attributes);
+	SedOutput::addExpectedAttributes(attributes);
 
 }
 
@@ -404,10 +404,10 @@ Report::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-Report::readAttributes (const XMLAttributes& attributes,
+SedReport::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	SedMLOutput::readAttributes(attributes, expectedAttributes);
+	SedOutput::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -423,9 +423,9 @@ Report::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-Report::writeAttributes (XMLOutputStream& stream) const
+SedReport::writeAttributes (XMLOutputStream& stream) const
 {
-	SedMLOutput::writeAttributes(stream);
+	SedOutput::writeAttributes(stream);
 
 }
 
@@ -437,10 +437,10 @@ Report::writeAttributes (XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-Report_t *
-Report_create(unsigned int level, unsigned int version)
+SedReport_t *
+SedReport_create(unsigned int level, unsigned int version)
 {
-	return new Report(level, version);
+	return new SedReport(level, version);
 }
 
 
@@ -449,10 +449,10 @@ Report_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-Report_free(Report_t * r)
+SedReport_free(SedReport_t * sr)
 {
-	if (r != NULL)
-		delete r;
+	if (sr != NULL)
+		delete sr;
 }
 
 
@@ -460,12 +460,12 @@ Report_free(Report_t * r)
  * write comments
  */
 LIBSEDML_EXTERN
-Report_t *
-Report_clone(Report_t * r)
+SedReport_t *
+SedReport_clone(SedReport_t * sr)
 {
-	if (r != NULL)
+	if (sr != NULL)
 	{
-		return static_cast<Report_t*>(r->clone());
+		return static_cast<SedReport_t*>(sr->clone());
 	}
 	else
 	{
@@ -476,58 +476,58 @@ Report_clone(Report_t * r)
 
 LIBSEDML_EXTERN
 int
-Report_addDataSet(Report_t * r, DataSet_t * ds)
+SedReport_addSedDataSet(SedReport_t * sr, SedDataSet_t * sds)
 {
-	return  (r != NULL) ? r->addDataSet(ds) : LIBSBML_INVALID_OBJECT;
+	return  (sr != NULL) ? sr->addSedDataSet(sds) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
-DataSet_t *
-Report_createDataSet(Report_t * r)
+SedDataSet_t *
+SedReport_createSedDataSet(SedReport_t * sr)
 {
-	return  (r != NULL) ? r->createDataSet() : NULL;
+	return  (sr != NULL) ? sr->createSedDataSet() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-Report_getSedListOfDataSets(Report_t * r)
+SedReport_getSedListOfSedDataSets(SedReport_t * sr)
 {
-	return  (r != NULL) ? (SedListOf_t *)r->getListOfDataSets() : NULL;
+	return  (sr != NULL) ? (SedListOf_t *)sr->getListOfSedDataSets() : NULL;
 }
 
 LIBSEDML_EXTERN
-DataSet_t *
-Report_getDataSet(Report_t * r, unsigned int n)
+SedDataSet_t *
+SedReport_getSedDataSet(SedReport_t * sr, unsigned int n)
 {
-	return  (r != NULL) ? r->getDataSet(n) : NULL;
+	return  (sr != NULL) ? sr->getSedDataSet(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-DataSet_t *
-Report_getDataSetById(Report_t * r, const char * sid)
+SedDataSet_t *
+SedReport_getSedDataSetById(SedReport_t * sr, const char * sid)
 {
-	return  (r != NULL) ? r->getDataSet(sid) : NULL;
+	return  (sr != NULL) ? sr->getSedDataSet(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-Report_getNumDataSets(Report_t * r)
+SedReport_getNumSedDataSets(SedReport_t * sr)
 {
-	return  (r != NULL) ? r->getNumDataSets() : SEDML_INT_MAX;
+	return  (sr != NULL) ? sr->getNumSedDataSets() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
-DataSet_t *
-Report_removeDataSet(Report_t * r, unsigned int n)
+SedDataSet_t *
+SedReport_removeSedDataSet(SedReport_t * sr, unsigned int n)
 {
-	return  (r != NULL) ? r->removeDataSet(n) : NULL;
+	return  (sr != NULL) ? sr->removeSedDataSet(n) : NULL;
 }
 
 LIBSEDML_EXTERN
-DataSet_t *
-Report_removeDataSetById(Report_t * r, const char * sid)
+SedDataSet_t *
+SedReport_removeSedDataSetById(SedReport_t * sr, const char * sid)
 {
-	return  (r != NULL) ? r->removeDataSet(sid) : NULL;
+	return  (sr != NULL) ? sr->removeSedDataSet(sid) : NULL;
 }
 
 /**
@@ -535,9 +535,9 @@ Report_removeDataSetById(Report_t * r, const char * sid)
  */
 LIBSEDML_EXTERN
 int
-Report_hasRequiredAttributes(Report_t * r)
+SedReport_hasRequiredAttributes(SedReport_t * sr)
 {
-	return (r != NULL) ? static_cast<int>(r->hasRequiredAttributes()) : 0;
+	return (sr != NULL) ? static_cast<int>(sr->hasRequiredAttributes()) : 0;
 }
 
 
@@ -546,9 +546,9 @@ Report_hasRequiredAttributes(Report_t * r)
  */
 LIBSEDML_EXTERN
 int
-Report_hasRequiredElements(Report_t * r)
+SedReport_hasRequiredElements(SedReport_t * sr)
 {
-	return (r != NULL) ? static_cast<int>(r->hasRequiredElements()) : 0;
+	return (sr != NULL) ? static_cast<int>(sr->hasRequiredElements()) : 0;
 }
 
 

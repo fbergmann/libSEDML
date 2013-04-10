@@ -1,11 +1,11 @@
 /**
- * @file    SedMLNamespaces.cpp
- * @brief   SedMLNamespaces class to store level/version and namespace 
+ * @file    SedNamespaces.cpp
+ * @brief   SedNamespaces class to store level/version and namespace 
  * @author  Sarah Keating
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -32,8 +32,8 @@
 #include <sedml/common/common.h>
 #include <sedml/common/operationReturnValues.h>
 #include <sbml/util/List.h>
-#include <sedml/SedMLNamespaces.h>
-#include <sedml/SedMLConstructorException.h>
+#include <sedml/SedNamespaces.h>
+#include <sedml/SedConstructorException.h>
 
 /** @cond doxygen-ignored */
 
@@ -46,7 +46,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /** @cond doxygen-libsbml-internal */
 void 
-SedMLNamespaces::initSedMLNamespace()
+SedNamespaces::initSedNamespace()
 {
   mNamespaces = new XMLNamespaces();
 
@@ -74,14 +74,14 @@ SedMLNamespaces::initSedMLNamespace()
 /** @endcond */
 
 
-SedMLNamespaces::SedMLNamespaces(unsigned int level, unsigned int version)
+SedNamespaces::SedNamespaces(unsigned int level, unsigned int version)
  : mLevel(level)
   ,mVersion(version)
 {
-  initSedMLNamespace();
+  initSedNamespace();
 }
 
-SedMLNamespaces::~SedMLNamespaces()
+SedNamespaces::~SedNamespaces()
 {
   if (mNamespaces != NULL)
     delete mNamespaces;
@@ -89,13 +89,13 @@ SedMLNamespaces::~SedMLNamespaces()
 
 
 /*
- * Copy constructor; creates a copy of a SedMLNamespaces.
+ * Copy constructor; creates a copy of a SedNamespaces.
  */
-SedMLNamespaces::SedMLNamespaces(const SedMLNamespaces& orig)
+SedNamespaces::SedNamespaces(const SedNamespaces& orig)
 {
   if (&orig == NULL)
   {
-    throw SedMLConstructorException("Null argument to copy constructor");
+    throw SedConstructorException("Null argument to copy constructor");
   }
   else
   {
@@ -104,7 +104,7 @@ SedMLNamespaces::SedMLNamespaces(const SedMLNamespaces& orig)
  
     if(orig.mNamespaces != NULL)
       this->mNamespaces = 
-            new XMLNamespaces(*const_cast<SedMLNamespaces&>(orig).mNamespaces);
+            new XMLNamespaces(*const_cast<SedNamespaces&>(orig).mNamespaces);
     else
       this->mNamespaces = NULL;
   }
@@ -112,22 +112,22 @@ SedMLNamespaces::SedMLNamespaces(const SedMLNamespaces& orig)
 
 
 const List * 
-SedMLNamespaces::getSupportedNamespaces()
+SedNamespaces::getSupportedNamespaces()
 {
   List *result = new List();
-  result->add(new SedMLNamespaces(1,1));
+  result->add(new SedNamespaces(1,1));
   return result;
 }
 
 /*
- * Assignment operator for SedMLNamespaces.
+ * Assignment operator for SedNamespaces.
  */
-SedMLNamespaces&
-SedMLNamespaces::operator=(const SedMLNamespaces& rhs)
+SedNamespaces&
+SedNamespaces::operator=(const SedNamespaces& rhs)
 {
   if (&rhs == NULL)
   {
-    throw SedMLConstructorException("Null argument to assignment operator");
+    throw SedConstructorException("Null argument to assignment operator");
   }
   else if (&rhs != this)
   {
@@ -136,7 +136,7 @@ SedMLNamespaces::operator=(const SedMLNamespaces& rhs)
     delete this->mNamespaces;
     if(rhs.mNamespaces != NULL)
       this->mNamespaces = 
-            new XMLNamespaces(*const_cast<SedMLNamespaces&>(rhs).mNamespaces);
+            new XMLNamespaces(*const_cast<SedNamespaces&>(rhs).mNamespaces);
     else
       this->mNamespaces = NULL;
   }
@@ -147,17 +147,17 @@ SedMLNamespaces::operator=(const SedMLNamespaces& rhs)
 
 
 /*
- * Creates and returns a deep copy of this SedMLNamespaces.
+ * Creates and returns a deep copy of this SedNamespaces.
  */
-SedMLNamespaces *
-SedMLNamespaces::clone () const
+SedNamespaces *
+SedNamespaces::clone () const
 {
-  return new SedMLNamespaces(*this);
+  return new SedNamespaces(*this);
 }
 
 
 std::string 
-SedMLNamespaces::getSedMLNamespaceURI(unsigned int level,
+SedNamespaces::getSedNamespaceURI(unsigned int level,
                                  unsigned int version)
 {
   std::string uri = "";
@@ -172,56 +172,56 @@ SedMLNamespaces::getSedMLNamespaceURI(unsigned int level,
 
 
 std::string
-SedMLNamespaces::getURI() const
+SedNamespaces::getURI() const
 {
-  return getSedMLNamespaceURI(mLevel,mVersion);
+  return getSedNamespaceURI(mLevel,mVersion);
 }
 
 
 unsigned int 
-SedMLNamespaces::getLevel()
-{
-  return mLevel;
-}
-
-
-unsigned int 
-SedMLNamespaces::getLevel() const
+SedNamespaces::getLevel()
 {
   return mLevel;
 }
 
 
 unsigned int 
-SedMLNamespaces::getVersion()
+SedNamespaces::getLevel() const
+{
+  return mLevel;
+}
+
+
+unsigned int 
+SedNamespaces::getVersion()
 {
   return mVersion;
 }
 
 
 unsigned int 
-SedMLNamespaces::getVersion() const
+SedNamespaces::getVersion() const
 {
   return mVersion;
 }
 
 
 XMLNamespaces * 
-SedMLNamespaces::getNamespaces()
+SedNamespaces::getNamespaces()
 {
   return mNamespaces;
 }
 
 
 const XMLNamespaces * 
-SedMLNamespaces::getNamespaces() const
+SedNamespaces::getNamespaces() const
 {
   return mNamespaces;
 }
 
 
 int
-SedMLNamespaces::addNamespaces(const XMLNamespaces * xmlns)
+SedNamespaces::addNamespaces(const XMLNamespaces * xmlns)
 {
   int success = LIBSEDML_OPERATION_SUCCESS;
 
@@ -230,7 +230,7 @@ SedMLNamespaces::addNamespaces(const XMLNamespaces * xmlns)
 
   if (!mNamespaces) 
   {
-    initSedMLNamespace();
+    initSedNamespace();
   }
 
   /* check whether the namespace already exists
@@ -248,11 +248,11 @@ SedMLNamespaces::addNamespaces(const XMLNamespaces * xmlns)
 }
 
 int
-SedMLNamespaces::addNamespace(const std::string &uri, const std::string &prefix)
+SedNamespaces::addNamespace(const std::string &uri, const std::string &prefix)
 {
   if (!mNamespaces) 
   {
-    initSedMLNamespace();
+    initSedNamespace();
   }
 
   return mNamespaces->add(uri, prefix);
@@ -260,11 +260,11 @@ SedMLNamespaces::addNamespace(const std::string &uri, const std::string &prefix)
 
 
 int
-SedMLNamespaces::removeNamespace(const std::string &uri)
+SedNamespaces::removeNamespace(const std::string &uri)
 {
   if (!mNamespaces) 
   {
-    initSedMLNamespace();
+    initSedNamespace();
   }
 
   return mNamespaces->remove(mNamespaces->getIndex(uri));
@@ -273,10 +273,10 @@ SedMLNamespaces::removeNamespace(const std::string &uri)
 
 /*
  * Predicate returning @c true if the given
- * URL is one of SedML XML namespaces.
+ * URL is one of Sed XML namespaces.
  */
 bool 
-SedMLNamespaces::isSedMLNamespace(const std::string& uri)
+SedNamespaces::isSedNamespace(const std::string& uri)
 {
   if (uri ==SEDML_XMLNS_L1)   return true;
 
@@ -284,7 +284,7 @@ SedMLNamespaces::isSedMLNamespace(const std::string& uri)
 }
 
 bool 
-SedMLNamespaces::isValidCombination()
+SedNamespaces::isValidCombination()
 {
   bool valid = true;
   bool sedmlDeclared = false;
@@ -295,21 +295,21 @@ SedMLNamespaces::isValidCombination()
   if (xmlns != NULL)
   {
     // 
-    // checks defined SedML XMLNamespace
-    // returns false if different SedML XMLNamespaces 
+    // checks defined Sed XMLNamespace
+    // returns false if different Sed XMLNamespaces 
     // (e.g.SEDML_XMLNS_L2V1 andSEDML_XMLNS_L2V3) are defined.
     //
     int numNS = 0;
 
     if (xmlns->hasURI(SEDML_XMLNS_L1))
     {
-      // checks different SedML XMLNamespaces
+      // checks different Sed XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
       declaredURI.assign(SEDML_XMLNS_L1);
     }
 
-    // checks if the SedML Namespace is explicitly defined.
+    // checks if the Sed Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
       if (!declaredURI.empty() && 
@@ -355,21 +355,21 @@ SedMLNamespaces::isValidCombination()
 
 /** @cond doxygen-libsbml-internal */
 void 
-SedMLNamespaces::setLevel(unsigned int level)
+SedNamespaces::setLevel(unsigned int level)
 {
   mLevel = level;
 }
 
 
 void 
-SedMLNamespaces::setVersion(unsigned int version)
+SedNamespaces::setVersion(unsigned int version)
 {
   mVersion = version;
 }
 
 
 void 
-SedMLNamespaces::setNamespaces(XMLNamespaces * xmlns)
+SedNamespaces::setNamespaces(XMLNamespaces * xmlns)
 {
   delete mNamespaces;
   if (xmlns != NULL)
@@ -382,113 +382,113 @@ SedMLNamespaces::setNamespaces(XMLNamespaces * xmlns)
 /** @cond doxygen-c-only */
 
 /**
- * Creates a new SedMLNamespaces_t structure corresponding to the given SedML
+ * Creates a new SedNamespaces_t structure corresponding to the given Sed
  * @p level and @p version.
  *
- * SedMLNamespaces objects are used in libSedML to communicate SedML Level
+ * SedNamespaces objects are used in libSed to communicate Sed Level
  * and Version data between constructors and other methods.  The
- * SedMLNamespaces object class tracks 3-tuples (triples) consisting of
- * SedML Level, Version, and the corresponding SedML XML namespace.  Most
- * constructors for SedML objects in libSedML take a SedMLNamespaces object
+ * SedNamespaces object class tracks 3-tuples (triples) consisting of
+ * Sed Level, Version, and the corresponding Sed XML namespace.  Most
+ * constructors for Sed objects in libSed take a SedNamespaces object
  * as an argument, thereby allowing the constructor to produce the proper
  * combination of attributes and other internal data structures for the
- * given SedML Level and Version.
+ * given Sed Level and Version.
  *
- * The plural name "SedMLNamespaces" is not a mistake, because in SedML
+ * The plural name "SedNamespaces" is not a mistake, because in Sed
  * Level&nbsp;3, objects may have extensions added by Level&nbsp;3
  * packages used by a given model; however, until the introduction of
- * SedML Level&nbsp;3, the SedMLNamespaces object only records one SedML
+ * Sed Level&nbsp;3, the SedNamespaces object only records one Sed
  * Level/Version/namespace combination at a time.
  *
- * @param level the SedML level
- * @param version the SedML version
+ * @param level the Sed level
+ * @param version the Sed version
  *
- * @return SedMLNamespaces_t structure created
+ * @return SedNamespaces_t structure created
  *
  * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
  */
 
 LIBSEDML_EXTERN
-SedMLNamespaces_t *
-SedMLNamespaces_create(unsigned int level, unsigned int version)
+SedNamespaces_t *
+SedNamespaces_create(unsigned int level, unsigned int version)
 {
-  return new SedMLNamespaces(level, version);
+  return new SedNamespaces(level, version);
 }
 
 
 /**
- * Get the SedML Level of this SedMLNamespaces_t structure.
+ * Get the Sed Level of this SedNamespaces_t structure.
  *
- * @param sbmlns the SedMLNamespaces_t structure to query
+ * @param sbmlns the SedNamespaces_t structure to query
  *
- * @return the SedML Level of this SedMLNamespaces_t structure.
+ * @return the Sed Level of this SedNamespaces_t structure.
  */
 LIBSEDML_EXTERN
 unsigned int
-SedMLNamespaces_getLevel(SedMLNamespaces_t *sbmlns)
+SedNamespaces_getLevel(SedNamespaces_t *sbmlns)
 {
   return (sbmlns != NULL) ? sbmlns->getLevel() :SEDML_INT_MAX;
 }
 
 
 /**
- * Get the SedML Version of this SedMLNamespaces_t structure.
+ * Get the Sed Version of this SedNamespaces_t structure.
  *
- * @param sbmlns the SedMLNamespaces_t structure to query
+ * @param sbmlns the SedNamespaces_t structure to query
  *
- * @return the SedML Version of this SedMLNamespaces_t structure.
+ * @return the Sed Version of this SedNamespaces_t structure.
  */
 LIBSEDML_EXTERN
 unsigned int
-SedMLNamespaces_getVersion(SedMLNamespaces_t *sbmlns)
+SedNamespaces_getVersion(SedNamespaces_t *sbmlns)
 {
   return (sbmlns != NULL) ? sbmlns->getVersion() :SEDML_INT_MAX;
 }
 
 
 /**
- * Get the SedML Version of this SedMLNamespaces_t structure.
+ * Get the Sed Version of this SedNamespaces_t structure.
  *
- * @param sbmlns the SedMLNamespaces_t structure to query
+ * @param sbmlns the SedNamespaces_t structure to query
  *
- * @return the XMLNamespaces_t structure of this SedMLNamespaces_t structure.
+ * @return the XMLNamespaces_t structure of this SedNamespaces_t structure.
  */
 LIBSEDML_EXTERN
 XMLNamespaces_t *
-SedMLNamespaces_getNamespaces(SedMLNamespaces_t *sbmlns)
+SedNamespaces_getNamespaces(SedNamespaces_t *sbmlns)
 {
   return (sbmlns != NULL) ? sbmlns->getNamespaces() : NULL;
 }
 
 
 /**
- * Returns a string representing the SedML XML namespace for the 
- * given @p level and @p version of SedML.
+ * Returns a string representing the Sed XML namespace for the 
+ * given @p level and @p version of Sed.
  *
- * @param level the SedML level
- * @param version the SedML version
+ * @param level the Sed level
+ * @param version the Sed version
  *
- * @return a string representing the SedML namespace that reflects the
- * SedML Level and Version specified.
+ * @return a string representing the Sed namespace that reflects the
+ * Sed Level and Version specified.
  */
 LIBSEDML_EXTERN
 char *
-SedMLNamespaces_getSedMLNamespaceURI(unsigned int level, unsigned int version)
+SedNamespaces_getSedNamespaceURI(unsigned int level, unsigned int version)
 {
-  return safe_strdup(SedMLNamespaces::getSedMLNamespaceURI(level, version).c_str());
+  return safe_strdup(SedNamespaces::getSedNamespaceURI(level, version).c_str());
 }
 
 
 /**
  * Add the XML namespaces list to the set of namespaces
- * within this SedMLNamespaces_t structure.
+ * within this SedNamespaces_t structure.
  * 
- * @param sbmlns the SedMLNamespaces_t structure to add to
+ * @param sbmlns the SedNamespaces_t structure to add to
  * @param xmlns the XML namespaces to be added.
  */
 LIBSEDML_EXTERN
 int
-SedMLNamespaces_addNamespaces(SedMLNamespaces_t *sbmlns,
+SedNamespaces_addNamespaces(SedNamespaces_t *sbmlns,
                              const XMLNamespaces_t * xmlns)
 {
   if (sbmlns != NULL)
@@ -498,26 +498,26 @@ SedMLNamespaces_addNamespaces(SedMLNamespaces_t *sbmlns,
 }
 
 /**
- * Returns an array of SedML Namespaces supported by this version of 
- * LibSedML. 
+ * Returns an array of Sed Namespaces supported by this version of 
+ * LibSed. 
  *
  * @param length an integer holding the length of the array
- * @return an array of SedML namespaces, or @c NULL if length is @c NULL. The array 
+ * @return an array of Sed namespaces, or @c NULL if length is @c NULL. The array 
  *         has to be freed by the caller.
  */
 LIBSEDML_EXTERN
-SedMLNamespaces_t **
-SedMLNamespaces_getSupportedNamespaces(int *length)
+SedNamespaces_t **
+SedNamespaces_getSupportedNamespaces(int *length)
 {
   if (length == NULL) return NULL;
-   const List* supported = SedMLNamespaces::getSupportedNamespaces();
+   const List* supported = SedNamespaces::getSupportedNamespaces();
   
    *length = (int) supported->getSize();
-  SedMLNamespaces_t ** result = (SedMLNamespaces_t**)malloc(sizeof(SedMLNamespaces_t*)*(*length));
-  memset(result, 0, sizeof(SedMLNamespaces_t*)*(*length));
+  SedNamespaces_t ** result = (SedNamespaces_t**)malloc(sizeof(SedNamespaces_t*)*(*length));
+  memset(result, 0, sizeof(SedNamespaces_t*)*(*length));
   for (int i = 0; i < *length; i++)
   {
-    result[i] = ((SedMLNamespaces*)supported->get(i))->clone();
+    result[i] = ((SedNamespaces*)supported->get(i))->clone();
   }
   return result;
 }

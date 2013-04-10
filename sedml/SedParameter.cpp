@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLParameter.cpp
- * @brief:  Implementation of the SedMLParameter class
+ * @file:   SedParameter.cpp
+ * @brief:  Implementation of the SedParameter class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/SedMLParameter.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedParameter.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,9 +45,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedMLParameter with the given level, version, and package version.
+ * Creates a new SedParameter with the given level, version, and package version.
  */
-SedMLParameter::SedMLParameter (unsigned int level, unsigned int version)
+SedParameter::SedParameter (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mName ("")
@@ -55,16 +55,16 @@ SedMLParameter::SedMLParameter (unsigned int level, unsigned int version)
 	, mIsSetValue (false)
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new SedMLParameter with the given SedMLNamespaces object.
+ * Creates a new SedParameter with the given SedNamespaces object.
  */
-SedMLParameter::SedMLParameter (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedParameter::SedParameter (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mId ("")
 	, mName ("")
 	, mValue (numeric_limits<double>::quiet_NaN())
@@ -72,19 +72,19 @@ SedMLParameter::SedMLParameter (SedMLNamespaces* sedmlns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for SedMLParameter.
+ * Copy constructor for SedParameter.
  */
-SedMLParameter::SedMLParameter (const SedMLParameter& orig)
+SedParameter::SedParameter (const SedParameter& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -97,14 +97,14 @@ SedMLParameter::SedMLParameter (const SedMLParameter& orig)
 
 
 /*
- * Assignment for SedMLParameter.
+ * Assignment for SedParameter.
  */
-SedMLParameter&
-SedMLParameter::operator=(const SedMLParameter& rhs)
+SedParameter&
+SedParameter::operator=(const SedParameter& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -119,48 +119,48 @@ SedMLParameter::operator=(const SedMLParameter& rhs)
 
 
 /*
- * Clone for SedMLParameter.
+ * Clone for SedParameter.
  */
-SedMLParameter*
-SedMLParameter::clone () const
+SedParameter*
+SedParameter::clone () const
 {
-	return new SedMLParameter(*this);
+	return new SedParameter(*this);
 }
 
 
 /*
- * Destructor for SedMLParameter.
+ * Destructor for SedParameter.
  */
-SedMLParameter::~SedMLParameter ()
+SedParameter::~SedParameter ()
 {
 }
 
 
 /*
- * Returns the value of the "id" attribute of this SedMLParameter.
+ * Returns the value of the "id" attribute of this SedParameter.
  */
 const std::string&
-SedMLParameter::getId() const
+SedParameter::getId() const
 {
 	return mId;
 }
 
 
 /*
- * Returns the value of the "name" attribute of this SedMLParameter.
+ * Returns the value of the "name" attribute of this SedParameter.
  */
 const std::string&
-SedMLParameter::getName() const
+SedParameter::getName() const
 {
 	return mName;
 }
 
 
 /*
- * Returns the value of the "value" attribute of this SedMLParameter.
+ * Returns the value of the "value" attribute of this SedParameter.
  */
 const double
-SedMLParameter::getValue() const
+SedParameter::getValue() const
 {
 	return mValue;
 }
@@ -170,7 +170,7 @@ SedMLParameter::getValue() const
  * Returns true/false if id is set.
  */
 bool
-SedMLParameter::isSetId() const
+SedParameter::isSetId() const
 {
 	return (mId.empty() == false);
 }
@@ -180,7 +180,7 @@ SedMLParameter::isSetId() const
  * Returns true/false if name is set.
  */
 bool
-SedMLParameter::isSetName() const
+SedParameter::isSetName() const
 {
 	return (mName.empty() == false);
 }
@@ -190,7 +190,7 @@ SedMLParameter::isSetName() const
  * Returns true/false if value is set.
  */
 bool
-SedMLParameter::isSetValue() const
+SedParameter::isSetValue() const
 {
 	return mIsSetValue;
 }
@@ -200,7 +200,7 @@ SedMLParameter::isSetValue() const
  * Sets id and returns value indicating success.
  */
 int
-SedMLParameter::setId(const std::string& id)
+SedParameter::setId(const std::string& id)
 {
 	return SyntaxChecker::checkAndSetSId(id, mId);
 }
@@ -210,7 +210,7 @@ SedMLParameter::setId(const std::string& id)
  * Sets name and returns value indicating success.
  */
 int
-SedMLParameter::setName(const std::string& name)
+SedParameter::setName(const std::string& name)
 {
 	if (&(name) == NULL)
 	{
@@ -228,7 +228,7 @@ SedMLParameter::setName(const std::string& name)
  * Sets value and returns value indicating success.
  */
 int
-SedMLParameter::setValue(double value)
+SedParameter::setValue(double value)
 {
 	mValue = value;
 	mIsSetValue = true;
@@ -240,7 +240,7 @@ SedMLParameter::setValue(double value)
  * Unsets id and returns value indicating success.
  */
 int
-SedMLParameter::unsetId()
+SedParameter::unsetId()
 {
 	mId.erase();
 
@@ -259,7 +259,7 @@ SedMLParameter::unsetId()
  * Unsets name and returns value indicating success.
  */
 int
-SedMLParameter::unsetName()
+SedParameter::unsetName()
 {
 	mName.erase();
 
@@ -278,7 +278,7 @@ SedMLParameter::unsetName()
  * Unsets value and returns value indicating success.
  */
 int
-SedMLParameter::unsetValue()
+SedParameter::unsetValue()
 {
 	mValue = numeric_limits<double>::quiet_NaN();
 	mIsSetValue = false;
@@ -298,7 +298,7 @@ SedMLParameter::unsetValue()
  * Returns the XML element name of this object
  */
 const std::string&
-SedMLParameter::getElementName () const
+SedParameter::getElementName () const
 {
 	static const string name = "parameter";
 	return name;
@@ -309,7 +309,7 @@ SedMLParameter::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedMLParameter::getTypeCode () const
+SedParameter::getTypeCode () const
 {
 	return SEDML_PARAMETER;
 }
@@ -319,7 +319,7 @@ SedMLParameter::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedMLParameter::hasRequiredAttributes () const
+SedParameter::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -339,7 +339,7 @@ SedMLParameter::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedMLParameter::writeElements (XMLOutputStream& stream) const
+SedParameter::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -351,10 +351,10 @@ SedMLParameter::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-SedMLParameter::accept (SedMLVisitor& v) const
+SedParameter::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -367,12 +367,12 @@ SedMLParameter::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-SedMLParameter::setSedMLDocument (SedMLDocument* d)
+SedParameter::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -385,7 +385,7 @@ SedMLParameter::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-SedMLParameter::addExpectedAttributes(ExpectedAttributes& attributes)
+SedParameter::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -404,7 +404,7 @@ SedMLParameter::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedMLParameter::readAttributes (const XMLAttributes& attributes,
+SedParameter::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -422,7 +422,7 @@ SedMLParameter::readAttributes (const XMLAttributes& attributes,
 
 		if (mId.empty() == true)
 		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedMLParameter>");
+			logEmptyString(mId, getLevel(), getVersion(), "<SedParameter>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
@@ -441,7 +441,7 @@ SedMLParameter::readAttributes (const XMLAttributes& attributes,
 
 		if (mName.empty() == true)
 		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedMLParameter>");
+			logEmptyString(mName, getLevel(), getVersion(), "<SedParameter>");
 		}
 	}
 
@@ -462,7 +462,7 @@ SedMLParameter::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-SedMLParameter::writeAttributes (XMLOutputStream& stream) const
+SedParameter::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -484,98 +484,98 @@ SedMLParameter::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedMLParameters::SedListOfSedMLParameters(unsigned int level, 
-	                         unsigned int version)
+SedListOfSedParameters::SedListOfSedParameters(unsigned int level, 
+	                       unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfSedMLParameters::SedListOfSedMLParameters(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedParameters::SedListOfSedParameters(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfSedMLParameters 
+ * Returns a deep copy of this SedListOfSedParameters 
  */
-SedListOfSedMLParameters* 
-SedListOfSedMLParameters::clone () const
+SedListOfSedParameters* 
+SedListOfSedParameters::clone () const
  {
-	return new SedListOfSedMLParameters(*this);
+	return new SedListOfSedParameters(*this);
 }
 
 
 /*
- * Get a SedMLParameter from the SedListOfSedMLParameters by index.
+ * Get a SedParameter from the SedListOfSedParameters by index.
 */
-SedMLParameter*
-SedListOfSedMLParameters::get(unsigned int n)
+SedParameter*
+SedListOfSedParameters::get(unsigned int n)
 {
-	return static_cast<SedMLParameter*>(SedListOf::get(n));
+	return static_cast<SedParameter*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedMLParameter from the SedListOfSedMLParameters by index.
+ * Get a SedParameter from the SedListOfSedParameters by index.
  */
-const SedMLParameter*
-SedListOfSedMLParameters::get(unsigned int n) const
+const SedParameter*
+SedListOfSedParameters::get(unsigned int n) const
 {
-	return static_cast<const SedMLParameter*>(SedListOf::get(n));
+	return static_cast<const SedParameter*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedMLParameter from the SedListOfSedMLParameters by id.
+ * Get a SedParameter from the SedListOfSedParameters by id.
  */
-SedMLParameter*
-SedListOfSedMLParameters::get(const std::string& sid)
+SedParameter*
+SedListOfSedParameters::get(const std::string& sid)
 {
-	return const_cast<SedMLParameter*>(
-	  static_cast<const SedListOfSedMLParameters&>(*this).get(sid));
+	return const_cast<SedParameter*>(
+	  static_cast<const SedListOfSedParameters&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedMLParameter from the SedListOfSedMLParameters by id.
+ * Get a SedParameter from the SedListOfSedParameters by id.
  */
-const SedMLParameter*
-SedListOfSedMLParameters::get(const std::string& sid) const
+const SedParameter*
+SedListOfSedParameters::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedMLParameter>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedMLParameter*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedParameter>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedParameter*> (*result);
 }
 
 
 /*
- * Removes the nth SedMLParameter from this SedListOfSedMLParameters
+ * Removes the nth SedParameter from this SedListOfSedParameters
  */
-SedMLParameter*
-SedListOfSedMLParameters::remove(unsigned int n)
+SedParameter*
+SedListOfSedParameters::remove(unsigned int n)
 {
-	return static_cast<SedMLParameter*>(SedListOf::remove(n));
+	return static_cast<SedParameter*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedMLParameter from this SedListOfSedMLParameters with the given identifier
+ * Removes the SedParameter from this SedListOfSedParameters with the given identifier
  */
-SedMLParameter*
-SedListOfSedMLParameters::remove(const std::string& sid)
+SedParameter*
+SedListOfSedParameters::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedMLParameter>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedParameter>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -583,7 +583,7 @@ SedListOfSedMLParameters::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <SedMLParameter*> (item);
+	return static_cast <SedParameter*> (item);
 }
 
 
@@ -591,7 +591,7 @@ SedListOfSedMLParameters::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedMLParameters::getElementName () const
+SedListOfSedParameters::getElementName () const
 {
 	static const string name = "listOfParameters";
 	return name;
@@ -602,7 +602,7 @@ SedListOfSedMLParameters::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedMLParameters::getTypeCode () const
+SedListOfSedParameters::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -612,7 +612,7 @@ SedListOfSedMLParameters::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedMLParameters::getItemTypeCode () const
+SedListOfSedParameters::getItemTypeCode () const
 {
 	return SEDML_PARAMETER;
 }
@@ -621,17 +621,17 @@ SedListOfSedMLParameters::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedMLParameter in this SedListOfSedMLParameters
+ * Creates a new SedParameter in this SedListOfSedParameters
  */
 SedBase*
-SedListOfSedMLParameters::createObject(XMLInputStream& stream)
+SedListOfSedParameters::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "parameter")
 	{
-		object = new SedMLParameter(getSedMLNamespaces());
+		object = new SedParameter(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -645,10 +645,10 @@ SedListOfSedMLParameters::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfSedMLParameters::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedParameters::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -673,10 +673,10 @@ SedListOfSedMLParameters::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedMLParameter_create(unsigned int level, unsigned int version)
+SedParameter_t *
+SedParameter_create(unsigned int level, unsigned int version)
 {
-	return new SedMLParameter(level, version);
+	return new SedParameter(level, version);
 }
 
 
@@ -685,10 +685,10 @@ SedMLParameter_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-SedMLParameter_free(SedMLParameter_t * smlp)
+SedParameter_free(SedParameter_t * sp)
 {
-	if (smlp != NULL)
-		delete smlp;
+	if (sp != NULL)
+		delete sp;
 }
 
 
@@ -696,12 +696,12 @@ SedMLParameter_free(SedMLParameter_t * smlp)
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedMLParameter_clone(SedMLParameter_t * smlp)
+SedParameter_t *
+SedParameter_clone(SedParameter_t * sp)
 {
-	if (smlp != NULL)
+	if (sp != NULL)
 	{
-		return static_cast<SedMLParameter_t*>(smlp->clone());
+		return static_cast<SedParameter_t*>(sp->clone());
 	}
 	else
 	{
@@ -715,12 +715,12 @@ SedMLParameter_clone(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 char *
-SedMLParameter_getId(SedMLParameter_t * smlp)
+SedParameter_getId(SedParameter_t * sp)
 {
-	if (smlp == NULL)
+	if (sp == NULL)
 		return NULL;
 
-	return smlp->getId().empty() ? NULL : safe_strdup(smlp->getId().c_str());
+	return sp->getId().empty() ? NULL : safe_strdup(sp->getId().c_str());
 }
 
 
@@ -729,12 +729,12 @@ SedMLParameter_getId(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 char *
-SedMLParameter_getName(SedMLParameter_t * smlp)
+SedParameter_getName(SedParameter_t * sp)
 {
-	if (smlp == NULL)
+	if (sp == NULL)
 		return NULL;
 
-	return smlp->getName().empty() ? NULL : safe_strdup(smlp->getName().c_str());
+	return sp->getName().empty() ? NULL : safe_strdup(sp->getName().c_str());
 }
 
 
@@ -743,9 +743,9 @@ SedMLParameter_getName(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 double
-SedMLParameter_getValue(SedMLParameter_t * smlp)
+SedParameter_getValue(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? smlp->getValue() : numeric_limits<double>::quiet_NaN();
+	return (sp != NULL) ? sp->getValue() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -754,9 +754,9 @@ SedMLParameter_getValue(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_isSetId(SedMLParameter_t * smlp)
+SedParameter_isSetId(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? static_cast<int>(smlp->isSetId()) : 0;
+	return (sp != NULL) ? static_cast<int>(sp->isSetId()) : 0;
 }
 
 
@@ -765,9 +765,9 @@ SedMLParameter_isSetId(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_isSetName(SedMLParameter_t * smlp)
+SedParameter_isSetName(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? static_cast<int>(smlp->isSetName()) : 0;
+	return (sp != NULL) ? static_cast<int>(sp->isSetName()) : 0;
 }
 
 
@@ -776,9 +776,9 @@ SedMLParameter_isSetName(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_isSetValue(SedMLParameter_t * smlp)
+SedParameter_isSetValue(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? static_cast<int>(smlp->isSetValue()) : 0;
+	return (sp != NULL) ? static_cast<int>(sp->isSetValue()) : 0;
 }
 
 
@@ -787,9 +787,9 @@ SedMLParameter_isSetValue(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_setId(SedMLParameter_t * smlp, const char * id)
+SedParameter_setId(SedParameter_t * sp, const char * id)
 {
-	return (smlp != NULL) ? smlp->setId(id) : LIBSEDML_INVALID_OBJECT;
+	return (sp != NULL) ? sp->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -798,9 +798,9 @@ SedMLParameter_setId(SedMLParameter_t * smlp, const char * id)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_setName(SedMLParameter_t * smlp, const char * name)
+SedParameter_setName(SedParameter_t * sp, const char * name)
 {
-	return (smlp != NULL) ? smlp->setName(name) : LIBSEDML_INVALID_OBJECT;
+	return (sp != NULL) ? sp->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -809,9 +809,9 @@ SedMLParameter_setName(SedMLParameter_t * smlp, const char * name)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_setValue(SedMLParameter_t * smlp, double value)
+SedParameter_setValue(SedParameter_t * sp, double value)
 {
-	return (smlp != NULL) ? smlp->setValue(value) : LIBSEDML_INVALID_OBJECT;
+	return (sp != NULL) ? sp->setValue(value) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -820,9 +820,9 @@ SedMLParameter_setValue(SedMLParameter_t * smlp, double value)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_unsetId(SedMLParameter_t * smlp)
+SedParameter_unsetId(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? smlp->unsetId() : LIBSEDML_INVALID_OBJECT;
+	return (sp != NULL) ? sp->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -831,9 +831,9 @@ SedMLParameter_unsetId(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_unsetName(SedMLParameter_t * smlp)
+SedParameter_unsetName(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? smlp->unsetName() : LIBSEDML_INVALID_OBJECT;
+	return (sp != NULL) ? sp->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -842,9 +842,9 @@ SedMLParameter_unsetName(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_unsetValue(SedMLParameter_t * smlp)
+SedParameter_unsetValue(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? smlp->unsetValue() : LIBSEDML_INVALID_OBJECT;
+	return (sp != NULL) ? sp->unsetValue() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -853,9 +853,9 @@ SedMLParameter_unsetValue(SedMLParameter_t * smlp)
  */
 LIBSEDML_EXTERN
 int
-SedMLParameter_hasRequiredAttributes(SedMLParameter_t * smlp)
+SedParameter_hasRequiredAttributes(SedParameter_t * sp)
 {
-	return (smlp != NULL) ? static_cast<int>(smlp->hasRequiredAttributes()) : 0;
+	return (sp != NULL) ? static_cast<int>(sp->hasRequiredAttributes()) : 0;
 }
 
 
@@ -863,13 +863,13 @@ SedMLParameter_hasRequiredAttributes(SedMLParameter_t * smlp)
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedListOfSedMLParameters_getById(SedListOf_t * lo, const char * sid)
+SedParameter_t *
+SedListOfSedParameters_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedMLParameters *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedParameters *>(lo)->get(sid) : NULL;
 }
 
 
@@ -877,13 +877,13 @@ SedListOfSedMLParameters_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedListOfSedMLParameters_removeById(SedListOf_t * lo, const char * sid)
+SedParameter_t *
+SedListOfSedParameters_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedMLParameters *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedParameters *>(lo)->remove(sid) : NULL;
 }
 
 

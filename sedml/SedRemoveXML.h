@@ -1,6 +1,6 @@
 /**
- * @file:   RemoveXML.h
- * @brief:  Implementation of the RemoveXML class
+ * @file:   SedRemoveXML.h
+ * @brief:  Implementation of the SedRemoveXML class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef RemoveXML_H__
-#define RemoveXML_H__
+#ifndef SedRemoveXML_H__
+#define SedRemoveXML_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,16 +49,16 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/Change.h>
+#include <sedml/SedChange.h>
 
 
-class LIBSEDML_EXTERN RemoveXML : public Change
+class LIBSEDML_EXTERN SedRemoveXML : public SedChange
 {
 
 protected:
@@ -68,62 +68,62 @@ protected:
 public:
 
 	/**
-	 * Creates a new RemoveXML with the given level, version, and package version.
+	 * Creates a new SedRemoveXML with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this RemoveXML
+	 * @param level an unsigned int, the SEDML Level to assign to this SedRemoveXML
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this RemoveXML
+	 * @param version an unsigned int, the SEDML Version to assign to this SedRemoveXML
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this RemoveXML
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedRemoveXML
 	 */
-	RemoveXML(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	          unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedRemoveXML(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	             unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new RemoveXML with the given SedMLNamespaces object.
+	 * Creates a new SedRemoveXML with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	RemoveXML(SedMLNamespaces* sedmlns);
+	SedRemoveXML(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for RemoveXML.
+	 * Copy constructor for SedRemoveXML.
 	 *
-	 * @param orig; the RemoveXML instance to copy.
+	 * @param orig; the SedRemoveXML instance to copy.
 	 */
-	RemoveXML(const RemoveXML& orig);
+	SedRemoveXML(const SedRemoveXML& orig);
 
 
  	/**
-	 * Assignment operator for RemoveXML.
+	 * Assignment operator for SedRemoveXML.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	RemoveXML& operator=(const RemoveXML& rhs);
+	SedRemoveXML& operator=(const SedRemoveXML& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this RemoveXML object.
+	 * Creates and returns a deep copy of this SedRemoveXML object.
 	 *
-	 * @return a (deep) copy of this RemoveXML object.
+	 * @return a (deep) copy of this SedRemoveXML object.
 	 */
-	virtual RemoveXML* clone () const;
+	virtual SedRemoveXML* clone () const;
 
 
  	/**
-	 * Destructor for RemoveXML.
+	 * Destructor for SedRemoveXML.
 	 */
-	virtual ~RemoveXML();
+	virtual ~SedRemoveXML();
 
 
  	/**
-	 * Returns the XML element name of this object, which for RemoveXML, is
-	 * always @c "removeXML".
+	 * Returns the XML element name of this object, which for SedRemoveXML, is
+	 * always @c "sedRemoveXML".
 	 *
-	 * @return the name of this element, i.e. @c "removeXML".
+	 * @return the name of this element, i.e. @c "sedRemoveXML".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -163,9 +163,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this RemoveXML object have been set.
+	 * for this SedRemoveXML object have been set.
 	 *
-	 * @note The required attributes for a RemoveXML object are:
+	 * @note The required attributes for a SedRemoveXML object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
@@ -189,9 +189,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -200,9 +200,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -270,23 +270,23 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-RemoveXML_t *
-RemoveXML_create(unsigned int level, unsigned int version);
+SedRemoveXML_t *
+SedRemoveXML_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-RemoveXML_free(RemoveXML_t * rxml);
+SedRemoveXML_free(SedRemoveXML_t * srxml);
 
 
 LIBSEDML_EXTERN
-RemoveXML_t *
-RemoveXML_clone(RemoveXML_t * rxml);
+SedRemoveXML_t *
+SedRemoveXML_clone(SedRemoveXML_t * srxml);
 
 
 LIBSEDML_EXTERN
 int
-RemoveXML_hasRequiredAttributes(RemoveXML_t * rxml);
+SedRemoveXML_hasRequiredAttributes(SedRemoveXML_t * srxml);
 
 
 
@@ -296,5 +296,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  RemoveXML_H__  */
+#endif /*  SedRemoveXML_H__  */
 

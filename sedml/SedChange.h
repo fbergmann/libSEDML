@@ -1,6 +1,6 @@
 /**
- * @file:   Change.h
- * @brief:  Implementation of the Change class
+ * @file:   SedChange.h
+ * @brief:  Implementation of the SedChange class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef Change_H__
-#define Change_H__
+#ifndef SedChange_H__
+#define SedChange_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN Change : public SedBase
+class LIBSEDML_EXTERN SedChange : public SedBase
 {
 
 protected:
@@ -68,77 +68,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new Change with the given level, version, and package version.
+	 * Creates a new SedChange with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this Change
+	 * @param level an unsigned int, the SEDML Level to assign to this SedChange
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this Change
+	 * @param version an unsigned int, the SEDML Version to assign to this SedChange
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this Change
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedChange
 	 */
-	Change(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	       unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedChange(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	          unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new Change with the given SedMLNamespaces object.
+	 * Creates a new SedChange with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	Change(SedMLNamespaces* sedmlns);
+	SedChange(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for Change.
+	 * Copy constructor for SedChange.
 	 *
-	 * @param orig; the Change instance to copy.
+	 * @param orig; the SedChange instance to copy.
 	 */
-	Change(const Change& orig);
+	SedChange(const SedChange& orig);
 
 
  	/**
-	 * Assignment operator for Change.
+	 * Assignment operator for SedChange.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	Change& operator=(const Change& rhs);
+	SedChange& operator=(const SedChange& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this Change object.
+	 * Creates and returns a deep copy of this SedChange object.
 	 *
-	 * @return a (deep) copy of this Change object.
+	 * @return a (deep) copy of this SedChange object.
 	 */
-	virtual Change* clone () const;
+	virtual SedChange* clone () const;
 
 
  	/**
-	 * Destructor for Change.
+	 * Destructor for SedChange.
 	 */
-	virtual ~Change();
+	virtual ~SedChange();
 
 
  	/**
-	 * Returns the value of the "target" attribute of this Change.
+	 * Returns the value of the "target" attribute of this SedChange.
 	 *
-	 * @return the value of the "target" attribute of this Change as a string.
+	 * @return the value of the "target" attribute of this SedChange as a string.
 	 */
 	virtual const std::string& getTarget() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Change's "target" attribute has been set.
+	 * SedChange's "target" attribute has been set.
 	 *
-	 * @return @c true if this Change's "target" attribute has been set,
+	 * @return @c true if this SedChange's "target" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetTarget() const;
 
 
 	/**
-	 * Sets the value of the "target" attribute of this Change.
+	 * Sets the value of the "target" attribute of this SedChange.
 	 *
 	 * @param target; const std::string& value of the "target" attribute to be set
 	 *
@@ -153,7 +153,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "target" attribute of this Change.
+	 * Unsets the value of the "target" attribute of this SedChange.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -166,10 +166,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for Change, is
-	 * always @c "change".
+	 * Returns the XML element name of this object, which for SedChange, is
+	 * always @c "sedChange".
 	 *
-	 * @return the name of this element, i.e. @c "change".
+	 * @return the name of this element, i.e. @c "sedChange".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -209,9 +209,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this Change object have been set.
+	 * for this SedChange object have been set.
 	 *
-	 * @note The required attributes for a Change object are:
+	 * @note The required attributes for a SedChange object are:
 	 * @li "target"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -236,9 +236,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -247,9 +247,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -306,7 +306,7 @@ public:
 	 *
 	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfChanges
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfChanges
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfChanges
 	 */
 	SedListOfChanges(unsigned int level      = SEDML_DEFAULT_LEVEL,
 	                 unsigned int version    = SEDML_DEFAULT_VERSION
@@ -314,11 +314,11 @@ public:
 
 
 	/**
-	 * Creates a new SedListOfChanges with the given SedMLNamespaces object.
+	 * Creates a new SedListOfChanges with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfChanges(SedMLNamespaces* sedmlns);
+	SedListOfChanges(SedNamespaces* sedns);
 
 
  	/**
@@ -338,7 +338,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual Change* get(unsigned int n);
+	virtual SedChange* get(unsigned int n);
 
 
 	/**
@@ -350,7 +350,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual const Change* get(unsigned int n) const;
+	virtual const SedChange* get(unsigned int n) const;
 
 
 	/**
@@ -367,7 +367,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual Change* get(const std::string& sid);
+	virtual SedChange* get(const std::string& sid);
 
 
 	/**
@@ -384,7 +384,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const Change* get(const std::string& sid) const;
+	virtual const SedChange* get(const std::string& sid) const;
 
 
 	/**
@@ -399,7 +399,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addChange(const Change* c);
+	int addChange(const SedChange* c);
 
 
 	/**
@@ -416,9 +416,9 @@ public:
 	 *
 	 * @return a new Change object instance
 	 *
-	 * @see addChange(const Change* c)
+	 * @see addChange(const SedChange* c)
 	 */
-	Change* createChange();
+	SedChange* createChange();
 
 
 	/**
@@ -431,7 +431,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual Change* remove(unsigned int n);
+	virtual SedChange* remove(unsigned int n);
 
 
 	/**
@@ -447,7 +447,7 @@ public:
 	 * @return the Change removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual Change* remove(const std::string& sid);
+	virtual SedChange* remove(const std::string& sid);
 
 
 	/**
@@ -542,7 +542,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -565,53 +565,53 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-Change_t *
-Change_create(unsigned int level, unsigned int version);
+SedChange_t *
+SedChange_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-Change_free(Change_t * c);
+SedChange_free(SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
-Change_t *
-Change_clone(Change_t * c);
+SedChange_t *
+SedChange_clone(SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
 char *
-Change_getTarget(Change_t * c);
+SedChange_getTarget(SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-Change_isSetTarget(Change_t * c);
+SedChange_isSetTarget(SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-Change_setTarget(Change_t * c, const char * target);
+SedChange_setTarget(SedChange_t * sc, const char * target);
 
 
 LIBSEDML_EXTERN
 int
-Change_unsetTarget(Change_t * c);
+SedChange_unsetTarget(SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
 int
-Change_hasRequiredAttributes(Change_t * c);
+SedChange_hasRequiredAttributes(SedChange_t * sc);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedListOfChanges_getById(SedListOf_t * lo, const char * sid);
+SedChange_t *
+SedListOfSedChanges_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-Change_t *
-SedListOfChanges_removeById(SedListOf_t * lo, const char * sid);
+SedChange_t *
+SedListOfSedChanges_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -621,5 +621,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  Change_H__  */
+#endif /*  SedChange_H__  */
 

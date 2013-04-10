@@ -1,6 +1,6 @@
 /**
- * @file:   DataSet.h
- * @brief:  Implementation of the DataSet class
+ * @file:   SedDataSet.h
+ * @brief:  Implementation of the SedDataSet class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef DataSet_H__
-#define DataSet_H__
+#ifndef SedDataSet_H__
+#define SedDataSet_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN DataSet : public SedBase
+class LIBSEDML_EXTERN SedDataSet : public SedBase
 {
 
 protected:
@@ -71,77 +71,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new DataSet with the given level, version, and package version.
+	 * Creates a new SedDataSet with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this DataSet
+	 * @param level an unsigned int, the SEDML Level to assign to this SedDataSet
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this DataSet
+	 * @param version an unsigned int, the SEDML Version to assign to this SedDataSet
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this DataSet
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedDataSet
 	 */
-	DataSet(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	        unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedDataSet(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	           unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new DataSet with the given SedMLNamespaces object.
+	 * Creates a new SedDataSet with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	DataSet(SedMLNamespaces* sedmlns);
+	SedDataSet(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for DataSet.
+	 * Copy constructor for SedDataSet.
 	 *
-	 * @param orig; the DataSet instance to copy.
+	 * @param orig; the SedDataSet instance to copy.
 	 */
-	DataSet(const DataSet& orig);
+	SedDataSet(const SedDataSet& orig);
 
 
  	/**
-	 * Assignment operator for DataSet.
+	 * Assignment operator for SedDataSet.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	DataSet& operator=(const DataSet& rhs);
+	SedDataSet& operator=(const SedDataSet& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this DataSet object.
+	 * Creates and returns a deep copy of this SedDataSet object.
 	 *
-	 * @return a (deep) copy of this DataSet object.
+	 * @return a (deep) copy of this SedDataSet object.
 	 */
-	virtual DataSet* clone () const;
+	virtual SedDataSet* clone () const;
 
 
  	/**
-	 * Destructor for DataSet.
+	 * Destructor for SedDataSet.
 	 */
-	virtual ~DataSet();
+	virtual ~SedDataSet();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this DataSet.
+	 * Returns the value of the "id" attribute of this SedDataSet.
 	 *
-	 * @return the value of the "id" attribute of this DataSet as a string.
+	 * @return the value of the "id" attribute of this SedDataSet as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataSet's "id" attribute has been set.
+	 * SedDataSet's "id" attribute has been set.
 	 *
-	 * @return @c true if this DataSet's "id" attribute has been set,
+	 * @return @c true if this SedDataSet's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this DataSet.
+	 * Sets the value of the "id" attribute of this SedDataSet.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -156,7 +156,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this DataSet.
+	 * Unsets the value of the "id" attribute of this SedDataSet.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -169,25 +169,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "label" attribute of this DataSet.
+	 * Returns the value of the "label" attribute of this SedDataSet.
 	 *
-	 * @return the value of the "label" attribute of this DataSet as a string.
+	 * @return the value of the "label" attribute of this SedDataSet as a string.
 	 */
 	virtual const std::string& getLabel() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataSet's "label" attribute has been set.
+	 * SedDataSet's "label" attribute has been set.
 	 *
-	 * @return @c true if this DataSet's "label" attribute has been set,
+	 * @return @c true if this SedDataSet's "label" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetLabel() const;
 
 
 	/**
-	 * Sets the value of the "label" attribute of this DataSet.
+	 * Sets the value of the "label" attribute of this SedDataSet.
 	 *
 	 * @param label; const std::string& value of the "label" attribute to be set
 	 *
@@ -202,7 +202,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "label" attribute of this DataSet.
+	 * Unsets the value of the "label" attribute of this SedDataSet.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -215,25 +215,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this DataSet.
+	 * Returns the value of the "name" attribute of this SedDataSet.
 	 *
-	 * @return the value of the "name" attribute of this DataSet as a string.
+	 * @return the value of the "name" attribute of this SedDataSet as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataSet's "name" attribute has been set.
+	 * SedDataSet's "name" attribute has been set.
 	 *
-	 * @return @c true if this DataSet's "name" attribute has been set,
+	 * @return @c true if this SedDataSet's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this DataSet.
+	 * Sets the value of the "name" attribute of this SedDataSet.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -248,7 +248,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this DataSet.
+	 * Unsets the value of the "name" attribute of this SedDataSet.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -261,25 +261,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "dataReference" attribute of this DataSet.
+	 * Returns the value of the "dataReference" attribute of this SedDataSet.
 	 *
-	 * @return the value of the "dataReference" attribute of this DataSet as a string.
+	 * @return the value of the "dataReference" attribute of this SedDataSet as a string.
 	 */
 	virtual const std::string& getDataReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * DataSet's "dataReference" attribute has been set.
+	 * SedDataSet's "dataReference" attribute has been set.
 	 *
-	 * @return @c true if this DataSet's "dataReference" attribute has been set,
+	 * @return @c true if this SedDataSet's "dataReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetDataReference() const;
 
 
 	/**
-	 * Sets the value of the "dataReference" attribute of this DataSet.
+	 * Sets the value of the "dataReference" attribute of this SedDataSet.
 	 *
 	 * @param dataReference; const std::string& value of the "dataReference" attribute to be set
 	 *
@@ -294,7 +294,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "dataReference" attribute of this DataSet.
+	 * Unsets the value of the "dataReference" attribute of this SedDataSet.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -307,10 +307,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for DataSet, is
-	 * always @c "dataSet".
+	 * Returns the XML element name of this object, which for SedDataSet, is
+	 * always @c "sedDataSet".
 	 *
-	 * @return the name of this element, i.e. @c "dataSet".
+	 * @return the name of this element, i.e. @c "sedDataSet".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -350,9 +350,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this DataSet object have been set.
+	 * for this SedDataSet object have been set.
 	 *
-	 * @note The required attributes for a DataSet object are:
+	 * @note The required attributes for a SedDataSet object are:
 	 * @li "id"
 	 * @li "label"
 	 * @li "dataReference"
@@ -379,9 +379,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -390,9 +390,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -449,7 +449,7 @@ public:
 	 *
 	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfDataSets
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfDataSets
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfDataSets
 	 */
 	SedListOfDataSets(unsigned int level      = SEDML_DEFAULT_LEVEL,
 	                  unsigned int version    = SEDML_DEFAULT_VERSION
@@ -457,11 +457,11 @@ public:
 
 
 	/**
-	 * Creates a new SedListOfDataSets with the given SedMLNamespaces object.
+	 * Creates a new SedListOfDataSets with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfDataSets(SedMLNamespaces* sedmlns);
+	SedListOfDataSets(SedNamespaces* sedns);
 
 
  	/**
@@ -481,7 +481,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual DataSet* get(unsigned int n);
+	virtual SedDataSet* get(unsigned int n);
 
 
 	/**
@@ -493,7 +493,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual const DataSet* get(unsigned int n) const;
+	virtual const SedDataSet* get(unsigned int n) const;
 
 
 	/**
@@ -510,7 +510,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual DataSet* get(const std::string& sid);
+	virtual SedDataSet* get(const std::string& sid);
 
 
 	/**
@@ -527,7 +527,7 @@ public:
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const DataSet* get(const std::string& sid) const;
+	virtual const SedDataSet* get(const std::string& sid) const;
 
 
 	/**
@@ -542,7 +542,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addDataSet(const DataSet* ds);
+	int addDataSet(const SedDataSet* ds);
 
 
 	/**
@@ -559,9 +559,9 @@ public:
 	 *
 	 * @return a new DataSet object instance
 	 *
-	 * @see addDataSet(const DataSet* ds)
+	 * @see addDataSet(const SedDataSet* ds)
 	 */
-	DataSet* createDataSet();
+	SedDataSet* createDataSet();
 
 
 	/**
@@ -574,7 +574,7 @@ public:
 	 *
 	 * @see size()
 	 */
-	virtual DataSet* remove(unsigned int n);
+	virtual SedDataSet* remove(unsigned int n);
 
 
 	/**
@@ -590,7 +590,7 @@ public:
 	 * @return the DataSet removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual DataSet* remove(const std::string& sid);
+	virtual SedDataSet* remove(const std::string& sid);
 
 
 	/**
@@ -685,7 +685,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -708,113 +708,113 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-DataSet_t *
-DataSet_create(unsigned int level, unsigned int version);
+SedDataSet_t *
+SedDataSet_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-DataSet_free(DataSet_t * ds);
+SedDataSet_free(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
-DataSet_t *
-DataSet_clone(DataSet_t * ds);
-
-
-LIBSEDML_EXTERN
-char *
-DataSet_getId(DataSet_t * ds);
+SedDataSet_t *
+SedDataSet_clone(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 char *
-DataSet_getLabel(DataSet_t * ds);
+SedDataSet_getId(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 char *
-DataSet_getName(DataSet_t * ds);
+SedDataSet_getLabel(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 char *
-DataSet_getDataReference(DataSet_t * ds);
+SedDataSet_getName(SedDataSet_t * sds);
+
+
+LIBSEDML_EXTERN
+char *
+SedDataSet_getDataReference(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_isSetId(DataSet_t * ds);
+SedDataSet_isSetId(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_isSetLabel(DataSet_t * ds);
+SedDataSet_isSetLabel(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_isSetName(DataSet_t * ds);
+SedDataSet_isSetName(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_isSetDataReference(DataSet_t * ds);
+SedDataSet_isSetDataReference(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_setId(DataSet_t * ds, const char * id);
+SedDataSet_setId(SedDataSet_t * sds, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_setLabel(DataSet_t * ds, const char * label);
+SedDataSet_setLabel(SedDataSet_t * sds, const char * label);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_setName(DataSet_t * ds, const char * name);
+SedDataSet_setName(SedDataSet_t * sds, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_setDataReference(DataSet_t * ds, const char * dataReference);
+SedDataSet_setDataReference(SedDataSet_t * sds, const char * dataReference);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_unsetId(DataSet_t * ds);
+SedDataSet_unsetId(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_unsetLabel(DataSet_t * ds);
+SedDataSet_unsetLabel(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_unsetName(DataSet_t * ds);
+SedDataSet_unsetName(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_unsetDataReference(DataSet_t * ds);
+SedDataSet_unsetDataReference(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
 int
-DataSet_hasRequiredAttributes(DataSet_t * ds);
+SedDataSet_hasRequiredAttributes(SedDataSet_t * sds);
 
 
 LIBSEDML_EXTERN
-DataSet_t *
-SedListOfDataSets_getById(SedListOf_t * lo, const char * sid);
+SedDataSet_t *
+SedListOfSedDataSets_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-DataSet_t *
-SedListOfDataSets_removeById(SedListOf_t * lo, const char * sid);
+SedDataSet_t *
+SedListOfSedDataSets_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -824,5 +824,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  DataSet_H__  */
+#endif /*  SedDataSet_H__  */
 

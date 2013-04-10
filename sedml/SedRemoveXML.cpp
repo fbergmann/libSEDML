@@ -1,6 +1,6 @@
 /**
- * @file:   RemoveXML.cpp
- * @brief:  Implementation of the RemoveXML class
+ * @file:   SedRemoveXML.cpp
+ * @brief:  Implementation of the SedRemoveXML class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/RemoveXML.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedRemoveXML.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,38 +45,38 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new RemoveXML with the given level, version, and package version.
+ * Creates a new SedRemoveXML with the given level, version, and package version.
  */
-RemoveXML::RemoveXML (unsigned int level, unsigned int version)
-	: Change(level, version)
+SedRemoveXML::SedRemoveXML (unsigned int level, unsigned int version)
+	: SedChange(level, version)
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new RemoveXML with the given SedMLNamespaces object.
+ * Creates a new SedRemoveXML with the given SedNamespaces object.
  */
-RemoveXML::RemoveXML (SedMLNamespaces* sedmlns)
-	: Change(sedmlns)
+SedRemoveXML::SedRemoveXML (SedNamespaces* sedns)
+	: SedChange(sedns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for RemoveXML.
+ * Copy constructor for SedRemoveXML.
  */
-RemoveXML::RemoveXML (const RemoveXML& orig)
-	: Change(orig)
+SedRemoveXML::SedRemoveXML (const SedRemoveXML& orig)
+	: SedChange(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -85,37 +85,37 @@ RemoveXML::RemoveXML (const RemoveXML& orig)
 
 
 /*
- * Assignment for RemoveXML.
+ * Assignment for SedRemoveXML.
  */
-RemoveXML&
-RemoveXML::operator=(const RemoveXML& rhs)
+SedRemoveXML&
+SedRemoveXML::operator=(const SedRemoveXML& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
-		Change::operator=(rhs);
+		SedChange::operator=(rhs);
 	}
 	return *this;
 }
 
 
 /*
- * Clone for RemoveXML.
+ * Clone for SedRemoveXML.
  */
-RemoveXML*
-RemoveXML::clone () const
+SedRemoveXML*
+SedRemoveXML::clone () const
 {
-	return new RemoveXML(*this);
+	return new SedRemoveXML(*this);
 }
 
 
 /*
- * Destructor for RemoveXML.
+ * Destructor for SedRemoveXML.
  */
-RemoveXML::~RemoveXML ()
+SedRemoveXML::~SedRemoveXML ()
 {
 }
 
@@ -124,7 +124,7 @@ RemoveXML::~RemoveXML ()
  * Returns the XML element name of this object
  */
 const std::string&
-RemoveXML::getElementName () const
+SedRemoveXML::getElementName () const
 {
 	static const string name = "removeXML";
 	return name;
@@ -135,13 +135,13 @@ RemoveXML::getElementName () const
  * return the SEDML object corresponding to next XMLToken.
  */
 SedBase*
-RemoveXML::createObject(XMLInputStream& stream)
+SedRemoveXML::createObject(XMLInputStream& stream)
 {
-	SedBase* object = Change::createObject(stream);
+	SedBase* object = SedChange::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 
-	Change::connectToChild();
+	SedChange::connectToChild();
 
 	return object;
 }
@@ -151,7 +151,7 @@ RemoveXML::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-RemoveXML::getTypeCode () const
+SedRemoveXML::getTypeCode () const
 {
 	return SEDML_CHANGE_REMOVEXML;
 }
@@ -161,9 +161,9 @@ RemoveXML::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-RemoveXML::hasRequiredAttributes () const
+SedRemoveXML::hasRequiredAttributes () const
 {
-	bool allPresent = Change::hasRequiredAttributes();
+	bool allPresent = SedChange::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -175,9 +175,9 @@ RemoveXML::hasRequiredAttributes () const
  * write contained elements
  */
 void
-RemoveXML::writeElements (XMLOutputStream& stream) const
+SedRemoveXML::writeElements (XMLOutputStream& stream) const
 {
-	Change::writeElements(stream);
+	SedChange::writeElements(stream);
 }
 
 
@@ -187,10 +187,10 @@ RemoveXML::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-RemoveXML::accept (SedMLVisitor& v) const
+SedRemoveXML::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -203,12 +203,12 @@ RemoveXML::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-RemoveXML::setSedMLDocument (SedMLDocument* d)
+SedRemoveXML::setSedDocument (SedDocument* d)
 {
-	Change::setSedMLDocument(d);
+	SedChange::setSedDocument(d);
 }
 
 
@@ -221,9 +221,9 @@ RemoveXML::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-RemoveXML::addExpectedAttributes(ExpectedAttributes& attributes)
+SedRemoveXML::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	Change::addExpectedAttributes(attributes);
+	SedChange::addExpectedAttributes(attributes);
 
 }
 
@@ -237,10 +237,10 @@ RemoveXML::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-RemoveXML::readAttributes (const XMLAttributes& attributes,
+SedRemoveXML::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	Change::readAttributes(attributes, expectedAttributes);
+	SedChange::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -256,9 +256,9 @@ RemoveXML::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-RemoveXML::writeAttributes (XMLOutputStream& stream) const
+SedRemoveXML::writeAttributes (XMLOutputStream& stream) const
 {
-	Change::writeAttributes(stream);
+	SedChange::writeAttributes(stream);
 
 }
 
@@ -270,10 +270,10 @@ RemoveXML::writeAttributes (XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-RemoveXML_t *
-RemoveXML_create(unsigned int level, unsigned int version)
+SedRemoveXML_t *
+SedRemoveXML_create(unsigned int level, unsigned int version)
 {
-	return new RemoveXML(level, version);
+	return new SedRemoveXML(level, version);
 }
 
 
@@ -282,10 +282,10 @@ RemoveXML_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-RemoveXML_free(RemoveXML_t * rxml)
+SedRemoveXML_free(SedRemoveXML_t * srxml)
 {
-	if (rxml != NULL)
-		delete rxml;
+	if (srxml != NULL)
+		delete srxml;
 }
 
 
@@ -293,12 +293,12 @@ RemoveXML_free(RemoveXML_t * rxml)
  * write comments
  */
 LIBSEDML_EXTERN
-RemoveXML_t *
-RemoveXML_clone(RemoveXML_t * rxml)
+SedRemoveXML_t *
+SedRemoveXML_clone(SedRemoveXML_t * srxml)
 {
-	if (rxml != NULL)
+	if (srxml != NULL)
 	{
-		return static_cast<RemoveXML_t*>(rxml->clone());
+		return static_cast<SedRemoveXML_t*>(srxml->clone());
 	}
 	else
 	{
@@ -312,9 +312,9 @@ RemoveXML_clone(RemoveXML_t * rxml)
  */
 LIBSEDML_EXTERN
 int
-RemoveXML_hasRequiredAttributes(RemoveXML_t * rxml)
+SedRemoveXML_hasRequiredAttributes(SedRemoveXML_t * srxml)
 {
-	return (rxml != NULL) ? static_cast<int>(rxml->hasRequiredAttributes()) : 0;
+	return (srxml != NULL) ? static_cast<int>(srxml->hasRequiredAttributes()) : 0;
 }
 
 

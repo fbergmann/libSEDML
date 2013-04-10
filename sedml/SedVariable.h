@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLVariable.h
- * @brief:  Implementation of the SedMLVariable class
+ * @file:   SedVariable.h
+ * @brief:  Implementation of the SedVariable class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedMLVariable_H__
-#define SedMLVariable_H__
+#ifndef SedVariable_H__
+#define SedVariable_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN SedMLVariable : public SedBase
+class LIBSEDML_EXTERN SedVariable : public SedBase
 {
 
 protected:
@@ -73,77 +73,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new SedMLVariable with the given level, version, and package version.
+	 * Creates a new SedVariable with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedMLVariable
+	 * @param level an unsigned int, the SEDML Level to assign to this SedVariable
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedMLVariable
+	 * @param version an unsigned int, the SEDML Version to assign to this SedVariable
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedMLVariable
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedVariable
 	 */
-	SedMLVariable(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	              unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedVariable(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	            unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedMLVariable with the given SedMLNamespaces object.
+	 * Creates a new SedVariable with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedMLVariable(SedMLNamespaces* sedmlns);
+	SedVariable(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedMLVariable.
+	 * Copy constructor for SedVariable.
 	 *
-	 * @param orig; the SedMLVariable instance to copy.
+	 * @param orig; the SedVariable instance to copy.
 	 */
-	SedMLVariable(const SedMLVariable& orig);
+	SedVariable(const SedVariable& orig);
 
 
  	/**
-	 * Assignment operator for SedMLVariable.
+	 * Assignment operator for SedVariable.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedMLVariable& operator=(const SedMLVariable& rhs);
+	SedVariable& operator=(const SedVariable& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedMLVariable object.
+	 * Creates and returns a deep copy of this SedVariable object.
 	 *
-	 * @return a (deep) copy of this SedMLVariable object.
+	 * @return a (deep) copy of this SedVariable object.
 	 */
-	virtual SedMLVariable* clone () const;
+	virtual SedVariable* clone () const;
 
 
  	/**
-	 * Destructor for SedMLVariable.
+	 * Destructor for SedVariable.
 	 */
-	virtual ~SedMLVariable();
+	virtual ~SedVariable();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this SedMLVariable.
+	 * Returns the value of the "id" attribute of this SedVariable.
 	 *
-	 * @return the value of the "id" attribute of this SedMLVariable as a string.
+	 * @return the value of the "id" attribute of this SedVariable as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLVariable's "id" attribute has been set.
+	 * SedVariable's "id" attribute has been set.
 	 *
-	 * @return @c true if this SedMLVariable's "id" attribute has been set,
+	 * @return @c true if this SedVariable's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this SedMLVariable.
+	 * Sets the value of the "id" attribute of this SedVariable.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -158,7 +158,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this SedMLVariable.
+	 * Unsets the value of the "id" attribute of this SedVariable.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -171,25 +171,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this SedMLVariable.
+	 * Returns the value of the "name" attribute of this SedVariable.
 	 *
-	 * @return the value of the "name" attribute of this SedMLVariable as a string.
+	 * @return the value of the "name" attribute of this SedVariable as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLVariable's "name" attribute has been set.
+	 * SedVariable's "name" attribute has been set.
 	 *
-	 * @return @c true if this SedMLVariable's "name" attribute has been set,
+	 * @return @c true if this SedVariable's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this SedMLVariable.
+	 * Sets the value of the "name" attribute of this SedVariable.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -204,7 +204,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this SedMLVariable.
+	 * Unsets the value of the "name" attribute of this SedVariable.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -217,25 +217,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "symbol" attribute of this SedMLVariable.
+	 * Returns the value of the "symbol" attribute of this SedVariable.
 	 *
-	 * @return the value of the "symbol" attribute of this SedMLVariable as a string.
+	 * @return the value of the "symbol" attribute of this SedVariable as a string.
 	 */
 	virtual const std::string& getSymbol() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLVariable's "symbol" attribute has been set.
+	 * SedVariable's "symbol" attribute has been set.
 	 *
-	 * @return @c true if this SedMLVariable's "symbol" attribute has been set,
+	 * @return @c true if this SedVariable's "symbol" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetSymbol() const;
 
 
 	/**
-	 * Sets the value of the "symbol" attribute of this SedMLVariable.
+	 * Sets the value of the "symbol" attribute of this SedVariable.
 	 *
 	 * @param symbol; const std::string& value of the "symbol" attribute to be set
 	 *
@@ -250,7 +250,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "symbol" attribute of this SedMLVariable.
+	 * Unsets the value of the "symbol" attribute of this SedVariable.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -263,25 +263,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "target" attribute of this SedMLVariable.
+	 * Returns the value of the "target" attribute of this SedVariable.
 	 *
-	 * @return the value of the "target" attribute of this SedMLVariable as a string.
+	 * @return the value of the "target" attribute of this SedVariable as a string.
 	 */
 	virtual const std::string& getTarget() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLVariable's "target" attribute has been set.
+	 * SedVariable's "target" attribute has been set.
 	 *
-	 * @return @c true if this SedMLVariable's "target" attribute has been set,
+	 * @return @c true if this SedVariable's "target" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetTarget() const;
 
 
 	/**
-	 * Sets the value of the "target" attribute of this SedMLVariable.
+	 * Sets the value of the "target" attribute of this SedVariable.
 	 *
 	 * @param target; const std::string& value of the "target" attribute to be set
 	 *
@@ -296,7 +296,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "target" attribute of this SedMLVariable.
+	 * Unsets the value of the "target" attribute of this SedVariable.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -309,25 +309,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "taskReference" attribute of this SedMLVariable.
+	 * Returns the value of the "taskReference" attribute of this SedVariable.
 	 *
-	 * @return the value of the "taskReference" attribute of this SedMLVariable as a string.
+	 * @return the value of the "taskReference" attribute of this SedVariable as a string.
 	 */
 	virtual const std::string& getTaskReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLVariable's "taskReference" attribute has been set.
+	 * SedVariable's "taskReference" attribute has been set.
 	 *
-	 * @return @c true if this SedMLVariable's "taskReference" attribute has been set,
+	 * @return @c true if this SedVariable's "taskReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetTaskReference() const;
 
 
 	/**
-	 * Sets the value of the "taskReference" attribute of this SedMLVariable.
+	 * Sets the value of the "taskReference" attribute of this SedVariable.
 	 *
 	 * @param taskReference; const std::string& value of the "taskReference" attribute to be set
 	 *
@@ -342,7 +342,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "taskReference" attribute of this SedMLVariable.
+	 * Unsets the value of the "taskReference" attribute of this SedVariable.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -355,25 +355,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "modelReference" attribute of this SedMLVariable.
+	 * Returns the value of the "modelReference" attribute of this SedVariable.
 	 *
-	 * @return the value of the "modelReference" attribute of this SedMLVariable as a string.
+	 * @return the value of the "modelReference" attribute of this SedVariable as a string.
 	 */
 	virtual const std::string& getModelReference() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLVariable's "modelReference" attribute has been set.
+	 * SedVariable's "modelReference" attribute has been set.
 	 *
-	 * @return @c true if this SedMLVariable's "modelReference" attribute has been set,
+	 * @return @c true if this SedVariable's "modelReference" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetModelReference() const;
 
 
 	/**
-	 * Sets the value of the "modelReference" attribute of this SedMLVariable.
+	 * Sets the value of the "modelReference" attribute of this SedVariable.
 	 *
 	 * @param modelReference; const std::string& value of the "modelReference" attribute to be set
 	 *
@@ -388,7 +388,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "modelReference" attribute of this SedMLVariable.
+	 * Unsets the value of the "modelReference" attribute of this SedVariable.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -401,10 +401,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedMLVariable, is
-	 * always @c "sedMLVariable".
+	 * Returns the XML element name of this object, which for SedVariable, is
+	 * always @c "sedVariable".
 	 *
-	 * @return the name of this element, i.e. @c "sedMLVariable".
+	 * @return the name of this element, i.e. @c "sedVariable".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -444,9 +444,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedMLVariable object have been set.
+	 * for this SedVariable object have been set.
 	 *
-	 * @note The required attributes for a SedMLVariable object are:
+	 * @note The required attributes for a SedVariable object are:
 	 * @li "id"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -471,9 +471,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -482,9 +482,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -529,103 +529,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfSedMLVariables : public SedListOf
+class LIBSEDML_EXTERN SedListOfVariables : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfSedMLVariables with the given level, version, and package version.
+	 * Creates a new SedListOfVariables with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSedMLVariables
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfVariables
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSedMLVariables
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfVariables
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfSedMLVariables
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfVariables
 	 */
-	SedListOfSedMLVariables(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                        unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfVariables(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                   unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfSedMLVariables with the given SedMLNamespaces object.
+	 * Creates a new SedListOfVariables with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSedMLVariables(SedMLNamespaces* sedmlns);
+	SedListOfVariables(SedNamespaces* sedns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfSedMLVariables object.
+	 * Creates and returns a deep copy of this SedListOfVariables object.
 	 *
-	 * @return a (deep) copy of this SedListOfSedMLVariables object.
+	 * @return a (deep) copy of this SedListOfVariables object.
 	 */
-	virtual SedListOfSedMLVariables* clone () const;
+	virtual SedListOfVariables* clone () const;
 
 
  	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables.
+	 * Get a Variable from the SedListOfVariables.
 	 *
-	 * @param n the index number of the SedMLVariable to get.
+	 * @param n the index number of the Variable to get.
 	 *
-	 * @return the nth SedMLVariable in this SedListOfSedMLVariables.
-	 *
-	 * @see size()
-	 */
-	virtual SedMLVariable* get(unsigned int n);
-
-
-	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables.
-	 *
-	 * @param n the index number of the SedMLVariable to get.
-	 *
-	 * @return the nth SedMLVariable in this SedListOfSedMLVariables.
+	 * @return the nth Variable in this SedListOfVariables.
 	 *
 	 * @see size()
 	 */
-	virtual const SedMLVariable* get(unsigned int n) const;
+	virtual SedVariable* get(unsigned int n);
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables
+	 * Get a Variable from the SedListOfVariables.
+	 *
+	 * @param n the index number of the Variable to get.
+	 *
+	 * @return the nth Variable in this SedListOfVariables.
+	 *
+	 * @see size()
+	 */
+	virtual const SedVariable* get(unsigned int n) const;
+
+
+	/**
+	 * Get a Variable from the SedListOfVariables
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLVariable to get.
+	 * of the Variable to get.
 	 *
-	 * @return SedMLVariable in this SedListOfSedMLVariables
+	 * @return Variable in this SedListOfVariables
 	 * with the given id or NULL if no such
-	 * SedMLVariable exists.
+	 * Variable exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual SedMLVariable* get(const std::string& sid);
+	virtual SedVariable* get(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLVariable from the SedListOfSedMLVariables
+	 * Get a Variable from the SedListOfVariables
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLVariable to get.
+	 * of the Variable to get.
 	 *
-	 * @return SedMLVariable in this SedListOfSedMLVariables
+	 * @return Variable in this SedListOfVariables
 	 * with the given id or NULL if no such
-	 * SedMLVariable exists.
+	 * Variable exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const SedMLVariable* get(const std::string& sid) const;
+	virtual const SedVariable* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLVariable" to this SedListOfSedMLVariables.
+	 * Adds a copy the given "Variable" to this SedListOfVariables.
 	 *
-	 * @param smlv; the SedMLVariable object to add
+	 * @param v; the Variable object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -634,62 +634,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLVariable(const SedMLVariable* smlv);
+	int addVariable(const SedVariable* v);
 
 
 	/**
-	 * Get the number of SedMLVariable objects in this SedListOfSedMLVariables.
+	 * Get the number of Variable objects in this SedListOfVariables.
 	 *
-	 * @return the number of SedMLVariable objects in this SedListOfSedMLVariables
+	 * @return the number of Variable objects in this SedListOfVariables
 	 */
-	unsigned int getNumSedMLVariables() const;
+	unsigned int getNumVariables() const;
 
 
 	/**
-	 * Creates a new SedMLVariable object, adds it to the
-	 * SedListOfSedMLVariables and returns the SedMLVariable object created. 
+	 * Creates a new Variable object, adds it to the
+	 * SedListOfVariables and returns the Variable object created. 
 	 *
-	 * @return a new SedMLVariable object instance
+	 * @return a new Variable object instance
 	 *
-	 * @see addSedMLVariable(const SedMLVariable* smlv)
+	 * @see addVariable(const SedVariable* v)
 	 */
-	SedMLVariable* createSedMLVariable();
+	SedVariable* createVariable();
 
 
 	/**
-	 * Removes the nth SedMLVariable from this SedListOfSedMLVariables
+	 * Removes the nth Variable from this SedListOfVariables
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLVariable to remove.
+	 * @param n the index of the Variable to remove.
 	 *
 	 * @see size()
 	 */
-	virtual SedMLVariable* remove(unsigned int n);
+	virtual SedVariable* remove(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLVariable from this SedListOfSedMLVariables with the given identifier
+	 * Removes the Variable from this SedListOfVariables with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLVariable to remove.
+	 * @param sid the identifier of the Variable to remove.
 	 *
-	 * @return the SedMLVariable removed. As mentioned above, the caller owns the
+	 * @return the Variable removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual SedMLVariable* remove(const std::string& sid);
+	virtual SedVariable* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfSedMLVariables, is
-	 * always @c "sedListOfSedMLVariables".
+	 * Returns the XML element name of this object, which for SedListOfVariables, is
+	 * always @c "sedListOfVariables".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfSedMLVariables".
+	 * @return the name of this element, i.e. @c "sedListOfVariables".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -766,7 +766,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new SedMLVariable in this SedListOfSedMLVariables
+	 * Creates a new Variable in this SedListOfVariables
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -777,7 +777,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -800,153 +800,153 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedMLVariable_create(unsigned int level, unsigned int version);
+SedVariable_t *
+SedVariable_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedMLVariable_free(SedMLVariable_t * smlv);
+SedVariable_free(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedMLVariable_clone(SedMLVariable_t * smlv);
-
-
-LIBSEDML_EXTERN
-char *
-SedMLVariable_getId(SedMLVariable_t * smlv);
+SedVariable_t *
+SedVariable_clone(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getName(SedMLVariable_t * smlv);
+SedVariable_getId(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getSymbol(SedMLVariable_t * smlv);
+SedVariable_getName(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getTarget(SedMLVariable_t * smlv);
+SedVariable_getSymbol(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getTaskReference(SedMLVariable_t * smlv);
+SedVariable_getTarget(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getModelReference(SedMLVariable_t * smlv);
+SedVariable_getTaskReference(SedVariable_t * sv);
+
+
+LIBSEDML_EXTERN
+char *
+SedVariable_getModelReference(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetId(SedMLVariable_t * smlv);
+SedVariable_isSetId(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetName(SedMLVariable_t * smlv);
+SedVariable_isSetName(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetSymbol(SedMLVariable_t * smlv);
+SedVariable_isSetSymbol(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetTarget(SedMLVariable_t * smlv);
+SedVariable_isSetTarget(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetTaskReference(SedMLVariable_t * smlv);
+SedVariable_isSetTaskReference(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetModelReference(SedMLVariable_t * smlv);
+SedVariable_isSetModelReference(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_setId(SedMLVariable_t * smlv, const char * id);
+SedVariable_setId(SedVariable_t * sv, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_setName(SedMLVariable_t * smlv, const char * name);
+SedVariable_setName(SedVariable_t * sv, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_setSymbol(SedMLVariable_t * smlv, const char * symbol);
+SedVariable_setSymbol(SedVariable_t * sv, const char * symbol);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_setTarget(SedMLVariable_t * smlv, const char * target);
+SedVariable_setTarget(SedVariable_t * sv, const char * target);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_setTaskReference(SedMLVariable_t * smlv, const char * taskReference);
+SedVariable_setTaskReference(SedVariable_t * sv, const char * taskReference);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_setModelReference(SedMLVariable_t * smlv, const char * modelReference);
+SedVariable_setModelReference(SedVariable_t * sv, const char * modelReference);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetId(SedMLVariable_t * smlv);
+SedVariable_unsetId(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetName(SedMLVariable_t * smlv);
+SedVariable_unsetName(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetSymbol(SedMLVariable_t * smlv);
+SedVariable_unsetSymbol(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetTarget(SedMLVariable_t * smlv);
+SedVariable_unsetTarget(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetTaskReference(SedMLVariable_t * smlv);
+SedVariable_unsetTaskReference(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetModelReference(SedMLVariable_t * smlv);
+SedVariable_unsetModelReference(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
 int
-SedMLVariable_hasRequiredAttributes(SedMLVariable_t * smlv);
+SedVariable_hasRequiredAttributes(SedVariable_t * sv);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedListOfSedMLVariables_getById(SedListOf_t * lo, const char * sid);
+SedVariable_t *
+SedListOfSedVariables_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedListOfSedMLVariables_removeById(SedListOf_t * lo, const char * sid);
+SedVariable_t *
+SedListOfSedVariables_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -956,5 +956,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedMLVariable_H__  */
+#endif /*  SedVariable_H__  */
 

@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLParameter.h
- * @brief:  Implementation of the SedMLParameter class
+ * @file:   SedParameter.h
+ * @brief:  Implementation of the SedParameter class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedMLParameter_H__
-#define SedMLParameter_H__
+#ifndef SedParameter_H__
+#define SedParameter_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN SedMLParameter : public SedBase
+class LIBSEDML_EXTERN SedParameter : public SedBase
 {
 
 protected:
@@ -71,77 +71,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new SedMLParameter with the given level, version, and package version.
+	 * Creates a new SedParameter with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedMLParameter
+	 * @param level an unsigned int, the SEDML Level to assign to this SedParameter
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedMLParameter
+	 * @param version an unsigned int, the SEDML Version to assign to this SedParameter
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedMLParameter
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedParameter
 	 */
-	SedMLParameter(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	               unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedParameter(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	             unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedMLParameter with the given SedMLNamespaces object.
+	 * Creates a new SedParameter with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedMLParameter(SedMLNamespaces* sedmlns);
+	SedParameter(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedMLParameter.
+	 * Copy constructor for SedParameter.
 	 *
-	 * @param orig; the SedMLParameter instance to copy.
+	 * @param orig; the SedParameter instance to copy.
 	 */
-	SedMLParameter(const SedMLParameter& orig);
+	SedParameter(const SedParameter& orig);
 
 
  	/**
-	 * Assignment operator for SedMLParameter.
+	 * Assignment operator for SedParameter.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedMLParameter& operator=(const SedMLParameter& rhs);
+	SedParameter& operator=(const SedParameter& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedMLParameter object.
+	 * Creates and returns a deep copy of this SedParameter object.
 	 *
-	 * @return a (deep) copy of this SedMLParameter object.
+	 * @return a (deep) copy of this SedParameter object.
 	 */
-	virtual SedMLParameter* clone () const;
+	virtual SedParameter* clone () const;
 
 
  	/**
-	 * Destructor for SedMLParameter.
+	 * Destructor for SedParameter.
 	 */
-	virtual ~SedMLParameter();
+	virtual ~SedParameter();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this SedMLParameter.
+	 * Returns the value of the "id" attribute of this SedParameter.
 	 *
-	 * @return the value of the "id" attribute of this SedMLParameter as a string.
+	 * @return the value of the "id" attribute of this SedParameter as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLParameter's "id" attribute has been set.
+	 * SedParameter's "id" attribute has been set.
 	 *
-	 * @return @c true if this SedMLParameter's "id" attribute has been set,
+	 * @return @c true if this SedParameter's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this SedMLParameter.
+	 * Sets the value of the "id" attribute of this SedParameter.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -156,7 +156,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this SedMLParameter.
+	 * Unsets the value of the "id" attribute of this SedParameter.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -169,25 +169,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this SedMLParameter.
+	 * Returns the value of the "name" attribute of this SedParameter.
 	 *
-	 * @return the value of the "name" attribute of this SedMLParameter as a string.
+	 * @return the value of the "name" attribute of this SedParameter as a string.
 	 */
 	virtual const std::string& getName() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLParameter's "name" attribute has been set.
+	 * SedParameter's "name" attribute has been set.
 	 *
-	 * @return @c true if this SedMLParameter's "name" attribute has been set,
+	 * @return @c true if this SedParameter's "name" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetName() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this SedMLParameter.
+	 * Sets the value of the "name" attribute of this SedParameter.
 	 *
 	 * @param name; const std::string& value of the "name" attribute to be set
 	 *
@@ -202,7 +202,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this SedMLParameter.
+	 * Unsets the value of the "name" attribute of this SedParameter.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -215,25 +215,25 @@ public:
 
 
 	/**
-	 * Returns the value of the "value" attribute of this SedMLParameter.
+	 * Returns the value of the "value" attribute of this SedParameter.
 	 *
-	 * @return the value of the "value" attribute of this SedMLParameter as a double.
+	 * @return the value of the "value" attribute of this SedParameter as a double.
 	 */
 	virtual const double getValue() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedMLParameter's "value" attribute has been set.
+	 * SedParameter's "value" attribute has been set.
 	 *
-	 * @return @c true if this SedMLParameter's "value" attribute has been set,
+	 * @return @c true if this SedParameter's "value" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetValue() const;
 
 
 	/**
-	 * Sets the value of the "value" attribute of this SedMLParameter.
+	 * Sets the value of the "value" attribute of this SedParameter.
 	 *
 	 * @param value; double value of the "value" attribute to be set
 	 *
@@ -248,7 +248,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "value" attribute of this SedMLParameter.
+	 * Unsets the value of the "value" attribute of this SedParameter.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -261,10 +261,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedMLParameter, is
-	 * always @c "sedMLParameter".
+	 * Returns the XML element name of this object, which for SedParameter, is
+	 * always @c "sedParameter".
 	 *
-	 * @return the name of this element, i.e. @c "sedMLParameter".
+	 * @return the name of this element, i.e. @c "sedParameter".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -304,9 +304,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedMLParameter object have been set.
+	 * for this SedParameter object have been set.
 	 *
-	 * @note The required attributes for a SedMLParameter object are:
+	 * @note The required attributes for a SedParameter object are:
 	 * @li "id"
 	 * @li "value"
 	 *
@@ -332,9 +332,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -343,9 +343,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -390,103 +390,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfSedMLParameters : public SedListOf
+class LIBSEDML_EXTERN SedListOfParameters : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfSedMLParameters with the given level, version, and package version.
+	 * Creates a new SedListOfParameters with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSedMLParameters
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfParameters
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSedMLParameters
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfParameters
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this SedListOfSedMLParameters
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfParameters
 	 */
-	SedListOfSedMLParameters(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                         unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfParameters(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                    unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfSedMLParameters with the given SedMLNamespaces object.
+	 * Creates a new SedListOfParameters with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSedMLParameters(SedMLNamespaces* sedmlns);
+	SedListOfParameters(SedNamespaces* sedns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfSedMLParameters object.
+	 * Creates and returns a deep copy of this SedListOfParameters object.
 	 *
-	 * @return a (deep) copy of this SedListOfSedMLParameters object.
+	 * @return a (deep) copy of this SedListOfParameters object.
 	 */
-	virtual SedListOfSedMLParameters* clone () const;
+	virtual SedListOfParameters* clone () const;
 
 
  	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters.
+	 * Get a Parameter from the SedListOfParameters.
 	 *
-	 * @param n the index number of the SedMLParameter to get.
+	 * @param n the index number of the Parameter to get.
 	 *
-	 * @return the nth SedMLParameter in this SedListOfSedMLParameters.
-	 *
-	 * @see size()
-	 */
-	virtual SedMLParameter* get(unsigned int n);
-
-
-	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters.
-	 *
-	 * @param n the index number of the SedMLParameter to get.
-	 *
-	 * @return the nth SedMLParameter in this SedListOfSedMLParameters.
+	 * @return the nth Parameter in this SedListOfParameters.
 	 *
 	 * @see size()
 	 */
-	virtual const SedMLParameter* get(unsigned int n) const;
+	virtual SedParameter* get(unsigned int n);
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters
+	 * Get a Parameter from the SedListOfParameters.
+	 *
+	 * @param n the index number of the Parameter to get.
+	 *
+	 * @return the nth Parameter in this SedListOfParameters.
+	 *
+	 * @see size()
+	 */
+	virtual const SedParameter* get(unsigned int n) const;
+
+
+	/**
+	 * Get a Parameter from the SedListOfParameters
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLParameter to get.
+	 * of the Parameter to get.
 	 *
-	 * @return SedMLParameter in this SedListOfSedMLParameters
+	 * @return Parameter in this SedListOfParameters
 	 * with the given id or NULL if no such
-	 * SedMLParameter exists.
+	 * Parameter exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual SedMLParameter* get(const std::string& sid);
+	virtual SedParameter* get(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLParameter from the SedListOfSedMLParameters
+	 * Get a Parameter from the SedListOfParameters
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLParameter to get.
+	 * of the Parameter to get.
 	 *
-	 * @return SedMLParameter in this SedListOfSedMLParameters
+	 * @return Parameter in this SedListOfParameters
 	 * with the given id or NULL if no such
-	 * SedMLParameter exists.
+	 * Parameter exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const SedMLParameter* get(const std::string& sid) const;
+	virtual const SedParameter* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLParameter" to this SedListOfSedMLParameters.
+	 * Adds a copy the given "Parameter" to this SedListOfParameters.
 	 *
-	 * @param smlp; the SedMLParameter object to add
+	 * @param p; the Parameter object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -495,62 +495,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLParameter(const SedMLParameter* smlp);
+	int addParameter(const SedParameter* p);
 
 
 	/**
-	 * Get the number of SedMLParameter objects in this SedListOfSedMLParameters.
+	 * Get the number of Parameter objects in this SedListOfParameters.
 	 *
-	 * @return the number of SedMLParameter objects in this SedListOfSedMLParameters
+	 * @return the number of Parameter objects in this SedListOfParameters
 	 */
-	unsigned int getNumSedMLParameters() const;
+	unsigned int getNumParameters() const;
 
 
 	/**
-	 * Creates a new SedMLParameter object, adds it to the
-	 * SedListOfSedMLParameters and returns the SedMLParameter object created. 
+	 * Creates a new Parameter object, adds it to the
+	 * SedListOfParameters and returns the Parameter object created. 
 	 *
-	 * @return a new SedMLParameter object instance
+	 * @return a new Parameter object instance
 	 *
-	 * @see addSedMLParameter(const SedMLParameter* smlp)
+	 * @see addParameter(const SedParameter* p)
 	 */
-	SedMLParameter* createSedMLParameter();
+	SedParameter* createParameter();
 
 
 	/**
-	 * Removes the nth SedMLParameter from this SedListOfSedMLParameters
+	 * Removes the nth Parameter from this SedListOfParameters
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLParameter to remove.
+	 * @param n the index of the Parameter to remove.
 	 *
 	 * @see size()
 	 */
-	virtual SedMLParameter* remove(unsigned int n);
+	virtual SedParameter* remove(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLParameter from this SedListOfSedMLParameters with the given identifier
+	 * Removes the Parameter from this SedListOfParameters with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLParameter to remove.
+	 * @param sid the identifier of the Parameter to remove.
 	 *
-	 * @return the SedMLParameter removed. As mentioned above, the caller owns the
+	 * @return the Parameter removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual SedMLParameter* remove(const std::string& sid);
+	virtual SedParameter* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfSedMLParameters, is
-	 * always @c "sedListOfSedMLParameters".
+	 * Returns the XML element name of this object, which for SedListOfParameters, is
+	 * always @c "sedListOfParameters".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfSedMLParameters".
+	 * @return the name of this element, i.e. @c "sedListOfParameters".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -627,7 +627,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new SedMLParameter in this SedListOfSedMLParameters
+	 * Creates a new Parameter in this SedListOfParameters
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -638,7 +638,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Write the namespace for the SedML package.
+	 * Write the namespace for the Sed package.
 	 */
 	virtual void writeXMLNS(XMLOutputStream& stream) const;
 
@@ -661,93 +661,93 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedMLParameter_create(unsigned int level, unsigned int version);
+SedParameter_t *
+SedParameter_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedMLParameter_free(SedMLParameter_t * smlp);
+SedParameter_free(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedMLParameter_clone(SedMLParameter_t * smlp);
-
-
-LIBSEDML_EXTERN
-char *
-SedMLParameter_getId(SedMLParameter_t * smlp);
+SedParameter_t *
+SedParameter_clone(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 char *
-SedMLParameter_getName(SedMLParameter_t * smlp);
+SedParameter_getId(SedParameter_t * sp);
+
+
+LIBSEDML_EXTERN
+char *
+SedParameter_getName(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 double
-SedMLParameter_getValue(SedMLParameter_t * smlp);
+SedParameter_getValue(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_isSetId(SedMLParameter_t * smlp);
+SedParameter_isSetId(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_isSetName(SedMLParameter_t * smlp);
+SedParameter_isSetName(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_isSetValue(SedMLParameter_t * smlp);
+SedParameter_isSetValue(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_setId(SedMLParameter_t * smlp, const char * id);
+SedParameter_setId(SedParameter_t * sp, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_setName(SedMLParameter_t * smlp, const char * name);
+SedParameter_setName(SedParameter_t * sp, const char * name);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_setValue(SedMLParameter_t * smlp, double value);
+SedParameter_setValue(SedParameter_t * sp, double value);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_unsetId(SedMLParameter_t * smlp);
+SedParameter_unsetId(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_unsetName(SedMLParameter_t * smlp);
+SedParameter_unsetName(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_unsetValue(SedMLParameter_t * smlp);
+SedParameter_unsetValue(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
 int
-SedMLParameter_hasRequiredAttributes(SedMLParameter_t * smlp);
+SedParameter_hasRequiredAttributes(SedParameter_t * sp);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedListOfSedMLParameters_getById(SedListOf_t * lo, const char * sid);
+SedParameter_t *
+SedListOfSedParameters_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-SedMLParameter_t *
-SedListOfSedMLParameters_removeById(SedListOf_t * lo, const char * sid);
+SedParameter_t *
+SedListOfSedParameters_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -757,5 +757,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedMLParameter_H__  */
+#endif /*  SedParameter_H__  */
 

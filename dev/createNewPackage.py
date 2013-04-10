@@ -7,8 +7,8 @@
 
 import sys
 
-def createSedML():
-  m0 = dict({'name': 'SedMLDocument', 'typecode': 'SEDML_DOCUMENT'})
+def createSed():
+  m0 = dict({'name': 'SedDocument', 'typecode': 'SEDML_DOCUMENT'})
   m1 = dict({'name': 'Model', 'typecode': 'SEDML_MODEL', 'isSedListOf': True})
   c1 = dict({'name': 'Change', 'typecode': 'SEDML_CHANGE', 'isSedListOf': True})
   c2 = dict({'name': 'NewXML', 'typecode': 'SEDML_CHANGE_NEW_XML'})
@@ -31,7 +31,7 @@ def createSedML():
   o7 = dict({'name': 'Report', 'typecode': 'SEDML_OUTPUT_REPORT'})
   elem = [m0, m1, c1, c2, c3, c4, c5, v1, p1, s1, s2, s3, t1, d1, o1, o2, o3, o4, o5, o6, o7]
   doc_elem = [m1, c1, s1, t1, d1, o1]
-  doc_plug = dict({'sbase': 'SedMLDocument', 'extension': doc_elem}) 
+  doc_plug = dict({'sbase': 'SedDocument', 'extension': doc_elem}) 
   plug = [doc_plug]
-  package = dict({'name' : 'SedML', 'elements': elem, 'plugins': plug, 'number': 1000})
+  package = dict({'name' : 'Sed', 'elements': elem, 'plugins': plug, 'number': 1000})
   return package  

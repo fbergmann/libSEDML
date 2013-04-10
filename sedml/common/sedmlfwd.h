@@ -63,23 +63,23 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 typedef CLASS_OR_STRUCT SedBase                     SedBase_t;
 
 /**
- * @var typedef class SedMLReader SedMLReader_t
- * @copydoc SedMLReader
+ * @var typedef class SedReader SedReader_t
+ * @copydoc SedReader
  */
-typedef CLASS_OR_STRUCT SedMLReader                     SedMLReader_t;
+typedef CLASS_OR_STRUCT SedReader                     SedReader_t;
 
 /**
- * @var typedef class SedMLWriter SedMLWriter_t
- * @copydoc SedMLWriter
+ * @var typedef class SedWriter SedWriter_t
+ * @copydoc SedWriter
  */
-typedef CLASS_OR_STRUCT SedMLWriter                     SedMLWriter_t;
+typedef CLASS_OR_STRUCT SedWriter                     SedWriter_t;
 
 
 /**
- * @var typedef class SedMLNamespaces SedMLNamespaces_t
- * @copydoc SedMLNamespaces
+ * @var typedef class SedNamespaces SedNamespaces_t
+ * @copydoc SedNamespaces
  */
-typedef CLASS_OR_STRUCT SedMLNamespaces              SedMLNamespaces_t;
+typedef CLASS_OR_STRUCT SedNamespaces              SedNamespaces_t;
 
 /**
  * @var typedef class SedListOf SedListOf_t
@@ -92,65 +92,65 @@ typedef CLASS_OR_STRUCT SedListOf              SedListOf_t;
  * @var typedef class SEDMLDocument SEDMLDocument_t
  * @copydoc SEDMLDocument
  */
-typedef CLASS_OR_STRUCT SedMLDocument              SedMLDocument_t;
+typedef CLASS_OR_STRUCT SedDocument              SedDocument_t;
 
 
 /**
- * @var typedef class SedMLModel SedMLModel_t
- * @copydoc SedMLModel
+ * @var typedef class SedModel SedModel_t
+ * @copydoc SedModel
  */
-typedef CLASS_OR_STRUCT SedMLModel                     SedMLModel_t;
+typedef CLASS_OR_STRUCT SedModel                     SedModel_t;
 
 /**
- * @var typedef class SedMLVariable SedMLVariable_t
- * @copydoc SedMLVariable
+ * @var typedef class SedVariable SedVariable_t
+ * @copydoc SedVariable
  */
-typedef CLASS_OR_STRUCT SedMLVariable                     SedMLVariable_t;
+typedef CLASS_OR_STRUCT SedVariable                     SedVariable_t;
 
 /**
- * @var typedef class SedMLParameter SedMLParameter_t
- * @copydoc SedMLParameter
+ * @var typedef class SedParameter SedParameter_t
+ * @copydoc SedParameter
  */
-typedef CLASS_OR_STRUCT SedMLParameter                     SedMLParameter_t;
-
-
-/**
- * @var typedef class Change Change_t
- * @copydoc Change
- */
-typedef CLASS_OR_STRUCT Change                     Change_t;
+typedef CLASS_OR_STRUCT SedParameter                     SedParameter_t;
 
 
 /**
- * @var typedef class Algorithm Algorithm_t
- * @copydoc Algorithm
+ * @var typedef class SedChange SedChange_t
+ * @copydoc SedChange
  */
-typedef CLASS_OR_STRUCT Algorithm                     Algorithm_t;
-
-/**
- * @var typedef class ComputeChange ComputeChange_t
- * @copydoc ComputeChange
- */
-typedef CLASS_OR_STRUCT ComputeChange                     ComputeChange_t;
+typedef CLASS_OR_STRUCT SedChange                     SedChange_t;
 
 
 /**
- * @var typedef class RemoveXML RemoveXML_t
- * @copydoc RemoveXML
+ * @var typedef class SedAlgorithm SedAlgorithm_t
+ * @copydoc SedAlgorithm
  */
-typedef CLASS_OR_STRUCT RemoveXML                     RemoveXML_t;
+typedef CLASS_OR_STRUCT SedAlgorithm                     SedAlgorithm_t;
 
 /**
- * @var typedef class ChangeAttribute ChangeAttribute_t
- * @copydoc ChangeAttribute
+ * @var typedef class SedComputeChange SedComputeChange_t
+ * @copydoc SedComputeChange
  */
-typedef CLASS_OR_STRUCT ChangeAttribute                     ChangeAttribute_t;
+typedef CLASS_OR_STRUCT SedComputeChange                     SedComputeChange_t;
+
 
 /**
- * @var typedef class DataGenerator DataGenerator_t
- * @copydoc DataGenerator
+ * @var typedef class SedRemoveXML SedRemoveXML_t
+ * @copydoc SedRemoveXML
  */
-typedef CLASS_OR_STRUCT DataGenerator                     DataGenerator_t;
+typedef CLASS_OR_STRUCT SedRemoveXML                     SedRemoveXML_t;
+
+/**
+ * @var typedef class SedChangeAttribute SedChangeAttribute_t
+ * @copydoc SedChangeAttribute
+ */
+typedef CLASS_OR_STRUCT SedChangeAttribute                     SedChangeAttribute_t;
+
+/**
+ * @var typedef class SedDataGenerator SedDataGenerator_t
+ * @copydoc SedDataGenerator
+ */
+typedef CLASS_OR_STRUCT SedDataGenerator                     SedDataGenerator_t;
 
 /**
  * @var typedef class SedListOfDataGenerators SedListOfDataGenerators_t
@@ -160,17 +160,17 @@ typedef CLASS_OR_STRUCT SedListOfDataGenerators                     SedListOfDat
 
 
 /**
- * @var typedef class SedListOfSedMLModels SedListOfSedMLModels_t
- * @copydoc SedListOfSedMLModels
+ * @var typedef class SedListOfModels SedListOfModels_t
+ * @copydoc SedListOfModels
  */
-typedef CLASS_OR_STRUCT SedListOfSedMLModels                     SedListOfSedMLModels_t;
+typedef CLASS_OR_STRUCT SedListOfModels                     SedListOfModels_t;
 
 
 /**
- * @var typedef class SedListOfSedMLOutputs SedListOfSedMLOutputs_t
- * @copydoc SedListOfSedMLOutputs
+ * @var typedef class SedListOfOutputs SedListOfOutputs_t
+ * @copydoc SedListOfOutputs
  */
-typedef CLASS_OR_STRUCT SedListOfSedMLOutputs                     SedListOfSedMLOutputs_t;
+typedef CLASS_OR_STRUCT SedListOfOutputs                     SedListOfOutputs_t;
 
 
 /**
@@ -181,68 +181,68 @@ typedef CLASS_OR_STRUCT SedListOfTasks                     SedListOfTasks_t;
 
 
 /**
- * @var typedef class Task Task_t
+ * @var typedef class SedTask SedTask_t
  * @copydoc Task
  */
-typedef CLASS_OR_STRUCT Task                     Task_t;
+typedef CLASS_OR_STRUCT SedTask                     SedTask_t;
 
 
 /**
- * @var typedef class Simulation Simulation_t
- * @copydoc Simulation
+ * @var typedef class SedSimulation SedSimulation_t
+ * @copydoc SedSimulation
  */
-typedef CLASS_OR_STRUCT Simulation                     Simulation_t;
+typedef CLASS_OR_STRUCT SedSimulation                     SedSimulation_t;
 
 
 /**
- * @var typedef class UniformTimeCourse UniformTimeCourse_t
- * @copydoc UniformTimeCourse
+ * @var typedef class SedUniformTimeCourse SedUniformTimeCourse_t
+ * @copydoc SedUniformTimeCourse
  */
-typedef CLASS_OR_STRUCT UniformTimeCourse                     UniformTimeCourse_t;
+typedef CLASS_OR_STRUCT SedUniformTimeCourse                     SedUniformTimeCourse_t;
 
 
 /**
- * @var typedef class SedMLOutput SedMLOutput_t
+ * @var typedef class SedOutput SedOutput_t
  * @copydoc Output
  */
-typedef CLASS_OR_STRUCT SedMLOutput                     SedMLOutput_t;
+typedef CLASS_OR_STRUCT SedOutput                     SedOutput_t;
 
 
 /**
- * @var typedef class Plot3D Plot3D_t
- * @copydoc Plot3D
+ * @var typedef class SedPlot3D SedPlot3D_t
+ * @copydoc SedPlot3D
  */
-typedef CLASS_OR_STRUCT Plot3D                     Plot3D_t;
+typedef CLASS_OR_STRUCT SedPlot3D                     SedPlot3D_t;
 
 /**
- * @var typedef class Plot2D Plot2D_t
- * @copydoc Plot2D
+ * @var typedef class SedPlot2D SedPlot2D_t
+ * @copydoc SedPlot2D
  */
-typedef CLASS_OR_STRUCT Plot2D                     Plot2D_t;
+typedef CLASS_OR_STRUCT SedPlot2D                     SedPlot2D_t;
 
 /**
- * @var typedef class Report Report_t
- * @copydoc Report
+ * @var typedef class SedReport SedReport_t
+ * @copydoc SedReport
  */
-typedef CLASS_OR_STRUCT Report                     Report_t;
+typedef CLASS_OR_STRUCT SedReport                     SedReport_t;
 
 /**
- * @var typedef class Surface Surface_t
- * @copydoc Surface
+ * @var typedef class SedSurface SedSurface_t
+ * @copydoc SedSurface
  */
-typedef CLASS_OR_STRUCT Surface                     Surface_t;
+typedef CLASS_OR_STRUCT SedSurface                     SedSurface_t;
 
 /**
- * @var typedef class SedMLCurve SedMLCurve_t
- * @copydoc SedMLCurve
+ * @var typedef class SedCurve SedCurve_t
+ * @copydoc SedCurve
  */
-typedef CLASS_OR_STRUCT SedMLCurve                     SedMLCurve_t;
+typedef CLASS_OR_STRUCT SedCurve                     SedCurve_t;
 
 /**
- * @var typedef class DataSet DataSet_t
- * @copydoc DataSet
+ * @var typedef class SedDataSet SedDataSet_t
+ * @copydoc SedDataSet
  */
-typedef CLASS_OR_STRUCT DataSet                     DataSet_t;
+typedef CLASS_OR_STRUCT SedDataSet                     SedDataSet_t;
 
 /**
  * @var typedef class ASTNode ASTNode_t

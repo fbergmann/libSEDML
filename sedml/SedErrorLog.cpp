@@ -1,11 +1,11 @@
 /**
- * @file    SedMLErrorLog.cpp
- * @brief   Stores errors (and messages) encountered while processing SedML.
+ * @file    SedErrorLog.cpp
+ * @brief   Stores errors (and messages) encountered while processing Sed.
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -32,8 +32,8 @@
 
 #include <sbml/xml/XMLToken.h>
 #include <sbml/xml/XMLParser.h>
-#include <sedml/SedMLError.h>
-#include <sedml/SedMLErrorLog.h>
+#include <sedml/SedError.h>
+#include <sedml/SedErrorLog.h>
 
 
 /** @cond doxygen-ignored */
@@ -49,9 +49,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new empty SedMLErrorLog.
+ * Creates a new empty SedErrorLog.
  */
-SedMLErrorLog::SedMLErrorLog ()
+SedErrorLog::SedErrorLog ()
 {
 }
 
@@ -66,13 +66,13 @@ struct Delete : public unary_function<XMLError*, void>
 
 
 /*
- * Destroys this SedMLErrorLog.
+ * Destroys this SedErrorLog.
  */
-SedMLErrorLog::~SedMLErrorLog ()
+SedErrorLog::~SedErrorLog ()
 {
 /*
   //
-  // debug code for SedMLErrorLog::remove(const unsigned int)
+  // debug code for SedErrorLog::remove(const unsigned int)
   //
   vector<XMLError*>::iterator iter;
 
@@ -93,11 +93,11 @@ SedMLErrorLog::~SedMLErrorLog ()
 
 
 /*
- * See SedMLError for a list of SedML error codes and XMLError
+ * See SedError for a list of Sed error codes and XMLError
  * for a list of system and XML-level error codes.
  */
 void
-SedMLErrorLog::logError ( const unsigned int errorId
+SedErrorLog::logError ( const unsigned int errorId
                        , const unsigned int level
                        , const unsigned int version
                        , const std::string& details
@@ -106,13 +106,13 @@ SedMLErrorLog::logError ( const unsigned int errorId
                        , const unsigned int severity
                        , const unsigned int category )
 {
-  add( SedMLError( errorId, level, version, details, line, column,
+  add( SedError( errorId, level, version, details, line, column,
                   severity, category ));
 }
 
 
 void
-SedMLErrorLog::logPackageError ( const std::string& package
+SedErrorLog::logPackageError ( const std::string& package
                        , const unsigned int errorId
                        , const unsigned int pkgVersion
                        , const unsigned int level
@@ -123,18 +123,18 @@ SedMLErrorLog::logPackageError ( const std::string& package
                        , const unsigned int severity
                        , const unsigned int category )
 {
-  add( SedMLError( errorId, level, version, details, line, column,
+  add( SedError( errorId, level, version, details, line, column,
                   severity, category, package, pkgVersion));
 }
 
 
 /*
- * Adds the given SedMLError to the log.
+ * Adds the given SedError to the log.
  *
- * @param error SedMLError, the error to be logged.
+ * @param error SedError, the error to be logged.
  */
 void
-SedMLErrorLog::add (const SedMLError& error)
+SedErrorLog::add (const SedError& error)
 {
   if (error.getSeverity() != LIBSEDML_SEV_NOT_APPLICABLE)
     XMLErrorLog::add(error);
@@ -142,39 +142,39 @@ SedMLErrorLog::add (const SedMLError& error)
 
 
 /*
- * Logs (copies) the SedMLErrors in the given SedMLError list to this
- * SedMLErrorLog.
+ * Logs (copies) the SedErrors in the given SedError list to this
+ * SedErrorLog.
  *
- * @param errors list, a list of SedMLError to be added to the log.
+ * @param errors list, a list of SedError to be added to the log.
  */
 void
-SedMLErrorLog::add (const std::list<SedMLError>& errors)
+SedErrorLog::add (const std::list<SedError>& errors)
 {
-  list<SedMLError>::const_iterator end = errors.end();
-  list<SedMLError>::const_iterator iter;
+  list<SedError>::const_iterator end = errors.end();
+  list<SedError>::const_iterator iter;
 
   for (iter = errors.begin(); iter != end; ++iter)
     XMLErrorLog::add( *iter );
 }
 
 /*
- * Logs (copies) the SedMLErrors in the given SedMLError vector to this
- * SedMLErrorLog.
+ * Logs (copies) the SedErrors in the given SedError vector to this
+ * SedErrorLog.
  *
- * @param errors vector, a vector of SedMLError to be added to the log.
+ * @param errors vector, a vector of SedError to be added to the log.
  */
 void
-SedMLErrorLog::add (const std::vector<SedMLError>& errors)
+SedErrorLog::add (const std::vector<SedError>& errors)
 {
-  vector<SedMLError>::const_iterator end = errors.end();
-  vector<SedMLError>::const_iterator iter;
+  vector<SedError>::const_iterator end = errors.end();
+  vector<SedError>::const_iterator iter;
 
   for (iter = errors.begin(); iter != end; ++iter)
     XMLErrorLog::add( *iter );
 }
 
 /*
- * Helper class used by SedMLErrorLog::remove.
+ * Helper class used by SedErrorLog::remove.
  */
 class MatchErrorId
 {
@@ -192,7 +192,7 @@ private:
 
 
 /*
- * Removes an error having errorId from the SedMLError list.
+ * Removes an error having errorId from the SedError list.
  *
  * Only the first item will be removed if there are multiple errors
  * with the given errorId.
@@ -200,7 +200,7 @@ private:
  * @param errorId the error identifier of the error to be removed.
  */
 void
-SedMLErrorLog::remove (const unsigned int errorId)
+SedErrorLog::remove (const unsigned int errorId)
 {
   //
   // "mErrors.erase( remove_if( ...))" can't be used for removing
@@ -229,7 +229,7 @@ SedMLErrorLog::remove (const unsigned int errorId)
 
 
 bool
-SedMLErrorLog::contains (const unsigned int errorId)
+SedErrorLog::contains (const unsigned int errorId)
 {
   vector<XMLError*>::iterator iter;
 
@@ -250,7 +250,7 @@ SedMLErrorLog::contains (const unsigned int errorId)
 
 /*
  * Helper class used by
- * SedMLErrorLog::getNumFailsWithSeverity(SedMLErrorSeverity_t).
+ * SedErrorLog::getNumFailsWithSeverity(SedErrorSeverity_t).
  */
 class MatchSeverity
 {
@@ -271,7 +271,7 @@ private:
 /** @endcond */
 
 unsigned int 
-SedMLErrorLog::getNumFailsWithSeverity(unsigned int severity) const
+SedErrorLog::getNumFailsWithSeverity(unsigned int severity) const
 {
   int n = 0;
 
@@ -289,7 +289,7 @@ SedMLErrorLog::getNumFailsWithSeverity(unsigned int severity) const
  * Returns number of errors that are logged with severity Error
  */
 unsigned int
-SedMLErrorLog::getNumFailsWithSeverity(unsigned int severity)
+SedErrorLog::getNumFailsWithSeverity(unsigned int severity)
 {
   int n = 0;
 
@@ -305,16 +305,16 @@ SedMLErrorLog::getNumFailsWithSeverity(unsigned int severity)
 
 
 /*
- * Returns the nth SedMLError in this log.
+ * Returns the nth SedError in this log.
  *
  * @param n unsigned int number of the error to retrieve.
  *
- * @return the nth SedMLError in this log.
+ * @return the nth SedError in this log.
  */
-const SedMLError*
-SedMLErrorLog::getError (unsigned int n) const
+const SedError*
+SedErrorLog::getError (unsigned int n) const
 {
-  return static_cast<const SedMLError*>(XMLErrorLog::getError(n));
+  return static_cast<const SedError*>(XMLErrorLog::getError(n));
 }
 
 LIBSEDML_CPP_NAMESPACE_END

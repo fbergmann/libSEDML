@@ -1,6 +1,6 @@
 /**
- * @file:   Plot2D.h
- * @brief:  Implementation of the Plot2D class
+ * @file:   SedPlot2D.h
+ * @brief:  Implementation of the SedPlot2D class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef Plot2D_H__
-#define Plot2D_H__
+#ifndef SedPlot2D_H__
+#define SedPlot2D_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,150 +49,150 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/SedMLOutput.h>
-#include <sedml/SedMLCurve.h>
+#include <sedml/SedOutput.h>
+#include <sedml/SedCurve.h>
 
 
-class LIBSEDML_EXTERN Plot2D : public SedMLOutput
+class LIBSEDML_EXTERN SedPlot2D : public SedOutput
 {
 
 protected:
 
-	SedListOfSedMLCurves   mCurve;
+	SedListOfCurves   mCurve;
 
 
 public:
 
 	/**
-	 * Creates a new Plot2D with the given level, version, and package version.
+	 * Creates a new SedPlot2D with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this Plot2D
+	 * @param level an unsigned int, the SEDML Level to assign to this SedPlot2D
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this Plot2D
+	 * @param version an unsigned int, the SEDML Version to assign to this SedPlot2D
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this Plot2D
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedPlot2D
 	 */
-	Plot2D(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	       unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedPlot2D(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	          unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new Plot2D with the given SedMLNamespaces object.
+	 * Creates a new SedPlot2D with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	Plot2D(SedMLNamespaces* sedmlns);
+	SedPlot2D(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for Plot2D.
+	 * Copy constructor for SedPlot2D.
 	 *
-	 * @param orig; the Plot2D instance to copy.
+	 * @param orig; the SedPlot2D instance to copy.
 	 */
-	Plot2D(const Plot2D& orig);
+	SedPlot2D(const SedPlot2D& orig);
 
 
  	/**
-	 * Assignment operator for Plot2D.
+	 * Assignment operator for SedPlot2D.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	Plot2D& operator=(const Plot2D& rhs);
+	SedPlot2D& operator=(const SedPlot2D& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this Plot2D object.
+	 * Creates and returns a deep copy of this SedPlot2D object.
 	 *
-	 * @return a (deep) copy of this Plot2D object.
+	 * @return a (deep) copy of this SedPlot2D object.
 	 */
-	virtual Plot2D* clone () const;
+	virtual SedPlot2D* clone () const;
 
 
  	/**
-	 * Destructor for Plot2D.
+	 * Destructor for SedPlot2D.
 	 */
-	virtual ~Plot2D();
+	virtual ~SedPlot2D();
 
 
  	/**
-	 * Returns the  "SedListOfSedMLCurves" in this Plot2D object.
+	 * Returns the  "SedListOfCurves" in this SedPlot2D object.
 	 *
-	 * @return the "SedListOfSedMLCurves" attribute of this Plot2D.
+	 * @return the "SedListOfCurves" attribute of this SedPlot2D.
 	 */
-	const SedListOfSedMLCurves* getListOfSedMLCurves() const;
+	const SedListOfCurves* getListOfCurves() const;
 
 
 	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves.
+	 * Get a Curve from the SedListOfCurves.
 	 *
-	 * @param n the index number of the SedMLCurve to get.
+	 * @param n the index number of the Curve to get.
 	 *
-	 * @return the nth SedMLCurve in the SedListOfSedMLCurves within this Plot2D.
+	 * @return the nth Curve in the SedListOfCurves within this SedPlot2D.
 	 *
-	 * @see getNumSedMLCurves()
+	 * @see getNumCurves()
 	 */
-	SedMLCurve* getSedMLCurve(unsigned int n);
+	SedCurve* getCurve(unsigned int n);
 
 
 	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves.
+	 * Get a Curve from the SedListOfCurves.
 	 *
-	 * @param n the index number of the SedMLCurve to get.
+	 * @param n the index number of the Curve to get.
 	 *
-	 * @return the nth SedMLCurve in the SedListOfSedMLCurves within this Plot2D.
+	 * @return the nth Curve in the SedListOfCurves within this SedPlot2D.
 	 *
-	 * @see getNumSedMLCurves()
+	 * @see getNumCurves()
 	 */
-	const SedMLCurve* getSedMLCurve(unsigned int n) const;
+	const SedCurve* getCurve(unsigned int n) const;
 
 
 	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves
+	 * Get a Curve from the SedListOfCurves
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLCurve to get.
+	 * of the Curve to get.
 	 *
-	 * @return the SedMLCurve in the SedListOfSedMLCurves
+	 * @return the Curve in the SedListOfCurves
 	 * with the given id or NULL if no such
-	 * SedMLCurve exists.
+	 * Curve exists.
 	 *
-	 * @see getSedMLCurve(unsigned int n)
+	 * @see getCurve(unsigned int n)
 	 *
-	 * @see getNumSedMLCurves()
+	 * @see getNumCurves()
 	 */
-	SedMLCurve* getSedMLCurve(const std::string& sid);
+	SedCurve* getCurve(const std::string& sid);
 
 
 	/**
-	 * Get a SedMLCurve from the SedListOfSedMLCurves
+	 * Get a Curve from the SedListOfCurves
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SedMLCurve to get.
+	 * of the Curve to get.
 	 *
-	 * @return the SedMLCurve in the SedListOfSedMLCurves
+	 * @return the Curve in the SedListOfCurves
 	 * with the given id or NULL if no such
-	 * SedMLCurve exists.
+	 * Curve exists.
 	 *
-	 * @see getSedMLCurve(unsigned int n)
+	 * @see getCurve(unsigned int n)
 	 *
-	 * @see getNumSedMLCurves()
+	 * @see getNumCurves()
 	 */
-	const SedMLCurve* getSedMLCurve(const std::string& sid) const;
+	const SedCurve* getCurve(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "SedMLCurve" to this Plot2D.
+	 * Adds a copy the given "SedCurve" to this SedPlot2D.
 	 *
-	 * @param smlc; the SedMLCurve object to add
+	 * @param sc; the SedCurve object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -201,62 +201,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSedMLCurve(const SedMLCurve* smlc);
+	int addCurve(const SedCurve* sc);
 
 
 	/**
-	 * Get the number of SedMLCurve objects in this Plot2D.
+	 * Get the number of SedCurve objects in this SedPlot2D.
 	 *
-	 * @return the number of SedMLCurve objects in this Plot2D
+	 * @return the number of SedCurve objects in this SedPlot2D
 	 */
-	unsigned int getNumSedMLCurves() const;
+	unsigned int getNumCurves() const;
 
 
 	/**
-	 * Creates a new SedMLCurve object, adds it to this Plot2Ds
-	 * SedListOfSedMLCurves and returns the SedMLCurve object created. 
+	 * Creates a new SedCurve object, adds it to this SedPlot2Ds
+	 * SedListOfCurves and returns the SedCurve object created. 
 	 *
-	 * @return a new SedMLCurve object instance
+	 * @return a new SedCurve object instance
 	 *
-	 * @see addSedMLCurve(const SedMLCurve* smlc)
+	 * @see addCurve(const SedCurve* sc)
 	 */
-	SedMLCurve* createSedMLCurve();
+	SedCurve* createCurve();
 
 
 	/**
-	 * Removes the nth SedMLCurve from the SedListOfSedMLCurves within this Plot2D.
+	 * Removes the nth Curve from the SedListOfCurves within this SedPlot2D.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SedMLCurve to remove.
+	 * @param n the index of the Curve to remove.
 	 *
-	 * @see getNumSedMLCurves()
+	 * @see getNumCurves()
 	 */
-	SedMLCurve* removeSedMLCurve(unsigned int n);
+	SedCurve* removeCurve(unsigned int n);
 
 
 	/**
-	 * Removes the SedMLCurve with the given identifier from the SedListOfSedMLCurves within this Plot2D
+	 * Removes the Curve with the given identifier from the SedListOfCurves within this SedPlot2D
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SedMLCurve to remove.
+	 * @param sid the identifier of the Curve to remove.
 	 *
-	 * @return the SedMLCurve removed. As mentioned above, the caller owns the
+	 * @return the Curve removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedMLCurve* removeSedMLCurve(const std::string& sid);
+	SedCurve* removeCurve(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for Plot2D, is
-	 * always @c "plot2D".
+	 * Returns the XML element name of this object, which for SedPlot2D, is
+	 * always @c "sedPlot2D".
 	 *
-	 * @return the name of this element, i.e. @c "plot2D".
+	 * @return the name of this element, i.e. @c "sedPlot2D".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -296,9 +296,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this Plot2D object have been set.
+	 * for this SedPlot2D object have been set.
 	 *
-	 * @note The required attributes for a Plot2D object are:
+	 * @note The required attributes for a SedPlot2D object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
@@ -308,9 +308,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required elements
-	 * for this Plot2D object have been set.
+	 * for this SedPlot2D object have been set.
 	 *
-	 * @note The required elements for a Plot2D object are:
+	 * @note The required elements for a SedPlot2D object are:
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * elements for this object have been defined.
@@ -334,9 +334,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -345,9 +345,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -426,68 +426,68 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-Plot2D_t *
-Plot2D_create(unsigned int level, unsigned int version);
+SedPlot2D_t *
+SedPlot2D_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-Plot2D_free(Plot2D_t * pd);
+SedPlot2D_free(SedPlot2D_t * spd);
 
 
 LIBSEDML_EXTERN
-Plot2D_t *
-Plot2D_clone(Plot2D_t * pd);
+SedPlot2D_t *
+SedPlot2D_clone(SedPlot2D_t * spd);
 
 
 LIBSEDML_EXTERN
 int
-Plot2D_addSedMLCurve(Plot2D_t * pd, SedMLCurve_t * smlc);
+SedPlot2D_addCurve(SedPlot2D_t * spd, SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_createSedMLCurve(Plot2D_t * pd);
+SedCurve_t *
+SedPlot2D_createCurve(SedPlot2D_t * spd);
 
 
 LIBSEDML_EXTERN
 SedListOf_t *
-Plot2D_getSedListOfSedMLCurves(Plot2D_t * pd);
+SedPlot2D_getSedListOfCurves(SedPlot2D_t * spd);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_getSedMLCurve(Plot2D_t * pd, unsigned int n);
+SedCurve_t *
+SedPlot2D_getCurve(SedPlot2D_t * spd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_getSedMLCurveById(Plot2D_t * pd, const char * sid);
+SedCurve_t *
+SedPlot2D_getCurveById(SedPlot2D_t * spd, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-Plot2D_getNumSedMLCurves(Plot2D_t * pd);
+SedPlot2D_getNumCurves(SedPlot2D_t * spd);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_removeSedMLCurve(Plot2D_t * pd, unsigned int n);
+SedCurve_t *
+SedPlot2D_removeCurve(SedPlot2D_t * spd, unsigned int n);
 
 
 LIBSEDML_EXTERN
-SedMLCurve_t *
-Plot2D_removeSedMLCurveById(Plot2D_t * pd, const char * sid);
-
-
-LIBSEDML_EXTERN
-int
-Plot2D_hasRequiredAttributes(Plot2D_t * pd);
+SedCurve_t *
+SedPlot2D_removeCurveById(SedPlot2D_t * spd, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-Plot2D_hasRequiredElements(Plot2D_t * pd);
+SedPlot2D_hasRequiredAttributes(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_hasRequiredElements(SedPlot2D_t * spd);
 
 
 
@@ -497,5 +497,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  Plot2D_H__  */
+#endif /*  SedPlot2D_H__  */
 

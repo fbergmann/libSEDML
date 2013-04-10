@@ -10,7 +10,7 @@ import fileHeaders
 import generalFunctions
 import strFunctions
 
-def writeConstructors(element, package, output):
+def writeConstructors(element, type, package, output):
   element = generalFunctions.writeListOf(element)
   indent = strFunctions.getIndent(element)
   output.write('\t/**\n\t * ' )
@@ -32,11 +32,11 @@ def writeConstructors(element, package, output):
   output.write(');\n\n\n'.format(package))
   output.write('\t/**\n\t * ' )
   output.write('Creates a new {0}'.format(element))
-  output.write(' with the given SedMLNamespaces object.\n')
+  output.write(' with the given SedNamespaces object.\n')
   output.write('\t *\n')
-  output.write('\t * @param {0}ns the SedMLNamespaces object'.format(package.lower(), package))
+  output.write('\t * @param {0}ns the SedNamespaces object'.format(package.lower(), package))
   output.write('\n\t */\n')
-  output.write('\t{0}(SedMLNamespaces* {1}ns);\n\n\n '.format(element, package.lower()))
+  output.write('\t{0}(SedNamespaces* {1}ns);\n\n\n '.format(element, package.lower()))
 #  output.write('\t/**\n\t * ' )
 #  output.write('Copy constructor for {0}.\n'.format(element))
 #  output.write('\t *\n')
@@ -55,7 +55,7 @@ def writeConstructors(element, package, output):
   output.write('\tvirtual {0}* clone () const;\n\n\n '.format(element))
   return
 
-def writeGetFunctions(output, element, subelement=False, topelement=""):
+def writeGetFunctions(output, element, type, subelement=False, topelement=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('\t/**\n')
   output.write('\t * Get a {0} from the {1}.\n'.format(element, listOf))
@@ -66,12 +66,12 @@ def writeGetFunctions(output, element, subelement=False, topelement=""):
     output.write('\t * @return the nth {0} in the {1} within this {2}.\n'.format(element, listOf, topelement))
     output.write('\t *\n\t * @see getNum{0}s()\n'.format(element))
     output.write('\t */\n')
-    output.write('\t{0}* get{0}(unsigned int n);\n\n\n'.format(element))
+    output.write('\t{0}* get{1}(unsigned int n);\n\n\n'.format(type, element))
   else:
     output.write('\t * @return the nth {0} in this {1}.\n'.format(element, listOf))
     output.write('\t *\n\t * @see size()\n')
     output.write('\t */\n')
-    output.write('\tvirtual {0}* get(unsigned int n);\n\n\n'.format(element))
+    output.write('\tvirtual {0}* get(unsigned int n);\n\n\n'.format(type))
   output.write('\t/**\n')
   output.write('\t * Get a {0} from the {1}.\n'.format(element, listOf))
   output.write('\t *\n')
@@ -81,12 +81,12 @@ def writeGetFunctions(output, element, subelement=False, topelement=""):
     output.write('\t * @return the nth {0} in the {1} within this {2}.\n'.format(element, listOf, topelement))
     output.write('\t *\n\t * @see getNum{0}s()\n'.format(element))
     output.write('\t */\n')
-    output.write('\tconst {0}* get{0}(unsigned int n) const;\n\n\n'.format(element))
+    output.write('\tconst {0}* get{1}(unsigned int n) const;\n\n\n'.format(type, element))
   else:
     output.write('\t * @return the nth {0} in this {1}.\n'.format(element, listOf))
     output.write('\t *\n\t * @see size()\n')
     output.write('\t */\n')
-    output.write('\tvirtual const {0}* get(unsigned int n) const;\n\n\n'.format(element))
+    output.write('\tvirtual const {0}* get(unsigned int n) const;\n\n\n'.format(type))
   output.write('\t/**\n')
   output.write('\t * Get a {0} from the {1}\n'.format(element, listOf))
   output.write('\t * based on its identifier.\n')
@@ -99,14 +99,14 @@ def writeGetFunctions(output, element, subelement=False, topelement=""):
     output.write('\t *\n\t * @see get{0}(unsigned int n)\n'.format(element))
     output.write('\t *\n\t * @see getNum{0}s()\n'.format(element))
     output.write('\t */\n')
-    output.write('\t{0}* get{0}(const std::string& sid);\n\n\n'.format(element))
+    output.write('\t{0}* get{1}(const std::string& sid);\n\n\n'.format(type, element))
   else:
     output.write('\t * @return {0} in this {1}\n'.format(element, listOf))
     output.write('\t * with the given id or NULL if no such\n\t * {0} exists.\n'.format(element))
     output.write('\t *\n\t * @see get(unsigned int n)')
     output.write('\t *\n\t * @see size()\n')
     output.write('\t */\n')
-    output.write('\tvirtual {0}* get(const std::string& sid);\n\n\n'.format(element))
+    output.write('\tvirtual {0}* get(const std::string& sid);\n\n\n'.format(type))
   output.write('\t/**\n')
   output.write('\t * Get a {0} from the {1}\n'.format(element, listOf))
   output.write('\t * based on its identifier.\n')
@@ -119,16 +119,16 @@ def writeGetFunctions(output, element, subelement=False, topelement=""):
     output.write('\t *\n\t * @see get{0}(unsigned int n)\n'.format(element))
     output.write('\t *\n\t * @see getNum{0}s()\n'.format(element))
     output.write('\t */\n')
-    output.write('\tconst {0}* get{0}(const std::string& sid) const;\n\n\n'.format(element))
+    output.write('\tconst {0}* get{1}(const std::string& sid) const;\n\n\n'.format(type,element))
   else:
     output.write('\t * @return {0} in this {1}\n'.format(element, listOf))
     output.write('\t * with the given id or NULL if no such\n\t * {0} exists.\n'.format(element))
     output.write('\t *\n\t * @see get(unsigned int n)')
     output.write('\t *\n\t * @see size()\n')
     output.write('\t */\n')
-    output.write('\tvirtual const {0}* get(const std::string& sid) const;\n\n\n'.format(element))
+    output.write('\tvirtual const {0}* get(const std::string& sid) const;\n\n\n'.format(type))
      
-def writeRemoveFunctions(output, element, subelement=False, topelement=""):
+def writeRemoveFunctions(output, element, type, subelement=False, topelement=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('\t/**\n')
   if subelement == True:
@@ -143,11 +143,11 @@ def writeRemoveFunctions(output, element, subelement=False, topelement=""):
   if subelement == True:
     output.write('\t *\n\t * @see getNum{0}s()\n'.format(element))
     output.write('\t */\n')
-    output.write('\t{0}* remove{0}(unsigned int n);\n\n\n'.format(element))
+    output.write('\t{0}* remove{1}(unsigned int n);\n\n\n'.format(type, element))
   else:
     output.write('\t *\n\t * @see size()\n')
     output.write('\t */\n')
-    output.write('\tvirtual {0}* remove(unsigned int n);\n\n\n'.format(element))
+    output.write('\tvirtual {0}* remove(unsigned int n);\n\n\n'.format(type))
   output.write('\t/**\n')
   if subelement == True:
     output.write('\t * Removes the {0} with the given identifier from the {1} within this {2}\n'.format(element, listOf, topelement))
@@ -165,9 +165,9 @@ def writeRemoveFunctions(output, element, subelement=False, topelement=""):
   output.write('\t * returned item.\n')
   output.write('\t */\n')
   if subelement == True:
-    output.write('\t{0}* remove{0}(const std::string& sid);\n\n\n'.format(element))
+    output.write('\t{0}* remove{1}(const std::string& sid);\n\n\n'.format(type, element))
   else:
-    output.write('\tvirtual {0}* remove(const std::string& sid);\n\n\n'.format(element))
+    output.write('\tvirtual {0}* remove(const std::string& sid);\n\n\n'.format(type))
      
   
 def writeProtectedFunctions(output, element, package):
@@ -189,12 +189,12 @@ def writeProtectedFunctions(output, element, package):
    
 
 #write class
-def writeClass(header, nameOfElement, nameOfPackage):
+def writeClass(header, nameOfElement, typeOfElement, nameOfPackage):
   header.write('class LIBSEDML_EXTERN {0} :'.format(generalFunctions.writeListOf(nameOfElement)))
   header.write(' public SedListOf\n{0}\n\n'.format('{'))
   header.write('public:\n\n')
-  writeConstructors(nameOfElement, nameOfPackage, header)
-  writeGetFunctions(header, nameOfElement)
+  writeConstructors(nameOfElement, typeOfElement, nameOfPackage, header)
+  writeGetFunctions(header, nameOfElement, typeOfElement)
   header.write('\t/**\n')
   header.write('\t * Adds a copy the given \"{0}\" to this {1}.\n'.format(nameOfElement, generalFunctions.writeListOf(nameOfElement)))
   header.write('\t *\n')
@@ -207,7 +207,7 @@ def writeClass(header, nameOfElement, nameOfPackage):
   header.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
   header.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
   header.write('\t */\n')
-  header.write('\tint add{0}(const {0}* {1});\n\n\n'.format(nameOfElement, strFunctions.objAbbrev(nameOfElement)))
+  header.write('\tint add{0}(const {1}* {2});\n\n\n'.format(nameOfElement, typeOfElement, strFunctions.objAbbrev(nameOfElement)))
   header.write('\t/**\n')
   header.write('\t * Get the number of {0} objects in this {1}.\n'.format(nameOfElement, generalFunctions.writeListOf(nameOfElement)))
   header.write('\t *\n')
@@ -220,11 +220,11 @@ def writeClass(header, nameOfElement, nameOfPackage):
   header.write('\t *\n')
   header.write('\t * @return a new {0} object instance\n'.format(nameOfElement))
   header.write('\t *\n')
-  header.write('\t * @see add{0}(const {0}* {1})\n'.format(nameOfElement, strFunctions.objAbbrev(nameOfElement)))
+  header.write('\t * @see add{0}(const {1}* {2})\n'.format(nameOfElement, typeOfElement, strFunctions.objAbbrev(nameOfElement)))
   header.write('\t */\n')
-  header.write('\t{0}* create{0}();\n\n\n'.format(nameOfElement))
+  header.write('\t{0}* create{1}();\n\n\n'.format(typeOfElement, nameOfElement))
 
-  writeRemoveFunctions(header, nameOfElement)
+  writeRemoveFunctions(header, nameOfElement, typeOfElement)
   generalFunctions.writeCommonHeaders(header, nameOfElement, None, True)
   header.write('protected:\n\n')
   writeProtectedFunctions(header, nameOfElement, nameOfPackage)
@@ -232,7 +232,13 @@ def writeClass(header, nameOfElement, nameOfPackage):
  
 # write the header file      
 def createHeader(element, header):
-  writeClass(header, element['name'], element['package'])
+  type = element['name']
+  name = element['name']
+  if element.has_key('elementName'):
+    name = strFunctions.cap(element['elementName']) 
+  if element.has_key('element'):
+    type = element['element']
+  writeClass(header, name, type, element['package'])
 
  
 

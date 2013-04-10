@@ -1,6 +1,6 @@
 /**
- * @file:   Algorithm.h
- * @brief:  Implementation of the Algorithm class
+ * @file:   SedAlgorithm.h
+ * @brief:  Implementation of the SedAlgorithm class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef Algorithm_H__
-#define Algorithm_H__
+#ifndef SedAlgorithm_H__
+#define SedAlgorithm_H__
 
 
 #include <sedml/common/extern.h>
@@ -49,7 +49,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
-#include <sedml/SedMLNamespaces.h>
+#include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
@@ -57,7 +57,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN Algorithm : public SedBase
+class LIBSEDML_EXTERN SedAlgorithm : public SedBase
 {
 
 protected:
@@ -68,77 +68,77 @@ protected:
 public:
 
 	/**
-	 * Creates a new Algorithm with the given level, version, and package version.
+	 * Creates a new SedAlgorithm with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this Algorithm
+	 * @param level an unsigned int, the SEDML Level to assign to this SedAlgorithm
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this Algorithm
+	 * @param version an unsigned int, the SEDML Version to assign to this SedAlgorithm
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML SedML Version to assign to this Algorithm
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedAlgorithm
 	 */
-	Algorithm(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	          unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedAlgorithm(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	             unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new Algorithm with the given SedMLNamespaces object.
+	 * Creates a new SedAlgorithm with the given SedNamespaces object.
 	 *
-	 * @param sedmlns the SedMLNamespaces object
+	 * @param sedns the SedNamespaces object
 	 */
-	Algorithm(SedMLNamespaces* sedmlns);
+	SedAlgorithm(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for Algorithm.
+	 * Copy constructor for SedAlgorithm.
 	 *
-	 * @param orig; the Algorithm instance to copy.
+	 * @param orig; the SedAlgorithm instance to copy.
 	 */
-	Algorithm(const Algorithm& orig);
+	SedAlgorithm(const SedAlgorithm& orig);
 
 
  	/**
-	 * Assignment operator for Algorithm.
+	 * Assignment operator for SedAlgorithm.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	Algorithm& operator=(const Algorithm& rhs);
+	SedAlgorithm& operator=(const SedAlgorithm& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this Algorithm object.
+	 * Creates and returns a deep copy of this SedAlgorithm object.
 	 *
-	 * @return a (deep) copy of this Algorithm object.
+	 * @return a (deep) copy of this SedAlgorithm object.
 	 */
-	virtual Algorithm* clone () const;
+	virtual SedAlgorithm* clone () const;
 
 
  	/**
-	 * Destructor for Algorithm.
+	 * Destructor for SedAlgorithm.
 	 */
-	virtual ~Algorithm();
+	virtual ~SedAlgorithm();
 
 
  	/**
-	 * Returns the value of the "kisaoID" attribute of this Algorithm.
+	 * Returns the value of the "kisaoID" attribute of this SedAlgorithm.
 	 *
-	 * @return the value of the "kisaoID" attribute of this Algorithm as a string.
+	 * @return the value of the "kisaoID" attribute of this SedAlgorithm as a string.
 	 */
 	virtual const std::string& getKisaoID() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * Algorithm's "kisaoID" attribute has been set.
+	 * SedAlgorithm's "kisaoID" attribute has been set.
 	 *
-	 * @return @c true if this Algorithm's "kisaoID" attribute has been set,
+	 * @return @c true if this SedAlgorithm's "kisaoID" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetKisaoID() const;
 
 
 	/**
-	 * Sets the value of the "kisaoID" attribute of this Algorithm.
+	 * Sets the value of the "kisaoID" attribute of this SedAlgorithm.
 	 *
 	 * @param kisaoID; const std::string& value of the "kisaoID" attribute to be set
 	 *
@@ -153,7 +153,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "kisaoID" attribute of this Algorithm.
+	 * Unsets the value of the "kisaoID" attribute of this SedAlgorithm.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -166,10 +166,10 @@ public:
 
 
 	/**
-	 * Returns the XML element name of this object, which for Algorithm, is
-	 * always @c "algorithm".
+	 * Returns the XML element name of this object, which for SedAlgorithm, is
+	 * always @c "sedAlgorithm".
 	 *
-	 * @return the name of this element, i.e. @c "algorithm".
+	 * @return the name of this element, i.e. @c "sedAlgorithm".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -209,9 +209,9 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this Algorithm object have been set.
+	 * for this SedAlgorithm object have been set.
 	 *
-	 * @note The required attributes for a Algorithm object are:
+	 * @note The required attributes for a SedAlgorithm object are:
 	 * @li "kisaoID"
 	 *
 	 * @return a boolean value indicating whether all the required
@@ -236,9 +236,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Accepts the given SedMLVisitor.
+	 * Accepts the given SedVisitor.
 	 */
-	virtual bool accept (SedMLVisitor& v) const;
+	virtual bool accept (SedVisitor& v) const;
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -247,9 +247,9 @@ public:
 /** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Sets the parent SedMLDocument.
+	 * Sets the parent SedDocument.
 	 */
-	virtual void setSedMLDocument (SedMLDocument* d);
+	virtual void setSedDocument (SedDocument* d);
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -306,43 +306,43 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-Algorithm_t *
-Algorithm_create(unsigned int level, unsigned int version);
+SedAlgorithm_t *
+SedAlgorithm_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-Algorithm_free(Algorithm_t * a);
+SedAlgorithm_free(SedAlgorithm_t * sa);
 
 
 LIBSEDML_EXTERN
-Algorithm_t *
-Algorithm_clone(Algorithm_t * a);
+SedAlgorithm_t *
+SedAlgorithm_clone(SedAlgorithm_t * sa);
 
 
 LIBSEDML_EXTERN
 char *
-Algorithm_getKisaoID(Algorithm_t * a);
+SedAlgorithm_getKisaoID(SedAlgorithm_t * sa);
 
 
 LIBSEDML_EXTERN
 int
-Algorithm_isSetKisaoID(Algorithm_t * a);
+SedAlgorithm_isSetKisaoID(SedAlgorithm_t * sa);
 
 
 LIBSEDML_EXTERN
 int
-Algorithm_setKisaoID(Algorithm_t * a, const char * kisaoID);
+SedAlgorithm_setKisaoID(SedAlgorithm_t * sa, const char * kisaoID);
 
 
 LIBSEDML_EXTERN
 int
-Algorithm_unsetKisaoID(Algorithm_t * a);
+SedAlgorithm_unsetKisaoID(SedAlgorithm_t * sa);
 
 
 LIBSEDML_EXTERN
 int
-Algorithm_hasRequiredAttributes(Algorithm_t * a);
+SedAlgorithm_hasRequiredAttributes(SedAlgorithm_t * sa);
 
 
 
@@ -352,5 +352,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  Algorithm_H__  */
+#endif /*  SedAlgorithm_H__  */
 

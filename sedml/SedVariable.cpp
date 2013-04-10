@@ -1,6 +1,6 @@
 /**
- * @file:   SedMLVariable.cpp
- * @brief:  Implementation of the SedMLVariable class
+ * @file:   SedVariable.cpp
+ * @brief:  Implementation of the SedVariable class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#include <sedml/SedMLVariable.h>
-#include <sedml/SedMLTypes.h>
+#include <sedml/SedVariable.h>
+#include <sedml/SedTypes.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -45,9 +45,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedMLVariable with the given level, version, and package version.
+ * Creates a new SedVariable with the given level, version, and package version.
  */
-SedMLVariable::SedMLVariable (unsigned int level, unsigned int version)
+SedVariable::SedVariable (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mName ("")
@@ -57,16 +57,16 @@ SedMLVariable::SedMLVariable (unsigned int level, unsigned int version)
 	, mModelReference ("")
 
 {
-	// set an SedMLNamespaces derived object of this package
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version));
+	// set an SedNamespaces derived object of this package
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Creates a new SedMLVariable with the given SedMLNamespaces object.
+ * Creates a new SedVariable with the given SedNamespaces object.
  */
-SedMLVariable::SedMLVariable (SedMLNamespaces* sedmlns)
-	: SedBase(sedmlns)
+SedVariable::SedVariable (SedNamespaces* sedns)
+	: SedBase(sedns)
 	, mId ("")
 	, mName ("")
 	, mSymbol ("")
@@ -76,19 +76,19 @@ SedMLVariable::SedMLVariable (SedMLNamespaces* sedmlns)
 
 {
 	// set the element namespace of this object
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Copy constructor for SedMLVariable.
+ * Copy constructor for SedVariable.
  */
-SedMLVariable::SedMLVariable (const SedMLVariable& orig)
+SedVariable::SedVariable (const SedVariable& orig)
 	: SedBase(orig)
 {
 	if (&orig == NULL)
 	{
-		throw SedMLConstructorException("Null argument to copy constructor");
+		throw SedConstructorException("Null argument to copy constructor");
 	}
 	else
 	{
@@ -103,14 +103,14 @@ SedMLVariable::SedMLVariable (const SedMLVariable& orig)
 
 
 /*
- * Assignment for SedMLVariable.
+ * Assignment for SedVariable.
  */
-SedMLVariable&
-SedMLVariable::operator=(const SedMLVariable& rhs)
+SedVariable&
+SedVariable::operator=(const SedVariable& rhs)
 {
 	if (&rhs == NULL)
 	{
-		throw SedMLConstructorException("Null argument to assignment");
+		throw SedConstructorException("Null argument to assignment");
 	}
 	else if (&rhs != this)
 	{
@@ -127,78 +127,78 @@ SedMLVariable::operator=(const SedMLVariable& rhs)
 
 
 /*
- * Clone for SedMLVariable.
+ * Clone for SedVariable.
  */
-SedMLVariable*
-SedMLVariable::clone () const
+SedVariable*
+SedVariable::clone () const
 {
-	return new SedMLVariable(*this);
+	return new SedVariable(*this);
 }
 
 
 /*
- * Destructor for SedMLVariable.
+ * Destructor for SedVariable.
  */
-SedMLVariable::~SedMLVariable ()
+SedVariable::~SedVariable ()
 {
 }
 
 
 /*
- * Returns the value of the "id" attribute of this SedMLVariable.
+ * Returns the value of the "id" attribute of this SedVariable.
  */
 const std::string&
-SedMLVariable::getId() const
+SedVariable::getId() const
 {
 	return mId;
 }
 
 
 /*
- * Returns the value of the "name" attribute of this SedMLVariable.
+ * Returns the value of the "name" attribute of this SedVariable.
  */
 const std::string&
-SedMLVariable::getName() const
+SedVariable::getName() const
 {
 	return mName;
 }
 
 
 /*
- * Returns the value of the "symbol" attribute of this SedMLVariable.
+ * Returns the value of the "symbol" attribute of this SedVariable.
  */
 const std::string&
-SedMLVariable::getSymbol() const
+SedVariable::getSymbol() const
 {
 	return mSymbol;
 }
 
 
 /*
- * Returns the value of the "target" attribute of this SedMLVariable.
+ * Returns the value of the "target" attribute of this SedVariable.
  */
 const std::string&
-SedMLVariable::getTarget() const
+SedVariable::getTarget() const
 {
 	return mTarget;
 }
 
 
 /*
- * Returns the value of the "taskReference" attribute of this SedMLVariable.
+ * Returns the value of the "taskReference" attribute of this SedVariable.
  */
 const std::string&
-SedMLVariable::getTaskReference() const
+SedVariable::getTaskReference() const
 {
 	return mTaskReference;
 }
 
 
 /*
- * Returns the value of the "modelReference" attribute of this SedMLVariable.
+ * Returns the value of the "modelReference" attribute of this SedVariable.
  */
 const std::string&
-SedMLVariable::getModelReference() const
+SedVariable::getModelReference() const
 {
 	return mModelReference;
 }
@@ -208,7 +208,7 @@ SedMLVariable::getModelReference() const
  * Returns true/false if id is set.
  */
 bool
-SedMLVariable::isSetId() const
+SedVariable::isSetId() const
 {
 	return (mId.empty() == false);
 }
@@ -218,7 +218,7 @@ SedMLVariable::isSetId() const
  * Returns true/false if name is set.
  */
 bool
-SedMLVariable::isSetName() const
+SedVariable::isSetName() const
 {
 	return (mName.empty() == false);
 }
@@ -228,7 +228,7 @@ SedMLVariable::isSetName() const
  * Returns true/false if symbol is set.
  */
 bool
-SedMLVariable::isSetSymbol() const
+SedVariable::isSetSymbol() const
 {
 	return (mSymbol.empty() == false);
 }
@@ -238,7 +238,7 @@ SedMLVariable::isSetSymbol() const
  * Returns true/false if target is set.
  */
 bool
-SedMLVariable::isSetTarget() const
+SedVariable::isSetTarget() const
 {
 	return (mTarget.empty() == false);
 }
@@ -248,7 +248,7 @@ SedMLVariable::isSetTarget() const
  * Returns true/false if taskReference is set.
  */
 bool
-SedMLVariable::isSetTaskReference() const
+SedVariable::isSetTaskReference() const
 {
 	return (mTaskReference.empty() == false);
 }
@@ -258,7 +258,7 @@ SedMLVariable::isSetTaskReference() const
  * Returns true/false if modelReference is set.
  */
 bool
-SedMLVariable::isSetModelReference() const
+SedVariable::isSetModelReference() const
 {
 	return (mModelReference.empty() == false);
 }
@@ -268,7 +268,7 @@ SedMLVariable::isSetModelReference() const
  * Sets id and returns value indicating success.
  */
 int
-SedMLVariable::setId(const std::string& id)
+SedVariable::setId(const std::string& id)
 {
 	return SyntaxChecker::checkAndSetSId(id, mId);
 }
@@ -278,7 +278,7 @@ SedMLVariable::setId(const std::string& id)
  * Sets name and returns value indicating success.
  */
 int
-SedMLVariable::setName(const std::string& name)
+SedVariable::setName(const std::string& name)
 {
 	if (&(name) == NULL)
 	{
@@ -296,7 +296,7 @@ SedMLVariable::setName(const std::string& name)
  * Sets symbol and returns value indicating success.
  */
 int
-SedMLVariable::setSymbol(const std::string& symbol)
+SedVariable::setSymbol(const std::string& symbol)
 {
 	if (&(symbol) == NULL)
 	{
@@ -314,7 +314,7 @@ SedMLVariable::setSymbol(const std::string& symbol)
  * Sets target and returns value indicating success.
  */
 int
-SedMLVariable::setTarget(const std::string& target)
+SedVariable::setTarget(const std::string& target)
 {
 	if (&(target) == NULL)
 	{
@@ -332,7 +332,7 @@ SedMLVariable::setTarget(const std::string& target)
  * Sets taskReference and returns value indicating success.
  */
 int
-SedMLVariable::setTaskReference(const std::string& taskReference)
+SedVariable::setTaskReference(const std::string& taskReference)
 {
 	if (&(taskReference) == NULL)
 	{
@@ -354,7 +354,7 @@ SedMLVariable::setTaskReference(const std::string& taskReference)
  * Sets modelReference and returns value indicating success.
  */
 int
-SedMLVariable::setModelReference(const std::string& modelReference)
+SedVariable::setModelReference(const std::string& modelReference)
 {
 	if (&(modelReference) == NULL)
 	{
@@ -376,7 +376,7 @@ SedMLVariable::setModelReference(const std::string& modelReference)
  * Unsets id and returns value indicating success.
  */
 int
-SedMLVariable::unsetId()
+SedVariable::unsetId()
 {
 	mId.erase();
 
@@ -395,7 +395,7 @@ SedMLVariable::unsetId()
  * Unsets name and returns value indicating success.
  */
 int
-SedMLVariable::unsetName()
+SedVariable::unsetName()
 {
 	mName.erase();
 
@@ -414,7 +414,7 @@ SedMLVariable::unsetName()
  * Unsets symbol and returns value indicating success.
  */
 int
-SedMLVariable::unsetSymbol()
+SedVariable::unsetSymbol()
 {
 	mSymbol.erase();
 
@@ -433,7 +433,7 @@ SedMLVariable::unsetSymbol()
  * Unsets target and returns value indicating success.
  */
 int
-SedMLVariable::unsetTarget()
+SedVariable::unsetTarget()
 {
 	mTarget.erase();
 
@@ -452,7 +452,7 @@ SedMLVariable::unsetTarget()
  * Unsets taskReference and returns value indicating success.
  */
 int
-SedMLVariable::unsetTaskReference()
+SedVariable::unsetTaskReference()
 {
 	mTaskReference.erase();
 
@@ -471,7 +471,7 @@ SedMLVariable::unsetTaskReference()
  * Unsets modelReference and returns value indicating success.
  */
 int
-SedMLVariable::unsetModelReference()
+SedVariable::unsetModelReference()
 {
 	mModelReference.erase();
 
@@ -490,7 +490,7 @@ SedMLVariable::unsetModelReference()
  * Returns the XML element name of this object
  */
 const std::string&
-SedMLVariable::getElementName () const
+SedVariable::getElementName () const
 {
 	static const string name = "variable";
 	return name;
@@ -501,7 +501,7 @@ SedMLVariable::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedMLVariable::getTypeCode () const
+SedVariable::getTypeCode () const
 {
 	return SEDML_VARIABLE;
 }
@@ -511,7 +511,7 @@ SedMLVariable::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedMLVariable::hasRequiredAttributes () const
+SedVariable::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
@@ -528,7 +528,7 @@ SedMLVariable::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedMLVariable::writeElements (XMLOutputStream& stream) const
+SedVariable::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
 }
@@ -540,10 +540,10 @@ SedMLVariable::writeElements (XMLOutputStream& stream) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Accepts the given SedMLVisitor.
+ * Accepts the given SedVisitor.
  */
 bool
-SedMLVariable::accept (SedMLVisitor& v) const
+SedVariable::accept (SedVisitor& v) const
 {
 	return false;
 
@@ -556,12 +556,12 @@ SedMLVariable::accept (SedMLVisitor& v) const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Sets the parent SedMLDocument.
+ * Sets the parent SedDocument.
  */
 void
-SedMLVariable::setSedMLDocument (SedMLDocument* d)
+SedVariable::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedMLDocument(d);
+	SedBase::setSedDocument(d);
 }
 
 
@@ -574,7 +574,7 @@ SedMLVariable::setSedMLDocument (SedMLDocument* d)
  * Get the list of expected attributes for this element.
  */
 void
-SedMLVariable::addExpectedAttributes(ExpectedAttributes& attributes)
+SedVariable::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
@@ -596,7 +596,7 @@ SedMLVariable::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedMLVariable::readAttributes (const XMLAttributes& attributes,
+SedVariable::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedBase::readAttributes(attributes, expectedAttributes);
@@ -614,7 +614,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
 
 		if (mId.empty() == true)
 		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedMLVariable>");
+			logEmptyString(mId, getLevel(), getVersion(), "<SedVariable>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
@@ -633,7 +633,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
 
 		if (mName.empty() == true)
 		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedMLVariable>");
+			logEmptyString(mName, getLevel(), getVersion(), "<SedVariable>");
 		}
 	}
 
@@ -648,7 +648,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
 
 		if (mSymbol.empty() == true)
 		{
-			logEmptyString(mSymbol, getLevel(), getVersion(), "<SedMLVariable>");
+			logEmptyString(mSymbol, getLevel(), getVersion(), "<SedVariable>");
 		}
 	}
 
@@ -663,7 +663,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
 
 		if (mTarget.empty() == true)
 		{
-			logEmptyString(mTarget, getLevel(), getVersion(), "<SedMLVariable>");
+			logEmptyString(mTarget, getLevel(), getVersion(), "<SedVariable>");
 		}
 	}
 
@@ -678,7 +678,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
 
 		if (mTaskReference.empty() == true)
 		{
-			logEmptyString(mTaskReference, getLevel(), getVersion(), "<SedMLVariable>");
+			logEmptyString(mTaskReference, getLevel(), getVersion(), "<SedVariable>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mTaskReference) == false)
 		{
@@ -697,7 +697,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
 
 		if (mModelReference.empty() == true)
 		{
-			logEmptyString(mModelReference, getLevel(), getVersion(), "<SedMLVariable>");
+			logEmptyString(mModelReference, getLevel(), getVersion(), "<SedVariable>");
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
 		{
@@ -717,7 +717,7 @@ SedMLVariable::readAttributes (const XMLAttributes& attributes,
  * Write values of XMLAttributes to the output stream.
  */
 	void
-SedMLVariable::writeAttributes (XMLOutputStream& stream) const
+SedVariable::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
@@ -748,98 +748,98 @@ SedMLVariable::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedMLVariables::SedListOfSedMLVariables(unsigned int level, 
-	                        unsigned int version)
+SedListOfSedVariables::SedListOfSedVariables(unsigned int level, 
+	                      unsigned int version)
  : SedListOf(level, version)
 {
-	setSedMLNamespacesAndOwn(new SedMLNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
 }
 
 
 /*
  * Constructor 
  */
-SedListOfSedMLVariables::SedListOfSedMLVariables(SedMLNamespaces* sedmlns)
-  : SedListOf(sedmlns)
+SedListOfSedVariables::SedListOfSedVariables(SedNamespaces* sedns)
+  : SedListOf(sedns)
 {
-	setElementNamespace(sedmlns->getURI());
+	setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfSedMLVariables 
+ * Returns a deep copy of this SedListOfSedVariables 
  */
-SedListOfSedMLVariables* 
-SedListOfSedMLVariables::clone () const
+SedListOfSedVariables* 
+SedListOfSedVariables::clone () const
  {
-	return new SedListOfSedMLVariables(*this);
+	return new SedListOfSedVariables(*this);
 }
 
 
 /*
- * Get a SedMLVariable from the SedListOfSedMLVariables by index.
+ * Get a SedVariable from the SedListOfSedVariables by index.
 */
-SedMLVariable*
-SedListOfSedMLVariables::get(unsigned int n)
+SedVariable*
+SedListOfSedVariables::get(unsigned int n)
 {
-	return static_cast<SedMLVariable*>(SedListOf::get(n));
+	return static_cast<SedVariable*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedMLVariable from the SedListOfSedMLVariables by index.
+ * Get a SedVariable from the SedListOfSedVariables by index.
  */
-const SedMLVariable*
-SedListOfSedMLVariables::get(unsigned int n) const
+const SedVariable*
+SedListOfSedVariables::get(unsigned int n) const
 {
-	return static_cast<const SedMLVariable*>(SedListOf::get(n));
+	return static_cast<const SedVariable*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedMLVariable from the SedListOfSedMLVariables by id.
+ * Get a SedVariable from the SedListOfSedVariables by id.
  */
-SedMLVariable*
-SedListOfSedMLVariables::get(const std::string& sid)
+SedVariable*
+SedListOfSedVariables::get(const std::string& sid)
 {
-	return const_cast<SedMLVariable*>(
-	  static_cast<const SedListOfSedMLVariables&>(*this).get(sid));
+	return const_cast<SedVariable*>(
+	  static_cast<const SedListOfSedVariables&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedMLVariable from the SedListOfSedMLVariables by id.
+ * Get a SedVariable from the SedListOfSedVariables by id.
  */
-const SedMLVariable*
-SedListOfSedMLVariables::get(const std::string& sid) const
+const SedVariable*
+SedListOfSedVariables::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedMLVariable>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedMLVariable*> (*result);
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedVariable>(sid) );
+	return (result == mItems.end()) ? 0 : static_cast <SedVariable*> (*result);
 }
 
 
 /*
- * Removes the nth SedMLVariable from this SedListOfSedMLVariables
+ * Removes the nth SedVariable from this SedListOfSedVariables
  */
-SedMLVariable*
-SedListOfSedMLVariables::remove(unsigned int n)
+SedVariable*
+SedListOfSedVariables::remove(unsigned int n)
 {
-	return static_cast<SedMLVariable*>(SedListOf::remove(n));
+	return static_cast<SedVariable*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedMLVariable from this SedListOfSedMLVariables with the given identifier
+ * Removes the SedVariable from this SedListOfSedVariables with the given identifier
  */
-SedMLVariable*
-SedListOfSedMLVariables::remove(const std::string& sid)
+SedVariable*
+SedListOfSedVariables::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedMLVariable>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), IdEq<SedVariable>(sid) );
 
 	if (result != mItems.end())
 	{
@@ -847,7 +847,7 @@ SedListOfSedMLVariables::remove(const std::string& sid)
 		mItems.erase(result);
 	}
 
-	return static_cast <SedMLVariable*> (item);
+	return static_cast <SedVariable*> (item);
 }
 
 
@@ -855,7 +855,7 @@ SedListOfSedMLVariables::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedMLVariables::getElementName () const
+SedListOfSedVariables::getElementName () const
 {
 	static const string name = "listOfVariables";
 	return name;
@@ -866,7 +866,7 @@ SedListOfSedMLVariables::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedMLVariables::getTypeCode () const
+SedListOfSedVariables::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -876,7 +876,7 @@ SedListOfSedMLVariables::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedMLVariables::getItemTypeCode () const
+SedListOfSedVariables::getItemTypeCode () const
 {
 	return SEDML_VARIABLE;
 }
@@ -885,17 +885,17 @@ SedListOfSedMLVariables::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedMLVariable in this SedListOfSedMLVariables
+ * Creates a new SedVariable in this SedListOfSedVariables
  */
 SedBase*
-SedListOfSedMLVariables::createObject(XMLInputStream& stream)
+SedListOfSedVariables::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
 
 	if (name == "variable")
 	{
-		object = new SedMLVariable(getSedMLNamespaces());
+		object = new SedVariable(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
@@ -909,10 +909,10 @@ SedListOfSedMLVariables::createObject(XMLInputStream& stream)
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Write the namespace for the SedML package.
+ * Write the namespace for the Sed package.
  */
 void
-SedListOfSedMLVariables::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSedVariables::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -937,10 +937,10 @@ SedListOfSedMLVariables::writeXMLNS(XMLOutputStream& stream) const
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedMLVariable_create(unsigned int level, unsigned int version)
+SedVariable_t *
+SedVariable_create(unsigned int level, unsigned int version)
 {
-	return new SedMLVariable(level, version);
+	return new SedVariable(level, version);
 }
 
 
@@ -949,10 +949,10 @@ SedMLVariable_create(unsigned int level, unsigned int version)
  */
 LIBSEDML_EXTERN
 void
-SedMLVariable_free(SedMLVariable_t * smlv)
+SedVariable_free(SedVariable_t * sv)
 {
-	if (smlv != NULL)
-		delete smlv;
+	if (sv != NULL)
+		delete sv;
 }
 
 
@@ -960,12 +960,12 @@ SedMLVariable_free(SedMLVariable_t * smlv)
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedMLVariable_clone(SedMLVariable_t * smlv)
+SedVariable_t *
+SedVariable_clone(SedVariable_t * sv)
 {
-	if (smlv != NULL)
+	if (sv != NULL)
 	{
-		return static_cast<SedMLVariable_t*>(smlv->clone());
+		return static_cast<SedVariable_t*>(sv->clone());
 	}
 	else
 	{
@@ -979,12 +979,12 @@ SedMLVariable_clone(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getId(SedMLVariable_t * smlv)
+SedVariable_getId(SedVariable_t * sv)
 {
-	if (smlv == NULL)
+	if (sv == NULL)
 		return NULL;
 
-	return smlv->getId().empty() ? NULL : safe_strdup(smlv->getId().c_str());
+	return sv->getId().empty() ? NULL : safe_strdup(sv->getId().c_str());
 }
 
 
@@ -993,12 +993,12 @@ SedMLVariable_getId(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getName(SedMLVariable_t * smlv)
+SedVariable_getName(SedVariable_t * sv)
 {
-	if (smlv == NULL)
+	if (sv == NULL)
 		return NULL;
 
-	return smlv->getName().empty() ? NULL : safe_strdup(smlv->getName().c_str());
+	return sv->getName().empty() ? NULL : safe_strdup(sv->getName().c_str());
 }
 
 
@@ -1007,12 +1007,12 @@ SedMLVariable_getName(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getSymbol(SedMLVariable_t * smlv)
+SedVariable_getSymbol(SedVariable_t * sv)
 {
-	if (smlv == NULL)
+	if (sv == NULL)
 		return NULL;
 
-	return smlv->getSymbol().empty() ? NULL : safe_strdup(smlv->getSymbol().c_str());
+	return sv->getSymbol().empty() ? NULL : safe_strdup(sv->getSymbol().c_str());
 }
 
 
@@ -1021,12 +1021,12 @@ SedMLVariable_getSymbol(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getTarget(SedMLVariable_t * smlv)
+SedVariable_getTarget(SedVariable_t * sv)
 {
-	if (smlv == NULL)
+	if (sv == NULL)
 		return NULL;
 
-	return smlv->getTarget().empty() ? NULL : safe_strdup(smlv->getTarget().c_str());
+	return sv->getTarget().empty() ? NULL : safe_strdup(sv->getTarget().c_str());
 }
 
 
@@ -1035,12 +1035,12 @@ SedMLVariable_getTarget(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getTaskReference(SedMLVariable_t * smlv)
+SedVariable_getTaskReference(SedVariable_t * sv)
 {
-	if (smlv == NULL)
+	if (sv == NULL)
 		return NULL;
 
-	return smlv->getTaskReference().empty() ? NULL : safe_strdup(smlv->getTaskReference().c_str());
+	return sv->getTaskReference().empty() ? NULL : safe_strdup(sv->getTaskReference().c_str());
 }
 
 
@@ -1049,12 +1049,12 @@ SedMLVariable_getTaskReference(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 char *
-SedMLVariable_getModelReference(SedMLVariable_t * smlv)
+SedVariable_getModelReference(SedVariable_t * sv)
 {
-	if (smlv == NULL)
+	if (sv == NULL)
 		return NULL;
 
-	return smlv->getModelReference().empty() ? NULL : safe_strdup(smlv->getModelReference().c_str());
+	return sv->getModelReference().empty() ? NULL : safe_strdup(sv->getModelReference().c_str());
 }
 
 
@@ -1063,9 +1063,9 @@ SedMLVariable_getModelReference(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetId(SedMLVariable_t * smlv)
+SedVariable_isSetId(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->isSetId()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->isSetId()) : 0;
 }
 
 
@@ -1074,9 +1074,9 @@ SedMLVariable_isSetId(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetName(SedMLVariable_t * smlv)
+SedVariable_isSetName(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->isSetName()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->isSetName()) : 0;
 }
 
 
@@ -1085,9 +1085,9 @@ SedMLVariable_isSetName(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetSymbol(SedMLVariable_t * smlv)
+SedVariable_isSetSymbol(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->isSetSymbol()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->isSetSymbol()) : 0;
 }
 
 
@@ -1096,9 +1096,9 @@ SedMLVariable_isSetSymbol(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetTarget(SedMLVariable_t * smlv)
+SedVariable_isSetTarget(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->isSetTarget()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->isSetTarget()) : 0;
 }
 
 
@@ -1107,9 +1107,9 @@ SedMLVariable_isSetTarget(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetTaskReference(SedMLVariable_t * smlv)
+SedVariable_isSetTaskReference(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->isSetTaskReference()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->isSetTaskReference()) : 0;
 }
 
 
@@ -1118,9 +1118,9 @@ SedMLVariable_isSetTaskReference(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_isSetModelReference(SedMLVariable_t * smlv)
+SedVariable_isSetModelReference(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->isSetModelReference()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->isSetModelReference()) : 0;
 }
 
 
@@ -1129,9 +1129,9 @@ SedMLVariable_isSetModelReference(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_setId(SedMLVariable_t * smlv, const char * id)
+SedVariable_setId(SedVariable_t * sv, const char * id)
 {
-	return (smlv != NULL) ? smlv->setId(id) : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1140,9 +1140,9 @@ SedMLVariable_setId(SedMLVariable_t * smlv, const char * id)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_setName(SedMLVariable_t * smlv, const char * name)
+SedVariable_setName(SedVariable_t * sv, const char * name)
 {
-	return (smlv != NULL) ? smlv->setName(name) : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1151,9 +1151,9 @@ SedMLVariable_setName(SedMLVariable_t * smlv, const char * name)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_setSymbol(SedMLVariable_t * smlv, const char * symbol)
+SedVariable_setSymbol(SedVariable_t * sv, const char * symbol)
 {
-	return (smlv != NULL) ? smlv->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1162,9 +1162,9 @@ SedMLVariable_setSymbol(SedMLVariable_t * smlv, const char * symbol)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_setTarget(SedMLVariable_t * smlv, const char * target)
+SedVariable_setTarget(SedVariable_t * sv, const char * target)
 {
-	return (smlv != NULL) ? smlv->setTarget(target) : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->setTarget(target) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1173,9 +1173,9 @@ SedMLVariable_setTarget(SedMLVariable_t * smlv, const char * target)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_setTaskReference(SedMLVariable_t * smlv, const char * taskReference)
+SedVariable_setTaskReference(SedVariable_t * sv, const char * taskReference)
 {
-	return (smlv != NULL) ? smlv->setTaskReference(taskReference) : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->setTaskReference(taskReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1184,9 +1184,9 @@ SedMLVariable_setTaskReference(SedMLVariable_t * smlv, const char * taskReferenc
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_setModelReference(SedMLVariable_t * smlv, const char * modelReference)
+SedVariable_setModelReference(SedVariable_t * sv, const char * modelReference)
 {
-	return (smlv != NULL) ? smlv->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1195,9 +1195,9 @@ SedMLVariable_setModelReference(SedMLVariable_t * smlv, const char * modelRefere
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetId(SedMLVariable_t * smlv)
+SedVariable_unsetId(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? smlv->unsetId() : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1206,9 +1206,9 @@ SedMLVariable_unsetId(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetName(SedMLVariable_t * smlv)
+SedVariable_unsetName(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? smlv->unsetName() : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1217,9 +1217,9 @@ SedMLVariable_unsetName(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetSymbol(SedMLVariable_t * smlv)
+SedVariable_unsetSymbol(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? smlv->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1228,9 +1228,9 @@ SedMLVariable_unsetSymbol(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetTarget(SedMLVariable_t * smlv)
+SedVariable_unsetTarget(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? smlv->unsetTarget() : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->unsetTarget() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1239,9 +1239,9 @@ SedMLVariable_unsetTarget(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetTaskReference(SedMLVariable_t * smlv)
+SedVariable_unsetTaskReference(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? smlv->unsetTaskReference() : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->unsetTaskReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1250,9 +1250,9 @@ SedMLVariable_unsetTaskReference(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_unsetModelReference(SedMLVariable_t * smlv)
+SedVariable_unsetModelReference(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? smlv->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
+	return (sv != NULL) ? sv->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1261,9 +1261,9 @@ SedMLVariable_unsetModelReference(SedMLVariable_t * smlv)
  */
 LIBSEDML_EXTERN
 int
-SedMLVariable_hasRequiredAttributes(SedMLVariable_t * smlv)
+SedVariable_hasRequiredAttributes(SedVariable_t * sv)
 {
-	return (smlv != NULL) ? static_cast<int>(smlv->hasRequiredAttributes()) : 0;
+	return (sv != NULL) ? static_cast<int>(sv->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1271,13 +1271,13 @@ SedMLVariable_hasRequiredAttributes(SedMLVariable_t * smlv)
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedListOfSedMLVariables_getById(SedListOf_t * lo, const char * sid)
+SedVariable_t *
+SedListOfSedVariables_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedMLVariables *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedVariables *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1285,13 +1285,13 @@ SedListOfSedMLVariables_getById(SedListOf_t * lo, const char * sid)
  * write comments
  */
 LIBSEDML_EXTERN
-SedMLVariable_t *
-SedListOfSedMLVariables_removeById(SedListOf_t * lo, const char * sid)
+SedVariable_t *
+SedListOfSedVariables_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedMLVariables *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSedVariables *>(lo)->remove(sid) : NULL;
 }
 
 

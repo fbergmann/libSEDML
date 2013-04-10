@@ -2,10 +2,10 @@
 
 /*
  * @return the nth error encountered during the parse of this
- * SedMLDocument or @c NULL if n > getNumErrors() - 1.
+ * SedDocument or @c NULL if n > getNumErrors() - 1.
  */
-const SedMLError*
-SedMLDocument::getError (unsigned int n) const
+const SedError*
+SedDocument::getError (unsigned int n) const
 {
   return mErrorLog.getError(n);
 }
@@ -13,39 +13,39 @@ SedMLDocument::getError (unsigned int n) const
 
 /*
  * @return the number of errors encountered during the parse of this
- * SedMLDocument.
+ * SedDocument.
  */
 unsigned int
-SedMLDocument::getNumErrors () const
+SedDocument::getNumErrors () const
 {
   return mErrorLog.getNumErrors();
 }
 
 
 unsigned int 
-SedMLDocument::getNumErrors (unsigned int severity) const
+SedDocument::getNumErrors (unsigned int severity) const
 {
   return getErrorLog()->getNumFailsWithSeverity(severity);
 }
 
 
 /*
- * @return the SedMLErrorLog used to log errors during while reading and
- * validating SedML.
+ * @return the SedErrorLog used to log errors during while reading and
+ * validating Sed.
  */
-SedMLErrorLog*
-SedMLDocument::getErrorLog ()
+SedErrorLog*
+SedDocument::getErrorLog ()
 {
   return &mErrorLog;
 }
 
 
 /*
- * @return the SedMLErrorLog used to log errors during while reading and
- * validating SedML.
+ * @return the SedErrorLog used to log errors during while reading and
+ * validating Sed.
  */
-const SedMLErrorLog*
-SedMLDocument::getErrorLog () const
+const SedErrorLog*
+SedDocument::getErrorLog () const
 {
   return &mErrorLog;
 }
@@ -58,7 +58,7 @@ SedMLDocument::getErrorLog () const
  *
  */
 void
-SedMLDocument::writeXMLNS (XMLOutputStream& stream) const
+SedDocument::writeXMLNS (XMLOutputStream& stream) const
 {
   // need to check that we have indeed a namespace set!
   XMLNamespaces * thisNs = this->getNamespaces();
@@ -69,7 +69,7 @@ SedMLDocument::writeXMLNS (XMLOutputStream& stream) const
     XMLNamespaces xmlns;
     xmlns.add(SEDML_XMLNS_L1);
 
-    mSedMLNamespaces->setNamespaces(&xmlns);
+    mSedNamespaces->setNamespaces(&xmlns);
     thisNs = getNamespaces();
   }
   else if (thisNs->getLength() == 0)
@@ -79,7 +79,7 @@ SedMLDocument::writeXMLNS (XMLOutputStream& stream) const
   else
   {
     // check that there is an sbml namespace
-    std::string sedmlURI = SedMLNamespaces::getSedMLNamespaceURI(mLevel, mVersion);
+    std::string sedmlURI = SedNamespaces::getSedNamespaceURI(mLevel, mVersion);
     std::string sedmlPrefix = thisNs->getPrefix(sedmlURI);
     if (thisNs->hasNS(sedmlURI, sedmlPrefix) == false)
     {
@@ -113,7 +113,7 @@ SedMLDocument::writeXMLNS (XMLOutputStream& stream) const
   * @return the Namespaces associated with this SBML object
   */
 XMLNamespaces* 
-SedMLDocument::getNamespaces() const
+SedDocument::getNamespaces() const
 {
-  return mSedMLNamespaces->getNamespaces();
+  return mSedNamespaces->getNamespaces();
 }
