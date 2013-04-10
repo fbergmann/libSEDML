@@ -10,7 +10,7 @@ import fileHeaders
 import generalFunctions
 import strFunctions
 
-def writeConstructors(element, package, output):
+def writeConstructors(element, type, package, output):
   element = generalFunctions.writeListOf(element)
   indent = strFunctions.getIndent(element)
   output.write('/*\n' )
@@ -40,13 +40,13 @@ def writeConstructors(element, package, output):
   output.write('\treturn new {0}(*this);\n'.format(element))
   output.write('}\n\n\n')
   
-def writeGetFunctions(output, element, subelement=False, topelement="", name=""):
+def writeGetFunctions(output, element, type, subelement=False, topelement="", name=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('/*\n')
   if subelement == True:
     output.write(' * Return the nth {0} in the {1} within this {2}.\n'.format(element, listOf, topelement))
     output.write(' */\n')
-    output.write('{0}*\n'.format(element))
+    output.write('{0}*\n'.format(type))
     output.write('{0}::get{1}(unsigned int n)\n'.format(topelement, element))
     output.write('{\n' )
     output.write('\treturn m{0}.get(n);\n'.format(name))
@@ -54,16 +54,16 @@ def writeGetFunctions(output, element, subelement=False, topelement="", name="")
   else:
     output.write(' * Get a {0} from the {1} by index.\n'.format(element, listOf))
     output.write('*/\n')
-    output.write('{0}*\n'.format(element))
+    output.write('{0}*\n'.format(type))
     output.write('{0}::get(unsigned int n)\n'.format(listOf))
     output.write('{\n' )
-    output.write('\treturn static_cast<{0}*>(SedListOf::get(n));\n'.format(element))
+    output.write('\treturn static_cast<{0}*>(SedListOf::get(n));\n'.format(type))
     output.write('}\n\n\n')
   output.write('/*\n')
   if subelement == True:
     output.write(' * Return the nth {0} in the {1} within this {2}.\n'.format(element, listOf, topelement))
     output.write(' */\n')
-    output.write('const {0}*\n'.format(element))
+    output.write('const {0}*\n'.format(type))
     output.write('{0}::get{1}(unsigned int n) const\n'.format(topelement, element))
     output.write('{\n' )
     output.write('\treturn m{0}.get(n);\n'.format(name))
@@ -71,16 +71,16 @@ def writeGetFunctions(output, element, subelement=False, topelement="", name="")
   else:
     output.write(' * Get a {0} from the {1} by index.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('const {0}*\n'.format(element))
+    output.write('const {0}*\n'.format(type))
     output.write('{0}::get(unsigned int n) const\n'.format(listOf))
     output.write('{\n' )
-    output.write('\treturn static_cast<const {0}*>(SedListOf::get(n));\n'.format(element))
+    output.write('\treturn static_cast<const {0}*>(SedListOf::get(n));\n'.format(type))
     output.write('}\n\n\n')
   output.write('/*\n')
   if subelement == True:
     output.write(' * Return a {0} from the {1} by id.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('{0}*\n'.format(element))
+    output.write('{0}*\n'.format(type))
     output.write('{0}::get{1}(const std::string& sid)\n'.format(topelement, element))
     output.write('{\n' )
     output.write('\treturn m{0}.get(sid);\n'.format(name))
@@ -88,17 +88,17 @@ def writeGetFunctions(output, element, subelement=False, topelement="", name="")
   else:
     output.write(' * Get a {0} from the {1} by id.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('{0}*\n'.format(element))
+    output.write('{0}*\n'.format(type))
     output.write('{0}::get(const std::string& sid)\n'.format(listOf))
     output.write('{\n' )
-    output.write('\treturn const_cast<{0}*>(\n'.format(element))
+    output.write('\treturn const_cast<{0}*>(\n'.format(type))
     output.write('\t  static_cast<const {0}&>(*this).get(sid));\n'.format(listOf))
     output.write('}\n\n\n')
   output.write('/*\n')
   if subelement == True:
     output.write(' * Return a {0} from the {1} by id.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('const {0}*\n'.format(element))
+    output.write('const {0}*\n'.format(type))
     output.write('{0}::get{1}(const std::string& sid) const\n'.format(topelement, element))
     output.write('{\n' )
     output.write('\treturn m{0}.get(sid);\n'.format(name))
@@ -106,21 +106,21 @@ def writeGetFunctions(output, element, subelement=False, topelement="", name="")
   else:
     output.write(' * Get a {0} from the {1} by id.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('const {0}*\n'.format(element))
+    output.write('const {0}*\n'.format(type))
     output.write('{0}::get(const std::string& sid) const\n'.format(listOf))
     output.write('{\n' )
     output.write('\tvector<SedBase*>::const_iterator result;\n\n')
-    output.write('\tresult = find_if( mItems.begin(), mItems.end(), IdEq<{0}>(sid) );\n'.format(element))
-    output.write('\treturn (result == mItems.end()) ? 0 : static_cast <{0}*> (*result);\n'.format(element))
+    output.write('\tresult = find_if( mItems.begin(), mItems.end(), IdEq<{0}>(sid) );\n'.format(type))
+    output.write('\treturn (result == mItems.end()) ? 0 : static_cast <{0}*> (*result);\n'.format(type))
     output.write('}\n\n\n')
      
-def writeRemoveFunctions(output, element, subelement=False, topelement="", name=""):
+def writeRemoveFunctions(output, element, type, subelement=False, topelement="", name=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('/*\n')
   if subelement == True:
     output.write(' * Removes the nth {0} from the {1}.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('{0}*\n'.format(element))
+    output.write('{0}*\n'.format(type))
     output.write('{0}::remove{1}(unsigned int n)\n'.format(topelement, element))
     output.write('{\n' )
     output.write('\treturn m{0}.remove(n);\n'.format(name))
@@ -128,15 +128,15 @@ def writeRemoveFunctions(output, element, subelement=False, topelement="", name=
   else:
     output.write(' * Removes the nth {0} from this {1}\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('{0}*\n{1}::remove(unsigned int n)\n'.format(element, listOf))
+    output.write('{0}*\n{1}::remove(unsigned int n)\n'.format(type, listOf))
     output.write('{\n' )
-    output.write('\treturn static_cast<{0}*>(SedListOf::remove(n));\n'.format(element))
+    output.write('\treturn static_cast<{0}*>(SedListOf::remove(n));\n'.format(type))
     output.write('}\n\n\n')
   output.write('/*\n')
   if subelement == True:
     output.write(' * Removes the a {0} with given id from the {1}.\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('{0}*\n'.format(element))
+    output.write('{0}*\n'.format(type))
     output.write('{0}::remove{1}(const std::string& sid)\n'.format(topelement, element))
     output.write('{\n' )
     output.write('\treturn m{0}.remove(sid);\n'.format(name))
@@ -144,20 +144,27 @@ def writeRemoveFunctions(output, element, subelement=False, topelement="", name=
   else:
     output.write(' * Removes the {0} from this {1} with the given identifier\n'.format(element, listOf))
     output.write(' */\n')
-    output.write('{0}*\n{1}::remove(const std::string& sid)\n'.format(element, listOf))
+    output.write('{0}*\n{1}::remove(const std::string& sid)\n'.format(type, listOf))
     output.write('{\n' )
     output.write('\tSedBase* item = NULL;\n')
     output.write('\tvector<SedBase*>::iterator result;\n\n')
-    output.write('\tresult = find_if( mItems.begin(), mItems.end(), IdEq<{0}>(sid) );\n\n'.format(element))
+    output.write('\tresult = find_if( mItems.begin(), mItems.end(), IdEq<{0}>(sid) );\n\n'.format(type))
     output.write('\tif (result != mItems.end())\n\t{\n')
     output.write('\t\titem = *result;\n')
     output.write('\t\tmItems.erase(result);\n\t}\n\n')
-    output.write('\treturn static_cast <{0}*> (item);\n'.format(element))
+    output.write('\treturn static_cast <{0}*> (item);\n'.format(type))
     output.write('}\n\n\n')
      
   
 def writeProtectedFunctions(output, element, package, name, elementDict):
-  listOf = generalFunctions.writeListOf(element)
+  type = elementDict['name']
+  elName = elementDict['name']
+  if elementDict.has_key('elementName'):
+    elName = strFunctions.cap(elementDict['elementName']) 
+  if elementDict.has_key('element'):
+    type = elementDict['element']
+
+  listOf = generalFunctions.writeListOf(elName)
   generalFunctions.writeInternalStart(output)
   output.write('/*\n')
   output.write(' * Creates a new {0} in this {1}\n'.format(element, listOf))
@@ -202,9 +209,15 @@ def writeProtectedFunctions(output, element, package, name, elementDict):
    
 # write the code file      
 def createCode(element, code):
-  writeConstructors(element['name'], element['package'], code) 
-  writeGetFunctions(code, element['name'])
-  writeRemoveFunctions(code, element['name'])
+  type = element['name']
+  name = element['name']
+  if element.has_key('elementName'):
+    name = strFunctions.cap(element['elementName']) 
+  if element.has_key('element'):
+    type = element['element']
+  writeConstructors(name, type, element['package'], code) 
+  writeGetFunctions(code, name, type)
+  writeRemoveFunctions(code, name, type)
   generalFunctions.writeCommonCPPCode(code, element['name'], element['typecode'],None,  True, False,False, element)
   elementName = element['name']
   if element.has_key('elementName'):

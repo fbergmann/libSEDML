@@ -792,12 +792,12 @@ SedSimulation_hasRequiredElements(SedSimulation_t * ss);
 
 LIBSEDML_EXTERN
 SedSimulation_t *
-SedListOfSedSimulations_getById(SedListOf_t * lo, const char * sid);
+SedListOfSimulations_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedSimulation_t *
-SedListOfSedSimulations_removeById(SedListOf_t * lo, const char * sid);
+SedListOfSimulations_removeById(SedListOf_t * lo, const char * sid);
 
 
 

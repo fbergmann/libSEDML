@@ -941,12 +941,12 @@ SedVariable_hasRequiredAttributes(SedVariable_t * sv);
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedListOfSedVariables_getById(SedListOf_t * lo, const char * sid);
+SedListOfVariables_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedListOfSedVariables_removeById(SedListOf_t * lo, const char * sid);
+SedListOfVariables_removeById(SedListOf_t * lo, const char * sid);
 
 
 

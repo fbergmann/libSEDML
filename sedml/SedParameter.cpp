@@ -484,8 +484,8 @@ SedParameter::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedParameters::SedListOfSedParameters(unsigned int level, 
-	                       unsigned int version)
+SedListOfParameters::SedListOfParameters(unsigned int level, 
+	                    unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -495,7 +495,7 @@ SedListOfSedParameters::SedListOfSedParameters(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedParameters::SedListOfSedParameters(SedNamespaces* sedns)
+SedListOfParameters::SedListOfParameters(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -503,51 +503,51 @@ SedListOfSedParameters::SedListOfSedParameters(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedParameters 
+ * Returns a deep copy of this SedListOfParameters 
  */
-SedListOfSedParameters* 
-SedListOfSedParameters::clone () const
+SedListOfParameters* 
+SedListOfParameters::clone () const
  {
-	return new SedListOfSedParameters(*this);
+	return new SedListOfParameters(*this);
 }
 
 
 /*
- * Get a SedParameter from the SedListOfSedParameters by index.
+ * Get a Parameter from the SedListOfParameters by index.
 */
 SedParameter*
-SedListOfSedParameters::get(unsigned int n)
+SedListOfParameters::get(unsigned int n)
 {
 	return static_cast<SedParameter*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedParameter from the SedListOfSedParameters by index.
+ * Get a Parameter from the SedListOfParameters by index.
  */
 const SedParameter*
-SedListOfSedParameters::get(unsigned int n) const
+SedListOfParameters::get(unsigned int n) const
 {
 	return static_cast<const SedParameter*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedParameter from the SedListOfSedParameters by id.
+ * Get a Parameter from the SedListOfParameters by id.
  */
 SedParameter*
-SedListOfSedParameters::get(const std::string& sid)
+SedListOfParameters::get(const std::string& sid)
 {
 	return const_cast<SedParameter*>(
-	  static_cast<const SedListOfSedParameters&>(*this).get(sid));
+	  static_cast<const SedListOfParameters&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedParameter from the SedListOfSedParameters by id.
+ * Get a Parameter from the SedListOfParameters by id.
  */
 const SedParameter*
-SedListOfSedParameters::get(const std::string& sid) const
+SedListOfParameters::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -557,20 +557,20 @@ SedListOfSedParameters::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedParameter from this SedListOfSedParameters
+ * Removes the nth Parameter from this SedListOfParameters
  */
 SedParameter*
-SedListOfSedParameters::remove(unsigned int n)
+SedListOfParameters::remove(unsigned int n)
 {
 	return static_cast<SedParameter*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedParameter from this SedListOfSedParameters with the given identifier
+ * Removes the Parameter from this SedListOfParameters with the given identifier
  */
 SedParameter*
-SedListOfSedParameters::remove(const std::string& sid)
+SedListOfParameters::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -591,7 +591,7 @@ SedListOfSedParameters::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedParameters::getElementName () const
+SedListOfParameters::getElementName () const
 {
 	static const string name = "listOfParameters";
 	return name;
@@ -602,7 +602,7 @@ SedListOfSedParameters::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedParameters::getTypeCode () const
+SedListOfParameters::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -612,7 +612,7 @@ SedListOfSedParameters::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedParameters::getItemTypeCode () const
+SedListOfParameters::getItemTypeCode () const
 {
 	return SEDML_PARAMETER;
 }
@@ -621,10 +621,10 @@ SedListOfSedParameters::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedParameter in this SedListOfSedParameters
+ * Creates a new SedParameter in this SedListOfParameters
  */
 SedBase*
-SedListOfSedParameters::createObject(XMLInputStream& stream)
+SedListOfParameters::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -648,7 +648,7 @@ SedListOfSedParameters::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedParameters::writeXMLNS(XMLOutputStream& stream) const
+SedListOfParameters::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -864,12 +864,12 @@ SedParameter_hasRequiredAttributes(SedParameter_t * sp)
  */
 LIBSEDML_EXTERN
 SedParameter_t *
-SedListOfSedParameters_getById(SedListOf_t * lo, const char * sid)
+SedListOfParameters_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedParameters *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfParameters *>(lo)->get(sid) : NULL;
 }
 
 
@@ -878,12 +878,12 @@ SedListOfSedParameters_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedParameter_t *
-SedListOfSedParameters_removeById(SedListOf_t * lo, const char * sid)
+SedListOfParameters_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedParameters *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfParameters *>(lo)->remove(sid) : NULL;
 }
 
 

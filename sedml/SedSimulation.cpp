@@ -550,8 +550,8 @@ SedSimulation::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedSimulations::SedListOfSedSimulations(unsigned int level, 
-	                        unsigned int version)
+SedListOfSimulations::SedListOfSimulations(unsigned int level, 
+	                     unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -561,7 +561,7 @@ SedListOfSedSimulations::SedListOfSedSimulations(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedSimulations::SedListOfSedSimulations(SedNamespaces* sedns)
+SedListOfSimulations::SedListOfSimulations(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -569,51 +569,51 @@ SedListOfSedSimulations::SedListOfSedSimulations(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedSimulations 
+ * Returns a deep copy of this SedListOfSimulations 
  */
-SedListOfSedSimulations* 
-SedListOfSedSimulations::clone () const
+SedListOfSimulations* 
+SedListOfSimulations::clone () const
  {
-	return new SedListOfSedSimulations(*this);
+	return new SedListOfSimulations(*this);
 }
 
 
 /*
- * Get a SedSimulation from the SedListOfSedSimulations by index.
+ * Get a Simulation from the SedListOfSimulations by index.
 */
 SedSimulation*
-SedListOfSedSimulations::get(unsigned int n)
+SedListOfSimulations::get(unsigned int n)
 {
 	return static_cast<SedSimulation*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedSimulation from the SedListOfSedSimulations by index.
+ * Get a Simulation from the SedListOfSimulations by index.
  */
 const SedSimulation*
-SedListOfSedSimulations::get(unsigned int n) const
+SedListOfSimulations::get(unsigned int n) const
 {
 	return static_cast<const SedSimulation*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedSimulation from the SedListOfSedSimulations by id.
+ * Get a Simulation from the SedListOfSimulations by id.
  */
 SedSimulation*
-SedListOfSedSimulations::get(const std::string& sid)
+SedListOfSimulations::get(const std::string& sid)
 {
 	return const_cast<SedSimulation*>(
-	  static_cast<const SedListOfSedSimulations&>(*this).get(sid));
+	  static_cast<const SedListOfSimulations&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedSimulation from the SedListOfSedSimulations by id.
+ * Get a Simulation from the SedListOfSimulations by id.
  */
 const SedSimulation*
-SedListOfSedSimulations::get(const std::string& sid) const
+SedListOfSimulations::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -623,20 +623,20 @@ SedListOfSedSimulations::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedSimulation from this SedListOfSedSimulations
+ * Removes the nth Simulation from this SedListOfSimulations
  */
 SedSimulation*
-SedListOfSedSimulations::remove(unsigned int n)
+SedListOfSimulations::remove(unsigned int n)
 {
 	return static_cast<SedSimulation*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedSimulation from this SedListOfSedSimulations with the given identifier
+ * Removes the Simulation from this SedListOfSimulations with the given identifier
  */
 SedSimulation*
-SedListOfSedSimulations::remove(const std::string& sid)
+SedListOfSimulations::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -657,7 +657,7 @@ SedListOfSedSimulations::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedSimulations::getElementName () const
+SedListOfSimulations::getElementName () const
 {
 	static const string name = "listOfSimulations";
 	return name;
@@ -668,7 +668,7 @@ SedListOfSedSimulations::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedSimulations::getTypeCode () const
+SedListOfSimulations::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -678,7 +678,7 @@ SedListOfSedSimulations::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedSimulations::getItemTypeCode () const
+SedListOfSimulations::getItemTypeCode () const
 {
 	return SEDML_SIMULATION;
 }
@@ -687,10 +687,10 @@ SedListOfSedSimulations::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedSimulation in this SedListOfSedSimulations
+ * Creates a new SedSimulation in this SedListOfSimulations
  */
 SedBase*
-SedListOfSedSimulations::createObject(XMLInputStream& stream)
+SedListOfSimulations::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -714,7 +714,7 @@ SedListOfSedSimulations::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedSimulations::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSimulations::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -955,12 +955,12 @@ SedSimulation_hasRequiredElements(SedSimulation_t * ss)
  */
 LIBSEDML_EXTERN
 SedSimulation_t *
-SedListOfSedSimulations_getById(SedListOf_t * lo, const char * sid)
+SedListOfSimulations_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedSimulations *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSimulations *>(lo)->get(sid) : NULL;
 }
 
 
@@ -969,12 +969,12 @@ SedListOfSedSimulations_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedSimulation_t *
-SedListOfSedSimulations_removeById(SedListOf_t * lo, const char * sid)
+SedListOfSimulations_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedSimulations *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSimulations *>(lo)->remove(sid) : NULL;
 }
 
 

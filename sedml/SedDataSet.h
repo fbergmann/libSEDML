@@ -809,12 +809,12 @@ SedDataSet_hasRequiredAttributes(SedDataSet_t * sds);
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedListOfSedDataSets_getById(SedListOf_t * lo, const char * sid);
+SedListOfDataSets_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedListOfSedDataSets_removeById(SedListOf_t * lo, const char * sid);
+SedListOfDataSets_removeById(SedListOf_t * lo, const char * sid);
 
 
 

@@ -137,70 +137,70 @@ SedPlot3D::~SedPlot3D ()
 
 
 /*
- * Returns the  "SedListOfSedSurfaces" in this SedPlot3D object.
+ * Returns the  "SedListOfSurfaces" in this SedPlot3D object.
  */
-const SedListOfSedSurfaces*
-SedPlot3D::getListOfSedSurfaces() const
+const SedListOfSurfaces*
+SedPlot3D::getListOfSurfaces() const
 {
 	return &mSurface;
 }
 
 
 /*
- * Removes the nth SedSurface from the SedListOfSedSurfaces.
+ * Removes the nth Surface from the SedListOfSurfaces.
  */
 SedSurface*
-SedPlot3D::removeSedSurface(unsigned int n)
+SedPlot3D::removeSurface(unsigned int n)
 {
 	return mSurface.remove(n);
 }
 
 
 /*
- * Removes the a SedSurface with given id from the SedListOfSedSurfaces.
+ * Removes the a Surface with given id from the SedListOfSurfaces.
  */
 SedSurface*
-SedPlot3D::removeSedSurface(const std::string& sid)
+SedPlot3D::removeSurface(const std::string& sid)
 {
 	return mSurface.remove(sid);
 }
 
 
 /*
- * Return the nth SedSurface in the SedListOfSedSurfaces within this SedPlot3D.
+ * Return the nth Surface in the SedListOfSurfaces within this SedPlot3D.
  */
 SedSurface*
-SedPlot3D::getSedSurface(unsigned int n)
+SedPlot3D::getSurface(unsigned int n)
 {
 	return mSurface.get(n);
 }
 
 
 /*
- * Return the nth SedSurface in the SedListOfSedSurfaces within this SedPlot3D.
+ * Return the nth Surface in the SedListOfSurfaces within this SedPlot3D.
  */
 const SedSurface*
-SedPlot3D::getSedSurface(unsigned int n) const
+SedPlot3D::getSurface(unsigned int n) const
 {
 	return mSurface.get(n);
 }
 
 
 /*
- * Return a SedSurface from the SedListOfSedSurfaces by id.
+ * Return a Surface from the SedListOfSurfaces by id.
  */
 SedSurface*
-SedPlot3D::getSedSurface(const std::string& sid)
+SedPlot3D::getSurface(const std::string& sid)
 {
 	return mSurface.get(sid);
 }
 
 
 /*
- * Return a SedSurface from the SedListOfSedSurfaces by id.
+ * Return a Surface from the SedListOfSurfaces by id.
  */
 const SedSurface*
-SedPlot3D::getSedSurface(const std::string& sid) const
+SedPlot3D::getSurface(const std::string& sid) const
 {
 	return mSurface.get(sid);
 }
@@ -219,7 +219,7 @@ SedPlot3D::getSedSurface(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedPlot3D::addSedSurface(const SedSurface* ss)
+SedPlot3D::addSurface(const SedSurface* ss)
 {
 	if(ss == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
 	mSurface.append(ss);
@@ -233,7 +233,7 @@ SedPlot3D::addSedSurface(const SedSurface* ss)
  * @return the number of SedSurface objects in this SedPlot3D
  */
 unsigned int 
-SedPlot3D::getNumSedSurfaces() const
+SedPlot3D::getNumSurfaces() const
 {
 	return mSurface.size();
 }
@@ -247,7 +247,7 @@ SedPlot3D::getNumSedSurfaces() const
  * @see addSedSurface(const SedSurface* ss)
  */
 SedSurface* 
-SedPlot3D::createSedSurface()
+SedPlot3D::createSurface()
 {
 	SedSurface *temp = new SedSurface();
 	if (temp != NULL) mSurface.appendAndOwn(temp);
@@ -341,7 +341,7 @@ void
 SedPlot3D::writeElements (XMLOutputStream& stream) const
 {
 	SedOutput::writeElements(stream);
-	if (getNumSedSurfaces() > 0)
+	if (getNumSurfaces() > 0)
 	{
 		mSurface.write(stream);
 	}
@@ -476,58 +476,58 @@ SedPlot3D_clone(SedPlot3D_t * spd)
 
 LIBSEDML_EXTERN
 int
-SedPlot3D_addSedSurface(SedPlot3D_t * spd, SedSurface_t * ss)
+SedPlot3D_addSurface(SedPlot3D_t * spd, SedSurface_t * ss)
 {
-	return  (spd != NULL) ? spd->addSedSurface(ss) : LIBSBML_INVALID_OBJECT;
+	return  (spd != NULL) ? spd->addSurface(ss) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedPlot3D_createSedSurface(SedPlot3D_t * spd)
+SedPlot3D_createSurface(SedPlot3D_t * spd)
 {
-	return  (spd != NULL) ? spd->createSedSurface() : NULL;
+	return  (spd != NULL) ? spd->createSurface() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedPlot3D_getSedListOfSedSurfaces(SedPlot3D_t * spd)
+SedPlot3D_getSedListOfSurfaces(SedPlot3D_t * spd)
 {
-	return  (spd != NULL) ? (SedListOf_t *)spd->getListOfSedSurfaces() : NULL;
+	return  (spd != NULL) ? (SedListOf_t *)spd->getListOfSurfaces() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedPlot3D_getSedSurface(SedPlot3D_t * spd, unsigned int n)
+SedPlot3D_getSurface(SedPlot3D_t * spd, unsigned int n)
 {
-	return  (spd != NULL) ? spd->getSedSurface(n) : NULL;
+	return  (spd != NULL) ? spd->getSurface(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedPlot3D_getSedSurfaceById(SedPlot3D_t * spd, const char * sid)
+SedPlot3D_getSurfaceById(SedPlot3D_t * spd, const char * sid)
 {
-	return  (spd != NULL) ? spd->getSedSurface(sid) : NULL;
+	return  (spd != NULL) ? spd->getSurface(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedPlot3D_getNumSedSurfaces(SedPlot3D_t * spd)
+SedPlot3D_getNumSurfaces(SedPlot3D_t * spd)
 {
-	return  (spd != NULL) ? spd->getNumSedSurfaces() : SEDML_INT_MAX;
+	return  (spd != NULL) ? spd->getNumSurfaces() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedPlot3D_removeSedSurface(SedPlot3D_t * spd, unsigned int n)
+SedPlot3D_removeSurface(SedPlot3D_t * spd, unsigned int n)
 {
-	return  (spd != NULL) ? spd->removeSedSurface(n) : NULL;
+	return  (spd != NULL) ? spd->removeSurface(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedPlot3D_removeSedSurfaceById(SedPlot3D_t * spd, const char * sid)
+SedPlot3D_removeSurfaceById(SedPlot3D_t * spd, const char * sid)
 {
-	return  (spd != NULL) ? spd->removeSedSurface(sid) : NULL;
+	return  (spd != NULL) ? spd->removeSurface(sid) : NULL;
 }
 
 /**

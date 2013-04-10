@@ -712,12 +712,12 @@ SedOutput_hasRequiredElements(SedOutput_t * so);
 
 LIBSEDML_EXTERN
 SedOutput_t *
-SedListOfSedOutputs_getById(SedListOf_t * lo, const char * sid);
+SedListOfOutputs_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedOutput_t *
-SedListOfSedOutputs_removeById(SedListOf_t * lo, const char * sid);
+SedListOfOutputs_removeById(SedListOf_t * lo, const char * sid);
 
 
 

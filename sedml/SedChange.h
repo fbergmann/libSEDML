@@ -606,12 +606,12 @@ SedChange_hasRequiredAttributes(SedChange_t * sc);
 
 LIBSEDML_EXTERN
 SedChange_t *
-SedListOfSedChanges_getById(SedListOf_t * lo, const char * sid);
+SedListOfChanges_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedChange_t *
-SedListOfSedChanges_removeById(SedListOf_t * lo, const char * sid);
+SedListOfChanges_removeById(SedListOf_t * lo, const char * sid);
 
 
 

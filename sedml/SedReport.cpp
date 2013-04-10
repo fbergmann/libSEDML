@@ -137,70 +137,70 @@ SedReport::~SedReport ()
 
 
 /*
- * Returns the  "SedListOfSedDataSets" in this SedReport object.
+ * Returns the  "SedListOfDataSets" in this SedReport object.
  */
-const SedListOfSedDataSets*
-SedReport::getListOfSedDataSets() const
+const SedListOfDataSets*
+SedReport::getListOfDataSets() const
 {
 	return &mDataSet;
 }
 
 
 /*
- * Removes the nth SedDataSet from the SedListOfSedDataSets.
+ * Removes the nth DataSet from the SedListOfDataSets.
  */
 SedDataSet*
-SedReport::removeSedDataSet(unsigned int n)
+SedReport::removeDataSet(unsigned int n)
 {
 	return mDataSet.remove(n);
 }
 
 
 /*
- * Removes the a SedDataSet with given id from the SedListOfSedDataSets.
+ * Removes the a DataSet with given id from the SedListOfDataSets.
  */
 SedDataSet*
-SedReport::removeSedDataSet(const std::string& sid)
+SedReport::removeDataSet(const std::string& sid)
 {
 	return mDataSet.remove(sid);
 }
 
 
 /*
- * Return the nth SedDataSet in the SedListOfSedDataSets within this SedReport.
+ * Return the nth DataSet in the SedListOfDataSets within this SedReport.
  */
 SedDataSet*
-SedReport::getSedDataSet(unsigned int n)
+SedReport::getDataSet(unsigned int n)
 {
 	return mDataSet.get(n);
 }
 
 
 /*
- * Return the nth SedDataSet in the SedListOfSedDataSets within this SedReport.
+ * Return the nth DataSet in the SedListOfDataSets within this SedReport.
  */
 const SedDataSet*
-SedReport::getSedDataSet(unsigned int n) const
+SedReport::getDataSet(unsigned int n) const
 {
 	return mDataSet.get(n);
 }
 
 
 /*
- * Return a SedDataSet from the SedListOfSedDataSets by id.
+ * Return a DataSet from the SedListOfDataSets by id.
  */
 SedDataSet*
-SedReport::getSedDataSet(const std::string& sid)
+SedReport::getDataSet(const std::string& sid)
 {
 	return mDataSet.get(sid);
 }
 
 
 /*
- * Return a SedDataSet from the SedListOfSedDataSets by id.
+ * Return a DataSet from the SedListOfDataSets by id.
  */
 const SedDataSet*
-SedReport::getSedDataSet(const std::string& sid) const
+SedReport::getDataSet(const std::string& sid) const
 {
 	return mDataSet.get(sid);
 }
@@ -219,7 +219,7 @@ SedReport::getSedDataSet(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedReport::addSedDataSet(const SedDataSet* sds)
+SedReport::addDataSet(const SedDataSet* sds)
 {
 	if(sds == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
 	mDataSet.append(sds);
@@ -233,7 +233,7 @@ SedReport::addSedDataSet(const SedDataSet* sds)
  * @return the number of SedDataSet objects in this SedReport
  */
 unsigned int 
-SedReport::getNumSedDataSets() const
+SedReport::getNumDataSets() const
 {
 	return mDataSet.size();
 }
@@ -247,7 +247,7 @@ SedReport::getNumSedDataSets() const
  * @see addSedDataSet(const SedDataSet* sds)
  */
 SedDataSet* 
-SedReport::createSedDataSet()
+SedReport::createDataSet()
 {
 	SedDataSet *temp = new SedDataSet();
 	if (temp != NULL) mDataSet.appendAndOwn(temp);
@@ -341,7 +341,7 @@ void
 SedReport::writeElements (XMLOutputStream& stream) const
 {
 	SedOutput::writeElements(stream);
-	if (getNumSedDataSets() > 0)
+	if (getNumDataSets() > 0)
 	{
 		mDataSet.write(stream);
 	}
@@ -476,58 +476,58 @@ SedReport_clone(SedReport_t * sr)
 
 LIBSEDML_EXTERN
 int
-SedReport_addSedDataSet(SedReport_t * sr, SedDataSet_t * sds)
+SedReport_addDataSet(SedReport_t * sr, SedDataSet_t * sds)
 {
-	return  (sr != NULL) ? sr->addSedDataSet(sds) : LIBSBML_INVALID_OBJECT;
+	return  (sr != NULL) ? sr->addDataSet(sds) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedReport_createSedDataSet(SedReport_t * sr)
+SedReport_createDataSet(SedReport_t * sr)
 {
-	return  (sr != NULL) ? sr->createSedDataSet() : NULL;
+	return  (sr != NULL) ? sr->createDataSet() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedReport_getSedListOfSedDataSets(SedReport_t * sr)
+SedReport_getSedListOfDataSets(SedReport_t * sr)
 {
-	return  (sr != NULL) ? (SedListOf_t *)sr->getListOfSedDataSets() : NULL;
+	return  (sr != NULL) ? (SedListOf_t *)sr->getListOfDataSets() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedReport_getSedDataSet(SedReport_t * sr, unsigned int n)
+SedReport_getDataSet(SedReport_t * sr, unsigned int n)
 {
-	return  (sr != NULL) ? sr->getSedDataSet(n) : NULL;
+	return  (sr != NULL) ? sr->getDataSet(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedReport_getSedDataSetById(SedReport_t * sr, const char * sid)
+SedReport_getDataSetById(SedReport_t * sr, const char * sid)
 {
-	return  (sr != NULL) ? sr->getSedDataSet(sid) : NULL;
+	return  (sr != NULL) ? sr->getDataSet(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedReport_getNumSedDataSets(SedReport_t * sr)
+SedReport_getNumDataSets(SedReport_t * sr)
 {
-	return  (sr != NULL) ? sr->getNumSedDataSets() : SEDML_INT_MAX;
+	return  (sr != NULL) ? sr->getNumDataSets() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedReport_removeSedDataSet(SedReport_t * sr, unsigned int n)
+SedReport_removeDataSet(SedReport_t * sr, unsigned int n)
 {
-	return  (sr != NULL) ? sr->removeSedDataSet(n) : NULL;
+	return  (sr != NULL) ? sr->removeDataSet(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedDataSet_t *
-SedReport_removeSedDataSetById(SedReport_t * sr, const char * sid)
+SedReport_removeDataSetById(SedReport_t * sr, const char * sid)
 {
-	return  (sr != NULL) ? sr->removeSedDataSet(sid) : NULL;
+	return  (sr != NULL) ? sr->removeDataSet(sid) : NULL;
 }
 
 /**

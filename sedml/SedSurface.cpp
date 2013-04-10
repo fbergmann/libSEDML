@@ -424,8 +424,8 @@ SedSurface::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedSurfaces::SedListOfSedSurfaces(unsigned int level, 
-	                     unsigned int version)
+SedListOfSurfaces::SedListOfSurfaces(unsigned int level, 
+	                  unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -435,7 +435,7 @@ SedListOfSedSurfaces::SedListOfSedSurfaces(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedSurfaces::SedListOfSedSurfaces(SedNamespaces* sedns)
+SedListOfSurfaces::SedListOfSurfaces(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -443,51 +443,51 @@ SedListOfSedSurfaces::SedListOfSedSurfaces(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedSurfaces 
+ * Returns a deep copy of this SedListOfSurfaces 
  */
-SedListOfSedSurfaces* 
-SedListOfSedSurfaces::clone () const
+SedListOfSurfaces* 
+SedListOfSurfaces::clone () const
  {
-	return new SedListOfSedSurfaces(*this);
+	return new SedListOfSurfaces(*this);
 }
 
 
 /*
- * Get a SedSurface from the SedListOfSedSurfaces by index.
+ * Get a Surface from the SedListOfSurfaces by index.
 */
 SedSurface*
-SedListOfSedSurfaces::get(unsigned int n)
+SedListOfSurfaces::get(unsigned int n)
 {
 	return static_cast<SedSurface*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedSurface from the SedListOfSedSurfaces by index.
+ * Get a Surface from the SedListOfSurfaces by index.
  */
 const SedSurface*
-SedListOfSedSurfaces::get(unsigned int n) const
+SedListOfSurfaces::get(unsigned int n) const
 {
 	return static_cast<const SedSurface*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedSurface from the SedListOfSedSurfaces by id.
+ * Get a Surface from the SedListOfSurfaces by id.
  */
 SedSurface*
-SedListOfSedSurfaces::get(const std::string& sid)
+SedListOfSurfaces::get(const std::string& sid)
 {
 	return const_cast<SedSurface*>(
-	  static_cast<const SedListOfSedSurfaces&>(*this).get(sid));
+	  static_cast<const SedListOfSurfaces&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedSurface from the SedListOfSedSurfaces by id.
+ * Get a Surface from the SedListOfSurfaces by id.
  */
 const SedSurface*
-SedListOfSedSurfaces::get(const std::string& sid) const
+SedListOfSurfaces::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -497,20 +497,20 @@ SedListOfSedSurfaces::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedSurface from this SedListOfSedSurfaces
+ * Removes the nth Surface from this SedListOfSurfaces
  */
 SedSurface*
-SedListOfSedSurfaces::remove(unsigned int n)
+SedListOfSurfaces::remove(unsigned int n)
 {
 	return static_cast<SedSurface*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedSurface from this SedListOfSedSurfaces with the given identifier
+ * Removes the Surface from this SedListOfSurfaces with the given identifier
  */
 SedSurface*
-SedListOfSedSurfaces::remove(const std::string& sid)
+SedListOfSurfaces::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -531,7 +531,7 @@ SedListOfSedSurfaces::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedSurfaces::getElementName () const
+SedListOfSurfaces::getElementName () const
 {
 	static const string name = "listOfSurfaces";
 	return name;
@@ -542,7 +542,7 @@ SedListOfSedSurfaces::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedSurfaces::getTypeCode () const
+SedListOfSurfaces::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -552,7 +552,7 @@ SedListOfSedSurfaces::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedSurfaces::getItemTypeCode () const
+SedListOfSurfaces::getItemTypeCode () const
 {
 	return SEDML_OUTPUT_SURFACE;
 }
@@ -561,10 +561,10 @@ SedListOfSedSurfaces::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedSurface in this SedListOfSedSurfaces
+ * Creates a new SedSurface in this SedListOfSurfaces
  */
 SedBase*
-SedListOfSedSurfaces::createObject(XMLInputStream& stream)
+SedListOfSurfaces::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -588,7 +588,7 @@ SedListOfSedSurfaces::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedSurfaces::writeXMLNS(XMLOutputStream& stream) const
+SedListOfSurfaces::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -757,12 +757,12 @@ SedSurface_hasRequiredAttributes(SedSurface_t * ss)
  */
 LIBSEDML_EXTERN
 SedSurface_t *
-SedListOfSedSurfaces_getById(SedListOf_t * lo, const char * sid)
+SedListOfSurfaces_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedSurfaces *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSurfaces *>(lo)->get(sid) : NULL;
 }
 
 
@@ -771,12 +771,12 @@ SedListOfSedSurfaces_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedSurface_t *
-SedListOfSedSurfaces_removeById(SedListOf_t * lo, const char * sid)
+SedListOfSurfaces_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedSurfaces *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfSurfaces *>(lo)->remove(sid) : NULL;
 }
 
 

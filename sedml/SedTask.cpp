@@ -639,8 +639,8 @@ SedTask::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedTasks::SedListOfSedTasks(unsigned int level, 
-	                  unsigned int version)
+SedListOfTasks::SedListOfTasks(unsigned int level, 
+	               unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -650,7 +650,7 @@ SedListOfSedTasks::SedListOfSedTasks(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedTasks::SedListOfSedTasks(SedNamespaces* sedns)
+SedListOfTasks::SedListOfTasks(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -658,51 +658,51 @@ SedListOfSedTasks::SedListOfSedTasks(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedTasks 
+ * Returns a deep copy of this SedListOfTasks 
  */
-SedListOfSedTasks* 
-SedListOfSedTasks::clone () const
+SedListOfTasks* 
+SedListOfTasks::clone () const
  {
-	return new SedListOfSedTasks(*this);
+	return new SedListOfTasks(*this);
 }
 
 
 /*
- * Get a SedTask from the SedListOfSedTasks by index.
+ * Get a Task from the SedListOfTasks by index.
 */
 SedTask*
-SedListOfSedTasks::get(unsigned int n)
+SedListOfTasks::get(unsigned int n)
 {
 	return static_cast<SedTask*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedTask from the SedListOfSedTasks by index.
+ * Get a Task from the SedListOfTasks by index.
  */
 const SedTask*
-SedListOfSedTasks::get(unsigned int n) const
+SedListOfTasks::get(unsigned int n) const
 {
 	return static_cast<const SedTask*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedTask from the SedListOfSedTasks by id.
+ * Get a Task from the SedListOfTasks by id.
  */
 SedTask*
-SedListOfSedTasks::get(const std::string& sid)
+SedListOfTasks::get(const std::string& sid)
 {
 	return const_cast<SedTask*>(
-	  static_cast<const SedListOfSedTasks&>(*this).get(sid));
+	  static_cast<const SedListOfTasks&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedTask from the SedListOfSedTasks by id.
+ * Get a Task from the SedListOfTasks by id.
  */
 const SedTask*
-SedListOfSedTasks::get(const std::string& sid) const
+SedListOfTasks::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -712,20 +712,20 @@ SedListOfSedTasks::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedTask from this SedListOfSedTasks
+ * Removes the nth Task from this SedListOfTasks
  */
 SedTask*
-SedListOfSedTasks::remove(unsigned int n)
+SedListOfTasks::remove(unsigned int n)
 {
 	return static_cast<SedTask*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedTask from this SedListOfSedTasks with the given identifier
+ * Removes the Task from this SedListOfTasks with the given identifier
  */
 SedTask*
-SedListOfSedTasks::remove(const std::string& sid)
+SedListOfTasks::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -746,7 +746,7 @@ SedListOfSedTasks::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedTasks::getElementName () const
+SedListOfTasks::getElementName () const
 {
 	static const string name = "listOfTasks";
 	return name;
@@ -757,7 +757,7 @@ SedListOfSedTasks::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedTasks::getTypeCode () const
+SedListOfTasks::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -767,7 +767,7 @@ SedListOfSedTasks::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedTasks::getItemTypeCode () const
+SedListOfTasks::getItemTypeCode () const
 {
 	return SEDML_TASK;
 }
@@ -776,10 +776,10 @@ SedListOfSedTasks::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedTask in this SedListOfSedTasks
+ * Creates a new SedTask in this SedListOfTasks
  */
 SedBase*
-SedListOfSedTasks::createObject(XMLInputStream& stream)
+SedListOfTasks::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -803,7 +803,7 @@ SedListOfSedTasks::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedTasks::writeXMLNS(XMLOutputStream& stream) const
+SedListOfTasks::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -1080,12 +1080,12 @@ SedTask_hasRequiredElements(SedTask_t * st)
  */
 LIBSEDML_EXTERN
 SedTask_t *
-SedListOfSedTasks_getById(SedListOf_t * lo, const char * sid)
+SedListOfTasks_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedTasks *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1094,12 +1094,12 @@ SedListOfSedTasks_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedTask_t *
-SedListOfSedTasks_removeById(SedListOf_t * lo, const char * sid)
+SedListOfTasks_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedTasks *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->remove(sid) : NULL;
 }
 
 

@@ -373,70 +373,70 @@ SedModel::unsetSource()
 
 
 /*
- * Returns the  "SedListOfSedChanges" in this SedModel object.
+ * Returns the  "SedListOfChanges" in this SedModel object.
  */
-const SedListOfSedChanges*
-SedModel::getListOfSedChanges() const
+const SedListOfChanges*
+SedModel::getListOfChanges() const
 {
 	return &mChange;
 }
 
 
 /*
- * Removes the nth SedChange from the SedListOfSedChanges.
+ * Removes the nth Change from the SedListOfChanges.
  */
 SedChange*
-SedModel::removeSedChange(unsigned int n)
+SedModel::removeChange(unsigned int n)
 {
 	return mChange.remove(n);
 }
 
 
 /*
- * Removes the a SedChange with given id from the SedListOfSedChanges.
+ * Removes the a Change with given id from the SedListOfChanges.
  */
 SedChange*
-SedModel::removeSedChange(const std::string& sid)
+SedModel::removeChange(const std::string& sid)
 {
 	return mChange.remove(sid);
 }
 
 
 /*
- * Return the nth SedChange in the SedListOfSedChanges within this SedModel.
+ * Return the nth Change in the SedListOfChanges within this SedModel.
  */
 SedChange*
-SedModel::getSedChange(unsigned int n)
+SedModel::getChange(unsigned int n)
 {
 	return mChange.get(n);
 }
 
 
 /*
- * Return the nth SedChange in the SedListOfSedChanges within this SedModel.
+ * Return the nth Change in the SedListOfChanges within this SedModel.
  */
 const SedChange*
-SedModel::getSedChange(unsigned int n) const
+SedModel::getChange(unsigned int n) const
 {
 	return mChange.get(n);
 }
 
 
 /*
- * Return a SedChange from the SedListOfSedChanges by id.
+ * Return a Change from the SedListOfChanges by id.
  */
 SedChange*
-SedModel::getSedChange(const std::string& sid)
+SedModel::getChange(const std::string& sid)
 {
 	return mChange.get(sid);
 }
 
 
 /*
- * Return a SedChange from the SedListOfSedChanges by id.
+ * Return a Change from the SedListOfChanges by id.
  */
 const SedChange*
-SedModel::getSedChange(const std::string& sid) const
+SedModel::getChange(const std::string& sid) const
 {
 	return mChange.get(sid);
 }
@@ -455,7 +455,7 @@ SedModel::getSedChange(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedModel::addSedChange(const SedChange* sc)
+SedModel::addChange(const SedChange* sc)
 {
 	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
 	mChange.append(sc);
@@ -469,7 +469,7 @@ SedModel::addSedChange(const SedChange* sc)
  * @return the number of SedChange objects in this SedModel
  */
 unsigned int 
-SedModel::getNumSedChanges() const
+SedModel::getNumChanges() const
 {
 	return mChange.size();
 }
@@ -480,10 +480,10 @@ SedModel::getNumSedChanges() const
  *
  * @return a new SedRemoveXML object instance
  *
- * @see addSedChange(const SedChange* sc)
+ * @see addRemoveXML(const SedChange* sc)
  */
 SedRemoveXML* 
-SedModel::createSedRemoveXML()
+SedModel::createRemoveXML()
 {
 	SedRemoveXML *temp = new SedRemoveXML();
 	if (temp != NULL) mChange.appendAndOwn(temp);
@@ -496,10 +496,10 @@ SedModel::createSedRemoveXML()
  *
  * @return a new SedChangeAttribute object instance
  *
- * @see addSedChange(const SedChange* sc)
+ * @see addChangeAttribute(const SedChange* sc)
  */
 SedChangeAttribute* 
-SedModel::createSedChangeAttribute()
+SedModel::createChangeAttribute()
 {
 	SedChangeAttribute *temp = new SedChangeAttribute();
 	if (temp != NULL) mChange.appendAndOwn(temp);
@@ -512,10 +512,10 @@ SedModel::createSedChangeAttribute()
  *
  * @return a new SedComputeChange object instance
  *
- * @see addSedChange(const SedChange* sc)
+ * @see addComputeChange(const SedChange* sc)
  */
 SedComputeChange* 
-SedModel::createSedComputeChange()
+SedModel::createComputeChange()
 {
 	SedComputeChange *temp = new SedComputeChange();
 	if (temp != NULL) mChange.appendAndOwn(temp);
@@ -615,7 +615,7 @@ void
 SedModel::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
-	if (getNumSedChanges() > 0)
+	if (getNumChanges() > 0)
 	{
 		mChange.write(stream);
 	}
@@ -790,8 +790,8 @@ SedModel::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedModels::SedListOfSedModels(unsigned int level, 
-	                   unsigned int version)
+SedListOfModels::SedListOfModels(unsigned int level, 
+	                unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -801,7 +801,7 @@ SedListOfSedModels::SedListOfSedModels(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedModels::SedListOfSedModels(SedNamespaces* sedns)
+SedListOfModels::SedListOfModels(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -809,51 +809,51 @@ SedListOfSedModels::SedListOfSedModels(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedModels 
+ * Returns a deep copy of this SedListOfModels 
  */
-SedListOfSedModels* 
-SedListOfSedModels::clone () const
+SedListOfModels* 
+SedListOfModels::clone () const
  {
-	return new SedListOfSedModels(*this);
+	return new SedListOfModels(*this);
 }
 
 
 /*
- * Get a SedModel from the SedListOfSedModels by index.
+ * Get a Model from the SedListOfModels by index.
 */
 SedModel*
-SedListOfSedModels::get(unsigned int n)
+SedListOfModels::get(unsigned int n)
 {
 	return static_cast<SedModel*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedModel from the SedListOfSedModels by index.
+ * Get a Model from the SedListOfModels by index.
  */
 const SedModel*
-SedListOfSedModels::get(unsigned int n) const
+SedListOfModels::get(unsigned int n) const
 {
 	return static_cast<const SedModel*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedModel from the SedListOfSedModels by id.
+ * Get a Model from the SedListOfModels by id.
  */
 SedModel*
-SedListOfSedModels::get(const std::string& sid)
+SedListOfModels::get(const std::string& sid)
 {
 	return const_cast<SedModel*>(
-	  static_cast<const SedListOfSedModels&>(*this).get(sid));
+	  static_cast<const SedListOfModels&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedModel from the SedListOfSedModels by id.
+ * Get a Model from the SedListOfModels by id.
  */
 const SedModel*
-SedListOfSedModels::get(const std::string& sid) const
+SedListOfModels::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -863,20 +863,20 @@ SedListOfSedModels::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedModel from this SedListOfSedModels
+ * Removes the nth Model from this SedListOfModels
  */
 SedModel*
-SedListOfSedModels::remove(unsigned int n)
+SedListOfModels::remove(unsigned int n)
 {
 	return static_cast<SedModel*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedModel from this SedListOfSedModels with the given identifier
+ * Removes the Model from this SedListOfModels with the given identifier
  */
 SedModel*
-SedListOfSedModels::remove(const std::string& sid)
+SedListOfModels::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -897,7 +897,7 @@ SedListOfSedModels::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedModels::getElementName () const
+SedListOfModels::getElementName () const
 {
 	static const string name = "listOfModels";
 	return name;
@@ -908,7 +908,7 @@ SedListOfSedModels::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedModels::getTypeCode () const
+SedListOfModels::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -918,7 +918,7 @@ SedListOfSedModels::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedModels::getItemTypeCode () const
+SedListOfModels::getItemTypeCode () const
 {
 	return SEDML_MODEL;
 }
@@ -927,10 +927,10 @@ SedListOfSedModels::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedModel in this SedListOfSedModels
+ * Creates a new SedModel in this SedListOfModels
  */
 SedBase*
-SedListOfSedModels::createObject(XMLInputStream& stream)
+SedListOfModels::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -954,7 +954,7 @@ SedListOfSedModels::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedModels::writeXMLNS(XMLOutputStream& stream) const
+SedListOfModels::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -1206,72 +1206,72 @@ SedModel_unsetSource(SedModel_t * sm)
 
 LIBSEDML_EXTERN
 int
-SedModel_addSedChange(SedModel_t * sm, SedChange_t * sc)
+SedModel_addChange(SedModel_t * sm, SedChange_t * sc)
 {
-	return  (sm != NULL) ? sm->addSedChange(sc) : LIBSBML_INVALID_OBJECT;
+	return  (sm != NULL) ? sm->addChange(sc) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedRemoveXML_t *
-SedModel_createSedRemoveXML(SedModel_t * sm)
+SedModel_createRemoveXML(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createSedRemoveXML() : NULL;
+	return  (sm != NULL) ? sm->createRemoveXML() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChangeAttribute_t *
-SedModel_createSedChangeAttribute(SedModel_t * sm)
+SedModel_createChangeAttribute(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createSedChangeAttribute() : NULL;
+	return  (sm != NULL) ? sm->createChangeAttribute() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedComputeChange_t *
-SedModel_createSedComputeChange(SedModel_t * sm)
+SedModel_createComputeChange(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createSedComputeChange() : NULL;
+	return  (sm != NULL) ? sm->createComputeChange() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedModel_getSedListOfSedChanges(SedModel_t * sm)
+SedModel_getSedListOfChanges(SedModel_t * sm)
 {
-	return  (sm != NULL) ? (SedListOf_t *)sm->getListOfSedChanges() : NULL;
+	return  (sm != NULL) ? (SedListOf_t *)sm->getListOfChanges() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
-SedModel_getSedChange(SedModel_t * sm, unsigned int n)
+SedModel_getChange(SedModel_t * sm, unsigned int n)
 {
-	return  (sm != NULL) ? sm->getSedChange(n) : NULL;
+	return  (sm != NULL) ? sm->getChange(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
-SedModel_getSedChangeById(SedModel_t * sm, const char * sid)
+SedModel_getChangeById(SedModel_t * sm, const char * sid)
 {
-	return  (sm != NULL) ? sm->getSedChange(sid) : NULL;
+	return  (sm != NULL) ? sm->getChange(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedModel_getNumSedChanges(SedModel_t * sm)
+SedModel_getNumChanges(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->getNumSedChanges() : SEDML_INT_MAX;
+	return  (sm != NULL) ? sm->getNumChanges() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
-SedModel_removeSedChange(SedModel_t * sm, unsigned int n)
+SedModel_removeChange(SedModel_t * sm, unsigned int n)
 {
-	return  (sm != NULL) ? sm->removeSedChange(n) : NULL;
+	return  (sm != NULL) ? sm->removeChange(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
-SedModel_removeSedChangeById(SedModel_t * sm, const char * sid)
+SedModel_removeChangeById(SedModel_t * sm, const char * sid)
 {
-	return  (sm != NULL) ? sm->removeSedChange(sid) : NULL;
+	return  (sm != NULL) ? sm->removeChange(sid) : NULL;
 }
 
 /**
@@ -1301,12 +1301,12 @@ SedModel_hasRequiredElements(SedModel_t * sm)
  */
 LIBSEDML_EXTERN
 SedModel_t *
-SedListOfSedModels_getById(SedListOf_t * lo, const char * sid)
+SedListOfModels_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedModels *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfModels *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1315,12 +1315,12 @@ SedListOfSedModels_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedModel_t *
-SedListOfSedModels_removeById(SedListOf_t * lo, const char * sid)
+SedListOfModels_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedModels *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfModels *>(lo)->remove(sid) : NULL;
 }
 
 

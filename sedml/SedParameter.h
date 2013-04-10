@@ -742,12 +742,12 @@ SedParameter_hasRequiredAttributes(SedParameter_t * sp);
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedListOfSedParameters_getById(SedListOf_t * lo, const char * sid);
+SedListOfParameters_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedListOfSedParameters_removeById(SedListOf_t * lo, const char * sid);
+SedListOfParameters_removeById(SedListOf_t * lo, const char * sid);
 
 
 

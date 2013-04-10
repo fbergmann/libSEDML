@@ -946,12 +946,12 @@ SedCurve_hasRequiredAttributes(SedCurve_t * sc);
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedListOfSedCurves_getById(SedListOf_t * lo, const char * sid);
+SedListOfCurves_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedListOfSedCurves_removeById(SedListOf_t * lo, const char * sid);
+SedListOfCurves_removeById(SedListOf_t * lo, const char * sid);
 
 
 

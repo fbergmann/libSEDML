@@ -1138,12 +1138,12 @@ SedDataGenerator_hasRequiredElements(SedDataGenerator_t * sdg);
 
 LIBSEDML_EXTERN
 SedDataGenerator_t *
-SedListOfSedDataGenerators_getById(SedListOf_t * lo, const char * sid);
+SedListOfDataGenerators_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedDataGenerator_t *
-SedListOfSedDataGenerators_removeById(SedListOf_t * lo, const char * sid);
+SedListOfDataGenerators_removeById(SedListOf_t * lo, const char * sid);
 
 
 

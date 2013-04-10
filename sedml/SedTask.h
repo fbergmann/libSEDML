@@ -846,12 +846,12 @@ SedTask_hasRequiredElements(SedTask_t * st);
 
 LIBSEDML_EXTERN
 SedTask_t *
-SedListOfSedTasks_getById(SedListOf_t * lo, const char * sid);
+SedListOfTasks_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedTask_t *
-SedListOfSedTasks_removeById(SedListOf_t * lo, const char * sid);
+SedListOfTasks_removeById(SedListOf_t * lo, const char * sid);
 
 
 

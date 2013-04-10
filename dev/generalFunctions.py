@@ -237,7 +237,7 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('m{0}->write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\n\t}\n')
       if attributes[i]['type'] == 'lo_element':
-        outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['element'])))
+        outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\t{\n\t\t')
         outFile.write('m{0}.write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\n\t}\n')
@@ -733,8 +733,14 @@ def writeInternalHeaders(outFile, isSedListOf, hasChildren=False):
   writeEnablePkgHeader(outFile)
   
 def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None, baseClass='SedBase'):
+  type = elementDict['name']
+  name = elementDict['name']
+  if elementDict.has_key('elementName'):
+    name = strFunctions.cap(elementDict['elementName']) 
+  if elementDict.has_key('element'):
+    type = elementDict['element']
   if isSedListOf == True:
-    element = writeListOf(element)
+    element = writeListOf(name)
   writeGetElementNameCPPCode(outFile, element, isSedListOf, elementDict)
   if hasChildren or baseClass != 'SedBase':
     writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren, hasMath, baseClass)

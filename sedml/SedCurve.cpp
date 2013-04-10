@@ -719,8 +719,8 @@ SedCurve::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedCurves::SedListOfSedCurves(unsigned int level, 
-	                   unsigned int version)
+SedListOfCurves::SedListOfCurves(unsigned int level, 
+	                unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -730,7 +730,7 @@ SedListOfSedCurves::SedListOfSedCurves(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedCurves::SedListOfSedCurves(SedNamespaces* sedns)
+SedListOfCurves::SedListOfCurves(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -738,51 +738,51 @@ SedListOfSedCurves::SedListOfSedCurves(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedCurves 
+ * Returns a deep copy of this SedListOfCurves 
  */
-SedListOfSedCurves* 
-SedListOfSedCurves::clone () const
+SedListOfCurves* 
+SedListOfCurves::clone () const
  {
-	return new SedListOfSedCurves(*this);
+	return new SedListOfCurves(*this);
 }
 
 
 /*
- * Get a SedCurve from the SedListOfSedCurves by index.
+ * Get a Curve from the SedListOfCurves by index.
 */
 SedCurve*
-SedListOfSedCurves::get(unsigned int n)
+SedListOfCurves::get(unsigned int n)
 {
 	return static_cast<SedCurve*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedCurve from the SedListOfSedCurves by index.
+ * Get a Curve from the SedListOfCurves by index.
  */
 const SedCurve*
-SedListOfSedCurves::get(unsigned int n) const
+SedListOfCurves::get(unsigned int n) const
 {
 	return static_cast<const SedCurve*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedCurve from the SedListOfSedCurves by id.
+ * Get a Curve from the SedListOfCurves by id.
  */
 SedCurve*
-SedListOfSedCurves::get(const std::string& sid)
+SedListOfCurves::get(const std::string& sid)
 {
 	return const_cast<SedCurve*>(
-	  static_cast<const SedListOfSedCurves&>(*this).get(sid));
+	  static_cast<const SedListOfCurves&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedCurve from the SedListOfSedCurves by id.
+ * Get a Curve from the SedListOfCurves by id.
  */
 const SedCurve*
-SedListOfSedCurves::get(const std::string& sid) const
+SedListOfCurves::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -792,20 +792,20 @@ SedListOfSedCurves::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedCurve from this SedListOfSedCurves
+ * Removes the nth Curve from this SedListOfCurves
  */
 SedCurve*
-SedListOfSedCurves::remove(unsigned int n)
+SedListOfCurves::remove(unsigned int n)
 {
 	return static_cast<SedCurve*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedCurve from this SedListOfSedCurves with the given identifier
+ * Removes the Curve from this SedListOfCurves with the given identifier
  */
 SedCurve*
-SedListOfSedCurves::remove(const std::string& sid)
+SedListOfCurves::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -826,7 +826,7 @@ SedListOfSedCurves::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedCurves::getElementName () const
+SedListOfCurves::getElementName () const
 {
 	static const string name = "listOfCurves";
 	return name;
@@ -837,7 +837,7 @@ SedListOfSedCurves::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedCurves::getTypeCode () const
+SedListOfCurves::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -847,7 +847,7 @@ SedListOfSedCurves::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedCurves::getItemTypeCode () const
+SedListOfCurves::getItemTypeCode () const
 {
 	return SEDML_OUTPUT_CURVE;
 }
@@ -856,10 +856,10 @@ SedListOfSedCurves::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedCurve in this SedListOfSedCurves
+ * Creates a new SedCurve in this SedListOfCurves
  */
 SedBase*
-SedListOfSedCurves::createObject(XMLInputStream& stream)
+SedListOfCurves::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -883,7 +883,7 @@ SedListOfSedCurves::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedCurves::writeXMLNS(XMLOutputStream& stream) const
+SedListOfCurves::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -1237,12 +1237,12 @@ SedCurve_hasRequiredAttributes(SedCurve_t * sc)
  */
 LIBSEDML_EXTERN
 SedCurve_t *
-SedListOfSedCurves_getById(SedListOf_t * lo, const char * sid)
+SedListOfCurves_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedCurves *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfCurves *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1251,12 +1251,12 @@ SedListOfSedCurves_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedCurve_t *
-SedListOfSedCurves_removeById(SedListOf_t * lo, const char * sid)
+SedListOfCurves_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedCurves *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfCurves *>(lo)->remove(sid) : NULL;
 }
 
 

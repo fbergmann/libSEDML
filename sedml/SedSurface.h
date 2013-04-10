@@ -687,12 +687,12 @@ SedSurface_hasRequiredAttributes(SedSurface_t * ss);
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedListOfSedSurfaces_getById(SedListOf_t * lo, const char * sid);
+SedListOfSurfaces_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedSurface_t *
-SedListOfSedSurfaces_removeById(SedListOf_t * lo, const char * sid);
+SedListOfSurfaces_removeById(SedListOf_t * lo, const char * sid);
 
 
 

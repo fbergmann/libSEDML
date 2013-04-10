@@ -336,8 +336,8 @@ SedChange::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedChanges::SedListOfSedChanges(unsigned int level, 
-	                    unsigned int version)
+SedListOfChanges::SedListOfChanges(unsigned int level, 
+	                 unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -347,7 +347,7 @@ SedListOfSedChanges::SedListOfSedChanges(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedChanges::SedListOfSedChanges(SedNamespaces* sedns)
+SedListOfChanges::SedListOfChanges(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -355,51 +355,51 @@ SedListOfSedChanges::SedListOfSedChanges(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedChanges 
+ * Returns a deep copy of this SedListOfChanges 
  */
-SedListOfSedChanges* 
-SedListOfSedChanges::clone () const
+SedListOfChanges* 
+SedListOfChanges::clone () const
  {
-	return new SedListOfSedChanges(*this);
+	return new SedListOfChanges(*this);
 }
 
 
 /*
- * Get a SedChange from the SedListOfSedChanges by index.
+ * Get a Change from the SedListOfChanges by index.
 */
 SedChange*
-SedListOfSedChanges::get(unsigned int n)
+SedListOfChanges::get(unsigned int n)
 {
 	return static_cast<SedChange*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedChange from the SedListOfSedChanges by index.
+ * Get a Change from the SedListOfChanges by index.
  */
 const SedChange*
-SedListOfSedChanges::get(unsigned int n) const
+SedListOfChanges::get(unsigned int n) const
 {
 	return static_cast<const SedChange*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedChange from the SedListOfSedChanges by id.
+ * Get a Change from the SedListOfChanges by id.
  */
 SedChange*
-SedListOfSedChanges::get(const std::string& sid)
+SedListOfChanges::get(const std::string& sid)
 {
 	return const_cast<SedChange*>(
-	  static_cast<const SedListOfSedChanges&>(*this).get(sid));
+	  static_cast<const SedListOfChanges&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedChange from the SedListOfSedChanges by id.
+ * Get a Change from the SedListOfChanges by id.
  */
 const SedChange*
-SedListOfSedChanges::get(const std::string& sid) const
+SedListOfChanges::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -409,20 +409,20 @@ SedListOfSedChanges::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedChange from this SedListOfSedChanges
+ * Removes the nth Change from this SedListOfChanges
  */
 SedChange*
-SedListOfSedChanges::remove(unsigned int n)
+SedListOfChanges::remove(unsigned int n)
 {
 	return static_cast<SedChange*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedChange from this SedListOfSedChanges with the given identifier
+ * Removes the Change from this SedListOfChanges with the given identifier
  */
 SedChange*
-SedListOfSedChanges::remove(const std::string& sid)
+SedListOfChanges::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -443,7 +443,7 @@ SedListOfSedChanges::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedChanges::getElementName () const
+SedListOfChanges::getElementName () const
 {
 	static const string name = "listOfChanges";
 	return name;
@@ -454,7 +454,7 @@ SedListOfSedChanges::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedChanges::getTypeCode () const
+SedListOfChanges::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -464,7 +464,7 @@ SedListOfSedChanges::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedChanges::getItemTypeCode () const
+SedListOfChanges::getItemTypeCode () const
 {
 	return SEDML_CHANGE;
 }
@@ -473,10 +473,10 @@ SedListOfSedChanges::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedChange in this SedListOfSedChanges
+ * Creates a new SedChange in this SedListOfChanges
  */
 SedBase*
-SedListOfSedChanges::createObject(XMLInputStream& stream)
+SedListOfChanges::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -512,7 +512,7 @@ SedListOfSedChanges::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedChanges::writeXMLNS(XMLOutputStream& stream) const
+SedListOfChanges::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -637,12 +637,12 @@ SedChange_hasRequiredAttributes(SedChange_t * sc)
  */
 LIBSEDML_EXTERN
 SedChange_t *
-SedListOfSedChanges_getById(SedListOf_t * lo, const char * sid)
+SedListOfChanges_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedChanges *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfChanges *>(lo)->get(sid) : NULL;
 }
 
 
@@ -651,12 +651,12 @@ SedListOfSedChanges_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedChange_t *
-SedListOfSedChanges_removeById(SedListOf_t * lo, const char * sid)
+SedListOfChanges_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedChanges *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfChanges *>(lo)->remove(sid) : NULL;
 }
 
 

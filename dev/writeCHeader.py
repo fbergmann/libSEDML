@@ -189,26 +189,33 @@ def writeHasReqdElementsFunction(output, element):
   output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
 
     
-def writeListOfHeaders(output, element):
+def writeListOfHeaders(output, element, type):
   loelement = generalFunctions.writeListOf(element)
   output.write('LIBSEDML_EXTERN\n')
-  output.write('{0}_t *\n'.format(element))
+  output.write('{0}_t *\n'.format(type))
   output.write('{0}_getById'.format(loelement))
   output.write('(SedListOf_t * lo, const char * sid);\n\n\n')
   output.write('LIBSEDML_EXTERN\n')
-  output.write('{0}_t *\n'.format(element))
+  output.write('{0}_t *\n'.format(type))
   output.write('{0}_removeById'.format(loelement))
   output.write('(SedListOf_t * lo, const char * sid);\n\n\n')
  
 # write the header file      
 def createHeader(element, header):
+  type = element['name']
+  name = element['name']
+  if element.has_key('elementName'):
+    name = strFunctions.cap(element['elementName']) 
+  if element.has_key('element'):
+    type = element['element']
+
   writeConstructors(element['name'], element['package'], header)
   writeAttributeFunctions(element['attribs'], header, element['name'], element)
   writeHasReqdAttrFunction(header, element['name'])
   if element['hasChildren'] == True or element['hasMath'] == True:
     writeHasReqdElementsFunction(header, element['name'])
   if element['hasSedListOf'] == True:
-    writeListOfHeaders(header, element['name'])
+    writeListOfHeaders(header, name, type)
  
 
   

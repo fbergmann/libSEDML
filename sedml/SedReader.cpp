@@ -1,11 +1,11 @@
 /**
- * @file    SedMLReader.cpp
- * @brief   Reads an SedML Document into memory
+ * @file    SedReader.cpp
+ * @brief   Reads an Sed Document into memory
  * @author  Ben Bornstein
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSedML.  Please visit http://sbml.org for more
- * information about SedML, and the latest version of libSedML.
+ * This file is part of libSed.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSed.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -29,11 +29,11 @@
 #include <sbml/xml/XMLErrorLog.h>
 #include <sbml/xml/XMLInputStream.h>
 
-#include <sedml/SedMLErrorLog.h>
-#include <sedml/SedMLVisitor.h>
-#include <sedml/SedMLDocument.h>
-#include <sedml/SedMLError.h>
-#include <sedml/SedMLReader.h>
+#include <sedml/SedErrorLog.h>
+#include <sedml/SedVisitor.h>
+#include <sedml/SedDocument.h>
+#include <sedml/SedError.h>
+#include <sedml/SedReader.h>
 
 #include <sbml/compress/CompressCommon.h>
 #include <sbml/compress/InputDecompressor.h>
@@ -47,33 +47,33 @@ using namespace std;
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /*
- * Creates a new SedMLReader and returns it. 
+ * Creates a new SedReader and returns it. 
  */
-SedMLReader::SedMLReader ()
+SedReader::SedReader ()
 {
 }
 
 
 /*
- * Destorys this SedMLReader.
+ * Destorys this SedReader.
  */
-SedMLReader::~SedMLReader ()
+SedReader::~SedReader ()
 {
 }
 
 
 /*
- * Reads an SedML document from the given file.  If filename does not exist
- * or is not an SedML file, an error will be logged.  Errors can be
+ * Reads an Sed document from the given file.  If filename does not exist
+ * or is not an Sed file, an error will be logged.  Errors can be
  * identified by their unique ids, e.g.:
  *
  * <code>
- *   SedMLDocument* d = reader.readSedML(filename);
+ *   SedDocument* d = reader.readSed(filename);
  *
  *   if (d->getNumErrors() > 0)\n
  *   {\n
  *     if (d->getError(0)->getId() ==SEDML_READ_ERROR_FILE_NOT_FOUND)\n
- *     if (d->getError(0)->getId() ==SEDML_READ_ERROR_NOT_SedML)\n
+ *     if (d->getError(0)->getId() ==SEDML_READ_ERROR_NOT_Sed)\n
  *   }\n
  * </code>
  *
@@ -84,35 +84,35 @@ SedMLReader::~SedMLReader ()
  * If the filename ends with @em .zip, only the first file in the archive will
  * be read if the zip archive contains two or more files.
  *
- * To read a gzip/zip file, underlying libSedML needs to be linked with zlib
- * at compile time. Also, underlying libSedML needs to be linked with bzip2 
+ * To read a gzip/zip file, underlying libSed needs to be linked with zlib
+ * at compile time. Also, underlying libSed needs to be linked with bzip2 
  * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSedML is not linked with the corresponding 
+ * file name is given and underlying libSed is not linked with the corresponding 
  * required library.
- * SedMLReader::hasZlib() and SedMLReader::hasBzip2() can be used to check 
- * whether libSedML is linked with each library.
+ * SedReader::hasZlib() and SedReader::hasBzip2() can be used to check 
+ * whether libSed is linked with each library.
  * 
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
-SedMLDocument*
-SedMLReader::readSedML (const std::string& filename)
+SedDocument*
+SedReader::readSed (const std::string& filename)
 {
   return readInternal(filename.c_str(), true);
 }
 
 
 /*
- * Reads an SedML document from the given filename.
+ * Reads an Sed document from the given filename.
  */
-SedMLDocument*
-SedMLReader::readSedMLFromFile (const std::string& filename)
+SedDocument*
+SedReader::readSedFromFile (const std::string& filename)
 {
   return readInternal(filename.c_str(), true);
 }
 
 
 /*
- * Reads an SedML document from the given XML string.
+ * Reads an Sed document from the given XML string.
  *
  * If the string does not begin with XML declaration:
  *
@@ -120,14 +120,14 @@ SedMLReader::readSedMLFromFile (const std::string& filename)
  *
  * it will be prepended.
  *
- * This method will log a fatal error if the XML string is not SedML.  See
- * the method documentation for readSedML(filename) for example error
+ * This method will log a fatal error if the XML string is not Sed.  See
+ * the method documentation for readSed(filename) for example error
  * checking code.
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
-SedMLDocument*
-SedMLReader::readSedMLFromString (const std::string& xml)
+SedDocument*
+SedReader::readSedFromString (const std::string& xml)
 {
   if (&xml == NULL) return NULL;
 
@@ -149,12 +149,12 @@ SedMLReader::readSedMLFromString (const std::string& xml)
 
 /*
  * Predicate returning @c true if
- * libSedML is linked with zlib.
+ * libSed is linked with zlib.
  *
- * @return @c true if libSedML is linked with zlib, @c false otherwise.
+ * @return @c true if libSed is linked with zlib, @c false otherwise.
  */
 bool 
-SedMLReader::hasZlib() 
+SedReader::hasZlib() 
 {
   return LIBSEDML_CPP_NAMESPACE ::hasZlib();
 }
@@ -162,12 +162,12 @@ SedMLReader::hasZlib()
 
 /*
  * Predicate returning @c true if
- * libSedML is linked with bzip2.
+ * libSed is linked with bzip2.
  *
- * @return @c true if libSedML is linked with bzip2, @c false otherwise.
+ * @return @c true if libSed is linked with bzip2, @c false otherwise.
  */
 bool 
-SedMLReader::hasBzip2() 
+SedReader::hasBzip2() 
 {
   return LIBSEDML_CPP_NAMESPACE ::hasBzip2();
 }
@@ -208,12 +208,12 @@ isCriticalError(const unsigned int errorId)
 
 /** @cond doxygen-libsbml-internal */
 /*
- * Used by readSedML() and readSedMLFromString().
+ * Used by readSed() and readSedFromString().
  */
-SedMLDocument*
-SedMLReader::readInternal (const char* content, bool isFile)
+SedDocument*
+SedReader::readInternal (const char* content, bool isFile)
 {
-  SedMLDocument* d = new SedMLDocument();
+  SedDocument* d = new SedDocument();
   //if (isFile) {
   //  d->setURI(content);
   //}
@@ -257,8 +257,8 @@ SedMLReader::readInternal (const char* content, bool isFile)
     else
     {
       // Low-level XML errors will have been caught in the first read,
-      // before we even attempt to interpret the content as SedML.  Here
-      // we want to start checking some basic SedML-level errors.
+      // before we even attempt to interpret the content as Sed.  Here
+      // we want to start checking some basic Sed-level errors.
 
       if (stream.getEncoding() == "")
       {
@@ -288,99 +288,99 @@ SedMLReader::readInternal (const char* content, bool isFile)
 
 
 /**
- * Creates a new SedMLReader and returns it. 
+ * Creates a new SedReader and returns it. 
  */
 LIBSEDML_EXTERN
-SedMLReader_t *
-SedMLReader_create ()
+SedReader_t *
+SedReader_create ()
 {
-  return new (nothrow) SedMLReader;
+  return new (nothrow) SedReader;
 }
 
 
 /**
- * Frees the given SedMLReader.
+ * Frees the given SedReader.
  */
 LIBSEDML_EXTERN
 void
-SedMLReader_free (SedMLReader_t *sr)
+SedReader_free (SedReader_t *sr)
 {
   delete sr;
 }
 
 
 /**
- * Reads an SedML document from the given file.  If filename does not exist
- * or is not an SedML file, an error will be logged.  Errors can be
+ * Reads an Sed document from the given file.  If filename does not exist
+ * or is not an Sed file, an error will be logged.  Errors can be
  * identified by their unique ids, e.g.:
  *
  * <code>
- *   SedMLReader_t   *sr;\n
- *   SedMLDocument_t *d;
+ *   SedReader_t   *sr;\n
+ *   SedDocument_t *d;
  *
- *   sr = SedMLReader_create();
+ *   sr = SedReader_create();
  *
- *   d = SedMLReader_readSedML(reader, filename);
+ *   d = SedReader_readSed(reader, filename);
  *
- *   if (SedMLDocument_getNumErrors(d) > 0)\n
+ *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
  *                                           ==SEDML_READ_ERROR_FILE_NOT_FOUND)\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
- *                                           ==SEDML_READ_ERROR_NOT_SedML)\n
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
+ *                                           ==SEDML_READ_ERROR_NOT_Sed)\n
  *   }\n
  * </code>
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
-SedMLDocument_t *
-SedMLReader_readSedML (SedMLReader_t *sr, const char *filename)
+SedDocument_t *
+SedReader_readSed (SedReader_t *sr, const char *filename)
 {
   if (sr != NULL)
-    return (filename != NULL) ? sr->readSedML(filename) : sr->readSedML("");
+    return (filename != NULL) ? sr->readSed(filename) : sr->readSed("");
   else
     return NULL;
 }
 
 
 /**
- * Reads an SedML document from the given file.  If filename does not exist
- * or is not an SedML file, an error will be logged.  Errors can be
+ * Reads an Sed document from the given file.  If filename does not exist
+ * or is not an Sed file, an error will be logged.  Errors can be
  * identified by their unique ids, e.g.:
  *
  * <code>
- *   SedMLReader_t   *sr;\n
- *   SedMLDocument_t *d;
+ *   SedReader_t   *sr;\n
+ *   SedDocument_t *d;
  *
- *   sr = SedMLReader_create();
+ *   sr = SedReader_create();
  *
- *   d = SedMLReader_readSedML(reader, filename);
+ *   d = SedReader_readSed(reader, filename);
  *
- *   if (SedMLDocument_getNumErrors(d) > 0)\n
+ *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
  *                                           ==SEDML_READ_ERROR_FILE_NOT_FOUND)\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
- *                                           ==SEDML_READ_ERROR_NOT_SedML)\n
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
+ *                                           ==SEDML_READ_ERROR_NOT_Sed)\n
  *   }\n
  * </code>
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
-SedMLDocument_t *
-SedMLReader_readSedMLFromFile (SedMLReader_t *sr, const char *filename)
+SedDocument_t *
+SedReader_readSedFromFile (SedReader_t *sr, const char *filename)
 {
   if (sr != NULL)
-    return (filename != NULL) ? sr->readSedML(filename) : sr->readSedML("");
+    return (filename != NULL) ? sr->readSed(filename) : sr->readSed("");
   else
     return NULL;
 }
 
 
 /**
- * Reads an SedML document from the given XML string.
+ * Reads an Sed document from the given XML string.
  *
  * If the string does not begin with XML declaration:
  *
@@ -388,19 +388,19 @@ SedMLReader_readSedMLFromFile (SedMLReader_t *sr, const char *filename)
  *
  * it will be prepended.
  *
- * This method will log a fatal error if the XML string is not SedML.  See
- * the method documentation for readSedML(filename) for example error
+ * This method will log a fatal error if the XML string is not Sed.  See
+ * the method documentation for readSed(filename) for example error
  * checking code.
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
-SedMLDocument_t *
-SedMLReader_readSedMLFromString (SedMLReader_t *sr, const char *xml)
+SedDocument_t *
+SedReader_readSedFromString (SedReader_t *sr, const char *xml)
 {
   if (sr != NULL)
-    return (xml != NULL) ? sr->readSedMLFromString(xml) :
-                         sr->readSedMLFromString("");
+    return (xml != NULL) ? sr->readSedFromString(xml) :
+                         sr->readSedFromString("");
   else
     return NULL;
 }
@@ -408,51 +408,51 @@ SedMLReader_readSedMLFromString (SedMLReader_t *sr, const char *xml)
 
 /**
  * Predicate returning @c non-zero or @c zero depending on whether
- * underlying libSedML is linked with zlib at compile time.
+ * underlying libSed is linked with zlib at compile time.
  *
- * @return @c non-zero if libSedML is linked with zlib, @c zero otherwise.
+ * @return @c non-zero if libSed is linked with zlib, @c zero otherwise.
  */
 LIBSEDML_EXTERN
 int
-SedMLReader_hasZlib (void)
+SedReader_hasZlib (void)
 {
-  return static_cast<int>( SedMLReader::hasZlib() );
+  return static_cast<int>( SedReader::hasZlib() );
 }
 
 
 /**
  * Predicate returning @c non-zero or @c zero depending on whether
- * underlying libSedML is linked with bzip2 at compile time.
+ * underlying libSed is linked with bzip2 at compile time.
  *
- * @return @c non-zero if libSedML is linked with bzip2, @c zero otherwise.
+ * @return @c non-zero if libSed is linked with bzip2, @c zero otherwise.
  */
 LIBSEDML_EXTERN
 int
-SedMLReader_hasBzip2 (void)
+SedReader_hasBzip2 (void)
 {
-  return static_cast<int>( SedMLReader::hasBzip2() );
+  return static_cast<int>( SedReader::hasBzip2() );
 }
 
 
 /**
- * Reads an SedML document from the given file.  If filename does not exist
- * or is not an SedML file, an error will be logged.  Errors can be
+ * Reads an Sed document from the given file.  If filename does not exist
+ * or is not an Sed file, an error will be logged.  Errors can be
  * identified by their unique ids, e.g.:
  *
  * <code>
- *   SedMLReader_t   *sr;\n
- *   SedMLDocument_t *d;
+ *   SedReader_t   *sr;\n
+ *   SedDocument_t *d;
  *
- *   sr = SedMLReader_create();
+ *   sr = SedReader_create();
  *
- *   d = SedMLReader_readSedML(reader, filename);
+ *   d = SedReader_readSed(reader, filename);
  *
- *   if (SedMLDocument_getNumErrors(d) > 0)\n
+ *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
  *                                           ==SEDML_READ_ERROR_FILE_NOT_FOUND)\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
- *                                           ==SEDML_READ_ERROR_NOT_SedML)\n
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
+ *                                           ==SEDML_READ_ERROR_NOT_Sed)\n
  *   }\n
  * </code>
  *
@@ -463,44 +463,44 @@ SedMLReader_hasBzip2 (void)
  * If the filename ends with @em .zip, only the first file in the archive will
  * be read if the zip archive contains two or more files.
  *
- * To read a gzip/zip file, underlying libSedML needs to be linked with zlib
- * at compile time. Also, underlying libSedML needs to be linked with bzip2 
+ * To read a gzip/zip file, underlying libSed needs to be linked with zlib
+ * at compile time. Also, underlying libSed needs to be linked with bzip2 
  * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSedML is not linked with the corresponding 
+ * file name is given and underlying libSed is not linked with the corresponding 
  * required library.
- * SedMLReader_hasZlib() and SedMLReader_hasBzip2() can be used to check 
- * whether libSedML is linked with each library.
+ * SedReader_hasZlib() and SedReader_hasBzip2() can be used to check 
+ * whether libSed is linked with each library.
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
-SedMLDocument_t *
-readSedML (const char *filename)
+SedDocument_t *
+readSed (const char *filename)
 {
-  SedMLReader sr;
-  return (filename != NULL) ? sr.readSedML(filename) : sr.readSedML("");
+  SedReader sr;
+  return (filename != NULL) ? sr.readSed(filename) : sr.readSed("");
 }
 
 
 /**
- * Reads an SedML document from the given file.  If filename does not exist
- * or is not an SedML file, an error will be logged.  Errors can be
+ * Reads an Sed document from the given file.  If filename does not exist
+ * or is not an Sed file, an error will be logged.  Errors can be
  * identified by their unique ids, e.g.:
  *
  * <code>
- *   SedMLReader_t   *sr;\n
- *   SedMLDocument_t *d;
+ *   SedReader_t   *sr;\n
+ *   SedDocument_t *d;
  *
- *   sr = SedMLReader_create();
+ *   sr = SedReader_create();
  *
- *   d = SedMLReader_readSedML(reader, filename);
+ *   d = SedReader_readSed(reader, filename);
  *
- *   if (SedMLDocument_getNumErrors(d) > 0)\n
+ *   if (SedDocument_getNumErrors(d) > 0)\n
  *   {\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
  *                                           ==SEDML_READ_ERROR_FILE_NOT_FOUND)\n
- *     if (XMLError_getId(SedMLDocument_getError(d, 0))
- *                                           ==SEDML_READ_ERROR_NOT_SedML)\n
+ *     if (XMLError_getId(SedDocument_getError(d, 0))
+ *                                           ==SEDML_READ_ERROR_NOT_Sed)\n
  *   }\n
  * </code>
  *
@@ -511,27 +511,27 @@ readSedML (const char *filename)
  * If the filename ends with @em .zip, only the first file in the archive will
  * be read if the zip archive contains two or more files.
  *
- * To read a gzip/zip file, underlying libSedML needs to be linked with zlib
- * at compile time. Also, underlying libSedML needs to be linked with bzip2 
+ * To read a gzip/zip file, underlying libSed needs to be linked with zlib
+ * at compile time. Also, underlying libSed needs to be linked with bzip2 
  * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSedML is not linked with the corresponding 
+ * file name is given and underlying libSed is not linked with the corresponding 
  * required library.
- * SedMLReader_hasZlib() and SedMLReader_hasBzip2() can be used to check 
- * whether libSedML is linked with each library.
+ * SedReader_hasZlib() and SedReader_hasBzip2() can be used to check 
+ * whether libSed is linked with each library.
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
-SedMLDocument_t *
-readSedMLFromFile (const char *filename)
+SedDocument_t *
+readSedFromFile (const char *filename)
 {
-  SedMLReader sr;
-  return (filename != NULL) ? sr.readSedML(filename) : sr.readSedML("");
+  SedReader sr;
+  return (filename != NULL) ? sr.readSed(filename) : sr.readSed("");
 }
 
 
 /**
- * Reads an SedML document from the given XML string.
+ * Reads an Sed document from the given XML string.
  *
  * If the string does not begin with XML declaration:
  *
@@ -539,18 +539,18 @@ readSedMLFromFile (const char *filename)
  *
  * it will be prepended.
  *
- * This method will log a fatal error if the XML string is not SedML.  See
- * the method documentation for readSedML(filename) for example error
+ * This method will log a fatal error if the XML string is not Sed.  See
+ * the method documentation for readSed(filename) for example error
  * checking code.
  *
- * @return a pointer to the SedMLDocument read.
+ * @return a pointer to the SedDocument read.
  */
 LIBSEDML_EXTERN
-SedMLDocument_t *
-readSedMLFromString (const char *xml)
+SedDocument_t *
+readSedFromString (const char *xml)
 {
-  SedMLReader sr;
-  return (xml != NULL) ? sr.readSedMLFromString(xml) : sr.readSedMLFromString("");
+  SedReader sr;
+  return (xml != NULL) ? sr.readSedFromString(xml) : sr.readSedFromString("");
 }
 
 LIBSEDML_CPP_NAMESPACE_END

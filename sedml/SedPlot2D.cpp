@@ -137,70 +137,70 @@ SedPlot2D::~SedPlot2D ()
 
 
 /*
- * Returns the  "SedListOfSedCurves" in this SedPlot2D object.
+ * Returns the  "SedListOfCurves" in this SedPlot2D object.
  */
-const SedListOfSedCurves*
-SedPlot2D::getListOfSedCurves() const
+const SedListOfCurves*
+SedPlot2D::getListOfCurves() const
 {
 	return &mCurve;
 }
 
 
 /*
- * Removes the nth SedCurve from the SedListOfSedCurves.
+ * Removes the nth Curve from the SedListOfCurves.
  */
 SedCurve*
-SedPlot2D::removeSedCurve(unsigned int n)
+SedPlot2D::removeCurve(unsigned int n)
 {
 	return mCurve.remove(n);
 }
 
 
 /*
- * Removes the a SedCurve with given id from the SedListOfSedCurves.
+ * Removes the a Curve with given id from the SedListOfCurves.
  */
 SedCurve*
-SedPlot2D::removeSedCurve(const std::string& sid)
+SedPlot2D::removeCurve(const std::string& sid)
 {
 	return mCurve.remove(sid);
 }
 
 
 /*
- * Return the nth SedCurve in the SedListOfSedCurves within this SedPlot2D.
+ * Return the nth Curve in the SedListOfCurves within this SedPlot2D.
  */
 SedCurve*
-SedPlot2D::getSedCurve(unsigned int n)
+SedPlot2D::getCurve(unsigned int n)
 {
 	return mCurve.get(n);
 }
 
 
 /*
- * Return the nth SedCurve in the SedListOfSedCurves within this SedPlot2D.
+ * Return the nth Curve in the SedListOfCurves within this SedPlot2D.
  */
 const SedCurve*
-SedPlot2D::getSedCurve(unsigned int n) const
+SedPlot2D::getCurve(unsigned int n) const
 {
 	return mCurve.get(n);
 }
 
 
 /*
- * Return a SedCurve from the SedListOfSedCurves by id.
+ * Return a Curve from the SedListOfCurves by id.
  */
 SedCurve*
-SedPlot2D::getSedCurve(const std::string& sid)
+SedPlot2D::getCurve(const std::string& sid)
 {
 	return mCurve.get(sid);
 }
 
 
 /*
- * Return a SedCurve from the SedListOfSedCurves by id.
+ * Return a Curve from the SedListOfCurves by id.
  */
 const SedCurve*
-SedPlot2D::getSedCurve(const std::string& sid) const
+SedPlot2D::getCurve(const std::string& sid) const
 {
 	return mCurve.get(sid);
 }
@@ -219,7 +219,7 @@ SedPlot2D::getSedCurve(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedPlot2D::addSedCurve(const SedCurve* sc)
+SedPlot2D::addCurve(const SedCurve* sc)
 {
 	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
 	mCurve.append(sc);
@@ -233,7 +233,7 @@ SedPlot2D::addSedCurve(const SedCurve* sc)
  * @return the number of SedCurve objects in this SedPlot2D
  */
 unsigned int 
-SedPlot2D::getNumSedCurves() const
+SedPlot2D::getNumCurves() const
 {
 	return mCurve.size();
 }
@@ -247,7 +247,7 @@ SedPlot2D::getNumSedCurves() const
  * @see addSedCurve(const SedCurve* sc)
  */
 SedCurve* 
-SedPlot2D::createSedCurve()
+SedPlot2D::createCurve()
 {
 	SedCurve *temp = new SedCurve();
 	if (temp != NULL) mCurve.appendAndOwn(temp);
@@ -341,7 +341,7 @@ void
 SedPlot2D::writeElements (XMLOutputStream& stream) const
 {
 	SedOutput::writeElements(stream);
-	if (getNumSedCurves() > 0)
+	if (getNumCurves() > 0)
 	{
 		mCurve.write(stream);
 	}
@@ -476,58 +476,58 @@ SedPlot2D_clone(SedPlot2D_t * spd)
 
 LIBSEDML_EXTERN
 int
-SedPlot2D_addSedCurve(SedPlot2D_t * spd, SedCurve_t * sc)
+SedPlot2D_addCurve(SedPlot2D_t * spd, SedCurve_t * sc)
 {
-	return  (spd != NULL) ? spd->addSedCurve(sc) : LIBSBML_INVALID_OBJECT;
+	return  (spd != NULL) ? spd->addCurve(sc) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedPlot2D_createSedCurve(SedPlot2D_t * spd)
+SedPlot2D_createCurve(SedPlot2D_t * spd)
 {
-	return  (spd != NULL) ? spd->createSedCurve() : NULL;
+	return  (spd != NULL) ? spd->createCurve() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedPlot2D_getSedListOfSedCurves(SedPlot2D_t * spd)
+SedPlot2D_getSedListOfCurves(SedPlot2D_t * spd)
 {
-	return  (spd != NULL) ? (SedListOf_t *)spd->getListOfSedCurves() : NULL;
+	return  (spd != NULL) ? (SedListOf_t *)spd->getListOfCurves() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedPlot2D_getSedCurve(SedPlot2D_t * spd, unsigned int n)
+SedPlot2D_getCurve(SedPlot2D_t * spd, unsigned int n)
 {
-	return  (spd != NULL) ? spd->getSedCurve(n) : NULL;
+	return  (spd != NULL) ? spd->getCurve(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedPlot2D_getSedCurveById(SedPlot2D_t * spd, const char * sid)
+SedPlot2D_getCurveById(SedPlot2D_t * spd, const char * sid)
 {
-	return  (spd != NULL) ? spd->getSedCurve(sid) : NULL;
+	return  (spd != NULL) ? spd->getCurve(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedPlot2D_getNumSedCurves(SedPlot2D_t * spd)
+SedPlot2D_getNumCurves(SedPlot2D_t * spd)
 {
-	return  (spd != NULL) ? spd->getNumSedCurves() : SEDML_INT_MAX;
+	return  (spd != NULL) ? spd->getNumCurves() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedPlot2D_removeSedCurve(SedPlot2D_t * spd, unsigned int n)
+SedPlot2D_removeCurve(SedPlot2D_t * spd, unsigned int n)
 {
-	return  (spd != NULL) ? spd->removeSedCurve(n) : NULL;
+	return  (spd != NULL) ? spd->removeCurve(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedCurve_t *
-SedPlot2D_removeSedCurveById(SedPlot2D_t * spd, const char * sid)
+SedPlot2D_removeCurveById(SedPlot2D_t * spd, const char * sid)
 {
-	return  (spd != NULL) ? spd->removeSedCurve(sid) : NULL;
+	return  (spd != NULL) ? spd->removeCurve(sid) : NULL;
 }
 
 /**

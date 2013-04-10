@@ -212,70 +212,70 @@ SedComputeChange::unsetMath()
 
 
 /*
- * Returns the  "SedListOfSedVariables" in this SedComputeChange object.
+ * Returns the  "SedListOfVariables" in this SedComputeChange object.
  */
-const SedListOfSedVariables*
-SedComputeChange::getListOfSedVariables() const
+const SedListOfVariables*
+SedComputeChange::getListOfVariables() const
 {
 	return &mVariable;
 }
 
 
 /*
- * Removes the nth SedVariable from the SedListOfSedVariables.
+ * Removes the nth Variable from the SedListOfVariables.
  */
 SedVariable*
-SedComputeChange::removeSedVariable(unsigned int n)
+SedComputeChange::removeVariable(unsigned int n)
 {
 	return mVariable.remove(n);
 }
 
 
 /*
- * Removes the a SedVariable with given id from the SedListOfSedVariables.
+ * Removes the a Variable with given id from the SedListOfVariables.
  */
 SedVariable*
-SedComputeChange::removeSedVariable(const std::string& sid)
+SedComputeChange::removeVariable(const std::string& sid)
 {
 	return mVariable.remove(sid);
 }
 
 
 /*
- * Return the nth SedVariable in the SedListOfSedVariables within this SedComputeChange.
+ * Return the nth Variable in the SedListOfVariables within this SedComputeChange.
  */
 SedVariable*
-SedComputeChange::getSedVariable(unsigned int n)
+SedComputeChange::getVariable(unsigned int n)
 {
 	return mVariable.get(n);
 }
 
 
 /*
- * Return the nth SedVariable in the SedListOfSedVariables within this SedComputeChange.
+ * Return the nth Variable in the SedListOfVariables within this SedComputeChange.
  */
 const SedVariable*
-SedComputeChange::getSedVariable(unsigned int n) const
+SedComputeChange::getVariable(unsigned int n) const
 {
 	return mVariable.get(n);
 }
 
 
 /*
- * Return a SedVariable from the SedListOfSedVariables by id.
+ * Return a Variable from the SedListOfVariables by id.
  */
 SedVariable*
-SedComputeChange::getSedVariable(const std::string& sid)
+SedComputeChange::getVariable(const std::string& sid)
 {
 	return mVariable.get(sid);
 }
 
 
 /*
- * Return a SedVariable from the SedListOfSedVariables by id.
+ * Return a Variable from the SedListOfVariables by id.
  */
 const SedVariable*
-SedComputeChange::getSedVariable(const std::string& sid) const
+SedComputeChange::getVariable(const std::string& sid) const
 {
 	return mVariable.get(sid);
 }
@@ -294,7 +294,7 @@ SedComputeChange::getSedVariable(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedComputeChange::addSedVariable(const SedVariable* sv)
+SedComputeChange::addVariable(const SedVariable* sv)
 {
 	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
 	mVariable.append(sv);
@@ -308,7 +308,7 @@ SedComputeChange::addSedVariable(const SedVariable* sv)
  * @return the number of SedVariable objects in this SedComputeChange
  */
 unsigned int 
-SedComputeChange::getNumSedVariables() const
+SedComputeChange::getNumVariables() const
 {
 	return mVariable.size();
 }
@@ -322,7 +322,7 @@ SedComputeChange::getNumSedVariables() const
  * @see addSedVariable(const SedVariable* sv)
  */
 SedVariable* 
-SedComputeChange::createSedVariable()
+SedComputeChange::createVariable()
 {
 	SedVariable *temp = new SedVariable();
 	if (temp != NULL) mVariable.appendAndOwn(temp);
@@ -330,70 +330,70 @@ SedComputeChange::createSedVariable()
 }
 
 /*
- * Returns the  "SedListOfSedParameters" in this SedComputeChange object.
+ * Returns the  "SedListOfParameters" in this SedComputeChange object.
  */
-const SedListOfSedParameters*
-SedComputeChange::getListOfSedParameters() const
+const SedListOfParameters*
+SedComputeChange::getListOfParameters() const
 {
 	return &mParameter;
 }
 
 
 /*
- * Removes the nth SedParameter from the SedListOfSedParameters.
+ * Removes the nth Parameter from the SedListOfParameters.
  */
 SedParameter*
-SedComputeChange::removeSedParameter(unsigned int n)
+SedComputeChange::removeParameter(unsigned int n)
 {
 	return mParameter.remove(n);
 }
 
 
 /*
- * Removes the a SedParameter with given id from the SedListOfSedParameters.
+ * Removes the a Parameter with given id from the SedListOfParameters.
  */
 SedParameter*
-SedComputeChange::removeSedParameter(const std::string& sid)
+SedComputeChange::removeParameter(const std::string& sid)
 {
 	return mParameter.remove(sid);
 }
 
 
 /*
- * Return the nth SedParameter in the SedListOfSedParameters within this SedComputeChange.
+ * Return the nth Parameter in the SedListOfParameters within this SedComputeChange.
  */
 SedParameter*
-SedComputeChange::getSedParameter(unsigned int n)
+SedComputeChange::getParameter(unsigned int n)
 {
 	return mParameter.get(n);
 }
 
 
 /*
- * Return the nth SedParameter in the SedListOfSedParameters within this SedComputeChange.
+ * Return the nth Parameter in the SedListOfParameters within this SedComputeChange.
  */
 const SedParameter*
-SedComputeChange::getSedParameter(unsigned int n) const
+SedComputeChange::getParameter(unsigned int n) const
 {
 	return mParameter.get(n);
 }
 
 
 /*
- * Return a SedParameter from the SedListOfSedParameters by id.
+ * Return a Parameter from the SedListOfParameters by id.
  */
 SedParameter*
-SedComputeChange::getSedParameter(const std::string& sid)
+SedComputeChange::getParameter(const std::string& sid)
 {
 	return mParameter.get(sid);
 }
 
 
 /*
- * Return a SedParameter from the SedListOfSedParameters by id.
+ * Return a Parameter from the SedListOfParameters by id.
  */
 const SedParameter*
-SedComputeChange::getSedParameter(const std::string& sid) const
+SedComputeChange::getParameter(const std::string& sid) const
 {
 	return mParameter.get(sid);
 }
@@ -412,7 +412,7 @@ SedComputeChange::getSedParameter(const std::string& sid) const
  * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
  */
 int
-SedComputeChange::addSedParameter(const SedParameter* sp)
+SedComputeChange::addParameter(const SedParameter* sp)
 {
 	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
 	mParameter.append(sp);
@@ -426,7 +426,7 @@ SedComputeChange::addSedParameter(const SedParameter* sp)
  * @return the number of SedParameter objects in this SedComputeChange
  */
 unsigned int 
-SedComputeChange::getNumSedParameters() const
+SedComputeChange::getNumParameters() const
 {
 	return mParameter.size();
 }
@@ -440,7 +440,7 @@ SedComputeChange::getNumSedParameters() const
  * @see addSedParameter(const SedParameter* sp)
  */
 SedParameter* 
-SedComputeChange::createSedParameter()
+SedComputeChange::createParameter()
 {
 	SedParameter *temp = new SedParameter();
 	if (temp != NULL) mParameter.appendAndOwn(temp);
@@ -540,11 +540,11 @@ void
 SedComputeChange::writeElements (XMLOutputStream& stream) const
 {
 	SedChange::writeElements(stream);
-	if (getNumSedVariables() > 0)
+	if (getNumVariables() > 0)
 	{
 		mVariable.write(stream);
 	}
-	if (getNumSedParameters() > 0)
+	if (getNumParameters() > 0)
 	{
 		mParameter.write(stream);
 	}
@@ -759,114 +759,114 @@ SedComputeChange_unsetMath(SedComputeChange_t * scc)
 
 LIBSEDML_EXTERN
 int
-SedComputeChange_addSedVariable(SedComputeChange_t * scc, SedVariable_t * sv)
+SedComputeChange_addVariable(SedComputeChange_t * scc, SedVariable_t * sv)
 {
-	return  (scc != NULL) ? scc->addSedVariable(sv) : LIBSBML_INVALID_OBJECT;
+	return  (scc != NULL) ? scc->addVariable(sv) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedComputeChange_createSedVariable(SedComputeChange_t * scc)
+SedComputeChange_createVariable(SedComputeChange_t * scc)
 {
-	return  (scc != NULL) ? scc->createSedVariable() : NULL;
+	return  (scc != NULL) ? scc->createVariable() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedComputeChange_getSedListOfSedVariables(SedComputeChange_t * scc)
+SedComputeChange_getSedListOfVariables(SedComputeChange_t * scc)
 {
-	return  (scc != NULL) ? (SedListOf_t *)scc->getListOfSedVariables() : NULL;
+	return  (scc != NULL) ? (SedListOf_t *)scc->getListOfVariables() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedComputeChange_getSedVariable(SedComputeChange_t * scc, unsigned int n)
+SedComputeChange_getVariable(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (scc != NULL) ? scc->getSedVariable(n) : NULL;
+	return  (scc != NULL) ? scc->getVariable(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedComputeChange_getSedVariableById(SedComputeChange_t * scc, const char * sid)
+SedComputeChange_getVariableById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (scc != NULL) ? scc->getSedVariable(sid) : NULL;
+	return  (scc != NULL) ? scc->getVariable(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedComputeChange_getNumSedVariables(SedComputeChange_t * scc)
+SedComputeChange_getNumVariables(SedComputeChange_t * scc)
 {
-	return  (scc != NULL) ? scc->getNumSedVariables() : SEDML_INT_MAX;
+	return  (scc != NULL) ? scc->getNumVariables() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedComputeChange_removeSedVariable(SedComputeChange_t * scc, unsigned int n)
+SedComputeChange_removeVariable(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (scc != NULL) ? scc->removeSedVariable(n) : NULL;
+	return  (scc != NULL) ? scc->removeVariable(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
-SedComputeChange_removeSedVariableById(SedComputeChange_t * scc, const char * sid)
+SedComputeChange_removeVariableById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (scc != NULL) ? scc->removeSedVariable(sid) : NULL;
+	return  (scc != NULL) ? scc->removeVariable(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 int
-SedComputeChange_addSedParameter(SedComputeChange_t * scc, SedParameter_t * sp)
+SedComputeChange_addParameter(SedComputeChange_t * scc, SedParameter_t * sp)
 {
-	return  (scc != NULL) ? scc->addSedParameter(sp) : LIBSBML_INVALID_OBJECT;
+	return  (scc != NULL) ? scc->addParameter(sp) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedComputeChange_createSedParameter(SedComputeChange_t * scc)
+SedComputeChange_createParameter(SedComputeChange_t * scc)
 {
-	return  (scc != NULL) ? scc->createSedParameter() : NULL;
+	return  (scc != NULL) ? scc->createParameter() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
-SedComputeChange_getSedListOfSedParameters(SedComputeChange_t * scc)
+SedComputeChange_getSedListOfParameters(SedComputeChange_t * scc)
 {
-	return  (scc != NULL) ? (SedListOf_t *)scc->getListOfSedParameters() : NULL;
+	return  (scc != NULL) ? (SedListOf_t *)scc->getListOfParameters() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedComputeChange_getSedParameter(SedComputeChange_t * scc, unsigned int n)
+SedComputeChange_getParameter(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (scc != NULL) ? scc->getSedParameter(n) : NULL;
+	return  (scc != NULL) ? scc->getParameter(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedComputeChange_getSedParameterById(SedComputeChange_t * scc, const char * sid)
+SedComputeChange_getParameterById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (scc != NULL) ? scc->getSedParameter(sid) : NULL;
+	return  (scc != NULL) ? scc->getParameter(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
-SedComputeChange_getNumSedParameters(SedComputeChange_t * scc)
+SedComputeChange_getNumParameters(SedComputeChange_t * scc)
 {
-	return  (scc != NULL) ? scc->getNumSedParameters() : SEDML_INT_MAX;
+	return  (scc != NULL) ? scc->getNumParameters() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedComputeChange_removeSedParameter(SedComputeChange_t * scc, unsigned int n)
+SedComputeChange_removeParameter(SedComputeChange_t * scc, unsigned int n)
 {
-	return  (scc != NULL) ? scc->removeSedParameter(n) : NULL;
+	return  (scc != NULL) ? scc->removeParameter(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
-SedComputeChange_removeSedParameterById(SedComputeChange_t * scc, const char * sid)
+SedComputeChange_removeParameterById(SedComputeChange_t * scc, const char * sid)
 {
-	return  (scc != NULL) ? scc->removeSedParameter(sid) : NULL;
+	return  (scc != NULL) ? scc->removeParameter(sid) : NULL;
 }
 
 /**

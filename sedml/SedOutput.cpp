@@ -463,8 +463,8 @@ SedOutput::writeAttributes (XMLOutputStream& stream) const
 /*
  * Constructor 
  */
-SedListOfSedOutputs::SedListOfSedOutputs(unsigned int level, 
-	                    unsigned int version)
+SedListOfOutputs::SedListOfOutputs(unsigned int level, 
+	                 unsigned int version)
  : SedListOf(level, version)
 {
 	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
@@ -474,7 +474,7 @@ SedListOfSedOutputs::SedListOfSedOutputs(unsigned int level,
 /*
  * Constructor 
  */
-SedListOfSedOutputs::SedListOfSedOutputs(SedNamespaces* sedns)
+SedListOfOutputs::SedListOfOutputs(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
 	setElementNamespace(sedns->getURI());
@@ -482,51 +482,51 @@ SedListOfSedOutputs::SedListOfSedOutputs(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSedOutputs 
+ * Returns a deep copy of this SedListOfOutputs 
  */
-SedListOfSedOutputs* 
-SedListOfSedOutputs::clone () const
+SedListOfOutputs* 
+SedListOfOutputs::clone () const
  {
-	return new SedListOfSedOutputs(*this);
+	return new SedListOfOutputs(*this);
 }
 
 
 /*
- * Get a SedOutput from the SedListOfSedOutputs by index.
+ * Get a Output from the SedListOfOutputs by index.
 */
 SedOutput*
-SedListOfSedOutputs::get(unsigned int n)
+SedListOfOutputs::get(unsigned int n)
 {
 	return static_cast<SedOutput*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedOutput from the SedListOfSedOutputs by index.
+ * Get a Output from the SedListOfOutputs by index.
  */
 const SedOutput*
-SedListOfSedOutputs::get(unsigned int n) const
+SedListOfOutputs::get(unsigned int n) const
 {
 	return static_cast<const SedOutput*>(SedListOf::get(n));
 }
 
 
 /*
- * Get a SedOutput from the SedListOfSedOutputs by id.
+ * Get a Output from the SedListOfOutputs by id.
  */
 SedOutput*
-SedListOfSedOutputs::get(const std::string& sid)
+SedListOfOutputs::get(const std::string& sid)
 {
 	return const_cast<SedOutput*>(
-	  static_cast<const SedListOfSedOutputs&>(*this).get(sid));
+	  static_cast<const SedListOfOutputs&>(*this).get(sid));
 }
 
 
 /*
- * Get a SedOutput from the SedListOfSedOutputs by id.
+ * Get a Output from the SedListOfOutputs by id.
  */
 const SedOutput*
-SedListOfSedOutputs::get(const std::string& sid) const
+SedListOfOutputs::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
@@ -536,20 +536,20 @@ SedListOfSedOutputs::get(const std::string& sid) const
 
 
 /*
- * Removes the nth SedOutput from this SedListOfSedOutputs
+ * Removes the nth Output from this SedListOfOutputs
  */
 SedOutput*
-SedListOfSedOutputs::remove(unsigned int n)
+SedListOfOutputs::remove(unsigned int n)
 {
 	return static_cast<SedOutput*>(SedListOf::remove(n));
 }
 
 
 /*
- * Removes the SedOutput from this SedListOfSedOutputs with the given identifier
+ * Removes the Output from this SedListOfOutputs with the given identifier
  */
 SedOutput*
-SedListOfSedOutputs::remove(const std::string& sid)
+SedListOfOutputs::remove(const std::string& sid)
 {
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
@@ -570,7 +570,7 @@ SedListOfSedOutputs::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSedOutputs::getElementName () const
+SedListOfOutputs::getElementName () const
 {
 	static const string name = "listOfOutputs";
 	return name;
@@ -581,7 +581,7 @@ SedListOfSedOutputs::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSedOutputs::getTypeCode () const
+SedListOfOutputs::getTypeCode () const
 {
 	return SEDML_LIST_OF;
 }
@@ -591,7 +591,7 @@ SedListOfSedOutputs::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSedOutputs::getItemTypeCode () const
+SedListOfOutputs::getItemTypeCode () const
 {
 	return SEDML_OUTPUT;
 }
@@ -600,10 +600,10 @@ SedListOfSedOutputs::getItemTypeCode () const
 /** @cond doxygen-libsbml-internal */
 
 /*
- * Creates a new SedOutput in this SedListOfSedOutputs
+ * Creates a new SedOutput in this SedListOfOutputs
  */
 SedBase*
-SedListOfSedOutputs::createObject(XMLInputStream& stream)
+SedListOfOutputs::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
@@ -639,7 +639,7 @@ SedListOfSedOutputs::createObject(XMLInputStream& stream)
  * Write the namespace for the Sed package.
  */
 void
-SedListOfSedOutputs::writeXMLNS(XMLOutputStream& stream) const
+SedListOfOutputs::writeXMLNS(XMLOutputStream& stream) const
 {
 	XMLNamespaces xmlns;
 
@@ -822,12 +822,12 @@ SedOutput_hasRequiredElements(SedOutput_t * so)
  */
 LIBSEDML_EXTERN
 SedOutput_t *
-SedListOfSedOutputs_getById(SedListOf_t * lo, const char * sid)
+SedListOfOutputs_getById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedOutputs *>(lo)->get(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->get(sid) : NULL;
 }
 
 
@@ -836,12 +836,12 @@ SedListOfSedOutputs_getById(SedListOf_t * lo, const char * sid)
  */
 LIBSEDML_EXTERN
 SedOutput_t *
-SedListOfSedOutputs_removeById(SedListOf_t * lo, const char * sid)
+SedListOfOutputs_removeById(SedListOf_t * lo, const char * sid)
 {
 	if (lo == NULL)
 		return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSedOutputs *>(lo)->remove(sid) : NULL;
+	return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->remove(sid) : NULL;
 }
 
 

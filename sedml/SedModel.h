@@ -1052,12 +1052,12 @@ SedModel_hasRequiredElements(SedModel_t * sm);
 
 LIBSEDML_EXTERN
 SedModel_t *
-SedListOfSedModels_getById(SedListOf_t * lo, const char * sid);
+SedListOfModels_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
 SedModel_t *
-SedListOfSedModels_removeById(SedListOf_t * lo, const char * sid);
+SedListOfModels_removeById(SedListOf_t * lo, const char * sid);
 
 
 
