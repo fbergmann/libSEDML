@@ -1987,7 +1987,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see getNamespaces()
    * @see getPackageVersion()
    */
-  unsigned int getLevel () const;
+  virtual const int getLevel () const;
 
 
   /**
@@ -1999,7 +1999,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see getLevel()
    * @see getNamespaces()
    */
-  unsigned int getVersion () const;
+  virtual const int getVersion () const;
 
 
   /**

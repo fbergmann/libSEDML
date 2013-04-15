@@ -42,11 +42,11 @@ if(WITH_CSHARP)
   add_subdirectory(csharp)
 endif(WITH_CSHARP)
 
-#
-#if(WITH_JAVA)
-#  add_subdirectory(java)
-#endif(WITH_JAVA)
-#
+
+if(WITH_JAVA)
+  add_subdirectory(java)
+endif(WITH_JAVA)
+
 
 endif(WITH_EXAMPLES)
 
@@ -77,12 +77,12 @@ file(GLOB cs_samples "${CMAKE_CURRENT_SOURCE_DIR}/csharp/*.cs"
 install(FILES ${cs_samples} DESTINATION ${MISC_PREFIX}examples/csharp)
 endif()
 
-#if(WITH_JAVA)
-## install java examples
-#file(GLOB java_samples "${CMAKE_CURRENT_SOURCE_DIR}/java/*.java"
-#					 "${CMAKE_CURRENT_SOURCE_DIR}/java/README.md")
-#install(FILES ${java_samples} DESTINATION ${MISC_PREFIX}examples/java)
-#endif()
+if(WITH_JAVA)
+# install java examples
+file(GLOB java_samples "${CMAKE_CURRENT_SOURCE_DIR}/java/*.java"
+					 "${CMAKE_CURRENT_SOURCE_DIR}/java/README.md")
+install(FILES ${java_samples} DESTINATION ${MISC_PREFIX}examples/java)
+endif()
 #
 #if(WITH_PERL)
 ## install perl examples

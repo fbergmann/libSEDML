@@ -1763,7 +1763,7 @@ SedBase::unsetAnnotation ()
 /*
  * @return the Sed level of this Sed object.
  */
-unsigned int
+const int
 SedBase::getLevel () const
 {
   if (mSed != NULL)
@@ -1778,7 +1778,7 @@ SedBase::getLevel () const
 /*
  * @return the Sed version of this Sed object.
  */
-unsigned int
+const int
 SedBase::getVersion () const
 {
   if (mSed != NULL)

@@ -47,11 +47,11 @@ if(WITH_CSHARP)
 add_subdirectory(csharp)
 endif()
 
-# 
-# if(WITH_JAVA)
-# add_subdirectory(java)
-# endif()
-# 
+
+if(WITH_JAVA)
+add_subdirectory(java)
+endif()
+
 # if(WITH_PERL)
 # add_subdirectory(perl)
 # endif()

@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Description       : CMake build script for libSEDML C++ examples
+# Description       : CMake build script for libSEDML Java examples
 # Original author(s): Frank Bergmann <fbergman@caltech.edu>
 # Organization      : California Institute of Technology
 #
@@ -32,36 +32,43 @@
 #
 ###############################################################################
 
+find_package(Java COMPONENTS Development REQUIRED)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${CMAKE_SOURCE_DIR})
-include_directories(BEFORE ${CMAKE_BINARY_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/include)
 
-foreach(example 
-
+foreach( example
+	
 	create_sedml
 	echo_sedml
 	print_sedml
 	
 )
-	add_executable(example_cpp_${example} ${example}.cpp)
-	set_target_properties(example_cpp_${example} PROPERTIES  OUTPUT_NAME ${example})
-	if (WIN32 AND NOT CYGWIN)
-	set_target_properties(example_cpp_${example} PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
-	endif()
-	target_link_libraries(example_cpp_${example} ${LIBSEDML_LIBRARY}-static)
+
+	file(TO_NATIVE_PATH ${CMAKE_CURRENT_BINARY_DIR} CURRENT_BIN)
+	file(TO_NATIVE_PATH ${CMAKE_CURRENT_BINARY_DIR}/../../bindings/java/libsedmlj.jar CURRENT_JAR )
+	file(TO_NATIVE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${example}.java CURRENT_FILE)
+
+	add_custom_command(	
+		OUTPUT ${example}.class
+		COMMAND "${Java_JAVAC_EXECUTABLE}"
+		ARGS -cp ".${FILE_SEP}\"${CURRENT_JAR}\"${FILE_SEP}${CMAKE_CURRENT_SOURCE_DIR}"
+			 ${CURRENT_FILE}
+			 -source 1.5
+			 -target 1.5
+			 -d ${CMAKE_CURRENT_BINARY_DIR}
+		MAIN_DEPENDENCY "${CMAKE_CURRENT_SOURCE_DIR}/../../bindings/java/local.i"
+		WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${example}.java
+		COMMENT "Build java example ${example}"
+	) 
 	
-	if (WITH_LIBXML)
-		target_link_libraries(example_cpp_${example} ${LIBXML_LIBRARY} ${EXTRA_LIBS})
-	endif()
+	add_custom_target(example_java_${example} ALL 
+		DEPENDS 
+		${CMAKE_CURRENT_BINARY_DIR}/${example}.class 
+		SOURCES 
+		${CMAKE_CURRENT_SOURCE_DIR}/${example}.java 
+	)
+	
+	add_dependencies(example_java_${example} binding_java_jar)
 
-	if (WITH_ZLIB)
-		target_link_libraries(example_cpp_${example} ${LIBZ_LIBRARY})
-	endif(WITH_ZLIB)
-	if (WITH_BZIP2)
-		target_link_libraries(example_cpp_${example} ${LIBBZ_LIBRARY})
-	endif(WITH_BZIP2)
-
+	
 endforeach()
