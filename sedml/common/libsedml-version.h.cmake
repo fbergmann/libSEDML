@@ -69,7 +69,7 @@ BEGIN_C_DECLS
  */
 LIBSEDML_EXTERN
 int 
-getLibSEDMLVersion () ;
+getLibSEDMLVersion ();
 
 
 /**

@@ -535,6 +535,86 @@ SedListOfOutputs::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedOutput" to this SedListOfOutputs.
+ *
+ * @param so; the SedOutput object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfOutputs::addOutput(const SedOutput* so)
+{
+	if(so == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(so);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedOutput objects in this SedListOfOutputs.
+ *
+ * @return the number of SedOutput objects in this SedListOfOutputs
+ */
+unsigned int 
+SedListOfOutputs::getNumOutputs() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedReport object, adds it to this SedListOfOutputss
+ * SedListOfOutputs and returns the SedReport object created. 
+ *
+ * @return a new SedReport object instance
+ *
+ * @see addReport(const SedOutput* so)
+ */
+SedReport* 
+SedListOfOutputs::createReport()
+{
+	SedReport *temp = new SedReport();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedPlot2D object, adds it to this SedListOfOutputss
+ * SedListOfOutputs and returns the SedPlot2D object created. 
+ *
+ * @return a new SedPlot2D object instance
+ *
+ * @see addPlot2D(const SedOutput* so)
+ */
+SedPlot2D* 
+SedListOfOutputs::createPlot2D()
+{
+	SedPlot2D *temp = new SedPlot2D();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedPlot3D object, adds it to this SedListOfOutputss
+ * SedListOfOutputs and returns the SedPlot3D object created. 
+ *
+ * @return a new SedPlot3D object instance
+ *
+ * @see addPlot3D(const SedOutput* so)
+ */
+SedPlot3D* 
+SedListOfOutputs::createPlot3D()
+{
+	SedPlot3D *temp = new SedPlot3D();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Output from this SedListOfOutputs
  */

@@ -711,6 +711,54 @@ SedListOfTasks::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedTask" to this SedListOfTasks.
+ *
+ * @param st; the SedTask object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfTasks::addTask(const SedTask* st)
+{
+	if(st == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(st);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedTask objects in this SedListOfTasks.
+ *
+ * @return the number of SedTask objects in this SedListOfTasks
+ */
+unsigned int 
+SedListOfTasks::getNumTasks() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedTask object, adds it to this SedListOfTaskss
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'SIdRef', 'name': 'modelReference'}, {'reqd': False, 'type': 'SIdRef', 'name': 'simulationReference'}], 'elementName': 'task', 'name': 'SedTask', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_TASK'} and returns the SedTask object created. 
+ *
+ * @return a new SedTask object instance
+ *
+ * @see addSedTask(const SedTask* st)
+ */
+SedTask* 
+SedListOfTasks::createTask()
+{
+	SedTask *temp = new SedTask();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Task from this SedListOfTasks
  */

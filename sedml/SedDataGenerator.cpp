@@ -903,6 +903,54 @@ SedListOfDataGenerators::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedDataGenerator" to this SedListOfDataGenerators.
+ *
+ * @param sdg; the SedDataGenerator object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfDataGenerators::addDataGenerator(const SedDataGenerator* sdg)
+{
+	if(sdg == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sdg);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedDataGenerator objects in this SedListOfDataGenerators.
+ *
+ * @return the number of SedDataGenerator objects in this SedListOfDataGenerators
+ */
+unsigned int 
+SedListOfDataGenerators::getNumDataGenerators() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedDataGenerator object, adds it to this SedListOfDataGeneratorss
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'lo_element', 'name': 'variable', 'element': 'SedVariable'}, {'reqd': False, 'type': 'lo_element', 'name': 'parameter', 'element': 'SedParameter'}, {'reqd': False, 'type': 'element', 'name': 'math'}], 'elementName': 'dataGenerator', 'name': 'SedDataGenerator', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': True, 'typecode': 'SEDML_DATAGENERATOR'} and returns the SedDataGenerator object created. 
+ *
+ * @return a new SedDataGenerator object instance
+ *
+ * @see addSedDataGenerator(const SedDataGenerator* sdg)
+ */
+SedDataGenerator* 
+SedListOfDataGenerators::createDataGenerator()
+{
+	SedDataGenerator *temp = new SedDataGenerator();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth DataGenerator from this SedListOfDataGenerators
  */

@@ -862,6 +862,54 @@ SedListOfModels::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedModel" to this SedListOfModels.
+ *
+ * @param sm; the SedModel object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfModels::addModel(const SedModel* sm)
+{
+	if(sm == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sm);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedModel objects in this SedListOfModels.
+ *
+ * @return the number of SedModel objects in this SedListOfModels
+ */
+unsigned int 
+SedListOfModels::getNumModels() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedModel object, adds it to this SedListOfModelss
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'string', 'name': 'language'}, {'reqd': True, 'type': 'string', 'name': 'source'}, {'concrete': [{'name': 'removeXML', 'element': 'SedRemoveXML'}, {'name': 'changeAttribute', 'element': 'SedChangeAttribute'}, {'name': 'computeChange', 'element': 'SedComputeChange'}], 'name': 'change', 'reqd': False, 'abstract': True, 'type': 'lo_element', 'element': 'SedChange'}], 'elementName': 'model', 'name': 'SedModel', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_MODEL'} and returns the SedModel object created. 
+ *
+ * @return a new SedModel object instance
+ *
+ * @see addSedModel(const SedModel* sm)
+ */
+SedModel* 
+SedListOfModels::createModel()
+{
+	SedModel *temp = new SedModel();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Model from this SedListOfModels
  */

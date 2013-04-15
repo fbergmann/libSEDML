@@ -499,7 +499,29 @@ public:
 	 *
 	 * @see addOutput(const SedOutput* o)
 	 */
-	SedOutput* createOutput();
+	SedReport* createReport();
+
+
+	/**
+	 * Creates a new Output object, adds it to the
+	 * SedListOfOutputs and returns the Output object created. 
+	 *
+	 * @return a new Output object instance
+	 *
+	 * @see addOutput(const SedOutput* o)
+	 */
+	SedPlot2D* createPlot2D();
+
+
+	/**
+	 * Creates a new Output object, adds it to the
+	 * SedListOfOutputs and returns the Output object created. 
+	 *
+	 * @return a new Output object instance
+	 *
+	 * @see addOutput(const SedOutput* o)
+	 */
+	SedPlot3D* createPlot3D();
 
 
 	/**

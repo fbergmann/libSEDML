@@ -418,7 +418,29 @@ public:
 	 *
 	 * @see addChange(const SedChange* c)
 	 */
-	SedChange* createChange();
+	SedRemoveXML* createRemoveXML();
+
+
+	/**
+	 * Creates a new Change object, adds it to the
+	 * SedListOfChanges and returns the Change object created. 
+	 *
+	 * @return a new Change object instance
+	 *
+	 * @see addChange(const SedChange* c)
+	 */
+	SedChangeAttribute* createChangeAttribute();
+
+
+	/**
+	 * Creates a new Change object, adds it to the
+	 * SedListOfChanges and returns the Change object created. 
+	 *
+	 * @return a new Change object instance
+	 *
+	 * @see addChange(const SedChange* c)
+	 */
+	SedComputeChange* createComputeChange();
 
 
 	/**

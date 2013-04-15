@@ -622,6 +622,54 @@ SedListOfSimulations::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedSimulation" to this SedListOfSimulations.
+ *
+ * @param ss; the SedSimulation object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfSimulations::addSimulation(const SedSimulation* ss)
+{
+	if(ss == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(ss);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedSimulation objects in this SedListOfSimulations.
+ *
+ * @return the number of SedSimulation objects in this SedListOfSimulations
+ */
+unsigned int 
+SedListOfSimulations::getNumSimulations() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedUniformTimeCourse object, adds it to this SedListOfSimulationss
+ * SedListOfSimulations and returns the SedUniformTimeCourse object created. 
+ *
+ * @return a new SedUniformTimeCourse object instance
+ *
+ * @see addUniformTimeCourse(const SedSimulation* ss)
+ */
+SedUniformTimeCourse* 
+SedListOfSimulations::createUniformTimeCourse()
+{
+	SedUniformTimeCourse *temp = new SedUniformTimeCourse();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Simulation from this SedListOfSimulations
  */

@@ -554,7 +554,7 @@ public:
 	 *
 	 * @see addSimulation(const SedSimulation* s)
 	 */
-	SedSimulation* createSimulation();
+	SedUniformTimeCourse* createUniformTimeCourse();
 
 
 	/**

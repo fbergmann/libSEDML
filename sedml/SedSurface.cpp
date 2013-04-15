@@ -496,6 +496,54 @@ SedListOfSurfaces::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedSurface" to this SedListOfSurfaces.
+ *
+ * @param ss; the SedSurface object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfSurfaces::addSurface(const SedSurface* ss)
+{
+	if(ss == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(ss);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedSurface objects in this SedListOfSurfaces.
+ *
+ * @return the number of SedSurface objects in this SedListOfSurfaces
+ */
+unsigned int 
+SedListOfSurfaces::getNumSurfaces() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedSurface object, adds it to this SedListOfSurfacess
+ * {'attribs': [{'reqd': True, 'type': 'bool', 'name': 'logZ'}, {'reqd': True, 'type': 'SIdRef', 'name': 'zDataReference'}], 'elementName': 'surface', 'name': 'SedSurface', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_OUTPUT_SURFACE', 'baseClass': 'SedCurve'} and returns the SedSurface object created. 
+ *
+ * @return a new SedSurface object instance
+ *
+ * @see addSedSurface(const SedSurface* ss)
+ */
+SedSurface* 
+SedListOfSurfaces::createSurface()
+{
+	SedSurface *temp = new SedSurface();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Surface from this SedListOfSurfaces
  */

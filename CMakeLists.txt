@@ -257,6 +257,14 @@ find_path(LIBSBML_INCLUDE_DIR
     DOC "The directory containing the sbml include files."
 )
 
+set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
+if (WIN32 AND NOT CYGWIN)
+if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
+else()
+	option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
+endif()
+endif()
 
 if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
     message(FATAL_ERROR "The include directory specified for sbml appears to be invalid.  It should contain the file sbml/SBase.h, but it does not.")
@@ -482,8 +490,18 @@ if(UNIX)
 
 else(UNIX)
     add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
-    add_definitions(-DWIN32 -DLIBSEDML_EXPORTS -DLIBLAX_EXPORTS)
-    set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32 -DLIBSEDML_EXPORTS -DLIBLAX_EXPORTS")
+		
+    add_definitions(-DWIN32)
+    set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
+
+	if (LIBSBML_STATIC)
+      add_definitions(-DLIBSBML_STATIC -DLIBLAX_STATIC)
+      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_STATIC -DLIBLAX_STATIC")
+	else()
+      add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
+      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
+	endif()
+	
     if(MSVC OR USING_INTEL)
         add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -D_CRT_SECURE_NO_WARNINGS")
@@ -637,7 +655,7 @@ add_subdirectory(sedml)
 #
 # create language bindings
 # 
-#add_subdirectory(bindings)
+add_subdirectory(bindings)
 
 
 

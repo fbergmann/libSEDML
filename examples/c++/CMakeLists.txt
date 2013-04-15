@@ -41,13 +41,16 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 
 foreach(example 
 
-	create_sedml
-	echo_sedml
+	#create_sedml
+	#echo_sedml
 	print_sedml
 	
 )
 	add_executable(example_cpp_${example} ${example}.cpp)
 	set_target_properties(example_cpp_${example} PROPERTIES  OUTPUT_NAME ${example})
+	if (WIN32 AND NOT CYGWIN)
+	set_target_properties(example_cpp_${example} PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
+	endif()
 	target_link_libraries(example_cpp_${example} ${LIBSEDML_LIBRARY}-static)
 	
 	if (WITH_LIBXML)

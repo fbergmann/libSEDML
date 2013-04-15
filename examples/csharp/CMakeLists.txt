@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# Description       : CMake build script for libSEDML C examples
+# Description       : CMake build script for libSEDML C# examples
 # Original author(s): Frank Bergmann <fbergman@caltech.edu>
 # Organization      : California Institute of Technology
 #
@@ -32,36 +32,26 @@
 #
 ###############################################################################
 
-
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${CMAKE_SOURCE_DIR})
-include_directories(BEFORE ${CMAKE_BINARY_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/include)
-
-foreach(example 
-
+foreach( example
+	
 	create_sedml
 	echo_sedml
 	print_sedml
 	
 )
-	add_executable(example_c_${example} ${example}.c)
-	set_target_properties(example_c_${example} PROPERTIES  OUTPUT_NAME ${example})
-	if (WIN32 AND NOT CYGWIN)
-	set_target_properties(example_c_${example} PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
-	endif()
-	target_link_libraries(example_c_${example} ${LIBSEDML_LIBRARY}-static)
+
+	add_custom_command(	
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${example}.exe
+		COMMAND "${CSHARP_COMPILER}"
+		ARGS -r:${CMAKE_CURRENT_BINARY_DIR}/../../bindings/csharp/libsedmlcsP.dll
+			-target:exe
+			-out:${example}.exe
+			${CSHARP_EXTRA_ARGS}
+			${CMAKE_CURRENT_SOURCE_DIR}${PATH_SEP}${example}.cs
+		MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/${example}.cs
+		COMMENT "Build C# example: ${example}") 
 	
-	if (WITH_LIBXML)
-		target_link_libraries(example_c_${example} ${LIBXML_LIBRARY} ${EXTRA_LIBS})
-	endif()
-
-	if (WITH_ZLIB)
-		target_link_libraries(example_c_${example} ${LIBZ_LIBRARY})
-	endif(WITH_ZLIB)
-	if (WITH_BZIP2)
-		target_link_libraries(example_c_${example} ${LIBBZ_LIBRARY})
-	endif(WITH_BZIP2)
-
+	add_custom_target(exmple_cs_${example} ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${example}.exe)
+	add_dependencies(exmple_cs_${example} binding_csharp_managed_lib)
+	
 endforeach()

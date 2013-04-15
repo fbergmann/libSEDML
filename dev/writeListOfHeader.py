@@ -189,7 +189,7 @@ def writeProtectedFunctions(output, element, package):
    
 
 #write class
-def writeClass(header, nameOfElement, typeOfElement, nameOfPackage):
+def writeClass(header, nameOfElement, typeOfElement, nameOfPackage, elementDict):
   header.write('class LIBSEDML_EXTERN {0} :'.format(generalFunctions.writeListOf(nameOfElement)))
   header.write(' public SedListOf\n{0}\n\n'.format('{'))
   header.write('public:\n\n')
@@ -214,16 +214,27 @@ def writeClass(header, nameOfElement, typeOfElement, nameOfPackage):
   header.write('\t * @return the number of {0} objects in this {1}\n'.format(nameOfElement, generalFunctions.writeListOf(nameOfElement)))
   header.write('\t */\n')
   header.write('\tunsigned int getNum{0}s() const;\n\n\n'.format(nameOfElement))
-  header.write('\t/**\n')
-  header.write('\t * Creates a new {0} object, adds it to the\n'.format(nameOfElement))
-  header.write('\t * {0} and returns the {1} object created. \n'.format(generalFunctions.writeListOf(nameOfElement), nameOfElement))
-  header.write('\t *\n')
-  header.write('\t * @return a new {0} object instance\n'.format(nameOfElement))
-  header.write('\t *\n')
-  header.write('\t * @see add{0}(const {1}* {2})\n'.format(nameOfElement, typeOfElement, strFunctions.objAbbrev(nameOfElement)))
-  header.write('\t */\n')
-  header.write('\t{0}* create{1}();\n\n\n'.format(typeOfElement, nameOfElement))
-
+  if elementDict.has_key('abstract') == False or (elementDict.has_key('abstract') and elementDict['abstract'] == False):
+    header.write('\t/**\n')
+    header.write('\t * Creates a new {0} object, adds it to the\n'.format(nameOfElement))
+    header.write('\t * {0} and returns the {1} object created. \n'.format(generalFunctions.writeListOf(nameOfElement), nameOfElement))
+    header.write('\t *\n')
+    header.write('\t * @return a new {0} object instance\n'.format(nameOfElement))
+    header.write('\t *\n')
+    header.write('\t * @see add{0}(const {1}* {2})\n'.format(nameOfElement, typeOfElement, strFunctions.objAbbrev(nameOfElement)))
+    header.write('\t */\n')
+    header.write('\t{0}* create{1}();\n\n\n'.format(typeOfElement, nameOfElement))
+  elif elementDict.has_key('concrete'):
+    for elem in elementDict['concrete']:
+      header.write('\t/**\n')
+      header.write('\t * Creates a new {0} object, adds it to the\n'.format(nameOfElement))
+      header.write('\t * {0} and returns the {1} object created. \n'.format(generalFunctions.writeListOf(nameOfElement), nameOfElement))
+      header.write('\t *\n')
+      header.write('\t * @return a new {0} object instance\n'.format(nameOfElement))
+      header.write('\t *\n')
+      header.write('\t * @see add{0}(const {1}* {2})\n'.format(nameOfElement, typeOfElement, strFunctions.objAbbrev(nameOfElement)))
+      header.write('\t */\n')
+      header.write('\t{0}* create{1}();\n\n\n'.format(elem['element'], strFunctions.cap(elem['name'])))
   writeRemoveFunctions(header, nameOfElement, typeOfElement)
   generalFunctions.writeCommonHeaders(header, nameOfElement, None, True)
   header.write('protected:\n\n')
@@ -238,7 +249,7 @@ def createHeader(element, header):
     name = strFunctions.cap(element['elementName']) 
   if element.has_key('element'):
     type = element['element']
-  writeClass(header, name, type, element['package'])
+  writeClass(header, name, type, element['package'], element)
 
  
 

@@ -408,6 +408,86 @@ SedListOfChanges::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedChange" to this SedListOfChanges.
+ *
+ * @param sc; the SedChange object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfChanges::addChange(const SedChange* sc)
+{
+	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sc);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedChange objects in this SedListOfChanges.
+ *
+ * @return the number of SedChange objects in this SedListOfChanges
+ */
+unsigned int 
+SedListOfChanges::getNumChanges() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedRemoveXML object, adds it to this SedListOfChangess
+ * SedListOfChanges and returns the SedRemoveXML object created. 
+ *
+ * @return a new SedRemoveXML object instance
+ *
+ * @see addRemoveXML(const SedChange* sc)
+ */
+SedRemoveXML* 
+SedListOfChanges::createRemoveXML()
+{
+	SedRemoveXML *temp = new SedRemoveXML();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedChangeAttribute object, adds it to this SedListOfChangess
+ * SedListOfChanges and returns the SedChangeAttribute object created. 
+ *
+ * @return a new SedChangeAttribute object instance
+ *
+ * @see addChangeAttribute(const SedChange* sc)
+ */
+SedChangeAttribute* 
+SedListOfChanges::createChangeAttribute()
+{
+	SedChangeAttribute *temp = new SedChangeAttribute();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedComputeChange object, adds it to this SedListOfChangess
+ * SedListOfChanges and returns the SedComputeChange object created. 
+ *
+ * @return a new SedComputeChange object instance
+ *
+ * @see addComputeChange(const SedChange* sc)
+ */
+SedComputeChange* 
+SedListOfChanges::createComputeChange()
+{
+	SedComputeChange *temp = new SedComputeChange();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Change from this SedListOfChanges
  */

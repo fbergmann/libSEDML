@@ -791,6 +791,54 @@ SedListOfCurves::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedCurve" to this SedListOfCurves.
+ *
+ * @param sc; the SedCurve object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfCurves::addCurve(const SedCurve* sc)
+{
+	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sc);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedCurve objects in this SedListOfCurves.
+ *
+ * @return the number of SedCurve objects in this SedListOfCurves
+ */
+unsigned int 
+SedListOfCurves::getNumCurves() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedCurve object, adds it to this SedListOfCurvess
+ * {'attribs': [{'reqd': False, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': True, 'type': 'bool', 'name': 'logX'}, {'reqd': True, 'type': 'bool', 'name': 'logY'}, {'reqd': True, 'type': 'SIdRef', 'name': 'xDataReference'}, {'reqd': True, 'type': 'SIdRef', 'name': 'yDataReference'}], 'elementName': 'curve', 'name': 'SedCurve', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_OUTPUT_CURVE'} and returns the SedCurve object created. 
+ *
+ * @return a new SedCurve object instance
+ *
+ * @see addSedCurve(const SedCurve* sc)
+ */
+SedCurve* 
+SedListOfCurves::createCurve()
+{
+	SedCurve *temp = new SedCurve();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Curve from this SedListOfCurves
  */

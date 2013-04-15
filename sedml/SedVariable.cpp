@@ -820,6 +820,54 @@ SedListOfVariables::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedVariable" to this SedListOfVariables.
+ *
+ * @param sv; the SedVariable object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfVariables::addVariable(const SedVariable* sv)
+{
+	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sv);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedVariable objects in this SedListOfVariables.
+ *
+ * @return the number of SedVariable objects in this SedListOfVariables
+ */
+unsigned int 
+SedListOfVariables::getNumVariables() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedVariable object, adds it to this SedListOfVariabless
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'string', 'name': 'symbol'}, {'reqd': False, 'type': 'string', 'name': 'target'}, {'reqd': False, 'type': 'SIdRef', 'name': 'taskReference'}, {'reqd': False, 'type': 'SIdRef', 'name': 'modelReference'}], 'elementName': 'variable', 'name': 'SedVariable', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_VARIABLE'} and returns the SedVariable object created. 
+ *
+ * @return a new SedVariable object instance
+ *
+ * @see addSedVariable(const SedVariable* sv)
+ */
+SedVariable* 
+SedListOfVariables::createVariable()
+{
+	SedVariable *temp = new SedVariable();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Variable from this SedListOfVariables
  */

@@ -556,6 +556,54 @@ SedListOfParameters::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedParameter" to this SedListOfParameters.
+ *
+ * @param sp; the SedParameter object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfParameters::addParameter(const SedParameter* sp)
+{
+	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sp);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedParameter objects in this SedListOfParameters.
+ *
+ * @return the number of SedParameter objects in this SedListOfParameters
+ */
+unsigned int 
+SedListOfParameters::getNumParameters() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedParameter object, adds it to this SedListOfParameterss
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': True, 'type': 'double', 'name': 'value'}], 'elementName': 'parameter', 'name': 'SedParameter', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_PARAMETER'} and returns the SedParameter object created. 
+ *
+ * @return a new SedParameter object instance
+ *
+ * @see addSedParameter(const SedParameter* sp)
+ */
+SedParameter* 
+SedListOfParameters::createParameter()
+{
+	SedParameter *temp = new SedParameter();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Parameter from this SedListOfParameters
  */

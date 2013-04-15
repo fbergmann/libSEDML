@@ -658,6 +658,54 @@ SedListOfDataSets::get(const std::string& sid) const
 }
 
 
+/**
+ * Adds a copy the given "SedDataSet" to this SedListOfDataSets.
+ *
+ * @param sds; the SedDataSet object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedListOfDataSets::addDataSet(const SedDataSet* sds)
+{
+	if(sds == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	append(sds);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedDataSet objects in this SedListOfDataSets.
+ *
+ * @return the number of SedDataSet objects in this SedListOfDataSets
+ */
+unsigned int 
+SedListOfDataSets::getNumDataSets() const
+{
+	return size();
+}
+
+/**
+ * Creates a new SedDataSet object, adds it to this SedListOfDataSetss
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': True, 'type': 'string', 'name': 'label'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': True, 'type': 'SIdRef', 'name': 'dataReference'}], 'elementName': 'dataSet', 'name': 'SedDataSet', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_OUTPUT_DATASET'} and returns the SedDataSet object created. 
+ *
+ * @return a new SedDataSet object instance
+ *
+ * @see addSedDataSet(const SedDataSet* sds)
+ */
+SedDataSet* 
+SedListOfDataSets::createDataSet()
+{
+	SedDataSet *temp = new SedDataSet();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth DataSet from this SedListOfDataSets
  */

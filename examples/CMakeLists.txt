@@ -38,9 +38,10 @@ if(WITH_EXAMPLES)
 add_subdirectory(c)
 add_subdirectory(c++)
 
-#if(WITH_CSHARP)
-#  add_subdirectory(csharp)
-#endif(WITH_CSHARP)
+if(WITH_CSHARP)
+  add_subdirectory(csharp)
+endif(WITH_CSHARP)
+
 #
 #if(WITH_JAVA)
 #  add_subdirectory(java)
@@ -57,10 +58,10 @@ endif(WITH_EXAMPLES)
 install(FILES README.md DESTINATION ${MISC_PREFIX}examples)
 
 ## install c examples
-#file(GLOB c_samples "${CMAKE_CURRENT_SOURCE_DIR}/c/*.c"
-#					 "${CMAKE_CURRENT_SOURCE_DIR}/c/README.md"
-#					 "${CMAKE_CURRENT_SOURCE_DIR}/c/*.h")
-#install(FILES ${c_samples} DESTINATION ${MISC_PREFIX}examples/c)
+file(GLOB c_samples "${CMAKE_CURRENT_SOURCE_DIR}/c/*.c"
+					 "${CMAKE_CURRENT_SOURCE_DIR}/c/README.md"
+					 "${CMAKE_CURRENT_SOURCE_DIR}/c/*.h")
+install(FILES ${c_samples} DESTINATION ${MISC_PREFIX}examples/c)
 #
 # install c++ examples
 file(GLOB cpp_samples "${CMAKE_CURRENT_SOURCE_DIR}/c++/*.c"
@@ -69,13 +70,13 @@ file(GLOB cpp_samples "${CMAKE_CURRENT_SOURCE_DIR}/c++/*.c"
 					 "${CMAKE_CURRENT_SOURCE_DIR}/c++/*.h")
 install(FILES ${cpp_samples} DESTINATION ${MISC_PREFIX}examples/c++)
 
-#if(WITH_CSHARP)
-## install c# examples
-#file(GLOB cs_samples "${CMAKE_CURRENT_SOURCE_DIR}/csharp/*.cs"
-#					 "${CMAKE_CURRENT_SOURCE_DIR}/csharp/README.md")
-#install(FILES ${cs_samples} DESTINATION ${MISC_PREFIX}examples/csharp)
-#endif()
-#
+if(WITH_CSHARP)
+# install c# examples
+file(GLOB cs_samples "${CMAKE_CURRENT_SOURCE_DIR}/csharp/*.cs"
+					 "${CMAKE_CURRENT_SOURCE_DIR}/csharp/README.md")
+install(FILES ${cs_samples} DESTINATION ${MISC_PREFIX}examples/csharp)
+endif()
+
 #if(WITH_JAVA)
 ## install java examples
 #file(GLOB java_samples "${CMAKE_CURRENT_SOURCE_DIR}/java/*.java"
