@@ -90,14 +90,14 @@ endif()
 #					 "${CMAKE_CURRENT_SOURCE_DIR}/perl/README.md")
 #install(FILES ${perl_samples} DESTINATION ${MISC_PREFIX}examples/perl)
 #endif()
-#
-#if (WITH_PYTHON)
-## install python examples
-#file(GLOB python_samples "${CMAKE_CURRENT_SOURCE_DIR}/python/*.py"
-#					 "${CMAKE_CURRENT_SOURCE_DIR}/python/README.md")
-#install(FILES ${python_samples} DESTINATION ${MISC_PREFIX}examples/python)
-#endif()
-#
+
+if (WITH_PYTHON)
+# install python examples
+file(GLOB python_samples "${CMAKE_CURRENT_SOURCE_DIR}/python/*.py"
+					 "${CMAKE_CURRENT_SOURCE_DIR}/python/README.md")
+install(FILES ${python_samples} DESTINATION ${MISC_PREFIX}examples/python)
+endif()
+
 
 # install sample-models
 
