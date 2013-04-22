@@ -1,6 +1,6 @@
 /**
  * @file    local.i
- * @brief   Ruby-specific SWIG directives for wrapping libSEDML API
+ * @brief   R-specific SWIG directives for wrapping libSEDML API
  * @author  Alex Gutteridge
  * @author  Ben Bornstein
  * @author  Akiya Jouraku
@@ -27,7 +27,6 @@
  * and also available online as http://sbml.org/software/libsbml/license.html
  * ---------------------------------------------------------------------- -->*/
 
-%trackobjects;
 
 #pragma SWIG nowarn=509
 %warnfilter(365) operator+=;
@@ -61,6 +60,34 @@
  */
 
 // ignores C++ specific methods in std::string.
+
+/**
+ *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream, 
+ *
+ * (sample code) -----------------------------------------------------
+ *
+ * 1. wraps std::cout
+ *
+ *    xos = LibSBML::XMLOutputStream.new(LibSBML::cout)
+ *
+ * 2. wraps std::cerr
+ *
+ *    d = LibSBML::readSBML("foo.xml")
+ *    if ( d.getNumErrors > 0 ) 
+ *       d.printErrors(LibSBML::cerr)
+ *    end
+ *
+ * 3. wraps std::ostringstream
+ *
+ *    oss = LibSBML::Ostringstream.new()
+ *    xos = LibSBML::XMLOutputStream.new(oss)
+ *    ...
+ *    LibSBML::endl(oss)
+ *    s = oss.str();
+ * 
+ */
+
+// ignores C++ specific methods in std::string.
 %ignore std::basic_string<char>::begin;
 %ignore std::basic_string<char>::end;
 %ignore std::basic_string<char>::rbegin;
@@ -70,8 +97,8 @@
 %ignore std::basic_string<char>::reserve;
 
 %include <std_alloc.i>
-%include <std_basic_string.i>
 %include <std_string.i>
+
 
 namespace std
 {
@@ -159,35 +186,6 @@ namespace std
    }
 }
 
-/**
- * Allows SedListOf objects:
- *
- *   - To be indexed and sliced, e.g. lst[0].
- */
-
-%mixin SedListOf "Enumerable";
-
-%extend SedListOf
-{
-  int __len__()
-  {
-    return self->size();
-  }
-
-  SedBase* __getitem__(int i)
-  {
-     return self->get(fixNegativeIndex(i,self));
-  }
-
-  void each(void)
-  {
-     unsigned int i;
-     for(i=0;i<self->size();i++){    
-       rb_yield(SWIG_NewPointerObj(self->get(i),
-       GetDowncastSwigType(self->get(i)), 0));
-     }
-  }
-}
 
 /**
  * Convert SedBase, SimpleSpeciesReference, and Rule objects into the most specific type possible.
@@ -282,8 +280,7 @@ namespace std
     $action
   }
   catch (const SedConstructorException &e){
-    static VALUE cpperror = rb_define_class("SedConstructorException", rb_eArgError);
-    rb_raise(cpperror, e.what());    
+    Rf_error(e.what());    
   }
 }
 %enddef
@@ -361,8 +358,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
     $action
   }
   catch (const XMLConstructorException &e){
-    static VALUE cpperror = rb_define_class("XMLConstructorException", rb_eArgError);
-    rb_raise(cpperror, e.what());    
+    Rf_error(e.what());    
   }
 }
 %enddef
@@ -398,12 +394,6 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
  %typemap(out) List* SedNamespaces::getSupportedNamespaces
 {
   ListWrapper<SedNamespaces> *listw = ($1 != 0) ? new ListWrapper<SedNamespaces>($1) : 0;
-  $result = SWIG_NewPointerObj(SWIG_as_voidptr(listw), 
-#if SWIG_VERSION > 0x010333
-                               SWIGTYPE_p_ListWrapperT_SedNamespaces_t,
-#else
-                               SWIGTYPE_p_ListWrapperTSedNamespaces_t,
-#endif
-                               SWIG_POINTER_OWN |  0 );
+  $result = SWIG_NewPointerObj(SWIG_as_voidptr(listw), SWIGTYPE_p_ListWrapperT_SedNamespaces_t, SWIG_POINTER_OWN |  0 );
 }
 

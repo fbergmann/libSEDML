@@ -27,9 +27,13 @@
  * ---------------------------------------------------------------------- -->*/
 
 #include <cstddef>
+#include <string>
+#include <iostream>
+#include <sstream>
+#include <R.h>
 #include "sedml/SedBase.h"
 
-
+using namespace std;
 
 /**
  * @return the most specific Swig type for the given SedBase object.
