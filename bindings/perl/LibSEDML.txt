@@ -1,0 +1,40 @@
+=head1 NAME
+
+LibSEDML  -- interface to the libSEDML library
+
+=head1 SYNOPSIS
+
+  # Change the following path to wherever your copy is installed.
+  use lib '/usr/local/lib/perl5/site_perl';
+
+  use File::Spec;
+  use LibSEDML;
+  use strict;
+
+  my $file     = File::Spec->rel2abs('FOO.xml');
+  my $rd       = new LibSEDML::SedReader;
+  my $document = $rd->readSEDML($file);
+  
+  # Check for reading errors:
+  my $errors   = $document->getNumErrors();
+
+  # Print errors, if any, to stderr.
+  if ($errors > 0) {
+    $document->printErrors();
+    die "Errors while reading $file";
+  }
+
+  my $numModels = $document->getNumModels();
+  ... 
+
+=head1 DESCRIPTION
+
+The LibSEDML.pm package gives access to almost all functions in libSEDML
+(http://sed-ml.org). The Perl wrapper is generated using SWIG
+http://www.swig.org/ with relatively little manual intervention.  
+
+
+=head1 AUTHORS
+
+ Frank T. Bergmann <fbergman@caltech.edu>
+

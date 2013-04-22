@@ -56,10 +56,10 @@ add_subdirectory(python)
 endif()
 
 
-# if(WITH_PERL)
-# add_subdirectory(perl)
-# endif()
-# 
+if(WITH_PERL)
+add_subdirectory(perl)
+endif()
+
 # if(WITH_MATLAB)
 # add_subdirectory(matlab)
 # endif()
