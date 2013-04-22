@@ -79,7 +79,7 @@ $variable = $compute->createVariable();
 $variable->setId("S2");
 $variable->setModelReference("$model1");
 $variable->setTarget("/sbml:sbml/sbml:$model/sbml:listOfSpecies/sbml:species[@id='S2']");
-$compute->setMath(libsedml.parseFormula("S2 / 2"));  
+$compute->setMath(LibSEDML::parseFormula("S2 / 2"));  
 
 # create simulation
 $tc = $doc->createUniformTimeCourse();
@@ -107,7 +107,7 @@ $var->setId("v0");
 $var->setName("time");
 $var->setTaskReference("task1");
 $var->setSymbol("urn:sedml:symbol:time");
-$dg->setMath(libsedml.parseFormula("v0"));
+$dg->setMath(LibSEDML::parseFormula("v0"));
 
 # and one for S1
 $dg = $doc->createDataGenerator();
@@ -118,7 +118,7 @@ $var->setId("v1");
 $var->setName("S1");
 $var->setTaskReference("task1");
 $var->setTarget("/sbml:sbml/sbml:$model/sbml:listOfSpecies/sbml:species[@id='S1']");
-$dg->setMath(libsedml.parseFormula("v1"));
+$dg->setMath(LibSEDML::parseFormula("v1"));
 
 # add a report
 $report = $doc->createReport();
