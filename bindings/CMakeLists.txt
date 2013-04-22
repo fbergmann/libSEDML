@@ -68,10 +68,10 @@ endif()
 # add_subdirectory(octave)
 # endif()
 # 
-# if(WITH_RUBY)
-# add_subdirectory(ruby)
-# endif()
-# 
+if(WITH_RUBY)
+add_subdirectory(ruby)
+endif()
+
 # if(WITH_R)
 # add_subdirectory(r)
 # endif()
