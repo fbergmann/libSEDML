@@ -38,23 +38,23 @@ use File::Basename;
 use LibSEDML;
 no strict;
 
-if ($#ARGV != 1) {
+if ($#ARGV != 0) {
    print  ("usage: print_sedml.pl input-filename\n");
    exit 1;
 }
 
 
-$doc = LibSEDML::readSedML(ARGV[0]);
+$doc = LibSEDML::readSedML($ARGV[0]);
 if ( $doc->getErrorLog()->getNumFailsWithSeverity($LibSEDML::LIBSEDML_SEV_ERROR) > 0)
 {
   print $doc->getErrorLog()->toString();
   exit(2); 
 }
 
-print ("The document has ",$doc->getNumSimulations()," simulation(s).");
+print ("The document has ",$doc->getNumSimulations()," simulation(s).\n");
 for ($i = 0; $i < $doc->getNumSimulations(); $i++)
 {
-  $current = $doc->getSimulation(i);
+  $current = $doc->getSimulation($i);
   if ($current->getTypeCode() == $LibSEDML::SEDML_SIMULATION_UNIFORMTIMECOURSE)
   {
     $tc = $current;
@@ -74,29 +74,29 @@ for ($i = 0; $i < $doc->getNumSimulations(); $i++)
 print ("The document has ",$doc->getNumModels() , " model(s)." , "\n");
 for ($i =0; $i < $doc->getNumModels();$i++)
 {
-  $current = $doc->getModel(i);
+  $current = $doc->getModel($i);
   print ("\tModel id=" , $current->getId() , " language=" , $current->getLanguage() , " source=" , $current->getSource() , " numChanges=" , $current->getNumChanges() , "\n");
 }
 
 print ("The document has " , $doc->getNumTasks() , " task(s)." , "\n");
-for ($i =0; i < $doc->getNumTasks();$i++)
+for ($i =0; $i < $doc->getNumTasks();$i++)
 {
-  $current = $doc->getTask(i);
-  print ("\tTask id=" , $current->getId() , " model=" , $current->getModelReference() , " sim=" , $current->getSimulationReference() , "\n");
+  $task = $doc->getTask($i);
+  print ("\tTask id=" , $task->getId() , " model=" , $task->getModelReference() , " sim=" , $task->getSimulationReference() , "\n");
 }
 
 
 print ("The document has " , $doc->getNumDataGenerators() , " datagenerators(s)." , "\n");
 for ($i=0;$i < $doc->getNumDataGenerators();$i++)
 {
-  $current = $doc->getDataGenerator(i);
-  print ("\tDG id=" , $current->getId() , " math=" , LibSEDML::formulaToString($current->getMath()) , "\n");
+  $dg = $doc->getDataGenerator($i);
+  print ("\tDG id=" , $dg->getId() , " math=" , LibSEDML::formulaToString($dg->getMath()) , "\n");
 }
 
 print ("The document has " , $doc->getNumOutputs() , " output(s)." , "\n");
 for ($i=0; $i< $doc->getNumOutputs();$i++)
 {
-  $current = $doc->getOutput(i);
+  $current = $doc->getOutput($i);
   $tc = $current->getTypeCode();
   if ($tc == $LibSEDML::SEDML_OUTPUT_REPORT){
     $r = ($current);
@@ -109,8 +109,9 @@ for ($i=0; $i< $doc->getNumOutputs();$i++)
   elsif ($tc == $LibSEDML::SEDML_OUTPUT_PLOT3D){
     $p = ($current);
     print ("\tPlot3d id=" , $current->getId() , " numSurfaces=" , $p->getNumSurfaces() , "\n");
-  {
+  }
   else {
     print ("\tEncountered unknown output " , $current->getId() , "\n");
   }
 }
+
