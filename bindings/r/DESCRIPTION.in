@@ -1,0 +1,16 @@
+Package: libSEDML
+Version: ${PACKAGE_VERSION}
+Date: ${CURRENT_DATE}
+Title: libSEDML: An API Library for SEDML
+Author: Frank Bergmann <fbergman@caltech.edu>
+Maintainer: Frank Bergmann <fbergman@caltech.edu>
+Depends: R (>= 1.8.0)
+Description: LibSEDML is an open-source programming library designed to help you 
+	read, write, manipulate, translate, and validate SEDML files and data 
+	streams.  It is not an application itself (though it does come with 
+	example programs), but rather a library you can embed in your own 
+	applications. LibSEDML ${PACKAGE_VERSION} understands SEDML Level 1 Version 1. It's written in ISO C and C++ but can also be 
+	used from C#, Java, MATLAB, Octave, Perl, Python, and Ruby.
+License: BSD 
+URL: http://fbergmann.github.io/libSEDML/
+BugReports: https://github.com/fbergmann/libSEDML/issues
