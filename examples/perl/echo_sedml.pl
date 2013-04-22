@@ -51,12 +51,12 @@ unless (-e $infile) {
   exit 1;
 }
 
-$d = $LibSBML::readSedML($infile);
+$d = LibSEDML::readSedML($infile);
 if ( $d->getErrorLog()->getNumFailsWithSeverity($LibSEDML::LIBSEDML_SEV_ERROR) > 0)
 {
   print ($d->getErrorLog()->toString());
 }
 else
 {
-  $LibSEDML::writeSedML(d, $outfile);
+  LibSEDML::writeSedML($d, $outfile);
 }
