@@ -25,8 +25,8 @@
 ## WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
 ## DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
 ## ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-## (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-## LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+## (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES
+## LOSS OF USE, DATA, OR PROFITS OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ## ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 ## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ## SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
@@ -41,59 +41,61 @@ if ARGV.size != 1
   exit(2)
 end
 
-doc = LibSEDML::readSedML(args[1]);
-if ( doc.getErrorLog().getNumFailsWithSeverity(LibSEDML::LIBSEDML_SEV_ERROR) > 0)
-  puts doc.getErrorLog().toString();
-  exit(2); 
+doc = LibSEDML::readSedML(ARGV[0])
+if ( doc.getErrorLog.getNumFailsWithSeverity(LibSEDML::LIBSEDML_SEV_ERROR) > 0)
+  puts doc.getErrorLog.toString
+  exit(2) 
 end
 
-puts 'The document has #{doc.getNumSimulations()}" simulation(s).'.format();
+puts "The document has #{doc.getNumSimulations} simulation(s)."
 doc.getNumSimulations.times do |i|
-  current = doc.getSimulation(i);
-  if (current.getTypeCode() == LibSEDML::SEDML_SIMULATION_UNIFORMTIMECOURSE)
-    tc = current;
+  current = doc.getSimulation(i)
+  if (current.getTypeCode == LibSEDML::SEDML_SIMULATION_UNIFORMTIMECOURSE)
+    tc = current
     kisaoid="none"
-    if tc.isSetAlgorithm()
-	  kisaoid=tc.getAlgorithm().getKisaoID()
+    if tc.isSetAlgorithm
+	  kisaoid=tc.getAlgorithm.getKisaoID
 	end
-    puts "\tTimecourse id=#{tc.getId()} start=#{tc.getOutputStartTime()} end=#{tc.getOutputEndTime()} numPoints=#{tc.getNumberOfPoints()} kisao=#{kisaoid}\n";
+    puts "\tTimecourse id=#{tc.getId} start=#{tc.getOutputStartTime} end=#{tc.getOutputEndTime} numPoints=#{tc.getNumberOfPoints} kisao=#{kisaoid}\n"
   else
-    puts "\tUncountered unknown simulation. ",current.getId(),"\n";
+    puts "\tUncountered unknown simulation. ",current.getId,"\n"
   end
 end
 
-puts "The document has #{doc.getNumModels()} model(s)." , "\n";
+puts "\nThe document has #{doc.getNumModels} model(s)."
 doc.getNumModels.times do |i|
-  current = doc.getModel(i);
-  puts "\tModel id=#{current.getId()} language=#{current.getLanguage()} source=#{current.getSource()} numChanges=#{current.getNumChanges()}\n";
+  current = doc.getModel(i)
+  puts "\tModel id=#{current.getId} language=#{current.getLanguage} source=#{current.getSource} numChanges=#{current.getNumChanges}\n"
 end
 
-puts "The document has #{doc.getNumTasks()} task(s)." , "\n";
+puts "\nThe document has #{doc.getNumTasks} task(s)."
 doc.getNumTasks.times do |i|
-  current = doc.getTask(i);
-  puts "\tTask id=#{current.getId()} model=#{current.getModelReference()} sim=#{current.getSimulationReference()}\n";
+  current = doc.getTask(i)
+  puts "\tTask id=#{current.getId} model=#{current.getModelReference} sim=#{current.getSimulationReference}\n"
 end
 
-puts "The document has #{doc.getNumDataGenerators()} datagenerators(s)." , "\n";
+puts "\nThe document has #{doc.getNumDataGenerators} datagenerators(s)."
 doc.getNumDataGenerators.times do |i|
-  current = doc.getDataGenerator(i);
-  puts "\tDG id=#{current.getId()} math=#{LibSEDML::formulaToString(current.getMath())}\n";
+  current = doc.getDataGenerator(i)
+  puts "\tDG id=#{current.getId} math=#{LibSEDML::formulaToString(current.getMath)}\n"
 end
 
-puts "The document has #{doc.getNumOutputs()} output(s)." , "\n";
+puts "\nThe document has #{doc.getNumOutputs} output(s)."
 doc.getNumOutputs.times do |i|
-  current = doc.getOutput(i);
-  tc = current.getTypeCode();
+  current = doc.getOutput(i)
+  tc = current.getTypeCode
   if tc == LibSEDML::SEDML_OUTPUT_REPORT
-    r = (current);
-    puts "\tReport id=#{current.getId()} numDataSets=#{r.getNumDataSets() }\n";
+    r = (current)
+    puts "\tReport id=#{current.getId} numDataSets=#{r.getNumDataSets }\n"
   elsif tc == LibSEDML::SEDML_OUTPUT_PLOT2D
-    p = (current);
-    puts "\tPlot2d id=#{current.getId()} numCurves=#{p.getNumCurves()}\n";
+    p = (current)
+    puts "\tPlot2d id=#{current.getId} numCurves=#{p.getNumCurves}\n"
   elsif tc == LibSEDML::SEDML_OUTPUT_PLOT3D
-    p = (current);
-    puts "\tPlot3d id=#{current.getId()} numSurfaces=#{p.getNumSurfaces()}\n";
+    p = (current)
+    puts "\tPlot3d id=#{current.getId} numSurfaces=#{p.getNumSurfaces}\n"
   else
-    puts "\tEncountered unknown output #{current.getId()}\n";
+    puts "\tEncountered unknown output #{current.getId}\n"
   end
 end
+puts "\n"
+

@@ -40,9 +40,9 @@ if ARGV.size != 2
   exit(2)
 end
 
-d = LibSEDML::readSedML(args[1]);
-if ( d.getErrorLog().getNumFailsWithSeverity(LibSEDML::LIBSEDML_SEV_ERROR) > 0):
+d = LibSEDML::readSedML(ARGV[0]);
+if ( d.getErrorLog().getNumFailsWithSeverity(LibSEDML::LIBSEDML_SEV_ERROR) > 0)
   puts d.getErrorLog().toString();
-else:
-  LibSEDML::writeSedML(d, args[2]);
-
+else
+  LibSEDML::writeSedML(d, ARGV[1]);
+end

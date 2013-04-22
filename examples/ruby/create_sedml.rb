@@ -135,8 +135,8 @@ plot.setName("S1 Timecourse");
 curve = plot.createCurve();
 curve.setId("c1");
 curve.setName("S1");
-curve.setLogX(False);
-curve.setLogY(False);
+curve.setLogX(false);
+curve.setLogY(false);
 curve.setXDataReference("time");
 curve.setYDataReference("S1");
 
@@ -147,12 +147,12 @@ plot2.setName("dunno");
 surf = plot2.createSurface();
 surf.setId("surf1");
 surf.setName("S1");
-surf.setLogX(False);
-surf.setLogY(False);
-surf.setLogZ(False);
+surf.setLogX(false);
+surf.setLogY(false);
+surf.setLogZ(false);
 surf.setXDataReference("time");
 surf.setYDataReference("S1");
 surf.setZDataReference("S1");
 
 # write the document
-LibSEDML::writeSedML(doc, args[1]);
+LibSEDML.writeSedML(doc, ARGV[0]);
