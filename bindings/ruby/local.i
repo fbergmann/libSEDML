@@ -160,14 +160,14 @@ namespace std
 }
 
 /**
- * Allows ListOf objects:
+ * Allows SedListOf objects:
  *
  *   - To be indexed and sliced, e.g. lst[0].
  */
 
-%mixin ListOf "Enumerable";
+%mixin SedListOf "Enumerable";
 
-%extend ListOf
+%extend SedListOf
 {
   int __len__()
   {
