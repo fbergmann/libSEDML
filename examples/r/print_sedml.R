@@ -34,7 +34,7 @@
 # ------------------------------------------------------------------------ -->
 # 
 
-library(libSBML)
+library(libSEDML)
 
 args <- commandArgs(trailingOnly = TRUE)
 
@@ -43,17 +43,17 @@ if (length(args) != 1)
   stop("Usage: print_sedml input-filename\n\n");
 }
 
-doc = readSedML(argv[1]);
+doc = readSedML(args[1]);
 
 cat("The document has ",SedDocument_getNumSimulations(doc)," simulation(s).\n");
 for (i in seq_len(SedDocument_getNumSimulations(doc)))
 {
-  current = SedDocument_getSimulation(doc,i);
-  switch(SedBase_getTypeCode(current),
-     SEDML_SIMULATION_UNIFORMTIMECOURSE=
+  current = SedDocument_getSimulation(doc,i-1);
+  switch(enumFromInteger(SedBase_getTypeCode(current), "_SedTypeCode_t"),
+     "SEDML_SIMULATION_UNIFORMTIMECOURSE"=
      {
         tc = current;
-        cat("\tTimecourse id=",SedSimulation_getId(current)"   start=",SedUniformTimeCourse_getOutputStartTime(tc)," end=",SedUniformTimeCourse_getOutputEndTime(tc)," numPoints=",SedUniformTimeCourse_getNumberOfPoints(tc)," kisao=");
+        cat("\tTimecourse id=",SedSimulation_getId(current),"   start=",SedUniformTimeCourse_getOutputStartTime(tc)," end=",SedUniformTimeCourse_getOutputEndTime(tc)," numPoints=",SedUniformTimeCourse_getNumberOfPoints(tc)," kisao=");
         if (SedSimulation_isSetAlgorithm(current))
         {
           cat(SedAlgorithm_getKisaoID(SedSimulation_getAlgorithm(current)),"\n");
@@ -63,7 +63,7 @@ for (i in seq_len(SedDocument_getNumSimulations(doc)))
           cat("none\n");
         }
      },
-     'default'={
+     "default"={
         cat("\tUncountered unknown simulation %s.\n ", SedSimulation_getId(current),"\n");    
 	}
   );
@@ -73,7 +73,7 @@ cat("\n");
 cat("The document has ",SedDocument_getNumModels(doc)," model(s).\n");
 for (i in seq_len(SedDocument_getNumModels(doc)))
 {
-  current =  SedDocument_getModel(doc,i);
+  current =  SedDocument_getModel(doc,i-1);
   cat("\tModel id=",SedModel_getId(current),"  language=",SedModel_getLanguage(current)," source=",SedModel_getSource(current)," numChanges=",SedModel_getNumChanges(current),"\n");
 }
 
@@ -81,7 +81,7 @@ cat("\n");
 cat("The document has ",SedDocument_getNumTasks(doc)," task(s).\n");
 for (i in seq_len(SedDocument_getNumTasks(doc)))
 {
-  current =  SedDocument_getTask(doc,i);
+  current =  SedDocument_getTask(doc,i-1);
   cat("\tTask id=",SedTask_getId(current),"  model=",SedTask_getModelReference(current)," sim=",SedTask_getSimulationReference(current),"\n");
 }
 
@@ -89,32 +89,32 @@ cat("\n");
 cat("The document has ",SedDocument_getNumDataGenerators(doc)," datagenerators(s).\n");
 for (i in seq_len(SedDocument_getNumDataGenerators(doc)))
 {
-  current = SedDocument_getDataGenerator(doc, i);
-  cat("\tDG id=",SedDataGenerator_getId(current)," math=",SBML_formulaToString(SedDataGenerator_getMath(current)),"\n");
+  current = SedDocument_getDataGenerator(doc, i-1);
+  cat("\tDG id=",SedDataGenerator_getId(current)," math=",formulaToString(SedDataGenerator_getMath(current)),"\n");
 }
 
 cat("\n");
 cat("The document has ",SedDocument_getNumOutputs(doc)," output(s).\n");
-for (i in seq_len(SedDocument_getNumOutputs(doc); ++i)
+for (i in seq_len(SedDocument_getNumOutputs(doc)))
 {
-  current = SedDocument_getOutput(doc,i);
-  switch(SedBase_getTypeCode(current),
-   SEDML_OUTPUT_REPORT =
+  current = SedDocument_getOutput(doc,i-1);
+  switch(enumFromInteger(SedBase_getTypeCode(current), "_SedTypeCode_t"),
+   "SEDML_OUTPUT_REPORT" =
     {
       r = current;
       cat("\tReport id=",SedOutput_getId(current)," numDataSets=", SedReport_getNumDataSets(r),"\n");      
     },
-    SEDML_OUTPUT_PLOT2D=
+    "SEDML_OUTPUT_PLOT2D"=
     {
       p = current;
-	cat("\tPlot2D id=",SedOutput_getId(current)," numCurves=", SedPlot2D_getNumCurves(p),"\n");
+      cat("\tPlot2D id=",SedOutput_getId(current)," numCurves=", SedPlot2D_getNumCurves(p),"\n");
     },
-    SEDML_OUTPUT_PLOT3D=
+    "SEDML_OUTPUT_PLOT3D"=
     {
       p = current;
-	cat("\tPlot3D id=", SedOutput_getId(current)," numSurfaces=",SedPlot3D_getNumSurfaces(p),"\n");      
+      cat("\tPlot3D id=", SedOutput_getId(current)," numSurfaces=",SedPlot3D_getNumSurfaces(p),"\n");      
     },
-    'default'=
+    "default"=
     {	
       cat("\tEncountered unknown output %s\n", SedOutput_getId(current),"\n");
     });

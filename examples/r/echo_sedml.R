@@ -43,5 +43,5 @@ if (length(args) != 2)
   stop("Usage: echo_sedml input-filename output-filename\n\n");
 }
 
-d = readSedML(argv[1]);
-writeSedML(d, argv[2]);
+d = readSedML(args[1]);
+writeSedML(d, args[2]);

@@ -1,4 +1,4 @@
 #import(methods)
-useDynLib(libSBML, .registration = TRUE)
+useDynLib(libSEDML, .registration = TRUE)
 
 exportPattern(".")

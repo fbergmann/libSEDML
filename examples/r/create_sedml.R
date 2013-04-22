@@ -45,7 +45,7 @@ if (length(args) != 1)
 }
 
 #  create the document 
-doc = SedDocument_create(1,1);
+doc = SedDocument(1,1);
 SedDocument_setLevel(doc, 1);
 SedDocument_setVersion(doc, 1);  
 
@@ -79,7 +79,7 @@ variable = SedComputeChange_createVariable(compute);
 SedVariable_setId(variable, "S2");
 SedVariable_setModelReference(variable, "model1");
 SedVariable_setTarget(variable, "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
-SedComputeChange_setMath(compute, SBML_parseFormula("S2 / 2"));
+SedComputeChange_setMath(compute, parseFormula("S2 / 2"));
 
 #  create simulation 
 tc = SedDocument_createUniformTimeCourse(doc);
@@ -90,7 +90,7 @@ SedUniformTimeCourse_setOutputEndTime(tc, 10.0);
 SedUniformTimeCourse_setNumberOfPoints(tc, 1000);
 
 #  need to set the correct KISAO Term 
-algorithm = SedSimulation_createAlgorithm((SedSimulation_t*)tc);
+algorithm = SedSimulation_createAlgorithm(tc);
 SedAlgorithm_setKisaoID(algorithm,"KISAO:0000019");
 
 #  create a task that uses the simulation and the model above 
@@ -108,7 +108,7 @@ SedVariable_setId(variable, "v0");
 SedVariable_setName(variable, "time");
 SedVariable_setTaskReference(variable, "task1");
 SedVariable_setSymbol(variable, "urn:sedml:symbol:time");
-SedDataGenerator_setMath(dg, SBML_parseFormula("v0"));
+SedDataGenerator_setMath(dg, parseFormula("v0"));
 
 #  and one for S1 
 dg = SedDocument_createDataGenerator(doc);
@@ -119,7 +119,7 @@ SedVariable_setId(variable, "v1");
 SedVariable_setName(variable, "S1");
 SedVariable_setTaskReference(variable, "task1");
 SedVariable_setTarget(variable, "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
-SedDataGenerator_setMath(dg, SBML_parseFormula("v1"));
+SedDataGenerator_setMath(dg, parseFormula("v1"));
 
 #  add a report 
 report = SedDocument_createReport(doc);
@@ -160,5 +160,5 @@ SedSurface_setLogZ(surf, 0);
 SedSurface_setZDataReference(surf, "S1");
 
 #  write the document 
-writeSedML(doc, argv[1]);
+writeSedML(doc, args[1]);
 
