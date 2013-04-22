@@ -63,7 +63,7 @@
 %ignore std::basic_string<char>::capacity;
 %ignore std::basic_string<char>::reserve;
 
-%include <std_alloc.i>
+
 /**
  * Wraps standard output streams
  */
