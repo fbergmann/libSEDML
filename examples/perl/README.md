@@ -4,6 +4,9 @@ Examples in this folder contain basic perl examples that demonstrate the use of 
 
 	use lib '/usr/local/lib/perl5/site_perl';
 
+or from the command line it would be possible to specify the directories to include directly: 
+
+	perl -I/usr/local/lib/perl5/site_perl/5.14.2/x86_64-linux-gnu-thread-multi -I/usr/local/lib/perl5/site_perl/5.14.2/x86_64-linux-gnu-thread-multi/auto/libSEDML echo_sedml.pl 
 
 The following examples are present: 
 
