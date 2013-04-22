@@ -60,19 +60,11 @@ if(WITH_PERL)
 add_subdirectory(perl)
 endif()
 
-# if(WITH_MATLAB)
-# add_subdirectory(matlab)
-# endif()
-# 
-# if(WITH_OCTAVE)
-# add_subdirectory(octave)
-# endif()
-# 
 if(WITH_RUBY)
 add_subdirectory(ruby)
 endif()
 
-# if(WITH_R)
-# add_subdirectory(r)
-# endif()
+if(WITH_R)
+add_subdirectory(r)
+endif()
 
