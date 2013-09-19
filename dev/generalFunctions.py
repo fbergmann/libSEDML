@@ -382,7 +382,7 @@ def writeReadAttribute(output, attrib, element):
     output.write('\t\t\tlogEmptyString(m{0}, getLevel(), getVersion(), "<{1}>");\n'.format(capAttName, element))
     output.write('\t\t}\n')
     output.write('\t\telse if (SyntaxChecker::isValidSBMLSId(m{0}) == false)\n'.format(capAttName))
-    output.write('\t\t{\n\t\t\tlogError(InvalidIdSyntax);\n\t\t}\n')
+    output.write('\t\t{\n\t\t\tlogError(SedInvalidIdSyntax);\n\t\t}\n')
     output.write('\t}\n\n')
   elif attrib['type'] == 'SIdRef':
     output.write('\t//\n\t// {0} SIdRef '.format(attName))
@@ -400,7 +400,7 @@ def writeReadAttribute(output, attrib, element):
     output.write('\t\t\tlogEmptyString(m{0}, getLevel(), getVersion(), "<{1}>");\n'.format(capAttName, element))
     output.write('\t\t}\n')
     output.write('\t\telse if (SyntaxChecker::isValidSBMLSId(m{0}) == false)\n'.format(capAttName))
-    output.write('\t\t{\n\t\t\tlogError(InvalidIdSyntax);\n\t\t}\n')
+    output.write('\t\t{\n\t\t\tlogError(SedInvalidIdSyntax);\n\t\t}\n')
     output.write('\t}\n\n')
   elif attrib['type'] == 'UnitSIdRef':
     output.write('\t//\n\t// {0} UnitSIdRef '.format(attName))
@@ -418,7 +418,7 @@ def writeReadAttribute(output, attrib, element):
     output.write('\t\t\tlogEmptyString(m{0}, getLevel(), getVersion(), "<{1}>");\n'.format(capAttName, element))
     output.write('\t\t}\n')
     output.write('\t\telse if (SyntaxChecker::isValidInternalUnitSId(m{0}) == false)\n'.format(capAttName))
-    output.write('\t\t{\n\t\t\tlogError(InvalidUnitIdSyntax);\n\t\t}\n')
+    output.write('\t\t{\n\t\t\tlogError(SedInvalidUnitIdSyntax);\n\t\t}\n')
     output.write('\t}\n\n')
   elif attrib['type'] == 'UnitSId':
     output.write('\t//\n\t// {0} UnitSId '.format(attName))
@@ -436,7 +436,7 @@ def writeReadAttribute(output, attrib, element):
     output.write('\t\t\tlogEmptyString(m{0}, getLevel(), getVersion(), "<{1}>");\n'.format(capAttName, element))
     output.write('\t\t}\n')
     output.write('\t\telse if (SyntaxChecker::isValidInternalUnitSId(m{0}) == false)\n'.format(capAttName))
-    output.write('\t\t{\n\t\t\tlogError(InvalidUnitIdSyntax);\n\t\t}\n')
+    output.write('\t\t{\n\t\t\tlogError(SedInvalidUnitIdSyntax);\n\t\t}\n')
     output.write('\t}\n\n')
   elif attrib['type'] == 'string':
     output.write('\t//\n\t// {0} string '.format(attName))

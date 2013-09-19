@@ -174,7 +174,7 @@ SedError::SedError (  const unsigned int errorId
       }
     }
 
-    if ( index == 0 && mErrorId != UnknownError )
+    if ( index == 0 && mErrorId != SedUnknownError )
     {
       // The id is in the range of error numbers that are supposed to be in
       // the Sed layer, but it's NOT in our table. This is an internal error.
@@ -198,11 +198,11 @@ SedError::SedError (  const unsigned int errorId
     mCategory     = errorTable[index].category;
     mShortMessage = errorTable[index].shortMessage;
 
-    if ( mErrorId == InconsistentArgUnitsWarnings
-         || mErrorId == InconsistentPowerUnitsWarnings
-         || mErrorId == InconsistentExponUnitsWarnings )
+    if ( mErrorId == SedInconsistentArgUnitsWarnings
+         || mErrorId == SedInconsistentPowerUnitsWarnings
+         || mErrorId == SedInconsistentExponUnitsWarnings )
     {
-      mErrorId = InconsistentArgUnits;
+      mErrorId = SedInconsistentArgUnits;
     }
 
     ostringstream newMsg;
@@ -224,7 +224,7 @@ SedError::SedError (  const unsigned int errorId
       // here, we translate the errors into the same basic error code and
       // add some elaboration to the error text message.
 
-      mErrorId  = NotSchemaConformant;
+      mErrorId  = SedNotSchemaConformant;
       mSeverity = LIBSEDML_SEV_ERROR;
       newMsg << errorTable[3].message << " "; // FIXME
     }

@@ -266,7 +266,7 @@ SedReader::readInternal (const char* content, bool isFile)
       }
       else if (strcmp_insensitive(stream.getEncoding().c_str(), "UTF-8") != 0)
       {
-        d->getErrorLog()->logError(NotUTF8);
+        d->getErrorLog()->logError(SedNotUTF8);
       }
 
       if (stream.getVersion() == "")

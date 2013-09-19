@@ -752,7 +752,7 @@ SedDataGenerator::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 

@@ -389,7 +389,7 @@ SedSurface::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mZDataReference) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 

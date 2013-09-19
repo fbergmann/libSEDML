@@ -54,7 +54,7 @@ typedef struct {
 static const sbmlErrorTableEntry errorTable[] =
 {
   // 10000
-  { UnknownError, 
+  { SedUnknownError,
     "Encountered unknown internal libSed error",
     LIBSEDML_CAT_INTERNAL, 
     LIBSEDML_SEV_FATAL,
@@ -62,7 +62,7 @@ static const sbmlErrorTableEntry errorTable[] =
 
   //10101
   {
-    NotUTF8,
+    SedNotUTF8,
     "File does not use UTF-8 encoding",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -76,7 +76,7 @@ static const sbmlErrorTableEntry errorTable[] =
 
   //10102
   {
-    UnrecognizedElement,
+    SedUnrecognizedElement,
     "Encountered unrecognized element",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -89,7 +89,7 @@ static const sbmlErrorTableEntry errorTable[] =
 
   //10103
   {
-    NotSchemaConformant,
+    SedNotSchemaConformant,
     "Document does not conform to the Sed XML schema",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
@@ -102,7 +102,7 @@ static const sbmlErrorTableEntry errorTable[] =
 
   //10104
   {
-    L3NotSchemaConformant,
+    SedL3NotSchemaConformant,
     "Document is not well-formed XML",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_NOT_APPLICABLE,
@@ -827,7 +827,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //
   //10310
   {
-    InvalidIdSyntax,
+    SedInvalidIdSyntax,
     "Invalid syntax for an 'id' attribute value",
     LIBSEDML_CAT_IDENTIFIER_CONSISTENCY,
     LIBSEDML_SEV_ERROR,

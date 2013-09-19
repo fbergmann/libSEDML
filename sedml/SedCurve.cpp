@@ -609,7 +609,7 @@ SedCurve::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 
@@ -653,7 +653,7 @@ SedCurve::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mXDataReference) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 
@@ -672,7 +672,7 @@ SedCurve::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mYDataReference) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 

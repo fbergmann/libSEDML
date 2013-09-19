@@ -2112,10 +2112,10 @@ SedBase::read (XMLInputStream& stream)
         {
           unsigned int errorId = 
                              this->getErrorLog()->getError(n)->getErrorId();
-          if (errorId == MissingOrInconsistentLevel
-            || errorId == MissingOrInconsistentVersion
-            || errorId == InvalidSedLevelVersion
-            || errorId == InvalidNamespaceOnSed)
+          if (errorId == SedMissingOrInconsistentLevel
+            || errorId == SedMissingOrInconsistentVersion
+            || errorId == SedInvalidSedLevelVersion
+            || errorId == SedInvalidNamespaceOnSed)
           {
             errorLoggedAlready = true;
           }
@@ -2129,7 +2129,7 @@ SedBase::read (XMLInputStream& stream)
             << "the prefix for the Sed namespace.  This means that "
             << "the <sbml> element in not in the SedNamespace."<< endl;
 
-          logError(InvalidNamespaceOnSed, 
+          logError(SedInvalidNamespaceOnSed,
                     getLevel(), getVersion(), errMsg.str());
         }      
       }
@@ -2334,7 +2334,7 @@ SedBase::readAnnotation (XMLInputStream& stream)
     // the sbml container
     if (getLevel() == 1 && getTypeCode() ==SEDML_DOCUMENT)
     {
-      logError(AnnotationNotesNotAllowedLevel1);
+      logError(SedAnnotationNotesNotAllowedLevel1);
     }
 
 
@@ -2345,13 +2345,13 @@ SedBase::readAnnotation (XMLInputStream& stream)
     {
       if (getLevel() < 3) 
       {
-        logError(NotSchemaConformant, getLevel(), getVersion(),
+        logError(SedNotSchemaConformant, getLevel(), getVersion(),
 	        "Only one <annotation> element is permitted inside a "
 	        "particular containing element.");
       }
       else
       {
-        logError(MultipleAnnotations, getLevel(), getVersion());
+        logError(SedMultipleAnnotations, getLevel(), getVersion());
       }
     }
 
@@ -2381,7 +2381,7 @@ SedBase::readNotes (XMLInputStream& stream)
     // the sbml container
     if (getLevel() == 1 && getTypeCode() ==SEDML_DOCUMENT)
     {
-      logError(AnnotationNotesNotAllowedLevel1);
+      logError(SedAnnotationNotesNotAllowedLevel1);
     }
 
     // If a notes element already exists, then it is an error.
@@ -2392,18 +2392,18 @@ SedBase::readNotes (XMLInputStream& stream)
     {
       if (getLevel() < 3)
       {
-        logError(NotSchemaConformant, getLevel(), getVersion(),
+        logError(SedNotSchemaConformant, getLevel(), getVersion(),
                 "Only one <notes> element is permitted inside a "
 	            "particular containing element.");
       }
       else
       {
-        logError(OnlyOneNotesElementAllowed, getLevel(), getVersion());
+        logError(SedOnlyOneNotesElementAllowed, getLevel(), getVersion());
       }
     }
     else if (mAnnotation != NULL)
     {
-      logError(NotSchemaConformant, getLevel(), getVersion(),
+      logError(SedNotSchemaConformant, getLevel(), getVersion(),
                "Incorrect ordering of <annotation> and <notes> elements -- "
                "<notes> must come before <annotation> due to the way that "
                "the XML Schema for Sed is defined.");
@@ -2491,7 +2491,7 @@ SedBase::logUnknownAttribute( const string& attribute,
    */
   if (mSed)
   {
-      getErrorLog()->logError(NotSchemaConformant,
+      getErrorLog()->logError(SedNotSchemaConformant,
   			    level, version, msg.str(), getLine(), getColumn());
   }
 }
@@ -2521,7 +2521,7 @@ SedBase::logUnknownElement( const string& element,
       
     if (mSed != NULL)
     {
-      getErrorLog()->logError(UnrecognizedElement,
+      getErrorLog()->logError(SedUnrecognizedElement,
 			      level, version, msg.str(), getLine(), getColumn());
     }
   }
@@ -2551,7 +2551,7 @@ SedBase::logEmptyString( const string& attribute,
   // no SedDocument attached.
   //
   if (mSed != NULL)
-    getErrorLog()->logError(NotSchemaConformant,
+    getErrorLog()->logError(SedNotSchemaConformant,
                             level, version, msg.str(), getLine(), getColumn());
 }
 /** @endcond */
@@ -2668,7 +2668,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     {
       if (!SyntaxChecker::isValidXMLID(mMetaId))
       {
-        logError(InvalidMetaidSyntax, getLevel(), getVersion());
+        logError(SedInvalidMetaidSyntax, getLevel(), getVersion());
       }
     }
   }
@@ -2847,7 +2847,7 @@ SedBase::checkOrderAndLogError (SedBase* object, int expected)
 
   if (actual != -1 && actual < expected)
   {
-    SedErrorCode_t error = IncorrectOrderInModel;
+    SedErrorCode_t error = SedIncorrectOrderInModel;
 
     
     {
@@ -2888,7 +2888,7 @@ SedBase::checkListOfPopulated(SedBase* object)
     {
       //typecode (int) tc = static_cast<SedListOf*>(object)->getItemTypeCode();
       int tc = static_cast<SedListOf*>(object)->getItemTypeCode();
-      SedErrorCode_t error = EmptyListElement;
+      SedErrorCode_t error = SedEmptyListElement;
 
       // By default, the error will be the EmptyListElement error, unless
       // we have a special case for which Sed has a separate error code.
@@ -2956,7 +2956,7 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
   }
   if (match == 0)
   {
-    logError(InvalidMathElement);
+    logError(SedInvalidMathElement);
   }
 
   return prefix;
@@ -2985,7 +2985,7 @@ SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
       errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
              << "> element is an invalid namespace." << endl;
       
-      logError(NotSchemaConformant, getLevel(), getVersion(), errMsg.str());
+      logError(SedNotSchemaConformant, getLevel(), getVersion(), errMsg.str());
     }
   }
 }
@@ -3019,7 +3019,7 @@ SedBase::checkAnnotation()
     // the top level must be an element (so it should be a start)
     if (topLevel.isStart() == false)
     {
-      logError(AnnotationNotElement, getLevel(), getVersion());
+      logError(SedAnnotationNotElement, getLevel(), getVersion());
       nNodes++;
       continue;
     }
@@ -3042,7 +3042,7 @@ SedBase::checkAnnotation()
       if (find(uri_list.begin(), uri_list.end(), uri) 
                                                != uri_list.end())
       {
-        logError(DuplicateAnnotationNamespaces);
+        logError(SedDuplicateAnnotationNamespaces);
       }
       uri_list.push_back(uri);
     }
@@ -3072,7 +3072,7 @@ SedBase::checkAnnotation()
 
       if (!implicitNSdecl)
       {
-        logError(MissingAnnotationNamespace);
+        logError(SedMissingAnnotationNamespace);
       }
     }
     // cannot declare sbml namespace
@@ -3084,7 +3084,7 @@ SedBase::checkAnnotation()
     }
     if (match > 0)
     {
-      logError(SedNamespaceInAnnotation);
+      logError(SedSedNamespaceInAnnotation);
       break;
     }
 
@@ -3095,9 +3095,9 @@ SedBase::checkAnnotation()
        */
       if (getLevel() < 3)
       {
-        logError(MissingAnnotationNamespace);
+        logError(SedMissingAnnotationNamespace);
       }
-      logError(SedNamespaceInAnnotation);   
+      logError(SedSedNamespaceInAnnotation);
     }
     nNodes++;
   }
@@ -3121,21 +3121,21 @@ SedBase::checkXHTML(const XMLNode * xhtml)
 
   if (name == "notes")
   {
-    errorNS   = NotesNotInXHTMLNamespace;
-    errorXML  = NotesContainsXMLDecl;
-    errorDOC  = NotesContainsDOCTYPE;
-    errorELEM = InvalidNotesContent;
+      errorNS   = SedNotesNotInXHTMLNamespace;
+      errorXML  = SedNotesContainsXMLDecl;
+    errorDOC  = SedNotesContainsDOCTYPE;
+    errorELEM = SedInvalidNotesContent;
   }
   else if (name == "message")
   {
-    errorNS   = ConstraintNotInXHTMLNamespace;
-    errorXML  = ConstraintContainsXMLDecl;
-    errorDOC  = ConstraintContainsDOCTYPE;
-    errorELEM = InvalidConstraintContent;
+    errorNS   = SedConstraintNotInXHTMLNamespace;
+    errorXML  = SedConstraintContainsXMLDecl;
+    errorDOC  = SedConstraintContainsDOCTYPE;
+    errorELEM = SedInvalidConstraintContent;
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(UnknownError);
+    logError(SedUnknownError);
     return;
   }
 

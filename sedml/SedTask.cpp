@@ -545,7 +545,7 @@ SedTask::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 
@@ -579,7 +579,7 @@ SedTask::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 
@@ -598,7 +598,7 @@ SedTask::readAttributes (const XMLAttributes& attributes,
 		}
 		else if (SyntaxChecker::isValidSBMLSId(mSimulationReference) == false)
 		{
-			logError(InvalidIdSyntax);
+			logError(SedInvalidIdSyntax);
 		}
 	}
 
