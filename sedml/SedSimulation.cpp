@@ -617,7 +617,7 @@ SedListOfSimulations::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSimulation>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSimulation>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedSimulation*> (*result);
 }
 
@@ -689,7 +689,7 @@ SedListOfSimulations::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSimulation>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSimulation>(sid) );
 
 	if (result != mItems.end())
 	{

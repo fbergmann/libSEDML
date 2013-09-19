@@ -898,7 +898,7 @@ SedListOfDataGenerators::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedDataGenerator>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedDataGenerator>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedDataGenerator*> (*result);
 }
 
@@ -970,7 +970,7 @@ SedListOfDataGenerators::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedDataGenerator>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedDataGenerator>(sid) );
 
 	if (result != mItems.end())
 	{

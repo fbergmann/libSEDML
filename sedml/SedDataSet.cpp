@@ -653,7 +653,7 @@ SedListOfDataSets::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedDataSet>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedDataSet>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedDataSet*> (*result);
 }
 
@@ -725,7 +725,7 @@ SedListOfDataSets::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedDataSet>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedDataSet>(sid) );
 
 	if (result != mItems.end())
 	{

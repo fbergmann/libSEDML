@@ -786,7 +786,7 @@ SedListOfCurves::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedCurve>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedCurve>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedCurve*> (*result);
 }
 
@@ -858,7 +858,7 @@ SedListOfCurves::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedCurve>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedCurve>(sid) );
 
 	if (result != mItems.end())
 	{

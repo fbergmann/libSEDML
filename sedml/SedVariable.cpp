@@ -815,7 +815,7 @@ SedListOfVariables::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedVariable>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedVariable>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedVariable*> (*result);
 }
 
@@ -887,7 +887,7 @@ SedListOfVariables::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedVariable>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedVariable>(sid) );
 
 	if (result != mItems.end())
 	{

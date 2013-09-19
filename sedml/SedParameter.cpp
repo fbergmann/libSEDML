@@ -551,7 +551,7 @@ SedListOfParameters::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedParameter>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedParameter>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedParameter*> (*result);
 }
 
@@ -623,7 +623,7 @@ SedListOfParameters::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedParameter>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedParameter>(sid) );
 
 	if (result != mItems.end())
 	{

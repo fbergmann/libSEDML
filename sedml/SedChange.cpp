@@ -403,7 +403,7 @@ SedListOfChanges::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedChange>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedChange>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedChange*> (*result);
 }
 
@@ -507,7 +507,7 @@ SedListOfChanges::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedChange>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedChange>(sid) );
 
 	if (result != mItems.end())
 	{

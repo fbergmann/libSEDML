@@ -491,7 +491,7 @@ SedListOfSurfaces::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSurface>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSurface>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedSurface*> (*result);
 }
 
@@ -563,7 +563,7 @@ SedListOfSurfaces::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedSurface>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSurface>(sid) );
 
 	if (result != mItems.end())
 	{

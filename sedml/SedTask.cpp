@@ -706,7 +706,7 @@ SedListOfTasks::get(const std::string& sid) const
 {
 	vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedTask>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedTask>(sid) );
 	return (result == mItems.end()) ? 0 : static_cast <SedTask*> (*result);
 }
 
@@ -778,7 +778,7 @@ SedListOfTasks::remove(const std::string& sid)
 	SedBase* item = NULL;
 	vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEq<SedTask>(sid) );
+	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedTask>(sid) );
 
 	if (result != mItems.end())
 	{

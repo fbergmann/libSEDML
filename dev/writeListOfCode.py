@@ -110,7 +110,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement="", na
     output.write('{0}::get(const std::string& sid) const\n'.format(listOf))
     output.write('{\n' )
     output.write('\tvector<SedBase*>::const_iterator result;\n\n')
-    output.write('\tresult = find_if( mItems.begin(), mItems.end(), IdEq<{0}>(sid) );\n'.format(type))
+    output.write('\tresult = find_if( mItems.begin(), mItems.end(), SedIdEq<{0}>(sid) );\n'.format(type))
     output.write('\treturn (result == mItems.end()) ? 0 : static_cast <{0}*> (*result);\n'.format(type))
     output.write('}\n\n\n')
      
@@ -148,7 +148,7 @@ def writeRemoveFunctions(output, element, type, subelement=False, topelement="",
     output.write('{\n' )
     output.write('\tSedBase* item = NULL;\n')
     output.write('\tvector<SedBase*>::iterator result;\n\n')
-    output.write('\tresult = find_if( mItems.begin(), mItems.end(), IdEq<{0}>(sid) );\n\n'.format(type))
+    output.write('\tresult = find_if( mItems.begin(), mItems.end(), SedIdEq<{0}>(sid) );\n\n'.format(type))
     output.write('\tif (result != mItems.end())\n\t{\n')
     output.write('\t\titem = *result;\n')
     output.write('\t\tmItems.erase(result);\n\t}\n\n')

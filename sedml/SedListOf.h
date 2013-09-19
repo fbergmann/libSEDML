@@ -88,11 +88,11 @@ class SedVisitor;
  */
 #ifndef SWIG
 template<class CNAME>
-struct IdEq : public std::unary_function<SedBase*, bool>
+struct SedIdEq : public std::unary_function<SedBase*, bool>
 {
   const std::string& id;
 
-  IdEq (const std::string& id) : id(id) { }
+  SedIdEq (const std::string& id) : id(id) { }
   bool operator() (SedBase* sb) 
        { return static_cast <CNAME*> (sb)->getId() == id; }
 };
