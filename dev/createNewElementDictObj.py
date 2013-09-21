@@ -110,7 +110,16 @@ def createSedModel() :
 						   ]
 			  })
   attributes = [a1, a2, a3, a4, lo1]
-  element = dict({'name': 'SedModel', 'package': 'Sed', 'typecode': 'SEDML_MODEL', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'model'})
+  element = dict({
+                 'name': 'SedModel',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_MODEL',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':False,
+                 'elementName':'model'
+                 })
   return element
 
 def createSedVariable() :
@@ -121,7 +130,16 @@ def createSedVariable() :
   a5 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'taskReference'})
   a6 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'modelReference'})
   attributes = [a1, a2, a3, a4, a5, a6]
-  element = dict({'name': 'SedVariable', 'package': 'Sed', 'typecode': 'SEDML_VARIABLE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'variable'})
+  element = dict({
+                 'name': 'SedVariable',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_VARIABLE',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'elementName':'variable'
+                 })
   return element
 
 def createSedParameter() :
@@ -129,19 +147,48 @@ def createSedParameter() :
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'double', 'reqd' : True, 'name':'value'})
   attributes = [a1, a2, a3]
-  element = dict({'name': 'SedParameter', 'package': 'Sed', 'typecode': 'SEDML_PARAMETER', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'parameter'})
+  element = dict({
+                 'name': 'SedParameter',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_PARAMETER',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'elementName':'parameter'
+                 })
   return element
+
 def createSedAlgorithmParameter() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'kisaoID'})
   a2 = dict({'type': 'string', 'reqd' : True, 'name':'value'})
   attributes = [a1, a2]
-  element = dict({'name': 'SedAlgorithmParameter', 'package': 'Sed', 'typecode': 'SEDML_SIMULATION_ALGORITHM_PARAMETER', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'algorithmParameter'})
+  element = dict({
+                 'name': 'SedAlgorithmParameter',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_SIMULATION_ALGORITHM_PARAMETER',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'elementName':'algorithmParameter'
+                 })
   return element
+
 def createSedAlgorithm() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'kisaoID'})
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'algorithmParameter', 'element': 'SedAlgorithmParameter'})
   attributes = [lo1,a1]
-  element = dict({'name': 'SedAlgorithm', 'package': 'Sed', 'typecode': 'SEDML_SIMULATION_ALGORITHM', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'algorithm'})
+  element = dict({
+                 'name': 'SedAlgorithm',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_SIMULATION_ALGORITHM',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':False,
+                 'elementName':'algorithm'
+                 })
   return element
 
 def createSedRange():
@@ -188,7 +235,17 @@ def createSedChange() :
 
 def createSedChangeRemoveXML() :
   attributes = []
-  element = dict({'name': 'SedRemoveXML', 'package': 'Sed', 'typecode': 'SEDML_CHANGE_REMOVEXML', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'SedChange', 'elementName':'removeXML'})
+  element = dict({
+                 'name': 'SedRemoveXML',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_CHANGE_REMOVEXML',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'baseClass':'SedChange',
+                 'elementName':'removeXML'
+                 })
   return element
 
 def createSedSetValue():
@@ -211,18 +268,39 @@ def createSedSetValue():
                    'elementName':'setValue'
                    })
     return element
+
 def createSedComputeChange() :
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'variable', 'element': 'SedVariable'})
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'parameter', 'element': 'SedParameter'})
   a1 = dict({'type': 'element', 'reqd' : False, 'name':'math'})
   attributes = [lo1, lo2, a1]
-  element = dict({'name': 'SedComputeChange', 'package': 'Sed', 'typecode': 'SEDML_CHANGE_COMPUTECHANGE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':True, 'baseClass':'SedChange', 'elementName':'computeChange'})
+  element = dict({
+                 'name': 'SedComputeChange',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_CHANGE_COMPUTECHANGE',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':True,
+                 'baseClass':'SedChange',
+                 'elementName':'computeChange'
+                 })
   return element
 
 def createSedChangeAttribute() :
   a1 = dict({'type': 'string', 'reqd' : True, 'name':'newValue'})
   attributes = [a1]
-  element = dict({'name': 'SedChangeAttribute', 'package': 'Sed', 'typecode': 'SEDML_CHANGE_ATTRIBUTE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'SedChange', 'elementName':'changeAttribute'})
+  element = dict({
+                 'name': 'SedChangeAttribute',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_CHANGE_ATTRIBUTE',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'baseClass':'SedChange',
+                 'elementName':'changeAttribute'
+                 })
   return element
 
 
@@ -232,7 +310,17 @@ def createSedUniformRange() :
     a3 = dict({'type': 'int', 'reqd' : True, 'name':'numberOfPoints'})
     a4 = dict({'type': 'string', 'reqd' : True, 'name':'type'})
     attributes = [a1, a2, a3, a4]
-    element = dict({'name': 'SedUniformRange', 'package': 'Sed', 'typecode': 'SEDML_RANGE_UNIFORMRANGE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'SedRange', 'elementName':'uniformRange'})
+    element = dict({
+                   'name': 'SedUniformRange',
+                   'package': 'Sed',
+                   'typecode': 'SEDML_RANGE_UNIFORMRANGE',
+                   'hasSedListOf': False,
+                   'attribs':attributes,
+                   'hasChildren':False,
+                   'hasMath':False,
+                   'baseClass':'SedRange',
+                   'elementName':'uniformRange'
+                   })
     return element
 
 def createSedVectorRange():
@@ -275,25 +363,64 @@ def createSedUniformTimeCourse() :
   a3 = dict({'type': 'double', 'reqd' : True, 'name':'outputEndTime'})
   a4 = dict({'type': 'int', 'reqd' : True, 'name':'numberOfPoints'})
   attributes = [a1, a2, a3, a4]
-  element = dict({'name': 'SedUniformTimeCourse', 'package': 'Sed', 'typecode': 'SEDML_SIMULATION_UNIFORMTIMECOURSE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'SedSimulation', 'elementName':'uniformTimeCourse'})
+  element = dict({
+                 'name': 'SedUniformTimeCourse',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_SIMULATION_UNIFORMTIMECOURSE',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'baseClass':'SedSimulation',
+                 'elementName':'uniformTimeCourse'
+                 })
   return element
 
 def createSedSubTask():
     a0 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'task'})
     a1 = dict({'type': 'int', 'reqd' : True, 'name':'order'})
     attributes = [a0, a1]
-    element = dict({'name': 'SedSubTask', 'package': 'Sed', 'typecode': 'SEDML_TASK_SUBTASK', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'subTask'})
+    element = dict({
+                   'name': 'SedSubTask',
+                   'package': 'Sed',
+                   'typecode': 'SEDML_TASK_SUBTASK',
+                   'hasSedListOf': True,
+                   'attribs':attributes,
+                   'hasChildren':False,
+                   'hasMath':False,
+                   'elementName':'subTask'
+                   })
     return element
 
 def createSedOneStep() :
     a1 = dict({'type': 'double', 'reqd' : True, 'name':'step'})
     attributes = [a1]
-    element = dict({'name': 'SedOneStep', 'package': 'Sed', 'typecode': 'SEDML_SIMULATION_ONESTEP', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'SedSimulation', 'elementName':'oneStep'})
+    element = dict({
+                   'name': 'SedOneStep',
+                   'package': 'Sed',
+                   'typecode': 'SEDML_SIMULATION_ONESTEP',
+                   'hasSedListOf': False,
+                   'attribs':attributes,
+                   'hasChildren':False,
+                   'hasMath':False,
+                   'baseClass':'SedSimulation',
+                   'elementName':'oneStep'
+                   })
     return element
 
 def createSedSteadyState() :
     attributes = []
-    element = dict({'name': 'SedSteadyState', 'package': 'Sed', 'typecode': 'SEDML_SIMULATION_STEADYSTATE', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'baseClass':'SedSimulation', 'elementName':'steadyState'})
+    element = dict({
+                   'name': 'SedSteadyState',
+                   'package': 'Sed',
+                   'typecode': 'SEDML_SIMULATION_STEADYSTATE',
+                   'hasSedListOf': False,
+                   'attribs':attributes,
+                   'hasChildren':False,
+                   'hasMath':False,
+                   'baseClass':'SedSimulation',
+                   'elementName':'steadyState'
+                   })
     return element
 
 def createSedSimulation() :
@@ -325,7 +452,16 @@ def createSedTask() :
   a3 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'modelReference'})
   a4 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'simulationReference'})
   attributes = [a1, a2, a3, a4]
-  element = dict({'name': 'SedTask', 'package': 'Sed', 'typecode': 'SEDML_TASK', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'elementName':'task'})
+  element = dict({
+                 'name': 'SedTask',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_TASK',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':False,
+                 'elementName':'task'
+                 })
   return element
 
 def createSedRepeatedTask():
@@ -366,7 +502,16 @@ def createSedDataGenerator() :
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'parameter', 'element': 'SedParameter'})
   a3 = dict({'type': 'element', 'reqd' : False, 'name':'math'})
   attributes = [a1, a2, lo1, lo2, a3]
-  element = dict({'name': 'SedDataGenerator', 'package': 'Sed', 'typecode': 'SEDML_DATAGENERATOR', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':True, 'hasMath':True, 'elementName':'dataGenerator'})
+  element = dict({
+                 'name': 'SedDataGenerator',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_DATAGENERATOR',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':True,
+                 'elementName':'dataGenerator'
+                 })
   return element
 
 def createSedOutput() :
@@ -394,19 +539,49 @@ def createSedOutput() :
 def createSedReport() :
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataSet', 'element': 'SedDataSet'})
   attributes = [lo1]
-  element = dict({'name': 'SedReport', 'package': 'Sed', 'typecode': 'SEDML_OUTPUT_REPORT', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'baseClass':'SedOutput', 'elementName':'report'})
+  element = dict({
+                 'name': 'SedReport',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_OUTPUT_REPORT',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':False,
+                 'baseClass':'SedOutput',
+                 'elementName':'report'
+                 })
   return element
 
 def createSedPlot2D() :
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'curve', 'element': 'SedCurve'})
   attributes = [lo1]
-  element = dict({'name': 'SedPlot2D', 'package': 'Sed', 'typecode': 'SEDML_OUTPUT_PLOT2D', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'baseClass':'SedOutput', 'elementName':'plot2D'})
+  element = dict({
+                 'name': 'SedPlot2D',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_OUTPUT_PLOT2D',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':False,
+                 'baseClass':'SedOutput',
+                 'elementName':'plot2D'
+                 })
   return element
 
 def createSedPlot3D() :
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'surface', 'element': 'SedSurface'})
   attributes = [lo1]
-  element = dict({'name': 'SedPlot3D', 'package': 'Sed', 'typecode': 'SEDML_OUTPUT_PLOT3D', 'hasSedListOf': False, 'attribs':attributes, 'hasChildren':True, 'hasMath':False, 'baseClass':'SedOutput' , 'elementName':'plot3D'})
+  element = dict({
+                 'name': 'SedPlot3D',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_OUTPUT_PLOT3D',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':True,
+                 'hasMath':False,
+                 'baseClass':'SedOutput' ,
+                 'elementName':'plot3D'
+                 })
   return element
 
 def createSedDataSet() :
@@ -415,7 +590,16 @@ def createSedDataSet() :
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'dataReference'})
   attributes = [a0, a1, a2, a3]
-  element = dict({'name': 'SedDataSet', 'package': 'Sed', 'typecode': 'SEDML_OUTPUT_DATASET', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'dataSet'})
+  element = dict({
+                 'name': 'SedDataSet',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_OUTPUT_DATASET',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'elementName':'dataSet'
+                 })
   return element
 
 def createSedCurve() :
@@ -426,12 +610,31 @@ def createSedCurve() :
   a4 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'xDataReference'})
   a5 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'yDataReference'})
   attributes = [a0, a1, a2, a3, a4, a5]
-  element = dict({'name': 'SedCurve', 'package': 'Sed', 'typecode': 'SEDML_OUTPUT_CURVE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False, 'elementName':'curve'})
+  element = dict({
+                 'name': 'SedCurve',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_OUTPUT_CURVE',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'elementName':'curve'
+                 })
   return element
 
 def createSedSurface() :
   a1 = dict({'type': 'bool', 'reqd' : True, 'name':'logZ'})
   a2 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'zDataReference'})
   attributes = [a1, a2]
-  element = dict({'name': 'SedSurface', 'package': 'Sed', 'typecode': 'SEDML_OUTPUT_SURFACE', 'hasSedListOf': True, 'attribs':attributes, 'hasChildren':False, 'hasMath':False,'baseClass':'SedCurve', 'elementName':'surface' })
+  element = dict({
+                 'name': 'SedSurface',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_OUTPUT_SURFACE',
+                 'hasSedListOf': True,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'baseClass':'SedCurve',
+                 'elementName':'surface'
+                 })
   return element
