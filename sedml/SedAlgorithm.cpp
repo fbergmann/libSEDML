@@ -49,11 +49,15 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedAlgorithm::SedAlgorithm (unsigned int level, unsigned int version)
 	: SedBase(level, version)
+	, mAlgorithmParameter (level, version)
 	, mKisaoID ("")
 
 {
 	// set an SedNamespaces derived object of this package
 	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+
+	// connect to child objects
+	connectToChild();
 }
 
 
@@ -62,11 +66,15 @@ SedAlgorithm::SedAlgorithm (unsigned int level, unsigned int version)
  */
 SedAlgorithm::SedAlgorithm (SedNamespaces* sedns)
 	: SedBase(sedns)
+	, mAlgorithmParameter (sedns)
 	, mKisaoID ("")
 
 {
 	// set the element namespace of this object
 	setElementNamespace(sedns->getURI());
+
+	// connect to child objects
+	connectToChild();
 }
 
 
@@ -82,7 +90,11 @@ SedAlgorithm::SedAlgorithm (const SedAlgorithm& orig)
 	}
 	else
 	{
+		mAlgorithmParameter  = orig.mAlgorithmParameter;
 		mKisaoID  = orig.mKisaoID;
+
+		// connect to child objects
+		connectToChild();
 	}
 }
 
@@ -100,7 +112,11 @@ SedAlgorithm::operator=(const SedAlgorithm& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
+		mAlgorithmParameter  = rhs.mAlgorithmParameter;
 		mKisaoID  = rhs.mKisaoID;
+
+		// connect to child objects
+		connectToChild();
 	}
 	return *this;
 }
@@ -182,6 +198,124 @@ SedAlgorithm::unsetKisaoID()
 
 
 /*
+ * Returns the  "SedListOfAlgorithmParameters" in this SedAlgorithm object.
+ */
+const SedListOfAlgorithmParameters*
+SedAlgorithm::getListOfAlgorithmParameters() const
+{
+	return &mAlgorithmParameter;
+}
+
+
+/*
+ * Removes the nth AlgorithmParameter from the SedListOfAlgorithmParameters.
+ */
+SedAlgorithmParameter*
+SedAlgorithm::removeAlgorithmParameter(unsigned int n)
+{
+	return mAlgorithmParameter.remove(n);
+}
+
+
+/*
+ * Removes the a AlgorithmParameter with given id from the SedListOfAlgorithmParameters.
+ */
+SedAlgorithmParameter*
+SedAlgorithm::removeAlgorithmParameter(const std::string& sid)
+{
+	return mAlgorithmParameter.remove(sid);
+}
+
+
+/*
+ * Return the nth AlgorithmParameter in the SedListOfAlgorithmParameters within this SedAlgorithm.
+ */
+SedAlgorithmParameter*
+SedAlgorithm::getAlgorithmParameter(unsigned int n)
+{
+	return mAlgorithmParameter.get(n);
+}
+
+
+/*
+ * Return the nth AlgorithmParameter in the SedListOfAlgorithmParameters within this SedAlgorithm.
+ */
+const SedAlgorithmParameter*
+SedAlgorithm::getAlgorithmParameter(unsigned int n) const
+{
+	return mAlgorithmParameter.get(n);
+}
+
+
+/*
+ * Return a AlgorithmParameter from the SedListOfAlgorithmParameters by id.
+ */
+SedAlgorithmParameter*
+SedAlgorithm::getAlgorithmParameter(const std::string& sid)
+{
+	return mAlgorithmParameter.get(sid);
+}
+
+
+/*
+ * Return a AlgorithmParameter from the SedListOfAlgorithmParameters by id.
+ */
+const SedAlgorithmParameter*
+SedAlgorithm::getAlgorithmParameter(const std::string& sid) const
+{
+	return mAlgorithmParameter.get(sid);
+}
+
+
+/**
+ * Adds a copy the given "SedAlgorithmParameter" to this SedAlgorithm.
+ *
+ * @param sap; the SedAlgorithmParameter object to add
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedAlgorithm::addAlgorithmParameter(const SedAlgorithmParameter* sap)
+{
+	if(sap == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+	mAlgorithmParameter.append(sap);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Get the number of SedAlgorithmParameter objects in this SedAlgorithm.
+ *
+ * @return the number of SedAlgorithmParameter objects in this SedAlgorithm
+ */
+unsigned int 
+SedAlgorithm::getNumAlgorithmParameters() const
+{
+	return mAlgorithmParameter.size();
+}
+
+/**
+ * Creates a new SedAlgorithmParameter object, adds it to this SedAlgorithms
+ * SedAlgorithm and returns the SedAlgorithmParameter object created. 
+ *
+ * @return a new SedAlgorithmParameter object instance
+ *
+ * @see addSedAlgorithmParameter(const SedAlgorithmParameter* sap)
+ */
+SedAlgorithmParameter* 
+SedAlgorithm::createAlgorithmParameter()
+{
+	SedAlgorithmParameter *temp = new SedAlgorithmParameter();
+	if (temp != NULL) mAlgorithmParameter.appendAndOwn(temp);
+	return temp;
+}
+
+/*
  * Returns the XML element name of this object
  */
 const std::string&
@@ -189,6 +323,39 @@ SedAlgorithm::getElementName () const
 {
 	static const string name = "algorithm";
 	return name;
+}
+
+
+/**
+ * return the SEDML object corresponding to next XMLToken.
+ */
+SedBase*
+SedAlgorithm::createObject(XMLInputStream& stream)
+{
+	SedBase* object = NULL;
+
+	const string& name   = stream.peek().getName();
+
+	SedBase::connectToChild();
+
+	if (name == "listOfAlgorithmParameters")
+	{
+		object = &mAlgorithmParameter;
+	}
+
+	return object;
+}
+
+
+/*
+ * Read values from the given XMLAttributes set into their specific fields.
+ */
+void
+SedAlgorithm::connectToChild ()
+{
+	SedBase::connectToChild();
+
+	mAlgorithmParameter.connectToParent(this);
 }
 
 
@@ -217,6 +384,18 @@ SedAlgorithm::hasRequiredAttributes () const
 }
 
 
+/*
+ * check if all the required elements are set
+ */
+bool
+SedAlgorithm::hasRequiredElements () const
+{
+	bool allPresent = true;
+
+	return allPresent;
+}
+
+
 /** @cond doxygen-libsbml-internal */
 
 /*
@@ -226,6 +405,10 @@ void
 SedAlgorithm::writeElements (XMLOutputStream& stream) const
 {
 	SedBase::writeElements(stream);
+	if (getNumAlgorithmParameters() > 0)
+	{
+		mAlgorithmParameter.write(stream);
+	}
 }
 
 
@@ -421,6 +604,62 @@ SedAlgorithm_unsetKisaoID(SedAlgorithm_t * sa)
 }
 
 
+LIBSEDML_EXTERN
+int
+SedAlgorithm_addAlgorithmParameter(SedAlgorithm_t * sa, SedAlgorithmParameter_t * sap)
+{
+	return  (sa != NULL) ? sa->addAlgorithmParameter(sap) : LIBSBML_INVALID_OBJECT;
+}
+
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t *
+SedAlgorithm_createAlgorithmParameter(SedAlgorithm_t * sa)
+{
+	return  (sa != NULL) ? sa->createAlgorithmParameter() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedListOf_t *
+SedAlgorithm_getSedListOfAlgorithmParameters(SedAlgorithm_t * sa)
+{
+	return  (sa != NULL) ? (SedListOf_t *)sa->getListOfAlgorithmParameters() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t *
+SedAlgorithm_getAlgorithmParameter(SedAlgorithm_t * sa, unsigned int n)
+{
+	return  (sa != NULL) ? sa->getAlgorithmParameter(n) : NULL;
+}
+
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t *
+SedAlgorithm_getAlgorithmParameterById(SedAlgorithm_t * sa, const char * sid)
+{
+	return  (sa != NULL) ? sa->getAlgorithmParameter(sid) : NULL;
+}
+
+LIBSEDML_EXTERN
+unsigned int
+SedAlgorithm_getNumAlgorithmParameters(SedAlgorithm_t * sa)
+{
+	return  (sa != NULL) ? sa->getNumAlgorithmParameters() : SEDML_INT_MAX;
+}
+
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t *
+SedAlgorithm_removeAlgorithmParameter(SedAlgorithm_t * sa, unsigned int n)
+{
+	return  (sa != NULL) ? sa->removeAlgorithmParameter(n) : NULL;
+}
+
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t *
+SedAlgorithm_removeAlgorithmParameterById(SedAlgorithm_t * sa, const char * sid)
+{
+	return  (sa != NULL) ? sa->removeAlgorithmParameter(sid) : NULL;
+}
+
 /**
  * write comments
  */
@@ -429,6 +668,17 @@ int
 SedAlgorithm_hasRequiredAttributes(SedAlgorithm_t * sa)
 {
 	return (sa != NULL) ? static_cast<int>(sa->hasRequiredAttributes()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedAlgorithm_hasRequiredElements(SedAlgorithm_t * sa)
+{
+	return (sa != NULL) ? static_cast<int>(sa->hasRequiredElements()) : 0;
 }
 
 

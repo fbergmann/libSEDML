@@ -44,6 +44,9 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
     , "Variable"
     , "Parameter"
     , "Task"
+    , "SubTask"
+    , "SetValue"
+    , "RepeatedTask"
     , "Output"
     , "DataSet"
     , "Curve"
@@ -54,6 +57,13 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
 	, "Simulation"
 	, "Algorithm"
 	, "UniformTimeCourse"
+    , "AlgorithmParameter"
+    , "OneStep"
+    , "SteadyState"
+    , "Range"
+    , "UniformRange"
+    , "VectorRange"
+    , "FunctionalRange"
 	, "SedListOf"
 };
 

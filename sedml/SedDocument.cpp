@@ -390,6 +390,38 @@ SedDocument::createUniformTimeCourse()
 	return temp;
 }
 
+/**
+ * Creates a new SedOneStep object, adds it to this SedDocuments
+ * SedDocument and returns the SedOneStep object created. 
+ *
+ * @return a new SedOneStep object instance
+ *
+ * @see addOneStep(const SedSimulation* ss)
+ */
+SedOneStep* 
+SedDocument::createOneStep()
+{
+	SedOneStep *temp = new SedOneStep();
+	if (temp != NULL) mSimulation.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedSteadyState object, adds it to this SedDocuments
+ * SedDocument and returns the SedSteadyState object created. 
+ *
+ * @return a new SedSteadyState object instance
+ *
+ * @see addSteadyState(const SedSimulation* ss)
+ */
+SedSteadyState* 
+SedDocument::createSteadyState()
+{
+	SedSteadyState *temp = new SedSteadyState();
+	if (temp != NULL) mSimulation.appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Returns the  "SedListOfModels" in this SedDocument object.
  */
@@ -1396,6 +1428,20 @@ SedUniformTimeCourse_t *
 SedDocument_createUniformTimeCourse(SedDocument_t * sd)
 {
 	return  (sd != NULL) ? sd->createUniformTimeCourse() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedOneStep_t *
+SedDocument_createOneStep(SedDocument_t * sd)
+{
+	return  (sd != NULL) ? sd->createOneStep() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedSteadyState_t *
+SedDocument_createSteadyState(SedDocument_t * sd)
+{
+	return  (sd != NULL) ? sd->createSteadyState() : NULL;
 }
 
 LIBSEDML_EXTERN

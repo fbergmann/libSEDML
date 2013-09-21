@@ -1,6 +1,6 @@
 /**
- * @file:   SedSimulation.h
- * @brief:  Implementation of the SedSimulation class
+ * @file:   SedSubTask.h
+ * @brief:  Implementation of the SedSubTask class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedSimulation_H__
-#define SedSimulation_H__
+#ifndef SedSubTask_H__
+#define SedSubTask_H__
 
 
 #include <sedml/common/extern.h>
@@ -57,92 +57,92 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN SedSimulation : public SedBase
+class LIBSEDML_EXTERN SedSubTask : public SedBase
 {
 
 protected:
 
-	std::string   mId;
-	std::string   mName;
-	SedAlgorithm*      mAlgorithm;
+	std::string   mTask;
+	int           mOrder;
+	bool          mIsSetOrder;
 
 
 public:
 
 	/**
-	 * Creates a new SedSimulation with the given level, version, and package version.
+	 * Creates a new SedSubTask with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedSimulation
+	 * @param level an unsigned int, the SEDML Level to assign to this SedSubTask
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedSimulation
+	 * @param version an unsigned int, the SEDML Version to assign to this SedSubTask
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedSimulation
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedSubTask
 	 */
-	SedSimulation(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	              unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedSubTask(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	           unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedSimulation with the given SedNamespaces object.
+	 * Creates a new SedSubTask with the given SedNamespaces object.
 	 *
 	 * @param sedns the SedNamespaces object
 	 */
-	SedSimulation(SedNamespaces* sedns);
+	SedSubTask(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedSimulation.
+	 * Copy constructor for SedSubTask.
 	 *
-	 * @param orig; the SedSimulation instance to copy.
+	 * @param orig; the SedSubTask instance to copy.
 	 */
-	SedSimulation(const SedSimulation& orig);
+	SedSubTask(const SedSubTask& orig);
 
 
  	/**
-	 * Assignment operator for SedSimulation.
+	 * Assignment operator for SedSubTask.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedSimulation& operator=(const SedSimulation& rhs);
+	SedSubTask& operator=(const SedSubTask& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedSimulation object.
+	 * Creates and returns a deep copy of this SedSubTask object.
 	 *
-	 * @return a (deep) copy of this SedSimulation object.
+	 * @return a (deep) copy of this SedSubTask object.
 	 */
-	virtual SedSimulation* clone () const;
+	virtual SedSubTask* clone () const;
 
 
  	/**
-	 * Destructor for SedSimulation.
+	 * Destructor for SedSubTask.
 	 */
-	virtual ~SedSimulation();
+	virtual ~SedSubTask();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this SedSimulation.
+	 * Returns the value of the "task" attribute of this SedSubTask.
 	 *
-	 * @return the value of the "id" attribute of this SedSimulation as a string.
+	 * @return the value of the "task" attribute of this SedSubTask as a string.
 	 */
-	virtual const std::string& getId() const;
+	virtual const std::string& getTask() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSimulation's "id" attribute has been set.
+	 * SedSubTask's "task" attribute has been set.
 	 *
-	 * @return @c true if this SedSimulation's "id" attribute has been set,
+	 * @return @c true if this SedSubTask's "task" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
-	virtual bool isSetId() const;
+	virtual bool isSetTask() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this SedSimulation.
+	 * Sets the value of the "task" attribute of this SedSubTask.
 	 *
-	 * @param id; const std::string& value of the "id" attribute to be set
+	 * @param task; const std::string& value of the "task" attribute to be set
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -151,11 +151,11 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	virtual int setId(const std::string& id);
+	virtual int setTask(const std::string& task);
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this SedSimulation.
+	 * Unsets the value of the "task" attribute of this SedSubTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -164,31 +164,31 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_OPERATION_FAILED
 	 */
-	virtual int unsetId();
+	virtual int unsetTask();
 
 
 	/**
-	 * Returns the value of the "name" attribute of this SedSimulation.
+	 * Returns the value of the "order" attribute of this SedSubTask.
 	 *
-	 * @return the value of the "name" attribute of this SedSimulation as a string.
+	 * @return the value of the "order" attribute of this SedSubTask as a integer.
 	 */
-	virtual const std::string& getName() const;
+	virtual const int getOrder() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSimulation's "name" attribute has been set.
+	 * SedSubTask's "order" attribute has been set.
 	 *
-	 * @return @c true if this SedSimulation's "name" attribute has been set,
+	 * @return @c true if this SedSubTask's "order" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
-	virtual bool isSetName() const;
+	virtual bool isSetOrder() const;
 
 
 	/**
-	 * Sets the value of the "name" attribute of this SedSimulation.
+	 * Sets the value of the "order" attribute of this SedSubTask.
 	 *
-	 * @param name; const std::string& value of the "name" attribute to be set
+	 * @param order; int value of the "order" attribute to be set
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -197,11 +197,11 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	virtual int setName(const std::string& name);
+	virtual int setOrder(int order);
 
 
 	/**
-	 * Unsets the value of the "name" attribute of this SedSimulation.
+	 * Unsets the value of the "order" attribute of this SedSubTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -210,68 +210,14 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_OPERATION_FAILED
 	 */
-	virtual int unsetName();
+	virtual int unsetOrder();
 
 
 	/**
-	 * Returns the "algorithm" element of this SedSimulation.
+	 * Returns the XML element name of this object, which for SedSubTask, is
+	 * always @c "sedSubTask".
 	 *
-	 * @return the "algorithm" element of this SedSimulation.
-	 */
-	virtual const SedAlgorithm* getAlgorithm() const;
-
-
-	/**
-	 * Creates a new "SedAlgorithm" and sets it for this SedSimulation.
-	 *
-	 * @return the created "SedAlgorithm" element of this SedSimulation.
-	 */
-	virtual SedAlgorithm* createAlgorithm();
-
-
-	/**
-	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSimulation's "algorithm" element has been set.
-	 *
-	 * @return @c true if this SedSimulation's "algorithm" element has been set,
-	 * otherwise @c false is returned.
-	 */
-	virtual bool isSetAlgorithm() const;
-
-
-	/**
-	 * Sets the "algorithm" element of this SedSimulation.
-	 *
-	 * @param algorithm; SedAlgorithm* determining the value of the "resultLevel" attribute to be set.
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
-	 */
-	virtual int setAlgorithm(SedAlgorithm* algorithm);
-
-
-	/**
-	 * Unsets the "algorithm" element of this SedSimulation.
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_OPERATION_FAILED
-	 */
-	virtual int unsetAlgorithm();
-
-
-	/**
-	 * Returns the XML element name of this object, which for SedSimulation, is
-	 * always @c "sedSimulation".
-	 *
-	 * @return the name of this element, i.e. @c "sedSimulation".
+	 * @return the name of this element, i.e. @c "sedSubTask".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -311,27 +257,16 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedSimulation object have been set.
+	 * for this SedSubTask object have been set.
 	 *
-	 * @note The required attributes for a SedSimulation object are:
-	 * @li "id"
+	 * @note The required attributes for a SedSubTask object are:
+	 * @li "task"
+	 * @li "order"
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
 	 */
 	virtual bool hasRequiredAttributes() const;
-
-
-	/**
-	 * Predicate returning @c true if all the required elements
-	 * for this SedSimulation object have been set.
-	 *
-	 * @note The required elements for a SedSimulation object are:
-	 *
-	 * @return a boolean value indicating whether all the required
-	 * elements for this object have been defined.
-	 */
-	virtual bool hasRequiredElements() const;
 
 
 /** @cond doxygen-libsbml-internal */
@@ -369,29 +304,7 @@ public:
 /** @endcond doxygen-libsbml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
-
-	/**
-	 * Connects to child elements.
-	 */
-	virtual void connectToChild ();
-
-
-/** @endcond doxygen-libsbml-internal */
-
-
 protected:
-
-/** @cond doxygen-libsbml-internal */
-
-	/**
-	 * return the SEDML object corresponding to next XMLToken.
-	 */
-	virtual SedBase* createObject(XMLInputStream& stream);
-
-
-/** @endcond doxygen-libsbml-internal */
-
 
 /** @cond doxygen-libsbml-internal */
 
@@ -430,103 +343,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfSimulations : public SedListOf
+class LIBSEDML_EXTERN SedListOfSubTasks : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfSimulations with the given level, version, and package version.
+	 * Creates a new SedListOfSubTasks with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSimulations
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSubTasks
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSimulations
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSubTasks
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfSimulations
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfSubTasks
 	 */
-	SedListOfSimulations(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                     unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfSubTasks(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                  unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfSimulations with the given SedNamespaces object.
+	 * Creates a new SedListOfSubTasks with the given SedNamespaces object.
 	 *
 	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSimulations(SedNamespaces* sedns);
+	SedListOfSubTasks(SedNamespaces* sedns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfSimulations object.
+	 * Creates and returns a deep copy of this SedListOfSubTasks object.
 	 *
-	 * @return a (deep) copy of this SedListOfSimulations object.
+	 * @return a (deep) copy of this SedListOfSubTasks object.
 	 */
-	virtual SedListOfSimulations* clone () const;
+	virtual SedListOfSubTasks* clone () const;
 
 
  	/**
-	 * Get a Simulation from the SedListOfSimulations.
+	 * Get a SubTask from the SedListOfSubTasks.
 	 *
-	 * @param n the index number of the Simulation to get.
+	 * @param n the index number of the SubTask to get.
 	 *
-	 * @return the nth Simulation in this SedListOfSimulations.
-	 *
-	 * @see size()
-	 */
-	virtual SedSimulation* get(unsigned int n);
-
-
-	/**
-	 * Get a Simulation from the SedListOfSimulations.
-	 *
-	 * @param n the index number of the Simulation to get.
-	 *
-	 * @return the nth Simulation in this SedListOfSimulations.
+	 * @return the nth SubTask in this SedListOfSubTasks.
 	 *
 	 * @see size()
 	 */
-	virtual const SedSimulation* get(unsigned int n) const;
+	virtual SedSubTask* get(unsigned int n);
 
 
 	/**
-	 * Get a Simulation from the SedListOfSimulations
+	 * Get a SubTask from the SedListOfSubTasks.
+	 *
+	 * @param n the index number of the SubTask to get.
+	 *
+	 * @return the nth SubTask in this SedListOfSubTasks.
+	 *
+	 * @see size()
+	 */
+	virtual const SedSubTask* get(unsigned int n) const;
+
+
+	/**
+	 * Get a SubTask from the SedListOfSubTasks
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Simulation to get.
+	 * of the SubTask to get.
 	 *
-	 * @return Simulation in this SedListOfSimulations
+	 * @return SubTask in this SedListOfSubTasks
 	 * with the given id or NULL if no such
-	 * Simulation exists.
+	 * SubTask exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual SedSimulation* get(const std::string& sid);
+	virtual SedSubTask* get(const std::string& sid);
 
 
 	/**
-	 * Get a Simulation from the SedListOfSimulations
+	 * Get a SubTask from the SedListOfSubTasks
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Simulation to get.
+	 * of the SubTask to get.
 	 *
-	 * @return Simulation in this SedListOfSimulations
+	 * @return SubTask in this SedListOfSubTasks
 	 * with the given id or NULL if no such
-	 * Simulation exists.
+	 * SubTask exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const SedSimulation* get(const std::string& sid) const;
+	virtual const SedSubTask* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Simulation" to this SedListOfSimulations.
+	 * Adds a copy the given "SubTask" to this SedListOfSubTasks.
 	 *
-	 * @param s; the Simulation object to add
+	 * @param st; the SubTask object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -535,84 +448,62 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSimulation(const SedSimulation* s);
+	int addSubTask(const SedSubTask* st);
 
 
 	/**
-	 * Get the number of Simulation objects in this SedListOfSimulations.
+	 * Get the number of SubTask objects in this SedListOfSubTasks.
 	 *
-	 * @return the number of Simulation objects in this SedListOfSimulations
+	 * @return the number of SubTask objects in this SedListOfSubTasks
 	 */
-	unsigned int getNumSimulations() const;
+	unsigned int getNumSubTasks() const;
 
 
 	/**
-	 * Creates a new Simulation object, adds it to the
-	 * SedListOfSimulations and returns the Simulation object created. 
+	 * Creates a new SubTask object, adds it to the
+	 * SedListOfSubTasks and returns the SubTask object created. 
 	 *
-	 * @return a new Simulation object instance
+	 * @return a new SubTask object instance
 	 *
-	 * @see addSimulation(const SedSimulation* s)
+	 * @see addSubTask(const SedSubTask* st)
 	 */
-	SedUniformTimeCourse* createUniformTimeCourse();
+	SedSubTask* createSubTask();
 
 
 	/**
-	 * Creates a new Simulation object, adds it to the
-	 * SedListOfSimulations and returns the Simulation object created. 
-	 *
-	 * @return a new Simulation object instance
-	 *
-	 * @see addSimulation(const SedSimulation* s)
-	 */
-	SedOneStep* createOneStep();
-
-
-	/**
-	 * Creates a new Simulation object, adds it to the
-	 * SedListOfSimulations and returns the Simulation object created. 
-	 *
-	 * @return a new Simulation object instance
-	 *
-	 * @see addSimulation(const SedSimulation* s)
-	 */
-	SedSteadyState* createSteadyState();
-
-
-	/**
-	 * Removes the nth Simulation from this SedListOfSimulations
+	 * Removes the nth SubTask from this SedListOfSubTasks
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the Simulation to remove.
+	 * @param n the index of the SubTask to remove.
 	 *
 	 * @see size()
 	 */
-	virtual SedSimulation* remove(unsigned int n);
+	virtual SedSubTask* remove(unsigned int n);
 
 
 	/**
-	 * Removes the Simulation from this SedListOfSimulations with the given identifier
+	 * Removes the SubTask from this SedListOfSubTasks with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the Simulation to remove.
+	 * @param sid the identifier of the SubTask to remove.
 	 *
-	 * @return the Simulation removed. As mentioned above, the caller owns the
+	 * @return the SubTask removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual SedSimulation* remove(const std::string& sid);
+	virtual SedSubTask* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfSimulations, is
-	 * always @c "sedListOfSimulations".
+	 * Returns the XML element name of this object, which for SedListOfSubTasks, is
+	 * always @c "sedListOfSubTasks".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfSimulations".
+	 * @return the name of this element, i.e. @c "sedListOfSubTasks".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -689,7 +580,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new Simulation in this SedListOfSimulations
+	 * Creates a new SubTask in this SedListOfSubTasks
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -723,103 +614,73 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedSimulation_t *
-SedSimulation_create(unsigned int level, unsigned int version);
+SedSubTask_t *
+SedSubTask_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedSimulation_free(SedSimulation_t * ss);
+SedSubTask_free(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
-SedSimulation_t *
-SedSimulation_clone(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-char *
-SedSimulation_getId(SedSimulation_t * ss);
+SedSubTask_t *
+SedSubTask_clone(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 char *
-SedSimulation_getName(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-SedAlgorithm_t*
-SedSimulation_getAlgorithm(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-SedAlgorithm_t*
-SedSimulation_createAlgorithm(SedSimulation_t * ss);
+SedSubTask_getTask(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_isSetId(SedSimulation_t * ss);
+SedSubTask_getOrder(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_isSetName(SedSimulation_t * ss);
+SedSubTask_isSetTask(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_isSetAlgorithm(SedSimulation_t * ss);
+SedSubTask_isSetOrder(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_setId(SedSimulation_t * ss, const char * id);
+SedSubTask_setTask(SedSubTask_t * sst, const char * task);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_setName(SedSimulation_t * ss, const char * name);
+SedSubTask_setOrder(SedSubTask_t * sst, int order);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_setAlgorithm(SedSimulation_t * ss, SedAlgorithm_t* algorithm);
+SedSubTask_unsetTask(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_unsetId(SedSimulation_t * ss);
+SedSubTask_unsetOrder(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_unsetName(SedSimulation_t * ss);
+SedSubTask_hasRequiredAttributes(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
-int
-SedSimulation_unsetAlgorithm(SedSimulation_t * ss);
+SedSubTask_t *
+SedListOfSubTasks_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-int
-SedSimulation_hasRequiredAttributes(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-int
-SedSimulation_hasRequiredElements(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-SedSimulation_t *
-SedListOfSimulations_getById(SedListOf_t * lo, const char * sid);
-
-
-LIBSEDML_EXTERN
-SedSimulation_t *
-SedListOfSimulations_removeById(SedListOf_t * lo, const char * sid);
+SedSubTask_t *
+SedListOfSubTasks_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -829,5 +690,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedSimulation_H__  */
+#endif /*  SedSubTask_H__  */
 

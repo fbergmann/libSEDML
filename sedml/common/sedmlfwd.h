@@ -120,12 +120,67 @@ typedef CLASS_OR_STRUCT SedParameter                     SedParameter_t;
  */
 typedef CLASS_OR_STRUCT SedChange                     SedChange_t;
 
+/**
+ * @var typedef class SedRange SedRange_t
+ * @copydoc SedRange
+ */
+typedef CLASS_OR_STRUCT SedRange                     SedRange_t;
+
+/**
+ * @var typedef class SedUniformRange SedUniformRange_t
+ * @copydoc SedUniformRange
+ */
+typedef CLASS_OR_STRUCT SedUniformRange                     SedUniformRange_t;
+
+/**
+ * @var typedef class SedVectorRange SedVectorRange_t
+ * @copydoc SedVectorRange
+ */
+typedef CLASS_OR_STRUCT SedVectorRange                     SedVectorRange_t;
+
+/**
+ * @var typedef class SedFunctionalRange SedFunctionalRange_t
+ * @copydoc SedFunctionalRange
+ */
+typedef CLASS_OR_STRUCT SedFunctionalRange                     SedFunctionalRange_t;
 
 /**
  * @var typedef class SedAlgorithm SedAlgorithm_t
  * @copydoc SedAlgorithm
  */
 typedef CLASS_OR_STRUCT SedAlgorithm                     SedAlgorithm_t;
+
+/**
+ * @var typedef class SedOneStep SedOneStep_t
+ * @copydoc SedOneStep
+ */
+typedef CLASS_OR_STRUCT SedOneStep                     SedOneStep_t;
+
+/**
+ * @var typedef class SedSteadyState SedSteadyState_t
+ * @copydoc SedOneStep
+ */
+typedef CLASS_OR_STRUCT SedSteadyState                     SedSteadyState_t;
+
+/**
+ * @var typedef class SedSubTask SedSubTask_t
+ * @copydoc SedOneStep
+ */
+typedef CLASS_OR_STRUCT SedSubTask                     SedSubTask_t;
+
+/**
+ * @var typedef class SedSetValue SedSetValue_t
+ * @copydoc SedOneStep
+ */
+typedef CLASS_OR_STRUCT SedSetValue                     SedSetValue_t;
+
+
+/**
+ * @var typedef class SedAlgorithmParameter SedAlgorithmParameter_t
+ * @copydoc SedAlgorithmParameter
+ */
+typedef CLASS_OR_STRUCT SedAlgorithmParameter                     SedAlgorithmParameter_t;
+
 
 /**
  * @var typedef class SedComputeChange SedComputeChange_t
@@ -186,6 +241,11 @@ typedef CLASS_OR_STRUCT SedListOfTasks                     SedListOfTasks_t;
  */
 typedef CLASS_OR_STRUCT SedTask                     SedTask_t;
 
+/**
+ * @var typedef class SedRepeatedTask SedRepeatedTask_t
+ * @copydoc SedRepeatedTask
+ */
+typedef CLASS_OR_STRUCT SedRepeatedTask                     SedRepeatedTask_t;
 
 /**
  * @var typedef class SedSimulation SedSimulation_t

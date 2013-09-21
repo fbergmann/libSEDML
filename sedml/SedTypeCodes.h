@@ -103,6 +103,9 @@ typedef enum
     , SEDML_VARIABLE                     =  31
     , SEDML_PARAMETER                    =  32
     , SEDML_TASK                         =  40
+    , SEDML_TASK_SUBTASK                 =  41
+    , SEDML_TASK_SETVALUE                =  42
+    , SEDML_TASK_REPEATEDTASK            =  43
     , SEDML_OUTPUT                       =  50
     , SEDML_OUTPUT_DATASET               =  51
     , SEDML_OUTPUT_CURVE                 =  52
@@ -113,8 +116,15 @@ typedef enum
 	, SEDML_SIMULATION                   =  60
 	, SEDML_SIMULATION_ALGORITHM         =  61
 	, SEDML_SIMULATION_UNIFORMTIMECOURSE =  62
-	, SEDML_LIST_OF                      =  70
-	
+	, SEDML_SIMULATION_ALGORITHM_PARAMETER = 63
+	, SEDML_SIMULATION_ONESTEP           =  64
+	, SEDML_SIMULATION_STEADYSTATE       =  65
+    , SEDML_RANGE                        = 70
+    , SEDML_RANGE_UNIFORMRANGE           = 71
+    , SEDML_RANGE_VECTORRANGE            = 72
+    , SEDML_RANGE_FUNCTIONALRANGE        = 73
+	, SEDML_LIST_OF                      =  100
+
 } SedTypeCode_t;
 
 

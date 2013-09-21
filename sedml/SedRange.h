@@ -1,6 +1,6 @@
 /**
- * @file:   SedSimulation.h
- * @brief:  Implementation of the SedSimulation class
+ * @file:   SedRange.h
+ * @brief:  Implementation of the SedRange class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedSimulation_H__
-#define SedSimulation_H__
+#ifndef SedRange_H__
+#define SedRange_H__
 
 
 #include <sedml/common/extern.h>
@@ -57,90 +57,88 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 
-class LIBSEDML_EXTERN SedSimulation : public SedBase
+class LIBSEDML_EXTERN SedRange : public SedBase
 {
 
 protected:
 
 	std::string   mId;
-	std::string   mName;
-	SedAlgorithm*      mAlgorithm;
 
 
 public:
 
 	/**
-	 * Creates a new SedSimulation with the given level, version, and package version.
+	 * Creates a new SedRange with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedSimulation
+	 * @param level an unsigned int, the SEDML Level to assign to this SedRange
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedSimulation
+	 * @param version an unsigned int, the SEDML Version to assign to this SedRange
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedSimulation
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedRange
 	 */
-	SedSimulation(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	              unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedRange(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	         unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedSimulation with the given SedNamespaces object.
+	 * Creates a new SedRange with the given SedNamespaces object.
 	 *
 	 * @param sedns the SedNamespaces object
 	 */
-	SedSimulation(SedNamespaces* sedns);
+	SedRange(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedSimulation.
+	 * Copy constructor for SedRange.
 	 *
-	 * @param orig; the SedSimulation instance to copy.
+	 * @param orig; the SedRange instance to copy.
 	 */
-	SedSimulation(const SedSimulation& orig);
+	SedRange(const SedRange& orig);
 
 
  	/**
-	 * Assignment operator for SedSimulation.
+	 * Assignment operator for SedRange.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedSimulation& operator=(const SedSimulation& rhs);
+	SedRange& operator=(const SedRange& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedSimulation object.
+	 * Creates and returns a deep copy of this SedRange object.
 	 *
-	 * @return a (deep) copy of this SedSimulation object.
+	 * @return a (deep) copy of this SedRange object.
 	 */
-	virtual SedSimulation* clone () const;
+	virtual SedRange* clone () const;
 
 
  	/**
-	 * Destructor for SedSimulation.
+	 * Destructor for SedRange.
 	 */
-	virtual ~SedSimulation();
+	virtual ~SedRange();
 
 
  	/**
-	 * Returns the value of the "id" attribute of this SedSimulation.
+	 * Returns the value of the "id" attribute of this SedRange.
 	 *
-	 * @return the value of the "id" attribute of this SedSimulation as a string.
+	 * @return the value of the "id" attribute of this SedRange as a string.
 	 */
 	virtual const std::string& getId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSimulation's "id" attribute has been set.
+	 * SedRange's "id" attribute has been set.
 	 *
-	 * @return @c true if this SedSimulation's "id" attribute has been set,
+	 * @return @c true if this SedRange's "id" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
 	virtual bool isSetId() const;
 
 
 	/**
-	 * Sets the value of the "id" attribute of this SedSimulation.
+	 * Sets the value of the "id" attribute of this SedRange.
 	 *
 	 * @param id; const std::string& value of the "id" attribute to be set
 	 *
@@ -155,7 +153,7 @@ public:
 
 
 	/**
-	 * Unsets the value of the "id" attribute of this SedSimulation.
+	 * Unsets the value of the "id" attribute of this SedRange.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -168,110 +166,10 @@ public:
 
 
 	/**
-	 * Returns the value of the "name" attribute of this SedSimulation.
+	 * Returns the XML element name of this object, which for SedRange, is
+	 * always @c "sedRange".
 	 *
-	 * @return the value of the "name" attribute of this SedSimulation as a string.
-	 */
-	virtual const std::string& getName() const;
-
-
-	/**
-	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSimulation's "name" attribute has been set.
-	 *
-	 * @return @c true if this SedSimulation's "name" attribute has been set,
-	 * otherwise @c false is returned.
-	 */
-	virtual bool isSetName() const;
-
-
-	/**
-	 * Sets the value of the "name" attribute of this SedSimulation.
-	 *
-	 * @param name; const std::string& value of the "name" attribute to be set
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
-	 */
-	virtual int setName(const std::string& name);
-
-
-	/**
-	 * Unsets the value of the "name" attribute of this SedSimulation.
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_OPERATION_FAILED
-	 */
-	virtual int unsetName();
-
-
-	/**
-	 * Returns the "algorithm" element of this SedSimulation.
-	 *
-	 * @return the "algorithm" element of this SedSimulation.
-	 */
-	virtual const SedAlgorithm* getAlgorithm() const;
-
-
-	/**
-	 * Creates a new "SedAlgorithm" and sets it for this SedSimulation.
-	 *
-	 * @return the created "SedAlgorithm" element of this SedSimulation.
-	 */
-	virtual SedAlgorithm* createAlgorithm();
-
-
-	/**
-	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSimulation's "algorithm" element has been set.
-	 *
-	 * @return @c true if this SedSimulation's "algorithm" element has been set,
-	 * otherwise @c false is returned.
-	 */
-	virtual bool isSetAlgorithm() const;
-
-
-	/**
-	 * Sets the "algorithm" element of this SedSimulation.
-	 *
-	 * @param algorithm; SedAlgorithm* determining the value of the "resultLevel" attribute to be set.
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
-	 */
-	virtual int setAlgorithm(SedAlgorithm* algorithm);
-
-
-	/**
-	 * Unsets the "algorithm" element of this SedSimulation.
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_OPERATION_FAILED
-	 */
-	virtual int unsetAlgorithm();
-
-
-	/**
-	 * Returns the XML element name of this object, which for SedSimulation, is
-	 * always @c "sedSimulation".
-	 *
-	 * @return the name of this element, i.e. @c "sedSimulation".
+	 * @return the name of this element, i.e. @c "sedRange".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -311,27 +209,15 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedSimulation object have been set.
+	 * for this SedRange object have been set.
 	 *
-	 * @note The required attributes for a SedSimulation object are:
+	 * @note The required attributes for a SedRange object are:
 	 * @li "id"
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
 	 */
 	virtual bool hasRequiredAttributes() const;
-
-
-	/**
-	 * Predicate returning @c true if all the required elements
-	 * for this SedSimulation object have been set.
-	 *
-	 * @note The required elements for a SedSimulation object are:
-	 *
-	 * @return a boolean value indicating whether all the required
-	 * elements for this object have been defined.
-	 */
-	virtual bool hasRequiredElements() const;
 
 
 /** @cond doxygen-libsbml-internal */
@@ -369,29 +255,7 @@ public:
 /** @endcond doxygen-libsbml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
-
-	/**
-	 * Connects to child elements.
-	 */
-	virtual void connectToChild ();
-
-
-/** @endcond doxygen-libsbml-internal */
-
-
 protected:
-
-/** @cond doxygen-libsbml-internal */
-
-	/**
-	 * return the SEDML object corresponding to next XMLToken.
-	 */
-	virtual SedBase* createObject(XMLInputStream& stream);
-
-
-/** @endcond doxygen-libsbml-internal */
-
 
 /** @cond doxygen-libsbml-internal */
 
@@ -430,103 +294,103 @@ protected:
 
 };
 
-class LIBSEDML_EXTERN SedListOfSimulations : public SedListOf
+class LIBSEDML_EXTERN SedListOfRanges : public SedListOf
 {
 
 public:
 
 	/**
-	 * Creates a new SedListOfSimulations with the given level, version, and package version.
+	 * Creates a new SedListOfRanges with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfSimulations
+	 * @param level an unsigned int, the SEDML Level to assign to this SedListOfRanges
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfSimulations
+	 * @param version an unsigned int, the SEDML Version to assign to this SedListOfRanges
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfSimulations
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedListOfRanges
 	 */
-	SedListOfSimulations(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	                     unsigned int version    = SEDML_DEFAULT_VERSION
+	SedListOfRanges(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                unsigned int version    = SEDML_DEFAULT_VERSION
 );
 
 
 	/**
-	 * Creates a new SedListOfSimulations with the given SedNamespaces object.
+	 * Creates a new SedListOfRanges with the given SedNamespaces object.
 	 *
 	 * @param sedns the SedNamespaces object
 	 */
-	SedListOfSimulations(SedNamespaces* sedns);
+	SedListOfRanges(SedNamespaces* sedns);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedListOfSimulations object.
+	 * Creates and returns a deep copy of this SedListOfRanges object.
 	 *
-	 * @return a (deep) copy of this SedListOfSimulations object.
+	 * @return a (deep) copy of this SedListOfRanges object.
 	 */
-	virtual SedListOfSimulations* clone () const;
+	virtual SedListOfRanges* clone () const;
 
 
  	/**
-	 * Get a Simulation from the SedListOfSimulations.
+	 * Get a Range from the SedListOfRanges.
 	 *
-	 * @param n the index number of the Simulation to get.
+	 * @param n the index number of the Range to get.
 	 *
-	 * @return the nth Simulation in this SedListOfSimulations.
-	 *
-	 * @see size()
-	 */
-	virtual SedSimulation* get(unsigned int n);
-
-
-	/**
-	 * Get a Simulation from the SedListOfSimulations.
-	 *
-	 * @param n the index number of the Simulation to get.
-	 *
-	 * @return the nth Simulation in this SedListOfSimulations.
+	 * @return the nth Range in this SedListOfRanges.
 	 *
 	 * @see size()
 	 */
-	virtual const SedSimulation* get(unsigned int n) const;
+	virtual SedRange* get(unsigned int n);
 
 
 	/**
-	 * Get a Simulation from the SedListOfSimulations
+	 * Get a Range from the SedListOfRanges.
+	 *
+	 * @param n the index number of the Range to get.
+	 *
+	 * @return the nth Range in this SedListOfRanges.
+	 *
+	 * @see size()
+	 */
+	virtual const SedRange* get(unsigned int n) const;
+
+
+	/**
+	 * Get a Range from the SedListOfRanges
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Simulation to get.
+	 * of the Range to get.
 	 *
-	 * @return Simulation in this SedListOfSimulations
+	 * @return Range in this SedListOfRanges
 	 * with the given id or NULL if no such
-	 * Simulation exists.
+	 * Range exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual SedSimulation* get(const std::string& sid);
+	virtual SedRange* get(const std::string& sid);
 
 
 	/**
-	 * Get a Simulation from the SedListOfSimulations
+	 * Get a Range from the SedListOfRanges
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Simulation to get.
+	 * of the Range to get.
 	 *
-	 * @return Simulation in this SedListOfSimulations
+	 * @return Range in this SedListOfRanges
 	 * with the given id or NULL if no such
-	 * Simulation exists.
+	 * Range exists.
 	 *
 	 * @see get(unsigned int n)	 *
 	 * @see size()
 	 */
-	virtual const SedSimulation* get(const std::string& sid) const;
+	virtual const SedRange* get(const std::string& sid) const;
 
 
 	/**
-	 * Adds a copy the given "Simulation" to this SedListOfSimulations.
+	 * Adds a copy the given "Range" to this SedListOfRanges.
 	 *
-	 * @param s; the Simulation object to add
+	 * @param r; the Range object to add
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -535,84 +399,84 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSimulation(const SedSimulation* s);
+	int addRange(const SedRange* r);
 
 
 	/**
-	 * Get the number of Simulation objects in this SedListOfSimulations.
+	 * Get the number of Range objects in this SedListOfRanges.
 	 *
-	 * @return the number of Simulation objects in this SedListOfSimulations
+	 * @return the number of Range objects in this SedListOfRanges
 	 */
-	unsigned int getNumSimulations() const;
+	unsigned int getNumRanges() const;
 
 
 	/**
-	 * Creates a new Simulation object, adds it to the
-	 * SedListOfSimulations and returns the Simulation object created. 
+	 * Creates a new Range object, adds it to the
+	 * SedListOfRanges and returns the Range object created. 
 	 *
-	 * @return a new Simulation object instance
+	 * @return a new Range object instance
 	 *
-	 * @see addSimulation(const SedSimulation* s)
+	 * @see addRange(const SedRange* r)
 	 */
-	SedUniformTimeCourse* createUniformTimeCourse();
+	SedUniformRange* createUniformRange();
 
 
 	/**
-	 * Creates a new Simulation object, adds it to the
-	 * SedListOfSimulations and returns the Simulation object created. 
+	 * Creates a new Range object, adds it to the
+	 * SedListOfRanges and returns the Range object created. 
 	 *
-	 * @return a new Simulation object instance
+	 * @return a new Range object instance
 	 *
-	 * @see addSimulation(const SedSimulation* s)
+	 * @see addRange(const SedRange* r)
 	 */
-	SedOneStep* createOneStep();
+	SedVectorRange* createVectorRange();
 
 
 	/**
-	 * Creates a new Simulation object, adds it to the
-	 * SedListOfSimulations and returns the Simulation object created. 
+	 * Creates a new Range object, adds it to the
+	 * SedListOfRanges and returns the Range object created. 
 	 *
-	 * @return a new Simulation object instance
+	 * @return a new Range object instance
 	 *
-	 * @see addSimulation(const SedSimulation* s)
+	 * @see addRange(const SedRange* r)
 	 */
-	SedSteadyState* createSteadyState();
+	SedFunctionalRange* createFunctionalRange();
 
 
 	/**
-	 * Removes the nth Simulation from this SedListOfSimulations
+	 * Removes the nth Range from this SedListOfRanges
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the Simulation to remove.
+	 * @param n the index of the Range to remove.
 	 *
 	 * @see size()
 	 */
-	virtual SedSimulation* remove(unsigned int n);
+	virtual SedRange* remove(unsigned int n);
 
 
 	/**
-	 * Removes the Simulation from this SedListOfSimulations with the given identifier
+	 * Removes the Range from this SedListOfRanges with the given identifier
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the Simulation to remove.
+	 * @param sid the identifier of the Range to remove.
 	 *
-	 * @return the Simulation removed. As mentioned above, the caller owns the
+	 * @return the Range removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	virtual SedSimulation* remove(const std::string& sid);
+	virtual SedRange* remove(const std::string& sid);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedListOfSimulations, is
-	 * always @c "sedListOfSimulations".
+	 * Returns the XML element name of this object, which for SedListOfRanges, is
+	 * always @c "sedListOfRanges".
 	 *
-	 * @return the name of this element, i.e. @c "sedListOfSimulations".
+	 * @return the name of this element, i.e. @c "sedListOfRanges".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -689,7 +553,7 @@ protected:
 	/** @cond doxygen-libsbml-internal */
 
 	/**
-	 * Creates a new Simulation in this SedListOfSimulations
+	 * Creates a new Range in this SedListOfRanges
 	 */
 	virtual SedBase* createObject(XMLInputStream& stream);
 
@@ -723,103 +587,53 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedSimulation_t *
-SedSimulation_create(unsigned int level, unsigned int version);
+SedRange_t *
+SedRange_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedSimulation_free(SedSimulation_t * ss);
+SedRange_free(SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
-SedSimulation_t *
-SedSimulation_clone(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-char *
-SedSimulation_getId(SedSimulation_t * ss);
+SedRange_t *
+SedRange_clone(SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
 char *
-SedSimulation_getName(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-SedAlgorithm_t*
-SedSimulation_getAlgorithm(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-SedAlgorithm_t*
-SedSimulation_createAlgorithm(SedSimulation_t * ss);
+SedRange_getId(SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_isSetId(SedSimulation_t * ss);
+SedRange_isSetId(SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_isSetName(SedSimulation_t * ss);
+SedRange_setId(SedRange_t * sr, const char * id);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_isSetAlgorithm(SedSimulation_t * ss);
+SedRange_unsetId(SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
 int
-SedSimulation_setId(SedSimulation_t * ss, const char * id);
+SedRange_hasRequiredAttributes(SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
-int
-SedSimulation_setName(SedSimulation_t * ss, const char * name);
+SedRange_t *
+SedListOfRanges_getById(SedListOf_t * lo, const char * sid);
 
 
 LIBSEDML_EXTERN
-int
-SedSimulation_setAlgorithm(SedSimulation_t * ss, SedAlgorithm_t* algorithm);
-
-
-LIBSEDML_EXTERN
-int
-SedSimulation_unsetId(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-int
-SedSimulation_unsetName(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-int
-SedSimulation_unsetAlgorithm(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-int
-SedSimulation_hasRequiredAttributes(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-int
-SedSimulation_hasRequiredElements(SedSimulation_t * ss);
-
-
-LIBSEDML_EXTERN
-SedSimulation_t *
-SedListOfSimulations_getById(SedListOf_t * lo, const char * sid);
-
-
-LIBSEDML_EXTERN
-SedSimulation_t *
-SedListOfSimulations_removeById(SedListOf_t * lo, const char * sid);
+SedRange_t *
+SedListOfRanges_removeById(SedListOf_t * lo, const char * sid);
 
 
 
@@ -829,5 +643,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedSimulation_H__  */
+#endif /*  SedRange_H__  */
 

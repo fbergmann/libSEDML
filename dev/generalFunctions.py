@@ -21,6 +21,8 @@ def writeInternalEndDecl(outFile):
   outFile.write('\t/** @endcond doxygen-libsbml-internal */\n\n\n')
 
 def writeListOf(element):
+  if (element == 'SetValue'):
+    return 'SedListOfTaskChanges'
   last = len(element)-1
   if element[last] != 's':
     element = element + 's'

@@ -1,6 +1,6 @@
 /**
- * @file:   SedAlgorithm.h
- * @brief:  Implementation of the SedAlgorithm class
+ * @file:   SedUniformRange.h
+ * @brief:  Implementation of the SedUniformRange class
  * @author: Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -33,8 +33,8 @@
  */
 
 
-#ifndef SedAlgorithm_H__
-#define SedAlgorithm_H__
+#ifndef SedUniformRange_H__
+#define SedUniformRange_H__
 
 
 #include <sedml/common/extern.h>
@@ -55,94 +55,99 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-#include <sedml/SedAlgorithmParameter.h>
+#include <sedml/SedRange.h>
 
 
-class LIBSEDML_EXTERN SedAlgorithm : public SedBase
+class LIBSEDML_EXTERN SedUniformRange : public SedRange
 {
 
 protected:
 
-	SedListOfAlgorithmParameters   mAlgorithmParameter;
-	std::string   mKisaoID;
+	double        mStart;
+	bool          mIsSetStart;
+	double        mEnd;
+	bool          mIsSetEnd;
+	int           mNumberOfPoints;
+	bool          mIsSetNumberOfPoints;
+	std::string   mType;
 
 
 public:
 
 	/**
-	 * Creates a new SedAlgorithm with the given level, version, and package version.
+	 * Creates a new SedUniformRange with the given level, version, and package version.
 	 *
-	 * @param level an unsigned int, the SEDML Level to assign to this SedAlgorithm
+	 * @param level an unsigned int, the SEDML Level to assign to this SedUniformRange
 	 *
-	 * @param version an unsigned int, the SEDML Version to assign to this SedAlgorithm
+	 * @param version an unsigned int, the SEDML Version to assign to this SedUniformRange
 	 *
-	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedAlgorithm
+	 * @param pkgVersion an unsigned int, the SEDML Sed Version to assign to this SedUniformRange
 	 */
-	SedAlgorithm(unsigned int level      = SEDML_DEFAULT_LEVEL,
-	             unsigned int version    = SEDML_DEFAULT_VERSION);
+	SedUniformRange(unsigned int level      = SEDML_DEFAULT_LEVEL,
+	                unsigned int version    = SEDML_DEFAULT_VERSION);
 
 
 	/**
-	 * Creates a new SedAlgorithm with the given SedNamespaces object.
+	 * Creates a new SedUniformRange with the given SedNamespaces object.
 	 *
 	 * @param sedns the SedNamespaces object
 	 */
-	SedAlgorithm(SedNamespaces* sedns);
+	SedUniformRange(SedNamespaces* sedns);
 
 
  	/**
-	 * Copy constructor for SedAlgorithm.
+	 * Copy constructor for SedUniformRange.
 	 *
-	 * @param orig; the SedAlgorithm instance to copy.
+	 * @param orig; the SedUniformRange instance to copy.
 	 */
-	SedAlgorithm(const SedAlgorithm& orig);
+	SedUniformRange(const SedUniformRange& orig);
 
 
  	/**
-	 * Assignment operator for SedAlgorithm.
+	 * Assignment operator for SedUniformRange.
 	 *
 	 * @param rhs; the object whose values are used as the basis
 	 * of the assignment
 	 */
-	SedAlgorithm& operator=(const SedAlgorithm& rhs);
+	SedUniformRange& operator=(const SedUniformRange& rhs);
 
 
  	/**
-	 * Creates and returns a deep copy of this SedAlgorithm object.
+	 * Creates and returns a deep copy of this SedUniformRange object.
 	 *
-	 * @return a (deep) copy of this SedAlgorithm object.
+	 * @return a (deep) copy of this SedUniformRange object.
 	 */
-	virtual SedAlgorithm* clone () const;
+	virtual SedUniformRange* clone () const;
 
 
  	/**
-	 * Destructor for SedAlgorithm.
+	 * Destructor for SedUniformRange.
 	 */
-	virtual ~SedAlgorithm();
+	virtual ~SedUniformRange();
 
 
  	/**
-	 * Returns the value of the "kisaoID" attribute of this SedAlgorithm.
+	 * Returns the value of the "start" attribute of this SedUniformRange.
 	 *
-	 * @return the value of the "kisaoID" attribute of this SedAlgorithm as a string.
+	 * @return the value of the "start" attribute of this SedUniformRange as a double.
 	 */
-	virtual const std::string& getKisaoID() const;
+	virtual const double getStart() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedAlgorithm's "kisaoID" attribute has been set.
+	 * SedUniformRange's "start" attribute has been set.
 	 *
-	 * @return @c true if this SedAlgorithm's "kisaoID" attribute has been set,
+	 * @return @c true if this SedUniformRange's "start" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
-	virtual bool isSetKisaoID() const;
+	virtual bool isSetStart() const;
 
 
 	/**
-	 * Sets the value of the "kisaoID" attribute of this SedAlgorithm.
+	 * Sets the value of the "start" attribute of this SedUniformRange.
 	 *
-	 * @param kisaoID; const std::string& value of the "kisaoID" attribute to be set
+	 * @param start; double value of the "start" attribute to be set
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -151,11 +156,11 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	virtual int setKisaoID(const std::string& kisaoID);
+	virtual int setStart(double start);
 
 
 	/**
-	 * Unsets the value of the "kisaoID" attribute of this SedAlgorithm.
+	 * Unsets the value of the "start" attribute of this SedUniformRange.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -164,81 +169,31 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_OPERATION_FAILED
 	 */
-	virtual int unsetKisaoID();
+	virtual int unsetStart();
 
 
 	/**
-	 * Returns the  "SedListOfAlgorithmParameters" in this SedAlgorithm object.
+	 * Returns the value of the "end" attribute of this SedUniformRange.
 	 *
-	 * @return the "SedListOfAlgorithmParameters" attribute of this SedAlgorithm.
+	 * @return the value of the "end" attribute of this SedUniformRange as a double.
 	 */
-	const SedListOfAlgorithmParameters* getListOfAlgorithmParameters() const;
+	virtual const double getEnd() const;
 
 
 	/**
-	 * Get a AlgorithmParameter from the SedListOfAlgorithmParameters.
+	 * Predicate returning @c true or @c false depending on whether this
+	 * SedUniformRange's "end" attribute has been set.
 	 *
-	 * @param n the index number of the AlgorithmParameter to get.
-	 *
-	 * @return the nth AlgorithmParameter in the SedListOfAlgorithmParameters within this SedAlgorithm.
-	 *
-	 * @see getNumAlgorithmParameters()
+	 * @return @c true if this SedUniformRange's "end" attribute has been set,
+	 * otherwise @c false is returned.
 	 */
-	SedAlgorithmParameter* getAlgorithmParameter(unsigned int n);
+	virtual bool isSetEnd() const;
 
 
 	/**
-	 * Get a AlgorithmParameter from the SedListOfAlgorithmParameters.
+	 * Sets the value of the "end" attribute of this SedUniformRange.
 	 *
-	 * @param n the index number of the AlgorithmParameter to get.
-	 *
-	 * @return the nth AlgorithmParameter in the SedListOfAlgorithmParameters within this SedAlgorithm.
-	 *
-	 * @see getNumAlgorithmParameters()
-	 */
-	const SedAlgorithmParameter* getAlgorithmParameter(unsigned int n) const;
-
-
-	/**
-	 * Get a AlgorithmParameter from the SedListOfAlgorithmParameters
-	 * based on its identifier.
-	 *
-	 * @param sid a string representing the identifier
-	 * of the AlgorithmParameter to get.
-	 *
-	 * @return the AlgorithmParameter in the SedListOfAlgorithmParameters
-	 * with the given id or NULL if no such
-	 * AlgorithmParameter exists.
-	 *
-	 * @see getAlgorithmParameter(unsigned int n)
-	 *
-	 * @see getNumAlgorithmParameters()
-	 */
-	SedAlgorithmParameter* getAlgorithmParameter(const std::string& sid);
-
-
-	/**
-	 * Get a AlgorithmParameter from the SedListOfAlgorithmParameters
-	 * based on its identifier.
-	 *
-	 * @param sid a string representing the identifier
-	 * of the AlgorithmParameter to get.
-	 *
-	 * @return the AlgorithmParameter in the SedListOfAlgorithmParameters
-	 * with the given id or NULL if no such
-	 * AlgorithmParameter exists.
-	 *
-	 * @see getAlgorithmParameter(unsigned int n)
-	 *
-	 * @see getNumAlgorithmParameters()
-	 */
-	const SedAlgorithmParameter* getAlgorithmParameter(const std::string& sid) const;
-
-
-	/**
-	 * Adds a copy the given "SedAlgorithmParameter" to this SedAlgorithm.
-	 *
-	 * @param sap; the SedAlgorithmParameter object to add
+	 * @param end; double value of the "end" attribute to be set
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -247,62 +202,119 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addAlgorithmParameter(const SedAlgorithmParameter* sap);
+	virtual int setEnd(double end);
 
 
 	/**
-	 * Get the number of SedAlgorithmParameter objects in this SedAlgorithm.
+	 * Unsets the value of the "end" attribute of this SedUniformRange.
 	 *
-	 * @return the number of SedAlgorithmParameter objects in this SedAlgorithm
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
 	 */
-	unsigned int getNumAlgorithmParameters() const;
+	virtual int unsetEnd();
 
 
 	/**
-	 * Creates a new SedAlgorithmParameter object, adds it to this SedAlgorithms
-	 * SedListOfAlgorithmParameters and returns the SedAlgorithmParameter object created. 
+	 * Returns the value of the "numberOfPoints" attribute of this SedUniformRange.
 	 *
-	 * @return a new SedAlgorithmParameter object instance
-	 *
-	 * @see addAlgorithmParameter(const SedAlgorithmParameter* sap)
+	 * @return the value of the "numberOfPoints" attribute of this SedUniformRange as a integer.
 	 */
-	SedAlgorithmParameter* createAlgorithmParameter();
+	virtual const int getNumberOfPoints() const;
 
 
 	/**
-	 * Removes the nth AlgorithmParameter from the SedListOfAlgorithmParameters within this SedAlgorithm.
-	 * and returns a pointer to it.
+	 * Predicate returning @c true or @c false depending on whether this
+	 * SedUniformRange's "numberOfPoints" attribute has been set.
 	 *
-	 * The caller owns the returned item and is responsible for deleting it.
-	 *
-	 * @param n the index of the AlgorithmParameter to remove.
-	 *
-	 * @see getNumAlgorithmParameters()
+	 * @return @c true if this SedUniformRange's "numberOfPoints" attribute has been set,
+	 * otherwise @c false is returned.
 	 */
-	SedAlgorithmParameter* removeAlgorithmParameter(unsigned int n);
+	virtual bool isSetNumberOfPoints() const;
 
 
 	/**
-	 * Removes the AlgorithmParameter with the given identifier from the SedListOfAlgorithmParameters within this SedAlgorithm
-	 * and returns a pointer to it.
+	 * Sets the value of the "numberOfPoints" attribute of this SedUniformRange.
 	 *
-	 * The caller owns the returned item and is responsible for deleting it.
-	 * If none of the items in this list have the identifier @p sid, then
-	 * @c NULL is returned.
+	 * @param numberOfPoints; int value of the "numberOfPoints" attribute to be set
 	 *
-	 * @param sid the identifier of the AlgorithmParameter to remove.
-	 *
-	 * @return the AlgorithmParameter removed. As mentioned above, the caller owns the
-	 * returned item.
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	SedAlgorithmParameter* removeAlgorithmParameter(const std::string& sid);
+	virtual int setNumberOfPoints(int numberOfPoints);
 
 
 	/**
-	 * Returns the XML element name of this object, which for SedAlgorithm, is
-	 * always @c "sedAlgorithm".
+	 * Unsets the value of the "numberOfPoints" attribute of this SedUniformRange.
 	 *
-	 * @return the name of this element, i.e. @c "sedAlgorithm".
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
+	 */
+	virtual int unsetNumberOfPoints();
+
+
+	/**
+	 * Returns the value of the "type" attribute of this SedUniformRange.
+	 *
+	 * @return the value of the "type" attribute of this SedUniformRange as a string.
+	 */
+	virtual const std::string& getType() const;
+
+
+	/**
+	 * Predicate returning @c true or @c false depending on whether this
+	 * SedUniformRange's "type" attribute has been set.
+	 *
+	 * @return @c true if this SedUniformRange's "type" attribute has been set,
+	 * otherwise @c false is returned.
+	 */
+	virtual bool isSetType() const;
+
+
+	/**
+	 * Sets the value of the "type" attribute of this SedUniformRange.
+	 *
+	 * @param type; const std::string& value of the "type" attribute to be set
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	virtual int setType(const std::string& type);
+
+
+	/**
+	 * Unsets the value of the "type" attribute of this SedUniformRange.
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
+	 */
+	virtual int unsetType();
+
+
+	/**
+	 * Returns the XML element name of this object, which for SedUniformRange, is
+	 * always @c "sedUniformRange".
+	 *
+	 * @return the name of this element, i.e. @c "sedUniformRange".
 	 */
 	virtual const std::string& getElementName () const;
 
@@ -342,27 +354,18 @@ public:
 
 	/**
 	 * Predicate returning @c true if all the required attributes
-	 * for this SedAlgorithm object have been set.
+	 * for this SedUniformRange object have been set.
 	 *
-	 * @note The required attributes for a SedAlgorithm object are:
-	 * @li "kisaoID"
+	 * @note The required attributes for a SedUniformRange object are:
+	 * @li "start"
+	 * @li "end"
+	 * @li "numberOfPoints"
+	 * @li "type"
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
 	 */
 	virtual bool hasRequiredAttributes() const;
-
-
-	/**
-	 * Predicate returning @c true if all the required elements
-	 * for this SedAlgorithm object have been set.
-	 *
-	 * @note The required elements for a SedAlgorithm object are:
-	 *
-	 * @return a boolean value indicating whether all the required
-	 * elements for this object have been defined.
-	 */
-	virtual bool hasRequiredElements() const;
 
 
 /** @cond doxygen-libsbml-internal */
@@ -395,17 +398,6 @@ public:
 	 * Sets the parent SedDocument.
 	 */
 	virtual void setSedDocument (SedDocument* d);
-
-
-/** @endcond doxygen-libsbml-internal */
-
-
-/** @cond doxygen-libsbml-internal */
-
-	/**
-	 * Connects to child elements.
-	 */
-	virtual void connectToChild ();
 
 
 /** @endcond doxygen-libsbml-internal */
@@ -473,88 +465,103 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
-SedAlgorithm_t *
-SedAlgorithm_create(unsigned int level, unsigned int version);
+SedUniformRange_t *
+SedUniformRange_create(unsigned int level, unsigned int version);
 
 
 LIBSEDML_EXTERN
 void
-SedAlgorithm_free(SedAlgorithm_t * sa);
+SedUniformRange_free(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
-SedAlgorithm_t *
-SedAlgorithm_clone(SedAlgorithm_t * sa);
+SedUniformRange_t *
+SedUniformRange_clone(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+double
+SedUniformRange_getStart(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+double
+SedUniformRange_getEnd(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_getNumberOfPoints(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
 char *
-SedAlgorithm_getKisaoID(SedAlgorithm_t * sa);
+SedUniformRange_getType(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
 int
-SedAlgorithm_isSetKisaoID(SedAlgorithm_t * sa);
+SedUniformRange_isSetStart(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
 int
-SedAlgorithm_setKisaoID(SedAlgorithm_t * sa, const char * kisaoID);
+SedUniformRange_isSetEnd(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
 int
-SedAlgorithm_unsetKisaoID(SedAlgorithm_t * sa);
+SedUniformRange_isSetNumberOfPoints(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
 int
-SedAlgorithm_addAlgorithmParameter(SedAlgorithm_t * sa, SedAlgorithmParameter_t * sap);
-
-
-LIBSEDML_EXTERN
-SedAlgorithmParameter_t *
-SedAlgorithm_createAlgorithmParameter(SedAlgorithm_t * sa);
-
-
-LIBSEDML_EXTERN
-SedListOf_t *
-SedAlgorithm_getSedListOfAlgorithmParameters(SedAlgorithm_t * sa);
-
-
-LIBSEDML_EXTERN
-SedAlgorithmParameter_t *
-SedAlgorithm_getAlgorithmParameter(SedAlgorithm_t * sa, unsigned int n);
-
-
-LIBSEDML_EXTERN
-SedAlgorithmParameter_t *
-SedAlgorithm_getAlgorithmParameterById(SedAlgorithm_t * sa, const char * sid);
-
-
-LIBSEDML_EXTERN
-unsigned int
-SedAlgorithm_getNumAlgorithmParameters(SedAlgorithm_t * sa);
-
-
-LIBSEDML_EXTERN
-SedAlgorithmParameter_t *
-SedAlgorithm_removeAlgorithmParameter(SedAlgorithm_t * sa, unsigned int n);
-
-
-LIBSEDML_EXTERN
-SedAlgorithmParameter_t *
-SedAlgorithm_removeAlgorithmParameterById(SedAlgorithm_t * sa, const char * sid);
+SedUniformRange_isSetType(SedUniformRange_t * sur);
 
 
 LIBSEDML_EXTERN
 int
-SedAlgorithm_hasRequiredAttributes(SedAlgorithm_t * sa);
+SedUniformRange_setStart(SedUniformRange_t * sur, double start);
 
 
 LIBSEDML_EXTERN
 int
-SedAlgorithm_hasRequiredElements(SedAlgorithm_t * sa);
+SedUniformRange_setEnd(SedUniformRange_t * sur, double end);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_setNumberOfPoints(SedUniformRange_t * sur, int numberOfPoints);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_setType(SedUniformRange_t * sur, const char * type);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_unsetStart(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_unsetEnd(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_unsetNumberOfPoints(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_unsetType(SedUniformRange_t * sur);
+
+
+LIBSEDML_EXTERN
+int
+SedUniformRange_hasRequiredAttributes(SedUniformRange_t * sur);
 
 
 
@@ -564,5 +571,5 @@ LIBSEDML_CPP_NAMESPACE_END
 
 #endif  /*  !SWIG  */
 
-#endif /*  SedAlgorithm_H__  */
+#endif /*  SedUniformRange_H__  */
 

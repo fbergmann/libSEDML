@@ -327,6 +327,28 @@ public:
 
 
 	/**
+	 * Creates a new SedOneStep object, adds it to this SedDocuments
+	 * SedListOfSimulations and returns the SedOneStep object created. 
+	 *
+	 * @return a new SedOneStep object instance
+	 *
+	 * @see addSedSimulation(const SedSimulation* ss)
+	 */
+	SedOneStep* createOneStep();
+
+
+	/**
+	 * Creates a new SedSteadyState object, adds it to this SedDocuments
+	 * SedListOfSimulations and returns the SedSteadyState object created. 
+	 *
+	 * @return a new SedSteadyState object instance
+	 *
+	 * @see addSedSimulation(const SedSimulation* ss)
+	 */
+	SedSteadyState* createSteadyState();
+
+
+	/**
 	 * Removes the nth Simulation from the SedListOfSimulations within this SedDocument.
 	 * and returns a pointer to it.
 	 *
@@ -1224,6 +1246,16 @@ SedDocument_addSimulation(SedDocument_t * sd, SedSimulation_t * ss);
 LIBSEDML_EXTERN
 SedUniformTimeCourse_t *
 SedDocument_createUniformTimeCourse(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+SedOneStep_t *
+SedDocument_createOneStep(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+SedSteadyState_t *
+SedDocument_createSteadyState(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN

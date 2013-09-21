@@ -670,6 +670,38 @@ SedListOfSimulations::createUniformTimeCourse()
 	return temp;
 }
 
+/**
+ * Creates a new SedOneStep object, adds it to this SedListOfSimulationss
+ * SedListOfSimulations and returns the SedOneStep object created. 
+ *
+ * @return a new SedOneStep object instance
+ *
+ * @see addOneStep(const SedSimulation* ss)
+ */
+SedOneStep* 
+SedListOfSimulations::createOneStep()
+{
+	SedOneStep *temp = new SedOneStep();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedSteadyState object, adds it to this SedListOfSimulationss
+ * SedListOfSimulations and returns the SedSteadyState object created. 
+ *
+ * @return a new SedSteadyState object instance
+ *
+ * @see addSteadyState(const SedSimulation* ss)
+ */
+SedSteadyState* 
+SedListOfSimulations::createSteadyState()
+{
+	SedSteadyState *temp = new SedSteadyState();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
 /*
  * Removes the nth Simulation from this SedListOfSimulations
  */
@@ -746,6 +778,18 @@ SedListOfSimulations::createObject(XMLInputStream& stream)
 	if (name == "uniformTimeCourse")
 	{
 		object = new SedUniformTimeCourse(getSedNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "oneStep")
+	{
+		object = new SedOneStep(getSedNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "steadyState")
+	{
+		object = new SedSteadyState(getSedNamespaces());
 		appendAndOwn(object);
 	}
 
