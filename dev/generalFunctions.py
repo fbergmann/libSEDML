@@ -84,6 +84,10 @@ def parseAttribute(attrib):
     attType = 'lo_element'
     attTypeCode = attrib['element']
     num = False
+  elif attrib['type'] == 'XMLNode*':
+    attType = 'XMLNode*'
+    attTypeCode = 'XMLNode*'
+    num = False
   else:
     attType = 'FIX ME'
     attTypeCode = 'FIX ME'
@@ -142,6 +146,10 @@ def parseAttributeForC(attrib):
   elif attrib['type'] == 'lo_element':
     attType = 'lo_element'
     attTypeCode = attrib['element']
+    num = False
+  elif attrib['type'] == 'XMLNode*':
+    attType = 'XMLNode*'
+    attTypeCode = 'XMLNode*'
     num = False
   else:
     attType = 'FIX ME'

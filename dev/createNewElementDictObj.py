@@ -18,6 +18,8 @@ def createElements():
 			  createSedParameter(),
 			  createSedVariable(),
 			  createSedChangeAttribute(),
+			  createSedChangeAddXML(),
+			  createSedChangeChangeXML(),
 			  createSedChangeRemoveXML(),
 			  createSedComputeChange(),
 			  createSedSimulation(),
@@ -107,6 +109,8 @@ def createSedModel() :
 			  'abstract':True,
 			  'concrete': [ 
 				           dict({ 'name':'removeXML', 'element':'SedRemoveXML'}),
+				           dict({ 'name':'addXML', 'element':'SedAddXML'}),
+				           dict({ 'name':'changeXML', 'element':'SedChangeXML'}),
 				           dict({ 'name':'changeAttribute', 'element':'SedChangeAttribute'}),
 				           dict({ 'name':'computeChange', 'element':'SedComputeChange'}),
 						   ]
@@ -228,6 +232,8 @@ def createSedChange() :
 				  'elementName':'change', 
 				  'abstract':True,
 				  'concrete': [ 
+				           dict({ 'name':'addXML', 'element':'SedAddXML'}),
+				           dict({ 'name':'changeXML', 'element':'SedChangeXML'}),
 				           dict({ 'name':'removeXML', 'element':'SedRemoveXML'}),
 				           dict({ 'name':'changeAttribute', 'element':'SedChangeAttribute'}),
 				           dict({ 'name':'computeChange', 'element':'SedComputeChange'}),
@@ -235,6 +241,39 @@ def createSedChange() :
 				  })
   return element
 
+def createSedChangeAddXML() :
+  a1 = dict({'type': 'XMLNode*', 'reqd' : True, 'name':'newXML'})
+  attributes = [a1]
+  element = dict({
+                 'name': 'SedAddXML',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_CHANGE_ADDXML',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'baseClass':'SedChange',
+                 'elementName':'addXML'
+                 })
+  return element
+
+
+def createSedChangeChangeXML() :
+  a1 = dict({'type': 'XMLNode*', 'reqd' : True, 'name':'newXML'})
+  attributes = [a1]
+  element = dict({
+                 'name': 'SedChangeXML',
+                 'package': 'Sed',
+                 'typecode': 'SEDML_CHANGE_CHANGEXML',
+                 'hasSedListOf': False,
+                 'attribs':attributes,
+                 'hasChildren':False,
+                 'hasMath':False,
+                 'baseClass':'SedChange',
+                 'elementName':'changeXML'
+                 })
+  return element
+  
 def createSedChangeRemoveXML() :
   attributes = []
   element = dict({

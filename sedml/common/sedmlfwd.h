@@ -196,6 +196,20 @@ typedef CLASS_OR_STRUCT SedComputeChange                     SedComputeChange_t;
 typedef CLASS_OR_STRUCT SedRemoveXML                     SedRemoveXML_t;
 
 /**
+ * @var typedef class SedAddXML SedAddXML_t
+ * @copydoc SedAddXML
+ */
+typedef CLASS_OR_STRUCT SedAddXML                     SedAddXML_t;
+
+
+/**
+ * @var typedef class SedChangeXML SedChangeXML_t
+ * @copydoc SedChangeXML
+ */
+typedef CLASS_OR_STRUCT SedChangeXML                     SedChangeXML_t;
+
+
+/**
  * @var typedef class SedChangeAttribute SedChangeAttribute_t
  * @copydoc SedChangeAttribute
  */
@@ -310,6 +324,11 @@ typedef CLASS_OR_STRUCT SedDataSet                     SedDataSet_t;
  */
 typedef CLASS_OR_STRUCT ASTNode                     ASTNode_t;
 
+/**
+ * @var typedef class XMLNode XMLNode_t
+ * @copydoc XMLNode
+ */
+typedef CLASS_OR_STRUCT XMLNode                     XMLNode_t;
 
 LIBSEDML_CPP_NAMESPACE_END
 

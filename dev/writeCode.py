@@ -41,7 +41,7 @@ def writeAttributes(attrs, output, constType=0, pkg=""):
 def writeAtt(atttype, name, output, constType, pkg):
   if atttype == 'SId' or atttype == 'SIdRef' or atttype == 'UnitSId' or atttype == 'UnitSIdRef' or atttype == 'string':
     output.write('\t, m{0} ("")\n'.format(strFunctions.cap(name)))
-  elif atttype == 'element':
+  elif atttype == 'element' or atttype == 'XMLNode*':
     output.write('\t, m{0} (NULL)\n'.format(strFunctions.cap(name)))
   elif atttype == 'lo_element':
     output.write('\t, m{0} ('.format(strFunctions.cap(name)))
@@ -70,6 +70,8 @@ def writeCopyAttributes(attrs, output, tabs, name):
     atttype = attrs[i]['type']
     if atttype == 'element' and attName == 'Math':
       output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->deepCopy() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
+    elif atttype == 'XMLNode*':
+      output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->clone() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     else:
       output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     if atttype == 'double' or atttype == 'int' or atttype == 'uint' or atttype == 'bool':
@@ -202,7 +204,7 @@ def writeIsSetCode(attrib, output, element):
   output.write('{\n')
   if attType == 'string':
     output.write('\treturn (m{0}.empty() == false);\n'.format(capAttName))
-  elif attType == 'element':
+  elif attType == 'element' or attType == 'XMLNode*':
     output.write('\treturn (m{0} != NULL);\n'.format(capAttName))
   elif num == True:
     output.write('\treturn mIsSet{0};\n'.format(capAttName))
@@ -249,6 +251,18 @@ def writeSetCode(attrib, output, element):
   elif attType == 'boolean':
     output.write('\tm{0} = {1};\n'.format(capAttName, attName))
     output.write('\tmIsSet{0} = true;\n'.format(capAttName))
+    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+  elif attType == 'XMLNode*':
+    output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
+    output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+    output.write('\telse if ({0} == NULL)\n'.format(attName))
+    output.write('\t{\n')
+    output.write('\t\tdelete m{0};\n'.format(capAttName))
+    output.write('\t\tm{0} = NULL;\n'.format(capAttName))
+    output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+    output.write('\tdelete m{0};\n'.format(capAttName))
+    output.write('\tm{0} = ({1} != NULL) ?\n'.format(capAttName, attName))
+    output.write('\t\t{0}->clone() : NULL;\n'.format(attName))
     output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
   elif attType == 'element':
     output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
@@ -317,7 +331,7 @@ def writeUnsetCode(attrib, output, element):
     output.write('\tm{0} = false;\n'.format(capAttName))
     output.write('\tmIsSet{0} = false;\n'.format(capAttName))
     output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-  elif attType == 'element':
+  elif attType == 'element' or attType == 'XMLNode*':
     output.write('\tdelete m{0};\n'.format(capAttName))
     output.write('\tm{0} = NULL;\n'.format(capAttName))
     output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')

@@ -86,6 +86,8 @@ def writeAtt(attrib, output):
       return
   elif attType == 'lo_element':
     output.write('\t{0}   m{1};\n'.format(generalFunctions.writeListOf(capAttName), capAttName))
+  elif attTypeCode == 'XMLNode*':
+    output.write('\t{0}   m{1};\n'.format('XMLNode*', capAttName))
   elif num == True:
     while len(attTypeCode) < 13:
       attTypeCode = attTypeCode + ' '

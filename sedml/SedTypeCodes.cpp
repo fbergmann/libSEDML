@@ -40,6 +40,8 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
     , "ChangeAttribute"
     , "RemoveXML"
     , "ComputeChange"
+    , "AddXML"
+    , "ChangeXML"
     , "DataGenerator"
     , "Variable"
     , "Parameter"

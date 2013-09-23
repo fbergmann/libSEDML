@@ -491,6 +491,38 @@ SedModel::createRemoveXML()
 }
 
 /**
+ * Creates a new SedAddXML object, adds it to this SedModels
+ * SedModel and returns the SedAddXML object created. 
+ *
+ * @return a new SedAddXML object instance
+ *
+ * @see addAddXML(const SedChange* sc)
+ */
+SedAddXML* 
+SedModel::createAddXML()
+{
+	SedAddXML *temp = new SedAddXML();
+	if (temp != NULL) mChange.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedChangeXML object, adds it to this SedModels
+ * SedModel and returns the SedChangeXML object created. 
+ *
+ * @return a new SedChangeXML object instance
+ *
+ * @see addChangeXML(const SedChange* sc)
+ */
+SedChangeXML* 
+SedModel::createChangeXML()
+{
+	SedChangeXML *temp = new SedChangeXML();
+	if (temp != NULL) mChange.appendAndOwn(temp);
+	return temp;
+}
+
+/**
  * Creates a new SedChangeAttribute object, adds it to this SedModels
  * SedModel and returns the SedChangeAttribute object created. 
  *
@@ -896,7 +928,7 @@ SedListOfModels::getNumModels() const
 
 /**
  * Creates a new SedModel object, adds it to this SedListOfModelss
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'string', 'name': 'language'}, {'reqd': True, 'type': 'string', 'name': 'source'}, {'concrete': [{'name': 'removeXML', 'element': 'SedRemoveXML'}, {'name': 'changeAttribute', 'element': 'SedChangeAttribute'}, {'name': 'computeChange', 'element': 'SedComputeChange'}], 'name': 'change', 'reqd': False, 'abstract': True, 'type': 'lo_element', 'element': 'SedChange'}], 'elementName': 'model', 'name': 'SedModel', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_MODEL'} and returns the SedModel object created. 
+ * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'string', 'name': 'language'}, {'reqd': True, 'type': 'string', 'name': 'source'}, {'concrete': [{'name': 'removeXML', 'element': 'SedRemoveXML'}, {'name': 'addXML', 'element': 'SedAddXML'}, {'name': 'changeXML', 'element': 'SedChangeXML'}, {'name': 'changeAttribute', 'element': 'SedChangeAttribute'}, {'name': 'computeChange', 'element': 'SedComputeChange'}], 'name': 'change', 'reqd': False, 'abstract': True, 'type': 'lo_element', 'element': 'SedChange'}], 'elementName': 'model', 'name': 'SedModel', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_MODEL'} and returns the SedModel object created. 
  *
  * @return a new SedModel object instance
  *
@@ -1264,6 +1296,20 @@ SedRemoveXML_t *
 SedModel_createRemoveXML(SedModel_t * sm)
 {
 	return  (sm != NULL) ? sm->createRemoveXML() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedAddXML_t *
+SedModel_createAddXML(SedModel_t * sm)
+{
+	return  (sm != NULL) ? sm->createAddXML() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedChangeXML_t *
+SedModel_createChangeXML(SedModel_t * sm)
+{
+	return  (sm != NULL) ? sm->createChangeXML() : NULL;
 }
 
 LIBSEDML_EXTERN

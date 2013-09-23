@@ -441,6 +441,38 @@ SedListOfChanges::getNumChanges() const
 }
 
 /**
+ * Creates a new SedAddXML object, adds it to this SedListOfChangess
+ * SedListOfChanges and returns the SedAddXML object created. 
+ *
+ * @return a new SedAddXML object instance
+ *
+ * @see addAddXML(const SedChange* sc)
+ */
+SedAddXML* 
+SedListOfChanges::createAddXML()
+{
+	SedAddXML *temp = new SedAddXML();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedChangeXML object, adds it to this SedListOfChangess
+ * SedListOfChanges and returns the SedChangeXML object created. 
+ *
+ * @return a new SedChangeXML object instance
+ *
+ * @see addChangeXML(const SedChange* sc)
+ */
+SedChangeXML* 
+SedListOfChanges::createChangeXML()
+{
+	SedChangeXML *temp = new SedChangeXML();
+	if (temp != NULL) appendAndOwn(temp);
+	return temp;
+}
+
+/**
  * Creates a new SedRemoveXML object, adds it to this SedListOfChangess
  * SedListOfChanges and returns the SedRemoveXML object created. 
  *
@@ -560,6 +592,18 @@ SedListOfChanges::createObject(XMLInputStream& stream)
 {
 	const std::string& name   = stream.peek().getName();
 	SedBase* object = NULL;
+
+	if (name == "addXML")
+	{
+		object = new SedAddXML(getSedNamespaces());
+		appendAndOwn(object);
+	}
+
+	if (name == "changeXML")
+	{
+		object = new SedChangeXML(getSedNamespaces());
+		appendAndOwn(object);
+	}
 
 	if (name == "removeXML")
 	{

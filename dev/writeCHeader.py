@@ -99,11 +99,16 @@ def writeGetFunction(attrib, output, element):
   else:
     attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
     output.write('LIBSEDML_EXTERN\n')
     output.write('{0}\n'.format(attTypeCode))
     output.write('{0}_get{1}'.format(element, capAttName))
     output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
+  elif attrib['type'] == 'XMLNode*':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('XMLNode_t*\n')
+    output.write('{0}_get{1}'.format(element, capAttName))
+    output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))    
   elif attrib['type'] == 'element':
     if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('LIBSEDML_EXTERN\n')
@@ -141,12 +146,18 @@ def writeSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
     output.write('LIBSEDML_EXTERN\n')
     output.write('int\n')
     output.write('{0}_set{1}'.format(element, capAttName))
     output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
     output.write(' {0} {1});\n\n\n'.format(attTypeCode, attName))
+  elif attrib['type'] == 'XMLNode*':
+    output.write('LIBSEDML_EXTERN\n')
+    output.write('int\n')
+    output.write('{0}_set{1}'.format(element, capAttName))
+    output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
+    output.write(' XMLNode_t* {0});\n\n\n'.format(attName))
   elif attrib['type'] == 'element':
     if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('LIBSEDML_EXTERN\n')

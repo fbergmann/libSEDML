@@ -411,6 +411,28 @@ public:
 
 
 	/**
+	 * Creates a new SedAddXML object, adds it to this SedModels
+	 * SedListOfChanges and returns the SedAddXML object created. 
+	 *
+	 * @return a new SedAddXML object instance
+	 *
+	 * @see addSedChange(const SedChange* sc)
+	 */
+	SedAddXML* createAddXML();
+
+
+	/**
+	 * Creates a new SedChangeXML object, adds it to this SedModels
+	 * SedListOfChanges and returns the SedChangeXML object created. 
+	 *
+	 * @return a new SedChangeXML object instance
+	 *
+	 * @see addSedChange(const SedChange* sc)
+	 */
+	SedChangeXML* createChangeXML();
+
+
+	/**
 	 * Creates a new SedChangeAttribute object, adds it to this SedModels
 	 * SedListOfChanges and returns the SedChangeAttribute object created. 
 	 *
@@ -998,6 +1020,16 @@ SedModel_addChange(SedModel_t * sm, SedChange_t * sc);
 LIBSEDML_EXTERN
 SedRemoveXML_t *
 SedModel_createRemoveXML(SedModel_t * sm);
+
+
+LIBSEDML_EXTERN
+SedAddXML_t *
+SedModel_createAddXML(SedModel_t * sm);
+
+
+LIBSEDML_EXTERN
+SedChangeXML_t *
+SedModel_createChangeXML(SedModel_t * sm);
 
 
 LIBSEDML_EXTERN

@@ -35,6 +35,8 @@
 #include <sedml/SedParameter.h>
 #include <sedml/SedChange.h>
 #include <sedml/SedChangeAttribute.h>
+#include <sedml/SedAddXML.h>
+#include <sedml/SedChangeXML.h>
 #include <sedml/SedRemoveXML.h>
 #include <sedml/SedComputeChange.h>
 #include <sedml/SedModel.h>

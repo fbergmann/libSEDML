@@ -161,7 +161,7 @@ def writeGetFunction(attrib, output, element):
   output.write('/**\n')
   output.write(' * write comments\n')
   output.write(' */\n')
-  if attrib['type'] != 'element' and attrib['type'] != 'lo_element':
+  if attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
     output.write('LIBSEDML_EXTERN\n')
     output.write('{0}\n'.format(attTypeCode))
     output.write('{0}_get{1}'.format(element, capAttName))
@@ -179,6 +179,16 @@ def writeGetFunction(attrib, output, element):
     elif attType == 'boolean':
       output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->get{1}()) : 0;\n'.format(varname, capAttName))
     output.write('}\n\n\n')
+  elif attrib['type'] == 'XMLNode*':
+      output.write('LIBSEDML_EXTERN\n')
+      output.write('XMLNode_t*\n')
+      output.write('{0}_get{1}'.format(element, capAttName))
+      output.write('({0}_t * {1})\n'.format(element, varname))
+      output.write('{\n')
+      output.write('\tif ({0} == NULL)\n'.format(varname))
+      output.write('\t\treturn NULL;\n\n')
+      output.write('\treturn ({0}_t*){1}->get{2}();\n'.format('XMLNode',varname, capAttName))
+      output.write('}\n\n\n')
   elif attrib['type'] == 'element':
     if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('LIBSEDML_EXTERN\n')
