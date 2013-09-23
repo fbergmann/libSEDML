@@ -336,9 +336,9 @@ def createSedVectorRange():
                    'hasChildren':False,
                    'hasMath':False,
                    'baseClass':'SedRange',
-                   'elementName':'vectorRange'
-                   'additionalCPPDecls':'../dev/vectorrange_inc.h',
-                   'additionalCPPImpls':'../dev/vectorrange_inc.cpp'
+                   'elementName':'vectorRange',
+                   'additionalCPPDecls': '../dev/vectorrange_inc.h',
+                   'additionalCPPImpls': '../dev/vectorrange_inc.cpp',
                    })
     return element
 
