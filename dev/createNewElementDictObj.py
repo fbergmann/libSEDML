@@ -11,7 +11,8 @@ import writeCode
 import writeHeader
 
 def createElements():
-  elements = [ createSedDocument(), 
+  elements = [
+              createSedDocument(),
               createSedModel(),
 			  createSedChange(),
 			  createSedParameter(),
@@ -41,7 +42,8 @@ def createElements():
 			  createSedDataSet(),
 			  createSedReport(),
 			  createSedPlot2D(),
-			  createSedPlot3D() ]
+			  createSedPlot3D()
+              ]
   for element in elements:
     writeCode.createCode(element)
     writeHeader.createHeader(element)
@@ -335,6 +337,8 @@ def createSedVectorRange():
                    'hasMath':False,
                    'baseClass':'SedRange',
                    'elementName':'vectorRange'
+                   'additionalCPPDecls':'../dev/vectorrange_inc.h',
+                   'additionalCPPImpls':'../dev/vectorrange_inc.cpp'
                    })
     return element
 
