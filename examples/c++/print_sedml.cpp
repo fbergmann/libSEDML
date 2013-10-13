@@ -84,6 +84,8 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < doc->getNumSimulations(); ++i)
   {
     SedSimulation* current = doc->getSimulation(i);
+    if (current->isSetAnnotation())
+      printAnnotation(*current->getAnnotation());
     switch(current->getTypeCode())
     {
        case SEDML_SIMULATION_UNIFORMTIMECOURSE:
