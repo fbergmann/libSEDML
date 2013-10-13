@@ -46,7 +46,7 @@ main (int argc, char* argv[])
   if (argc != 2)
   {
     cout << endl << "Usage: create_sedml output-filename"
-         << endl << endl;
+    << endl << endl;
     return 2;
   }
 
@@ -54,38 +54,39 @@ main (int argc, char* argv[])
   SedDocument doc;
   doc.setLevel(1);
   doc.setVersion(1);
+  doc.setAnnotation("<test xmlns='http://test.org/test/annotation' attribute='test' />");
 
   {
-  // create a first model referencing an sbml file
-  SedModel *model = doc.createModel();
-  model->setId("model1");
-  model->setSource("file.xml");
-  model->setLanguage("urn:sedml:sbml");
+    // create a first model referencing an sbml file
+    SedModel *model = doc.createModel();
+    model->setId("model1");
+    model->setSource("file.xml");
+    model->setLanguage("urn:sedml:sbml");
 
-  // create a second model modifying a variable of that other sbml file
-  model = doc.createModel();
-  model->setId("model2");
-  model->setSource("model1");
-  model->setLanguage("urn:sedml:sbml");
+    // create a second model modifying a variable of that other sbml file
+    model = doc.createModel();
+    model->setId("model2");
+    model->setSource("model1");
+    model->setLanguage("urn:sedml:sbml");
 
-  // change a paramerter 'k' to 0.1
-  SedChangeAttribute* change = model->createChangeAttribute();
-  change->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
-  change->setNewValue("0.1");
+    // change a paramerter 'k' to 0.1
+    SedChangeAttribute* change = model->createChangeAttribute();
+    change->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
+    change->setNewValue("0.1");
 
-  // remove species 's1'
-  SedRemoveXML* remove = model->createRemoveXML();
-  remove->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
+    // remove species 's1'
+    SedRemoveXML* remove = model->createRemoveXML();
+    remove->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
 
-  // now for something tricky we want to update the initialConcentration of 'S2' to be
-  // half what it was in the original model
-  SedComputeChange* compute = model->createComputeChange();
-  compute->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
-  SedVariable *variable = compute->createVariable();
-  variable->setId("S2");
-  variable->setModelReference("model1");
-  variable->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
-  compute->setMath(SBML_parseFormula("S2 / 2"));
+    // now for something tricky we want to update the initialConcentration of 'S2' to be
+    // half what it was in the original model
+    SedComputeChange* compute = model->createComputeChange();
+    compute->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
+    SedVariable *variable = compute->createVariable();
+    variable->setId("S2");
+    variable->setModelReference("model1");
+    variable->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
+    compute->setMath(SBML_parseFormula("S2 / 2"));
   }
 
   // create simulation
@@ -165,9 +166,9 @@ main (int argc, char* argv[])
   surf->setXDataReference("time");
   surf->setYDataReference("S1");
   surf->setZDataReference("S1");
-
+  
   // write the document
   writeSedML(&doc, argv[1]);
-
+  
   return 0;
 }

@@ -39,6 +39,21 @@
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE
 
+void printAnnotation(const XMLNode& node)
+{
+  cout << "annotation element: '" << node.getName() << "'" << endl;
+
+  for (unsigned int i = 0; i < node.getAttributesLength(); ++i)
+  {
+    cout << "\tattribute '" << node.getAttrName(i) << "' value: '" << node.getAttrValue(i) << "'" << endl;
+  }
+
+  for (unsigned int i = 0; i < node.getNumChildren(); ++i)
+  {
+    printAnnotation(node.getChild(i));
+  }
+}
+
 int
 main (int argc, char* argv[])
 {
@@ -55,7 +70,16 @@ main (int argc, char* argv[])
     cout << doc->getErrorLog()->toString();
     return 2; 
   }
-  
+
+  if (doc->isSetAnnotation())
+  {
+    cout << "document has annotation: " << doc->getAnnotationString() << endl;
+
+    const XMLNode& node = *doc->getAnnotation();
+    printAnnotation(node);
+
+  }
+
   cout << "The document has " << doc->getNumSimulations() << " simulation(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumSimulations(); ++i)
   {
