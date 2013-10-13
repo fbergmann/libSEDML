@@ -86,6 +86,16 @@ main (int argc, char* argv[])
     SedSimulation* current = doc->getSimulation(i);
     if (current->isSetAnnotation())
       printAnnotation(*current->getAnnotation());
+
+    if (current->isSetAlgorithm())
+    {
+      const SedAlgorithm* alg = current->getAlgorithm();
+      if (alg->isSetAnnotation())
+      {
+        printAnnotation(*alg->getAnnotation());
+      }
+    }
+
     switch(current->getTypeCode())
     {
        case SEDML_SIMULATION_UNIFORMTIMECOURSE:

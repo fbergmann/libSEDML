@@ -100,7 +100,8 @@ main (int argc, char* argv[])
   SedAlgorithm* alg = tc->createAlgorithm();
   alg->setKisaoID("KISAO:0000019");
   // add annotation
-  tc->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='test' />");
+  tc->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='uniform time course' />");
+  alg->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='algorithm' />");
 
   // create a task that uses the simulation and the model above
   SedTask* task = doc.createTask();
