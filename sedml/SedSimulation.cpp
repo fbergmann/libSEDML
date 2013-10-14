@@ -363,7 +363,8 @@ void
 SedSimulation::connectToChild ()
 {
 	SedBase::connectToChild();
-
+  if (mAlgorithm != NULL)
+  mAlgorithm->connectToParent(this);
 }
 
 
@@ -448,6 +449,8 @@ void
 SedSimulation::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
+  if (mAlgorithm != NULL)
+    mAlgorithm->setSedDocument(d);
 }
 
 

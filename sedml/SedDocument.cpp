@@ -1094,6 +1094,12 @@ void
 SedDocument::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
+
+  mDataGenerator.setSedDocument(d);
+  mSimulation.setSedDocument(d);
+  mTask.setSedDocument(d);
+  mOutput.setSedDocument(d);
+  mModel.setSedDocument(d);
 }
 
 

@@ -3055,7 +3055,7 @@ SedBase::checkAnnotation()
     if (topLevel.getNamespaces().getLength() == 0)
     {
       // not on actual element - is it explicit ??
-      if( mSed->getNamespaces() != NULL)
+      if(mSed != NULL &&  mSed->getNamespaces() != NULL)
       /* check for implicit declaration */
       {
         for (n = 0; n < mSed->getNamespaces()->getLength(); n++)

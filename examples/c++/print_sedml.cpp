@@ -71,6 +71,11 @@ main (int argc, char* argv[])
     return 2; 
   }
 
+  if (doc->getNumErrors() > 0)
+  {
+    cout << "Warnings: " << doc->getErrorLog()->toString() << endl;
+  }
+
   if (doc->isSetAnnotation())
   {
     cout << "document has annotation: " << doc->getAnnotationString() << endl;
