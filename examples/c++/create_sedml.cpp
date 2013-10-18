@@ -143,6 +143,10 @@ main (int argc, char* argv[])
   current->setRange("index");
   current->setMath(SBML_parseFormula("piecewise(8, lt(index, 1), 0.1, and(geq(index, 4), lt(index, 6)), 8)"));
 
+  SedVectorRange* vrange = repeat->createVectorRange();
+  vrange->setId("vRange");
+
+
   SedSetValue* setValue = repeat->createTaskChange();
   setValue->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J0_v0']");
   setValue->setRange("current");
