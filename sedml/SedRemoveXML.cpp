@@ -139,8 +139,6 @@ SedRemoveXML::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedChange::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;
@@ -241,8 +239,6 @@ SedRemoveXML::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedChange::readAttributes(attributes, expectedAttributes);
-
-	bool assigned = false;
 
 }
 

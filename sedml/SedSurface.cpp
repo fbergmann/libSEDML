@@ -256,8 +256,6 @@ SedSurface::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedCurve::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;

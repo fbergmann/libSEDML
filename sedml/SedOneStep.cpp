@@ -199,8 +199,6 @@ SedOneStep::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedSimulation::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;

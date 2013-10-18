@@ -139,8 +139,6 @@ SedSteadyState::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedSimulation::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;
@@ -241,8 +239,6 @@ SedSteadyState::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedSimulation::readAttributes(attributes, expectedAttributes);
-
-	bool assigned = false;
 
 }
 

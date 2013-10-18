@@ -500,7 +500,8 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
     outFile.write('\tSedBase* object = NULL;\n\n')
   else:
     outFile.write('\tSedBase* object = {0}::createObject(stream);\n\n'.format(baseClass))
-  outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
+  if hasChildren or hasMath:
+    outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
   for i in range (0, len(attribs)):
     current = attribs[i]
     if current['type'] == 'lo_element':
@@ -546,7 +547,8 @@ def writeReadAttributesCPPCode(outFile, element, attribs, baseClass):
   outFile.write('                             const ExpectedAttributes& expectedAttributes)\n')
   outFile.write('{\n')
   outFile.write('\t{0}::readAttributes(attributes, expectedAttributes);\n\n'.format(baseClass))
-  outFile.write('\tbool assigned = false;\n\n')
+  if (len(attribs) > 0):
+    outFile.write('\tbool assigned = false;\n\n')
   for i in range (0, len(attribs)):
     writeReadAttribute(outFile, attribs[i], element)
   outFile.write('}\n\n\n')

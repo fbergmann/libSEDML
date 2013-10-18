@@ -139,8 +139,6 @@ SedVectorRange::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedRange::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;
@@ -241,8 +239,6 @@ SedVectorRange::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
 	SedRange::readAttributes(attributes, expectedAttributes);
-
-	bool assigned = false;
 
 }
 

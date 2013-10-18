@@ -380,8 +380,6 @@ SedUniformRange::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedRange::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;

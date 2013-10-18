@@ -198,8 +198,6 @@ SedAddXML::createObject(XMLInputStream& stream)
 {
 	SedBase* object = SedChange::createObject(stream);
 
-	const string& name   = stream.peek().getName();
-
 	connectToChild();
 
 	return object;
