@@ -121,7 +121,38 @@ main (int argc, char* argv[])
   task->setModelReference("model1");
   task->setSimulationReference("sim1");
 
-//  SedRepeatedTask* repeat = doc.createRep
+  task = doc.createTask();
+  task->setId("task2");
+  task->setModelReference("model1");
+  task->setSimulationReference("sim2");
+
+  SedRepeatedTask* repeat = doc.createRepeatedTask();
+  repeat->setId("task2");
+  repeat->setRangeId("index");
+  repeat->setResetModel(false);
+
+  SedUniformRange* index = repeat->createUniformRange();
+  index->setId("index");
+  index->setStart(0);
+  index->setEnd(10);
+  index->setNumberOfPoints(100);
+  index->setType("linear");
+
+  SedFunctionalRange* current = repeat->createFunctionalRange();
+  current->setId("current");
+  current->setRange("index");
+  current->setMath(SBML_parseFormula("piecewise(8, lt(index, 1), 0.1, and(geq(index, 4), lt(index, 6)), 8)"));
+
+  SedSetValue* setValue = repeat->createTaskChange();
+  setValue->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J0_v0']");
+  setValue->setRange("current");
+  setValue->setModelReference("model1");
+  setValue->setMath(SBML_parseFormula("current"));
+
+  SedSubTask* subTask = repeat->createSubTask();
+  subTask->setTask("task1");
+  subTask->setOrder(1);
+  
 
   // add a DataGenerator to hold the output for time
   SedDataGenerator* dg = doc.createDataGenerator();
