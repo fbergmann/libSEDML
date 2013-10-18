@@ -250,7 +250,7 @@ def createCode(element, code):
   if element.has_key('abstract') == False or (element.has_key('abstract') and element['abstract'] == False):
     code.write('/**\n')
     code.write(' * Creates a new {0} object, adds it to this {1}s\n'.format(type, listOf))
-    code.write(' * {0} and returns the {1} object created. \n'.format(element, type))
+    code.write(' * {0} and returns the {1} object created. \n'.format(element['name'], type))
     code.write(' *\n')
     code.write(' * @return a new {0} object instance\n'.format(type))
     code.write(' *\n')
@@ -266,8 +266,8 @@ def createCode(element, code):
   elif element.has_key('concrete'):
     for elem in element['concrete']:
       code.write('/**\n')
-      code.write(' * Creates a new {0} object, adds it to this {1}s\n'.format(elem['element'], listOf))
-      code.write(' * {0} and returns the {1} object created. \n'.format(listOf, elem['element']))
+      code.write(' * Creates a new {0} object, adds it to this {1}\n'.format(elem['element'], listOf))
+      code.write(' * {0} and returns the {1} object created. \n'.format(elem['name'], elem['element']))
       code.write(' *\n')
       code.write(' * @return a new {0} object instance\n'.format(elem['element']))
       code.write(' *\n')

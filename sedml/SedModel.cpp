@@ -929,7 +929,7 @@ SedListOfModels::getNumModels() const
 
 /**
  * Creates a new SedModel object, adds it to this SedListOfModelss
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'string', 'name': 'language'}, {'reqd': True, 'type': 'string', 'name': 'source'}, {'concrete': [{'name': 'removeXML', 'element': 'SedRemoveXML'}, {'name': 'addXML', 'element': 'SedAddXML'}, {'name': 'changeXML', 'element': 'SedChangeXML'}, {'name': 'changeAttribute', 'element': 'SedChangeAttribute'}, {'name': 'computeChange', 'element': 'SedComputeChange'}], 'name': 'change', 'reqd': False, 'abstract': True, 'type': 'lo_element', 'element': 'SedChange'}], 'elementName': 'model', 'name': 'SedModel', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_MODEL'} and returns the SedModel object created. 
+ * SedModel and returns the SedModel object created. 
  *
  * @return a new SedModel object instance
  *

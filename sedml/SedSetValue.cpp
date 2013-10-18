@@ -1119,7 +1119,7 @@ SedListOfTaskChanges::getNumSetValues() const
 
 /**
  * Creates a new SedSetValue object, adds it to this SedListOfTaskChangess
- * {'attribs': [{'reqd': False, 'type': 'lo_element', 'name': 'variable', 'element': 'SedVariable'}, {'reqd': False, 'type': 'lo_element', 'name': 'parameter', 'element': 'SedParameter'}, {'reqd': False, 'type': 'SIdRef', 'name': 'range'}, {'reqd': True, 'type': 'SIdRef', 'name': 'modelReference'}, {'reqd': False, 'type': 'string', 'name': 'symbol'}, {'reqd': False, 'type': 'string', 'name': 'target'}, {'reqd': False, 'type': 'element', 'name': 'math'}], 'elementName': 'setValue', 'name': 'SedSetValue', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': True, 'typecode': 'SEDML_TASK_SETVALUE'} and returns the SedSetValue object created. 
+ * SedSetValue and returns the SedSetValue object created. 
  *
  * @return a new SedSetValue object instance
  *
@@ -1170,7 +1170,7 @@ SedListOfTaskChanges::remove(const std::string& sid)
 const std::string&
 SedListOfTaskChanges::getElementName () const
 {
-	static const string name = "listOfSetValues";
+	static const string name = "listOfListOfChanges";
 	return name;
 }
 

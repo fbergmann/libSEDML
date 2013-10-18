@@ -590,7 +590,7 @@ SedListOfParameters::getNumParameters() const
 
 /**
  * Creates a new SedParameter object, adds it to this SedListOfParameterss
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': True, 'type': 'double', 'name': 'value'}], 'elementName': 'parameter', 'name': 'SedParameter', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_PARAMETER'} and returns the SedParameter object created. 
+ * SedParameter and returns the SedParameter object created. 
  *
  * @return a new SedParameter object instance
  *

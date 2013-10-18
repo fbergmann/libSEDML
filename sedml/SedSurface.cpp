@@ -528,7 +528,7 @@ SedListOfSurfaces::getNumSurfaces() const
 
 /**
  * Creates a new SedSurface object, adds it to this SedListOfSurfacess
- * {'attribs': [{'reqd': True, 'type': 'bool', 'name': 'logZ'}, {'reqd': True, 'type': 'SIdRef', 'name': 'zDataReference'}], 'elementName': 'surface', 'name': 'SedSurface', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_OUTPUT_SURFACE', 'baseClass': 'SedCurve'} and returns the SedSurface object created. 
+ * SedSurface and returns the SedSurface object created. 
  *
  * @return a new SedSurface object instance
  *

@@ -854,7 +854,7 @@ SedListOfVariables::getNumVariables() const
 
 /**
  * Creates a new SedVariable object, adds it to this SedListOfVariabless
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'string', 'name': 'symbol'}, {'reqd': False, 'type': 'string', 'name': 'target'}, {'reqd': False, 'type': 'SIdRef', 'name': 'taskReference'}, {'reqd': False, 'type': 'SIdRef', 'name': 'modelReference'}], 'elementName': 'variable', 'name': 'SedVariable', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_VARIABLE'} and returns the SedVariable object created. 
+ * SedVariable and returns the SedVariable object created. 
  *
  * @return a new SedVariable object instance
  *

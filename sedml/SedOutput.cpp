@@ -568,8 +568,8 @@ SedListOfOutputs::getNumOutputs() const
 }
 
 /**
- * Creates a new SedReport object, adds it to this SedListOfOutputss
- * SedListOfOutputs and returns the SedReport object created. 
+ * Creates a new SedReport object, adds it to this SedListOfOutputs
+ * report and returns the SedReport object created. 
  *
  * @return a new SedReport object instance
  *
@@ -584,8 +584,8 @@ SedListOfOutputs::createReport()
 }
 
 /**
- * Creates a new SedPlot2D object, adds it to this SedListOfOutputss
- * SedListOfOutputs and returns the SedPlot2D object created. 
+ * Creates a new SedPlot2D object, adds it to this SedListOfOutputs
+ * plot2D and returns the SedPlot2D object created. 
  *
  * @return a new SedPlot2D object instance
  *
@@ -600,8 +600,8 @@ SedListOfOutputs::createPlot2D()
 }
 
 /**
- * Creates a new SedPlot3D object, adds it to this SedListOfOutputss
- * SedListOfOutputs and returns the SedPlot3D object created. 
+ * Creates a new SedPlot3D object, adds it to this SedListOfOutputs
+ * plot3D and returns the SedPlot3D object created. 
  *
  * @return a new SedPlot3D object instance
  *

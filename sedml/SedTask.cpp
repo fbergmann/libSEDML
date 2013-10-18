@@ -745,7 +745,7 @@ SedListOfTasks::getNumTasks() const
 
 /**
  * Creates a new SedTask object, adds it to this SedListOfTaskss
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'SIdRef', 'name': 'modelReference'}, {'reqd': False, 'type': 'SIdRef', 'name': 'simulationReference'}], 'elementName': 'task', 'name': 'SedTask', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_TASK'} and returns the SedTask object created. 
+ * SedTask and returns the SedTask object created. 
  *
  * @return a new SedTask object instance
  *

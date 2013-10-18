@@ -437,8 +437,8 @@ SedListOfRanges::getNumRanges() const
 }
 
 /**
- * Creates a new SedUniformRange object, adds it to this SedListOfRangess
- * SedListOfRanges and returns the SedUniformRange object created. 
+ * Creates a new SedUniformRange object, adds it to this SedListOfRanges
+ * uniformRange and returns the SedUniformRange object created. 
  *
  * @return a new SedUniformRange object instance
  *
@@ -453,8 +453,8 @@ SedListOfRanges::createUniformRange()
 }
 
 /**
- * Creates a new SedVectorRange object, adds it to this SedListOfRangess
- * SedListOfRanges and returns the SedVectorRange object created. 
+ * Creates a new SedVectorRange object, adds it to this SedListOfRanges
+ * vectorRange and returns the SedVectorRange object created. 
  *
  * @return a new SedVectorRange object instance
  *
@@ -469,8 +469,8 @@ SedListOfRanges::createVectorRange()
 }
 
 /**
- * Creates a new SedFunctionalRange object, adds it to this SedListOfRangess
- * SedListOfRanges and returns the SedFunctionalRange object created. 
+ * Creates a new SedFunctionalRange object, adds it to this SedListOfRanges
+ * functionalRange and returns the SedFunctionalRange object created. 
  *
  * @return a new SedFunctionalRange object instance
  *

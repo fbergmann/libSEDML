@@ -825,7 +825,7 @@ SedListOfCurves::getNumCurves() const
 
 /**
  * Creates a new SedCurve object, adds it to this SedListOfCurvess
- * {'attribs': [{'reqd': False, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': True, 'type': 'bool', 'name': 'logX'}, {'reqd': True, 'type': 'bool', 'name': 'logY'}, {'reqd': True, 'type': 'SIdRef', 'name': 'xDataReference'}, {'reqd': True, 'type': 'SIdRef', 'name': 'yDataReference'}], 'elementName': 'curve', 'name': 'SedCurve', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_OUTPUT_CURVE'} and returns the SedCurve object created. 
+ * SedCurve and returns the SedCurve object created. 
  *
  * @return a new SedCurve object instance
  *

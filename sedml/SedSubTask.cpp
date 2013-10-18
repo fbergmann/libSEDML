@@ -522,7 +522,7 @@ SedListOfSubTasks::getNumSubTasks() const
 
 /**
  * Creates a new SedSubTask object, adds it to this SedListOfSubTaskss
- * {'attribs': [{'reqd': True, 'type': 'SIdRef', 'name': 'task'}, {'reqd': True, 'type': 'int', 'name': 'order'}], 'elementName': 'subTask', 'name': 'SedSubTask', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_TASK_SUBTASK'} and returns the SedSubTask object created. 
+ * SedSubTask and returns the SedSubTask object created. 
  *
  * @return a new SedSubTask object instance
  *

@@ -659,8 +659,8 @@ SedListOfSimulations::getNumSimulations() const
 }
 
 /**
- * Creates a new SedUniformTimeCourse object, adds it to this SedListOfSimulationss
- * SedListOfSimulations and returns the SedUniformTimeCourse object created. 
+ * Creates a new SedUniformTimeCourse object, adds it to this SedListOfSimulations
+ * uniformTimeCourse and returns the SedUniformTimeCourse object created. 
  *
  * @return a new SedUniformTimeCourse object instance
  *
@@ -675,8 +675,8 @@ SedListOfSimulations::createUniformTimeCourse()
 }
 
 /**
- * Creates a new SedOneStep object, adds it to this SedListOfSimulationss
- * SedListOfSimulations and returns the SedOneStep object created. 
+ * Creates a new SedOneStep object, adds it to this SedListOfSimulations
+ * oneStep and returns the SedOneStep object created. 
  *
  * @return a new SedOneStep object instance
  *
@@ -691,8 +691,8 @@ SedListOfSimulations::createOneStep()
 }
 
 /**
- * Creates a new SedSteadyState object, adds it to this SedListOfSimulationss
- * SedListOfSimulations and returns the SedSteadyState object created. 
+ * Creates a new SedSteadyState object, adds it to this SedListOfSimulations
+ * steadyState and returns the SedSteadyState object created. 
  *
  * @return a new SedSteadyState object instance
  *

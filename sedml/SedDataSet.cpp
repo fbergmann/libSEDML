@@ -692,7 +692,7 @@ SedListOfDataSets::getNumDataSets() const
 
 /**
  * Creates a new SedDataSet object, adds it to this SedListOfDataSetss
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': True, 'type': 'string', 'name': 'label'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': True, 'type': 'SIdRef', 'name': 'dataReference'}], 'elementName': 'dataSet', 'name': 'SedDataSet', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_OUTPUT_DATASET'} and returns the SedDataSet object created. 
+ * SedDataSet and returns the SedDataSet object created. 
  *
  * @return a new SedDataSet object instance
  *

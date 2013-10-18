@@ -525,7 +525,7 @@ SedListOfAlgorithmParameters::getNumAlgorithmParameters() const
 
 /**
  * Creates a new SedAlgorithmParameter object, adds it to this SedListOfAlgorithmParameterss
- * {'attribs': [{'reqd': True, 'type': 'string', 'name': 'kisaoID'}, {'reqd': True, 'type': 'string', 'name': 'value'}], 'elementName': 'algorithmParameter', 'name': 'SedAlgorithmParameter', 'hasChildren': False, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': False, 'typecode': 'SEDML_SIMULATION_ALGORITHM_PARAMETER'} and returns the SedAlgorithmParameter object created. 
+ * SedAlgorithmParameter and returns the SedAlgorithmParameter object created. 
  *
  * @return a new SedAlgorithmParameter object instance
  *

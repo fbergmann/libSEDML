@@ -596,11 +596,17 @@ def writeGetElementNameCPPCode(outFile, element, isSedListOf=False, dict=None):
   outFile.write('{\n')
   if dict != None and dict.has_key('elementName'):
     if isSedListOf:
-      outFile.write('\tstatic const string name = "listOf{0}";\n'.format(strFunctions.capp(dict['elementName'])))
+      if dict.has_key('lo_elementName'):
+        outFile.write('\tstatic const string name = "listOf{0}";\n'.format(strFunctions.capp(dict['lo_elementName'])))
+      else:
+        outFile.write('\tstatic const string name = "listOf{0}";\n'.format(strFunctions.capp(dict['elementName'])))
     else:
       outFile.write('\tstatic const string name = "{0}";\n'.format(dict['elementName']))
   else:
-    outFile.write('\tstatic const string name = "{0}";\n'.format(strFunctions.lowerFirst(element)))
+    if dict != None and dict.has_key('lo_elementName'):
+      outFile.write('\tstatic const string name = "{0}";\n'.format(strFunctions.capp(dict['lo_elementName'])))
+    else: 
+      outFile.write('\tstatic const string name = "{0}";\n'.format(strFunctions.lowerFirst(element)))
   outFile.write('\treturn name;\n')
   outFile.write('}\n\n\n')
   

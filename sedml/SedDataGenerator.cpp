@@ -939,7 +939,7 @@ SedListOfDataGenerators::getNumDataGenerators() const
 
 /**
  * Creates a new SedDataGenerator object, adds it to this SedListOfDataGeneratorss
- * {'attribs': [{'reqd': True, 'type': 'SId', 'name': 'id'}, {'reqd': False, 'type': 'string', 'name': 'name'}, {'reqd': False, 'type': 'lo_element', 'name': 'variable', 'element': 'SedVariable'}, {'reqd': False, 'type': 'lo_element', 'name': 'parameter', 'element': 'SedParameter'}, {'reqd': False, 'type': 'element', 'name': 'math'}], 'elementName': 'dataGenerator', 'name': 'SedDataGenerator', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': True, 'typecode': 'SEDML_DATAGENERATOR'} and returns the SedDataGenerator object created. 
+ * SedDataGenerator and returns the SedDataGenerator object created. 
  *
  * @return a new SedDataGenerator object instance
  *

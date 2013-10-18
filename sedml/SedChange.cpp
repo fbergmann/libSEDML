@@ -441,8 +441,8 @@ SedListOfChanges::getNumChanges() const
 }
 
 /**
- * Creates a new SedAddXML object, adds it to this SedListOfChangess
- * SedListOfChanges and returns the SedAddXML object created. 
+ * Creates a new SedAddXML object, adds it to this SedListOfChanges
+ * addXML and returns the SedAddXML object created. 
  *
  * @return a new SedAddXML object instance
  *
@@ -457,8 +457,8 @@ SedListOfChanges::createAddXML()
 }
 
 /**
- * Creates a new SedChangeXML object, adds it to this SedListOfChangess
- * SedListOfChanges and returns the SedChangeXML object created. 
+ * Creates a new SedChangeXML object, adds it to this SedListOfChanges
+ * changeXML and returns the SedChangeXML object created. 
  *
  * @return a new SedChangeXML object instance
  *
@@ -473,8 +473,8 @@ SedListOfChanges::createChangeXML()
 }
 
 /**
- * Creates a new SedRemoveXML object, adds it to this SedListOfChangess
- * SedListOfChanges and returns the SedRemoveXML object created. 
+ * Creates a new SedRemoveXML object, adds it to this SedListOfChanges
+ * removeXML and returns the SedRemoveXML object created. 
  *
  * @return a new SedRemoveXML object instance
  *
@@ -489,8 +489,8 @@ SedListOfChanges::createRemoveXML()
 }
 
 /**
- * Creates a new SedChangeAttribute object, adds it to this SedListOfChangess
- * SedListOfChanges and returns the SedChangeAttribute object created. 
+ * Creates a new SedChangeAttribute object, adds it to this SedListOfChanges
+ * changeAttribute and returns the SedChangeAttribute object created. 
  *
  * @return a new SedChangeAttribute object instance
  *
@@ -505,8 +505,8 @@ SedListOfChanges::createChangeAttribute()
 }
 
 /**
- * Creates a new SedComputeChange object, adds it to this SedListOfChangess
- * SedListOfChanges and returns the SedComputeChange object created. 
+ * Creates a new SedComputeChange object, adds it to this SedListOfChanges
+ * computeChange and returns the SedComputeChange object created. 
  *
  * @return a new SedComputeChange object instance
  *

@@ -871,7 +871,7 @@ SedListOfFunctionalRanges::getNumFunctionalRanges() const
 
 /**
  * Creates a new SedFunctionalRange object, adds it to this SedListOfFunctionalRangess
- * {'attribs': [{'reqd': False, 'type': 'lo_element', 'name': 'variable', 'element': 'SedVariable'}, {'reqd': False, 'type': 'lo_element', 'name': 'parameter', 'element': 'SedParameter'}, {'reqd': True, 'type': 'SIdRef', 'name': 'range'}, {'reqd': False, 'type': 'element', 'name': 'math'}], 'elementName': 'functionalRange', 'name': 'SedFunctionalRange', 'hasChildren': True, 'package': 'Sed', 'hasSedListOf': True, 'hasMath': True, 'typecode': 'SEDML_RANGE_FUNCTIONALRANGE', 'baseClass': 'SedRange'} and returns the SedFunctionalRange object created. 
+ * SedFunctionalRange and returns the SedFunctionalRange object created. 
  *
  * @return a new SedFunctionalRange object instance
  *
