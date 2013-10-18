@@ -1594,7 +1594,7 @@ SedBase::connectToParent (SedBase* parent)
   }
   else
   {
-    setSedDocument(0);
+    setSedDocument(NULL);
   }
 }
 

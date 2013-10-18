@@ -60,6 +60,8 @@ SedDocument::SedDocument (unsigned int level, unsigned int version)
 	, mOutput (level, version)
 
 {
+	setSedDocument(this);
+
 	// set an SedNamespaces derived object of this package
 	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
@@ -84,6 +86,8 @@ SedDocument::SedDocument (SedNamespaces* sedns)
 	, mOutput (sedns)
 
 {
+	setSedDocument(this);
+
 	// set the element namespace of this object
 	setElementNamespace(sedns->getURI());
 
@@ -104,6 +108,8 @@ SedDocument::SedDocument (const SedDocument& orig)
 	}
 	else
 	{
+		setSedDocument(this);
+
 		mLevel  = orig.mLevel;
 		mIsSetLevel  = orig.mIsSetLevel;
 		mVersion  = orig.mVersion;
@@ -133,6 +139,9 @@ SedDocument::operator=(const SedDocument& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
+
+		setSedDocument(this);
+
 		mLevel  = rhs.mLevel;
 		mIsSetLevel  = rhs.mIsSetLevel;
 		mVersion  = rhs.mVersion;

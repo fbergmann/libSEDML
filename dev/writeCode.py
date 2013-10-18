@@ -89,6 +89,8 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('\t: {0}(level, version)\n'.format(baseClass))
   writeAttributes(attrs, output, 1)
   output.write('{\n')
+  if element == 'SedDocument':
+    output.write('\tsetSedDocument(this);\n\n');
   output.write('\t// set an SedNamespaces derived object of this package\n')
   output.write('\tsetSedNamespacesAndOwn(new SedNamespaces(level, version));\n'.format(package))
   if hasChildren == True or hasMath == True:
@@ -102,6 +104,8 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('\t: {1}({0}ns)\n'.format(package.lower(), baseClass))
   writeAttributes(attrs, output, 2, package.lower())
   output.write('{\n')
+  if element == 'SedDocument':
+    output.write('\tsetSedDocument(this);\n\n');
   output.write('\t// set the element namespace of this object\n')
   output.write('\tsetElementNamespace({0}ns->getURI());\n'.format(package.lower()))
   if hasChildren == True:
@@ -119,6 +123,8 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('\t}\n')
   output.write('\telse\n')
   output.write('\t{\n')
+  if element == 'SedDocument':
+    output.write('\t\tsetSedDocument(this);\n\n');
   writeCopyAttributes(attrs, output, '\t\t', 'orig')
   if hasChildren == True:
     output.write('\n\t\t// connect to child objects\n')
@@ -136,6 +142,8 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   output.write('\telse if (&rhs != this)\n')
   output.write('\t{\n')
   output.write('\t\t{0}::operator=(rhs);\n'.format(baseClass))
+  if element == 'SedDocument':
+    output.write('\n\t\tsetSedDocument(this);\n\n');
   writeCopyAttributes(attrs, output, '\t\t', 'rhs')
   if hasChildren == True:
     output.write('\n\t\t// connect to child objects\n')
