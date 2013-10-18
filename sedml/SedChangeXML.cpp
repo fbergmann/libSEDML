@@ -200,7 +200,7 @@ SedChangeXML::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedChange::connectToChild();
+	connectToChild();
 
 	return object;
 }

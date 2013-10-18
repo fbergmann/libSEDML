@@ -533,8 +533,6 @@ SedFunctionalRange::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedRange::connectToChild();
-
 	if (name == "listOfVariables")
 	{
 		object = &mVariable;
@@ -544,6 +542,8 @@ SedFunctionalRange::createObject(XMLInputStream& stream)
 	{
 		object = &mParameter;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -651,6 +651,8 @@ void
 SedFunctionalRange::setSedDocument (SedDocument* d)
 {
 	SedRange::setSedDocument(d);
+	mVariable.setSedDocument(d);
+	mParameter.setSedDocument(d);
 }
 
 

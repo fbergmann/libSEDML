@@ -275,12 +275,12 @@ SedPlot3D::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedOutput::connectToChild();
-
 	if (name == "listOfSurfaces")
 	{
 		object = &mSurface;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -376,6 +376,7 @@ void
 SedPlot3D::setSedDocument (SedDocument* d)
 {
 	SedOutput::setSedDocument(d);
+	mSurface.setSedDocument(d);
 }
 
 

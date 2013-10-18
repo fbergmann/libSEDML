@@ -947,8 +947,6 @@ SedDocument::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
-
 	if (name == "listOfSimulations")
 	{
 		object = &mSimulation;
@@ -973,6 +971,8 @@ SedDocument::createObject(XMLInputStream& stream)
 	{
 		object = &mOutput;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -1094,12 +1094,11 @@ void
 SedDocument::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-
-  mDataGenerator.setSedDocument(d);
-  mSimulation.setSedDocument(d);
-  mTask.setSedDocument(d);
-  mOutput.setSedDocument(d);
-  mModel.setSedDocument(d);
+	mSimulation.setSedDocument(d);
+	mModel.setSedDocument(d);
+	mTask.setSedDocument(d);
+	mDataGenerator.setSedDocument(d);
+	mOutput.setSedDocument(d);
 }
 
 

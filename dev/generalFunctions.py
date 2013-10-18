@@ -286,7 +286,7 @@ def writeSetDocHeader(outFile):
   outFile.write('\tvirtual void setSedDocument (SedDocument* d);\n\n\n')
   writeInternalEnd(outFile)
 
-def writeSetDocCPPCode(outFile, element, baseClass='SedBase'):
+def writeSetDocCPPCode(outFile, element,attribs, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
   outFile.write(' * Sets the parent SedDocument.\n')
@@ -294,6 +294,13 @@ def writeSetDocCPPCode(outFile, element, baseClass='SedBase'):
   outFile.write('void\n{0}::setSedDocument (SedDocument* d)\n'.format(element))
   outFile.write('{\n')
   outFile.write('\t{0}::setSedDocument(d);\n'.format(baseClass))
+  for i in range (0, len(attribs)):
+    if attribs[i]['type'] == 'lo_element' or ( attribs[i]['type'] == 'element' and attribs[i]['name'] != 'math'):
+      if attribs[i]['reqd'] == True or attribs[i]['type'] == 'lo_element':
+        outFile.write('\tm{0}.setSedDocument(d);\n'.format(strFunctions.cap(attribs[i]['name'])))
+      else:
+        outFile.write('\tif (m{0} != NULL)\n'.format(strFunctions.cap(attribs[i]['name'])))
+        outFile.write('\t\tm{0}->setSedDocument(d);\n'.format(strFunctions.cap(attribs[i]['name'])))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
 
@@ -307,28 +314,6 @@ def writeConnectHeader(outFile, isSedListOf=False, hasChildren=False):
   outFile.write('\tvirtual void connectToChild ();\n\n\n')
   writeInternalEnd(outFile)
 
-def writeEnablePkgHeader(outFile):
-  #writeInternalStart(outFile)
-  #outFile.write('\t/**\n')
-  #outFile.write('\t * Enables/Disables the given package with this element.\n')
-  #outFile.write('\t */\n')
-  #outFile.write('\tvirtual void enablePackageInternal(const std::string& pkgURI,\n')
-  #outFile.write('\t             const std::string& pkgPrefix, bool flag);\n\n\n')
-  #writeInternalEnd(outFile)
-  pass
-
-def writeEnablePkgCPPCode(outFile, element):
-  #writeInternalStart(outFile)
-  #outFile.write('/*\n')
-  #outFile.write(' * Enables/Disables the given package with this element.\n')
-  #outFile.write(' */\n')
-  #outFile.write('void\n{0}::enablePackageInternal(const std::string& pkgURI,\n'.format(element))
-  #outFile.write('             const std::string& pkgPrefix, bool flag)\n')
-  #outFile.write('{\n')
-  #outFile.write('\tSedBase::enablePackageInternal(pkgURI, pkgPrefix, flag);\n')
-  #outFile.write('}\n\n\n')
-  #writeInternalEnd(outFile)
-  pass
 
 def writeCreateObjectHeader(outFile):
   writeInternalStart(outFile)
@@ -516,7 +501,6 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
   else:
     outFile.write('\tSedBase* object = {0}::createObject(stream);\n\n'.format(baseClass))
   outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
-  outFile.write('\t{0}::connectToChild();\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     current = attribs[i]
     if current['type'] == 'lo_element':
@@ -530,6 +514,7 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
       outFile.write('\t\tm{0}= new {1}();\n'.format(strFunctions.cap(current['name']), current['element']))	
       outFile.write('\t\tobject = m{0};\n'.format(strFunctions.cap(current['name'])))	
       outFile.write('\t}\n\n')
+  outFile.write('\tconnectToChild();\n\n')
   outFile.write('\treturn object;\n')  
   outFile.write('}\n\n\n')  
 
@@ -544,9 +529,12 @@ def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, h
   outFile.write('{\n')
   outFile.write('\t{0}::connectToChild();\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
-    current = attribs[i]
-    if current['type'] == 'lo_element':
-      outFile.write('\tm{0}.connectToParent(this);\n'.format(strFunctions.cap(current['name'])))	
+    if attribs[i]['type'] == 'lo_element' or ( attribs[i]['type'] == 'element' and attribs[i]['name'] != 'math'):
+      if attribs[i]['reqd'] == True or attribs[i]['type'] == 'lo_element':
+        outFile.write('\tm{0}.connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
+      else:
+        outFile.write('\tif (m{0} != NULL)\n'.format(strFunctions.cap(attribs[i]['name'])))
+        outFile.write('\t\tm{0}->connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
   outFile.write('}\n\n\n')  
 
 def writeReadAttributesCPPCode(outFile, element, attribs, baseClass):
@@ -740,7 +728,6 @@ def writeInternalHeaders(outFile, isSedListOf, hasChildren=False):
   writeSetDocHeader(outFile)
   if hasChildren or isSedListOf:
     writeConnectHeader(outFile, isSedListOf, hasChildren)
-  writeEnablePkgHeader(outFile)
   
 def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None, baseClass='SedBase'):
   type = elementDict['name']
@@ -764,10 +751,24 @@ def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, has
 def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMath,baseClass='SedBase'):
   writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath, baseClass)
   writeAcceptCPPCode(outFile, element)
-  writeSetDocCPPCode(outFile, element,baseClass)
- # writeConnectCPPCode(outFile)
-  writeEnablePkgCPPCode(outFile, element)
+  writeSetDocCPPCode(outFile, element, attributes,baseClass)
+  #if hasChildren == True:
+  #  writeConnectCPPCode(outFile, element, attributes)
 
+
+def writeConnectCPPCode(outFile, element, attribs):
+  writeInternalStart(outFile)
+  outFile.write('/*\n')
+  outFile.write('   * Connects to child elements.\n')
+  outFile.write(' */\n')
+  outFile.write('void\n{0}::connectToChild()\n'.format(element))
+  outFile.write('{\n')
+  for i in range (0, len(attribs)):
+    if attribs[i]['type'] == 'lo_element':
+      outFile.write('  m{0}s.connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
+  outFile.write('}\n\n\n')
+  writeInternalEnd(outFile)
+  
 def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, baseClass):
   writeAddExpectedCPPCode(outFile, element, attribs, baseClass)
   writeReadAttributesCPPCode(outFile, element, attribs, baseClass)

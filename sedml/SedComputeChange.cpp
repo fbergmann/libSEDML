@@ -468,8 +468,6 @@ SedComputeChange::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedChange::connectToChild();
-
 	if (name == "listOfVariables")
 	{
 		object = &mVariable;
@@ -479,6 +477,8 @@ SedComputeChange::createObject(XMLInputStream& stream)
 	{
 		object = &mParameter;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -583,6 +583,8 @@ void
 SedComputeChange::setSedDocument (SedDocument* d)
 {
 	SedChange::setSedDocument(d);
+	mVariable.setSedDocument(d);
+	mParameter.setSedDocument(d);
 }
 
 

@@ -275,12 +275,12 @@ SedPlot2D::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedOutput::connectToChild();
-
 	if (name == "listOfCurves")
 	{
 		object = &mCurve;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -376,6 +376,7 @@ void
 SedPlot2D::setSedDocument (SedDocument* d)
 {
 	SedOutput::setSedDocument(d);
+	mCurve.setSedDocument(d);
 }
 
 

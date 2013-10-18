@@ -668,8 +668,6 @@ SedRepeatedTask::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
-
 	if (name == "listOfRangess")
 	{
 		object = &mRanges;
@@ -684,6 +682,8 @@ SedRepeatedTask::createObject(XMLInputStream& stream)
 	{
 		object = &mSubTasks;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -789,6 +789,9 @@ void
 SedRepeatedTask::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
+	mRanges.setSedDocument(d);
+	mTaskChanges.setSedDocument(d);
+	mSubTasks.setSedDocument(d);
 }
 
 

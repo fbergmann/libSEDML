@@ -582,8 +582,6 @@ SedDataGenerator::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
-
 	if (name == "listOfVariables")
 	{
 		object = &mVariable;
@@ -593,6 +591,8 @@ SedDataGenerator::createObject(XMLInputStream& stream)
 	{
 		object = &mParameter;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -700,6 +700,8 @@ void
 SedDataGenerator::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
+	mVariable.setSedDocument(d);
+	mParameter.setSedDocument(d);
 }
 
 

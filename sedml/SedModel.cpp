@@ -575,12 +575,12 @@ SedModel::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
-
 	if (name == "listOfChanges")
 	{
 		object = &mChange;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -682,6 +682,7 @@ void
 SedModel::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
+	mChange.setSedDocument(d);
 }
 
 

@@ -43,7 +43,7 @@ void printAnnotation(const XMLNode& node)
 {
   cout << "annotation element: '" << node.getName() << "'" << endl;
 
-  for (unsigned int i = 0; i < node.getAttributesLength(); ++i)
+  for (int i = 0; i < node.getAttributesLength(); ++i)
   {
     cout << "\tattribute '" << node.getAttrName(i) << "' value: '" << node.getAttrValue(i) << "'" << endl;
   }

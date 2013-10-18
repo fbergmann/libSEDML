@@ -381,7 +381,7 @@ SedUniformTimeCourse::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedSimulation::connectToChild();
+	connectToChild();
 
 	return object;
 }

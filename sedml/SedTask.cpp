@@ -397,7 +397,7 @@ SedTask::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
+	connectToChild();
 
 	return object;
 }

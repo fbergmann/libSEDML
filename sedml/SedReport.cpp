@@ -275,12 +275,12 @@ SedReport::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedOutput::connectToChild();
-
 	if (name == "listOfDataSets")
 	{
 		object = &mDataSet;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -376,6 +376,7 @@ void
 SedReport::setSedDocument (SedDocument* d)
 {
 	SedOutput::setSedDocument(d);
+	mDataSet.setSedDocument(d);
 }
 
 

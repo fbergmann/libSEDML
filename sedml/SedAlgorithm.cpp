@@ -336,12 +336,12 @@ SedAlgorithm::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
-
 	if (name == "listOfAlgorithmParameters")
 	{
 		object = &mAlgorithmParameter;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -440,6 +440,7 @@ void
 SedAlgorithm::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
+	mAlgorithmParameter.setSedDocument(d);
 }
 
 

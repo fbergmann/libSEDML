@@ -344,13 +344,13 @@ SedSimulation::createObject(XMLInputStream& stream)
 
 	const string& name   = stream.peek().getName();
 
-	SedBase::connectToChild();
-
 	if (name == "algorithm")
 	{
 		mAlgorithm= new SedAlgorithm();
 		object = mAlgorithm;
 	}
+
+	connectToChild();
 
 	return object;
 }
@@ -363,8 +363,9 @@ void
 SedSimulation::connectToChild ()
 {
 	SedBase::connectToChild();
-  if (mAlgorithm != NULL)
-  mAlgorithm->connectToParent(this);
+
+	if (mAlgorithm != NULL)
+		mAlgorithm->connectToParent(this);
 }
 
 
@@ -449,8 +450,8 @@ void
 SedSimulation::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-  if (mAlgorithm != NULL)
-    mAlgorithm->setSedDocument(d);
+	if (mAlgorithm != NULL)
+		mAlgorithm->setSedDocument(d);
 }
 
 
