@@ -64,7 +64,7 @@ class LIBSEDML_EXTERN SedPlot2D : public SedOutput
 
 protected:
 
-	SedListOfCurves   mCurve;
+	SedListOfCurves   mCurves;
 
 
 public:

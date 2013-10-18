@@ -51,8 +51,8 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedSetValue::SedSetValue (unsigned int level, unsigned int version)
 	: SedBase(level, version)
-	, mVariable (level, version)
-	, mParameter (level, version)
+	, mVariables (level, version)
+	, mParameters (level, version)
 	, mRange ("")
 	, mModelReference ("")
 	, mSymbol ("")
@@ -73,8 +73,8 @@ SedSetValue::SedSetValue (unsigned int level, unsigned int version)
  */
 SedSetValue::SedSetValue (SedNamespaces* sedns)
 	: SedBase(sedns)
-	, mVariable (sedns)
-	, mParameter (sedns)
+	, mVariables (sedns)
+	, mParameters (sedns)
 	, mRange ("")
 	, mModelReference ("")
 	, mSymbol ("")
@@ -102,8 +102,8 @@ SedSetValue::SedSetValue (const SedSetValue& orig)
 	}
 	else
 	{
-		mVariable  = orig.mVariable;
-		mParameter  = orig.mParameter;
+		mVariables  = orig.mVariables;
+		mParameters  = orig.mParameters;
 		mRange  = orig.mRange;
 		mModelReference  = orig.mModelReference;
 		mSymbol  = orig.mSymbol;
@@ -129,8 +129,8 @@ SedSetValue::operator=(const SedSetValue& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
-		mVariable  = rhs.mVariable;
-		mParameter  = rhs.mParameter;
+		mVariables  = rhs.mVariables;
+		mParameters  = rhs.mParameters;
 		mRange  = rhs.mRange;
 		mModelReference  = rhs.mModelReference;
 		mSymbol  = rhs.mSymbol;
@@ -469,7 +469,7 @@ SedSetValue::unsetMath()
 const SedListOfVariables*
 SedSetValue::getListOfVariables() const
 {
-	return &mVariable;
+	return &mVariables;
 }
 
 
@@ -479,7 +479,7 @@ SedSetValue::getListOfVariables() const
 SedVariable*
 SedSetValue::removeVariable(unsigned int n)
 {
-	return mVariable.remove(n);
+	return mVariables.remove(n);
 }
 
 
@@ -489,7 +489,7 @@ SedSetValue::removeVariable(unsigned int n)
 SedVariable*
 SedSetValue::removeVariable(const std::string& sid)
 {
-	return mVariable.remove(sid);
+	return mVariables.remove(sid);
 }
 
 
@@ -499,7 +499,7 @@ SedSetValue::removeVariable(const std::string& sid)
 SedVariable*
 SedSetValue::getVariable(unsigned int n)
 {
-	return mVariable.get(n);
+	return mVariables.get(n);
 }
 
 
@@ -509,7 +509,7 @@ SedSetValue::getVariable(unsigned int n)
 const SedVariable*
 SedSetValue::getVariable(unsigned int n) const
 {
-	return mVariable.get(n);
+	return mVariables.get(n);
 }
 
 
@@ -519,7 +519,7 @@ SedSetValue::getVariable(unsigned int n) const
 SedVariable*
 SedSetValue::getVariable(const std::string& sid)
 {
-	return mVariable.get(sid);
+	return mVariables.get(sid);
 }
 
 
@@ -529,7 +529,7 @@ SedSetValue::getVariable(const std::string& sid)
 const SedVariable*
 SedSetValue::getVariable(const std::string& sid) const
 {
-	return mVariable.get(sid);
+	return mVariables.get(sid);
 }
 
 
@@ -549,7 +549,7 @@ int
 SedSetValue::addVariable(const SedVariable* sv)
 {
 	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mVariable.append(sv);
+	mVariables.append(sv);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -562,7 +562,7 @@ SedSetValue::addVariable(const SedVariable* sv)
 unsigned int 
 SedSetValue::getNumVariables() const
 {
-	return mVariable.size();
+	return mVariables.size();
 }
 
 /**
@@ -577,7 +577,7 @@ SedVariable*
 SedSetValue::createVariable()
 {
 	SedVariable *temp = new SedVariable();
-	if (temp != NULL) mVariable.appendAndOwn(temp);
+	if (temp != NULL) mVariables.appendAndOwn(temp);
 	return temp;
 }
 
@@ -587,7 +587,7 @@ SedSetValue::createVariable()
 const SedListOfParameters*
 SedSetValue::getListOfParameters() const
 {
-	return &mParameter;
+	return &mParameters;
 }
 
 
@@ -597,7 +597,7 @@ SedSetValue::getListOfParameters() const
 SedParameter*
 SedSetValue::removeParameter(unsigned int n)
 {
-	return mParameter.remove(n);
+	return mParameters.remove(n);
 }
 
 
@@ -607,7 +607,7 @@ SedSetValue::removeParameter(unsigned int n)
 SedParameter*
 SedSetValue::removeParameter(const std::string& sid)
 {
-	return mParameter.remove(sid);
+	return mParameters.remove(sid);
 }
 
 
@@ -617,7 +617,7 @@ SedSetValue::removeParameter(const std::string& sid)
 SedParameter*
 SedSetValue::getParameter(unsigned int n)
 {
-	return mParameter.get(n);
+	return mParameters.get(n);
 }
 
 
@@ -627,7 +627,7 @@ SedSetValue::getParameter(unsigned int n)
 const SedParameter*
 SedSetValue::getParameter(unsigned int n) const
 {
-	return mParameter.get(n);
+	return mParameters.get(n);
 }
 
 
@@ -637,7 +637,7 @@ SedSetValue::getParameter(unsigned int n) const
 SedParameter*
 SedSetValue::getParameter(const std::string& sid)
 {
-	return mParameter.get(sid);
+	return mParameters.get(sid);
 }
 
 
@@ -647,7 +647,7 @@ SedSetValue::getParameter(const std::string& sid)
 const SedParameter*
 SedSetValue::getParameter(const std::string& sid) const
 {
-	return mParameter.get(sid);
+	return mParameters.get(sid);
 }
 
 
@@ -667,7 +667,7 @@ int
 SedSetValue::addParameter(const SedParameter* sp)
 {
 	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mParameter.append(sp);
+	mParameters.append(sp);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -680,7 +680,7 @@ SedSetValue::addParameter(const SedParameter* sp)
 unsigned int 
 SedSetValue::getNumParameters() const
 {
-	return mParameter.size();
+	return mParameters.size();
 }
 
 /**
@@ -695,7 +695,7 @@ SedParameter*
 SedSetValue::createParameter()
 {
 	SedParameter *temp = new SedParameter();
-	if (temp != NULL) mParameter.appendAndOwn(temp);
+	if (temp != NULL) mParameters.appendAndOwn(temp);
 	return temp;
 }
 
@@ -722,12 +722,12 @@ SedSetValue::createObject(XMLInputStream& stream)
 
 	if (name == "listOfVariables")
 	{
-		object = &mVariable;
+		object = &mVariables;
 	}
 
 	if (name == "listOfParameters")
 	{
-		object = &mParameter;
+		object = &mParameters;
 	}
 
 	connectToChild();
@@ -744,8 +744,8 @@ SedSetValue::connectToChild ()
 {
 	SedBase::connectToChild();
 
-	mVariable.connectToParent(this);
-	mParameter.connectToParent(this);
+	mVariables.connectToParent(this);
+	mParameters.connectToParent(this);
 }
 
 
@@ -797,11 +797,11 @@ SedSetValue::writeElements (XMLOutputStream& stream) const
 	SedBase::writeElements(stream);
 	if (getNumVariables() > 0)
 	{
-		mVariable.write(stream);
+		mVariables.write(stream);
 	}
 	if (getNumParameters() > 0)
 	{
-		mParameter.write(stream);
+		mParameters.write(stream);
 	}
 	if (isSetMath() == true)
 	{
@@ -838,8 +838,8 @@ void
 SedSetValue::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-	mVariable.setSedDocument(d);
-	mParameter.setSedDocument(d);
+	mVariables.setSedDocument(d);
+	mParameters.setSedDocument(d);
 }
 
 

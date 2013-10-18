@@ -67,7 +67,7 @@ protected:
 	std::string   mName;
 	std::string   mLanguage;
 	std::string   mSource;
-	SedListOfChanges   mChange;
+	SedListOfChanges   mChanges;
 
 
 public:

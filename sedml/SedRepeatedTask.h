@@ -65,12 +65,12 @@ class LIBSEDML_EXTERN SedRepeatedTask : public SedBase
 
 protected:
 
-	std::string   mRange;
+	std::string   mRangeId;
 	bool          mResetModel;
 	bool          mIsSetResetModel;
-	SedListOfRanges   mRange;
-	SedListOfTaskChanges   mTaskChange;
-	SedListOfSubTasks   mSubTask;
+	SedListOfRanges   mRanges;
+	SedListOfTaskChanges   mTaskChanges;
+	SedListOfSubTasks   mSubTasks;
 
 
 public:
@@ -128,27 +128,27 @@ public:
 
 
  	/**
-	 * Returns the value of the "range" attribute of this SedRepeatedTask.
+	 * Returns the value of the "rangeId" attribute of this SedRepeatedTask.
 	 *
-	 * @return the value of the "range" attribute of this SedRepeatedTask as a string.
+	 * @return the value of the "rangeId" attribute of this SedRepeatedTask as a string.
 	 */
-	virtual const std::string& getRange() const;
+	virtual const std::string& getRangeId() const;
 
 
 	/**
 	 * Predicate returning @c true or @c false depending on whether this
-	 * SedRepeatedTask's "range" attribute has been set.
+	 * SedRepeatedTask's "rangeId" attribute has been set.
 	 *
-	 * @return @c true if this SedRepeatedTask's "range" attribute has been set,
+	 * @return @c true if this SedRepeatedTask's "rangeId" attribute has been set,
 	 * otherwise @c false is returned.
 	 */
-	virtual bool isSetRange() const;
+	virtual bool isSetRangeId() const;
 
 
 	/**
-	 * Sets the value of the "range" attribute of this SedRepeatedTask.
+	 * Sets the value of the "rangeId" attribute of this SedRepeatedTask.
 	 *
-	 * @param range; const std::string& value of the "range" attribute to be set
+	 * @param rangeId; const std::string& value of the "rangeId" attribute to be set
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -157,11 +157,11 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	virtual int setRange(const std::string& range);
+	virtual int setRangeId(const std::string& rangeId);
 
 
 	/**
-	 * Unsets the value of the "range" attribute of this SedRepeatedTask.
+	 * Unsets the value of the "rangeId" attribute of this SedRepeatedTask.
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -170,7 +170,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_OPERATION_FAILED
 	 */
-	virtual int unsetRange();
+	virtual int unsetRangeId();
 
 
 	/**
@@ -824,7 +824,7 @@ SedRepeatedTask_clone(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 char *
-SedRepeatedTask_getRange(SedRepeatedTask_t * srt);
+SedRepeatedTask_getRangeId(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
@@ -834,7 +834,7 @@ SedRepeatedTask_getResetModel(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_isSetRange(SedRepeatedTask_t * srt);
+SedRepeatedTask_isSetRangeId(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
@@ -844,7 +844,7 @@ SedRepeatedTask_isSetResetModel(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_setRange(SedRepeatedTask_t * srt, const char * range);
+SedRepeatedTask_setRangeId(SedRepeatedTask_t * srt, const char * rangeId);
 
 
 LIBSEDML_EXTERN
@@ -854,7 +854,7 @@ SedRepeatedTask_setResetModel(SedRepeatedTask_t * srt, int resetModel);
 
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_unsetRange(SedRepeatedTask_t * srt);
+SedRepeatedTask_unsetRangeId(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN

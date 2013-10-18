@@ -7,6 +7,12 @@
 
 import sys
 
+def capp(word, plural=True):
+  capWord = word[0].upper() + word[1:len(word)]
+  if plural and word[len(word)-1] != 's':
+    capWord = capWord + 's'
+  return capWord
+
 def cap(word):
   capWord = word[0].upper() + word[1:len(word)]
   return capWord

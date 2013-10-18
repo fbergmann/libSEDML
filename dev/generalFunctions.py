@@ -247,9 +247,9 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('m{0}->write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\n\t}\n')
       if attributes[i]['type'] == 'lo_element':
-        outFile.write('\tif (getNum{0}s() > 0)\n'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('\tif (getNum{0}() > 0)\n'.format(strFunctions.capp(attributes[i]['name'])))
         outFile.write('\t{\n\t\t')
-        outFile.write('m{0}.write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
+        outFile.write('m{0}.write(stream);'.format(strFunctions.capp(attributes[i]['name'])))
         outFile.write('\n\t}\n')
   if hasMath == True:
     for i in range(0, len(attributes)):
@@ -297,7 +297,7 @@ def writeSetDocCPPCode(outFile, element,attribs, baseClass='SedBase'):
   for i in range (0, len(attribs)):
     if attribs[i]['type'] == 'lo_element' or ( attribs[i]['type'] == 'element' and attribs[i]['name'] != 'math'):
       if attribs[i]['reqd'] == True or attribs[i]['type'] == 'lo_element':
-        outFile.write('\tm{0}.setSedDocument(d);\n'.format(strFunctions.cap(attribs[i]['name'])))
+        outFile.write('\tm{0}.setSedDocument(d);\n'.format(strFunctions.capp(attribs[i]['name'], attribs[i]['type'] == 'lo_element')))
       else:
         outFile.write('\tif (m{0} != NULL)\n'.format(strFunctions.cap(attribs[i]['name'])))
         outFile.write('\t\tm{0}->setSedDocument(d);\n'.format(strFunctions.cap(attribs[i]['name'])))
@@ -505,9 +505,9 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
   for i in range (0, len(attribs)):
     current = attribs[i]
     if current['type'] == 'lo_element':
-      outFile.write('\tif (name == "listOf{0}s")\n'.format(strFunctions.cap(current['name'])))	
+      outFile.write('\tif (name == "listOf{0}")\n'.format(strFunctions.capp(current['name'])))	
       outFile.write('\t{\n')	
-      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.cap(current['name'])))	
+      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))	
       outFile.write('\t}\n\n')
     elif current['type'] == 'element' and (current['name'] !='Math' and current['name'] != 'math'):
       outFile.write('\tif (name == "{0}")\n'.format(current['name']))	
@@ -532,7 +532,7 @@ def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, h
   for i in range (0, len(attribs)):
     if attribs[i]['type'] == 'lo_element' or ( attribs[i]['type'] == 'element' and attribs[i]['name'] != 'math'):
       if attribs[i]['reqd'] == True or attribs[i]['type'] == 'lo_element':
-        outFile.write('\tm{0}.connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
+        outFile.write('\tm{0}.connectToParent(this);\n'.format(strFunctions.capp(attribs[i]['name'],attribs[i]['type'] == 'lo_element')))
       else:
         outFile.write('\tif (m{0} != NULL)\n'.format(strFunctions.cap(attribs[i]['name'])))
         outFile.write('\t\tm{0}->connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
@@ -596,7 +596,7 @@ def writeGetElementNameCPPCode(outFile, element, isSedListOf=False, dict=None):
   outFile.write('{\n')
   if dict != None and dict.has_key('elementName'):
     if isSedListOf:
-      outFile.write('\tstatic const string name = "listOf{0}s";\n'.format(strFunctions.cap(dict['elementName'])))
+      outFile.write('\tstatic const string name = "listOf{0}";\n'.format(strFunctions.capp(dict['elementName'])))
     else:
       outFile.write('\tstatic const string name = "{0}";\n'.format(dict['elementName']))
   else:
@@ -754,22 +754,6 @@ def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMa
   writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath, baseClass)
   writeAcceptCPPCode(outFile, element)
   writeSetDocCPPCode(outFile, element, attributes,baseClass)
-  #if hasChildren == True:
-  #  writeConnectCPPCode(outFile, element, attributes)
-
-
-def writeConnectCPPCode(outFile, element, attribs):
-  writeInternalStart(outFile)
-  outFile.write('/*\n')
-  outFile.write('   * Connects to child elements.\n')
-  outFile.write(' */\n')
-  outFile.write('void\n{0}::connectToChild()\n'.format(element))
-  outFile.write('{\n')
-  for i in range (0, len(attribs)):
-    if attribs[i]['type'] == 'lo_element':
-      outFile.write('  m{0}s.connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
-  outFile.write('}\n\n\n')
-  writeInternalEnd(outFile)
   
 def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, baseClass):
   writeAddExpectedCPPCode(outFile, element, attribs, baseClass)

@@ -44,7 +44,7 @@ def writeAtt(atttype, name, output, constType, pkg):
   elif atttype == 'element' or atttype == 'XMLNode*':
     output.write('\t, m{0} (NULL)\n'.format(strFunctions.cap(name)))
   elif atttype == 'lo_element':
-    output.write('\t, m{0} ('.format(strFunctions.cap(name)))
+    output.write('\t, m{0} ('.format(strFunctions.capp(name)))
     if constType == 0:
       output.write(')\n')
     elif constType == 1:
@@ -73,7 +73,7 @@ def writeCopyAttributes(attrs, output, tabs, name):
     elif atttype == 'XMLNode*':
       output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->clone() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     else:
-      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
+      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.capp(attrs[i]['name'], atttype == 'lo_element'), name))
     if atttype == 'double' or atttype == 'int' or atttype == 'uint' or atttype == 'bool':
       output.write('{0}mIsSet{1}  = {2}.mIsSet{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
 
@@ -378,7 +378,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('const {0}*\n'.format(loname))
   output.write('{0}::getListOf{1}s() const\n'.format(element, strFunctions.cap(attrib['name'])))
   output.write('{\n')
-  output.write('\treturn &m{0};\n'.format(capAttName))
+  output.write('\treturn &m{0};\n'.format(strFunctions.capp(attName)))
   output.write('}\n\n\n')
   writeListOfCode.writeRemoveFunctions(output, strFunctions.cap(attrib['name']), attrib['element'], True, element, capAttName)
   writeListOfCode.writeGetFunctions(output, strFunctions.cap(attrib['name']), attrib['element'], True, element, capAttName)
@@ -398,7 +398,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('{0}::add{1}(const {2}* {3})\n'.format(element, strFunctions.cap(attrib['name']), attrib['element'], strFunctions.objAbbrev(attrib['element'])))
   output.write('{\n')
   output.write('\tif({0} == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n'.format(strFunctions.objAbbrev(attrib['element'])))
-  output.write('\tm{0}.append({1});\n'.format(strFunctions.cap(attrib['name']),strFunctions.objAbbrev(attrib['element'])))
+  output.write('\tm{0}.append({1});\n'.format(strFunctions.capp(attrib['name']),strFunctions.objAbbrev(attrib['element'])))
   output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
   output.write('}\n\n\n')
   output.write('/**\n')
@@ -409,7 +409,7 @@ def writeListOfSubFunctions(attrib, output, element):
   output.write('unsigned int \n')
   output.write('{0}::getNum{1}s() const\n'.format(element, strFunctions.cap(attrib['name'])))
   output.write('{\n')
-  output.write('\treturn m{0}.size();\n'.format(strFunctions.cap(attrib['name'])))
+  output.write('\treturn m{0}.size();\n'.format(strFunctions.capp(attrib['name'])))
   output.write('}\n\n')
   if attrib.has_key('abstract') == False or (attrib.has_key('abstract') and attrib['abstract'] == False):
     output.write('/**\n')
@@ -424,7 +424,7 @@ def writeListOfSubFunctions(attrib, output, element):
     output.write('{0}::create{1}()\n'.format(element, strFunctions.cap(attrib['name'])))
     output.write('{\n')
     output.write('\t{0} *temp = new {0}();\n'.format(attrib['element']))
-    output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(strFunctions.cap(attrib['name'])))
+    output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(strFunctions.capp(attrib['name'])))
     output.write('\treturn temp;\n')
     output.write('}\n\n')
   elif attrib.has_key('concrete'):
@@ -441,7 +441,7 @@ def writeListOfSubFunctions(attrib, output, element):
       output.write('{0}::create{1}()\n'.format(element, strFunctions.cap(elem['name'])))
       output.write('{\n')
       output.write('\t{0} *temp = new {0}();\n'.format(elem['element']))
-      output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(strFunctions.cap(attrib['name'])))
+      output.write('\tif (temp != NULL) m{0}.appendAndOwn(temp);\n'.format(strFunctions.capp(attrib['name'])))
       output.write('\treturn temp;\n')
       output.write('}\n\n')
 

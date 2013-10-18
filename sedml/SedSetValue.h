@@ -64,8 +64,8 @@ class LIBSEDML_EXTERN SedSetValue : public SedBase
 
 protected:
 
-	SedListOfVariables   mVariable;
-	SedListOfParameters   mParameter;
+	SedListOfVariables   mVariables;
+	SedListOfParameters   mParameters;
 	std::string   mRange;
 	std::string   mModelReference;
 	std::string   mSymbol;

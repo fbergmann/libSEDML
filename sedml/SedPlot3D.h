@@ -64,7 +64,7 @@ class LIBSEDML_EXTERN SedPlot3D : public SedOutput
 
 protected:
 
-	SedListOfSurfaces   mSurface;
+	SedListOfSurfaces   mSurfaces;
 
 
 public:

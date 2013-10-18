@@ -66,8 +66,8 @@ protected:
 
 	std::string   mId;
 	std::string   mName;
-	SedListOfVariables   mVariable;
-	SedListOfParameters   mParameter;
+	SedListOfVariables   mVariables;
+	SedListOfParameters   mParameters;
 	ASTNode*      mMath;
 
 

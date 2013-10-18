@@ -49,7 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedAlgorithm::SedAlgorithm (unsigned int level, unsigned int version)
 	: SedBase(level, version)
-	, mAlgorithmParameter (level, version)
+	, mAlgorithmParameters (level, version)
 	, mKisaoID ("")
 
 {
@@ -66,7 +66,7 @@ SedAlgorithm::SedAlgorithm (unsigned int level, unsigned int version)
  */
 SedAlgorithm::SedAlgorithm (SedNamespaces* sedns)
 	: SedBase(sedns)
-	, mAlgorithmParameter (sedns)
+	, mAlgorithmParameters (sedns)
 	, mKisaoID ("")
 
 {
@@ -90,7 +90,7 @@ SedAlgorithm::SedAlgorithm (const SedAlgorithm& orig)
 	}
 	else
 	{
-		mAlgorithmParameter  = orig.mAlgorithmParameter;
+		mAlgorithmParameters  = orig.mAlgorithmParameters;
 		mKisaoID  = orig.mKisaoID;
 
 		// connect to child objects
@@ -112,7 +112,7 @@ SedAlgorithm::operator=(const SedAlgorithm& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
-		mAlgorithmParameter  = rhs.mAlgorithmParameter;
+		mAlgorithmParameters  = rhs.mAlgorithmParameters;
 		mKisaoID  = rhs.mKisaoID;
 
 		// connect to child objects
@@ -203,7 +203,7 @@ SedAlgorithm::unsetKisaoID()
 const SedListOfAlgorithmParameters*
 SedAlgorithm::getListOfAlgorithmParameters() const
 {
-	return &mAlgorithmParameter;
+	return &mAlgorithmParameters;
 }
 
 
@@ -213,7 +213,7 @@ SedAlgorithm::getListOfAlgorithmParameters() const
 SedAlgorithmParameter*
 SedAlgorithm::removeAlgorithmParameter(unsigned int n)
 {
-	return mAlgorithmParameter.remove(n);
+	return mAlgorithmParameters.remove(n);
 }
 
 
@@ -223,7 +223,7 @@ SedAlgorithm::removeAlgorithmParameter(unsigned int n)
 SedAlgorithmParameter*
 SedAlgorithm::removeAlgorithmParameter(const std::string& sid)
 {
-	return mAlgorithmParameter.remove(sid);
+	return mAlgorithmParameters.remove(sid);
 }
 
 
@@ -233,7 +233,7 @@ SedAlgorithm::removeAlgorithmParameter(const std::string& sid)
 SedAlgorithmParameter*
 SedAlgorithm::getAlgorithmParameter(unsigned int n)
 {
-	return mAlgorithmParameter.get(n);
+	return mAlgorithmParameters.get(n);
 }
 
 
@@ -243,7 +243,7 @@ SedAlgorithm::getAlgorithmParameter(unsigned int n)
 const SedAlgorithmParameter*
 SedAlgorithm::getAlgorithmParameter(unsigned int n) const
 {
-	return mAlgorithmParameter.get(n);
+	return mAlgorithmParameters.get(n);
 }
 
 
@@ -253,7 +253,7 @@ SedAlgorithm::getAlgorithmParameter(unsigned int n) const
 SedAlgorithmParameter*
 SedAlgorithm::getAlgorithmParameter(const std::string& sid)
 {
-	return mAlgorithmParameter.get(sid);
+	return mAlgorithmParameters.get(sid);
 }
 
 
@@ -263,7 +263,7 @@ SedAlgorithm::getAlgorithmParameter(const std::string& sid)
 const SedAlgorithmParameter*
 SedAlgorithm::getAlgorithmParameter(const std::string& sid) const
 {
-	return mAlgorithmParameter.get(sid);
+	return mAlgorithmParameters.get(sid);
 }
 
 
@@ -283,7 +283,7 @@ int
 SedAlgorithm::addAlgorithmParameter(const SedAlgorithmParameter* sap)
 {
 	if(sap == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mAlgorithmParameter.append(sap);
+	mAlgorithmParameters.append(sap);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -296,7 +296,7 @@ SedAlgorithm::addAlgorithmParameter(const SedAlgorithmParameter* sap)
 unsigned int 
 SedAlgorithm::getNumAlgorithmParameters() const
 {
-	return mAlgorithmParameter.size();
+	return mAlgorithmParameters.size();
 }
 
 /**
@@ -311,7 +311,7 @@ SedAlgorithmParameter*
 SedAlgorithm::createAlgorithmParameter()
 {
 	SedAlgorithmParameter *temp = new SedAlgorithmParameter();
-	if (temp != NULL) mAlgorithmParameter.appendAndOwn(temp);
+	if (temp != NULL) mAlgorithmParameters.appendAndOwn(temp);
 	return temp;
 }
 
@@ -338,7 +338,7 @@ SedAlgorithm::createObject(XMLInputStream& stream)
 
 	if (name == "listOfAlgorithmParameters")
 	{
-		object = &mAlgorithmParameter;
+		object = &mAlgorithmParameters;
 	}
 
 	connectToChild();
@@ -355,7 +355,7 @@ SedAlgorithm::connectToChild ()
 {
 	SedBase::connectToChild();
 
-	mAlgorithmParameter.connectToParent(this);
+	mAlgorithmParameters.connectToParent(this);
 }
 
 
@@ -407,7 +407,7 @@ SedAlgorithm::writeElements (XMLOutputStream& stream) const
 	SedBase::writeElements(stream);
 	if (getNumAlgorithmParameters() > 0)
 	{
-		mAlgorithmParameter.write(stream);
+		mAlgorithmParameters.write(stream);
 	}
 }
 
@@ -440,7 +440,7 @@ void
 SedAlgorithm::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-	mAlgorithmParameter.setSedDocument(d);
+	mAlgorithmParameters.setSedDocument(d);
 }
 
 

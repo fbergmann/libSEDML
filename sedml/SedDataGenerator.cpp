@@ -53,8 +53,8 @@ SedDataGenerator::SedDataGenerator (unsigned int level, unsigned int version)
 	: SedBase(level, version)
 	, mId ("")
 	, mName ("")
-	, mVariable (level, version)
-	, mParameter (level, version)
+	, mVariables (level, version)
+	, mParameters (level, version)
 	, mMath (NULL)
 
 {
@@ -73,8 +73,8 @@ SedDataGenerator::SedDataGenerator (SedNamespaces* sedns)
 	: SedBase(sedns)
 	, mId ("")
 	, mName ("")
-	, mVariable (sedns)
-	, mParameter (sedns)
+	, mVariables (sedns)
+	, mParameters (sedns)
 	, mMath (NULL)
 
 {
@@ -100,8 +100,8 @@ SedDataGenerator::SedDataGenerator (const SedDataGenerator& orig)
 	{
 		mId  = orig.mId;
 		mName  = orig.mName;
-		mVariable  = orig.mVariable;
-		mParameter  = orig.mParameter;
+		mVariables  = orig.mVariables;
+		mParameters  = orig.mParameters;
 		mMath  = orig.mMath != NULL ? orig.mMath->deepCopy() : NULL;
 
 		// connect to child objects
@@ -125,8 +125,8 @@ SedDataGenerator::operator=(const SedDataGenerator& rhs)
 		SedBase::operator=(rhs);
 		mId  = rhs.mId;
 		mName  = rhs.mName;
-		mVariable  = rhs.mVariable;
-		mParameter  = rhs.mParameter;
+		mVariables  = rhs.mVariables;
+		mParameters  = rhs.mParameters;
 		mMath  = rhs.mMath != NULL ? rhs.mMath->deepCopy() : NULL;
 
 		// connect to child objects
@@ -331,7 +331,7 @@ SedDataGenerator::unsetMath()
 const SedListOfVariables*
 SedDataGenerator::getListOfVariables() const
 {
-	return &mVariable;
+	return &mVariables;
 }
 
 
@@ -341,7 +341,7 @@ SedDataGenerator::getListOfVariables() const
 SedVariable*
 SedDataGenerator::removeVariable(unsigned int n)
 {
-	return mVariable.remove(n);
+	return mVariables.remove(n);
 }
 
 
@@ -351,7 +351,7 @@ SedDataGenerator::removeVariable(unsigned int n)
 SedVariable*
 SedDataGenerator::removeVariable(const std::string& sid)
 {
-	return mVariable.remove(sid);
+	return mVariables.remove(sid);
 }
 
 
@@ -361,7 +361,7 @@ SedDataGenerator::removeVariable(const std::string& sid)
 SedVariable*
 SedDataGenerator::getVariable(unsigned int n)
 {
-	return mVariable.get(n);
+	return mVariables.get(n);
 }
 
 
@@ -371,7 +371,7 @@ SedDataGenerator::getVariable(unsigned int n)
 const SedVariable*
 SedDataGenerator::getVariable(unsigned int n) const
 {
-	return mVariable.get(n);
+	return mVariables.get(n);
 }
 
 
@@ -381,7 +381,7 @@ SedDataGenerator::getVariable(unsigned int n) const
 SedVariable*
 SedDataGenerator::getVariable(const std::string& sid)
 {
-	return mVariable.get(sid);
+	return mVariables.get(sid);
 }
 
 
@@ -391,7 +391,7 @@ SedDataGenerator::getVariable(const std::string& sid)
 const SedVariable*
 SedDataGenerator::getVariable(const std::string& sid) const
 {
-	return mVariable.get(sid);
+	return mVariables.get(sid);
 }
 
 
@@ -411,7 +411,7 @@ int
 SedDataGenerator::addVariable(const SedVariable* sv)
 {
 	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mVariable.append(sv);
+	mVariables.append(sv);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -424,7 +424,7 @@ SedDataGenerator::addVariable(const SedVariable* sv)
 unsigned int 
 SedDataGenerator::getNumVariables() const
 {
-	return mVariable.size();
+	return mVariables.size();
 }
 
 /**
@@ -439,7 +439,7 @@ SedVariable*
 SedDataGenerator::createVariable()
 {
 	SedVariable *temp = new SedVariable();
-	if (temp != NULL) mVariable.appendAndOwn(temp);
+	if (temp != NULL) mVariables.appendAndOwn(temp);
 	return temp;
 }
 
@@ -449,7 +449,7 @@ SedDataGenerator::createVariable()
 const SedListOfParameters*
 SedDataGenerator::getListOfParameters() const
 {
-	return &mParameter;
+	return &mParameters;
 }
 
 
@@ -459,7 +459,7 @@ SedDataGenerator::getListOfParameters() const
 SedParameter*
 SedDataGenerator::removeParameter(unsigned int n)
 {
-	return mParameter.remove(n);
+	return mParameters.remove(n);
 }
 
 
@@ -469,7 +469,7 @@ SedDataGenerator::removeParameter(unsigned int n)
 SedParameter*
 SedDataGenerator::removeParameter(const std::string& sid)
 {
-	return mParameter.remove(sid);
+	return mParameters.remove(sid);
 }
 
 
@@ -479,7 +479,7 @@ SedDataGenerator::removeParameter(const std::string& sid)
 SedParameter*
 SedDataGenerator::getParameter(unsigned int n)
 {
-	return mParameter.get(n);
+	return mParameters.get(n);
 }
 
 
@@ -489,7 +489,7 @@ SedDataGenerator::getParameter(unsigned int n)
 const SedParameter*
 SedDataGenerator::getParameter(unsigned int n) const
 {
-	return mParameter.get(n);
+	return mParameters.get(n);
 }
 
 
@@ -499,7 +499,7 @@ SedDataGenerator::getParameter(unsigned int n) const
 SedParameter*
 SedDataGenerator::getParameter(const std::string& sid)
 {
-	return mParameter.get(sid);
+	return mParameters.get(sid);
 }
 
 
@@ -509,7 +509,7 @@ SedDataGenerator::getParameter(const std::string& sid)
 const SedParameter*
 SedDataGenerator::getParameter(const std::string& sid) const
 {
-	return mParameter.get(sid);
+	return mParameters.get(sid);
 }
 
 
@@ -529,7 +529,7 @@ int
 SedDataGenerator::addParameter(const SedParameter* sp)
 {
 	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mParameter.append(sp);
+	mParameters.append(sp);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -542,7 +542,7 @@ SedDataGenerator::addParameter(const SedParameter* sp)
 unsigned int 
 SedDataGenerator::getNumParameters() const
 {
-	return mParameter.size();
+	return mParameters.size();
 }
 
 /**
@@ -557,7 +557,7 @@ SedParameter*
 SedDataGenerator::createParameter()
 {
 	SedParameter *temp = new SedParameter();
-	if (temp != NULL) mParameter.appendAndOwn(temp);
+	if (temp != NULL) mParameters.appendAndOwn(temp);
 	return temp;
 }
 
@@ -584,12 +584,12 @@ SedDataGenerator::createObject(XMLInputStream& stream)
 
 	if (name == "listOfVariables")
 	{
-		object = &mVariable;
+		object = &mVariables;
 	}
 
 	if (name == "listOfParameters")
 	{
-		object = &mParameter;
+		object = &mParameters;
 	}
 
 	connectToChild();
@@ -606,8 +606,8 @@ SedDataGenerator::connectToChild ()
 {
 	SedBase::connectToChild();
 
-	mVariable.connectToParent(this);
-	mParameter.connectToParent(this);
+	mVariables.connectToParent(this);
+	mParameters.connectToParent(this);
 }
 
 
@@ -659,11 +659,11 @@ SedDataGenerator::writeElements (XMLOutputStream& stream) const
 	SedBase::writeElements(stream);
 	if (getNumVariables() > 0)
 	{
-		mVariable.write(stream);
+		mVariables.write(stream);
 	}
 	if (getNumParameters() > 0)
 	{
-		mParameter.write(stream);
+		mParameters.write(stream);
 	}
 	if (isSetMath() == true)
 	{
@@ -700,8 +700,8 @@ void
 SedDataGenerator::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-	mVariable.setSedDocument(d);
-	mParameter.setSedDocument(d);
+	mVariables.setSedDocument(d);
+	mParameters.setSedDocument(d);
 }
 
 

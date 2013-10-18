@@ -65,8 +65,8 @@ class LIBSEDML_EXTERN SedComputeChange : public SedChange
 
 protected:
 
-	SedListOfVariables   mVariable;
-	SedListOfParameters   mParameter;
+	SedListOfVariables   mVariables;
+	SedListOfParameters   mParameters;
 	ASTNode*      mMath;
 
 

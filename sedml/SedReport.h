@@ -64,7 +64,7 @@ class LIBSEDML_EXTERN SedReport : public SedOutput
 
 protected:
 
-	SedListOfDataSets   mDataSet;
+	SedListOfDataSets   mDataSets;
 
 
 public:

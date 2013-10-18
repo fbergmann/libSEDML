@@ -51,8 +51,8 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedComputeChange::SedComputeChange (unsigned int level, unsigned int version)
 	: SedChange(level, version)
-	, mVariable (level, version)
-	, mParameter (level, version)
+	, mVariables (level, version)
+	, mParameters (level, version)
 	, mMath (NULL)
 
 {
@@ -69,8 +69,8 @@ SedComputeChange::SedComputeChange (unsigned int level, unsigned int version)
  */
 SedComputeChange::SedComputeChange (SedNamespaces* sedns)
 	: SedChange(sedns)
-	, mVariable (sedns)
-	, mParameter (sedns)
+	, mVariables (sedns)
+	, mParameters (sedns)
 	, mMath (NULL)
 
 {
@@ -94,8 +94,8 @@ SedComputeChange::SedComputeChange (const SedComputeChange& orig)
 	}
 	else
 	{
-		mVariable  = orig.mVariable;
-		mParameter  = orig.mParameter;
+		mVariables  = orig.mVariables;
+		mParameters  = orig.mParameters;
 		mMath  = orig.mMath != NULL ? orig.mMath->deepCopy() : NULL;
 
 		// connect to child objects
@@ -117,8 +117,8 @@ SedComputeChange::operator=(const SedComputeChange& rhs)
 	else if (&rhs != this)
 	{
 		SedChange::operator=(rhs);
-		mVariable  = rhs.mVariable;
-		mParameter  = rhs.mParameter;
+		mVariables  = rhs.mVariables;
+		mParameters  = rhs.mParameters;
 		mMath  = rhs.mMath != NULL ? rhs.mMath->deepCopy() : NULL;
 
 		// connect to child objects
@@ -217,7 +217,7 @@ SedComputeChange::unsetMath()
 const SedListOfVariables*
 SedComputeChange::getListOfVariables() const
 {
-	return &mVariable;
+	return &mVariables;
 }
 
 
@@ -227,7 +227,7 @@ SedComputeChange::getListOfVariables() const
 SedVariable*
 SedComputeChange::removeVariable(unsigned int n)
 {
-	return mVariable.remove(n);
+	return mVariables.remove(n);
 }
 
 
@@ -237,7 +237,7 @@ SedComputeChange::removeVariable(unsigned int n)
 SedVariable*
 SedComputeChange::removeVariable(const std::string& sid)
 {
-	return mVariable.remove(sid);
+	return mVariables.remove(sid);
 }
 
 
@@ -247,7 +247,7 @@ SedComputeChange::removeVariable(const std::string& sid)
 SedVariable*
 SedComputeChange::getVariable(unsigned int n)
 {
-	return mVariable.get(n);
+	return mVariables.get(n);
 }
 
 
@@ -257,7 +257,7 @@ SedComputeChange::getVariable(unsigned int n)
 const SedVariable*
 SedComputeChange::getVariable(unsigned int n) const
 {
-	return mVariable.get(n);
+	return mVariables.get(n);
 }
 
 
@@ -267,7 +267,7 @@ SedComputeChange::getVariable(unsigned int n) const
 SedVariable*
 SedComputeChange::getVariable(const std::string& sid)
 {
-	return mVariable.get(sid);
+	return mVariables.get(sid);
 }
 
 
@@ -277,7 +277,7 @@ SedComputeChange::getVariable(const std::string& sid)
 const SedVariable*
 SedComputeChange::getVariable(const std::string& sid) const
 {
-	return mVariable.get(sid);
+	return mVariables.get(sid);
 }
 
 
@@ -297,7 +297,7 @@ int
 SedComputeChange::addVariable(const SedVariable* sv)
 {
 	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mVariable.append(sv);
+	mVariables.append(sv);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -310,7 +310,7 @@ SedComputeChange::addVariable(const SedVariable* sv)
 unsigned int 
 SedComputeChange::getNumVariables() const
 {
-	return mVariable.size();
+	return mVariables.size();
 }
 
 /**
@@ -325,7 +325,7 @@ SedVariable*
 SedComputeChange::createVariable()
 {
 	SedVariable *temp = new SedVariable();
-	if (temp != NULL) mVariable.appendAndOwn(temp);
+	if (temp != NULL) mVariables.appendAndOwn(temp);
 	return temp;
 }
 
@@ -335,7 +335,7 @@ SedComputeChange::createVariable()
 const SedListOfParameters*
 SedComputeChange::getListOfParameters() const
 {
-	return &mParameter;
+	return &mParameters;
 }
 
 
@@ -345,7 +345,7 @@ SedComputeChange::getListOfParameters() const
 SedParameter*
 SedComputeChange::removeParameter(unsigned int n)
 {
-	return mParameter.remove(n);
+	return mParameters.remove(n);
 }
 
 
@@ -355,7 +355,7 @@ SedComputeChange::removeParameter(unsigned int n)
 SedParameter*
 SedComputeChange::removeParameter(const std::string& sid)
 {
-	return mParameter.remove(sid);
+	return mParameters.remove(sid);
 }
 
 
@@ -365,7 +365,7 @@ SedComputeChange::removeParameter(const std::string& sid)
 SedParameter*
 SedComputeChange::getParameter(unsigned int n)
 {
-	return mParameter.get(n);
+	return mParameters.get(n);
 }
 
 
@@ -375,7 +375,7 @@ SedComputeChange::getParameter(unsigned int n)
 const SedParameter*
 SedComputeChange::getParameter(unsigned int n) const
 {
-	return mParameter.get(n);
+	return mParameters.get(n);
 }
 
 
@@ -385,7 +385,7 @@ SedComputeChange::getParameter(unsigned int n) const
 SedParameter*
 SedComputeChange::getParameter(const std::string& sid)
 {
-	return mParameter.get(sid);
+	return mParameters.get(sid);
 }
 
 
@@ -395,7 +395,7 @@ SedComputeChange::getParameter(const std::string& sid)
 const SedParameter*
 SedComputeChange::getParameter(const std::string& sid) const
 {
-	return mParameter.get(sid);
+	return mParameters.get(sid);
 }
 
 
@@ -415,7 +415,7 @@ int
 SedComputeChange::addParameter(const SedParameter* sp)
 {
 	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mParameter.append(sp);
+	mParameters.append(sp);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -428,7 +428,7 @@ SedComputeChange::addParameter(const SedParameter* sp)
 unsigned int 
 SedComputeChange::getNumParameters() const
 {
-	return mParameter.size();
+	return mParameters.size();
 }
 
 /**
@@ -443,7 +443,7 @@ SedParameter*
 SedComputeChange::createParameter()
 {
 	SedParameter *temp = new SedParameter();
-	if (temp != NULL) mParameter.appendAndOwn(temp);
+	if (temp != NULL) mParameters.appendAndOwn(temp);
 	return temp;
 }
 
@@ -470,12 +470,12 @@ SedComputeChange::createObject(XMLInputStream& stream)
 
 	if (name == "listOfVariables")
 	{
-		object = &mVariable;
+		object = &mVariables;
 	}
 
 	if (name == "listOfParameters")
 	{
-		object = &mParameter;
+		object = &mParameters;
 	}
 
 	connectToChild();
@@ -492,8 +492,8 @@ SedComputeChange::connectToChild ()
 {
 	SedChange::connectToChild();
 
-	mVariable.connectToParent(this);
-	mParameter.connectToParent(this);
+	mVariables.connectToParent(this);
+	mParameters.connectToParent(this);
 }
 
 
@@ -542,11 +542,11 @@ SedComputeChange::writeElements (XMLOutputStream& stream) const
 	SedChange::writeElements(stream);
 	if (getNumVariables() > 0)
 	{
-		mVariable.write(stream);
+		mVariables.write(stream);
 	}
 	if (getNumParameters() > 0)
 	{
-		mParameter.write(stream);
+		mParameters.write(stream);
 	}
 	if (isSetMath() == true)
 	{
@@ -583,8 +583,8 @@ void
 SedComputeChange::setSedDocument (SedDocument* d)
 {
 	SedChange::setSedDocument(d);
-	mVariable.setSedDocument(d);
-	mParameter.setSedDocument(d);
+	mVariables.setSedDocument(d);
+	mParameters.setSedDocument(d);
 }
 
 

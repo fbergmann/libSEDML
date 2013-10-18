@@ -71,11 +71,11 @@ protected:
 	bool          mIsSetLevel;
 	int           mVersion;
 	bool          mIsSetVersion;
-	SedListOfSimulations   mSimulation;
-	SedListOfModels   mModel;
-	SedListOfTasks   mTask;
-	SedListOfDataGenerators   mDataGenerator;
-	SedListOfOutputs   mOutput;
+	SedListOfSimulations   mSimulations;
+	SedListOfModels   mModels;
+	SedListOfTasks   mTasks;
+	SedListOfDataGenerators   mDataGenerators;
+	SedListOfOutputs   mOutputs;
 
 
 public:
@@ -605,9 +605,20 @@ public:
 	 *
 	 * @return a new SedTask object instance
 	 *
-	 * @see addTask(const SedTask* st)
+	 * @see addSedTask(const SedTask* st)
 	 */
 	SedTask* createTask();
+
+
+	/**
+	 * Creates a new SedRepeatedTask object, adds it to this SedDocuments
+	 * SedListOfTasks and returns the SedRepeatedTask object created. 
+	 *
+	 * @return a new SedRepeatedTask object instance
+	 *
+	 * @see addSedTask(const SedTask* st)
+	 */
+	SedRepeatedTask* createRepeatedTask();
 
 
 	/**
@@ -1336,6 +1347,11 @@ SedDocument_addTask(SedDocument_t * sd, SedTask_t * st);
 LIBSEDML_EXTERN
 SedTask_t *
 SedDocument_createTask(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+SedRepeatedTask_t *
+SedDocument_createRepeatedTask(SedDocument_t * sd);
 
 
 LIBSEDML_EXTERN

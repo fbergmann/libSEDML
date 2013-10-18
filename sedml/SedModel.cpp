@@ -53,7 +53,7 @@ SedModel::SedModel (unsigned int level, unsigned int version)
 	, mName ("")
 	, mLanguage ("")
 	, mSource ("")
-	, mChange (level, version)
+	, mChanges (level, version)
 
 {
 	// set an SedNamespaces derived object of this package
@@ -73,7 +73,7 @@ SedModel::SedModel (SedNamespaces* sedns)
 	, mName ("")
 	, mLanguage ("")
 	, mSource ("")
-	, mChange (sedns)
+	, mChanges (sedns)
 
 {
 	// set the element namespace of this object
@@ -100,7 +100,7 @@ SedModel::SedModel (const SedModel& orig)
 		mName  = orig.mName;
 		mLanguage  = orig.mLanguage;
 		mSource  = orig.mSource;
-		mChange  = orig.mChange;
+		mChanges  = orig.mChanges;
 
 		// connect to child objects
 		connectToChild();
@@ -125,7 +125,7 @@ SedModel::operator=(const SedModel& rhs)
 		mName  = rhs.mName;
 		mLanguage  = rhs.mLanguage;
 		mSource  = rhs.mSource;
-		mChange  = rhs.mChange;
+		mChanges  = rhs.mChanges;
 
 		// connect to child objects
 		connectToChild();
@@ -378,7 +378,7 @@ SedModel::unsetSource()
 const SedListOfChanges*
 SedModel::getListOfChanges() const
 {
-	return &mChange;
+	return &mChanges;
 }
 
 
@@ -388,7 +388,7 @@ SedModel::getListOfChanges() const
 SedChange*
 SedModel::removeChange(unsigned int n)
 {
-	return mChange.remove(n);
+	return mChanges.remove(n);
 }
 
 
@@ -398,7 +398,7 @@ SedModel::removeChange(unsigned int n)
 SedChange*
 SedModel::removeChange(const std::string& sid)
 {
-	return mChange.remove(sid);
+	return mChanges.remove(sid);
 }
 
 
@@ -408,7 +408,7 @@ SedModel::removeChange(const std::string& sid)
 SedChange*
 SedModel::getChange(unsigned int n)
 {
-	return mChange.get(n);
+	return mChanges.get(n);
 }
 
 
@@ -418,7 +418,7 @@ SedModel::getChange(unsigned int n)
 const SedChange*
 SedModel::getChange(unsigned int n) const
 {
-	return mChange.get(n);
+	return mChanges.get(n);
 }
 
 
@@ -428,7 +428,7 @@ SedModel::getChange(unsigned int n) const
 SedChange*
 SedModel::getChange(const std::string& sid)
 {
-	return mChange.get(sid);
+	return mChanges.get(sid);
 }
 
 
@@ -438,7 +438,7 @@ SedModel::getChange(const std::string& sid)
 const SedChange*
 SedModel::getChange(const std::string& sid) const
 {
-	return mChange.get(sid);
+	return mChanges.get(sid);
 }
 
 
@@ -458,7 +458,7 @@ int
 SedModel::addChange(const SedChange* sc)
 {
 	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mChange.append(sc);
+	mChanges.append(sc);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -471,7 +471,7 @@ SedModel::addChange(const SedChange* sc)
 unsigned int 
 SedModel::getNumChanges() const
 {
-	return mChange.size();
+	return mChanges.size();
 }
 
 /**
@@ -486,7 +486,7 @@ SedRemoveXML*
 SedModel::createRemoveXML()
 {
 	SedRemoveXML *temp = new SedRemoveXML();
-	if (temp != NULL) mChange.appendAndOwn(temp);
+	if (temp != NULL) mChanges.appendAndOwn(temp);
 	return temp;
 }
 
@@ -502,7 +502,7 @@ SedAddXML*
 SedModel::createAddXML()
 {
 	SedAddXML *temp = new SedAddXML();
-	if (temp != NULL) mChange.appendAndOwn(temp);
+	if (temp != NULL) mChanges.appendAndOwn(temp);
 	return temp;
 }
 
@@ -518,7 +518,7 @@ SedChangeXML*
 SedModel::createChangeXML()
 {
 	SedChangeXML *temp = new SedChangeXML();
-	if (temp != NULL) mChange.appendAndOwn(temp);
+	if (temp != NULL) mChanges.appendAndOwn(temp);
 	return temp;
 }
 
@@ -534,7 +534,7 @@ SedChangeAttribute*
 SedModel::createChangeAttribute()
 {
 	SedChangeAttribute *temp = new SedChangeAttribute();
-	if (temp != NULL) mChange.appendAndOwn(temp);
+	if (temp != NULL) mChanges.appendAndOwn(temp);
 	return temp;
 }
 
@@ -550,7 +550,7 @@ SedComputeChange*
 SedModel::createComputeChange()
 {
 	SedComputeChange *temp = new SedComputeChange();
-	if (temp != NULL) mChange.appendAndOwn(temp);
+	if (temp != NULL) mChanges.appendAndOwn(temp);
 	return temp;
 }
 
@@ -577,7 +577,7 @@ SedModel::createObject(XMLInputStream& stream)
 
 	if (name == "listOfChanges")
 	{
-		object = &mChange;
+		object = &mChanges;
 	}
 
 	connectToChild();
@@ -594,7 +594,7 @@ SedModel::connectToChild ()
 {
 	SedBase::connectToChild();
 
-	mChange.connectToParent(this);
+	mChanges.connectToParent(this);
 }
 
 
@@ -649,7 +649,7 @@ SedModel::writeElements (XMLOutputStream& stream) const
 	SedBase::writeElements(stream);
 	if (getNumChanges() > 0)
 	{
-		mChange.write(stream);
+		mChanges.write(stream);
 	}
 }
 
@@ -682,7 +682,7 @@ void
 SedModel::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-	mChange.setSedDocument(d);
+	mChanges.setSedDocument(d);
 }
 
 

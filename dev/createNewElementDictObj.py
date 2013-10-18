@@ -67,7 +67,18 @@ def createSedDocument() :
 						   ]
 			  })
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedModel'})
-  lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'SedTask'})
+  lo3 = dict({
+              'type': 'lo_element', 
+			  'reqd' : False, 
+			  'name':'task', 
+			  'element': 'SedTask',
+			  'abstract':True,
+			  'concrete': [
+				           dict({ 'name':'task', 'element':'SedTask'}),
+				           dict({ 'name':'repeatedTask', 'element':'SedRepeatedTask'}),
+ 					    ]
+			  })
+  #lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'SedTask'})
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'SedDataGenerator'})
   lo5 = dict({
               'type': 'lo_element', 
@@ -508,7 +519,7 @@ def createSedTask() :
   return element
 
 def createSedRepeatedTask():
-    a1 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'range'})
+    a1 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'rangeId'})
     a2 = dict({'type': 'bool', 'reqd' : False, 'name':'resetModel'})
 
     lo1 = dict({

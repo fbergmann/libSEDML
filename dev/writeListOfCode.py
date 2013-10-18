@@ -49,7 +49,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement="", na
     output.write('{0}*\n'.format(type))
     output.write('{0}::get{1}(unsigned int n)\n'.format(topelement, element))
     output.write('{\n' )
-    output.write('\treturn m{0}.get(n);\n'.format(name))
+    output.write('\treturn m{0}.get(n);\n'.format(strFunctions.capp(name)))
     output.write('}\n\n\n')
   else:
     output.write(' * Get a {0} from the {1} by index.\n'.format(element, listOf))
@@ -66,7 +66,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement="", na
     output.write('const {0}*\n'.format(type))
     output.write('{0}::get{1}(unsigned int n) const\n'.format(topelement, element))
     output.write('{\n' )
-    output.write('\treturn m{0}.get(n);\n'.format(name))
+    output.write('\treturn m{0}.get(n);\n'.format(strFunctions.capp(name)))
     output.write('}\n\n\n')
   else:
     output.write(' * Get a {0} from the {1} by index.\n'.format(element, listOf))
@@ -83,7 +83,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement="", na
     output.write('{0}*\n'.format(type))
     output.write('{0}::get{1}(const std::string& sid)\n'.format(topelement, element))
     output.write('{\n' )
-    output.write('\treturn m{0}.get(sid);\n'.format(name))
+    output.write('\treturn m{0}.get(sid);\n'.format(strFunctions.capp(name)))
     output.write('}\n\n\n')
   else:
     output.write(' * Get a {0} from the {1} by id.\n'.format(element, listOf))
@@ -101,7 +101,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement="", na
     output.write('const {0}*\n'.format(type))
     output.write('{0}::get{1}(const std::string& sid) const\n'.format(topelement, element))
     output.write('{\n' )
-    output.write('\treturn m{0}.get(sid);\n'.format(name))
+    output.write('\treturn m{0}.get(sid);\n'.format(strFunctions.capp(name)))
     output.write('}\n\n\n')
   else:
     output.write(' * Get a {0} from the {1} by id.\n'.format(element, listOf))
@@ -123,7 +123,7 @@ def writeRemoveFunctions(output, element, type, subelement=False, topelement="",
     output.write('{0}*\n'.format(type))
     output.write('{0}::remove{1}(unsigned int n)\n'.format(topelement, element))
     output.write('{\n' )
-    output.write('\treturn m{0}.remove(n);\n'.format(name))
+    output.write('\treturn m{0}.remove(n);\n'.format(strFunctions.capp(name)))
     output.write('}\n\n\n')
   else:
     output.write(' * Removes the nth {0} from this {1}\n'.format(element, listOf))
@@ -139,7 +139,7 @@ def writeRemoveFunctions(output, element, type, subelement=False, topelement="",
     output.write('{0}*\n'.format(type))
     output.write('{0}::remove{1}(const std::string& sid)\n'.format(topelement, element))
     output.write('{\n' )
-    output.write('\treturn m{0}.remove(sid);\n'.format(name))
+    output.write('\treturn m{0}.remove(sid);\n'.format(strFunctions.capp(name)))
     output.write('}\n\n\n')
   else:
     output.write(' * Removes the {0} from this {1} with the given identifier\n'.format(element, listOf))

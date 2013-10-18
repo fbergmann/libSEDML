@@ -53,11 +53,11 @@ SedDocument::SedDocument (unsigned int level, unsigned int version)
 	, mIsSetLevel (false)
 	, mVersion (SEDML_INT_MAX)
 	, mIsSetVersion (false)
-	, mSimulation (level, version)
-	, mModel (level, version)
-	, mTask (level, version)
-	, mDataGenerator (level, version)
-	, mOutput (level, version)
+	, mSimulations (level, version)
+	, mModels (level, version)
+	, mTasks (level, version)
+	, mDataGenerators (level, version)
+	, mOutputs (level, version)
 
 {
 	setSedDocument(this);
@@ -79,11 +79,11 @@ SedDocument::SedDocument (SedNamespaces* sedns)
 	, mIsSetLevel (false)
 	, mVersion (SEDML_INT_MAX)
 	, mIsSetVersion (false)
-	, mSimulation (sedns)
-	, mModel (sedns)
-	, mTask (sedns)
-	, mDataGenerator (sedns)
-	, mOutput (sedns)
+	, mSimulations (sedns)
+	, mModels (sedns)
+	, mTasks (sedns)
+	, mDataGenerators (sedns)
+	, mOutputs (sedns)
 
 {
 	setSedDocument(this);
@@ -114,11 +114,11 @@ SedDocument::SedDocument (const SedDocument& orig)
 		mIsSetLevel  = orig.mIsSetLevel;
 		mVersion  = orig.mVersion;
 		mIsSetVersion  = orig.mIsSetVersion;
-		mSimulation  = orig.mSimulation;
-		mModel  = orig.mModel;
-		mTask  = orig.mTask;
-		mDataGenerator  = orig.mDataGenerator;
-		mOutput  = orig.mOutput;
+		mSimulations  = orig.mSimulations;
+		mModels  = orig.mModels;
+		mTasks  = orig.mTasks;
+		mDataGenerators  = orig.mDataGenerators;
+		mOutputs  = orig.mOutputs;
 
 		// connect to child objects
 		connectToChild();
@@ -146,11 +146,11 @@ SedDocument::operator=(const SedDocument& rhs)
 		mIsSetLevel  = rhs.mIsSetLevel;
 		mVersion  = rhs.mVersion;
 		mIsSetVersion  = rhs.mIsSetVersion;
-		mSimulation  = rhs.mSimulation;
-		mModel  = rhs.mModel;
-		mTask  = rhs.mTask;
-		mDataGenerator  = rhs.mDataGenerator;
-		mOutput  = rhs.mOutput;
+		mSimulations  = rhs.mSimulations;
+		mModels  = rhs.mModels;
+		mTasks  = rhs.mTasks;
+		mDataGenerators  = rhs.mDataGenerators;
+		mOutputs  = rhs.mOutputs;
 
 		// connect to child objects
 		connectToChild();
@@ -287,7 +287,7 @@ SedDocument::unsetVersion()
 const SedListOfSimulations*
 SedDocument::getListOfSimulations() const
 {
-	return &mSimulation;
+	return &mSimulations;
 }
 
 
@@ -297,7 +297,7 @@ SedDocument::getListOfSimulations() const
 SedSimulation*
 SedDocument::removeSimulation(unsigned int n)
 {
-	return mSimulation.remove(n);
+	return mSimulations.remove(n);
 }
 
 
@@ -307,7 +307,7 @@ SedDocument::removeSimulation(unsigned int n)
 SedSimulation*
 SedDocument::removeSimulation(const std::string& sid)
 {
-	return mSimulation.remove(sid);
+	return mSimulations.remove(sid);
 }
 
 
@@ -317,7 +317,7 @@ SedDocument::removeSimulation(const std::string& sid)
 SedSimulation*
 SedDocument::getSimulation(unsigned int n)
 {
-	return mSimulation.get(n);
+	return mSimulations.get(n);
 }
 
 
@@ -327,7 +327,7 @@ SedDocument::getSimulation(unsigned int n)
 const SedSimulation*
 SedDocument::getSimulation(unsigned int n) const
 {
-	return mSimulation.get(n);
+	return mSimulations.get(n);
 }
 
 
@@ -337,7 +337,7 @@ SedDocument::getSimulation(unsigned int n) const
 SedSimulation*
 SedDocument::getSimulation(const std::string& sid)
 {
-	return mSimulation.get(sid);
+	return mSimulations.get(sid);
 }
 
 
@@ -347,7 +347,7 @@ SedDocument::getSimulation(const std::string& sid)
 const SedSimulation*
 SedDocument::getSimulation(const std::string& sid) const
 {
-	return mSimulation.get(sid);
+	return mSimulations.get(sid);
 }
 
 
@@ -367,7 +367,7 @@ int
 SedDocument::addSimulation(const SedSimulation* ss)
 {
 	if(ss == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mSimulation.append(ss);
+	mSimulations.append(ss);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -380,7 +380,7 @@ SedDocument::addSimulation(const SedSimulation* ss)
 unsigned int 
 SedDocument::getNumSimulations() const
 {
-	return mSimulation.size();
+	return mSimulations.size();
 }
 
 /**
@@ -395,7 +395,7 @@ SedUniformTimeCourse*
 SedDocument::createUniformTimeCourse()
 {
 	SedUniformTimeCourse *temp = new SedUniformTimeCourse();
-	if (temp != NULL) mSimulation.appendAndOwn(temp);
+	if (temp != NULL) mSimulations.appendAndOwn(temp);
 	return temp;
 }
 
@@ -411,7 +411,7 @@ SedOneStep*
 SedDocument::createOneStep()
 {
 	SedOneStep *temp = new SedOneStep();
-	if (temp != NULL) mSimulation.appendAndOwn(temp);
+	if (temp != NULL) mSimulations.appendAndOwn(temp);
 	return temp;
 }
 
@@ -427,7 +427,7 @@ SedSteadyState*
 SedDocument::createSteadyState()
 {
 	SedSteadyState *temp = new SedSteadyState();
-	if (temp != NULL) mSimulation.appendAndOwn(temp);
+	if (temp != NULL) mSimulations.appendAndOwn(temp);
 	return temp;
 }
 
@@ -437,7 +437,7 @@ SedDocument::createSteadyState()
 const SedListOfModels*
 SedDocument::getListOfModels() const
 {
-	return &mModel;
+	return &mModels;
 }
 
 
@@ -447,7 +447,7 @@ SedDocument::getListOfModels() const
 SedModel*
 SedDocument::removeModel(unsigned int n)
 {
-	return mModel.remove(n);
+	return mModels.remove(n);
 }
 
 
@@ -457,7 +457,7 @@ SedDocument::removeModel(unsigned int n)
 SedModel*
 SedDocument::removeModel(const std::string& sid)
 {
-	return mModel.remove(sid);
+	return mModels.remove(sid);
 }
 
 
@@ -467,7 +467,7 @@ SedDocument::removeModel(const std::string& sid)
 SedModel*
 SedDocument::getModel(unsigned int n)
 {
-	return mModel.get(n);
+	return mModels.get(n);
 }
 
 
@@ -477,7 +477,7 @@ SedDocument::getModel(unsigned int n)
 const SedModel*
 SedDocument::getModel(unsigned int n) const
 {
-	return mModel.get(n);
+	return mModels.get(n);
 }
 
 
@@ -487,7 +487,7 @@ SedDocument::getModel(unsigned int n) const
 SedModel*
 SedDocument::getModel(const std::string& sid)
 {
-	return mModel.get(sid);
+	return mModels.get(sid);
 }
 
 
@@ -497,7 +497,7 @@ SedDocument::getModel(const std::string& sid)
 const SedModel*
 SedDocument::getModel(const std::string& sid) const
 {
-	return mModel.get(sid);
+	return mModels.get(sid);
 }
 
 
@@ -517,7 +517,7 @@ int
 SedDocument::addModel(const SedModel* sm)
 {
 	if(sm == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mModel.append(sm);
+	mModels.append(sm);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -530,7 +530,7 @@ SedDocument::addModel(const SedModel* sm)
 unsigned int 
 SedDocument::getNumModels() const
 {
-	return mModel.size();
+	return mModels.size();
 }
 
 /**
@@ -545,7 +545,7 @@ SedModel*
 SedDocument::createModel()
 {
 	SedModel *temp = new SedModel();
-	if (temp != NULL) mModel.appendAndOwn(temp);
+	if (temp != NULL) mModels.appendAndOwn(temp);
 	return temp;
 }
 
@@ -555,7 +555,7 @@ SedDocument::createModel()
 const SedListOfTasks*
 SedDocument::getListOfTasks() const
 {
-	return &mTask;
+	return &mTasks;
 }
 
 
@@ -565,7 +565,7 @@ SedDocument::getListOfTasks() const
 SedTask*
 SedDocument::removeTask(unsigned int n)
 {
-	return mTask.remove(n);
+	return mTasks.remove(n);
 }
 
 
@@ -575,7 +575,7 @@ SedDocument::removeTask(unsigned int n)
 SedTask*
 SedDocument::removeTask(const std::string& sid)
 {
-	return mTask.remove(sid);
+	return mTasks.remove(sid);
 }
 
 
@@ -585,7 +585,7 @@ SedDocument::removeTask(const std::string& sid)
 SedTask*
 SedDocument::getTask(unsigned int n)
 {
-	return mTask.get(n);
+	return mTasks.get(n);
 }
 
 
@@ -595,7 +595,7 @@ SedDocument::getTask(unsigned int n)
 const SedTask*
 SedDocument::getTask(unsigned int n) const
 {
-	return mTask.get(n);
+	return mTasks.get(n);
 }
 
 
@@ -605,7 +605,7 @@ SedDocument::getTask(unsigned int n) const
 SedTask*
 SedDocument::getTask(const std::string& sid)
 {
-	return mTask.get(sid);
+	return mTasks.get(sid);
 }
 
 
@@ -615,7 +615,7 @@ SedDocument::getTask(const std::string& sid)
 const SedTask*
 SedDocument::getTask(const std::string& sid) const
 {
-	return mTask.get(sid);
+	return mTasks.get(sid);
 }
 
 
@@ -635,7 +635,7 @@ int
 SedDocument::addTask(const SedTask* st)
 {
 	if(st == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mTask.append(st);
+	mTasks.append(st);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -648,7 +648,7 @@ SedDocument::addTask(const SedTask* st)
 unsigned int 
 SedDocument::getNumTasks() const
 {
-	return mTask.size();
+	return mTasks.size();
 }
 
 /**
@@ -657,13 +657,29 @@ SedDocument::getNumTasks() const
  *
  * @return a new SedTask object instance
  *
- * @see addSedTask(const SedTask* st)
+ * @see addTask(const SedTask* st)
  */
 SedTask* 
 SedDocument::createTask()
 {
 	SedTask *temp = new SedTask();
-	if (temp != NULL) mTask.appendAndOwn(temp);
+	if (temp != NULL) mTasks.appendAndOwn(temp);
+	return temp;
+}
+
+/**
+ * Creates a new SedRepeatedTask object, adds it to this SedDocuments
+ * SedDocument and returns the SedRepeatedTask object created. 
+ *
+ * @return a new SedRepeatedTask object instance
+ *
+ * @see addRepeatedTask(const SedTask* st)
+ */
+SedRepeatedTask* 
+SedDocument::createRepeatedTask()
+{
+	SedRepeatedTask *temp = new SedRepeatedTask();
+	if (temp != NULL) mTasks.appendAndOwn(temp);
 	return temp;
 }
 
@@ -673,7 +689,7 @@ SedDocument::createTask()
 const SedListOfDataGenerators*
 SedDocument::getListOfDataGenerators() const
 {
-	return &mDataGenerator;
+	return &mDataGenerators;
 }
 
 
@@ -683,7 +699,7 @@ SedDocument::getListOfDataGenerators() const
 SedDataGenerator*
 SedDocument::removeDataGenerator(unsigned int n)
 {
-	return mDataGenerator.remove(n);
+	return mDataGenerators.remove(n);
 }
 
 
@@ -693,7 +709,7 @@ SedDocument::removeDataGenerator(unsigned int n)
 SedDataGenerator*
 SedDocument::removeDataGenerator(const std::string& sid)
 {
-	return mDataGenerator.remove(sid);
+	return mDataGenerators.remove(sid);
 }
 
 
@@ -703,7 +719,7 @@ SedDocument::removeDataGenerator(const std::string& sid)
 SedDataGenerator*
 SedDocument::getDataGenerator(unsigned int n)
 {
-	return mDataGenerator.get(n);
+	return mDataGenerators.get(n);
 }
 
 
@@ -713,7 +729,7 @@ SedDocument::getDataGenerator(unsigned int n)
 const SedDataGenerator*
 SedDocument::getDataGenerator(unsigned int n) const
 {
-	return mDataGenerator.get(n);
+	return mDataGenerators.get(n);
 }
 
 
@@ -723,7 +739,7 @@ SedDocument::getDataGenerator(unsigned int n) const
 SedDataGenerator*
 SedDocument::getDataGenerator(const std::string& sid)
 {
-	return mDataGenerator.get(sid);
+	return mDataGenerators.get(sid);
 }
 
 
@@ -733,7 +749,7 @@ SedDocument::getDataGenerator(const std::string& sid)
 const SedDataGenerator*
 SedDocument::getDataGenerator(const std::string& sid) const
 {
-	return mDataGenerator.get(sid);
+	return mDataGenerators.get(sid);
 }
 
 
@@ -753,7 +769,7 @@ int
 SedDocument::addDataGenerator(const SedDataGenerator* sdg)
 {
 	if(sdg == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mDataGenerator.append(sdg);
+	mDataGenerators.append(sdg);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -766,7 +782,7 @@ SedDocument::addDataGenerator(const SedDataGenerator* sdg)
 unsigned int 
 SedDocument::getNumDataGenerators() const
 {
-	return mDataGenerator.size();
+	return mDataGenerators.size();
 }
 
 /**
@@ -781,7 +797,7 @@ SedDataGenerator*
 SedDocument::createDataGenerator()
 {
 	SedDataGenerator *temp = new SedDataGenerator();
-	if (temp != NULL) mDataGenerator.appendAndOwn(temp);
+	if (temp != NULL) mDataGenerators.appendAndOwn(temp);
 	return temp;
 }
 
@@ -791,7 +807,7 @@ SedDocument::createDataGenerator()
 const SedListOfOutputs*
 SedDocument::getListOfOutputs() const
 {
-	return &mOutput;
+	return &mOutputs;
 }
 
 
@@ -801,7 +817,7 @@ SedDocument::getListOfOutputs() const
 SedOutput*
 SedDocument::removeOutput(unsigned int n)
 {
-	return mOutput.remove(n);
+	return mOutputs.remove(n);
 }
 
 
@@ -811,7 +827,7 @@ SedDocument::removeOutput(unsigned int n)
 SedOutput*
 SedDocument::removeOutput(const std::string& sid)
 {
-	return mOutput.remove(sid);
+	return mOutputs.remove(sid);
 }
 
 
@@ -821,7 +837,7 @@ SedDocument::removeOutput(const std::string& sid)
 SedOutput*
 SedDocument::getOutput(unsigned int n)
 {
-	return mOutput.get(n);
+	return mOutputs.get(n);
 }
 
 
@@ -831,7 +847,7 @@ SedDocument::getOutput(unsigned int n)
 const SedOutput*
 SedDocument::getOutput(unsigned int n) const
 {
-	return mOutput.get(n);
+	return mOutputs.get(n);
 }
 
 
@@ -841,7 +857,7 @@ SedDocument::getOutput(unsigned int n) const
 SedOutput*
 SedDocument::getOutput(const std::string& sid)
 {
-	return mOutput.get(sid);
+	return mOutputs.get(sid);
 }
 
 
@@ -851,7 +867,7 @@ SedDocument::getOutput(const std::string& sid)
 const SedOutput*
 SedDocument::getOutput(const std::string& sid) const
 {
-	return mOutput.get(sid);
+	return mOutputs.get(sid);
 }
 
 
@@ -871,7 +887,7 @@ int
 SedDocument::addOutput(const SedOutput* so)
 {
 	if(so == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mOutput.append(so);
+	mOutputs.append(so);
 	return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -884,7 +900,7 @@ SedDocument::addOutput(const SedOutput* so)
 unsigned int 
 SedDocument::getNumOutputs() const
 {
-	return mOutput.size();
+	return mOutputs.size();
 }
 
 /**
@@ -899,7 +915,7 @@ SedReport*
 SedDocument::createReport()
 {
 	SedReport *temp = new SedReport();
-	if (temp != NULL) mOutput.appendAndOwn(temp);
+	if (temp != NULL) mOutputs.appendAndOwn(temp);
 	return temp;
 }
 
@@ -915,7 +931,7 @@ SedPlot2D*
 SedDocument::createPlot2D()
 {
 	SedPlot2D *temp = new SedPlot2D();
-	if (temp != NULL) mOutput.appendAndOwn(temp);
+	if (temp != NULL) mOutputs.appendAndOwn(temp);
 	return temp;
 }
 
@@ -931,7 +947,7 @@ SedPlot3D*
 SedDocument::createPlot3D()
 {
 	SedPlot3D *temp = new SedPlot3D();
-	if (temp != NULL) mOutput.appendAndOwn(temp);
+	if (temp != NULL) mOutputs.appendAndOwn(temp);
 	return temp;
 }
 
@@ -958,27 +974,27 @@ SedDocument::createObject(XMLInputStream& stream)
 
 	if (name == "listOfSimulations")
 	{
-		object = &mSimulation;
+		object = &mSimulations;
 	}
 
 	if (name == "listOfModels")
 	{
-		object = &mModel;
+		object = &mModels;
 	}
 
 	if (name == "listOfTasks")
 	{
-		object = &mTask;
+		object = &mTasks;
 	}
 
 	if (name == "listOfDataGenerators")
 	{
-		object = &mDataGenerator;
+		object = &mDataGenerators;
 	}
 
 	if (name == "listOfOutputs")
 	{
-		object = &mOutput;
+		object = &mOutputs;
 	}
 
 	connectToChild();
@@ -995,11 +1011,11 @@ SedDocument::connectToChild ()
 {
 	SedBase::connectToChild();
 
-	mSimulation.connectToParent(this);
-	mModel.connectToParent(this);
-	mTask.connectToParent(this);
-	mDataGenerator.connectToParent(this);
-	mOutput.connectToParent(this);
+	mSimulations.connectToParent(this);
+	mModels.connectToParent(this);
+	mTasks.connectToParent(this);
+	mDataGenerators.connectToParent(this);
+	mOutputs.connectToParent(this);
 }
 
 
@@ -1054,23 +1070,23 @@ SedDocument::writeElements (XMLOutputStream& stream) const
 	SedBase::writeElements(stream);
 	if (getNumSimulations() > 0)
 	{
-		mSimulation.write(stream);
+		mSimulations.write(stream);
 	}
 	if (getNumModels() > 0)
 	{
-		mModel.write(stream);
+		mModels.write(stream);
 	}
 	if (getNumTasks() > 0)
 	{
-		mTask.write(stream);
+		mTasks.write(stream);
 	}
 	if (getNumDataGenerators() > 0)
 	{
-		mDataGenerator.write(stream);
+		mDataGenerators.write(stream);
 	}
 	if (getNumOutputs() > 0)
 	{
-		mOutput.write(stream);
+		mOutputs.write(stream);
 	}
 }
 
@@ -1103,11 +1119,11 @@ void
 SedDocument::setSedDocument (SedDocument* d)
 {
 	SedBase::setSedDocument(d);
-	mSimulation.setSedDocument(d);
-	mModel.setSedDocument(d);
-	mTask.setSedDocument(d);
-	mDataGenerator.setSedDocument(d);
-	mOutput.setSedDocument(d);
+	mSimulations.setSedDocument(d);
+	mModels.setSedDocument(d);
+	mTasks.setSedDocument(d);
+	mDataGenerators.setSedDocument(d);
+	mOutputs.setSedDocument(d);
 }
 
 
@@ -1568,6 +1584,13 @@ SedTask_t *
 SedDocument_createTask(SedDocument_t * sd)
 {
 	return  (sd != NULL) ? sd->createTask() : NULL;
+}
+
+LIBSEDML_EXTERN
+SedRepeatedTask_t *
+SedDocument_createRepeatedTask(SedDocument_t * sd)
+{
+	return  (sd != NULL) ? sd->createRepeatedTask() : NULL;
 }
 
 LIBSEDML_EXTERN

@@ -63,7 +63,7 @@ class LIBSEDML_EXTERN SedAlgorithm : public SedBase
 
 protected:
 
-	SedListOfAlgorithmParameters   mAlgorithmParameter;
+	SedListOfAlgorithmParameters   mAlgorithmParameters;
 	std::string   mKisaoID;
 
 

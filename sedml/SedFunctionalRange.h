@@ -65,8 +65,8 @@ class LIBSEDML_EXTERN SedFunctionalRange : public SedRange
 
 protected:
 
-	SedListOfVariables   mVariable;
-	SedListOfParameters   mParameter;
+	SedListOfVariables   mVariables;
+	SedListOfParameters   mParameters;
 	std::string   mRange;
 	ASTNode*      mMath;
 
