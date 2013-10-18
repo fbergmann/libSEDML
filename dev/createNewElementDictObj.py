@@ -432,8 +432,8 @@ def createSedUniformTimeCourse() :
   return element
 
 def createSedSubTask():
-    a0 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'task'})
-    a1 = dict({'type': 'int', 'reqd' : True, 'name':'order'})
+    a0 = dict({'type': 'int', 'reqd' : True, 'name':'order'})
+    a1 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'task'})
     attributes = [a0, a1]
     element = dict({
                    'name': 'SedSubTask',
