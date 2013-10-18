@@ -1170,7 +1170,7 @@ SedListOfTaskChanges::remove(const std::string& sid)
 const std::string&
 SedListOfTaskChanges::getElementName () const
 {
-	static const string name = "listOfListOfChanges";
+	static const string name = "listOfChanges";
 	return name;
 }
 
