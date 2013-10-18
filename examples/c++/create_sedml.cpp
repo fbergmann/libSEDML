@@ -53,7 +53,7 @@ main (int argc, char* argv[])
   // create the document
   SedDocument doc;
   doc.setLevel(1);
-  doc.setVersion(1);
+  doc.setVersion(2);
   doc.setAnnotation("<test xmlns='http://test.org/test/annotation' attribute='test' />");
 
   {
@@ -103,11 +103,25 @@ main (int argc, char* argv[])
   tc->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='uniform time course' />");
   alg->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='algorithm' />");
 
+  // create one step
+  SedOneStep* step = doc.createOneStep();
+  step->setId("sim2");
+  step->setStep(0.1);
+  alg = step->createAlgorithm();
+  alg->setKisaoID("KISAO:0000019");
+
+
+  // create steady state
+  SedSteadyState* steady = doc.createSteadyState();
+  steady->setId("sim3");
+
   // create a task that uses the simulation and the model above
   SedTask* task = doc.createTask();
   task->setId("task1");
   task->setModelReference("model1");
   task->setSimulationReference("sim1");
+
+//  SedRepeatedTask* repeat = doc.createRep
 
   // add a DataGenerator to hold the output for time
   SedDataGenerator* dg = doc.createDataGenerator();
