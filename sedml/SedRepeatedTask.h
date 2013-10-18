@@ -68,9 +68,9 @@ protected:
 	std::string   mRange;
 	bool          mResetModel;
 	bool          mIsSetResetModel;
-	SedListOfRanges   mRanges;
-	SedListOfTaskChanges   mTaskChanges;
-	SedListOfSubTasks   mSubTasks;
+	SedListOfRanges   mRange;
+	SedListOfTaskChanges   mTaskChange;
+	SedListOfSubTasks   mSubTask;
 
 
 public:
@@ -224,67 +224,67 @@ public:
 	 *
 	 * @return the "SedListOfRanges" attribute of this SedRepeatedTask.
 	 */
-	const SedListOfRanges* getListOfRangess() const;
+	const SedListOfRanges* getListOfRanges() const;
 
 
 	/**
-	 * Get a Ranges from the SedListOfRanges.
+	 * Get a Range from the SedListOfRanges.
 	 *
-	 * @param n the index number of the Ranges to get.
+	 * @param n the index number of the Range to get.
 	 *
-	 * @return the nth Ranges in the SedListOfRanges within this SedRepeatedTask.
+	 * @return the nth Range in the SedListOfRanges within this SedRepeatedTask.
 	 *
-	 * @see getNumRangess()
+	 * @see getNumRanges()
 	 */
-	SedRange* getRanges(unsigned int n);
+	SedRange* getRange(unsigned int n);
 
 
 	/**
-	 * Get a Ranges from the SedListOfRanges.
+	 * Get a Range from the SedListOfRanges.
 	 *
-	 * @param n the index number of the Ranges to get.
+	 * @param n the index number of the Range to get.
 	 *
-	 * @return the nth Ranges in the SedListOfRanges within this SedRepeatedTask.
+	 * @return the nth Range in the SedListOfRanges within this SedRepeatedTask.
 	 *
-	 * @see getNumRangess()
+	 * @see getNumRanges()
 	 */
-	const SedRange* getRanges(unsigned int n) const;
+	const SedRange* getRange(unsigned int n) const;
 
 
 	/**
-	 * Get a Ranges from the SedListOfRanges
+	 * Get a Range from the SedListOfRanges
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Ranges to get.
+	 * of the Range to get.
 	 *
-	 * @return the Ranges in the SedListOfRanges
+	 * @return the Range in the SedListOfRanges
 	 * with the given id or NULL if no such
-	 * Ranges exists.
+	 * Range exists.
 	 *
-	 * @see getRanges(unsigned int n)
+	 * @see getRange(unsigned int n)
 	 *
-	 * @see getNumRangess()
+	 * @see getNumRanges()
 	 */
-	SedRange* getRanges(const std::string& sid);
+	SedRange* getRange(const std::string& sid);
 
 
 	/**
-	 * Get a Ranges from the SedListOfRanges
+	 * Get a Range from the SedListOfRanges
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the Ranges to get.
+	 * of the Range to get.
 	 *
-	 * @return the Ranges in the SedListOfRanges
+	 * @return the Range in the SedListOfRanges
 	 * with the given id or NULL if no such
-	 * Ranges exists.
+	 * Range exists.
 	 *
-	 * @see getRanges(unsigned int n)
+	 * @see getRange(unsigned int n)
 	 *
-	 * @see getNumRangess()
+	 * @see getNumRanges()
 	 */
-	const SedRange* getRanges(const std::string& sid) const;
+	const SedRange* getRange(const std::string& sid) const;
 
 
 	/**
@@ -299,7 +299,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addRanges(const SedRange* sr);
+	int addRange(const SedRange* sr);
 
 
 	/**
@@ -307,7 +307,7 @@ public:
 	 *
 	 * @return the number of SedRange objects in this SedRepeatedTask
 	 */
-	unsigned int getNumRangess() const;
+	unsigned int getNumRanges() const;
 
 
 	/**
@@ -344,32 +344,32 @@ public:
 
 
 	/**
-	 * Removes the nth Ranges from the SedListOfRanges within this SedRepeatedTask.
+	 * Removes the nth Range from the SedListOfRanges within this SedRepeatedTask.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the Ranges to remove.
+	 * @param n the index of the Range to remove.
 	 *
-	 * @see getNumRangess()
+	 * @see getNumRanges()
 	 */
-	SedRange* removeRanges(unsigned int n);
+	SedRange* removeRange(unsigned int n);
 
 
 	/**
-	 * Removes the Ranges with the given identifier from the SedListOfRanges within this SedRepeatedTask
+	 * Removes the Range with the given identifier from the SedListOfRanges within this SedRepeatedTask
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the Ranges to remove.
+	 * @param sid the identifier of the Range to remove.
 	 *
-	 * @return the Ranges removed. As mentioned above, the caller owns the
+	 * @return the Range removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedRange* removeRanges(const std::string& sid);
+	SedRange* removeRange(const std::string& sid);
 
 
 	/**
@@ -377,67 +377,67 @@ public:
 	 *
 	 * @return the "SedListOfTaskChanges" attribute of this SedRepeatedTask.
 	 */
-	const SedListOfTaskChanges* getListOfTaskChangess() const;
+	const SedListOfTaskChanges* getListOfTaskChanges() const;
 
 
 	/**
-	 * Get a TaskChanges from the SedListOfTaskChanges.
+	 * Get a TaskChange from the SedListOfTaskChanges.
 	 *
-	 * @param n the index number of the TaskChanges to get.
+	 * @param n the index number of the TaskChange to get.
 	 *
-	 * @return the nth TaskChanges in the SedListOfTaskChanges within this SedRepeatedTask.
+	 * @return the nth TaskChange in the SedListOfTaskChanges within this SedRepeatedTask.
 	 *
-	 * @see getNumTaskChangess()
+	 * @see getNumTaskChanges()
 	 */
-	SedSetValue* getTaskChanges(unsigned int n);
+	SedSetValue* getTaskChange(unsigned int n);
 
 
 	/**
-	 * Get a TaskChanges from the SedListOfTaskChanges.
+	 * Get a TaskChange from the SedListOfTaskChanges.
 	 *
-	 * @param n the index number of the TaskChanges to get.
+	 * @param n the index number of the TaskChange to get.
 	 *
-	 * @return the nth TaskChanges in the SedListOfTaskChanges within this SedRepeatedTask.
+	 * @return the nth TaskChange in the SedListOfTaskChanges within this SedRepeatedTask.
 	 *
-	 * @see getNumTaskChangess()
+	 * @see getNumTaskChanges()
 	 */
-	const SedSetValue* getTaskChanges(unsigned int n) const;
+	const SedSetValue* getTaskChange(unsigned int n) const;
 
 
 	/**
-	 * Get a TaskChanges from the SedListOfTaskChanges
+	 * Get a TaskChange from the SedListOfTaskChanges
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the TaskChanges to get.
+	 * of the TaskChange to get.
 	 *
-	 * @return the TaskChanges in the SedListOfTaskChanges
+	 * @return the TaskChange in the SedListOfTaskChanges
 	 * with the given id or NULL if no such
-	 * TaskChanges exists.
+	 * TaskChange exists.
 	 *
-	 * @see getTaskChanges(unsigned int n)
+	 * @see getTaskChange(unsigned int n)
 	 *
-	 * @see getNumTaskChangess()
+	 * @see getNumTaskChanges()
 	 */
-	SedSetValue* getTaskChanges(const std::string& sid);
+	SedSetValue* getTaskChange(const std::string& sid);
 
 
 	/**
-	 * Get a TaskChanges from the SedListOfTaskChanges
+	 * Get a TaskChange from the SedListOfTaskChanges
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the TaskChanges to get.
+	 * of the TaskChange to get.
 	 *
-	 * @return the TaskChanges in the SedListOfTaskChanges
+	 * @return the TaskChange in the SedListOfTaskChanges
 	 * with the given id or NULL if no such
-	 * TaskChanges exists.
+	 * TaskChange exists.
 	 *
-	 * @see getTaskChanges(unsigned int n)
+	 * @see getTaskChange(unsigned int n)
 	 *
-	 * @see getNumTaskChangess()
+	 * @see getNumTaskChanges()
 	 */
-	const SedSetValue* getTaskChanges(const std::string& sid) const;
+	const SedSetValue* getTaskChange(const std::string& sid) const;
 
 
 	/**
@@ -452,7 +452,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addTaskChanges(const SedSetValue* ssv);
+	int addTaskChange(const SedSetValue* ssv);
 
 
 	/**
@@ -460,7 +460,7 @@ public:
 	 *
 	 * @return the number of SedSetValue objects in this SedRepeatedTask
 	 */
-	unsigned int getNumTaskChangess() const;
+	unsigned int getNumTaskChanges() const;
 
 
 	/**
@@ -469,38 +469,38 @@ public:
 	 *
 	 * @return a new SedSetValue object instance
 	 *
-	 * @see addTaskChanges(const SedSetValue* ssv)
+	 * @see addTaskChange(const SedSetValue* ssv)
 	 */
-	SedSetValue* createTaskChanges();
+	SedSetValue* createTaskChange();
 
 
 	/**
-	 * Removes the nth TaskChanges from the SedListOfTaskChanges within this SedRepeatedTask.
+	 * Removes the nth TaskChange from the SedListOfTaskChanges within this SedRepeatedTask.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the TaskChanges to remove.
+	 * @param n the index of the TaskChange to remove.
 	 *
-	 * @see getNumTaskChangess()
+	 * @see getNumTaskChanges()
 	 */
-	SedSetValue* removeTaskChanges(unsigned int n);
+	SedSetValue* removeTaskChange(unsigned int n);
 
 
 	/**
-	 * Removes the TaskChanges with the given identifier from the SedListOfTaskChanges within this SedRepeatedTask
+	 * Removes the TaskChange with the given identifier from the SedListOfTaskChanges within this SedRepeatedTask
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the TaskChanges to remove.
+	 * @param sid the identifier of the TaskChange to remove.
 	 *
-	 * @return the TaskChanges removed. As mentioned above, the caller owns the
+	 * @return the TaskChange removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedSetValue* removeTaskChanges(const std::string& sid);
+	SedSetValue* removeTaskChange(const std::string& sid);
 
 
 	/**
@@ -508,67 +508,67 @@ public:
 	 *
 	 * @return the "SedListOfSubTasks" attribute of this SedRepeatedTask.
 	 */
-	const SedListOfSubTasks* getListOfSubTaskss() const;
+	const SedListOfSubTasks* getListOfSubTasks() const;
 
 
 	/**
-	 * Get a SubTasks from the SedListOfSubTasks.
+	 * Get a SubTask from the SedListOfSubTasks.
 	 *
-	 * @param n the index number of the SubTasks to get.
+	 * @param n the index number of the SubTask to get.
 	 *
-	 * @return the nth SubTasks in the SedListOfSubTasks within this SedRepeatedTask.
+	 * @return the nth SubTask in the SedListOfSubTasks within this SedRepeatedTask.
 	 *
-	 * @see getNumSubTaskss()
+	 * @see getNumSubTasks()
 	 */
-	SedSubTask* getSubTasks(unsigned int n);
+	SedSubTask* getSubTask(unsigned int n);
 
 
 	/**
-	 * Get a SubTasks from the SedListOfSubTasks.
+	 * Get a SubTask from the SedListOfSubTasks.
 	 *
-	 * @param n the index number of the SubTasks to get.
+	 * @param n the index number of the SubTask to get.
 	 *
-	 * @return the nth SubTasks in the SedListOfSubTasks within this SedRepeatedTask.
+	 * @return the nth SubTask in the SedListOfSubTasks within this SedRepeatedTask.
 	 *
-	 * @see getNumSubTaskss()
+	 * @see getNumSubTasks()
 	 */
-	const SedSubTask* getSubTasks(unsigned int n) const;
+	const SedSubTask* getSubTask(unsigned int n) const;
 
 
 	/**
-	 * Get a SubTasks from the SedListOfSubTasks
+	 * Get a SubTask from the SedListOfSubTasks
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SubTasks to get.
+	 * of the SubTask to get.
 	 *
-	 * @return the SubTasks in the SedListOfSubTasks
+	 * @return the SubTask in the SedListOfSubTasks
 	 * with the given id or NULL if no such
-	 * SubTasks exists.
+	 * SubTask exists.
 	 *
-	 * @see getSubTasks(unsigned int n)
+	 * @see getSubTask(unsigned int n)
 	 *
-	 * @see getNumSubTaskss()
+	 * @see getNumSubTasks()
 	 */
-	SedSubTask* getSubTasks(const std::string& sid);
+	SedSubTask* getSubTask(const std::string& sid);
 
 
 	/**
-	 * Get a SubTasks from the SedListOfSubTasks
+	 * Get a SubTask from the SedListOfSubTasks
 	 * based on its identifier.
 	 *
 	 * @param sid a string representing the identifier
-	 * of the SubTasks to get.
+	 * of the SubTask to get.
 	 *
-	 * @return the SubTasks in the SedListOfSubTasks
+	 * @return the SubTask in the SedListOfSubTasks
 	 * with the given id or NULL if no such
-	 * SubTasks exists.
+	 * SubTask exists.
 	 *
-	 * @see getSubTasks(unsigned int n)
+	 * @see getSubTask(unsigned int n)
 	 *
-	 * @see getNumSubTaskss()
+	 * @see getNumSubTasks()
 	 */
-	const SedSubTask* getSubTasks(const std::string& sid) const;
+	const SedSubTask* getSubTask(const std::string& sid) const;
 
 
 	/**
@@ -583,7 +583,7 @@ public:
 	 * @li LIBSEDML_OPERATION_SUCCESS
 	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
 	 */
-	int addSubTasks(const SedSubTask* sst);
+	int addSubTask(const SedSubTask* sst);
 
 
 	/**
@@ -591,7 +591,7 @@ public:
 	 *
 	 * @return the number of SedSubTask objects in this SedRepeatedTask
 	 */
-	unsigned int getNumSubTaskss() const;
+	unsigned int getNumSubTasks() const;
 
 
 	/**
@@ -600,38 +600,38 @@ public:
 	 *
 	 * @return a new SedSubTask object instance
 	 *
-	 * @see addSubTasks(const SedSubTask* sst)
+	 * @see addSubTask(const SedSubTask* sst)
 	 */
-	SedSubTask* createSubTasks();
+	SedSubTask* createSubTask();
 
 
 	/**
-	 * Removes the nth SubTasks from the SedListOfSubTasks within this SedRepeatedTask.
+	 * Removes the nth SubTask from the SedListOfSubTasks within this SedRepeatedTask.
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 *
-	 * @param n the index of the SubTasks to remove.
+	 * @param n the index of the SubTask to remove.
 	 *
-	 * @see getNumSubTaskss()
+	 * @see getNumSubTasks()
 	 */
-	SedSubTask* removeSubTasks(unsigned int n);
+	SedSubTask* removeSubTask(unsigned int n);
 
 
 	/**
-	 * Removes the SubTasks with the given identifier from the SedListOfSubTasks within this SedRepeatedTask
+	 * Removes the SubTask with the given identifier from the SedListOfSubTasks within this SedRepeatedTask
 	 * and returns a pointer to it.
 	 *
 	 * The caller owns the returned item and is responsible for deleting it.
 	 * If none of the items in this list have the identifier @p sid, then
 	 * @c NULL is returned.
 	 *
-	 * @param sid the identifier of the SubTasks to remove.
+	 * @param sid the identifier of the SubTask to remove.
 	 *
-	 * @return the SubTasks removed. As mentioned above, the caller owns the
+	 * @return the SubTask removed. As mentioned above, the caller owns the
 	 * returned item.
 	 */
-	SedSubTask* removeSubTasks(const std::string& sid);
+	SedSubTask* removeSubTask(const std::string& sid);
 
 
 	/**
@@ -864,7 +864,7 @@ SedRepeatedTask_unsetResetModel(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_addRanges(SedRepeatedTask_t * srt, SedRange_t * sr);
+SedRepeatedTask_addRange(SedRepeatedTask_t * srt, SedRange_t * sr);
 
 
 LIBSEDML_EXTERN
@@ -889,37 +889,37 @@ SedRepeatedTask_getSedListOfRanges(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 SedRange_t *
-SedRepeatedTask_getRanges(SedRepeatedTask_t * srt, unsigned int n);
+SedRepeatedTask_getRange(SedRepeatedTask_t * srt, unsigned int n);
 
 
 LIBSEDML_EXTERN
 SedRange_t *
-SedRepeatedTask_getRangesById(SedRepeatedTask_t * srt, const char * sid);
+SedRepeatedTask_getRangeById(SedRepeatedTask_t * srt, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedRepeatedTask_getNumRangess(SedRepeatedTask_t * srt);
+SedRepeatedTask_getNumRanges(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
 SedRange_t *
-SedRepeatedTask_removeRanges(SedRepeatedTask_t * srt, unsigned int n);
+SedRepeatedTask_removeRange(SedRepeatedTask_t * srt, unsigned int n);
 
 
 LIBSEDML_EXTERN
 SedRange_t *
-SedRepeatedTask_removeRangesById(SedRepeatedTask_t * srt, const char * sid);
+SedRepeatedTask_removeRangeById(SedRepeatedTask_t * srt, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_addTaskChanges(SedRepeatedTask_t * srt, SedSetValue_t * ssv);
+SedRepeatedTask_addTaskChange(SedRepeatedTask_t * srt, SedSetValue_t * ssv);
 
 
 LIBSEDML_EXTERN
 SedSetValue_t *
-SedRepeatedTask_createTaskChanges(SedRepeatedTask_t * srt);
+SedRepeatedTask_createTaskChange(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
@@ -929,37 +929,37 @@ SedRepeatedTask_getSedListOfTaskChanges(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 SedSetValue_t *
-SedRepeatedTask_getTaskChanges(SedRepeatedTask_t * srt, unsigned int n);
+SedRepeatedTask_getTaskChange(SedRepeatedTask_t * srt, unsigned int n);
 
 
 LIBSEDML_EXTERN
 SedSetValue_t *
-SedRepeatedTask_getTaskChangesById(SedRepeatedTask_t * srt, const char * sid);
+SedRepeatedTask_getTaskChangeById(SedRepeatedTask_t * srt, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedRepeatedTask_getNumTaskChangess(SedRepeatedTask_t * srt);
+SedRepeatedTask_getNumTaskChanges(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
 SedSetValue_t *
-SedRepeatedTask_removeTaskChanges(SedRepeatedTask_t * srt, unsigned int n);
+SedRepeatedTask_removeTaskChange(SedRepeatedTask_t * srt, unsigned int n);
 
 
 LIBSEDML_EXTERN
 SedSetValue_t *
-SedRepeatedTask_removeTaskChangesById(SedRepeatedTask_t * srt, const char * sid);
+SedRepeatedTask_removeTaskChangeById(SedRepeatedTask_t * srt, const char * sid);
 
 
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_addSubTasks(SedRepeatedTask_t * srt, SedSubTask_t * sst);
+SedRepeatedTask_addSubTask(SedRepeatedTask_t * srt, SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
 SedSubTask_t *
-SedRepeatedTask_createSubTasks(SedRepeatedTask_t * srt);
+SedRepeatedTask_createSubTask(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
@@ -969,27 +969,27 @@ SedRepeatedTask_getSedListOfSubTasks(SedRepeatedTask_t * srt);
 
 LIBSEDML_EXTERN
 SedSubTask_t *
-SedRepeatedTask_getSubTasks(SedRepeatedTask_t * srt, unsigned int n);
+SedRepeatedTask_getSubTask(SedRepeatedTask_t * srt, unsigned int n);
 
 
 LIBSEDML_EXTERN
 SedSubTask_t *
-SedRepeatedTask_getSubTasksById(SedRepeatedTask_t * srt, const char * sid);
+SedRepeatedTask_getSubTaskById(SedRepeatedTask_t * srt, const char * sid);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedRepeatedTask_getNumSubTaskss(SedRepeatedTask_t * srt);
+SedRepeatedTask_getNumSubTasks(SedRepeatedTask_t * srt);
 
 
 LIBSEDML_EXTERN
 SedSubTask_t *
-SedRepeatedTask_removeSubTasks(SedRepeatedTask_t * srt, unsigned int n);
+SedRepeatedTask_removeSubTask(SedRepeatedTask_t * srt, unsigned int n);
 
 
 LIBSEDML_EXTERN
 SedSubTask_t *
-SedRepeatedTask_removeSubTasksById(SedRepeatedTask_t * srt, const char * sid);
+SedRepeatedTask_removeSubTaskById(SedRepeatedTask_t * srt, const char * sid);
 
 
 LIBSEDML_EXTERN

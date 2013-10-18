@@ -473,20 +473,20 @@ def createSedSimulation() :
   attributes = [a1, a2, a3]
   element = dict({
                   'name': 'SedSimulation', 
-				  'package': 'Sed', 
-				  'typecode': 'SEDML_SIMULATION', 
-				  'hasSedListOf': True, 
-				  'attribs':attributes, 
-				  'hasChildren':True, 
-				  'hasMath':False, 
-				  'elementName':'simulation',
-				  'abstract':True,
-				  'concrete': [ 
-				           dict({ 'name':'uniformTimeCourse', 'element':'SedUniformTimeCourse'}),
-                           dict({ 'name':'oneStep', 'element':'SedOneStep'}),
-                           dict({ 'name':'steadyState', 'element':'SedSteadyState'}),
-						   ]
-				})
+                  'package': 'Sed', 
+                  'typecode': 'SEDML_SIMULATION', 
+                  'hasSedListOf': True, 
+                  'attribs':attributes, 
+                  'hasChildren':True, 
+                  'hasMath':False, 
+                  'elementName':'simulation',
+                  'abstract':True,
+                  'concrete': [ 
+                      dict({ 'name':'uniformTimeCourse', 'element':'SedUniformTimeCourse'}),
+                      dict({ 'name':'oneStep', 'element':'SedOneStep'}),
+                      dict({ 'name':'steadyState', 'element':'SedSteadyState'}),
+                  ]
+               })
   return element
 
 def createSedTask() :
@@ -514,7 +514,7 @@ def createSedRepeatedTask():
     lo1 = dict({
                'type': 'lo_element',
                'reqd': False,
-               'name': 'ranges',
+               'name': 'range',
                'element': 'SedRange',
                'abstract': True,
                'concrete': [
@@ -523,8 +523,8 @@ def createSedRepeatedTask():
                             dict({ 'name':'functionalRange', 'element':'SedFunctionalRange'}),
                             ]
                })
-    lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'taskChanges', 'element': 'SedSetValue'})
-    lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'subTasks', 'element': 'SedSubTask'})
+    lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'taskChange', 'element': 'SedSetValue'})
+    lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'subTask', 'element': 'SedSubTask'})
     attributes = [a1, a2, lo1, lo2, lo3]
     element = dict({
                    'name': 'SedRepeatedTask',
