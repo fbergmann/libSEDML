@@ -99,7 +99,9 @@ def writeGetFunction(attrib, output, element):
   else:
     attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
+  if attrib['type'] == 'std::vector<double>':
+    return
+  elif attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
     output.write('LIBSEDML_EXTERN\n')
     output.write('{0}\n'.format(attTypeCode))
     output.write('{0}_get{1}'.format(element, capAttName))
@@ -132,7 +134,9 @@ def writeIsSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] != 'lo_element':
+  if attrib['type'] == 'std::vector<double>':
+    return
+  elif attrib['type'] != 'lo_element':
     output.write('LIBSEDML_EXTERN\n')
     output.write('int\n')
     output.write('{0}_isSet{1}'.format(element, capAttName))
@@ -146,7 +150,9 @@ def writeSetFunction(attrib, output, element):
   attType = att[2]
   attTypeCode = att[3]
   num = att[4]
-  if attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
+  if attrib['type'] == 'std::vector<double>':
+    return
+  elif attrib['type'] != 'element' and attrib['type'] != 'lo_element' and attrib['type'] != 'XMLNode*':
     output.write('LIBSEDML_EXTERN\n')
     output.write('int\n')
     output.write('{0}_set{1}'.format(element, capAttName))
@@ -180,6 +186,8 @@ def writeUnsetFunction(attrib, output, element):
   attTypeCode = att[3]
   num = att[4]
   if attrib['type'] == 'lo_element':
+    return
+  if attrib['type'] == 'std::vector<double>':
     return
   output.write('LIBSEDML_EXTERN\n')
   output.write('int\n')

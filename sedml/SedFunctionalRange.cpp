@@ -733,7 +733,7 @@ SedFunctionalRange::readOtherXML (XMLInputStream& stream)
 	}
 
 	if (SedRange::readOtherXML(stream))
-		{
+	{
 		read = true;
 	}
 	return read;

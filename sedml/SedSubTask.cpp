@@ -49,9 +49,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedSubTask::SedSubTask (unsigned int level, unsigned int version)
 	: SedBase(level, version)
-	, mTask ("")
 	, mOrder (SEDML_INT_MAX)
 	, mIsSetOrder (false)
+	, mTask ("")
 
 {
 	// set an SedNamespaces derived object of this package
@@ -64,9 +64,9 @@ SedSubTask::SedSubTask (unsigned int level, unsigned int version)
  */
 SedSubTask::SedSubTask (SedNamespaces* sedns)
 	: SedBase(sedns)
-	, mTask ("")
 	, mOrder (SEDML_INT_MAX)
 	, mIsSetOrder (false)
+	, mTask ("")
 
 {
 	// set the element namespace of this object
@@ -86,9 +86,9 @@ SedSubTask::SedSubTask (const SedSubTask& orig)
 	}
 	else
 	{
-		mTask  = orig.mTask;
 		mOrder  = orig.mOrder;
 		mIsSetOrder  = orig.mIsSetOrder;
+		mTask  = orig.mTask;
 	}
 }
 
@@ -106,9 +106,9 @@ SedSubTask::operator=(const SedSubTask& rhs)
 	else if (&rhs != this)
 	{
 		SedBase::operator=(rhs);
-		mTask  = rhs.mTask;
 		mOrder  = rhs.mOrder;
 		mIsSetOrder  = rhs.mIsSetOrder;
+		mTask  = rhs.mTask;
 	}
 	return *this;
 }
@@ -133,6 +133,16 @@ SedSubTask::~SedSubTask ()
 
 
 /*
+ * Returns the value of the "order" attribute of this SedSubTask.
+ */
+const int
+SedSubTask::getOrder() const
+{
+	return mOrder;
+}
+
+
+/*
  * Returns the value of the "task" attribute of this SedSubTask.
  */
 const std::string&
@@ -143,12 +153,12 @@ SedSubTask::getTask() const
 
 
 /*
- * Returns the value of the "order" attribute of this SedSubTask.
+ * Returns true/false if order is set.
  */
-const int
-SedSubTask::getOrder() const
+bool
+SedSubTask::isSetOrder() const
 {
-	return mOrder;
+	return mIsSetOrder;
 }
 
 
@@ -163,12 +173,14 @@ SedSubTask::isSetTask() const
 
 
 /*
- * Returns true/false if order is set.
+ * Sets order and returns value indicating success.
  */
-bool
-SedSubTask::isSetOrder() const
+int
+SedSubTask::setOrder(int order)
 {
-	return mIsSetOrder;
+	mOrder = order;
+	mIsSetOrder = true;
+	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -195,14 +207,22 @@ SedSubTask::setTask(const std::string& task)
 
 
 /*
- * Sets order and returns value indicating success.
+ * Unsets order and returns value indicating success.
  */
 int
-SedSubTask::setOrder(int order)
+SedSubTask::unsetOrder()
 {
-	mOrder = order;
-	mIsSetOrder = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+	mOrder = SEDML_INT_MAX;
+	mIsSetOrder = false;
+
+	if (isSetOrder() == false)
+	{
+		return LIBSEDML_OPERATION_SUCCESS;
+	}
+	else
+	{
+		return LIBSEDML_OPERATION_FAILED;
+	}
 }
 
 
@@ -215,26 +235,6 @@ SedSubTask::unsetTask()
 	mTask.erase();
 
 	if (mTask.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
-}
-
-
-/*
- * Unsets order and returns value indicating success.
- */
-int
-SedSubTask::unsetOrder()
-{
-	mOrder = SEDML_INT_MAX;
-	mIsSetOrder = false;
-
-	if (isSetOrder() == false)
 	{
 		return LIBSEDML_OPERATION_SUCCESS;
 	}
@@ -274,10 +274,10 @@ SedSubTask::hasRequiredAttributes () const
 {
 	bool allPresent = true;
 
-	if (isSetTask() == false)
+	if (isSetOrder() == false)
 		allPresent = false;
 
-	if (isSetOrder() == false)
+	if (isSetTask() == false)
 		allPresent = false;
 
 	return allPresent;
@@ -340,8 +340,8 @@ SedSubTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("task");
 	attributes.add("order");
+	attributes.add("task");
 }
 
 
@@ -362,6 +362,11 @@ SedSubTask::readAttributes (const XMLAttributes& attributes,
 	bool assigned = false;
 
 	//
+	// order int   ( use = "required" )
+	//
+	mIsSetOrder = attributes.readInto("order", mOrder, getErrorLog(), true);
+
+	//
 	// task SIdRef   ( use = "required" )
 	//
 	assigned = attributes.readInto("task", mTask, getErrorLog(), true);
@@ -380,11 +385,6 @@ SedSubTask::readAttributes (const XMLAttributes& attributes,
 		}
 	}
 
-	//
-	// order int   ( use = "required" )
-	//
-	mIsSetOrder = attributes.readInto("order", mOrder, getErrorLog(), true);
-
 }
 
 
@@ -401,11 +401,11 @@ SedSubTask::writeAttributes (XMLOutputStream& stream) const
 {
 	SedBase::writeAttributes(stream);
 
-	if (isSetTask() == true)
-		stream.writeAttribute("task", getPrefix(), mTask);
-
 	if (isSetOrder() == true)
 		stream.writeAttribute("order", getPrefix(), mOrder);
+
+	if (isSetTask() == true)
+		stream.writeAttribute("task", getPrefix(), mTask);
 
 }
 
@@ -694,20 +694,6 @@ SedSubTask_clone(SedSubTask_t * sst)
  * write comments
  */
 LIBSEDML_EXTERN
-char *
-SedSubTask_getTask(SedSubTask_t * sst)
-{
-	if (sst == NULL)
-		return NULL;
-
-	return sst->getTask().empty() ? NULL : safe_strdup(sst->getTask().c_str());
-}
-
-
-/**
- * write comments
- */
-LIBSEDML_EXTERN
 int
 SedSubTask_getOrder(SedSubTask_t * sst)
 {
@@ -719,10 +705,13 @@ SedSubTask_getOrder(SedSubTask_t * sst)
  * write comments
  */
 LIBSEDML_EXTERN
-int
-SedSubTask_isSetTask(SedSubTask_t * sst)
+char *
+SedSubTask_getTask(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? static_cast<int>(sst->isSetTask()) : 0;
+	if (sst == NULL)
+		return NULL;
+
+	return sst->getTask().empty() ? NULL : safe_strdup(sst->getTask().c_str());
 }
 
 
@@ -742,9 +731,9 @@ SedSubTask_isSetOrder(SedSubTask_t * sst)
  */
 LIBSEDML_EXTERN
 int
-SedSubTask_setTask(SedSubTask_t * sst, const char * task)
+SedSubTask_isSetTask(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? sst->setTask(task) : LIBSEDML_INVALID_OBJECT;
+	return (sst != NULL) ? static_cast<int>(sst->isSetTask()) : 0;
 }
 
 
@@ -764,9 +753,9 @@ SedSubTask_setOrder(SedSubTask_t * sst, int order)
  */
 LIBSEDML_EXTERN
 int
-SedSubTask_unsetTask(SedSubTask_t * sst)
+SedSubTask_setTask(SedSubTask_t * sst, const char * task)
 {
-	return (sst != NULL) ? sst->unsetTask() : LIBSEDML_INVALID_OBJECT;
+	return (sst != NULL) ? sst->setTask(task) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -778,6 +767,17 @@ int
 SedSubTask_unsetOrder(SedSubTask_t * sst)
 {
 	return (sst != NULL) ? sst->unsetOrder() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedSubTask_unsetTask(SedSubTask_t * sst)
+{
+	return (sst != NULL) ? sst->unsetTask() : LIBSEDML_INVALID_OBJECT;
 }
 
 

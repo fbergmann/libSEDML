@@ -67,7 +67,9 @@ def writeInclude(attrib, output):
   attTypeCode = att[3]
   num = att[4]
   if attType == 'lo_element':
-    output.write('#include <sedml/{0}.h>\n'.format(attrib['element']))  
+    output.write('#include <sedml/{0}.h>\n'.format(attrib['element']))
+  elif attType == 'std::vector<double>':
+    output.write('#include <vector>')
 
 def writeAtt(attrib, output):
   att = generalFunctions.parseAttribute(attrib)
@@ -96,6 +98,8 @@ def writeAtt(attrib, output):
   elif attType == 'boolean':
     output.write('\tbool          m{0};\n'.format(capAttName))
     output.write('\tbool          mIsSet{0};\n'.format(capAttName))
+  elif attType == 'std::vector<double>':
+    output.write('\tstd::vector<double>  m{0};\n'.format( strFunctions.capp(attName)))    
   else:
     output.write('\tFIX ME   {0};\n'.format(attName))
 
@@ -151,6 +155,25 @@ def writeGetFunction(attrib, output, element):
       output.write('\t */\n')
       output.write('\tvirtual {0}*'.format(attrib['element']))
       output.write(' create{0}();\n\n\n'.format(capAttName))
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('\t/**\n')
+    output.write('\t * Returns the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @return the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0} as a {1}.\n'.format(element, attType))
+    output.write('\t */\n')
+    output.write('\tvirtual const {0}&'.format(attTypeCode))
+    output.write(' get{0}() const;\n\n\n'.format(strFunctions.capp(attName)))
+    output.write('\t/**\n')
+    output.write('\t * Returns the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @return the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0} as a {1}.\n'.format(element, attType))
+    output.write('\t */\n')
+    output.write('\tvirtual {0}&'.format(attTypeCode))
+    output.write(' get{0}();\n\n\n'.format(strFunctions.capp(attName)))
   else:
     output.write('\t/**\n')
     output.write('\t * Returns the value of the \"{0}\"'.format(attName))
@@ -171,6 +194,23 @@ def writeIsSetFunction(attrib, output, element):
   num = att[4]
   if attrib['type'] == 'lo_element':
     return
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('\t/**\n')
+    output.write('\t * Predicate returning @c true or @c false depending on ')
+    output.write('whether this\n\t * {0}\'s \"{1}\" '.format(element, attName))
+    output.write('element has elements set.\n\t *\n')
+    output.write('\t * @return @c true if this {0}\'s \"{1}\"'.format(element, attName))
+    output.write(' element has been set,\n')
+    output.write('\t * otherwise @c false is returned.\n')
+    output.write('\t */\n')
+    output.write('\tvirtual bool has{0}() const;\n\n\n'.format(strFunctions.capp(capAttName)))  
+    output.write('\t/**\n')
+    output.write('\t * Returning the number of elements in this\n\t * {0}\'s \"{1}\" '.format(element, attName))
+    output.write('.\n\t *\n')
+    output.write('\t * @return number of elements in this {0}\'s \"{1}\"'.format(element, attName))
+    output.write(' \n')
+    output.write('\t */\n')
+    output.write('\tvirtual unsigned int getNum{0}() const;\n\n\n'.format(strFunctions.capp(capAttName)))  
   elif attrib['type'] == 'element':
     output.write('\t/**\n')
     output.write('\t * Predicate returning @c true or @c false depending on ')
@@ -220,6 +260,37 @@ def writeSetFunction(attrib, output, element):
     output.write('\t */\n')
     output.write('\tvirtual int set{0}('.format(capAttName))
     output.write('{0} {1});\n\n\n'.format(attTypeCode, attName))    
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('\t/**\n')
+    output.write('\t * Sets the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @param {0}; {1} value of the "{0}" attribute to be set\n'.format(attName, attTypeCode))
+    output.write('\t *\n')
+    output.write('\t * @return integer value indicating success/failure of the\n')
+    output.write('\t * function.  @if clike The value is drawn from the\n')
+    output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write('\t * returned by this function are:\n')
+    output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
+    output.write('\t */\n')
+    output.write('\tvirtual int set{0}('.format(strFunctions.capp(capAttName)))
+    output.write('const {0}& {1});\n\n\n'.format(attTypeCode, attName))
+    output.write('\t/**\n')
+    output.write('\t * Adds another value to the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @param {0}; {1} value of the "{0}" attribute to be added \n'.format(attName, 'double'))
+    output.write('\t *\n')
+    output.write('\t * @return integer value indicating success/failure of the\n')
+    output.write('\t * function.  @if clike The value is drawn from the\n')
+    output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write('\t * returned by this function are:\n')
+    output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
+    output.write('\t */\n')
+    output.write('\tvirtual int add{0}('.format(capAttName))
+    output.write('{0} {1});\n\n\n'.format('double', attName))
   else:
     output.write('\t/**\n')
     output.write('\t * Sets the value of the \"{0}\"'.format(attName))
@@ -243,6 +314,19 @@ def writeUnsetFunction(attrib, output, element):
   capAttName = strFunctions.cap(attName)
   if attrib['type'] == 'lo_element':
     return
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('\t/**\n')
+    output.write('\t * Clears the \"{0}\"'.format(attName))
+    output.write(' element of this {0}.\n'.format(element))
+    output.write('\t *\n')
+    output.write('\t * @return integer value indicating success/failure of the\n')
+    output.write('\t * function.  @if clike The value is drawn from the\n')
+    output.write('\t * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write('\t * returned by this function are:\n')
+    output.write('\t * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write('\t * @li LIBSEDML_OPERATION_FAILED\n')
+    output.write('\t */\n')
+    output.write('\tvirtual int clear{0}();\n\n\n'.format(strFunctions.capp(capAttName)))
   elif attrib['type'] == 'element':
     output.write('\t/**\n')
     output.write('\t * Unsets the \"{0}\"'.format(attName))
@@ -352,7 +436,7 @@ def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, ha
   generalFunctions.writeCommonHeaders(header, nameOfElement, attributes, False, hasChildren, hasMath)
   generalFunctions.writeInternalHeaders(header, isSedListOf, hasChildren)
   header.write('protected:\n\n')
-  generalFunctions.writeProtectedHeaders(header, hasChildren, hasMath, baseClass)
+  generalFunctions.writeProtectedHeaders(header, attributes, hasChildren, hasMath, baseClass)
   if elementDict.has_key('additionalCPPDecls'):
     header.write(open(elementDict['additionalCPPDecls'], 'r').read())
   header.write('\n};\n\n')

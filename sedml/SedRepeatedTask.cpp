@@ -673,7 +673,7 @@ SedRepeatedTask::createObject(XMLInputStream& stream)
 		object = &mRanges;
 	}
 
-	if (name == "listOfTaskChanges")
+	if (name == "listOfChanges")
 	{
 		object = &mTaskChanges;
 	}

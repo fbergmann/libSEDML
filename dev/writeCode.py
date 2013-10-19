@@ -60,6 +60,8 @@ def writeAtt(atttype, name, output, constType, pkg):
   elif atttype == 'bool':
     output.write('\t, m{0} (false)\n'.format(strFunctions.cap(name)))
     output.write('\t, mIsSet{0} (false)\n'.format(strFunctions.cap(name)))
+  elif atttype == 'std::vector<double>':
+    output.write('\t, m{0} ()\n'.format(strFunctions.capp(name)))
   else:
     output.write('\tFIX ME   {0};\n'.format(name))
 
@@ -73,7 +75,7 @@ def writeCopyAttributes(attrs, output, tabs, name):
     elif atttype == 'XMLNode*':
       output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->clone() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     else:
-      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.capp(attrs[i]['name'], atttype == 'lo_element'), name))
+      output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.capp(attrs[i]['name'], atttype == 'lo_element' or atttype == 'std::vector<double>'), name))
     if atttype == 'double' or atttype == 'int' or atttype == 'uint' or atttype == 'bool':
       output.write('{0}mIsSet{1}  = {2}.mIsSet{1};\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
 
@@ -173,15 +175,35 @@ def writeGetCode(attrib, output, element):
   attTypeCode = att[3]
   if attType == 'lo_element':
     return
-  output.write('/*\n')
-  output.write(' * Returns the value of the \"{0}\"'.format(attName))
-  output.write(' attribute of this {0}.\n'.format(element))
-  output.write(' */\n')
-  output.write('const {0}\n'.format(attTypeCode))
-  output.write('{0}::get{1}() const\n'.format(element, capAttName))
-  output.write('{\n')
-  output.write('\treturn m{0};\n'.format(capAttName))
-  output.write('}\n\n\n')
+  if attType == 'std::vector<double>': 
+    output.write('/*\n')
+    output.write(' * Returns the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write(' */\n')
+    output.write('const {0}&\n'.format(attTypeCode))
+    output.write('{0}::get{1}() const\n'.format(element, strFunctions.capp(capAttName)))
+    output.write('{\n')
+    output.write('\treturn m{0};\n'.format(strFunctions.capp(capAttName)))
+    output.write('}\n\n\n')
+    output.write('/*\n')
+    output.write(' * Returns the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write(' */\n')
+    output.write('{0}&\n'.format(attTypeCode))
+    output.write('{0}::get{1}()\n'.format(element, strFunctions.capp(capAttName)))
+    output.write('{\n')
+    output.write('\treturn m{0};\n'.format(strFunctions.capp(capAttName)))
+    output.write('}\n\n\n')
+  else: 
+    output.write('/*\n')
+    output.write(' * Returns the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write(' */\n')
+    output.write('const {0}\n'.format(attTypeCode))
+    output.write('{0}::get{1}() const\n'.format(element, capAttName))
+    output.write('{\n')
+    output.write('\treturn m{0};\n'.format(capAttName))
+    output.write('}\n\n\n')
   if attType == 'element' and attName != 'math':
     output.write('/*\n')
     output.write(' * Creates a new \"{0}\"'.format(attName))
@@ -204,21 +226,45 @@ def writeIsSetCode(attrib, output, element):
   num = att[4]
   if attType == 'lo_element':
     return
-  output.write('/*\n')
-  output.write(' * Returns true/false if {0} is set.\n'.format(attName))
-  output.write(' */\n')
-  output.write('bool\n')
-  output.write('{0}::isSet{1}() const\n'.format(element, capAttName))
-  output.write('{\n')
-  if attType == 'string':
-    output.write('\treturn (m{0}.empty() == false);\n'.format(capAttName))
-  elif attType == 'element' or attType == 'XMLNode*':
-    output.write('\treturn (m{0} != NULL);\n'.format(capAttName))
-  elif num == True:
-    output.write('\treturn mIsSet{0};\n'.format(capAttName))
-  elif attType == 'boolean':
-    output.write('\treturn mIsSet{0};\n'.format(capAttName))
-  output.write('}\n\n\n')
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('/**\n')
+    output.write(' * Predicate returning @c true or @c false depending on ')
+    output.write('whether this\n * {0}\'s \"{1}\" '.format(element, attName))
+    output.write('element has elements set.\n *\n')
+    output.write(' * @return @c true if this {0}\'s \"{1}\"'.format(element, attName))
+    output.write(' element has been set,\n')
+    output.write(' * otherwise @c false is returned.\n')
+    output.write(' */\n')
+    output.write('bool\n{0}::has{1}() const\n'.format(element, strFunctions.capp(capAttName)))  
+    output.write('{\n')
+    output.write('\treturn m{0}.size() > 0;\n'.format(strFunctions.capp(capAttName)))
+    output.write('}\n\n\n')
+    output.write('/**\n')
+    output.write(' * Returning the number of elements in this\n * {0}\'s \"{1}\" '.format(element, attName))
+    output.write('.\n *\n')
+    output.write(' * @return number of elements in this {0}\'s \"{1}\"'.format(element, attName))
+    output.write(' \n')
+    output.write(' */\n')
+    output.write('unsigned int\n{0}::getNum{1}() const\n'.format(element, strFunctions.capp(capAttName)))  
+    output.write('{\n')
+    output.write('\treturn (unsigned int)m{0}.size();\n'.format(strFunctions.capp(capAttName)))
+    output.write('}\n\n\n')
+  else:
+    output.write('/*\n')
+    output.write(' * Returns true/false if {0} is set.\n'.format(attName))
+    output.write(' */\n')
+    output.write('bool\n')
+    output.write('{0}::isSet{1}() const\n'.format(element, capAttName))
+    output.write('{\n')
+    if attType == 'string':
+      output.write('\treturn (m{0}.empty() == false);\n'.format(capAttName))
+    elif attType == 'element' or attType == 'XMLNode*':
+      output.write('\treturn (m{0} != NULL);\n'.format(capAttName))
+    elif num == True:
+      output.write('\treturn mIsSet{0};\n'.format(capAttName))
+    elif attType == 'boolean':
+      output.write('\treturn mIsSet{0};\n'.format(capAttName))
+    output.write('}\n\n\n')
 
 
 
@@ -234,73 +280,113 @@ def writeSetCode(attrib, output, element):
   num = att[4]
   if attType == 'lo_element':
     return
-  output.write('/*\n')
-  output.write(' * Sets {0} and returns value indicating success.\n'.format(attName))
-  output.write(' */\n')
-  output.write('int\n')
-  output.write('{0}::set{1}({2} {3})\n'.format(element, capAttName, attTypeCode, attName))
-  output.write('{\n')
-  if attType == 'string':
-    if attName == 'id':
-      output.write('\treturn SyntaxChecker::checkAndSetSId({0}, m{1});\n'.format(attName, capAttName ))
-    else:
-      output.write('\tif (&({0}) == NULL)\n'.format(attName))
-      output.write('\t{\n\t\treturn LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n\t}\n')
-      if attrib['type'] == 'SIdRef':
-        output.write('\telse if (!(SyntaxChecker::isValidInternalSId({0})))\n'.format(attName))
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('/**\n')
+    output.write(' * Sets the value of the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write(' *\n')
+    output.write(' * @param {0}; {1} value of the "{0}" attribute to be set\n'.format(attName, attTypeCode))
+    output.write(' *\n')
+    output.write(' * @return integer value indicating success/failure of the\n')
+    output.write(' * function.  @if clike The value is drawn from the\n')
+    output.write(' * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write(' * returned by this function are:\n')
+    output.write(' * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write(' * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
+    output.write(' */\n')
+    output.write('int\n{0}::set{1}('.format(element, strFunctions.capp(capAttName)))
+    output.write('const {0}& {1})\n'.format(attTypeCode, attName))
+    output.write('{\n')
+    output.write('\tm{0} = {1};\n'.format( strFunctions.capp(capAttName), attName))
+    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    output.write('}\n\n\n')
+    output.write('/**\n')
+    output.write(' * Adds another value to the \"{0}\"'.format(attName))
+    output.write(' attribute of this {0}.\n'.format(element))
+    output.write(' *\n')
+    output.write(' * @param {0}; {1} value of the "{0}" attribute to be added \n'.format(attName, 'double'))
+    output.write(' *\n')
+    output.write(' * @return integer value indicating success/failure of the\n')
+    output.write(' * function.  @if clike The value is drawn from the\n')
+    output.write(' * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write(' * returned by this function are:\n')
+    output.write(' * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write(' * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
+    output.write(' */\n')
+    output.write('int\n{0}::add{1}('.format(element, capAttName))
+    output.write('{0} {1})\n'.format('double', attName))
+    output.write('{\n')
+    output.write('\tm{0}.push_back({1});\n'.format( strFunctions.capp(capAttName), attName))
+    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    output.write('}\n\n\n')
+  else:
+    output.write('/*\n')
+    output.write(' * Sets {0} and returns value indicating success.\n'.format(attName))
+    output.write(' */\n')
+    output.write('int\n')
+    output.write('{0}::set{1}({2} {3})\n'.format(element, capAttName, attTypeCode, attName))
+    output.write('{\n')
+    if attType == 'string':
+      if attName == 'id':
+        output.write('\treturn SyntaxChecker::checkAndSetSId({0}, m{1});\n'.format(attName, capAttName ))
+      else:
+        output.write('\tif (&({0}) == NULL)\n'.format(attName))
         output.write('\t{\n\t\treturn LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n\t}\n')
-      output.write('\telse\n\t{\n')
-      output.write('\t\tm{0} = {1};\n'.format(capAttName, attName))
+        if attrib['type'] == 'SIdRef':
+          output.write('\telse if (!(SyntaxChecker::isValidInternalSId({0})))\n'.format(attName))
+          output.write('\t{\n\t\treturn LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n\t}\n')
+        output.write('\telse\n\t{\n')
+        output.write('\t\tm{0} = {1};\n'.format(capAttName, attName))
+        output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+    elif num == True:
+      output.write('\tm{0} = {1};\n'.format(capAttName, attName))
+      output.write('\tmIsSet{0} = true;\n'.format(capAttName))
+      output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    elif attType == 'boolean':
+      output.write('\tm{0} = {1};\n'.format(capAttName, attName))
+      output.write('\tmIsSet{0} = true;\n'.format(capAttName))
+      output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    elif attType == 'XMLNode*':
+      output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
+      output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+      output.write('\telse if ({0} == NULL)\n'.format(attName))
+      output.write('\t{\n')
+      output.write('\t\tdelete m{0};\n'.format(capAttName))
+      output.write('\t\tm{0} = NULL;\n'.format(capAttName))
       output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-  elif num == True:
-    output.write('\tm{0} = {1};\n'.format(capAttName, attName))
-    output.write('\tmIsSet{0} = true;\n'.format(capAttName))
-    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-  elif attType == 'boolean':
-    output.write('\tm{0} = {1};\n'.format(capAttName, attName))
-    output.write('\tmIsSet{0} = true;\n'.format(capAttName))
-    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-  elif attType == 'XMLNode*':
-    output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
-    output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-    output.write('\telse if ({0} == NULL)\n'.format(attName))
-    output.write('\t{\n')
-    output.write('\t\tdelete m{0};\n'.format(capAttName))
-    output.write('\t\tm{0} = NULL;\n'.format(capAttName))
-    output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-    output.write('\tdelete m{0};\n'.format(capAttName))
-    output.write('\tm{0} = ({1} != NULL) ?\n'.format(capAttName, attName))
-    output.write('\t\t{0}->clone() : NULL;\n'.format(attName))
-    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-  elif attType == 'element':
-    output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
-    output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-    output.write('\telse if ({0} == NULL)\n'.format(attName))
-    output.write('\t{\n')
-    output.write('\t\tdelete m{0};\n'.format(capAttName))
-    output.write('\t\tm{0} = NULL;\n'.format(capAttName))
-    output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-    if attTypeCode == 'ASTNode*':
-      output.write('\telse if (!({0}->isWellFormedASTNode()))\n'.format(attName))
-      output.write('\t{\n\t\treturn LIBSEDML_INVALID_OBJECT;\n\t}\n')
-    output.write('\telse\n\t{\n')
-    output.write('\t\tdelete m{0};\n'.format(capAttName))
-    output.write('\t\tm{0} = ({1} != NULL) ?\n'.format(capAttName, attName))
-    if attTypeCode == 'ASTNode*':
-      output.write('\t\t\t{0}->deepCopy() : NULL;\n'.format(attName))
-    else:
-      output.write('\t\t\tstatic_cast<{0}*>({1}->clone()) : NULL;\n'.format(attrib['element'], attName))
-    output.write('\t\tif (m{0} != NULL)\n'.format(capAttName))
-    output.write('\t\t{\n')
-    #if attTypeCode == 'ASTNode*':
-    #  output.write('\t\t\tm{0}->setParentSEDMLObject(this);\n'.format(capAttName, attName))
-    #else:
-    #  output.write('\t\t\tm{0}->connectToParent(this);\n'.format(capAttName, attName))
-    if attTypeCode != 'ASTNode*':
-      output.write('\t\t\tm{0}->connectToParent(this);\n'.format(capAttName, attName))
-    output.write('\t\t}\n')
-    output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-  output.write('}\n\n\n')
+      output.write('\tdelete m{0};\n'.format(capAttName))
+      output.write('\tm{0} = ({1} != NULL) ?\n'.format(capAttName, attName))
+      output.write('\t\t{0}->clone() : NULL;\n'.format(attName))
+      output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    elif attType == 'element':
+      output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
+      output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+      output.write('\telse if ({0} == NULL)\n'.format(attName))
+      output.write('\t{\n')
+      output.write('\t\tdelete m{0};\n'.format(capAttName))
+      output.write('\t\tm{0} = NULL;\n'.format(capAttName))
+      output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+      if attTypeCode == 'ASTNode*':
+        output.write('\telse if (!({0}->isWellFormedASTNode()))\n'.format(attName))
+        output.write('\t{\n\t\treturn LIBSEDML_INVALID_OBJECT;\n\t}\n')
+      output.write('\telse\n\t{\n')
+      output.write('\t\tdelete m{0};\n'.format(capAttName))
+      output.write('\t\tm{0} = ({1} != NULL) ?\n'.format(capAttName, attName))
+      if attTypeCode == 'ASTNode*':
+        output.write('\t\t\t{0}->deepCopy() : NULL;\n'.format(attName))
+      else:
+        output.write('\t\t\tstatic_cast<{0}*>({1}->clone()) : NULL;\n'.format(attrib['element'], attName))
+      output.write('\t\tif (m{0} != NULL)\n'.format(capAttName))
+      output.write('\t\t{\n')
+      #if attTypeCode == 'ASTNode*':
+      #  output.write('\t\t\tm{0}->setParentSEDMLObject(this);\n'.format(capAttName, attName))
+      #else:
+      #  output.write('\t\t\tm{0}->connectToParent(this);\n'.format(capAttName, attName))
+      if attTypeCode != 'ASTNode*':
+        output.write('\t\t\tm{0}->connectToParent(this);\n'.format(capAttName, attName))
+      output.write('\t\t}\n')
+      output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+    output.write('}\n\n\n')
 
 
 
@@ -313,37 +399,55 @@ def writeUnsetCode(attrib, output, element):
   num = att[4]
   if attType == 'lo_element':
     return
-  output.write('/*\n')
-  output.write(' * Unsets {0} and returns value indicating success.\n'.format(attName))
-  output.write(' */\n')
-  output.write('int\n')
-  output.write('{0}::unset{1}()\n'.format(element, capAttName))
-  output.write('{\n')
-  if attType == 'string':
-    output.write('\tm{0}.erase();\n\n'.format(capAttName))
-    output.write('\tif (m{0}.empty() == true)\n'.format(capAttName))
-    output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-    output.write('\telse\n\t{\n')
-    output.write('\t\treturn LIBSEDML_OPERATION_FAILED;\n\t}\n')
-  elif num == True:
-    if attType == 'double':
-      output.write('\tm{0} = numeric_limits<double>::quiet_NaN();\n'.format(capAttName))
-    else:
-      output.write('\tm{0} = SEDML_INT_MAX;\n'.format(capAttName))
-    output.write('\tmIsSet{0} = false;\n\n'.format(capAttName))
-    output.write('\tif (isSet{0}() == false)\n'.format(capAttName))
-    output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
-    output.write('\telse\n\t{\n')
-    output.write('\t\treturn LIBSEDML_OPERATION_FAILED;\n\t}\n')
-  elif attType == 'boolean':
-    output.write('\tm{0} = false;\n'.format(capAttName))
-    output.write('\tmIsSet{0} = false;\n'.format(capAttName))
+  elif attrib['type'] == 'std::vector<double>':
+    output.write('/**\n')
+    output.write(' * Clears the \"{0}\"'.format(attName))
+    output.write(' element of this {0}.\n'.format(element))
+    output.write(' *\n')
+    output.write(' * @return integer value indicating success/failure of the\n')
+    output.write(' * function.  @if clike The value is drawn from the\n')
+    output.write(' * enumeration #OperationReturnValues_t. @endif The possible values\n')
+    output.write(' * returned by this function are:\n')
+    output.write(' * @li LIBSEDML_OPERATION_SUCCESS\n')
+    output.write(' * @li LIBSEDML_OPERATION_FAILED\n')
+    output.write(' */\n')
+    output.write('int\n{0}::clear{1}()\n'.format(element, strFunctions.capp(capAttName)))
+    output.write('{\n')
+    output.write('\tm{0}.clear();\n'.format(strFunctions.capp(capAttName)))
     output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-  elif attType == 'element' or attType == 'XMLNode*':
-    output.write('\tdelete m{0};\n'.format(capAttName))
-    output.write('\tm{0} = NULL;\n'.format(capAttName))
-    output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-  output.write('}\n\n\n')
+    output.write('}\n\n\n')
+  else:    
+    output.write('/*\n')
+    output.write(' * Unsets {0} and returns value indicating success.\n'.format(attName))
+    output.write(' */\n')
+    output.write('int\n')
+    output.write('{0}::unset{1}()\n'.format(element, capAttName))
+    output.write('{\n')
+    if attType == 'string':
+      output.write('\tm{0}.erase();\n\n'.format(capAttName))
+      output.write('\tif (m{0}.empty() == true)\n'.format(capAttName))
+      output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+      output.write('\telse\n\t{\n')
+      output.write('\t\treturn LIBSEDML_OPERATION_FAILED;\n\t}\n')
+    elif num == True:
+      if attType == 'double':
+        output.write('\tm{0} = numeric_limits<double>::quiet_NaN();\n'.format(capAttName))
+      else:
+        output.write('\tm{0} = SEDML_INT_MAX;\n'.format(capAttName))
+      output.write('\tmIsSet{0} = false;\n\n'.format(capAttName))
+      output.write('\tif (isSet{0}() == false)\n'.format(capAttName))
+      output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
+      output.write('\telse\n\t{\n')
+      output.write('\t\treturn LIBSEDML_OPERATION_FAILED;\n\t}\n')
+    elif attType == 'boolean':
+      output.write('\tm{0} = false;\n'.format(capAttName))
+      output.write('\tmIsSet{0} = false;\n'.format(capAttName))
+      output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    elif attType == 'element' or attType == 'XMLNode*':
+      output.write('\tdelete m{0};\n'.format(capAttName))
+      output.write('\tm{0} = NULL;\n'.format(capAttName))
+      output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
+    output.write('}\n\n\n')
 
 # for each attribute write a set/get/isset/unset
 def writeAttributeCode(attrs, output, element):

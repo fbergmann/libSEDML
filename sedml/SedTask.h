@@ -597,6 +597,17 @@ public:
 
 
 	/**
+	 * Creates a new Task object, adds it to the
+	 * SedListOfTasks and returns the Task object created. 
+	 *
+	 * @return a new Task object instance
+	 *
+	 * @see addTask(const SedTask* t)
+	 */
+	SedRepeatedTask* createRepeatedTask();
+
+
+	/**
 	 * Removes the nth Task from this SedListOfTasks
 	 * and returns a pointer to it.
 	 *

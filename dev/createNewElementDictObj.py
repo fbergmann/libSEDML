@@ -377,7 +377,8 @@ def createSedUniformRange() :
     return element
 
 def createSedVectorRange():
-    attributes = []
+    a0 = dict({'type': 'std::vector<double>', 'reqd' : False, 'name':'value'})
+    attributes = [a0]
     element = dict({
                    'name': 'SedVectorRange',
                    'package': 'Sed',
@@ -388,8 +389,6 @@ def createSedVectorRange():
                    'hasMath':False,
                    'baseClass':'SedRange',
                    'elementName':'vectorRange',
-                   'additionalCPPDecls': '../dev/vectorrange_inc.h',
-                   'additionalCPPImpls': '../dev/vectorrange_inc.cpp',
                    })
     return element
 
@@ -515,7 +514,12 @@ def createSedTask() :
                  'attribs':attributes,
                  'hasChildren':True,
                  'hasMath':False,
-                 'elementName':'task'
+                 'elementName':'task',
+                 'abstract':True,
+                 'concrete': [ 
+                            dict({ 'name':'task', 'element':'SedTask'}),
+                            dict({ 'name':'repeatedTask', 'element':'SedRepeatedTask'}),
+                             ]
                  })
   return element
 

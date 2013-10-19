@@ -56,13 +56,14 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 #include <sedml/SedRange.h>
-
+#include <vector>
 
 class LIBSEDML_EXTERN SedVectorRange : public SedRange
 {
 
 protected:
 
+	std::vector<double>  mValues;
 
 
 public:
@@ -120,6 +121,84 @@ public:
 
 
  	/**
+	 * Returns the value of the "value" attribute of this SedVectorRange.
+	 *
+	 * @return the value of the "value" attribute of this SedVectorRange as a std::vector<double>.
+	 */
+	virtual const std::vector<double>& getValues() const;
+
+
+	/**
+	 * Returns the value of the "value" attribute of this SedVectorRange.
+	 *
+	 * @return the value of the "value" attribute of this SedVectorRange as a std::vector<double>.
+	 */
+	virtual std::vector<double>& getValues();
+
+
+	/**
+	 * Predicate returning @c true or @c false depending on whether this
+	 * SedVectorRange's "value" element has elements set.
+	 *
+	 * @return @c true if this SedVectorRange's "value" element has been set,
+	 * otherwise @c false is returned.
+	 */
+	virtual bool hasValues() const;
+
+
+	/**
+	 * Returning the number of elements in this
+	 * SedVectorRange's "value" .
+	 *
+	 * @return number of elements in this SedVectorRange's "value" 
+	 */
+	virtual unsigned int getNumValues() const;
+
+
+	/**
+	 * Sets the value of the "value" attribute of this SedVectorRange.
+	 *
+	 * @param value; std::vector<double> value of the "value" attribute to be set
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	virtual int setValues(const std::vector<double>& value);
+
+
+	/**
+	 * Adds another value to the "value" attribute of this SedVectorRange.
+	 *
+	 * @param value; double value of the "value" attribute to be added 
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	virtual int addValue(double value);
+
+
+	/**
+	 * Clears the "value" element of this SedVectorRange.
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
+	 */
+	virtual int clearValues();
+
+
+	/**
 	 * Returns the XML element name of this object, which for SedVectorRange, is
 	 * always @c "sedVectorRange".
 	 *
@@ -247,6 +326,19 @@ protected:
 /** @cond doxygen-libsbml-internal */
 
 	/**
+	 * Subclasses should override this method ro read other XML.
+	 *
+	 * return true if read from stream, false otherwise.
+	 */
+	virtual bool readOtherXML (XMLInputStream& stream);
+
+
+/** @endcond doxygen-libsbml-internal */
+
+
+/** @cond doxygen-libsbml-internal */
+
+	/**
 	 * Write values of XMLAttributes to the output stream.
 	 */
 	virtual void writeAttributes (XMLOutputStream& stream) const;
@@ -254,44 +346,6 @@ protected:
 
 /** @endcond doxygen-libsbml-internal */
 
-
-
-protected:
-
-  std::vector<double> mValues;
-
-public: 
-
-  /** 
-   * @return the number of items
-   */
-  unsigned int getNumValues() const;
-  
-  /**
-   * @return the value at the given index, or NaN.
-   */
-  double getValue(unsigned int index) const;
-  
-  /**
-   * clears the vector of values
-   */
-  void clearValues();
-  
-  /** 
-   * adds the given value
-   */ 
-  void addValue(double value);
-  
-  /**
-   * removes the item at the given index and returns it
-   */
-  double removeValueAt(unsigned int index);
-  
-  /**
-   * sets the value at the given index
-   */ 
-  void setValue(unsigned int index, double value);  
-  
 
 
 };

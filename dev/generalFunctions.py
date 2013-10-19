@@ -8,6 +8,22 @@
 import sys
 import strFunctions
 
+def getByType(attribs, typeName):
+  if attribs == None: 
+    return None
+  for i in range(0, len(attribs)): 
+    if attribs[i]['type'] == typeName: 
+      return attribs[i]
+  return None
+  
+def containsType(attribs, typeName):
+  if attribs == None: 
+    return False
+  for i in range(0, len(attribs)): 
+    if attribs[i]['type'] == typeName: 
+      return True
+  return False
+  
 def writeInternalStart(outFile):
   outFile.write('/** @cond doxygen-libsbml-internal */\n\n')
   
@@ -88,6 +104,10 @@ def parseAttribute(attrib):
     attType = 'XMLNode*'
     attTypeCode = 'XMLNode*'
     num = False
+  elif attrib['type'] == 'std::vector<double>':
+    attType = 'std::vector<double>'
+    attTypeCode = 'std::vector<double>'
+    num = False
   else:
     attType = 'FIX ME'
     attTypeCode = 'FIX ME'
@@ -150,6 +170,10 @@ def parseAttributeForC(attrib):
   elif attrib['type'] == 'XMLNode*':
     attType = 'XMLNode*'
     attTypeCode = 'XMLNode*'
+    num = False
+  elif attrib['type'] == 'std::vector<double>':
+    attType = 'std::vector<double>'
+    attTypeCode = 'std::vector<double>'
     num = False
   else:
     attType = 'FIX ME'
@@ -251,6 +275,19 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('\t{\n\t\t')
         outFile.write('m{0}.write(stream);'.format(strFunctions.capp(attributes[i]['name'])))
         outFile.write('\n\t}\n')
+  if containsType(attributes, 'std::vector<double>'):
+    vector = getByType(attributes, 'std::vector<double>')
+    outFile.write('\tif(has{0}())\n'.format(strFunctions.capp(vector['name'])))
+    outFile.write('\t{\n')
+    outFile.write('\t\tfor (std::vector<double>::const_iterator it = m{0}.begin(); it != m{0}.end(); ++it)\n'.format(strFunctions.capp(vector['name'])))
+    outFile.write('\t\t{\n')
+    outFile.write('\t\t\tstream.startElement("{0}");\n'.format(vector['name']))
+    outFile.write('\t\t\tstream.setAutoIndent(false);\n')
+    outFile.write('\t\t\tstream << " " << *it << " ";\n')
+    outFile.write('\t\t\tstream.endElement("{0}");\n'.format(vector['name']))
+    outFile.write('\t\t\tstream.setAutoIndent(true);\n')
+    outFile.write('\t\t}\n')
+    outFile.write('\t}\n')
   if hasMath == True:
     for i in range(0, len(attributes)):
       if attributes[i]['type'] == 'element' and attributes[i]['name'] == 'Math' or attributes[i]['name'] == 'math':
@@ -483,6 +520,8 @@ def writeReadAttribute(output, attrib, element):
       output.write('false);\n\n')
   elif attrib['type'] == 'element':
     return
+  elif attrib['type'] == 'std::vector<double>':
+    return
   else:
     attType = 'FIX ME'
     attTypeCode = 'FIX ME'
@@ -504,7 +543,12 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
     outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
   for i in range (0, len(attribs)):
     current = attribs[i]
-    if current['type'] == 'lo_element':
+    if current.has_key('lo_elementName'):        
+      outFile.write('\tif (name == "{0}")\n'.format(current['lo_elementName']))	
+      outFile.write('\t{\n')	
+      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))	
+      outFile.write('\t}\n\n')
+    elif current['type'] == 'lo_element':
       outFile.write('\tif (name == "listOf{0}")\n'.format(strFunctions.capp(current['name'])))	
       outFile.write('\t{\n')	
       outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))	
@@ -571,7 +615,7 @@ def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   outFile.write('{\n')
   outFile.write('\t{0}::writeAttributes(stream);\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
-    if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
+    if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element' and attribs[i]['type'] != 'std::vector<double>':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
       outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))	 
   outFile.write('}\n\n\n')
@@ -686,23 +730,38 @@ def writeReadOtherXMLHeader(outFile):
   outFile.write('\tvirtual bool readOtherXML (XMLInputStream& stream);\n\n\n')
   writeInternalEnd(outFile)
   
-def writeReadOtherXMLCPPCode(outFile, element, baseClass='SedBase'):
+def writeReadOtherXMLCPPCode(outFile, element, hasMath = True, attribs = None, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('bool\n{0}::readOtherXML (XMLInputStream& stream)\n'.format(element))
   outFile.write('{\n')
   outFile.write('\tbool          read = false;\n')
   outFile.write('\tconst string& name = stream.peek().getName();\n\n')
-  outFile.write('\tif (name == "math")\n\t{\n')
-  outFile.write('\t\tconst XMLToken elem = stream.peek();\n')
-  outFile.write('\t\tconst std::string prefix = checkMathMLNamespace(elem);\n\n')
-  #outFile.write('\t\tif (stream.getSedNamespaces() == NULL)\n\t\t{\n')
-  #outFile.write('\t\t\tstream.setSedNamespaces(new SedNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
-  outFile.write('\t\tdelete mMath;\n')
-  outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
-  #outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
-  outFile.write('\t\tread = true;\n\t}\n\n')
+  if hasMath == True: 
+    outFile.write('\tif (name == "math")\n\t{\n')
+    outFile.write('\t\tconst XMLToken elem = stream.peek();\n')
+    outFile.write('\t\tconst std::string prefix = checkMathMLNamespace(elem);\n\n')
+    #outFile.write('\t\tif (stream.getSedNamespaces() == NULL)\n\t\t{\n')
+    #outFile.write('\t\t\tstream.setSedNamespaces(new SedNamespaces(getLevel(), getVersion()));\n\t\t}\n\n')
+    outFile.write('\t\tdelete mMath;\n')
+    outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
+    #outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
+    outFile.write('\t\tread = true;\n\t}\n\n')
+  elif containsType(attribs, 'std::vector<double>'):
+    elem = getByType(attribs, 'std::vector<double>')
+    outFile.write('\twhile (stream.peek().getName() == "{0}")\n'.format(elem['name']))
+    outFile.write('\t{\n')
+    outFile.write('\t  stream.next(); // consume start\n')
+    outFile.write('\t  stringstream text;\n')
+    outFile.write('\t  while(stream.isGood() && stream.peek().isText())\n')
+    outFile.write('\t    text << stream.next().getCharacters();\n')
+    outFile.write('\t  double value; text >> value;\n')
+    outFile.write('\t  if (!text.fail())\n')
+    outFile.write('\t    m{0}.push_back(value);\n'.format(strFunctions.capp(elem['name'])))
+    outFile.write('\t  stream.next(); // consume end\n')
+    outFile.write('\t  read = true;\n')
+    outFile.write('\t}\n')
   outFile.write('\tif ({0}::readOtherXML(stream))\n'.format(baseClass))
-  outFile.write('\t\t{\n\t\tread = true;\n\t}\n')
+  outFile.write('\t{\n\t\tread = true;\n\t}\n')
   outFile.write('\treturn read;\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
@@ -710,12 +769,12 @@ def writeReadOtherXMLCPPCode(outFile, element, baseClass='SedBase'):
 
 
 
-def writeProtectedHeaders(outFile, hasChildren=False, hasMath=False, baseClass='SedBase'):
+def writeProtectedHeaders(outFile, attribs = None, hasChildren=False, hasMath=False, baseClass='SedBase'):
   if hasChildren or baseClass != 'SedBase':
     writeCreateObjectHeader(outFile)
   writeAddExpectedHeader(outFile)
   writeReadAttributesHeader(outFile)
-  if hasMath == True:
+  if hasMath == True or containsType(attribs, 'std::vector<double>'):
     writeReadOtherXMLHeader(outFile)
   writeWriteAttributesHeader(outFile)
   
@@ -760,10 +819,10 @@ def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMa
   writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath, baseClass)
   writeAcceptCPPCode(outFile, element)
   writeSetDocCPPCode(outFile, element, attributes,baseClass)
-  
+
 def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, baseClass):
   writeAddExpectedCPPCode(outFile, element, attribs, baseClass)
   writeReadAttributesCPPCode(outFile, element, attribs, baseClass)
-  if hasMath == True:
-    writeReadOtherXMLCPPCode(outFile, element, baseClass)
+  if hasMath == True or containsType(attribs, 'std::vector<double>'):
+    writeReadOtherXMLCPPCode(outFile, element, hasMath, attribs, baseClass)
   writeWriteAttributesCPPCode(outFile, element, attribs, baseClass)

@@ -645,7 +645,7 @@ SedComputeChange::readOtherXML (XMLInputStream& stream)
 	}
 
 	if (SedChange::readOtherXML(stream))
-		{
+	{
 		read = true;
 	}
 	return read;

@@ -62,9 +62,9 @@ class LIBSEDML_EXTERN SedSubTask : public SedBase
 
 protected:
 
-	std::string   mTask;
 	int           mOrder;
 	bool          mIsSetOrder;
+	std::string   mTask;
 
 
 public:
@@ -122,52 +122,6 @@ public:
 
 
  	/**
-	 * Returns the value of the "task" attribute of this SedSubTask.
-	 *
-	 * @return the value of the "task" attribute of this SedSubTask as a string.
-	 */
-	virtual const std::string& getTask() const;
-
-
-	/**
-	 * Predicate returning @c true or @c false depending on whether this
-	 * SedSubTask's "task" attribute has been set.
-	 *
-	 * @return @c true if this SedSubTask's "task" attribute has been set,
-	 * otherwise @c false is returned.
-	 */
-	virtual bool isSetTask() const;
-
-
-	/**
-	 * Sets the value of the "task" attribute of this SedSubTask.
-	 *
-	 * @param task; const std::string& value of the "task" attribute to be set
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
-	 */
-	virtual int setTask(const std::string& task);
-
-
-	/**
-	 * Unsets the value of the "task" attribute of this SedSubTask.
-	 *
-	 * @return integer value indicating success/failure of the
-	 * function.  @if clike The value is drawn from the
-	 * enumeration #OperationReturnValues_t. @endif The possible values
-	 * returned by this function are:
-	 * @li LIBSEDML_OPERATION_SUCCESS
-	 * @li LIBSEDML_OPERATION_FAILED
-	 */
-	virtual int unsetTask();
-
-
-	/**
 	 * Returns the value of the "order" attribute of this SedSubTask.
 	 *
 	 * @return the value of the "order" attribute of this SedSubTask as a integer.
@@ -211,6 +165,52 @@ public:
 	 * @li LIBSEDML_OPERATION_FAILED
 	 */
 	virtual int unsetOrder();
+
+
+	/**
+	 * Returns the value of the "task" attribute of this SedSubTask.
+	 *
+	 * @return the value of the "task" attribute of this SedSubTask as a string.
+	 */
+	virtual const std::string& getTask() const;
+
+
+	/**
+	 * Predicate returning @c true or @c false depending on whether this
+	 * SedSubTask's "task" attribute has been set.
+	 *
+	 * @return @c true if this SedSubTask's "task" attribute has been set,
+	 * otherwise @c false is returned.
+	 */
+	virtual bool isSetTask() const;
+
+
+	/**
+	 * Sets the value of the "task" attribute of this SedSubTask.
+	 *
+	 * @param task; const std::string& value of the "task" attribute to be set
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+	 */
+	virtual int setTask(const std::string& task);
+
+
+	/**
+	 * Unsets the value of the "task" attribute of this SedSubTask.
+	 *
+	 * @return integer value indicating success/failure of the
+	 * function.  @if clike The value is drawn from the
+	 * enumeration #OperationReturnValues_t. @endif The possible values
+	 * returned by this function are:
+	 * @li LIBSEDML_OPERATION_SUCCESS
+	 * @li LIBSEDML_OPERATION_FAILED
+	 */
+	virtual int unsetTask();
 
 
 	/**
@@ -260,8 +260,8 @@ public:
 	 * for this SedSubTask object have been set.
 	 *
 	 * @note The required attributes for a SedSubTask object are:
-	 * @li "task"
 	 * @li "order"
+	 * @li "task"
 	 *
 	 * @return a boolean value indicating whether all the required
 	 * attributes for this object have been defined.
@@ -629,18 +629,13 @@ SedSubTask_clone(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
-char *
-SedSubTask_getTask(SedSubTask_t * sst);
-
-
-LIBSEDML_EXTERN
 int
 SedSubTask_getOrder(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
-int
-SedSubTask_isSetTask(SedSubTask_t * sst);
+char *
+SedSubTask_getTask(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
@@ -650,7 +645,7 @@ SedSubTask_isSetOrder(SedSubTask_t * sst);
 
 LIBSEDML_EXTERN
 int
-SedSubTask_setTask(SedSubTask_t * sst, const char * task);
+SedSubTask_isSetTask(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN
@@ -660,12 +655,17 @@ SedSubTask_setOrder(SedSubTask_t * sst, int order);
 
 LIBSEDML_EXTERN
 int
-SedSubTask_unsetTask(SedSubTask_t * sst);
+SedSubTask_setTask(SedSubTask_t * sst, const char * task);
 
 
 LIBSEDML_EXTERN
 int
 SedSubTask_unsetOrder(SedSubTask_t * sst);
+
+
+LIBSEDML_EXTERN
+int
+SedSubTask_unsetTask(SedSubTask_t * sst);
 
 
 LIBSEDML_EXTERN

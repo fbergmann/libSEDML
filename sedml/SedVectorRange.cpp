@@ -49,6 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedVectorRange::SedVectorRange (unsigned int level, unsigned int version)
 	: SedRange(level, version)
+	, mValues ()
 
 {
 	// set an SedNamespaces derived object of this package
@@ -61,6 +62,7 @@ SedVectorRange::SedVectorRange (unsigned int level, unsigned int version)
  */
 SedVectorRange::SedVectorRange (SedNamespaces* sedns)
 	: SedRange(sedns)
+	, mValues ()
 
 {
 	// set the element namespace of this object
@@ -80,6 +82,7 @@ SedVectorRange::SedVectorRange (const SedVectorRange& orig)
 	}
 	else
 	{
+		mValues  = orig.mValues;
 	}
 }
 
@@ -97,6 +100,7 @@ SedVectorRange::operator=(const SedVectorRange& rhs)
 	else if (&rhs != this)
 	{
 		SedRange::operator=(rhs);
+		mValues  = rhs.mValues;
 	}
 	return *this;
 }
@@ -117,6 +121,111 @@ SedVectorRange::clone () const
  */
 SedVectorRange::~SedVectorRange ()
 {
+}
+
+
+/*
+ * Returns the value of the "value" attribute of this SedVectorRange.
+ */
+const std::vector<double>&
+SedVectorRange::getValues() const
+{
+	return mValues;
+}
+
+
+/*
+ * Returns the value of the "value" attribute of this SedVectorRange.
+ */
+std::vector<double>&
+SedVectorRange::getValues()
+{
+	return mValues;
+}
+
+
+/**
+ * Predicate returning @c true or @c false depending on whether this
+ * SedVectorRange's "value" element has elements set.
+ *
+ * @return @c true if this SedVectorRange's "value" element has been set,
+ * otherwise @c false is returned.
+ */
+bool
+SedVectorRange::hasValues() const
+{
+	return mValues.size() > 0;
+}
+
+
+/**
+ * Returning the number of elements in this
+ * SedVectorRange's "value" .
+ *
+ * @return number of elements in this SedVectorRange's "value" 
+ */
+unsigned int
+SedVectorRange::getNumValues() const
+{
+	return (unsigned int)mValues.size();
+}
+
+
+/**
+ * Sets the value of the "value" attribute of this SedVectorRange.
+ *
+ * @param value; std::vector<double> value of the "value" attribute to be set
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedVectorRange::setValues(const std::vector<double>& value)
+{
+	mValues = value;
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Adds another value to the "value" attribute of this SedVectorRange.
+ *
+ * @param value; double value of the "value" attribute to be added 
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+ */
+int
+SedVectorRange::addValue(double value)
+{
+	mValues.push_back(value);
+	return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/**
+ * Clears the "value" element of this SedVectorRange.
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif The possible values
+ * returned by this function are:
+ * @li LIBSEDML_OPERATION_SUCCESS
+ * @li LIBSEDML_OPERATION_FAILED
+ */
+int
+SedVectorRange::clearValues()
+{
+	mValues.clear();
+	return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -176,6 +285,17 @@ void
 SedVectorRange::writeElements (XMLOutputStream& stream) const
 {
 	SedRange::writeElements(stream);
+	if(hasValues())
+	{
+		for (std::vector<double>::const_iterator it = mValues.begin(); it != mValues.end(); ++it)
+		{
+			stream.startElement("value");
+			stream.setAutoIndent(false);
+			stream << " " << *it << " ";
+			stream.endElement("value");
+			stream.setAutoIndent(true);
+		}
+	}
 }
 
 
@@ -223,6 +343,7 @@ SedVectorRange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedRange::addExpectedAttributes(attributes);
 
+	attributes.add("value");
 }
 
 
@@ -240,6 +361,39 @@ SedVectorRange::readAttributes (const XMLAttributes& attributes,
 {
 	SedRange::readAttributes(attributes, expectedAttributes);
 
+	bool assigned = false;
+
+}
+
+
+/** @endcond doxygen-libsbml-internal */
+
+
+/** @cond doxygen-libsbml-internal */
+
+bool
+SedVectorRange::readOtherXML (XMLInputStream& stream)
+{
+	bool          read = false;
+	const string& name = stream.peek().getName();
+
+	while (stream.peek().getName() == "value")
+	{
+	  stream.next(); // consume start
+	  stringstream text;
+	  while(stream.isGood() && stream.peek().isText())
+	    text << stream.next().getCharacters();
+	  double value; text >> value;
+	  if (!text.fail())
+	    mValues.push_back(value);
+	  stream.next(); // consume end
+	  read = true;
+	}
+	if (SedRange::readOtherXML(stream))
+	{
+		read = true;
+	}
+	return read;
 }
 
 
@@ -262,63 +416,7 @@ SedVectorRange::writeAttributes (XMLOutputStream& stream) const
 /** @endcond doxygen-libsbml-internal */
 
 
-  /** 
-   * @return the number of items
-   */
-  unsigned int SedVectorRange::getNumValues() const
-  {
-    return mValues.size();
-  }
-  
-  /**
-   * @return the value at the given index, or NaN.
-   */
-  double SedVectorRange::getValue(unsigned int index) const
-  {
-    if (index > mValues.size())
-      return numeric_limits<double>::quiet_NaN();
-    return mValues[index];
-  }
-  
-  /**
-   * clears the vector of values
-   */
-  void SedVectorRange::clearValues()
-  {
-    mValues.clear();
-  }
-  
-  /** 
-   * adds the given value
-   */ 
-  void SedVectorRange::addValue(double value)
-  {
-    mValues.push_back(value);
-  }
-  
-  /**
-   * removes the item at the given index and returns it
-   */
-  double SedVectorRange::removeValueAt(unsigned int index)
-  {
-    std::vector<double>::iterator it = mValues.begin() + index;
-    if (it == mValues.end())
-      return numeric_limits<double>::quiet_NaN();
-    double result = *it;
-    mValues.erase(it);
-    return result;
-  }
-  
-  /**
-   * sets the value at the given index
-   */ 
-  void SedVectorRange::setValue(unsigned int index, double value)
-  {
-    if (index > mValues.size())
-     return;
-    mValues[index] = value;
-  }
-  /**
+/**
  * write comments
  */
 LIBSEDML_EXTERN
@@ -359,6 +457,12 @@ SedVectorRange_clone(SedVectorRange_t * svr)
 }
 
 
+/**
+ * write comments
+ */
+/**
+ * write comments
+ */
 /**
  * write comments
  */

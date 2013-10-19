@@ -972,7 +972,7 @@ SedSetValue::readOtherXML (XMLInputStream& stream)
 	}
 
 	if (SedBase::readOtherXML(stream))
-		{
+	{
 		read = true;
 	}
 	return read;

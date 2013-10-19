@@ -145,6 +145,9 @@ main (int argc, char* argv[])
 
   SedVectorRange* vrange = repeat->createVectorRange();
   vrange->setId("vRange");
+  vrange->addValue(8);
+  vrange->addValue(4);
+  vrange->addValue(0.1);
 
 
   SedSetValue* setValue = repeat->createTaskChange();
