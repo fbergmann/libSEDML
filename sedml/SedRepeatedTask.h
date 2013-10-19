@@ -55,12 +55,13 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
+#include <sedml/SedTask.h>
 #include <sedml/SedRange.h>
 #include <sedml/SedSetValue.h>
 #include <sedml/SedSubTask.h>
 
 
-class LIBSEDML_EXTERN SedRepeatedTask : public SedBase
+class LIBSEDML_EXTERN SedRepeatedTask : public SedTask
 {
 
 protected:

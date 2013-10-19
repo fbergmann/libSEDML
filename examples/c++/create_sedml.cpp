@@ -127,7 +127,7 @@ main (int argc, char* argv[])
   task->setSimulationReference("sim2");
 
   SedRepeatedTask* repeat = doc.createRepeatedTask();
-  repeat->setId("task2");
+  repeat->setId("task3");
   repeat->setRangeId("index");
   repeat->setResetModel(false);
 

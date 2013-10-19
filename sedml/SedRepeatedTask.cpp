@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  * Creates a new SedRepeatedTask with the given level, version, and package version.
  */
 SedRepeatedTask::SedRepeatedTask (unsigned int level, unsigned int version)
-	: SedBase(level, version)
+	: SedTask(level, version)
 	, mRangeId ("")
 	, mResetModel (false)
 	, mIsSetResetModel (false)
@@ -69,7 +69,7 @@ SedRepeatedTask::SedRepeatedTask (unsigned int level, unsigned int version)
  * Creates a new SedRepeatedTask with the given SedNamespaces object.
  */
 SedRepeatedTask::SedRepeatedTask (SedNamespaces* sedns)
-	: SedBase(sedns)
+	: SedTask(sedns)
 	, mRangeId ("")
 	, mResetModel (false)
 	, mIsSetResetModel (false)
@@ -90,7 +90,7 @@ SedRepeatedTask::SedRepeatedTask (SedNamespaces* sedns)
  * Copy constructor for SedRepeatedTask.
  */
 SedRepeatedTask::SedRepeatedTask (const SedRepeatedTask& orig)
-	: SedBase(orig)
+	: SedTask(orig)
 {
 	if (&orig == NULL)
 	{
@@ -123,7 +123,7 @@ SedRepeatedTask::operator=(const SedRepeatedTask& rhs)
 	}
 	else if (&rhs != this)
 	{
-		SedBase::operator=(rhs);
+		SedTask::operator=(rhs);
 		mRangeId  = rhs.mRangeId;
 		mResetModel  = rhs.mResetModel;
 		mIsSetResetModel  = rhs.mIsSetResetModel;
@@ -664,7 +664,7 @@ SedRepeatedTask::getElementName () const
 SedBase*
 SedRepeatedTask::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+	SedBase* object = SedTask::createObject(stream);
 
 	const string& name   = stream.peek().getName();
 
@@ -695,7 +695,7 @@ SedRepeatedTask::createObject(XMLInputStream& stream)
 void
 SedRepeatedTask::connectToChild ()
 {
-	SedBase::connectToChild();
+	SedTask::connectToChild();
 
 	mRanges.connectToParent(this);
 	mTaskChanges.connectToParent(this);
@@ -719,7 +719,7 @@ SedRepeatedTask::getTypeCode () const
 bool
 SedRepeatedTask::hasRequiredAttributes () const
 {
-	bool allPresent = true;
+	bool allPresent = SedTask::hasRequiredAttributes();
 
 	return allPresent;
 }
@@ -731,7 +731,7 @@ SedRepeatedTask::hasRequiredAttributes () const
 bool
 SedRepeatedTask::hasRequiredElements () const
 {
-	bool allPresent = true;
+	bool allPresent = SedTask::hasRequiredElements();
 
 	return allPresent;
 }
@@ -745,7 +745,7 @@ SedRepeatedTask::hasRequiredElements () const
 void
 SedRepeatedTask::writeElements (XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+	SedTask::writeElements(stream);
 	if (getNumRanges() > 0)
 	{
 		mRanges.write(stream);
@@ -788,7 +788,7 @@ SedRepeatedTask::accept (SedVisitor& v) const
 void
 SedRepeatedTask::setSedDocument (SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+	SedTask::setSedDocument(d);
 	mRanges.setSedDocument(d);
 	mTaskChanges.setSedDocument(d);
 	mSubTasks.setSedDocument(d);
@@ -806,7 +806,7 @@ SedRepeatedTask::setSedDocument (SedDocument* d)
 void
 SedRepeatedTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+	SedTask::addExpectedAttributes(attributes);
 
 	attributes.add("rangeId");
 	attributes.add("resetModel");
@@ -825,7 +825,7 @@ void
 SedRepeatedTask::readAttributes (const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+	SedTask::readAttributes(attributes, expectedAttributes);
 
 	bool assigned = false;
 
@@ -867,7 +867,7 @@ SedRepeatedTask::readAttributes (const XMLAttributes& attributes,
 	void
 SedRepeatedTask::writeAttributes (XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+	SedTask::writeAttributes(stream);
 
 	if (isSetRangeId() == true)
 		stream.writeAttribute("rangeId", getPrefix(), mRangeId);

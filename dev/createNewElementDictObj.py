@@ -555,6 +555,7 @@ def createSedRepeatedTask():
                    'attribs':attributes,
                    'hasChildren':True,
                    'hasMath':False,
+                   'baseClass':'SedTask',
                    'elementName':'repeatedTask'
                    })
     return element
