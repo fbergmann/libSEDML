@@ -34,11 +34,56 @@
 
 
 #include <iostream>
+#include <vector>
 #include <sedml/SedTypes.h>
 
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE
 
+void printRepeatedTask(const SedRepeatedTask* repeat)
+{
+  cout << "\tRepeatedTask id='" << repeat->getId() 
+       << "' resetModel: '" << (repeat->getResetModel() ? "true" : "false") 
+	  << "' range: '" << repeat->getRangeId() << "'" << endl;
+  
+  for (unsigned int i = 0; i < repeat->getNumRanges(); ++i)
+  {
+	const SedRange* current = repeat->getRange(i);
+	const SedFunctionalRange* functional = dynamic_cast<const SedFunctionalRange*>(current);
+	const SedVectorRange* vrange = dynamic_cast<const SedVectorRange*>(current);
+	const SedUniformRange* urange = dynamic_cast<const SedUniformRange*>(current);
+	if (functional != NULL)
+	{
+		cout << "\t\tFunctionalRange id='" << functional->getId() << "' range='" << functional->getRange() << "' math='" <<  SBML_formulaToString(functional->getMath()) << "'" << endl;
+	}
+	else if (vrange != NULL)
+	{
+		cout << "\t\tVectorRange id='" << vrange->getId() << "' values="; 
+		const vector<double>& values = vrange->getValues();
+		for (vector<double>::const_iterator it = values.begin(); it != values.end(); ++it)
+			cout << *it << ", ";
+		cout << endl;
+	}
+	else if (urange != NULL)
+	{
+		cout << "\t\tUniformRange id='" << urange->getId() << "' start='" << urange->getStart() << "' end='" << urange->getEnd() << "' numPoints='" << urange->getNumberOfPoints() << "' type='" << urange->getType() << "'" << endl;
+	}
+	
+  }
+  cout << endl;
+  for (unsigned int i = 0; i < repeat->getNumTaskChanges(); ++i)
+  {
+	const SedSetValue* current = repeat->getTaskChange(i);
+	cout << "\t\tSetvalue range='" << current->getRange() << "' modelReference='" << current->getModelReference() << "' target='" << current->getTarget() << " math='" << SBML_formulaToString(current->getMath()) <<"'" << endl;
+  }
+  cout << endl;
+  for (unsigned int i = 0; i < repeat->getNumSubTasks(); ++i)
+  {
+	const SedSubTask* current = repeat->getSubTask(i);
+	cout << "\t\tSubTask order='" << current->getOrder() << "' task='" << current->getTask() << "'" << endl;
+  }
+
+}
 void printAnnotation(const XMLNode& node)
 {
   cout << "annotation element: '" << node.getName() << "'" << endl;
@@ -128,6 +173,10 @@ main (int argc, char* argv[])
   for (unsigned int i = 0; i < doc->getNumTasks(); ++i)
   {
     SedTask* current = doc->getTask(i);
+    SedRepeatedTask* repeat = dynamic_cast<SedRepeatedTask*>(current);
+    if (repeat != NULL) 
+	printRepeatedTask(repeat);
+    else
     cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
   }
 
