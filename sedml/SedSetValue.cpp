@@ -1233,9 +1233,10 @@ SedListOfTaskChanges::writeXMLNS(XMLOutputStream& stream) const
 
 	if (prefix.empty())
 	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1))
+		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
 		{
-			xmlns.add(SEDML_XMLNS_L1,prefix);
+			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
+			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
 		}
 	}
 

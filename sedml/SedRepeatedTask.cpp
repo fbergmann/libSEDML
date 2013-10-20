@@ -808,7 +808,7 @@ SedRepeatedTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
 	SedTask::addExpectedAttributes(attributes);
 
-	attributes.add("rangeId");
+	attributes.add("range");
 	attributes.add("resetModel");
 }
 
@@ -832,7 +832,7 @@ SedRepeatedTask::readAttributes (const XMLAttributes& attributes,
 	//
 	// rangeId SIdRef   ( use = "optional" )
 	//
-	assigned = attributes.readInto("rangeId", mRangeId, getErrorLog(), false);
+	assigned = attributes.readInto("range", mRangeId, getErrorLog(), false);
 
 	if (assigned == true)
 	{
@@ -870,7 +870,7 @@ SedRepeatedTask::writeAttributes (XMLOutputStream& stream) const
 	SedTask::writeAttributes(stream);
 
 	if (isSetRangeId() == true)
-		stream.writeAttribute("rangeId", getPrefix(), mRangeId);
+		stream.writeAttribute("range", getPrefix(), mRangeId);
 
 	if (isSetResetModel() == true)
 		stream.writeAttribute("resetModel", getPrefix(), mResetModel);

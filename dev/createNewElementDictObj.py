@@ -524,7 +524,7 @@ def createSedTask() :
   return element
 
 def createSedRepeatedTask():
-    a1 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'rangeId'})
+    a1 = dict({'type': 'SIdRef', 'reqd' : False, 'name':'rangeId', 'attName': 'range'})
     a2 = dict({'type': 'bool', 'reqd' : False, 'name':'resetModel'})
     lo1 = dict({
                'type': 'lo_element',

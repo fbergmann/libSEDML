@@ -1,5 +1,6 @@
 
 public: 
+
   /**
    * Returns the list of errors or warnings logged during parsing, 
    * consistency checking, or attempted translation of this model.

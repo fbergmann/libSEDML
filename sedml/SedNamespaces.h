@@ -68,13 +68,18 @@
 #ifdef __cplusplus
 namespace LIBSEDML_CPP_NAMESPACE {
   const unsigned int SEDML_DEFAULT_LEVEL   = 1;
-  const unsigned int SEDML_DEFAULT_VERSION = 1;
+  const unsigned int SEDML_DEFAULT_VERSION = 2;
   const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";  
+  const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";  
+  const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2";  
 }
 #else
 static const unsigned int SEDML_DEFAULT_LEVEL   = 1;
-static const unsigned int SEDML_DEFAULT_VERSION = 1;
+static const unsigned int SEDML_DEFAULT_VERSION = 2;
 static const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";
+static const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
+static const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
+static const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2"; 
 #endif
 
 #ifdef __cplusplus

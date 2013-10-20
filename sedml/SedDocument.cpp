@@ -60,6 +60,11 @@ SedDocument::SedDocument (unsigned int level, unsigned int version)
 	, mOutputs (level, version)
 
 {
+	mLevel = level;
+	mIsSetLevel = true;
+	mVersion = version;
+	mIsSetVersion = true;
+
 	setSedDocument(this);
 
 	// set an SedNamespaces derived object of this package
@@ -86,6 +91,11 @@ SedDocument::SedDocument (SedNamespaces* sedns)
 	, mOutputs (sedns)
 
 {
+	mLevel = sedns->getLevel();
+	mIsSetLevel = true;
+	mVersion = sedns->getVersion();
+	mIsSetVersion = true;
+
 	setSedDocument(this);
 
 	// set the element namespace of this object
@@ -1199,8 +1209,6 @@ SedDocument::writeAttributes (XMLOutputStream& stream) const
 /** @endcond doxygen-libsbml-internal */
 
 
-
-
 /*
  * @return the nth error encountered during the parse of this
  * SedDocument or @c NULL if n > getNumErrors() - 1.
@@ -1268,19 +1276,25 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
   if (thisNs == NULL)
   {
     XMLNamespaces xmlns;
-    xmlns.add(SEDML_XMLNS_L1);
+    if (getVersion() == 1)
+    xmlns.add(SEDML_XMLNS_L1V1);
+    else 
+    xmlns.add(SEDML_XMLNS_L1V2);
 
     mSedNamespaces->setNamespaces(&xmlns);
     thisNs = getNamespaces();
   }
   else if (thisNs->getLength() == 0)
   {
-     thisNs->add(SEDML_XMLNS_L1);
+     if (getVersion() == 1)
+     thisNs->add(SEDML_XMLNS_L1V1);
+	else
+     thisNs->add(SEDML_XMLNS_L1V2);
   }
   else
   {
     // check that there is an sbml namespace
-    std::string sedmlURI = SedNamespaces::getSedNamespaceURI(mLevel, mVersion);
+    std::string sedmlURI = SedNamespaces::getSedNamespaceURI(getLevel(), getVersion());
     std::string sedmlPrefix = thisNs->getPrefix(sedmlURI);
     if (thisNs->hasNS(sedmlURI, sedmlPrefix) == false)
     {

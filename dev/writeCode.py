@@ -92,6 +92,10 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   writeAttributes(attrs, output, 1)
   output.write('{\n')
   if element == 'SedDocument':
+    output.write('\tmLevel = level;\n');
+    output.write('\tmIsSetLevel = true;\n');
+    output.write('\tmVersion = version;\n');
+    output.write('\tmIsSetVersion = true;\n\n');
     output.write('\tsetSedDocument(this);\n\n');
   output.write('\t// set an SedNamespaces derived object of this package\n')
   output.write('\tsetSedNamespacesAndOwn(new SedNamespaces(level, version));\n'.format(package))
@@ -107,6 +111,10 @@ def writeConstructors(element, package, output, attrs, hasChildren=False, hasMat
   writeAttributes(attrs, output, 2, package.lower())
   output.write('{\n')
   if element == 'SedDocument':
+    output.write('\tmLevel = sedns->getLevel();\n');
+    output.write('\tmIsSetLevel = true;\n');
+    output.write('\tmVersion = sedns->getVersion();\n');
+    output.write('\tmIsSetVersion = true;\n\n');
     output.write('\tsetSedDocument(this);\n\n');
   output.write('\t// set the element namespace of this object\n')
   output.write('\tsetElementNamespace({0}ns->getURI());\n'.format(package.lower()))

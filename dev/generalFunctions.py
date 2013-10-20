@@ -378,7 +378,10 @@ def writeAddExpectedCPPCode(outFile, element, attribs, baseClass='SedBase'):
   outFile.write('\t{0}::addExpectedAttributes(attributes);\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
-      outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['name']))
+      if attribs[i].has_key('attName'): 
+        outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['attName']))
+      else: 
+        outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['name']))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
   
@@ -419,7 +422,10 @@ def writeReadAttribute(output, attrib, element):
   elif attrib['type'] == 'SIdRef':
     output.write('\t//\n\t// {0} SIdRef '.format(attName))
     output.write('  ( use = "{0}" )\n\t//\n'.format(use))
-    output.write('\tassigned = attributes.readInto("{0}", m{1}, getErrorLog(), '.format(attName, capAttName))
+    if attrib.has_key('attName'): 
+      output.write('\tassigned = attributes.readInto("{0}", m{1}, getErrorLog(), '.format(attrib['attName'], capAttName))
+    else: 
+      output.write('\tassigned = attributes.readInto("{0}", m{1}, getErrorLog(), '.format(attName, capAttName))
     if use == 'required':
       output.write('true);\n\n')
     else:
@@ -617,7 +623,10 @@ def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element' and attribs[i]['type'] != 'std::vector<double>':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
-      outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))	 
+      if attribs[i].has_key('attName'): 
+        outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['attName'], strFunctions.cap(attribs[i]['name'])))	 
+      else:
+        outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))	 
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
   

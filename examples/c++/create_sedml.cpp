@@ -51,9 +51,7 @@ main (int argc, char* argv[])
   }
 
   // create the document
-  SedDocument doc;
-  doc.setLevel(1);
-  doc.setVersion(2);
+  SedDocument doc(1,2);
   doc.setAnnotation("<test xmlns='http://test.org/test/annotation' attribute='test' />");
 
   {
