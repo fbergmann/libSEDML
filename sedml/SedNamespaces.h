@@ -78,7 +78,6 @@ static const unsigned int SEDML_DEFAULT_LEVEL   = 1;
 static const unsigned int SEDML_DEFAULT_VERSION = 2;
 static const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";
 static const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
-static const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
 static const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2"; 
 #endif
 
