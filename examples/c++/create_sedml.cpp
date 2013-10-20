@@ -97,6 +97,10 @@ main (int argc, char* argv[])
   // need to set the correct KISAO Term
   SedAlgorithm* alg = tc->createAlgorithm();
   alg->setKisaoID("KISAO:0000019");
+  SedAlgorithmParameter* algParam = alg->createAlgorithmParameter();
+  algParam ->setNotes("<p xmlns='http://www.w3.org/1999/xhtml'>This is the absolute tolerance</p>");
+  algParam ->setKisaoID("KISAO:0000211");
+  algParam ->setValue("1e-12");
   // add annotation
   tc->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='uniform time course' />");
   alg->setAnnotation("<test xmlns='http://test.org/test/simulation/annotation' attribute='algorithm' />");
@@ -112,6 +116,8 @@ main (int argc, char* argv[])
   // create steady state
   SedSteadyState* steady = doc.createSteadyState();
   steady->setId("sim3");
+  alg = steady->createAlgorithm();
+  alg->setKisaoID("KISAO:0000282");
 
   // create a task that uses the simulation and the model above
   SedTask* task = doc.createTask();
