@@ -4,8 +4,8 @@
  * @author  Sarah Keating
  * 
  * <!--------------------------------------------------------------------------
- * This file is part of libSed.  Please visit http://sbml.org for more
- * information about Sed, and the latest version of libSed.
+ * This file is part of libSEDML.  Please visit http://sbml.org for more
+ * information about Sed, and the latest version of libSEDML.
  *
  * Copyright (C) 2009-2013 jointly by the following organizations: 
  *     1. California Institute of Technology, Pasadena, CA, USA
@@ -66,7 +66,7 @@ static const sbmlErrorTableEntry errorTable[] =
     "File does not use UTF-8 encoding",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An Sed XML file must use UTF-8 as the character encoding. More "
+    "An SED-ML XML file must use UTF-8 as the character encoding. More "
     "precisely, the 'encoding' attribute of the XML declaration at the "
     "beginning of the XML data stream cannot have a value other than "
     "'UTF-8'. An example valid declaration is "
@@ -80,7 +80,7 @@ static const sbmlErrorTableEntry errorTable[] =
     "Encountered unrecognized element",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An Sed XML document must not contain undefined elements or attributes "
+    "An SED-ML XML document must not contain undefined elements or attributes "
     "in the Sed namespace. Documents containing unknown elements or "
     "attributes placed in the Sed namespace do not conform to the Sed "
     "specification.",  
@@ -93,7 +93,7 @@ static const sbmlErrorTableEntry errorTable[] =
     "Document does not conform to the Sed XML schema",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An Sed XML document must conform to the XML Schema for the corresponding "
+    "An SED-ML XML document must conform to the XML Schema for the corresponding "
     "Sed Level, Version and Release. The XML Schema for Sed defines the "
     "basic Sed object structure, the data types used by those objects, and the "
     "order in which the objects may appear in an Sed document.",
@@ -1526,7 +1526,7 @@ static const sbmlErrorTableEntry errorTable[] =
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
 //    LIBSEDML_SEV_ERROR,
-//    "The system of equations created from an Sed model must not be "
+//    "The system of equations created from an SED-ML model must not be "
 //    "overdetermined.",
 //    {"",
 //     "",
@@ -2073,28 +2073,17 @@ static const sbmlErrorTableEntry errorTable[] =
 //     "L3V1 Section 3.2"}
 //  },
 //
-//  //20101
-//  {
-//    InvalidNamespaceOnSed,
-//    "Invalid XML namespace for the Sed container element",
-//    LIBSEDML_CAT_SEDML,
-//    LIBSEDML_SEV_ERROR,
-//    LIBSEDML_SEV_ERROR,
-//    LIBSEDML_SEV_ERROR,
-//    LIBSEDML_SEV_ERROR,
-//    LIBSEDML_SEV_ERROR,
-//    LIBSEDML_SEV_ERROR,
-//    LIBSEDML_SEV_ERROR,
-//    "The <sbml> container element must declare the XML Namespace for Sed, "
-//    "and this declaration must be consistent with the values of the 'level' "
-//    "and 'version' attributes on the <sbml> element. ",
-//    {"",
-//     "",
-//     "L2V2 Section 4.1",
-//     "L2V3 Section 4.1",
-//     "L2V4 Section 4.1",
-//     "L3V1 Section 4.1"}
-//  },
+ //20101
+ {
+   SedInvalidNamespaceOnSed,
+   "Invalid XML namespace for the SED-ML container element",
+   LIBSEDML_CAT_SEDML,
+   LIBSEDML_SEV_ERROR,
+   "The <sedML> container element must declare the XML Namespace for Sed, "
+   "and this declaration must be consistent with the values of the 'level' "
+   "and 'version' attributes on the <sedML> element. ",
+   {""}
+  },
 //
 //  //20102
 //  {
@@ -9119,7 +9108,7 @@ static const sbmlErrorTableEntry errorTable[] =
   //99999
   {
     SedCodesUpperBound,
-    "Upper boundary of libSed-specific diagnostic codes",
+    "Upper boundary of libSEDML-specific diagnostic codes",
     LIBSEDML_CAT_INTERNAL,
     LIBSEDML_SEV_NOT_APPLICABLE,
     "Application-specific codes should begin at 100000.", 

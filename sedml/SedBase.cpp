@@ -2081,6 +2081,7 @@ SedBase::read (XMLInputStream& stream)
    */
   if (element.getName() == "sedML")
   {
+    SedNamespaces *ns = new SedNamespaces(getLevel(), getVersion());
     //stream.setNamespaces(this->getSedNamespaces());
     // need to check that any prefix on the sbmlns also occurs on element
     // remembering the horrible situation where the sbmlns might be declared
@@ -2095,7 +2096,7 @@ SedBase::read (XMLInputStream& stream)
         bool error = false;
         if (i > -1)
         {
-          if (xmlns->getURI(i) != this->getSedNamespaces()->getURI())
+          if (xmlns->getURI(i) != ns->getURI())
           {
             error = true;
           }
@@ -2125,16 +2126,20 @@ SedBase::read (XMLInputStream& stream)
         {
           static ostringstream errMsg;
           errMsg.str("");
-          errMsg << "The prefix for the <sbml> element does not match "
+          errMsg << "The prefix for the <sedML> element does not match "
             << "the prefix for the Sed namespace.  This means that "
-            << "the <sbml> element in not in the SedNamespace."<< endl;
+            << "the <sedML> element in not in the SED-ML Namespace."<< endl;
 
           logError(SedInvalidNamespaceOnSed,
                     getLevel(), getVersion(), errMsg.str());
         }      
+
+
+        // add it to the namespace
+        ns->getNamespaces()->add(xmlns->getURI(i), xmlns->getPrefix(i));
       }
     }
-
+    setSedNamespaces(ns);
   }
   else
   {
