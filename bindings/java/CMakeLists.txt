@@ -122,9 +122,9 @@ ADD_CUSTOM_COMMAND(
 	ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
     COMMAND "${SWIG_EXECUTABLE}"
     ARGS -I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
-         -I${CMAKE_SOURCE_DIR}/
+         -I${CMAKE_CURRENT_SOURCE_DIR}/../../
          -I${CMAKE_BINARY_DIR}/
-         -I${CMAKE_SOURCE_DIR}/sedml
+         -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
          -I${CMAKE_CURRENT_SOURCE_DIR}
          -I${LIBSBML_INCLUDE_DIR}/
 		 -c++
@@ -146,7 +146,7 @@ add_custom_target(binding_java_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libs
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
 include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${CMAKE_SOURCE_DIR})
+include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 include_directories(BEFORE ${CMAKE_BINARY_DIR})
 add_definitions(-DLIBSEDML_STATIC)
 if (EXTRA_INCLUDE_DIRS) 

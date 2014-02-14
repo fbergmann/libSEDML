@@ -47,7 +47,7 @@ if (NOT R_INCLUDE_DIRS)
               $ENV{ProgramW6432}/R/R-2.15.2/include
               $ENV{ProgramFiles}/R/R-2.15.1/include
               $ENV{ProgramW6432}/R/R-2.15.1/include
-              ${CMAKE_SOURCE_DIR}/include
+              ${CMAKE_CURRENT_SOURCE_DIR}/../../include
               ${LIBSEDML_DEPENDENCY_DIR}/include
         DOC "The directory containing the R include files."
         )
@@ -72,7 +72,7 @@ if (NOT R_LIB)
             $ENV{ProgramFiles}/R/R-2.15.1/bin${R_SUFFIX}
             $ENV{ProgramW6432}/R/R-2.15.1/bin${R_SUFFIX}
             /Library/Frameworks/R.framework/Versions/Current/Resources/lib
-            ${CMAKE_SOURCE_DIR}
+            ${CMAKE_CURRENT_SOURCE_DIR}/../../
             ${LIBSEDML_DEPENDENCY_DIR}/lib
 			DOC "The file name of the R library."
 			)
@@ -154,9 +154,9 @@ ADD_CUSTOM_COMMAND(
 	       ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
     COMMAND "${SWIG_EXECUTABLE}"
     ARGS	-I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
-			-I${CMAKE_SOURCE_DIR}/
+			-I${CMAKE_CURRENT_SOURCE_DIR}/../../
 			-I${CMAKE_BINARY_DIR}/
-			-I${CMAKE_SOURCE_DIR}/sedml
+			-I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
 			-I${CMAKE_CURRENT_SOURCE_DIR}
 			-I${LIBSBML_INCLUDE_DIR}/
 			-c++
