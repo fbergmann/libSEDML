@@ -391,10 +391,13 @@ LIBSEDML_CPP_NAMESPACE_USE
 %include <sedml/SedParameter.h>
 %include <sedml/SedChange.h>
 %include <sedml/SedChangeAttribute.h>
+%include <sedml/SedAddXML.h>
+%include <sedml/SedChangeXML.h>
 %include <sedml/SedRemoveXML.h>
 %include <sedml/SedComputeChange.h>
 %include <sedml/SedModel.h>
 %include <sedml/SedAlgorithm.h>
+%include <sedml/SedAlgorithmParameter.h>
 %include <sedml/SedSimulation.h>
 %include <sedml/SedUniformTimeCourse.h>
 %include <sedml/SedDataSet.h>
@@ -405,7 +408,16 @@ LIBSEDML_CPP_NAMESPACE_USE
 %include <sedml/SedPlot2D.h>
 %include <sedml/SedPlot3D.h>
 %include <sedml/SedDataGenerator.h>
+%include <sedml/SedRange.h>
+%include <sedml/SedVectorRange.h>
+%include <sedml/SedUniformRange.h>
+%include <sedml/SedFunctionalRange.h>
+%include <sedml/SedSubTask.h>
+%include <sedml/SedSetValue.h>
+%include <sedml/SedSteadyState.h>
+%include <sedml/SedOneStep.h>
 %include <sedml/SedTask.h>
+%include <sedml/SedRepeatedTask.h>
 %include <sedml/SedDocument.h>
 
 %include <sedml/SedConstructorException.h>
