@@ -238,6 +238,13 @@ void
 SedChangeXML::writeElements (XMLOutputStream& stream) const
 {
 	SedChange::writeElements(stream);
+	if (isSetNewXML() == true)
+	{
+		stream.startElement("newXML");
+		stream << *mNewXML;
+		stream.endElement("newXML");
+
+	}
 }
 
 
@@ -320,9 +327,6 @@ SedChangeXML::readAttributes (const XMLAttributes& attributes,
 SedChangeXML::writeAttributes (XMLOutputStream& stream) const
 {
 	SedChange::writeAttributes(stream);
-
-	if (isSetNewXML() == true)
-		stream.writeAttribute("newXML", getPrefix(), mNewXML);
 
 }
 
