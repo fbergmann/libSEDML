@@ -763,6 +763,15 @@ def writeReadOtherXMLCPPCode(outFile, element, hasMath = True, attribs = None, b
     outFile.write('\t\tmMath = readMathML(stream, prefix);\n')
     #outFile.write('\t\tif (mMath != NULL)\n\t\t{\n\t\t\tmMath->setParentSEDMLObject(this);\n\t\t}\n')
     outFile.write('\t\tread = true;\n\t}\n\n')
+  elif containsType(attribs, 'XMLNode*'):
+    node = getByType(attribs, 'XMLNode*')
+    outFile.write('\tif (name == "{0}")\n'.format(node['name']))
+    outFile.write('\t{\n')	
+    outFile.write('\t\tconst XMLToken& token = stream.next();\n')	
+    outFile.write('\t\tstream.skipText();\n')	
+    outFile.write('\t\tm{0} = new XMLNode(stream);\n'.format(strFunctions.cap(node['name'])))	
+    outFile.write('\t\tstream.skipPastEnd(token);\n')	
+    outFile.write('\t\tread = true;\n\t}\n\n')
   elif containsType(attribs, 'std::vector<double>'):
     elem = getByType(attribs, 'std::vector<double>')
     outFile.write('\twhile (stream.peek().getName() == "{0}")\n'.format(elem['name']))
@@ -791,7 +800,7 @@ def writeProtectedHeaders(outFile, attribs = None, hasChildren=False, hasMath=Fa
     writeCreateObjectHeader(outFile)
   writeAddExpectedHeader(outFile)
   writeReadAttributesHeader(outFile)
-  if hasMath == True or containsType(attribs, 'std::vector<double>'):
+  if hasMath == True or containsType(attribs, 'std::vector<double>') or containsType(attribs, 'XMLNode*'):
     writeReadOtherXMLHeader(outFile)
   writeWriteAttributesHeader(outFile)
   
@@ -840,6 +849,6 @@ def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMa
 def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, baseClass):
   writeAddExpectedCPPCode(outFile, element, attribs, baseClass)
   writeReadAttributesCPPCode(outFile, element, attribs, baseClass)
-  if hasMath == True or containsType(attribs, 'std::vector<double>'):
+  if hasMath == True or containsType(attribs, 'std::vector<double>') or containsType(attribs, 'XMLNode*'):
     writeReadOtherXMLCPPCode(outFile, element, hasMath, attribs, baseClass)
   writeWriteAttributesCPPCode(outFile, element, attribs, baseClass)

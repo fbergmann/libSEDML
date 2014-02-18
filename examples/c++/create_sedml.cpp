@@ -79,12 +79,12 @@ main (int argc, char* argv[])
     // add another species 's1' using addxml
     SedAddXML* addXml = model->createAddXML();
     addXml->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies");
-    addXml->setNewXML(XMLNode::convertStringToXMLNode("<species id='S1' boundaryCondition='false' initialConcentration='0' compartment='compartment' />"));
+    addXml->setNewXML(XMLNode::convertStringToXMLNode("<species xmlns='http://www.sbml.org/sbml/level2' id='S1' boundaryCondition='false' initialConcentration='0' compartment='compartment' />"));
 
     // replace 's1' one more time by a better one 
     SedChangeXML* changeXML = model->createChangeXML();
     changeXML->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
-    changeXML->setNewXML(XMLNode::convertStringToXMLNode("<species id='S1' boundaryCondition='false' initialConcentration='10' compartment='compartment' />"));
+    changeXML->setNewXML(XMLNode::convertStringToXMLNode("<species xmlns='http://www.sbml.org/sbml/level2'  id='S1' boundaryCondition='false' initialConcentration='10' compartment='compartment' />"));
 
     // now for something tricky we want to update the initialConcentration of 'S2' to be
     // half what it was in the original model

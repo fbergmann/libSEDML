@@ -295,6 +295,19 @@ protected:
 /** @cond doxygen-libsbml-internal */
 
 	/**
+	 * Subclasses should override this method ro read other XML.
+	 *
+	 * return true if read from stream, false otherwise.
+	 */
+	virtual bool readOtherXML (XMLInputStream& stream);
+
+
+/** @endcond doxygen-libsbml-internal */
+
+
+/** @cond doxygen-libsbml-internal */
+
+	/**
 	 * Write values of XMLAttributes to the output stream.
 	 */
 	virtual void writeAttributes (XMLOutputStream& stream) const;

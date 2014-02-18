@@ -166,6 +166,48 @@ main (int argc, char* argv[])
   {
     SedModel* current = doc->getModel(i);
     cout << "\tModel id=" << current->getId() << " language=" << current->getLanguage() << " source=" << current->getSource() << " numChanges=" << current->getNumChanges() << endl;
+    for (unsigned int j = 0; j < current->getNumChanges(); ++j)
+    {
+      SedChange* change = current->getChange(j);
+      cout << "\t\tchange " << (j + 1) << " target: " << change->getTarget();
+      switch (change->getTypeCode())
+      {
+      case SEDML_CHANGE_ADDXML:
+      {
+        SedAddXML* addXML = static_cast<SedAddXML*>(change);
+        cout << " adds the following child: " << endl << endl << "\t\t\t"
+          << addXML->getNewXML()->toXMLString() << endl;
+        break;
+      }
+      case SEDML_CHANGE_ATTRIBUTE:
+      {
+        SedChangeAttribute* changeAttribute = static_cast<SedChangeAttribute*>(change);
+        cout << " changes the attribute to: " << changeAttribute->getNewValue();
+        break;
+      }
+      case SEDML_CHANGE_CHANGEXML:
+      {
+        SedChangeXML* changeXML = static_cast<SedChangeXML*>(change);
+        cout << " replaces the target with: " << endl << endl << "\t\t\t"
+          << changeXML->getNewXML()->toXMLString() << endl;
+        break;
+        break;
+      }
+      case SEDML_CHANGE_COMPUTECHANGE:
+      {
+        SedComputeChange* computeChange = static_cast<SedComputeChange*>(change);
+        cout << " replaces the value with the computation: " << SBML_formulaToString(computeChange->getMath());
+        break;
+      }
+      case SEDML_CHANGE_REMOVEXML:
+        cout << " removes the target!";
+        break;
+      default:
+        cout << " is of unknown type!";
+        break;
+      }
+      cout << endl;
+    }
   }
   
   cout << endl;
