@@ -36,6 +36,7 @@
 #include <iostream>
 #include <vector>
 #include <sedml/SedTypes.h>
+#include <sbml/SBMLTypes.h>
 
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE

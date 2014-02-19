@@ -76,7 +76,7 @@ install(FILES
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(BEFORE ${LIBSBML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/..)
-include_directories(BEFORE ${CMAKE_BINARY_DIR})
+include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/..)
 
 if (EXTRA_DEFS)
 add_definitions(${EXTRA_DEFS})
