@@ -27,6 +27,7 @@
 
 %module(directors="1") libsedml
 
+
 //#pragma SWIG nowarn=473,401,844
 
 %pragma(java) moduleclassmodifiers="
@@ -371,6 +372,9 @@ LIBSEDML_CPP_NAMESPACE_USE
  */
 
 %include "std_string.i"
+%include "std_vector.i"
+%template(DoubleStdVector) std::vector<double>;
+typedef std::vector<double> DoubleStdVector;
 
 %include sedml/common/libsedml-version.h
 %include sedml/common/operationReturnValues.h
@@ -444,3 +448,5 @@ LIBSEDML_CPP_NAMESPACE_USE
 %include sbml/xml/XMLInputStream.h
 %include sbml/xml/XMLError.h
 %include sbml/xml/XMLErrorLog.h
+
+
