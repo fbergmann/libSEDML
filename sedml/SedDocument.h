@@ -5,9 +5,10 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SEDML, and the latest version of libSEDML.
+ * information about SED-ML. The latest version of libSEDML can be found on 
+ * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann  
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -955,17 +956,17 @@ public:
 	 * other languages, the set of type codes is stored in an enumeration; in
 	 * the Java language interface for libSEDML, the type codes are defined as
 	 * static integer constants in the interface class {@link
-	 * libsbmlConstants}.  The names of the type codes all begin with the
+	 * libsedmlConstants}.  The names of the type codes all begin with the
 	 * characters @c SEDML_. @endif@if python LibSEDML attaches an identifying
 	 * code to every kind of SEDML object.  These are known as <em>SEDML type
 	 * codes</em>.  In the Python language interface for libSEDML, the type
 	 * codes are defined as static integer constants in the interface class
-	 * @link libsbml@endlink.  The names of the type codes all begin with the
+	 * @link libsedml@endlink.  The names of the type codes all begin with the
 	 * characters @c SEDML_. @endif@if csharp LibSEDML attaches an identifying
 	 * code to every kind of SEDML object.  These are known as <em>SEDML type
 	 * codes</em>.  In the C# language interface for libSEDML, the type codes
 	 * are defined as static integer constants in the interface class @link
-	 * libsbmlcs.libsbml@endlink.  The names of the type codes all begin with
+	 * libsedmlcs.libsedml@endlink.  The names of the type codes all begin with
 	 * the characters @c SEDML_. @endif
 	 *
 	 * @return the SEDML type code for this object, or
@@ -1002,7 +1003,7 @@ public:
 	virtual bool hasRequiredElements() const;
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Subclasses should override this method to write out their contained
@@ -1012,10 +1013,10 @@ public:
 	virtual void writeElements (XMLOutputStream& stream) const;
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Accepts the given SedVisitor.
@@ -1023,10 +1024,10 @@ public:
 	virtual bool accept (SedVisitor& v) const;
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Sets the parent SedDocument.
@@ -1034,10 +1035,10 @@ public:
 	virtual void setSedDocument (SedDocument* d);
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Connects to child elements.
@@ -1045,12 +1046,12 @@ public:
 	virtual void connectToChild ();
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
 protected:
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * return the SEDML object corresponding to next XMLToken.
@@ -1058,10 +1059,10 @@ protected:
 	virtual SedBase* createObject(XMLInputStream& stream);
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Get the list of expected attributes for this element.
@@ -1069,10 +1070,10 @@ protected:
 	virtual void addExpectedAttributes(ExpectedAttributes& attributes);
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Read values from the given XMLAttributes set into their specific fields.
@@ -1081,10 +1082,10 @@ protected:
 	                             const ExpectedAttributes& expectedAttributes);
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 	/**
 	 * Write values of XMLAttributes to the output stream.
@@ -1092,7 +1093,7 @@ protected:
 	virtual void writeAttributes (XMLOutputStream& stream) const;
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
 
@@ -1102,9 +1103,9 @@ public:
    * Returns the list of errors or warnings logged during parsing, 
    * consistency checking, or attempted translation of this model.
    * 
-   * @return the SBMLErrorLog used for this SBMLDocument
+   * @return the SedErrorLog used for this SedDocument
    * 
-   * @see SBMLDocument::getNumErrors()
+   * @see SedDocument::getNumErrors()
    */
   virtual SedErrorLog* getErrorLog ();
 
@@ -1114,9 +1115,9 @@ public:
    * logged during parsing, consistency checking, or attempted translation 
    * of this model.
    * 
-   * @return the SBMLErrorLog used for this SBMLDocument
+   * @return the SedErrorLog used for this SedDocument
    * 
-   * @see SBMLDocument::getNumErrors()
+   * @see SedDocument::getNumErrors()
    */
   const SedErrorLog* getErrorLog () const;
 
@@ -1133,7 +1134,7 @@ public:
    *
    * @param n the integer index of the error sought.
    *
-   * @see SBMLDocument::getNumErrors()
+   * @see SedDocument::getNumErrors()
    */
   const SedError* getError (unsigned int n) const;
 
@@ -1144,7 +1145,7 @@ public:
    *
    * @return the number of errors or warnings encountered
    *
-   * @see SBMLDocument::getError(unsigned int n)
+   * @see SedDocument::getError(unsigned int n)
    */
   unsigned int getNumErrors () const;
 
@@ -1157,7 +1158,7 @@ public:
    *
    * @return the number of errors or warnings encountered
    *
-   * @see SBMLDocument::getError(unsigned int n)
+   * @see SedDocument::getError(unsigned int n)
    */
   unsigned int getNumErrors (unsigned int severity) const;
 

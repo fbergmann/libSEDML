@@ -4,10 +4,14 @@
 # Original author(s): Frank Bergmann <fbergman@caltech.edu>
 # Organization      : California Institute of Technology
 #
+# <!--------------------------------------------------------------------------
+# 
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
-# information about SEDML, and the latest version of libSEDML.
-#
-# Copyright (c) 2013, Frank T. Bergmann  
+# information about SED-ML. The latest version of libSEDML can be found on 
+# github: https://github.com/fbergmann/libSEDML/
+# 
+# 
+# Copyright (c) 2013-2014, Frank T. Bergmann  
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -29,6 +33,8 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# 
+# ---------------------------------------------------------------------- -->
 #
 ###############################################################################
 
@@ -73,7 +79,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION.txt")
 
 endif()
 
-set(LIBSEDML_VERSION_NUMERIC "${LIBSEDML_VERSION_MAJOR}${LIBSEDML_VERSION_MINOR}${LIBSEDML_VERSION_PATCH}${LIBSEDML_VERSION_RELEASE}")
+MATH(EXPR LIBSEDML_VERSION_NUMERIC "${LIBSEDML_VERSION_MAJOR} * 10000 + ${LIBSEDML_VERSION_MINOR} * 100 + ${LIBSEDML_VERSION_PATCH}" )
 set(PACKAGE_VERSION "${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH}${LIBSEDML_VERSION_RELEASE}")
 set(PACKAGE_NAME "libSEDML")
 
@@ -224,6 +230,11 @@ if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
         NAMES swig
         PATHS
+		      c:/swigwin-2.0.12
+		      c:/swigwin-2.0.11
+		      c:/swigwin-2.0.10
+		      c:/swigwin-2.0.9
+		      c:/swigwin-2.0.8
 		      c:/swigwin-2.0.7
 		      c:/swigwin-2.0.4
               c:/swigwin-2.0.2

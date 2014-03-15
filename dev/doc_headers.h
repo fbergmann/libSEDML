@@ -5,9 +5,9 @@ public:
    * Returns the list of errors or warnings logged during parsing, 
    * consistency checking, or attempted translation of this model.
    * 
-   * @return the SBMLErrorLog used for this SBMLDocument
+   * @return the SedErrorLog used for this SedDocument
    * 
-   * @see SBMLDocument::getNumErrors()
+   * @see SedDocument::getNumErrors()
    */
   virtual SedErrorLog* getErrorLog ();
 
@@ -17,9 +17,9 @@ public:
    * logged during parsing, consistency checking, or attempted translation 
    * of this model.
    * 
-   * @return the SBMLErrorLog used for this SBMLDocument
+   * @return the SedErrorLog used for this SedDocument
    * 
-   * @see SBMLDocument::getNumErrors()
+   * @see SedDocument::getNumErrors()
    */
   const SedErrorLog* getErrorLog () const;
 
@@ -36,7 +36,7 @@ public:
    *
    * @param n the integer index of the error sought.
    *
-   * @see SBMLDocument::getNumErrors()
+   * @see SedDocument::getNumErrors()
    */
   const SedError* getError (unsigned int n) const;
 
@@ -47,7 +47,7 @@ public:
    *
    * @return the number of errors or warnings encountered
    *
-   * @see SBMLDocument::getError(unsigned int n)
+   * @see SedDocument::getError(unsigned int n)
    */
   unsigned int getNumErrors () const;
 
@@ -60,7 +60,7 @@ public:
    *
    * @return the number of errors or warnings encountered
    *
-   * @see SBMLDocument::getError(unsigned int n)
+   * @see SedDocument::getError(unsigned int n)
    */
   unsigned int getNumErrors (unsigned int severity) const;
 

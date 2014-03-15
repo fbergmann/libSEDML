@@ -16,9 +16,10 @@ def addFilename(outFile, filename, element):
 def addLicence(outFile):
   outFile.write(' * <!--------------------------------------------------------------------------\n')
   outFile.write(' * This file is part of libSEDML.  Please visit http://sed-ml.org for more\n')
-  outFile.write(' * information about SEDML, and the latest version of libSEDML.\n')
+  outFile.write(' * information about SED-ML. The latest version of libSEDML can be found on \n')
+  outFile.write(' * github: https://github.com/fbergmann/libSEDML/\n')
   outFile.write(' *\n')
-  outFile.write(' * Copyright (c) 2013, Frank T. Bergmann  \n')
+  outFile.write(' * Copyright (c) 2013-2014, Frank T. Bergmann  \n')
   outFile.write(' * All rights reserved.\n')
   outFile.write(' * \n')
   outFile.write(' * Redistribution and use in source and binary forms, with or without\n')

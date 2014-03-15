@@ -5,9 +5,10 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SEDML, and the latest version of libSEDML.
+ * information about SED-ML. The latest version of libSEDML can be found on 
+ * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann  
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -332,7 +333,7 @@ SedPlot2D::hasRequiredElements () const
 }
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * write contained elements
@@ -348,10 +349,10 @@ SedPlot2D::writeElements (XMLOutputStream& stream) const
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Accepts the given SedVisitor.
@@ -364,10 +365,10 @@ SedPlot2D::accept (SedVisitor& v) const
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Sets the parent SedDocument.
@@ -380,10 +381,10 @@ SedPlot2D::setSedDocument (SedDocument* d)
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Get the list of expected attributes for this element.
@@ -396,10 +397,10 @@ SedPlot2D::addExpectedAttributes(ExpectedAttributes& attributes)
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Read values from the given XMLAttributes set into their specific fields.
@@ -415,10 +416,10 @@ SedPlot2D::readAttributes (const XMLAttributes& attributes,
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Write values of XMLAttributes to the output stream.
@@ -431,7 +432,7 @@ SedPlot2D::writeAttributes (XMLOutputStream& stream) const
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
 /**

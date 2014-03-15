@@ -1,6 +1,6 @@
 /**
- * @file    SedConstructorException.cpp
- * @brief   Implementation of SedConstructorException, the exception class for constructor exceptions
+ * @file    libsedml-namespace.h
+ * @brief   Defines C++ namespace of libSEDML
  * 
  * <!--------------------------------------------------------------------------
  *
@@ -33,58 +33,40 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * 
  * ---------------------------------------------------------------------- -->
+ *
  */
 
+#ifndef LIBSEDML_NAMESPACE_H
+#define LIBSEDML_NAMESPACE_H 1
 
-#include <sedml/SedConstructorException.h>
+/*
+ *
+ * The idea of the following marcors are borrowed from 
+ * Xerces-C++ XML Parser (http://xerces.apache.org/xerces-c/).
+ *
+ */
 
-#include <sedml/SedNamespaces.h>
-#include <sbml/xml/XMLNamespaces.h>
-#include <sbml/xml/XMLOutputStream.h>
-
-#include <string>
-#include <sstream>
-
-LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-/** @cond doxygen-libsbml-internal */
-
-SedConstructorException::SedConstructorException(std::string errmsg) :
-      std::invalid_argument("Level/version/namespaces combination is invalid")
-    , mSedErrMsg(errmsg)
-{
-}
-
-SedConstructorException::SedConstructorException (std::string errmsg, std::string sbmlErrMsg) :
-    std::invalid_argument(errmsg)
-  , mSedErrMsg(sbmlErrMsg)
-{
-}
-
-SedConstructorException::SedConstructorException (std::string elementName, SedNamespaces* sbmlns) :
-    std::invalid_argument("Level/version/namespaces combination is invalid")
-  , mSedErrMsg(elementName)
-{
-  if (sbmlns == NULL) return;
-  
-  XMLNamespaces* xmlns = sbmlns->getNamespaces();
-  
-  if (xmlns == NULL) return;
-    
-  std::ostringstream oss;
-  XMLOutputStream xos(oss);
-  xos << *xmlns;
-  mSedErrMsg.append(oss.str());
-  
-}
-
-SedConstructorException::~SedConstructorException() throw()
-{
-}
+/* Define to enable libSEDML C++ namespace */
+#cmakedefine LIBSEDML_USE_CPP_NAMESPACE 1
 
 
-/** @endcond */
+#if defined(__cplusplus) && defined(LIBSEDML_USE_CPP_NAMESPACE) && !defined(SWIG)
+  /* C++ namespace of libSEDML */
+  #define LIBSEDML_CPP_NAMESPACE            libsedml
+  #define LIBSEDML_CPP_NAMESPACE_BEGIN      namespace LIBSEDML_CPP_NAMESPACE {
+  #define LIBSEDML_CPP_NAMESPACE_END        }
+  #define LIBSEDML_CPP_NAMESPACE_USE        using namespace LIBSEDML_CPP_NAMESPACE;
+  #define LIBSEDML_CPP_NAMESPACE_QUALIFIER  LIBSEDML_CPP_NAMESPACE::
 
-LIBSEDML_CPP_NAMESPACE_END
+  namespace LIBSEDML_CPP_NAMESPACE {}
+#else
+  #define LIBSEDML_CPP_NAMESPACE 
+  #define LIBSEDML_CPP_NAMESPACE_BEGIN
+  #define LIBSEDML_CPP_NAMESPACE_END  
+  #define LIBSEDML_CPP_NAMESPACE_USE 
+  #define LIBSEDML_CPP_NAMESPACE_QUALIFIER 
+#endif
+
+
+#endif  /* LIBSEDML_NAMESPACE_H */
 

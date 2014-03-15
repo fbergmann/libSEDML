@@ -61,7 +61,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
   // need to check that we have indeed a namespace set!
   XMLNamespaces * thisNs = this->getNamespaces();
 
-  // the sbml namespace is missing - add it
+  // the SED-ML namespace is missing - add it
   if (thisNs == NULL)
   {
     XMLNamespaces xmlns;
@@ -82,16 +82,16 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
   }
   else
   {
-    // check that there is an sbml namespace
+    // check that there is an SED-ML namespace
     std::string sedmlURI = SedNamespaces::getSedNamespaceURI(getLevel(), getVersion());
     std::string sedmlPrefix = thisNs->getPrefix(sedmlURI);
     if (thisNs->hasNS(sedmlURI, sedmlPrefix) == false)
     {
-      // the sbml ns is not present
+      // the SED-ML ns is not present
       std::string other = thisNs->getURI(sedmlPrefix);
       if (other.empty() == false)
       {
-        // there is another ns with the prefix that the sbml ns expects to have
+        // there is another ns with the prefix that the SED-ML ns expects to have
         //remove the this ns, add the sbml ns and 
         //add the new ns with a new prefix
         thisNs->remove(sedmlPrefix);
@@ -114,7 +114,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
 }
 
 /*
-  * @return the Namespaces associated with this SBML object
+  * @return the Namespaces associated with this SED-ML object
   */
 XMLNamespaces* 
 SedDocument::getNamespaces() const

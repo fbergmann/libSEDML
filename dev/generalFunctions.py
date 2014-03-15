@@ -25,16 +25,16 @@ def containsType(attribs, typeName):
   return False
   
 def writeInternalStart(outFile):
-  outFile.write('/** @cond doxygen-libsbml-internal */\n\n')
+  outFile.write('/** @cond doxygen-libsedml-internal */\n\n')
   
 def writeInternalEnd(outFile):
-  outFile.write('/** @endcond doxygen-libsbml-internal */\n\n\n')
+  outFile.write('/** @endcond doxygen-libsedml-internal */\n\n\n')
 
 def writeInternalStartDecl(outFile):
-  outFile.write('\t/** @cond doxygen-libsbml-internal */\n\n')
+  outFile.write('\t/** @cond doxygen-libsedml-internal */\n\n')
   
 def writeInternalEndDecl(outFile):
-  outFile.write('\t/** @endcond doxygen-libsbml-internal */\n\n\n')
+  outFile.write('\t/** @endcond doxygen-libsedml-internal */\n\n\n')
 
 def writeListOf(element):
   if (element == 'SetValue'):
@@ -199,17 +199,17 @@ def writeGetTypeCodeHeader(outFile, isSedListOf):
   outFile.write('\t * other languages, the set of type codes is stored in an enumeration; in\n')
   outFile.write('\t * the Java language interface for libSEDML, the type codes are defined as\n')
   outFile.write('\t * static integer constants in the interface class {@link\n')
-  outFile.write('\t * libsbmlConstants}.  The names of the type codes all begin with the\n')
+  outFile.write('\t * libsedmlConstants}.  The names of the type codes all begin with the\n')
   outFile.write('\t * characters @c SEDML_. @endif@if python LibSEDML attaches an identifying\n')
   outFile.write('\t * code to every kind of SEDML object.  These are known as <em>SEDML type\n')
   outFile.write('\t * codes</em>.  In the Python language interface for libSEDML, the type\n')
   outFile.write('\t * codes are defined as static integer constants in the interface class\n')
-  outFile.write('\t * @link libsbml@endlink.  The names of the type codes all begin with the\n')
+  outFile.write('\t * @link libsedml@endlink.  The names of the type codes all begin with the\n')
   outFile.write('\t * characters @c SEDML_. @endif@if csharp LibSEDML attaches an identifying\n')
   outFile.write('\t * code to every kind of SEDML object.  These are known as <em>SEDML type\n')
   outFile.write('\t * codes</em>.  In the C# language interface for libSEDML, the type codes\n')
   outFile.write('\t * are defined as static integer constants in the interface class @link\n')
-  outFile.write('\t * libsbmlcs.libsbml@endlink.  The names of the type codes all begin with\n')
+  outFile.write('\t * libsedmlcs.libsedml@endlink.  The names of the type codes all begin with\n')
   outFile.write('\t * the characters @c SEDML_. @endif\n')
   outFile.write('\t *\n')
   if isSedListOf == True:

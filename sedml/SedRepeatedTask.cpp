@@ -5,9 +5,10 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SEDML, and the latest version of libSEDML.
+ * information about SED-ML. The latest version of libSEDML can be found on 
+ * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann  
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -737,7 +738,7 @@ SedRepeatedTask::hasRequiredElements () const
 }
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * write contained elements
@@ -761,10 +762,10 @@ SedRepeatedTask::writeElements (XMLOutputStream& stream) const
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Accepts the given SedVisitor.
@@ -777,10 +778,10 @@ SedRepeatedTask::accept (SedVisitor& v) const
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Sets the parent SedDocument.
@@ -795,10 +796,10 @@ SedRepeatedTask::setSedDocument (SedDocument* d)
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Get the list of expected attributes for this element.
@@ -813,10 +814,10 @@ SedRepeatedTask::addExpectedAttributes(ExpectedAttributes& attributes)
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Read values from the given XMLAttributes set into their specific fields.
@@ -856,10 +857,10 @@ SedRepeatedTask::readAttributes (const XMLAttributes& attributes,
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libsedml-internal */
 
 /*
  * Write values of XMLAttributes to the output stream.
@@ -878,7 +879,7 @@ SedRepeatedTask::writeAttributes (XMLOutputStream& stream) const
 }
 
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libsedml-internal */
 
 
 /**

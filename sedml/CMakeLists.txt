@@ -4,10 +4,14 @@
 # Original author(s): Frank Bergmann <fbergman@caltech.edu>
 # Organization      : California Institute of Technology
 #
+# <!--------------------------------------------------------------------------
+# 
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
-# information about SEDML, and the latest version of libSEDML.
-#
-# Copyright (c) 2013, Frank T. Bergmann  
+# information about SED-ML. The latest version of libSEDML can be found on 
+# github: https://github.com/fbergmann/libSEDML/
+# 
+# 
+# Copyright (c) 2013-2014, Frank T. Bergmann  
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -29,7 +33,9 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#
+# 
+# ---------------------------------------------------------------------- -->
+# 
 ###############################################################################
 
 
@@ -48,6 +54,16 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-version.h"
   )
 
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/common/libsedml-package.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-package.h"
+  )
+
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/common/libsedml-namespace.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-namespace.h"
+  )
+  
 
 ###############################################################################
 #
@@ -67,6 +83,8 @@ install(FILES ${files} DESTINATION include/sedml)
 install(FILES 
        "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-version.h"
        "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-config-common.h"
+       "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-namespace.h"
+       "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-package.h"
         DESTINATION include/sedml/common)
 
 ###############################################################################
