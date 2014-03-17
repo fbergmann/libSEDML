@@ -713,12 +713,12 @@ libSEDML version ${PACKAGE_VERSION}
 ----------------------------------------------------------------------
 
    More information and the latest version are available online at
-   http://sbml.org/Software/libSEDML
+   https://github.com/fbergmann/libSEDML/
 
    Please report problems using the issue tracker at
-   http://sbml.org/Software/libsedml/issue-tracker
+   https://github.com/fbergmann/libSEDML/issues
 
-   To contact the developers directly, email libsedml-team@caltech.edu
+   To contact the developers directly, email fbergman@caltech.edu
 
    Configured on host "$ENV{COMPUTERNAME}" ${HOSTNAME}
      host type                     = ${CMAKE_SYSTEM_NAME}
