@@ -254,17 +254,18 @@ endif(WITH_SWIG)
 #
 find_library(LIBSBML_LIBRARY
     NAMES libsbml-static.lib sbml-static libsbml.lib sbml
-    PATHS /usr/lib /usr/local/lib
-          ${LIBSEDML_DEPENDENCY_DIR}/lib
+    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
+		/usr/local/lib          
+          /usr/lib 
     DOC "The file name of the sbml library."
 )
 
 find_path(LIBSBML_INCLUDE_DIR
     NAMES sbml/SBase.h
-    PATHS /usr/include /usr/local/include
-          /usr/include/libxml2
-          /usr/local/include/libxml2
+    PATHS 
           ${LIBSEDML_DEPENDENCY_DIR}/include
+		/usr/local/include
+          /usr/include 
     DOC "The directory containing the sbml include files."
 )
 
