@@ -46,7 +46,7 @@ def main (args):
 
   d = libsedml.readSedML(args[1]);
   if ( d.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0):
-    print d.getErrorLog().toString();
+    print (d.getErrorLog().toString());
   else:
     libsedml.writeSedML(d, args[2]);
 
