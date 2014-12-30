@@ -279,7 +279,10 @@ endif()
 endif()
 
 if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
-    message(FATAL_ERROR "The include directory specified for sbml appears to be invalid.  It should contain the file sbml/SBase.h, but it does not.")
+    message(FATAL_ERROR 
+"The include directory specified for sbml appears to be invalid.  It should contain the 
+file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
+)
 endif()
 
 

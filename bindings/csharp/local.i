@@ -290,54 +290,54 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 			
 		case (int) libsedml.SEDML_LIST_OF:
 			String name = sb.getElementName();
-			if(name.equals("listOf"))
+			if(name == "listOf")
 			{
 				return new SedListOf(cPtr, owner);
 			}
-			else if(name.equals("listOfModels"))
+			else if(name == "listOfModels")
 			{
 				return new SedListOfModels(cPtr, owner);
 			}
-			else if(name.equals("listOfChanges"))
+			else if(name == "listOfChanges")
 			{
 				SedListOf temp = new SedListOf(cPtr, false);
 				if (temp.getItemTypeCode() ==  (int) libsedml.SEDML_TASK_SETVALUE)
-				return new SedListOfTaskChanges(cPtr, owner);
+  				  return new SedListOfTaskChanges(cPtr, owner);
 				return new SedListOfChanges(cPtr, owner);
 			}
-			else if(name.equals("listOfSimulations"))
+			else if(name == "listOfSimulations")
 			{
 				return new SedListOfSimulations(cPtr, owner);
 			}
-			else if(name.equals("listOfTasks"))
+			else if(name == "listOfTasks")
 			{
 				return new SedListOfTasks(cPtr, owner);
 			}
-			else if(name.equals("listOfDataGenerators"))
+			else if(name == "listOfDataGenerators")
 			{
 				return new SedListOfDataGenerators(cPtr, owner);
 			}
-			else if(name.equals("listOfOutputs"))
+			else if(name == "listOfOutputs")
 			{
 				return new SedListOfOutputs(cPtr, owner);
 			}
-			else if(name.equals("listOfCurves"))
+			else if(name == "listOfCurves")
 			{
 				return new SedListOfCurves(cPtr, owner);
 			}
-			else if(name.equals("listOfSurfaces"))
+			else if(name == "listOfSurfaces")
 			{
 				return new SedListOfSurfaces(cPtr, owner);
 			}
-			else if(name.equals("listOfDataSets"))
+			else if(name == "listOfDataSets")
 			{
 				return new SedListOfDataSets(cPtr, owner);
 			}
-			else if(name.equals("listOfParameters"))
+			else if(name == "listOfParameters")
 			{
 				return new SedListOfParameters(cPtr, owner);
 			}
-			else if(name.equals("listOfVariables"))
+			else if(name == "listOfVariables")
 			{
 				return new SedListOfVariables(cPtr, owner);
 			}
