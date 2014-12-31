@@ -134,6 +134,7 @@
 
 
 #include <sedml/common/extern.h>
+#include <sedml/common/libsedml-namespace.h>
 #include <sedml/common/sedmlfwd.h>
 #include <sedml/SedTypeCodes.h>
 #include <sedml/SedNamespaces.h>
@@ -152,11 +153,10 @@
 
 #include <sedml/SedErrorLog.h>
 
-LIBSEDML_CPP_NAMESPACE_BEGIN
 
-//class SedErrorLog;
-class SedVisitor;
-class SedDocument;
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
 class Model;
 
 class List;
@@ -166,6 +166,14 @@ class XMLInputStream;
 class XMLNamespaces;
 class XMLOutputStream;
 class XMLToken;
+
+LIBSBML_CPP_NAMESPACE_END
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
+
+//class SedErrorLog;
+class SedVisitor;
+class SedDocument;
 
 
 

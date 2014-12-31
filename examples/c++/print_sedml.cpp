@@ -35,11 +35,14 @@
 
 #include <iostream>
 #include <vector>
-#include <sedml/SedTypes.h>
+
 #include <sbml/SBMLTypes.h>
+LIBSBML_CPP_NAMESPACE_USE
+
+#include <sedml/SedTypes.h>
+LIBSEDML_CPP_NAMESPACE_USE
 
 using namespace std;
-LIBSEDML_CPP_NAMESPACE_USE
 
 void printRepeatedTask(const SedRepeatedTask* repeat)
 {

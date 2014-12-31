@@ -39,6 +39,13 @@
 #ifndef LIBSEDML_NAMESPACE_H
 #define LIBSEDML_NAMESPACE_H 1
 
+#ifndef SWIG
+#include <sbml/common/libsbml-namespace.h>
+
+LIBSBML_CPP_NAMESPACE_USE
+
+#endif
+
 /*
  *
  * The idea of the following marcors are borrowed from 

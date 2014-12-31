@@ -327,6 +327,10 @@ typedef CLASS_OR_STRUCT SedCurve                     SedCurve_t;
  */
 typedef CLASS_OR_STRUCT SedDataSet                     SedDataSet_t;
 
+LIBSEDML_CPP_NAMESPACE_END
+
+LIBSBML_CPP_NAMESPACE_BEGIN
+
 /**
  * @var typedef class ASTNode ASTNode_t
  * @copydoc ASTNode
@@ -339,7 +343,7 @@ typedef CLASS_OR_STRUCT ASTNode                     ASTNode_t;
  */
 typedef CLASS_OR_STRUCT XMLNode                     XMLNode_t;
 
-LIBSEDML_CPP_NAMESPACE_END
+LIBSBML_CPP_NAMESPACE_END
 
 #undef CLASS_OR_STRUCT
 
