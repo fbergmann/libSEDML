@@ -711,6 +711,10 @@ install(FILES ${DOCUMENTATION_FILES} DESTINATION ${MISC_PREFIX}.)
 # Print Summary
 #
 
+if (NOT HOSTNAME)
+ site_name(HOSTNAME)
+endif()
+
 message(STATUS "
 ----------------------------------------------------------------------
 libSEDML version ${PACKAGE_VERSION}
@@ -724,7 +728,7 @@ libSEDML version ${PACKAGE_VERSION}
 
    To contact the developers directly, email fbergman@caltech.edu
 
-   Configured on host "$ENV{COMPUTERNAME}" ${HOSTNAME}
+   Configured on host '${HOSTNAME}'
      host type                     = ${CMAKE_SYSTEM_NAME}
      host operating system         = ${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_VERSION}
      host CPU architecture         = ${CMAKE_SYSTEM_PROCESSOR}
@@ -801,16 +805,16 @@ endif()
 
 if(APPLE)
     if(CMAKE_OSX_ARCHITECTURES STREQUAL "")
-        message(STATUS "  Building universal binaries               = no (using native arch)")
+        message(STATUS "  Building universal binaries                 = no (using native arch)")
     else()
         list(REMOVE_DUPLICATES CMAKE_OSX_ARCHITECTURES)
         list(REMOVE_ITEM CMAKE_OSX_ARCHITECTURES "")
         list(SORT CMAKE_OSX_ARCHITECTURES)
         list(LENGTH CMAKE_OSX_ARCHITECTURES NUM_ARCHS)
         if(NUMARCHS EQUAL 1)
-            message(STATUS "  Building universal binaries               = no (using ${CMAKE_OSX_ARCHITECTURES})")
+            message(STATUS "  Building universal binaries                 = no (using ${CMAKE_OSX_ARCHITECTURES})")
         else()
-            message(STATUS "  Building universal binaries               = yes (using ${CMAKE_OSX_ARCHITECTURES})")
+            message(STATUS "  Building universal binaries                 = yes (using ${CMAKE_OSX_ARCHITECTURES})")
         endif()
     endif()
 endif()
