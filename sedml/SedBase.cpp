@@ -1,26 +1,26 @@
 /**
  * @file    SedBase.cpp
  * @brief   Implementation of SedBase, the base object of all Sed objects.
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  */
 
@@ -94,17 +94,17 @@ SedBase::getAllElements()
  * Only subclasses may create SedBase objects.
  */
 SedBase::SedBase (unsigned int level, unsigned int version) :
-   mNotes     ( NULL )
- , mAnnotation( NULL )
- , mSed      ( NULL )
- , mSedNamespaces (NULL)
- , mUserData(NULL)
- , mLine      ( 0 )
- , mColumn    ( 0 )
- , mParentSedObject (NULL)
- , mHasBeenDeleted (false)
- , mEmptyString ("")
- , mURI("")
+mNotes     ( NULL )
+, mAnnotation( NULL )
+, mSed      ( NULL )
+, mSedNamespaces (NULL)
+, mUserData(NULL)
+, mLine      ( 0 )
+, mColumn    ( 0 )
+, mParentSedObject (NULL)
+, mHasBeenDeleted (false)
+, mEmptyString ("")
+, mURI("")
 {
   mSedNamespaces = new SedNamespaces(level, version);
 
@@ -123,19 +123,19 @@ SedBase::SedBase (unsigned int level, unsigned int version) :
  * Only subclasses may create SedBase objects.
  */
 SedBase::SedBase (SedNamespaces *sbmlns) :
-   mNotes     ( NULL )
- , mAnnotation( NULL )
- , mSed      ( NULL )
- , mSedNamespaces (NULL)
- , mUserData(NULL)
- , mLine      ( 0 )
- , mColumn    ( 0 )
- , mParentSedObject (NULL)
- , mHasBeenDeleted (false)
- , mEmptyString ("")
- , mURI("")
+mNotes     ( NULL )
+, mAnnotation( NULL )
+, mSed      ( NULL )
+, mSedNamespaces (NULL)
+, mUserData(NULL)
+, mLine      ( 0 )
+, mColumn    ( 0 )
+, mParentSedObject (NULL)
+, mHasBeenDeleted (false)
+, mEmptyString ("")
+, mURI("")
 {
-  if (!sbmlns) 
+  if (!sbmlns)
   {
     std::string err("SedBase::SedBase(SedNamespaces*) : SedNamespaces is null");
     throw SedConstructorException(err);
@@ -152,7 +152,7 @@ SedBase::SedBase (SedNamespaces *sbmlns) :
   //
 
 #if 0
-    cout << "[DEBUG] SedBase::SedBase(SedNamespaces*,...) " << static_cast<SedNamespaces>(*mSedNamespaces).getURI() << endl;
+  cout << "[DEBUG] SedBase::SedBase(SedNamespaces*,...) " << static_cast<SedNamespaces>(*mSedNamespaces).getURI() << endl;
 #endif
 
   setElementNamespace(static_cast<SedNamespaces>(*mSedNamespaces).getURI());
@@ -172,16 +172,16 @@ SedBase::SedBase(const SedBase& orig)
   }
   this->mMetaId = orig.mMetaId;
 
-  if(orig.mNotes != NULL) 
+  if(orig.mNotes != NULL)
     this->mNotes = new XMLNode(*const_cast<SedBase&>(orig).getNotes());
   else
     this->mNotes = NULL;
-  
-  if(orig.mAnnotation != NULL) 
+
+  if(orig.mAnnotation != NULL)
     this->mAnnotation = new XMLNode(*const_cast<SedBase&>(orig).mAnnotation);
   else
     this->mAnnotation = NULL;
- 
+
   /* the copy does not contain a pointer to the document since technically
    * a copy is not part of the document
    */
@@ -196,18 +196,18 @@ SedBase::SedBase(const SedBase& orig)
    * need to use the default namespace NOT the namespace local to the object
    */
   if(orig.getSedNamespaces() != NULL)
-    this->mSedNamespaces = 
+    this->mSedNamespaces =
     new SedNamespaces(*const_cast<SedBase&>(orig).getSedNamespaces());
   else
     this->mSedNamespaces = NULL;
 
-  
+
   this->mHasBeenDeleted = false;
 
   this->mURI = orig.mURI;
 }
-  
-  
+
+
 /** @endcond */
 
 
@@ -237,14 +237,14 @@ SedBase& SedBase::operator=(const SedBase& rhs)
 
     delete this->mNotes;
 
-    if(rhs.mNotes != NULL) 
+    if(rhs.mNotes != NULL)
       this->mNotes = new XMLNode(*const_cast<SedBase&>(rhs).getNotes());
     else
       this->mNotes = NULL;
 
     delete this->mAnnotation;
 
-    if(rhs.mAnnotation != NULL) 
+    if(rhs.mAnnotation != NULL)
       this->mAnnotation = new XMLNode(*const_cast<SedBase&>(rhs).mAnnotation);
     else
       this->mAnnotation = NULL;
@@ -258,7 +258,7 @@ SedBase& SedBase::operator=(const SedBase& rhs)
     delete this->mSedNamespaces;
 
     if(rhs.mSedNamespaces != NULL)
-      this->mSedNamespaces = 
+      this->mSedNamespaces =
       new SedNamespaces(*const_cast<SedBase&>(rhs).mSedNamespaces);
     else
       this->mSedNamespaces = NULL;
@@ -341,7 +341,7 @@ SedBase::getNotes() const
  * @return the notes of this Sed object by string.
  */
 std::string
-SedBase::getNotesString() 
+SedBase::getNotesString()
 {
   return XMLNode::convertXMLNodeToString(mNotes);
 }
@@ -357,7 +357,7 @@ SedBase::getNotesString() const
 /*
  * @return the annotation of this Sed object.
  */
-XMLNode* 
+XMLNode*
 SedBase::getAnnotation ()
 {
   syncAnnotation();
@@ -366,7 +366,7 @@ SedBase::getAnnotation ()
 }
 
 
-XMLNode* 
+XMLNode*
 SedBase::getAnnotation () const
 {
   return const_cast<SedBase *>(this)->getAnnotation();
@@ -391,25 +391,25 @@ SedBase::getAnnotationString () const
 
 
 /** @cond doxygen-libsbml-internal */
-std::string 
+std::string
 SedBase::getURI() const
 {
   return getElementNamespace();
 }
-  
+
 /** @endcond */
 
 void *
 SedBase::getUserData() const
 {
-	return this->mUserData;
+  return this->mUserData;
 }
 
 
 int
 SedBase::setUserData(void *userData)
 {
-	this->mUserData = userData;
+  this->mUserData = userData;
   if (mUserData != NULL)
   {
     return LIBSEDML_OPERATION_SUCCESS;
@@ -441,9 +441,9 @@ SedBase::getSedDocument () const
 {
   if (mSed != NULL)
   {
-    // if the doc object has been deleted the pointer is 
+    // if the doc object has been deleted the pointer is
     // still valid but points to nothing
-    try 
+    try
     {
       if (mSed->getHasBeenDeleted())
       {
@@ -471,9 +471,9 @@ SedBase::getSedDocument ()
 {
   if (mSed != NULL)
   {
-    // if the doc object has been deleted the pointer is 
+    // if the doc object has been deleted the pointer is
     // still valid but points to nothing
-    try 
+    try
     {
       if (mSed->getHasBeenDeleted())
       {
@@ -496,9 +496,9 @@ SedBase::getParentSedObject ()
 {
   if (mParentSedObject != NULL)
   {
-    // if the parent object has been deleted the pointer is 
+    // if the parent object has been deleted the pointer is
     // still valid but points to nothing
-    try 
+    try
     {
       if (mParentSedObject->getHasBeenDeleted())
       {
@@ -514,7 +514,7 @@ SedBase::getParentSedObject ()
       return NULL;
     }
   }
-  
+
   return mParentSedObject;
 }
 
@@ -523,9 +523,9 @@ SedBase::getParentSedObject () const
 {
   if (mParentSedObject != NULL)
   {
-    // if the parent object has been deleted the pointer is 
+    // if the parent object has been deleted the pointer is
     // still valid but points to nothing
-    try 
+    try
     {
       if (mParentSedObject->getHasBeenDeleted())
       {
@@ -541,7 +541,7 @@ SedBase::getParentSedObject () const
       return NULL;
     }
   }
-  
+
   return mParentSedObject;
 }
 
@@ -696,15 +696,15 @@ SedBase::setName (const std::string& name)
 /*
  * Sets the annotation of this Sed object to a copy of annotation.
  */
-int 
+int
 SedBase::setAnnotation (const XMLNode* annotation)
 {
   //
-  // (*NOTICE*) 
+  // (*NOTICE*)
   //
   // syncAnnotation() must not be invoked in this function.
-  // 
-  // 
+  //
+  //
 
   if (annotation == NULL)
   {
@@ -718,14 +718,14 @@ SedBase::setAnnotation (const XMLNode* annotation)
   //  return LIBSEDML_INVALID_OBJECT;
   //}
   if (mAnnotation != annotation)
-  { 
+  {
     delete mAnnotation;
 
     // the annotation is an rdf annotation but the object has no metaid
     if (RDFAnnotationParser::hasRDFAnnotation(annotation) == true
-      && (RDFAnnotationParser::hasCVTermRDFAnnotation(annotation) == true
-      || RDFAnnotationParser::hasHistoryRDFAnnotation(annotation) == true)
-      && isSetMetaId() == false)
+        && (RDFAnnotationParser::hasCVTermRDFAnnotation(annotation) == true
+            || RDFAnnotationParser::hasHistoryRDFAnnotation(annotation) == true)
+        && isSetMetaId() == false)
     {
       mAnnotation = NULL;
       return LIBSEDML_UNEXPECTED_ATTRIBUTE;
@@ -736,17 +736,17 @@ SedBase::setAnnotation (const XMLNode* annotation)
       const string&  name = annotation->getName();
       if (name != "annotation")
       {
-        XMLToken ann_t = XMLToken(XMLTriple("annotation", "", ""), 
+        XMLToken ann_t = XMLToken(XMLTriple("annotation", "", ""),
                                   XMLAttributes());
         mAnnotation = new XMLNode(ann_t);
 
-        // The root node of the given XMLNode tree can be an empty XMLNode 
-        // (i.e. neither start, end, nor text XMLNode) if the given annotation was 
-        // converted from an XML string whose top level elements are neither 
+        // The root node of the given XMLNode tree can be an empty XMLNode
+        // (i.e. neither start, end, nor text XMLNode) if the given annotation was
+        // converted from an XML string whose top level elements are neither
         // "html" nor "body" and not enclosed with <annotation>..</annotation> tags
-        // (e.g. <foo xmlns:foo="...">..</foo><bar xmlns:bar="...">..</bar> ) 
-        if (!annotation->isStart() && !annotation->isEnd() && 
-                                      !annotation->isText()) 
+        // (e.g. <foo xmlns:foo="...">..</foo><bar xmlns:bar="...">..</bar> )
+        if (!annotation->isStart() && !annotation->isEnd() &&
+            !annotation->isText())
         {
           for (unsigned int i=0; i < annotation->getNumChildren(); i++)
           {
@@ -779,18 +779,18 @@ SedBase::setAnnotation (const std::string& annotation)
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
-  else  
+  else
   {
     int success = LIBSEDML_OPERATION_FAILED;
 
     //
-    // (*NOTICE*) 
+    // (*NOTICE*)
     //
     // syncAnnotation() must not be invoked in this function.
-    // 
-    // 
+    //
+    //
 
-    if(annotation.empty()) 
+    if(annotation.empty())
     {
       unsetAnnotation();
       return LIBSEDML_OPERATION_SUCCESS;
@@ -802,7 +802,7 @@ SedBase::setAnnotation (const std::string& annotation)
     if (getSedDocument() != NULL)
     {
       XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
-      annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns); 
+      annt_xmln = XMLNode::convertStringToXMLNode(annotation,xmlns);
     }
     else
     {
@@ -824,21 +824,21 @@ SedBase::setAnnotation (const std::string& annotation)
  * This allows other annotations to be preserved whilst
  * adding additional information.
  */
-int 
+int
 SedBase::appendAnnotation (const XMLNode* annotation)
 {
   int success = LIBSEDML_OPERATION_FAILED;
   unsigned int duplicates = 0;
 
 
-  if(annotation == NULL) 
+  if(annotation == NULL)
     return LIBSEDML_OPERATION_SUCCESS;
 
 
   XMLNode* new_annotation = NULL;
   const string&  name = annotation->getName();
 
-  // check for annotation tags and add if necessary 
+  // check for annotation tags and add if necessary
   if (name != "annotation")
   {
     XMLToken ann_t = XMLToken(XMLTriple("annotation", "", ""), XMLAttributes());
@@ -926,7 +926,7 @@ SedBase::appendAnnotation (const std::string& annotation)
   {
     annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
-  
+
   if(annt_xmln != NULL)
   {
     success = appendAnnotation(annt_xmln);
@@ -938,17 +938,17 @@ SedBase::appendAnnotation (const std::string& annotation)
 
 
 int
-SedBase::removeTopLevelAnnotationElement(const std::string elementName, 
-    const std::string elementURI)
+SedBase::removeTopLevelAnnotationElement(const std::string elementName,
+                                         const std::string elementURI)
 {
-  
+
   int success = LIBSEDML_OPERATION_FAILED;
   if (mAnnotation == NULL)
   {
     success = LIBSEDML_OPERATION_SUCCESS;
     return success;
   }
-  
+
   int index = mAnnotation->getIndex(elementName);
   if (index < 0)
   {
@@ -961,13 +961,13 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
     // check uri matches
     std::string prefix = mAnnotation->getChild(index).getPrefix();
 
-    if (elementURI.empty() == false 
-      && elementURI != mAnnotation->getChild(index).getNamespaceURI(prefix))
+    if (elementURI.empty() == false
+        && elementURI != mAnnotation->getChild(index).getNamespaceURI(prefix))
     {
       success = LIBSEDML_ANNOTATION_NS_NOT_FOUND;
       return success;
     }
-    
+
     // remove the annotation at the index corresponding to the name
     mAnnotation->removeChild(index);
     if (mAnnotation->getNumChildren() == 0)
@@ -976,7 +976,7 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
       mAnnotation = NULL;
     }
 
-    // check success 
+    // check success
     if (mAnnotation == NULL || mAnnotation->getIndex(elementName) < 0)
     {
       success = LIBSEDML_OPERATION_SUCCESS;
@@ -987,7 +987,7 @@ SedBase::removeTopLevelAnnotationElement(const std::string elementName,
 }
 
 
-int 
+int
 SedBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 {
   int success = LIBSEDML_OPERATION_FAILED;
@@ -999,7 +999,7 @@ SedBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
       success = LIBSEDML_INVALID_OBJECT;
       return success;
     }
-    else 
+    else
     {
       replacement = annotation->getChild(0).clone();
     }
@@ -1021,7 +1021,7 @@ SedBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
 }
 
 
-int 
+int
 SedBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 {
   int success = LIBSEDML_OPERATION_FAILED;
@@ -1035,7 +1035,7 @@ SedBase::replaceTopLevelAnnotationElement(const std::string& annotation)
   {
     annt_xmln = XMLNode::convertStringToXMLNode(annotation);
   }
-  
+
   if(annt_xmln != NULL)
   {
     success = replaceTopLevelAnnotationElement(annt_xmln);
@@ -1049,10 +1049,10 @@ SedBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 /*
  * Sets the notes of this Sed object to a copy of notes.
  */
-int 
+int
 SedBase::setNotes(const XMLNode* notes)
 {
-  if (mNotes == notes) 
+  if (mNotes == notes)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -1074,16 +1074,16 @@ SedBase::setNotes(const XMLNode* notes)
   }
   else
   {
-    XMLToken notes_t = XMLToken(XMLTriple("notes", "", ""), 
+    XMLToken notes_t = XMLToken(XMLTriple("notes", "", ""),
                                 XMLAttributes());
     mNotes = new XMLNode(notes_t);
-  
-    // The root node of the given XMLNode tree can be an empty XMLNode 
-    // (i.e. neither start, end, nor text XMLNode) if the given notes was 
-    // converted from an XML string whose top level elements are neither 
-    // "html" nor "body" and not enclosed with <notes>..</notes> tag 
+
+    // The root node of the given XMLNode tree can be an empty XMLNode
+    // (i.e. neither start, end, nor text XMLNode) if the given notes was
+    // converted from an XML string whose top level elements are neither
+    // "html" nor "body" and not enclosed with <notes>..</notes> tag
     // (e.g. <p ...>..</p><br/>).
-    if (!notes->isStart() && !notes->isEnd() && !notes->isText() ) 
+    if (!notes->isStart() && !notes->isEnd() && !notes->isText() )
     {
       for (unsigned int i=0; i < notes->getNumChildren(); i++)
       {
@@ -1099,12 +1099,12 @@ SedBase::setNotes(const XMLNode* notes)
         return LIBSEDML_OPERATION_FAILED;
     }
   }
-  
+
   // in L2v2 and beyond the XHTML content of notes is restricted
   // but I need the notes tag to use the function
   // so I havent tested it until now
-  if (getLevel() > 2 
-    || (getLevel() == 2 && getVersion() > 1))
+  if (getLevel() > 2
+      || (getLevel() == 2 && getVersion() > 1))
   {
     if (!SyntaxChecker::hasExpectedXHTMLSyntax(mNotes, NULL /*getSedNamespaces()*/))
     {
@@ -1141,7 +1141,7 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
     if (getSedDocument() != NULL)
     {
       XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
-      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns); 
+      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
     }
     else
     {
@@ -1153,15 +1153,15 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
       if (addXHTMLMarkup == true)
       {
         // user has specified that they want the markup added
-        if (getLevel() > 2 
-          || (getLevel() == 2 && getVersion() > 1))
+        if (getLevel() > 2
+            || (getLevel() == 2 && getVersion() > 1))
         {
           // just say the user passed a string that did not represent xhtml
           // the xmlnode will not get set as it is invalid
-          if (notes_xmln->getNumChildren() == 0 
-            && notes_xmln->isStart() == false
-            && notes_xmln->isEnd() == false 
-            && notes_xmln->isText() == true)
+          if (notes_xmln->getNumChildren() == 0
+              && notes_xmln->isStart() == false
+              && notes_xmln->isEnd() == false
+              && notes_xmln->isText() == true)
           {
             //create a parent node of xhtml type p
             XMLAttributes blank_att = XMLAttributes();
@@ -1179,7 +1179,7 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
           {
             success = setNotes(notes_xmln);
           }
-          
+
         }
         else
         {
@@ -1202,36 +1202,36 @@ SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
  * This allows other notes to be preserved whilst
  * adding additional information.
  */
-int 
+int
 SedBase::appendNotes(const XMLNode* notes)
 {
   int success = LIBSEDML_OPERATION_FAILED;
-  if(notes == NULL) 
+  if(notes == NULL)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
 
   const string&  name = notes->getName();
 
-  // The content of notes in Sed can consist only of the following 
+  // The content of notes in Sed can consist only of the following
   // possibilities:
   //
-  //  1. A complete XHTML document (minus the XML and DOCTYPE 
-  //     declarations), that is, XHTML content beginning with the 
+  //  1. A complete XHTML document (minus the XML and DOCTYPE
+  //     declarations), that is, XHTML content beginning with the
   //     html tag.
   //     (_NotesType is _ANotesHTML.)
   //
   //  2. The body element from an XHTML document.
-  //     (_NotesType is _ANotesBody.) 
+  //     (_NotesType is _ANotesBody.)
   //
-  //  3. Any XHTML content that would be permitted within a body 
+  //  3. Any XHTML content that would be permitted within a body
   //     element, each one must declare the XML namespace separately.
-  //     (_NotesType is _ANotesAny.) 
+  //     (_NotesType is _ANotesAny.)
   //
 
   typedef enum { _ANotesHTML, _ANotesBody, _ANotesAny } _NotesType;
 
-  _NotesType addedNotesType = _ANotesAny; 
+  _NotesType addedNotesType = _ANotesAny;
   XMLNode   addedNotes;
 
   //------------------------------------------------------------
@@ -1243,12 +1243,12 @@ SedBase::appendNotes(const XMLNode* notes)
   if (name == "notes")
   {
     /* check for notes tags on the added notes and strip if present and
-       the notes tag has "html" or "body" element */
+     the notes tag has "html" or "body" element */
 
-    if (notes->getNumChildren() > 0)  
-    { 
+    if (notes->getNumChildren() > 0)
+    {
       // notes->getChild(0) must be "html", "body", or any XHTML
-      // element that would be permitted within a "body" element 
+      // element that would be permitted within a "body" element
       // (e.g. <p>..</p>,  <br>..</br> and so forth).
 
       const string& cname = notes->getChild(0).getName();
@@ -1258,16 +1258,16 @@ SedBase::appendNotes(const XMLNode* notes)
         addedNotes = notes->getChild(0);
         addedNotesType = _ANotesHTML;
       }
-      else if (cname == "body") 
+      else if (cname == "body")
       {
         addedNotes = notes->getChild(0);
         addedNotesType = _ANotesBody;
       }
       else
       {
-        // the notes tag must NOT be stripped if notes->getChild(0) node 
-        // is neither "html" nor "body" element because the children of 
-        // the addedNotes will be added to the curNotes later if the node 
+        // the notes tag must NOT be stripped if notes->getChild(0) node
+        // is neither "html" nor "body" element because the children of
+        // the addedNotes will be added to the curNotes later if the node
         // is neither "html" nor "body".
         addedNotes = *notes;
         addedNotesType = _ANotesAny;
@@ -1275,26 +1275,26 @@ SedBase::appendNotes(const XMLNode* notes)
     }
     else
     {
-      // the given notes is empty 
+      // the given notes is empty
       return LIBSEDML_OPERATION_SUCCESS;
     }
   }
   else
   {
-    // if the XMLNode argument notes has been created from a string and 
+    // if the XMLNode argument notes has been created from a string and
     // it is a set of subelements there may be a single empty node
     // as parent - leaving this in doesnt affect the writing out of notes
     // but messes up the check for correct syntax
-    if (!notes->isStart() && !notes->isEnd() && !notes->isText() ) 
+    if (!notes->isStart() && !notes->isEnd() && !notes->isText() )
     {
       if (notes->getNumChildren() > 0)
-      { 
+      {
         addedNotes = *notes;
         addedNotesType = _ANotesAny;
       }
       else
       {
-        // the given notes is empty 
+        // the given notes is empty
         return LIBSEDML_OPERATION_SUCCESS;
       }
     }
@@ -1313,9 +1313,9 @@ SedBase::appendNotes(const XMLNode* notes)
       else
       {
         // The given notes node needs to be added to a parent node
-        // if the node is neither "html" nor "body" element because the 
-        // children of addedNotes will be added to the curNotes later if the 
-        // node is neither "html" nor "body" (i.e. any XHTML element that 
+        // if the node is neither "html" nor "body" element because the
+        // children of addedNotes will be added to the curNotes later if the
+        // node is neither "html" nor "body" (i.e. any XHTML element that
         // would be permitted within a "body" element)
         addedNotes.addChild(*notes);
         addedNotesType = _ANotesAny;
@@ -1324,24 +1324,24 @@ SedBase::appendNotes(const XMLNode* notes)
   }
 
   //
-  // checks the addedNotes of "html" if the html tag contains "head" and 
+  // checks the addedNotes of "html" if the html tag contains "head" and
   // "body" tags which must be located in this order.
   //
   if (addedNotesType == _ANotesHTML)
   {
     if ((addedNotes.getNumChildren() != 2) ||
         ( (addedNotes.getChild(0).getName() != "head") ||
-          (addedNotes.getChild(1).getName() != "body")
+         (addedNotes.getChild(1).getName() != "body")
+         )
         )
-       )
     {
       return LIBSEDML_INVALID_OBJECT;
     }
   }
 
   // check whether notes is valid xhtml
-  if (getLevel() > 2 
-    || (getLevel() == 2 && getVersion() > 1))
+  if (getLevel() > 2
+      || (getLevel() == 2 && getVersion() > 1))
   {
     XMLNode tmpNotes(XMLTriple("notes","",""), XMLAttributes());
 
@@ -1368,18 +1368,18 @@ SedBase::appendNotes(const XMLNode* notes)
   {
     //------------------------------------------------------------
     //
-    //  STEP2: identifies the type of the existing notes 
+    //  STEP2: identifies the type of the existing notes
     //
     //------------------------------------------------------------
 
-    _NotesType curNotesType   = _ANotesAny; 
+    _NotesType curNotesType   = _ANotesAny;
     XMLNode&  curNotes = *mNotes;
 
     // curNotes.getChild(0) must be "html", "body", or any XHTML
     // element that would be permitted within a "body" element .
 
     const string& cname = curNotes.getChild(0).getName();
-  
+
     if (cname == "html")
     {
       XMLNode& curHTML = curNotes.getChild(0);
@@ -1389,15 +1389,15 @@ SedBase::appendNotes(const XMLNode* notes)
       //
       if ((curHTML.getNumChildren() != 2) ||
           ( (curHTML.getChild(0).getName() != "head") ||
-            (curHTML.getChild(1).getName() != "body")
+           (curHTML.getChild(1).getName() != "body")
+           )
           )
-         )
       {
         return LIBSEDML_INVALID_OBJECT;
       }
       curNotesType = _ANotesHTML;
     }
-    else if (cname == "body") 
+    else if (cname == "body")
     {
       curNotesType = _ANotesBody;
     }
@@ -1405,7 +1405,7 @@ SedBase::appendNotes(const XMLNode* notes)
     {
       curNotesType = _ANotesAny;
     }
-  
+
     /*
      * BUT we also have the issue of the rules relating to notes
      * contents and where to add them ie we cannot add a second body element
@@ -1417,32 +1417,32 @@ SedBase::appendNotes(const XMLNode* notes)
     //  STEP3: appends the given notes to the current notes
     //
     //------------------------------------------------------------
-  
+
     unsigned int i;
-  
+
     if (curNotesType == _ANotesHTML)
     {
-      XMLNode& curHTML = curNotes.getChild(0); 
+      XMLNode& curHTML = curNotes.getChild(0);
       XMLNode& curBody = curHTML.getChild(1);
-      
+
       if (addedNotesType == _ANotesHTML)
       {
         // adds the given html tag to the current html tag
-  
-        XMLNode& addedBody = addedNotes.getChild(1);   
-  
+
+        XMLNode& addedBody = addedNotes.getChild(1);
+
         for (i=0; i < addedBody.getNumChildren(); i++)
         {
           if (curBody.addChild(addedBody.getChild(i)) < 0 )
-            return LIBSEDML_OPERATION_FAILED;          
+            return LIBSEDML_OPERATION_FAILED;
         }
       }
-      else if ((addedNotesType == _ANotesBody) 
-             || (addedNotesType == _ANotesAny))
+      else if ((addedNotesType == _ANotesBody)
+               || (addedNotesType == _ANotesAny))
       {
-        // adds the given body or other tag (permitted in the body) to the current 
+        // adds the given body or other tag (permitted in the body) to the current
         // html tag
-  
+
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curBody.addChild(addedNotes.getChild(i)) < 0 )
@@ -1456,27 +1456,27 @@ SedBase::appendNotes(const XMLNode* notes)
       if (addedNotesType == _ANotesHTML)
       {
         // adds the given html tag to the current body tag
-  
+
         XMLNode  addedHTML(addedNotes);
         XMLNode& addedBody = addedHTML.getChild(1);
         XMLNode& curBody   = curNotes.getChild(0);
-  
+
         for (i=0; i < curBody.getNumChildren(); i++)
         {
           addedBody.insertChild(i,curBody.getChild(i));
         }
-        
+
         curNotes.removeChildren();
         if (curNotes.addChild(addedHTML) < 0)
           return LIBSEDML_OPERATION_FAILED;
       }
       else if ((addedNotesType == _ANotesBody) || (addedNotesType == _ANotesAny))
       {
-        // adds the given body or other tag (permitted in the body) to the current 
+        // adds the given body or other tag (permitted in the body) to the current
         // body tag
-  
+
         XMLNode& curBody = curNotes.getChild(0);
-  
+
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curBody.addChild(addedNotes.getChild(i)) < 0)
@@ -1490,15 +1490,15 @@ SedBase::appendNotes(const XMLNode* notes)
       if (addedNotesType == _ANotesHTML)
       {
         // adds the given html tag to the current any tag permitted in the body.
-  
+
         XMLNode  addedHTML(addedNotes);
         XMLNode& addedBody = addedHTML.getChild(1);
-  
+
         for (i=0; i < curNotes.getNumChildren(); i++)
         {
           addedBody.insertChild(i,curNotes.getChild(i));
         }
-  
+
         curNotes.removeChildren();
         if (curNotes.addChild(addedHTML) < 0)
           return LIBSEDML_OPERATION_FAILED;
@@ -1506,23 +1506,23 @@ SedBase::appendNotes(const XMLNode* notes)
       else if (addedNotesType == _ANotesBody)
       {
         // adds the given body tag to the current any tag permitted in the body.
-  
+
         XMLNode addedBody(addedNotes);
-  
+
         for (i=0; i < curNotes.getNumChildren(); i++)
         {
           addedBody.insertChild(i,curNotes.getChild(i));
         }
-  
+
         curNotes.removeChildren();
         if (curNotes.addChild(addedBody) < 0)
           return LIBSEDML_OPERATION_FAILED;
       }
       else if (addedNotesType == _ANotesAny)
       {
-        // adds the given any tag permitted in the boy to that of the current 
+        // adds the given any tag permitted in the boy to that of the current
         // any tag.
-  
+
         for (i=0; i < addedNotes.getNumChildren(); i++)
         {
           if (curNotes.addChild(addedNotes.getChild(i)) < 0)
@@ -1559,12 +1559,12 @@ SedBase::appendNotes(const std::string& notes)
   // you might not have a document !!
   if (getSedDocument() != NULL)
   {
-      XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
-      notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns); 
+    XMLNamespaces* xmlns = getSedDocument()->getNamespaces();
+    notes_xmln = XMLNode::convertStringToXMLNode(notes,xmlns);
   }
   else
   {
-      notes_xmln = XMLNode::convertStringToXMLNode(notes);
+    notes_xmln = XMLNode::convertStringToXMLNode(notes);
   }
 
   if(notes_xmln != NULL)
@@ -1590,11 +1590,11 @@ SedBase::setSedDocument (SedDocument* d)
 
 
 /*
-  * Sets the parent Sed object of this Sed object.
-  *
-  * @param sb the Sed object to use
-  */
-void 
+ * Sets the parent Sed object of this Sed object.
+ *
+ * @param sb the Sed object to use
+ */
+void
 SedBase::connectToParent (SedBase* parent)
 {
   mParentSedObject = parent;
@@ -1625,7 +1625,7 @@ SedBase::connectToChild()
 
 /** @endcond */
 
-SedBase* 
+SedBase*
 SedBase::getAncestorOfType(int type, const std::string pkgName)
 {
   if (pkgName == "core" && type ==SEDML_DOCUMENT)
@@ -1634,9 +1634,9 @@ SedBase::getAncestorOfType(int type, const std::string pkgName)
   SedBase *child = this;
   SedBase *parent = getParentSedObject();
 
-  while ( parent != NULL && 
-          !( parent->getTypeCode() ==SEDML_DOCUMENT )
-        )
+  while ( parent != NULL &&
+         !( parent->getTypeCode() ==SEDML_DOCUMENT )
+         )
   {
     if (parent->getTypeCode() == type )
       return parent;
@@ -1653,7 +1653,7 @@ SedBase::getAncestorOfType(int type, const std::string pkgName)
 }
 
 
-const SedBase* 
+const SedBase*
 SedBase::getAncestorOfType(int type, const std::string pkgName) const
 {
   if (pkgName == "core" && type ==SEDML_DOCUMENT)
@@ -1662,9 +1662,9 @@ SedBase::getAncestorOfType(int type, const std::string pkgName) const
   const SedBase *child = this;
   const SedBase *parent = getParentSedObject();
 
-  while ( parent != NULL && 
-          !( parent->getTypeCode() ==SEDML_DOCUMENT )
-        )
+  while ( parent != NULL &&
+         !( parent->getTypeCode() ==SEDML_DOCUMENT )
+         )
   {
     if (parent->getTypeCode() == type )
       return parent;
@@ -1685,7 +1685,7 @@ SedBase::getAncestorOfType(int type, const std::string pkgName) const
  *
  * @param xmlns the namespaces to set
  */
-int 
+int
 SedBase::setNamespaces(XMLNamespaces* xmlns)
 {
   if (xmlns == NULL)
@@ -1733,7 +1733,7 @@ SedBase::unsetMetaId ()
 int
 SedBase::unsetId ()
 {
-  return LIBSEDML_OPERATION_FAILED;  
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 
@@ -1743,7 +1743,7 @@ SedBase::unsetId ()
 int
 SedBase::unsetName ()
 {
-  return LIBSEDML_OPERATION_FAILED;  
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 
@@ -1817,11 +1817,11 @@ SedBase::getTypeCode () const
   return SEDML_UNKNOWN;
 }
 
-bool 
+bool
 SedBase::hasValidLevelVersionNamespaceCombination()
 {
   int typecode = getTypeCode();
-  XMLNamespaces *xmlns = getNamespaces();  
+  XMLNamespaces *xmlns = getNamespaces();
 
   return hasValidLevelVersionNamespaceCombination(typecode, xmlns);
 }
@@ -1838,7 +1838,7 @@ SedBase::matchesSedNamespaces(const SedBase * sb)
     SedNamespaces *sbmlns = getSedNamespaces();
     SedNamespaces *sbmlns_rhs = sb->getSedNamespaces();
 
-	//TODO
+    //TODO
     //if (sbmlns->getNamespaces()->containIdenticalSetNS(
     //  sbmlns_rhs->getNamespaces()) == false)
     //{
@@ -1859,7 +1859,7 @@ SedBase::matchesSedNamespaces(const SedBase * sb) const
     SedNamespaces *sbmlns = getSedNamespaces();
     SedNamespaces *sbmlns_rhs = sb->getSedNamespaces();
 
-	// TODO: 
+    // TODO:
     //if (sbmlns->getNamespaces()->containIdenticalSetNS(
     //  sbmlns_rhs->getNamespaces()) == false)
     //{
@@ -1906,15 +1906,15 @@ SedBase::matchesCoreSedNamespace(const SedBase * sb)
     return match;
 
   std::string coreNs = SedNamespaces::getSedNamespaceURI(
-                       sbmlns->getLevel(), sbmlns->getVersion());
+                                                         sbmlns->getLevel(), sbmlns->getVersion());
 
   if (sbmlns->getNamespaces()->containsUri(coreNs)
-    && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
+      && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
   {
     match = true;
   }
 
-  //if (sbmlns->getNamespaces()->containIdenticalSetNS(sbmlns_rhs->getNamespaces()) 
+  //if (sbmlns->getNamespaces()->containIdenticalSetNS(sbmlns_rhs->getNamespaces())
   //                                     == true)
   //{
   //  match = true;
@@ -1939,15 +1939,15 @@ SedBase::matchesCoreSedNamespace(const SedBase * sb) const
     return match;
 
   std::string coreNs = SedNamespaces::getSedNamespaceURI(
-                       sbmlns->getLevel(), sbmlns->getVersion());
+                                                         sbmlns->getLevel(), sbmlns->getVersion());
 
   if (sbmlns->getNamespaces()->containsUri(coreNs)
-    && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
+      && sbmlns_rhs->getNamespaces()->containsUri(coreNs))
   {
     match = true;
   }
 
-  //if (sbmlns->getNamespaces()->containIdenticalSetNS(sbmlns_rhs->getNamespaces()) 
+  //if (sbmlns->getNamespaces()->containIdenticalSetNS(sbmlns_rhs->getNamespaces())
   //                                     == true)
   //{
   //  match = true;
@@ -1957,15 +1957,15 @@ SedBase::matchesCoreSedNamespace(const SedBase * sb) const
 }
 
 
-bool 
+bool
 SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns)
 {
-  
-  
+
+
   //
   // (TODO) Currently, the following check code works only for
   //        elements in Sed core.
-  //        This function may need to be extented for other elements 
+  //        This function may need to be extented for other elements
   //        defined in each package extension.
   //
 
@@ -1973,12 +1973,12 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
   bool sedmlDeclared = false;
   std::string declaredURI("");
   unsigned int version = getVersion();
-  
+
   if (xmlns != NULL)
   {
-    // 
+    //
     // checks defined Sed XMLNamespace
-    // returns false if different Sed XMLNamespaces 
+    // returns false if different Sed XMLNamespaces
     // (e.g.SEDML_XMLNS_L2V1 andSEDML_XMLNS_L2V3) are defined.
     //
     int numNS = 0;
@@ -1995,8 +1995,8 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
     // checks if the Sed Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
-      if (!declaredURI.empty() && 
-                      xmlns->getURI(i) == declaredURI)
+      if (!declaredURI.empty() &&
+          xmlns->getURI(i) == declaredURI)
       {
         sedmlDeclared = true;
         break;
@@ -2008,7 +2008,7 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
 }
 
 /* sets the Sednamespaces - internal use only*/
-int 
+int
 SedBase::setSedNamespaces(SedNamespaces * sbmlns)
 {
   if (sbmlns == NULL)
@@ -2092,6 +2092,9 @@ SedBase::read (XMLInputStream& stream)
   if (element.getName() == "sedML")
   {
     SedNamespaces *ns = new SedNamespaces(getLevel(), getVersion());
+
+    SBMLNamespaces *sbmlns = new SBMLNamespaces();
+    sbmlns->addNamespaces(this->getSedNamespaces()->getNamespaces());
     //stream.setNamespaces(this->getSedNamespaces());
     // need to check that any prefix on the sbmlns also occurs on element
     // remembering the horrible situation where the sbmlns might be declared
@@ -2121,35 +2124,35 @@ SedBase::read (XMLInputStream& stream)
          */
         for (unsigned int n = 0; n < this->getErrorLog()->getNumErrors(); n++)
         {
-          unsigned int errorId = 
-                             this->getErrorLog()->getError(n)->getErrorId();
+          unsigned int errorId =
+          this->getErrorLog()->getError(n)->getErrorId();
           if (errorId == SedMissingOrInconsistentLevel
-            || errorId == SedMissingOrInconsistentVersion
-            || errorId == SedInvalidSedLevelVersion
-            || errorId == SedInvalidNamespaceOnSed)
+              || errorId == SedMissingOrInconsistentVersion
+              || errorId == SedInvalidSedLevelVersion
+              || errorId == SedInvalidNamespaceOnSed)
           {
             errorLoggedAlready = true;
           }
         }
-       
+
         if (error == true && errorLoggedAlready == false)
         {
           static ostringstream errMsg;
           errMsg.str("");
           errMsg << "The prefix for the <sedML> element does not match "
-            << "the prefix for the Sed namespace.  This means that "
-            << "the <sedML> element in not in the SED-ML Namespace."<< endl;
+          << "the prefix for the Sed namespace.  This means that "
+          << "the <sedML> element in not in the SED-ML Namespace."<< endl;
 
           logError(SedInvalidNamespaceOnSed,
-                    getLevel(), getVersion(), errMsg.str());
-        }      
+                   getLevel(), getVersion(), errMsg.str());
+        }
 
 
         // add it to the namespace
-        ns->getNamespaces()->add(xmlns->getURI(i), xmlns->getPrefix(i));
+        //ns->getNamespaces()->add(xmlns->getURI(i), xmlns->getPrefix(i));
       }
     }
-    setSedNamespaces(ns);
+    //setSedNamespaces(ns);
   }
   else
   {
@@ -2177,7 +2180,7 @@ SedBase::read (XMLInputStream& stream)
     std::string text;
     while(stream.isGood() && stream.peek().isText())
     {
-      text += stream.next().getCharacters(); 
+      text += stream.next().getCharacters();
     }
     setElementText(text);
 
@@ -2196,11 +2199,11 @@ SedBase::read (XMLInputStream& stream)
       const std::string nextName = next.getName();
 #if 0
       cout << "[DEBUG] SedBase::read " << nextName << " uri "
-           << stream.peek().getURI() << endl;
+      << stream.peek().getURI() << endl;
 #endif
 
       SedBase * object = createObject(stream);
-      
+
       if (object != NULL)
       {
         checkOrderAndLogError(object, position);
@@ -2215,8 +2218,8 @@ SedBase::read (XMLInputStream& stream)
         checkListOfPopulated(object);
       }
       else if ( !( readOtherXML(stream)
-                   || readAnnotation(stream)
-                   || readNotes(stream) ))
+                  || readAnnotation(stream)
+                  || readNotes(stream) ))
       {
         logUnknownElement(nextName, getLevel(), getVersion());
         stream.skipPastEnd( stream.next() );
@@ -2231,8 +2234,8 @@ SedBase::read (XMLInputStream& stream)
 /** @endcond */
 
 
-void 
-SedBase::setElementText(const std::string &text) 
+void
+SedBase::setElementText(const std::string &text)
 {
 }
 
@@ -2248,7 +2251,7 @@ SedBase::write (XMLOutputStream& stream) const
   if (0)
   {
     cout << "[DEBUG] SedBase::write (element name) " << getElementName()
-         << " (element ns) " << getElementNamespace(); 
+    << " (element ns) " << getElementNamespace();
 
     if (xmlns)
     {
@@ -2257,7 +2260,7 @@ SedBase::write (XMLOutputStream& stream) const
       xos << *xmlns;
       cout << endl;
     }
-  
+
   }
 
   stream.startElement( getElementName(), getPrefix() );
@@ -2341,10 +2344,10 @@ SedBase::readAnnotation (XMLInputStream& stream)
 {
   const string& name = stream.peek().getName();
 
-  if (name == "annotation" 
-    || (getLevel() == 1 && getVersion() == 1 && name == "annotations"))
+  if (name == "annotation"
+      || (getLevel() == 1 && getVersion() == 1 && name == "annotations"))
   {
-//    XMLNode* new_annotation = NULL;
+    //    XMLNode* new_annotation = NULL;
     // If this is a level 1 document then annotations are not allowed on
     // the sbml container
     if (getLevel() == 1 && getTypeCode() ==SEDML_DOCUMENT)
@@ -2358,11 +2361,11 @@ SedBase::readAnnotation (XMLInputStream& stream)
 
     if (mAnnotation != NULL)
     {
-      if (getLevel() < 3) 
+      if (getLevel() < 3)
       {
         logError(SedNotSchemaConformant, getLevel(), getVersion(),
-	        "Only one <annotation> element is permitted inside a "
-	        "particular containing element.");
+                 "Only one <annotation> element is permitted inside a "
+                 "particular containing element.");
       }
       else
       {
@@ -2408,8 +2411,8 @@ SedBase::readNotes (XMLInputStream& stream)
       if (getLevel() < 3)
       {
         logError(SedNotSchemaConformant, getLevel(), getVersion(),
-                "Only one <notes> element is permitted inside a "
-	            "particular containing element.");
+                 "Only one <notes> element is permitted inside a "
+                 "particular containing element.");
       }
       else
       {
@@ -2489,25 +2492,25 @@ SedBase::getErrorLog ()
  */
 void
 SedBase::logUnknownAttribute( const string& attribute,
-                            const unsigned int level,
-                            const unsigned int version,
-                            const string& element,
-                            const string& prefix)
+                             const unsigned int level,
+                             const unsigned int version,
+                             const string& element,
+                             const string& prefix)
 {
   ostringstream msg;
 
   {
     msg << "Attribute '" << attribute << "' is not part of the "
-        << "definition of an Sed Level " << level
-        << " Version " << version << " " << element << " element.";
+    << "definition of an Sed Level " << level
+    << " Version " << version << " " << element << " element.";
   }
   /* Akiya made this note - so it needs checking BUT if it can crash due to no
    * SedDocument object then it can crash whatever level - so I put the catch outside
    */
   if (mSed)
   {
-      getErrorLog()->logError(SedNotSchemaConformant,
-  			    level, version, msg.str(), getLine(), getColumn());
+    getErrorLog()->logError(SedNotSchemaConformant,
+                            level, version, msg.str(), getLine(), getColumn());
   }
 }
 /** @endcond */
@@ -2519,28 +2522,28 @@ SedBase::logUnknownAttribute( const string& attribute,
  */
 void
 SedBase::logUnknownElement( const string& element,
-			  const unsigned int level,
-			  const unsigned int version )
+                           const unsigned int level,
+                           const unsigned int version )
 {
   bool logged = false;
   ostringstream msg;
 
-  
+
   if (logged == false)
   {
 
     ostringstream msg;
 
     msg << "Element '" << element << "' is not part of the definition of "
-        << "Sed Level " << level << " Version " << version << ".";
-      
+    << "Sed Level " << level << " Version " << version << ".";
+
     if (mSed != NULL)
     {
       getErrorLog()->logError(SedUnrecognizedElement,
-			      level, version, msg.str(), getLine(), getColumn());
+                              level, version, msg.str(), getLine(), getColumn());
     }
   }
-  
+
 }
 /** @endcond */
 
@@ -2551,16 +2554,16 @@ SedBase::logUnknownElement( const string& element,
  */
 void
 SedBase::logEmptyString( const string& attribute,
-                       const unsigned int level,
-                       const unsigned int version,
-                       const string& element )
-                       
+                        const unsigned int level,
+                        const unsigned int version,
+                        const string& element )
+
 {
   ostringstream msg;
 
   msg << "Attribute '" << attribute << "' on an "
-    << element << " must not be an empty string.";
-      
+  << element << " must not be an empty string.";
+
   //
   // (TODO) Needs to be fixed so that error can be added when
   // no SedDocument attached.
@@ -2581,15 +2584,15 @@ SedBase::logEmptyString( const string& attribute,
  */
 void
 SedBase::logError (  unsigned int       id
-                 , const unsigned int level
-                 , const unsigned int version
-                 , const std::string& details )
+                   , const unsigned int level
+                   , const unsigned int version
+                   , const std::string& details )
 {
   //
   // (TODO) Needs to be fixed so that error can be added when
   // no SedDocument attached.
   //
-  if ( SedBase::getErrorLog() != NULL && mSed != NULL) 
+  if ( SedBase::getErrorLog() != NULL && mSed != NULL)
     getErrorLog()->logError(id, getLevel(), getVersion(), details, getLine(), getColumn());
 }
 /** @endcond */
@@ -2610,7 +2613,7 @@ SedBase::addExpectedAttributes(ExpectedAttributes& attributes)
   // metaid: ID { use="optional" }  (L2v1 ->)
   //
   if (getLevel() > 1 )
-    attributes.add("metaid");  
+    attributes.add("metaid");
 
 }
 
@@ -2621,8 +2624,8 @@ SedBase::addExpectedAttributes(ExpectedAttributes& attributes)
  * parents implementation of this method as well.
  */
 void
-SedBase::readAttributes (const XMLAttributes& attributes, 
-                       const ExpectedAttributes& expectedAttributes)
+SedBase::readAttributes (const XMLAttributes& attributes,
+                         const ExpectedAttributes& expectedAttributes)
 {
   const_cast<XMLAttributes&>(attributes).setErrorLog(getErrorLog());
 
@@ -2648,7 +2651,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     {
       if ( expectedAttributes.hasAttribute(prefix + ":" + name) ) continue;
     }
-   
+
 
     //
     // Checks if there are attributes of unknown package extensions
@@ -2661,7 +2664,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
       if (!expectedAttributes.hasAttribute(name))
       {
         logUnknownAttribute(name, level, version, getElementName());
-      }    
+      }
     }
     else if (!expectedAttributes.hasAttribute(name))
     {
@@ -2672,7 +2675,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
   if (level > 1)
   {
     bool assigned = attributes.readInto("metaid", mMetaId, getErrorLog(), false, getLine(), getColumn());
-  
+
     if (assigned && mMetaId.empty())
     {
       logEmptyString("metaid", level, version,
@@ -2688,7 +2691,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
     }
   }
 
-  
+
 }
 
 /** @endcond */
@@ -2700,7 +2703,7 @@ SedBase::readAttributes (const XMLAttributes& attributes,
 /*
  * Returns the prefix of this element.
  */
-std::string 
+std::string
 SedBase::getPrefix() const
 {
   std::string prefix = "";
@@ -2709,10 +2712,10 @@ SedBase::getPrefix() const
   string uri = getURI();
   if(xmlns && mSed && false)//!mSed->isEnabledDefaultNS(uri))
   {
-    prefix = xmlns->getPrefix(uri);  
+    prefix = xmlns->getPrefix(uri);
 #if 0
-    std::cout << "[DEBUG] SedBase::getPrefix() " << prefix << " URI " << mURI 
-              << " element " << getElementName() << std::endl;
+    std::cout << "[DEBUG] SedBase::getPrefix() " << prefix << " URI " << mURI
+    << " element " << getElementName() << std::endl;
 #endif
   }
 #if 0
@@ -2720,15 +2723,15 @@ SedBase::getPrefix() const
   {
     if (!xmlns)
     {
-      std::cout << "[DEBUG] SedBase::getPrefix() [NO XMLNS] " << prefix << " URI " << mURI 
-              << " element " << getElementName() << std::endl;
+      std::cout << "[DEBUG] SedBase::getPrefix() [NO XMLNS] " << prefix << " URI " << mURI
+      << " element " << getElementName() << std::endl;
     }
     if (!mSed)
     {
-      std::cout << "[DEBUG] SedBase::getPrefix() [NO mSed] " << prefix << " URI " << mURI 
-              << " element " << getElementName() << std::endl;
+      std::cout << "[DEBUG] SedBase::getPrefix() [NO mSed] " << prefix << " URI " << mURI
+      << " element " << getElementName() << std::endl;
     }
-  
+
   }
 #endif
 
@@ -2739,7 +2742,7 @@ SedBase::getPrefix() const
 /*
  * Returns the prefix of this element.
  */
-std::string 
+std::string
 SedBase::getSedPrefix() const
 {
   std::string prefix = "";
@@ -2765,7 +2768,7 @@ SedBase::getSedPrefix() const
  * this element is the root element if this element doesn't have a parent
  * Sed object (i.e. mParentSedObject is NULL)
  */
-SedBase* 
+SedBase*
 SedBase::getRootElement()
 {
   if (mSed)
@@ -2791,10 +2794,10 @@ SedBase::getRootElement()
 void
 SedBase::writeAttributes (XMLOutputStream& stream) const
 {
-//  if (getTypeCode() ==SEDML_DOCUMENT)
-//  {
-//    if (this->getNamespaces()) stream << *(this->getNamespaces());
-//  }
+  //  if (getTypeCode() ==SEDML_DOCUMENT)
+  //  {
+  //    if (this->getNamespaces()) stream << *(this->getNamespaces());
+  //  }
   unsigned int level   = getLevel();
   unsigned int version = getVersion();
   string sbmlPrefix    = getSedPrefix();
@@ -2803,7 +2806,7 @@ SedBase::writeAttributes (XMLOutputStream& stream) const
     stream.writeAttribute("metaid", sbmlPrefix, mMetaId);
   }
 
-  
+
 }
 
 
@@ -2814,7 +2817,7 @@ SedBase::writeAttributes (XMLOutputStream& stream) const
  * of this method as well.
  *
  */
-void 
+void
 SedBase::writeXMLNS (XMLOutputStream& stream) const
 {
   // do nothing.
@@ -2826,7 +2829,7 @@ SedBase::writeXMLNS (XMLOutputStream& stream) const
 
 /** @cond doxygen-libsbml-internal */
 /*
- * Synchronizes the annotation of this Sed object. 
+ * Synchronizes the annotation of this Sed object.
  */
 void
 SedBase::syncAnnotation ()
@@ -2834,8 +2837,8 @@ SedBase::syncAnnotation ()
 
   if (mAnnotation == NULL)
   {
-    XMLToken ann_token = XMLToken(XMLTriple("annotation", "", ""), 
-                                      XMLAttributes());
+    XMLToken ann_token = XMLToken(XMLTriple("annotation", "", ""),
+                                  XMLAttributes());
     mAnnotation = new XMLNode(ann_token);
   }
 
@@ -2864,7 +2867,7 @@ SedBase::checkOrderAndLogError (SedBase* object, int expected)
   {
     SedErrorCode_t error = SedIncorrectOrderInModel;
 
-    
+
     {
       if (object->getTypeCode() ==SEDML_LIST_OF)
       {
@@ -2882,17 +2885,17 @@ SedBase::checkOrderAndLogError (SedBase* object, int expected)
 
 /** @cond doxygen-libsbml-internal */
 /*
-  * Checks that an Sed SedListOf element has been populated.  
-  * If a listOf element has been declared with no elements, 
-  * an error is logged.
-  */
-void 
+ * Checks that an Sed SedListOf element has been populated.
+ * If a listOf element has been declared with no elements,
+ * an error is logged.
+ */
+void
 SedBase::checkListOfPopulated(SedBase* object)
 {
   //
   // (TODO) Currently, the following check code works only for
   //        elements in Sed core.
-  //        This function may need to be extented for other elements 
+  //        This function may need to be extented for other elements
   //        defined in each package extension.
   //
 
@@ -2911,7 +2914,7 @@ SedBase::checkListOfPopulated(SedBase* object)
       logError(error, getLevel(), getVersion());
     }
   }
-  
+
 }
 /** @endcond */
 
@@ -2944,7 +2947,7 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
   {
     for (n = 0; n < elem.getNamespaces().getLength(); n++)
     {
-      if (!strcmp(elem.getNamespaces().getURI(n).c_str(), 
+      if (!strcmp(elem.getNamespaces().getURI(n).c_str(),
                   "http://www.w3.org/1998/Math/MathML"))
       {
         match = 1;
@@ -2959,7 +2962,7 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
     {
       for (n = 0; n < mSed->getNamespaces()->getLength(); n++)
       {
-        if (!strcmp(mSed->getNamespaces()->getURI(n).c_str(), 
+        if (!strcmp(mSed->getNamespaces()->getURI(n).c_str(),
                     "http://www.w3.org/1998/Math/MathML"))
         {
           match = 1;
@@ -2981,10 +2984,10 @@ SedBase::checkMathMLNamespace(const XMLToken elem)
 
 /** @cond doxygen-libsbml-internal */
 
-void 
-SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns, 
-                             const std::string& elementName,
-                             const std::string& prefix)
+void
+SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
+                               const std::string& elementName,
+                               const std::string& prefix)
 {
   //
   // checks if the given default namespace (if any) is a valid
@@ -2998,17 +3001,17 @@ SedBase::checkDefaultNamespace(const XMLNamespaces* xmlns,
       static ostringstream errMsg;
       errMsg.str("");
       errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
-             << "> element is an invalid namespace." << endl;
-      
+      << "> element is an invalid namespace." << endl;
+
       logError(SedNotSchemaConformant, getLevel(), getVersion(), errMsg.str());
     }
   }
 }
 
 /*
-  * Checks the annotation does not declare an sbml namespace.
-  * If the annotation declares an sbml namespace an error is logged.
-  */
+ * Checks the annotation does not declare an sbml namespace.
+ * If the annotation declares an sbml namespace an error is logged.
+ */
 void
 SedBase::checkAnnotation()
 {
@@ -3054,8 +3057,8 @@ SedBase::checkAnnotation()
     // cannot be other toplevel element with this uri
     if (!uri.empty())
     {
-      if (find(uri_list.begin(), uri_list.end(), uri) 
-                                               != uri_list.end())
+      if (find(uri_list.begin(), uri_list.end(), uri)
+          != uri_list.end())
       {
         logError(SedDuplicateAnnotationNamespaces);
       }
@@ -3066,7 +3069,7 @@ SedBase::checkAnnotation()
     n = 0;
 
     bool implicitNSdecl = false;
-   // must have a namespace
+    // must have a namespace
     if (topLevel.getNamespaces().getLength() == 0)
     {
       // not on actual element - is it explicit ??
@@ -3075,14 +3078,14 @@ SedBase::checkAnnotation()
       {
         for (n = 0; n < mSed->getNamespaces()->getLength(); n++)
         {
-          if (!strcmp(mSed->getNamespaces()->getPrefix(n).c_str(), 
-                        prefix.c_str()))
+          if (!strcmp(mSed->getNamespaces()->getPrefix(n).c_str(),
+                      prefix.c_str()))
           {
             implicitNSdecl = true;
             break;
           }
         }
-     }
+      }
 
 
       if (!implicitNSdecl)
@@ -3093,8 +3096,8 @@ SedBase::checkAnnotation()
     // cannot declare sbml namespace
     while(!match && n < topLevel.getNamespaces().getLength())
     {
-      match += !strcmp(topLevel.getNamespaces().getURI(n).c_str(), 
-                                          "http://sed-ml.org/");
+      match += !strcmp(topLevel.getNamespaces().getURI(n).c_str(),
+                       "http://sed-ml.org/");
       n++;
     }
     if (match > 0)
@@ -3105,7 +3108,7 @@ SedBase::checkAnnotation()
 
     if (implicitNSdecl && prefix.empty())
     {
-      /* if this is L3 a missing namespace with empty prefix means 
+      /* if this is L3 a missing namespace with empty prefix means
        * it is using the sbml ns - which is allowed in L3
        */
       if (getLevel() < 3)
@@ -3136,8 +3139,8 @@ SedBase::checkXHTML(const XMLNode * xhtml)
 
   if (name == "notes")
   {
-      errorNS   = SedNotesNotInXHTMLNamespace;
-      errorXML  = SedNotesContainsXMLDecl;
+    errorNS   = SedNotesNotInXHTMLNamespace;
+    errorXML  = SedNotesContainsXMLDecl;
     errorDOC  = SedNotesContainsDOCTYPE;
     errorELEM = SedInvalidNotesContent;
   }
@@ -3155,12 +3158,12 @@ SedBase::checkXHTML(const XMLNode * xhtml)
   }
 
   /*
-  * errors relating to a misplaced XML or DOCTYPE declaration 
-  * will also cause a parser error.
-  * since parsing will terminate at this error, then if it has occurred
-  * it will be in the XML currently being checked and so a more
-  * informative message can be added
-  */
+   * errors relating to a misplaced XML or DOCTYPE declaration
+   * will also cause a parser error.
+   * since parsing will terminate at this error, then if it has occurred
+   * it will be in the XML currently being checked and so a more
+   * informative message can be added
+   */
   for (i = 0; i < getErrorLog()->getNumErrors(); i++)
   {
     if (getErrorLog()->getError(i)->getErrorId() == BadXMLDeclLocation)
@@ -3176,10 +3179,10 @@ SedBase::checkXHTML(const XMLNode * xhtml)
   XMLNamespaces* toplevelNS = (mSed) ? mSed->getNamespaces() : NULL;
 
   /*
-  * namespace declaration is variable
-  * if a whole html tag has been used
-  * or a whole body tag then namespace can be implicitly declared
-  */
+   * namespace declaration is variable
+   * if a whole html tag has been used
+   * or a whole body tag then namespace can be implicitly declared
+   */
   unsigned int children = xhtml->getNumChildren();
 
   if (children > 1)
@@ -3189,7 +3192,7 @@ SedBase::checkXHTML(const XMLNode * xhtml)
       if (SyntaxChecker::isAllowedElement(xhtml->getChild(i)))
       {
         if (!SyntaxChecker::hasDeclaredNS(xhtml->getChild(i),
-                                                  toplevelNS))
+                                          toplevelNS))
         {
           logError(errorNS);
         }
@@ -3203,14 +3206,14 @@ SedBase::checkXHTML(const XMLNode * xhtml)
   else
   {
     /* only one element which can be html or body with either implicit/explicit
-    * namespace declaration
-    * OR could be one of the listed elements.
-    */
+     * namespace declaration
+     * OR could be one of the listed elements.
+     */
 
     const string& top_name = xhtml->getChild(0).getName();
 
     if (top_name != "html" && top_name != "body"
-      && !SyntaxChecker::isAllowedElement(xhtml->getChild(0)))
+        && !SyntaxChecker::isAllowedElement(xhtml->getChild(0)))
     {
       logError(errorELEM);
     }
@@ -3220,8 +3223,8 @@ SedBase::checkXHTML(const XMLNode * xhtml)
       {
         logError(errorNS);
       }
-      if (top_name == "html" 
-        && !SyntaxChecker::isCorrectHTMLNode(xhtml->getChild(0)))
+      if (top_name == "html"
+          && !SyntaxChecker::isCorrectHTMLNode(xhtml->getChild(0)))
       {
         logError(errorELEM);
       }
@@ -3281,12 +3284,12 @@ SedBase::removeDuplicateAnnotations()
   XMLNamespaces xmlns = XMLNamespaces();
   xmlns.add("http://www.sbml.org/libsbml/annotation", "");
   XMLTriple triple = XMLTriple("duplicateTopLevelElements",
-    "http://www.sbml.org/libsbml/annotation", "");
+                               "http://www.sbml.org/libsbml/annotation", "");
   XMLAttributes att = XMLAttributes();
   XMLToken token = XMLToken(triple, att, xmlns);
   XMLNode * newNode = NULL;
   if (isSetAnnotation())
-  { 
+  {
     //make a copy to work with
     XMLNode * newAnnotation = mAnnotation->clone();
 
@@ -3310,7 +3313,7 @@ SedBase::removeDuplicateAnnotations()
             // need to  create the new node
             newNode = new XMLNode(token);
           }
-          newNode->addChild(static_cast <XMLNode> 
+          newNode->addChild(static_cast <XMLNode>
                             (*(newAnnotation->removeChild(j))));
         }
       }
@@ -3358,7 +3361,7 @@ SedBase::setSedBaseFields (const XMLToken& element)
 /*
  *
  * Sets the XML namespace to which this element belogns to.
- * For example, all elements that belong to Sed Level 1 Version 1 
+ * For example, all elements that belong to Sed Level 1 Version 1
  * must set the namespace to "http://sed-ml.org/";
  *
  */
@@ -3373,7 +3376,7 @@ SedBase::setElementNamespace(const std::string &uri)
 /*
  * Gets the XML namespace to which this element belongs to.
  */
-const std::string& 
+const std::string&
 SedBase::getElementNamespace() const
 {
   return mURI;
@@ -3391,7 +3394,7 @@ SedBase::getElementNamespace() const
  * structure.
  *
  * @param sb the SedBase_t structure
- * 
+ *
  * @return the value of the "metaid" attribute of @p sb
  */
 LIBSEDML_EXTERN
@@ -3407,7 +3410,7 @@ SedBase_getMetaId (SedBase_t *sb)
 // * structure.
 // *
 // * @param sb the SedBase_t structure
-// * 
+// *
 // * @return the value of the "id" attribute of @p sb
 // */
 //LIBSEDML_EXTERN
@@ -3423,7 +3426,7 @@ SedBase_getMetaId (SedBase_t *sb)
 // * structure.
 // *
 // * @param sb the SedBase_t structure
-// * 
+// *
 // * @return the value of the "name" attribute of @p sb
 // */
 //LIBSEDML_EXTERN
@@ -3439,7 +3442,7 @@ SedBase_getMetaId (SedBase_t *sb)
  * structure.
  *
  * @param sb the SedBase_t structure
- * 
+ *
  * @return the parent SedDocument of this Sed object.
  */
 LIBSEDML_EXTERN
@@ -3455,7 +3458,7 @@ SedBase_getSedDocument (SedBase_t *sb)
  * structure.
  *
  * @param sb the SedBase_t structure
- * 
+ *
  * @return the parent SedBase  of this Sed object.
  */
 LIBSEDML_EXTERN
@@ -3470,15 +3473,15 @@ SedBase_getParentSedObject (SedBase_t *sb)
  * Returns the ancestor SedBase_t structure of the given SedBase_t
  * structure that corresponds to the given type.
  *
- * This function allows any object to determine its exact 
- * location/function within a model. For example a 
+ * This function allows any object to determine its exact
+ * location/function within a model. For example a
  * StoichiometryMath object has ancestors of type SpeciesReference,
- * SedListOf(Products/Reactants), Reaction, ListOfReactions and Model; 
+ * SedListOf(Products/Reactants), Reaction, ListOfReactions and Model;
  * any of which can be accessed via this function.
  *
  * @param sb the SedBase_t structure
  * @param type the typecode (int) of the structure to be returned
- * 
+ *
  * @return the ancestor SedBase_t structure of this Sed object with
  * the corresponding typecode (int), NULL if there is no ancestor of
  * this type.
@@ -3495,9 +3498,9 @@ SedBase_getAncestorOfType (SedBase_t *sb, int type, const char* pkgName)
  * Returns the Sed Level of the overall Sed document.
  *
  * @param sb the SedBase_t structure to query
- * 
+ *
  * @return the Sed level of the given object.
- * 
+ *
  * @see getVersion()
  */
 LIBSEDML_EXTERN
@@ -3512,7 +3515,7 @@ SedBase_getLevel (const SedBase_t *sb)
  * Returns the Version within the Sed Level of the overall Sed document.
  *
  * @param sb the SedBase_t structure to query
- * 
+ *
  * @return the Sed version of the given object.
  *
  * @see getLevel()
@@ -3543,7 +3546,7 @@ SedBase_getNotes (SedBase_t *sb)
 /**
  * Returns the notes string from given Sed object.
  * The string is owned by the caller and should be freed
- * (with free()) when no longer needed.  
+ * (with free()) when no longer needed.
  *
  * @param sb the given Sed object.
  *
@@ -3553,8 +3556,8 @@ LIBSEDML_EXTERN
 char*
 SedBase_getNotesString (SedBase_t *sb)
 {
-  return (sb != NULL && sb->isSetNotes()) ? 
-    safe_strdup(sb->getNotesString().c_str()) : NULL;
+  return (sb != NULL && sb->isSetNotes()) ?
+  safe_strdup(sb->getNotesString().c_str()) : NULL;
 }
 
 
@@ -3586,8 +3589,8 @@ LIBSEDML_EXTERN
 char*
 SedBase_getAnnotationString (SedBase_t *sb)
 {
-  return (sb != NULL && sb->isSetAnnotation()) ? 
-    safe_strdup(sb->getAnnotationString().c_str()) : NULL;
+  return (sb != NULL && sb->isSetAnnotation()) ?
+  safe_strdup(sb->getAnnotationString().c_str()) : NULL;
 }
 
 
@@ -3596,7 +3599,7 @@ SedBase_getAnnotationString (SedBase_t *sb)
  * structure's "metaid" attribute is set.
  *
  * @param sb the SedBase_t structure to query
- * 
+ *
  * @return nonzero (for true) if the "metaid" attribute of this Sed object
  * is set, zero (for false) otherwise.
  */
@@ -3613,7 +3616,7 @@ SedBase_isSetMetaId (const SedBase_t *sb)
 // * structure's "id" attribute is set.
 // *
 // * @param sb the SedBase_t structure to query
-// * 
+// *
 // * @return nonzero (for true) if the "id" attribute of this Sed object
 // * is set, zero (for false) otherwise.
 // */
@@ -3630,7 +3633,7 @@ SedBase_isSetMetaId (const SedBase_t *sb)
 // * structure's "name" attribute is set.
 // *
 // * @param sb the SedBase_t structure to query
-// * 
+// *
 // * @return nonzero (for true) if the "name" attribute of this Sed object
 // * is set, zero (for false) otherwise.
 // */
@@ -3647,7 +3650,7 @@ SedBase_isSetMetaId (const SedBase_t *sb)
  * structure's "notes" subelement is set.
  *
  * @param sb the SedBase_t structure to query
- * 
+ *
  * @return nonzero (for true) if the "notes" subelement of this Sed object
  * is set, zero (for false) otherwise.
  */
@@ -3664,7 +3667,7 @@ SedBase_isSetNotes (const SedBase_t *sb)
  * structure's "annotation" subelement is set.
  *
  * @param sb the SedBase_t structure to query
- * 
+ *
  * @return nonzero (for true) if the "annotation" subelement of this Sed object
  * is set, zero (for false) otherwise.
  */
@@ -4067,7 +4070,7 @@ SedBase_appendAnnotationString (SedBase_t *sb, char *annotation)
 }
 
 /**
- * Removes the top-level element within the "annotation" 
+ * Removes the top-level element within the "annotation"
  * subelement of this Sed object with the given name.
  *
  * Sed places a few restrictions on the organization of the content of
@@ -4089,7 +4092,7 @@ SedBase_appendAnnotationString (SedBase_t *sb, char *annotation)
  * @li @link OperationReturnValues_t#LIBSEDML_ANNOTATION_NAME_NOT_FOUND LIBSEDML_ANNOTATION_NAME_NOT_FOUND @endlink
  * @li @link OperationReturnValues_t#LIBSEDML_ANNOTATION_NS_NOT_FOUND LIBSEDML_ANNOTATION_NS_NOT_FOUND @endlink
  *
- * @see SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *, 
+ * @see SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *,
  *  const char *, const char *)
  * @see SedBase_replaceTopLevelAnnotationElement (SedBase_t *, XMLNode_t *)
  * @see SedBase_replaceTopLevelAnnotationElementString (SedBase_t *, char *)
@@ -4111,7 +4114,7 @@ SedBase_removeTopLevelAnnotationElement (SedBase_t *sb, char *name)
 
 
 /**
- * Removes the top-level element within the "annotation" 
+ * Removes the top-level element within the "annotation"
  * subelement of this Sed object with the given name and URI.
  *
  * Sed places a few restrictions on the organization of the content of
@@ -4141,8 +4144,8 @@ SedBase_removeTopLevelAnnotationElement (SedBase_t *sb, char *name)
  */
 LIBSEDML_EXTERN
 int
-SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name, 
-                                              const char *uri)
+SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name,
+                                                const char *uri)
 {
   if (sb != NULL)
   {
@@ -4157,7 +4160,7 @@ SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name,
 
 
 /**
- * Replaces the given top-level element within the "annotation" 
+ * Replaces the given top-level element within the "annotation"
  * subelement of this Sed object and with the annotation element supplied.
  *
  * Sed places a few restrictions on the organization of the content of
@@ -4167,13 +4170,13 @@ SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name,
  *
  * This method determines the name of the element to be replaced from the
  * annotation argument. Functionally it is equivalent to calling
- * <code> SedBase_removeTopLevelAnnotationElement(sb, name); 
+ * <code> SedBase_removeTopLevelAnnotationElement(sb, name);
  * SedBase_appendAnnotation(sb, annotation_with_name);
  * </code> with the exception that the placement of the annotation element remains
  * the same.
  *
  * @param sb SedBase_t object containing the annotation to be altered
- * @param annotation XMLNode representing the replacement top level annotation 
+ * @param annotation XMLNode representing the replacement top level annotation
  *
  * @return integer value indicating success/failure of the
  * function.  The possible values returned by this function are:
@@ -4182,7 +4185,7 @@ SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name,
  * @li @link OperationReturnValues_t#LIBSEDML_INVALID_OBJECT LIBSEDML_INVALID_OBJECT @endlink
  *
  * @see SedBase_removeTopLevelAnnotationElement (SedBase_t *, const char *)
- * @see SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *, 
+ * @see SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *,
  *  const char *, const char *)
  * @see SedBase_replaceTopLevelAnnotationElementString (SedBase_t *, char *)
  */
@@ -4203,7 +4206,7 @@ SedBase_replaceTopLevelAnnotationElement (SedBase_t *sb, XMLNode_t *annotation)
 
 
 /**
- * Replaces the given top-level element within the "annotation" 
+ * Replaces the given top-level element within the "annotation"
  * subelement of this Sed object and with the annotation element supplied.
  *
  * Sed places a few restrictions on the organization of the content of
@@ -4213,13 +4216,13 @@ SedBase_replaceTopLevelAnnotationElement (SedBase_t *sb, XMLNode_t *annotation)
  *
  * This method determines the name of the element to be replaced from the
  * annotation argument. Functionally it is equivalent to calling
- * <code> SedBase_removeTopLevelAnnotationElement(sb, name); 
+ * <code> SedBase_removeTopLevelAnnotationElement(sb, name);
  * SedBase_appendAnnotation(sb, annotation_with_name);
  * </code> with the exception that the placement of the annotation element remains
  * the same.
  *
  * @param sb SedBase_t object containing the annotation to be altered
- * @param annotation string representing the replacement top level annotation 
+ * @param annotation string representing the replacement top level annotation
  *
  * @return integer value indicating success/failure of the
  * function.  The possible values returned by this function are:
@@ -4228,7 +4231,7 @@ SedBase_replaceTopLevelAnnotationElement (SedBase_t *sb, XMLNode_t *annotation)
  * @li @link OperationReturnValues_t#LIBSEDML_INVALID_OBJECT LIBSEDML_INVALID_OBJECT @endlink
  *
  * @see SedBase_removeTopLevelAnnotationElement (SedBase_t *, const char *)
- * @see SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *, 
+ * @see SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *,
  *  const char *, const char *)
  * @see SedBase_replaceTopLevelAnnotationElement (SedBase_t *, XMLNode_t *)
  */
@@ -4272,23 +4275,23 @@ SedBase_unsetMetaId (SedBase_t *sb)
 
 
 /*
-* Unsets the "id" attribute of the given object.
-*
-* @param sb the SedBase_t structure
-*
-* @return integer value indicating success/failure of the
-* function.  @if clike The value is drawn from the
-* enumeration #OperationReturnValues_t. @endif@~ The possible values
-* returned by this function are:
-*
-* @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
-* @li @link OperationReturnValues_t#LIBSEDML_OPERATION_FAILED LIBSEDML_OPERATION_FAILED @endlink
-*/
+ * Unsets the "id" attribute of the given object.
+ *
+ * @param sb the SedBase_t structure
+ *
+ * @return integer value indicating success/failure of the
+ * function.  @if clike The value is drawn from the
+ * enumeration #OperationReturnValues_t. @endif@~ The possible values
+ * returned by this function are:
+ *
+ * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
+ * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_FAILED LIBSEDML_OPERATION_FAILED @endlink
+ */
 LIBSEDML_EXTERN
 int
 SedBase_unsetId (SedBase_t *sb)
 {
- return sb->unsetId();
+  return sb->unsetId();
 }
 
 
@@ -4407,8 +4410,8 @@ LIBSEDML_EXTERN
 const char *
 SedBase_getElementName (const SedBase_t *sb)
 {
-  return (sb != NULL && !(sb->getElementName().empty())) ? 
-    sb->getElementName().c_str() : NULL;
+  return (sb != NULL && !(sb->getElementName().empty())) ?
+  sb->getElementName().c_str() : NULL;
 }
 
 
@@ -4417,7 +4420,7 @@ SedBase_getElementName (const SedBase_t *sb)
  * XML representation of the Sed document.
  *
  * @param sb the SedBase_t structure
- * 
+ *
  * @return the line number of the given structure
  *
  * @see getColumn().
@@ -4435,9 +4438,9 @@ SedBase_getLine (const SedBase_t *sb)
  * XML representation of the Sed document.
  *
  * @param sb the SedBase_t structure
- * 
+ *
  * @return the column number of this Sed object.
- * 
+ *
  * @see getLine().
  */
 LIBSEDML_EXTERN
@@ -4449,22 +4452,22 @@ SedBase_getColumn (const SedBase_t *sb)
 
 
 /**
-  * Predicate returning nonzero true or false depending on whether the
-  * object's level/version and namespace values correspond to a valid
-  * Sed specification.
-  *
-  *
-  * @param sb the SedBase_t structure
-  *
-  * @return nonzero (true) if the level, version and namespace values of this 
-  * Sed object correspond to a valid set of values, zero (false) otherwise.
-  */
+ * Predicate returning nonzero true or false depending on whether the
+ * object's level/version and namespace values correspond to a valid
+ * Sed specification.
+ *
+ *
+ * @param sb the SedBase_t structure
+ *
+ * @return nonzero (true) if the level, version and namespace values of this
+ * Sed object correspond to a valid set of values, zero (false) otherwise.
+ */
 LIBSEDML_EXTERN
 int
 SedBase_hasValidLevelVersionNamespaceCombination(SedBase_t *sb)
 {
-  return (sb != NULL) ? 
-    static_cast <int> (sb->hasValidLevelVersionNamespaceCombination()) : 0;
+  return (sb != NULL) ?
+  static_cast <int> (sb->hasValidLevelVersionNamespaceCombination()) : 0;
 }
 
 
@@ -4474,9 +4477,9 @@ SedBase_hasValidLevelVersionNamespaceCombination(SedBase_t *sb)
  * developer to attach custom information to the node. In case of a deep
  * copy this attribute will passed as it is. The attribute will be never
  * interpreted by this class.
- * 
+ *
  * @param node defines the node of which the user data should be set.
- * @param userData specifies the new user data. 
+ * @param userData specifies the new user data.
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
