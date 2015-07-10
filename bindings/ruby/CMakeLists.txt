@@ -7,17 +7,17 @@
 # This file is part of libSEDML.  Please visit http://sedml.org for more
 # information about SEDML, and the latest version of libSEDML.
 #
-# Copyright (C) 2009-2013 jointly by the following organizations: 
+# Copyright (C) 2009-2013 jointly by the following organizations:
 #     1. California Institute of Technology, Pasadena, CA, USA
 #     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-#  
+#
 # Copyright (C) 2006-2008 by the California Institute of Technology,
-#     Pasadena, CA, USA 
-#  
-# Copyright (C) 2002-2005 jointly by the following organizations: 
+#     Pasadena, CA, USA
+#
+# Copyright (C) 2002-2005 jointly by the following organizations:
 #     1. California Institute of Technology, Pasadena, CA, USA
 #     2. Japan Science and Technology Agency, Japan
-# 
+#
 # This library is free software; you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation.  A copy of the license agreement is provided
@@ -34,11 +34,11 @@ include(FindRuby)
 ####################################################################
 #
 # determine local dependencies, so as to re-swig if one of them changed
-# 
+#
 
-file(GLOB SWIG_DEPENDENCIES 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.i 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.h 
+file(GLOB SWIG_DEPENDENCIES
+	${CMAKE_CURRENT_SOURCE_DIR}/*.i
+	${CMAKE_CURRENT_SOURCE_DIR}/*.h
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
 	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
@@ -48,7 +48,7 @@ file(GLOB SWIG_DEPENDENCIES
 # Remove SWIG wrappers if requested
 #
 if (LIBSEDML_REMOVE_WRAPPERS)
-  foreach(file 
+  foreach(file
     ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
   )
     if (EXISTS ${file})
@@ -63,7 +63,7 @@ if(NOT UNIX)
 	set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
 endif()
 
-add_custom_command(	
+add_custom_command(
     OUTPUT  ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
     COMMAND "${SWIG_EXECUTABLE}"
     ARGS    -I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
@@ -73,18 +73,18 @@ add_custom_command(
 			-I${CMAKE_CURRENT_SOURCE_DIR}
 			-I${LIBSBML_INCLUDE_DIR}/
 			-c++
-			-ruby		
-			${SWIG_EXTRA_FLAGS}		 
-			${SWIG_EXTRA_ARGS}		 
-			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
+			-ruby
+			${SWIG_EXTRA_FLAGS}
+			${SWIG_EXTRA_ARGS}
+			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
 			${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
 	DEPENDS ${SWIG_DEPENDENCIES}
-    COMMENT "Swig Ruby source") 
+    COMMENT "Swig Ruby source")
 
 add_custom_target(binding_ruby_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
 
-	
+
 ####################################################################
 #
 # Build native library
@@ -101,7 +101,7 @@ include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSEDML_STATIC)
 include_directories(${RUBY_INCLUDE_DIRS})
 include_directories(${RUBY_HDR_DIR})
-if (EXTRA_INCLUDE_DIRS) 
+if (EXTRA_INCLUDE_DIRS)
  include_directories(${EXTRA_INCLUDE_DIRS})
 endif(EXTRA_INCLUDE_DIRS)
 
@@ -109,11 +109,11 @@ endif(EXTRA_INCLUDE_DIRS)
 add_library(binding_ruby_lib SHARED ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
 add_dependencies(binding_ruby_lib binding_ruby_swig)
 
-# 
+#
 # Determine the ruby installation directory
 #
 set(RUBY_PACKAGE_INSTALL_DIR)
-if (UNIX OR CYGWIN) 
+if (UNIX OR CYGWIN)
   execute_process(COMMAND "${RUBY_EXECUTABLE}" -e "print RUBY_PLATFORM"
     OUTPUT_VARIABLE RUBY_PLATFORM)
   set(RUBY_PACKAGE_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/ruby/site_ruby/${RUBY_VERSION_MAJOR}.${RUBY_VERSION_MINOR}/${RUBY_PLATFORM})

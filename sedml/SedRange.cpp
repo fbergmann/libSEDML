@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -331,18 +331,18 @@ SedRange::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfRanges::SedListOfRanges(unsigned int level, 
+SedListOfRanges::SedListOfRanges(unsigned int level,
 	                unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfRanges::SedListOfRanges(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -352,9 +352,9 @@ SedListOfRanges::SedListOfRanges(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfRanges 
+ * Returns a deep copy of this SedListOfRanges
  */
-SedListOfRanges* 
+SedListOfRanges*
 SedListOfRanges::clone () const
  {
 	return new SedListOfRanges(*this);
@@ -431,7 +431,7 @@ SedListOfRanges::addRange(const SedRange* sr)
  *
  * @return the number of SedRange objects in this SedListOfRanges
  */
-unsigned int 
+unsigned int
 SedListOfRanges::getNumRanges() const
 {
 	return size();
@@ -439,13 +439,13 @@ SedListOfRanges::getNumRanges() const
 
 /**
  * Creates a new SedUniformRange object, adds it to this SedListOfRanges
- * uniformRange and returns the SedUniformRange object created. 
+ * uniformRange and returns the SedUniformRange object created.
  *
  * @return a new SedUniformRange object instance
  *
  * @see addUniformRange(const SedRange* sr)
  */
-SedUniformRange* 
+SedUniformRange*
 SedListOfRanges::createUniformRange()
 {
 	SedUniformRange *temp = new SedUniformRange();
@@ -455,13 +455,13 @@ SedListOfRanges::createUniformRange()
 
 /**
  * Creates a new SedVectorRange object, adds it to this SedListOfRanges
- * vectorRange and returns the SedVectorRange object created. 
+ * vectorRange and returns the SedVectorRange object created.
  *
  * @return a new SedVectorRange object instance
  *
  * @see addVectorRange(const SedRange* sr)
  */
-SedVectorRange* 
+SedVectorRange*
 SedListOfRanges::createVectorRange()
 {
 	SedVectorRange *temp = new SedVectorRange();
@@ -471,13 +471,13 @@ SedListOfRanges::createVectorRange()
 
 /**
  * Creates a new SedFunctionalRange object, adds it to this SedListOfRanges
- * functionalRange and returns the SedFunctionalRange object created. 
+ * functionalRange and returns the SedFunctionalRange object created.
  *
  * @return a new SedFunctionalRange object instance
  *
  * @see addFunctionalRange(const SedRange* sr)
  */
-SedFunctionalRange* 
+SedFunctionalRange*
 SedListOfRanges::createFunctionalRange()
 {
 	SedFunctionalRange *temp = new SedFunctionalRange();

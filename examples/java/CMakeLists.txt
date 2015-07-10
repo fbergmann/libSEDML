@@ -7,18 +7,18 @@
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
 # information about SEDML, and the latest version of libSEDML.
 #
-# Copyright (c) 2013, Frank T. Bergmann  
+# Copyright (c) 2013, Frank T. Bergmann
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met: 
-# 
+# modification, are permitted provided that the following conditions are met:
+#
 # 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer. 
+#    list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution. 
-# 
+#    and/or other materials provided with the distribution.
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -36,18 +36,18 @@ find_package(Java COMPONENTS Development REQUIRED)
 
 
 foreach( example
-	
+
 	create_sedml
 	echo_sedml
 	print_sedml
-	
+
 )
 
 	file(TO_NATIVE_PATH ${CMAKE_CURRENT_BINARY_DIR} CURRENT_BIN)
 	file(TO_NATIVE_PATH ${CMAKE_CURRENT_BINARY_DIR}/../../bindings/java/libsedmlj.jar CURRENT_JAR )
 	file(TO_NATIVE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/${example}.java CURRENT_FILE)
 
-	add_custom_command(	
+	add_custom_command(
 		OUTPUT ${example}.class
 		COMMAND "${Java_JAVAC_EXECUTABLE}"
 		ARGS -cp ".${FILE_SEP}\"${CURRENT_JAR}\"${FILE_SEP}${CMAKE_CURRENT_SOURCE_DIR}"
@@ -59,16 +59,16 @@ foreach( example
 		WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/${example}.java
 		COMMENT "Build java example ${example}"
-	) 
-	
-	add_custom_target(example_java_${example} ALL 
-		DEPENDS 
-		${CMAKE_CURRENT_BINARY_DIR}/${example}.class 
-		SOURCES 
-		${CMAKE_CURRENT_SOURCE_DIR}/${example}.java 
 	)
-	
+
+	add_custom_target(example_java_${example} ALL
+		DEPENDS
+		${CMAKE_CURRENT_BINARY_DIR}/${example}.class
+		SOURCES
+		${CMAKE_CURRENT_SOURCE_DIR}/${example}.java
+	)
+
 	add_dependencies(example_java_${example} binding_java_jar)
 
-	
+
 endforeach()

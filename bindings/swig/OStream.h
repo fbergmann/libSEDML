@@ -2,19 +2,19 @@
  * @file    OStream.h
  * @brief   Definition of wrapper classes for C++ standard output streams.
  * @author  Akiya Jouraku
- * 
+ *
  *<!-----------------------------------------------------------------------
  * This file is part of libSBML.  Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
  *
@@ -37,7 +37,7 @@
  * underlying native implementation.  It is a simple wrapper around the
  * underlying stream object and provides a few basic methods for
  * manipulating it.
- * 
+ *
  * @class OFStream
  *
  * Wrapper class for the C++ standard file stream <code>ofstream</code>.
@@ -59,14 +59,14 @@
  * @class OStringStream
  *
  * Wrapper class for the C++ standard stream <code>ostringstream</code>.
- * 
+ *
  * The C++ <code>ostringstream</code> ("output string stream class")
  * provides an interface to manipulating strings as if they were output
  * streams.  This class class, OStringStream, wraps the
  * <code>ostringstream</code> and provides an OStream interface to it.
- * 
+ *
  * This class may be useful because some libSBML methods accept an argument
- * for indicating where to send text string output.  An example is the 
+ * for indicating where to send text string output.  An example is the
  * SBMLDocument::printErrors(OStream stream) method.  The methods use
  * C++ style streams and not Java stream objects.  The OStream object
  * exists to bridge the Java and underlying native implementation.  It is a
@@ -81,7 +81,7 @@
 #include <fstream>
 #include <sstream>
 
-class SWIGEXPORT OStream 
+class SWIGEXPORT OStream
 {
   protected:
     std::ostream* Stream;
@@ -99,17 +99,17 @@ class SWIGEXPORT OStream
 
     /**
       * Creates a new OStream object with one of standard output stream objects.
-      * 
-      * @param sot a value from the StdOSType enumeration(COUT, CERR, or CLOG) 
+      *
+      * @param sot a value from the StdOSType enumeration(COUT, CERR, or CLOG)
 			* indicating the type of stream to create.
       */
-    OStream (StdOSType sot = COUT); 
+    OStream (StdOSType sot = COUT);
 
 
     /**
      * Destructor.
      */
-    virtual ~OStream (); 
+    virtual ~OStream ();
 
 
     /**
@@ -117,18 +117,18 @@ class SWIGEXPORT OStream
      * <p>
      * @return the stream object
      */
-    virtual std::ostream* get_ostream ();  
+    virtual std::ostream* get_ostream ();
 
 
     /**
      * Writes an end-of-line character on this tream.
      */
     void endl ();
-  
-};
-  
 
-class SWIGEXPORT OFStream : public OStream 
+};
+
+
+class SWIGEXPORT OFStream : public OStream
 {
   public:
     /**
@@ -141,12 +141,12 @@ class SWIGEXPORT OFStream : public OStream
      * @param filename the name of the file to open
      * @param is_append whether to open the file for appending (default:
      * <code>false</code>, meaning overwrite the content instead)
-     * 
+     *
      * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif
      */
-    OFStream (const std::string& filename, bool is_append = false); 
+    OFStream (const std::string& filename, bool is_append = false);
 
-  
+
     /**
      * Destructor.
      */
@@ -163,17 +163,17 @@ class SWIGEXPORT OFStream : public OStream
      * @param filename the name of the file to open
      * @param is_append whether to open the file for appending (default:
      * <code>false</code>, meaning overwrite the content instead)
-     * 
+     *
      * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif
      */
     void open (const std::string& filename, bool is_append = false);
-  
+
 
     /**
      * Closes the file currently associated with this stream object.
      */
     void close ();
-  
+
 
     /**
      * Returns <code>true</code> if this stream object is currently
@@ -182,28 +182,28 @@ class SWIGEXPORT OFStream : public OStream
      * @return <code>true</code> if the stream object is currently
      * associated with a file, <code>false</code> otherwise
      */
-    bool is_open (); 
-  
-};
-  
+    bool is_open ();
 
-class SWIGEXPORT OStringStream : public OStream 
+};
+
+
+class SWIGEXPORT OStringStream : public OStream
 {
   public:
     /**
      * Creates a new OStringStream object
      */
-    OStringStream (); 
-  
+    OStringStream ();
+
 
     /**
-     * Returns the copy of the string object currently assosiated 
+     * Returns the copy of the string object currently assosiated
      * with this <code>ostringstream</code> buffer.
      * <p>
      * @return a copy of the string object for this stream
      */
-    std::string str (); 
-  
+    std::string str ();
+
 
     /**
      * Sets string @p s to the string object currently assosiated with
@@ -212,13 +212,13 @@ class SWIGEXPORT OStringStream : public OStream
      * @param s the string to write to this stream
      */
     void str (const std::string& s);
-  
+
 
     /**
      * Destructor.
      */
-    virtual ~OStringStream (); 
-  
+    virtual ~OStringStream ();
+
 };
 
 #endif // OStream_h

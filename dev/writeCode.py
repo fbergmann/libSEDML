@@ -183,7 +183,7 @@ def writeGetCode(attrib, output, element):
   attTypeCode = att[3]
   if attType == 'lo_element':
     return
-  if attType == 'std::vector<double>': 
+  if attType == 'std::vector<double>':
     output.write('/*\n')
     output.write(' * Returns the value of the \"{0}\"'.format(attName))
     output.write(' attribute of this {0}.\n'.format(element))
@@ -202,7 +202,7 @@ def writeGetCode(attrib, output, element):
     output.write('{\n')
     output.write('\treturn m{0};\n'.format(strFunctions.capp(capAttName)))
     output.write('}\n\n\n')
-  else: 
+  else:
     output.write('/*\n')
     output.write(' * Returns the value of the \"{0}\"'.format(attName))
     output.write(' attribute of this {0}.\n'.format(element))
@@ -243,7 +243,7 @@ def writeIsSetCode(attrib, output, element):
     output.write(' element has been set,\n')
     output.write(' * otherwise @c false is returned.\n')
     output.write(' */\n')
-    output.write('bool\n{0}::has{1}() const\n'.format(element, strFunctions.capp(capAttName)))  
+    output.write('bool\n{0}::has{1}() const\n'.format(element, strFunctions.capp(capAttName)))
     output.write('{\n')
     output.write('\treturn m{0}.size() > 0;\n'.format(strFunctions.capp(capAttName)))
     output.write('}\n\n\n')
@@ -253,7 +253,7 @@ def writeIsSetCode(attrib, output, element):
     output.write(' * @return number of elements in this {0}\'s \"{1}\"'.format(element, attName))
     output.write(' \n')
     output.write(' */\n')
-    output.write('unsigned int\n{0}::getNum{1}() const\n'.format(element, strFunctions.capp(capAttName)))  
+    output.write('unsigned int\n{0}::getNum{1}() const\n'.format(element, strFunctions.capp(capAttName)))
     output.write('{\n')
     output.write('\treturn (unsigned int)m{0}.size();\n'.format(strFunctions.capp(capAttName)))
     output.write('}\n\n\n')
@@ -424,7 +424,7 @@ def writeUnsetCode(attrib, output, element):
     output.write('\tm{0}.clear();\n'.format(strFunctions.capp(capAttName)))
     output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
     output.write('}\n\n\n')
-  else:    
+  else:
     output.write('/*\n')
     output.write(' * Unsets {0} and returns value indicating success.\n'.format(attName))
     output.write(' */\n')

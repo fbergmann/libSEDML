@@ -46,7 +46,7 @@ public static int Main (string[] args)
 {
   if (args.Length != 1)
   {
-    Console.WriteLine("Usage: create_sedml output-filename.");         
+    Console.WriteLine("Usage: create_sedml output-filename.");
     return 2;
   }
 

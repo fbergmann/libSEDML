@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -51,15 +51,13 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
-
-
-LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedTask.h>
 #include <sedml/SedRange.h>
 #include <sedml/SedSetValue.h>
 #include <sedml/SedSubTask.h>
+#include <sedml/SedTask.h>
+
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 class LIBSEDML_EXTERN SedRepeatedTask : public SedTask
@@ -314,7 +312,7 @@ public:
 
 	/**
 	 * Creates a new SedUniformRange object, adds it to this SedRepeatedTasks
-	 * SedListOfRanges and returns the SedUniformRange object created. 
+	 * SedListOfRanges and returns the SedUniformRange object created.
 	 *
 	 * @return a new SedUniformRange object instance
 	 *
@@ -325,7 +323,7 @@ public:
 
 	/**
 	 * Creates a new SedVectorRange object, adds it to this SedRepeatedTasks
-	 * SedListOfRanges and returns the SedVectorRange object created. 
+	 * SedListOfRanges and returns the SedVectorRange object created.
 	 *
 	 * @return a new SedVectorRange object instance
 	 *
@@ -336,7 +334,7 @@ public:
 
 	/**
 	 * Creates a new SedFunctionalRange object, adds it to this SedRepeatedTasks
-	 * SedListOfRanges and returns the SedFunctionalRange object created. 
+	 * SedListOfRanges and returns the SedFunctionalRange object created.
 	 *
 	 * @return a new SedFunctionalRange object instance
 	 *
@@ -467,7 +465,7 @@ public:
 
 	/**
 	 * Creates a new SedSetValue object, adds it to this SedRepeatedTasks
-	 * SedListOfTaskChanges and returns the SedSetValue object created. 
+	 * SedListOfTaskChanges and returns the SedSetValue object created.
 	 *
 	 * @return a new SedSetValue object instance
 	 *
@@ -598,7 +596,7 @@ public:
 
 	/**
 	 * Creates a new SedSubTask object, adds it to this SedRepeatedTasks
-	 * SedListOfSubTasks and returns the SedSubTask object created. 
+	 * SedListOfSubTasks and returns the SedSubTask object created.
 	 *
 	 * @return a new SedSubTask object instance
 	 *
@@ -647,7 +645,7 @@ public:
 
 	/**
 	 * Returns the libSEDML type code for this SEDML object.
-	 * 
+	 *
 	 * @if clike LibSEDML attaches an identifying code to every kind of SEDML
 	 * object.  These are known as <em>SEDML type codes</em>.  The set of
 	 * possible type codes is defined in the enumeration #SEDMLTypeCode_t.

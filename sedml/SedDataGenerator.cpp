@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -422,7 +422,7 @@ SedDataGenerator::addVariable(const SedVariable* sv)
  *
  * @return the number of SedVariable objects in this SedDataGenerator
  */
-unsigned int 
+unsigned int
 SedDataGenerator::getNumVariables() const
 {
 	return mVariables.size();
@@ -430,13 +430,13 @@ SedDataGenerator::getNumVariables() const
 
 /**
  * Creates a new SedVariable object, adds it to this SedDataGenerators
- * SedDataGenerator and returns the SedVariable object created. 
+ * SedDataGenerator and returns the SedVariable object created.
  *
  * @return a new SedVariable object instance
  *
  * @see addSedVariable(const SedVariable* sv)
  */
-SedVariable* 
+SedVariable*
 SedDataGenerator::createVariable()
 {
 	SedVariable *temp = new SedVariable();
@@ -540,7 +540,7 @@ SedDataGenerator::addParameter(const SedParameter* sp)
  *
  * @return the number of SedParameter objects in this SedDataGenerator
  */
-unsigned int 
+unsigned int
 SedDataGenerator::getNumParameters() const
 {
 	return mParameters.size();
@@ -548,13 +548,13 @@ SedDataGenerator::getNumParameters() const
 
 /**
  * Creates a new SedParameter object, adds it to this SedDataGenerators
- * SedDataGenerator and returns the SedParameter object created. 
+ * SedDataGenerator and returns the SedParameter object created.
  *
  * @return a new SedParameter object instance
  *
  * @see addSedParameter(const SedParameter* sp)
  */
-SedParameter* 
+SedParameter*
 SedDataGenerator::createParameter()
 {
 	SedParameter *temp = new SedParameter();
@@ -832,18 +832,18 @@ SedDataGenerator::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfDataGenerators::SedListOfDataGenerators(unsigned int level, 
+SedListOfDataGenerators::SedListOfDataGenerators(unsigned int level,
 	                        unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfDataGenerators::SedListOfDataGenerators(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -853,9 +853,9 @@ SedListOfDataGenerators::SedListOfDataGenerators(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfDataGenerators 
+ * Returns a deep copy of this SedListOfDataGenerators
  */
-SedListOfDataGenerators* 
+SedListOfDataGenerators*
 SedListOfDataGenerators::clone () const
  {
 	return new SedListOfDataGenerators(*this);
@@ -932,7 +932,7 @@ SedListOfDataGenerators::addDataGenerator(const SedDataGenerator* sdg)
  *
  * @return the number of SedDataGenerator objects in this SedListOfDataGenerators
  */
-unsigned int 
+unsigned int
 SedListOfDataGenerators::getNumDataGenerators() const
 {
 	return size();
@@ -940,13 +940,13 @@ SedListOfDataGenerators::getNumDataGenerators() const
 
 /**
  * Creates a new SedDataGenerator object, adds it to this SedListOfDataGeneratorss
- * SedDataGenerator and returns the SedDataGenerator object created. 
+ * SedDataGenerator and returns the SedDataGenerator object created.
  *
  * @return a new SedDataGenerator object instance
  *
  * @see addSedDataGenerator(const SedDataGenerator* sdg)
  */
-SedDataGenerator* 
+SedDataGenerator*
 SedListOfDataGenerators::createDataGenerator()
 {
 	SedDataGenerator *temp = new SedDataGenerator();

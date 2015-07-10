@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -49,18 +49,16 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedDataGenerator.h>
 #include <sedml/SedListOf.h>
+#include <sedml/SedModel.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedOutput.h>
+#include <sedml/SedSimulation.h>
+#include <sedml/SedTask.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedSimulation.h>
-#include <sedml/SedModel.h>
-#include <sedml/SedTask.h>
-#include <sedml/SedDataGenerator.h>
-#include <sedml/SedOutput.h>
 
 
 class LIBSEDML_EXTERN SedDocument : public SedBase
@@ -318,7 +316,7 @@ public:
 
 	/**
 	 * Creates a new SedUniformTimeCourse object, adds it to this SedDocuments
-	 * SedListOfSimulations and returns the SedUniformTimeCourse object created. 
+	 * SedListOfSimulations and returns the SedUniformTimeCourse object created.
 	 *
 	 * @return a new SedUniformTimeCourse object instance
 	 *
@@ -329,7 +327,7 @@ public:
 
 	/**
 	 * Creates a new SedOneStep object, adds it to this SedDocuments
-	 * SedListOfSimulations and returns the SedOneStep object created. 
+	 * SedListOfSimulations and returns the SedOneStep object created.
 	 *
 	 * @return a new SedOneStep object instance
 	 *
@@ -340,7 +338,7 @@ public:
 
 	/**
 	 * Creates a new SedSteadyState object, adds it to this SedDocuments
-	 * SedListOfSimulations and returns the SedSteadyState object created. 
+	 * SedListOfSimulations and returns the SedSteadyState object created.
 	 *
 	 * @return a new SedSteadyState object instance
 	 *
@@ -471,7 +469,7 @@ public:
 
 	/**
 	 * Creates a new SedModel object, adds it to this SedDocuments
-	 * SedListOfModels and returns the SedModel object created. 
+	 * SedListOfModels and returns the SedModel object created.
 	 *
 	 * @return a new SedModel object instance
 	 *
@@ -602,7 +600,7 @@ public:
 
 	/**
 	 * Creates a new SedTask object, adds it to this SedDocuments
-	 * SedListOfTasks and returns the SedTask object created. 
+	 * SedListOfTasks and returns the SedTask object created.
 	 *
 	 * @return a new SedTask object instance
 	 *
@@ -613,7 +611,7 @@ public:
 
 	/**
 	 * Creates a new SedRepeatedTask object, adds it to this SedDocuments
-	 * SedListOfTasks and returns the SedRepeatedTask object created. 
+	 * SedListOfTasks and returns the SedRepeatedTask object created.
 	 *
 	 * @return a new SedRepeatedTask object instance
 	 *
@@ -744,7 +742,7 @@ public:
 
 	/**
 	 * Creates a new SedDataGenerator object, adds it to this SedDocuments
-	 * SedListOfDataGenerators and returns the SedDataGenerator object created. 
+	 * SedListOfDataGenerators and returns the SedDataGenerator object created.
 	 *
 	 * @return a new SedDataGenerator object instance
 	 *
@@ -875,7 +873,7 @@ public:
 
 	/**
 	 * Creates a new SedReport object, adds it to this SedDocuments
-	 * SedListOfOutputs and returns the SedReport object created. 
+	 * SedListOfOutputs and returns the SedReport object created.
 	 *
 	 * @return a new SedReport object instance
 	 *
@@ -886,7 +884,7 @@ public:
 
 	/**
 	 * Creates a new SedPlot2D object, adds it to this SedDocuments
-	 * SedListOfOutputs and returns the SedPlot2D object created. 
+	 * SedListOfOutputs and returns the SedPlot2D object created.
 	 *
 	 * @return a new SedPlot2D object instance
 	 *
@@ -897,7 +895,7 @@ public:
 
 	/**
 	 * Creates a new SedPlot3D object, adds it to this SedDocuments
-	 * SedListOfOutputs and returns the SedPlot3D object created. 
+	 * SedListOfOutputs and returns the SedPlot3D object created.
 	 *
 	 * @return a new SedPlot3D object instance
 	 *
@@ -946,7 +944,7 @@ public:
 
 	/**
 	 * Returns the libSEDML type code for this SEDML object.
-	 * 
+	 *
 	 * @if clike LibSEDML attaches an identifying code to every kind of SEDML
 	 * object.  These are known as <em>SEDML type codes</em>.  The set of
 	 * possible type codes is defined in the enumeration #SEDMLTypeCode_t.
@@ -1097,26 +1095,26 @@ protected:
 
 
 
-public: 
+public:
 
   /**
-   * Returns the list of errors or warnings logged during parsing, 
+   * Returns the list of errors or warnings logged during parsing,
    * consistency checking, or attempted translation of this model.
-   * 
+   *
    * @return the SedErrorLog used for this SedDocument
-   * 
+   *
    * @see SedDocument::getNumErrors()
    */
   virtual SedErrorLog* getErrorLog ();
 
 
   /**
-   * Returns a constant pointer to the list of errors or warnings 
-   * logged during parsing, consistency checking, or attempted translation 
+   * Returns a constant pointer to the list of errors or warnings
+   * logged during parsing, consistency checking, or attempted translation
    * of this model.
-   * 
+   *
    * @return the SedErrorLog used for this SedDocument
-   * 
+   *
    * @see SedDocument::getNumErrors()
    */
   const SedErrorLog* getErrorLog () const;
@@ -1150,11 +1148,11 @@ public:
   unsigned int getNumErrors () const;
 
   /**
-   * Returns the number of errors or warnings encountered with the given 
+   * Returns the number of errors or warnings encountered with the given
    * severity during parsing,
    * consistency checking, or attempted translation of this model.
    *
-   * @param severity the severity of the error sought. 
+   * @param severity the severity of the error sought.
    *
    * @return the number of errors or warnings encountered
    *
@@ -1165,7 +1163,7 @@ public:
   /**
    * Returns a list of XML Namespaces associated with the XML content
    * of this SED-ML document.
-   * 
+   *
    * @return the XML Namespaces associated with this SED-ML object
    */
   virtual XMLNamespaces* getNamespaces() const;
@@ -1178,8 +1176,8 @@ protected:
    * of this method as well.
    *
    */
-  virtual void writeXMLNS (XMLOutputStream& stream) const;  
-private: 
+  virtual void writeXMLNS (XMLOutputStream& stream) const;
+private:
 
 	SedErrorLog mErrorLog;
 

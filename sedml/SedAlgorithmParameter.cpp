@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -418,18 +418,18 @@ SedAlgorithmParameter::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfAlgorithmParameters::SedListOfAlgorithmParameters(unsigned int level, 
+SedListOfAlgorithmParameters::SedListOfAlgorithmParameters(unsigned int level,
 	                             unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfAlgorithmParameters::SedListOfAlgorithmParameters(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -439,9 +439,9 @@ SedListOfAlgorithmParameters::SedListOfAlgorithmParameters(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfAlgorithmParameters 
+ * Returns a deep copy of this SedListOfAlgorithmParameters
  */
-SedListOfAlgorithmParameters* 
+SedListOfAlgorithmParameters*
 SedListOfAlgorithmParameters::clone () const
  {
 	return new SedListOfAlgorithmParameters(*this);
@@ -518,7 +518,7 @@ SedListOfAlgorithmParameters::addAlgorithmParameter(const SedAlgorithmParameter*
  *
  * @return the number of SedAlgorithmParameter objects in this SedListOfAlgorithmParameters
  */
-unsigned int 
+unsigned int
 SedListOfAlgorithmParameters::getNumAlgorithmParameters() const
 {
 	return size();
@@ -526,13 +526,13 @@ SedListOfAlgorithmParameters::getNumAlgorithmParameters() const
 
 /**
  * Creates a new SedAlgorithmParameter object, adds it to this SedListOfAlgorithmParameterss
- * SedAlgorithmParameter and returns the SedAlgorithmParameter object created. 
+ * SedAlgorithmParameter and returns the SedAlgorithmParameter object created.
  *
  * @return a new SedAlgorithmParameter object instance
  *
  * @see addSedAlgorithmParameter(const SedAlgorithmParameter* sap)
  */
-SedAlgorithmParameter* 
+SedAlgorithmParameter*
 SedListOfAlgorithmParameters::createAlgorithmParameter()
 {
 	SedAlgorithmParameter *temp = new SedAlgorithmParameter();

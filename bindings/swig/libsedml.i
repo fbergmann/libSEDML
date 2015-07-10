@@ -2,22 +2,22 @@
  * \file    libsbml.i
  * \brief   Language-independent SWIG directives for wrapping libSEDML
  * \author  Ben Bornstein and Ben Kovitz
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sbml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -56,7 +56,7 @@ public class"
 #include "libsedml.h"
 
 LIBSEDML_CPP_NAMESPACE_USE
-	
+
 #include "local.cpp"
 %}
 
@@ -69,7 +69,7 @@ LIBSEDML_CPP_NAMESPACE_USE
 /**
  * Wraps List class by ListWrapper<TYPENAME> template class.
  * TYPENAME is replaced with a corresponding data type which is
- * stored in the List object (e.g. ModelCreator, CVTerm and ASTNode). 
+ * stored in the List object (e.g. ModelCreator, CVTerm and ASTNode).
  *
  * ListWrapper<TYPENAME> class is wrapped as TYPENAMEList class
  * (e.g. ListWrapper<CVTerm> -> CVTermList)
@@ -122,7 +122,7 @@ LIBSEDML_CPP_NAMESPACE_USE
 %ignore ASTNode::getUserData;
 %ignore ASTNode::setParentSEDMLObject;
 
-/** 
+/**
  * Ignore the list that can't be wrapped
  */
 %ignore SEDMLExtensionRegistry::getRegisteredPackageNames;
@@ -169,7 +169,7 @@ LIBSEDML_CPP_NAMESPACE_USE
 %ignore SEDMLErrorLog::add(const std::list<SEDMLError>& errors);
 %ignore SEDMLErrorLog::add(const std::vector<SEDMLError>& errors);
 
-/** 
+/**
  * Ignore methods from SEDML Validator that can't be wrapped
  */
 %ignore SEDMLValidator::getFailures;
@@ -233,7 +233,7 @@ LIBSEDML_CPP_NAMESPACE_USE
 
 /**
  * Ignore the unsigned int version of XMLOutputStream::writeAttribute method
- * in order to properly wrap the long version of XMLOutputStream::writeAttribute 
+ * in order to properly wrap the long version of XMLOutputStream::writeAttribute
  * method which should be used instead of the unsigned int version.
  */
 %ignore XMLOutputStream::writeAttribute(const std::string&, const unsigned int&);
@@ -318,10 +318,10 @@ LIBSEDML_CPP_NAMESPACE_USE
 
 
 /**
- * 
+ *
  * wraps "List* ASTNode::getListOfNodes(ASTNodePredicate)" function
- * as "ListWrapper<ASTNode>* ASTNode::getListOfNodes()" function 
- * which returns a list of all ASTNodes. 
+ * as "ListWrapper<ASTNode>* ASTNode::getListOfNodes()" function
+ * which returns a list of all ASTNodes.
  *
  */
 
@@ -356,9 +356,9 @@ LIBSEDML_CPP_NAMESPACE_USE
 }
 
 /*
- * Wraps "static void RDFAnnotationParser::parseRDFAnnotation(const XMLNode *annotation, 
- * List *CVTerms)" function as 
- * "static void RDFAnnotationParser::parseRDFAnnotation(const XMLNode *annotation, 
+ * Wraps "static void RDFAnnotationParser::parseRDFAnnotation(const XMLNode *annotation,
+ * List *CVTerms)" function as
+ * "static void RDFAnnotationParser::parseRDFAnnotation(const XMLNode *annotation,
  *  ListWrapper<CVTerm> *CVTerms);
  *
  */

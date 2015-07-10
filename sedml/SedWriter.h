@@ -1,26 +1,26 @@
 /**
  * @file    SedWriter.h
  * @brief   Writes an Sed Document to file or in-memory string
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedWriter
@@ -65,7 +65,7 @@
  * The compression feature requires that the @em zlib (for @em gzip and @em
  * zip formats) and/or @em bzip2 (for @em bzip2 format) be available on the
  * system running libSed, and that libSed was configured with their
- * support compiled-in.  Please see the libSed @if clike <a href="libsbml-installation.html">installation instructions</a>@endif@if python <a href="libsbml-installation.html">installation instructions</a>@endif@if java  <a href="../../../libsbml-installation.html">installation instructions</a>@endif@~ for 
+ * support compiled-in.  Please see the libSed @if clike <a href="libsbml-installation.html">installation instructions</a>@endif@if python <a href="libsbml-installation.html">installation instructions</a>@endif@if java  <a href="../../../libsbml-installation.html">installation instructions</a>@endif@~ for
  * more information about this.  The methods
  * SedWriter::hasZlib() and
  * SedWriter::hasBzip2()
@@ -139,7 +139,7 @@ public:
    * function.  The possible values
    * returned by this function are:
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
-   * 
+   *
    * @see setProgramVersion(const std::string& version)
    */
   int setProgramName (const std::string& name);
@@ -182,13 +182,13 @@ public:
    * @param d the Sed document to be written
    *
    * @param filename the name or full pathname of the file where the Sed
-   * is to be written. 
+   * is to be written.
    *
    * @return @c true on success and @c false if the filename could not be
    * opened for writing.
    *
    * @note @htmlinclude note-writing-zipped-files.html
-   * 
+   *
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
@@ -204,7 +204,7 @@ public:
    *
    * @return @c true on success and @c false if one of the underlying
    * parser components fail (rare).
-   * 
+   *
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
@@ -224,7 +224,7 @@ public:
    *
    * @return the string on success and @c 0 if one of the underlying parser
    * components fail.
-   * 
+   *
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
@@ -240,13 +240,13 @@ public:
    * @param d the Sed document to be written
    *
    * @param filename the name or full pathname of the file where the Sed
-   * is to be written. 
+   * is to be written.
    *
    * @return @c true on success and @c false if the filename could not be
    * opened for writing.
    *
    * @note @htmlinclude note-writing-zipped-files.html
-   * 
+   *
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
@@ -264,7 +264,7 @@ public:
    *
    * @return the string on success and @c 0 if one of the underlying parser
    * components fail.
-   * 
+   *
    * @see setProgramVersion(const std::string& version)
    * @see setProgramName(const std::string& name)
    */
@@ -452,11 +452,11 @@ SedWriter_hasBzip2 ();
  * Writes the given Sed document @p d to the file named by @p filename.
  *
  * This function is identical to @if clike SedWriter::writeSedMLToFile (const SedDocument_t *d, const char *filename)@endif@if java <a href="#writeSedMLToFile(org.sbml.libsbml.SedDocument, java.lang.String)"><code>writeSedMLToFile(SedDocument d, String filename)</code></a>@endif.
- * 
+ *
  * @htmlinclude assuming-compressed-file.html
  *
  * @param d the SedDocument object to be written out in XML format
- * 
+ *
  * @param filename a string giving the path to a file where the XML
  * content is to be written.
  *
@@ -510,7 +510,7 @@ writeSedMLToString (const SedDocument_t *d);
  * an SedWriter object first.
  *
  * @htmlinclude assuming-compressed-file.html
- * 
+ *
  * @param d an SedDocument object to be written out in XML format
  *
  * @param filename a string giving the path to a file where the XML

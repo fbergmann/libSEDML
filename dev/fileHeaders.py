@@ -12,7 +12,7 @@ def addFilename(outFile, filename, element):
   outFile.write(' * @file:   {0}\n'.format(filename))
   outFile.write(' * @brief:  Implementation of the {0} class\n'.format(element))
   outFile.write(' * @author: Frank T. Bergmann\n *\n')
-  
+
 def addLicence(outFile):
   outFile.write(' * <!--------------------------------------------------------------------------\n')
   outFile.write(' * This file is part of libSEDML.  Please visit http://sed-ml.org for more\n')
@@ -43,4 +43,4 @@ def addLicence(outFile):
   outFile.write(' * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n')
   outFile.write(' * ------------------------------------------------------------------------ -->\n')
   outFile.write(' */\n')
-  
+

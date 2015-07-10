@@ -20,7 +20,7 @@ def writeClassDefn(fileOut, nameOfClass, pkg):
 
 def writeClassEnd(fileOut):
   fileOut.write('};\n\n\n')
- 
+
 def writeConstructors(fileOut, nameOfClass):
  # indent = strFunctions.getIndent(nameOfClass)
   fileOut.write('\t/**\n\t * ' )
@@ -55,7 +55,7 @@ def writeGetFunctions(fileOut, pkg):
   fileOut.write('\t */\n')
   fileOut.write('\tvirtual const std::string& getName() const;\n\n\n')
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Returns the URI (namespace) of the package corresponding to the combination of \n') 
+  fileOut.write('\t * Returns the URI (namespace) of the package corresponding to the combination of \n')
   fileOut.write('\t * the given sedml level, sedml version, and package version.\n')
   fileOut.write('\t * Empty string will be returned if no corresponding URI exists.\n')
   fileOut.write('\t *\n')
@@ -200,7 +200,7 @@ def writeRequiredMethods(fileOut):
 def writeTypeDefns(fileOut, nameOfClass, nameOfPkg, elements, number):
   fileOut.write('// --------------------------------------------------------------------\n')
   fileOut.write('//\n')
-  fileOut.write('// Required typedef definitions\n') 
+  fileOut.write('// Required typedef definitions\n')
   fileOut.write('//\n')
   fileOut.write('// {0}PkgNamespaces is derived from the SedNamespaces class and\n'.format(nameOfPkg))
   fileOut.write('// used when creating an object of SedBase derived classes defined in\n')
@@ -238,7 +238,7 @@ def createHeader(package):
   fileHeaders.addLicence(code)
   writeIncludes(code, nameOfClass, nameOfPackage)
   writeClassDefn(code, nameOfClass, nameOfPackage)
-  writeTypeDefns(code, nameOfClass, nameOfPackage, package['elements'], package['number']) 
+  writeTypeDefns(code, nameOfClass, nameOfPackage, package['elements'], package['number'])
   writeIncludeEnds(code, nameOfClass)
 
-  
+

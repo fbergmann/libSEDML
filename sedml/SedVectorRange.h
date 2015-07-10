@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -51,13 +51,13 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedRange.h>
+
+#include <vector>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-
-#include <sedml/SedRange.h>
-#include <vector>
 
 class LIBSEDML_EXTERN SedVectorRange : public SedRange
 {
@@ -151,7 +151,7 @@ public:
 	 * Returning the number of elements in this
 	 * SedVectorRange's "value" .
 	 *
-	 * @return number of elements in this SedVectorRange's "value" 
+	 * @return number of elements in this SedVectorRange's "value"
 	 */
 	virtual unsigned int getNumValues() const;
 
@@ -174,7 +174,7 @@ public:
 	/**
 	 * Adds another value to the "value" attribute of this SedVectorRange.
 	 *
-	 * @param value; double value of the "value" attribute to be added 
+	 * @param value; double value of the "value" attribute to be added
 	 *
 	 * @return integer value indicating success/failure of the
 	 * function.  @if clike The value is drawn from the
@@ -210,7 +210,7 @@ public:
 
 	/**
 	 * Returns the libSEDML type code for this SEDML object.
-	 * 
+	 *
 	 * @if clike LibSEDML attaches an identifying code to every kind of SEDML
 	 * object.  These are known as <em>SEDML type codes</em>.  The set of
 	 * possible type codes is defined in the enumeration #SEDMLTypeCode_t.

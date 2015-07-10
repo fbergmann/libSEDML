@@ -1,8 +1,8 @@
 /**
  * \file    list_get_fix.i
- * \brief   "casts" void* return from List::get to the type of holded data 
+ * \brief   "casts" void* return from List::get to the type of holded data
  * \author  TBI {xtof,raim}@tbi.univie.ac.at
- * 
+ *
 /* Copyright 2009 TBI
  *
  * This library is free software; you can redistribute it and/or modify it
@@ -62,11 +62,11 @@
 %typemap(out) List* SedNamespaces::getSupportedNamespaces
 {
   ListWrapper<SedNamespaces> *listw = ($1 != 0) ? new ListWrapper<SedNamespaces>($1) : 0;
-  ST(argvi) = SWIG_NewPointerObj(SWIG_as_voidptr(listw), 
+  ST(argvi) = SWIG_NewPointerObj(SWIG_as_voidptr(listw),
 #if SWIG_VERSION > 0x010333
-                                 SWIGTYPE_p_ListWrapperT_SedNamespaces_t, 
+                                 SWIGTYPE_p_ListWrapperT_SedNamespaces_t,
 #else
-                                 SWIGTYPE_p_ListWrapperTSedNamespaces_t, 
+                                 SWIGTYPE_p_ListWrapperTSedNamespaces_t,
 #endif
                                  SWIG_OWNER | %newpointer_flags);
   argvi++;

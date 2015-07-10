@@ -4512,24 +4512,24 @@ void *SedBase_getUserData(SedBase_t* sb)
   return sb->getUserData();
 }
 
-LIBSEDML_EXTERN 
-SedBase_t* 
+LIBSEDML_EXTERN
+SedBase_t*
 SedBase_getElementBySId(SedBase_t* sb, const char* id)
 {
   if (sb == NULL) return NULL;
   return sb->getElementBySId(id);
 }
 
-LIBSEDML_EXTERN 
-SedBase_t* 
+LIBSEDML_EXTERN
+SedBase_t*
 SedBase_getElementByMetaId(SedBase_t* sb, const char* metaid)
 {
   if (sb == NULL) return NULL;
   return sb->getElementByMetaId(metaid);
 }
 
-LIBSEDML_EXTERN 
-List_t* 
+LIBSEDML_EXTERN
+List_t*
 SedBase_getAllElements(SedBase_t* sb)
 {
   if (sb == NULL) return NULL;

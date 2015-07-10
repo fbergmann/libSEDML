@@ -2,23 +2,23 @@
  * @file    print_sedml.java
  * @brief   Prints an overview of the elments in the given SED-ML document
  * @author  Frank T. Bergmann
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -43,19 +43,19 @@ public static void main (String[] args)
 {
   if (args.length != 1)
   {
-    System.out.println("Usage: print_sedml input-filename\n" );         
+    System.out.println("Usage: print_sedml input-filename\n" );
     System.exit(2);
   }
 
   System.loadLibrary("sedmlj");
-  
+
   SedDocument doc = libsedml.readSedML(args[0]);
   if ( doc.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0)
   {
     System.out.println(doc.getErrorLog().toString());
-    System.exit(2); 
+    System.exit(2);
   }
-  
+
   System.out.println("The document has " + doc.getNumSimulations() + " simulation(s).\n");
   for (int i = 0; i < doc.getNumSimulations(); ++i)
   {
@@ -73,7 +73,7 @@ public static void main (String[] args)
           break;
     }
   }
-  
+
   System.out.println( "\n");
   System.out.println( "The document has " + doc.getNumModels() + " model(s).\n");
   for (int i = 0; i < doc.getNumModels(); ++i)
@@ -81,7 +81,7 @@ public static void main (String[] args)
     SedModel current = doc.getModel(i);
     System.out.println( "\tModel id=" + current.getId() + " language=" + current.getLanguage() + " source=" + current.getSource() + " numChanges=" + current.getNumChanges() + "\n");
   }
-  
+
   System.out.println( "\n");
   System.out.println( "The document has " + doc.getNumTasks() + " task(s).\n");
   for (int i = 0; i < doc.getNumTasks(); ++i)
@@ -97,7 +97,7 @@ public static void main (String[] args)
     SedDataGenerator current = doc.getDataGenerator(i);
     System.out.println( "\tDG id=" + current.getId() + " math=" + libsedml.formulaToString(current.getMath()) + "\n");
   }
-  
+
   System.out.println( "\n");
   System.out.println( "The document has " + doc.getNumOutputs() + " output(s).\n");
   for (int i = 0; i < doc.getNumOutputs(); ++i)
@@ -123,7 +123,7 @@ public static void main (String[] args)
         System.out.println( "\tPlot3d id=" + current.getId() + " numSurfaces=" + p.getNumSurfaces() + "\n");
         break;
       }
-      default: 
+      default:
         System.out.println( "\tEncountered unknown output " + current.getId() + "\n");
         break;
     }

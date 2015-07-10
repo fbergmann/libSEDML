@@ -2,23 +2,23 @@
  * @file    print_sedml.cpp
  * @brief   Prints an overview of the elments in the given SED-ML document
  * @author  Frank T. Bergmann
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -46,10 +46,10 @@ using namespace std;
 
 void printRepeatedTask(const SedRepeatedTask* repeat)
 {
-  cout << "\tRepeatedTask id='" << repeat->getId() 
-       << "' resetModel: '" << (repeat->getResetModel() ? "true" : "false") 
+  cout << "\tRepeatedTask id='" << repeat->getId()
+       << "' resetModel: '" << (repeat->getResetModel() ? "true" : "false")
 	  << "' range: '" << repeat->getRangeId() << "'" << endl;
-  
+
   for (unsigned int i = 0; i < repeat->getNumRanges(); ++i)
   {
 	const SedRange* current = repeat->getRange(i);
@@ -62,7 +62,7 @@ void printRepeatedTask(const SedRepeatedTask* repeat)
 	}
 	else if (vrange != NULL)
 	{
-		cout << "\t\tVectorRange id='" << vrange->getId() << "' values="; 
+		cout << "\t\tVectorRange id='" << vrange->getId() << "' values=";
 		const vector<double>& values = vrange->getValues();
 		for (vector<double>::const_iterator it = values.begin(); it != values.end(); ++it)
 			cout << *it << ", ";
@@ -72,7 +72,7 @@ void printRepeatedTask(const SedRepeatedTask* repeat)
 	{
 		cout << "\t\tUniformRange id='" << urange->getId() << "' start='" << urange->getStart() << "' end='" << urange->getEnd() << "' numPoints='" << urange->getNumberOfPoints() << "' type='" << urange->getType() << "'" << endl;
 	}
-	
+
   }
   cout << endl;
   for (unsigned int i = 0; i < repeat->getNumTaskChanges(); ++i)
@@ -117,7 +117,7 @@ main (int argc, char* argv[])
   if ( doc->getErrorLog()->getNumFailsWithSeverity(LIBSEDML_SEV_ERROR) > 0)
   {
     cout << doc->getErrorLog()->toString();
-    return 2; 
+    return 2;
   }
 
   if (doc->getNumErrors() > 0)
@@ -163,7 +163,7 @@ main (int argc, char* argv[])
           break;
     }
   }
-  
+
   cout << endl;
   cout << "The document has " << doc->getNumModels() << " model(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumModels(); ++i)
@@ -213,14 +213,14 @@ main (int argc, char* argv[])
       cout << endl;
     }
   }
-  
+
   cout << endl;
   cout << "The document has " << doc->getNumTasks() << " task(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumTasks(); ++i)
   {
     SedTask* current = doc->getTask(i);
     SedRepeatedTask* repeat = dynamic_cast<SedRepeatedTask*>(current);
-    if (repeat != NULL) 
+    if (repeat != NULL)
 	printRepeatedTask(repeat);
     else
     cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
@@ -233,7 +233,7 @@ main (int argc, char* argv[])
     SedDataGenerator* current = doc->getDataGenerator(i);
     cout << "\tDG id=" << current->getId() << " math=" << SBML_formulaToString(current->getMath()) << endl;
   }
-  
+
   cout << endl;
   cout << "The document has " << doc->getNumOutputs() << " output(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumOutputs(); ++i)
@@ -259,7 +259,7 @@ main (int argc, char* argv[])
         cout << "\tPlot3d id=" << current->getId() << " numSurfaces=" << p->getNumSurfaces() << endl;
         break;
       }
-      default: 
+      default:
         cout << "\tEncountered unknown output " << current->getId() << endl;
         break;
     }

@@ -20,7 +20,7 @@ SedDocument::getNumErrors () const
 }
 
 
-unsigned int 
+unsigned int
 SedDocument::getNumErrors (unsigned int severity) const
 {
   return getErrorLog()->getNumFailsWithSeverity(severity);
@@ -67,7 +67,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
     XMLNamespaces xmlns;
     if (getVersion() == 1)
     xmlns.add(SEDML_XMLNS_L1V1);
-    else 
+    else
     xmlns.add(SEDML_XMLNS_L1V2);
 
     mSedNamespaces->setNamespaces(&xmlns);
@@ -92,7 +92,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
       if (other.empty() == false)
       {
         // there is another ns with the prefix that the SED-ML ns expects to have
-        //remove the this ns, add the sbml ns and 
+        //remove the this ns, add the sbml ns and
         //add the new ns with a new prefix
         thisNs->remove(sedmlPrefix);
         thisNs->add(sedmlURI, sedmlPrefix);
@@ -106,7 +106,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
   }
 
   XMLNamespaces * xmlns = thisNs->clone();
-  if (xmlns != NULL) 
+  if (xmlns != NULL)
   {
     stream << *(xmlns);
     delete xmlns;
@@ -116,7 +116,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
 /*
   * @return the Namespaces associated with this SED-ML object
   */
-XMLNamespaces* 
+XMLNamespaces*
 SedDocument::getNamespaces() const
 {
   return mSedNamespaces->getNamespaces();

@@ -145,7 +145,7 @@ def writeListOfSubElements(attrib, output, element):
   output.write('}\n\n')
  # writeListOfHeader.writeGetFunctions(output, attrib['element'], True, element)
  # writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
- 
+
 
 def writeGetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
@@ -221,8 +221,8 @@ def writeGetFunction(attrib, output, element):
       output.write('\t\treturn NULL;\n\n')
       output.write('\treturn ({0}_t*){1}->create{2}();\n'.format(attrib['element'],varname, capAttName))
       output.write('}\n\n\n')
-  
- 
+
+
 def writeIsSetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
   attName = att[0]
@@ -245,8 +245,8 @@ def writeIsSetFunction(attrib, output, element):
   output.write('{\n')
   output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->isSet{1}()) : 0;\n'.format(varname, capAttName))
   output.write('}\n\n\n')
-    
- 
+
+
 def writeSetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
   attName = att[0]
@@ -290,7 +290,7 @@ def writeSetFunction(attrib, output, element):
       output.write('{\n')
       output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
       output.write('}\n\n\n')
-    
+
 def writeUnsetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
   attName = att[0]
@@ -313,8 +313,8 @@ def writeUnsetFunction(attrib, output, element):
   output.write('{\n')
   output.write('\treturn ({0} != NULL) ? {0}->unset{1}() : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName))
   output.write('}\n\n\n')
-    
- 
+
+
 def writeHasReqdAttrFunction(output, element):
   varname = strFunctions.objAbbrev(element)
   output.write('/**\n')
@@ -340,7 +340,7 @@ def writeHasReqdElementsFunction(output, element):
   output.write('{\n')
   output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->hasRequiredElements()) : 0;\n'.format(varname))
   output.write('}\n\n\n')
-    
+
 def writeListOfCode(output, element, type):
   loelement = generalFunctions.writeListOf(element)
   output.write('/**\n')
@@ -367,13 +367,13 @@ def writeListOfCode(output, element, type):
   output.write('\t\treturn NULL;\n\n')
   output.write('\treturn (sid != NULL) ? static_cast <{0} *>(lo)->remove(sid) : NULL;\n'.format(loelement))
   output.write('}\n\n\n')
- 
-# write the code file      
+
+# write the code file
 def createCode(element, code):
   type = element['name']
   name = element['name']
   if element.has_key('elementName'):
-    name = strFunctions.cap(element['elementName']) 
+    name = strFunctions.cap(element['elementName'])
   if element.has_key('element'):
     type = element['element']
   writeConstructors(element['name'], element['package'], code)
@@ -386,7 +386,7 @@ def createCode(element, code):
   code.write('\n\n');
   code.write('LIBSEDML_CPP_NAMESPACE_END\n')
   code.write('\n\n');
- 
+
 # to de done
 
-  
+

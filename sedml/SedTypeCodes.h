@@ -1,26 +1,26 @@
 /**
  * @file    SedTypeCodes.h
  * @brief   Enumeration to identify Sed objects at runtime
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  */
 
@@ -64,7 +64,7 @@ BEGIN_C_DECLS
  *    (e.g. SedLayoutTypeCode_t for the layout extension, SedGroupTypeCode_t for
  *          group extension).
  *
- *  - The value of each typecode can be duplicated between those of different 
+ *  - The value of each typecode can be duplicated between those of different
  *    packages.
  *
  *  - To distinguish the typecodes of different packages, not only the return
@@ -84,7 +84,7 @@ BEGIN_C_DECLS
  *             case SEDML_REACTION:
  *                ....
  *           }
- *         } 
+ *         }
  *         else if (pkgName == "layout")
  *         {
  *           switch (sb->getTypeCode())
@@ -95,10 +95,10 @@ BEGIN_C_DECLS
  *             case SEDML_LAYOUT_REACTIONGLYPH:
  *                ....
  *           }
- *         } 
+ *         }
  *         ...
- *       } 
- *      
+ *       }
+ *
  */
 typedef enum
 {
@@ -111,7 +111,7 @@ typedef enum
     , SEDML_CHANGE_COMPUTECHANGE           =  24
     , SEDML_CHANGE_ADDXML                  =  25
     , SEDML_CHANGE_CHANGEXML               =  26
-    , SEDML_DATAGENERATOR                  =  30    
+    , SEDML_DATAGENERATOR                  =  30
     , SEDML_VARIABLE                       =  31
     , SEDML_PARAMETER                      =  32
     , SEDML_TASK                           =  40

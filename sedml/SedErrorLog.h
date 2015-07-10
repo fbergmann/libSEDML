@@ -5,22 +5,22 @@
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedErrorLog
@@ -194,19 +194,19 @@ public:
    * @param level an unsigned int, the Sed Level
    *
    * @param version an unsigned int, the Sed Level's Version
-   * 
+   *
    * @param details a string containing additional details about the error.
    * If the error code in @p errorId is one that is recognized by SedError,
    * the given message is @em appended to a predefined message associated
    * with the given code.  If the error code is not recognized, the message
    * is stored as-is as the text of the error.
-   * 
+   *
    * @param line an unsigned int, the line number at which the error occured.
-   * 
+   *
    * @param column an unsigned int, the column number at which the error occured.
-   * 
+   *
    * @param severity an integer indicating severity of the error.
-   * 
+   *
    * @param category an integer indicating the category to which the error
    * belongs.
    *
@@ -272,7 +272,7 @@ public:
 
   /**
    * Removes an error having errorId from the SedError list.
-   *  
+   *
    * Only the first item will be removed if there are multiple errors
    * with the given errorId.
    *

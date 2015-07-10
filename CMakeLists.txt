@@ -5,24 +5,24 @@
 # Organization      : California Institute of Technology
 #
 # <!--------------------------------------------------------------------------
-# 
+#
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
-# information about SED-ML. The latest version of libSEDML can be found on 
+# information about SED-ML. The latest version of libSEDML can be found on
 # github: https://github.com/fbergmann/libSEDML/
-# 
-# 
-# Copyright (c) 2013-2014, Frank T. Bergmann  
+#
+#
+# Copyright (c) 2013-2014, Frank T. Bergmann
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met: 
-# 
+# modification, are permitted provided that the following conditions are met:
+#
 # 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer. 
+#    list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution. 
-# 
+#    and/or other materials provided with the distribution.
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -33,7 +33,7 @@
 # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-# 
+#
 # ---------------------------------------------------------------------- -->
 #
 ###############################################################################
@@ -255,17 +255,17 @@ endif(WITH_SWIG)
 find_library(LIBSBML_LIBRARY
     NAMES libsbml-static.lib sbml-static libsbml.lib sbml
     PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-		/usr/local/lib          
-          /usr/lib 
+		/usr/local/lib
+          /usr/lib
     DOC "The file name of the sbml library."
 )
 
 find_path(LIBSBML_INCLUDE_DIR
     NAMES sbml/SBase.h
-    PATHS 
+    PATHS
           ${LIBSEDML_DEPENDENCY_DIR}/include
 		/usr/local/include
-          /usr/include 
+          /usr/include
     DOC "The directory containing the sbml include files."
 )
 
@@ -279,8 +279,8 @@ endif()
 endif()
 
 if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
-    message(FATAL_ERROR 
-"The include directory specified for sbml appears to be invalid.  It should contain the 
+    message(FATAL_ERROR
+"The include directory specified for sbml appears to be invalid.  It should contain the
 file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
 )
 endif()
@@ -472,7 +472,7 @@ if(UNIX)
             SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++" )
           endif()
         endif()
-        
+
         # On OSX it is common to build universal binaries to support multiple
         # processor architectures. The default behavior is not to build
         # multiple architectures, as most users might not need that.
@@ -514,7 +514,7 @@ if(UNIX)
 
 else(UNIX)
     add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
-		
+
     add_definitions(-DWIN32)
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
 
@@ -525,7 +525,7 @@ else(UNIX)
       add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
       set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
 	endif()
-	
+
     if(MSVC OR USING_INTEL)
         add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -D_CRT_SECURE_NO_WARNINGS")
@@ -672,13 +672,13 @@ endif()
 ##############################################################################
 #
 # create library
-# 
+#
 add_subdirectory(sedml)
 
 ##############################################################################
 #
 # create language bindings
-# 
+#
 add_subdirectory(bindings)
 
 

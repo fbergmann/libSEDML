@@ -7,18 +7,18 @@
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
 # information about SEDML, and the latest version of libSEDML.
 #
-# Copyright (c) 2013, Frank T. Bergmann  
+# Copyright (c) 2013, Frank T. Bergmann
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met: 
-# 
+# modification, are permitted provided that the following conditions are met:
+#
 # 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer. 
+#    list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution. 
-# 
+#    and/or other materials provided with the distribution.
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -42,11 +42,11 @@ include(FindPythonInterp)
 ####################################################################
 #
 # determine local dependencies, so as to re-swig if one of them changed
-# 
+#
 
-file(GLOB SWIG_DEPENDENCIES 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.i 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.h 
+file(GLOB SWIG_DEPENDENCIES
+	${CMAKE_CURRENT_SOURCE_DIR}/*.i
+	${CMAKE_CURRENT_SOURCE_DIR}/*.h
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
 	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
@@ -56,7 +56,7 @@ file(GLOB SWIG_DEPENDENCIES
 # Remove SWIG wrappers if requested
 #
 if (LIBSEDML_REMOVE_WRAPPERS)
-  foreach(file 
+  foreach(file
     ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
   )
     if (EXISTS ${file})
@@ -72,7 +72,7 @@ if(NOT UNIX)
 endif()
 
 
-ADD_CUSTOM_COMMAND(	
+ADD_CUSTOM_COMMAND(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
     COMMAND "${SWIG_EXECUTABLE}"
     ARGS	-I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
@@ -82,16 +82,16 @@ ADD_CUSTOM_COMMAND(
 			-I${CMAKE_CURRENT_SOURCE_DIR}
 			-I${LIBSBML_INCLUDE_DIR}/
 			-c++
-			-python		
-			${SWIG_EXTRA_FLAGS}		 
-			${SWIG_EXTRA_ARGS}		 
-			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
+			-python
+			${SWIG_EXTRA_FLAGS}
+			${SWIG_EXTRA_ARGS}
+			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
 			${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
 	DEPENDS local.i local.cpp local-contrib.i
-    COMMENT "Swig Python source") 
+    COMMENT "Swig Python source")
 
 add_custom_target(binding_python_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
-	
+
 ####################################################################
 #
 # Build native library
@@ -104,39 +104,39 @@ include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSEDML_STATIC)
 include_directories(${PYTHON_INCLUDE_DIRS})
-if (EXTRA_INCLUDE_DIRS) 
+if (EXTRA_INCLUDE_DIRS)
  include_directories(${EXTRA_INCLUDE_DIRS})
 endif(EXTRA_INCLUDE_DIRS)
 
 if (MSVC)
-  # the build fails when compiled with packages as the object file is too 
+  # the build fails when compiled with packages as the object file is too
   # big adding the big flag makes it work!
   add_definitions(/bigobj)
 endif(MSVC)
 
 add_library(binding_python_lib SHARED libsedml_wrap.cpp)
-add_dependencies( binding_python_lib binding_python_swig) 
+add_dependencies( binding_python_lib binding_python_swig)
 
 set_target_properties (binding_python_lib PROPERTIES OUTPUT_NAME "_libsedml")
 if (UNIX)
 	set_target_properties (binding_python_lib PROPERTIES PREFIX "")
 	set_target_properties (binding_python_lib PROPERTIES SUFFIX ".so")
-else()		
+else()
 	if (CYGWIN)
 		set_target_properties (binding_python_lib PROPERTIES PREFIX "")
 		set_target_properties (binding_python_lib PROPERTIES SUFFIX ".dll")
 	else()
-		set_target_properties (binding_python_lib PROPERTIES SUFFIX ".pyd")	
+		set_target_properties (binding_python_lib PROPERTIES SUFFIX ".pyd")
 	endif()
 endif()
 
 target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static ${PYTHON_LIBRARIES})
 
-# 
+#
 # Determine the python installation directory
 #
 set(PYTHON_PACKAGE_INSTALL_DIR)
-if (UNIX OR CYGWIN) 
+if (UNIX OR CYGWIN)
   execute_process(COMMAND "${PYTHON_EXECUTABLE}" -c "import sys;import platform; sys.stdout.write(platform.python_version()[:3])"
     OUTPUT_VARIABLE PYTHON_VERSION)
   set(PYTHON_PACKAGE_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR}/python${PYTHON_VERSION}/site-packages)

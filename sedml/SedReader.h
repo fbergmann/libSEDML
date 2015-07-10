@@ -1,26 +1,26 @@
 /**
  * @file    SedReader.h
  * @brief   Reads an Sed Document into memory
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedReader
@@ -114,7 +114,7 @@ class LIBSEDML_EXTERN SedReader
 public:
 
   /**
-   * Creates a new SedReader and returns it. 
+   * Creates a new SedReader and returns it.
    *
    * The libSed SedReader objects offer methods for reading Sed in
    * XML form from files and text strings.
@@ -156,13 +156,13 @@ public:
  @verbatim
  SedReader reader;
  SedDocument* doc  = reader.readSedMLFromFile(filename);
- 
+
  if (doc->getNumErrors() > 0)
  {
    if (doc->getError(0)->getErrorId() == XMLError::XMLFileUnreadable)
    {
      // Handle case of unreadable file here.
-   } 
+   }
    else if (doc->getError(0)->getErrorId() == XMLError::XMLFileOperationError)
    {
      // Handle case of other file operation error here.
@@ -178,13 +178,13 @@ public:
  @verbatim
  SedReader reader = new SedReader();
  SedDocument doc  = reader.readSedMLFromFile(filename);
- 
+
  if (doc.getNumErrors() > 0)
  {
      if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileUnreadable)
      {
          // Handle case of unreadable file here.
-     } 
+     }
      else if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileOperationError)
      {
          // Handle case of other file operation error here.
@@ -199,7 +199,7 @@ public:
  @verbatim
  reader = SedReader()
  doc    = reader.readSedMLFromFile(filename)
- 
+
  if doc.getNumErrors() > 0:
    if doc.getError(0).getErrorId() == libsbml.XMLFileUnreadable:
      # Handle case of unreadable file here.
@@ -207,7 +207,7 @@ public:
      # Handle case of other file error here.
    else:
      # Handle other error cases here.
-   
+
  @endverbatim
  @endif@if csharp
  @verbatim
@@ -298,13 +298,13 @@ public:
  @verbatim
  SedReader* reader = new SedReader();
  SedDocument* doc  = reader.readSedML(filename);
- 
+
  if (doc->getNumErrors() > 0)
  {
    if (doc->getError(0)->getErrorId() == XMLError::FileUnreadable)
    {
      // Handle case of unreadable file here.
-   } 
+   }
    else if (doc->getError(0)->getErrorId() == XMLError::FileOperationError)
    {
      // Handle case of other file operation error here.
@@ -320,13 +320,13 @@ public:
  @verbatim
  SedReader reader = new SedReader();
  SedDocument doc  = reader.readSedMLFromFile(filename);
- 
+
  if (doc.getNumErrors() > 0)
  {
      if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileUnreadable)
      {
          // Handle case of unreadable file here.
-     } 
+     }
      else if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileOperationError)
      {
          // Handle case of other file operation error here.
@@ -341,7 +341,7 @@ public:
  @verbatim
  reader = SedReader()
  doc    = reader.readSedMLFromFile(filename)
- 
+
  if doc.getNumErrors() > 0:
    if doc.getError(0).getErrorId() == libsbml.XMLFileUnreadable:
      # Handle case of unreadable file here.
@@ -349,7 +349,7 @@ public:
      # Handle case of other file error here.
    else:
      # Handle other error cases here.
-   
+
  @endverbatim
  @endif@~
    *

@@ -2,7 +2,7 @@
  * \file    list_of_fix.i
  * \brief   fix for using getListOfXXXXXXX methods in scalar and list context
  * \author  TBI {xtof,raim}@tbi.univie.ac.at
- * 
+ *
 /* Copyright 2007 TBI
  *
  * This library is free software; you can redistribute it and/or modify it
@@ -57,7 +57,7 @@
 //     return wantarray ? @lox : $lox;
 //   }
 // %}
-// 
+//
 //
 // ASTNode::getListOfNodes
 //

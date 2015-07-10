@@ -81,7 +81,7 @@ main (int argc, char* argv[])
     addXml->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies");
     addXml->setNewXML(XMLNode::convertStringToXMLNode("<species xmlns='http://www.sbml.org/sbml/level2' id='S1' boundaryCondition='false' initialConcentration='0' compartment='compartment' />"));
 
-    // replace 's1' one more time by a better one 
+    // replace 's1' one more time by a better one
     SedChangeXML* changeXML = model->createChangeXML();
     changeXML->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
     changeXML->setNewXML(XMLNode::convertStringToXMLNode("<species xmlns='http://www.sbml.org/sbml/level2'  id='S1' boundaryCondition='false' initialConcentration='10' compartment='compartment' />"));
@@ -173,7 +173,7 @@ main (int argc, char* argv[])
   SedSubTask* subTask = repeat->createSubTask();
   subTask->setTask("task1");
   subTask->setOrder(1);
-  
+
 
   // add a DataGenerator to hold the output for time
   SedDataGenerator* dg = doc.createDataGenerator();
@@ -235,9 +235,9 @@ main (int argc, char* argv[])
   surf->setXDataReference("time");
   surf->setYDataReference("S1");
   surf->setZDataReference("S1");
-  
+
   // write the document
   writeSedML(&doc, argv[1]);
-  
+
   return 0;
 }

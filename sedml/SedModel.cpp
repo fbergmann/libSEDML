@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -469,7 +469,7 @@ SedModel::addChange(const SedChange* sc)
  *
  * @return the number of SedChange objects in this SedModel
  */
-unsigned int 
+unsigned int
 SedModel::getNumChanges() const
 {
 	return mChanges.size();
@@ -477,13 +477,13 @@ SedModel::getNumChanges() const
 
 /**
  * Creates a new SedRemoveXML object, adds it to this SedModels
- * SedModel and returns the SedRemoveXML object created. 
+ * SedModel and returns the SedRemoveXML object created.
  *
  * @return a new SedRemoveXML object instance
  *
  * @see addRemoveXML(const SedChange* sc)
  */
-SedRemoveXML* 
+SedRemoveXML*
 SedModel::createRemoveXML()
 {
 	SedRemoveXML *temp = new SedRemoveXML();
@@ -493,13 +493,13 @@ SedModel::createRemoveXML()
 
 /**
  * Creates a new SedAddXML object, adds it to this SedModels
- * SedModel and returns the SedAddXML object created. 
+ * SedModel and returns the SedAddXML object created.
  *
  * @return a new SedAddXML object instance
  *
  * @see addAddXML(const SedChange* sc)
  */
-SedAddXML* 
+SedAddXML*
 SedModel::createAddXML()
 {
 	SedAddXML *temp = new SedAddXML();
@@ -509,13 +509,13 @@ SedModel::createAddXML()
 
 /**
  * Creates a new SedChangeXML object, adds it to this SedModels
- * SedModel and returns the SedChangeXML object created. 
+ * SedModel and returns the SedChangeXML object created.
  *
  * @return a new SedChangeXML object instance
  *
  * @see addChangeXML(const SedChange* sc)
  */
-SedChangeXML* 
+SedChangeXML*
 SedModel::createChangeXML()
 {
 	SedChangeXML *temp = new SedChangeXML();
@@ -525,13 +525,13 @@ SedModel::createChangeXML()
 
 /**
  * Creates a new SedChangeAttribute object, adds it to this SedModels
- * SedModel and returns the SedChangeAttribute object created. 
+ * SedModel and returns the SedChangeAttribute object created.
  *
  * @return a new SedChangeAttribute object instance
  *
  * @see addChangeAttribute(const SedChange* sc)
  */
-SedChangeAttribute* 
+SedChangeAttribute*
 SedModel::createChangeAttribute()
 {
 	SedChangeAttribute *temp = new SedChangeAttribute();
@@ -541,13 +541,13 @@ SedModel::createChangeAttribute()
 
 /**
  * Creates a new SedComputeChange object, adds it to this SedModels
- * SedModel and returns the SedComputeChange object created. 
+ * SedModel and returns the SedComputeChange object created.
  *
  * @return a new SedComputeChange object instance
  *
  * @see addComputeChange(const SedChange* sc)
  */
-SedComputeChange* 
+SedComputeChange*
 SedModel::createComputeChange()
 {
 	SedComputeChange *temp = new SedComputeChange();
@@ -822,18 +822,18 @@ SedModel::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfModels::SedListOfModels(unsigned int level, 
+SedListOfModels::SedListOfModels(unsigned int level,
 	                unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfModels::SedListOfModels(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -843,9 +843,9 @@ SedListOfModels::SedListOfModels(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfModels 
+ * Returns a deep copy of this SedListOfModels
  */
-SedListOfModels* 
+SedListOfModels*
 SedListOfModels::clone () const
  {
 	return new SedListOfModels(*this);
@@ -922,7 +922,7 @@ SedListOfModels::addModel(const SedModel* sm)
  *
  * @return the number of SedModel objects in this SedListOfModels
  */
-unsigned int 
+unsigned int
 SedListOfModels::getNumModels() const
 {
 	return size();
@@ -930,13 +930,13 @@ SedListOfModels::getNumModels() const
 
 /**
  * Creates a new SedModel object, adds it to this SedListOfModelss
- * SedModel and returns the SedModel object created. 
+ * SedModel and returns the SedModel object created.
  *
  * @return a new SedModel object instance
  *
  * @see addSedModel(const SedModel* sm)
  */
-SedModel* 
+SedModel*
 SedListOfModels::createModel()
 {
 	SedModel *temp = new SedModel();

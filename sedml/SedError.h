@@ -5,22 +5,22 @@
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedError
@@ -90,7 +90,7 @@
  * of the Sed specification documents, as well as some additional
  * libSed-specific error codes.
  * @endif@~
- * 
+ *
  * Error codes are useful mainly for software.  For human readers,
  * SedError also includes text messages that describe the nature of a
  * given problem.  The messages can be accessed using
@@ -108,7 +108,7 @@
  * href="#SedErrorCategory_t">SedErrorCategory_t</a> described below.
  * Categories are used to partition errors into distinct conceptual groups.
  * This is principally used by the libSed validation system to group
- * classes of validation checks.  For example, 
+ * classes of validation checks.  For example,
  * @link SedErrorCategory_t#LIBSEDML_CAT_IDENTIFIER_CONSISTENCY LIBSEDML_CAT_IDENTIFIER_CONSISTENCY@endlink
  * is the category for tests that check identifier consistency;
  * @link SedErrorCategory_t#LIBSEDML_CAT_MATHML_CONSISTENCY LIBSEDML_CAT_MATHML_CONSISTENCY@endlink
@@ -147,14 +147,14 @@
  *
  * In addition, SedError also has a severity code.  Its value may be
  * retrieved using the method SedError::getSeverity().  The possible
- * severity values are the same as those reported by @if clike XMLError.@endif@if python XMLError.@endif@if java <code><a href="XMLError.html">XMLError</a></code>.@endif@~ 
+ * severity values are the same as those reported by @if clike XMLError.@endif@if python XMLError.@endif@if java <code><a href="XMLError.html">XMLError</a></code>.@endif@~
  * Severity levels currently range from informational
  * (@link XMLErrorSeverity_t#LIBSEDML_SEV_INFO LIBSEDML_SEV_INFO@endlink)
  * to fatal errors
  * (@link XMLErrorSeverity_t#LIBSEDML_SEV_FATAL LIBSEDML_SEV_FATAL@endlink).
  * They can be
  * used by an application to evaluate how serious a given problem
- * is. 
+ * is.
  *
  * Finally, SedError records the line and column near where the problem
  * occurred in the Sed content.  The values may be retrieved using the
@@ -188,15 +188,15 @@
  * being numbered 10000 and higher, while the XML layer's codes are 9999 and
  * lower.  The method SedError::getErrorId() returns the error code of a
  * given SedError object instance.
- * 
+ *
  * The following is a table of the symbolic names of SedErrorCode_t values
  * and the meaning of each code.  In this table, the right-hand columns
  * titled "L1V1", "L1V2", etc. refer to Levels and Versions of the Sed
  * specifications, and the entries in each column refer to whether the
  * severity of the condition in that particular Level+Version of Sed.
  * The codes stand for the following:
- * 
- * @endif@if java <h3><a class="anchor" 
+ *
+ * @endif@if java <h3><a class="anchor"
  * name="SedErrorCode_t">Error codes associated with SedError objects</a></h3>
  *
  * The error and warning codes returned by libSed are listed in the table
@@ -209,13 +209,13 @@
  * programming, but it was necessary to work around the lack of
  * enumerations in Java prior to JDK 1.5.  Future versions of libSed may
  * use a proper Java enumeration type to define the error identifiers.
- * 
+ *
  * In this table, the right-hand columns titled "L1V1", "L1V2", etc. refer
  * to Levels and Versions of the Sed specifications, and the entries in
  * each column refer to whether the severity of the condition in that
  * particular Level+Version of Sed.  The codes stand for the following:
  *
- * @endif@if python <h3><a class="anchor" 
+ * @endif@if python <h3><a class="anchor"
  * name="SedErrorCode_t">Error codes associated with SedError objects</a></h3>
  *
  * The error and warning codes returned by libSed are listed in the table
@@ -223,8 +223,8 @@
  * given SedError object instance.  In the libSed Python language
  * interface, these error identifiers are currently
  * implemented as static integer constants defined in the interface class
- * @link libsbml libsbml@endlink. 
- * 
+ * @link libsbml libsbml@endlink.
+ *
  * In this table, the right-hand columns titled "L1V1", "L1V2", etc. refer
  * to Levels and Versions of the Sed specifications, and the entries in
  * each column refer to whether the severity of the condition in that
@@ -246,7 +246,7 @@
  * SedError::getMessage().
  *
  * @htmlinclude sbmlerror-table.html
- * 
+ *
  * @if clike <h3><a class="anchor" name="SedErrorCategory_t">SedErrorCategory_t</a></h3>
  *
  * SedErrorCategory_t is an enumeration of category codes for SedError
@@ -260,7 +260,7 @@
  *
  * The following table lists each possible value and a brief description of
  * its meaning.
- * 
+ *
  * @endif@if python <h3><a class="anchor" name="SedErrorCategory_t">Category codes associated with SedError objects</a></h3>
  *
  * As discussed above, each SedError object contains a value for a
@@ -272,20 +272,20 @@
  * As is the case with the error codes, in the libSed Python language
  * interface, the category identifiers are currently implemented as static
  * integer constants defined in the interface class
- * @link libsbml libsbml@endlink. 
+ * @link libsbml libsbml@endlink.
  *
  * The following table lists each possible value and a brief description of
  * its meaning.
- * 
+ *
  * @endif@if java <h3><a class="anchor"
  * name="SedErrorCategory_t">Category codes associated with SedError objects</a></h3>
- * 
+ *
  * As discussed above, each SedError object contains a value for a
  * category identifier, describing the type of issue that the SedError
  * object represents.  The category can be retrieved from an SedError
  * object using the method SedError::getCategory().  The following table
  * lists each possible value and a brief description of its meaning.
- * 
+ *
  * As is the case with the error codes, in the libSed Java language
  * interface, the category identifiers are currently implemented as static
  * integer constants defined in the interface class
@@ -293,16 +293,16 @@
  *
  * The following table lists each possible value and a brief description of
  * its meaning.
- * 
+ *
  * @endif@if csharp <h3><a class="anchor"
  * name="SedErrorCategory_t">Category codes associated with SedError objects</a></h3>
- * 
+ *
  * As discussed above, each SedError object contains a value for a
  * category identifier, describing the type of issue that the SedError
  * object represents.  The category can be retrieved from an SedError
  * object using the method SedError::getCategory().  The following table
  * lists each possible value and a brief description of its meaning.
- * 
+ *
  * As is the case with the error codes, in the libSed C# language
  * interface, the category identifiers are currently implemented as static
  * integer constants defined in the interface class
@@ -310,9 +310,9 @@
  *
  * The following table lists each possible value and a brief description of
  * its meaning.
- * 
+ *
  * @endif@~
- * 
+ *
  * <center>
  * <table width="90%" cellspacing="1" cellpadding="4" border="0"  class="text-table normal-font alt-row-colors">
  *  <tr style="background: lightgray" class="normal-font">
@@ -320,22 +320,22 @@
  *      <th>Meaning</td>
  *  </tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML LIBSEDML_CAT_SEDML@endlink</td><td>General error not falling into
- * another category below.</td></tr> 
+ * another category below.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML_L1_COMPAT LIBSEDML_CAT_SEDML_L1_COMPAT@endlink</td><td>Category of errors
  * that can only occur during attempted translation from one Level/Version
  * of Sed to another.  This particular category applies to errors
  * encountered while trying to convert a model from Sed Level&nbsp;2 to Sed
- * Level&nbsp;1.</td></tr> 
+ * Level&nbsp;1.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML_L2V1_COMPAT LIBSEDML_CAT_SEDML_L2V1_COMPAT@endlink</td><td>Category of errors
  * that can only occur during attempted translation from one Level/Version
  * of Sed to another.  This particular category applies to errors
  * encountered while trying to convert a model to Sed Level&nbsp;2
- * Version&nbsp;1.</td></tr> 
+ * Version&nbsp;1.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML_L2V2_COMPAT LIBSEDML_CAT_SEDML_L2V2_COMPAT@endlink</td><td>Category of errors
  * that can only occur during attempted translation from one Level/Version
  * of Sed to another.  This particular category applies to errors
  * encountered while trying to convert a model to Sed Level&nbsp;2
- * Version&nbsp;2.</td></tr> 
+ * Version&nbsp;2.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_GENERAL_CONSISTENCY LIBSEDML_CAT_GENERAL_CONSISTENCY@endlink</td><td>Category of
  * errors that can occur while validating general Sed constructs.  With
  * respect to the Sed specification, these concern failures in applying
@@ -345,55 +345,55 @@
  * errors that can occur while validating symbol identifiers in a model.
  * With respect to the Sed specification, these concern failures in
  * applying the validation rules numbered 103xx in the Level&nbsp;2 Versions&nbsp;2&ndash;4
- * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr>  
+ * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_UNITS_CONSISTENCY LIBSEDML_CAT_UNITS_CONSISTENCY@endlink</td><td>Category of
  * errors that can occur while validating the units of measurement on
  * quantities in a model.  With respect to the Sed specification, these
  * concern failures in applying the validation rules numbered 105xx in the
  * Level&nbsp;2 Versions&nbsp;2&ndash;4
- * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr> 
+ * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_MATHML_CONSISTENCY LIBSEDML_CAT_MATHML_CONSISTENCY@endlink</td><td>Category of
  * errors that can occur while validating MathML formulas in a model.  With
  * respect to the Sed specification, these concern failures in applying
  * the validation rules numbered 102xx in the Level&nbsp;2 Versions&nbsp;2&ndash;4
- * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr> 
+ * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SBO_CONSISTENCY LIBSEDML_CAT_SBO_CONSISTENCY@endlink</td><td>Category of errors
  * that can occur while validating SBO identifiers in a model.  With
  * respect to the Sed specification, these concern failures in applying
  * the validation rules numbered 107xx in the Level&nbsp;2 Versions&nbsp;2&ndash;4
- * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr> 
+ * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_OVERDETERMINED_MODEL LIBSEDML_CAT_OVERDETERMINED_MODEL@endlink</td><td>Error in the
  * system of equations in the model: the system is overdetermined,
  * therefore violating a tenet of proper Sed.  With respect to the Sed
  * specification, this is validation rule #10601 in the Sed Level&nbsp;2 Versions&nbsp;2&ndash;4
- * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr> 
+ * and Level&nbsp;3 Version&nbsp;1 specifications.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML_L2V3_COMPAT LIBSEDML_CAT_SEDML_L2V3_COMPAT@endlink</td><td>Category of errors
  * that can only occur during attempted translation from one Level/Version
  * of Sed to another.  This particular category applies to errors
  * encountered while trying to convert a model to Sed Level&nbsp;2
- * Version&nbsp;3.</td></tr> 
+ * Version&nbsp;3.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_MODELING_PRACTICE LIBSEDML_CAT_MODELING_PRACTICE@endlink</td><td>Category of
  * warnings about recommended good practices involving Sed and
  * computational modeling.  (These are tests performed by libSed and do
- * not have equivalent Sed validation rules.)</td></tr> 
+ * not have equivalent Sed validation rules.)</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_INTERNAL_CONSISTENCY LIBSEDML_CAT_INTERNAL_CONSISTENCY@endlink</td><td>Category of
  * errors that can occur while validating libSed's internal representation
  * of Sed constructs. (These are tests performed by libSed and do
- * not have equivalent Sed validation rules.)</td></tr> 
+ * not have equivalent Sed validation rules.)</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML_L2V4_COMPAT LIBSEDML_CAT_SEDML_L2V4_COMPAT@endlink</td><td>Category of errors
  * that can only occur during attempted translation from one Level/Version
  * of Sed to another.  This particular category applies to errors
  * encountered while trying to convert a model to Sed Level&nbsp;2
- * Version&nbsp;4.</td></tr> 
+ * Version&nbsp;4.</td></tr>
  * <tr><td>@link XMLErrorCategory_t#LIBSEDML_CAT_SEDML_L3V1_COMPAT LIBSEDML_CAT_SEDML_L3V1_COMPAT@endlink</td><td>Category of errors
  * that can only occur during attempted translation from one Level/Version
  * of Sed to another.  This particular category applies to errors
  * encountered while trying to convert a model to Sed Level&nbsp;3
- * Version&nbsp;1.</td></tr> 
+ * Version&nbsp;1.</td></tr>
  *
  * </table>
  * </center>
- * 
+ *
  * @if clike
  * <h3><a class="anchor" name="SedErrorSeverity_t">SedErrorSeverity_t</a></h3>
  *
@@ -401,20 +401,20 @@
  * User programs receiving an SedError object can use this distinction to
  * check whether the error represents a low-level XML problem or an Sed
  * problem.
- * 
+ *
  * In libSed version @htmlinclude libsbml-version.html
  * there are no additional severity codes in SedErrorSeverity_t beyond
  * those defined in @link XMLError::XMLErrorSeverity_t XMLErrorSeverity_t@endlink.
- * 
+ *
  * <hr>
  * @endif@if java <h3><a class="anchor"
  * name="SedErrorSeverity_t">Severity codes associated with SedError
  * objects</h3>
  *
  * In libSed version @htmlinclude libsbml-version.html
- * there are no additional severity codes beyond those defined by XMLError.  
- * They are implemented as static integer constants defined in the interface 
- * class <code><a href="libsbmlConstants.html">libsbmlConstants</a></code>, 
+ * there are no additional severity codes beyond those defined by XMLError.
+ * They are implemented as static integer constants defined in the interface
+ * class <code><a href="libsbmlConstants.html">libsbmlConstants</a></code>,
  * and have names beginning with <code>LIBSEDML_SEV_</code>.
  * @endif@if python <h3><a class="anchor"
  * name="SedErrorSeverity_t">Severity codes associated with SedError
@@ -875,10 +875,10 @@ typedef enum
  *
  * @see #XMLErrorCategory_t
  */
-typedef enum 
+typedef enum
 {
 	LIBSEDML_CAT_INTERNAL,
-    LIBSEDML_CAT_SEDML 
+    LIBSEDML_CAT_SEDML
     /*!< General Sed error  not falling into another category below. */
 
   , LIBSEDML_CAT_SEDML_L1_COMPAT
@@ -910,9 +910,9 @@ typedef enum
      * and Level&nbsp;3 Version&nbsp;1 specifications. */
 
   , LIBSEDML_CAT_INTERNAL_CONSISTENCY
-    /*!< Category of errors that can occur while validating libSed's 
-     * internal representation of Sed constructs. (These are tests 
-     * performed by libSed and do not have equivalent Sed validation 
+    /*!< Category of errors that can occur while validating libSed's
+     * internal representation of Sed constructs. (These are tests
+     * performed by libSed and do not have equivalent Sed validation
      * rules.)  */
 
 
@@ -922,7 +922,7 @@ typedef enum
 /**
  * Severity codes for SedError diagnostics.
  *
- * These are distinct from XMLError's severity codes.  
+ * These are distinct from XMLError's severity codes.
  *
  * @see XMLErrorSeverity_t
  */
@@ -937,10 +937,10 @@ typedef enum
 	LIBSEDML_SEV_ERROR = LIBSBML_SEV_ERROR,
 	LIBSEDML_SEV_FATAL = LIBSBML_SEV_FATAL,
 	LIBSEDML_SEV_WARNING = LIBSBML_SEV_WARNING,
-   
+
     LIBSEDML_SEV_SCHEMA_ERROR    = (LIBSBML_SEV_FATAL + 1)
     /*!< The XML content does not conform to
-     * the relevant version of the Sed XML 
+     * the relevant version of the Sed XML
      * Schema.  The content is not valid Sed. */
 
   , LIBSEDML_SEV_GENERAL_WARNING
@@ -988,7 +988,7 @@ public:
    * numbers are defined as unsigned integer constants in the interface
    * class @link libsbml libsbml@endlink.  See the <a class="el"
    * href="#SedErrorCode_t">top of this documentation page</a> for a table
-   * listing the possible values and their meanings. @endif@~ The argument 
+   * listing the possible values and their meanings. @endif@~ The argument
    * @p errorId to this constructor @em can be (but does not have to be) a
    * value from this @if clike enumeration. If it @em is a value
    * from <a class="el" href="#SedErrorCode_t">SedErrorCode_t</a>, the
@@ -1006,7 +1006,7 @@ public:
    * assumes the error is a low-level system or Sed layer error and
    * <em>prepends</em> a built-in, predefined error message to any string
    * passed in the argument @p details to this constructor.  In addition,
-   * all the predefined error identifiers have associated values for the 
+   * all the predefined error identifiers have associated values for the
    * @p severity and @p category codes, and these fields are filled-in using
    * the libSed defaults for each different error identifier. @endif@~
    *
@@ -1033,11 +1033,11 @@ public:
    * values (not just those from <a class="el"
    * href="#SedErrorSeverity_t">SedErrorSeverity_t</a> and <a class="el"
    * href="#SedErrorCategory_t">SedErrorCategory_t</a>, but their own
-   * special values) for @p severity and 
-   * @p category. @else As mentioned above, 
+   * special values) for @p severity and
+   * @p category. @else As mentioned above,
    * there are additional constants defined for <a class="el"
    * href="#SedErrorSeverity_t">standard severity</a> and <a class="el"
-   * href="#SedErrorCategory_t">standard category</a> codes, and every predefined 
+   * href="#SedErrorCategory_t">standard category</a> codes, and every predefined
    * error in libSed has an associated value for severity and category taken
    * from these predefined sets.  These constants have symbol names
    * prefixed with <code>LIBSEDML_SEV_</code> and <code>LIBSEDML_CAT_</code>,
@@ -1056,19 +1056,19 @@ public:
    * @param level the Sed Level of the Sed model
    *
    * @param version the Sed Version within the Level of the Sed model
-   * 
+   *
    * @param details a string containing additional details about the error.
    * If the error code in @p errorId is one that is recognized by SedError,
    * the given message is @em appended to a predefined message associated
    * with the given code.  If the error code is not recognized, the message
    * is stored as-is as the text of the error.
-   * 
+   *
    * @param line an unsigned int, the line number at which the error occured.
-   * 
+   *
    * @param column an unsigned int, the column number at which the error occured.
-   * 
+   *
    * @param severity an integer indicating severity of the error.
-   * 
+   *
    * @param category an integer indicating the category to which the error
    * belongs.
    *
@@ -1106,7 +1106,7 @@ public:
   /**
    * clone function
    */
-  virtual SedError* clone() const; 
+  virtual SedError* clone() const;
 
   /**
    * Outputs this SedError to stream in the following format (and followed

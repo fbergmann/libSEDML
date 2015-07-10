@@ -44,12 +44,12 @@ public static void main (String[] args)
 {
   if (args.length != 1)
   {
-    System.out.println("Usage: create_sedml output-filename.");         
+    System.out.println("Usage: create_sedml output-filename.");
     System.exit(2);
   }
 
   System.loadLibrary("sedmlj");
-  
+
   // create the document
   SedDocument doc = new SedDocument();
   doc.setLevel(1);

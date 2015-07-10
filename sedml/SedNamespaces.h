@@ -1,26 +1,26 @@
 /**
  * @file    SedNamespaces.h
- * @brief   SedNamespaces class to store level/version and namespace 
- * 
+ * @brief   SedNamespaces class to store level/version and namespace
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedNamespaces
@@ -48,7 +48,7 @@
  * to the SBase class, thereby allowing nearly all components to have SBO
  * annotations.  As a result of differences such as those, libSed needs to
  * track the Sed Level and Version of every object created.
- * 
+ *
  * The purpose of the SedNamespaces object class is to make it easier to
  * communicate Sed Level and Version data between libSed constructors and
  * other methods.  The SedNamespaces object class tracks 3-tuples
@@ -78,16 +78,16 @@
 namespace LIBSEDML_CPP_NAMESPACE {
   const unsigned int SEDML_DEFAULT_LEVEL   = 1;
   const unsigned int SEDML_DEFAULT_VERSION = 2;
-  const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";  
-  const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";  
-  const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2";  
+  const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";
+  const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
+  const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2";
 }
 #else
 static const unsigned int SEDML_DEFAULT_LEVEL   = 1;
 static const unsigned int SEDML_DEFAULT_VERSION = 2;
 static const char* const SEDML_XMLNS_L1   = "http://sed-ml.org/";
 static const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
-static const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2"; 
+static const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2";
 #endif
 
 #ifdef __cplusplus
@@ -127,10 +127,10 @@ public:
    *
    * @param level the Sed level
    * @param version the Sed version
-   * 
+   *
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
    */
-  SedNamespaces(unsigned int level = SEDML_DEFAULT_LEVEL, 
+  SedNamespaces(unsigned int level = SEDML_DEFAULT_LEVEL,
                  unsigned int version = SEDML_DEFAULT_VERSION);
 
   /**
@@ -138,10 +138,10 @@ public:
    */
   virtual ~SedNamespaces();
 
-  
+
   /**
    * Copy constructor; creates a copy of a SedNamespaces.
-   * 
+   *
    * @param orig the SedNamespaces instance to copy.
    *
    * @throws @if python ValueError @else SedConstructorException @endif@~
@@ -161,14 +161,14 @@ public:
 
   /**
    * Creates and returns a deep copy of this SedNamespaces.
-   * 
+   *
    * @return a (deep) copy of this SedNamespaces.
    */
   virtual SedNamespaces* clone () const;
 
 
   /**
-   * Returns a string representing the Sed XML namespace for the 
+   * Returns a string representing the Sed XML namespace for the
    * given @p level and @p version of Sed.
    *
    * @param level the Sed level
@@ -186,12 +186,12 @@ public:
    */
   static std::string getSedNamespaceURI(unsigned int level,
                                          unsigned int version);
-  
+
   /**
-   * Returns a list of all supported SedNamespaces in this version of 
-   * libsbml. 
-   * 
-   * @return a list with supported Sed namespaces. 
+   * Returns a list of all supported SedNamespaces in this version of
+   * libsbml.
+   *
+   * @return a list with supported Sed namespaces.
    *
    * @if notclike @note Because this is a @em static method, the
    * non-C++ language interfaces for libSed will contain two variants.  One
@@ -212,7 +212,7 @@ public:
    */
   virtual std::string getURI() const;
 
-  
+
   /**
    * Get the Sed Level of this SedNamespaces object.
    *
@@ -247,7 +247,7 @@ public:
 
   /**
    * Get the XML namespaces list for this SedNamespaces object.
-   * 
+   *
    * The plural is not a mistake, because in Sed Level&nbsp;3, objects may
    * have extensions added by Level&nbsp;3 packages used by a given model,
    * and therefore there may be multiple XML namespaces involved too.
@@ -263,7 +263,7 @@ public:
 
   /**
    * Get the XML namespaces list for this SedNamespaces object.
-   * 
+   *
    * The plural is not a mistake, because in Sed Level&nbsp;3, objects may
    * have extensions added by Level&nbsp;3 packages used by a given model,
    * and therefore there may be multiple XML namespaces involved too.
@@ -287,10 +287,10 @@ public:
    * namespace a prefix of <code>html</code>.  @if clike
    * @verbatim
 SedDocument *sd;
-try 
+try
 {
     sd = new SedDocument(3, 1);
-} 
+}
 catch (SedConstructorException e)
 {
     // Here, have code to handle a truly exceptional situation. Candidate
@@ -312,10 +312,10 @@ else
    * @endif@if java
 @verbatim
 SedDocument sd;
-try 
+try
 {
     sd = new SedDocument(3, 1);
-} 
+}
 catch (SedConstructorException e)
 {
     // Here, have code to handle a truly exceptional situation. Candidate
@@ -371,7 +371,7 @@ catch (SedConstructorException e)
 XMLNamespaces sn = sd.getNamespaces();
 if (sn != null)
 {
-    sn.add("http://www.w3.org/1999/xhtml", "html");            
+    sn.add("http://www.w3.org/1999/xhtml", "html");
 }
 else
 {
@@ -396,7 +396,7 @@ else
   /**
    * Add an XML namespace (a pair of URI and prefix) to the set of namespaces
    * within this SedNamespaces object.
-   * 
+   *
    * @param uri    the XML namespace to be added.
    * @param prefix the prefix of the namespace to be added.
    *
@@ -412,9 +412,9 @@ else
 
 
   /**
-   * Removes an XML namespace from the set of namespaces within this 
+   * Removes an XML namespace from the set of namespaces within this
    * SedNamespaces object.
-   * 
+   *
    * @param uri    the XML namespace to be added.
    *
    * @return integer value indicating success/failure of the
@@ -464,8 +464,8 @@ else
   void setNamespaces(XMLNamespaces * xmlns);
   /** @endcond */
 
-	
-protected:  
+
+protected:
   /** @cond doxygen-libsbml-internal */
 
   void initSedNamespace();

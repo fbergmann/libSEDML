@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -233,7 +233,7 @@ SedReport::addDataSet(const SedDataSet* sds)
  *
  * @return the number of SedDataSet objects in this SedReport
  */
-unsigned int 
+unsigned int
 SedReport::getNumDataSets() const
 {
 	return mDataSets.size();
@@ -241,13 +241,13 @@ SedReport::getNumDataSets() const
 
 /**
  * Creates a new SedDataSet object, adds it to this SedReports
- * SedReport and returns the SedDataSet object created. 
+ * SedReport and returns the SedDataSet object created.
  *
  * @return a new SedDataSet object instance
  *
  * @see addSedDataSet(const SedDataSet* sds)
  */
-SedDataSet* 
+SedDataSet*
 SedReport::createDataSet()
 {
 	SedDataSet *temp = new SedDataSet();

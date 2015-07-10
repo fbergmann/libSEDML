@@ -2,22 +2,22 @@
 * \file    local.i
 * \brief   Java-specific SWIG directives for wrapping libSEDML API
 * \author  Ben Bornstein
-* 
+*
 * <!--------------------------------------------------------------------------
 * This file is part of libSEDML.  Please visit http://sedml.org for more
 * information about SEDML, and the latest version of libSEDML.
 *
-* Copyright (C) 2009-2013 jointly by the following organizations: 
+* Copyright (C) 2009-2013 jointly by the following organizations:
 *     1. California Institute of Technology, Pasadena, CA, USA
 *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-*  
+*
 * Copyright (C) 2006-2008 by the California Institute of Technology,
-*     Pasadena, CA, USA 
-*  
-* Copyright (C) 2002-2005 jointly by the following organizations: 
+*     Pasadena, CA, USA
+*
+* Copyright (C) 2002-2005 jointly by the following organizations:
 *     1. California Institute of Technology, Pasadena, CA, USA
 *     2. Japan Science and Technology Agency, Japan
-* 
+*
 * This library is free software; you can redistribute it and/or modify it
 * under the terms of the GNU Lesser General Public License as published by
 * the Free Software Foundation.  A copy of the license agreement is provided
@@ -30,26 +30,26 @@
 
 /**
 * Renames *::clone() to *::cloneObject().
-* In JDK 1.4.2, libsedml's *::clone() methods can't override 
+* In JDK 1.4.2, libsedml's *::clone() methods can't override
 * "Object Java.lang.Object.clone()" because JDK 1.4.2 doesn't
-* allow override with different return type. 
+* allow override with different return type.
 *
 * (2008-12-07)
 * Currently, JDK 1.5 or later, which allows a covariant return type,
 * is required for libSEDML Java binding, and thus we don't have to use
-* this rename directive. However, this directive is still enabled for 
+* this rename directive. However, this directive is still enabled for
 * compatiblity.
 */
 
 %rename(cloneObject) *::clone;
 
-/** 
-* Rename XMLNode::equals() to XMLNode::xmlEquals(), otherwise it conflicts with the 
+/**
+* Rename XMLNode::equals() to XMLNode::xmlEquals(), otherwise it conflicts with the
 * equals operation defined below
 */
 %rename(xmlEquals) XMLNode::equals;
-/** 
-* Rename ASTNode::getClass() to ASTNode::getClassName(), otherwise it conflicts 
+/**
+* Rename ASTNode::getClass() to ASTNode::getClassName(), otherwise it conflicts
 */
 %rename(getClassName) ASTNode::getClass;
 %rename(setClassName) ASTNode::setClass;
@@ -59,8 +59,8 @@
 *
 * Currently, SWIG doesn't allow a covariant return type although
 * JDK 1.5 or later supports it.
-* Thus, the following directives are required to enable the 
-* covariant return type. 
+* Thus, the following directives are required to enable the
+* covariant return type.
 */
 
 #pragma SWIG nowarn=822
@@ -142,7 +142,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(UnitDefinition)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(Constraint)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(Unit)
 
-// Only ListOfSpecies and ListOfSpeciesReference classes do not 
+// Only ListOfSpecies and ListOfSpeciesReference classes do not
 // match the above macro...
 %typemap(jstype) Species* ListOfSpecies::get    "Species"
 %typemap(jstype) Species* ListOfSpecies::remove "Species"
@@ -153,7 +153,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(Unit)
 /**
 * Wraps the SedConstructorException
 *
-* The SedConstructorException (C++ class) is wrapped as the 
+* The SedConstructorException (C++ class) is wrapped as the
 * SedConstructorException (Java class) which is derived from
 * the built-in IllegalArgumentException class which is a subclass
 * of RunTimeException.
@@ -175,7 +175,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(Unit)
 %ignore SedConstructorException::SedConstructorException(std::string);
 
 %typemap(javabase) SedConstructorException "java.lang.IllegalArgumentException";
-%typemap(javacode) SedConstructorException 
+%typemap(javacode) SedConstructorException
 %{
 	protected SedConstructorException(long cPtr, boolean cMemoryOwn, String v)
 	{
@@ -265,7 +265,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
 /**
 * Wraps the XMLConstructorException
 *
-* The XMLConstructorException (C++ class) is wrapped as the 
+* The XMLConstructorException (C++ class) is wrapped as the
 * XMLConstructorException (Java class) which is derived from
 * the built-in IllegalArgumentException class which is a subclass
 * of RunTimeException.
@@ -285,7 +285,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
 */
 
 %typemap(javabase) XMLConstructorException "java.lang.IllegalArgumentException";
-%typemap(javacode) XMLConstructorException 
+%typemap(javacode) XMLConstructorException
 %{
 	/*
 * To pass the message from an exception to the parent exception class,
@@ -349,7 +349,7 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 /**
 * Ignores XMLToken::clone() in order to use XMLNode::clone().
 * (XMLNode is a derived class of XMLToken)
-* In JDK 1.4.2, "XMLNode XMLNode::clone()" can't override 
+* In JDK 1.4.2, "XMLNode XMLNode::clone()" can't override
 * "XMLToken XMLToken::clone()" because JDK 1.4.2 doesn't
 * allow override with different return type.
 */
@@ -418,7 +418,7 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 */
 %pragma(java) modulecode =
 %{
-	
+
 
 	/**
 * Internal method.
@@ -435,10 +435,10 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 		{
 		case (int) libsedml.SEDML_DOCUMENT:
 			return new SedDocument(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_MODEL:
 			return new SedModel(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_CHANGE:
 			return new SedChange(cPtr, owner);
 
@@ -447,7 +447,7 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 
 		case (int) libsedml.SEDML_CHANGE_CHANGEXML:
 			return new SedChangeXML(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_RANGE:
 			return new SedRange(cPtr, owner);
 
@@ -462,72 +462,72 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 
 		case (int) libsedml.SEDML_CHANGE_ATTRIBUTE:
 			return new SedChangeAttribute(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_CHANGE_REMOVEXML:
 			return new SedRemoveXML(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_CHANGE_COMPUTECHANGE:
 			return new SedComputeChange(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_DATAGENERATOR:
 			return new SedDataGenerator(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_VARIABLE:
 			return new SedVariable(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_PARAMETER:
 			return new SedParameter(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_TASK:
 			return new SedTask(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_OUTPUT_DATASET:
 			return new SedDataSet(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_OUTPUT_CURVE:
 			return new SedCurve(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_OUTPUT_SURFACE:
 			return new SedSurface(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_OUTPUT_REPORT:
 			return new SedReport(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_OUTPUT_PLOT2D:
 			return new SedPlot2D(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_OUTPUT_PLOT3D:
 			return new SedPlot3D(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_SIMULATION_ALGORITHM:
 			return new SedAlgorithm(cPtr, owner);
 
-			
+
 		case (int) libsedml.SEDML_SIMULATION_ALGORITHM_PARAMETER:
 			return new SedAlgorithmParameter(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_SIMULATION:
 			return new SedSimulation(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_SIMULATION_UNIFORMTIMECOURSE:
 			return new SedUniformTimeCourse(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_SIMULATION_ONESTEP:
 			return new SedOneStep(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_SIMULATION_STEADYSTATE:
 			return new SedSteadyState(cPtr, owner);
-			
-			
+
+
 		case (int) libsedml.SEDML_TASK_SETVALUE:
 			return new SedSetValue(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_TASK_SUBTASK:
 			return new SedSubTask(cPtr, owner);
 
 		case (int) libsedml.SEDML_TASK_REPEATEDTASK:
 			return new SedRepeatedTask(cPtr, owner);
-			
+
 		case (int) libsedml.SEDML_LIST_OF:
 			String name = sb.getElementName();
 			if(name.equals("listOf"))
@@ -581,22 +581,22 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 			{
 				return new SedListOfVariables(cPtr, owner);
 			}
-			
+
 			else if(name == "listOfSubTasks")
 			{
 				return new SedListOfSubTasks(cPtr, owner);
 			}
-			
+
 			else if(name == "listOfRanges")
 			{
 				return new SedListOfRanges(cPtr, owner);
 			}
-			
-			return new SedListOf(cPtr, owner);				
-			
+
+			return new SedListOf(cPtr, owner);
+
 		default:
 			return new SedBase(cPtr, owner);
-		}      
+		}
 
 	}
 	%}
@@ -788,8 +788,8 @@ SWIGJAVA_ATTRIBS(TYPENAME, public, public)
 * in libsedml.
 *
 * By default, 'equals' method ( and '==' operator) for each wrapped class
-* object returns 'true' if the given two objects refer to the same 
-* *Java proxy object* (not the underlying C++ object). 
+* object returns 'true' if the given two objects refer to the same
+* *Java proxy object* (not the underlying C++ object).
 * For example, the following code returns 'true'.
 *
 *   Model m = new Model();
@@ -808,12 +808,12 @@ SWIGJAVA_ATTRIBS(TYPENAME, public, public)
 *   return r1.equals(r2);  <---- this returns 'false'
 *
 * The following override changes the behaviour of 'equals' method such that
-* returns 'true' if the given two objects refer to the same underlying C++ 
+* returns 'true' if the given two objects refer to the same underlying C++
 * object (i.e. 'true' is returned in the both above examples).
 *
 * (Unfortunately, '==' operator can't be overidden in Java.
 *  Thus, the underlying C++ objects can't be compared by the '==' operator.)
-* 
+*
 */
 
 %define SWIGJAVA_EQUALS(CLASS)
@@ -836,7 +836,7 @@ SWIGJAVA_ATTRIBS(TYPENAME, public, public)
 * <code>equals()</code> method.  The <code>equals</code> method on this
 * class overrides the default java.lang.Object one, and performs an
 * intelligent comparison of instances of objects of this class.  The
-* result is an assessment of whether two libSEDML Java objects are truly 
+* result is an assessment of whether two libSEDML Java objects are truly
 * the same underlying native-code objects.
 *  <p>
 * The use of this method in practice is the same as the use of any other
@@ -848,12 +848,12 @@ SWIGJAVA_ATTRIBS(TYPENAME, public, public)
 * @param sb a reference to an object to which the current object
 * instance will be compared
 *
-* @return <code>true</code> if <code>sb</code> refers to the same underlying 
+* @return <code>true</code> if <code>sb</code> refers to the same underlying
 * native object as this one, <code>false</code> otherwise
 */
 	public boolean equals(Object sb)
 	{
-		if ( this == sb ) 
+		if ( this == sb )
 		{
 			return true;
 		}
@@ -933,10 +933,10 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 
 
 /**
-* On Windows, a string for filename should be encoded by ANSI CP 
-* instead of UTF-8 because file I/O APIs internally used in libSEDML 
+* On Windows, a string for filename should be encoded by ANSI CP
+* instead of UTF-8 because file I/O APIs internally used in libSEDML
 * requires an ANSI CP encoded string for the given filename.
-*  
+*
 *  1) SEDMLReader::readSEDML(const std::string& filename)
 *  2) readSEDML(const char* filename)
 *  3) SEDMLWriter::writeSEDML(SEDMLDocument*, const std::string& filename)
@@ -946,7 +946,7 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 //
 // UTF8 -> ANSI CP (for const std::string& filename)
 //
-%typemap("in") const std::string& filename (const char* arg_pstr, std::string arg_str) 
+%typemap("in") const std::string& filename (const char* arg_pstr, std::string arg_str)
 %{
 	if(!$input) {
 		SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "null std::string");
@@ -1000,7 +1000,7 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 #endif
 	%}
 
-%typemap("freearg")  const char* filename 
+%typemap("freearg")  const char* filename
 %{
 #ifdef WIN32
 	delete[] $1;
@@ -1040,8 +1040,8 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 *    2. public final static OStream cerr;
 *    3. public final static OStream clog;
 *
-* 2) OFStream (derived class of OStream) wraps std::ofstream 
-*    with ios_base::cout (default) or ios_base::app flag. 
+* 2) OFStream (derived class of OStream) wraps std::ofstream
+*    with ios_base::cout (default) or ios_base::app flag.
 *
 * 3) OStringStream (derived class of OStream) wraps std::ostringstream.
 *
@@ -1072,7 +1072,7 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 *    OFStream ofs = new OFStream("foo.xml",true);
 *    XMLOutputStream xos = new XMLOutputStream(ofs);
 *
-* 5. wraps std::ostringstream 
+* 5. wraps std::ostringstream
 *
 *    OStringStream   oss = new OStringStream();
 *    XMLOutputStream xos = new XMLOutputStream(oss);
@@ -1186,14 +1186,14 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 	public final static OStream clog;
 
 	static {
-		cout = new OStream(OStream.COUT); 
-		cerr = new OStream(OStream.CERR); 
-		clog = new OStream(OStream.CLOG); 
+		cout = new OStream(OStream.COUT);
+		cerr = new OStream(OStream.CERR);
+		clog = new OStream(OStream.CLOG);
 	}
 
 	/**
 * This private constructor does nothing and never invoked.
-* The purpose of this constuctor is to hide a default constructor of this 
+* The purpose of this constuctor is to hide a default constructor of this
 * class in javadoc documentation.
 */
 	private libsedml() {}
@@ -1224,15 +1224,15 @@ SWIGJAVA_EQUALS(XMLOutputStream)
 %define LIST_WRAPPER(_FNAME_,_TYPENAME_)
 %typemap(jstype)  List* _FNAME_ %{ _TYPENAME_ ## List %}
 
-%typemap(javaout) List* _FNAME_ 
-{ 
+%typemap(javaout) List* _FNAME_
+{
 	long cPtr = $jnicall;
 	return (cPtr == 0) ? null : new  _TYPENAME_ ## List(cPtr, true);
 }
 
-%typemap(out) List* _FNAME_ 
+%typemap(out) List* _FNAME_
 {
-	ListWrapper<_TYPENAME_> *listw = ($1 != 0) ? new ListWrapper<_TYPENAME_>($1) : 0;  
+	ListWrapper<_TYPENAME_> *listw = ($1 != 0) ? new ListWrapper<_TYPENAME_>($1) : 0;
 	*( ListWrapper<_TYPENAME_>   **)&$result = listw;
 }
 %enddef

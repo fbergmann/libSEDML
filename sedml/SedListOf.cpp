@@ -1,26 +1,26 @@
 /**
  * @file    SedListOf.cpp
  * @brief   Wraps List and inherits from SedBase
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  */
 
@@ -155,13 +155,13 @@ SedListOf::clone () const
  * Inserts the item at the given location.  This SedListOf items assumes
  * no ownership of item and will not delete it.
  */
-int 
+int
 SedListOf::insert(int location, const SedBase* item)
 {
   return insertAndOwn(location, item->clone());
 }
 
-bool 
+bool
 SedListOf::isValidTypeForList(SedBase * item) const
 {
   return true;
@@ -172,7 +172,7 @@ SedListOf::isValidTypeForList(SedBase * item) const
  * Inserts the item at the given location.  This SedListOf items assumes
  * ownership of item and will delete it.
  */
-int 
+int
 SedListOf::insertAndOwn(int location, SedBase* item)
 {
   /* no list elements yet */
@@ -502,7 +502,7 @@ SedListOf::getItemTypeCode () const
 
 /*
  * @return the name of this element ie "listOf".
- 
+
  */
 const string&
 SedListOf::getElementName () const
@@ -570,7 +570,7 @@ SedListOf::readAttributes (const XMLAttributes& attributes,
   //
 }
 
-void 
+void
 SedListOf::writeAttributes (XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
@@ -725,8 +725,8 @@ SedListOf_get (SedListOf_t *lo, unsigned int n)
  *
  * If doDelete is true (non-zero), all items in this SedListOf object are deleted
  * and cleared, and thus the caller doesn't have to delete those items.
- * Otherwise (zero), all items are just cleared from this SedListOf object and the 
- * caller is responsible for deleting all items (In this case, pointers to all 
+ * Otherwise (zero), all items are just cleared from this SedListOf object and the
+ * caller is responsible for deleting all items (In this case, pointers to all
  * items should be stored elsewhere before calling this function by the caller).
  */
 LIBSEDML_EXTERN

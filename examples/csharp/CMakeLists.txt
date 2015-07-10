@@ -7,18 +7,18 @@
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
 # information about SEDML, and the latest version of libSEDML.
 #
-# Copyright (c) 2013, Frank T. Bergmann  
+# Copyright (c) 2013, Frank T. Bergmann
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met: 
-# 
+# modification, are permitted provided that the following conditions are met:
+#
 # 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer. 
+#    list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution. 
-# 
+#    and/or other materials provided with the distribution.
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -33,14 +33,14 @@
 ###############################################################################
 
 foreach( example
-	
+
 	create_sedml
 	echo_sedml
 	print_sedml
-	
+
 )
 
-	add_custom_command(	
+	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${example}.exe
 		COMMAND "${CSHARP_COMPILER}"
 		ARGS -r:${CMAKE_CURRENT_BINARY_DIR}/../../bindings/csharp/libsedmlcsP.dll
@@ -49,9 +49,9 @@ foreach( example
 			${CSHARP_EXTRA_ARGS}
 			${CMAKE_CURRENT_SOURCE_DIR}${PATH_SEP}${example}.cs
 		MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/${example}.cs
-		COMMENT "Build C# example: ${example}") 
-	
+		COMMENT "Build C# example: ${example}")
+
 	add_custom_target(exmple_cs_${example} ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${example}.exe)
 	add_dependencies(exmple_cs_${example} binding_csharp_managed_lib)
-	
+
 endforeach()

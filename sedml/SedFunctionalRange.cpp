@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -373,7 +373,7 @@ SedFunctionalRange::addVariable(const SedVariable* sv)
  *
  * @return the number of SedVariable objects in this SedFunctionalRange
  */
-unsigned int 
+unsigned int
 SedFunctionalRange::getNumVariables() const
 {
 	return mVariables.size();
@@ -381,13 +381,13 @@ SedFunctionalRange::getNumVariables() const
 
 /**
  * Creates a new SedVariable object, adds it to this SedFunctionalRanges
- * SedFunctionalRange and returns the SedVariable object created. 
+ * SedFunctionalRange and returns the SedVariable object created.
  *
  * @return a new SedVariable object instance
  *
  * @see addSedVariable(const SedVariable* sv)
  */
-SedVariable* 
+SedVariable*
 SedFunctionalRange::createVariable()
 {
 	SedVariable *temp = new SedVariable();
@@ -491,7 +491,7 @@ SedFunctionalRange::addParameter(const SedParameter* sp)
  *
  * @return the number of SedParameter objects in this SedFunctionalRange
  */
-unsigned int 
+unsigned int
 SedFunctionalRange::getNumParameters() const
 {
 	return mParameters.size();
@@ -499,13 +499,13 @@ SedFunctionalRange::getNumParameters() const
 
 /**
  * Creates a new SedParameter object, adds it to this SedFunctionalRanges
- * SedFunctionalRange and returns the SedParameter object created. 
+ * SedFunctionalRange and returns the SedParameter object created.
  *
  * @return a new SedParameter object instance
  *
  * @see addSedParameter(const SedParameter* sp)
  */
-SedParameter* 
+SedParameter*
 SedFunctionalRange::createParameter()
 {
 	SedParameter *temp = new SedParameter();
@@ -764,18 +764,18 @@ SedFunctionalRange::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfFunctionalRanges::SedListOfFunctionalRanges(unsigned int level, 
+SedListOfFunctionalRanges::SedListOfFunctionalRanges(unsigned int level,
 	                          unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfFunctionalRanges::SedListOfFunctionalRanges(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -785,9 +785,9 @@ SedListOfFunctionalRanges::SedListOfFunctionalRanges(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfFunctionalRanges 
+ * Returns a deep copy of this SedListOfFunctionalRanges
  */
-SedListOfFunctionalRanges* 
+SedListOfFunctionalRanges*
 SedListOfFunctionalRanges::clone () const
  {
 	return new SedListOfFunctionalRanges(*this);
@@ -864,7 +864,7 @@ SedListOfFunctionalRanges::addFunctionalRange(const SedFunctionalRange* sfr)
  *
  * @return the number of SedFunctionalRange objects in this SedListOfFunctionalRanges
  */
-unsigned int 
+unsigned int
 SedListOfFunctionalRanges::getNumFunctionalRanges() const
 {
 	return size();
@@ -872,13 +872,13 @@ SedListOfFunctionalRanges::getNumFunctionalRanges() const
 
 /**
  * Creates a new SedFunctionalRange object, adds it to this SedListOfFunctionalRangess
- * SedFunctionalRange and returns the SedFunctionalRange object created. 
+ * SedFunctionalRange and returns the SedFunctionalRange object created.
  *
  * @return a new SedFunctionalRange object instance
  *
  * @see addSedFunctionalRange(const SedFunctionalRange* sfr)
  */
-SedFunctionalRange* 
+SedFunctionalRange*
 SedListOfFunctionalRanges::createFunctionalRange()
 {
 	SedFunctionalRange *temp = new SedFunctionalRange();

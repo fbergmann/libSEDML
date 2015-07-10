@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -553,18 +553,18 @@ SedSimulation::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfSimulations::SedListOfSimulations(unsigned int level, 
+SedListOfSimulations::SedListOfSimulations(unsigned int level,
 	                     unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfSimulations::SedListOfSimulations(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -574,9 +574,9 @@ SedListOfSimulations::SedListOfSimulations(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfSimulations 
+ * Returns a deep copy of this SedListOfSimulations
  */
-SedListOfSimulations* 
+SedListOfSimulations*
 SedListOfSimulations::clone () const
  {
 	return new SedListOfSimulations(*this);
@@ -653,7 +653,7 @@ SedListOfSimulations::addSimulation(const SedSimulation* ss)
  *
  * @return the number of SedSimulation objects in this SedListOfSimulations
  */
-unsigned int 
+unsigned int
 SedListOfSimulations::getNumSimulations() const
 {
 	return size();
@@ -661,13 +661,13 @@ SedListOfSimulations::getNumSimulations() const
 
 /**
  * Creates a new SedUniformTimeCourse object, adds it to this SedListOfSimulations
- * uniformTimeCourse and returns the SedUniformTimeCourse object created. 
+ * uniformTimeCourse and returns the SedUniformTimeCourse object created.
  *
  * @return a new SedUniformTimeCourse object instance
  *
  * @see addUniformTimeCourse(const SedSimulation* ss)
  */
-SedUniformTimeCourse* 
+SedUniformTimeCourse*
 SedListOfSimulations::createUniformTimeCourse()
 {
 	SedUniformTimeCourse *temp = new SedUniformTimeCourse();
@@ -677,13 +677,13 @@ SedListOfSimulations::createUniformTimeCourse()
 
 /**
  * Creates a new SedOneStep object, adds it to this SedListOfSimulations
- * oneStep and returns the SedOneStep object created. 
+ * oneStep and returns the SedOneStep object created.
  *
  * @return a new SedOneStep object instance
  *
  * @see addOneStep(const SedSimulation* ss)
  */
-SedOneStep* 
+SedOneStep*
 SedListOfSimulations::createOneStep()
 {
 	SedOneStep *temp = new SedOneStep();
@@ -693,13 +693,13 @@ SedListOfSimulations::createOneStep()
 
 /**
  * Creates a new SedSteadyState object, adds it to this SedListOfSimulations
- * steadyState and returns the SedSteadyState object created. 
+ * steadyState and returns the SedSteadyState object created.
  *
  * @return a new SedSteadyState object instance
  *
  * @see addSteadyState(const SedSimulation* ss)
  */
-SedSteadyState* 
+SedSteadyState*
 SedListOfSimulations::createSteadyState()
 {
 	SedSteadyState *temp = new SedSteadyState();
