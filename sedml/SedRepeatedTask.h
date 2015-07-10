@@ -51,15 +51,13 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
-
-
-LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedTask.h>
 #include <sedml/SedRange.h>
 #include <sedml/SedSetValue.h>
 #include <sedml/SedSubTask.h>
+#include <sedml/SedTask.h>
+
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 class LIBSEDML_EXTERN SedRepeatedTask : public SedTask

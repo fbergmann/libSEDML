@@ -51,13 +51,13 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedRange.h>
+
+#include <vector>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-
-#include <sedml/SedRange.h>
-#include <vector>
 
 class LIBSEDML_EXTERN SedVectorRange : public SedRange
 {

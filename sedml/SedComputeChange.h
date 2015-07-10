@@ -49,16 +49,14 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedChange.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedParameter.h>
+#include <sedml/SedVariable.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedChange.h>
-#include <sedml/SedVariable.h>
-#include <sedml/SedParameter.h>
 
 
 class LIBSEDML_EXTERN SedComputeChange : public SedChange

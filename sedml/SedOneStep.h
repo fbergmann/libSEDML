@@ -51,12 +51,10 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedSimulation.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedSimulation.h>
 
 
 class LIBSEDML_EXTERN SedOneStep : public SedSimulation

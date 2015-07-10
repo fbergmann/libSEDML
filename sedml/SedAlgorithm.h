@@ -48,15 +48,13 @@
 #include <string>
 
 
+#include <sedml/SedAlgorithmParameter.h>
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedAlgorithmParameter.h>
 
 
 class LIBSEDML_EXTERN SedAlgorithm : public SedBase

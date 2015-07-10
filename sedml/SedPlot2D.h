@@ -49,15 +49,13 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedCurve.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedOutput.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedOutput.h>
-#include <sedml/SedCurve.h>
 
 
 class LIBSEDML_EXTERN SedPlot2D : public SedOutput

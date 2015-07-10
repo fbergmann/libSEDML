@@ -49,14 +49,12 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedCurve.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedCurve.h>
 
 
 class LIBSEDML_EXTERN SedSurface : public SedCurve

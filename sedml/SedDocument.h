@@ -49,18 +49,16 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedDataGenerator.h>
 #include <sedml/SedListOf.h>
+#include <sedml/SedModel.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedOutput.h>
+#include <sedml/SedSimulation.h>
+#include <sedml/SedTask.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
-
-
-#include <sedml/SedSimulation.h>
-#include <sedml/SedModel.h>
-#include <sedml/SedTask.h>
-#include <sedml/SedDataGenerator.h>
-#include <sedml/SedOutput.h>
 
 
 class LIBSEDML_EXTERN SedDocument : public SedBase
