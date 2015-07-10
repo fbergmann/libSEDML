@@ -2,23 +2,23 @@
  * @file    print_sedml.cs
  * @brief   Prints an overview of the elments in the given SED-ML document
  * @author  Frank T. Bergmann
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -45,7 +45,7 @@ public static int Main (string[] args)
 {
   if (args.Length != 1)
   {
-    Console.WriteLine("{0}Usage: print_sedml input-filename{0}{0}", Environment.NewLine );         
+    Console.WriteLine("{0}Usage: print_sedml input-filename{0}{0}", Environment.NewLine );
     return 2;
   }
 
@@ -53,9 +53,9 @@ public static int Main (string[] args)
   if ( doc.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0)
   {
     Console.WriteLine(doc.getErrorLog().toString());
-    return 2; 
+    return 2;
   }
-  
+
   Console.WriteLine("The document has " + doc.getNumSimulations() + " simulation(s)." + Environment.NewLine);
   for (int i = 0; i < doc.getNumSimulations(); ++i)
   {
@@ -73,7 +73,7 @@ public static int Main (string[] args)
           break;
     }
   }
-  
+
   Console.WriteLine( Environment.NewLine);
   Console.WriteLine( "The document has " + doc.getNumModels() + " model(s)." + Environment.NewLine);
   for (int i = 0; i < doc.getNumModels(); ++i)
@@ -81,7 +81,7 @@ public static int Main (string[] args)
     SedModel current = doc.getModel(i);
     Console.WriteLine( "\tModel id=" + current.getId() + " language=" + current.getLanguage() + " source=" + current.getSource() + " numChanges=" + current.getNumChanges() + Environment.NewLine);
   }
-  
+
   Console.WriteLine( Environment.NewLine);
   Console.WriteLine( "The document has " + doc.getNumTasks() + " task(s)." + Environment.NewLine);
   for (int i = 0; i < doc.getNumTasks(); ++i)
@@ -97,7 +97,7 @@ public static int Main (string[] args)
     SedDataGenerator current = doc.getDataGenerator(i);
     Console.WriteLine( "\tDG id=" + current.getId() + " math=" + libsedml.formulaToString(current.getMath()) + Environment.NewLine);
   }
-  
+
   Console.WriteLine( Environment.NewLine);
   Console.WriteLine( "The document has " + doc.getNumOutputs() + " output(s)." + Environment.NewLine);
   for (int i = 0; i < doc.getNumOutputs(); ++i)
@@ -123,7 +123,7 @@ public static int Main (string[] args)
         Console.WriteLine( "\tPlot3d id=" + current.getId() + " numSurfaces=" + p.getNumSurfaces() + Environment.NewLine);
         break;
       }
-      default: 
+      default:
         Console.WriteLine( "\tEncountered unknown output " + current.getId() + Environment.NewLine);
         break;
     }

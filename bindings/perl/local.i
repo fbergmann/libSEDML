@@ -4,22 +4,22 @@
  * @author  Ben Bornstein
  * @author  Ben Kovitz
  * @author  Akiya Jouraku
- * 
+ *
  *<!---------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sedml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -29,7 +29,7 @@
 
 
 /**
- *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream, 
+ *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream,
  *
  * (sample code) -----------------------------------------------------
  *
@@ -42,7 +42,7 @@
  *    d = libsedml.readSedML("foo.xml")
  *    if d.getNumErrors() > 0 :
  *       d.printErrors(libsedml.cerr)
- *    
+ *
  *
  * 3. wraps std::ostringstream
  *
@@ -51,7 +51,7 @@
  *    ...
  *    libsedml.endl(oss)
  *    s = oss.str()
- * 
+ *
  */
 
 // ignores C++ specific methods in std::string.
@@ -116,7 +116,7 @@ extern std::ostream clog;
  *    if ( $d->getNumErrors() > 0) {
  *       $d->printErrors($LibSEDML::CERR);
  *    }
- * 3. wraps std::ostringstream 
+ * 3. wraps std::ostringstream
  *
  *    my $oss = new LibSEDML::OStringStream();
  *    my $xos = new XMLOutputStream($oss->get_ostream());
@@ -144,7 +144,7 @@ extern std::ostream clog;
 {
   ST(argvi) = SWIG_NewPointerObj(SWIG_as_voidptr($1), GetDowncastSwigType($1),
                                  $owner | %newpointer_flags);
-  argvi++;  
+  argvi++;
 }
 
 
@@ -158,9 +158,9 @@ extern std::ostream clog;
 }
 
 /**
- * By default, returned boolean false (C++) is converted to "" (Perl) in 
+ * By default, returned boolean false (C++) is converted to "" (Perl) in
  * SWIG 1.3.31.
- * The following typemap converts returned boolean value to 0 (false) or 
+ * The following typemap converts returned boolean value to 0 (false) or
  * 1 (true) like C/C++ for compatibility.
  */
 %typemap(out) bool
@@ -248,7 +248,7 @@ extern std::ostream clog;
  *  {
  *    $m = new LibSEDML::Model($level,$version);
  *  };
- *  if ($@) 
+ *  if ($@)
  *  {
  *    warn $@; # print error message
  *    $m = new LibSEDML::Model(2,4);
@@ -328,7 +328,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
  *  {
  *    $m = new LibSBML::XMLAttributes(invalid arguments);
  *  };
- *  if ($@) 
+ *  if ($@)
  *  {
  *    warn $@; # print error message
  *  }
@@ -355,4 +355,4 @@ XMLCONSTRUCTOR_EXCEPTION(XMLToken)
 XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 
 
- 
+

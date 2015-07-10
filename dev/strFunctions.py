@@ -16,8 +16,8 @@ def capp(word, plural=True):
 def cap(word):
   capWord = word[0].upper() + word[1:len(word)]
   return capWord
-  
-  
+
+
 def lowerFirst(word):
   capWord = word[0].lower() + word[1:len(word)]
   return capWord
@@ -35,5 +35,5 @@ def objAbbrev(element):
     if element[i].isupper():
       abbrev = abbrev + element[i]
   return abbrev.lower()
-    
-  
+
+

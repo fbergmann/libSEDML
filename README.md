@@ -1,44 +1,44 @@
 # LibSEDML
-Some time ago I developed [libSedML](http://libsedml.sf.net) a C# library that fully supports [SED-ML](http://sed-ml.org) for SBML as well as CellML models for creation of the description just as for the execution of Simulation Experiments. However, frequently the question to a C++ based library comes up. This project makes use of [libSBML](http://sbml.org/Software/libSBML) XML layer as well as code generation as starting point to produce a library for reading and writing of SED-ML models. 
+Some time ago I developed [libSedML](http://libsedml.sf.net) a C# library that fully supports [SED-ML](http://sed-ml.org) for SBML as well as CellML models for creation of the description just as for the execution of Simulation Experiments. However, frequently the question to a C++ based library comes up. This project makes use of [libSBML](http://sbml.org/Software/libSBML) XML layer as well as code generation as starting point to produce a library for reading and writing of SED-ML models.
 
 ## Dependencies
-This library requires libSBML to be present, as its XML parsing layer will be used. for that either expat, xerces-c or libXML2 needs to be available. 
+This library requires libSBML to be present, as its XML parsing layer will be used. for that either expat, xerces-c or libXML2 needs to be available.
 
-## Building 
-This library uses [CMake](http://cmake.org) to build the library, so from an initial checkout all you would need todo is to run: 
+## Building
+This library uses [CMake](http://cmake.org) to build the library, so from an initial checkout all you would need todo is to run:
 
 
-    mkdir build  
+    mkdir build
     cd build
-    cmake -DLIBSBML_LIBRARY=< path to libsbml lib> -DLIBSBML_INCLUDE_DIR=< path to includes > ... -DEXTRA_LIBS= < comma separated list of xml libraries> 
-    make  
+    cmake -DLIBSBML_LIBRARY=< path to libsbml lib> -DLIBSBML_INCLUDE_DIR=< path to includes > ... -DEXTRA_LIBS= < comma separated list of xml libraries>
+    make
     make install
-    
+
 Should libSBML be installed in a default location it will be found automatically. Note that you do need to list the xml libraries that libSBML was linked against. In most cases libSBML is compiled against libXML and have compression enabled, so your `EXTRA_LIBS` would be:
 
 	EXTRA_LIBS=xml2;bz2;z;iconv
 
-note the semicolon denoting the listing of several libraries. Of course you could also enter the full path to each individual file, just to give an example, on windows I use: 
+note the semicolon denoting the listing of several libraries. Of course you could also enter the full path to each individual file, just to give an example, on windows I use:
 
 	EXTRA_LIBS=D:/dependencies/lib/expat.lib
 
 for linking against `expat` and indicating, that libSBML was compiled without compression.
 
-## License 
-This project is open source and freely available under the [Simplified BSD](http://opensource.org/licenses/BSD-2-Clause) license. Should that license not meet your needs, please contact me. 
+## License
+This project is open source and freely available under the [Simplified BSD](http://opensource.org/licenses/BSD-2-Clause) license. Should that license not meet your needs, please contact me.
 
 
-Copyright (c) 2013-2014, Frank T. Bergmann  
+Copyright (c) 2013-2014, Frank T. Bergmann
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met: 
+modification, are permitted provided that the following conditions are met:
 
 1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer. 
+   list of conditions and the following disclaimer.
 2. Redistributions in binary form must reproduce the above copyright notice,
    this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution. 
+   and/or other materials provided with the distribution.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED

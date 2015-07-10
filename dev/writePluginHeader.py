@@ -32,7 +32,7 @@ def writeClassEnd(fileOut, members):
   fileOut.write('\n')
   generalFunctions.writeInternalEndDecl(fileOut)
   fileOut.write('};\n\n\n')
- 
+
 def writeConstructors(fileOut, nameOfClass, pkg):
  # indent = strFunctions.getIndent(nameOfClass)
   fileOut.write('\t/**\n\t * ' )
@@ -69,7 +69,7 @@ def writeGetFunctions(fileOut, pkg, members):
   for i in range (0, len(members)):
     mem = members[i]
     writeFunctions(fileOut, mem['name'])
-  
+
 def writeFunctions(fileOut, object):
   fileOut.write('\t/**\n')
   fileOut.write('\t * Returns the SedListOf{0}s in this plugin object.\n'.format(object))
@@ -84,7 +84,7 @@ def writeFunctions(fileOut, object):
   fileOut.write('\t */\n')
   fileOut.write('\tSedListOf{0}s* getListOf{0}s ();\n\n\n'.format(object))
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Returns the {0} object that belongs to the given index. If the \n'.format(object)) 
+  fileOut.write('\t * Returns the {0} object that belongs to the given index. If the \n'.format(object))
   fileOut.write('\t * index is invalid, NULL is returned.\n')
   fileOut.write('\t *\n')
   fileOut.write('\t * @param n the index number of the {0} to get\n'.format(object))
@@ -93,7 +93,7 @@ def writeFunctions(fileOut, object):
   fileOut.write('\t */\n')
   fileOut.write('\tconst {0}* get{0}(unsigned int n) const;\n'.format(object))
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Returns the {0} object that belongs to the given index. If the \n'.format(object)) 
+  fileOut.write('\t * Returns the {0} object that belongs to the given index. If the \n'.format(object))
   fileOut.write('\t * index is invalid, NULL is returned.\n')
   fileOut.write('\t *\n')
   fileOut.write('\t * @param n the index number of the {0} to get\n'.format(object))
@@ -102,7 +102,7 @@ def writeFunctions(fileOut, object):
   fileOut.write('\t */\n')
   fileOut.write('\t{0}* get{0}(unsigned int n);\n'.format(object))
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Returns the {0} object based on its identifier.\n'.format(object)) 
+  fileOut.write('\t * Returns the {0} object based on its identifier.\n'.format(object))
   fileOut.write('\t *\n')
   fileOut.write('\t * @param sid a string representing the id of the {0} to get\n'.format(object))
   fileOut.write('\t *\n')
@@ -114,7 +114,7 @@ def writeFunctions(fileOut, object):
   fileOut.write('\t */\n')
   fileOut.write('\tconst {0}* get{0}(const std::string& sid) const;\n'.format(object))
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Returns the {0} object based on its identifier.\n'.format(object)) 
+  fileOut.write('\t * Returns the {0} object based on its identifier.\n'.format(object))
   fileOut.write('\t *\n')
   fileOut.write('\t * @param sid a string representing the id of the {0} to get\n'.format(object))
   fileOut.write('\t *\n')
@@ -144,7 +144,7 @@ def writeFunctions(fileOut, object):
   fileOut.write('\t */\n')
   fileOut.write('\t{0}* create{0} ();\n\n\n'.format(object))
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Removes the nth {0} object from this plugin object\n'.format(object)) 
+  fileOut.write('\t * Removes the nth {0} object from this plugin object\n'.format(object))
   fileOut.write('\t * and returns a pointer to it.\n')
   fileOut.write('\t *\n')
   fileOut.write('\t * The caller owns the returned object and is responsible for\n')
@@ -157,7 +157,7 @@ def writeFunctions(fileOut, object):
   fileOut.write('\t */\n')
   fileOut.write('\t{0}* remove{0}(unsigned int n);\n'.format(object))
   fileOut.write('\t/**\n')
-  fileOut.write('\t * Removes the {0} object with the given id from this plugin object\n'.format(object)) 
+  fileOut.write('\t * Removes the {0} object with the given id from this plugin object\n'.format(object))
   fileOut.write('\t * and returns a pointer to it.\n')
   fileOut.write('\t *\n')
   fileOut.write('\t * The caller owns the returned object and is responsible for\n')
@@ -251,4 +251,4 @@ def createHeader(package, plugin):
   writeClassDefn(code, nameOfClass, nameOfPackage, plugin['extension'])
   writeIncludeEnds(code, nameOfClass)
 
-  
+

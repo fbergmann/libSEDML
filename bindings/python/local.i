@@ -4,22 +4,22 @@
  * @author  Ben Bornstein
  * @author  Ben Kovitz
  * @author  Akiya Jouraku
- * 
+ *
  *<!---------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sedml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -37,7 +37,7 @@
 
 
 /**
- *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream, 
+ *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream,
  *
  * (sample code) -----------------------------------------------------
  *
@@ -50,7 +50,7 @@
  *    d = libsedml.readSedML("foo.xml")
  *    if d.getNumErrors() > 0 :
  *       d.printErrors(libsedml.cerr)
- *    
+ *
  *
  * 3. wraps std::ostringstream
  *
@@ -59,7 +59,7 @@
  *    ...
  *    libsedml.endl(oss)
  *    s = oss.str()
- * 
+ *
  */
 
 // ignores C++ specific methods in std::string.
@@ -86,12 +86,12 @@ namespace std
 
   // Template class basic_ostream
   template<typename _CharT, typename _Traits = char_traits<_CharT> >
-  class basic_ostream : virtual public basic_ios<_CharT, _Traits> 
+  class basic_ostream : virtual public basic_ios<_CharT, _Traits>
   {
     public:
       explicit
       basic_ostream(std::basic_streambuf<_CharT, _Traits>* __sb);
-      virtual 
+      virtual
       ~basic_ostream();
   };
 
@@ -105,7 +105,7 @@ namespace std
       basic_ostringstream(std::ios_base::openmode __mode = std::ios_base::out);
       ~basic_ostringstream();
 
-      basic_string<_CharT, _Traits, _Alloc> 
+      basic_string<_CharT, _Traits, _Alloc>
       str() const;
 
       void
@@ -122,7 +122,7 @@ namespace std
    * streams.
    */
   template<typename _CharT, typename _Traits = char_traits<_CharT> >
-  basic_ostream<_CharT, _Traits>& 
+  basic_ostream<_CharT, _Traits>&
   endl(basic_ostream<_CharT, _Traits>&);
 
 
@@ -130,18 +130,18 @@ namespace std
    * Flush the given C++ stream.
    *
    * This is a wrapper around the underlying C++ OStream method
-   * <code>flush</code>.  It flush any pending output in the stream 
-   * passed as argument.  
+   * <code>flush</code>.  It flush any pending output in the stream
+   * passed as argument.
    */
   template<typename _CharT, typename _Traits = char_traits<_CharT> >
-  basic_ostream<_CharT, _Traits>& 
+  basic_ostream<_CharT, _Traits>&
   flush(basic_ostream<_CharT, _Traits>&);
 }
 
 namespace std
 {
   /**
-   *  std::ostream and std::ostringstream 
+   *  std::ostream and std::ostringstream
    *  (std::ios is not wrapped)
    */
   typedef basic_ios<char>           ios;
@@ -260,16 +260,16 @@ namespace std
 
 
 /*
- * SWIG-generated wrapper code wrongly invokes 
+ * SWIG-generated wrapper code wrongly invokes
  * XMLOutputStream::writeAttribute(.., const unsigned int& value) instead of
- * XMLOutputStream::writeAttribute(.., const bool& value) even if the writeAttribute 
+ * XMLOutputStream::writeAttribute(.., const bool& value) even if the writeAttribute
  * function invoked with a bool value (True or False) in Python code.
- * It seems that a bool value could be casted to unsigned int, int, or long value 
+ * It seems that a bool value could be casted to unsigned int, int, or long value
  * in SWIG-generated internal type check code when these types are overloaded in the
  * wrapped function.
  *
  * To avoid this problem, XMLOutputStream::writeAttribute(.., const bool& value)
- * is internally wrapped as XMLOutputStream::writeAttributeBool(.., const bool&) 
+ * is internally wrapped as XMLOutputStream::writeAttributeBool(.., const bool&)
  * and this function is properly invoked when the writeAttribute function is invoked
  * with a bool value in Python code.
  */
@@ -293,7 +293,7 @@ XMLOutputStream::writeAttribute
 %{
         if type(args[1]) == type(True): return _libsedml.XMLOutputStream_writeAttributeBool(self, *args)
 %}
-#else 
+#else
 %feature("pythonprepend")
 XMLOutputStream::writeAttribute
 %{
@@ -399,7 +399,7 @@ TAKEOVER_OWNERSHIP(ASTNode::addSemanticsAnnotation(XMLNode*),1)
 
 /**
  *
- * Wraps the SedConstructorException class (C++ exception defined by libSEDML) 
+ * Wraps the SedConstructorException class (C++ exception defined by libSEDML)
  * as the ValueError class (Python built-in exception).
  *
  * For example, the exception can be catched in Python code as follows:
@@ -475,7 +475,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
 
 /**
  *
- * Wraps the XMLConstructorException class (C++ exception defined by libSEDML) 
+ * Wraps the XMLConstructorException class (C++ exception defined by libSEDML)
  * as the VaueError class (Python built-in exception).
  *
  * For example, the exception can be catched in Python code as follows:
@@ -823,7 +823,7 @@ def readSedML(*args):
 
 
 /**
- *  Wraps the following functions by using the corresponding 
+ *  Wraps the following functions by using the corresponding
  *  ListWrapper<TYPENAME> class.
  *
  *  - List* ModelHistory::getListCreators()
@@ -848,11 +848,11 @@ SedNamespaces::getSupportedNamespaces
     """
     getSupportedNamespaces(self) -> SEDMLNamespaceList
 
-    Get the List of supported SedNamespaces for this 
+    Get the List of supported SedNamespaces for this
     version of LibSEDML.
 
     Returns the supported list of SedNamespaces.
-          
+
 
     """
     return _libsedml.SedNamespaces_getSupportedNamespaces(self)
@@ -861,12 +861,12 @@ SedNamespaces::getSupportedNamespaces
 %typemap(out) List* SedNamespaces::getSupportedNamespaces
 {
   ListWrapper<SedNamespaces> *listw = ($1 != 0) ? new ListWrapper<SedNamespaces>($1) : 0;
-  $result = SWIG_NewPointerObj(SWIG_as_voidptr(listw), 
+  $result = SWIG_NewPointerObj(SWIG_as_voidptr(listw),
 #if SWIG_VERSION > 0x010333
-                               SWIGTYPE_p_ListWrapperT_SedNamespaces_t, 
+                               SWIGTYPE_p_ListWrapperT_SedNamespaces_t,
 #else
-                               SWIGTYPE_p_ListWrapperTSedNamespaces_t, 
+                               SWIGTYPE_p_ListWrapperTSedNamespaces_t,
 #endif
                                SWIG_POINTER_OWN |  0 );
 }
- 
+

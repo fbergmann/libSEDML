@@ -14,7 +14,7 @@ LibSEDML  -- interface to the libSEDML library
   my $file     = File::Spec->rel2abs('FOO.xml');
   my $rd       = new LibSEDML::SedReader;
   my $document = $rd->readSEDML($file);
-  
+
   # Check for reading errors:
   my $errors   = $document->getNumErrors();
 
@@ -25,13 +25,13 @@ LibSEDML  -- interface to the libSEDML library
   }
 
   my $numModels = $document->getNumModels();
-  ... 
+  ...
 
 =head1 DESCRIPTION
 
 The LibSEDML.pm package gives access to almost all functions in libSEDML
 (http://sed-ml.org). The Perl wrapper is generated using SWIG
-http://www.swig.org/ with relatively little manual intervention.  
+http://www.swig.org/ with relatively little manual intervention.
 
 
 =head1 AUTHORS

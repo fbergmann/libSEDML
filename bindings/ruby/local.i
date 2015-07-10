@@ -4,22 +4,22 @@
  * @author  Alex Gutteridge
  * @author  Ben Bornstein
  * @author  Akiya Jouraku
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sbml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -31,11 +31,11 @@
 
 #pragma SWIG nowarn=509
 %warnfilter(365) operator+=;
-%warnfilter(401) basic_ios<char>;    
-%warnfilter(801) basic_string<char>; 
+%warnfilter(401) basic_ios<char>;
+%warnfilter(801) basic_string<char>;
 
 /**
- *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream, 
+ *  Wraps std::cout, std::cerr, std::clog, std::ostream, and std::ostringstream,
  *
  * (sample code) -----------------------------------------------------
  *
@@ -46,7 +46,7 @@
  * 2. wraps std::cerr
  *
  *    d = LibSEDML::readSEDML("foo.xml")
- *    if ( d.getNumErrors > 0 ) 
+ *    if ( d.getNumErrors > 0 )
  *       d.printErrors(LibSEDML::cerr)
  *    end
  *
@@ -57,7 +57,7 @@
  *    ...
  *    LibSEDML::endl(oss)
  *    s = oss.str();
- * 
+ *
  */
 
 // ignores C++ specific methods in std::string.
@@ -81,12 +81,12 @@ namespace std
 
   // Template class basic_ostream
   template<typename _CharT, typename _Traits = char_traits<_CharT> >
-  class basic_ostream : virtual public basic_ios<_CharT, _Traits> 
+  class basic_ostream : virtual public basic_ios<_CharT, _Traits>
   {
     public:
       explicit
       basic_ostream(std::basic_streambuf<_CharT, _Traits>* __sb);
-      virtual 
+      virtual
       ~basic_ostream();
   };
 
@@ -100,7 +100,7 @@ namespace std
       basic_ostringstream(std::ios_base::openmode __mode = std::ios_base::out);
       ~basic_ostringstream();
 
-      basic_string<_CharT, _Traits, _Alloc> 
+      basic_string<_CharT, _Traits, _Alloc>
       str() const;
 
       void
@@ -108,18 +108,18 @@ namespace std
   };
 
   template<typename _CharT, typename _Traits = char_traits<_CharT> >
-  basic_ostream<_CharT, _Traits>& 
+  basic_ostream<_CharT, _Traits>&
   endl(basic_ostream<_CharT, _Traits>&);
 
   template<typename _CharT, typename _Traits = char_traits<_CharT> >
-  basic_ostream<_CharT, _Traits>& 
+  basic_ostream<_CharT, _Traits>&
   flush(basic_ostream<_CharT, _Traits>&);
 }
 
 namespace std
 {
   /**
-   *  std::ostream and std::ostringstream 
+   *  std::ostream and std::ostringstream
    *  (std::ios is not wrapped)
    */
   typedef basic_ios<char>           ios;
@@ -182,7 +182,7 @@ namespace std
   void each(void)
   {
      unsigned int i;
-     for(i=0;i<self->size();i++){    
+     for(i=0;i<self->size();i++){
        rb_yield(SWIG_NewPointerObj(self->get(i),
        GetDowncastSwigType(self->get(i)), 0));
      }
@@ -209,7 +209,7 @@ namespace std
  *
  * To avoid this problem, XMLOutputStream::writeAttributeBool(.., const bool&)
  * functions, which internally invoke XMLOutputStream::writeAttribute(.., const bool& value)
- * functions properly, are additionally wrapped as aliases. 
+ * functions properly, are additionally wrapped as aliases.
  */
 %extend XMLOutputStream
 {
@@ -259,7 +259,7 @@ namespace std
 /**
  * Wraps the SedConstructorException
  *
- * The SedConstructorException (C++ class) is wrapped as the 
+ * The SedConstructorException (C++ class) is wrapped as the
  * SEDMLConsturctorException (Ruby class) which is derived from
  * the built-in ArgumentError class (Ruby class).
  *
@@ -269,7 +269,7 @@ namespace std
  *  begin
  *    s = LibSEDML::Compartment.new(level,version)
  *  rescue SedConstructorException
- *    errmsg = $! 
+ *    errmsg = $!
  *  end
  * -------------------------------------------------
  */
@@ -283,7 +283,7 @@ namespace std
   }
   catch (const SedConstructorException &e){
     static VALUE cpperror = rb_define_class("SedConstructorException", rb_eArgError);
-    rb_raise(cpperror, e.what());    
+    rb_raise(cpperror, e.what());
   }
 }
 %enddef
@@ -338,7 +338,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
 /**
  * Wraps the XMLConstructorException
  *
- * The XMLConstructorException (C++ class) is wrapped as the 
+ * The XMLConstructorException (C++ class) is wrapped as the
  * SEDMLConsturctorException (Ruby class) which is derived from
  * the built-in ArgumentError class (Ruby class).
  *
@@ -348,7 +348,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
  *  begin
  *    s = LibSEDML::XMLAttributes.new(invalid arguments)
  *  rescue XMLConstructorException
- *    errmsg = $! 
+ *    errmsg = $!
  *  end
  * -------------------------------------------------
  */
@@ -362,7 +362,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
   }
   catch (const XMLConstructorException &e){
     static VALUE cpperror = rb_define_class("XMLConstructorException", rb_eArgError);
-    rb_raise(cpperror, e.what());    
+    rb_raise(cpperror, e.what());
   }
 }
 %enddef
@@ -377,7 +377,7 @@ XMLCONSTRUCTOR_EXCEPTION(XMLToken)
 XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 
 /**
- *  Wraps the following functions by using the corresponding 
+ *  Wraps the following functions by using the corresponding
  *  ListWrapper<TYPENAME> class.
  *
  *  - List* ModelHistory::getListCreators()
@@ -398,7 +398,7 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
  %typemap(out) List* SedNamespaces::getSupportedNamespaces
 {
   ListWrapper<SedNamespaces> *listw = ($1 != 0) ? new ListWrapper<SedNamespaces>($1) : 0;
-  $result = SWIG_NewPointerObj(SWIG_as_voidptr(listw), 
+  $result = SWIG_NewPointerObj(SWIG_as_voidptr(listw),
 #if SWIG_VERSION > 0x010333
                                SWIGTYPE_p_ListWrapperT_SedNamespaces_t,
 #else

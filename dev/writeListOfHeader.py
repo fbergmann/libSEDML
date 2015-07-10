@@ -127,7 +127,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement=""):
     output.write('\t *\n\t * @see size()\n')
     output.write('\t */\n')
     output.write('\tvirtual const {0}* get(const std::string& sid) const;\n\n\n'.format(type))
-     
+
 def writeRemoveFunctions(output, element, type, subelement=False, topelement=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('\t/**\n')
@@ -168,8 +168,8 @@ def writeRemoveFunctions(output, element, type, subelement=False, topelement="")
     output.write('\t{0}* remove{1}(const std::string& sid);\n\n\n'.format(type, element))
   else:
     output.write('\tvirtual {0}* remove(const std::string& sid);\n\n\n'.format(type))
-     
-  
+
+
 def writeProtectedFunctions(output, element, package):
   listOf = generalFunctions.writeListOf(element)
   generalFunctions.writeInternalStartDecl(output)
@@ -184,9 +184,9 @@ def writeProtectedFunctions(output, element, package):
   output.write('\t */\n')
   output.write('\tvirtual void writeXMLNS(XMLOutputStream& stream) const;\n\n\n')
   generalFunctions.writeInternalEndDecl(output)
-   
-  
-   
+
+
+
 
 #write class
 def writeClass(header, nameOfElement, typeOfElement, nameOfPackage, elementDict):
@@ -240,17 +240,17 @@ def writeClass(header, nameOfElement, typeOfElement, nameOfPackage, elementDict)
   header.write('protected:\n\n')
   writeProtectedFunctions(header, nameOfElement, nameOfPackage)
   header.write('\n};\n\n')
- 
-# write the header file      
+
+# write the header file
 def createHeader(element, header):
   type = element['name']
   name = element['name']
   if element.has_key('elementName'):
-    name = strFunctions.cap(element['elementName']) 
+    name = strFunctions.cap(element['elementName'])
   if element.has_key('element'):
     type = element['element']
   writeClass(header, name, type, element['package'], element)
 
- 
 
-  
+
+

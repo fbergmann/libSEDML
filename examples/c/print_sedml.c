@@ -2,23 +2,23 @@
  * @file    print_sedml.c
  * @brief   Prints an overview of the elments in the given SED-ML document
  * @author  Frank T. Bergmann
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (c) 2013, Frank T. Bergmann  
+ * Copyright (c) 2013, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -41,7 +41,7 @@ main (int argc, char* argv[])
 {
   SedDocument_t *doc;
   unsigned int i;
-  
+
   if (argc != 2)
   {
     printf("Usage: print_sedml input-filename\n\n");
@@ -49,7 +49,7 @@ main (int argc, char* argv[])
   }
 
   doc = readSedML(argv[1]);
-  
+
   printf("The document has %d simulation(s).\n",SedDocument_getNumSimulations(doc));
   for (i = 0; i < SedDocument_getNumSimulations(doc); i++)
   {
@@ -59,10 +59,10 @@ main (int argc, char* argv[])
        case SEDML_SIMULATION_UNIFORMTIMECOURSE:
        {
           SedUniformTimeCourse_t* tc = (SedUniformTimeCourse_t*)current;
-          printf("\tTimecourse id=%s   start=%f end=%f numPoints=%d kisao=", 
-            SedSimulation_getId(current), 
-            SedUniformTimeCourse_getOutputStartTime(tc), 
-            SedUniformTimeCourse_getOutputEndTime(tc), 
+          printf("\tTimecourse id=%s   start=%f end=%f numPoints=%d kisao=",
+            SedSimulation_getId(current),
+            SedUniformTimeCourse_getOutputStartTime(tc),
+            SedUniformTimeCourse_getOutputEndTime(tc),
             SedUniformTimeCourse_getNumberOfPoints(tc)
 	  	  );
           if (SedSimulation_isSetAlgorithm(current))
@@ -72,7 +72,7 @@ main (int argc, char* argv[])
           else
           {
             printf("none\n");
-          }        
+          }
           break;
        }
        default:
@@ -80,25 +80,25 @@ main (int argc, char* argv[])
           break;
     }
   }
-  
+
   printf("\n");
   printf("The document has %d model(s).\n",SedDocument_getNumModels(doc));
   for (i = 0; i < SedDocument_getNumModels(doc); i++)
   {
     SedModel_t* current =  SedDocument_getModel(doc,i);
-    printf("\tModel id=%s  language=%s source=%s numChanges=%d\n", 
-	       SedModel_getId(current), 
-	       SedModel_getLanguage(current), 
-	       SedModel_getSource(current), 
+    printf("\tModel id=%s  language=%s source=%s numChanges=%d\n",
+	       SedModel_getId(current),
+	       SedModel_getLanguage(current),
+	       SedModel_getSource(current),
 	       SedModel_getNumChanges(current));
   }
-  
+
   printf("\n");
   printf("The document has %d task(s).\n",SedDocument_getNumTasks(doc));
   for (i = 0; i < SedDocument_getNumTasks(doc); ++i)
   {
     SedTask_t* current =  SedDocument_getTask(doc,i);
-    printf("\tTask id=%s  model=%s sim=%s\n", 
+    printf("\tTask id=%s  model=%s sim=%s\n",
 	  SedTask_getId(current),
 	  SedTask_getModelReference(current),
 	  SedTask_getSimulationReference(current));
@@ -110,10 +110,10 @@ main (int argc, char* argv[])
   {
     SedDataGenerator_t* current = SedDocument_getDataGenerator(doc, i);
     printf("\tDG id=%s math=%s\n",
-      SedDataGenerator_getId(current), 
+      SedDataGenerator_getId(current),
 	  SBML_formulaToString(SedDataGenerator_getMath(current)));
   }
-  
+
   printf("\n");
   printf("The document has %d output(s).\n",SedDocument_getNumOutputs(doc));
   for (i = 0; i < SedDocument_getNumOutputs(doc); ++i)
@@ -139,7 +139,7 @@ main (int argc, char* argv[])
 		printf("\tPlot3D id=%s numSurfaces=%d\n", SedOutput_getId(current), SedPlot3D_getNumSurfaces(p));
         break;
       }
-      default: 
+      default:
         printf("\tEncountered unknown output %s\n", SedOutput_getId(current));
         break;
     }

@@ -39,7 +39,7 @@ def writeConstructors(element, type, package, output):
   output.write('{\n' )
   output.write('\treturn new {0}(*this);\n'.format(element))
   output.write('}\n\n\n')
-  
+
 def writeGetFunctions(output, element, type, subelement=False, topelement="", name=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('/*\n')
@@ -113,7 +113,7 @@ def writeGetFunctions(output, element, type, subelement=False, topelement="", na
     output.write('\tresult = find_if( mItems.begin(), mItems.end(), SedIdEq<{0}>(sid) );\n'.format(type))
     output.write('\treturn (result == mItems.end()) ? 0 : static_cast <{0}*> (*result);\n'.format(type))
     output.write('}\n\n\n')
-     
+
 def writeRemoveFunctions(output, element, type, subelement=False, topelement="", name=""):
   listOf = generalFunctions.writeListOf(element)
   output.write('/*\n')
@@ -154,13 +154,13 @@ def writeRemoveFunctions(output, element, type, subelement=False, topelement="",
     output.write('\t\tmItems.erase(result);\n\t}\n\n')
     output.write('\treturn static_cast <{0}*> (item);\n'.format(type))
     output.write('}\n\n\n')
-     
-  
+
+
 def writeProtectedFunctions(output, element, package, name, elementDict):
   type = elementDict['name']
   elName = elementDict['name']
   if elementDict.has_key('elementName'):
-    elName = strFunctions.cap(elementDict['elementName']) 
+    elName = strFunctions.cap(elementDict['elementName'])
   if elementDict.has_key('element'):
     type = elementDict['element']
 
@@ -206,18 +206,18 @@ def writeProtectedFunctions(output, element, package, name, elementDict):
   output.write('\tstream << xmlns;\n')
   output.write('}\n\n\n')
   generalFunctions.writeInternalEnd(output)
-  
-   
-# write the code file      
+
+
+# write the code file
 def createCode(element, code):
   type = element['name']
   name = element['name']
   if element.has_key('elementName'):
-    name = strFunctions.cap(element['elementName']) 
+    name = strFunctions.cap(element['elementName'])
   if element.has_key('element'):
     type = element['element']
   listOf = generalFunctions.writeListOf(name)
-  writeConstructors(name, type, element['package'], code) 
+  writeConstructors(name, type, element['package'], code)
   writeGetFunctions(code, name, type)
   code.write('/**\n')
   code.write(' * Adds a copy the given \"{0}\" to this {1}.\n'.format(type, listOf))
@@ -288,4 +288,4 @@ def createCode(element, code):
     elementName = element['elementName']
   writeProtectedFunctions(code, element['name'], element['package'], elementName, element)
 
-  
+

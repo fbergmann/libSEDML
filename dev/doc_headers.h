@@ -1,24 +1,24 @@
 
-public: 
+public:
 
   /**
-   * Returns the list of errors or warnings logged during parsing, 
+   * Returns the list of errors or warnings logged during parsing,
    * consistency checking, or attempted translation of this model.
-   * 
+   *
    * @return the SedErrorLog used for this SedDocument
-   * 
+   *
    * @see SedDocument::getNumErrors()
    */
   virtual SedErrorLog* getErrorLog ();
 
 
   /**
-   * Returns a constant pointer to the list of errors or warnings 
-   * logged during parsing, consistency checking, or attempted translation 
+   * Returns a constant pointer to the list of errors or warnings
+   * logged during parsing, consistency checking, or attempted translation
    * of this model.
-   * 
+   *
    * @return the SedErrorLog used for this SedDocument
-   * 
+   *
    * @see SedDocument::getNumErrors()
    */
   const SedErrorLog* getErrorLog () const;
@@ -52,11 +52,11 @@ public:
   unsigned int getNumErrors () const;
 
   /**
-   * Returns the number of errors or warnings encountered with the given 
+   * Returns the number of errors or warnings encountered with the given
    * severity during parsing,
    * consistency checking, or attempted translation of this model.
    *
-   * @param severity the severity of the error sought. 
+   * @param severity the severity of the error sought.
    *
    * @return the number of errors or warnings encountered
    *
@@ -67,7 +67,7 @@ public:
   /**
    * Returns a list of XML Namespaces associated with the XML content
    * of this SED-ML document.
-   * 
+   *
    * @return the XML Namespaces associated with this SED-ML object
    */
   virtual XMLNamespaces* getNamespaces() const;
@@ -80,7 +80,7 @@ protected:
    * of this method as well.
    *
    */
-  virtual void writeXMLNS (XMLOutputStream& stream) const;  
-private: 
+  virtual void writeXMLNS (XMLOutputStream& stream) const;
+private:
 
 	SedErrorLog mErrorLog;

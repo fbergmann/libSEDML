@@ -1,23 +1,23 @@
 /**
  * @file    OStream.cpp
- * @brief   Implementations of wrapper classes for C++ standard output streams. 
+ * @brief   Implementations of wrapper classes for C++ standard output streams.
  * @author  Akiya Jouraku
- * 
+ *
  * <!--------------------------------------------------------------------------
  * This file is part of libSBML.  Please visit http://sbml.org for more
  * information about SBML, and the latest version of libSBML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -29,11 +29,11 @@
 
 /**
   * Creates a new OStream object with one of standard output stream objects.
-  * 
+  *
   * @param sot a value from the StdOSType enumeration indicating
   * the type of stream to create.
   */
-OStream::OStream (StdOSType sot) 
+OStream::OStream (StdOSType sot)
 {
   switch (sot) {
     case COUT:
@@ -53,19 +53,19 @@ OStream::OStream (StdOSType sot)
 /**
  * Destructor.
  */
-OStream::~OStream () 
+OStream::~OStream ()
 {
 }
-  
+
 
 /**
  * Returns the stream object.
  * <p>
  * @return the stream object
  */
-std::ostream* 
-OStream::get_ostream ()  
-{ 
+std::ostream*
+OStream::get_ostream ()
+{
   return Stream;
 }
 
@@ -73,12 +73,12 @@ OStream::get_ostream ()
 /**
  * Writes an end-of-line character on this tream.
  */
-void 
+void
 OStream::endl ()
 {
   std::endl(*Stream);
 }
-  
+
 
 /**
  * Creates a new OFStream object for a file.
@@ -91,7 +91,7 @@ OStream::endl ()
  * @param is_append whether to open the file for appending (default:
  * <code>false</code>, meaning overwrite the content instead)
  */
-OFStream::OFStream (const std::string& filename, bool is_append) 
+OFStream::OFStream (const std::string& filename, bool is_append)
 {
   if (is_append) {
     Stream = new std::ofstream(filename.c_str(),std::ios_base::app);
@@ -122,27 +122,27 @@ OFStream::~OFStream ()
  * @param is_append whether to open the file for appending (default:
  * <code>false</code>, meaning overwrite the content instead)
  */
-void 
-OFStream::open (const std::string& filename, bool is_append) 
-{ 
+void
+OFStream::open (const std::string& filename, bool is_append)
+{
   if (is_append) {
     static_cast<std::ofstream*>(Stream)->open(filename.c_str(),std::ios_base::app);
   }
   else {
     static_cast<std::ofstream*>(Stream)->open(filename.c_str(),std::ios_base::out);
   }
-}  
-  
+}
+
 
 /**
  * Closes the file currently associated with this stream object.
  */
-void 
+void
 OFStream::close ()
 {
   static_cast<std::ofstream*>(Stream)->close();
 }
-  
+
 
 /**
  * Returns <code>true</code> if this stream object is currently
@@ -151,30 +151,30 @@ OFStream::close ()
  * @return <code>true</code> if the stream object is currently
  * associated with a file, <code>false</code> otherwise
  */
-bool 
-OFStream::is_open () 
-{ 
-  return static_cast<std::ofstream*>(Stream)->is_open(); 
+bool
+OFStream::is_open ()
+{
+  return static_cast<std::ofstream*>(Stream)->is_open();
 }
 
 
 /**
  * Creates a new OStringStream object
  */
-OStringStream::OStringStream () 
+OStringStream::OStringStream ()
 {
   Stream = new std::ostringstream();
 }
-  
+
 
 /**
- * Returns the copy of the string object currently assosiated 
+ * Returns the copy of the string object currently assosiated
  * with this <code>ostringstream</code> buffer.
  * <p>
  * @return a copy of the string object for this stream
  */
-std::string 
-OStringStream::str () 
+std::string
+OStringStream::str ()
 {
   return static_cast<std::ostringstream*>(Stream)->str();
 }
@@ -186,7 +186,7 @@ OStringStream::str ()
  * <p>
  * @param s the string to write to this stream
  */
-void 
+void
 OStringStream::str (const std::string& s)
 {
   static_cast<std::ostringstream*>(Stream)->str(s.c_str());
@@ -196,8 +196,8 @@ OStringStream::str (const std::string& s)
 /**
  * Destructor.
  */
-OStringStream::~OStringStream () 
+OStringStream::~OStringStream ()
 {
   delete Stream;
 }
-  
+

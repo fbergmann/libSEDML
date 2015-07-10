@@ -1,26 +1,26 @@
 /**
  * @file    operationReturnValues.h
  * @brief   Enumeration of values returned by operations within libSEDML.
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  */
 
@@ -137,9 +137,9 @@ typedef enum
   , LIBSEDML_ANNOTATION_NAME_NOT_FOUND   = -12
     /*!< The existing annotation does not have a top-level element with
      * the given name. This error is
-     * typically returned in situations where the 
-     * replaceTopLevelAnnotationElement function or 
-     * the removeTopLevelAnnotationElement function 
+     * typically returned in situations where the
+     * replaceTopLevelAnnotationElement function or
+     * the removeTopLevelAnnotationElement function
      * is being used to replace or remove an annotation with a name that does
      * not match the name of any top-level element that is already
      * present in the existing annotation. */
@@ -147,70 +147,70 @@ typedef enum
    , LIBSEDML_ANNOTATION_NS_NOT_FOUND   = -13
     /*!< The existing annotation does not have a top-level element with
      * the given namespace. This error is
-     * typically returned in situations where the 
-     * replaceTopLevelAnnotationElement function or 
-     * the removeTopLevelAnnotationElement function 
+     * typically returned in situations where the
+     * replaceTopLevelAnnotationElement function or
+     * the removeTopLevelAnnotationElement function
      * is being used to replace or remove an annotation with a namespace that does
      * not match the namespace of any top-level element that is already
      * present in the existing annotation. */
    /* ---------------------------------------------------------------------------
-    *   
+    *
     *              Return codes for package extension
     *
     * -------------------------------------------------------------------------- */
 
   , LIBSEDML_PKG_VERSION_MISMATCH  = -20
     /*!< The Version of package extension within the SEDML Level and version
-     * associated with the object does not match the Version of the parent 
+     * associated with the object does not match the Version of the parent
      * object. This error can happen when an SEDML component such as a layout
-     * or group object is created outside of a model and a calling program 
-     * then attempts to add the object to a model that has a different SEDML 
+     * or group object is created outside of a model and a calling program
+     * then attempts to add the object to a model that has a different SEDML
      * Level+Version+Package Version combination. */
 
    , LIBSEDML_PKG_UNKNOWN           = -21
-    /*!< The required package extension is unknown. This error is typically 
-     * returned when creating an object of SBase derived class with the required 
-     * package, creating an object of SEDMLNamespaces or its derived class with the 
+    /*!< The required package extension is unknown. This error is typically
+     * returned when creating an object of SBase derived class with the required
+     * package, creating an object of SEDMLNamespaces or its derived class with the
      * required package, or invoking functions depending on the required package.
-     * To avoid this error, the library of the required package needs to be 
+     * To avoid this error, the library of the required package needs to be
      * linked.
      */
 
    , LIBSEDML_PKG_UNKNOWN_VERSION    = -22
-    /*!< The required version of the package extension is unknown. This error 
-     * is typically returned when creating an object of SBase derived class with 
-     * the required package, creating an object of SEDMLNamespaces or its derived 
-     * class with the required package, or invoking functions depending on the 
-     * required package. This error may be avoided by updating the library of the 
+    /*!< The required version of the package extension is unknown. This error
+     * is typically returned when creating an object of SBase derived class with
+     * the required package, creating an object of SEDMLNamespaces or its derived
+     * class with the required package, or invoking functions depending on the
+     * required package. This error may be avoided by updating the library of the
      * required package to be linked.
      */
 
    , LIBSEDML_PKG_DISABLED            = -23
-    /*!< The required package extension is disabled. This error is typically 
-     * returned when creating an object of SBase derived class with the required 
-     * package, creating an object of SEDMLNamespaces or its derived class with the 
+    /*!< The required package extension is disabled. This error is typically
+     * returned when creating an object of SBase derived class with the required
+     * package, creating an object of SEDMLNamespaces or its derived class with the
      * required package, or invoking functions depending on the required  package.
      * To avoid this error, the library of the required package needs to be enabled.
      */
 
    , LIBSEDML_PKG_CONFLICTED_VERSION  = -24
-    /*!< Another version of the required package extension has already been enabled 
-     * in the target SBase object, or enabled in the model to/in which the target 
-     * object to be added/contained. This error is typically returned  when adding an 
-     * object of some SBase derived class with the required package to other SBase 
-     * derived object, or when enabling the required package in the target object.  
-     * To avoid this error, the conflict of versions need to be avoided. 
+    /*!< Another version of the required package extension has already been enabled
+     * in the target SBase object, or enabled in the model to/in which the target
+     * object to be added/contained. This error is typically returned  when adding an
+     * object of some SBase derived class with the required package to other SBase
+     * derived object, or when enabling the required package in the target object.
+     * To avoid this error, the conflict of versions need to be avoided.
      */
 
    , LIBSEDML_PKG_CONFLICT            = -25
-    /*!< Another SEDML package extension for the same URI has already been registered. 
-     * This error is typically returned when adding a SEDML package extension to the 
-     * SEDMLExtensionRegistry. To avoid this error, ensure that SEDML package 
-     * extensions are only registered once. 
+    /*!< Another SEDML package extension for the same URI has already been registered.
+     * This error is typically returned when adding a SEDML package extension to the
+     * SEDMLExtensionRegistry. To avoid this error, ensure that SEDML package
+     * extensions are only registered once.
      */
 
    /* ---------------------------------------------------------------------------
-    *   
+    *
     *              Return codes for conversion extensions
     *
     * -------------------------------------------------------------------------- */
@@ -243,7 +243,7 @@ typedef enum
      */
 
   , LIBSEDML_CONV_CONVERSION_NOT_AVAILABLE = -33
-    /*!< Conversion with the given properties is not yet available. 
+    /*!< Conversion with the given properties is not yet available.
      */
 
   , LIBSEDML_CONV_PKG_CONSIDERED_UNKNOWN = -34
@@ -252,9 +252,9 @@ typedef enum
      * package.  This error is typically returned when calling
      * the StripPackage converter requesting that a package
      * for which code is not available be stripped. Thus the
-     * containing document will not be altered as the elements 
-     * and attributes for this package are stored as unknown package 
-     * information and will be written out as such. 
+     * containing document will not be altered as the elements
+     * and attributes for this package are stored as unknown package
+     * information and will be written out as such.
      */
 
 } SedOperationReturnValues_t;

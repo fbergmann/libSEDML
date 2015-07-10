@@ -7,17 +7,17 @@
 # This file is part of libSBML.  Please visit http://sedml.org for more
 # information about SBML, and the latest version of libSBML.
 #
-# Copyright (C) 2009-2013 jointly by the following organizations: 
+# Copyright (C) 2009-2013 jointly by the following organizations:
 #     1. California Institute of Technology, Pasadena, CA, USA
 #     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-#  
+#
 # Copyright (C) 2006-2008 by the California Institute of Technology,
-#     Pasadena, CA, USA 
-#  
-# Copyright (C) 2002-2005 jointly by the following organizations: 
+#     Pasadena, CA, USA
+#
+# Copyright (C) 2002-2005 jointly by the following organizations:
 #     1. California Institute of Technology, Pasadena, CA, USA
 #     2. Japan Science and Technology Agency, Japan
-# 
+#
 # This library is free software; you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation.  A copy of the license agreement is provided
@@ -40,7 +40,7 @@ endforeach()
 
 # delete file if it exists
 if (EXISTS ${BIN_DIRECTORY}/libsedml.jar)
-	file(REMOVE ${BIN_DIRECTORY}/libsedml.jar)	
+	file(REMOVE ${BIN_DIRECTORY}/libsedml.jar)
 endif()
 
 # compile files
@@ -49,7 +49,7 @@ execute_process(
 		 -source 1.5
 		 -target 1.5
 		 -d java-files
-		 ${NATIVE_FILES}	
+		 ${NATIVE_FILES}
 	WORKING_DIRECTORY "${BIN_DIRECTORY}"
 )
 
@@ -66,11 +66,11 @@ execute_process(
 	COMMAND "${Java_JAR_EXECUTABLE}"
 		 -cvfm ..${PATH_SEP}libsedmlj.jar
 		 ../Manifest.txt
-		 ${NATIVE_CLASS_FILES}	
+		 ${NATIVE_CLASS_FILES}
 	WORKING_DIRECTORY "${BIN_DIRECTORY}/java-files"
 )
 
-# # print variables for debug purposes 
+# # print variables for debug purposes
 # message("BIN_DIRECTORY         : ${BIN_DIRECTORY}")
 # message("Java_JAVAC_EXECUTABLE : ${Java_JAVAC_EXECUTABLE}")
 # message("Java_JAR_EXECUTABLE   : ${Java_JAR_EXECUTABLE}")

@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -638,18 +638,18 @@ SedTask::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfTasks::SedListOfTasks(unsigned int level, 
+SedListOfTasks::SedListOfTasks(unsigned int level,
 	               unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfTasks::SedListOfTasks(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -659,9 +659,9 @@ SedListOfTasks::SedListOfTasks(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfTasks 
+ * Returns a deep copy of this SedListOfTasks
  */
-SedListOfTasks* 
+SedListOfTasks*
 SedListOfTasks::clone () const
  {
 	return new SedListOfTasks(*this);
@@ -738,7 +738,7 @@ SedListOfTasks::addTask(const SedTask* st)
  *
  * @return the number of SedTask objects in this SedListOfTasks
  */
-unsigned int 
+unsigned int
 SedListOfTasks::getNumTasks() const
 {
 	return size();
@@ -746,13 +746,13 @@ SedListOfTasks::getNumTasks() const
 
 /**
  * Creates a new SedTask object, adds it to this SedListOfTasks
- * task and returns the SedTask object created. 
+ * task and returns the SedTask object created.
  *
  * @return a new SedTask object instance
  *
  * @see addTask(const SedTask* st)
  */
-SedTask* 
+SedTask*
 SedListOfTasks::createTask()
 {
 	SedTask *temp = new SedTask();
@@ -762,13 +762,13 @@ SedListOfTasks::createTask()
 
 /**
  * Creates a new SedRepeatedTask object, adds it to this SedListOfTasks
- * repeatedTask and returns the SedRepeatedTask object created. 
+ * repeatedTask and returns the SedRepeatedTask object created.
  *
  * @return a new SedRepeatedTask object instance
  *
  * @see addRepeatedTask(const SedTask* st)
  */
-SedRepeatedTask* 
+SedRepeatedTask*
 SedListOfTasks::createRepeatedTask()
 {
 	SedRepeatedTask *temp = new SedRepeatedTask();

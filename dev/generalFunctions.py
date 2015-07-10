@@ -9,30 +9,30 @@ import sys
 import strFunctions
 
 def getByType(attribs, typeName):
-  if attribs == None: 
+  if attribs == None:
     return None
-  for i in range(0, len(attribs)): 
-    if attribs[i]['type'] == typeName: 
+  for i in range(0, len(attribs)):
+    if attribs[i]['type'] == typeName:
       return attribs[i]
   return None
-  
+
 def containsType(attribs, typeName):
-  if attribs == None: 
+  if attribs == None:
     return False
-  for i in range(0, len(attribs)): 
-    if attribs[i]['type'] == typeName: 
+  for i in range(0, len(attribs)):
+    if attribs[i]['type'] == typeName:
       return True
   return False
-  
+
 def writeInternalStart(outFile):
   outFile.write('/** @cond doxygen-libsedml-internal */\n\n')
-  
+
 def writeInternalEnd(outFile):
   outFile.write('/** @endcond doxygen-libsedml-internal */\n\n\n')
 
 def writeInternalStartDecl(outFile):
   outFile.write('\t/** @cond doxygen-libsedml-internal */\n\n')
-  
+
 def writeInternalEndDecl(outFile):
   outFile.write('\t/** @endcond doxygen-libsedml-internal */\n\n\n')
 
@@ -224,7 +224,7 @@ def writeGetTypeCodeHeader(outFile, isSedListOf):
     outFile.write('\tvirtual int getItemTypeCode () const;\n\n\n')
   else:
     outFile.write('\tvirtual int getTypeCode () const;\n\n\n')
-    
+
 def writeGetTypeCodeCPPCode(outFile, element, sbmltc, isSedListOf):
   outFile.write('/*\n')
   outFile.write(' * Returns the libSEDML type code for this SEDML object.\n')
@@ -244,7 +244,7 @@ def writeGetTypeCodeCPPCode(outFile, element, sbmltc, isSedListOf):
     outFile.write('{\n')
     outFile.write('\treturn {0};\n'.format(sbmltc))
     outFile.write('}\n\n\n')
-    
+
 def writeWriteElementsHeader(outFile):
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
@@ -269,7 +269,7 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attributes[i]['name'])))
         outFile.write('\t{\n\t\t')
         outFile.write('m{0}->write(stream);'.format(strFunctions.cap(attributes[i]['name'])))
-        outFile.write('\n\t}\n')		
+        outFile.write('\n\t}\n')
       if attributes[i]['type'] == 'lo_element':
         outFile.write('\tif (getNum{0}() > 0)\n'.format(strFunctions.capp(attributes[i]['name'])))
         outFile.write('\t{\n\t\t')
@@ -282,7 +282,7 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
     outFile.write('stream.startElement("{0}");\n'.format(node['name']))
     outFile.write('\t\tstream << *m{0};\n'.format(strFunctions.cap(node['name'])))
     outFile.write('\t\tstream.endElement("{0}");\n'.format(node['name']))
-    outFile.write('\n\t}\n')		
+    outFile.write('\n\t}\n')
   if containsType(attributes, 'std::vector<double>'):
     vector = getByType(attributes, 'std::vector<double>')
     outFile.write('\tif(has{0}())\n'.format(strFunctions.capp(vector['name'])))
@@ -375,7 +375,7 @@ def writeAddExpectedHeader(outFile):
   outFile.write('\t */\n')
   outFile.write('\tvirtual void addExpectedAttributes(ExpectedAttributes& attributes);\n\n\n')
   writeInternalEnd(outFile)
-  
+
 def writeAddExpectedCPPCode(outFile, element, attribs, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
@@ -386,13 +386,13 @@ def writeAddExpectedCPPCode(outFile, element, attribs, baseClass='SedBase'):
   outFile.write('\t{0}::addExpectedAttributes(attributes);\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'lo_element':
-      if attribs[i].has_key('attName'): 
+      if attribs[i].has_key('attName'):
         outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['attName']))
-      else: 
+      else:
         outFile.write('\tattributes.add("{0}");\n'.format(attribs[i]['name']))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
-  
+
 def writeReadAttributesHeader(outFile):
   writeInternalStart(outFile)
   outFile.write('\t/**\n')
@@ -430,9 +430,9 @@ def writeReadAttribute(output, attrib, element):
   elif attrib['type'] == 'SIdRef':
     output.write('\t//\n\t// {0} SIdRef '.format(attName))
     output.write('  ( use = "{0}" )\n\t//\n'.format(use))
-    if attrib.has_key('attName'): 
+    if attrib.has_key('attName'):
       output.write('\tassigned = attributes.readInto("{0}", m{1}, getErrorLog(), '.format(attrib['attName'], capAttName))
-    else: 
+    else:
       output.write('\tassigned = attributes.readInto("{0}", m{1}, getErrorLog(), '.format(attName, capAttName))
     if use == 'required':
       output.write('true);\n\n')
@@ -540,8 +540,8 @@ def writeReadAttribute(output, attrib, element):
     attType = 'FIX ME'
     attTypeCode = 'FIX ME'
     num = False
-	
-def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False,baseClass='SedBase'):  
+
+def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False,baseClass='SedBase'):
   if (isSedListOf == True or hasChildren == False) and baseClass  == 'SedBase':
     return;
   outFile.write('/**\n')
@@ -557,27 +557,27 @@ def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasC
     outFile.write('\tconst string& name   = stream.peek().getName();\n\n')
   for i in range (0, len(attribs)):
     current = attribs[i]
-    if current.has_key('lo_elementName'):        
-      outFile.write('\tif (name == "{0}")\n'.format(current['lo_elementName']))	
-      outFile.write('\t{\n')	
-      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))	
+    if current.has_key('lo_elementName'):
+      outFile.write('\tif (name == "{0}")\n'.format(current['lo_elementName']))
+      outFile.write('\t{\n')
+      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))
       outFile.write('\t}\n\n')
     elif current['type'] == 'lo_element':
-      outFile.write('\tif (name == "listOf{0}")\n'.format(strFunctions.capp(current['name'])))	
-      outFile.write('\t{\n')	
-      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))	
+      outFile.write('\tif (name == "listOf{0}")\n'.format(strFunctions.capp(current['name'])))
+      outFile.write('\t{\n')
+      outFile.write('\t\tobject = &m{0};\n'.format(strFunctions.capp(current['name'])))
       outFile.write('\t}\n\n')
     elif current['type'] == 'element' and (current['name'] !='Math' and current['name'] != 'math'):
-      outFile.write('\tif (name == "{0}")\n'.format(current['name']))	
-      outFile.write('\t{\n')	
-      outFile.write('\t\tm{0}= new {1}();\n'.format(strFunctions.cap(current['name']), current['element']))	
-      outFile.write('\t\tobject = m{0};\n'.format(strFunctions.cap(current['name'])))	
+      outFile.write('\tif (name == "{0}")\n'.format(current['name']))
+      outFile.write('\t{\n')
+      outFile.write('\t\tm{0}= new {1}();\n'.format(strFunctions.cap(current['name']), current['element']))
+      outFile.write('\t\tobject = m{0};\n'.format(strFunctions.cap(current['name'])))
       outFile.write('\t}\n\n')
   outFile.write('\tconnectToChild();\n\n')
-  outFile.write('\treturn object;\n')  
-  outFile.write('}\n\n\n')  
+  outFile.write('\treturn object;\n')
+  outFile.write('}\n\n\n')
 
-def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, baseClass='SedBase'):  
+def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, baseClass='SedBase'):
   #print 'isSedListOf={0} hasChildren={1} hasMath={2}'.format(isSedListOf, hasChildren, hasMath)
   if isSedListOf or hasChildren == False:
     return;
@@ -594,7 +594,7 @@ def writeConnectToParent(outFile, element, sbmltypecode, attribs, isSedListOf, h
       else:
         outFile.write('\tif (m{0} != NULL)\n'.format(strFunctions.cap(attribs[i]['name'])))
         outFile.write('\t\tm{0}->connectToParent(this);\n'.format(strFunctions.cap(attribs[i]['name'])))
-  outFile.write('}\n\n\n')  
+  outFile.write('}\n\n\n')
 
 def writeReadAttributesCPPCode(outFile, element, attribs, baseClass):
   writeInternalStart(outFile)
@@ -619,7 +619,7 @@ def writeWriteAttributesHeader(outFile):
   outFile.write('\t */\n')
   outFile.write('\tvirtual void writeAttributes (XMLOutputStream& stream) const;\n\n\n')
   writeInternalEnd(outFile)
-  
+
 def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('/*\n')
@@ -631,13 +631,13 @@ def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   for i in range (0, len(attribs)):
     if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'XMLNode*' and attribs[i]['type'] != 'lo_element' and attribs[i]['type'] != 'std::vector<double>':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
-      if attribs[i].has_key('attName'): 
-        outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['attName'], strFunctions.cap(attribs[i]['name'])))	 
+      if attribs[i].has_key('attName'):
+        outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['attName'], strFunctions.cap(attribs[i]['name'])))
       else:
-        outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))	 
+        outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['name'], strFunctions.cap(attribs[i]['name'])))
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
-  
+
 def writeGetElementNameHeader(outFile, element, isSedListOf):
   if isSedListOf == True:
     element = writeListOf(element)
@@ -657,7 +657,7 @@ def writeGetElementNameCPPCode(outFile, element, isSedListOf=False, dict=None):
   outFile.write('{\n')
   if dict != None and dict.has_key('elementName'):
     if isSedListOf:
-      if dict.has_key('lo_elementName'):        
+      if dict.has_key('lo_elementName'):
         outFile.write('\tstatic const string name = "{0}";\n'.format(dict['lo_elementName']))
       else:
         outFile.write('\tstatic const string name = "listOf{0}";\n'.format(strFunctions.capp(dict['elementName'])))
@@ -666,11 +666,11 @@ def writeGetElementNameCPPCode(outFile, element, isSedListOf=False, dict=None):
   else:
     if dict != None and dict.has_key('lo_elementName'):
       outFile.write('\tstatic const string name = "{0}";\n'.format(dict['lo_elementName']))
-    else: 
+    else:
       outFile.write('\tstatic const string name = "{0}";\n'.format(strFunctions.lowerFirst(element)))
   outFile.write('\treturn name;\n')
   outFile.write('}\n\n\n')
-  
+
 
 def writeHasReqdAttribHeader(outFile, element, attribs):
   outFile.write('\t/**\n')
@@ -746,14 +746,14 @@ def writeReadOtherXMLHeader(outFile):
   outFile.write('\t */\n')
   outFile.write('\tvirtual bool readOtherXML (XMLInputStream& stream);\n\n\n')
   writeInternalEnd(outFile)
-  
+
 def writeReadOtherXMLCPPCode(outFile, element, hasMath = True, attribs = None, baseClass='SedBase'):
   writeInternalStart(outFile)
   outFile.write('bool\n{0}::readOtherXML (XMLInputStream& stream)\n'.format(element))
   outFile.write('{\n')
   outFile.write('\tbool          read = false;\n')
   outFile.write('\tconst string& name = stream.peek().getName();\n\n')
-  if hasMath == True: 
+  if hasMath == True:
     outFile.write('\tif (name == "math")\n\t{\n')
     outFile.write('\t\tconst XMLToken elem = stream.peek();\n')
     outFile.write('\t\tconst std::string prefix = checkMathMLNamespace(elem);\n\n')
@@ -766,11 +766,11 @@ def writeReadOtherXMLCPPCode(outFile, element, hasMath = True, attribs = None, b
   elif containsType(attribs, 'XMLNode*'):
     node = getByType(attribs, 'XMLNode*')
     outFile.write('\tif (name == "{0}")\n'.format(node['name']))
-    outFile.write('\t{\n')	
-    outFile.write('\t\tconst XMLToken& token = stream.next();\n')	
-    outFile.write('\t\tstream.skipText();\n')	
-    outFile.write('\t\tm{0} = new XMLNode(stream);\n'.format(strFunctions.cap(node['name'])))	
-    outFile.write('\t\tstream.skipPastEnd(token);\n')	
+    outFile.write('\t{\n')
+    outFile.write('\t\tconst XMLToken& token = stream.next();\n')
+    outFile.write('\t\tstream.skipText();\n')
+    outFile.write('\t\tm{0} = new XMLNode(stream);\n'.format(strFunctions.cap(node['name'])))
+    outFile.write('\t\tstream.skipPastEnd(token);\n')
     outFile.write('\t\tread = true;\n\t}\n\n')
   elif containsType(attribs, 'std::vector<double>'):
     elem = getByType(attribs, 'std::vector<double>')
@@ -791,7 +791,7 @@ def writeReadOtherXMLCPPCode(outFile, element, hasMath = True, attribs = None, b
   outFile.write('\treturn read;\n')
   outFile.write('}\n\n\n')
   writeInternalEnd(outFile)
-  
+
 
 
 
@@ -803,7 +803,7 @@ def writeProtectedHeaders(outFile, attribs = None, hasChildren=False, hasMath=Fa
   if hasMath == True or containsType(attribs, 'std::vector<double>') or containsType(attribs, 'XMLNode*'):
     writeReadOtherXMLHeader(outFile)
   writeWriteAttributesHeader(outFile)
-  
+
 def writeCommonHeaders(outFile, element, attribs, isSedListOf, hasChildren=False, hasMath=False):
   writeGetElementNameHeader(outFile, element, isSedListOf)
   if isSedListOf == True:
@@ -821,12 +821,12 @@ def writeInternalHeaders(outFile, isSedListOf, hasChildren=False):
   writeSetDocHeader(outFile)
   if hasChildren or isSedListOf:
     writeConnectHeader(outFile, isSedListOf, hasChildren)
-  
+
 def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False, elementDict=None, baseClass='SedBase'):
   type = elementDict['name']
   name = elementDict['name']
   if elementDict.has_key('elementName'):
-    name = strFunctions.cap(elementDict['elementName']) 
+    name = strFunctions.cap(elementDict['elementName'])
   if elementDict.has_key('element'):
     type = elementDict['element']
   if isSedListOf == True:

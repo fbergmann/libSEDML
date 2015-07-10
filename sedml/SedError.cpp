@@ -1,26 +1,26 @@
 /**
  * @file    SedError.cpp
  * @brief   Represents Sed errors and other diagnostics
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  */
 
@@ -54,7 +54,7 @@ using namespace std;
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /** @cond doxygen-libsbml-internal **/
-/** 
+/**
  * Helper function for SedError().  Takes an index, Sed level and version,
  * and returns the appropriate field for the severity code out of the
    errorTable entry.
@@ -149,12 +149,12 @@ std::string SedError::stringForCategory(unsigned int code) const
 
 SedError::SedError (  const unsigned int errorId
                       , const unsigned int level
-                      , const unsigned int version 
+                      , const unsigned int version
                       , const std::string& details
                       , const unsigned int line
                       , const unsigned int column
                       , const unsigned int severity
-                      , const unsigned int category 
+                      , const unsigned int category
                       , const std::string& package
                       , const unsigned int pkgVersion) :
     XMLError(errorId, details, line, column, severity, category)
@@ -190,7 +190,7 @@ SedError::SedError (  const unsigned int errorId
       // the Sed layer, but it's NOT in our table. This is an internal error.
       // Unfortunately, we don't have an error log or anywhere to report it
       // except the measure of last resort: the standard error output.
-    
+
       //cerr << "Internal error: unknown error code '" << mErrorId
       //     << "' encountered while processing error." << endl;
       //return;
@@ -256,14 +256,14 @@ SedError::SedError (  const unsigned int errorId
     // Finish updating the (full) error message.
 
     newMsg << errorTable[index].message;
-    
+
     // look for individual references
     // if the code for this error does not yet exist skip
 
     if (!details.empty())
     {
       newMsg << " " << details;
-    }      
+    }
     newMsg << endl;
     mMessage  = newMsg.str();
 
@@ -303,7 +303,7 @@ SedError::SedError(const SedError& orig) :
 /*
  * clone function
  */
-SedError* 
+SedError*
 SedError::clone() const
 {
   return new SedError(*this);
@@ -333,7 +333,7 @@ SedError::print(ostream& s) const
 void
 SedError::adjustErrorId(unsigned int offset)
 {
-  // actually dont do this since it means a user cannot 
+  // actually dont do this since it means a user cannot
   // look for the specific error
   //mErrorId = mErrorId - offset;
 }

@@ -8,17 +8,17 @@
 * This file is part of libSBML.  Please visit http://sbml.org for more
 * information about SBML, and the latest version of libSBML.
 *
-* Copyright (C) 2009-2013 jointly by the following organizations: 
+* Copyright (C) 2009-2013 jointly by the following organizations:
 *     1. California Institute of Technology, Pasadena, CA, USA
 *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-*  
+*
 * Copyright (C) 2006-2008 by the California Institute of Technology,
-*     Pasadena, CA, USA 
-*  
-* Copyright (C) 2002-2005 jointly by the following organizations: 
+*     Pasadena, CA, USA
+*
+* Copyright (C) 2002-2005 jointly by the following organizations:
 *     1. California Institute of Technology, Pasadena, CA, USA
 *     2. Japan Science and Technology Agency, Japan
-* 
+*
 * This library is free software; you can redistribute it and/or modify it
 * under the terms of the GNU Lesser General Public License as published by
 * the Free Software Foundation.  A copy of the license agreement is provided
@@ -64,7 +64,7 @@ GetDowncastSwigType (SedBase* sb)
 
 	case SEDML_CHANGE_CHANGEXML:
 		return SWIGTYPE_p_SedChangeXML;
-		
+
 	case SEDML_RANGE:
 		return SWIGTYPE_p_SedRange;
 
@@ -118,28 +118,28 @@ GetDowncastSwigType (SedBase* sb)
 
 	case SEDML_SIMULATION_ALGORITHM_PARAMETER:
 		return SWIGTYPE_p_SedAlgorithmParameter;
-		
+
 	case SEDML_SIMULATION:
 		return SWIGTYPE_p_SedSimulation;
 
 	case SEDML_SIMULATION_UNIFORMTIMECOURSE:
 		return SWIGTYPE_p_SedUniformTimeCourse;
-		
+
 	case SEDML_SIMULATION_ONESTEP:
 		return SWIGTYPE_p_SedOneStep;
-		
+
 	case SEDML_SIMULATION_STEADYSTATE:
 		return SWIGTYPE_p_SedSteadyState;
-		
+
 	case SEDML_TASK_SETVALUE:
 		return SWIGTYPE_p_SedSetValue;
-		
+
 	case SEDML_TASK_SUBTASK:
 		return SWIGTYPE_p_SedSubTask;
 
 	case SEDML_TASK_REPEATEDTASK:
 		return SWIGTYPE_p_SedRepeatedTask;
-		
+
 	case SEDML_LIST_OF:
 		name = sb->getElementName();
 		if(name == "listOf"){
@@ -201,7 +201,7 @@ GetDowncastSwigType (SedBase* sb)
 			return SWIGTYPE_p_SedListOfRanges;
 		}
 		return SWIGTYPE_p_SedListOf;
-		
+
 	default:
 		return SWIGTYPE_p_SedBase;
 	}
@@ -210,7 +210,7 @@ GetDowncastSwigType (SedBase* sb)
 }
 
 
-/* Compatibility bug fix for swig 2.0.7 and Python 3. 
+/* Compatibility bug fix for swig 2.0.7 and Python 3.
 * See http://patch-tracker.debian.org/patch/series/view/swig2.0/2.0.7-3/pyint_fromsize_t.diff
 */
 #if (PY_MAJOR_VERSION >= 3)

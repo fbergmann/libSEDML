@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -462,18 +462,18 @@ SedOutput::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfOutputs::SedListOfOutputs(unsigned int level, 
+SedListOfOutputs::SedListOfOutputs(unsigned int level,
 	                 unsigned int version)
  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+	setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfOutputs::SedListOfOutputs(SedNamespaces* sedns)
   : SedListOf(sedns)
@@ -483,9 +483,9 @@ SedListOfOutputs::SedListOfOutputs(SedNamespaces* sedns)
 
 
 /*
- * Returns a deep copy of this SedListOfOutputs 
+ * Returns a deep copy of this SedListOfOutputs
  */
-SedListOfOutputs* 
+SedListOfOutputs*
 SedListOfOutputs::clone () const
  {
 	return new SedListOfOutputs(*this);
@@ -562,7 +562,7 @@ SedListOfOutputs::addOutput(const SedOutput* so)
  *
  * @return the number of SedOutput objects in this SedListOfOutputs
  */
-unsigned int 
+unsigned int
 SedListOfOutputs::getNumOutputs() const
 {
 	return size();
@@ -570,13 +570,13 @@ SedListOfOutputs::getNumOutputs() const
 
 /**
  * Creates a new SedReport object, adds it to this SedListOfOutputs
- * report and returns the SedReport object created. 
+ * report and returns the SedReport object created.
  *
  * @return a new SedReport object instance
  *
  * @see addReport(const SedOutput* so)
  */
-SedReport* 
+SedReport*
 SedListOfOutputs::createReport()
 {
 	SedReport *temp = new SedReport();
@@ -586,13 +586,13 @@ SedListOfOutputs::createReport()
 
 /**
  * Creates a new SedPlot2D object, adds it to this SedListOfOutputs
- * plot2D and returns the SedPlot2D object created. 
+ * plot2D and returns the SedPlot2D object created.
  *
  * @return a new SedPlot2D object instance
  *
  * @see addPlot2D(const SedOutput* so)
  */
-SedPlot2D* 
+SedPlot2D*
 SedListOfOutputs::createPlot2D()
 {
 	SedPlot2D *temp = new SedPlot2D();
@@ -602,13 +602,13 @@ SedListOfOutputs::createPlot2D()
 
 /**
  * Creates a new SedPlot3D object, adds it to this SedListOfOutputs
- * plot3D and returns the SedPlot3D object created. 
+ * plot3D and returns the SedPlot3D object created.
  *
  * @return a new SedPlot3D object instance
  *
  * @see addPlot3D(const SedOutput* so)
  */
-SedPlot3D* 
+SedPlot3D*
 SedListOfOutputs::createPlot3D()
 {
 	SedPlot3D *temp = new SedPlot3D();

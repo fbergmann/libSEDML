@@ -1,25 +1,25 @@
 #!/usr/bin/env python
-## 
+##
 ## @file    print_sedml.py
 ## @brief   Prints an overview of the elments in the given SED-ML document
 ## @author  Frank T. Bergmann
-## 
+##
 ## <!--------------------------------------------------------------------------
 ## This file is part of libSEDML.  Please visit http://sed-ml.org for more
 ## information about SEDML, and the latest version of libSEDML.
-## 
-## Copyright (c) 2013, Frank T. Bergmann  
+##
+## Copyright (c) 2013, Frank T. Bergmann
 ## All rights reserved.
-## 
+##
 ## Redistribution and use in source and binary forms, with or without
-## modification, are permitted provided that the following conditions are met: 
-## 
+## modification, are permitted provided that the following conditions are met:
+##
 ## 1. Redistributions of source code must retain the above copyright notice, this
-##    list of conditions and the following disclaimer. 
+##    list of conditions and the following disclaimer.
 ## 2. Redistributions in binary form must reproduce the above copyright notice,
 ##    this list of conditions and the following disclaimer in the documentation
-##    and/or other materials provided with the distribution. 
-## 
+##    and/or other materials provided with the distribution.
+##
 ## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ## ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 ## WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
 ## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ## SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ## ------------------------------------------------------------------------ -.
-## 
+##
 
 import sys
 import os.path
@@ -45,10 +45,10 @@ def main (args):
     sys.exit(1)
 
   doc = libsedml.readSedML(args[1]);
-  if ( doc.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0):  
+  if ( doc.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0):
     print doc.getErrorLog().toString();
-    sys.exit(2); 
-  
+    sys.exit(2);
+
   print 'The document has {0}" simulation(s).'.format(doc.getNumSimulations());
   for i  in range(0, doc.getNumSimulations()):
     current = doc.getSimulation(i);
@@ -60,13 +60,13 @@ def main (args):
       print "\tTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," numPoints=",tc.getNumberOfPoints()," kisao=",kisaoid,"\n";
     else:
 	  print "\tUncountered unknown simulation. ",current.getId(),"\n";
-  
+
   print "\n"
   print "The document has ",doc.getNumModels() , " model(s)." , "\n";
   for i in range(0,doc.getNumModels()):
     current = doc.getModel(i);
     print "\tModel id=" , current.getId() , " language=" , current.getLanguage() , " source=" , current.getSource() , " numChanges=" , current.getNumChanges() , "\n";
-  
+
   print "\n";
   print "The document has " , doc.getNumTasks() , " task(s)." , "\n";
   for i in range(0,doc.getNumTasks()):
@@ -78,7 +78,7 @@ def main (args):
   for i in range( 0,  doc.getNumDataGenerators()):
     current = doc.getDataGenerator(i);
     print "\tDG id=" , current.getId() , " math=" , libsedml.formulaToString(current.getMath()) , "\n";
-  
+
   print "\n";
   print "The document has " , doc.getNumOutputs() , " output(s)." , "\n";
   for i in range (0, doc.getNumOutputs()):
@@ -93,8 +93,8 @@ def main (args):
     elif tc == libsedml.SEDML_OUTPUT_PLOT3D:
       p = (current);
       print "\tPlot3d id=" , current.getId() , " numSurfaces=" , p.getNumSurfaces() , "\n";
-    else: 
+    else:
       print "\tEncountered unknown output " , current.getId() , "\n";
-  
+
 if __name__ == '__main__':
-  main(sys.argv)  
+  main(sys.argv)

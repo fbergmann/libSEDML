@@ -1,26 +1,26 @@
 /**
  * @file    SedReader.cpp
  * @brief   Reads an Sed Document into memory
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  */
 
@@ -57,7 +57,7 @@ using namespace std;
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 /*
- * Creates a new SedReader and returns it. 
+ * Creates a new SedReader and returns it.
  */
 SedReader::SedReader ()
 {
@@ -95,13 +95,13 @@ SedReader::~SedReader ()
  * be read if the zip archive contains two or more files.
  *
  * To read a gzip/zip file, underlying libSed needs to be linked with zlib
- * at compile time. Also, underlying libSed needs to be linked with bzip2 
- * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSed is not linked with the corresponding 
+ * at compile time. Also, underlying libSed needs to be linked with bzip2
+ * to read a bzip2 file. File unreadable error will be logged if a compressed
+ * file name is given and underlying libSed is not linked with the corresponding
  * required library.
- * SedReader::hasZlib() and SedReader::hasBzip2() can be used to check 
+ * SedReader::hasZlib() and SedReader::hasBzip2() can be used to check
  * whether libSed is linked with each library.
- * 
+ *
  * @return a pointer to the SedDocument read.
  */
 SedDocument*
@@ -141,8 +141,8 @@ SedReader::readSedMLFromString (const std::string& xml)
 {
   if (&xml == NULL) return NULL;
 
-  const static string dummy_xml ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");  
-  
+  const static string dummy_xml ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+
   if (!strncmp(xml.c_str(), dummy_xml.c_str(), 14))
   {
     return readInternal(xml.c_str(), false);
@@ -152,8 +152,8 @@ SedReader::readSedMLFromString (const std::string& xml)
     const std::string temp = (dummy_xml + xml);
     return readInternal(temp.c_str(), false);
   }
-  
-  
+
+
 }
 
 
@@ -163,8 +163,8 @@ SedReader::readSedMLFromString (const std::string& xml)
  *
  * @return @c true if libSed is linked with zlib, @c false otherwise.
  */
-bool 
-SedReader::hasZlib() 
+bool
+SedReader::hasZlib()
 {
   return LIBSEDML_CPP_NAMESPACE ::hasZlib();
 }
@@ -176,8 +176,8 @@ SedReader::hasZlib()
  *
  * @return @c true if libSed is linked with bzip2, @c false otherwise.
  */
-bool 
-SedReader::hasBzip2() 
+bool
+SedReader::hasBzip2()
 {
   return LIBSEDML_CPP_NAMESPACE ::hasBzip2();
 }
@@ -237,7 +237,7 @@ SedReader::readInternal (const char* content, bool isFile)
     XMLInputStream stream(content, isFile, "", d->getErrorLog());
 
     d->read(stream);
-    
+
     if (stream.isError())
     {
       // If we encountered an error, some parsers will report it sooner
@@ -247,14 +247,14 @@ SedReader::readInternal (const char* content, bool isFile)
       // all parsers back to the same point.
 
 
-      for (unsigned int i = 0; i < d->getErrorLog()->getNumErrors(); ++i)      
+      for (unsigned int i = 0; i < d->getErrorLog()->getNumErrors(); ++i)
       {
         if (isCriticalError(d->getErrorLog()->getError(i)->getErrorId()))
         {
           // If we find even one critical error, all other errors are
           // suspect and may be bogus.  Remove them.
 
-          for (int n = d->getErrorLog()->getNumErrors()-1; n >= 0; n--)      
+          for (int n = d->getErrorLog()->getNumErrors()-1; n >= 0; n--)
             if (!isCriticalError(d->getErrorLog()->getError(n)->getErrorId()))
             {
               d->getErrorLog()->remove(d->getErrorLog()->getError(n)->getErrorId());
@@ -298,7 +298,7 @@ SedReader::readInternal (const char* content, bool isFile)
 
 
 /**
- * Creates a new SedReader and returns it. 
+ * Creates a new SedReader and returns it.
  */
 LIBSEDML_EXTERN
 SedReader_t *
@@ -474,11 +474,11 @@ SedReader_hasBzip2 (void)
  * be read if the zip archive contains two or more files.
  *
  * To read a gzip/zip file, underlying libSed needs to be linked with zlib
- * at compile time. Also, underlying libSed needs to be linked with bzip2 
- * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSed is not linked with the corresponding 
+ * at compile time. Also, underlying libSed needs to be linked with bzip2
+ * to read a bzip2 file. File unreadable error will be logged if a compressed
+ * file name is given and underlying libSed is not linked with the corresponding
  * required library.
- * SedReader_hasZlib() and SedReader_hasBzip2() can be used to check 
+ * SedReader_hasZlib() and SedReader_hasBzip2() can be used to check
  * whether libSed is linked with each library.
  *
  * @return a pointer to the SedDocument read.
@@ -522,11 +522,11 @@ readSedML (const char *filename)
  * be read if the zip archive contains two or more files.
  *
  * To read a gzip/zip file, underlying libSed needs to be linked with zlib
- * at compile time. Also, underlying libSed needs to be linked with bzip2 
- * to read a bzip2 file. File unreadable error will be logged if a compressed 
- * file name is given and underlying libSed is not linked with the corresponding 
+ * at compile time. Also, underlying libSed needs to be linked with bzip2
+ * to read a bzip2 file. File unreadable error will be logged if a compressed
+ * file name is given and underlying libSed is not linked with the corresponding
  * required library.
- * SedReader_hasZlib() and SedReader_hasBzip2() can be used to check 
+ * SedReader_hasZlib() and SedReader_hasBzip2() can be used to check
  * whether libSed is linked with each library.
  *
  * @return a pointer to the SedDocument read.

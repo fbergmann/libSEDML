@@ -80,7 +80,7 @@ def writeAtt(attrib, output):
   num = att[4]
   if attType == 'string':
     output.write('\tstd::string   m{0};\n'.format(capAttName))
-  elif attType == 'element':    
+  elif attType == 'element':
     if attTypeCode == 'ASTNode*' or attName== 'Math':
       output.write('\tASTNode*      m{0};\n'.format(capAttName))
     else:
@@ -99,7 +99,7 @@ def writeAtt(attrib, output):
     output.write('\tbool          m{0};\n'.format(capAttName))
     output.write('\tbool          mIsSet{0};\n'.format(capAttName))
   elif attType == 'std::vector<double>':
-    output.write('\tstd::vector<double>  m{0};\n'.format( strFunctions.capp(attName)))    
+    output.write('\tstd::vector<double>  m{0};\n'.format( strFunctions.capp(attName)))
   else:
     output.write('\tFIX ME   {0};\n'.format(attName))
 
@@ -107,13 +107,13 @@ def writeAdditionalIncludes (attrs, output, elementDict):
   if elementDict.has_key('baseClass'):
     output.write('#include <sedml/{0}.h>\n'.format(elementDict['baseClass']))
   for i in range(0, len(attrs)):
-    writeInclude(attrs[i], output)  
+    writeInclude(attrs[i], output)
   output.write('\n\n')
 
 def writeAttributes(attrs, output):
   output.write('protected:\n\n')
   for i in range(0, len(attrs)):
-    writeAtt(attrs[i], output)  
+    writeAtt(attrs[i], output)
   output.write('\n\n')
 
 def writeGetFunction(attrib, output, element):
@@ -184,7 +184,7 @@ def writeGetFunction(attrib, output, element):
     output.write('\t */\n')
     output.write('\tvirtual const {0}'.format(attTypeCode))
     output.write(' get{0}() const;\n\n\n'.format(capAttName))
-     
+
 def writeIsSetFunction(attrib, output, element):
   att = generalFunctions.parseAttribute(attrib)
   attName = att[0]
@@ -203,14 +203,14 @@ def writeIsSetFunction(attrib, output, element):
     output.write(' element has been set,\n')
     output.write('\t * otherwise @c false is returned.\n')
     output.write('\t */\n')
-    output.write('\tvirtual bool has{0}() const;\n\n\n'.format(strFunctions.capp(capAttName)))  
+    output.write('\tvirtual bool has{0}() const;\n\n\n'.format(strFunctions.capp(capAttName)))
     output.write('\t/**\n')
     output.write('\t * Returning the number of elements in this\n\t * {0}\'s \"{1}\" '.format(element, attName))
     output.write('.\n\t *\n')
     output.write('\t * @return number of elements in this {0}\'s \"{1}\"'.format(element, attName))
     output.write(' \n')
     output.write('\t */\n')
-    output.write('\tvirtual unsigned int getNum{0}() const;\n\n\n'.format(strFunctions.capp(capAttName)))  
+    output.write('\tvirtual unsigned int getNum{0}() const;\n\n\n'.format(strFunctions.capp(capAttName)))
   elif attrib['type'] == 'element':
     output.write('\t/**\n')
     output.write('\t * Predicate returning @c true or @c false depending on ')
@@ -231,20 +231,20 @@ def writeIsSetFunction(attrib, output, element):
     output.write('\t * otherwise @c false is returned.\n')
     output.write('\t */\n')
     output.write('\tvirtual bool isSet{0}() const;\n\n\n'.format(capAttName))
-   
+
 def writeSetFunction(attrib, output, element):
   att = generalFunctions.parseAttribute(attrib)
   attName = att[0]
   capAttName = att[1]
   attType = att[2]
   if attType == 'string':
-    attTypeCode = 'const std::string&' 
+    attTypeCode = 'const std::string&'
   else:
     attTypeCode = att[3]
   num = att[4]
   if attrib['type'] == 'lo_element':
     return
-  elif attrib['type'] == 'element':    
+  elif attrib['type'] == 'element':
     output.write('\t/**\n')
     output.write('\t * Sets the \"{0}\"'.format(attName))
     output.write(' element of this {0}.\n'.format(element))
@@ -259,7 +259,7 @@ def writeSetFunction(attrib, output, element):
     output.write('\t * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE\n')
     output.write('\t */\n')
     output.write('\tvirtual int set{0}('.format(capAttName))
-    output.write('{0} {1});\n\n\n'.format(attTypeCode, attName))    
+    output.write('{0} {1});\n\n\n'.format(attTypeCode, attName))
   elif attrib['type'] == 'std::vector<double>':
     output.write('\t/**\n')
     output.write('\t * Sets the value of the \"{0}\"'.format(attName))
@@ -307,8 +307,8 @@ def writeSetFunction(attrib, output, element):
     output.write('\t */\n')
     output.write('\tvirtual int set{0}('.format(capAttName))
     output.write('{0} {1});\n\n\n'.format(attTypeCode, attName))
-     
-  
+
+
 def writeUnsetFunction(attrib, output, element):
   attName = attrib['name']
   capAttName = strFunctions.cap(attName)
@@ -353,9 +353,9 @@ def writeUnsetFunction(attrib, output, element):
     output.write('\t * @li LIBSEDML_OPERATION_FAILED\n')
     output.write('\t */\n')
     output.write('\tvirtual int unset{0}();\n\n\n'.format(capAttName))
-   
-  
-   
+
+
+
 def writeAttributeFunctions(attrs, output, element, elementDict):
   for i in range(0, len(attrs)):
     writeGetFunction(attrs[i], output, element)
@@ -365,7 +365,7 @@ def writeAttributeFunctions(attrs, output, element, elementDict):
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
       writeListOfSubFunctions(attrs[i], output, element, elementDict)
-      
+
 
 def writeListOfSubFunctions(attrib, output, element, elementDict):
   loname = generalFunctions.writeListOf(strFunctions.cap(attrib['name']))
@@ -420,7 +420,7 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
       output.write('\t */\n')
       output.write('\t{0}* create{1}();\n\n\n'.format(elem['element'], strFunctions.cap(elem['name'])))
   writeListOfHeader.writeRemoveFunctions(output, strFunctions.cap(attrib['name']), attrib['element'], True, element)
- 
+
 #write class
 def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf, elementDict):
   writeAdditionalIncludes(attributes, header, elementDict)
@@ -440,7 +440,7 @@ def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, ha
   if elementDict.has_key('additionalCPPDecls'):
     header.write(open(elementDict['additionalCPPDecls'], 'r').read())
   header.write('\n};\n\n')
- 
+
 # write the include files
 def writeIncludes(fileOut, element, pkg):
   fileOut.write('\n\n');
@@ -460,26 +460,26 @@ def writeIncludes(fileOut, element, pkg):
   fileOut.write('\n\n');
   fileOut.write('LIBSEDML_CPP_NAMESPACE_BEGIN\n')
   fileOut.write('\n\n');
-  
+
 def writeCPPEnd(fileOut):
   fileOut.write('\n\nLIBSEDML_CPP_NAMESPACE_END\n\n')
   fileOut.write('#endif  /*  __cplusplus  */\n\n')
-  
+
 def writeCStart(fileOut):
   fileOut.write('#ifndef SWIG\n\n')
   fileOut.write('LIBSEDML_CPP_NAMESPACE_BEGIN\nBEGIN_C_DECLS\n\n')
-  
+
 
 def writeCEnd(fileOut, element):
   fileOut.write('\n\nEND_C_DECLS\n')
   fileOut.write('LIBSEDML_CPP_NAMESPACE_END\n\n')
   fileOut.write('#endif  /*  !SWIG  */\n\n')
   fileOut.write('#endif /*  {0}_H__  */\n\n'.format(element))
- 
-  
- 
- 
-# write the header file      
+
+
+
+
+# write the header file
 def createHeader(element):
   nameOfElement = element['name']
   nameOfPackage = element['package']
@@ -506,6 +506,6 @@ def createHeader(element):
 #else:
 #  element = createNewElementDictObj.createFBCObj()
 #  createHeader(element)
-  
 
-  
+
+

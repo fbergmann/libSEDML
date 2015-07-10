@@ -86,7 +86,7 @@ def writeListOfSubElements(attrib, output, element):
   output.write('const char * sid);\n\n\n')
  # writeListOfHeader.writeGetFunctions(output, attrib['element'], True, element)
  # writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
- 
+
 
 
 def writeGetFunction(attrib, output, element):
@@ -110,7 +110,7 @@ def writeGetFunction(attrib, output, element):
     output.write('LIBSEDML_EXTERN\n')
     output.write('XMLNode_t*\n')
     output.write('{0}_get{1}'.format(element, capAttName))
-    output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))    
+    output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
   elif attrib['type'] == 'element':
     if attrib['name'] == 'Math' or attrib['name'] == 'math':
       output.write('LIBSEDML_EXTERN\n')
@@ -126,7 +126,7 @@ def writeGetFunction(attrib, output, element):
       output.write('{0}_t*\n'.format(strFunctions.cap(attrib['element'])))
       output.write('{0}_create{1}'.format(element, capAttName))
       output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
- 
+
 def writeIsSetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
   attName = att[0]
@@ -141,8 +141,8 @@ def writeIsSetFunction(attrib, output, element):
     output.write('int\n')
     output.write('{0}_isSet{1}'.format(element, capAttName))
     output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
-    
- 
+
+
 def writeSetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
   attName = att[0]
@@ -177,7 +177,7 @@ def writeSetFunction(attrib, output, element):
       output.write('{0}_set{1}'.format(element, capAttName))
       output.write('({0}_t * {1},'.format(element, strFunctions.objAbbrev(element)))
       output.write(' {0}_t* {1});\n\n\n'.format(attrib['element'], attName))
-    
+
 def writeUnsetFunction(attrib, output, element):
   att = generalFunctions.parseAttributeForC(attrib)
   attName = att[0]
@@ -193,8 +193,8 @@ def writeUnsetFunction(attrib, output, element):
   output.write('int\n')
   output.write('{0}_unset{1}'.format(element, capAttName))
   output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
-    
- 
+
+
 def writeHasReqdAttrFunction(output, element):
   output.write('LIBSEDML_EXTERN\n')
   output.write('int\n')
@@ -207,7 +207,7 @@ def writeHasReqdElementsFunction(output, element):
   output.write('{0}_hasRequiredElements'.format(element))
   output.write('({0}_t * {1});\n\n\n'.format(element, strFunctions.objAbbrev(element)))
 
-    
+
 def writeListOfHeaders(output, element, type):
   loelement = generalFunctions.writeListOf(element)
   output.write('LIBSEDML_EXTERN\n')
@@ -218,13 +218,13 @@ def writeListOfHeaders(output, element, type):
   output.write('{0}_t *\n'.format(type))
   output.write('{0}_removeById'.format(loelement))
   output.write('(SedListOf_t * lo, const char * sid);\n\n\n')
- 
-# write the header file      
+
+# write the header file
 def createHeader(element, header):
   type = element['name']
   name = element['name']
   if element.has_key('elementName'):
-    name = strFunctions.cap(element['elementName']) 
+    name = strFunctions.cap(element['elementName'])
   if element.has_key('element'):
     type = element['element']
 
@@ -235,6 +235,6 @@ def createHeader(element, header):
     writeHasReqdElementsFunction(header, element['name'])
   if element['hasSedListOf'] == True:
     writeListOfHeaders(header, name, type)
- 
 
-  
+
+

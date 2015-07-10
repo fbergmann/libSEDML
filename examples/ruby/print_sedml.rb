@@ -3,23 +3,23 @@
 ## @file    print_sedml.rb
 ## @brief   Prints an overview of the elments in the given SED-ML document
 ## @author  Frank T. Bergmann
-## 
+##
 ## <!--------------------------------------------------------------------------
 ## This file is part of libSEDML.  Please visit http://sed-ml.org for more
 ## information about SEDML, and the latest version of libSEDML.
-## 
-## Copyright (c) 2013, Frank T. Bergmann  
+##
+## Copyright (c) 2013, Frank T. Bergmann
 ## All rights reserved.
-## 
+##
 ## Redistribution and use in source and binary forms, with or without
-## modification, are permitted provided that the following conditions are met: 
-## 
+## modification, are permitted provided that the following conditions are met:
+##
 ## 1. Redistributions of source code must retain the above copyright notice, this
-##    list of conditions and the following disclaimer. 
+##    list of conditions and the following disclaimer.
 ## 2. Redistributions in binary form must reproduce the above copyright notice,
 ##    this list of conditions and the following disclaimer in the documentation
-##    and/or other materials provided with the distribution. 
-## 
+##    and/or other materials provided with the distribution.
+##
 ## THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ## ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 ## WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
 ## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ## SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ## ------------------------------------------------------------------------ -.
-## 
+##
 
 
 require 'libSEDML'
@@ -44,7 +44,7 @@ end
 doc = LibSEDML::readSedML(ARGV[0])
 if ( doc.getErrorLog.getNumFailsWithSeverity(LibSEDML::LIBSEDML_SEV_ERROR) > 0)
   puts doc.getErrorLog.toString
-  exit(2) 
+  exit(2)
 end
 
 puts "The document has #{doc.getNumSimulations} simulation(s)."

@@ -1,4 +1,4 @@
-# 
+#
 # @file    print_sedml.R
 # @brief   Prints an overview of the elements in the given SED-ML document
 # @author  Frank T. Bergmann
@@ -8,19 +8,19 @@
 # <!--------------------------------------------------------------------------
 # This file is part of libSEDML.  Please visit http://sed-ml.org for more
 # information about SEDML, and the latest version of libSEDML.
-# 
-# Copyright (c) 2013, Frank T. Bergmann  
+#
+# Copyright (c) 2013, Frank T. Bergmann
 # All rights reserved.
-# 
+#
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met: 
-# 
+# modification, are permitted provided that the following conditions are met:
+#
 # 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer. 
+#    list of conditions and the following disclaimer.
 # 2. Redistributions in binary form must reproduce the above copyright notice,
 #    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution. 
-# 
+#    and/or other materials provided with the distribution.
+#
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -32,7 +32,7 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # ------------------------------------------------------------------------ -->
-# 
+#
 
 library(libSEDML)
 
@@ -64,7 +64,7 @@ for (i in seq_len(SedDocument_getNumSimulations(doc)))
         }
      },
      "default"={
-        cat("\tUncountered unknown simulation %s.\n ", SedSimulation_getId(current),"\n");    
+        cat("\tUncountered unknown simulation %s.\n ", SedSimulation_getId(current),"\n");
 	}
   );
 }
@@ -102,7 +102,7 @@ for (i in seq_len(SedDocument_getNumOutputs(doc)))
    "SEDML_OUTPUT_REPORT" =
     {
       r = current;
-      cat("\tReport id=",SedOutput_getId(current)," numDataSets=", SedReport_getNumDataSets(r),"\n");      
+      cat("\tReport id=",SedOutput_getId(current)," numDataSets=", SedReport_getNumDataSets(r),"\n");
     },
     "SEDML_OUTPUT_PLOT2D"=
     {
@@ -112,10 +112,10 @@ for (i in seq_len(SedDocument_getNumOutputs(doc)))
     "SEDML_OUTPUT_PLOT3D"=
     {
       p = current;
-      cat("\tPlot3D id=", SedOutput_getId(current)," numSurfaces=",SedPlot3D_getNumSurfaces(p),"\n");      
+      cat("\tPlot3D id=", SedOutput_getId(current)," numSurfaces=",SedPlot3D_getNumSurfaces(p),"\n");
     },
     "default"=
-    {	
+    {
       cat("\tEncountered unknown output %s\n", SedOutput_getId(current),"\n");
     });
 }

@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -388,7 +388,7 @@ SedDocument::addSimulation(const SedSimulation* ss)
  *
  * @return the number of SedSimulation objects in this SedDocument
  */
-unsigned int 
+unsigned int
 SedDocument::getNumSimulations() const
 {
 	return mSimulations.size();
@@ -396,13 +396,13 @@ SedDocument::getNumSimulations() const
 
 /**
  * Creates a new SedUniformTimeCourse object, adds it to this SedDocuments
- * SedDocument and returns the SedUniformTimeCourse object created. 
+ * SedDocument and returns the SedUniformTimeCourse object created.
  *
  * @return a new SedUniformTimeCourse object instance
  *
  * @see addUniformTimeCourse(const SedSimulation* ss)
  */
-SedUniformTimeCourse* 
+SedUniformTimeCourse*
 SedDocument::createUniformTimeCourse()
 {
 	SedUniformTimeCourse *temp = new SedUniformTimeCourse();
@@ -412,13 +412,13 @@ SedDocument::createUniformTimeCourse()
 
 /**
  * Creates a new SedOneStep object, adds it to this SedDocuments
- * SedDocument and returns the SedOneStep object created. 
+ * SedDocument and returns the SedOneStep object created.
  *
  * @return a new SedOneStep object instance
  *
  * @see addOneStep(const SedSimulation* ss)
  */
-SedOneStep* 
+SedOneStep*
 SedDocument::createOneStep()
 {
 	SedOneStep *temp = new SedOneStep();
@@ -428,13 +428,13 @@ SedDocument::createOneStep()
 
 /**
  * Creates a new SedSteadyState object, adds it to this SedDocuments
- * SedDocument and returns the SedSteadyState object created. 
+ * SedDocument and returns the SedSteadyState object created.
  *
  * @return a new SedSteadyState object instance
  *
  * @see addSteadyState(const SedSimulation* ss)
  */
-SedSteadyState* 
+SedSteadyState*
 SedDocument::createSteadyState()
 {
 	SedSteadyState *temp = new SedSteadyState();
@@ -538,7 +538,7 @@ SedDocument::addModel(const SedModel* sm)
  *
  * @return the number of SedModel objects in this SedDocument
  */
-unsigned int 
+unsigned int
 SedDocument::getNumModels() const
 {
 	return mModels.size();
@@ -546,13 +546,13 @@ SedDocument::getNumModels() const
 
 /**
  * Creates a new SedModel object, adds it to this SedDocuments
- * SedDocument and returns the SedModel object created. 
+ * SedDocument and returns the SedModel object created.
  *
  * @return a new SedModel object instance
  *
  * @see addSedModel(const SedModel* sm)
  */
-SedModel* 
+SedModel*
 SedDocument::createModel()
 {
 	SedModel *temp = new SedModel();
@@ -656,7 +656,7 @@ SedDocument::addTask(const SedTask* st)
  *
  * @return the number of SedTask objects in this SedDocument
  */
-unsigned int 
+unsigned int
 SedDocument::getNumTasks() const
 {
 	return mTasks.size();
@@ -664,13 +664,13 @@ SedDocument::getNumTasks() const
 
 /**
  * Creates a new SedTask object, adds it to this SedDocuments
- * SedDocument and returns the SedTask object created. 
+ * SedDocument and returns the SedTask object created.
  *
  * @return a new SedTask object instance
  *
  * @see addTask(const SedTask* st)
  */
-SedTask* 
+SedTask*
 SedDocument::createTask()
 {
 	SedTask *temp = new SedTask();
@@ -680,13 +680,13 @@ SedDocument::createTask()
 
 /**
  * Creates a new SedRepeatedTask object, adds it to this SedDocuments
- * SedDocument and returns the SedRepeatedTask object created. 
+ * SedDocument and returns the SedRepeatedTask object created.
  *
  * @return a new SedRepeatedTask object instance
  *
  * @see addRepeatedTask(const SedTask* st)
  */
-SedRepeatedTask* 
+SedRepeatedTask*
 SedDocument::createRepeatedTask()
 {
 	SedRepeatedTask *temp = new SedRepeatedTask();
@@ -790,7 +790,7 @@ SedDocument::addDataGenerator(const SedDataGenerator* sdg)
  *
  * @return the number of SedDataGenerator objects in this SedDocument
  */
-unsigned int 
+unsigned int
 SedDocument::getNumDataGenerators() const
 {
 	return mDataGenerators.size();
@@ -798,13 +798,13 @@ SedDocument::getNumDataGenerators() const
 
 /**
  * Creates a new SedDataGenerator object, adds it to this SedDocuments
- * SedDocument and returns the SedDataGenerator object created. 
+ * SedDocument and returns the SedDataGenerator object created.
  *
  * @return a new SedDataGenerator object instance
  *
  * @see addSedDataGenerator(const SedDataGenerator* sdg)
  */
-SedDataGenerator* 
+SedDataGenerator*
 SedDocument::createDataGenerator()
 {
 	SedDataGenerator *temp = new SedDataGenerator();
@@ -908,7 +908,7 @@ SedDocument::addOutput(const SedOutput* so)
  *
  * @return the number of SedOutput objects in this SedDocument
  */
-unsigned int 
+unsigned int
 SedDocument::getNumOutputs() const
 {
 	return mOutputs.size();
@@ -916,13 +916,13 @@ SedDocument::getNumOutputs() const
 
 /**
  * Creates a new SedReport object, adds it to this SedDocuments
- * SedDocument and returns the SedReport object created. 
+ * SedDocument and returns the SedReport object created.
  *
  * @return a new SedReport object instance
  *
  * @see addReport(const SedOutput* so)
  */
-SedReport* 
+SedReport*
 SedDocument::createReport()
 {
 	SedReport *temp = new SedReport();
@@ -932,13 +932,13 @@ SedDocument::createReport()
 
 /**
  * Creates a new SedPlot2D object, adds it to this SedDocuments
- * SedDocument and returns the SedPlot2D object created. 
+ * SedDocument and returns the SedPlot2D object created.
  *
  * @return a new SedPlot2D object instance
  *
  * @see addPlot2D(const SedOutput* so)
  */
-SedPlot2D* 
+SedPlot2D*
 SedDocument::createPlot2D()
 {
 	SedPlot2D *temp = new SedPlot2D();
@@ -948,13 +948,13 @@ SedDocument::createPlot2D()
 
 /**
  * Creates a new SedPlot3D object, adds it to this SedDocuments
- * SedDocument and returns the SedPlot3D object created. 
+ * SedDocument and returns the SedPlot3D object created.
  *
  * @return a new SedPlot3D object instance
  *
  * @see addPlot3D(const SedOutput* so)
  */
-SedPlot3D* 
+SedPlot3D*
 SedDocument::createPlot3D()
 {
 	SedPlot3D *temp = new SedPlot3D();
@@ -1232,7 +1232,7 @@ SedDocument::getNumErrors () const
 }
 
 
-unsigned int 
+unsigned int
 SedDocument::getNumErrors (unsigned int severity) const
 {
   return getErrorLog()->getNumFailsWithSeverity(severity);
@@ -1279,7 +1279,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
     XMLNamespaces xmlns;
     if (getVersion() == 1)
     xmlns.add(SEDML_XMLNS_L1V1);
-    else 
+    else
     xmlns.add(SEDML_XMLNS_L1V2);
 
     mSedNamespaces->setNamespaces(&xmlns);
@@ -1304,7 +1304,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
       if (other.empty() == false)
       {
         // there is another ns with the prefix that the SED-ML ns expects to have
-        //remove the this ns, add the sbml ns and 
+        //remove the this ns, add the sbml ns and
         //add the new ns with a new prefix
         thisNs->remove(sedmlPrefix);
         thisNs->add(sedmlURI, sedmlPrefix);
@@ -1318,7 +1318,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
   }
 
   XMLNamespaces * xmlns = thisNs->clone();
-  if (xmlns != NULL) 
+  if (xmlns != NULL)
   {
     stream << *(xmlns);
     delete xmlns;
@@ -1328,7 +1328,7 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
 /*
   * @return the Namespaces associated with this SED-ML object
   */
-XMLNamespaces* 
+XMLNamespaces*
 SedDocument::getNamespaces() const
 {
   return mSedNamespaces->getNamespaces();

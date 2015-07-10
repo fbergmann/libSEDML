@@ -40,7 +40,7 @@
 int
 main (int argc, char* argv[])
 {
-  /* declare all variables */ 
+  /* declare all variables */
   SedDocument_t *doc;
   SedModel_t *model;
   SedChangeAttribute_t *change;
@@ -67,9 +67,9 @@ main (int argc, char* argv[])
   /* create the document */
   doc = SedDocument_create(1,1);
   SedDocument_setLevel(doc, 1);
-  SedDocument_setVersion(doc, 1);  
+  SedDocument_setVersion(doc, 1);
 
-  
+
   /* create a first model referencing an sbml file */
   model = SedDocument_createModel(doc);
   SedModel_setId(model, "model1");
@@ -100,7 +100,7 @@ main (int argc, char* argv[])
   SedVariable_setModelReference(variable, "model1");
   SedVariable_setTarget(variable, "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
   SedComputeChange_setMath(compute, SBML_parseFormula("S2 / 2"));
-  
+
   /* create simulation */
   tc = SedDocument_createUniformTimeCourse(doc);
   SedSimulation_setId((SedSimulation_t*)tc, "sim1");
@@ -108,7 +108,7 @@ main (int argc, char* argv[])
   SedUniformTimeCourse_setOutputStartTime(tc, 0.0);
   SedUniformTimeCourse_setOutputEndTime(tc, 10.0);
   SedUniformTimeCourse_setNumberOfPoints(tc, 1000);
-  
+
   /* need to set the correct KISAO Term */
   algorithm = SedSimulation_createAlgorithm((SedSimulation_t*)tc);
   SedAlgorithm_setKisaoID(algorithm,"KISAO:0000019");

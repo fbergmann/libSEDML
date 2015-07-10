@@ -7,17 +7,17 @@
 # This file is part of libSEDML.  Please visit http://sedml.org for more
 # information about SEDML, and the latest version of libSEDML.
 #
-# Copyright (C) 2009-2013 jointly by the following organizations: 
+# Copyright (C) 2009-2013 jointly by the following organizations:
 #     1. California Institute of Technology, Pasadena, CA, USA
 #     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-#  
+#
 # Copyright (C) 2006-2008 by the California Institute of Technology,
-#     Pasadena, CA, USA 
-#  
-# Copyright (C) 2002-2005 jointly by the following organizations: 
+#     Pasadena, CA, USA
+#
+# Copyright (C) 2002-2005 jointly by the following organizations:
 #     1. California Institute of Technology, Pasadena, CA, USA
 #     2. Japan Science and Technology Agency, Japan
-# 
+#
 # This library is free software; you can redistribute it and/or modify it
 # under the terms of the GNU Lesser General Public License as published by
 # the Free Software Foundation.  A copy of the license agreement is provided
@@ -80,7 +80,7 @@ endif()
 if (NOT R_INTERPRETER)
 	find_program(R_INTERPRETER
         NAMES R R32 R64
-        PATHS 
+        PATHS
           $ENV{ProgramFiles}/R/R-2.15.3/bin
           $ENV{ProgramW6432}/R/R-2.15.3/bin
           $ENV{ProgramFiles}/R/R-2.15.2/bin
@@ -100,12 +100,12 @@ endif()
 #                       R_LIB = ${R_LIB}
 #               R_INTERPRETER = ${R_INTERPRETER}
 #   R_ADDITIONAL_PATH_ENTRIES = ${R_ADDITIONAL_PATH_ENTRIES}
-# 
+#
 # ")
 
 # if we have not found something, stop here to ask for it
 if (NOT R_INTERPRETER)
-	message(FATAL_ERROR "Need the R interpreter in order to create an R package") 
+	message(FATAL_ERROR "Need the R interpreter in order to create an R package")
 endif()
 if (NOT R_LIB)
 	message(FATAL_ERROR "Need the R library, please specify R_LIB")
@@ -119,11 +119,11 @@ endif()
 ####################################################################
 #
 # determine local dependencies, so as to re-swig if one of them changed
-# 
+#
 
-file(GLOB SWIG_DEPENDENCIES 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.i 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.h 
+file(GLOB SWIG_DEPENDENCIES
+	${CMAKE_CURRENT_SOURCE_DIR}/*.i
+	${CMAKE_CURRENT_SOURCE_DIR}/*.h
 	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
 	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
@@ -133,7 +133,7 @@ file(GLOB SWIG_DEPENDENCIES
 # Remove SWIG wrappers if requested
 #
 if (LIBSEDML_REMOVE_WRAPPERS)
-  foreach(file 
+  foreach(file
     ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
   )
@@ -149,7 +149,7 @@ if(NOT UNIX)
 	set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
 endif()
 
-ADD_CUSTOM_COMMAND(	
+ADD_CUSTOM_COMMAND(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
 	       ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
     COMMAND "${SWIG_EXECUTABLE}"
@@ -161,17 +161,17 @@ ADD_CUSTOM_COMMAND(
 			-I${LIBSBML_INCLUDE_DIR}/
 			-c++
 			-r
-			${SWIG_EXTRA_FLAGS}		 
-			${SWIG_EXTRA_ARGS}		 
-			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
+			${SWIG_EXTRA_FLAGS}
+			${SWIG_EXTRA_ARGS}
+			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
 			${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
 	DEPENDS ${SWIG_DEPENDENCIES}
-    COMMENT "Swig R source") 
+    COMMENT "Swig R source")
 
 add_custom_target(binding_r_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
 
-	
+
 ####################################################################
 #
 # Build native library
@@ -187,7 +187,7 @@ include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSEDML_STATIC)
 include_directories(${R_INCLUDE_DIRS})
-if (EXTRA_INCLUDE_DIRS) 
+if (EXTRA_INCLUDE_DIRS)
  include_directories(${EXTRA_INCLUDE_DIRS})
 endif(EXTRA_INCLUDE_DIRS)
 
@@ -215,20 +215,20 @@ install(TARGETS binding_r_lib DESTINATION lib )
 # create the r package
 #
 
-MACRO (TODAY RESULT) 
-    IF (WIN32) 
-        EXECUTE_PROCESS(COMMAND "cmd" " /C date /T" OUTPUT_VARIABLE ${RESULT} OUTPUT_STRIP_TRAILING_WHITESPACE) 
-        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}}) 
-    ELSEIF(UNIX) 
-        EXECUTE_PROCESS(COMMAND "date" "+%Y-%m-%d" OUTPUT_VARIABLE ${RESULT} OUTPUT_STRIP_TRAILING_WHITESPACE) 
-        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}}) 
-    ELSE (WIN32) 
-        MESSAGE(SEND_ERROR "date not implemented") 
-        SET(${RESULT} 000000) 
-    ENDIF (WIN32) 
-ENDMACRO (TODAY) 
+MACRO (TODAY RESULT)
+    IF (WIN32)
+        EXECUTE_PROCESS(COMMAND "cmd" " /C date /T" OUTPUT_VARIABLE ${RESULT} OUTPUT_STRIP_TRAILING_WHITESPACE)
+        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}})
+    ELSEIF(UNIX)
+        EXECUTE_PROCESS(COMMAND "date" "+%Y-%m-%d" OUTPUT_VARIABLE ${RESULT} OUTPUT_STRIP_TRAILING_WHITESPACE)
+        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}})
+    ELSE (WIN32)
+        MESSAGE(SEND_ERROR "date not implemented")
+        SET(${RESULT} 000000)
+    ENDIF (WIN32)
+ENDMACRO (TODAY)
 
-TODAY(CURRENT_DATE) 
+TODAY(CURRENT_DATE)
 
 file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/libSEDML")
 
@@ -253,13 +253,13 @@ file(MAKE_DIRECTORY ${R_LIBRARY_DESTINATION})
 file(MAKE_DIRECTORY ${R_LIBRARY_DESTINATION}/i386)
 file(MAKE_DIRECTORY ${R_LIBRARY_DESTINATION}/x86_64)
 
-add_custom_command(	
+add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libSEDML_${LIBSEDML_VERSION_MAJOR}${LIBSEDML_VERSION_MINOR}${LIBSEDML_VERSION_PATCH}.zip
 	COMMAND "${CMAKE_COMMAND}"
 			-DFILENAME=\"${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R\"
 			-P "${CMAKE_CURRENT_SOURCE_DIR}/patch-swig-file.cmake"
 	COMMAND "${CMAKE_COMMAND}"
-	ARGS  -E copy_if_different 
+	ARGS  -E copy_if_different
 		 ${LIBSEDML_R_NATIVELIB}
 		 ${R_LIBRARY_DESTINATION}/i386
 	COMMAND "${CMAKE_COMMAND}"
@@ -267,20 +267,20 @@ add_custom_command(
 		 ${LIBSEDML_R_NATIVELIB}
 		 ${R_LIBRARY_DESTINATION}/x86_64
 	COMMAND "${CMAKE_COMMAND}"
-	ARGS  -E copy_if_different 
+	ARGS  -E copy_if_different
 		 ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
 		 ${CMAKE_CURRENT_BINARY_DIR}/libSEDML/R
     COMMAND "${R_INTERPRETER}"
-    ARGS  CMD INSTALL --build 
-	      --no-libs 
-		  --no-test-load 
-		  --no-clean-on-error 
-		  --no-multiarch 
+    ARGS  CMD INSTALL --build
+	      --no-libs
+		  --no-test-load
+		  --no-clean-on-error
+		  --no-multiarch
 		  libSEDML
-		  -l temp		  
+		  -l temp
 	MAIN_DEPENDENCY ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
 	DEPENDS ${SWIG_DEPENDENCIES}
-    COMMENT "Create R Package") 
+    COMMENT "Create R Package")
 
 else(APPLE AND ENABLE_UNIVERSAL)
 
@@ -303,29 +303,29 @@ endif(APPLE)
 
 file(MAKE_DIRECTORY ${R_LIBRARY_DESTINATION})
 
-add_custom_command(	
+add_custom_command(
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libSEDML_${LIBSEDML_VERSION_MAJOR}${LIBSEDML_VERSION_MINOR}${LIBSEDML_VERSION_PATCH}.zip
 	COMMAND "${CMAKE_COMMAND}"
 			-DFILENAME=\"${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R\"
 			-P "${CMAKE_CURRENT_SOURCE_DIR}/patch-swig-file.cmake"
 	COMMAND "${CMAKE_COMMAND}"
-	ARGS  -E copy_if_different 
+	ARGS  -E copy_if_different
 		 ${LIBSEDML_R_NATIVELIB}
 		 ${R_LIBRARY_DESTINATION}
 	COMMAND "${CMAKE_COMMAND}"
-	ARGS  -E copy_if_different 
+	ARGS  -E copy_if_different
 		 ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
 		 ${CMAKE_CURRENT_BINARY_DIR}/libSEDML/R
     COMMAND "${R_INTERPRETER}"
-    ARGS  CMD INSTALL --build 
-	      --no-libs 
-		  --no-test-load 
-		  --no-clean-on-error 
-		  --no-multiarch 
+    ARGS  CMD INSTALL --build
+	      --no-libs
+		  --no-test-load
+		  --no-clean-on-error
+		  --no-multiarch
 		  libSEDML
-		  -l temp		  
+		  -l temp
 	MAIN_DEPENDENCY ${CMAKE_CURRENT_BINARY_DIR}/libSEDML.R
 	DEPENDS ${SWIG_DEPENDENCIES}
-    COMMENT "Create R Package (${LIBSEDML_BUILD_TYPE})") 
+    COMMENT "Create R Package (${LIBSEDML_BUILD_TYPE})")
 endif(APPLE AND ENABLE_UNIVERSAL)
 add_custom_target(binding_r_package ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libSEDML_${LIBSEDML_VERSION_MAJOR}${LIBSEDML_VERSION_MINOR}${LIBSEDML_VERSION_PATCH}.zip binding_r_lib)

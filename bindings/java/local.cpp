@@ -8,17 +8,17 @@
  * This file is part of libSEDML.  Please visit http://sedml.org for more
  * information about SEDML, and the latest version of libSEDML.
  *
- * Copyright (C) 2009-2013 jointly by the following organizations: 
+ * Copyright (C) 2009-2013 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
- *  
+ *
  * Copyright (C) 2006-2008 by the California Institute of Technology,
- *     Pasadena, CA, USA 
- *  
- * Copyright (C) 2002-2005 jointly by the following organizations: 
+ *     Pasadena, CA, USA
+ *
+ * Copyright (C) 2002-2005 jointly by the following organizations:
  *     1. California Institute of Technology, Pasadena, CA, USA
  *     2. Japan Science and Technology Agency, Japan
- * 
+ *
  * This library is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation.  A copy of the license agreement is provided
@@ -34,21 +34,21 @@
 //--------------------------------------------------------------------------------
 // (Currently (2008-07-25), this file is used only for Windows)
 //
-// Utility functions for converting encodings between Unicode (wide char), 
+// Utility functions for converting encodings between Unicode (wide char),
 // UTF8 and ANSI CP (multibyte char)
 //
-// 1) char*    convertUnicodeToUTF8(const wchar_t* src_wstr) 
-// 2) char*    convertUnicodeToACP(const wchar_t* src_wstr) 
-// 3) wchar_t* convertUTF8ToUnicode(const char* src_str) 
-// 4) char*    convertACPToUTF8(const char* src_str) 
-// 5) char*    convertUTF8ToACP(const char* src_str) 
+// 1) char*    convertUnicodeToUTF8(const wchar_t* src_wstr)
+// 2) char*    convertUnicodeToACP(const wchar_t* src_wstr)
+// 3) wchar_t* convertUTF8ToUnicode(const char* src_str)
+// 4) char*    convertACPToUTF8(const char* src_str)
+// 5) char*    convertUTF8ToACP(const char* src_str)
 //
 //--------------------------------------------------------------------------------
 
 #ifdef WIN32
 
 // do not include MFC
-#define WIN32_LEAN_AND_MEAN 
+#define WIN32_LEAN_AND_MEAN
 // do not include GDI by default
 #define NOGDI
 
@@ -58,7 +58,7 @@
 //
 // convert Unicode -> UTF8 (for Windows)
 //
-char* convertUnicodeToUTF8(const wchar_t* src_wstr) 
+char* convertUnicodeToUTF8(const wchar_t* src_wstr)
 {
   int    length;
   int    clength;
@@ -69,7 +69,7 @@ char* convertUnicodeToUTF8(const wchar_t* src_wstr)
   //
 
   //
-  // Check wbuf length		
+  // Check wbuf length
   //
   length = WideCharToMultiByte(CP_UTF8, 0, (LPCWSTR)src_wstr, -1, NULL, 0, NULL, NULL);
 
@@ -97,7 +97,7 @@ char* convertUnicodeToUTF8(const wchar_t* src_wstr)
 //
 // convert Unicode -> ANSI CP (for Windows)
 //
-char* convertUnicodeToACP(const wchar_t* src_wstr) 
+char* convertUnicodeToACP(const wchar_t* src_wstr)
 {
   int    length;
   int    clength;
@@ -108,7 +108,7 @@ char* convertUnicodeToACP(const wchar_t* src_wstr)
   //
 
   //
-  // Check wbuf length		
+  // Check wbuf length
   //
   length = WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)src_wstr, -1, NULL, 0, NULL, NULL);
 
@@ -136,7 +136,7 @@ char* convertUnicodeToACP(const wchar_t* src_wstr)
 //
 // convert UTF8 -> Unicode (for Windows)
 //
-wchar_t* convertUTF8ToUnicode(const char* src_str) 
+wchar_t* convertUTF8ToUnicode(const char* src_str)
 {
   int      length;
   int      c_length;
@@ -170,7 +170,7 @@ wchar_t* convertUTF8ToUnicode(const char* src_str)
 //
 // convert ANSI CP -> UTF8  for Windows
 //
-char* convertACPToUTF8(const char* src_str) 
+char* convertACPToUTF8(const char* src_str)
 {
   int      length;
   int      c_length;
@@ -180,7 +180,7 @@ char* convertACPToUTF8(const char* src_str)
   //
   // ANSI CP -> Unicode
   //
-  
+
   // Check src_str length
   length = MultiByteToWideChar(CP_ACP, 0, (LPCSTR)src_str, -1, NULL, 0);
   if(length == 0){
@@ -202,7 +202,7 @@ char* convertACPToUTF8(const char* src_str)
   // Unicode -> UTF8
   //
 
-  // Check wbuf length		
+  // Check wbuf length
   length = WideCharToMultiByte(CP_UTF8, 0, (LPCWSTR)wbuf,-1,NULL,0,NULL,NULL);
 
   if(length == 0){
@@ -231,7 +231,7 @@ char* convertACPToUTF8(const char* src_str)
 //
 // convert UTF8 -> ANSI CP  for Windows
 //
-char* convertUTF8ToACP(const char* src_str) 
+char* convertUTF8ToACP(const char* src_str)
 {
   int      length;
   int      c_length;
@@ -262,7 +262,7 @@ char* convertUTF8ToACP(const char* src_str)
   // Unicode -> ANSI CP
   //
 
-  // Check wbuf length		
+  // Check wbuf length
   length = WideCharToMultiByte(CP_ACP, 0, (LPCWSTR)wbuf,-1,NULL,0,NULL,NULL);
 
   if(length == 0){
