@@ -166,10 +166,6 @@ mNotes     ( NULL )
  */
 SedBase::SedBase(const SedBase& orig)
 {
-  if (&orig == NULL)
-  {
-    throw SedConstructorException("Null argument to copy constructor");
-  }
   this->mMetaId = orig.mMetaId;
 
   if(orig.mNotes != NULL)
@@ -227,11 +223,7 @@ SedBase::~SedBase ()
  */
 SedBase& SedBase::operator=(const SedBase& rhs)
 {
-  if (&rhs == NULL)
-  {
-    throw SedConstructorException("Null argument to assignment operator");
-  }
-  else if(&rhs!=this)
+  if(&rhs!=this)
   {
     this->mMetaId = rhs.mMetaId;
 
@@ -640,11 +632,7 @@ SedBase::isSetAnnotation () const
 int
 SedBase::setMetaId (const std::string& metaid)
 {
-  if (&(metaid) == NULL)
-  {
-    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-  }
-  else if (getLevel() == 1)
+  if (getLevel() == 1)
   {
     return LIBSEDML_UNEXPECTED_ATTRIBUTE;
   }
@@ -775,11 +763,6 @@ SedBase::setAnnotation (const XMLNode* annotation)
 int
 SedBase::setAnnotation (const std::string& annotation)
 {
-  if (&(annotation) == NULL)
-  {
-    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-  }
-  else
   {
     int success = LIBSEDML_OPERATION_FAILED;
 
@@ -1125,11 +1108,7 @@ int
 SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
 {
   int success = LIBSEDML_OPERATION_FAILED;
-  if (&(notes) == NULL)
-  {
-    success = LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-  }
-  else if (notes.empty())
+  if (notes.empty())
   {
     success = unsetNotes();
   }

@@ -87,15 +87,10 @@ SedWriter::~SedWriter ()
 int
 SedWriter::setProgramName (const std::string& name)
 {
-  if (&(name) == NULL)
-  {
-    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-  }
-  else  
-  {
-    mProgramName = name;
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
+  
+  mProgramName = name;
+  return LIBSEDML_OPERATION_SUCCESS;
+  
 }
 
 
@@ -111,15 +106,10 @@ SedWriter::setProgramName (const std::string& name)
 int
 SedWriter::setProgramVersion (const std::string& version)
 {
-  if (&(version) == NULL)
-  {
-    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-  }
-  else  
-  {
-    mProgramVersion = version;
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
+  
+  mProgramVersion = version;
+  return LIBSEDML_OPERATION_SUCCESS;
+  
 }
 
 

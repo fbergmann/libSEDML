@@ -104,11 +104,6 @@ SedNamespaces::~SedNamespaces()
  */
 SedNamespaces::SedNamespaces(const SedNamespaces& orig)
 {
-  if (&orig == NULL)
-  {
-    throw SedConstructorException("Null argument to copy constructor");
-  }
-  else
   {
     mLevel   = orig.mLevel;
     mVersion = orig.mVersion;
@@ -137,11 +132,7 @@ SedNamespaces::getSupportedNamespaces()
 SedNamespaces&
 SedNamespaces::operator=(const SedNamespaces& rhs)
 {
-  if (&rhs == NULL)
-  {
-    throw SedConstructorException("Null argument to assignment operator");
-  }
-  else if (&rhs != this)
+  if (&rhs != this)
   {
     mLevel   = rhs.mLevel;
     mVersion = rhs.mVersion;
