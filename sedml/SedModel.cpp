@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,64 +48,57 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedModel with the given level, version, and package version.
  */
-SedModel::SedModel (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
-	, mName ("")
-	, mLanguage ("")
-	, mSource ("")
-	, mChanges (level, version)
+SedModel::SedModel(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
+  , mName("")
+  , mLanguage("")
+  , mSource("")
+  , mChanges(level, version)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Creates a new SedModel with the given SedNamespaces object.
  */
-SedModel::SedModel (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
-	, mName ("")
-	, mLanguage ("")
-	, mSource ("")
-	, mChanges (sedns)
+SedModel::SedModel(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
+  , mName("")
+  , mLanguage("")
+  , mSource("")
+  , mChanges(sedns)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Copy constructor for SedModel.
  */
-SedModel::SedModel (const SedModel& orig)
-	: SedBase(orig)
+SedModel::SedModel(const SedModel& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-		mName  = orig.mName;
-		mLanguage  = orig.mLanguage;
-		mSource  = orig.mSource;
-		mChanges  = orig.mChanges;
+  mId  = orig.mId;
+  mName  = orig.mName;
+  mLanguage  = orig.mLanguage;
+  mSource  = orig.mSource;
+  mChanges  = orig.mChanges;
 
-		// connect to child objects
-		connectToChild();
-	}
+  // connect to child objects
+  connectToChild();
 }
 
 
@@ -115,23 +108,20 @@ SedModel::SedModel (const SedModel& orig)
 SedModel&
 SedModel::operator=(const SedModel& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-		mName  = rhs.mName;
-		mLanguage  = rhs.mLanguage;
-		mSource  = rhs.mSource;
-		mChanges  = rhs.mChanges;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+      mName  = rhs.mName;
+      mLanguage  = rhs.mLanguage;
+      mSource  = rhs.mSource;
+      mChanges  = rhs.mChanges;
 
-		// connect to child objects
-		connectToChild();
-	}
-	return *this;
+      // connect to child objects
+      connectToChild();
+    }
+
+  return *this;
 }
 
 
@@ -139,16 +129,16 @@ SedModel::operator=(const SedModel& rhs)
  * Clone for SedModel.
  */
 SedModel*
-SedModel::clone () const
+SedModel::clone() const
 {
-	return new SedModel(*this);
+  return new SedModel(*this);
 }
 
 
 /*
  * Destructor for SedModel.
  */
-SedModel::~SedModel ()
+SedModel::~SedModel()
 {
 }
 
@@ -159,7 +149,7 @@ SedModel::~SedModel ()
 const std::string&
 SedModel::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -169,7 +159,7 @@ SedModel::getId() const
 const std::string&
 SedModel::getName() const
 {
-	return mName;
+  return mName;
 }
 
 
@@ -179,7 +169,7 @@ SedModel::getName() const
 const std::string&
 SedModel::getLanguage() const
 {
-	return mLanguage;
+  return mLanguage;
 }
 
 
@@ -189,7 +179,7 @@ SedModel::getLanguage() const
 const std::string&
 SedModel::getSource() const
 {
-	return mSource;
+  return mSource;
 }
 
 
@@ -199,7 +189,7 @@ SedModel::getSource() const
 bool
 SedModel::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -209,7 +199,7 @@ SedModel::isSetId() const
 bool
 SedModel::isSetName() const
 {
-	return (mName.empty() == false);
+  return (mName.empty() == false);
 }
 
 
@@ -219,7 +209,7 @@ SedModel::isSetName() const
 bool
 SedModel::isSetLanguage() const
 {
-	return (mLanguage.empty() == false);
+  return (mLanguage.empty() == false);
 }
 
 
@@ -229,7 +219,7 @@ SedModel::isSetLanguage() const
 bool
 SedModel::isSetSource() const
 {
-	return (mSource.empty() == false);
+  return (mSource.empty() == false);
 }
 
 
@@ -239,7 +229,7 @@ SedModel::isSetSource() const
 int
 SedModel::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -249,15 +239,10 @@ SedModel::setId(const std::string& id)
 int
 SedModel::setName(const std::string& name)
 {
-	if (&(name) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mName = name;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -267,15 +252,10 @@ SedModel::setName(const std::string& name)
 int
 SedModel::setLanguage(const std::string& language)
 {
-	if (&(language) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mLanguage = language;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mLanguage = language;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -285,15 +265,10 @@ SedModel::setLanguage(const std::string& language)
 int
 SedModel::setSource(const std::string& source)
 {
-	if (&(source) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mSource = source;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mSource = source;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -303,16 +278,16 @@ SedModel::setSource(const std::string& source)
 int
 SedModel::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -322,16 +297,16 @@ SedModel::unsetId()
 int
 SedModel::unsetName()
 {
-	mName.erase();
+  mName.erase();
 
-	if (mName.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -341,16 +316,16 @@ SedModel::unsetName()
 int
 SedModel::unsetLanguage()
 {
-	mLanguage.erase();
+  mLanguage.erase();
 
-	if (mLanguage.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mLanguage.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -360,16 +335,16 @@ SedModel::unsetLanguage()
 int
 SedModel::unsetSource()
 {
-	mSource.erase();
+  mSource.erase();
 
-	if (mSource.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mSource.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -379,7 +354,7 @@ SedModel::unsetSource()
 const SedListOfChanges*
 SedModel::getListOfChanges() const
 {
-	return &mChanges;
+  return &mChanges;
 }
 
 
@@ -389,7 +364,7 @@ SedModel::getListOfChanges() const
 SedChange*
 SedModel::removeChange(unsigned int n)
 {
-	return mChanges.remove(n);
+  return mChanges.remove(n);
 }
 
 
@@ -399,7 +374,7 @@ SedModel::removeChange(unsigned int n)
 SedChange*
 SedModel::removeChange(const std::string& sid)
 {
-	return mChanges.remove(sid);
+  return mChanges.remove(sid);
 }
 
 
@@ -409,7 +384,7 @@ SedModel::removeChange(const std::string& sid)
 SedChange*
 SedModel::getChange(unsigned int n)
 {
-	return mChanges.get(n);
+  return mChanges.get(n);
 }
 
 
@@ -419,7 +394,7 @@ SedModel::getChange(unsigned int n)
 const SedChange*
 SedModel::getChange(unsigned int n) const
 {
-	return mChanges.get(n);
+  return mChanges.get(n);
 }
 
 
@@ -429,7 +404,7 @@ SedModel::getChange(unsigned int n) const
 SedChange*
 SedModel::getChange(const std::string& sid)
 {
-	return mChanges.get(sid);
+  return mChanges.get(sid);
 }
 
 
@@ -439,7 +414,7 @@ SedModel::getChange(const std::string& sid)
 const SedChange*
 SedModel::getChange(const std::string& sid) const
 {
-	return mChanges.get(sid);
+  return mChanges.get(sid);
 }
 
 
@@ -458,9 +433,10 @@ SedModel::getChange(const std::string& sid) const
 int
 SedModel::addChange(const SedChange* sc)
 {
-	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mChanges.append(sc);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  mChanges.append(sc);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -469,100 +445,110 @@ SedModel::addChange(const SedChange* sc)
  *
  * @return the number of SedChange objects in this SedModel
  */
-unsigned int 
+unsigned int
 SedModel::getNumChanges() const
 {
-	return mChanges.size();
+  return mChanges.size();
 }
 
 /**
  * Creates a new SedRemoveXML object, adds it to this SedModels
- * SedModel and returns the SedRemoveXML object created. 
+ * SedModel and returns the SedRemoveXML object created.
  *
  * @return a new SedRemoveXML object instance
  *
  * @see addRemoveXML(const SedChange* sc)
  */
-SedRemoveXML* 
+SedRemoveXML*
 SedModel::createRemoveXML()
 {
-	SedRemoveXML *temp = new SedRemoveXML();
-	if (temp != NULL) mChanges.appendAndOwn(temp);
-	return temp;
+  SedRemoveXML *temp = new SedRemoveXML();
+
+  if (temp != NULL) mChanges.appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedAddXML object, adds it to this SedModels
- * SedModel and returns the SedAddXML object created. 
+ * SedModel and returns the SedAddXML object created.
  *
  * @return a new SedAddXML object instance
  *
  * @see addAddXML(const SedChange* sc)
  */
-SedAddXML* 
+SedAddXML*
 SedModel::createAddXML()
 {
-	SedAddXML *temp = new SedAddXML();
-	if (temp != NULL) mChanges.appendAndOwn(temp);
-	return temp;
+  SedAddXML *temp = new SedAddXML();
+
+  if (temp != NULL) mChanges.appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedChangeXML object, adds it to this SedModels
- * SedModel and returns the SedChangeXML object created. 
+ * SedModel and returns the SedChangeXML object created.
  *
  * @return a new SedChangeXML object instance
  *
  * @see addChangeXML(const SedChange* sc)
  */
-SedChangeXML* 
+SedChangeXML*
 SedModel::createChangeXML()
 {
-	SedChangeXML *temp = new SedChangeXML();
-	if (temp != NULL) mChanges.appendAndOwn(temp);
-	return temp;
+  SedChangeXML *temp = new SedChangeXML();
+
+  if (temp != NULL) mChanges.appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedChangeAttribute object, adds it to this SedModels
- * SedModel and returns the SedChangeAttribute object created. 
+ * SedModel and returns the SedChangeAttribute object created.
  *
  * @return a new SedChangeAttribute object instance
  *
  * @see addChangeAttribute(const SedChange* sc)
  */
-SedChangeAttribute* 
+SedChangeAttribute*
 SedModel::createChangeAttribute()
 {
-	SedChangeAttribute *temp = new SedChangeAttribute();
-	if (temp != NULL) mChanges.appendAndOwn(temp);
-	return temp;
+  SedChangeAttribute *temp = new SedChangeAttribute();
+
+  if (temp != NULL) mChanges.appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedComputeChange object, adds it to this SedModels
- * SedModel and returns the SedComputeChange object created. 
+ * SedModel and returns the SedComputeChange object created.
  *
  * @return a new SedComputeChange object instance
  *
  * @see addComputeChange(const SedChange* sc)
  */
-SedComputeChange* 
+SedComputeChange*
 SedModel::createComputeChange()
 {
-	SedComputeChange *temp = new SedComputeChange();
-	if (temp != NULL) mChanges.appendAndOwn(temp);
-	return temp;
+  SedComputeChange *temp = new SedComputeChange();
+
+  if (temp != NULL) mChanges.appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
  * Returns the XML element name of this object
  */
 const std::string&
-SedModel::getElementName () const
+SedModel::getElementName() const
 {
-	static const string name = "model";
-	return name;
+  static const string name = "model";
+  return name;
 }
 
 
@@ -572,18 +558,18 @@ SedModel::getElementName () const
 SedBase*
 SedModel::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+  SedBase* object = NULL;
 
-	const string& name   = stream.peek().getName();
+  const string& name   = stream.peek().getName();
 
-	if (name == "listOfChanges")
-	{
-		object = &mChanges;
-	}
+  if (name == "listOfChanges")
+    {
+      object = &mChanges;
+    }
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -591,11 +577,11 @@ SedModel::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedModel::connectToChild ()
+SedModel::connectToChild()
 {
-	SedBase::connectToChild();
+  SedBase::connectToChild();
 
-	mChanges.connectToParent(this);
+  mChanges.connectToParent(this);
 }
 
 
@@ -603,9 +589,9 @@ SedModel::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedModel::getTypeCode () const
+SedModel::getTypeCode() const
 {
-	return SEDML_MODEL;
+  return SEDML_MODEL;
 }
 
 
@@ -613,17 +599,17 @@ SedModel::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedModel::hasRequiredAttributes () const
+SedModel::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetId() == false)
-		allPresent = false;
+  if (isSetId() == false)
+    allPresent = false;
 
-	if (isSetSource() == false)
-		allPresent = false;
+  if (isSetSource() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -631,11 +617,11 @@ SedModel::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-SedModel::hasRequiredElements () const
+SedModel::hasRequiredElements() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -645,13 +631,14 @@ SedModel::hasRequiredElements () const
  * write contained elements
  */
 void
-SedModel::writeElements (XMLOutputStream& stream) const
+SedModel::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
-	if (getNumChanges() > 0)
-	{
-		mChanges.write(stream);
-	}
+  SedBase::writeElements(stream);
+
+  if (getNumChanges() > 0)
+    {
+      mChanges.write(stream);
+    }
 }
 
 
@@ -664,9 +651,9 @@ SedModel::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedModel::accept (SedVisitor& v) const
+SedModel::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -680,10 +667,10 @@ SedModel::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedModel::setSedDocument (SedDocument* d)
+SedModel::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
-	mChanges.setSedDocument(d);
+  SedBase::setSedDocument(d);
+  mChanges.setSedDocument(d);
 }
 
 
@@ -698,12 +685,12 @@ SedModel::setSedDocument (SedDocument* d)
 void
 SedModel::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
-	attributes.add("name");
-	attributes.add("language");
-	attributes.add("source");
+  attributes.add("id");
+  attributes.add("name");
+  attributes.add("language");
+  attributes.add("source");
 }
 
 
@@ -716,76 +703,76 @@ SedModel::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedModel::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedModel::readAttributes(const XMLAttributes& attributes,
+                         const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "required" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+  //
+  // id SId  ( use = "required" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedModel>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedModel>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// name string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("name", mName, getErrorLog(), false);
+  //
+  // name string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("name", mName, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mName.empty() == true)
-		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedModel>");
-		}
-	}
+      if (mName.empty() == true)
+        {
+          logEmptyString(mName, getLevel(), getVersion(), "<SedModel>");
+        }
+    }
 
-	//
-	// language string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("language", mLanguage, getErrorLog(), false);
+  //
+  // language string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("language", mLanguage, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mLanguage.empty() == true)
-		{
-			logEmptyString(mLanguage, getLevel(), getVersion(), "<SedModel>");
-		}
-	}
+      if (mLanguage.empty() == true)
+        {
+          logEmptyString(mLanguage, getLevel(), getVersion(), "<SedModel>");
+        }
+    }
 
-	//
-	// source string   ( use = "required" )
-	//
-	assigned = attributes.readInto("source", mSource, getErrorLog(), true);
+  //
+  // source string   ( use = "required" )
+  //
+  assigned = attributes.readInto("source", mSource, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mSource.empty() == true)
-		{
-			logEmptyString(mSource, getLevel(), getVersion(), "<SedModel>");
-		}
-	}
+      if (mSource.empty() == true)
+        {
+          logEmptyString(mSource, getLevel(), getVersion(), "<SedModel>");
+        }
+    }
 
 }
 
@@ -798,22 +785,22 @@ SedModel::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedModel::writeAttributes (XMLOutputStream& stream) const
+void
+SedModel::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
-	if (isSetName() == true)
-		stream.writeAttribute("name", getPrefix(), mName);
+  if (isSetName() == true)
+    stream.writeAttribute("name", getPrefix(), mName);
 
-	if (isSetLanguage() == true)
-		stream.writeAttribute("language", getPrefix(), mLanguage);
+  if (isSetLanguage() == true)
+    stream.writeAttribute("language", getPrefix(), mLanguage);
 
-	if (isSetSource() == true)
-		stream.writeAttribute("source", getPrefix(), mSource);
+  if (isSetSource() == true)
+    stream.writeAttribute("source", getPrefix(), mSource);
 
 }
 
@@ -822,33 +809,33 @@ SedModel::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfModels::SedListOfModels(unsigned int level, 
-	                unsigned int version)
- : SedListOf(level, version)
+SedListOfModels::SedListOfModels(unsigned int level,
+                                 unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfModels::SedListOfModels(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfModels 
+ * Returns a deep copy of this SedListOfModels
  */
-SedListOfModels* 
-SedListOfModels::clone () const
- {
-	return new SedListOfModels(*this);
+SedListOfModels*
+SedListOfModels::clone() const
+{
+  return new SedListOfModels(*this);
 }
 
 
@@ -858,7 +845,7 @@ SedListOfModels::clone () const
 SedModel*
 SedListOfModels::get(unsigned int n)
 {
-	return static_cast<SedModel*>(SedListOf::get(n));
+  return static_cast<SedModel*>(SedListOf::get(n));
 }
 
 
@@ -868,7 +855,7 @@ SedListOfModels::get(unsigned int n)
 const SedModel*
 SedListOfModels::get(unsigned int n) const
 {
-	return static_cast<const SedModel*>(SedListOf::get(n));
+  return static_cast<const SedModel*>(SedListOf::get(n));
 }
 
 
@@ -878,8 +865,8 @@ SedListOfModels::get(unsigned int n) const
 SedModel*
 SedListOfModels::get(const std::string& sid)
 {
-	return const_cast<SedModel*>(
-	  static_cast<const SedListOfModels&>(*this).get(sid));
+  return const_cast<SedModel*>(
+           static_cast<const SedListOfModels&>(*this).get(sid));
 }
 
 
@@ -889,10 +876,10 @@ SedListOfModels::get(const std::string& sid)
 const SedModel*
 SedListOfModels::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedModel>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedModel*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedModel>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedModel*>(*result);
 }
 
 
@@ -911,9 +898,10 @@ SedListOfModels::get(const std::string& sid) const
 int
 SedListOfModels::addModel(const SedModel* sm)
 {
-	if(sm == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(sm);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sm == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(sm);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -922,26 +910,28 @@ SedListOfModels::addModel(const SedModel* sm)
  *
  * @return the number of SedModel objects in this SedListOfModels
  */
-unsigned int 
+unsigned int
 SedListOfModels::getNumModels() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedModel object, adds it to this SedListOfModelss
- * SedModel and returns the SedModel object created. 
+ * SedModel and returns the SedModel object created.
  *
  * @return a new SedModel object instance
  *
  * @see addSedModel(const SedModel* sm)
  */
-SedModel* 
+SedModel*
 SedListOfModels::createModel()
 {
-	SedModel *temp = new SedModel();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedModel *temp = new SedModel();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -950,7 +940,7 @@ SedListOfModels::createModel()
 SedModel*
 SedListOfModels::remove(unsigned int n)
 {
-	return static_cast<SedModel*>(SedListOf::remove(n));
+  return static_cast<SedModel*>(SedListOf::remove(n));
 }
 
 
@@ -960,18 +950,18 @@ SedListOfModels::remove(unsigned int n)
 SedModel*
 SedListOfModels::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedModel>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedModel>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedModel*> (item);
+  return static_cast <SedModel*>(item);
 }
 
 
@@ -979,10 +969,10 @@ SedListOfModels::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfModels::getElementName () const
+SedListOfModels::getElementName() const
 {
-	static const string name = "listOfModels";
-	return name;
+  static const string name = "listOfModels";
+  return name;
 }
 
 
@@ -990,9 +980,9 @@ SedListOfModels::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfModels::getTypeCode () const
+SedListOfModels::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -1000,9 +990,9 @@ SedListOfModels::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfModels::getItemTypeCode () const
+SedListOfModels::getItemTypeCode() const
 {
-	return SEDML_MODEL;
+  return SEDML_MODEL;
 }
 
 
@@ -1014,16 +1004,16 @@ SedListOfModels::getItemTypeCode () const
 SedBase*
 SedListOfModels::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "model")
-	{
-		object = new SedModel(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "model")
+    {
+      object = new SedModel(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -1038,20 +1028,20 @@ SedListOfModels::createObject(XMLInputStream& stream)
 void
 SedListOfModels::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -1065,7 +1055,7 @@ LIBSEDML_EXTERN
 SedModel_t *
 SedModel_create(unsigned int level, unsigned int version)
 {
-	return new SedModel(level, version);
+  return new SedModel(level, version);
 }
 
 
@@ -1076,8 +1066,8 @@ LIBSEDML_EXTERN
 void
 SedModel_free(SedModel_t * sm)
 {
-	if (sm != NULL)
-		delete sm;
+  if (sm != NULL)
+    delete sm;
 }
 
 
@@ -1088,14 +1078,14 @@ LIBSEDML_EXTERN
 SedModel_t *
 SedModel_clone(SedModel_t * sm)
 {
-	if (sm != NULL)
-	{
-		return static_cast<SedModel_t*>(sm->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sm != NULL)
+    {
+      return static_cast<SedModel_t*>(sm->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -1106,10 +1096,10 @@ LIBSEDML_EXTERN
 char *
 SedModel_getId(SedModel_t * sm)
 {
-	if (sm == NULL)
-		return NULL;
+  if (sm == NULL)
+    return NULL;
 
-	return sm->getId().empty() ? NULL : safe_strdup(sm->getId().c_str());
+  return sm->getId().empty() ? NULL : safe_strdup(sm->getId().c_str());
 }
 
 
@@ -1120,10 +1110,10 @@ LIBSEDML_EXTERN
 char *
 SedModel_getName(SedModel_t * sm)
 {
-	if (sm == NULL)
-		return NULL;
+  if (sm == NULL)
+    return NULL;
 
-	return sm->getName().empty() ? NULL : safe_strdup(sm->getName().c_str());
+  return sm->getName().empty() ? NULL : safe_strdup(sm->getName().c_str());
 }
 
 
@@ -1134,10 +1124,10 @@ LIBSEDML_EXTERN
 char *
 SedModel_getLanguage(SedModel_t * sm)
 {
-	if (sm == NULL)
-		return NULL;
+  if (sm == NULL)
+    return NULL;
 
-	return sm->getLanguage().empty() ? NULL : safe_strdup(sm->getLanguage().c_str());
+  return sm->getLanguage().empty() ? NULL : safe_strdup(sm->getLanguage().c_str());
 }
 
 
@@ -1148,10 +1138,10 @@ LIBSEDML_EXTERN
 char *
 SedModel_getSource(SedModel_t * sm)
 {
-	if (sm == NULL)
-		return NULL;
+  if (sm == NULL)
+    return NULL;
 
-	return sm->getSource().empty() ? NULL : safe_strdup(sm->getSource().c_str());
+  return sm->getSource().empty() ? NULL : safe_strdup(sm->getSource().c_str());
 }
 
 
@@ -1162,7 +1152,7 @@ LIBSEDML_EXTERN
 int
 SedModel_isSetId(SedModel_t * sm)
 {
-	return (sm != NULL) ? static_cast<int>(sm->isSetId()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->isSetId()) : 0;
 }
 
 
@@ -1173,7 +1163,7 @@ LIBSEDML_EXTERN
 int
 SedModel_isSetName(SedModel_t * sm)
 {
-	return (sm != NULL) ? static_cast<int>(sm->isSetName()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->isSetName()) : 0;
 }
 
 
@@ -1184,7 +1174,7 @@ LIBSEDML_EXTERN
 int
 SedModel_isSetLanguage(SedModel_t * sm)
 {
-	return (sm != NULL) ? static_cast<int>(sm->isSetLanguage()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->isSetLanguage()) : 0;
 }
 
 
@@ -1195,7 +1185,7 @@ LIBSEDML_EXTERN
 int
 SedModel_isSetSource(SedModel_t * sm)
 {
-	return (sm != NULL) ? static_cast<int>(sm->isSetSource()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->isSetSource()) : 0;
 }
 
 
@@ -1206,7 +1196,7 @@ LIBSEDML_EXTERN
 int
 SedModel_setId(SedModel_t * sm, const char * id)
 {
-	return (sm != NULL) ? sm->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1217,7 +1207,7 @@ LIBSEDML_EXTERN
 int
 SedModel_setName(SedModel_t * sm, const char * name)
 {
-	return (sm != NULL) ? sm->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1228,7 +1218,7 @@ LIBSEDML_EXTERN
 int
 SedModel_setLanguage(SedModel_t * sm, const char * language)
 {
-	return (sm != NULL) ? sm->setLanguage(language) : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->setLanguage(language) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1239,7 +1229,7 @@ LIBSEDML_EXTERN
 int
 SedModel_setSource(SedModel_t * sm, const char * source)
 {
-	return (sm != NULL) ? sm->setSource(source) : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->setSource(source) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1250,7 +1240,7 @@ LIBSEDML_EXTERN
 int
 SedModel_unsetId(SedModel_t * sm)
 {
-	return (sm != NULL) ? sm->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1261,7 +1251,7 @@ LIBSEDML_EXTERN
 int
 SedModel_unsetName(SedModel_t * sm)
 {
-	return (sm != NULL) ? sm->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1272,7 +1262,7 @@ LIBSEDML_EXTERN
 int
 SedModel_unsetLanguage(SedModel_t * sm)
 {
-	return (sm != NULL) ? sm->unsetLanguage() : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->unsetLanguage() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1283,7 +1273,7 @@ LIBSEDML_EXTERN
 int
 SedModel_unsetSource(SedModel_t * sm)
 {
-	return (sm != NULL) ? sm->unsetSource() : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->unsetSource() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1291,84 +1281,84 @@ LIBSEDML_EXTERN
 int
 SedModel_addChange(SedModel_t * sm, SedChange_t * sc)
 {
-	return  (sm != NULL) ? sm->addChange(sc) : LIBSBML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->addChange(sc) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedRemoveXML_t *
 SedModel_createRemoveXML(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createRemoveXML() : NULL;
+  return (sm != NULL) ? sm->createRemoveXML() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedAddXML_t *
 SedModel_createAddXML(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createAddXML() : NULL;
+  return (sm != NULL) ? sm->createAddXML() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChangeXML_t *
 SedModel_createChangeXML(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createChangeXML() : NULL;
+  return (sm != NULL) ? sm->createChangeXML() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChangeAttribute_t *
 SedModel_createChangeAttribute(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createChangeAttribute() : NULL;
+  return (sm != NULL) ? sm->createChangeAttribute() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedComputeChange_t *
 SedModel_createComputeChange(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->createComputeChange() : NULL;
+  return (sm != NULL) ? sm->createComputeChange() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
 SedModel_getSedListOfChanges(SedModel_t * sm)
 {
-	return  (sm != NULL) ? (SedListOf_t *)sm->getListOfChanges() : NULL;
+  return (sm != NULL) ? (SedListOf_t *)sm->getListOfChanges() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
 SedModel_getChange(SedModel_t * sm, unsigned int n)
 {
-	return  (sm != NULL) ? sm->getChange(n) : NULL;
+  return (sm != NULL) ? sm->getChange(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
 SedModel_getChangeById(SedModel_t * sm, const char * sid)
 {
-	return  (sm != NULL) ? sm->getChange(sid) : NULL;
+  return (sm != NULL) ? sm->getChange(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
 SedModel_getNumChanges(SedModel_t * sm)
 {
-	return  (sm != NULL) ? sm->getNumChanges() : SEDML_INT_MAX;
+  return (sm != NULL) ? sm->getNumChanges() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
 SedModel_removeChange(SedModel_t * sm, unsigned int n)
 {
-	return  (sm != NULL) ? sm->removeChange(n) : NULL;
+  return (sm != NULL) ? sm->removeChange(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedChange_t *
 SedModel_removeChangeById(SedModel_t * sm, const char * sid)
 {
-	return  (sm != NULL) ? sm->removeChange(sid) : NULL;
+  return (sm != NULL) ? sm->removeChange(sid) : NULL;
 }
 
 /**
@@ -1378,7 +1368,7 @@ LIBSEDML_EXTERN
 int
 SedModel_hasRequiredAttributes(SedModel_t * sm)
 {
-	return (sm != NULL) ? static_cast<int>(sm->hasRequiredAttributes()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1389,7 +1379,7 @@ LIBSEDML_EXTERN
 int
 SedModel_hasRequiredElements(SedModel_t * sm)
 {
-	return (sm != NULL) ? static_cast<int>(sm->hasRequiredElements()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->hasRequiredElements()) : 0;
 }
 
 
@@ -1400,10 +1390,10 @@ LIBSEDML_EXTERN
 SedModel_t *
 SedListOfModels_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfModels *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfModels *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1414,10 +1404,10 @@ LIBSEDML_EXTERN
 SedModel_t *
 SedListOfModels_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfModels *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfModels *>(lo)->remove(sid) : NULL;
 }
 
 

@@ -5,22 +5,22 @@
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedErrorLog
@@ -111,7 +111,7 @@ public:
    *
    * @see getNumErrors()
    */
-  const SedError* getError (unsigned int n) const;
+  const SedError* getError(unsigned int n) const;
 
 
   /**
@@ -142,32 +142,32 @@ public:
    */
   unsigned int getNumFailsWithSeverity(unsigned int severity);
 
-   /**
-   * Returns the number of errors that have been logged with the given
-   * severity code.
-   *
-   * LibSed associates severity levels with every SedError object to
-   * provide an indication of how serious the problem is.  Severities range
-   * from informational diagnostics to fatal (irrecoverable) errors.  Given
-   * an SedError object instance, a caller can interrogate it for its
-   * severity level using methods such as SedError::getSeverity(),
-   * SedError::isFatal(), and so on.  The present method encapsulates
-   * iteration and interrogation of all objects in an SedErrorLog, making
-   * it easy to check for the presence of error objects with specific
-   * severity levels.
-   *
-   * @if clike @param severity a value from
-   * #SedErrorSeverity_t @endif@if java @param severity a
-   * value from the set of <code>LIBSEDML_SEV_</code> constants defined by
-   * the interface class <code><a
-   * href="libsbmlConstants.html">libsbmlConstants</a></code> @endif@if python @param severity a
-   * value from the set of <code>LIBSEDML_SEV_</code> constants defined by
-   * the interface class @link libsbml libsbml@endlink. @endif@~
-   *
-   * @return a count of the number of errors with the given severity code.
-   *
-   * @see getNumErrors()
-   */
+  /**
+  * Returns the number of errors that have been logged with the given
+  * severity code.
+  *
+  * LibSed associates severity levels with every SedError object to
+  * provide an indication of how serious the problem is.  Severities range
+  * from informational diagnostics to fatal (irrecoverable) errors.  Given
+  * an SedError object instance, a caller can interrogate it for its
+  * severity level using methods such as SedError::getSeverity(),
+  * SedError::isFatal(), and so on.  The present method encapsulates
+  * iteration and interrogation of all objects in an SedErrorLog, making
+  * it easy to check for the presence of error objects with specific
+  * severity levels.
+  *
+  * @if clike @param severity a value from
+  * #SedErrorSeverity_t @endif@if java @param severity a
+  * value from the set of <code>LIBSEDML_SEV_</code> constants defined by
+  * the interface class <code><a
+  * href="libsbmlConstants.html">libsbmlConstants</a></code> @endif@if python @param severity a
+  * value from the set of <code>LIBSEDML_SEV_</code> constants defined by
+  * the interface class @link libsbml libsbml@endlink. @endif@~
+  *
+  * @return a count of the number of errors with the given severity code.
+  *
+  * @see getNumErrors()
+  */
   unsigned int getNumFailsWithSeverity(unsigned int severity) const;
 
 
@@ -176,13 +176,13 @@ public:
   /**
    * Creates a new, empty SedErrorLog.
    */
-  SedErrorLog ();
+  SedErrorLog();
 
 
   /**
    * Destroys this SedErrorLog.
    */
-  virtual ~SedErrorLog ();
+  virtual ~SedErrorLog();
 
 
   /**
@@ -194,19 +194,19 @@ public:
    * @param level an unsigned int, the Sed Level
    *
    * @param version an unsigned int, the Sed Level's Version
-   * 
+   *
    * @param details a string containing additional details about the error.
    * If the error code in @p errorId is one that is recognized by SedError,
    * the given message is @em appended to a predefined message associated
    * with the given code.  If the error code is not recognized, the message
    * is stored as-is as the text of the error.
-   * 
+   *
    * @param line an unsigned int, the line number at which the error occured.
-   * 
+   *
    * @param column an unsigned int, the column number at which the error occured.
-   * 
+   *
    * @param severity an integer indicating severity of the error.
-   * 
+   *
    * @param category an integer indicating the category to which the error
    * belongs.
    *
@@ -214,29 +214,29 @@ public:
    */
   void logError
   (
-      const unsigned int errorId  = 0
-    , const unsigned int level    =SEDML_DEFAULT_LEVEL
-    , const unsigned int version  =SEDML_DEFAULT_VERSION
-    , const std::string& details  = ""
-    , const unsigned int line     = 0
-    , const unsigned int column   = 0
-    , const unsigned int severity = LIBSEDML_SEV_ERROR
-    , const unsigned int category = LIBSEDML_CAT_SEDML
+    const unsigned int errorId  = 0
+                                  , const unsigned int level    = SEDML_DEFAULT_LEVEL
+                                      , const unsigned int version  = SEDML_DEFAULT_VERSION
+                                          , const std::string& details  = ""
+                                              , const unsigned int line     = 0
+                                                  , const unsigned int column   = 0
+                                                      , const unsigned int severity = LIBSEDML_SEV_ERROR
+                                                          , const unsigned int category = LIBSEDML_CAT_SEDML
   );
 
 
   void logPackageError
   (
-      const std::string& package    = "core"
-    , const unsigned int errorId    = 0
-    , const unsigned int pkgVersion = 1
-    , const unsigned int level      =SEDML_DEFAULT_LEVEL
-    , const unsigned int version    =SEDML_DEFAULT_VERSION
-    , const std::string& details    = ""
-    , const unsigned int line       = 0
-    , const unsigned int column     = 0
-    , const unsigned int severity   = LIBSEDML_SEV_ERROR
-    , const unsigned int category   = LIBSEDML_CAT_SEDML
+    const std::string& package    = "core"
+                                    , const unsigned int errorId    = 0
+                                        , const unsigned int pkgVersion = 1
+                                            , const unsigned int level      = SEDML_DEFAULT_LEVEL
+                                                , const unsigned int version    = SEDML_DEFAULT_VERSION
+                                                    , const std::string& details    = ""
+                                                        , const unsigned int line       = 0
+                                                            , const unsigned int column     = 0
+                                                                , const unsigned int severity   = LIBSEDML_SEV_ERROR
+                                                                    , const unsigned int category   = LIBSEDML_CAT_SEDML
   );
 
 
@@ -245,7 +245,7 @@ public:
    *
    * @param error SedError, the error to be logged.
    */
-  void add (const SedError& error);
+  void add(const SedError& error);
 
 
   /** @cond doxygen-cpp-only */
@@ -256,7 +256,7 @@ public:
    *
    * @param errors list, a list of SedError to be added to the log.
    */
-  void add (const std::list<SedError>& errors);
+  void add(const std::list<SedError>& errors);
 
 
   /**
@@ -265,20 +265,20 @@ public:
    *
    * @param errors vector, a vector of SedError to be added to the log.
    */
-  void add (const std::vector<SedError>& errors);
+  void add(const std::vector<SedError>& errors);
 
   /** @endcond */
 
 
   /**
    * Removes an error having errorId from the SedError list.
-   *  
+   *
    * Only the first item will be removed if there are multiple errors
    * with the given errorId.
    *
    * @param errorId the error identifier of the error to be removed.
    */
-  void remove (const unsigned int errorId);
+  void remove(const unsigned int errorId);
 
 
   /**
@@ -286,7 +286,7 @@ public:
    *
    * @param errorId the error identifier of the error to be found.
    */
-  bool contains (const unsigned int errorId);
+  bool contains(const unsigned int errorId);
 
 
   /** @endcond */

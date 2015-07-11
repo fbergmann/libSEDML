@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,40 +48,33 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedSteadyState with the given level, version, and package version.
  */
-SedSteadyState::SedSteadyState (unsigned int level, unsigned int version)
-	: SedSimulation(level, version)
+SedSteadyState::SedSteadyState(unsigned int level, unsigned int version)
+  : SedSimulation(level, version)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedSteadyState with the given SedNamespaces object.
  */
-SedSteadyState::SedSteadyState (SedNamespaces* sedns)
-	: SedSimulation(sedns)
+SedSteadyState::SedSteadyState(SedNamespaces* sedns)
+  : SedSimulation(sedns)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedSteadyState.
  */
-SedSteadyState::SedSteadyState (const SedSteadyState& orig)
-	: SedSimulation(orig)
+SedSteadyState::SedSteadyState(const SedSteadyState& orig)
+  : SedSimulation(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-	}
 }
 
 
@@ -91,15 +84,12 @@ SedSteadyState::SedSteadyState (const SedSteadyState& orig)
 SedSteadyState&
 SedSteadyState::operator=(const SedSteadyState& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedSimulation::operator=(rhs);
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedSimulation::operator=(rhs);
+    }
+
+  return *this;
 }
 
 
@@ -107,16 +97,16 @@ SedSteadyState::operator=(const SedSteadyState& rhs)
  * Clone for SedSteadyState.
  */
 SedSteadyState*
-SedSteadyState::clone () const
+SedSteadyState::clone() const
 {
-	return new SedSteadyState(*this);
+  return new SedSteadyState(*this);
 }
 
 
 /*
  * Destructor for SedSteadyState.
  */
-SedSteadyState::~SedSteadyState ()
+SedSteadyState::~SedSteadyState()
 {
 }
 
@@ -125,10 +115,10 @@ SedSteadyState::~SedSteadyState ()
  * Returns the XML element name of this object
  */
 const std::string&
-SedSteadyState::getElementName () const
+SedSteadyState::getElementName() const
 {
-	static const string name = "steadyState";
-	return name;
+  static const string name = "steadyState";
+  return name;
 }
 
 
@@ -138,11 +128,11 @@ SedSteadyState::getElementName () const
 SedBase*
 SedSteadyState::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedSimulation::createObject(stream);
+  SedBase* object = SedSimulation::createObject(stream);
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -150,9 +140,9 @@ SedSteadyState::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedSteadyState::getTypeCode () const
+SedSteadyState::getTypeCode() const
 {
-	return SEDML_SIMULATION_STEADYSTATE;
+  return SEDML_SIMULATION_STEADYSTATE;
 }
 
 
@@ -160,11 +150,11 @@ SedSteadyState::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedSteadyState::hasRequiredAttributes () const
+SedSteadyState::hasRequiredAttributes() const
 {
-	bool allPresent = SedSimulation::hasRequiredAttributes();
+  bool allPresent = SedSimulation::hasRequiredAttributes();
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -174,9 +164,9 @@ SedSteadyState::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedSteadyState::writeElements (XMLOutputStream& stream) const
+SedSteadyState::writeElements(XMLOutputStream& stream) const
 {
-	SedSimulation::writeElements(stream);
+  SedSimulation::writeElements(stream);
 }
 
 
@@ -189,9 +179,9 @@ SedSteadyState::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedSteadyState::accept (SedVisitor& v) const
+SedSteadyState::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -205,9 +195,9 @@ SedSteadyState::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedSteadyState::setSedDocument (SedDocument* d)
+SedSteadyState::setSedDocument(SedDocument* d)
 {
-	SedSimulation::setSedDocument(d);
+  SedSimulation::setSedDocument(d);
 }
 
 
@@ -222,7 +212,7 @@ SedSteadyState::setSedDocument (SedDocument* d)
 void
 SedSteadyState::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedSimulation::addExpectedAttributes(attributes);
+  SedSimulation::addExpectedAttributes(attributes);
 
 }
 
@@ -236,10 +226,10 @@ SedSteadyState::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedSteadyState::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedSteadyState::readAttributes(const XMLAttributes& attributes,
+                               const ExpectedAttributes& expectedAttributes)
 {
-	SedSimulation::readAttributes(attributes, expectedAttributes);
+  SedSimulation::readAttributes(attributes, expectedAttributes);
 
 }
 
@@ -252,10 +242,10 @@ SedSteadyState::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedSteadyState::writeAttributes (XMLOutputStream& stream) const
+void
+SedSteadyState::writeAttributes(XMLOutputStream& stream) const
 {
-	SedSimulation::writeAttributes(stream);
+  SedSimulation::writeAttributes(stream);
 
 }
 
@@ -270,7 +260,7 @@ LIBSEDML_EXTERN
 SedSteadyState_t *
 SedSteadyState_create(unsigned int level, unsigned int version)
 {
-	return new SedSteadyState(level, version);
+  return new SedSteadyState(level, version);
 }
 
 
@@ -281,8 +271,8 @@ LIBSEDML_EXTERN
 void
 SedSteadyState_free(SedSteadyState_t * sss)
 {
-	if (sss != NULL)
-		delete sss;
+  if (sss != NULL)
+    delete sss;
 }
 
 
@@ -293,14 +283,14 @@ LIBSEDML_EXTERN
 SedSteadyState_t *
 SedSteadyState_clone(SedSteadyState_t * sss)
 {
-	if (sss != NULL)
-	{
-		return static_cast<SedSteadyState_t*>(sss->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sss != NULL)
+    {
+      return static_cast<SedSteadyState_t*>(sss->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -311,7 +301,7 @@ LIBSEDML_EXTERN
 int
 SedSteadyState_hasRequiredAttributes(SedSteadyState_t * sss)
 {
-	return (sss != NULL) ? static_cast<int>(sss->hasRequiredAttributes()) : 0;
+  return (sss != NULL) ? static_cast<int>(sss->hasRequiredAttributes()) : 0;
 }
 
 

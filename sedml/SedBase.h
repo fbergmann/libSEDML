@@ -1,26 +1,26 @@
 /**
  * @file    SedBase.h
  * @brief   Definition of SedBase, the base object of all Sed objects
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  * @class SedBase
  * @ingroup Core
@@ -69,7 +69,7 @@
  * specification document</a> corresponding to the Sed Level and Version
  * of your model for more information about the requirements for
  * "annotation" content.
- * 
+ *
  * It is worth pointing out that the "annotation" element in the definition
  * of SedBase exists in order that software developers may attach optional
  * application-specific data to the elements in an Sed model.  However, it
@@ -186,7 +186,7 @@ public:
   /**
    * Destroys this object.
    */
-  virtual ~SedBase ();
+  virtual ~SedBase();
 
 
   /**
@@ -208,15 +208,15 @@ public:
    *
    * @return the result of calling <code>v.visit()</code>.
    */
-  virtual bool accept (SedVisitor& v) const = 0;
+  virtual bool accept(SedVisitor& v) const = 0;
 
 
   /**
    * Creates and returns a deep copy of this SedBase object.
-   * 
+   *
    * @return a (deep) copy of this SedBase object.
    */
-  virtual SedBase* clone () const = 0;
+  virtual SedBase* clone() const = 0;
 
 
   /**
@@ -229,8 +229,8 @@ public:
    * @return pointer to the first element found with the given identifier.
    */
   virtual SedBase* getElementBySId(std::string id);
-  
-  
+
+
   /**
    * Returns the first child element it can find with a specific "metaid"
    * attribute value, or @c NULL if no such object is found.
@@ -241,8 +241,8 @@ public:
    * @return pointer to the first element found with the given meta-identifier.
    */
   virtual SedBase* getElementByMetaId(std::string metaid);
-  
-  
+
+
   /**
    * Returns a List of all child SedBase objects, including those nested to
    * an arbitrary depth.
@@ -250,11 +250,11 @@ public:
    * @return a pointer to a List of pointers to all children objects.
    */
   virtual List* getAllElements();
-  
-  
+
+
   /**
    * Returns the value of the "metaid" attribute of this object.
-   * 
+   *
    * The optional attribute named "metaid", present on every major Sed
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format). The attribute value has the data type
@@ -269,18 +269,18 @@ public:
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
-   *  
+   *
    * @return the meta-identifier of this Sed object.
    *
    * @see isSetMetaId()
    * @see setMetaId(const std::string& metaid)
    */
-  const std::string& getMetaId () const;
+  const std::string& getMetaId() const;
 
 
   /**
    * Returns the value of the "metaid" attribute of this object.
-   * 
+   *
    * The optional attribute named "metaid", present on every major Sed
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format).  The attribute value has the data type
@@ -295,13 +295,13 @@ public:
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
-   *  
+   *
    * @return the meta-identifier of this Sed object, as a string.
    *
    * @see isSetMetaId()
    * @see setMetaId(const std::string& metaid)
    */
-  std::string& getMetaId ();
+  std::string& getMetaId();
 
 
   /** @cond doxygen-libsbml-internal */
@@ -309,7 +309,7 @@ public:
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
    * Returns the value of the "id" attribute of this object, if it has one.
-   * 
+   *
    * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  The identifier given by an object's "id" attribute value
    * is used to identify the object within the Sed model definition.
@@ -347,7 +347,7 @@ public:
    * @see isSetId()
    * @see unsetId()
    */
-  virtual const std::string& getId () const;
+  virtual const std::string& getId() const;
   /** @endcond */
 
 
@@ -356,7 +356,7 @@ public:
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
    * Returns the value of the "name" attribute of this object, if it has one.
-   * 
+   *
    * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
@@ -376,7 +376,7 @@ public:
    * should display the value of the "id" attribute instead.  (Script
    * language interpreters are especially likely to display "id" instead of
    * "name".)
-   * 
+   *
    * As a consequence of the above, authors of systems that automatically
    * generate the values of "id" attributes should be aware some systems
    * may display the "id"'s to the user.  Authors therefore may wish to
@@ -384,12 +384,12 @@ public:
    * reasonably easy for humans to type and read; and (b) likely to be
    * meaningful, for example by making the "id" attribute be an abbreviated
    * form of the name attribute value.
-   * 
+   *
    * An additional point worth mentioning is although there are
    * restrictions on the uniqueness of "id" values, there are no
    * restrictions on the uniqueness of "name" values in a model.  This
    * allows software packages leeway in assigning component identifiers.
-   * 
+   *
    * @return the name of this Sed object.
    *
    * @note The fact that the "name" attribute is defined on the SedBase parent
@@ -407,7 +407,7 @@ public:
    * @see setName(const std::string& name)
    * @see unsetName()
    */
-  virtual const std::string& getName () const;
+  virtual const std::string& getName() const;
   /** @endcond */
 
 
@@ -544,7 +544,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif)
    */
-  std::string getNotesString ();
+  std::string getNotesString();
 
 
   /**
@@ -588,7 +588,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif)
    */
-  std::string getNotesString () const;
+  std::string getNotesString() const;
 
 
   /**
@@ -625,7 +625,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  XMLNode* getAnnotation ();
+  XMLNode* getAnnotation();
 
 
   /**
@@ -662,7 +662,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  XMLNode* getAnnotation () const;
+  XMLNode* getAnnotation() const;
 
 
   /**
@@ -695,7 +695,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  std::string getAnnotationString ();
+  std::string getAnnotationString();
 
 
   /**
@@ -728,17 +728,17 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  std::string getAnnotationString () const;
+  std::string getAnnotationString() const;
 
 
   /**
    * Returns a list of the XML Namespaces declared on this Sed document.
-   * 
+   *
    * The SedNamespaces object encapsulates Sed Level/Version/namespaces
    * information.  It is used to communicate the Sed Level, Version, and
    * (in Sed Level&nbsp;3) packages used in addition to Sed Level&nbsp;3
    * Core.
-   * 
+   *
    * @return the XML Namespaces associated with this Sed object
    *
    * @see getLevel()
@@ -761,13 +761,13 @@ public:
    *
    * This method allows the caller to obtain the SedDocument for the
    * current object.
-   * 
+   *
    * @return the parent SedDocument object of this Sed object.
    *
    * @see getParentSedObject()
    * @see getModel()
    */
-  const SedDocument* getSedDocument () const;
+  const SedDocument* getSedDocument() const;
 
 
   /**
@@ -784,13 +784,13 @@ public:
    *
    * This method allows the caller to obtain the SedDocument for the
    * current object.
-   * 
+   *
    * @return the parent SedDocument object of this Sed object.
    *
    * @see getParentSedObject()
    * @see getModel()
    */
-  SedDocument* getSedDocument ();
+  SedDocument* getSedDocument();
 
 
   /**
@@ -798,8 +798,8 @@ public:
    *
    * This returns the immediately-containing object.  This method is
    * convenient when holding an object nested inside other objects in an
-   * Sed model.  
-   * 
+   * Sed model.
+   *
    * @return the parent Sed object of this Sed object.
    *
    * @see getSedDocument()
@@ -813,8 +813,8 @@ public:
    *
    * This returns the immediately-containing object.  This method is
    * convenient when holding an object nested inside other objects in an
-   * Sed model.  
-   * 
+   * Sed model.
+   *
    * @return the parent Sed object of this Sed object.
    *
    * @see getSedDocument()
@@ -857,7 +857,7 @@ public:
    *
    * @param pkgName (optional) the short name of an Sed Level&nbsp;3
    * package to which the sought-after object must belong
-   * 
+   *
    * @return the ancestor Sed object of this Sed object that corresponds
    * to the given @if clike #SedTypeCode_t value@else Sed object type
    * code@endif, or @c NULL if no ancestor exists.
@@ -901,7 +901,7 @@ public:
    *
    * @param pkgName (optional) the short name of an Sed Level&nbsp;3
    * package to which the sought-after object must belong
-   * 
+   *
    * @return the ancestor Sed object of this Sed object that corresponds
    * to the given @if clike #SedTypeCode_t value@else Sed object type
    * code@endif, or @c NULL if no ancestor exists.
@@ -914,7 +914,7 @@ public:
   /**
    * Returns the line number on which this object first appears in the XML
    * representation of the Sed document.
-   * 
+   *
    * @return the line number of this Sed object.
    *
    * @note The line number for each construct in an Sed model is set upon
@@ -934,15 +934,15 @@ public:
    *
    * @see getColumn()
    */
-  unsigned int getLine () const;
+  unsigned int getLine() const;
 
 
   /**
    * Returns the column number on which this object first appears in the XML
    * representation of the Sed document.
-   * 
+   *
    * @return the column number of this Sed object.
-   * 
+   *
    * @note The column number for each construct in an Sed model is set
    * upon reading the model.  The accuracy of the column number depends on
    * the correctness of the XML representation of the model, and on the
@@ -957,10 +957,10 @@ public:
    * href="http://xmlsoft.org">libxml2</a>, <a target="_blank"
    * href="http://expat.sourceforge.net/">Expat</a> and <a target="_blank"
    * href="http://xerces.apache.org/xerces-c/">Xerces</a>.)
-   * 
+   *
    * @see getLine()
    */
-  unsigned int getColumn () const;
+  unsigned int getColumn() const;
 
   /**
    * Predicate returning @c true if this object's "metaid" attribute is set.
@@ -986,7 +986,7 @@ public:
    * @see getMetaId()
    * @see setMetaId(const std::string& metaid)
    */
-  bool isSetMetaId () const;
+  bool isSetMetaId() const;
 
 
   /** @cond doxygen-libsbml-internal */
@@ -1003,21 +1003,21 @@ public:
    * <code>UnitSId</code>, depending on the object in question.  Both
    * data types are defined as follows:
    * @verbatim
- letter ::= 'a'..'z','A'..'Z'
- digit  ::= '0'..'9'
- idChar ::= letter | digit | '_'
- SId    ::= ( letter | '_' ) idChar*
- @endverbatim
+  letter ::= 'a'..'z','A'..'Z'
+  digit  ::= '0'..'9'
+  idChar ::= letter | digit | '_'
+  SId    ::= ( letter | '_' ) idChar*
+  @endverbatim
    *
    * The equality of <code>SId</code> and <code>UnitSId</code> type values
    * in Sed is determined by an exact character sequence match; i.e.,
    * comparisons of these identifiers must be performed in a case-sensitive
    * manner.  This applies to all uses of <code>SId</code> and
    * <code>UnitSId</code>.
-   * 
+   *
    * @return @c true if the "id" attribute of this Sed object is
    * set, @c false otherwise.
-   * 
+   *
    * @note The fact that the value of attribute "id" is defined on the
    * SedBase parent class object is a convenience provided by libSed, and
    * <b>does not strictly follow Sed specifications</b>.  This libSed
@@ -1033,7 +1033,7 @@ public:
    * @see setId(const std::string& sid)
    * @see unsetId()
    */
-  virtual bool isSetId () const;
+  virtual bool isSetId() const;
   /** @endcond */
 
 
@@ -1042,7 +1042,7 @@ public:
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    * Predicate returning @c true if this
    * object's "name" attribute is set.
-   * 
+   *
    * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
@@ -1051,7 +1051,7 @@ public:
    * <code>string</code> defined in XML Schema.  Sed imposes no
    * restrictions as to the content of "name" attributes beyond those
    * restrictions defined by the <code>string</code> type in XML Schema.
-   * 
+   *
    * The recommended practice for handling "name" is as follows.  If a
    * software tool has the capability for displaying the content of "name"
    * attributes, it should display this content to the user as a
@@ -1062,7 +1062,7 @@ public:
    * should display the value of the "id" attribute instead.  (Script
    * language interpreters are especially likely to display "id" instead of
    * "name".)
-   * 
+   *
    * As a consequence of the above, authors of systems that automatically
    * generate the values of "id" attributes should be aware some systems
    * may display the "id"'s to the user.  Authors therefore may wish to
@@ -1070,7 +1070,7 @@ public:
    * reasonably easy for humans to type and read; and (b) likely to be
    * meaningful, for example by making the "id" attribute be an abbreviated
    * form of the name attribute value.
-   * 
+   *
    * An additional point worth mentioning is although there are
    * restrictions on the uniqueness of "id" values, there are no
    * restrictions on the uniqueness of "name" values in a model.  This
@@ -1094,7 +1094,7 @@ public:
    * @see setName(const std::string& name)
    * @see unsetName()
    */
-  virtual bool isSetName () const;
+  virtual bool isSetName() const;
   /** @endcond */
 
 
@@ -1123,7 +1123,7 @@ public:
    * content must be structured.
    *
    * @return @c true if a "notes" subelement exists, @c false otherwise.
-   * 
+   *
    * @see getNotes()
    * @see getNotesString()
    * @see setNotes(const XMLNode* notes)
@@ -1133,7 +1133,7 @@ public:
    * @see unsetNotes()
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif)
    */
-  bool isSetNotes () const;
+  bool isSetNotes() const;
 
 
   /**
@@ -1156,7 +1156,7 @@ public:
    *
    * @return @c true if a "annotation" subelement exists, @c false
    * otherwise.
-   * 
+   *
    * @see getAnnotation()
    * @see getAnnotationString()
    * @see setAnnotation(const XMLNode* annotation)
@@ -1165,7 +1165,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  bool isSetAnnotation () const;
+  bool isSetAnnotation() const;
 
   /**
    * Sets the value of the "metaid" attribute of this object.
@@ -1189,11 +1189,11 @@ public:
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_INVALID_ATTRIBUTE_VALUE LIBSEDML_INVALID_ATTRIBUTE_VALUE @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_UNEXPECTED_ATTRIBUTE LIBSEDML_UNEXPECTED_ATTRIBUTE @endlink
-   * 
+   *
    * @see getMetaId()
    * @see isSetMetaId()
    */
-  int setMetaId (const std::string& metaid);
+  int setMetaId(const std::string& metaid);
 
 
   /** @cond doxygen-libsbml-internal */
@@ -1213,7 +1213,7 @@ public:
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_INVALID_ATTRIBUTE_VALUE LIBSEDML_INVALID_ATTRIBUTE_VALUE @endlink
    */
-   virtual int setId (const std::string& sid);
+  virtual int setId(const std::string& sid);
   /** @endcond */
 
 
@@ -1222,7 +1222,7 @@ public:
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    * Sets the value of the "name" attribute of this Sed object to a copy
    * of @p name.
-   * 
+   *
    * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
@@ -1242,7 +1242,7 @@ public:
    * should display the value of the "id" attribute instead.  (Script
    * language interpreters are especially likely to display "id" instead of
    * "name".)
-   * 
+   *
    * As a consequence of the above, authors of systems that automatically
    * generate the values of "id" attributes should be aware some systems
    * may display the "id"'s to the user.  Authors therefore may wish to
@@ -1250,12 +1250,12 @@ public:
    * reasonably easy for humans to type and read; and (b) likely to be
    * meaningful, for example by making the "id" attribute be an abbreviated
    * form of the name attribute value.
-   * 
+   *
    * An additional point worth mentioning is although there are
    * restrictions on the uniqueness of "id" values, there are no
    * restrictions on the uniqueness of "name" values in a model.  This
    * allows software applications leeway in assigning component identifiers.
-   * 
+   *
    * @param name the new name for the object; the string will be copied
    *
    * @note The fact that the "name" attribute is defined on the SedBase parent
@@ -1278,7 +1278,7 @@ public:
    * @see isSetName()
    * @see unsetName()
    */
-  virtual int setName (const std::string& name);
+  virtual int setName(const std::string& name);
   /** @endcond */
 
 
@@ -1287,7 +1287,7 @@ public:
    *
    * The content of @p annotation is copied, and any previous content of
    * this object's "annotation" subelement is deleted.
-   * 
+   *
    * Whereas the SedBase "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
@@ -1325,7 +1325,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  virtual int setAnnotation (const XMLNode* annotation);
+  virtual int setAnnotation(const XMLNode* annotation);
 
 
   /**
@@ -1333,7 +1333,7 @@ public:
    *
    * The content of @p annotation is copied, and any previous content of
    * this object's "annotation" subelement is deleted.
-   * 
+   *
    * Whereas the SedBase "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
@@ -1372,13 +1372,13 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  virtual int setAnnotation (const std::string& annotation);
+  virtual int setAnnotation(const std::string& annotation);
 
 
   /**
    * Appends the given @p annotation to the "annotation" subelement of this
    * object.
-   * 
+   *
    * Whereas the SedBase "notes" subelement is a container for content to be
    * shown directly to humans, the "annotation" element is a container for
    * optional software-generated content @em not meant to be shown to
@@ -1413,7 +1413,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  virtual int appendAnnotation (const XMLNode* annotation);
+  virtual int appendAnnotation(const XMLNode* annotation);
 
 
   /**
@@ -1454,7 +1454,7 @@ public:
    * @see appendAnnotation(const XMLNode* annotation)
    * @see unsetAnnotation()
    */
-  virtual int appendAnnotation (const std::string& annotation);
+  virtual int appendAnnotation(const std::string& annotation);
 
 
   /**
@@ -1484,12 +1484,12 @@ public:
    * @see replaceTopLevelAnnotationElement(const XMLNode *)
    * @see replaceTopLevelAnnotationElement(const std::string&)
    */
-  int removeTopLevelAnnotationElement(const std::string elementName, 
-    const std::string elementURI = "");
+  int removeTopLevelAnnotationElement(const std::string elementName,
+                                      const std::string elementURI = "");
 
 
   /**
-   * Replaces the given top-level element within the "annotation" 
+   * Replaces the given top-level element within the "annotation"
    * subelement of this Sed object and with the annotation element supplied.
    *
    * Sed places a few restrictions on the organization of the content of
@@ -1503,7 +1503,7 @@ public:
    * </code> with the exception that the placement of the annotation element remains
    * the same.
    *
-   * @param annotation XMLNode representing the replacement top level annotation 
+   * @param annotation XMLNode representing the replacement top level annotation
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -1518,7 +1518,7 @@ public:
 
 
   /**
-   * Replaces the given top-level element within the "annotation" 
+   * Replaces the given top-level element within the "annotation"
    * subelement of this Sed object and with the annotation element supplied.
    *
    * Sed places a few restrictions on the organization of the content of
@@ -1532,7 +1532,7 @@ public:
    * </code> with the exception that the placement of the annotation element remains
    * the same.
    *
-   * @param annotation string representing the replacement top level annotation 
+   * @param annotation string representing the replacement top level annotation
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
@@ -1623,20 +1623,20 @@ public:
    * document, but that is for illustration purposes only; you could of
    * course use this same approach to annotate any other Sed component.
    * @if clike
-@verbatim
-SedDocument* s = new SedDocument(3, 1);
-s->setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
-@endverbatim
+  @verbatim
+  SedDocument* s = new SedDocument(3, 1);
+  s->setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
+  @endverbatim
    * @endif@if java
-@verbatim
-SedDocument s = new SedDocument(3, 1);
-s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
-@endverbatim
+  @verbatim
+  SedDocument s = new SedDocument(3, 1);
+  s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
+  @endverbatim
    * @endif@if csharp
-@verbatim
-SedDocument s = new SedDocument(3, 1);
-s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
-@endverbatim
+  @verbatim
+  SedDocument s = new SedDocument(3, 1);
+  s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></body>");
+  @endverbatim
    * @endif@~
    *
    * @param notes an XML string that is to be used as the content of the
@@ -1688,7 +1688,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * in-depth explanations.  The Sed Level&nbsp;2 and &nbsp;3
    * specifications have considerable detail about how "notes" element
    * content must be structured.
-   * 
+   *
    * @param notes an XML node structure that is to appended to the content
    * of the "notes" subelement of this object
    *
@@ -1765,7 +1765,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see enablePackageInternal()
    * @endif@~
    */
-  virtual void setSedDocument (SedDocument* d);
+  virtual void setSedDocument(SedDocument* d);
   /** @endcond */
 
 
@@ -1780,7 +1780,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *
    * @param parent the Sed object to use
    */
-  virtual void connectToParent (SedBase* parent);
+  virtual void connectToParent(SedBase* parent);
 
 
   /**
@@ -1797,7 +1797,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see enablePackageInternal()
    * @endif@~
    */
-  virtual void connectToChild ();
+  virtual void connectToChild();
 
   /** @endcond */
 
@@ -1811,7 +1811,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * The SedNamespaces object encapsulates Sed Level/Version/namespaces
    * information.  It is used to communicate the Sed Level, Version, and
    * (in Level&nbsp;3) packages used in addition to Sed Level&nbsp;3 Core.
-   * 
+   *
    * @param xmlns the namespaces to set
    *
    * @return integer value indicating success/failure of the
@@ -1838,14 +1838,14 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * The "metaid" value serves to identify a model component for purposes
    * such as referencing that component from metadata placed within
    * "annotation" subelements.
-   *  
+   *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_UNEXPECTED_ATTRIBUTE LIBSEDML_UNEXPECTED_ATTRIBUTE @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_FAILED LIBSEDML_OPERATION_FAILED @endlink
    */
-  int unsetMetaId ();
+  int unsetMetaId();
 
 
   /**
@@ -1876,12 +1876,12 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_FAILED LIBSEDML_OPERATION_FAILED @endlink
    */
-  virtual int unsetId ();
+  virtual int unsetId();
 
 
   /**
    * Unsets the value of the "name" attribute of this Sed object.
-   * 
+   *
    * Most (but not all) objects in Sed include two common attributes: "id"
    * and "name".  In contrast to the "id" attribute, the "name" attribute is
    * optional and is not intended to be used for cross-referencing purposes
@@ -1901,7 +1901,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * should display the value of the "id" attribute instead.  (Script
    * language interpreters are especially likely to display "id" instead of
    * "name".)
-   * 
+   *
    * As a consequence of the above, authors of systems that automatically
    * generate the values of "id" attributes should be aware some systems
    * may display the "id"'s to the user.  Authors therefore may wish to
@@ -1909,18 +1909,18 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * reasonably easy for humans to type and read; and (b) likely to be
    * meaningful, for example by making the "id" attribute be an abbreviated
    * form of the name attribute value.
-   * 
+   *
    * An additional point worth mentioning is although there are
    * restrictions on the uniqueness of "id" values, there are no
    * restrictions on the uniqueness of "name" values in a model.  This
    * allows software applications leeway in assigning component identifiers.
-   * 
+   *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_FAILED LIBSEDML_OPERATION_FAILED @endlink
    */
-  virtual int unsetName ();
+  virtual int unsetName();
 
 
   /**
@@ -1958,7 +1958,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see appendNotes(const std::string& notes)
    * @see SyntaxChecker::hasExpectedXHTMLSyntax(@if java XMLNode xhtml@endif)
    */
-  int unsetNotes ();
+  int unsetNotes();
 
 
   /**
@@ -1990,37 +1990,37 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see appendAnnotation(const XMLNode* annotation)
    * @see appendAnnotation(const std::string& annotation)
    */
-  int unsetAnnotation ();
+  int unsetAnnotation();
 
 
   /**
    * Returns the Sed Level of the SedDocument object containing this
    * object.
-   * 
+   *
    * @return the Sed level of this Sed object.
-   * 
+   *
    * @see getVersion()
    * @see getNamespaces()
    * @see getPackageVersion()
    */
-  virtual const int getLevel () const;
+  virtual const int getLevel() const;
 
 
   /**
    * Returns the Version within the Sed Level of the SedDocument object
    * containing this object.
-   * 
+   *
    * @return the Sed version of this Sed object.
    *
    * @see getLevel()
    * @see getNamespaces()
    */
-  virtual const int getVersion () const;
+  virtual const int getVersion() const;
 
 
   /**
    * Returns the libSed type code for this object.
-   * 
+   *
    * This method may return the type code of this Sed object, or it may
    * return @link SedTypeCode_t#Sed_UNKNOWNSEDML_UNKNOWN@endlink.  This
    * is because subclasses of SedBase are not required to implement this
@@ -2035,7 +2035,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * @see getElementName()
    * @see getPackageName()
    */
-  virtual int getTypeCode () const;
+  virtual int getTypeCode() const;
 
 
   /**
@@ -2043,12 +2043,12 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * object's level/version and namespace values correspond to a valid
    * Sed specification.
    *
-   * @return @c true if the level, version and namespace values of this 
+   * @return @c true if the level, version and namespace values of this
    * Sed object correspond to a valid set of values, @c false otherwise.
    */
   bool hasValidLevelVersionNamespaceCombination();
 
-  
+
   /**
    * Returns the XML element name of this object.
    *
@@ -2057,26 +2057,26 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * "model", CompartmentType defines it as returning @c "compartmentType",
    * and so on.
    */
-  virtual const std::string& getElementName () const = 0;
+  virtual const std::string& getElementName() const = 0;
 
 
   /**
    * Returns a string consisting of a partial Sed corresponding to just
    * this object.
-   * 
+   *
    * @return the partial Sed that describes this Sed object.
    *
    * @warning This is primarily provided for testing and debugging
    * purposes.  It may be removed in a future version of libSed.
    */
-  char* toSed ();
+  char* toSed();
 
 
   /** @cond doxygen-libsbml-internal */
   /**
    * Reads (initializes) this Sed object by reading from XMLInputStream.
    */
-  void read (XMLInputStream& stream);
+  void read(XMLInputStream& stream);
   /** @endcond */
 
 
@@ -2084,7 +2084,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
   /**
    * Writes (serializes) this Sed object by writing it to XMLOutputStream.
    */
-  void write (XMLOutputStream& stream) const;
+  void write(XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -2100,7 +2100,7 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    *   ...
    * </pre>@endif@~
    */
-  virtual void writeElements (XMLOutputStream& stream) const;
+  virtual void writeElements(XMLOutputStream& stream) const;
   /** @endcond */
 
 
@@ -2204,8 +2204,8 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * a subset of @p sb's, @c false otherwise.
    */
   bool matchesRequiredSedNamespacesForAddition(const SedBase * sb);
-  
-  
+
+
   /**
    * Returns @c true if this object's set of XML namespaces are a subset
    * of the given object's XML namespaces.
@@ -2216,21 +2216,21 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * a subset of @p sb's, @c false otherwise.
    */
   bool matchesRequiredSedNamespacesForAddition(const SedBase * sb) const;
-  
-  
+
+
   /**
    * Sets the user data of this element. This can be used by the application
    * developer to attach custom information to the node. In case of a deep
    * copy this attribute will passed as it is. The attribute will be never
    * interpreted by this class.
-   * 
-   * @param userData specifies the new user data. 
+   *
+   * @param userData specifies the new user data.
    *
    * @return integer value indicating success/failure of the
    * function.  The possible values returned by this function are:
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_SUCCESS LIBSEDML_OPERATION_SUCCESS @endlink
    * @li @link OperationReturnValues_t#LIBSEDML_OPERATION_FAILED LIBSEDML_OPERATION_FAILED @endlink
-   */  
+   */
   int setUserData(void *userData);
 
 
@@ -2238,29 +2238,29 @@ s.setNotes("<body xmlns='http://www.w3.org/1999/xhtml'><p>here is my note</p></b
    * Returns the user data that has been previously set via setUserData().
    *
    * @return the user data of this node, or @c NULL if no user data has been set.
-   * 
+   *
    * @if clike
    * @see ASTNode::setUserData(void *userData)
    * @endif@~
-   */  
+   */
   void *getUserData() const;
 
   /**
    * @return the SedErrorLog used to log errors during while reading and
    * validating Sed.
    */
-  virtual SedErrorLog* getErrorLog ();
+  virtual SedErrorLog* getErrorLog();
 
-  
+
 protected:
 
-  
-  /** 
+
+  /**
    * When overridden allows SedBase elements to use the text included in between
    * the elements tags. The default implementation does nothing.
-   * 
+   *
    * @param text the text string found between the element tags.
-   */ 
+   */
   virtual void setElementText(const std::string &text);
 
 
@@ -2269,25 +2269,25 @@ protected:
   bool matchesCoreSedNamespace(const SedBase * sb);
 
   bool matchesCoreSedNamespace(const SedBase * sb) const;
-  
+
   /**
    * Creates a new SedBase object with the given Sed level, version.
    */
-  SedBase (unsigned int level, unsigned int version);
+  SedBase(unsigned int level, unsigned int version);
 
 
   /**
    * Creates a new SedBase object with the given SedNamespaces.
    * Only subclasses may create SedBase objects.
    */
-  SedBase (SedNamespaces* sbmlns);
+  SedBase(SedNamespaces* sbmlns);
 
 
   /**
   * Copy constructor. Creates a copy of this SedBase object.
    *
    * @param orig the object to copy.
-   * 
+   *
    * @throws @if python ValueError @else SedConstructorException @endif@~
    * Thrown if the argument @p orig is @c NULL.
   */
@@ -2302,7 +2302,7 @@ protected:
    * @return the Sed object corresponding to next XMLToken in the
    * XMLInputStream or @c NULL if the token was not recognized.
    */
-  virtual SedBase* createObject (XMLInputStream& stream);
+  virtual SedBase* createObject(XMLInputStream& stream);
 
 
   /**
@@ -2313,10 +2313,10 @@ protected:
    * @param typecode the typecode for this element
    * @param xmlns the namespaces used by this element.
    *
-   * @note  This function is provided as convenience method to be called from constructors. This 
-   *        allows to use it in scenarios where the namespaces or typecode have not yet been initialized. 
-   * 
-   * @return @c true if the level, version and namespace values of this 
+   * @note  This function is provided as convenience method to be called from constructors. This
+   *        allows to use it in scenarios where the namespaces or typecode have not yet been initialized.
+   *
+   * @return @c true if the level, version and namespace values of this
    * Sed object correspond to a valid set of values, @c false otherwise.
    */
   bool hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *xmlns);
@@ -2328,7 +2328,7 @@ protected:
    *
    * @return true if the subclass read from the stream, false otherwise.
    */
-  virtual bool readOtherXML (XMLInputStream& stream);
+  virtual bool readOtherXML(XMLInputStream& stream);
 
 
   /**
@@ -2342,7 +2342,7 @@ protected:
    * siblings or @c -1 (the default) to indicate the position is not
    * significant.
    */
-  virtual int getElementPosition () const;
+  virtual int getElementPosition() const;
 
 
 
@@ -2354,42 +2354,42 @@ protected:
    *
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
    */
-  void logError (  unsigned int       id
-                 , const unsigned int level   = 2
-                 , const unsigned int version = 3
-                 , const std::string& details = "" );
+  void logError(unsigned int       id
+                , const unsigned int level   = 2
+                    , const unsigned int version = 3
+                        , const std::string& details = "");
 
 
   /**
    * Helper to log a common type of error.
    */
-  void logUnknownAttribute( const std::string& attribute,
-			    const unsigned int level,
-			    const unsigned int version,
-			    const std::string& element,
-          const std::string& prefix="");
+  void logUnknownAttribute(const std::string& attribute,
+                           const unsigned int level,
+                           const unsigned int version,
+                           const std::string& element,
+                           const std::string& prefix = "");
 
 
   /**
    * Helper to log a common type of error.
    */
-  void logUnknownElement( const std::string& element,
-			  const unsigned int level,
-			  const unsigned int version );
+  void logUnknownElement(const std::string& element,
+                         const unsigned int level,
+                         const unsigned int version);
 
- 
+
   /**
    * Helper to log a common type of error.
    */
-  void logEmptyString( const std::string& attribute,
-                       const unsigned int level,
-                       const unsigned int version,
-                       const std::string& element);
+  void logEmptyString(const std::string& attribute,
+                      const unsigned int level,
+                      const unsigned int version,
+                      const std::string& element);
 
 
   /**
    * Subclasses should override this method to add the list of
-   * expected attributes. Be sure to call your parents implementation 
+   * expected attributes. Be sure to call your parents implementation
    * of this method as well.
    */
   virtual void addExpectedAttributes(ExpectedAttributes& attributes);
@@ -2399,8 +2399,8 @@ protected:
    * XMLAttributes set into their specific fields.  Be sure to call your
    * parents implementation of this method as well.
    */
-  virtual void readAttributes (const XMLAttributes& attributes, 
-                               const ExpectedAttributes& expectedAttributes);
+  virtual void readAttributes(const XMLAttributes& attributes,
+                              const ExpectedAttributes& expectedAttributes);
 
 
   /**
@@ -2417,22 +2417,22 @@ protected:
    * Be sure to implement wirteXMLNS() function to write xmlns attributes.
    *
    */
-  virtual void writeAttributes (XMLOutputStream& stream) const;
+  virtual void writeAttributes(XMLOutputStream& stream) const;
 
 
   /**
    *
    * Subclasses should override this method to write their xmlns attriubutes
-   * (if any) to the XMLOutputStream. 
+   * (if any) to the XMLOutputStream.
    *
    */
-  virtual void writeXMLNS (XMLOutputStream& stream) const;
+  virtual void writeXMLNS(XMLOutputStream& stream) const;
 
 
   /**
    * Synchronizes the annotation of this Sed object.
    *
-   * Annotation element (XMLNode* mAnnotation) is synchronized with the 
+   * Annotation element (XMLNode* mAnnotation) is synchronized with the
    * current CVTerm objects (List* mCVTerm).
    * Currently, this method is called in getAnnotation, isSetAnnotation,
    * and writeElements methods.
@@ -2445,12 +2445,12 @@ protected:
    *
    * If @p object is not in the expected position, an error is logged.
    */
-  void checkOrderAndLogError (SedBase* object, int expected);
+  void checkOrderAndLogError(SedBase* object, int expected);
 
 
   /**
-   * Checks that an Sed ListOf element is populated.  
-   * If a listOf element has been declared with no elements, 
+   * Checks that an Sed ListOf element is populated.
+   * If a listOf element has been declared with no elements,
    * an error is logged.
    */
   void checkListOfPopulated(SedBase* object);
@@ -2459,8 +2459,8 @@ protected:
    * Checks that the given default namespace in the given element is valid.
    * If the given default namespace is not valid, an error is logged.
    */
-  void checkDefaultNamespace(const XMLNamespaces* xmlns, 
-    const std::string& elementName, const std::string& prefix = "");
+  void checkDefaultNamespace(const XMLNamespaces* xmlns,
+                             const std::string& elementName, const std::string& prefix = "");
 
   /**
    * Checks the annotation does not declare an sbml namespace.
@@ -2480,7 +2480,7 @@ protected:
   /**
    * Sets the XML namespace to which this element belongs to.
    * For example, all elements that belong to Sed Level 1 Version 1 Core
-   * must set the namespace to "http://sed-ml.org/"; 
+   * must set the namespace to "http://sed-ml.org/";
    *
    * @return integer value indicating success/failure of the
    * function.  @if clike The value is drawn from the
@@ -2500,14 +2500,14 @@ protected:
   /**
    * Gets the URI to which this element belongs to.
    * For example, all elements that belong to Sed Level 1 Version 1 Core
-   * must would have the URI "http://sed-ml.org/"; 
+   * must would have the URI "http://sed-ml.org/";
    *
-   * Unlike getElementNamespace, this function first returns the URI for this 
-   * element by looking into the SedNamespaces object of the document with 
-   * the its package name. if not found it will return the result of 
+   * Unlike getElementNamespace, this function first returns the URI for this
+   * element by looking into the SedNamespaces object of the document with
+   * the its package name. if not found it will return the result of
    * getElementNamespace
    *
-   * @return the URI this elements  
+   * @return the URI this elements
    *
    * @see getPackageName
    * @see getElementNamespace
@@ -2568,22 +2568,22 @@ protected:
   // namespace to which this SedBase object belongs.
   // This variable can be publicly accessible by getElementNamespace function.
   //
-  // For example, mURI of elements defined in L3 Core (or defined in Level 2 
+  // For example, mURI of elements defined in L3 Core (or defined in Level 2
   // or before) will be the URI defined in the corresponding Sed specification
   // (e.g. "http://www.sbml.org/sbml/level3/version1" for L3V1 Core); and mURI
-  // will be "http://www.sbml.org/sbml/level3/version1/layout/version1" for 
+  // will be "http://www.sbml.org/sbml/level3/version1/layout/version1" for
   // elements defined in layout extension L3V1-V1.
-  // The purpuse of this data member is to explicitly distinguish elements in core 
+  // The purpuse of this data member is to explicitly distinguish elements in core
   // package and extension packages.
-  // 
+  //
   // From the implementation point of view, this variable is needed to identify
   // if the prefix needs to be added when printing elements in some package extension.
   // (i.e. used in getPrefix function)
   //
   std::string mURI;
-  
+
   bool getHasBeenDeleted() const;
-  
+
   /** @endcond */
 
 private:
@@ -2593,19 +2593,19 @@ private:
    * Stores the location (line and column) and any XML namespaces (for
    * roundtripping) declared on this Sed (XML) element.
    */
-  void setSedBaseFields (const XMLToken& element);
+  void setSedBaseFields(const XMLToken& element);
 
 
   /**
    * @return true if read an <annotation> element from the stream
    */
-  bool readAnnotation (XMLInputStream& stream);
+  bool readAnnotation(XMLInputStream& stream);
 
 
   /**
    * @return true if read a <notes> element from the stream
    */
-  bool readNotes (XMLInputStream& stream);
+  bool readNotes(XMLInputStream& stream);
 
 
   /** @endcond */
@@ -2629,192 +2629,192 @@ BEGIN_C_DECLS
 
 LIBSEDML_EXTERN
 const char *
-SedBase_getMetaId (SedBase_t *sb);
+SedBase_getMetaId(SedBase_t *sb);
 
 
 
 
 LIBSEDML_EXTERN
 const SedDocument_t *
-SedBase_getSedDocument (SedBase_t *sb);
+SedBase_getSedDocument(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 const SedBase_t *
-SedBase_getParentSedObject (SedBase_t *sb);
+SedBase_getParentSedObject(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 const SedBase_t *
-SedBase_getAncestorOfType (SedBase_t *sb, int type, const char* pkgName);
+SedBase_getAncestorOfType(SedBase_t *sb, int type, const char* pkgName);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedBase_getLine (const SedBase_t *sb);
+SedBase_getLine(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedBase_getColumn (const SedBase_t *sb);
+SedBase_getColumn(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 XMLNode_t *
-SedBase_getNotes (SedBase_t *sb);
+SedBase_getNotes(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 char*
-SedBase_getNotesString (SedBase_t *sb);
+SedBase_getNotesString(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 XMLNode_t *
-SedBase_getAnnotation (SedBase_t *sb);
+SedBase_getAnnotation(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 char*
-SedBase_getAnnotationString (SedBase_t *sb);
+SedBase_getAnnotationString(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_isSetMetaId (const SedBase_t *sb);
+SedBase_isSetMetaId(const SedBase_t *sb);
 
 
 
 
 LIBSEDML_EXTERN
 int
-SedBase_isSetNotes (const SedBase_t *sb);
+SedBase_isSetNotes(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_isSetAnnotation (const SedBase_t *sb);
+SedBase_isSetAnnotation(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setMetaId (SedBase_t *sb, const char *metaid);
+SedBase_setMetaId(SedBase_t *sb, const char *metaid);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setNamespaces (SedBase_t *sb, XMLNamespaces_t *xmlns);
+SedBase_setNamespaces(SedBase_t *sb, XMLNamespaces_t *xmlns);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setNotes (SedBase_t *sb, XMLNode_t *notes);
+SedBase_setNotes(SedBase_t *sb, XMLNode_t *notes);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setNotesString (SedBase_t *sb, char *notes);
+SedBase_setNotesString(SedBase_t *sb, char *notes);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setNotesStringAddMarkup (SedBase_t *sb, char *notes);
+SedBase_setNotesStringAddMarkup(SedBase_t *sb, char *notes);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_appendNotes (SedBase_t *sb, XMLNode_t *notes);
+SedBase_appendNotes(SedBase_t *sb, XMLNode_t *notes);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_appendNotesString (SedBase_t *sb, char *notes);
+SedBase_appendNotesString(SedBase_t *sb, char *notes);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setAnnotation (SedBase_t *sb, XMLNode_t *annotation);
+SedBase_setAnnotation(SedBase_t *sb, XMLNode_t *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_setAnnotationString (SedBase_t *sb, char *annotation);
+SedBase_setAnnotationString(SedBase_t *sb, char *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_appendAnnotation (SedBase_t *sb, XMLNode_t *annotation);
+SedBase_appendAnnotation(SedBase_t *sb, XMLNode_t *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_appendAnnotationString (SedBase_t *sb, char *annotation);
+SedBase_appendAnnotationString(SedBase_t *sb, char *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_appendAnnotationString (SedBase_t *sb, char *annotation);
+SedBase_appendAnnotationString(SedBase_t *sb, char *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_removeTopLevelAnnotationElement (SedBase_t *sb, char *name);
+SedBase_removeTopLevelAnnotationElement(SedBase_t *sb, char *name);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_removeTopLevelAnnotationElementWithURI (SedBase_t *sb, const char *name, 
-                                              const char *uri);
+SedBase_removeTopLevelAnnotationElementWithURI(SedBase_t *sb, const char *name,
+    const char *uri);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_replaceTopLevelAnnotationElement (SedBase_t *sb, XMLNode_t *annotation);
+SedBase_replaceTopLevelAnnotationElement(SedBase_t *sb, XMLNode_t *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_replaceTopLevelAnnotationElementString (SedBase_t *sb, char *annotation);
+SedBase_replaceTopLevelAnnotationElementString(SedBase_t *sb, char *annotation);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_unsetMetaId (SedBase_t *sb);
+SedBase_unsetMetaId(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_unsetNotes (SedBase_t *sb);
+SedBase_unsetNotes(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_unsetAnnotation (SedBase_t *sb);
+SedBase_unsetAnnotation(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 const Model_t *
-SedBase_getModel (const SedBase_t *sb);
+SedBase_getModel(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedBase_getLevel (const SedBase_t *sb);
+SedBase_getLevel(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 unsigned int
-SedBase_getVersion (const SedBase_t *sb);
+SedBase_getVersion(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 int
-SedBase_getTypeCode (const SedBase_t *sb);
+SedBase_getTypeCode(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
 const char *
-SedBase_getElementName (const SedBase_t *sb);
+SedBase_getElementName(const SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
@@ -2823,27 +2823,27 @@ SedBase_hasValidLevelVersionNamespaceCombination(SedBase_t *sb);
 
 
 LIBSEDML_EXTERN
-int 
+int
 SedBase_setUserData(SedBase_t* sb, void *userData);
 
 LIBSEDML_EXTERN
 void *
 SedBase_getUserData(SedBase_t* sb);
 
-LIBSEDML_EXTERN 
-SedBase_t* 
+LIBSEDML_EXTERN
+SedBase_t*
 SedBase_getElementBySId(SedBase_t* sb, const char* id);
 
-LIBSEDML_EXTERN 
-SedBase_t* 
+LIBSEDML_EXTERN
+SedBase_t*
 SedBase_getElementByMetaId(SedBase_t* sb, const char* metaid);
 
-LIBSEDML_EXTERN 
-List_t* 
+LIBSEDML_EXTERN
+List_t*
 SedBase_getAllElements(SedBase_t* sb);
 
-LIBSEDML_EXTERN 
-void 
+LIBSEDML_EXTERN
+void
 SedBase_renameSIdRefs(SedBase_t* sb, const char* oldid, const char* newid);
 
 

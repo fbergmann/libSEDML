@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,52 +48,45 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedPlot3D with the given level, version, and package version.
  */
-SedPlot3D::SedPlot3D (unsigned int level, unsigned int version)
-	: SedOutput(level, version)
-	, mSurfaces (level, version)
+SedPlot3D::SedPlot3D(unsigned int level, unsigned int version)
+  : SedOutput(level, version)
+  , mSurfaces(level, version)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Creates a new SedPlot3D with the given SedNamespaces object.
  */
-SedPlot3D::SedPlot3D (SedNamespaces* sedns)
-	: SedOutput(sedns)
-	, mSurfaces (sedns)
+SedPlot3D::SedPlot3D(SedNamespaces* sedns)
+  : SedOutput(sedns)
+  , mSurfaces(sedns)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Copy constructor for SedPlot3D.
  */
-SedPlot3D::SedPlot3D (const SedPlot3D& orig)
-	: SedOutput(orig)
+SedPlot3D::SedPlot3D(const SedPlot3D& orig)
+  : SedOutput(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mSurfaces  = orig.mSurfaces;
+  mSurfaces  = orig.mSurfaces;
 
-		// connect to child objects
-		connectToChild();
-	}
+  // connect to child objects
+  connectToChild();
 }
 
 
@@ -103,19 +96,16 @@ SedPlot3D::SedPlot3D (const SedPlot3D& orig)
 SedPlot3D&
 SedPlot3D::operator=(const SedPlot3D& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedOutput::operator=(rhs);
-		mSurfaces  = rhs.mSurfaces;
+  if (&rhs != this)
+    {
+      SedOutput::operator=(rhs);
+      mSurfaces  = rhs.mSurfaces;
 
-		// connect to child objects
-		connectToChild();
-	}
-	return *this;
+      // connect to child objects
+      connectToChild();
+    }
+
+  return *this;
 }
 
 
@@ -123,16 +113,16 @@ SedPlot3D::operator=(const SedPlot3D& rhs)
  * Clone for SedPlot3D.
  */
 SedPlot3D*
-SedPlot3D::clone () const
+SedPlot3D::clone() const
 {
-	return new SedPlot3D(*this);
+  return new SedPlot3D(*this);
 }
 
 
 /*
  * Destructor for SedPlot3D.
  */
-SedPlot3D::~SedPlot3D ()
+SedPlot3D::~SedPlot3D()
 {
 }
 
@@ -143,7 +133,7 @@ SedPlot3D::~SedPlot3D ()
 const SedListOfSurfaces*
 SedPlot3D::getListOfSurfaces() const
 {
-	return &mSurfaces;
+  return &mSurfaces;
 }
 
 
@@ -153,7 +143,7 @@ SedPlot3D::getListOfSurfaces() const
 SedSurface*
 SedPlot3D::removeSurface(unsigned int n)
 {
-	return mSurfaces.remove(n);
+  return mSurfaces.remove(n);
 }
 
 
@@ -163,7 +153,7 @@ SedPlot3D::removeSurface(unsigned int n)
 SedSurface*
 SedPlot3D::removeSurface(const std::string& sid)
 {
-	return mSurfaces.remove(sid);
+  return mSurfaces.remove(sid);
 }
 
 
@@ -173,7 +163,7 @@ SedPlot3D::removeSurface(const std::string& sid)
 SedSurface*
 SedPlot3D::getSurface(unsigned int n)
 {
-	return mSurfaces.get(n);
+  return mSurfaces.get(n);
 }
 
 
@@ -183,7 +173,7 @@ SedPlot3D::getSurface(unsigned int n)
 const SedSurface*
 SedPlot3D::getSurface(unsigned int n) const
 {
-	return mSurfaces.get(n);
+  return mSurfaces.get(n);
 }
 
 
@@ -193,7 +183,7 @@ SedPlot3D::getSurface(unsigned int n) const
 SedSurface*
 SedPlot3D::getSurface(const std::string& sid)
 {
-	return mSurfaces.get(sid);
+  return mSurfaces.get(sid);
 }
 
 
@@ -203,7 +193,7 @@ SedPlot3D::getSurface(const std::string& sid)
 const SedSurface*
 SedPlot3D::getSurface(const std::string& sid) const
 {
-	return mSurfaces.get(sid);
+  return mSurfaces.get(sid);
 }
 
 
@@ -222,9 +212,10 @@ SedPlot3D::getSurface(const std::string& sid) const
 int
 SedPlot3D::addSurface(const SedSurface* ss)
 {
-	if(ss == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mSurfaces.append(ss);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (ss == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  mSurfaces.append(ss);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -233,36 +224,38 @@ SedPlot3D::addSurface(const SedSurface* ss)
  *
  * @return the number of SedSurface objects in this SedPlot3D
  */
-unsigned int 
+unsigned int
 SedPlot3D::getNumSurfaces() const
 {
-	return mSurfaces.size();
+  return mSurfaces.size();
 }
 
 /**
  * Creates a new SedSurface object, adds it to this SedPlot3Ds
- * SedPlot3D and returns the SedSurface object created. 
+ * SedPlot3D and returns the SedSurface object created.
  *
  * @return a new SedSurface object instance
  *
  * @see addSedSurface(const SedSurface* ss)
  */
-SedSurface* 
+SedSurface*
 SedPlot3D::createSurface()
 {
-	SedSurface *temp = new SedSurface();
-	if (temp != NULL) mSurfaces.appendAndOwn(temp);
-	return temp;
+  SedSurface *temp = new SedSurface();
+
+  if (temp != NULL) mSurfaces.appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
  * Returns the XML element name of this object
  */
 const std::string&
-SedPlot3D::getElementName () const
+SedPlot3D::getElementName() const
 {
-	static const string name = "plot3D";
-	return name;
+  static const string name = "plot3D";
+  return name;
 }
 
 
@@ -272,18 +265,18 @@ SedPlot3D::getElementName () const
 SedBase*
 SedPlot3D::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedOutput::createObject(stream);
+  SedBase* object = SedOutput::createObject(stream);
 
-	const string& name   = stream.peek().getName();
+  const string& name   = stream.peek().getName();
 
-	if (name == "listOfSurfaces")
-	{
-		object = &mSurfaces;
-	}
+  if (name == "listOfSurfaces")
+    {
+      object = &mSurfaces;
+    }
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -291,11 +284,11 @@ SedPlot3D::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedPlot3D::connectToChild ()
+SedPlot3D::connectToChild()
 {
-	SedOutput::connectToChild();
+  SedOutput::connectToChild();
 
-	mSurfaces.connectToParent(this);
+  mSurfaces.connectToParent(this);
 }
 
 
@@ -303,9 +296,9 @@ SedPlot3D::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedPlot3D::getTypeCode () const
+SedPlot3D::getTypeCode() const
 {
-	return SEDML_OUTPUT_PLOT3D;
+  return SEDML_OUTPUT_PLOT3D;
 }
 
 
@@ -313,11 +306,11 @@ SedPlot3D::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedPlot3D::hasRequiredAttributes () const
+SedPlot3D::hasRequiredAttributes() const
 {
-	bool allPresent = SedOutput::hasRequiredAttributes();
+  bool allPresent = SedOutput::hasRequiredAttributes();
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -325,11 +318,11 @@ SedPlot3D::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-SedPlot3D::hasRequiredElements () const
+SedPlot3D::hasRequiredElements() const
 {
-	bool allPresent = SedOutput::hasRequiredElements();
+  bool allPresent = SedOutput::hasRequiredElements();
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -339,13 +332,14 @@ SedPlot3D::hasRequiredElements () const
  * write contained elements
  */
 void
-SedPlot3D::writeElements (XMLOutputStream& stream) const
+SedPlot3D::writeElements(XMLOutputStream& stream) const
 {
-	SedOutput::writeElements(stream);
-	if (getNumSurfaces() > 0)
-	{
-		mSurfaces.write(stream);
-	}
+  SedOutput::writeElements(stream);
+
+  if (getNumSurfaces() > 0)
+    {
+      mSurfaces.write(stream);
+    }
 }
 
 
@@ -358,9 +352,9 @@ SedPlot3D::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedPlot3D::accept (SedVisitor& v) const
+SedPlot3D::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -374,10 +368,10 @@ SedPlot3D::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedPlot3D::setSedDocument (SedDocument* d)
+SedPlot3D::setSedDocument(SedDocument* d)
 {
-	SedOutput::setSedDocument(d);
-	mSurfaces.setSedDocument(d);
+  SedOutput::setSedDocument(d);
+  mSurfaces.setSedDocument(d);
 }
 
 
@@ -392,7 +386,7 @@ SedPlot3D::setSedDocument (SedDocument* d)
 void
 SedPlot3D::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedOutput::addExpectedAttributes(attributes);
+  SedOutput::addExpectedAttributes(attributes);
 
 }
 
@@ -406,12 +400,12 @@ SedPlot3D::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedPlot3D::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedPlot3D::readAttributes(const XMLAttributes& attributes,
+                          const ExpectedAttributes& expectedAttributes)
 {
-	SedOutput::readAttributes(attributes, expectedAttributes);
+  SedOutput::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
 }
 
@@ -424,10 +418,10 @@ SedPlot3D::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedPlot3D::writeAttributes (XMLOutputStream& stream) const
+void
+SedPlot3D::writeAttributes(XMLOutputStream& stream) const
 {
-	SedOutput::writeAttributes(stream);
+  SedOutput::writeAttributes(stream);
 
 }
 
@@ -442,7 +436,7 @@ LIBSEDML_EXTERN
 SedPlot3D_t *
 SedPlot3D_create(unsigned int level, unsigned int version)
 {
-	return new SedPlot3D(level, version);
+  return new SedPlot3D(level, version);
 }
 
 
@@ -453,8 +447,8 @@ LIBSEDML_EXTERN
 void
 SedPlot3D_free(SedPlot3D_t * spd)
 {
-	if (spd != NULL)
-		delete spd;
+  if (spd != NULL)
+    delete spd;
 }
 
 
@@ -465,14 +459,14 @@ LIBSEDML_EXTERN
 SedPlot3D_t *
 SedPlot3D_clone(SedPlot3D_t * spd)
 {
-	if (spd != NULL)
-	{
-		return static_cast<SedPlot3D_t*>(spd->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (spd != NULL)
+    {
+      return static_cast<SedPlot3D_t*>(spd->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -480,56 +474,56 @@ LIBSEDML_EXTERN
 int
 SedPlot3D_addSurface(SedPlot3D_t * spd, SedSurface_t * ss)
 {
-	return  (spd != NULL) ? spd->addSurface(ss) : LIBSBML_INVALID_OBJECT;
+  return (spd != NULL) ? spd->addSurface(ss) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
 SedPlot3D_createSurface(SedPlot3D_t * spd)
 {
-	return  (spd != NULL) ? spd->createSurface() : NULL;
+  return (spd != NULL) ? spd->createSurface() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
 SedPlot3D_getSedListOfSurfaces(SedPlot3D_t * spd)
 {
-	return  (spd != NULL) ? (SedListOf_t *)spd->getListOfSurfaces() : NULL;
+  return (spd != NULL) ? (SedListOf_t *)spd->getListOfSurfaces() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
 SedPlot3D_getSurface(SedPlot3D_t * spd, unsigned int n)
 {
-	return  (spd != NULL) ? spd->getSurface(n) : NULL;
+  return (spd != NULL) ? spd->getSurface(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
 SedPlot3D_getSurfaceById(SedPlot3D_t * spd, const char * sid)
 {
-	return  (spd != NULL) ? spd->getSurface(sid) : NULL;
+  return (spd != NULL) ? spd->getSurface(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
 SedPlot3D_getNumSurfaces(SedPlot3D_t * spd)
 {
-	return  (spd != NULL) ? spd->getNumSurfaces() : SEDML_INT_MAX;
+  return (spd != NULL) ? spd->getNumSurfaces() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
 SedPlot3D_removeSurface(SedPlot3D_t * spd, unsigned int n)
 {
-	return  (spd != NULL) ? spd->removeSurface(n) : NULL;
+  return (spd != NULL) ? spd->removeSurface(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedSurface_t *
 SedPlot3D_removeSurfaceById(SedPlot3D_t * spd, const char * sid)
 {
-	return  (spd != NULL) ? spd->removeSurface(sid) : NULL;
+  return (spd != NULL) ? spd->removeSurface(sid) : NULL;
 }
 
 /**
@@ -539,7 +533,7 @@ LIBSEDML_EXTERN
 int
 SedPlot3D_hasRequiredAttributes(SedPlot3D_t * spd)
 {
-	return (spd != NULL) ? static_cast<int>(spd->hasRequiredAttributes()) : 0;
+  return (spd != NULL) ? static_cast<int>(spd->hasRequiredAttributes()) : 0;
 }
 
 
@@ -550,7 +544,7 @@ LIBSEDML_EXTERN
 int
 SedPlot3D_hasRequiredElements(SedPlot3D_t * spd)
 {
-	return (spd != NULL) ? static_cast<int>(spd->hasRequiredElements()) : 0;
+  return (spd != NULL) ? static_cast<int>(spd->hasRequiredElements()) : 0;
 }
 
 

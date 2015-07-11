@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,52 +48,45 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedDataSet with the given level, version, and package version.
  */
-SedDataSet::SedDataSet (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
-	, mLabel ("")
-	, mName ("")
-	, mDataReference ("")
+SedDataSet::SedDataSet(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
+  , mLabel("")
+  , mName("")
+  , mDataReference("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedDataSet with the given SedNamespaces object.
  */
-SedDataSet::SedDataSet (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
-	, mLabel ("")
-	, mName ("")
-	, mDataReference ("")
+SedDataSet::SedDataSet(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
+  , mLabel("")
+  , mName("")
+  , mDataReference("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedDataSet.
  */
-SedDataSet::SedDataSet (const SedDataSet& orig)
-	: SedBase(orig)
+SedDataSet::SedDataSet(const SedDataSet& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-		mLabel  = orig.mLabel;
-		mName  = orig.mName;
-		mDataReference  = orig.mDataReference;
-	}
+  mId  = orig.mId;
+  mLabel  = orig.mLabel;
+  mName  = orig.mName;
+  mDataReference  = orig.mDataReference;
 }
 
 
@@ -103,19 +96,16 @@ SedDataSet::SedDataSet (const SedDataSet& orig)
 SedDataSet&
 SedDataSet::operator=(const SedDataSet& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-		mLabel  = rhs.mLabel;
-		mName  = rhs.mName;
-		mDataReference  = rhs.mDataReference;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+      mLabel  = rhs.mLabel;
+      mName  = rhs.mName;
+      mDataReference  = rhs.mDataReference;
+    }
+
+  return *this;
 }
 
 
@@ -123,16 +113,16 @@ SedDataSet::operator=(const SedDataSet& rhs)
  * Clone for SedDataSet.
  */
 SedDataSet*
-SedDataSet::clone () const
+SedDataSet::clone() const
 {
-	return new SedDataSet(*this);
+  return new SedDataSet(*this);
 }
 
 
 /*
  * Destructor for SedDataSet.
  */
-SedDataSet::~SedDataSet ()
+SedDataSet::~SedDataSet()
 {
 }
 
@@ -143,7 +133,7 @@ SedDataSet::~SedDataSet ()
 const std::string&
 SedDataSet::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -153,7 +143,7 @@ SedDataSet::getId() const
 const std::string&
 SedDataSet::getLabel() const
 {
-	return mLabel;
+  return mLabel;
 }
 
 
@@ -163,7 +153,7 @@ SedDataSet::getLabel() const
 const std::string&
 SedDataSet::getName() const
 {
-	return mName;
+  return mName;
 }
 
 
@@ -173,7 +163,7 @@ SedDataSet::getName() const
 const std::string&
 SedDataSet::getDataReference() const
 {
-	return mDataReference;
+  return mDataReference;
 }
 
 
@@ -183,7 +173,7 @@ SedDataSet::getDataReference() const
 bool
 SedDataSet::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -193,7 +183,7 @@ SedDataSet::isSetId() const
 bool
 SedDataSet::isSetLabel() const
 {
-	return (mLabel.empty() == false);
+  return (mLabel.empty() == false);
 }
 
 
@@ -203,7 +193,7 @@ SedDataSet::isSetLabel() const
 bool
 SedDataSet::isSetName() const
 {
-	return (mName.empty() == false);
+  return (mName.empty() == false);
 }
 
 
@@ -213,7 +203,7 @@ SedDataSet::isSetName() const
 bool
 SedDataSet::isSetDataReference() const
 {
-	return (mDataReference.empty() == false);
+  return (mDataReference.empty() == false);
 }
 
 
@@ -223,7 +213,7 @@ SedDataSet::isSetDataReference() const
 int
 SedDataSet::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -233,15 +223,10 @@ SedDataSet::setId(const std::string& id)
 int
 SedDataSet::setLabel(const std::string& label)
 {
-	if (&(label) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mLabel = label;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mLabel = label;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -251,15 +236,10 @@ SedDataSet::setLabel(const std::string& label)
 int
 SedDataSet::setName(const std::string& name)
 {
-	if (&(name) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mName = name;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -269,19 +249,15 @@ SedDataSet::setName(const std::string& name)
 int
 SedDataSet::setDataReference(const std::string& dataReference)
 {
-	if (&(dataReference) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(dataReference)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mDataReference = dataReference;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(dataReference)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mDataReference = dataReference;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -291,16 +267,16 @@ SedDataSet::setDataReference(const std::string& dataReference)
 int
 SedDataSet::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -310,16 +286,16 @@ SedDataSet::unsetId()
 int
 SedDataSet::unsetLabel()
 {
-	mLabel.erase();
+  mLabel.erase();
 
-	if (mLabel.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mLabel.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -329,16 +305,16 @@ SedDataSet::unsetLabel()
 int
 SedDataSet::unsetName()
 {
-	mName.erase();
+  mName.erase();
 
-	if (mName.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -348,16 +324,16 @@ SedDataSet::unsetName()
 int
 SedDataSet::unsetDataReference()
 {
-	mDataReference.erase();
+  mDataReference.erase();
 
-	if (mDataReference.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mDataReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -365,10 +341,10 @@ SedDataSet::unsetDataReference()
  * Returns the XML element name of this object
  */
 const std::string&
-SedDataSet::getElementName () const
+SedDataSet::getElementName() const
 {
-	static const string name = "dataSet";
-	return name;
+  static const string name = "dataSet";
+  return name;
 }
 
 
@@ -376,9 +352,9 @@ SedDataSet::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedDataSet::getTypeCode () const
+SedDataSet::getTypeCode() const
 {
-	return SEDML_OUTPUT_DATASET;
+  return SEDML_OUTPUT_DATASET;
 }
 
 
@@ -386,20 +362,20 @@ SedDataSet::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedDataSet::hasRequiredAttributes () const
+SedDataSet::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetId() == false)
-		allPresent = false;
+  if (isSetId() == false)
+    allPresent = false;
 
-	if (isSetLabel() == false)
-		allPresent = false;
+  if (isSetLabel() == false)
+    allPresent = false;
 
-	if (isSetDataReference() == false)
-		allPresent = false;
+  if (isSetDataReference() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -409,9 +385,9 @@ SedDataSet::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedDataSet::writeElements (XMLOutputStream& stream) const
+SedDataSet::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -424,9 +400,9 @@ SedDataSet::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedDataSet::accept (SedVisitor& v) const
+SedDataSet::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -440,9 +416,9 @@ SedDataSet::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedDataSet::setSedDocument (SedDocument* d)
+SedDataSet::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -457,12 +433,12 @@ SedDataSet::setSedDocument (SedDocument* d)
 void
 SedDataSet::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
-	attributes.add("label");
-	attributes.add("name");
-	attributes.add("dataReference");
+  attributes.add("id");
+  attributes.add("label");
+  attributes.add("name");
+  attributes.add("dataReference");
 }
 
 
@@ -475,80 +451,80 @@ SedDataSet::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedDataSet::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedDataSet::readAttributes(const XMLAttributes& attributes,
+                           const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "required" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+  //
+  // id SId  ( use = "required" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedDataSet>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedDataSet>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// label string   ( use = "required" )
-	//
-	assigned = attributes.readInto("label", mLabel, getErrorLog(), true);
+  //
+  // label string   ( use = "required" )
+  //
+  assigned = attributes.readInto("label", mLabel, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mLabel.empty() == true)
-		{
-			logEmptyString(mLabel, getLevel(), getVersion(), "<SedDataSet>");
-		}
-	}
+      if (mLabel.empty() == true)
+        {
+          logEmptyString(mLabel, getLevel(), getVersion(), "<SedDataSet>");
+        }
+    }
 
-	//
-	// name string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("name", mName, getErrorLog(), false);
+  //
+  // name string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("name", mName, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mName.empty() == true)
-		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedDataSet>");
-		}
-	}
+      if (mName.empty() == true)
+        {
+          logEmptyString(mName, getLevel(), getVersion(), "<SedDataSet>");
+        }
+    }
 
-	//
-	// dataReference SIdRef   ( use = "required" )
-	//
-	assigned = attributes.readInto("dataReference", mDataReference, getErrorLog(), true);
+  //
+  // dataReference SIdRef   ( use = "required" )
+  //
+  assigned = attributes.readInto("dataReference", mDataReference, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mDataReference.empty() == true)
-		{
-			logEmptyString(mDataReference, getLevel(), getVersion(), "<SedDataSet>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mDataReference) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mDataReference.empty() == true)
+        {
+          logEmptyString(mDataReference, getLevel(), getVersion(), "<SedDataSet>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mDataReference) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
 }
 
@@ -561,22 +537,22 @@ SedDataSet::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedDataSet::writeAttributes (XMLOutputStream& stream) const
+void
+SedDataSet::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
-	if (isSetLabel() == true)
-		stream.writeAttribute("label", getPrefix(), mLabel);
+  if (isSetLabel() == true)
+    stream.writeAttribute("label", getPrefix(), mLabel);
 
-	if (isSetName() == true)
-		stream.writeAttribute("name", getPrefix(), mName);
+  if (isSetName() == true)
+    stream.writeAttribute("name", getPrefix(), mName);
 
-	if (isSetDataReference() == true)
-		stream.writeAttribute("dataReference", getPrefix(), mDataReference);
+  if (isSetDataReference() == true)
+    stream.writeAttribute("dataReference", getPrefix(), mDataReference);
 
 }
 
@@ -585,33 +561,33 @@ SedDataSet::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfDataSets::SedListOfDataSets(unsigned int level, 
-	                  unsigned int version)
- : SedListOf(level, version)
+SedListOfDataSets::SedListOfDataSets(unsigned int level,
+                                     unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfDataSets::SedListOfDataSets(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfDataSets 
+ * Returns a deep copy of this SedListOfDataSets
  */
-SedListOfDataSets* 
-SedListOfDataSets::clone () const
- {
-	return new SedListOfDataSets(*this);
+SedListOfDataSets*
+SedListOfDataSets::clone() const
+{
+  return new SedListOfDataSets(*this);
 }
 
 
@@ -621,7 +597,7 @@ SedListOfDataSets::clone () const
 SedDataSet*
 SedListOfDataSets::get(unsigned int n)
 {
-	return static_cast<SedDataSet*>(SedListOf::get(n));
+  return static_cast<SedDataSet*>(SedListOf::get(n));
 }
 
 
@@ -631,7 +607,7 @@ SedListOfDataSets::get(unsigned int n)
 const SedDataSet*
 SedListOfDataSets::get(unsigned int n) const
 {
-	return static_cast<const SedDataSet*>(SedListOf::get(n));
+  return static_cast<const SedDataSet*>(SedListOf::get(n));
 }
 
 
@@ -641,8 +617,8 @@ SedListOfDataSets::get(unsigned int n) const
 SedDataSet*
 SedListOfDataSets::get(const std::string& sid)
 {
-	return const_cast<SedDataSet*>(
-	  static_cast<const SedListOfDataSets&>(*this).get(sid));
+  return const_cast<SedDataSet*>(
+           static_cast<const SedListOfDataSets&>(*this).get(sid));
 }
 
 
@@ -652,10 +628,10 @@ SedListOfDataSets::get(const std::string& sid)
 const SedDataSet*
 SedListOfDataSets::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedDataSet>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedDataSet*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedDataSet>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedDataSet*>(*result);
 }
 
 
@@ -674,9 +650,10 @@ SedListOfDataSets::get(const std::string& sid) const
 int
 SedListOfDataSets::addDataSet(const SedDataSet* sds)
 {
-	if(sds == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(sds);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sds == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(sds);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -685,26 +662,28 @@ SedListOfDataSets::addDataSet(const SedDataSet* sds)
  *
  * @return the number of SedDataSet objects in this SedListOfDataSets
  */
-unsigned int 
+unsigned int
 SedListOfDataSets::getNumDataSets() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedDataSet object, adds it to this SedListOfDataSetss
- * SedDataSet and returns the SedDataSet object created. 
+ * SedDataSet and returns the SedDataSet object created.
  *
  * @return a new SedDataSet object instance
  *
  * @see addSedDataSet(const SedDataSet* sds)
  */
-SedDataSet* 
+SedDataSet*
 SedListOfDataSets::createDataSet()
 {
-	SedDataSet *temp = new SedDataSet();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedDataSet *temp = new SedDataSet();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -713,7 +692,7 @@ SedListOfDataSets::createDataSet()
 SedDataSet*
 SedListOfDataSets::remove(unsigned int n)
 {
-	return static_cast<SedDataSet*>(SedListOf::remove(n));
+  return static_cast<SedDataSet*>(SedListOf::remove(n));
 }
 
 
@@ -723,18 +702,18 @@ SedListOfDataSets::remove(unsigned int n)
 SedDataSet*
 SedListOfDataSets::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedDataSet>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedDataSet>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedDataSet*> (item);
+  return static_cast <SedDataSet*>(item);
 }
 
 
@@ -742,10 +721,10 @@ SedListOfDataSets::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfDataSets::getElementName () const
+SedListOfDataSets::getElementName() const
 {
-	static const string name = "listOfDataSets";
-	return name;
+  static const string name = "listOfDataSets";
+  return name;
 }
 
 
@@ -753,9 +732,9 @@ SedListOfDataSets::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfDataSets::getTypeCode () const
+SedListOfDataSets::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -763,9 +742,9 @@ SedListOfDataSets::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfDataSets::getItemTypeCode () const
+SedListOfDataSets::getItemTypeCode() const
 {
-	return SEDML_OUTPUT_DATASET;
+  return SEDML_OUTPUT_DATASET;
 }
 
 
@@ -777,16 +756,16 @@ SedListOfDataSets::getItemTypeCode () const
 SedBase*
 SedListOfDataSets::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "dataSet")
-	{
-		object = new SedDataSet(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "dataSet")
+    {
+      object = new SedDataSet(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -801,20 +780,20 @@ SedListOfDataSets::createObject(XMLInputStream& stream)
 void
 SedListOfDataSets::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -828,7 +807,7 @@ LIBSEDML_EXTERN
 SedDataSet_t *
 SedDataSet_create(unsigned int level, unsigned int version)
 {
-	return new SedDataSet(level, version);
+  return new SedDataSet(level, version);
 }
 
 
@@ -839,8 +818,8 @@ LIBSEDML_EXTERN
 void
 SedDataSet_free(SedDataSet_t * sds)
 {
-	if (sds != NULL)
-		delete sds;
+  if (sds != NULL)
+    delete sds;
 }
 
 
@@ -851,14 +830,14 @@ LIBSEDML_EXTERN
 SedDataSet_t *
 SedDataSet_clone(SedDataSet_t * sds)
 {
-	if (sds != NULL)
-	{
-		return static_cast<SedDataSet_t*>(sds->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sds != NULL)
+    {
+      return static_cast<SedDataSet_t*>(sds->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -869,10 +848,10 @@ LIBSEDML_EXTERN
 char *
 SedDataSet_getId(SedDataSet_t * sds)
 {
-	if (sds == NULL)
-		return NULL;
+  if (sds == NULL)
+    return NULL;
 
-	return sds->getId().empty() ? NULL : safe_strdup(sds->getId().c_str());
+  return sds->getId().empty() ? NULL : safe_strdup(sds->getId().c_str());
 }
 
 
@@ -883,10 +862,10 @@ LIBSEDML_EXTERN
 char *
 SedDataSet_getLabel(SedDataSet_t * sds)
 {
-	if (sds == NULL)
-		return NULL;
+  if (sds == NULL)
+    return NULL;
 
-	return sds->getLabel().empty() ? NULL : safe_strdup(sds->getLabel().c_str());
+  return sds->getLabel().empty() ? NULL : safe_strdup(sds->getLabel().c_str());
 }
 
 
@@ -897,10 +876,10 @@ LIBSEDML_EXTERN
 char *
 SedDataSet_getName(SedDataSet_t * sds)
 {
-	if (sds == NULL)
-		return NULL;
+  if (sds == NULL)
+    return NULL;
 
-	return sds->getName().empty() ? NULL : safe_strdup(sds->getName().c_str());
+  return sds->getName().empty() ? NULL : safe_strdup(sds->getName().c_str());
 }
 
 
@@ -911,10 +890,10 @@ LIBSEDML_EXTERN
 char *
 SedDataSet_getDataReference(SedDataSet_t * sds)
 {
-	if (sds == NULL)
-		return NULL;
+  if (sds == NULL)
+    return NULL;
 
-	return sds->getDataReference().empty() ? NULL : safe_strdup(sds->getDataReference().c_str());
+  return sds->getDataReference().empty() ? NULL : safe_strdup(sds->getDataReference().c_str());
 }
 
 
@@ -925,7 +904,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_isSetId(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? static_cast<int>(sds->isSetId()) : 0;
+  return (sds != NULL) ? static_cast<int>(sds->isSetId()) : 0;
 }
 
 
@@ -936,7 +915,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_isSetLabel(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? static_cast<int>(sds->isSetLabel()) : 0;
+  return (sds != NULL) ? static_cast<int>(sds->isSetLabel()) : 0;
 }
 
 
@@ -947,7 +926,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_isSetName(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? static_cast<int>(sds->isSetName()) : 0;
+  return (sds != NULL) ? static_cast<int>(sds->isSetName()) : 0;
 }
 
 
@@ -958,7 +937,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_isSetDataReference(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? static_cast<int>(sds->isSetDataReference()) : 0;
+  return (sds != NULL) ? static_cast<int>(sds->isSetDataReference()) : 0;
 }
 
 
@@ -969,7 +948,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_setId(SedDataSet_t * sds, const char * id)
 {
-	return (sds != NULL) ? sds->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -980,7 +959,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_setLabel(SedDataSet_t * sds, const char * label)
 {
-	return (sds != NULL) ? sds->setLabel(label) : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->setLabel(label) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -991,7 +970,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_setName(SedDataSet_t * sds, const char * name)
 {
-	return (sds != NULL) ? sds->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1002,7 +981,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_setDataReference(SedDataSet_t * sds, const char * dataReference)
 {
-	return (sds != NULL) ? sds->setDataReference(dataReference) : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->setDataReference(dataReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1013,7 +992,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_unsetId(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? sds->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1024,7 +1003,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_unsetLabel(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? sds->unsetLabel() : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->unsetLabel() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1035,7 +1014,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_unsetName(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? sds->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1046,7 +1025,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_unsetDataReference(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? sds->unsetDataReference() : LIBSEDML_INVALID_OBJECT;
+  return (sds != NULL) ? sds->unsetDataReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1057,7 +1036,7 @@ LIBSEDML_EXTERN
 int
 SedDataSet_hasRequiredAttributes(SedDataSet_t * sds)
 {
-	return (sds != NULL) ? static_cast<int>(sds->hasRequiredAttributes()) : 0;
+  return (sds != NULL) ? static_cast<int>(sds->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1068,10 +1047,10 @@ LIBSEDML_EXTERN
 SedDataSet_t *
 SedListOfDataSets_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfDataSets *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfDataSets *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1082,10 +1061,10 @@ LIBSEDML_EXTERN
 SedDataSet_t *
 SedListOfDataSets_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfDataSets *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfDataSets *>(lo)->remove(sid) : NULL;
 }
 
 

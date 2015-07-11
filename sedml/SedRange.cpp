@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,43 +48,36 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedRange with the given level, version, and package version.
  */
-SedRange::SedRange (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
+SedRange::SedRange(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedRange with the given SedNamespaces object.
  */
-SedRange::SedRange (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
+SedRange::SedRange(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedRange.
  */
-SedRange::SedRange (const SedRange& orig)
-	: SedBase(orig)
+SedRange::SedRange(const SedRange& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-	}
+  mId  = orig.mId;
 }
 
 
@@ -94,16 +87,13 @@ SedRange::SedRange (const SedRange& orig)
 SedRange&
 SedRange::operator=(const SedRange& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+    }
+
+  return *this;
 }
 
 
@@ -111,16 +101,16 @@ SedRange::operator=(const SedRange& rhs)
  * Clone for SedRange.
  */
 SedRange*
-SedRange::clone () const
+SedRange::clone() const
 {
-	return new SedRange(*this);
+  return new SedRange(*this);
 }
 
 
 /*
  * Destructor for SedRange.
  */
-SedRange::~SedRange ()
+SedRange::~SedRange()
 {
 }
 
@@ -131,7 +121,7 @@ SedRange::~SedRange ()
 const std::string&
 SedRange::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -141,7 +131,7 @@ SedRange::getId() const
 bool
 SedRange::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -151,7 +141,7 @@ SedRange::isSetId() const
 int
 SedRange::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -161,16 +151,16 @@ SedRange::setId(const std::string& id)
 int
 SedRange::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -178,10 +168,10 @@ SedRange::unsetId()
  * Returns the XML element name of this object
  */
 const std::string&
-SedRange::getElementName () const
+SedRange::getElementName() const
 {
-	static const string name = "range";
-	return name;
+  static const string name = "range";
+  return name;
 }
 
 
@@ -189,9 +179,9 @@ SedRange::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedRange::getTypeCode () const
+SedRange::getTypeCode() const
 {
-	return SEDML_RANGE;
+  return SEDML_RANGE;
 }
 
 
@@ -199,14 +189,14 @@ SedRange::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedRange::hasRequiredAttributes () const
+SedRange::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetId() == false)
-		allPresent = false;
+  if (isSetId() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -216,9 +206,9 @@ SedRange::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedRange::writeElements (XMLOutputStream& stream) const
+SedRange::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -231,9 +221,9 @@ SedRange::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedRange::accept (SedVisitor& v) const
+SedRange::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -247,9 +237,9 @@ SedRange::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedRange::setSedDocument (SedDocument* d)
+SedRange::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -264,9 +254,9 @@ SedRange::setSedDocument (SedDocument* d)
 void
 SedRange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
+  attributes.add("id");
 }
 
 
@@ -279,31 +269,31 @@ SedRange::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedRange::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedRange::readAttributes(const XMLAttributes& attributes,
+                         const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "required" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+  //
+  // id SId  ( use = "required" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedRange>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedRange>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
 }
 
@@ -316,13 +306,13 @@ SedRange::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedRange::writeAttributes (XMLOutputStream& stream) const
+void
+SedRange::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
 }
 
@@ -331,33 +321,33 @@ SedRange::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfRanges::SedListOfRanges(unsigned int level, 
-	                unsigned int version)
- : SedListOf(level, version)
+SedListOfRanges::SedListOfRanges(unsigned int level,
+                                 unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfRanges::SedListOfRanges(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfRanges 
+ * Returns a deep copy of this SedListOfRanges
  */
-SedListOfRanges* 
-SedListOfRanges::clone () const
- {
-	return new SedListOfRanges(*this);
+SedListOfRanges*
+SedListOfRanges::clone() const
+{
+  return new SedListOfRanges(*this);
 }
 
 
@@ -367,7 +357,7 @@ SedListOfRanges::clone () const
 SedRange*
 SedListOfRanges::get(unsigned int n)
 {
-	return static_cast<SedRange*>(SedListOf::get(n));
+  return static_cast<SedRange*>(SedListOf::get(n));
 }
 
 
@@ -377,7 +367,7 @@ SedListOfRanges::get(unsigned int n)
 const SedRange*
 SedListOfRanges::get(unsigned int n) const
 {
-	return static_cast<const SedRange*>(SedListOf::get(n));
+  return static_cast<const SedRange*>(SedListOf::get(n));
 }
 
 
@@ -387,8 +377,8 @@ SedListOfRanges::get(unsigned int n) const
 SedRange*
 SedListOfRanges::get(const std::string& sid)
 {
-	return const_cast<SedRange*>(
-	  static_cast<const SedListOfRanges&>(*this).get(sid));
+  return const_cast<SedRange*>(
+           static_cast<const SedListOfRanges&>(*this).get(sid));
 }
 
 
@@ -398,10 +388,10 @@ SedListOfRanges::get(const std::string& sid)
 const SedRange*
 SedListOfRanges::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedRange>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedRange*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedRange>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedRange*>(*result);
 }
 
 
@@ -420,9 +410,10 @@ SedListOfRanges::get(const std::string& sid) const
 int
 SedListOfRanges::addRange(const SedRange* sr)
 {
-	if(sr == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(sr);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sr == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(sr);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -431,58 +422,64 @@ SedListOfRanges::addRange(const SedRange* sr)
  *
  * @return the number of SedRange objects in this SedListOfRanges
  */
-unsigned int 
+unsigned int
 SedListOfRanges::getNumRanges() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedUniformRange object, adds it to this SedListOfRanges
- * uniformRange and returns the SedUniformRange object created. 
+ * uniformRange and returns the SedUniformRange object created.
  *
  * @return a new SedUniformRange object instance
  *
  * @see addUniformRange(const SedRange* sr)
  */
-SedUniformRange* 
+SedUniformRange*
 SedListOfRanges::createUniformRange()
 {
-	SedUniformRange *temp = new SedUniformRange();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedUniformRange *temp = new SedUniformRange();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedVectorRange object, adds it to this SedListOfRanges
- * vectorRange and returns the SedVectorRange object created. 
+ * vectorRange and returns the SedVectorRange object created.
  *
  * @return a new SedVectorRange object instance
  *
  * @see addVectorRange(const SedRange* sr)
  */
-SedVectorRange* 
+SedVectorRange*
 SedListOfRanges::createVectorRange()
 {
-	SedVectorRange *temp = new SedVectorRange();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedVectorRange *temp = new SedVectorRange();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedFunctionalRange object, adds it to this SedListOfRanges
- * functionalRange and returns the SedFunctionalRange object created. 
+ * functionalRange and returns the SedFunctionalRange object created.
  *
  * @return a new SedFunctionalRange object instance
  *
  * @see addFunctionalRange(const SedRange* sr)
  */
-SedFunctionalRange* 
+SedFunctionalRange*
 SedListOfRanges::createFunctionalRange()
 {
-	SedFunctionalRange *temp = new SedFunctionalRange();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedFunctionalRange *temp = new SedFunctionalRange();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -491,7 +488,7 @@ SedListOfRanges::createFunctionalRange()
 SedRange*
 SedListOfRanges::remove(unsigned int n)
 {
-	return static_cast<SedRange*>(SedListOf::remove(n));
+  return static_cast<SedRange*>(SedListOf::remove(n));
 }
 
 
@@ -501,18 +498,18 @@ SedListOfRanges::remove(unsigned int n)
 SedRange*
 SedListOfRanges::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedRange>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedRange>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedRange*> (item);
+  return static_cast <SedRange*>(item);
 }
 
 
@@ -520,10 +517,10 @@ SedListOfRanges::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfRanges::getElementName () const
+SedListOfRanges::getElementName() const
 {
-	static const string name = "listOfRanges";
-	return name;
+  static const string name = "listOfRanges";
+  return name;
 }
 
 
@@ -531,9 +528,9 @@ SedListOfRanges::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfRanges::getTypeCode () const
+SedListOfRanges::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -541,9 +538,9 @@ SedListOfRanges::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfRanges::getItemTypeCode () const
+SedListOfRanges::getItemTypeCode() const
 {
-	return SEDML_RANGE;
+  return SEDML_RANGE;
 }
 
 
@@ -555,28 +552,28 @@ SedListOfRanges::getItemTypeCode () const
 SedBase*
 SedListOfRanges::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "uniformRange")
-	{
-		object = new SedUniformRange(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "uniformRange")
+    {
+      object = new SedUniformRange(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	if (name == "vectorRange")
-	{
-		object = new SedVectorRange(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "vectorRange")
+    {
+      object = new SedVectorRange(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	if (name == "functionalRange")
-	{
-		object = new SedFunctionalRange(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "functionalRange")
+    {
+      object = new SedFunctionalRange(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -591,20 +588,20 @@ SedListOfRanges::createObject(XMLInputStream& stream)
 void
 SedListOfRanges::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -618,7 +615,7 @@ LIBSEDML_EXTERN
 SedRange_t *
 SedRange_create(unsigned int level, unsigned int version)
 {
-	return new SedRange(level, version);
+  return new SedRange(level, version);
 }
 
 
@@ -629,8 +626,8 @@ LIBSEDML_EXTERN
 void
 SedRange_free(SedRange_t * sr)
 {
-	if (sr != NULL)
-		delete sr;
+  if (sr != NULL)
+    delete sr;
 }
 
 
@@ -641,14 +638,14 @@ LIBSEDML_EXTERN
 SedRange_t *
 SedRange_clone(SedRange_t * sr)
 {
-	if (sr != NULL)
-	{
-		return static_cast<SedRange_t*>(sr->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sr != NULL)
+    {
+      return static_cast<SedRange_t*>(sr->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -659,10 +656,10 @@ LIBSEDML_EXTERN
 char *
 SedRange_getId(SedRange_t * sr)
 {
-	if (sr == NULL)
-		return NULL;
+  if (sr == NULL)
+    return NULL;
 
-	return sr->getId().empty() ? NULL : safe_strdup(sr->getId().c_str());
+  return sr->getId().empty() ? NULL : safe_strdup(sr->getId().c_str());
 }
 
 
@@ -673,7 +670,7 @@ LIBSEDML_EXTERN
 int
 SedRange_isSetId(SedRange_t * sr)
 {
-	return (sr != NULL) ? static_cast<int>(sr->isSetId()) : 0;
+  return (sr != NULL) ? static_cast<int>(sr->isSetId()) : 0;
 }
 
 
@@ -684,7 +681,7 @@ LIBSEDML_EXTERN
 int
 SedRange_setId(SedRange_t * sr, const char * id)
 {
-	return (sr != NULL) ? sr->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (sr != NULL) ? sr->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -695,7 +692,7 @@ LIBSEDML_EXTERN
 int
 SedRange_unsetId(SedRange_t * sr)
 {
-	return (sr != NULL) ? sr->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (sr != NULL) ? sr->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -706,7 +703,7 @@ LIBSEDML_EXTERN
 int
 SedRange_hasRequiredAttributes(SedRange_t * sr)
 {
-	return (sr != NULL) ? static_cast<int>(sr->hasRequiredAttributes()) : 0;
+  return (sr != NULL) ? static_cast<int>(sr->hasRequiredAttributes()) : 0;
 }
 
 
@@ -717,10 +714,10 @@ LIBSEDML_EXTERN
 SedRange_t *
 SedListOfRanges_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfRanges *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfRanges *>(lo)->get(sid) : NULL;
 }
 
 
@@ -731,10 +728,10 @@ LIBSEDML_EXTERN
 SedRange_t *
 SedListOfRanges_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfRanges *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfRanges *>(lo)->remove(sid) : NULL;
 }
 
 

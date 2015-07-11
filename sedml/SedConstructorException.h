@@ -1,26 +1,26 @@
 /**
  * @file    SedConstructorException.h
  * @brief   Definition of SedConstructorException, the exception class for constructor exceptions
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,9 +31,9 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
- * 
+ *
  * @class SedConstructorException
  * @ingroup Core
  * @brief Class of exceptions thrown by constructors of some libSed objects.
@@ -71,12 +71,12 @@ public:
   /** @cond doxygen-libsbml-internal */
 
   /* constructor */
-  SedConstructorException (std::string errmsg = "");
-  SedConstructorException (std::string errmsg, std::string sbmlErrMsg);
-  SedConstructorException (std::string elementName, SedNamespaces* xmlns);
-  virtual ~SedConstructorException () throw();
-  
- /** @endcond */
+  SedConstructorException(std::string errmsg = "");
+  SedConstructorException(std::string errmsg, std::string sbmlErrMsg);
+  SedConstructorException(std::string elementName, SedNamespaces* xmlns);
+  virtual ~SedConstructorException() throw();
+
+  /** @endcond */
 
   /**
    * Returns the message associated with this Sed exception.

@@ -1,26 +1,26 @@
 /**
  * @file    SedReader.h
  * @brief   Reads an Sed Document into memory
- * 
+ *
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * @class SedReader
@@ -114,18 +114,18 @@ class LIBSEDML_EXTERN SedReader
 public:
 
   /**
-   * Creates a new SedReader and returns it. 
+   * Creates a new SedReader and returns it.
    *
    * The libSed SedReader objects offer methods for reading Sed in
    * XML form from files and text strings.
    */
-  SedReader ();
+  SedReader();
 
 
   /**
    * Destroys this SedReader.
    */
-  virtual ~SedReader ();
+  virtual ~SedReader();
 
 
   /**
@@ -153,16 +153,16 @@ public:
    * by the underlying operating system.  Callers can check for these
    * situations using a program fragment such as the following:
    * @if clike
- @verbatim
- SedReader reader;
- SedDocument* doc  = reader.readSedMLFromFile(filename);
- 
- if (doc->getNumErrors() > 0)
- {
+  @verbatim
+  SedReader reader;
+  SedDocument* doc  = reader.readSedMLFromFile(filename);
+
+  if (doc->getNumErrors() > 0)
+  {
    if (doc->getError(0)->getErrorId() == XMLError::XMLFileUnreadable)
    {
      // Handle case of unreadable file here.
-   } 
+   }
    else if (doc->getError(0)->getErrorId() == XMLError::XMLFileOperationError)
    {
      // Handle case of other file operation error here.
@@ -172,19 +172,19 @@ public:
      // Handle other cases -- see error codes defined in XMLErrorCode_t
      // for other possible cases to check.
    }
- }
- @endverbatim
- @endif@if java
- @verbatim
- SedReader reader = new SedReader();
- SedDocument doc  = reader.readSedMLFromFile(filename);
- 
- if (doc.getNumErrors() > 0)
- {
+  }
+  @endverbatim
+  @endif@if java
+  @verbatim
+  SedReader reader = new SedReader();
+  SedDocument doc  = reader.readSedMLFromFile(filename);
+
+  if (doc.getNumErrors() > 0)
+  {
      if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileUnreadable)
      {
          // Handle case of unreadable file here.
-     } 
+     }
      else if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileOperationError)
      {
          // Handle case of other file operation error here.
@@ -193,29 +193,29 @@ public:
      {
          // Handle other error cases.
      }
- }
- @endverbatim
- @endif@if python
- @verbatim
- reader = SedReader()
- doc    = reader.readSedMLFromFile(filename)
- 
- if doc.getNumErrors() > 0:
+  }
+  @endverbatim
+  @endif@if python
+  @verbatim
+  reader = SedReader()
+  doc    = reader.readSedMLFromFile(filename)
+
+  if doc.getNumErrors() > 0:
    if doc.getError(0).getErrorId() == libsbml.XMLFileUnreadable:
      # Handle case of unreadable file here.
    elif doc.getError(0).getErrorId() == libsbml.XMLFileOperationError:
      # Handle case of other file error here.
    else:
      # Handle other error cases here.
-   
- @endverbatim
- @endif@if csharp
- @verbatim
- SedReader reader = new SedReader();
- SedDocument doc = reader.readSedMLFromFile(filename);
 
- if (doc.getNumErrors() > 0)
- {
+  @endverbatim
+  @endif@if csharp
+  @verbatim
+  SedReader reader = new SedReader();
+  SedDocument doc = reader.readSedMLFromFile(filename);
+
+  if (doc.getNumErrors() > 0)
+  {
      if (doc.getError(0).getErrorId() == libsbmlcs.libsbml.XMLFileUnreadable)
      {
           // Handle case of unreadable file here.
@@ -230,8 +230,8 @@ public:
           // for other possible cases to check.
      }
   }
- @endverbatim
- @endif@~
+  @endverbatim
+  @endif@~
    *
    * If the given filename ends with the suffix @c ".gz" (for example, @c
    * "myfile.xml.gz"), the file is assumed to be compressed in @em gzip
@@ -267,7 +267,7 @@ public:
    *
    * @see SedError
    */
-  SedDocument* readSedML (const std::string& filename);
+  SedDocument* readSedML(const std::string& filename);
 
 
   /**
@@ -295,16 +295,16 @@ public:
    * by the underlying operating system.  Callers can check for these
    * situations using a program fragment such as the following:
    * @if clike
- @verbatim
- SedReader* reader = new SedReader();
- SedDocument* doc  = reader.readSedML(filename);
- 
- if (doc->getNumErrors() > 0)
- {
+  @verbatim
+  SedReader* reader = new SedReader();
+  SedDocument* doc  = reader.readSedML(filename);
+
+  if (doc->getNumErrors() > 0)
+  {
    if (doc->getError(0)->getErrorId() == XMLError::FileUnreadable)
    {
      // Handle case of unreadable file here.
-   } 
+   }
    else if (doc->getError(0)->getErrorId() == XMLError::FileOperationError)
    {
      // Handle case of other file operation error here.
@@ -314,19 +314,19 @@ public:
      // Handle other cases -- see error codes defined in XMLErrorCode_t
      // for other possible cases to check.
    }
- }
- @endverbatim
- @endif@if java
- @verbatim
- SedReader reader = new SedReader();
- SedDocument doc  = reader.readSedMLFromFile(filename);
- 
- if (doc.getNumErrors() > 0)
- {
+  }
+  @endverbatim
+  @endif@if java
+  @verbatim
+  SedReader reader = new SedReader();
+  SedDocument doc  = reader.readSedMLFromFile(filename);
+
+  if (doc.getNumErrors() > 0)
+  {
      if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileUnreadable)
      {
          // Handle case of unreadable file here.
-     } 
+     }
      else if (doc.getError(0).getErrorId() == libsbmlConstants.XMLFileOperationError)
      {
          // Handle case of other file operation error here.
@@ -335,23 +335,23 @@ public:
      {
          // Handle other error cases.
      }
- }
- @endverbatim
- @endif@if python
- @verbatim
- reader = SedReader()
- doc    = reader.readSedMLFromFile(filename)
- 
- if doc.getNumErrors() > 0:
+  }
+  @endverbatim
+  @endif@if python
+  @verbatim
+  reader = SedReader()
+  doc    = reader.readSedMLFromFile(filename)
+
+  if doc.getNumErrors() > 0:
    if doc.getError(0).getErrorId() == libsbml.XMLFileUnreadable:
      # Handle case of unreadable file here.
    elif doc.getError(0).getErrorId() == libsbml.XMLFileOperationError:
      # Handle case of other file error here.
    else:
      # Handle other error cases here.
-   
- @endverbatim
- @endif@~
+
+  @endverbatim
+  @endif@~
    *
    * If the given filename ends with the suffix @c ".gz" (for example, @c
    * "myfile.xml.gz"), the file is assumed to be compressed in @em gzip
@@ -388,7 +388,7 @@ public:
    * @see SedError
    * @see SedDocument
    */
-  SedDocument* readSedMLFromFile (const std::string& filename);
+  SedDocument* readSedMLFromFile(const std::string& filename);
 
 
   /**
@@ -411,7 +411,7 @@ public:
    *
    * @see SedReader::readSedML(@if java String filename@endif)
    */
-  SedDocument* readSedMLFromString (const std::string& xml);
+  SedDocument* readSedMLFromString(const std::string& xml);
 
 
   /**
@@ -458,7 +458,7 @@ protected:
    *
    * @if notcpp @htmlinclude warn-default-args-in-docs.html @endif@~
    */
-  SedDocument* readInternal (const char* content, bool isFile = true);
+  SedDocument* readInternal(const char* content, bool isFile = true);
 
   /** @endcond */
 };
@@ -480,14 +480,14 @@ BEGIN_C_DECLS
  */
 LIBSEDML_EXTERN
 SedReader_t *
-SedReader_create (void);
+SedReader_create(void);
 
 /**
  * Frees the given SedReader.
  */
 LIBSEDML_EXTERN
 void
-SedReader_free (SedReader_t *sr);
+SedReader_free(SedReader_t *sr);
 
 
 /**
@@ -543,11 +543,11 @@ SedReader_free (SedReader_t *sr);
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedML (SedReader_t *sr, const char *filename);
+SedReader_readSedML(SedReader_t *sr, const char *filename);
 
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedMLFromFile (SedReader_t *sr, const char *filename);
+SedReader_readSedMLFromFile(SedReader_t *sr, const char *filename);
 
 /**
  * Reads an Sed document from the given XML string.
@@ -566,7 +566,7 @@ SedReader_readSedMLFromFile (SedReader_t *sr, const char *filename);
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-SedReader_readSedMLFromString (SedReader_t *sr, const char *xml);
+SedReader_readSedMLFromString(SedReader_t *sr, const char *xml);
 
 
 /**
@@ -577,7 +577,7 @@ SedReader_readSedMLFromString (SedReader_t *sr, const char *xml);
  */
 LIBSEDML_EXTERN
 int
-SedReader_hasZlib ();
+SedReader_hasZlib();
 
 
 /**
@@ -588,7 +588,7 @@ SedReader_hasZlib ();
  */
 LIBSEDML_EXTERN
 int
-SedReader_hasBzip2 ();
+SedReader_hasBzip2();
 
 #endif  /* !SWIG */
 
@@ -606,12 +606,12 @@ SedReader_hasBzip2 ();
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedML (const char *filename);
+readSedML(const char *filename);
 
 
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedMLFromFile (const char *filename);
+readSedMLFromFile(const char *filename);
 
 
 /**
@@ -634,7 +634,7 @@ readSedMLFromFile (const char *filename);
  */
 LIBSEDML_EXTERN
 SedDocument_t *
-readSedMLFromString (const char *xml);
+readSedMLFromString(const char *xml);
 
 
 END_C_DECLS

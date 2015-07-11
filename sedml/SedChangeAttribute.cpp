@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,43 +48,36 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedChangeAttribute with the given level, version, and package version.
  */
-SedChangeAttribute::SedChangeAttribute (unsigned int level, unsigned int version)
-	: SedChange(level, version)
-	, mNewValue ("")
+SedChangeAttribute::SedChangeAttribute(unsigned int level, unsigned int version)
+  : SedChange(level, version)
+  , mNewValue("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedChangeAttribute with the given SedNamespaces object.
  */
-SedChangeAttribute::SedChangeAttribute (SedNamespaces* sedns)
-	: SedChange(sedns)
-	, mNewValue ("")
+SedChangeAttribute::SedChangeAttribute(SedNamespaces* sedns)
+  : SedChange(sedns)
+  , mNewValue("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedChangeAttribute.
  */
-SedChangeAttribute::SedChangeAttribute (const SedChangeAttribute& orig)
-	: SedChange(orig)
+SedChangeAttribute::SedChangeAttribute(const SedChangeAttribute& orig)
+  : SedChange(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mNewValue  = orig.mNewValue;
-	}
+  mNewValue  = orig.mNewValue;
 }
 
 
@@ -94,16 +87,13 @@ SedChangeAttribute::SedChangeAttribute (const SedChangeAttribute& orig)
 SedChangeAttribute&
 SedChangeAttribute::operator=(const SedChangeAttribute& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedChange::operator=(rhs);
-		mNewValue  = rhs.mNewValue;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedChange::operator=(rhs);
+      mNewValue  = rhs.mNewValue;
+    }
+
+  return *this;
 }
 
 
@@ -111,16 +101,16 @@ SedChangeAttribute::operator=(const SedChangeAttribute& rhs)
  * Clone for SedChangeAttribute.
  */
 SedChangeAttribute*
-SedChangeAttribute::clone () const
+SedChangeAttribute::clone() const
 {
-	return new SedChangeAttribute(*this);
+  return new SedChangeAttribute(*this);
 }
 
 
 /*
  * Destructor for SedChangeAttribute.
  */
-SedChangeAttribute::~SedChangeAttribute ()
+SedChangeAttribute::~SedChangeAttribute()
 {
 }
 
@@ -131,7 +121,7 @@ SedChangeAttribute::~SedChangeAttribute ()
 const std::string&
 SedChangeAttribute::getNewValue() const
 {
-	return mNewValue;
+  return mNewValue;
 }
 
 
@@ -141,7 +131,7 @@ SedChangeAttribute::getNewValue() const
 bool
 SedChangeAttribute::isSetNewValue() const
 {
-	return (mNewValue.empty() == false);
+  return (mNewValue.empty() == false);
 }
 
 
@@ -151,15 +141,10 @@ SedChangeAttribute::isSetNewValue() const
 int
 SedChangeAttribute::setNewValue(const std::string& newValue)
 {
-	if (&(newValue) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mNewValue = newValue;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mNewValue = newValue;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -169,16 +154,16 @@ SedChangeAttribute::setNewValue(const std::string& newValue)
 int
 SedChangeAttribute::unsetNewValue()
 {
-	mNewValue.erase();
+  mNewValue.erase();
 
-	if (mNewValue.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mNewValue.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -186,10 +171,10 @@ SedChangeAttribute::unsetNewValue()
  * Returns the XML element name of this object
  */
 const std::string&
-SedChangeAttribute::getElementName () const
+SedChangeAttribute::getElementName() const
 {
-	static const string name = "changeAttribute";
-	return name;
+  static const string name = "changeAttribute";
+  return name;
 }
 
 
@@ -199,11 +184,11 @@ SedChangeAttribute::getElementName () const
 SedBase*
 SedChangeAttribute::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedChange::createObject(stream);
+  SedBase* object = SedChange::createObject(stream);
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -211,9 +196,9 @@ SedChangeAttribute::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedChangeAttribute::getTypeCode () const
+SedChangeAttribute::getTypeCode() const
 {
-	return SEDML_CHANGE_ATTRIBUTE;
+  return SEDML_CHANGE_ATTRIBUTE;
 }
 
 
@@ -221,14 +206,14 @@ SedChangeAttribute::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedChangeAttribute::hasRequiredAttributes () const
+SedChangeAttribute::hasRequiredAttributes() const
 {
-	bool allPresent = SedChange::hasRequiredAttributes();
+  bool allPresent = SedChange::hasRequiredAttributes();
 
-	if (isSetNewValue() == false)
-		allPresent = false;
+  if (isSetNewValue() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -238,9 +223,9 @@ SedChangeAttribute::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedChangeAttribute::writeElements (XMLOutputStream& stream) const
+SedChangeAttribute::writeElements(XMLOutputStream& stream) const
 {
-	SedChange::writeElements(stream);
+  SedChange::writeElements(stream);
 }
 
 
@@ -253,9 +238,9 @@ SedChangeAttribute::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedChangeAttribute::accept (SedVisitor& v) const
+SedChangeAttribute::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -269,9 +254,9 @@ SedChangeAttribute::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedChangeAttribute::setSedDocument (SedDocument* d)
+SedChangeAttribute::setSedDocument(SedDocument* d)
 {
-	SedChange::setSedDocument(d);
+  SedChange::setSedDocument(d);
 }
 
 
@@ -286,9 +271,9 @@ SedChangeAttribute::setSedDocument (SedDocument* d)
 void
 SedChangeAttribute::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedChange::addExpectedAttributes(attributes);
+  SedChange::addExpectedAttributes(attributes);
 
-	attributes.add("newValue");
+  attributes.add("newValue");
 }
 
 
@@ -301,27 +286,27 @@ SedChangeAttribute::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedChangeAttribute::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedChangeAttribute::readAttributes(const XMLAttributes& attributes,
+                                   const ExpectedAttributes& expectedAttributes)
 {
-	SedChange::readAttributes(attributes, expectedAttributes);
+  SedChange::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// newValue string   ( use = "required" )
-	//
-	assigned = attributes.readInto("newValue", mNewValue, getErrorLog(), true);
+  //
+  // newValue string   ( use = "required" )
+  //
+  assigned = attributes.readInto("newValue", mNewValue, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mNewValue.empty() == true)
-		{
-			logEmptyString(mNewValue, getLevel(), getVersion(), "<SedChangeAttribute>");
-		}
-	}
+      if (mNewValue.empty() == true)
+        {
+          logEmptyString(mNewValue, getLevel(), getVersion(), "<SedChangeAttribute>");
+        }
+    }
 
 }
 
@@ -334,13 +319,13 @@ SedChangeAttribute::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedChangeAttribute::writeAttributes (XMLOutputStream& stream) const
+void
+SedChangeAttribute::writeAttributes(XMLOutputStream& stream) const
 {
-	SedChange::writeAttributes(stream);
+  SedChange::writeAttributes(stream);
 
-	if (isSetNewValue() == true)
-		stream.writeAttribute("newValue", getPrefix(), mNewValue);
+  if (isSetNewValue() == true)
+    stream.writeAttribute("newValue", getPrefix(), mNewValue);
 
 }
 
@@ -355,7 +340,7 @@ LIBSEDML_EXTERN
 SedChangeAttribute_t *
 SedChangeAttribute_create(unsigned int level, unsigned int version)
 {
-	return new SedChangeAttribute(level, version);
+  return new SedChangeAttribute(level, version);
 }
 
 
@@ -366,8 +351,8 @@ LIBSEDML_EXTERN
 void
 SedChangeAttribute_free(SedChangeAttribute_t * sca)
 {
-	if (sca != NULL)
-		delete sca;
+  if (sca != NULL)
+    delete sca;
 }
 
 
@@ -378,14 +363,14 @@ LIBSEDML_EXTERN
 SedChangeAttribute_t *
 SedChangeAttribute_clone(SedChangeAttribute_t * sca)
 {
-	if (sca != NULL)
-	{
-		return static_cast<SedChangeAttribute_t*>(sca->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sca != NULL)
+    {
+      return static_cast<SedChangeAttribute_t*>(sca->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -396,10 +381,10 @@ LIBSEDML_EXTERN
 char *
 SedChangeAttribute_getNewValue(SedChangeAttribute_t * sca)
 {
-	if (sca == NULL)
-		return NULL;
+  if (sca == NULL)
+    return NULL;
 
-	return sca->getNewValue().empty() ? NULL : safe_strdup(sca->getNewValue().c_str());
+  return sca->getNewValue().empty() ? NULL : safe_strdup(sca->getNewValue().c_str());
 }
 
 
@@ -410,7 +395,7 @@ LIBSEDML_EXTERN
 int
 SedChangeAttribute_isSetNewValue(SedChangeAttribute_t * sca)
 {
-	return (sca != NULL) ? static_cast<int>(sca->isSetNewValue()) : 0;
+  return (sca != NULL) ? static_cast<int>(sca->isSetNewValue()) : 0;
 }
 
 
@@ -421,7 +406,7 @@ LIBSEDML_EXTERN
 int
 SedChangeAttribute_setNewValue(SedChangeAttribute_t * sca, const char * newValue)
 {
-	return (sca != NULL) ? sca->setNewValue(newValue) : LIBSEDML_INVALID_OBJECT;
+  return (sca != NULL) ? sca->setNewValue(newValue) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -432,7 +417,7 @@ LIBSEDML_EXTERN
 int
 SedChangeAttribute_unsetNewValue(SedChangeAttribute_t * sca)
 {
-	return (sca != NULL) ? sca->unsetNewValue() : LIBSEDML_INVALID_OBJECT;
+  return (sca != NULL) ? sca->unsetNewValue() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -443,7 +428,7 @@ LIBSEDML_EXTERN
 int
 SedChangeAttribute_hasRequiredAttributes(SedChangeAttribute_t * sca)
 {
-	return (sca != NULL) ? static_cast<int>(sca->hasRequiredAttributes()) : 0;
+  return (sca != NULL) ? static_cast<int>(sca->hasRequiredAttributes()) : 0;
 }
 
 

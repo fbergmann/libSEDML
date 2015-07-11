@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -50,70 +50,63 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedSetValue with the given level, version, and package version.
  */
-SedSetValue::SedSetValue (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mVariables (level, version)
-	, mParameters (level, version)
-	, mRange ("")
-	, mModelReference ("")
-	, mSymbol ("")
-	, mTarget ("")
-	, mMath (NULL)
+SedSetValue::SedSetValue(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mVariables(level, version)
+  , mParameters(level, version)
+  , mRange("")
+  , mModelReference("")
+  , mSymbol("")
+  , mTarget("")
+  , mMath(NULL)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Creates a new SedSetValue with the given SedNamespaces object.
  */
-SedSetValue::SedSetValue (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mVariables (sedns)
-	, mParameters (sedns)
-	, mRange ("")
-	, mModelReference ("")
-	, mSymbol ("")
-	, mTarget ("")
-	, mMath (NULL)
+SedSetValue::SedSetValue(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mVariables(sedns)
+  , mParameters(sedns)
+  , mRange("")
+  , mModelReference("")
+  , mSymbol("")
+  , mTarget("")
+  , mMath(NULL)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Copy constructor for SedSetValue.
  */
-SedSetValue::SedSetValue (const SedSetValue& orig)
-	: SedBase(orig)
+SedSetValue::SedSetValue(const SedSetValue& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mVariables  = orig.mVariables;
-		mParameters  = orig.mParameters;
-		mRange  = orig.mRange;
-		mModelReference  = orig.mModelReference;
-		mSymbol  = orig.mSymbol;
-		mTarget  = orig.mTarget;
-		mMath  = orig.mMath != NULL ? orig.mMath->deepCopy() : NULL;
+  mVariables  = orig.mVariables;
+  mParameters  = orig.mParameters;
+  mRange  = orig.mRange;
+  mModelReference  = orig.mModelReference;
+  mSymbol  = orig.mSymbol;
+  mTarget  = orig.mTarget;
+  mMath  = orig.mMath != NULL ? orig.mMath->deepCopy() : NULL;
 
-		// connect to child objects
-		connectToChild();
-	}
+  // connect to child objects
+  connectToChild();
 }
 
 
@@ -123,25 +116,22 @@ SedSetValue::SedSetValue (const SedSetValue& orig)
 SedSetValue&
 SedSetValue::operator=(const SedSetValue& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mVariables  = rhs.mVariables;
-		mParameters  = rhs.mParameters;
-		mRange  = rhs.mRange;
-		mModelReference  = rhs.mModelReference;
-		mSymbol  = rhs.mSymbol;
-		mTarget  = rhs.mTarget;
-		mMath  = rhs.mMath != NULL ? rhs.mMath->deepCopy() : NULL;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mVariables  = rhs.mVariables;
+      mParameters  = rhs.mParameters;
+      mRange  = rhs.mRange;
+      mModelReference  = rhs.mModelReference;
+      mSymbol  = rhs.mSymbol;
+      mTarget  = rhs.mTarget;
+      mMath  = rhs.mMath != NULL ? rhs.mMath->deepCopy() : NULL;
 
-		// connect to child objects
-		connectToChild();
-	}
-	return *this;
+      // connect to child objects
+      connectToChild();
+    }
+
+  return *this;
 }
 
 
@@ -149,16 +139,16 @@ SedSetValue::operator=(const SedSetValue& rhs)
  * Clone for SedSetValue.
  */
 SedSetValue*
-SedSetValue::clone () const
+SedSetValue::clone() const
 {
-	return new SedSetValue(*this);
+  return new SedSetValue(*this);
 }
 
 
 /*
  * Destructor for SedSetValue.
  */
-SedSetValue::~SedSetValue ()
+SedSetValue::~SedSetValue()
 {
 }
 
@@ -169,7 +159,7 @@ SedSetValue::~SedSetValue ()
 const std::string&
 SedSetValue::getRange() const
 {
-	return mRange;
+  return mRange;
 }
 
 
@@ -179,7 +169,7 @@ SedSetValue::getRange() const
 const std::string&
 SedSetValue::getModelReference() const
 {
-	return mModelReference;
+  return mModelReference;
 }
 
 
@@ -189,7 +179,7 @@ SedSetValue::getModelReference() const
 const std::string&
 SedSetValue::getSymbol() const
 {
-	return mSymbol;
+  return mSymbol;
 }
 
 
@@ -199,7 +189,7 @@ SedSetValue::getSymbol() const
 const std::string&
 SedSetValue::getTarget() const
 {
-	return mTarget;
+  return mTarget;
 }
 
 
@@ -209,7 +199,7 @@ SedSetValue::getTarget() const
 const ASTNode*
 SedSetValue::getMath() const
 {
-	return mMath;
+  return mMath;
 }
 
 
@@ -219,7 +209,7 @@ SedSetValue::getMath() const
 bool
 SedSetValue::isSetRange() const
 {
-	return (mRange.empty() == false);
+  return (mRange.empty() == false);
 }
 
 
@@ -229,7 +219,7 @@ SedSetValue::isSetRange() const
 bool
 SedSetValue::isSetModelReference() const
 {
-	return (mModelReference.empty() == false);
+  return (mModelReference.empty() == false);
 }
 
 
@@ -239,7 +229,7 @@ SedSetValue::isSetModelReference() const
 bool
 SedSetValue::isSetSymbol() const
 {
-	return (mSymbol.empty() == false);
+  return (mSymbol.empty() == false);
 }
 
 
@@ -249,7 +239,7 @@ SedSetValue::isSetSymbol() const
 bool
 SedSetValue::isSetTarget() const
 {
-	return (mTarget.empty() == false);
+  return (mTarget.empty() == false);
 }
 
 
@@ -259,7 +249,7 @@ SedSetValue::isSetTarget() const
 bool
 SedSetValue::isSetMath() const
 {
-	return (mMath != NULL);
+  return (mMath != NULL);
 }
 
 
@@ -269,19 +259,15 @@ SedSetValue::isSetMath() const
 int
 SedSetValue::setRange(const std::string& range)
 {
-	if (&(range) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(range)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mRange = range;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(range)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mRange = range;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -291,19 +277,15 @@ SedSetValue::setRange(const std::string& range)
 int
 SedSetValue::setModelReference(const std::string& modelReference)
 {
-	if (&(modelReference) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(modelReference)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mModelReference = modelReference;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(modelReference)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mModelReference = modelReference;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -313,15 +295,10 @@ SedSetValue::setModelReference(const std::string& modelReference)
 int
 SedSetValue::setSymbol(const std::string& symbol)
 {
-	if (&(symbol) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mSymbol = symbol;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mSymbol = symbol;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -331,15 +308,10 @@ SedSetValue::setSymbol(const std::string& symbol)
 int
 SedSetValue::setTarget(const std::string& target)
 {
-	if (&(target) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mTarget = target;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mTarget = target;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -349,30 +321,32 @@ SedSetValue::setTarget(const std::string& target)
 int
 SedSetValue::setMath(ASTNode* math)
 {
-	if (mMath == math)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else if (math == NULL)
-	{
-		delete mMath;
-		mMath = NULL;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else if (!(math->isWellFormedASTNode()))
-	{
-		return LIBSEDML_INVALID_OBJECT;
-	}
-	else
-	{
-		delete mMath;
-		mMath = (math != NULL) ?
-			math->deepCopy() : NULL;
-		if (mMath != NULL)
-		{
-		}
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (mMath == math)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else if (math == NULL)
+    {
+      delete mMath;
+      mMath = NULL;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else if (!(math->isWellFormedASTNode()))
+    {
+      return LIBSEDML_INVALID_OBJECT;
+    }
+  else
+    {
+      delete mMath;
+      mMath = (math != NULL) ?
+              math->deepCopy() : NULL;
+
+      if (mMath != NULL)
+        {
+        }
+
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -382,16 +356,16 @@ SedSetValue::setMath(ASTNode* math)
 int
 SedSetValue::unsetRange()
 {
-	mRange.erase();
+  mRange.erase();
 
-	if (mRange.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mRange.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -401,16 +375,16 @@ SedSetValue::unsetRange()
 int
 SedSetValue::unsetModelReference()
 {
-	mModelReference.erase();
+  mModelReference.erase();
 
-	if (mModelReference.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mModelReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -420,16 +394,16 @@ SedSetValue::unsetModelReference()
 int
 SedSetValue::unsetSymbol()
 {
-	mSymbol.erase();
+  mSymbol.erase();
 
-	if (mSymbol.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mSymbol.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -439,16 +413,16 @@ SedSetValue::unsetSymbol()
 int
 SedSetValue::unsetTarget()
 {
-	mTarget.erase();
+  mTarget.erase();
 
-	if (mTarget.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mTarget.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -458,9 +432,9 @@ SedSetValue::unsetTarget()
 int
 SedSetValue::unsetMath()
 {
-	delete mMath;
-	mMath = NULL;
-	return LIBSEDML_OPERATION_SUCCESS;
+  delete mMath;
+  mMath = NULL;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -470,7 +444,7 @@ SedSetValue::unsetMath()
 const SedListOfVariables*
 SedSetValue::getListOfVariables() const
 {
-	return &mVariables;
+  return &mVariables;
 }
 
 
@@ -480,7 +454,7 @@ SedSetValue::getListOfVariables() const
 SedVariable*
 SedSetValue::removeVariable(unsigned int n)
 {
-	return mVariables.remove(n);
+  return mVariables.remove(n);
 }
 
 
@@ -490,7 +464,7 @@ SedSetValue::removeVariable(unsigned int n)
 SedVariable*
 SedSetValue::removeVariable(const std::string& sid)
 {
-	return mVariables.remove(sid);
+  return mVariables.remove(sid);
 }
 
 
@@ -500,7 +474,7 @@ SedSetValue::removeVariable(const std::string& sid)
 SedVariable*
 SedSetValue::getVariable(unsigned int n)
 {
-	return mVariables.get(n);
+  return mVariables.get(n);
 }
 
 
@@ -510,7 +484,7 @@ SedSetValue::getVariable(unsigned int n)
 const SedVariable*
 SedSetValue::getVariable(unsigned int n) const
 {
-	return mVariables.get(n);
+  return mVariables.get(n);
 }
 
 
@@ -520,7 +494,7 @@ SedSetValue::getVariable(unsigned int n) const
 SedVariable*
 SedSetValue::getVariable(const std::string& sid)
 {
-	return mVariables.get(sid);
+  return mVariables.get(sid);
 }
 
 
@@ -530,7 +504,7 @@ SedSetValue::getVariable(const std::string& sid)
 const SedVariable*
 SedSetValue::getVariable(const std::string& sid) const
 {
-	return mVariables.get(sid);
+  return mVariables.get(sid);
 }
 
 
@@ -549,9 +523,10 @@ SedSetValue::getVariable(const std::string& sid) const
 int
 SedSetValue::addVariable(const SedVariable* sv)
 {
-	if(sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mVariables.append(sv);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  mVariables.append(sv);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -560,26 +535,28 @@ SedSetValue::addVariable(const SedVariable* sv)
  *
  * @return the number of SedVariable objects in this SedSetValue
  */
-unsigned int 
+unsigned int
 SedSetValue::getNumVariables() const
 {
-	return mVariables.size();
+  return mVariables.size();
 }
 
 /**
  * Creates a new SedVariable object, adds it to this SedSetValues
- * SedSetValue and returns the SedVariable object created. 
+ * SedSetValue and returns the SedVariable object created.
  *
  * @return a new SedVariable object instance
  *
  * @see addSedVariable(const SedVariable* sv)
  */
-SedVariable* 
+SedVariable*
 SedSetValue::createVariable()
 {
-	SedVariable *temp = new SedVariable();
-	if (temp != NULL) mVariables.appendAndOwn(temp);
-	return temp;
+  SedVariable *temp = new SedVariable();
+
+  if (temp != NULL) mVariables.appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -588,7 +565,7 @@ SedSetValue::createVariable()
 const SedListOfParameters*
 SedSetValue::getListOfParameters() const
 {
-	return &mParameters;
+  return &mParameters;
 }
 
 
@@ -598,7 +575,7 @@ SedSetValue::getListOfParameters() const
 SedParameter*
 SedSetValue::removeParameter(unsigned int n)
 {
-	return mParameters.remove(n);
+  return mParameters.remove(n);
 }
 
 
@@ -608,7 +585,7 @@ SedSetValue::removeParameter(unsigned int n)
 SedParameter*
 SedSetValue::removeParameter(const std::string& sid)
 {
-	return mParameters.remove(sid);
+  return mParameters.remove(sid);
 }
 
 
@@ -618,7 +595,7 @@ SedSetValue::removeParameter(const std::string& sid)
 SedParameter*
 SedSetValue::getParameter(unsigned int n)
 {
-	return mParameters.get(n);
+  return mParameters.get(n);
 }
 
 
@@ -628,7 +605,7 @@ SedSetValue::getParameter(unsigned int n)
 const SedParameter*
 SedSetValue::getParameter(unsigned int n) const
 {
-	return mParameters.get(n);
+  return mParameters.get(n);
 }
 
 
@@ -638,7 +615,7 @@ SedSetValue::getParameter(unsigned int n) const
 SedParameter*
 SedSetValue::getParameter(const std::string& sid)
 {
-	return mParameters.get(sid);
+  return mParameters.get(sid);
 }
 
 
@@ -648,7 +625,7 @@ SedSetValue::getParameter(const std::string& sid)
 const SedParameter*
 SedSetValue::getParameter(const std::string& sid) const
 {
-	return mParameters.get(sid);
+  return mParameters.get(sid);
 }
 
 
@@ -667,9 +644,10 @@ SedSetValue::getParameter(const std::string& sid) const
 int
 SedSetValue::addParameter(const SedParameter* sp)
 {
-	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	mParameters.append(sp);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  mParameters.append(sp);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -678,36 +656,38 @@ SedSetValue::addParameter(const SedParameter* sp)
  *
  * @return the number of SedParameter objects in this SedSetValue
  */
-unsigned int 
+unsigned int
 SedSetValue::getNumParameters() const
 {
-	return mParameters.size();
+  return mParameters.size();
 }
 
 /**
  * Creates a new SedParameter object, adds it to this SedSetValues
- * SedSetValue and returns the SedParameter object created. 
+ * SedSetValue and returns the SedParameter object created.
  *
  * @return a new SedParameter object instance
  *
  * @see addSedParameter(const SedParameter* sp)
  */
-SedParameter* 
+SedParameter*
 SedSetValue::createParameter()
 {
-	SedParameter *temp = new SedParameter();
-	if (temp != NULL) mParameters.appendAndOwn(temp);
-	return temp;
+  SedParameter *temp = new SedParameter();
+
+  if (temp != NULL) mParameters.appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
  * Returns the XML element name of this object
  */
 const std::string&
-SedSetValue::getElementName () const
+SedSetValue::getElementName() const
 {
-	static const string name = "setValue";
-	return name;
+  static const string name = "setValue";
+  return name;
 }
 
 
@@ -717,23 +697,23 @@ SedSetValue::getElementName () const
 SedBase*
 SedSetValue::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+  SedBase* object = NULL;
 
-	const string& name   = stream.peek().getName();
+  const string& name   = stream.peek().getName();
 
-	if (name == "listOfVariables")
-	{
-		object = &mVariables;
-	}
+  if (name == "listOfVariables")
+    {
+      object = &mVariables;
+    }
 
-	if (name == "listOfParameters")
-	{
-		object = &mParameters;
-	}
+  if (name == "listOfParameters")
+    {
+      object = &mParameters;
+    }
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -741,12 +721,12 @@ SedSetValue::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedSetValue::connectToChild ()
+SedSetValue::connectToChild()
 {
-	SedBase::connectToChild();
+  SedBase::connectToChild();
 
-	mVariables.connectToParent(this);
-	mParameters.connectToParent(this);
+  mVariables.connectToParent(this);
+  mParameters.connectToParent(this);
 }
 
 
@@ -754,9 +734,9 @@ SedSetValue::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedSetValue::getTypeCode () const
+SedSetValue::getTypeCode() const
 {
-	return SEDML_TASK_SETVALUE;
+  return SEDML_TASK_SETVALUE;
 }
 
 
@@ -764,14 +744,14 @@ SedSetValue::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedSetValue::hasRequiredAttributes () const
+SedSetValue::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetModelReference() == false)
-		allPresent = false;
+  if (isSetModelReference() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -779,11 +759,11 @@ SedSetValue::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-SedSetValue::hasRequiredElements () const
+SedSetValue::hasRequiredElements() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -793,21 +773,24 @@ SedSetValue::hasRequiredElements () const
  * write contained elements
  */
 void
-SedSetValue::writeElements (XMLOutputStream& stream) const
+SedSetValue::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
-	if (getNumVariables() > 0)
-	{
-		mVariables.write(stream);
-	}
-	if (getNumParameters() > 0)
-	{
-		mParameters.write(stream);
-	}
-	if (isSetMath() == true)
-	{
-		writeMathML(getMath(), stream, NULL);
-	}
+  SedBase::writeElements(stream);
+
+  if (getNumVariables() > 0)
+    {
+      mVariables.write(stream);
+    }
+
+  if (getNumParameters() > 0)
+    {
+      mParameters.write(stream);
+    }
+
+  if (isSetMath() == true)
+    {
+      writeMathML(getMath(), stream, NULL);
+    }
 }
 
 
@@ -820,9 +803,9 @@ SedSetValue::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedSetValue::accept (SedVisitor& v) const
+SedSetValue::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -836,11 +819,11 @@ SedSetValue::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedSetValue::setSedDocument (SedDocument* d)
+SedSetValue::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
-	mVariables.setSedDocument(d);
-	mParameters.setSedDocument(d);
+  SedBase::setSedDocument(d);
+  mVariables.setSedDocument(d);
+  mParameters.setSedDocument(d);
 }
 
 
@@ -855,12 +838,12 @@ SedSetValue::setSedDocument (SedDocument* d)
 void
 SedSetValue::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("range");
-	attributes.add("modelReference");
-	attributes.add("symbol");
-	attributes.add("target");
+  attributes.add("range");
+  attributes.add("modelReference");
+  attributes.add("symbol");
+  attributes.add("target");
 }
 
 
@@ -873,80 +856,80 @@ SedSetValue::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedSetValue::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedSetValue::readAttributes(const XMLAttributes& attributes,
+                            const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// range SIdRef   ( use = "optional" )
-	//
-	assigned = attributes.readInto("range", mRange, getErrorLog(), false);
+  //
+  // range SIdRef   ( use = "optional" )
+  //
+  assigned = attributes.readInto("range", mRange, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mRange.empty() == true)
-		{
-			logEmptyString(mRange, getLevel(), getVersion(), "<SedSetValue>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mRange.empty() == true)
+        {
+          logEmptyString(mRange, getLevel(), getVersion(), "<SedSetValue>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mRange) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// modelReference SIdRef   ( use = "required" )
-	//
-	assigned = attributes.readInto("modelReference", mModelReference, getErrorLog(), true);
+  //
+  // modelReference SIdRef   ( use = "required" )
+  //
+  assigned = attributes.readInto("modelReference", mModelReference, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mModelReference.empty() == true)
-		{
-			logEmptyString(mModelReference, getLevel(), getVersion(), "<SedSetValue>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mModelReference.empty() == true)
+        {
+          logEmptyString(mModelReference, getLevel(), getVersion(), "<SedSetValue>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// symbol string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("symbol", mSymbol, getErrorLog(), false);
+  //
+  // symbol string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("symbol", mSymbol, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mSymbol.empty() == true)
-		{
-			logEmptyString(mSymbol, getLevel(), getVersion(), "<SedSetValue>");
-		}
-	}
+      if (mSymbol.empty() == true)
+        {
+          logEmptyString(mSymbol, getLevel(), getVersion(), "<SedSetValue>");
+        }
+    }
 
-	//
-	// target string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("target", mTarget, getErrorLog(), false);
+  //
+  // target string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("target", mTarget, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mTarget.empty() == true)
-		{
-			logEmptyString(mTarget, getLevel(), getVersion(), "<SedSetValue>");
-		}
-	}
+      if (mTarget.empty() == true)
+        {
+          logEmptyString(mTarget, getLevel(), getVersion(), "<SedSetValue>");
+        }
+    }
 
 }
 
@@ -957,26 +940,27 @@ SedSetValue::readAttributes (const XMLAttributes& attributes,
 /** @cond doxygen-libsedml-internal */
 
 bool
-SedSetValue::readOtherXML (XMLInputStream& stream)
+SedSetValue::readOtherXML(XMLInputStream& stream)
 {
-	bool          read = false;
-	const string& name = stream.peek().getName();
+  bool          read = false;
+  const string& name = stream.peek().getName();
 
-	if (name == "math")
-	{
-		const XMLToken elem = stream.peek();
-		const std::string prefix = checkMathMLNamespace(elem);
+  if (name == "math")
+    {
+      const XMLToken elem = stream.peek();
+      const std::string prefix = checkMathMLNamespace(elem);
 
-		delete mMath;
-		mMath = readMathML(stream, prefix);
-		read = true;
-	}
+      delete mMath;
+      mMath = readMathML(stream, prefix);
+      read = true;
+    }
 
-	if (SedBase::readOtherXML(stream))
-	{
-		read = true;
-	}
-	return read;
+  if (SedBase::readOtherXML(stream))
+    {
+      read = true;
+    }
+
+  return read;
 }
 
 
@@ -988,22 +972,22 @@ SedSetValue::readOtherXML (XMLInputStream& stream)
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedSetValue::writeAttributes (XMLOutputStream& stream) const
+void
+SedSetValue::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetRange() == true)
-		stream.writeAttribute("range", getPrefix(), mRange);
+  if (isSetRange() == true)
+    stream.writeAttribute("range", getPrefix(), mRange);
 
-	if (isSetModelReference() == true)
-		stream.writeAttribute("modelReference", getPrefix(), mModelReference);
+  if (isSetModelReference() == true)
+    stream.writeAttribute("modelReference", getPrefix(), mModelReference);
 
-	if (isSetSymbol() == true)
-		stream.writeAttribute("symbol", getPrefix(), mSymbol);
+  if (isSetSymbol() == true)
+    stream.writeAttribute("symbol", getPrefix(), mSymbol);
 
-	if (isSetTarget() == true)
-		stream.writeAttribute("target", getPrefix(), mTarget);
+  if (isSetTarget() == true)
+    stream.writeAttribute("target", getPrefix(), mTarget);
 
 }
 
@@ -1012,33 +996,33 @@ SedSetValue::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfTaskChanges::SedListOfTaskChanges(unsigned int level, 
-	                     unsigned int version)
- : SedListOf(level, version)
+SedListOfTaskChanges::SedListOfTaskChanges(unsigned int level,
+    unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfTaskChanges::SedListOfTaskChanges(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfTaskChanges 
+ * Returns a deep copy of this SedListOfTaskChanges
  */
-SedListOfTaskChanges* 
-SedListOfTaskChanges::clone () const
- {
-	return new SedListOfTaskChanges(*this);
+SedListOfTaskChanges*
+SedListOfTaskChanges::clone() const
+{
+  return new SedListOfTaskChanges(*this);
 }
 
 
@@ -1048,7 +1032,7 @@ SedListOfTaskChanges::clone () const
 SedSetValue*
 SedListOfTaskChanges::get(unsigned int n)
 {
-	return static_cast<SedSetValue*>(SedListOf::get(n));
+  return static_cast<SedSetValue*>(SedListOf::get(n));
 }
 
 
@@ -1058,7 +1042,7 @@ SedListOfTaskChanges::get(unsigned int n)
 const SedSetValue*
 SedListOfTaskChanges::get(unsigned int n) const
 {
-	return static_cast<const SedSetValue*>(SedListOf::get(n));
+  return static_cast<const SedSetValue*>(SedListOf::get(n));
 }
 
 
@@ -1068,8 +1052,8 @@ SedListOfTaskChanges::get(unsigned int n) const
 SedSetValue*
 SedListOfTaskChanges::get(const std::string& sid)
 {
-	return const_cast<SedSetValue*>(
-	  static_cast<const SedListOfTaskChanges&>(*this).get(sid));
+  return const_cast<SedSetValue*>(
+           static_cast<const SedListOfTaskChanges&>(*this).get(sid));
 }
 
 
@@ -1079,10 +1063,10 @@ SedListOfTaskChanges::get(const std::string& sid)
 const SedSetValue*
 SedListOfTaskChanges::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSetValue>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedSetValue*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedSetValue>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedSetValue*>(*result);
 }
 
 
@@ -1101,9 +1085,10 @@ SedListOfTaskChanges::get(const std::string& sid) const
 int
 SedListOfTaskChanges::addSetValue(const SedSetValue* ssv)
 {
-	if(ssv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(ssv);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (ssv == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(ssv);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -1112,26 +1097,28 @@ SedListOfTaskChanges::addSetValue(const SedSetValue* ssv)
  *
  * @return the number of SedSetValue objects in this SedListOfTaskChanges
  */
-unsigned int 
+unsigned int
 SedListOfTaskChanges::getNumSetValues() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedSetValue object, adds it to this SedListOfTaskChangess
- * SedSetValue and returns the SedSetValue object created. 
+ * SedSetValue and returns the SedSetValue object created.
  *
  * @return a new SedSetValue object instance
  *
  * @see addSedSetValue(const SedSetValue* ssv)
  */
-SedSetValue* 
+SedSetValue*
 SedListOfTaskChanges::createSetValue()
 {
-	SedSetValue *temp = new SedSetValue();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedSetValue *temp = new SedSetValue();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -1140,7 +1127,7 @@ SedListOfTaskChanges::createSetValue()
 SedSetValue*
 SedListOfTaskChanges::remove(unsigned int n)
 {
-	return static_cast<SedSetValue*>(SedListOf::remove(n));
+  return static_cast<SedSetValue*>(SedListOf::remove(n));
 }
 
 
@@ -1150,18 +1137,18 @@ SedListOfTaskChanges::remove(unsigned int n)
 SedSetValue*
 SedListOfTaskChanges::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSetValue>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedSetValue>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedSetValue*> (item);
+  return static_cast <SedSetValue*>(item);
 }
 
 
@@ -1169,10 +1156,10 @@ SedListOfTaskChanges::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfTaskChanges::getElementName () const
+SedListOfTaskChanges::getElementName() const
 {
-	static const string name = "listOfChanges";
-	return name;
+  static const string name = "listOfChanges";
+  return name;
 }
 
 
@@ -1180,9 +1167,9 @@ SedListOfTaskChanges::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfTaskChanges::getTypeCode () const
+SedListOfTaskChanges::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -1190,9 +1177,9 @@ SedListOfTaskChanges::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfTaskChanges::getItemTypeCode () const
+SedListOfTaskChanges::getItemTypeCode() const
 {
-	return SEDML_TASK_SETVALUE;
+  return SEDML_TASK_SETVALUE;
 }
 
 
@@ -1204,16 +1191,16 @@ SedListOfTaskChanges::getItemTypeCode () const
 SedBase*
 SedListOfTaskChanges::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "setValue")
-	{
-		object = new SedSetValue(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "setValue")
+    {
+      object = new SedSetValue(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -1228,20 +1215,20 @@ SedListOfTaskChanges::createObject(XMLInputStream& stream)
 void
 SedListOfTaskChanges::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -1255,7 +1242,7 @@ LIBSEDML_EXTERN
 SedSetValue_t *
 SedSetValue_create(unsigned int level, unsigned int version)
 {
-	return new SedSetValue(level, version);
+  return new SedSetValue(level, version);
 }
 
 
@@ -1266,8 +1253,8 @@ LIBSEDML_EXTERN
 void
 SedSetValue_free(SedSetValue_t * ssv)
 {
-	if (ssv != NULL)
-		delete ssv;
+  if (ssv != NULL)
+    delete ssv;
 }
 
 
@@ -1278,14 +1265,14 @@ LIBSEDML_EXTERN
 SedSetValue_t *
 SedSetValue_clone(SedSetValue_t * ssv)
 {
-	if (ssv != NULL)
-	{
-		return static_cast<SedSetValue_t*>(ssv->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (ssv != NULL)
+    {
+      return static_cast<SedSetValue_t*>(ssv->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -1296,10 +1283,10 @@ LIBSEDML_EXTERN
 char *
 SedSetValue_getRange(SedSetValue_t * ssv)
 {
-	if (ssv == NULL)
-		return NULL;
+  if (ssv == NULL)
+    return NULL;
 
-	return ssv->getRange().empty() ? NULL : safe_strdup(ssv->getRange().c_str());
+  return ssv->getRange().empty() ? NULL : safe_strdup(ssv->getRange().c_str());
 }
 
 
@@ -1310,10 +1297,10 @@ LIBSEDML_EXTERN
 char *
 SedSetValue_getModelReference(SedSetValue_t * ssv)
 {
-	if (ssv == NULL)
-		return NULL;
+  if (ssv == NULL)
+    return NULL;
 
-	return ssv->getModelReference().empty() ? NULL : safe_strdup(ssv->getModelReference().c_str());
+  return ssv->getModelReference().empty() ? NULL : safe_strdup(ssv->getModelReference().c_str());
 }
 
 
@@ -1324,10 +1311,10 @@ LIBSEDML_EXTERN
 char *
 SedSetValue_getSymbol(SedSetValue_t * ssv)
 {
-	if (ssv == NULL)
-		return NULL;
+  if (ssv == NULL)
+    return NULL;
 
-	return ssv->getSymbol().empty() ? NULL : safe_strdup(ssv->getSymbol().c_str());
+  return ssv->getSymbol().empty() ? NULL : safe_strdup(ssv->getSymbol().c_str());
 }
 
 
@@ -1338,10 +1325,10 @@ LIBSEDML_EXTERN
 char *
 SedSetValue_getTarget(SedSetValue_t * ssv)
 {
-	if (ssv == NULL)
-		return NULL;
+  if (ssv == NULL)
+    return NULL;
 
-	return ssv->getTarget().empty() ? NULL : safe_strdup(ssv->getTarget().c_str());
+  return ssv->getTarget().empty() ? NULL : safe_strdup(ssv->getTarget().c_str());
 }
 
 
@@ -1352,10 +1339,10 @@ LIBSEDML_EXTERN
 ASTNode_t*
 SedSetValue_getMath(SedSetValue_t * ssv)
 {
-	if (ssv == NULL)
-		return NULL;
+  if (ssv == NULL)
+    return NULL;
 
-	return (ASTNode_t*)ssv->getMath();
+  return (ASTNode_t*)ssv->getMath();
 }
 
 
@@ -1366,7 +1353,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_isSetRange(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->isSetRange()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetRange()) : 0;
 }
 
 
@@ -1377,7 +1364,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_isSetModelReference(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->isSetModelReference()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetModelReference()) : 0;
 }
 
 
@@ -1388,7 +1375,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_isSetSymbol(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->isSetSymbol()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetSymbol()) : 0;
 }
 
 
@@ -1399,7 +1386,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_isSetTarget(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->isSetTarget()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetTarget()) : 0;
 }
 
 
@@ -1410,7 +1397,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_isSetMath(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->isSetMath()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->isSetMath()) : 0;
 }
 
 
@@ -1421,7 +1408,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_setRange(SedSetValue_t * ssv, const char * range)
 {
-	return (ssv != NULL) ? ssv->setRange(range) : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->setRange(range) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1432,7 +1419,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_setModelReference(SedSetValue_t * ssv, const char * modelReference)
 {
-	return (ssv != NULL) ? ssv->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1443,7 +1430,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_setSymbol(SedSetValue_t * ssv, const char * symbol)
 {
-	return (ssv != NULL) ? ssv->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1454,7 +1441,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_setTarget(SedSetValue_t * ssv, const char * target)
 {
-	return (ssv != NULL) ? ssv->setTarget(target) : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->setTarget(target) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1465,7 +1452,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_setMath(SedSetValue_t * ssv, ASTNode_t* math)
 {
-	return (ssv != NULL) ? ssv->setMath(math) : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->setMath(math) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1476,7 +1463,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_unsetRange(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? ssv->unsetRange() : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->unsetRange() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1487,7 +1474,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_unsetModelReference(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? ssv->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1498,7 +1485,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_unsetSymbol(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? ssv->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1509,7 +1496,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_unsetTarget(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? ssv->unsetTarget() : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->unsetTarget() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1520,7 +1507,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_unsetMath(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? ssv->unsetMath() : LIBSEDML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->unsetMath() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1528,112 +1515,112 @@ LIBSEDML_EXTERN
 int
 SedSetValue_addVariable(SedSetValue_t * ssv, SedVariable_t * sv)
 {
-	return  (ssv != NULL) ? ssv->addVariable(sv) : LIBSBML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->addVariable(sv) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
 SedSetValue_createVariable(SedSetValue_t * ssv)
 {
-	return  (ssv != NULL) ? ssv->createVariable() : NULL;
+  return (ssv != NULL) ? ssv->createVariable() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
 SedSetValue_getSedListOfVariables(SedSetValue_t * ssv)
 {
-	return  (ssv != NULL) ? (SedListOf_t *)ssv->getListOfVariables() : NULL;
+  return (ssv != NULL) ? (SedListOf_t *)ssv->getListOfVariables() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
 SedSetValue_getVariable(SedSetValue_t * ssv, unsigned int n)
 {
-	return  (ssv != NULL) ? ssv->getVariable(n) : NULL;
+  return (ssv != NULL) ? ssv->getVariable(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
 SedSetValue_getVariableById(SedSetValue_t * ssv, const char * sid)
 {
-	return  (ssv != NULL) ? ssv->getVariable(sid) : NULL;
+  return (ssv != NULL) ? ssv->getVariable(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
 SedSetValue_getNumVariables(SedSetValue_t * ssv)
 {
-	return  (ssv != NULL) ? ssv->getNumVariables() : SEDML_INT_MAX;
+  return (ssv != NULL) ? ssv->getNumVariables() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
 SedSetValue_removeVariable(SedSetValue_t * ssv, unsigned int n)
 {
-	return  (ssv != NULL) ? ssv->removeVariable(n) : NULL;
+  return (ssv != NULL) ? ssv->removeVariable(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedVariable_t *
 SedSetValue_removeVariableById(SedSetValue_t * ssv, const char * sid)
 {
-	return  (ssv != NULL) ? ssv->removeVariable(sid) : NULL;
+  return (ssv != NULL) ? ssv->removeVariable(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 int
 SedSetValue_addParameter(SedSetValue_t * ssv, SedParameter_t * sp)
 {
-	return  (ssv != NULL) ? ssv->addParameter(sp) : LIBSBML_INVALID_OBJECT;
+  return (ssv != NULL) ? ssv->addParameter(sp) : LIBSBML_INVALID_OBJECT;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
 SedSetValue_createParameter(SedSetValue_t * ssv)
 {
-	return  (ssv != NULL) ? ssv->createParameter() : NULL;
+  return (ssv != NULL) ? ssv->createParameter() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedListOf_t *
 SedSetValue_getSedListOfParameters(SedSetValue_t * ssv)
 {
-	return  (ssv != NULL) ? (SedListOf_t *)ssv->getListOfParameters() : NULL;
+  return (ssv != NULL) ? (SedListOf_t *)ssv->getListOfParameters() : NULL;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
 SedSetValue_getParameter(SedSetValue_t * ssv, unsigned int n)
 {
-	return  (ssv != NULL) ? ssv->getParameter(n) : NULL;
+  return (ssv != NULL) ? ssv->getParameter(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
 SedSetValue_getParameterById(SedSetValue_t * ssv, const char * sid)
 {
-	return  (ssv != NULL) ? ssv->getParameter(sid) : NULL;
+  return (ssv != NULL) ? ssv->getParameter(sid) : NULL;
 }
 
 LIBSEDML_EXTERN
 unsigned int
 SedSetValue_getNumParameters(SedSetValue_t * ssv)
 {
-	return  (ssv != NULL) ? ssv->getNumParameters() : SEDML_INT_MAX;
+  return (ssv != NULL) ? ssv->getNumParameters() : SEDML_INT_MAX;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
 SedSetValue_removeParameter(SedSetValue_t * ssv, unsigned int n)
 {
-	return  (ssv != NULL) ? ssv->removeParameter(n) : NULL;
+  return (ssv != NULL) ? ssv->removeParameter(n) : NULL;
 }
 
 LIBSEDML_EXTERN
 SedParameter_t *
 SedSetValue_removeParameterById(SedSetValue_t * ssv, const char * sid)
 {
-	return  (ssv != NULL) ? ssv->removeParameter(sid) : NULL;
+  return (ssv != NULL) ? ssv->removeParameter(sid) : NULL;
 }
 
 /**
@@ -1643,7 +1630,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_hasRequiredAttributes(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredAttributes()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1654,7 +1641,7 @@ LIBSEDML_EXTERN
 int
 SedSetValue_hasRequiredElements(SedSetValue_t * ssv)
 {
-	return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredElements()) : 0;
+  return (ssv != NULL) ? static_cast<int>(ssv->hasRequiredElements()) : 0;
 }
 
 
@@ -1665,10 +1652,10 @@ LIBSEDML_EXTERN
 SedSetValue_t *
 SedListOfTaskChanges_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfTaskChanges *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfTaskChanges *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1679,10 +1666,10 @@ LIBSEDML_EXTERN
 SedSetValue_t *
 SedListOfTaskChanges_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfTaskChanges *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfTaskChanges *>(lo)->remove(sid) : NULL;
 }
 
 

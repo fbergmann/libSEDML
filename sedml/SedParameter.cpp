@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,52 +48,45 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedParameter with the given level, version, and package version.
  */
-SedParameter::SedParameter (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
-	, mName ("")
-	, mValue (numeric_limits<double>::quiet_NaN())
-	, mIsSetValue (false)
+SedParameter::SedParameter(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
+  , mName("")
+  , mValue(numeric_limits<double>::quiet_NaN())
+  , mIsSetValue(false)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedParameter with the given SedNamespaces object.
  */
-SedParameter::SedParameter (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
-	, mName ("")
-	, mValue (numeric_limits<double>::quiet_NaN())
-	, mIsSetValue (false)
+SedParameter::SedParameter(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
+  , mName("")
+  , mValue(numeric_limits<double>::quiet_NaN())
+  , mIsSetValue(false)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedParameter.
  */
-SedParameter::SedParameter (const SedParameter& orig)
-	: SedBase(orig)
+SedParameter::SedParameter(const SedParameter& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-		mName  = orig.mName;
-		mValue  = orig.mValue;
-		mIsSetValue  = orig.mIsSetValue;
-	}
+  mId  = orig.mId;
+  mName  = orig.mName;
+  mValue  = orig.mValue;
+  mIsSetValue  = orig.mIsSetValue;
 }
 
 
@@ -103,19 +96,16 @@ SedParameter::SedParameter (const SedParameter& orig)
 SedParameter&
 SedParameter::operator=(const SedParameter& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-		mName  = rhs.mName;
-		mValue  = rhs.mValue;
-		mIsSetValue  = rhs.mIsSetValue;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+      mName  = rhs.mName;
+      mValue  = rhs.mValue;
+      mIsSetValue  = rhs.mIsSetValue;
+    }
+
+  return *this;
 }
 
 
@@ -123,16 +113,16 @@ SedParameter::operator=(const SedParameter& rhs)
  * Clone for SedParameter.
  */
 SedParameter*
-SedParameter::clone () const
+SedParameter::clone() const
 {
-	return new SedParameter(*this);
+  return new SedParameter(*this);
 }
 
 
 /*
  * Destructor for SedParameter.
  */
-SedParameter::~SedParameter ()
+SedParameter::~SedParameter()
 {
 }
 
@@ -143,7 +133,7 @@ SedParameter::~SedParameter ()
 const std::string&
 SedParameter::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -153,7 +143,7 @@ SedParameter::getId() const
 const std::string&
 SedParameter::getName() const
 {
-	return mName;
+  return mName;
 }
 
 
@@ -163,7 +153,7 @@ SedParameter::getName() const
 const double
 SedParameter::getValue() const
 {
-	return mValue;
+  return mValue;
 }
 
 
@@ -173,7 +163,7 @@ SedParameter::getValue() const
 bool
 SedParameter::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -183,7 +173,7 @@ SedParameter::isSetId() const
 bool
 SedParameter::isSetName() const
 {
-	return (mName.empty() == false);
+  return (mName.empty() == false);
 }
 
 
@@ -193,7 +183,7 @@ SedParameter::isSetName() const
 bool
 SedParameter::isSetValue() const
 {
-	return mIsSetValue;
+  return mIsSetValue;
 }
 
 
@@ -203,7 +193,7 @@ SedParameter::isSetValue() const
 int
 SedParameter::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -213,15 +203,10 @@ SedParameter::setId(const std::string& id)
 int
 SedParameter::setName(const std::string& name)
 {
-	if (&(name) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mName = name;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -231,9 +216,9 @@ SedParameter::setName(const std::string& name)
 int
 SedParameter::setValue(double value)
 {
-	mValue = value;
-	mIsSetValue = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mValue = value;
+  mIsSetValue = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -243,16 +228,16 @@ SedParameter::setValue(double value)
 int
 SedParameter::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -262,16 +247,16 @@ SedParameter::unsetId()
 int
 SedParameter::unsetName()
 {
-	mName.erase();
+  mName.erase();
 
-	if (mName.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -281,17 +266,17 @@ SedParameter::unsetName()
 int
 SedParameter::unsetValue()
 {
-	mValue = numeric_limits<double>::quiet_NaN();
-	mIsSetValue = false;
+  mValue = numeric_limits<double>::quiet_NaN();
+  mIsSetValue = false;
 
-	if (isSetValue() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetValue() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -299,10 +284,10 @@ SedParameter::unsetValue()
  * Returns the XML element name of this object
  */
 const std::string&
-SedParameter::getElementName () const
+SedParameter::getElementName() const
 {
-	static const string name = "parameter";
-	return name;
+  static const string name = "parameter";
+  return name;
 }
 
 
@@ -310,9 +295,9 @@ SedParameter::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedParameter::getTypeCode () const
+SedParameter::getTypeCode() const
 {
-	return SEDML_PARAMETER;
+  return SEDML_PARAMETER;
 }
 
 
@@ -320,17 +305,17 @@ SedParameter::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedParameter::hasRequiredAttributes () const
+SedParameter::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetId() == false)
-		allPresent = false;
+  if (isSetId() == false)
+    allPresent = false;
 
-	if (isSetValue() == false)
-		allPresent = false;
+  if (isSetValue() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -340,9 +325,9 @@ SedParameter::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedParameter::writeElements (XMLOutputStream& stream) const
+SedParameter::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -355,9 +340,9 @@ SedParameter::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedParameter::accept (SedVisitor& v) const
+SedParameter::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -371,9 +356,9 @@ SedParameter::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedParameter::setSedDocument (SedDocument* d)
+SedParameter::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -388,11 +373,11 @@ SedParameter::setSedDocument (SedDocument* d)
 void
 SedParameter::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
-	attributes.add("name");
-	attributes.add("value");
+  attributes.add("id");
+  attributes.add("name");
+  attributes.add("value");
 }
 
 
@@ -405,51 +390,51 @@ SedParameter::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedParameter::readAttributes (const XMLAttributes& attributes,
+SedParameter::readAttributes(const XMLAttributes& attributes,
                              const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "required" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+  //
+  // id SId  ( use = "required" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedParameter>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedParameter>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// name string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("name", mName, getErrorLog(), false);
+  //
+  // name string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("name", mName, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mName.empty() == true)
-		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedParameter>");
-		}
-	}
+      if (mName.empty() == true)
+        {
+          logEmptyString(mName, getLevel(), getVersion(), "<SedParameter>");
+        }
+    }
 
-	//
-	// value double   ( use = "required" )
-	//
-	mIsSetValue = attributes.readInto("value", mValue, getErrorLog(), true);
+  //
+  // value double   ( use = "required" )
+  //
+  mIsSetValue = attributes.readInto("value", mValue, getErrorLog(), true);
 
 }
 
@@ -462,19 +447,19 @@ SedParameter::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedParameter::writeAttributes (XMLOutputStream& stream) const
+void
+SedParameter::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
-	if (isSetName() == true)
-		stream.writeAttribute("name", getPrefix(), mName);
+  if (isSetName() == true)
+    stream.writeAttribute("name", getPrefix(), mName);
 
-	if (isSetValue() == true)
-		stream.writeAttribute("value", getPrefix(), mValue);
+  if (isSetValue() == true)
+    stream.writeAttribute("value", getPrefix(), mValue);
 
 }
 
@@ -483,33 +468,33 @@ SedParameter::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfParameters::SedListOfParameters(unsigned int level, 
-	                    unsigned int version)
- : SedListOf(level, version)
+SedListOfParameters::SedListOfParameters(unsigned int level,
+    unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfParameters::SedListOfParameters(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfParameters 
+ * Returns a deep copy of this SedListOfParameters
  */
-SedListOfParameters* 
-SedListOfParameters::clone () const
- {
-	return new SedListOfParameters(*this);
+SedListOfParameters*
+SedListOfParameters::clone() const
+{
+  return new SedListOfParameters(*this);
 }
 
 
@@ -519,7 +504,7 @@ SedListOfParameters::clone () const
 SedParameter*
 SedListOfParameters::get(unsigned int n)
 {
-	return static_cast<SedParameter*>(SedListOf::get(n));
+  return static_cast<SedParameter*>(SedListOf::get(n));
 }
 
 
@@ -529,7 +514,7 @@ SedListOfParameters::get(unsigned int n)
 const SedParameter*
 SedListOfParameters::get(unsigned int n) const
 {
-	return static_cast<const SedParameter*>(SedListOf::get(n));
+  return static_cast<const SedParameter*>(SedListOf::get(n));
 }
 
 
@@ -539,8 +524,8 @@ SedListOfParameters::get(unsigned int n) const
 SedParameter*
 SedListOfParameters::get(const std::string& sid)
 {
-	return const_cast<SedParameter*>(
-	  static_cast<const SedListOfParameters&>(*this).get(sid));
+  return const_cast<SedParameter*>(
+           static_cast<const SedListOfParameters&>(*this).get(sid));
 }
 
 
@@ -550,10 +535,10 @@ SedListOfParameters::get(const std::string& sid)
 const SedParameter*
 SedListOfParameters::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedParameter>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedParameter*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedParameter>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedParameter*>(*result);
 }
 
 
@@ -572,9 +557,10 @@ SedListOfParameters::get(const std::string& sid) const
 int
 SedListOfParameters::addParameter(const SedParameter* sp)
 {
-	if(sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(sp);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sp == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(sp);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -583,26 +569,28 @@ SedListOfParameters::addParameter(const SedParameter* sp)
  *
  * @return the number of SedParameter objects in this SedListOfParameters
  */
-unsigned int 
+unsigned int
 SedListOfParameters::getNumParameters() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedParameter object, adds it to this SedListOfParameterss
- * SedParameter and returns the SedParameter object created. 
+ * SedParameter and returns the SedParameter object created.
  *
  * @return a new SedParameter object instance
  *
  * @see addSedParameter(const SedParameter* sp)
  */
-SedParameter* 
+SedParameter*
 SedListOfParameters::createParameter()
 {
-	SedParameter *temp = new SedParameter();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedParameter *temp = new SedParameter();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -611,7 +599,7 @@ SedListOfParameters::createParameter()
 SedParameter*
 SedListOfParameters::remove(unsigned int n)
 {
-	return static_cast<SedParameter*>(SedListOf::remove(n));
+  return static_cast<SedParameter*>(SedListOf::remove(n));
 }
 
 
@@ -621,18 +609,18 @@ SedListOfParameters::remove(unsigned int n)
 SedParameter*
 SedListOfParameters::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedParameter>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedParameter>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedParameter*> (item);
+  return static_cast <SedParameter*>(item);
 }
 
 
@@ -640,10 +628,10 @@ SedListOfParameters::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfParameters::getElementName () const
+SedListOfParameters::getElementName() const
 {
-	static const string name = "listOfParameters";
-	return name;
+  static const string name = "listOfParameters";
+  return name;
 }
 
 
@@ -651,9 +639,9 @@ SedListOfParameters::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfParameters::getTypeCode () const
+SedListOfParameters::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -661,9 +649,9 @@ SedListOfParameters::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfParameters::getItemTypeCode () const
+SedListOfParameters::getItemTypeCode() const
 {
-	return SEDML_PARAMETER;
+  return SEDML_PARAMETER;
 }
 
 
@@ -675,16 +663,16 @@ SedListOfParameters::getItemTypeCode () const
 SedBase*
 SedListOfParameters::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "parameter")
-	{
-		object = new SedParameter(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "parameter")
+    {
+      object = new SedParameter(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -699,20 +687,20 @@ SedListOfParameters::createObject(XMLInputStream& stream)
 void
 SedListOfParameters::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -726,7 +714,7 @@ LIBSEDML_EXTERN
 SedParameter_t *
 SedParameter_create(unsigned int level, unsigned int version)
 {
-	return new SedParameter(level, version);
+  return new SedParameter(level, version);
 }
 
 
@@ -737,8 +725,8 @@ LIBSEDML_EXTERN
 void
 SedParameter_free(SedParameter_t * sp)
 {
-	if (sp != NULL)
-		delete sp;
+  if (sp != NULL)
+    delete sp;
 }
 
 
@@ -749,14 +737,14 @@ LIBSEDML_EXTERN
 SedParameter_t *
 SedParameter_clone(SedParameter_t * sp)
 {
-	if (sp != NULL)
-	{
-		return static_cast<SedParameter_t*>(sp->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sp != NULL)
+    {
+      return static_cast<SedParameter_t*>(sp->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -767,10 +755,10 @@ LIBSEDML_EXTERN
 char *
 SedParameter_getId(SedParameter_t * sp)
 {
-	if (sp == NULL)
-		return NULL;
+  if (sp == NULL)
+    return NULL;
 
-	return sp->getId().empty() ? NULL : safe_strdup(sp->getId().c_str());
+  return sp->getId().empty() ? NULL : safe_strdup(sp->getId().c_str());
 }
 
 
@@ -781,10 +769,10 @@ LIBSEDML_EXTERN
 char *
 SedParameter_getName(SedParameter_t * sp)
 {
-	if (sp == NULL)
-		return NULL;
+  if (sp == NULL)
+    return NULL;
 
-	return sp->getName().empty() ? NULL : safe_strdup(sp->getName().c_str());
+  return sp->getName().empty() ? NULL : safe_strdup(sp->getName().c_str());
 }
 
 
@@ -795,7 +783,7 @@ LIBSEDML_EXTERN
 double
 SedParameter_getValue(SedParameter_t * sp)
 {
-	return (sp != NULL) ? sp->getValue() : numeric_limits<double>::quiet_NaN();
+  return (sp != NULL) ? sp->getValue() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -806,7 +794,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_isSetId(SedParameter_t * sp)
 {
-	return (sp != NULL) ? static_cast<int>(sp->isSetId()) : 0;
+  return (sp != NULL) ? static_cast<int>(sp->isSetId()) : 0;
 }
 
 
@@ -817,7 +805,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_isSetName(SedParameter_t * sp)
 {
-	return (sp != NULL) ? static_cast<int>(sp->isSetName()) : 0;
+  return (sp != NULL) ? static_cast<int>(sp->isSetName()) : 0;
 }
 
 
@@ -828,7 +816,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_isSetValue(SedParameter_t * sp)
 {
-	return (sp != NULL) ? static_cast<int>(sp->isSetValue()) : 0;
+  return (sp != NULL) ? static_cast<int>(sp->isSetValue()) : 0;
 }
 
 
@@ -839,7 +827,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_setId(SedParameter_t * sp, const char * id)
 {
-	return (sp != NULL) ? sp->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -850,7 +838,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_setName(SedParameter_t * sp, const char * name)
 {
-	return (sp != NULL) ? sp->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -861,7 +849,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_setValue(SedParameter_t * sp, double value)
 {
-	return (sp != NULL) ? sp->setValue(value) : LIBSEDML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->setValue(value) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -872,7 +860,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_unsetId(SedParameter_t * sp)
 {
-	return (sp != NULL) ? sp->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -883,7 +871,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_unsetName(SedParameter_t * sp)
 {
-	return (sp != NULL) ? sp->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -894,7 +882,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_unsetValue(SedParameter_t * sp)
 {
-	return (sp != NULL) ? sp->unsetValue() : LIBSEDML_INVALID_OBJECT;
+  return (sp != NULL) ? sp->unsetValue() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -905,7 +893,7 @@ LIBSEDML_EXTERN
 int
 SedParameter_hasRequiredAttributes(SedParameter_t * sp)
 {
-	return (sp != NULL) ? static_cast<int>(sp->hasRequiredAttributes()) : 0;
+  return (sp != NULL) ? static_cast<int>(sp->hasRequiredAttributes()) : 0;
 }
 
 
@@ -916,10 +904,10 @@ LIBSEDML_EXTERN
 SedParameter_t *
 SedListOfParameters_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfParameters *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfParameters *>(lo)->get(sid) : NULL;
 }
 
 
@@ -930,10 +918,10 @@ LIBSEDML_EXTERN
 SedParameter_t *
 SedListOfParameters_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfParameters *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfParameters *>(lo)->remove(sid) : NULL;
 }
 
 

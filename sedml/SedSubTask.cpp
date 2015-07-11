@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,49 +48,42 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedSubTask with the given level, version, and package version.
  */
-SedSubTask::SedSubTask (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mOrder (SEDML_INT_MAX)
-	, mIsSetOrder (false)
-	, mTask ("")
+SedSubTask::SedSubTask(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mOrder(SEDML_INT_MAX)
+  , mIsSetOrder(false)
+  , mTask("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedSubTask with the given SedNamespaces object.
  */
-SedSubTask::SedSubTask (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mOrder (SEDML_INT_MAX)
-	, mIsSetOrder (false)
-	, mTask ("")
+SedSubTask::SedSubTask(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mOrder(SEDML_INT_MAX)
+  , mIsSetOrder(false)
+  , mTask("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedSubTask.
  */
-SedSubTask::SedSubTask (const SedSubTask& orig)
-	: SedBase(orig)
+SedSubTask::SedSubTask(const SedSubTask& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mOrder  = orig.mOrder;
-		mIsSetOrder  = orig.mIsSetOrder;
-		mTask  = orig.mTask;
-	}
+  mOrder  = orig.mOrder;
+  mIsSetOrder  = orig.mIsSetOrder;
+  mTask  = orig.mTask;
 }
 
 
@@ -100,18 +93,15 @@ SedSubTask::SedSubTask (const SedSubTask& orig)
 SedSubTask&
 SedSubTask::operator=(const SedSubTask& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mOrder  = rhs.mOrder;
-		mIsSetOrder  = rhs.mIsSetOrder;
-		mTask  = rhs.mTask;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mOrder  = rhs.mOrder;
+      mIsSetOrder  = rhs.mIsSetOrder;
+      mTask  = rhs.mTask;
+    }
+
+  return *this;
 }
 
 
@@ -119,16 +109,16 @@ SedSubTask::operator=(const SedSubTask& rhs)
  * Clone for SedSubTask.
  */
 SedSubTask*
-SedSubTask::clone () const
+SedSubTask::clone() const
 {
-	return new SedSubTask(*this);
+  return new SedSubTask(*this);
 }
 
 
 /*
  * Destructor for SedSubTask.
  */
-SedSubTask::~SedSubTask ()
+SedSubTask::~SedSubTask()
 {
 }
 
@@ -139,7 +129,7 @@ SedSubTask::~SedSubTask ()
 const int
 SedSubTask::getOrder() const
 {
-	return mOrder;
+  return mOrder;
 }
 
 
@@ -149,7 +139,7 @@ SedSubTask::getOrder() const
 const std::string&
 SedSubTask::getTask() const
 {
-	return mTask;
+  return mTask;
 }
 
 
@@ -159,7 +149,7 @@ SedSubTask::getTask() const
 bool
 SedSubTask::isSetOrder() const
 {
-	return mIsSetOrder;
+  return mIsSetOrder;
 }
 
 
@@ -169,7 +159,7 @@ SedSubTask::isSetOrder() const
 bool
 SedSubTask::isSetTask() const
 {
-	return (mTask.empty() == false);
+  return (mTask.empty() == false);
 }
 
 
@@ -179,9 +169,9 @@ SedSubTask::isSetTask() const
 int
 SedSubTask::setOrder(int order)
 {
-	mOrder = order;
-	mIsSetOrder = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mOrder = order;
+  mIsSetOrder = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -191,19 +181,15 @@ SedSubTask::setOrder(int order)
 int
 SedSubTask::setTask(const std::string& task)
 {
-	if (&(task) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(task)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mTask = task;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(task)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mTask = task;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -213,17 +199,17 @@ SedSubTask::setTask(const std::string& task)
 int
 SedSubTask::unsetOrder()
 {
-	mOrder = SEDML_INT_MAX;
-	mIsSetOrder = false;
+  mOrder = SEDML_INT_MAX;
+  mIsSetOrder = false;
 
-	if (isSetOrder() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetOrder() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -233,16 +219,16 @@ SedSubTask::unsetOrder()
 int
 SedSubTask::unsetTask()
 {
-	mTask.erase();
+  mTask.erase();
 
-	if (mTask.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mTask.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -250,10 +236,10 @@ SedSubTask::unsetTask()
  * Returns the XML element name of this object
  */
 const std::string&
-SedSubTask::getElementName () const
+SedSubTask::getElementName() const
 {
-	static const string name = "subTask";
-	return name;
+  static const string name = "subTask";
+  return name;
 }
 
 
@@ -261,9 +247,9 @@ SedSubTask::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedSubTask::getTypeCode () const
+SedSubTask::getTypeCode() const
 {
-	return SEDML_TASK_SUBTASK;
+  return SEDML_TASK_SUBTASK;
 }
 
 
@@ -271,17 +257,17 @@ SedSubTask::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedSubTask::hasRequiredAttributes () const
+SedSubTask::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetOrder() == false)
-		allPresent = false;
+  if (isSetOrder() == false)
+    allPresent = false;
 
-	if (isSetTask() == false)
-		allPresent = false;
+  if (isSetTask() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -291,9 +277,9 @@ SedSubTask::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedSubTask::writeElements (XMLOutputStream& stream) const
+SedSubTask::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -306,9 +292,9 @@ SedSubTask::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedSubTask::accept (SedVisitor& v) const
+SedSubTask::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -322,9 +308,9 @@ SedSubTask::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedSubTask::setSedDocument (SedDocument* d)
+SedSubTask::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -339,10 +325,10 @@ SedSubTask::setSedDocument (SedDocument* d)
 void
 SedSubTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("order");
-	attributes.add("task");
+  attributes.add("order");
+  attributes.add("task");
 }
 
 
@@ -355,36 +341,36 @@ SedSubTask::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedSubTask::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedSubTask::readAttributes(const XMLAttributes& attributes,
+                           const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// order int   ( use = "required" )
-	//
-	mIsSetOrder = attributes.readInto("order", mOrder, getErrorLog(), true);
+  //
+  // order int   ( use = "required" )
+  //
+  mIsSetOrder = attributes.readInto("order", mOrder, getErrorLog(), true);
 
-	//
-	// task SIdRef   ( use = "required" )
-	//
-	assigned = attributes.readInto("task", mTask, getErrorLog(), true);
+  //
+  // task SIdRef   ( use = "required" )
+  //
+  assigned = attributes.readInto("task", mTask, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mTask.empty() == true)
-		{
-			logEmptyString(mTask, getLevel(), getVersion(), "<SedSubTask>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mTask) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mTask.empty() == true)
+        {
+          logEmptyString(mTask, getLevel(), getVersion(), "<SedSubTask>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mTask) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
 }
 
@@ -397,16 +383,16 @@ SedSubTask::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedSubTask::writeAttributes (XMLOutputStream& stream) const
+void
+SedSubTask::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetOrder() == true)
-		stream.writeAttribute("order", getPrefix(), mOrder);
+  if (isSetOrder() == true)
+    stream.writeAttribute("order", getPrefix(), mOrder);
 
-	if (isSetTask() == true)
-		stream.writeAttribute("task", getPrefix(), mTask);
+  if (isSetTask() == true)
+    stream.writeAttribute("task", getPrefix(), mTask);
 
 }
 
@@ -415,33 +401,33 @@ SedSubTask::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfSubTasks::SedListOfSubTasks(unsigned int level, 
-	                  unsigned int version)
- : SedListOf(level, version)
+SedListOfSubTasks::SedListOfSubTasks(unsigned int level,
+                                     unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfSubTasks::SedListOfSubTasks(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfSubTasks 
+ * Returns a deep copy of this SedListOfSubTasks
  */
-SedListOfSubTasks* 
-SedListOfSubTasks::clone () const
- {
-	return new SedListOfSubTasks(*this);
+SedListOfSubTasks*
+SedListOfSubTasks::clone() const
+{
+  return new SedListOfSubTasks(*this);
 }
 
 
@@ -451,7 +437,7 @@ SedListOfSubTasks::clone () const
 SedSubTask*
 SedListOfSubTasks::get(unsigned int n)
 {
-	return static_cast<SedSubTask*>(SedListOf::get(n));
+  return static_cast<SedSubTask*>(SedListOf::get(n));
 }
 
 
@@ -461,7 +447,7 @@ SedListOfSubTasks::get(unsigned int n)
 const SedSubTask*
 SedListOfSubTasks::get(unsigned int n) const
 {
-	return static_cast<const SedSubTask*>(SedListOf::get(n));
+  return static_cast<const SedSubTask*>(SedListOf::get(n));
 }
 
 
@@ -471,8 +457,8 @@ SedListOfSubTasks::get(unsigned int n) const
 SedSubTask*
 SedListOfSubTasks::get(const std::string& sid)
 {
-	return const_cast<SedSubTask*>(
-	  static_cast<const SedListOfSubTasks&>(*this).get(sid));
+  return const_cast<SedSubTask*>(
+           static_cast<const SedListOfSubTasks&>(*this).get(sid));
 }
 
 
@@ -482,10 +468,10 @@ SedListOfSubTasks::get(const std::string& sid)
 const SedSubTask*
 SedListOfSubTasks::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSubTask>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedSubTask*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedSubTask>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedSubTask*>(*result);
 }
 
 
@@ -504,9 +490,10 @@ SedListOfSubTasks::get(const std::string& sid) const
 int
 SedListOfSubTasks::addSubTask(const SedSubTask* sst)
 {
-	if(sst == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(sst);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sst == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(sst);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -515,26 +502,28 @@ SedListOfSubTasks::addSubTask(const SedSubTask* sst)
  *
  * @return the number of SedSubTask objects in this SedListOfSubTasks
  */
-unsigned int 
+unsigned int
 SedListOfSubTasks::getNumSubTasks() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedSubTask object, adds it to this SedListOfSubTaskss
- * SedSubTask and returns the SedSubTask object created. 
+ * SedSubTask and returns the SedSubTask object created.
  *
  * @return a new SedSubTask object instance
  *
  * @see addSedSubTask(const SedSubTask* sst)
  */
-SedSubTask* 
+SedSubTask*
 SedListOfSubTasks::createSubTask()
 {
-	SedSubTask *temp = new SedSubTask();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedSubTask *temp = new SedSubTask();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -543,7 +532,7 @@ SedListOfSubTasks::createSubTask()
 SedSubTask*
 SedListOfSubTasks::remove(unsigned int n)
 {
-	return static_cast<SedSubTask*>(SedListOf::remove(n));
+  return static_cast<SedSubTask*>(SedListOf::remove(n));
 }
 
 
@@ -553,18 +542,18 @@ SedListOfSubTasks::remove(unsigned int n)
 SedSubTask*
 SedListOfSubTasks::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedSubTask>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedSubTask>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedSubTask*> (item);
+  return static_cast <SedSubTask*>(item);
 }
 
 
@@ -572,10 +561,10 @@ SedListOfSubTasks::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfSubTasks::getElementName () const
+SedListOfSubTasks::getElementName() const
 {
-	static const string name = "listOfSubTasks";
-	return name;
+  static const string name = "listOfSubTasks";
+  return name;
 }
 
 
@@ -583,9 +572,9 @@ SedListOfSubTasks::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfSubTasks::getTypeCode () const
+SedListOfSubTasks::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -593,9 +582,9 @@ SedListOfSubTasks::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfSubTasks::getItemTypeCode () const
+SedListOfSubTasks::getItemTypeCode() const
 {
-	return SEDML_TASK_SUBTASK;
+  return SEDML_TASK_SUBTASK;
 }
 
 
@@ -607,16 +596,16 @@ SedListOfSubTasks::getItemTypeCode () const
 SedBase*
 SedListOfSubTasks::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "subTask")
-	{
-		object = new SedSubTask(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "subTask")
+    {
+      object = new SedSubTask(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -631,20 +620,20 @@ SedListOfSubTasks::createObject(XMLInputStream& stream)
 void
 SedListOfSubTasks::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -658,7 +647,7 @@ LIBSEDML_EXTERN
 SedSubTask_t *
 SedSubTask_create(unsigned int level, unsigned int version)
 {
-	return new SedSubTask(level, version);
+  return new SedSubTask(level, version);
 }
 
 
@@ -669,8 +658,8 @@ LIBSEDML_EXTERN
 void
 SedSubTask_free(SedSubTask_t * sst)
 {
-	if (sst != NULL)
-		delete sst;
+  if (sst != NULL)
+    delete sst;
 }
 
 
@@ -681,14 +670,14 @@ LIBSEDML_EXTERN
 SedSubTask_t *
 SedSubTask_clone(SedSubTask_t * sst)
 {
-	if (sst != NULL)
-	{
-		return static_cast<SedSubTask_t*>(sst->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sst != NULL)
+    {
+      return static_cast<SedSubTask_t*>(sst->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -699,7 +688,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_getOrder(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? sst->getOrder() : SEDML_INT_MAX;
+  return (sst != NULL) ? sst->getOrder() : SEDML_INT_MAX;
 }
 
 
@@ -710,10 +699,10 @@ LIBSEDML_EXTERN
 char *
 SedSubTask_getTask(SedSubTask_t * sst)
 {
-	if (sst == NULL)
-		return NULL;
+  if (sst == NULL)
+    return NULL;
 
-	return sst->getTask().empty() ? NULL : safe_strdup(sst->getTask().c_str());
+  return sst->getTask().empty() ? NULL : safe_strdup(sst->getTask().c_str());
 }
 
 
@@ -724,7 +713,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_isSetOrder(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? static_cast<int>(sst->isSetOrder()) : 0;
+  return (sst != NULL) ? static_cast<int>(sst->isSetOrder()) : 0;
 }
 
 
@@ -735,7 +724,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_isSetTask(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? static_cast<int>(sst->isSetTask()) : 0;
+  return (sst != NULL) ? static_cast<int>(sst->isSetTask()) : 0;
 }
 
 
@@ -746,7 +735,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_setOrder(SedSubTask_t * sst, int order)
 {
-	return (sst != NULL) ? sst->setOrder(order) : LIBSEDML_INVALID_OBJECT;
+  return (sst != NULL) ? sst->setOrder(order) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -757,7 +746,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_setTask(SedSubTask_t * sst, const char * task)
 {
-	return (sst != NULL) ? sst->setTask(task) : LIBSEDML_INVALID_OBJECT;
+  return (sst != NULL) ? sst->setTask(task) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -768,7 +757,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_unsetOrder(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? sst->unsetOrder() : LIBSEDML_INVALID_OBJECT;
+  return (sst != NULL) ? sst->unsetOrder() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -779,7 +768,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_unsetTask(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? sst->unsetTask() : LIBSEDML_INVALID_OBJECT;
+  return (sst != NULL) ? sst->unsetTask() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -790,7 +779,7 @@ LIBSEDML_EXTERN
 int
 SedSubTask_hasRequiredAttributes(SedSubTask_t * sst)
 {
-	return (sst != NULL) ? static_cast<int>(sst->hasRequiredAttributes()) : 0;
+  return (sst != NULL) ? static_cast<int>(sst->hasRequiredAttributes()) : 0;
 }
 
 
@@ -801,10 +790,10 @@ LIBSEDML_EXTERN
 SedSubTask_t *
 SedListOfSubTasks_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSubTasks *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfSubTasks *>(lo)->get(sid) : NULL;
 }
 
 
@@ -815,10 +804,10 @@ LIBSEDML_EXTERN
 SedSubTask_t *
 SedListOfSubTasks_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfSubTasks *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfSubTasks *>(lo)->remove(sid) : NULL;
 }
 
 

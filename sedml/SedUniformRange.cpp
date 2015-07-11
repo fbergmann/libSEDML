@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,61 +48,54 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedUniformRange with the given level, version, and package version.
  */
-SedUniformRange::SedUniformRange (unsigned int level, unsigned int version)
-	: SedRange(level, version)
-	, mStart (numeric_limits<double>::quiet_NaN())
-	, mIsSetStart (false)
-	, mEnd (numeric_limits<double>::quiet_NaN())
-	, mIsSetEnd (false)
-	, mNumberOfPoints (SEDML_INT_MAX)
-	, mIsSetNumberOfPoints (false)
-	, mType ("")
+SedUniformRange::SedUniformRange(unsigned int level, unsigned int version)
+  : SedRange(level, version)
+  , mStart(numeric_limits<double>::quiet_NaN())
+  , mIsSetStart(false)
+  , mEnd(numeric_limits<double>::quiet_NaN())
+  , mIsSetEnd(false)
+  , mNumberOfPoints(SEDML_INT_MAX)
+  , mIsSetNumberOfPoints(false)
+  , mType("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedUniformRange with the given SedNamespaces object.
  */
-SedUniformRange::SedUniformRange (SedNamespaces* sedns)
-	: SedRange(sedns)
-	, mStart (numeric_limits<double>::quiet_NaN())
-	, mIsSetStart (false)
-	, mEnd (numeric_limits<double>::quiet_NaN())
-	, mIsSetEnd (false)
-	, mNumberOfPoints (SEDML_INT_MAX)
-	, mIsSetNumberOfPoints (false)
-	, mType ("")
+SedUniformRange::SedUniformRange(SedNamespaces* sedns)
+  : SedRange(sedns)
+  , mStart(numeric_limits<double>::quiet_NaN())
+  , mIsSetStart(false)
+  , mEnd(numeric_limits<double>::quiet_NaN())
+  , mIsSetEnd(false)
+  , mNumberOfPoints(SEDML_INT_MAX)
+  , mIsSetNumberOfPoints(false)
+  , mType("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedUniformRange.
  */
-SedUniformRange::SedUniformRange (const SedUniformRange& orig)
-	: SedRange(orig)
+SedUniformRange::SedUniformRange(const SedUniformRange& orig)
+  : SedRange(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mStart  = orig.mStart;
-		mIsSetStart  = orig.mIsSetStart;
-		mEnd  = orig.mEnd;
-		mIsSetEnd  = orig.mIsSetEnd;
-		mNumberOfPoints  = orig.mNumberOfPoints;
-		mIsSetNumberOfPoints  = orig.mIsSetNumberOfPoints;
-		mType  = orig.mType;
-	}
+  mStart  = orig.mStart;
+  mIsSetStart  = orig.mIsSetStart;
+  mEnd  = orig.mEnd;
+  mIsSetEnd  = orig.mIsSetEnd;
+  mNumberOfPoints  = orig.mNumberOfPoints;
+  mIsSetNumberOfPoints  = orig.mIsSetNumberOfPoints;
+  mType  = orig.mType;
 }
 
 
@@ -112,22 +105,19 @@ SedUniformRange::SedUniformRange (const SedUniformRange& orig)
 SedUniformRange&
 SedUniformRange::operator=(const SedUniformRange& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedRange::operator=(rhs);
-		mStart  = rhs.mStart;
-		mIsSetStart  = rhs.mIsSetStart;
-		mEnd  = rhs.mEnd;
-		mIsSetEnd  = rhs.mIsSetEnd;
-		mNumberOfPoints  = rhs.mNumberOfPoints;
-		mIsSetNumberOfPoints  = rhs.mIsSetNumberOfPoints;
-		mType  = rhs.mType;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedRange::operator=(rhs);
+      mStart  = rhs.mStart;
+      mIsSetStart  = rhs.mIsSetStart;
+      mEnd  = rhs.mEnd;
+      mIsSetEnd  = rhs.mIsSetEnd;
+      mNumberOfPoints  = rhs.mNumberOfPoints;
+      mIsSetNumberOfPoints  = rhs.mIsSetNumberOfPoints;
+      mType  = rhs.mType;
+    }
+
+  return *this;
 }
 
 
@@ -135,16 +125,16 @@ SedUniformRange::operator=(const SedUniformRange& rhs)
  * Clone for SedUniformRange.
  */
 SedUniformRange*
-SedUniformRange::clone () const
+SedUniformRange::clone() const
 {
-	return new SedUniformRange(*this);
+  return new SedUniformRange(*this);
 }
 
 
 /*
  * Destructor for SedUniformRange.
  */
-SedUniformRange::~SedUniformRange ()
+SedUniformRange::~SedUniformRange()
 {
 }
 
@@ -155,7 +145,7 @@ SedUniformRange::~SedUniformRange ()
 const double
 SedUniformRange::getStart() const
 {
-	return mStart;
+  return mStart;
 }
 
 
@@ -165,7 +155,7 @@ SedUniformRange::getStart() const
 const double
 SedUniformRange::getEnd() const
 {
-	return mEnd;
+  return mEnd;
 }
 
 
@@ -175,7 +165,7 @@ SedUniformRange::getEnd() const
 const int
 SedUniformRange::getNumberOfPoints() const
 {
-	return mNumberOfPoints;
+  return mNumberOfPoints;
 }
 
 
@@ -185,7 +175,7 @@ SedUniformRange::getNumberOfPoints() const
 const std::string&
 SedUniformRange::getType() const
 {
-	return mType;
+  return mType;
 }
 
 
@@ -195,7 +185,7 @@ SedUniformRange::getType() const
 bool
 SedUniformRange::isSetStart() const
 {
-	return mIsSetStart;
+  return mIsSetStart;
 }
 
 
@@ -205,7 +195,7 @@ SedUniformRange::isSetStart() const
 bool
 SedUniformRange::isSetEnd() const
 {
-	return mIsSetEnd;
+  return mIsSetEnd;
 }
 
 
@@ -215,7 +205,7 @@ SedUniformRange::isSetEnd() const
 bool
 SedUniformRange::isSetNumberOfPoints() const
 {
-	return mIsSetNumberOfPoints;
+  return mIsSetNumberOfPoints;
 }
 
 
@@ -225,7 +215,7 @@ SedUniformRange::isSetNumberOfPoints() const
 bool
 SedUniformRange::isSetType() const
 {
-	return (mType.empty() == false);
+  return (mType.empty() == false);
 }
 
 
@@ -235,9 +225,9 @@ SedUniformRange::isSetType() const
 int
 SedUniformRange::setStart(double start)
 {
-	mStart = start;
-	mIsSetStart = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mStart = start;
+  mIsSetStart = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -247,9 +237,9 @@ SedUniformRange::setStart(double start)
 int
 SedUniformRange::setEnd(double end)
 {
-	mEnd = end;
-	mIsSetEnd = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mEnd = end;
+  mIsSetEnd = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -259,9 +249,9 @@ SedUniformRange::setEnd(double end)
 int
 SedUniformRange::setNumberOfPoints(int numberOfPoints)
 {
-	mNumberOfPoints = numberOfPoints;
-	mIsSetNumberOfPoints = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mNumberOfPoints = numberOfPoints;
+  mIsSetNumberOfPoints = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -271,15 +261,10 @@ SedUniformRange::setNumberOfPoints(int numberOfPoints)
 int
 SedUniformRange::setType(const std::string& type)
 {
-	if (&(type) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mType = type;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mType = type;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -289,17 +274,17 @@ SedUniformRange::setType(const std::string& type)
 int
 SedUniformRange::unsetStart()
 {
-	mStart = numeric_limits<double>::quiet_NaN();
-	mIsSetStart = false;
+  mStart = numeric_limits<double>::quiet_NaN();
+  mIsSetStart = false;
 
-	if (isSetStart() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetStart() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -309,17 +294,17 @@ SedUniformRange::unsetStart()
 int
 SedUniformRange::unsetEnd()
 {
-	mEnd = numeric_limits<double>::quiet_NaN();
-	mIsSetEnd = false;
+  mEnd = numeric_limits<double>::quiet_NaN();
+  mIsSetEnd = false;
 
-	if (isSetEnd() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetEnd() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -329,17 +314,17 @@ SedUniformRange::unsetEnd()
 int
 SedUniformRange::unsetNumberOfPoints()
 {
-	mNumberOfPoints = SEDML_INT_MAX;
-	mIsSetNumberOfPoints = false;
+  mNumberOfPoints = SEDML_INT_MAX;
+  mIsSetNumberOfPoints = false;
 
-	if (isSetNumberOfPoints() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetNumberOfPoints() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -349,16 +334,16 @@ SedUniformRange::unsetNumberOfPoints()
 int
 SedUniformRange::unsetType()
 {
-	mType.erase();
+  mType.erase();
 
-	if (mType.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mType.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -366,10 +351,10 @@ SedUniformRange::unsetType()
  * Returns the XML element name of this object
  */
 const std::string&
-SedUniformRange::getElementName () const
+SedUniformRange::getElementName() const
 {
-	static const string name = "uniformRange";
-	return name;
+  static const string name = "uniformRange";
+  return name;
 }
 
 
@@ -379,11 +364,11 @@ SedUniformRange::getElementName () const
 SedBase*
 SedUniformRange::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedRange::createObject(stream);
+  SedBase* object = SedRange::createObject(stream);
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -391,9 +376,9 @@ SedUniformRange::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedUniformRange::getTypeCode () const
+SedUniformRange::getTypeCode() const
 {
-	return SEDML_RANGE_UNIFORMRANGE;
+  return SEDML_RANGE_UNIFORMRANGE;
 }
 
 
@@ -401,23 +386,23 @@ SedUniformRange::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedUniformRange::hasRequiredAttributes () const
+SedUniformRange::hasRequiredAttributes() const
 {
-	bool allPresent = SedRange::hasRequiredAttributes();
+  bool allPresent = SedRange::hasRequiredAttributes();
 
-	if (isSetStart() == false)
-		allPresent = false;
+  if (isSetStart() == false)
+    allPresent = false;
 
-	if (isSetEnd() == false)
-		allPresent = false;
+  if (isSetEnd() == false)
+    allPresent = false;
 
-	if (isSetNumberOfPoints() == false)
-		allPresent = false;
+  if (isSetNumberOfPoints() == false)
+    allPresent = false;
 
-	if (isSetType() == false)
-		allPresent = false;
+  if (isSetType() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -427,9 +412,9 @@ SedUniformRange::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedUniformRange::writeElements (XMLOutputStream& stream) const
+SedUniformRange::writeElements(XMLOutputStream& stream) const
 {
-	SedRange::writeElements(stream);
+  SedRange::writeElements(stream);
 }
 
 
@@ -442,9 +427,9 @@ SedUniformRange::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedUniformRange::accept (SedVisitor& v) const
+SedUniformRange::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -458,9 +443,9 @@ SedUniformRange::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedUniformRange::setSedDocument (SedDocument* d)
+SedUniformRange::setSedDocument(SedDocument* d)
 {
-	SedRange::setSedDocument(d);
+  SedRange::setSedDocument(d);
 }
 
 
@@ -475,12 +460,12 @@ SedUniformRange::setSedDocument (SedDocument* d)
 void
 SedUniformRange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedRange::addExpectedAttributes(attributes);
+  SedRange::addExpectedAttributes(attributes);
 
-	attributes.add("start");
-	attributes.add("end");
-	attributes.add("numberOfPoints");
-	attributes.add("type");
+  attributes.add("start");
+  attributes.add("end");
+  attributes.add("numberOfPoints");
+  attributes.add("type");
 }
 
 
@@ -493,42 +478,42 @@ SedUniformRange::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedUniformRange::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedUniformRange::readAttributes(const XMLAttributes& attributes,
+                                const ExpectedAttributes& expectedAttributes)
 {
-	SedRange::readAttributes(attributes, expectedAttributes);
+  SedRange::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// start double   ( use = "required" )
-	//
-	mIsSetStart = attributes.readInto("start", mStart, getErrorLog(), true);
+  //
+  // start double   ( use = "required" )
+  //
+  mIsSetStart = attributes.readInto("start", mStart, getErrorLog(), true);
 
-	//
-	// end double   ( use = "required" )
-	//
-	mIsSetEnd = attributes.readInto("end", mEnd, getErrorLog(), true);
+  //
+  // end double   ( use = "required" )
+  //
+  mIsSetEnd = attributes.readInto("end", mEnd, getErrorLog(), true);
 
-	//
-	// numberOfPoints int   ( use = "required" )
-	//
-	mIsSetNumberOfPoints = attributes.readInto("numberOfPoints", mNumberOfPoints, getErrorLog(), true);
+  //
+  // numberOfPoints int   ( use = "required" )
+  //
+  mIsSetNumberOfPoints = attributes.readInto("numberOfPoints", mNumberOfPoints, getErrorLog(), true);
 
-	//
-	// type string   ( use = "required" )
-	//
-	assigned = attributes.readInto("type", mType, getErrorLog(), true);
+  //
+  // type string   ( use = "required" )
+  //
+  assigned = attributes.readInto("type", mType, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mType.empty() == true)
-		{
-			logEmptyString(mType, getLevel(), getVersion(), "<SedUniformRange>");
-		}
-	}
+      if (mType.empty() == true)
+        {
+          logEmptyString(mType, getLevel(), getVersion(), "<SedUniformRange>");
+        }
+    }
 
 }
 
@@ -541,22 +526,22 @@ SedUniformRange::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedUniformRange::writeAttributes (XMLOutputStream& stream) const
+void
+SedUniformRange::writeAttributes(XMLOutputStream& stream) const
 {
-	SedRange::writeAttributes(stream);
+  SedRange::writeAttributes(stream);
 
-	if (isSetStart() == true)
-		stream.writeAttribute("start", getPrefix(), mStart);
+  if (isSetStart() == true)
+    stream.writeAttribute("start", getPrefix(), mStart);
 
-	if (isSetEnd() == true)
-		stream.writeAttribute("end", getPrefix(), mEnd);
+  if (isSetEnd() == true)
+    stream.writeAttribute("end", getPrefix(), mEnd);
 
-	if (isSetNumberOfPoints() == true)
-		stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfPoints);
+  if (isSetNumberOfPoints() == true)
+    stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfPoints);
 
-	if (isSetType() == true)
-		stream.writeAttribute("type", getPrefix(), mType);
+  if (isSetType() == true)
+    stream.writeAttribute("type", getPrefix(), mType);
 
 }
 
@@ -571,7 +556,7 @@ LIBSEDML_EXTERN
 SedUniformRange_t *
 SedUniformRange_create(unsigned int level, unsigned int version)
 {
-	return new SedUniformRange(level, version);
+  return new SedUniformRange(level, version);
 }
 
 
@@ -582,8 +567,8 @@ LIBSEDML_EXTERN
 void
 SedUniformRange_free(SedUniformRange_t * sur)
 {
-	if (sur != NULL)
-		delete sur;
+  if (sur != NULL)
+    delete sur;
 }
 
 
@@ -594,14 +579,14 @@ LIBSEDML_EXTERN
 SedUniformRange_t *
 SedUniformRange_clone(SedUniformRange_t * sur)
 {
-	if (sur != NULL)
-	{
-		return static_cast<SedUniformRange_t*>(sur->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sur != NULL)
+    {
+      return static_cast<SedUniformRange_t*>(sur->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -612,7 +597,7 @@ LIBSEDML_EXTERN
 double
 SedUniformRange_getStart(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->getStart() : numeric_limits<double>::quiet_NaN();
+  return (sur != NULL) ? sur->getStart() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -623,7 +608,7 @@ LIBSEDML_EXTERN
 double
 SedUniformRange_getEnd(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->getEnd() : numeric_limits<double>::quiet_NaN();
+  return (sur != NULL) ? sur->getEnd() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -634,7 +619,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_getNumberOfPoints(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->getNumberOfPoints() : SEDML_INT_MAX;
+  return (sur != NULL) ? sur->getNumberOfPoints() : SEDML_INT_MAX;
 }
 
 
@@ -645,10 +630,10 @@ LIBSEDML_EXTERN
 char *
 SedUniformRange_getType(SedUniformRange_t * sur)
 {
-	if (sur == NULL)
-		return NULL;
+  if (sur == NULL)
+    return NULL;
 
-	return sur->getType().empty() ? NULL : safe_strdup(sur->getType().c_str());
+  return sur->getType().empty() ? NULL : safe_strdup(sur->getType().c_str());
 }
 
 
@@ -659,7 +644,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_isSetStart(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? static_cast<int>(sur->isSetStart()) : 0;
+  return (sur != NULL) ? static_cast<int>(sur->isSetStart()) : 0;
 }
 
 
@@ -670,7 +655,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_isSetEnd(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? static_cast<int>(sur->isSetEnd()) : 0;
+  return (sur != NULL) ? static_cast<int>(sur->isSetEnd()) : 0;
 }
 
 
@@ -681,7 +666,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_isSetNumberOfPoints(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? static_cast<int>(sur->isSetNumberOfPoints()) : 0;
+  return (sur != NULL) ? static_cast<int>(sur->isSetNumberOfPoints()) : 0;
 }
 
 
@@ -692,7 +677,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_isSetType(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? static_cast<int>(sur->isSetType()) : 0;
+  return (sur != NULL) ? static_cast<int>(sur->isSetType()) : 0;
 }
 
 
@@ -703,7 +688,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_setStart(SedUniformRange_t * sur, double start)
 {
-	return (sur != NULL) ? sur->setStart(start) : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->setStart(start) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -714,7 +699,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_setEnd(SedUniformRange_t * sur, double end)
 {
-	return (sur != NULL) ? sur->setEnd(end) : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->setEnd(end) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -725,7 +710,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_setNumberOfPoints(SedUniformRange_t * sur, int numberOfPoints)
 {
-	return (sur != NULL) ? sur->setNumberOfPoints(numberOfPoints) : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->setNumberOfPoints(numberOfPoints) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -736,7 +721,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_setType(SedUniformRange_t * sur, const char * type)
 {
-	return (sur != NULL) ? sur->setType(type) : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->setType(type) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -747,7 +732,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_unsetStart(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->unsetStart() : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->unsetStart() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -758,7 +743,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_unsetEnd(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->unsetEnd() : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->unsetEnd() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -769,7 +754,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_unsetNumberOfPoints(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->unsetNumberOfPoints() : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->unsetNumberOfPoints() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -780,7 +765,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_unsetType(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? sur->unsetType() : LIBSEDML_INVALID_OBJECT;
+  return (sur != NULL) ? sur->unsetType() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -791,7 +776,7 @@ LIBSEDML_EXTERN
 int
 SedUniformRange_hasRequiredAttributes(SedUniformRange_t * sur)
 {
-	return (sur != NULL) ? static_cast<int>(sur->hasRequiredAttributes()) : 0;
+  return (sur != NULL) ? static_cast<int>(sur->hasRequiredAttributes()) : 0;
 }
 
 

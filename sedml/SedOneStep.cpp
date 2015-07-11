@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,46 +48,39 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedOneStep with the given level, version, and package version.
  */
-SedOneStep::SedOneStep (unsigned int level, unsigned int version)
-	: SedSimulation(level, version)
-	, mStep (numeric_limits<double>::quiet_NaN())
-	, mIsSetStep (false)
+SedOneStep::SedOneStep(unsigned int level, unsigned int version)
+  : SedSimulation(level, version)
+  , mStep(numeric_limits<double>::quiet_NaN())
+  , mIsSetStep(false)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedOneStep with the given SedNamespaces object.
  */
-SedOneStep::SedOneStep (SedNamespaces* sedns)
-	: SedSimulation(sedns)
-	, mStep (numeric_limits<double>::quiet_NaN())
-	, mIsSetStep (false)
+SedOneStep::SedOneStep(SedNamespaces* sedns)
+  : SedSimulation(sedns)
+  , mStep(numeric_limits<double>::quiet_NaN())
+  , mIsSetStep(false)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedOneStep.
  */
-SedOneStep::SedOneStep (const SedOneStep& orig)
-	: SedSimulation(orig)
+SedOneStep::SedOneStep(const SedOneStep& orig)
+  : SedSimulation(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mStep  = orig.mStep;
-		mIsSetStep  = orig.mIsSetStep;
-	}
+  mStep  = orig.mStep;
+  mIsSetStep  = orig.mIsSetStep;
 }
 
 
@@ -97,17 +90,14 @@ SedOneStep::SedOneStep (const SedOneStep& orig)
 SedOneStep&
 SedOneStep::operator=(const SedOneStep& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedSimulation::operator=(rhs);
-		mStep  = rhs.mStep;
-		mIsSetStep  = rhs.mIsSetStep;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedSimulation::operator=(rhs);
+      mStep  = rhs.mStep;
+      mIsSetStep  = rhs.mIsSetStep;
+    }
+
+  return *this;
 }
 
 
@@ -115,16 +105,16 @@ SedOneStep::operator=(const SedOneStep& rhs)
  * Clone for SedOneStep.
  */
 SedOneStep*
-SedOneStep::clone () const
+SedOneStep::clone() const
 {
-	return new SedOneStep(*this);
+  return new SedOneStep(*this);
 }
 
 
 /*
  * Destructor for SedOneStep.
  */
-SedOneStep::~SedOneStep ()
+SedOneStep::~SedOneStep()
 {
 }
 
@@ -135,7 +125,7 @@ SedOneStep::~SedOneStep ()
 const double
 SedOneStep::getStep() const
 {
-	return mStep;
+  return mStep;
 }
 
 
@@ -145,7 +135,7 @@ SedOneStep::getStep() const
 bool
 SedOneStep::isSetStep() const
 {
-	return mIsSetStep;
+  return mIsSetStep;
 }
 
 
@@ -155,9 +145,9 @@ SedOneStep::isSetStep() const
 int
 SedOneStep::setStep(double step)
 {
-	mStep = step;
-	mIsSetStep = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mStep = step;
+  mIsSetStep = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -167,17 +157,17 @@ SedOneStep::setStep(double step)
 int
 SedOneStep::unsetStep()
 {
-	mStep = numeric_limits<double>::quiet_NaN();
-	mIsSetStep = false;
+  mStep = numeric_limits<double>::quiet_NaN();
+  mIsSetStep = false;
 
-	if (isSetStep() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetStep() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -185,10 +175,10 @@ SedOneStep::unsetStep()
  * Returns the XML element name of this object
  */
 const std::string&
-SedOneStep::getElementName () const
+SedOneStep::getElementName() const
 {
-	static const string name = "oneStep";
-	return name;
+  static const string name = "oneStep";
+  return name;
 }
 
 
@@ -198,11 +188,11 @@ SedOneStep::getElementName () const
 SedBase*
 SedOneStep::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedSimulation::createObject(stream);
+  SedBase* object = SedSimulation::createObject(stream);
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -210,9 +200,9 @@ SedOneStep::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedOneStep::getTypeCode () const
+SedOneStep::getTypeCode() const
 {
-	return SEDML_SIMULATION_ONESTEP;
+  return SEDML_SIMULATION_ONESTEP;
 }
 
 
@@ -220,14 +210,14 @@ SedOneStep::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedOneStep::hasRequiredAttributes () const
+SedOneStep::hasRequiredAttributes() const
 {
-	bool allPresent = SedSimulation::hasRequiredAttributes();
+  bool allPresent = SedSimulation::hasRequiredAttributes();
 
-	if (isSetStep() == false)
-		allPresent = false;
+  if (isSetStep() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -237,9 +227,9 @@ SedOneStep::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedOneStep::writeElements (XMLOutputStream& stream) const
+SedOneStep::writeElements(XMLOutputStream& stream) const
 {
-	SedSimulation::writeElements(stream);
+  SedSimulation::writeElements(stream);
 }
 
 
@@ -252,9 +242,9 @@ SedOneStep::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedOneStep::accept (SedVisitor& v) const
+SedOneStep::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -268,9 +258,9 @@ SedOneStep::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedOneStep::setSedDocument (SedDocument* d)
+SedOneStep::setSedDocument(SedDocument* d)
 {
-	SedSimulation::setSedDocument(d);
+  SedSimulation::setSedDocument(d);
 }
 
 
@@ -285,9 +275,9 @@ SedOneStep::setSedDocument (SedDocument* d)
 void
 SedOneStep::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedSimulation::addExpectedAttributes(attributes);
+  SedSimulation::addExpectedAttributes(attributes);
 
-	attributes.add("step");
+  attributes.add("step");
 }
 
 
@@ -300,17 +290,17 @@ SedOneStep::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedOneStep::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedOneStep::readAttributes(const XMLAttributes& attributes,
+                           const ExpectedAttributes& expectedAttributes)
 {
-	SedSimulation::readAttributes(attributes, expectedAttributes);
+  SedSimulation::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// step double   ( use = "required" )
-	//
-	mIsSetStep = attributes.readInto("step", mStep, getErrorLog(), true);
+  //
+  // step double   ( use = "required" )
+  //
+  mIsSetStep = attributes.readInto("step", mStep, getErrorLog(), true);
 
 }
 
@@ -323,13 +313,13 @@ SedOneStep::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedOneStep::writeAttributes (XMLOutputStream& stream) const
+void
+SedOneStep::writeAttributes(XMLOutputStream& stream) const
 {
-	SedSimulation::writeAttributes(stream);
+  SedSimulation::writeAttributes(stream);
 
-	if (isSetStep() == true)
-		stream.writeAttribute("step", getPrefix(), mStep);
+  if (isSetStep() == true)
+    stream.writeAttribute("step", getPrefix(), mStep);
 
 }
 
@@ -344,7 +334,7 @@ LIBSEDML_EXTERN
 SedOneStep_t *
 SedOneStep_create(unsigned int level, unsigned int version)
 {
-	return new SedOneStep(level, version);
+  return new SedOneStep(level, version);
 }
 
 
@@ -355,8 +345,8 @@ LIBSEDML_EXTERN
 void
 SedOneStep_free(SedOneStep_t * sos)
 {
-	if (sos != NULL)
-		delete sos;
+  if (sos != NULL)
+    delete sos;
 }
 
 
@@ -367,14 +357,14 @@ LIBSEDML_EXTERN
 SedOneStep_t *
 SedOneStep_clone(SedOneStep_t * sos)
 {
-	if (sos != NULL)
-	{
-		return static_cast<SedOneStep_t*>(sos->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sos != NULL)
+    {
+      return static_cast<SedOneStep_t*>(sos->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -385,7 +375,7 @@ LIBSEDML_EXTERN
 double
 SedOneStep_getStep(SedOneStep_t * sos)
 {
-	return (sos != NULL) ? sos->getStep() : numeric_limits<double>::quiet_NaN();
+  return (sos != NULL) ? sos->getStep() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -396,7 +386,7 @@ LIBSEDML_EXTERN
 int
 SedOneStep_isSetStep(SedOneStep_t * sos)
 {
-	return (sos != NULL) ? static_cast<int>(sos->isSetStep()) : 0;
+  return (sos != NULL) ? static_cast<int>(sos->isSetStep()) : 0;
 }
 
 
@@ -407,7 +397,7 @@ LIBSEDML_EXTERN
 int
 SedOneStep_setStep(SedOneStep_t * sos, double step)
 {
-	return (sos != NULL) ? sos->setStep(step) : LIBSEDML_INVALID_OBJECT;
+  return (sos != NULL) ? sos->setStep(step) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -418,7 +408,7 @@ LIBSEDML_EXTERN
 int
 SedOneStep_unsetStep(SedOneStep_t * sos)
 {
-	return (sos != NULL) ? sos->unsetStep() : LIBSEDML_INVALID_OBJECT;
+  return (sos != NULL) ? sos->unsetStep() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -429,7 +419,7 @@ LIBSEDML_EXTERN
 int
 SedOneStep_hasRequiredAttributes(SedOneStep_t * sos)
 {
-	return (sos != NULL) ? static_cast<int>(sos->hasRequiredAttributes()) : 0;
+  return (sos != NULL) ? static_cast<int>(sos->hasRequiredAttributes()) : 0;
 }
 
 
