@@ -327,12 +327,11 @@ def writeSetCode(attrib, output, element):
       if attName == 'id':
         output.write('\treturn SyntaxChecker::checkAndSetSId({0}, m{1});\n'.format(attName, capAttName ))
       else:
-        output.write('\tif (&({0}) == NULL)\n'.format(attName))
-        output.write('\t{\n\t\treturn LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n\t}\n')
         if attrib['type'] == 'SIdRef':
-          output.write('\telse if (!(SyntaxChecker::isValidInternalSId({0})))\n'.format(attName))
+          output.write('\tif (!(SyntaxChecker::isValidInternalSId({0})))\n'.format(attName))
           output.write('\t{\n\t\treturn LIBSEDML_INVALID_ATTRIBUTE_VALUE;\n\t}\n')
-        output.write('\telse\n\t{\n')
+          output.write('\telse\n')
+        output.write('\t{\n')
         output.write('\t\tm{0} = {1};\n'.format(capAttName, attName))
         output.write('\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
     elif num == True:
