@@ -424,6 +424,7 @@ def writeListOfSubFunctions(attrib, output, element, elementDict):
 #write class
 def writeClass(attributes, header, nameOfElement, nameOfPackage, hasChildren, hasMath, isSedListOf, elementDict):
   writeAdditionalIncludes(attributes, header, elementDict)
+  writeCPPStart(header)
   header.write('class LIBSEDML_EXTERN {0} :'.format(nameOfElement))
   baseClass = 'SedBase'
   if elementDict.has_key('baseClass'):
@@ -457,6 +458,8 @@ def writeIncludes(fileOut, element, pkg):
   fileOut.write('#include <sedml/SedBase.h>\n')
   fileOut.write('#include <sedml/SedListOf.h>\n')
   fileOut.write('#include <sedml/SedNamespaces.h>\n')
+
+def writeCPPStart(fileOut):
   fileOut.write('\n\n');
   fileOut.write('LIBSEDML_CPP_NAMESPACE_BEGIN\n')
   fileOut.write('\n\n');
