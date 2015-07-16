@@ -222,8 +222,10 @@ endif()
 # If WITH_SWIG is selected, we need to find swig
 #
 
+set (LIBSEDML_USE_CPP_NAMESPACE 0)
 if(WITH_CPP_NAMESPACE)
     add_definitions(-DLIBSEDML_USE_CPP_NAMESPACE)
+    set (LIBSEDML_USE_CPP_NAMESPACE 1)
 endif()
 
 if(WITH_SWIG)
