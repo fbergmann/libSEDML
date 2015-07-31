@@ -82,7 +82,15 @@ START_TEST (test_mathml_issue1)
   string v1 = stream.str();
   stream.str("");
   astn = SBML_parseL3Formula("log(S1/S2)");
+
+#if LIBSBML_USE_LEGACY_MATH
   sdg->setMath(astn->getChild(1));
+#else 
+  ASTNode* node =astn->getChild(1);
+  node ->setIsChildFlag(false);
+  sdg->setMath(node);
+#endif
+
   sw.writeSedML(&doc, stream);
   string v2 = stream.str();
   //cout << v1 << endl << endl << v2 << endl << endl;
