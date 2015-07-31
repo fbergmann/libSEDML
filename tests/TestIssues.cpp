@@ -99,7 +99,13 @@ create_suite_SedMLIssues (void)
   TCase *tcase = tcase_create("SedMLIssues");
 
   cout << "Testing issues reported using: " << endl;
-  cout << "  libSBML  : " << getLibSBMLDottedVersion() << endl;
+  cout << "  libSBML  : " << getLibSBMLDottedVersion()
+  #if LIBSBML_USE_LEGACY_MATH
+      << " (using legacy math) "
+  #else 
+      << " (using new ASTnode implementation) "
+  #endif
+      << endl;
   cout << "  libSEDML : " << getLibSEDMLDottedVersion() << endl << endl;
  
   tcase_add_test( tcase, test_mathml_issue1         );
