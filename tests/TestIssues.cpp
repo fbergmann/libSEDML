@@ -44,6 +44,9 @@
 #include <string>
 #include <sstream>
 
+#include <sbml/common/libsbml-version.h>
+#include <sedml/common/libsedml-version.h>
+
 #include <sedml/SedDocument.h>
 #include <sedml/SedDataGenerator.h>
 #include <sedml/SedWriter.h>
@@ -55,6 +58,7 @@
 
 using namespace std;
 LIBSBML_CPP_NAMESPACE_USE
+LIBSEDML_CPP_NAMESPACE_USE
 
 /** @endcond */
 
@@ -65,6 +69,9 @@ CK_CPPSTART
 
 START_TEST (test_mathml_issue1)
 {
+  
+  
+  
   SedDocument doc;
   SedDataGenerator* sdg = doc.createDataGenerator();
   ASTNode* astn = SBML_parseL3Formula("S1/S2");
@@ -91,6 +98,9 @@ create_suite_SedMLIssues (void)
   Suite *suite = suite_create("SedMLIssues");
   TCase *tcase = tcase_create("SedMLIssues");
 
+  cout << "Testing issues reported using: " << endl;
+  cout << "  libSBML  : " << getLibSBMLDottedVersion() << endl;
+  cout << "  libSEDML : " << getLibSEDMLDottedVersion() << endl << endl;
  
   tcase_add_test( tcase, test_mathml_issue1         );
 
