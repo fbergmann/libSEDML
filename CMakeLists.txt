@@ -405,7 +405,6 @@ if(WITH_CHECK)
         message(WARNING "Libcheck is not compatible with Visual Studio 2003 (or earlier versions).")
     endif()
 
-
 endif(WITH_CHECK)
 
 
@@ -869,6 +868,13 @@ endif()
 
 message(STATUS "
 ----------------------------------------------------------------------")
+
+
+if(WITH_CHECK)
+
+    add_subdirectory(tests)
+
+endif(WITH_CHECK)
 
 
 ## To compile a test program simply comment out the lines below ...
