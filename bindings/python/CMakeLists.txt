@@ -130,7 +130,13 @@ else()
 	endif()
 endif()
 
-target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static ${PYTHON_LIBRARIES})
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	#Use late binding on OS X
+	set_target_properties(binding_python_lib PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
+	target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static)
+else()
+	target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static ${PYTHON_LIBRARIES})
+endif()
 
 # 
 # Determine the python installation directory
