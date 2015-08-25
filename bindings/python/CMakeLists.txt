@@ -139,9 +139,9 @@ endif(APPLE)
 
 if (APPLE AND PYTHON_USE_DYNAMIC_LOOKUP)
   set_target_properties (binding_python_lib PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
-  target_link_libraries(binding_python_lib ${LIBSBML_LIBRARY}-static)
+  target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static)
 else()
-  target_link_libraries(binding_python_lib ${LIBSBML_LIBRARY}-static ${PYTHON_LIBRARIES})
+  target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static ${PYTHON_LIBRARIES})
 endif()
 
 # 
