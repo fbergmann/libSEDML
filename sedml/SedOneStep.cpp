@@ -295,7 +295,7 @@ SedOneStep::readAttributes(const XMLAttributes& attributes,
 {
   SedSimulation::readAttributes(attributes, expectedAttributes);
 
-  bool assigned = false;
+  //bool assigned = false;
 
   //
   // step double   ( use = "required" )

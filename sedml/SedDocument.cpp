@@ -1190,7 +1190,7 @@ SedDocument::readAttributes(const XMLAttributes& attributes,
 {
   SedBase::readAttributes(attributes, expectedAttributes);
 
-  bool assigned = false;
+  //bool assigned = false;
 
   //
   // level int   ( use = "required" )

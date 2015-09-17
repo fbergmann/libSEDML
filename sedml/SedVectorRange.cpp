@@ -353,7 +353,7 @@ SedVectorRange::readAttributes(const XMLAttributes& attributes,
 {
   SedRange::readAttributes(attributes, expectedAttributes);
 
-  bool assigned = false;
+  //bool assigned = false;
 
 }
 
@@ -367,7 +367,7 @@ bool
 SedVectorRange::readOtherXML(XMLInputStream& stream)
 {
   bool          read = false;
-  const string& name = stream.peek().getName();
+  //const string& name = stream.peek().getName();
 
   while (stream.peek().getName() == "value")
     {

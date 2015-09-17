@@ -303,7 +303,7 @@ SedAddXML::readAttributes(const XMLAttributes& attributes,
 {
   SedChange::readAttributes(attributes, expectedAttributes);
 
-  bool assigned = false;
+  //bool assigned = false;
 
 }
 

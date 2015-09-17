@@ -1845,7 +1845,7 @@ SedBase::matchesSedNamespaces(const SedBase * sb)
 {
   bool match = matchesCoreSedNamespace(sb);
 
-  if (match == true)
+  /*if (match == true)
     {
       SedNamespaces *sbmlns = getSedNamespaces();
       SedNamespaces *sbmlns_rhs = sb->getSedNamespaces();
@@ -1856,7 +1856,7 @@ SedBase::matchesSedNamespaces(const SedBase * sb)
       //{
       //  match = false;
       //}
-    }
+    }*/
 
   return match;
 }
@@ -1866,7 +1866,7 @@ SedBase::matchesSedNamespaces(const SedBase * sb) const
 {
   bool match = matchesCoreSedNamespace(sb);
 
-  if (match == true)
+  /*if (match == true)
     {
       SedNamespaces *sbmlns = getSedNamespaces();
       SedNamespaces *sbmlns_rhs = sb->getSedNamespaces();
@@ -1877,7 +1877,7 @@ SedBase::matchesSedNamespaces(const SedBase * sb) const
       //{
       //  match = false;
       //}
-    }
+    }*/
 
   return match;
 }
@@ -1984,7 +1984,7 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, XMLNamespaces *x
   bool valid = true;
   bool sedmlDeclared = false;
   std::string declaredURI("");
-  unsigned int version = getVersion();
+  //unsigned int version = getVersion();
 
   if (xmlns != NULL)
     {
@@ -2829,7 +2829,7 @@ SedBase::writeAttributes(XMLOutputStream& stream) const
   //    if (this->getNamespaces()) stream << *(this->getNamespaces());
   //  }
   unsigned int level   = getLevel();
-  unsigned int version = getVersion();
+  //unsigned int version = getVersion();
   string sbmlPrefix    = getSedPrefix();
 
   if (level > 1 && !mMetaId.empty())
@@ -2900,12 +2900,12 @@ SedBase::checkOrderAndLogError(SedBase* object, int expected)
 
 
       {
-        if (object->getTypeCode() == SEDML_LIST_OF)
+        /*if (object->getTypeCode() == SEDML_LIST_OF)
           {
             int tc = static_cast<SedListOf*>(object)->getItemTypeCode();
             //typecode (int) tc = static_cast<SedListOf*>(object)->getItemTypeCode();
 
-          }
+          }*/
 
         logError(error, getLevel(), getVersion());
       }
@@ -2936,7 +2936,7 @@ SedBase::checkListOfPopulated(SedBase* object)
       if (static_cast <SedListOf*>(object)->size() == 0)
         {
           //typecode (int) tc = static_cast<SedListOf*>(object)->getItemTypeCode();
-          int tc = static_cast<SedListOf*>(object)->getItemTypeCode();
+          //int tc = static_cast<SedListOf*>(object)->getItemTypeCode();
           SedErrorCode_t error = SedEmptyListElement;
 
           // By default, the error will be the EmptyListElement error, unless

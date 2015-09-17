@@ -405,7 +405,7 @@ SedPlot2D::readAttributes(const XMLAttributes& attributes,
 {
   SedOutput::readAttributes(attributes, expectedAttributes);
 
-  bool assigned = false;
+  //bool assigned = false;
 
 }
 

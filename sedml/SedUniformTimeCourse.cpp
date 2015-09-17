@@ -487,7 +487,7 @@ SedUniformTimeCourse::readAttributes(const XMLAttributes& attributes,
 {
   SedSimulation::readAttributes(attributes, expectedAttributes);
 
-  bool assigned = false;
+  //bool assigned = false;
 
   //
   // initialTime double   ( use = "required" )
