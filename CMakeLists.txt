@@ -230,23 +230,26 @@ endif()
 
 if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
-        NAMES swig
-        PATHS
-		      c:/swigwin-2.0.12
-		      c:/swigwin-2.0.11
-		      c:/swigwin-2.0.10
-		      c:/swigwin-2.0.9
-		      c:/swigwin-2.0.8
-		      c:/swigwin-2.0.7
-		      c:/swigwin-2.0.4
-              c:/swigwin-2.0.2
-              c:/swigwin-2.0.1
-              c:/swigwin-2.0.0
-              /usr/local/bin
-              /opt/local/bin
-              /usr/bin
-        DOC "The file name of the swig executable."
-        )
+      NAMES swig
+      PATHS
+        c:/swigwin-3.0.5
+        c:/swigwin-3.0.2
+        c:/swigwin-3.0.0
+        c:/swigwin-2.0.12
+        c:/swigwin-2.0.11
+        c:/swigwin-2.0.10
+        c:/swigwin-2.0.9
+        c:/swigwin-2.0.8
+        c:/swigwin-2.0.7
+        c:/swigwin-2.0.4
+        c:/swigwin-2.0.2
+        c:/swigwin-2.0.1
+        c:/swigwin-2.0.0
+        /usr/local/bin
+        /opt/local/bin
+        /usr/bin
+      DOC "The file name of the swig executable."
+      )
     set(SWIG_EXTRA_ARGS)
 endif(WITH_SWIG)
 
@@ -257,7 +260,7 @@ endif(WITH_SWIG)
 find_library(LIBSBML_LIBRARY
     NAMES libsbml-static.lib sbml-static libsbml.lib sbml
     PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-		/usr/local/lib          
+    /usr/local/lib          
           /usr/lib 
     DOC "The file name of the sbml library."
 )
@@ -266,18 +269,18 @@ find_path(LIBSBML_INCLUDE_DIR
     NAMES sbml/SBase.h
     PATHS 
           ${LIBSEDML_DEPENDENCY_DIR}/include
-		/usr/local/include
+    /usr/local/include
           /usr/include 
     DOC "The directory containing the sbml include files."
 )
 
 set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
 if (WIN32 AND NOT CYGWIN)
-if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
-set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
-else()
-	option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
-endif()
+  if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+    set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
+  else()
+    option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
+  endif()
 endif()
 
 if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
@@ -515,52 +518,68 @@ if(UNIX)
 
 else(UNIX)
     add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
-		
+    
     add_definitions(-DWIN32)
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
 
-	if (LIBSBML_STATIC)
+  if (LIBSBML_STATIC)
       add_definitions(-DLIBSBML_STATIC -DLIBLAX_STATIC)
       set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_STATIC -DLIBLAX_STATIC")
-	else()
+  else()
       add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
       set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
-	endif()
-	
+  endif()
+  
     if(MSVC OR USING_INTEL)
-        add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
-        set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -D_CRT_SECURE_NO_WARNINGS")
-        option(WITH_STATIC_RUNTIME "Compile using the static MSVC Runtime." OFF)
-        if(WITH_STATIC_RUNTIME)
-            foreach(flag_var
-                CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
-                CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO
-                CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
-                CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
+      add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
+      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -D_CRT_SECURE_NO_WARNINGS")
+      option(WITH_STATIC_RUNTIME "Compile using the static MSVC Runtime." OFF)
+      if(WITH_STATIC_RUNTIME)
+          foreach(flag_var
+              CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+              CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO
+              CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
+              CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
+      
+              if(${flag_var} MATCHES "/MD")
+                  string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
+              endif(${flag_var} MATCHES "/MD")
+          endforeach(flag_var)
+      add_definitions( -D_MT)
+      endif(WITH_STATIC_RUNTIME)
 
-                if(${flag_var} MATCHES "/MD")
-                    string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
-                endif(${flag_var} MATCHES "/MD")
-            endforeach(flag_var)
-        add_definitions( -D_MT)
-        endif(WITH_STATIC_RUNTIME)
-
-        file(GLOB WIN32_BINARIES ${LIBSEDML_DEPENDENCY_DIR}/bin/*.dll)
-        INSTALL(FILES ${WIN32_BINARIES} DESTINATION bin)
-        file(GLOB WIN32_DEPENDENCIES ${LIBSEDML_DEPENDENCY_DIR}/lib/*.lib)
-        install(FILES ${WIN32_DEPENDENCIES} DESTINATION lib)
-        if(WITH_LIBXML AND WITH_STATIC_RUNTIME)
-		  if (EXTRA_LIBS STREQUAL "")
-		  # populate EXTRA_LIBS variable
-          find_library(LIBICONV_LIBRARY
-              NAMES libiconv.lib iconv.lib iconv
-              PATHS /usr/lib /usr/local/lib
-                    ${LIBSEDML_DEPENDENCY_DIR}/lib
-              DOC "The file name of the libiconv library."
-              )
-		  set(EXTRA_LIBS "WS2_32.lib;${LIBICONV_LIBRARY};${LIBZ_LIBRARY};" CACHE STRING "List of additional libraries to link against." FORCE)
-		  endif()
-		endif()
+      # CMake no longer creates PDB files for static libraries after 2.8.11
+      # so we store debug information in the object files instead
+      if (${CMAKE_VERSION} VERSION_GREATER "2.8.11")
+        foreach(flag_var
+            CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+            CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO
+            CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
+            CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
+      
+            if(${flag_var} MATCHES "/Zi")
+              STRING(REPLACE "/Zi"  "/Z7" "${flag_var}" "${${flag_var}}")
+            endif(${flag_var} MATCHES "/Zi")
+      
+        endforeach(flag_var)      
+      endif()
+        
+      file(GLOB WIN32_BINARIES ${LIBSEDML_DEPENDENCY_DIR}/bin/*.dll)
+      INSTALL(FILES ${WIN32_BINARIES} DESTINATION bin)
+      file(GLOB WIN32_DEPENDENCIES ${LIBSEDML_DEPENDENCY_DIR}/lib/*.lib)
+      install(FILES ${WIN32_DEPENDENCIES} DESTINATION lib)
+      if(WITH_LIBXML AND WITH_STATIC_RUNTIME)
+        if (EXTRA_LIBS STREQUAL "")
+        # populate EXTRA_LIBS variable
+            find_library(LIBICONV_LIBRARY
+                NAMES libiconv.lib iconv.lib iconv
+                PATHS /usr/lib /usr/local/lib
+                      ${LIBSEDML_DEPENDENCY_DIR}/lib
+                DOC "The file name of the libiconv library."
+                )
+        set(EXTRA_LIBS "WS2_32.lib;${LIBICONV_LIBRARY};${LIBZ_LIBRARY};" CACHE STRING "List of additional libraries to link against." FORCE)
+        endif()
+      endif()
     elseif(CYGWIN)
         add_definitions(-DCYGWIN)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DCYGWIN")
@@ -610,23 +629,23 @@ macro(copy_if_different_and_remove source target)
 # message(
 # "
 # copy_if_different_and_remove called with:
-# 	source = ${source}
-# 	target = ${target}
+#   source = ${source}
+#   target = ${target}
 # "
 # )
 file(READ ${source} CONTENT)
 
 if (EXISTS ${target})
-	# message("target exists")
-	file(READ ${target} CURRENT_CONTENT)
-	string(COMPARE EQUAL ${CURRENT_CONTENT} ${CONTENT} IS_SAME)
-	if (NOT ${IS_SAME})
-		#message("content is different")
-		file(WRITE ${target} ${CONTENT})
-	endif()
+  # message("target exists")
+  file(READ ${target} CURRENT_CONTENT)
+  string(COMPARE EQUAL ${CURRENT_CONTENT} ${CONTENT} IS_SAME)
+  if (NOT ${IS_SAME})
+    #message("content is different")
+    file(WRITE ${target} ${CONTENT})
+  endif()
 else()
-	#message("target does not exist")
-	file(WRITE ${target} ${CONTENT})
+  #message("target does not exist")
+  file(WRITE ${target} ${CONTENT})
 endif()
 
 file(REMOVE ${source})
@@ -849,10 +868,10 @@ if(EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
 
             math(EXPR length_minus_two "${length} - 2")
             if(${length_minus_two} GREATER 3)
-	        math(EXPR length_minus_one "${length} - 1")
+          math(EXPR length_minus_one "${length} - 1")
                 string(SUBSTRING "${line}" ${length_minus_one} 1 last_char)
-		if("x${last_char}" STREQUAL "x.")
-	            math(EXPR length_minus_three "${length} - 3")
+    if("x${last_char}" STREQUAL "x.")
+              math(EXPR length_minus_three "${length} - 3")
                     string(SUBSTRING "${line}" 2 ${length_minus_three} last_line)
                 else()
                     string(SUBSTRING "${line}" 2 ${length_minus_two} last_line)
