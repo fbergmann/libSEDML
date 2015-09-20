@@ -76,6 +76,9 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "UniformRange"
   , "VectorRange"
   , "FunctionalRange"
+  , "DataDescription"
+  , "DataSource"
+  , "Slice"
   , "SedListOf"
 };
 

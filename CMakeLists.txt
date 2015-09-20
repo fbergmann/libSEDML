@@ -291,6 +291,34 @@ file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR varia
 endif()
 
 
+find_library(LIBNUML_LIBRARY
+    NAMES libnuml-static.lib numl-static libnuml.lib numl
+    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
+    /usr/local/lib          
+          /usr/lib 
+    DOC "The file name of the numl library."
+)
+
+find_path(LIBNUML_INCLUDE_DIR
+    NAMES numl/NMBase.h
+    PATHS 
+          ${LIBSEDML_DEPENDENCY_DIR}/include
+    /usr/local/include
+          /usr/include 
+    DOC "The directory containing the numl include files."
+)
+
+set(LIBNUML_STATIC OFF CACHE BOOL "is libnuml statically compiled")
+if (WIN32 AND NOT CYGWIN)
+  if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+    set(LIBNUML_STATIC ON CACHE BOOL "is libnuml statically compiled")
+  else()
+    option(LIBNUML_STATIC "The LibNUML library was statically compiled" ON)
+  endif()
+endif()
+
+
+
 ###############################################################################
 #
 # list of additional files to link against.
@@ -528,6 +556,14 @@ else(UNIX)
   else()
       add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
       set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
+  endif()
+
+  if (LIBNUML_STATIC)
+      add_definitions(-DLIBNUML_STATIC)
+      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBNUML_STATIC")
+  else()
+      add_definitions(-DLIBNUML_EXPORTS)
+      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBNUML_EXPORTS")
   endif()
   
     if(MSVC OR USING_INTEL)
@@ -773,6 +809,10 @@ libSEDML version ${PACKAGE_VERSION}
    SBML library configuration:
      SBML library                  = ${LIBSBML_LIBRARY}
      SBML include                  = -I${LIBSBML_INCLUDE_DIR}
+
+   NUML library configuration:
+     NUML library                  = ${LIBNUML_LIBRARY}
+     NUML include                  = -I${LIBNUML_INCLUDE_DIR}
 
   Other libSEDML configuration settings:
      Installation $prefix          = ${CMAKE_INSTALL_PREFIX}")

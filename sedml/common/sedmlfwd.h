@@ -327,6 +327,27 @@ typedef CLASS_OR_STRUCT SedCurve                     SedCurve_t;
  */
 typedef CLASS_OR_STRUCT SedDataSet                     SedDataSet_t;
 
+/**
+* @var typedef class SedDataDescription SedDataDescription_t
+* @copydoc SedDataDescription
+*/
+typedef CLASS_OR_STRUCT SedDataDescription                     SedDataDescription_t;
+
+typedef CLASS_OR_STRUCT DimensionDescription                     DimensionDescription_t;
+
+/**
+* @var typedef class SedDataSource SedDataSource_t
+* @copydoc SedDataSource
+*/
+typedef CLASS_OR_STRUCT SedDataSource                     SedDataSource_t;
+
+/**
+* @var typedef class SedSlice SedSlice_t
+* @copydoc SedSlice
+*/
+typedef CLASS_OR_STRUCT SedSlice                     SedSlice_t;
+
+
 LIBSEDML_CPP_NAMESPACE_END
 
 LIBSBML_CPP_NAMESPACE_BEGIN

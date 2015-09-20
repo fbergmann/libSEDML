@@ -41,7 +41,7 @@ def writeAttributes(attrs, output, constType=0, pkg=""):
 def writeAtt(atttype, name, output, constType, pkg):
   if atttype == 'SId' or atttype == 'SIdRef' or atttype == 'UnitSId' or atttype == 'UnitSIdRef' or atttype == 'string':
     output.write('\t, m{0} ("")\n'.format(strFunctions.cap(name)))
-  elif atttype == 'element' or atttype == 'XMLNode*':
+  elif atttype == 'element' or atttype == 'XMLNode*'  or atttype == 'DimensionDescription*':
     output.write('\t, m{0} (NULL)\n'.format(strFunctions.cap(name)))
   elif atttype == 'lo_element':
     output.write('\t, m{0} ('.format(strFunctions.capp(name)))
@@ -72,7 +72,7 @@ def writeCopyAttributes(attrs, output, tabs, name):
     atttype = attrs[i]['type']
     if atttype == 'element' and attName == 'Math':
       output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->deepCopy() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
-    elif atttype == 'XMLNode*':
+    elif atttype == 'XMLNode*' or atttype == 'DimensionDescription*':
       output.write('{0}m{1}  = {2}.m{1} != NULL ? {2}.m{1}->clone() : NULL;\n'.format(tabs, strFunctions.cap(attrs[i]['name']), name))
     else:
       output.write('{0}m{1}  = {2}.m{1};\n'.format(tabs, strFunctions.capp(attrs[i]['name'], atttype == 'lo_element' or atttype == 'std::vector<double>'), name))
@@ -255,7 +255,7 @@ def writeIsSetCode(attrib, output, element):
     output.write('{\n')
     if attType == 'string':
       output.write('\treturn (m{0}.empty() == false);\n'.format(capAttName))
-    elif attType == 'element' or attType == 'XMLNode*':
+    elif attType == 'element' or attType == 'XMLNode*' or attType == 'DimensionDescription*':
       output.write('\treturn (m{0} != NULL);\n'.format(capAttName))
     elif num == True:
       output.write('\treturn mIsSet{0};\n'.format(capAttName))
@@ -342,7 +342,7 @@ def writeSetCode(attrib, output, element):
       output.write('\tm{0} = {1};\n'.format(capAttName, attName))
       output.write('\tmIsSet{0} = true;\n'.format(capAttName))
       output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-    elif attType == 'XMLNode*':
+    elif attType == 'XMLNode*' or attType == 'DimensionDescription*':
       output.write('\tif (m{0} == {1})\n'.format(capAttName, attName))
       output.write('\t{\n\t\treturn LIBSEDML_OPERATION_SUCCESS;\n\t}\n')
       output.write('\telse if ({0} == NULL)\n'.format(attName))
@@ -439,7 +439,7 @@ def writeUnsetCode(attrib, output, element):
       output.write('\tm{0} = false;\n'.format(capAttName))
       output.write('\tmIsSet{0} = false;\n'.format(capAttName))
       output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
-    elif attType == 'element' or attType == 'XMLNode*':
+    elif attType == 'element' or attType == 'XMLNode*' or attType == 'DimensionDescription*':
       output.write('\tdelete m{0};\n'.format(capAttName))
       output.write('\tm{0} = NULL;\n'.format(capAttName))
       output.write('\treturn LIBSEDML_OPERATION_SUCCESS;\n')
@@ -448,17 +448,17 @@ def writeUnsetCode(attrib, output, element):
 # for each attribute write a set/get/isset/unset
 def writeAttributeCode(attrs, output, element):
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeGetCode(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeGetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeIsSetCode(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeIsSetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeSetCode(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeSetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeUnsetCode(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeUnsetCode(attrs[i], output, element)
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
       writeListOfSubFunctions(attrs[i], output, element)

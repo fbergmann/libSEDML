@@ -32,6 +32,13 @@
 
 #include "ListWrapper.h"
 
+#include <sbml/SBase.h>
+#include <sbml/Model.h>
+#include <sbml/SBMLTransforms.h>
+#include <sbml/SBMLNamespaces.h>
+#include <sbml/annotation/CVTerm.h>
+#include <sbml/annotation/Date.h>
+
 #include <sbml/math/MathML.h>
 #include <sbml/math/ASTNode.h>
 #include <sbml/math/FormulaParser.h>
@@ -49,3 +56,28 @@
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
+
+#include <numl/common/extern.h>
+#include <numl/common/libnuml-namespace.h>
+#include <numl/common/libnuml-version.h>
+#include <numl/common/operationReturnValues.h>
+
+#include <numl/NUMLNamespaces.h>
+#include <numl/NUMLReader.h>
+#include <numl/NUMLWriter.h>
+#include <numl/NUMLTypeCodes.h>
+#include <numl/NMBase.h>
+#include <numl/NUMLDocument.h>
+#include <numl/ResultComponent.h>
+
+#include <numl/Dimension.h>
+#include <numl/DimensionDescription.h>
+
+#include <numl/CompositeValue.h>
+#include <numl/Tuple.h>
+#include <numl/AtomicValue.h>
+
+#include <numl/CompositeDescription.h>
+#include <numl/TupleDescription.h>
+#include <numl/AtomicDescription.h>
+

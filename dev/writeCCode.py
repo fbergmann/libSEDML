@@ -64,17 +64,17 @@ def writeConstructors(element, package, output):
 
 def writeAttributeFunctions(attrs, output, element):
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeGetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeGetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeIsSetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeIsSetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeSetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeSetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeUnsetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeUnsetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
       writeListOfSubElements(attrs[i], output, element)

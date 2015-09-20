@@ -51,6 +51,7 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <sedml/SedDataDescription.h>
 #include <sedml/SedSimulation.h>
 #include <sedml/SedModel.h>
 #include <sedml/SedTask.h>
@@ -72,6 +73,7 @@ protected:
   bool          mIsSetLevel;
   int           mVersion;
   bool          mIsSetVersion;
+  SedListOfDataDescriptions   mDataDescriptions;
   SedListOfSimulations   mSimulations;
   SedListOfModels   mModels;
   SedListOfTasks   mTasks;
@@ -223,6 +225,137 @@ public:
    * @li LIBSEDML_OPERATION_FAILED
    */
   virtual int unsetVersion();
+
+
+  /**
+   * Returns the  "SedListOfDataDescriptions" in this SedDocument object.
+   *
+   * @return the "SedListOfDataDescriptions" attribute of this SedDocument.
+   */
+  const SedListOfDataDescriptions* getListOfDataDescriptions() const;
+
+
+  /**
+   * Get a DataDescription from the SedListOfDataDescriptions.
+   *
+   * @param n the index number of the DataDescription to get.
+   *
+   * @return the nth DataDescription in the SedListOfDataDescriptions within this SedDocument.
+   *
+   * @see getNumDataDescriptions()
+   */
+  SedDataDescription* getDataDescription(unsigned int n);
+
+
+  /**
+   * Get a DataDescription from the SedListOfDataDescriptions.
+   *
+   * @param n the index number of the DataDescription to get.
+   *
+   * @return the nth DataDescription in the SedListOfDataDescriptions within this SedDocument.
+   *
+   * @see getNumDataDescriptions()
+   */
+  const SedDataDescription* getDataDescription(unsigned int n) const;
+
+
+  /**
+   * Get a DataDescription from the SedListOfDataDescriptions
+   * based on its identifier.
+   *
+   * @param sid a string representing the identifier
+   * of the DataDescription to get.
+   *
+   * @return the DataDescription in the SedListOfDataDescriptions
+   * with the given id or NULL if no such
+   * DataDescription exists.
+   *
+   * @see getDataDescription(unsigned int n)
+   *
+   * @see getNumDataDescriptions()
+   */
+  SedDataDescription* getDataDescription(const std::string& sid);
+
+
+  /**
+   * Get a DataDescription from the SedListOfDataDescriptions
+   * based on its identifier.
+   *
+   * @param sid a string representing the identifier
+   * of the DataDescription to get.
+   *
+   * @return the DataDescription in the SedListOfDataDescriptions
+   * with the given id or NULL if no such
+   * DataDescription exists.
+   *
+   * @see getDataDescription(unsigned int n)
+   *
+   * @see getNumDataDescriptions()
+   */
+  const SedDataDescription* getDataDescription(const std::string& sid) const;
+
+
+  /**
+   * Adds a copy the given "SedDataDescription" to this SedDocument.
+   *
+   * @param sdd; the SedDataDescription object to add
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  int addDataDescription(const SedDataDescription* sdd);
+
+
+  /**
+   * Get the number of SedDataDescription objects in this SedDocument.
+   *
+   * @return the number of SedDataDescription objects in this SedDocument
+   */
+  unsigned int getNumDataDescriptions() const;
+
+
+  /**
+   * Creates a new SedDataDescription object, adds it to this SedDocuments
+   * SedListOfDataDescriptions and returns the SedDataDescription object created.
+   *
+   * @return a new SedDataDescription object instance
+   *
+   * @see addDataDescription(const SedDataDescription* sdd)
+   */
+  SedDataDescription* createDataDescription();
+
+
+  /**
+   * Removes the nth DataDescription from the SedListOfDataDescriptions within this SedDocument.
+   * and returns a pointer to it.
+   *
+   * The caller owns the returned item and is responsible for deleting it.
+   *
+   * @param n the index of the DataDescription to remove.
+   *
+   * @see getNumDataDescriptions()
+   */
+  SedDataDescription* removeDataDescription(unsigned int n);
+
+
+  /**
+   * Removes the DataDescription with the given identifier from the SedListOfDataDescriptions within this SedDocument
+   * and returns a pointer to it.
+   *
+   * The caller owns the returned item and is responsible for deleting it.
+   * If none of the items in this list have the identifier @p sid, then
+   * @c NULL is returned.
+   *
+   * @param sid the identifier of the DataDescription to remove.
+   *
+   * @return the DataDescription removed. As mentioned above, the caller owns the
+   * returned item.
+   */
+  SedDataDescription* removeDataDescription(const std::string& sid);
 
 
   /**
@@ -1249,6 +1382,46 @@ SedDocument_unsetLevel(SedDocument_t * sd);
 LIBSEDML_EXTERN
 int
 SedDocument_unsetVersion(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+int
+SedDocument_addDataDescription(SedDocument_t * sd, SedDataDescription_t * sdd);
+
+
+LIBSEDML_EXTERN
+SedDataDescription_t *
+SedDocument_createDataDescription(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+SedListOf_t *
+SedDocument_getSedListOfDataDescriptions(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+SedDataDescription_t *
+SedDocument_getDataDescription(SedDocument_t * sd, unsigned int n);
+
+
+LIBSEDML_EXTERN
+SedDataDescription_t *
+SedDocument_getDataDescriptionById(SedDocument_t * sd, const char * sid);
+
+
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumDataDescriptions(SedDocument_t * sd);
+
+
+LIBSEDML_EXTERN
+SedDataDescription_t *
+SedDocument_removeDataDescription(SedDocument_t * sd, unsigned int n);
+
+
+LIBSEDML_EXTERN
+SedDataDescription_t *
+SedDocument_removeDataDescriptionById(SedDocument_t * sd, const char * sid);
 
 
 LIBSEDML_EXTERN

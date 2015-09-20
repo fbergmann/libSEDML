@@ -92,7 +92,7 @@ def parseAttribute(attrib):
     else:
       #attTypeCode = 'element-not-done'
       if attrib.has_key('element'):
-	    attTypeCode = '{0}*'.format(attrib['element'])
+        attTypeCode = '{0}*'.format(attrib['element'])
       else:
         attTypeCode = '{0}*'.format(strFunctions.cap(attrib['name']))
     num = False
@@ -103,6 +103,10 @@ def parseAttribute(attrib):
   elif attrib['type'] == 'XMLNode*':
     attType = 'XMLNode*'
     attTypeCode = 'XMLNode*'
+    num = False
+  elif attrib['type'] == 'DimensionDescription*':
+    attType = 'DimensionDescription*'
+    attTypeCode = 'DimensionDescription*'
     num = False
   elif attrib['type'] == 'std::vector<double>':
     attType = 'std::vector<double>'
@@ -161,7 +165,7 @@ def parseAttributeForC(attrib):
       attTypeCode = 'ASTNode_t*'
     else:
       #attTypeCode = 'element-not-done'
-	  attTypeCode = '{0}*'.format(strFunctions.cap(attrib['name']))
+      attTypeCode = '{0}*'.format(strFunctions.cap(attrib['name']))
     num = False
   elif attrib['type'] == 'lo_element':
     attType = 'lo_element'
@@ -170,6 +174,10 @@ def parseAttributeForC(attrib):
   elif attrib['type'] == 'XMLNode*':
     attType = 'XMLNode*'
     attTypeCode = 'XMLNode*'
+    num = False
+  elif attrib['type'] == 'DimensionDescription*':
+    attType = 'DimensionDescription*'
+    attTypeCode = 'DimensionDescription*'
     num = False
   elif attrib['type'] == 'std::vector<double>':
     attType = 'std::vector<double>'
@@ -275,6 +283,12 @@ def writeWriteElementsCPPCode(outFile, element, attributes, hasChildren=False, h
         outFile.write('\t{\n\t\t')
         outFile.write('m{0}.write(stream);'.format(strFunctions.capp(attributes[i]['name'])))
         outFile.write('\n\t}\n')
+  if containsType(attributes, 'DimensionDescription*'):
+    node = getByType(attributes, 'DimensionDescription*')
+    outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(node['name'])))
+    outFile.write('\t{\n\t\t')
+    outFile.write('m{0}->write(stream);'.format(strFunctions.cap(node['name'])))
+    outFile.write('\n\t}\n')		
   if containsType(attributes, 'XMLNode*'):
     node = getByType(attributes, 'XMLNode*')
     outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(node['name'])))
@@ -540,7 +554,7 @@ def writeReadAttribute(output, attrib, element):
     attType = 'FIX ME'
     attTypeCode = 'FIX ME'
     num = False
-	
+    
 def writeCreateObject(outFile, element, sbmltypecode, attribs, isSedListOf, hasChildren=False, hasMath=False,baseClass='SedBase'):  
   if (isSedListOf == True or hasChildren == False) and baseClass  == 'SedBase':
     return;
@@ -629,7 +643,7 @@ def writeWriteAttributesCPPCode(outFile, element, attribs, baseClass='SedBase'):
   outFile.write('{\n')
   outFile.write('\t{0}::writeAttributes(stream);\n\n'.format(baseClass))
   for i in range (0, len(attribs)):
-    if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'XMLNode*' and attribs[i]['type'] != 'lo_element' and attribs[i]['type'] != 'std::vector<double>':
+    if attribs[i]['type'] != 'element' and attribs[i]['type'] != 'XMLNode*' and attribs[i]['type'] != 'DimensionDescription*' and attribs[i]['type'] != 'lo_element' and attribs[i]['type'] != 'std::vector<double>':
       outFile.write('\tif (isSet{0}() == true)\n'.format(strFunctions.cap(attribs[i]['name'])))
       if attribs[i].has_key('attName'): 
         outFile.write('\t\tstream.writeAttribute("{0}", getPrefix(), m{1});\n\n'.format(attribs[i]['attName'], strFunctions.cap(attribs[i]['name'])))	 
@@ -772,6 +786,15 @@ def writeReadOtherXMLCPPCode(outFile, element, hasMath = True, attribs = None, b
     outFile.write('\t\tm{0} = new XMLNode(stream);\n'.format(strFunctions.cap(node['name'])))	
     outFile.write('\t\tstream.skipPastEnd(token);\n')	
     outFile.write('\t\tread = true;\n\t}\n\n')
+  elif containsType(attribs, 'DimensionDescription*'):
+    node = getByType(attribs, 'DimensionDescription*')
+    outFile.write('\tif (name == "{0}")\n'.format(node['name']))
+    outFile.write('\t{\n')	
+    outFile.write('\t\tconst XMLToken& token = stream.next();\n')	
+    outFile.write('\t\tm{0} = new DimensionDescription();\n'.format(strFunctions.cap(node['name'])))	
+    outFile.write('\t\tm{0}->read(stream);\n'.format(strFunctions.cap(node['name'])))	
+    outFile.write('\t\tstream.skipPastEnd(token);\n')	
+    outFile.write('\t\tread = true;\n\t}\n\n')
   elif containsType(attribs, 'std::vector<double>'):
     elem = getByType(attribs, 'std::vector<double>')
     outFile.write('\twhile (stream.peek().getName() == "{0}")\n'.format(elem['name']))
@@ -841,12 +864,12 @@ def writeCommonCPPCode(outFile, element, sbmltypecode, attribs, isSedListOf, has
   if hasChildren == True or hasMath == True:
     writeHasReqdElementsCPPCode(outFile, element, attribs, baseClass)
 
-def writeInternalCPPCode(outFile, element, attributes, False, hasChildren, hasMath,baseClass='SedBase'):
+def writeInternalCPPCode(outFile, element, attributes, unused_arg, hasChildren, hasMath,baseClass='SedBase'):
   writeWriteElementsCPPCode(outFile, element, attributes, hasChildren, hasMath, baseClass)
   writeAcceptCPPCode(outFile, element)
   writeSetDocCPPCode(outFile, element, attributes,baseClass)
 
-def writeProtectedCPPCode(outFile, element, attribs, False, hasChildren, hasMath, baseClass):
+def writeProtectedCPPCode(outFile, element, attribs, unused_arg, hasChildren, hasMath, baseClass):
   writeAddExpectedCPPCode(outFile, element, attribs, baseClass)
   writeReadAttributesCPPCode(outFile, element, attribs, baseClass)
   if hasMath == True or containsType(attribs, 'std::vector<double>') or containsType(attribs, 'XMLNode*'):

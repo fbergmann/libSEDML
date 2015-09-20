@@ -2,7 +2,7 @@
 * @file    local.i
 * @brief   cs-specific SWIG directives for wrapping libSEDML API this file 
 *          has been adapted from the SWIG java bindings written by 
-* 	    Ben Bornstein and Akiya Jouraku
+*       Ben Bornstein and Akiya Jouraku
 * @author  Frank Bergmann (fbergman@u.washington.edu)
 * @author  Akiya Jouraku
 *
@@ -103,41 +103,41 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 //
 
 %insert(runtime) %{
-	/* Callback for returning strings to C# without leaking memory */
-	typedef void * (SWIGSTDCALL* SWIG_CSharpWStringHelperCallback)(const wchar_t *);
-	static SWIG_CSharpWStringHelperCallback SWIG_csharp_wstring_callback = NULL;
-	%}
+  /* Callback for returning strings to C# without leaking memory */
+  typedef void * (SWIGSTDCALL* SWIG_CSharpWStringHelperCallback)(const wchar_t *);
+  static SWIG_CSharpWStringHelperCallback SWIG_csharp_wstring_callback = NULL;
+  %}
 
 %pragma(csharp) imclasscode=%{
-	protected class SWIGWStringHelper {
+  protected class SWIGWStringHelper {
 
-		public delegate IntPtr SWIGWStringDelegate(IntPtr message);
-		static SWIGWStringDelegate wstringDelegate = new SWIGWStringDelegate(CreateWString);
+    public delegate IntPtr SWIGWStringDelegate(IntPtr message);
+    static SWIGWStringDelegate wstringDelegate = new SWIGWStringDelegate(CreateWString);
 
-		[DllImport("$dllimport", EntryPoint="SWIGRegisterWStringCallback_$module")]
-		public static extern void SWIGRegisterWStringCallback_$module(SWIGWStringDelegate wstringDelegate);
+    [DllImport("$dllimport", EntryPoint="SWIGRegisterWStringCallback_$module")]
+    public static extern void SWIGRegisterWStringCallback_$module(SWIGWStringDelegate wstringDelegate);
 
-		static IntPtr CreateWString([MarshalAs(UnmanagedType.LPWStr)]IntPtr cString) {
-			string ustr = System.Runtime.InteropServices.Marshal.PtrToStringUni(cString);
-			return System.Runtime.InteropServices.Marshal.StringToHGlobalUni(ustr);
-		}
+    static IntPtr CreateWString([MarshalAs(UnmanagedType.LPWStr)]IntPtr cString) {
+      string ustr = System.Runtime.InteropServices.Marshal.PtrToStringUni(cString);
+      return System.Runtime.InteropServices.Marshal.StringToHGlobalUni(ustr);
+    }
 
-		static SWIGWStringHelper() {
-			SWIGRegisterWStringCallback_$module(wstringDelegate);
-		}
-	}
+    static SWIGWStringHelper() {
+      SWIGRegisterWStringCallback_$module(wstringDelegate);
+    }
+  }
 
-	static protected SWIGWStringHelper swigWStringHelper = new SWIGWStringHelper();
-	%}
+  static protected SWIGWStringHelper swigWStringHelper = new SWIGWStringHelper();
+  %}
 
 %insert(runtime) %{
 #ifdef __cplusplus
-	extern "C"
+  extern "C"
 #endif
-	SWIGEXPORT void SWIGSTDCALL SWIGRegisterWStringCallback_$module(SWIG_CSharpWStringHelperCallback callback) {
-		SWIG_csharp_wstring_callback = callback;
-	}
-	%}
+  SWIGEXPORT void SWIGSTDCALL SWIGRegisterWStringCallback_$module(SWIG_CSharpWStringHelperCallback callback) {
+    SWIG_csharp_wstring_callback = callback;
+  }
+  %}
 
 #endif //SWIGWIN
 
@@ -185,181 +185,202 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 %pragma(csharp) modulecode =
 %{
 
-	
-	public static SedBase DowncastSedBase(IntPtr cPtr, bool owner)
-	{
-		if (cPtr.Equals(IntPtr.Zero)) return null;
-		
-		SedBase sb = new SedBase(cPtr, false);
-		switch( sb.getTypeCode() )
-		{
-		case (int) libsedml.SEDML_DOCUMENT:
-			return new SedDocument(cPtr, owner);
-			
-		case (int) libsedml.SEDML_MODEL:
-			return new SedModel(cPtr, owner);
-			
-		case (int) libsedml.SEDML_CHANGE:
-			return new SedChange(cPtr, owner);
+  
+  public static SedBase DowncastSedBase(IntPtr cPtr, bool owner)
+  {
+    if (cPtr.Equals(IntPtr.Zero)) return null;
+    
+    SedBase sb = new SedBase(cPtr, false);
+    switch( sb.getTypeCode() )
+    {
+    case (int) libsedml.SEDML_DOCUMENT:
+      return new SedDocument(cPtr, owner);
+      
+    case (int) libsedml.SEDML_MODEL:
+      return new SedModel(cPtr, owner);
+      
+    case (int) libsedml.SEDML_CHANGE:
+      return new SedChange(cPtr, owner);
 
-		case (int) libsedml.SEDML_CHANGE_ADDXML:
-			return new SedAddXML(cPtr, owner);
+    case (int) libsedml.SEDML_CHANGE_ADDXML:
+      return new SedAddXML(cPtr, owner);
 
-		case (int) libsedml.SEDML_CHANGE_CHANGEXML:
-			return new SedChangeXML(cPtr, owner);
-			
-		case (int) libsedml.SEDML_RANGE:
-			return new SedRange(cPtr, owner);
+    case (int) libsedml.SEDML_CHANGE_CHANGEXML:
+      return new SedChangeXML(cPtr, owner);
+      
+    case (int) libsedml.SEDML_RANGE:
+      return new SedRange(cPtr, owner);
 
-		case (int) libsedml.SEDML_RANGE_FUNCTIONALRANGE:
-			return new SedFunctionalRange(cPtr, owner);
+    case (int) libsedml.SEDML_RANGE_FUNCTIONALRANGE:
+      return new SedFunctionalRange(cPtr, owner);
 
-		case (int) libsedml.SEDML_RANGE_UNIFORMRANGE:
-			return new SedUniformRange(cPtr, owner);
+    case (int) libsedml.SEDML_RANGE_UNIFORMRANGE:
+      return new SedUniformRange(cPtr, owner);
 
-		case (int) libsedml.SEDML_RANGE_VECTORRANGE:
-			return new SedVectorRange(cPtr, owner);
+    case (int) libsedml.SEDML_RANGE_VECTORRANGE:
+      return new SedVectorRange(cPtr, owner);
 
-		case (int) libsedml.SEDML_CHANGE_ATTRIBUTE:
-			return new SedChangeAttribute(cPtr, owner);
-			
-		case (int) libsedml.SEDML_CHANGE_REMOVEXML:
-			return new SedRemoveXML(cPtr, owner);
-			
-		case (int) libsedml.SEDML_CHANGE_COMPUTECHANGE:
-			return new SedComputeChange(cPtr, owner);
-			
-		case (int) libsedml.SEDML_DATAGENERATOR:
-			return new SedDataGenerator(cPtr, owner);
-			
-		case (int) libsedml.SEDML_VARIABLE:
-			return new SedVariable(cPtr, owner);
-			
-		case (int) libsedml.SEDML_PARAMETER:
-			return new SedParameter(cPtr, owner);
-			
-		case (int) libsedml.SEDML_TASK:
-			return new SedTask(cPtr, owner);
-			
-		case (int) libsedml.SEDML_OUTPUT_DATASET:
-			return new SedDataSet(cPtr, owner);
-			
-		case (int) libsedml.SEDML_OUTPUT_CURVE:
-			return new SedCurve(cPtr, owner);
-			
-		case (int) libsedml.SEDML_OUTPUT_SURFACE:
-			return new SedSurface(cPtr, owner);
-			
-		case (int) libsedml.SEDML_OUTPUT_REPORT:
-			return new SedReport(cPtr, owner);
-			
-		case (int) libsedml.SEDML_OUTPUT_PLOT2D:
-			return new SedPlot2D(cPtr, owner);
-			
-		case (int) libsedml.SEDML_OUTPUT_PLOT3D:
-			return new SedPlot3D(cPtr, owner);
-			
-		case (int) libsedml.SEDML_SIMULATION_ALGORITHM:
-			return new SedAlgorithm(cPtr, owner);
+    case (int) libsedml.SEDML_CHANGE_ATTRIBUTE:
+      return new SedChangeAttribute(cPtr, owner);
+      
+    case (int) libsedml.SEDML_CHANGE_REMOVEXML:
+      return new SedRemoveXML(cPtr, owner);
+      
+    case (int) libsedml.SEDML_CHANGE_COMPUTECHANGE:
+      return new SedComputeChange(cPtr, owner);
+      
+    case (int) libsedml.SEDML_DATAGENERATOR:
+      return new SedDataGenerator(cPtr, owner);
+      
+    case (int) libsedml.SEDML_VARIABLE:
+      return new SedVariable(cPtr, owner);
+      
+    case (int) libsedml.SEDML_PARAMETER:
+      return new SedParameter(cPtr, owner);
+      
+    case (int) libsedml.SEDML_TASK:
+      return new SedTask(cPtr, owner);
+      
+    case (int) libsedml.SEDML_OUTPUT_DATASET:
+      return new SedDataSet(cPtr, owner);
+      
+    case (int) libsedml.SEDML_OUTPUT_CURVE:
+      return new SedCurve(cPtr, owner);
+      
+    case (int) libsedml.SEDML_OUTPUT_SURFACE:
+      return new SedSurface(cPtr, owner);
+      
+    case (int) libsedml.SEDML_OUTPUT_REPORT:
+      return new SedReport(cPtr, owner);
+      
+    case (int) libsedml.SEDML_OUTPUT_PLOT2D:
+      return new SedPlot2D(cPtr, owner);
+      
+    case (int) libsedml.SEDML_OUTPUT_PLOT3D:
+      return new SedPlot3D(cPtr, owner);
+      
+    case (int) libsedml.SEDML_SIMULATION_ALGORITHM:
+      return new SedAlgorithm(cPtr, owner);
 
-			
-		case (int) libsedml.SEDML_SIMULATION_ALGORITHM_PARAMETER:
-			return new SedAlgorithmParameter(cPtr, owner);
-			
-		case (int) libsedml.SEDML_SIMULATION:
-			return new SedSimulation(cPtr, owner);
-			
-		case (int) libsedml.SEDML_SIMULATION_UNIFORMTIMECOURSE:
-			return new SedUniformTimeCourse(cPtr, owner);
-			
-		case (int) libsedml.SEDML_SIMULATION_ONESTEP:
-			return new SedOneStep(cPtr, owner);
-			
-		case (int) libsedml.SEDML_SIMULATION_STEADYSTATE:
-			return new SedSteadyState(cPtr, owner);
-			
-			
-		case (int) libsedml.SEDML_TASK_SETVALUE:
-			return new SedSetValue(cPtr, owner);
-			
-		case (int) libsedml.SEDML_TASK_SUBTASK:
-			return new SedSubTask(cPtr, owner);
+      
+    case (int) libsedml.SEDML_SIMULATION_ALGORITHM_PARAMETER:
+      return new SedAlgorithmParameter(cPtr, owner);
+      
+    case (int) libsedml.SEDML_SIMULATION:
+      return new SedSimulation(cPtr, owner);
+      
+    case (int) libsedml.SEDML_SIMULATION_UNIFORMTIMECOURSE:
+      return new SedUniformTimeCourse(cPtr, owner);
+      
+    case (int) libsedml.SEDML_SIMULATION_ONESTEP:
+      return new SedOneStep(cPtr, owner);
+      
+    case (int) libsedml.SEDML_SIMULATION_STEADYSTATE:
+      return new SedSteadyState(cPtr, owner);
+      
+      
+    case (int) libsedml.SEDML_TASK_SETVALUE:
+      return new SedSetValue(cPtr, owner);
+      
+    case (int) libsedml.SEDML_TASK_SUBTASK:
+      return new SedSubTask(cPtr, owner);
 
-		case (int) libsedml.SEDML_TASK_REPEATEDTASK:
-			return new SedRepeatedTask(cPtr, owner);
-			
-		case (int) libsedml.SEDML_LIST_OF:
-			String name = sb.getElementName();
-			if(name == "listOf")
-			{
-				return new SedListOf(cPtr, owner);
-			}
-			else if(name == "listOfModels")
-			{
-				return new SedListOfModels(cPtr, owner);
-			}
-			else if(name == "listOfChanges")
-			{
-				SedListOf temp = new SedListOf(cPtr, false);
-				if (temp.getItemTypeCode() ==  (int) libsedml.SEDML_TASK_SETVALUE)
-  				  return new SedListOfTaskChanges(cPtr, owner);
-				return new SedListOfChanges(cPtr, owner);
-			}
-			else if(name == "listOfSimulations")
-			{
-				return new SedListOfSimulations(cPtr, owner);
-			}
-			else if(name == "listOfTasks")
-			{
-				return new SedListOfTasks(cPtr, owner);
-			}
-			else if(name == "listOfDataGenerators")
-			{
-				return new SedListOfDataGenerators(cPtr, owner);
-			}
-			else if(name == "listOfOutputs")
-			{
-				return new SedListOfOutputs(cPtr, owner);
-			}
-			else if(name == "listOfCurves")
-			{
-				return new SedListOfCurves(cPtr, owner);
-			}
-			else if(name == "listOfSurfaces")
-			{
-				return new SedListOfSurfaces(cPtr, owner);
-			}
-			else if(name == "listOfDataSets")
-			{
-				return new SedListOfDataSets(cPtr, owner);
-			}
-			else if(name == "listOfParameters")
-			{
-				return new SedListOfParameters(cPtr, owner);
-			}
-			else if(name == "listOfVariables")
-			{
-				return new SedListOfVariables(cPtr, owner);
-			}
-			
-			else if(name == "listOfSubTasks")
-			{
-				return new SedListOfSubTasks(cPtr, owner);
-			}
-			
-			else if(name == "listOfRanges")
-			{
-				return new SedListOfRanges(cPtr, owner);
-			}
-			
-			return new SedListOf(cPtr, owner);				
-			
-		default:
-			return new SedBase(cPtr, owner);
-		}     
-		
-	}
-	%}
+    case (int) libsedml.SEDML_TASK_REPEATEDTASK:
+      return new SedRepeatedTask(cPtr, owner);
+      
+    case (int) libsedml.SEDML_DATA_DESCRIPTION:
+      return new SedDataDescription(cPtr, owner);
+      
+    case (int) libsedml.SEDML_DATA_SOURCE:
+      return new SedDataSource(cPtr, owner);
+      
+    case (int) libsedml.SEDML_DATA_SLICE:
+      return new SedSlice(cPtr, owner);
+      
+    case (int) libsedml.SEDML_LIST_OF:
+      String name = sb.getElementName();
+      if(name == "listOf")
+      {
+        return new SedListOf(cPtr, owner);
+      }
+      else if(name == "listOfModels")
+      {
+        return new SedListOfModels(cPtr, owner);
+      }
+      else if(name == "listOfChanges")
+      {
+        SedListOf temp = new SedListOf(cPtr, false);
+        if (temp.getItemTypeCode() ==  (int) libsedml.SEDML_TASK_SETVALUE)
+            return new SedListOfTaskChanges(cPtr, owner);
+        return new SedListOfChanges(cPtr, owner);
+      }
+      else if(name == "listOfSimulations")
+      {
+        return new SedListOfSimulations(cPtr, owner);
+      }
+      else if(name == "listOfTasks")
+      {
+        return new SedListOfTasks(cPtr, owner);
+      }
+      else if(name == "listOfDataGenerators")
+      {
+        return new SedListOfDataGenerators(cPtr, owner);
+      }
+      else if(name == "listOfOutputs")
+      {
+        return new SedListOfOutputs(cPtr, owner);
+      }
+      else if(name == "listOfCurves")
+      {
+        return new SedListOfCurves(cPtr, owner);
+      }
+      else if(name == "listOfSurfaces")
+      {
+        return new SedListOfSurfaces(cPtr, owner);
+      }
+      else if(name == "listOfDataSets")
+      {
+        return new SedListOfDataSets(cPtr, owner);
+      }
+      else if(name == "listOfParameters")
+      {
+        return new SedListOfParameters(cPtr, owner);
+      }
+      else if(name == "listOfVariables")
+      {
+        return new SedListOfVariables(cPtr, owner);
+      }
+      
+      else if(name == "listOfSubTasks")
+      {
+        return new SedListOfSubTasks(cPtr, owner);
+      }
+      
+      else if(name == "listOfDataDescriptions")
+      {
+        return new SedListOfDataDescriptions(cPtr, owner);
+      }
+      else if(name == "listOfDataSources")
+      {
+        return new SedListOfDataSources(cPtr, owner);
+      }
+      else if(name == "listOfSlices")
+      {
+        return new SedListOfSlices(cPtr, owner);
+      }
+      else if(name == "listOfRanges")
+      {
+        return new SedListOfRanges(cPtr, owner);
+      }
+      
+      return new SedListOf(cPtr, owner);        
+      
+    default:
+      return new SedBase(cPtr, owner);
+    }     
+    
+  }
+  %}
 
 
 /**
@@ -367,8 +388,8 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 */
 %typemap("csout", excode=SWIGEXCODE) SedBase*
 {
-	SedBase ret = (SedBase) libsedml.DowncastSedBase($imcall, $owner);$excode
-	return ret;
+  SedBase ret = (SedBase) libsedml.DowncastSedBase($imcall, $owner);$excode
+  return ret;
 }
 
 
@@ -377,8 +398,8 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 */
 %typemap("csout", excode=SWIGEXCODE) SedTask*
 {
-	SedTask ret = (SedTask) libsedml.DowncastSedBase($imcall, $owner);$excode
-	return ret;
+  SedTask ret = (SedTask) libsedml.DowncastSedBase($imcall, $owner);$excode
+  return ret;
 }
 
 /**
@@ -386,8 +407,8 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 */
 %typemap("csout", excode=SWIGEXCODE) SedRange*
 {
-	SedRange ret = (SedRange) libsedml.DowncastSedBase($imcall, $owner);$excode
-	return ret;
+  SedRange ret = (SedRange) libsedml.DowncastSedBase($imcall, $owner);$excode
+  return ret;
 }
 
 /**
@@ -395,8 +416,8 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 */
 %typemap("csout", excode=SWIGEXCODE) SedSimulation*
 {
-	SedSimulation ret = (SedSimulation) libsedml.DowncastSedBase($imcall, $owner);$excode
-	return ret;
+  SedSimulation ret = (SedSimulation) libsedml.DowncastSedBase($imcall, $owner);$excode
+  return ret;
 }
 
 /**
@@ -404,9 +425,9 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 */
 %typemap("csout", excode=SWIGEXCODE) SedOutput*
 {
-	SedOutput ret
-	= (SedOutput) libsedml.DowncastSedBase($imcall, $owner);$excode
-	return ret;
+  SedOutput ret
+  = (SedOutput) libsedml.DowncastSedBase($imcall, $owner);$excode
+  return ret;
 }
 
 /**
@@ -414,9 +435,9 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 */
 %typemap("csout", excode=SWIGEXCODE) SedChange*
 {
-	SedChange ret
-	= (SedChange) libsedml.DowncastSedBase($imcall, $owner);$excode
-	return ret;
+  SedChange ret
+  = (SedChange) libsedml.DowncastSedBase($imcall, $owner);$excode
+  return ret;
 }
 
 
@@ -434,96 +455,96 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
 
 %typemap(csbody) TYPENAME
 %{
-	private HandleRef swigCPtr;
-	protected bool swigCMemOwn;
-	
-	CTOR_ATTRIB $csclassname(IntPtr cPtr, bool cMemoryOwn)
-	{
-		swigCMemOwn = cMemoryOwn;
-		swigCPtr    = new HandleRef(this, cPtr);
-	}
-	
-	GETCPTR_ATTRIB static HandleRef getCPtr($csclassname obj)
-	{
-		return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
-	}
-	
-	GETCPTR_ATTRIB static HandleRef getCPtrAndDisown ($csclassname obj)
-	{
-		HandleRef ptr = new HandleRef(null, IntPtr.Zero);
-		
-		if (obj != null)
-		{
-			ptr             = obj.swigCPtr;
-			obj.swigCMemOwn = false;
-		}
-		
-		return ptr;
-	}
-	%}
+  private HandleRef swigCPtr;
+  protected bool swigCMemOwn;
+  
+  CTOR_ATTRIB $csclassname(IntPtr cPtr, bool cMemoryOwn)
+  {
+    swigCMemOwn = cMemoryOwn;
+    swigCPtr    = new HandleRef(this, cPtr);
+  }
+  
+  GETCPTR_ATTRIB static HandleRef getCPtr($csclassname obj)
+  {
+    return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
+  }
+  
+  GETCPTR_ATTRIB static HandleRef getCPtrAndDisown ($csclassname obj)
+  {
+    HandleRef ptr = new HandleRef(null, IntPtr.Zero);
+    
+    if (obj != null)
+    {
+      ptr             = obj.swigCPtr;
+      obj.swigCMemOwn = false;
+    }
+    
+    return ptr;
+  }
+  %}
 
 
 #if SWIG_VERSION >= 0x020000
 
 %typemap(csbody_derived) TYPENAME
 %{
-	private HandleRef swigCPtr;
-	
-	CTOR_ATTRIB $csclassname(IntPtr cPtr, bool cMemoryOwn) : base($modulePINVOKE.$csclassname_SWIGUpcast(cPtr), cMemoryOwn)
-	{
-		//super($modulePINVOKE.$csclassnameUpcast(cPtr), cMemoryOwn);
-		swigCPtr = new HandleRef(this, cPtr);
-	}
-	
-	GETCPTR_ATTRIB static HandleRef getCPtr($csclassname obj)
-	{
-		return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
-	}
-	
-	GETCPTR_ATTRIB static HandleRef getCPtrAndDisown ($csclassname obj)
-	{
-		HandleRef ptr = new HandleRef(null, IntPtr.Zero);
-		
-		if (obj != null)
-		{
-			ptr             = obj.swigCPtr;
-			obj.swigCMemOwn = false;
-		}
-		
-		return ptr;
-	}
-	%}
+  private HandleRef swigCPtr;
+  
+  CTOR_ATTRIB $csclassname(IntPtr cPtr, bool cMemoryOwn) : base($modulePINVOKE.$csclassname_SWIGUpcast(cPtr), cMemoryOwn)
+  {
+    //super($modulePINVOKE.$csclassnameUpcast(cPtr), cMemoryOwn);
+    swigCPtr = new HandleRef(this, cPtr);
+  }
+  
+  GETCPTR_ATTRIB static HandleRef getCPtr($csclassname obj)
+  {
+    return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
+  }
+  
+  GETCPTR_ATTRIB static HandleRef getCPtrAndDisown ($csclassname obj)
+  {
+    HandleRef ptr = new HandleRef(null, IntPtr.Zero);
+    
+    if (obj != null)
+    {
+      ptr             = obj.swigCPtr;
+      obj.swigCMemOwn = false;
+    }
+    
+    return ptr;
+  }
+  %}
 
 #else
 
 %typemap(csbody_derived) TYPENAME
 %{
-	private HandleRef swigCPtr;
-	
-	CTOR_ATTRIB $csclassname(IntPtr cPtr, bool cMemoryOwn) : base($modulePINVOKE.$csclassnameUpcast(cPtr), cMemoryOwn)
-	{
-		//super($modulePINVOKE.$csclassnameUpcast(cPtr), cMemoryOwn);
-		swigCPtr = new HandleRef(this, cPtr);
-	}
-	
-	GETCPTR_ATTRIB static HandleRef getCPtr($csclassname obj)
-	{
-		return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
-	}
-	
-	GETCPTR_ATTRIB static HandleRef getCPtrAndDisown ($csclassname obj)
-	{
-		HandleRef ptr = new HandleRef(null, IntPtr.Zero);
-		
-		if (obj != null)
-		{
-			ptr             = obj.swigCPtr;
-			obj.swigCMemOwn = false;
-		}
-		
-		return ptr;
-	}
-	%}
+  private HandleRef swigCPtr;
+  
+  CTOR_ATTRIB $csclassname(IntPtr cPtr, bool cMemoryOwn) : base($modulePINVOKE.$csclassnameUpcast(cPtr), cMemoryOwn)
+  {
+    //super($modulePINVOKE.$csclassnameUpcast(cPtr), cMemoryOwn);
+    swigCPtr = new HandleRef(this, cPtr);
+  }
+  
+  GETCPTR_ATTRIB static HandleRef getCPtr($csclassname obj)
+  {
+    return (obj == null) ? new HandleRef(null, IntPtr.Zero) : obj.swigCPtr;
+  }
+  
+  GETCPTR_ATTRIB static HandleRef getCPtrAndDisown ($csclassname obj)
+  {
+    HandleRef ptr = new HandleRef(null, IntPtr.Zero);
+    
+    if (obj != null)
+    {
+      ptr             = obj.swigCPtr;
+      obj.swigCMemOwn = false;
+    }
+    
+    return ptr;
+  }
+  %}
 
 #endif
 
@@ -579,41 +600,41 @@ SWIGCSHARP_ATTRIBS(TYPENAME, public, public)
 %define SWIGCS_EQUALS(CLASS)
 %typemap("cscode") CLASS
 %{
-	public static bool operator==(CLASS lhs, CLASS rhs)
-	{
-		if((Object)lhs == (Object)rhs)
-		{
-			return true;
-		}
+  public static bool operator==(CLASS lhs, CLASS rhs)
+  {
+    if((Object)lhs == (Object)rhs)
+    {
+      return true;
+    }
 
-		if( ((Object)lhs == null) || ((Object)rhs == null) )
-		{
-			return false;
-		}
+    if( ((Object)lhs == null) || ((Object)rhs == null) )
+    {
+      return false;
+    }
 
-		return (getCPtr(lhs).Handle.ToString() == getCPtr(rhs).Handle.ToString());
-	}
+    return (getCPtr(lhs).Handle.ToString() == getCPtr(rhs).Handle.ToString());
+  }
 
-	public static bool operator!=(CLASS lhs, CLASS rhs)
-	{
-		return !(lhs == rhs);
-	}
+  public static bool operator!=(CLASS lhs, CLASS rhs)
+  {
+    return !(lhs == rhs);
+  }
 
-	public override bool Equals(Object sb)
-	{
-		if ( ! (sb is CLASS) )
-		{
-			return false;
-		}
+  public override bool Equals(Object sb)
+  {
+    if ( ! (sb is CLASS) )
+    {
+      return false;
+    }
 
-		return this == (CLASS)sb;
-	}
+    return this == (CLASS)sb;
+  }
 
-	public override int GetHashCode()
-	{
-		return swigCPtr.Handle.ToInt32();
-	}
-	%}
+  public override int GetHashCode()
+  {
+    return swigCPtr.Handle.ToInt32();
+  }
+  %}
 %enddef
 
 SWIGCS_EQUALS(SedBase)
@@ -701,6 +722,9 @@ COVARIANT_RTYPE_CLONE(SedVariable)
 COVARIANT_RTYPE_CLONE(SedParameter)
 COVARIANT_RTYPE_CLONE(SedTask)
 COVARIANT_RTYPE_CLONE(SedOutput)
+COVARIANT_RTYPE_CLONE(SedDataDescription)
+COVARIANT_RTYPE_CLONE(SedDataSource)
+COVARIANT_RTYPE_CLONE(SedSlice)
 COVARIANT_RTYPE_CLONE(SedDataSet)
 COVARIANT_RTYPE_CLONE(SedCurve)
 COVARIANT_RTYPE_CLONE(SedSurface)
@@ -723,6 +747,9 @@ COVARIANT_RTYPE_CLONE(SedListOfTasks)
 COVARIANT_RTYPE_CLONE(SedListOfDataSets)
 COVARIANT_RTYPE_CLONE(SedListOfCurves)
 COVARIANT_RTYPE_CLONE(SedListOfSurfaces)
+COVARIANT_RTYPE_CLONE(SedListOfDataDescriptions)
+COVARIANT_RTYPE_CLONE(SedListOfDataSources)
+COVARIANT_RTYPE_CLONE(SedListOfSlices)
 
 
 /**
@@ -808,30 +835,30 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(Unit)
 %typemap(csbase) SedConstructorException "System.ArgumentException";
 %typemap(cscode) SedConstructorException 
 %{
-	internal SedConstructorException(IntPtr cPtr, bool cMemoryOwn, string v) : base(v)
-	{
-		swigCMemOwn = cMemoryOwn;
-		swigCPtr    = new HandleRef(this, cPtr);
-	}
+  internal SedConstructorException(IntPtr cPtr, bool cMemoryOwn, string v) : base(v)
+  {
+    swigCMemOwn = cMemoryOwn;
+    swigCPtr    = new HandleRef(this, cPtr);
+  }
 
-	public SedConstructorException(string v) : 
-	this(libsedmlPINVOKE.new_SedConstructorException__SWIG_0(), true, v) 
-	{}
-	%}
+  public SedConstructorException(string v) : 
+  this(libsedmlPINVOKE.new_SedConstructorException__SWIG_0(), true, v) 
+  {}
+  %}
 
 %typemap(csbase) XMLConstructorException "System.ArgumentException";
 %typemap(cscode) XMLConstructorException 
 %{
-	internal XMLConstructorException(IntPtr cPtr, bool cMemoryOwn, string v) : base(v)
-	{
-		swigCMemOwn = cMemoryOwn;
-		swigCPtr    = new HandleRef(this, cPtr);
-	}
+  internal XMLConstructorException(IntPtr cPtr, bool cMemoryOwn, string v) : base(v)
+  {
+    swigCMemOwn = cMemoryOwn;
+    swigCPtr    = new HandleRef(this, cPtr);
+  }
 
-	public XMLConstructorException(string v) : 
-	this(libsedmlPINVOKE.new_XMLConstructorException(), true, v) 
-	{}
-	%}
+  public XMLConstructorException(string v) : 
+  this(libsedmlPINVOKE.new_XMLConstructorException(), true, v) 
+  {}
+  %}
 
 %ignore XMLConstructorException(std::string message);
 //
@@ -839,67 +866,67 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(Unit)
 // in http://www.swig.org/
 // 
 %insert(runtime) %{
-	// Code to handle throwing of C# CustomApplicationException from C/C++ code.
-	// The equivalent delegate to the callback, CSharpExceptionCallback_t, is CustomExceptionDelegate
-	// and the equivalent customExceptionCallback instance is customDelegate
-	typedef void (SWIGSTDCALL* CSharpExceptionCallback_t)(const char *, int);
-	CSharpExceptionCallback_t customExceptionCallback = NULL;
+  // Code to handle throwing of C# CustomApplicationException from C/C++ code.
+  // The equivalent delegate to the callback, CSharpExceptionCallback_t, is CustomExceptionDelegate
+  // and the equivalent customExceptionCallback instance is customDelegate
+  typedef void (SWIGSTDCALL* CSharpExceptionCallback_t)(const char *, int);
+  CSharpExceptionCallback_t customExceptionCallback = NULL;
 
-	extern "C" SWIGEXPORT
-	void SWIGSTDCALL CustomExceptionRegisterCallback(CSharpExceptionCallback_t customCallback) {
-		customExceptionCallback = customCallback;
-	}
+  extern "C" SWIGEXPORT
+  void SWIGSTDCALL CustomExceptionRegisterCallback(CSharpExceptionCallback_t customCallback) {
+    customExceptionCallback = customCallback;
+  }
 
-	// Note that SWIG detects any method calls named starting with
-	// SWIG_CSharpSetPendingException for warning 845
-	static void SWIG_CSharpSetPendingExceptionCustom(const char *msg, int type) {
-		customExceptionCallback(msg, type);
-	}
-	%}
+  // Note that SWIG detects any method calls named starting with
+  // SWIG_CSharpSetPendingException for warning 845
+  static void SWIG_CSharpSetPendingExceptionCustom(const char *msg, int type) {
+    customExceptionCallback(msg, type);
+  }
+  %}
 
 %pragma(csharp) imclasscode=%{
-	class CustomExceptionHelper {
-		// C# delegate for the C/C++ customExceptionCallback
-		public delegate void CustomExceptionDelegate(string message, int type);
-		static CustomExceptionDelegate customDelegate =
-		new CustomExceptionDelegate(SetPendingCustomException);
+  class CustomExceptionHelper {
+    // C# delegate for the C/C++ customExceptionCallback
+    public delegate void CustomExceptionDelegate(string message, int type);
+    static CustomExceptionDelegate customDelegate =
+    new CustomExceptionDelegate(SetPendingCustomException);
 
-		[DllImport("$dllimport", EntryPoint="CustomExceptionRegisterCallback")]
-		public static extern
-		void CustomExceptionRegisterCallback(CustomExceptionDelegate customCallback);
+    [DllImport("$dllimport", EntryPoint="CustomExceptionRegisterCallback")]
+    public static extern
+    void CustomExceptionRegisterCallback(CustomExceptionDelegate customCallback);
 
-		static void SetPendingCustomException(string message, int type) {
-			if (type == 0)
-			SWIGPendingException.Set(new SedConstructorException(message));
-			else 
-			SWIGPendingException.Set(new XMLConstructorException(message));
-		}
+    static void SetPendingCustomException(string message, int type) {
+      if (type == 0)
+      SWIGPendingException.Set(new SedConstructorException(message));
+      else 
+      SWIGPendingException.Set(new XMLConstructorException(message));
+    }
 
-		static CustomExceptionHelper() {
-			CustomExceptionRegisterCallback(customDelegate);
-		}
-	}
+    static CustomExceptionHelper() {
+      CustomExceptionRegisterCallback(customDelegate);
+    }
+  }
 
-	// The following pragma's disable the compiler warning that the variable is
-	// never used.  Don't remove the actual code, though, or you will get 
-	// compile-time errors.
+  // The following pragma's disable the compiler warning that the variable is
+  // never used.  Don't remove the actual code, though, or you will get 
+  // compile-time errors.
 
 #pragma warning disable 0414
-	static CustomExceptionHelper exceptionHelper = new CustomExceptionHelper();
+  static CustomExceptionHelper exceptionHelper = new CustomExceptionHelper();
 #pragma warning restore 0414
-	%}
+  %}
 
 
 %define SEDMLCONSTRUCTOR_EXCEPTION(SBASE_CLASS_NAME)
 %exception SBASE_CLASS_NAME
 %{
-	try {
-		$action
-	}
-	catch (const SedConstructorException &e) {
-		SWIG_CSharpSetPendingExceptionCustom(e.what(),0);
-	}
-	%}
+  try {
+    $action
+  }
+  catch (const SedConstructorException &e) {
+    SWIG_CSharpSetPendingExceptionCustom(e.what(),0);
+  }
+  %}
 %enddef
 
 
@@ -943,13 +970,13 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedListOfSurfaces)
 %define XMLCONSTRUCTOR_EXCEPTION(SBASE_CLASS_NAME)
 %exception SBASE_CLASS_NAME
 %{
-	try {
-		$action
-	}
-	catch (const XMLConstructorException &e) {
-		SWIG_CSharpSetPendingExceptionCustom(e.what(),1);
-	}
-	%}
+  try {
+    $action
+  }
+  catch (const XMLConstructorException &e) {
+    SWIG_CSharpSetPendingExceptionCustom(e.what(),1);
+  }
+  %}
 %enddef
 
 
@@ -1039,12 +1066,12 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // (argument variable)
 //
 %typemap("in") std::string&, const std::string&  (std::string arg_str) {
-	char*  mbstr = convertUnicodeToUTF8($input);
-	if (!mbstr) return $null;
+  char*  mbstr = convertUnicodeToUTF8($input);
+  if (!mbstr) return $null;
 
-	arg_str.assign(mbstr);
-	$1 = &arg_str;
-	delete[] mbstr;
+  arg_str.assign(mbstr);
+  $1 = &arg_str;
+  delete[] mbstr;
 }
 
 
@@ -1053,10 +1080,10 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // (return variable)
 //
 %typemap("out") std::string&, const std::string& {
-	$result = convertUTF8ToUnicode(($1)->c_str());
-	wchar_t* unistr = convertUTF8ToUnicode(($1)->c_str());
-	$result = (wchar_t*) SWIG_csharp_wstring_callback((const wchar_t*)unistr);
-	delete[] unistr;
+  $result = convertUTF8ToUnicode(($1)->c_str());
+  wchar_t* unistr = convertUTF8ToUnicode(($1)->c_str());
+  $result = (wchar_t*) SWIG_csharp_wstring_callback((const wchar_t*)unistr);
+  delete[] unistr;
 }
 
 
@@ -1065,9 +1092,9 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // (argument variable)
 //
 %typemap("in") std::string {
-	char*  mbstr = convertUnicodeToUTF8($input);
-	(&$1)->assign(mbstr);
-	delete[] mbstr;
+  char*  mbstr = convertUnicodeToUTF8($input);
+  (&$1)->assign(mbstr);
+  delete[] mbstr;
 }
 
 
@@ -1076,10 +1103,10 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // (return variable)
 //
 %typemap("out") std::string {
-	$result = convertUTF8ToUnicode( $1.c_str() );
-	wchar_t* unistr = convertUTF8ToUnicode( $1.c_str() );
-	$result = (wchar_t*) SWIG_csharp_wstring_callback((const wchar_t*)unistr);
-	delete[] unistr;
+  $result = convertUTF8ToUnicode( $1.c_str() );
+  wchar_t* unistr = convertUTF8ToUnicode( $1.c_str() );
+  $result = (wchar_t*) SWIG_csharp_wstring_callback((const wchar_t*)unistr);
+  delete[] unistr;
 }
 
 
@@ -1088,15 +1115,15 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // (argument variable)
 //
 %typemap("in")  char*, const char* {
-	if ($input)
-	{
-		$1 = convertUnicodeToUTF8($input);
-		if (!$1) return $null;
-	}
+  if ($input)
+  {
+    $1 = convertUnicodeToUTF8($input);
+    if (!$1) return $null;
+  }
 }
 
 %typemap("freearg")  char*, const char* {
-	delete[] $1;
+  delete[] $1;
 }
 
 
@@ -1105,10 +1132,10 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // (returned variable)
 //
 %typemap("out")  char*, const char* {
-	$result = convertUTF8ToUnicode( $1 );
-	wchar_t* unistr = convertUTF8ToUnicode( $1 );
-	$result = (wchar_t*) SWIG_csharp_wstring_callback((const wchar_t*)unistr);
-	delete[] unistr;
+  $result = convertUTF8ToUnicode( $1 );
+  wchar_t* unistr = convertUTF8ToUnicode( $1 );
+  $result = (wchar_t*) SWIG_csharp_wstring_callback((const wchar_t*)unistr);
+  delete[] unistr;
 }
 
 
@@ -1128,12 +1155,12 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // Unicode -> ANSI CP (for const std::string& filename)
 //
 %typemap("in") const std::string& filename (std::string arg_str) {
-	char*  mbstr = convertUnicodeToACP($input);
-	if (!mbstr) return $null;
+  char*  mbstr = convertUnicodeToACP($input);
+  if (!mbstr) return $null;
 
-	arg_str.assign(mbstr);
-	$1 = &arg_str;
-	delete[] mbstr;
+  arg_str.assign(mbstr);
+  $1 = &arg_str;
+  delete[] mbstr;
 }
 
 
@@ -1141,11 +1168,11 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 // Unicode -> ANSI CP (for const char* filename)
 //
 %typemap("in")  const char* filename{
-	if ($input)
-	{
-		$1 = convertUnicodeToACP($input);
-		if (!$1) return $null;
-	}
+  if ($input)
+  {
+    $1 = convertUnicodeToACP($input);
+    if (!$1) return $null;
+  }
 }
 
 #endif //SWIGWIN
@@ -1156,14 +1183,14 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 
 %{
 #include "OStream.cpp"
-	%}
+  %}
 
 %pragma(csharp) modulecode =
 %{
-	public static readonly OStream cout = new OStream(OStream.COUT); 
-	public static readonly OStream cerr = new OStream(OStream.CERR); 
-	public static readonly OStream clog = new OStream(OStream.CLOG); 
-	%}
+  public static readonly OStream cout = new OStream(OStream.COUT); 
+  public static readonly OStream cerr = new OStream(OStream.CERR); 
+  public static readonly OStream clog = new OStream(OStream.CLOG); 
+  %}
 
 
 /**
@@ -1189,13 +1216,13 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 %typemap(cstype)  List* _FNAME_ %{ _TYPENAME_ ## List %}
 %typemap(csout) List* _FNAME_ 
 { 
-	IntPtr cPtr = $imcall;
-	return (cPtr == IntPtr.Zero) ? null : new _TYPENAME_ ## List(cPtr, true);
+  IntPtr cPtr = $imcall;
+  return (cPtr == IntPtr.Zero) ? null : new _TYPENAME_ ## List(cPtr, true);
 }
 %typemap(out) List* _FNAME_ 
 {
-	ListWrapper<_TYPENAME_> *listw = ($1 != 0) ? new ListWrapper<_TYPENAME_>($1) : 0;  
-	$result = (void*)listw;
+  ListWrapper<_TYPENAME_> *listw = ($1 != 0) ? new ListWrapper<_TYPENAME_>($1) : 0;  
+  $result = (void*)listw;
 }
 %enddef
 

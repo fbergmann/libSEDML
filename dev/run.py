@@ -15,7 +15,7 @@ import writeExtensionHeader
 import writeExtensionCode
 
 if len(sys.argv) != 1:
-  print 'Usage: run.py'
+  print ('Usage: run.py')
 else:
   #package = createNewPackage.createSed()
   #writeExtensionHeader.createHeader(package)

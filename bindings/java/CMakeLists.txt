@@ -47,20 +47,20 @@ configure_file (
 # 
 
 if (NOT EXISTS "${Java_JAVAC_EXECUTABLE}")
-	if (NOT EXISTS "${JAVA_COMPILE}")
-		message(FATAL_ERROR "The java language bindings require Java_JAVAC_EXECUTABLE to be set to the javac command.")
-	else()
-		SET(Java_JAVAC_EXECUTABLE "${JAVA_COMPILE}" CACHE STRING "Javac compiler" FORCE)
-	endif()
+  if (NOT EXISTS "${JAVA_COMPILE}")
+    message(FATAL_ERROR "The java language bindings require Java_JAVAC_EXECUTABLE to be set to the javac command.")
+  else()
+    SET(Java_JAVAC_EXECUTABLE "${JAVA_COMPILE}" CACHE STRING "Javac compiler" FORCE)
+  endif()
 endif()
 
 
 if (NOT EXISTS "${Java_JAR_EXECUTABLE}")
-	if (NOT EXISTS "${JAVA_ARCHIVE}")	
-		message(FATAL_ERROR "The java language bindings require Java_JAR_EXECUTABLE to be set to the jar command.")
-	else()
+  if (NOT EXISTS "${JAVA_ARCHIVE}")	
+    message(FATAL_ERROR "The java language bindings require Java_JAR_EXECUTABLE to be set to the jar command.")
+  else()
         set (Java_JAR_EXECUTABLE "${JAVA_ARCHIVE}" CACHE STRING "jar command" FORCE)
-	endif()
+  endif()
 endif()
 
 
@@ -70,12 +70,12 @@ endif()
 # 
 
 file(GLOB SWIG_DEPENDENCIES 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.i 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.h 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
-	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
-	)
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.i 
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
+  ${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
+  )
 
 
 # 
@@ -106,7 +106,7 @@ endif(LIBSEDML_REMOVE_WRAPPERS)
 
 set(SWIG_EXTRA_FLAGS -DSWIGEXPORT -DLIBSBML_CPP_NAMESPACE_BEGIN -DLIBSBML_CPP_NAMESPACE_END)
 if(NOT UNIX)
-	set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
+  set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
 endif()
 
 
@@ -116,10 +116,10 @@ endif()
 #
 #
 ADD_CUSTOM_COMMAND(	
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
-	       ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
-	COMMAND "${CMAKE_COMMAND}"
-	ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
+         ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
+  COMMAND "${CMAKE_COMMAND}"
+  ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
     COMMAND "${SWIG_EXECUTABLE}"
     ARGS -I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
          -I${CMAKE_CURRENT_SOURCE_DIR}/../../
@@ -127,22 +127,22 @@ ADD_CUSTOM_COMMAND(
          -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
          -I${CMAKE_CURRENT_SOURCE_DIR}
          -I${LIBSBML_INCLUDE_DIR}/
-		 -c++
-		 -java
-		 -package org.sedml.libsedml
-		 ${SWIG_EXTRA_ARGS}
-		 ${SWIG_EXTRA_FLAGS}
-		 -outdir ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
+     -c++
+     -java
+     -package org.sedml.libsedml
+     ${SWIG_EXTRA_ARGS}
+     ${SWIG_EXTRA_FLAGS}
+     -outdir ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
          -o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
          ${CMAKE_CURRENT_SOURCE_DIR}/../swig/libsedml.i
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/../swig/libsedml.i
-	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt
-	        ${SWIG_DEPENDENCIES}
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt
+          ${SWIG_DEPENDENCIES}
     COMMENT "Swig Java source") 
-	
+  
 add_custom_target(binding_java_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
 
-	
+  
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
 include_directories(${LIBSBML_INCLUDE_DIR})
@@ -171,7 +171,7 @@ set_target_properties (binding_java_lib PROPERTIES OUTPUT_NAME "sedmlj")
 
 
 if(APPLE)
-	set_target_properties (binding_java_lib PROPERTIES SUFFIX ".jnilib")
+  set_target_properties (binding_java_lib PROPERTIES SUFFIX ".jnilib")
 endif()
 
 install(TARGETS binding_java_lib DESTINATION ${JAVA_PACKAGE_BIN_INSTALL_DIR} )
@@ -179,29 +179,29 @@ install(TARGETS binding_java_lib DESTINATION ${JAVA_PACKAGE_BIN_INSTALL_DIR} )
 target_link_libraries(binding_java_lib ${LIBSEDML_LIBRARY}-static )
 
 ADD_CUSTOM_COMMAND(	
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
-	COMMAND "${CMAKE_COMMAND}"
-	ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/test
-	COMMAND "${CMAKE_COMMAND}"
-	ARGS -DJava_JAVAC_EXECUTABLE=\"${Java_JAVAC_EXECUTABLE}\"
-		 -DJava_JAR_EXECUTABLE=\"${Java_JAR_EXECUTABLE}\"
-		 -DBIN_DIRECTORY=\"${CMAKE_CURRENT_BINARY_DIR}\"
-		 -DSRC_DIRECTORY=\"${CMAKE_CURRENT_SOURCE_DIR}\"
-		 -DFILE_SEP=\"${FILE_SEP}\"
-		 -DPATH_SEP=${PATH_SEP}
-		 -P "${CMAKE_CURRENT_SOURCE_DIR}/compile-native-files.cmake"
-	
-	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
+  COMMAND "${CMAKE_COMMAND}"
+  ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/test
+  COMMAND "${CMAKE_COMMAND}"
+  ARGS -DJava_JAVAC_EXECUTABLE=\"${Java_JAVAC_EXECUTABLE}\"
+     -DJava_JAR_EXECUTABLE=\"${Java_JAR_EXECUTABLE}\"
+     -DBIN_DIRECTORY=\"${CMAKE_CURRENT_BINARY_DIR}\"
+     -DSRC_DIRECTORY=\"${CMAKE_CURRENT_SOURCE_DIR}\"
+     -DFILE_SEP=\"${FILE_SEP}\"
+     -DPATH_SEP=${PATH_SEP}
+     -P "${CMAKE_CURRENT_SOURCE_DIR}/compile-native-files.cmake"
+  
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
     COMMENT "Building: libsedml.jar"
-	) 
+  ) 
 
 add_custom_target(binding_java_jar ALL DEPENDS 
-	${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
-	${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
-	)
-	
+  ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
+  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
+  )
+  
 add_dependencies(binding_java_jar binding_java_swig)
-	
+  
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar DESTINATION ${JAVA_PACKAGE_JAR_INSTALL_DIR}) 
-	
+  
 

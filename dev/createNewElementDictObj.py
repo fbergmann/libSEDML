@@ -13,6 +13,9 @@ import writeHeader
 def createElements():
   elements = [
                 createSedDocument(),
+                createSedDataDescription(),
+                createSedDataSource(),
+                createSedSlice(),
                 createSedModel(),
                 createSedChange(),
                 createSedParameter(),
@@ -50,61 +53,132 @@ def createElements():
     writeCode.createCode(element)
     writeHeader.createHeader(element)
 
+def createSedDataDescription():
+  a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'string', 'reqd' : False, 'name':'source'})
+  a4 = dict({'type': 'DimensionDescription*', 'reqd' : True, 'name':'dimensionDescription'})
+  lo0 = dict({
+                 'type': 'lo_element', 
+              'reqd' : False, 
+              'name':'dataSource', 
+              'element': 'SedDataSource',
+              'abstract':False
+              })
+  attributes = [a1, a2, a3, a4, lo0]
+  element = dict({
+           'name': 'SedDataDescription', 
+           'package': 'Sed', 
+           'typecode': 'SEDML_DATA_DESCRIPTION', 
+           'hasSedListOf': True, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'dataDescription'
+           })
+  return element
+
+def createSedDataSource():
+  a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'string', 'reqd' : False, 'name':'indexSet'})
+  lo0 = dict({
+              'type': 'lo_element', 
+              'reqd' : False, 
+              'name':'slice', 
+              'element': 'SedSlice',
+              'abstract':False
+              })
+  attributes = [a1, a2, a3, lo0]
+  element = dict({
+           'name': 'SedDataSource', 
+           'package': 'Sed', 
+           'typecode': 'SEDML_DATA_SOURCE', 
+           'hasSedListOf': True, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'dataSource'
+           })
+  return element
+
+def createSedSlice():
+  a1 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'reference'})
+  a2 = dict({'type': 'string', 'reqd' : True, 'name':'value'})
+  attributes = [a1, a2]
+  element = dict({
+           'name': 'SedSlice', 
+           'package': 'Sed', 
+           'typecode': 'SEDML_DATA_SLICE', 
+           'hasSedListOf': True, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'slice'
+           })
+  return element
 
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
+  lo0 = dict({
+                 'type': 'lo_element', 
+              'reqd' : False, 
+              'name':'dataDescription', 
+              'element': 'SedDataDescription',
+              'abstract':False
+              })
   lo1 = dict({
                  'type': 'lo_element', 
-			  'reqd' : False, 
-			  'name':'simulation', 
-			  'element': 'SedSimulation',
-			  'abstract':True,
-			  'concrete': [
-				           dict({ 'name':'uniformTimeCourse', 'element':'SedUniformTimeCourse'}),
-				           dict({ 'name':'oneStep', 'element':'SedOneStep'}),
-				           dict({ 'name':'steadyState', 'element':'SedSteadyState'}),
-						   ]
-			  })
+              'reqd' : False, 
+              'name':'simulation', 
+              'element': 'SedSimulation',
+              'abstract':True,
+              'concrete': [
+                           dict({ 'name':'uniformTimeCourse', 'element':'SedUniformTimeCourse'}),
+                           dict({ 'name':'oneStep', 'element':'SedOneStep'}),
+                           dict({ 'name':'steadyState', 'element':'SedSteadyState'}),
+                           ]
+              })
   lo2 = dict({'type': 'lo_element', 'reqd' : False, 'name':'model', 'element': 'SedModel'})
   lo3 = dict({
                  'type': 'lo_element', 
-			  'reqd' : False, 
-			  'name':'task', 
-			  'element': 'SedTask',
-			  'abstract':True,
-			  'concrete': [
-				           dict({ 'name':'task', 'element':'SedTask'}),
-				           dict({ 'name':'repeatedTask', 'element':'SedRepeatedTask'}),
- 					    ]
-			  })
+              'reqd' : False, 
+              'name':'task', 
+              'element': 'SedTask',
+              'abstract':True,
+              'concrete': [
+                           dict({ 'name':'task', 'element':'SedTask'}),
+                           dict({ 'name':'repeatedTask', 'element':'SedRepeatedTask'}),
+                        ]
+              })
   #lo3 = dict({'type': 'lo_element', 'reqd' : False, 'name':'task', 'element': 'SedTask'})
   lo4 = dict({'type': 'lo_element', 'reqd' : False, 'name':'dataGenerator', 'element': 'SedDataGenerator'})
   lo5 = dict({
               'type': 'lo_element', 
-			  'reqd' : False, 
-			  'name':'output', 
-			  'element': 'SedOutput',
-			  'abstract':True,
-			  'concrete': [ 
-				           dict({ 'name':'report', 'element':'SedReport'}),
-				           dict({ 'name':'plot2D', 'element':'SedPlot2D'}),
-				           dict({ 'name':'plot3D', 'element':'SedPlot3D'}),
-						   ]
-			  })
-  attributes = [a1, a2, lo1, lo2, lo3, lo4, lo5]
+              'reqd' : False, 
+              'name':'output', 
+              'element': 'SedOutput',
+              'abstract':True,
+              'concrete': [ 
+                           dict({ 'name':'report', 'element':'SedReport'}),
+                           dict({ 'name':'plot2D', 'element':'SedPlot2D'}),
+                           dict({ 'name':'plot3D', 'element':'SedPlot3D'}),
+                           ]
+              })
+  attributes = [a1, a2, lo0, lo1, lo2, lo3, lo4, lo5]
   element = dict({
            'name': 'SedDocument', 
-		   'package': 'Sed', 
-		   'typecode': 'SEDML_DOCUMENT', 
-		   'hasSedListOf': False, 
-		   'attribs':attributes, 
-		   'hasChildren':True, 
-		   'hasMath':False, 
-		   'elementName':'sedML',
-		   'additionalCPPDecls':'../dev/doc_headers.h',
-		   'additionalCPPImpls':'../dev/doc_code.cpp'
-		   })
+           'package': 'Sed', 
+           'typecode': 'SEDML_DOCUMENT', 
+           'hasSedListOf': False, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'sedML',
+           'additionalCPPDecls':'../dev/doc_headers.h',
+           'additionalCPPImpls':'../dev/doc_code.cpp'
+           })
   return element
 
 def createSedModel() :
@@ -114,18 +188,18 @@ def createSedModel() :
   a4 = dict({'type': 'string', 'reqd' : True, 'name':'source'})
   lo1 = dict({
               'type': 'lo_element', 
-			  'reqd' : False, 
-			  'name':'change', 
-			  'element': 'SedChange',
-			  'abstract':True,
-			  'concrete': [ 
-				           dict({ 'name':'removeXML', 'element':'SedRemoveXML'}),
-				           dict({ 'name':'addXML', 'element':'SedAddXML'}),
-				           dict({ 'name':'changeXML', 'element':'SedChangeXML'}),
-				           dict({ 'name':'changeAttribute', 'element':'SedChangeAttribute'}),
-				           dict({ 'name':'computeChange', 'element':'SedComputeChange'}),
-						   ]
-			  })
+              'reqd' : False, 
+              'name':'change', 
+              'element': 'SedChange',
+              'abstract':True,
+              'concrete': [ 
+                           dict({ 'name':'removeXML', 'element':'SedRemoveXML'}),
+                           dict({ 'name':'addXML', 'element':'SedAddXML'}),
+                           dict({ 'name':'changeXML', 'element':'SedChangeXML'}),
+                           dict({ 'name':'changeAttribute', 'element':'SedChangeAttribute'}),
+                           dict({ 'name':'computeChange', 'element':'SedComputeChange'}),
+                           ]
+              })
   attributes = [a1, a2, a3, a4, lo1]
   element = dict({
                  'name': 'SedModel',
