@@ -67,13 +67,22 @@ def main (args):
   slice.setValue('S1')
   
   # specify mapping
-  compDesc = libsedml.CompositeDescription()
-  compDesc.setIndexType('double')
-  compDesc.setId('time')
-  compDesc.setName('time')
+  timeDesc = libsedml.CompositeDescription()
+  timeDesc.setIndexType('double')
+  timeDesc.setId('time')
+  timeDesc.setName('time')
+  
+  speciesDesc = timeDesc.createCompositeDescription()
+  speciesDesc.setIndexType('string')
+  speciesDesc.setId('SpeciesIds')
+  speciesDesc.setName('SpeciesIds')
+  
+  concentrationDesc = speciesDesc.createAtomicDescription()
+  concentrationDesc.setValueType("double")
+  concentrationDesc.setName("Concentrations")
   
   dimDesc = ddesc.createDimensionDescription()
-  dimDesc.append(compDesc)
+  dimDesc.append(timeDesc)
   
   # write the document
   libsedml.writeSedML(doc, args[1]);
