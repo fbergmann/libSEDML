@@ -71,6 +71,10 @@ SedNamespaces::initSedNamespace()
             case 2:
               mNamespaces->add(SEDML_XMLNS_L1V2);
               break;
+            
+            case 3:
+              mNamespaces->add(SEDML_XMLNS_L1V3);
+              break;
           }
 
         break;
@@ -125,6 +129,7 @@ SedNamespaces::getSupportedNamespaces()
   List *result = new List();
   result->add(new SedNamespaces(1, 1));
   result->add(new SedNamespaces(1, 2));
+  result->add(new SedNamespaces(1, 3));
   return result;
 }
 
@@ -173,8 +178,10 @@ SedNamespaces::getSedNamespaceURI(unsigned int level,
       case 1:
         if (version == 1)
           uri = SEDML_XMLNS_L1V1;
-        else
+        else if (version == 2)
           uri = SEDML_XMLNS_L1V2;
+        else
+          uri = SEDML_XMLNS_L1V3;
 
         break;
     }
@@ -294,6 +301,8 @@ SedNamespaces::isSedNamespace(const std::string& uri)
 
   if (uri == SEDML_XMLNS_L1V2)   return true;
 
+  if (uri == SEDML_XMLNS_L1V3)   return true;
+
   return false;
 }
 
@@ -333,6 +342,15 @@ SedNamespaces::isValidCombination()
           declaredURI.assign(SEDML_XMLNS_L1V2);
         }
 
+
+      if (xmlns->hasURI(SEDML_XMLNS_L1V3))
+      {
+        // checks different Sed XMLNamespaces
+        if (numNS > 0) return false;
+
+        ++numNS;
+        declaredURI.assign(SEDML_XMLNS_L1V3);
+      }
       // checks if the Sed Namespace is explicitly defined.
       for (int i = 0; i < xmlns->getLength(); i++)
         {
@@ -372,6 +390,20 @@ SedNamespaces::isValidCombination()
               if (sedmlDeclared)
                 {
                   if (declaredURI != string(SEDML_XMLNS_L1V2))
+                    {
+                      valid = false;
+                    }
+                }
+
+              break;   
+            
+            case 3:
+
+              // the namespaces contains the sbml namespaces
+              // check it is the correct ns for the level/version
+              if (sedmlDeclared)
+                {
+                  if (declaredURI != string(SEDML_XMLNS_L1V3))
                     {
                       valid = false;
                     }

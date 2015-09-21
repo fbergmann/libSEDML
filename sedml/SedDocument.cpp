@@ -1437,8 +1437,10 @@ SedDocument::writeXMLNS(XMLOutputStream& stream) const
 
       if (getVersion() == 1)
         xmlns.add(SEDML_XMLNS_L1V1);
-      else
+      else if (getVersion() == 2)
         xmlns.add(SEDML_XMLNS_L1V2);
+      else
+        xmlns.add(SEDML_XMLNS_L1V3);
 
       mSedNamespaces->setNamespaces(&xmlns);
       thisNs = getNamespaces();
@@ -1447,8 +1449,10 @@ SedDocument::writeXMLNS(XMLOutputStream& stream) const
     {
       if (getVersion() == 1)
         thisNs->add(SEDML_XMLNS_L1V1);
-      else
+      else if (getVersion() == 2)
         thisNs->add(SEDML_XMLNS_L1V2);
+      else
+        thisNs->add(SEDML_XMLNS_L1V3);
     }
   else
     {
