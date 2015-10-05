@@ -76,9 +76,11 @@ SedDocument::writeXMLNS (XMLOutputStream& stream) const
   else if (thisNs->getLength() == 0)
   {
      if (getVersion() == 1)
-     thisNs->add(SEDML_XMLNS_L1V1);
-	else
-     thisNs->add(SEDML_XMLNS_L1V2);
+       thisNs->add(SEDML_XMLNS_L1V1);
+     else if (getVersion() == 2)
+       thisNs->add(SEDML_XMLNS_L1V2);
+     else
+       thisNs->add(SEDML_XMLNS_L1V3);
   }
   else
   {

@@ -79,7 +79,7 @@ def createSedDataDescription():
   return element
 
 def createSedDataSource():
-  a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
+  a1 = dict({'type': 'SId', 'reqd' : False, 'name':'id'})
   a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
   a3 = dict({'type': 'string', 'reqd' : False, 'name':'indexSet'})
   lo0 = dict({
