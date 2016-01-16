@@ -19,7 +19,7 @@ def addLicence(outFile):
   outFile.write(' * information about SED-ML. The latest version of libSEDML can be found on\n')
   outFile.write(' * github: https://github.com/fbergmann/libSEDML/\n')
   outFile.write(' *\n')
-  outFile.write(' * Copyright (c) 2013-2015, Frank T. Bergmann\n')
+  outFile.write(' * Copyright (c) 2013-2016, Frank T. Bergmann\n')
   outFile.write(' * All rights reserved.\n')
   outFile.write(' *\n')
   outFile.write(' * Redistribution and use in source and binary forms, with or without\n')
