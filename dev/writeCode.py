@@ -201,6 +201,16 @@ def writeGetCode(attrib, output, element):
     output.write('{\n')
     output.write('  return m{0};\n'.format(capAttName))
     output.write('}\n\n\n')
+    if attrib['type'] == 'element' and attName != 'math':
+      output.write('/*\n')
+      output.write(' * Returns the value of the \"{0}\"'.format(attName))
+      output.write(' attribute of this {0}.\n'.format(element))
+      output.write(' */\n')
+      output.write('{0}\n'.format(attTypeCode))
+      output.write('{0}::get{1}()\n'.format(element, capAttName))
+      output.write('{\n')
+      output.write('  return m{0};\n'.format(capAttName))
+      output.write('}\n\n\n')
   if attType == 'element' and attName != 'math':
     output.write('/*\n')
     output.write(' * Creates a new \"{0}\"'.format(attName))
