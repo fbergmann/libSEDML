@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -340,7 +340,18 @@ protected:
   /** @endcond doxygen-libsedml-internal */
 
 
+public:
 
+  /**
+   * @returns the KisaoTerm as integer if possible or -1 in
+   * case of failure
+   */
+  int getKisaoIDasInt() const;
+
+  /**
+   * Sets the KisaoId as integer
+   */
+  int setKisaoID(int kisaoID);
 };
 
 class LIBSEDML_EXTERN SedListOfAlgorithmParameters : public SedListOf
@@ -413,7 +424,7 @@ public:
    * with the given id or NULL if no such
    * AlgorithmParameter exists.
    *
-   * @see get(unsigned int n)  *
+   * @see get(unsigned int n)   *
    * @see size()
    */
   virtual SedAlgorithmParameter* get(const std::string& sid);
@@ -430,7 +441,7 @@ public:
    * with the given id or NULL if no such
    * AlgorithmParameter exists.
    *
-   * @see get(unsigned int n)  *
+   * @see get(unsigned int n)   *
    * @see size()
    */
   virtual const SedAlgorithmParameter* get(const std::string& sid) const;

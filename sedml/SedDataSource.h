@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -440,7 +440,6 @@ public:
    * for this SedDataSource object have been set.
    *
    * @note The required attributes for a SedDataSource object are:
-   * @li "id"
    *
    * @return a boolean value indicating whether all the required
    * attributes for this object have been defined.
@@ -626,7 +625,7 @@ public:
    * with the given id or NULL if no such
    * DataSource exists.
    *
-   * @see get(unsigned int n)  *
+   * @see get(unsigned int n)   *
    * @see size()
    */
   virtual SedDataSource* get(const std::string& sid);
@@ -643,7 +642,7 @@ public:
    * with the given id or NULL if no such
    * DataSource exists.
    *
-   * @see get(unsigned int n)  *
+   * @see get(unsigned int n)   *
    * @see size()
    */
   virtual const SedDataSource* get(const std::string& sid) const;

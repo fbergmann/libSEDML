@@ -71,7 +71,7 @@ SedNamespaces::initSedNamespace()
             case 2:
               mNamespaces->add(SEDML_XMLNS_L1V2);
               break;
-            
+
             case 3:
               mNamespaces->add(SEDML_XMLNS_L1V3);
               break;
@@ -344,13 +344,14 @@ SedNamespaces::isValidCombination()
 
 
       if (xmlns->hasURI(SEDML_XMLNS_L1V3))
-      {
-        // checks different Sed XMLNamespaces
-        if (numNS > 0) return false;
+        {
+          // checks different Sed XMLNamespaces
+          if (numNS > 0) return false;
 
-        ++numNS;
-        declaredURI.assign(SEDML_XMLNS_L1V3);
-      }
+          ++numNS;
+          declaredURI.assign(SEDML_XMLNS_L1V3);
+        }
+
       // checks if the Sed Namespace is explicitly defined.
       for (int i = 0; i < xmlns->getLength(); i++)
         {
@@ -395,8 +396,8 @@ SedNamespaces::isValidCombination()
                     }
                 }
 
-              break;   
-            
+              break;
+
             case 3:
 
               // the namespaces contains the sbml namespaces

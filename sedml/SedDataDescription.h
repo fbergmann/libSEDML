@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,6 +51,7 @@
 #include <sedml/SedBase.h>
 #include <sedml/SedListOf.h>
 #include <sedml/SedNamespaces.h>
+#include <numl/DimensionDescription.h>
 #include <sedml/SedDataSource.h>
 
 
@@ -58,8 +59,6 @@
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
-
-class DimensionDescription;
 
 class LIBSEDML_EXTERN SedDataDescription : public SedBase
 {
@@ -266,16 +265,19 @@ public:
 
 
   /**
-   * creates a new dimensiondescription
-   */
-  DimensionDescription* createDimensionDescription();
-
-  /**
    * Returns the value of the "dimensionDescription" attribute of this SedDataDescription.
    *
    * @return the value of the "dimensionDescription" attribute of this SedDataDescription as a DimensionDescription*.
    */
   virtual const DimensionDescription* getDimensionDescription() const;
+
+
+  /**
+   * Creates a new "DimensionDescription*" and sets it for this SedDataDescription.
+   *
+   * @return the created "DimensionDescription*" element of this SedDataDescription.
+   */
+  virtual DimensionDescription* createDimensionDescription();
 
 
   /**
@@ -573,19 +575,6 @@ protected:
 
   /** @endcond doxygen-libsedml-internal */
 
-  /** @cond doxygen-libsedml-internal */
-
-  /**
-  * Subclasses should override this method ro read other XML.
-  *
-  * return true if read from stream, false otherwise.
-  */
-  virtual bool readOtherXML(XMLInputStream& stream);
-
-
-  /** @endcond doxygen-libsedml-internal */
-
-
 
   /** @cond doxygen-libsedml-internal */
 
@@ -605,6 +594,19 @@ protected:
    */
   virtual void readAttributes(const XMLAttributes& attributes,
                               const ExpectedAttributes& expectedAttributes);
+
+
+  /** @endcond doxygen-libsedml-internal */
+
+
+  /** @cond doxygen-libsedml-internal */
+
+  /**
+   * Subclasses should override this method ro read other XML.
+   *
+   * return true if read from stream, false otherwise.
+   */
+  virtual bool readOtherXML(XMLInputStream& stream);
 
 
   /** @endcond doxygen-libsedml-internal */
@@ -694,7 +696,7 @@ public:
    * with the given id or NULL if no such
    * DataDescription exists.
    *
-   * @see get(unsigned int n)  *
+   * @see get(unsigned int n)   *
    * @see size()
    */
   virtual SedDataDescription* get(const std::string& sid);
@@ -711,7 +713,7 @@ public:
    * with the given id or NULL if no such
    * DataDescription exists.
    *
-   * @see get(unsigned int n)  *
+   * @see get(unsigned int n)   *
    * @see size()
    */
   virtual const SedDataDescription* get(const std::string& sid) const;

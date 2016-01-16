@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -1437,10 +1437,8 @@ SedDocument::writeXMLNS(XMLOutputStream& stream) const
 
       if (getVersion() == 1)
         xmlns.add(SEDML_XMLNS_L1V1);
-      else if (getVersion() == 2)
-        xmlns.add(SEDML_XMLNS_L1V2);
       else
-        xmlns.add(SEDML_XMLNS_L1V3);
+        xmlns.add(SEDML_XMLNS_L1V2);
 
       mSedNamespaces->setNamespaces(&xmlns);
       thisNs = getNamespaces();
@@ -1497,7 +1495,8 @@ XMLNamespaces*
 SedDocument::getNamespaces() const
 {
   return mSedNamespaces->getNamespaces();
-}/**
+}
+/**
  * write comments
  */
 LIBSEDML_EXTERN

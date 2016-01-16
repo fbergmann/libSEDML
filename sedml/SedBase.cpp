@@ -2369,14 +2369,6 @@ SedBase::readAnnotation(XMLInputStream& stream)
   if (name == "annotation"
       || (getLevel() == 1 && getVersion() == 1 && name == "annotations"))
     {
-      //    XMLNode* new_annotation = NULL;
-      // If this is a level 1 document then annotations are not allowed on
-      // the sbml container
-      if (getLevel() == 1 && getTypeCode() == SEDML_DOCUMENT)
-        {
-          logError(SedAnnotationNotesNotAllowedLevel1);
-        }
-
 
       // If an annotation already exists, log it as an error and replace
       // the content of the existing annotation with the new one.

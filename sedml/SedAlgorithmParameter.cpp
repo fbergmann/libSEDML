@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -398,6 +398,39 @@ SedAlgorithmParameter::writeAttributes(XMLOutputStream& stream) const
 
 
 /*
+ * @returns the KisaoTerm as integer
+ */
+
+int
+SedAlgorithmParameter::getKisaoIDasInt() const
+{
+  std::string::size_type pos = mKisaoID.find(':');
+
+  if (pos == std::string::npos)
+    pos = mKisaoID.find('_');
+
+  if (pos == std::string::npos)
+    return -1;
+
+  std::stringstream str(mKisaoID.substr(pos + 1));
+  int result; str >> result;
+  return result;
+}
+
+/*
+ * Sets the KisaoId as integer
+ */
+int
+SedAlgorithmParameter::setKisaoID(int kisaoID)
+{
+  std::stringstream str;
+  str << "KISAO:"
+      << std::setfill('0')
+      << std::setw(7)
+      << kisaoID;
+  mKisaoID = str.str();
+  return LIBSEDML_OPERATION_SUCCESS;
+}/*
  * Constructor
  */
 SedListOfAlgorithmParameters::SedListOfAlgorithmParameters(unsigned int level,
@@ -623,9 +656,10 @@ SedListOfAlgorithmParameters::writeXMLNS(XMLOutputStream& stream) const
 
   if (prefix.empty())
     {
-      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V3))
         {
           if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else if (getVersion() == 3) xmlns.add(SEDML_XMLNS_L1V3, prefix);
           else xmlns.add(SEDML_XMLNS_L1V2, prefix);
         }
     }
