@@ -262,7 +262,9 @@ def createSedAlgorithmParameter() :
                  'attribs':attributes,
                  'hasChildren':False,
                  'hasMath':False,
-                 'elementName':'algorithmParameter'
+                 'elementName':'algorithmParameter',
+                 'additionalCPPDecls':'../dev/algorithmparameter_headers.h',
+                 'additionalCPPImpls':'../dev/algorithmparameter_code.cpp'
                  })
   return element
 
@@ -278,7 +280,9 @@ def createSedAlgorithm() :
                  'attribs':attributes,
                  'hasChildren':True,
                  'hasMath':False,
-                 'elementName':'algorithm'
+                 'elementName':'algorithm',
+                 'additionalCPPDecls':'../dev/algorithm_headers.h',
+                 'additionalCPPImpls':'../dev/algorithm_code.cpp'
                  })
   return element
 
