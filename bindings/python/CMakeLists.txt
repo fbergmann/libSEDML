@@ -81,6 +81,7 @@ ADD_CUSTOM_COMMAND(
       -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
       -I${CMAKE_CURRENT_SOURCE_DIR}
       -I${LIBSBML_INCLUDE_DIR}/
+      -I${LIBNUML_INCLUDE_DIR}/
       -c++
       -python    
       ${SWIG_EXTRA_FLAGS}     
