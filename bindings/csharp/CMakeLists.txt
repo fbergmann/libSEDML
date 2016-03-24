@@ -105,6 +105,7 @@ add_custom_command(
          -I${CMAKE_CURRENT_BINARY_DIR}/../../
          -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
          -I${CMAKE_CURRENT_SOURCE_DIR}
+         -I${LIBNUML_INCLUDE_DIR}/
          -I${LIBSBML_INCLUDE_DIR}/
        -c++
        -csharp
