@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,6 +51,10 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedPlot2D::SedPlot2D(unsigned int level, unsigned int version)
   : SedOutput(level, version)
   , mCurves(level, version)
+  , mLogX(false)
+  , mIsSetLogX(false)
+  , mLogY(false)
+  , mIsSetLogY(false)
 
 {
   // set an SedNamespaces derived object of this package
@@ -67,6 +71,10 @@ SedPlot2D::SedPlot2D(unsigned int level, unsigned int version)
 SedPlot2D::SedPlot2D(SedNamespaces* sedns)
   : SedOutput(sedns)
   , mCurves(sedns)
+  , mLogX(false)
+  , mIsSetLogX(false)
+  , mLogY(false)
+  , mIsSetLogY(false)
 
 {
   // set the element namespace of this object
@@ -84,6 +92,10 @@ SedPlot2D::SedPlot2D(const SedPlot2D& orig)
   : SedOutput(orig)
 {
   mCurves  = orig.mCurves;
+  mLogX  = orig.mLogX;
+  mIsSetLogX  = orig.mIsSetLogX;
+  mLogY  = orig.mLogY;
+  mIsSetLogY  = orig.mIsSetLogY;
 
   // connect to child objects
   connectToChild();
@@ -100,6 +112,10 @@ SedPlot2D::operator=(const SedPlot2D& rhs)
     {
       SedOutput::operator=(rhs);
       mCurves  = rhs.mCurves;
+      mLogX  = rhs.mLogX;
+      mIsSetLogX  = rhs.mIsSetLogX;
+      mLogY  = rhs.mLogY;
+      mIsSetLogY  = rhs.mIsSetLogY;
 
       // connect to child objects
       connectToChild();
@@ -124,6 +140,94 @@ SedPlot2D::clone() const
  */
 SedPlot2D::~SedPlot2D()
 {
+}
+
+
+/*
+ * Returns the value of the "logX" attribute of this SedPlot2D.
+ */
+const bool
+SedPlot2D::getLogX() const
+{
+  return mLogX;
+}
+
+
+/*
+ * Returns the value of the "logY" attribute of this SedPlot2D.
+ */
+const bool
+SedPlot2D::getLogY() const
+{
+  return mLogY;
+}
+
+
+/*
+ * Returns true/false if logX is set.
+ */
+bool
+SedPlot2D::isSetLogX() const
+{
+  return mIsSetLogX;
+}
+
+
+/*
+ * Returns true/false if logY is set.
+ */
+bool
+SedPlot2D::isSetLogY() const
+{
+  return mIsSetLogY;
+}
+
+
+/*
+ * Sets logX and returns value indicating success.
+ */
+int
+SedPlot2D::setLogX(bool logX)
+{
+  mLogX = logX;
+  mIsSetLogX = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets logY and returns value indicating success.
+ */
+int
+SedPlot2D::setLogY(bool logY)
+{
+  mLogY = logY;
+  mIsSetLogY = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets logX and returns value indicating success.
+ */
+int
+SedPlot2D::unsetLogX()
+{
+  mLogX = false;
+  mIsSetLogX = false;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets logY and returns value indicating success.
+ */
+int
+SedPlot2D::unsetLogY()
+{
+  mLogY = false;
+  mIsSetLogY = false;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -310,6 +414,12 @@ SedPlot2D::hasRequiredAttributes() const
 {
   bool allPresent = SedOutput::hasRequiredAttributes();
 
+  if (isSetLogX() == false)
+    allPresent = false;
+
+  if (isSetLogY() == false)
+    allPresent = false;
+
   return allPresent;
 }
 
@@ -388,6 +498,8 @@ SedPlot2D::addExpectedAttributes(ExpectedAttributes& attributes)
 {
   SedOutput::addExpectedAttributes(attributes);
 
+  attributes.add("logX");
+  attributes.add("logY");
 }
 
 
@@ -405,7 +517,17 @@ SedPlot2D::readAttributes(const XMLAttributes& attributes,
 {
   SedOutput::readAttributes(attributes, expectedAttributes);
 
-  //bool assigned = false;
+  bool assigned = false;
+
+  //
+  // logX bool   ( use = "required" )
+  //
+  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), true);
+
+  //
+  // logY bool   ( use = "required" )
+  //
+  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), true);
 
 }
 
@@ -422,6 +544,12 @@ void
 SedPlot2D::writeAttributes(XMLOutputStream& stream) const
 {
   SedOutput::writeAttributes(stream);
+
+  if (isSetLogX() == true)
+    stream.writeAttribute("logX", getPrefix(), mLogX);
+
+  if (isSetLogY() == true)
+    stream.writeAttribute("logY", getPrefix(), mLogY);
 
 }
 
@@ -467,6 +595,94 @@ SedPlot2D_clone(SedPlot2D_t * spd)
     {
       return NULL;
     }
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_getLogX(SedPlot2D_t * spd)
+{
+  return (spd != NULL) ? static_cast<int>(spd->getLogX()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_getLogY(SedPlot2D_t * spd)
+{
+  return (spd != NULL) ? static_cast<int>(spd->getLogY()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_isSetLogX(SedPlot2D_t * spd)
+{
+  return (spd != NULL) ? static_cast<int>(spd->isSetLogX()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_isSetLogY(SedPlot2D_t * spd)
+{
+  return (spd != NULL) ? static_cast<int>(spd->isSetLogY()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_setLogX(SedPlot2D_t * spd, int logX)
+{
+  return (spd != NULL) ? spd->setLogX(logX) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_setLogY(SedPlot2D_t * spd, int logY)
+{
+  return (spd != NULL) ? spd->setLogY(logY) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_unsetLogX(SedPlot2D_t * spd)
+{
+  return (spd != NULL) ? spd->unsetLogX() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedPlot2D_unsetLogY(SedPlot2D_t * spd)
+{
+  return (spd != NULL) ? spd->unsetLogY() : LIBSEDML_INVALID_OBJECT;
 }
 
 

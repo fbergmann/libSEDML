@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -58,6 +58,12 @@ SedCurve::SedCurve(unsigned int level, unsigned int version)
   , mIsSetLogY(false)
   , mXDataReference("")
   , mYDataReference("")
+  , mLineColor("")
+  , mFillColor("")
+  , mSymbol("")
+  , mLineThickness(numeric_limits<double>::quiet_NaN())
+  , mIsSetLineThickness(false)
+  , mLineStyle("")
 
 {
   // set an SedNamespaces derived object of this package
@@ -78,6 +84,12 @@ SedCurve::SedCurve(SedNamespaces* sedns)
   , mIsSetLogY(false)
   , mXDataReference("")
   , mYDataReference("")
+  , mLineColor("")
+  , mFillColor("")
+  , mSymbol("")
+  , mLineThickness(numeric_limits<double>::quiet_NaN())
+  , mIsSetLineThickness(false)
+  , mLineStyle("")
 
 {
   // set the element namespace of this object
@@ -99,6 +111,12 @@ SedCurve::SedCurve(const SedCurve& orig)
   mIsSetLogY  = orig.mIsSetLogY;
   mXDataReference  = orig.mXDataReference;
   mYDataReference  = orig.mYDataReference;
+  mLineColor  = orig.mLineColor;
+  mFillColor  = orig.mFillColor;
+  mSymbol  = orig.mSymbol;
+  mLineThickness  = orig.mLineThickness;
+  mIsSetLineThickness  = orig.mIsSetLineThickness;
+  mLineStyle  = orig.mLineStyle;
 }
 
 
@@ -119,6 +137,12 @@ SedCurve::operator=(const SedCurve& rhs)
       mIsSetLogY  = rhs.mIsSetLogY;
       mXDataReference  = rhs.mXDataReference;
       mYDataReference  = rhs.mYDataReference;
+      mLineColor  = rhs.mLineColor;
+      mFillColor  = rhs.mFillColor;
+      mSymbol  = rhs.mSymbol;
+      mLineThickness  = rhs.mLineThickness;
+      mIsSetLineThickness  = rhs.mIsSetLineThickness;
+      mLineStyle  = rhs.mLineStyle;
     }
 
   return *this;
@@ -204,6 +228,56 @@ SedCurve::getYDataReference() const
 
 
 /*
+ * Returns the value of the "lineColor" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getLineColor() const
+{
+  return mLineColor;
+}
+
+
+/*
+ * Returns the value of the "fillColor" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getFillColor() const
+{
+  return mFillColor;
+}
+
+
+/*
+ * Returns the value of the "symbol" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getSymbol() const
+{
+  return mSymbol;
+}
+
+
+/*
+ * Returns the value of the "lineThickness" attribute of this SedCurve.
+ */
+const double
+SedCurve::getLineThickness() const
+{
+  return mLineThickness;
+}
+
+
+/*
+ * Returns the value of the "lineStyle" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getLineStyle() const
+{
+  return mLineStyle;
+}
+
+
+/*
  * Returns true/false if id is set.
  */
 bool
@@ -260,6 +334,56 @@ bool
 SedCurve::isSetYDataReference() const
 {
   return (mYDataReference.empty() == false);
+}
+
+
+/*
+ * Returns true/false if lineColor is set.
+ */
+bool
+SedCurve::isSetLineColor() const
+{
+  return (mLineColor.empty() == false);
+}
+
+
+/*
+ * Returns true/false if fillColor is set.
+ */
+bool
+SedCurve::isSetFillColor() const
+{
+  return (mFillColor.empty() == false);
+}
+
+
+/*
+ * Returns true/false if symbol is set.
+ */
+bool
+SedCurve::isSetSymbol() const
+{
+  return (mSymbol.empty() == false);
+}
+
+
+/*
+ * Returns true/false if lineThickness is set.
+ */
+bool
+SedCurve::isSetLineThickness() const
+{
+  return mIsSetLineThickness;
+}
+
+
+/*
+ * Returns true/false if lineStyle is set.
+ */
+bool
+SedCurve::isSetLineStyle() const
+{
+  return (mLineStyle.empty() == false);
 }
 
 
@@ -343,6 +467,70 @@ SedCurve::setYDataReference(const std::string& yDataReference)
       mYDataReference = yDataReference;
       return LIBSEDML_OPERATION_SUCCESS;
     }
+}
+
+
+/*
+ * Sets lineColor and returns value indicating success.
+ */
+int
+SedCurve::setLineColor(const std::string& lineColor)
+{
+  {
+    mLineColor = lineColor;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets fillColor and returns value indicating success.
+ */
+int
+SedCurve::setFillColor(const std::string& fillColor)
+{
+  {
+    mFillColor = fillColor;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets symbol and returns value indicating success.
+ */
+int
+SedCurve::setSymbol(const std::string& symbol)
+{
+  {
+    mSymbol = symbol;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets lineThickness and returns value indicating success.
+ */
+int
+SedCurve::setLineThickness(double lineThickness)
+{
+  mLineThickness = lineThickness;
+  mIsSetLineThickness = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets lineStyle and returns value indicating success.
+ */
+int
+SedCurve::setLineStyle(const std::string& lineStyle)
+{
+  {
+    mLineStyle = lineStyle;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -436,6 +624,102 @@ SedCurve::unsetYDataReference()
   mYDataReference.erase();
 
   if (mYDataReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets lineColor and returns value indicating success.
+ */
+int
+SedCurve::unsetLineColor()
+{
+  mLineColor.erase();
+
+  if (mLineColor.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets fillColor and returns value indicating success.
+ */
+int
+SedCurve::unsetFillColor()
+{
+  mFillColor.erase();
+
+  if (mFillColor.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets symbol and returns value indicating success.
+ */
+int
+SedCurve::unsetSymbol()
+{
+  mSymbol.erase();
+
+  if (mSymbol.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets lineThickness and returns value indicating success.
+ */
+int
+SedCurve::unsetLineThickness()
+{
+  mLineThickness = numeric_limits<double>::quiet_NaN();
+  mIsSetLineThickness = false;
+
+  if (isSetLineThickness() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets lineStyle and returns value indicating success.
+ */
+int
+SedCurve::unsetLineStyle()
+{
+  mLineStyle.erase();
+
+  if (mLineStyle.empty() == true)
     {
       return LIBSEDML_OPERATION_SUCCESS;
     }
@@ -553,6 +837,11 @@ SedCurve::addExpectedAttributes(ExpectedAttributes& attributes)
   attributes.add("logY");
   attributes.add("xDataReference");
   attributes.add("yDataReference");
+  attributes.add("lineColor");
+  attributes.add("fillColor");
+  attributes.add("symbol");
+  attributes.add("lineThickness");
+  attributes.add("lineStyle");
 }
 
 
@@ -654,6 +943,71 @@ SedCurve::readAttributes(const XMLAttributes& attributes,
         }
     }
 
+  //
+  // lineColor string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("lineColor", mLineColor, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mLineColor.empty() == true)
+        {
+          logEmptyString(mLineColor, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
+  //
+  // fillColor string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("fillColor", mFillColor, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mFillColor.empty() == true)
+        {
+          logEmptyString(mFillColor, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
+  //
+  // symbol string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("symbol", mSymbol, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mSymbol.empty() == true)
+        {
+          logEmptyString(mSymbol, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
+  //
+  // lineThickness double   ( use = "optional" )
+  //
+  mIsSetLineThickness = attributes.readInto("lineThickness", mLineThickness, getErrorLog(), false);
+
+  //
+  // lineStyle string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("lineStyle", mLineStyle, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mLineStyle.empty() == true)
+        {
+          logEmptyString(mLineStyle, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
 }
 
 
@@ -687,6 +1041,21 @@ SedCurve::writeAttributes(XMLOutputStream& stream) const
 
   if (isSetYDataReference() == true)
     stream.writeAttribute("yDataReference", getPrefix(), mYDataReference);
+
+  if (isSetLineColor() == true)
+    stream.writeAttribute("lineColor", getPrefix(), mLineColor);
+
+  if (isSetFillColor() == true)
+    stream.writeAttribute("fillColor", getPrefix(), mFillColor);
+
+  if (isSetSymbol() == true)
+    stream.writeAttribute("symbol", getPrefix(), mSymbol);
+
+  if (isSetLineThickness() == true)
+    stream.writeAttribute("lineThickness", getPrefix(), mLineThickness);
+
+  if (isSetLineStyle() == true)
+    stream.writeAttribute("lineStyle", getPrefix(), mLineStyle);
 
 }
 
@@ -920,10 +1289,9 @@ SedListOfCurves::writeXMLNS(XMLOutputStream& stream) const
 
   if (prefix.empty())
     {
-      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V3))
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
         {
           if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
-          else if (getVersion() == 3) xmlns.add(SEDML_XMLNS_L1V3, prefix);
           else xmlns.add(SEDML_XMLNS_L1V2, prefix);
         }
     }
@@ -1058,6 +1426,73 @@ SedCurve_getYDataReference(SedCurve_t * sc)
  * write comments
  */
 LIBSEDML_EXTERN
+char *
+SedCurve_getLineColor(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getLineColor().empty() ? NULL : safe_strdup(sc->getLineColor().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getFillColor(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getFillColor().empty() ? NULL : safe_strdup(sc->getFillColor().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getSymbol(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getSymbol().empty() ? NULL : safe_strdup(sc->getSymbol().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+double
+SedCurve_getLineThickness(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->getLineThickness() : numeric_limits<double>::quiet_NaN();
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getLineStyle(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getLineStyle().empty() ? NULL : safe_strdup(sc->getLineStyle().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
 int
 SedCurve_isSetId(SedCurve_t * sc)
 {
@@ -1117,6 +1552,61 @@ int
 SedCurve_isSetYDataReference(SedCurve_t * sc)
 {
   return (sc != NULL) ? static_cast<int>(sc->isSetYDataReference()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetLineColor()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetFillColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetFillColor()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetSymbol(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetSymbol()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineThickness(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetLineThickness()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineStyle(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetLineStyle()) : 0;
 }
 
 
@@ -1191,6 +1681,61 @@ SedCurve_setYDataReference(SedCurve_t * sc, const char * yDataReference)
  */
 LIBSEDML_EXTERN
 int
+SedCurve_setLineColor(SedCurve_t * sc, const char * lineColor)
+{
+  return (sc != NULL) ? sc->setLineColor(lineColor) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setFillColor(SedCurve_t * sc, const char * fillColor)
+{
+  return (sc != NULL) ? sc->setFillColor(fillColor) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setSymbol(SedCurve_t * sc, const char * symbol)
+{
+  return (sc != NULL) ? sc->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setLineThickness(SedCurve_t * sc, double lineThickness)
+{
+  return (sc != NULL) ? sc->setLineThickness(lineThickness) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setLineStyle(SedCurve_t * sc, const char * lineStyle)
+{
+  return (sc != NULL) ? sc->setLineStyle(lineStyle) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 SedCurve_unsetId(SedCurve_t * sc)
 {
   return (sc != NULL) ? sc->unsetId() : LIBSEDML_INVALID_OBJECT;
@@ -1249,6 +1794,61 @@ int
 SedCurve_unsetYDataReference(SedCurve_t * sc)
 {
   return (sc != NULL) ? sc->unsetYDataReference() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetLineColor() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetFillColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetFillColor() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetSymbol(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineThickness(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetLineThickness() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineStyle(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetLineStyle() : LIBSEDML_INVALID_OBJECT;
 }
 
 

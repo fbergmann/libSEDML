@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -66,6 +66,10 @@ class LIBSEDML_EXTERN SedPlot2D : public SedOutput
 protected:
 
   SedListOfCurves   mCurves;
+  bool          mLogX;
+  bool          mIsSetLogX;
+  bool          mLogY;
+  bool          mIsSetLogY;
 
 
 public:
@@ -120,6 +124,98 @@ public:
    * Destructor for SedPlot2D.
    */
   virtual ~SedPlot2D();
+
+
+  /**
+   * Returns the value of the "logX" attribute of this SedPlot2D.
+   *
+   * @return the value of the "logX" attribute of this SedPlot2D as a boolean.
+   */
+  virtual const bool getLogX() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedPlot2D's "logX" attribute has been set.
+   *
+   * @return @c true if this SedPlot2D's "logX" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetLogX() const;
+
+
+  /**
+   * Sets the value of the "logX" attribute of this SedPlot2D.
+   *
+   * @param logX; bool value of the "logX" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setLogX(bool logX);
+
+
+  /**
+   * Unsets the value of the "logX" attribute of this SedPlot2D.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetLogX();
+
+
+  /**
+   * Returns the value of the "logY" attribute of this SedPlot2D.
+   *
+   * @return the value of the "logY" attribute of this SedPlot2D as a boolean.
+   */
+  virtual const bool getLogY() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedPlot2D's "logY" attribute has been set.
+   *
+   * @return @c true if this SedPlot2D's "logY" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetLogY() const;
+
+
+  /**
+   * Sets the value of the "logY" attribute of this SedPlot2D.
+   *
+   * @param logY; bool value of the "logY" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setLogY(bool logY);
+
+
+  /**
+   * Unsets the value of the "logY" attribute of this SedPlot2D.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetLogY();
 
 
   /**
@@ -300,6 +396,8 @@ public:
    * for this SedPlot2D object have been set.
    *
    * @note The required attributes for a SedPlot2D object are:
+   * @li "logX"
+   * @li "logY"
    *
    * @return a boolean value indicating whether all the required
    * attributes for this object have been defined.
@@ -439,6 +537,46 @@ SedPlot2D_free(SedPlot2D_t * spd);
 LIBSEDML_EXTERN
 SedPlot2D_t *
 SedPlot2D_clone(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_getLogX(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_getLogY(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_isSetLogX(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_isSetLogY(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_setLogX(SedPlot2D_t * spd, int logX);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_setLogY(SedPlot2D_t * spd, int logY);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_unsetLogX(SedPlot2D_t * spd);
+
+
+LIBSEDML_EXTERN
+int
+SedPlot2D_unsetLogY(SedPlot2D_t * spd);
 
 
 LIBSEDML_EXTERN

@@ -8,7 +8,7 @@
  * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2016, Frank T. Bergmann
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -71,6 +71,12 @@ protected:
   bool          mIsSetLogY;
   std::string   mXDataReference;
   std::string   mYDataReference;
+  std::string   mLineColor;
+  std::string   mFillColor;
+  std::string   mSymbol;
+  double        mLineThickness;
+  bool          mIsSetLineThickness;
+  std::string   mLineStyle;
 
 
 public:
@@ -404,6 +410,236 @@ public:
 
 
   /**
+   * Returns the value of the "lineColor" attribute of this SedCurve.
+   *
+   * @return the value of the "lineColor" attribute of this SedCurve as a string.
+   */
+  virtual const std::string& getLineColor() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedCurve's "lineColor" attribute has been set.
+   *
+   * @return @c true if this SedCurve's "lineColor" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetLineColor() const;
+
+
+  /**
+   * Sets the value of the "lineColor" attribute of this SedCurve.
+   *
+   * @param lineColor; const std::string& value of the "lineColor" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setLineColor(const std::string& lineColor);
+
+
+  /**
+   * Unsets the value of the "lineColor" attribute of this SedCurve.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetLineColor();
+
+
+  /**
+   * Returns the value of the "fillColor" attribute of this SedCurve.
+   *
+   * @return the value of the "fillColor" attribute of this SedCurve as a string.
+   */
+  virtual const std::string& getFillColor() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedCurve's "fillColor" attribute has been set.
+   *
+   * @return @c true if this SedCurve's "fillColor" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetFillColor() const;
+
+
+  /**
+   * Sets the value of the "fillColor" attribute of this SedCurve.
+   *
+   * @param fillColor; const std::string& value of the "fillColor" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setFillColor(const std::string& fillColor);
+
+
+  /**
+   * Unsets the value of the "fillColor" attribute of this SedCurve.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetFillColor();
+
+
+  /**
+   * Returns the value of the "symbol" attribute of this SedCurve.
+   *
+   * @return the value of the "symbol" attribute of this SedCurve as a string.
+   */
+  virtual const std::string& getSymbol() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedCurve's "symbol" attribute has been set.
+   *
+   * @return @c true if this SedCurve's "symbol" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetSymbol() const;
+
+
+  /**
+   * Sets the value of the "symbol" attribute of this SedCurve.
+   *
+   * @param symbol; const std::string& value of the "symbol" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setSymbol(const std::string& symbol);
+
+
+  /**
+   * Unsets the value of the "symbol" attribute of this SedCurve.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetSymbol();
+
+
+  /**
+   * Returns the value of the "lineThickness" attribute of this SedCurve.
+   *
+   * @return the value of the "lineThickness" attribute of this SedCurve as a double.
+   */
+  virtual const double getLineThickness() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedCurve's "lineThickness" attribute has been set.
+   *
+   * @return @c true if this SedCurve's "lineThickness" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetLineThickness() const;
+
+
+  /**
+   * Sets the value of the "lineThickness" attribute of this SedCurve.
+   *
+   * @param lineThickness; double value of the "lineThickness" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setLineThickness(double lineThickness);
+
+
+  /**
+   * Unsets the value of the "lineThickness" attribute of this SedCurve.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetLineThickness();
+
+
+  /**
+   * Returns the value of the "lineStyle" attribute of this SedCurve.
+   *
+   * @return the value of the "lineStyle" attribute of this SedCurve as a string.
+   */
+  virtual const std::string& getLineStyle() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedCurve's "lineStyle" attribute has been set.
+   *
+   * @return @c true if this SedCurve's "lineStyle" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetLineStyle() const;
+
+
+  /**
+   * Sets the value of the "lineStyle" attribute of this SedCurve.
+   *
+   * @param lineStyle; const std::string& value of the "lineStyle" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setLineStyle(const std::string& lineStyle);
+
+
+  /**
+   * Unsets the value of the "lineStyle" attribute of this SedCurve.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetLineStyle();
+
+
+  /**
    * Returns the XML element name of this object, which for SedCurve, is
    * always @c "sedCurve".
    *
@@ -605,7 +841,7 @@ public:
    * with the given id or NULL if no such
    * Curve exists.
    *
-   * @see get(unsigned int n)   *
+   * @see get(unsigned int n)  *
    * @see size()
    */
   virtual SedCurve* get(const std::string& sid);
@@ -622,7 +858,7 @@ public:
    * with the given id or NULL if no such
    * Curve exists.
    *
-   * @see get(unsigned int n)   *
+   * @see get(unsigned int n)  *
    * @see size()
    */
   virtual const SedCurve* get(const std::string& sid) const;
@@ -851,6 +1087,31 @@ SedCurve_getYDataReference(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
+char *
+SedCurve_getLineColor(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+char *
+SedCurve_getFillColor(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+char *
+SedCurve_getSymbol(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+double
+SedCurve_getLineThickness(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+char *
+SedCurve_getLineStyle(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
 int
 SedCurve_isSetId(SedCurve_t * sc);
 
@@ -878,6 +1139,31 @@ SedCurve_isSetXDataReference(SedCurve_t * sc);
 LIBSEDML_EXTERN
 int
 SedCurve_isSetYDataReference(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineColor(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_isSetFillColor(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_isSetSymbol(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineThickness(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineStyle(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
@@ -912,6 +1198,31 @@ SedCurve_setYDataReference(SedCurve_t * sc, const char * yDataReference);
 
 LIBSEDML_EXTERN
 int
+SedCurve_setLineColor(SedCurve_t * sc, const char * lineColor);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_setFillColor(SedCurve_t * sc, const char * fillColor);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_setSymbol(SedCurve_t * sc, const char * symbol);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_setLineThickness(SedCurve_t * sc, double lineThickness);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_setLineStyle(SedCurve_t * sc, const char * lineStyle);
+
+
+LIBSEDML_EXTERN
+int
 SedCurve_unsetId(SedCurve_t * sc);
 
 
@@ -938,6 +1249,31 @@ SedCurve_unsetXDataReference(SedCurve_t * sc);
 LIBSEDML_EXTERN
 int
 SedCurve_unsetYDataReference(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineColor(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_unsetFillColor(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_unsetSymbol(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineThickness(SedCurve_t * sc);
+
+
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineStyle(SedCurve_t * sc);
 
 
 LIBSEDML_EXTERN
