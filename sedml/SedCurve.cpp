@@ -898,12 +898,12 @@ SedCurve::readAttributes(const XMLAttributes& attributes,
   //
   // logX bool   ( use = "required" )
   //
-  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), true);
+  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), getLevel() > 1 || (getLevel() == 1 && getVersion() > 2));
 
   //
   // logY bool   ( use = "required" )
   //
-  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), true);
+  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), getLevel() > 1 || (getLevel() == 1 && getVersion() > 2));
 
   //
   // xDataReference SIdRef   ( use = "required" )
