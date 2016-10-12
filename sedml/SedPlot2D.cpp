@@ -522,12 +522,12 @@ SedPlot2D::readAttributes(const XMLAttributes& attributes,
   //
   // logX bool   ( use = "required" )
   //
-  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), true);
+  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), getLevel() > 1 || (getLevel() == 1 && getVersion() > 2));
 
   //
   // logY bool   ( use = "required" )
   //
-  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), true);
+  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), getLevel() > 1 || (getLevel() == 1 && getVersion() > 2));
 
 }
 
@@ -545,10 +545,10 @@ SedPlot2D::writeAttributes(XMLOutputStream& stream) const
 {
   SedOutput::writeAttributes(stream);
 
-  if (isSetLogX() == true)
+  if (isSetLogX() == true && (getLevel() > 1 || (getLevel() == 1 && getVersion() > 2)))
     stream.writeAttribute("logX", getPrefix(), mLogX);
 
-  if (isSetLogY() == true)
+  if (isSetLogY() == true && (getLevel() > 1 || (getLevel() == 1 && getVersion() > 2)))
     stream.writeAttribute("logY", getPrefix(), mLogY);
 
 }
