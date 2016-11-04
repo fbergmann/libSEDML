@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,61 +48,54 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedTask with the given level, version, and package version.
  */
-SedTask::SedTask (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
-	, mName ("")
-	, mModelReference ("")
-	, mSimulationReference ("")
+SedTask::SedTask(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
+  , mName("")
+  , mModelReference("")
+  , mSimulationReference("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Creates a new SedTask with the given SedNamespaces object.
  */
-SedTask::SedTask (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
-	, mName ("")
-	, mModelReference ("")
-	, mSimulationReference ("")
+SedTask::SedTask(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
+  , mName("")
+  , mModelReference("")
+  , mSimulationReference("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Copy constructor for SedTask.
  */
-SedTask::SedTask (const SedTask& orig)
-	: SedBase(orig)
+SedTask::SedTask(const SedTask& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-		mName  = orig.mName;
-		mModelReference  = orig.mModelReference;
-		mSimulationReference  = orig.mSimulationReference;
+  mId  = orig.mId;
+  mName  = orig.mName;
+  mModelReference  = orig.mModelReference;
+  mSimulationReference  = orig.mSimulationReference;
 
-		// connect to child objects
-		connectToChild();
-	}
+  // connect to child objects
+  connectToChild();
 }
 
 
@@ -112,22 +105,19 @@ SedTask::SedTask (const SedTask& orig)
 SedTask&
 SedTask::operator=(const SedTask& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-		mName  = rhs.mName;
-		mModelReference  = rhs.mModelReference;
-		mSimulationReference  = rhs.mSimulationReference;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+      mName  = rhs.mName;
+      mModelReference  = rhs.mModelReference;
+      mSimulationReference  = rhs.mSimulationReference;
 
-		// connect to child objects
-		connectToChild();
-	}
-	return *this;
+      // connect to child objects
+      connectToChild();
+    }
+
+  return *this;
 }
 
 
@@ -135,16 +125,16 @@ SedTask::operator=(const SedTask& rhs)
  * Clone for SedTask.
  */
 SedTask*
-SedTask::clone () const
+SedTask::clone() const
 {
-	return new SedTask(*this);
+  return new SedTask(*this);
 }
 
 
 /*
  * Destructor for SedTask.
  */
-SedTask::~SedTask ()
+SedTask::~SedTask()
 {
 }
 
@@ -155,7 +145,7 @@ SedTask::~SedTask ()
 const std::string&
 SedTask::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -165,7 +155,7 @@ SedTask::getId() const
 const std::string&
 SedTask::getName() const
 {
-	return mName;
+  return mName;
 }
 
 
@@ -175,7 +165,7 @@ SedTask::getName() const
 const std::string&
 SedTask::getModelReference() const
 {
-	return mModelReference;
+  return mModelReference;
 }
 
 
@@ -185,7 +175,7 @@ SedTask::getModelReference() const
 const std::string&
 SedTask::getSimulationReference() const
 {
-	return mSimulationReference;
+  return mSimulationReference;
 }
 
 
@@ -195,7 +185,7 @@ SedTask::getSimulationReference() const
 bool
 SedTask::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -205,7 +195,7 @@ SedTask::isSetId() const
 bool
 SedTask::isSetName() const
 {
-	return (mName.empty() == false);
+  return (mName.empty() == false);
 }
 
 
@@ -215,7 +205,7 @@ SedTask::isSetName() const
 bool
 SedTask::isSetModelReference() const
 {
-	return (mModelReference.empty() == false);
+  return (mModelReference.empty() == false);
 }
 
 
@@ -225,7 +215,7 @@ SedTask::isSetModelReference() const
 bool
 SedTask::isSetSimulationReference() const
 {
-	return (mSimulationReference.empty() == false);
+  return (mSimulationReference.empty() == false);
 }
 
 
@@ -235,7 +225,7 @@ SedTask::isSetSimulationReference() const
 int
 SedTask::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -245,15 +235,10 @@ SedTask::setId(const std::string& id)
 int
 SedTask::setName(const std::string& name)
 {
-	if (&(name) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mName = name;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -263,19 +248,15 @@ SedTask::setName(const std::string& name)
 int
 SedTask::setModelReference(const std::string& modelReference)
 {
-	if (&(modelReference) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(modelReference)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mModelReference = modelReference;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(modelReference)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mModelReference = modelReference;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -285,19 +266,15 @@ SedTask::setModelReference(const std::string& modelReference)
 int
 SedTask::setSimulationReference(const std::string& simulationReference)
 {
-	if (&(simulationReference) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(simulationReference)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mSimulationReference = simulationReference;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(simulationReference)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mSimulationReference = simulationReference;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -307,16 +284,16 @@ SedTask::setSimulationReference(const std::string& simulationReference)
 int
 SedTask::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -326,16 +303,16 @@ SedTask::unsetId()
 int
 SedTask::unsetName()
 {
-	mName.erase();
+  mName.erase();
 
-	if (mName.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -345,16 +322,16 @@ SedTask::unsetName()
 int
 SedTask::unsetModelReference()
 {
-	mModelReference.erase();
+  mModelReference.erase();
 
-	if (mModelReference.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mModelReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -364,16 +341,16 @@ SedTask::unsetModelReference()
 int
 SedTask::unsetSimulationReference()
 {
-	mSimulationReference.erase();
+  mSimulationReference.erase();
 
-	if (mSimulationReference.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mSimulationReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -381,10 +358,10 @@ SedTask::unsetSimulationReference()
  * Returns the XML element name of this object
  */
 const std::string&
-SedTask::getElementName () const
+SedTask::getElementName() const
 {
-	static const string name = "task";
-	return name;
+  static const string name = "task";
+  return name;
 }
 
 
@@ -394,13 +371,13 @@ SedTask::getElementName () const
 SedBase*
 SedTask::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+  SedBase* object = NULL;
 
-	const string& name   = stream.peek().getName();
+  const string& name   = stream.peek().getName();
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -408,9 +385,9 @@ SedTask::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedTask::connectToChild ()
+SedTask::connectToChild()
 {
-	SedBase::connectToChild();
+  SedBase::connectToChild();
 
 }
 
@@ -419,9 +396,9 @@ SedTask::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedTask::getTypeCode () const
+SedTask::getTypeCode() const
 {
-	return SEDML_TASK;
+  return SEDML_TASK;
 }
 
 
@@ -429,14 +406,14 @@ SedTask::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedTask::hasRequiredAttributes () const
+SedTask::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetId() == false)
-		allPresent = false;
+  if (isSetId() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -444,11 +421,11 @@ SedTask::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-SedTask::hasRequiredElements () const
+SedTask::hasRequiredElements() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -458,9 +435,9 @@ SedTask::hasRequiredElements () const
  * write contained elements
  */
 void
-SedTask::writeElements (XMLOutputStream& stream) const
+SedTask::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -473,9 +450,9 @@ SedTask::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedTask::accept (SedVisitor& v) const
+SedTask::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -489,9 +466,9 @@ SedTask::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedTask::setSedDocument (SedDocument* d)
+SedTask::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -506,12 +483,12 @@ SedTask::setSedDocument (SedDocument* d)
 void
 SedTask::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
-	attributes.add("name");
-	attributes.add("modelReference");
-	attributes.add("simulationReference");
+  attributes.add("id");
+  attributes.add("name");
+  attributes.add("modelReference");
+  attributes.add("simulationReference");
 }
 
 
@@ -524,84 +501,84 @@ SedTask::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedTask::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedTask::readAttributes(const XMLAttributes& attributes,
+                        const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "required" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+  //
+  // id SId  ( use = "required" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedTask>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedTask>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// name string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("name", mName, getErrorLog(), false);
+  //
+  // name string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("name", mName, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mName.empty() == true)
-		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedTask>");
-		}
-	}
+      if (mName.empty() == true)
+        {
+          logEmptyString(mName, getLevel(), getVersion(), "<SedTask>");
+        }
+    }
 
-	//
-	// modelReference SIdRef   ( use = "optional" )
-	//
-	assigned = attributes.readInto("modelReference", mModelReference, getErrorLog(), false);
+  //
+  // modelReference SIdRef   ( use = "optional" )
+  //
+  assigned = attributes.readInto("modelReference", mModelReference, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mModelReference.empty() == true)
-		{
-			logEmptyString(mModelReference, getLevel(), getVersion(), "<SedTask>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mModelReference.empty() == true)
+        {
+          logEmptyString(mModelReference, getLevel(), getVersion(), "<SedTask>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mModelReference) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// simulationReference SIdRef   ( use = "optional" )
-	//
-	assigned = attributes.readInto("simulationReference", mSimulationReference, getErrorLog(), false);
+  //
+  // simulationReference SIdRef   ( use = "optional" )
+  //
+  assigned = attributes.readInto("simulationReference", mSimulationReference, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mSimulationReference.empty() == true)
-		{
-			logEmptyString(mSimulationReference, getLevel(), getVersion(), "<SedTask>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mSimulationReference) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mSimulationReference.empty() == true)
+        {
+          logEmptyString(mSimulationReference, getLevel(), getVersion(), "<SedTask>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mSimulationReference) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
 }
 
@@ -614,22 +591,22 @@ SedTask::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedTask::writeAttributes (XMLOutputStream& stream) const
+void
+SedTask::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
-	if (isSetName() == true)
-		stream.writeAttribute("name", getPrefix(), mName);
+  if (isSetName() == true)
+    stream.writeAttribute("name", getPrefix(), mName);
 
-	if (isSetModelReference() == true)
-		stream.writeAttribute("modelReference", getPrefix(), mModelReference);
+  if (isSetModelReference() == true)
+    stream.writeAttribute("modelReference", getPrefix(), mModelReference);
 
-	if (isSetSimulationReference() == true)
-		stream.writeAttribute("simulationReference", getPrefix(), mSimulationReference);
+  if (isSetSimulationReference() == true)
+    stream.writeAttribute("simulationReference", getPrefix(), mSimulationReference);
 
 }
 
@@ -638,33 +615,33 @@ SedTask::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfTasks::SedListOfTasks(unsigned int level, 
-	               unsigned int version)
- : SedListOf(level, version)
+SedListOfTasks::SedListOfTasks(unsigned int level,
+                               unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfTasks::SedListOfTasks(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfTasks 
+ * Returns a deep copy of this SedListOfTasks
  */
-SedListOfTasks* 
-SedListOfTasks::clone () const
- {
-	return new SedListOfTasks(*this);
+SedListOfTasks*
+SedListOfTasks::clone() const
+{
+  return new SedListOfTasks(*this);
 }
 
 
@@ -674,7 +651,7 @@ SedListOfTasks::clone () const
 SedTask*
 SedListOfTasks::get(unsigned int n)
 {
-	return static_cast<SedTask*>(SedListOf::get(n));
+  return static_cast<SedTask*>(SedListOf::get(n));
 }
 
 
@@ -684,7 +661,7 @@ SedListOfTasks::get(unsigned int n)
 const SedTask*
 SedListOfTasks::get(unsigned int n) const
 {
-	return static_cast<const SedTask*>(SedListOf::get(n));
+  return static_cast<const SedTask*>(SedListOf::get(n));
 }
 
 
@@ -694,8 +671,8 @@ SedListOfTasks::get(unsigned int n) const
 SedTask*
 SedListOfTasks::get(const std::string& sid)
 {
-	return const_cast<SedTask*>(
-	  static_cast<const SedListOfTasks&>(*this).get(sid));
+  return const_cast<SedTask*>(
+           static_cast<const SedListOfTasks&>(*this).get(sid));
 }
 
 
@@ -705,10 +682,10 @@ SedListOfTasks::get(const std::string& sid)
 const SedTask*
 SedListOfTasks::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedTask>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedTask*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedTask>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedTask*>(*result);
 }
 
 
@@ -727,9 +704,10 @@ SedListOfTasks::get(const std::string& sid) const
 int
 SedListOfTasks::addTask(const SedTask* st)
 {
-	if(st == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(st);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (st == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(st);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -738,42 +716,46 @@ SedListOfTasks::addTask(const SedTask* st)
  *
  * @return the number of SedTask objects in this SedListOfTasks
  */
-unsigned int 
+unsigned int
 SedListOfTasks::getNumTasks() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedTask object, adds it to this SedListOfTasks
- * task and returns the SedTask object created. 
+ * task and returns the SedTask object created.
  *
  * @return a new SedTask object instance
  *
  * @see addTask(const SedTask* st)
  */
-SedTask* 
+SedTask*
 SedListOfTasks::createTask()
 {
-	SedTask *temp = new SedTask();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedTask *temp = new SedTask();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedRepeatedTask object, adds it to this SedListOfTasks
- * repeatedTask and returns the SedRepeatedTask object created. 
+ * repeatedTask and returns the SedRepeatedTask object created.
  *
  * @return a new SedRepeatedTask object instance
  *
  * @see addRepeatedTask(const SedTask* st)
  */
-SedRepeatedTask* 
+SedRepeatedTask*
 SedListOfTasks::createRepeatedTask()
 {
-	SedRepeatedTask *temp = new SedRepeatedTask();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedRepeatedTask *temp = new SedRepeatedTask();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -782,7 +764,7 @@ SedListOfTasks::createRepeatedTask()
 SedTask*
 SedListOfTasks::remove(unsigned int n)
 {
-	return static_cast<SedTask*>(SedListOf::remove(n));
+  return static_cast<SedTask*>(SedListOf::remove(n));
 }
 
 
@@ -792,18 +774,18 @@ SedListOfTasks::remove(unsigned int n)
 SedTask*
 SedListOfTasks::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedTask>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedTask>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedTask*> (item);
+  return static_cast <SedTask*>(item);
 }
 
 
@@ -811,10 +793,10 @@ SedListOfTasks::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfTasks::getElementName () const
+SedListOfTasks::getElementName() const
 {
-	static const string name = "listOfTasks";
-	return name;
+  static const string name = "listOfTasks";
+  return name;
 }
 
 
@@ -822,9 +804,9 @@ SedListOfTasks::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfTasks::getTypeCode () const
+SedListOfTasks::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -832,9 +814,9 @@ SedListOfTasks::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfTasks::getItemTypeCode () const
+SedListOfTasks::getItemTypeCode() const
 {
-	return SEDML_TASK;
+  return SEDML_TASK;
 }
 
 
@@ -846,22 +828,22 @@ SedListOfTasks::getItemTypeCode () const
 SedBase*
 SedListOfTasks::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "task")
-	{
-		object = new SedTask(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "task")
+    {
+      object = new SedTask(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	if (name == "repeatedTask")
-	{
-		object = new SedRepeatedTask(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "repeatedTask")
+    {
+      object = new SedRepeatedTask(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -876,20 +858,21 @@ SedListOfTasks::createObject(XMLInputStream& stream)
 void
 SedListOfTasks::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V3))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else if (getVersion() == 3) xmlns.add(SEDML_XMLNS_L1V3, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -903,7 +886,7 @@ LIBSEDML_EXTERN
 SedTask_t *
 SedTask_create(unsigned int level, unsigned int version)
 {
-	return new SedTask(level, version);
+  return new SedTask(level, version);
 }
 
 
@@ -914,8 +897,8 @@ LIBSEDML_EXTERN
 void
 SedTask_free(SedTask_t * st)
 {
-	if (st != NULL)
-		delete st;
+  if (st != NULL)
+    delete st;
 }
 
 
@@ -926,14 +909,14 @@ LIBSEDML_EXTERN
 SedTask_t *
 SedTask_clone(SedTask_t * st)
 {
-	if (st != NULL)
-	{
-		return static_cast<SedTask_t*>(st->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (st != NULL)
+    {
+      return static_cast<SedTask_t*>(st->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -944,10 +927,10 @@ LIBSEDML_EXTERN
 char *
 SedTask_getId(SedTask_t * st)
 {
-	if (st == NULL)
-		return NULL;
+  if (st == NULL)
+    return NULL;
 
-	return st->getId().empty() ? NULL : safe_strdup(st->getId().c_str());
+  return st->getId().empty() ? NULL : safe_strdup(st->getId().c_str());
 }
 
 
@@ -958,10 +941,10 @@ LIBSEDML_EXTERN
 char *
 SedTask_getName(SedTask_t * st)
 {
-	if (st == NULL)
-		return NULL;
+  if (st == NULL)
+    return NULL;
 
-	return st->getName().empty() ? NULL : safe_strdup(st->getName().c_str());
+  return st->getName().empty() ? NULL : safe_strdup(st->getName().c_str());
 }
 
 
@@ -972,10 +955,10 @@ LIBSEDML_EXTERN
 char *
 SedTask_getModelReference(SedTask_t * st)
 {
-	if (st == NULL)
-		return NULL;
+  if (st == NULL)
+    return NULL;
 
-	return st->getModelReference().empty() ? NULL : safe_strdup(st->getModelReference().c_str());
+  return st->getModelReference().empty() ? NULL : safe_strdup(st->getModelReference().c_str());
 }
 
 
@@ -986,10 +969,10 @@ LIBSEDML_EXTERN
 char *
 SedTask_getSimulationReference(SedTask_t * st)
 {
-	if (st == NULL)
-		return NULL;
+  if (st == NULL)
+    return NULL;
 
-	return st->getSimulationReference().empty() ? NULL : safe_strdup(st->getSimulationReference().c_str());
+  return st->getSimulationReference().empty() ? NULL : safe_strdup(st->getSimulationReference().c_str());
 }
 
 
@@ -1000,7 +983,7 @@ LIBSEDML_EXTERN
 int
 SedTask_isSetId(SedTask_t * st)
 {
-	return (st != NULL) ? static_cast<int>(st->isSetId()) : 0;
+  return (st != NULL) ? static_cast<int>(st->isSetId()) : 0;
 }
 
 
@@ -1011,7 +994,7 @@ LIBSEDML_EXTERN
 int
 SedTask_isSetName(SedTask_t * st)
 {
-	return (st != NULL) ? static_cast<int>(st->isSetName()) : 0;
+  return (st != NULL) ? static_cast<int>(st->isSetName()) : 0;
 }
 
 
@@ -1022,7 +1005,7 @@ LIBSEDML_EXTERN
 int
 SedTask_isSetModelReference(SedTask_t * st)
 {
-	return (st != NULL) ? static_cast<int>(st->isSetModelReference()) : 0;
+  return (st != NULL) ? static_cast<int>(st->isSetModelReference()) : 0;
 }
 
 
@@ -1033,7 +1016,7 @@ LIBSEDML_EXTERN
 int
 SedTask_isSetSimulationReference(SedTask_t * st)
 {
-	return (st != NULL) ? static_cast<int>(st->isSetSimulationReference()) : 0;
+  return (st != NULL) ? static_cast<int>(st->isSetSimulationReference()) : 0;
 }
 
 
@@ -1044,7 +1027,7 @@ LIBSEDML_EXTERN
 int
 SedTask_setId(SedTask_t * st, const char * id)
 {
-	return (st != NULL) ? st->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1055,7 +1038,7 @@ LIBSEDML_EXTERN
 int
 SedTask_setName(SedTask_t * st, const char * name)
 {
-	return (st != NULL) ? st->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1066,7 +1049,7 @@ LIBSEDML_EXTERN
 int
 SedTask_setModelReference(SedTask_t * st, const char * modelReference)
 {
-	return (st != NULL) ? st->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->setModelReference(modelReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1077,7 +1060,7 @@ LIBSEDML_EXTERN
 int
 SedTask_setSimulationReference(SedTask_t * st, const char * simulationReference)
 {
-	return (st != NULL) ? st->setSimulationReference(simulationReference) : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->setSimulationReference(simulationReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1088,7 +1071,7 @@ LIBSEDML_EXTERN
 int
 SedTask_unsetId(SedTask_t * st)
 {
-	return (st != NULL) ? st->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1099,7 +1082,7 @@ LIBSEDML_EXTERN
 int
 SedTask_unsetName(SedTask_t * st)
 {
-	return (st != NULL) ? st->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1110,7 +1093,7 @@ LIBSEDML_EXTERN
 int
 SedTask_unsetModelReference(SedTask_t * st)
 {
-	return (st != NULL) ? st->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->unsetModelReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1121,7 +1104,7 @@ LIBSEDML_EXTERN
 int
 SedTask_unsetSimulationReference(SedTask_t * st)
 {
-	return (st != NULL) ? st->unsetSimulationReference() : LIBSEDML_INVALID_OBJECT;
+  return (st != NULL) ? st->unsetSimulationReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1132,7 +1115,7 @@ LIBSEDML_EXTERN
 int
 SedTask_hasRequiredAttributes(SedTask_t * st)
 {
-	return (st != NULL) ? static_cast<int>(st->hasRequiredAttributes()) : 0;
+  return (st != NULL) ? static_cast<int>(st->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1143,7 +1126,7 @@ LIBSEDML_EXTERN
 int
 SedTask_hasRequiredElements(SedTask_t * st)
 {
-	return (st != NULL) ? static_cast<int>(st->hasRequiredElements()) : 0;
+  return (st != NULL) ? static_cast<int>(st->hasRequiredElements()) : 0;
 }
 
 
@@ -1154,10 +1137,10 @@ LIBSEDML_EXTERN
 SedTask_t *
 SedListOfTasks_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1168,10 +1151,10 @@ LIBSEDML_EXTERN
 SedTask_t *
 SedListOfTasks_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfTasks *>(lo)->remove(sid) : NULL;
 }
 
 

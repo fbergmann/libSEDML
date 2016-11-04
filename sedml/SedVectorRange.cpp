@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,43 +48,36 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedVectorRange with the given level, version, and package version.
  */
-SedVectorRange::SedVectorRange (unsigned int level, unsigned int version)
-	: SedRange(level, version)
-	, mValues ()
+SedVectorRange::SedVectorRange(unsigned int level, unsigned int version)
+  : SedRange(level, version)
+  , mValues()
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedVectorRange with the given SedNamespaces object.
  */
-SedVectorRange::SedVectorRange (SedNamespaces* sedns)
-	: SedRange(sedns)
-	, mValues ()
+SedVectorRange::SedVectorRange(SedNamespaces* sedns)
+  : SedRange(sedns)
+  , mValues()
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedVectorRange.
  */
-SedVectorRange::SedVectorRange (const SedVectorRange& orig)
-	: SedRange(orig)
+SedVectorRange::SedVectorRange(const SedVectorRange& orig)
+  : SedRange(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mValues  = orig.mValues;
-	}
+  mValues  = orig.mValues;
 }
 
 
@@ -94,16 +87,13 @@ SedVectorRange::SedVectorRange (const SedVectorRange& orig)
 SedVectorRange&
 SedVectorRange::operator=(const SedVectorRange& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedRange::operator=(rhs);
-		mValues  = rhs.mValues;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedRange::operator=(rhs);
+      mValues  = rhs.mValues;
+    }
+
+  return *this;
 }
 
 
@@ -111,16 +101,16 @@ SedVectorRange::operator=(const SedVectorRange& rhs)
  * Clone for SedVectorRange.
  */
 SedVectorRange*
-SedVectorRange::clone () const
+SedVectorRange::clone() const
 {
-	return new SedVectorRange(*this);
+  return new SedVectorRange(*this);
 }
 
 
 /*
  * Destructor for SedVectorRange.
  */
-SedVectorRange::~SedVectorRange ()
+SedVectorRange::~SedVectorRange()
 {
 }
 
@@ -131,7 +121,7 @@ SedVectorRange::~SedVectorRange ()
 const std::vector<double>&
 SedVectorRange::getValues() const
 {
-	return mValues;
+  return mValues;
 }
 
 
@@ -141,7 +131,7 @@ SedVectorRange::getValues() const
 std::vector<double>&
 SedVectorRange::getValues()
 {
-	return mValues;
+  return mValues;
 }
 
 
@@ -155,7 +145,7 @@ SedVectorRange::getValues()
 bool
 SedVectorRange::hasValues() const
 {
-	return mValues.size() > 0;
+  return mValues.size() > 0;
 }
 
 
@@ -163,12 +153,12 @@ SedVectorRange::hasValues() const
  * Returning the number of elements in this
  * SedVectorRange's "value" .
  *
- * @return number of elements in this SedVectorRange's "value" 
+ * @return number of elements in this SedVectorRange's "value"
  */
 unsigned int
 SedVectorRange::getNumValues() const
 {
-	return (unsigned int)mValues.size();
+  return (unsigned int)mValues.size();
 }
 
 
@@ -187,15 +177,15 @@ SedVectorRange::getNumValues() const
 int
 SedVectorRange::setValues(const std::vector<double>& value)
 {
-	mValues = value;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mValues = value;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
 /**
  * Adds another value to the "value" attribute of this SedVectorRange.
  *
- * @param value; double value of the "value" attribute to be added 
+ * @param value; double value of the "value" attribute to be added
  *
  * @return integer value indicating success/failure of the
  * function.  @if clike The value is drawn from the
@@ -207,8 +197,8 @@ SedVectorRange::setValues(const std::vector<double>& value)
 int
 SedVectorRange::addValue(double value)
 {
-	mValues.push_back(value);
-	return LIBSEDML_OPERATION_SUCCESS;
+  mValues.push_back(value);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -225,8 +215,8 @@ SedVectorRange::addValue(double value)
 int
 SedVectorRange::clearValues()
 {
-	mValues.clear();
-	return LIBSEDML_OPERATION_SUCCESS;
+  mValues.clear();
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -234,10 +224,10 @@ SedVectorRange::clearValues()
  * Returns the XML element name of this object
  */
 const std::string&
-SedVectorRange::getElementName () const
+SedVectorRange::getElementName() const
 {
-	static const string name = "vectorRange";
-	return name;
+  static const string name = "vectorRange";
+  return name;
 }
 
 
@@ -247,11 +237,11 @@ SedVectorRange::getElementName () const
 SedBase*
 SedVectorRange::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedRange::createObject(stream);
+  SedBase* object = SedRange::createObject(stream);
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -259,9 +249,9 @@ SedVectorRange::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedVectorRange::getTypeCode () const
+SedVectorRange::getTypeCode() const
 {
-	return SEDML_RANGE_VECTORRANGE;
+  return SEDML_RANGE_VECTORRANGE;
 }
 
 
@@ -269,11 +259,11 @@ SedVectorRange::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedVectorRange::hasRequiredAttributes () const
+SedVectorRange::hasRequiredAttributes() const
 {
-	bool allPresent = SedRange::hasRequiredAttributes();
+  bool allPresent = SedRange::hasRequiredAttributes();
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -283,20 +273,21 @@ SedVectorRange::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedVectorRange::writeElements (XMLOutputStream& stream) const
+SedVectorRange::writeElements(XMLOutputStream& stream) const
 {
-	SedRange::writeElements(stream);
-	if(hasValues())
-	{
-		for (std::vector<double>::const_iterator it = mValues.begin(); it != mValues.end(); ++it)
-		{
-			stream.startElement("value");
-			stream.setAutoIndent(false);
-			stream << " " << *it << " ";
-			stream.endElement("value");
-			stream.setAutoIndent(true);
-		}
-	}
+  SedRange::writeElements(stream);
+
+  if (hasValues())
+    {
+      for (std::vector<double>::const_iterator it = mValues.begin(); it != mValues.end(); ++it)
+        {
+          stream.startElement("value");
+          stream.setAutoIndent(false);
+          stream << " " << *it << " ";
+          stream.endElement("value");
+          stream.setAutoIndent(true);
+        }
+    }
 }
 
 
@@ -309,9 +300,9 @@ SedVectorRange::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedVectorRange::accept (SedVisitor& v) const
+SedVectorRange::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -325,9 +316,9 @@ SedVectorRange::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedVectorRange::setSedDocument (SedDocument* d)
+SedVectorRange::setSedDocument(SedDocument* d)
 {
-	SedRange::setSedDocument(d);
+  SedRange::setSedDocument(d);
 }
 
 
@@ -342,9 +333,9 @@ SedVectorRange::setSedDocument (SedDocument* d)
 void
 SedVectorRange::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedRange::addExpectedAttributes(attributes);
+  SedRange::addExpectedAttributes(attributes);
 
-	attributes.add("value");
+  attributes.add("value");
 }
 
 
@@ -357,12 +348,12 @@ SedVectorRange::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedVectorRange::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedVectorRange::readAttributes(const XMLAttributes& attributes,
+                               const ExpectedAttributes& expectedAttributes)
 {
-	SedRange::readAttributes(attributes, expectedAttributes);
+  SedRange::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  //bool assigned = false;
 
 }
 
@@ -373,28 +364,34 @@ SedVectorRange::readAttributes (const XMLAttributes& attributes,
 /** @cond doxygen-libsedml-internal */
 
 bool
-SedVectorRange::readOtherXML (XMLInputStream& stream)
+SedVectorRange::readOtherXML(XMLInputStream& stream)
 {
-	bool          read = false;
-	const string& name = stream.peek().getName();
+  bool          read = false;
+  //const string& name = stream.peek().getName();
 
-	while (stream.peek().getName() == "value")
-	{
-	  stream.next(); // consume start
-	  stringstream text;
-	  while(stream.isGood() && stream.peek().isText())
-	    text << stream.next().getCharacters();
-	  double value; text >> value;
-	  if (!text.fail())
-	    mValues.push_back(value);
-	  stream.next(); // consume end
-	  read = true;
-	}
-	if (SedRange::readOtherXML(stream))
-	{
-		read = true;
-	}
-	return read;
+  while (stream.peek().getName() == "value")
+    {
+      stream.next(); // consume start
+      stringstream text;
+
+      while (stream.isGood() && stream.peek().isText())
+        text << stream.next().getCharacters();
+
+      double value; text >> value;
+
+      if (!text.fail())
+        mValues.push_back(value);
+
+      stream.next(); // consume end
+      read = true;
+    }
+
+  if (SedRange::readOtherXML(stream))
+    {
+      read = true;
+    }
+
+  return read;
 }
 
 
@@ -406,10 +403,10 @@ SedVectorRange::readOtherXML (XMLInputStream& stream)
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedVectorRange::writeAttributes (XMLOutputStream& stream) const
+void
+SedVectorRange::writeAttributes(XMLOutputStream& stream) const
 {
-	SedRange::writeAttributes(stream);
+  SedRange::writeAttributes(stream);
 
 }
 
@@ -424,7 +421,7 @@ LIBSEDML_EXTERN
 SedVectorRange_t *
 SedVectorRange_create(unsigned int level, unsigned int version)
 {
-	return new SedVectorRange(level, version);
+  return new SedVectorRange(level, version);
 }
 
 
@@ -435,8 +432,8 @@ LIBSEDML_EXTERN
 void
 SedVectorRange_free(SedVectorRange_t * svr)
 {
-	if (svr != NULL)
-		delete svr;
+  if (svr != NULL)
+    delete svr;
 }
 
 
@@ -447,14 +444,14 @@ LIBSEDML_EXTERN
 SedVectorRange_t *
 SedVectorRange_clone(SedVectorRange_t * svr)
 {
-	if (svr != NULL)
-	{
-		return static_cast<SedVectorRange_t*>(svr->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (svr != NULL)
+    {
+      return static_cast<SedVectorRange_t*>(svr->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -471,7 +468,7 @@ LIBSEDML_EXTERN
 int
 SedVectorRange_hasRequiredAttributes(SedVectorRange_t * svr)
 {
-	return (svr != NULL) ? static_cast<int>(svr->hasRequiredAttributes()) : 0;
+  return (svr != NULL) ? static_cast<int>(svr->hasRequiredAttributes()) : 0;
 }
 
 

@@ -4,25 +4,34 @@
 # Original author(s): Frank Bergmann <fbergman@caltech.edu>
 # Organization      : California Institute of Technology
 #
-# This file is part of libSEDML.  Please visit http://sedml.org for more
-# information about SEDML, and the latest version of libSEDML.
+# <!--------------------------------------------------------------------------
+# This file is part of libSEDML.  Please visit http://sed-ml.org for more
+# information about SED-ML. The latest version of libSEDML can be found on
+# github: https://github.com/fbergmann/libSEDML/
 #
-# Copyright (C) 2009-2013 jointly by the following organizations: 
-#     1. California Institute of Technology, Pasadena, CA, USA
-#     2. EMBL European Bioinformatics Institute (EBML-EBI), Hinxton, UK
-#  
-# Copyright (C) 2006-2008 by the California Institute of Technology,
-#     Pasadena, CA, USA 
-#  
-# Copyright (C) 2002-2005 jointly by the following organizations: 
-#     1. California Institute of Technology, Pasadena, CA, USA
-#     2. Japan Science and Technology Agency, Japan
-# 
-# This library is free software; you can redistribute it and/or modify it
-# under the terms of the GNU Lesser General Public License as published by
-# the Free Software Foundation.  A copy of the license agreement is provided
-# in the file named "LICENSE.txt" included with this software distribution
-# and also available online as http://sedml.org/software/libsedml/license.html
+# Copyright (c) 2013-2016, Frank T. Bergmann
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# ------------------------------------------------------------------------ -->
 #
 ###############################################################################
 
@@ -47,20 +56,20 @@ configure_file (
 # 
 
 if (NOT EXISTS "${Java_JAVAC_EXECUTABLE}")
-	if (NOT EXISTS "${JAVA_COMPILE}")
-		message(FATAL_ERROR "The java language bindings require Java_JAVAC_EXECUTABLE to be set to the javac command.")
-	else()
-		SET(Java_JAVAC_EXECUTABLE "${JAVA_COMPILE}" CACHE STRING "Javac compiler" FORCE)
-	endif()
+  if (NOT EXISTS "${JAVA_COMPILE}")
+    message(FATAL_ERROR "The java language bindings require Java_JAVAC_EXECUTABLE to be set to the javac command.")
+  else()
+    SET(Java_JAVAC_EXECUTABLE "${JAVA_COMPILE}" CACHE STRING "Javac compiler" FORCE)
+  endif()
 endif()
 
 
 if (NOT EXISTS "${Java_JAR_EXECUTABLE}")
-	if (NOT EXISTS "${JAVA_ARCHIVE}")	
-		message(FATAL_ERROR "The java language bindings require Java_JAR_EXECUTABLE to be set to the jar command.")
-	else()
+  if (NOT EXISTS "${JAVA_ARCHIVE}")	
+    message(FATAL_ERROR "The java language bindings require Java_JAR_EXECUTABLE to be set to the jar command.")
+  else()
         set (Java_JAR_EXECUTABLE "${JAVA_ARCHIVE}" CACHE STRING "jar command" FORCE)
-	endif()
+  endif()
 endif()
 
 
@@ -70,12 +79,12 @@ endif()
 # 
 
 file(GLOB SWIG_DEPENDENCIES 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.i 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.h 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
-	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
-	)
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.i 
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
+  ${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
+  )
 
 
 # 
@@ -104,9 +113,9 @@ if (LIBSEDML_REMOVE_WRAPPERS)
   endforeach()
 endif(LIBSEDML_REMOVE_WRAPPERS)
 
-set(SWIG_EXTRA_FLAGS -DSWIGEXPORT -DLIBSBML_CPP_NAMESPACE_BEGIN -DLIBSBML_CPP_NAMESPACE_END)
+set(SWIG_EXTRA_FLAGS -DSWIGEXPORT -DLIBSBML_CPP_NAMESPACE_BEGIN -DLIBSBML_CPP_NAMESPACE_END -DLIBSBML_CPP_NAMESPACE_QUALIFIER -DLIBSBML_CPP_NAMESPACE_USE)
 if(NOT UNIX)
-	set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
+  set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
 endif()
 
 
@@ -116,36 +125,38 @@ endif()
 #
 #
 ADD_CUSTOM_COMMAND(	
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
-	       ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
-	COMMAND "${CMAKE_COMMAND}"
-	ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
+         ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
+  COMMAND "${CMAKE_COMMAND}"
+  ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
     COMMAND "${SWIG_EXECUTABLE}"
     ARGS -I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
          -I${CMAKE_CURRENT_SOURCE_DIR}/../../
          -I${CMAKE_CURRENT_BINARY_DIR}/../../
          -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
          -I${CMAKE_CURRENT_SOURCE_DIR}
+         -I${LIBNUML_INCLUDE_DIR}/
          -I${LIBSBML_INCLUDE_DIR}/
-		 -c++
-		 -java
-		 -package org.sedml.libsedml
-		 ${SWIG_EXTRA_ARGS}
-		 ${SWIG_EXTRA_FLAGS}
-		 -outdir ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
+     -c++
+     -java
+     -package org.sedml.libsedml
+     ${SWIG_EXTRA_ARGS}
+     ${SWIG_EXTRA_FLAGS}
+     -outdir ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml
          -o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
          ${CMAKE_CURRENT_SOURCE_DIR}/../swig/libsedml.i
     MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/../swig/libsedml.i
-	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt
-	        ${SWIG_DEPENDENCIES}
+  DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists.txt
+          ${SWIG_DEPENDENCIES}
     COMMENT "Swig Java source") 
-	
+  
 add_custom_target(binding_java_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
 
-	
+  
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
 include_directories(${LIBSBML_INCLUDE_DIR})
+include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSEDML_STATIC)
@@ -171,7 +182,7 @@ set_target_properties (binding_java_lib PROPERTIES OUTPUT_NAME "sedmlj")
 
 
 if(APPLE)
-	set_target_properties (binding_java_lib PROPERTIES SUFFIX ".jnilib")
+  set_target_properties (binding_java_lib PROPERTIES SUFFIX ".jnilib")
 endif()
 
 install(TARGETS binding_java_lib DESTINATION ${JAVA_PACKAGE_BIN_INSTALL_DIR} )
@@ -179,29 +190,29 @@ install(TARGETS binding_java_lib DESTINATION ${JAVA_PACKAGE_BIN_INSTALL_DIR} )
 target_link_libraries(binding_java_lib ${LIBSEDML_LIBRARY}-static )
 
 ADD_CUSTOM_COMMAND(	
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
-	COMMAND "${CMAKE_COMMAND}"
-	ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/test
-	COMMAND "${CMAKE_COMMAND}"
-	ARGS -DJava_JAVAC_EXECUTABLE=\"${Java_JAVAC_EXECUTABLE}\"
-		 -DJava_JAR_EXECUTABLE=\"${Java_JAR_EXECUTABLE}\"
-		 -DBIN_DIRECTORY=\"${CMAKE_CURRENT_BINARY_DIR}\"
-		 -DSRC_DIRECTORY=\"${CMAKE_CURRENT_SOURCE_DIR}\"
-		 -DFILE_SEP=\"${FILE_SEP}\"
-		 -DPATH_SEP=${PATH_SEP}
-		 -P "${CMAKE_CURRENT_SOURCE_DIR}/compile-native-files.cmake"
-	
-	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
+  COMMAND "${CMAKE_COMMAND}"
+  ARGS    -E make_directory  ${CMAKE_CURRENT_BINARY_DIR}/test
+  COMMAND "${CMAKE_COMMAND}"
+  ARGS -DJava_JAVAC_EXECUTABLE=\"${Java_JAVAC_EXECUTABLE}\"
+     -DJava_JAR_EXECUTABLE=\"${Java_JAR_EXECUTABLE}\"
+     -DBIN_DIRECTORY=\"${CMAKE_CURRENT_BINARY_DIR}\"
+     -DSRC_DIRECTORY=\"${CMAKE_CURRENT_SOURCE_DIR}\"
+     -DFILE_SEP=\"${FILE_SEP}\"
+     -DPATH_SEP=${PATH_SEP}
+     -P "${CMAKE_CURRENT_SOURCE_DIR}/compile-native-files.cmake"
+  
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
     COMMENT "Building: libsedml.jar"
-	) 
+  ) 
 
 add_custom_target(binding_java_jar ALL DEPENDS 
-	${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
-	${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
-	)
-	
+  ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
+  ${CMAKE_CURRENT_BINARY_DIR}/java-files/org/sedml/libsedml/libsedmlJNI.java
+  )
+  
 add_dependencies(binding_java_jar binding_java_swig)
-	
+  
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar DESTINATION ${JAVA_PACKAGE_JAR_INSTALL_DIR}) 
-	
+  
 

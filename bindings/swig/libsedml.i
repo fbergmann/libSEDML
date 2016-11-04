@@ -56,7 +56,7 @@ public class"
 #include "libsedml.h"
 
 LIBSEDML_CPP_NAMESPACE_USE
-	
+  
 #include "local.cpp"
 %}
 
@@ -81,8 +81,9 @@ LIBSEDML_CPP_NAMESPACE_USE
 %template(DateList)           ListWrapper<Date>;
 %template(CVTermList)         ListWrapper<CVTerm>;
 %template(ASTNodeList)        ListWrapper<ASTNode>;
-%template(SedNamespacesList) ListWrapper<SedNamespaces>;
+%template(SedNamespacesList)  ListWrapper<SedNamespaces>;
 %template(SBaseList)          ListWrapper<SBase>;
+%template(SedBaseList)          ListWrapper<SedBase>;
 
 /**
  *
@@ -338,11 +339,11 @@ LIBSEDML_CPP_NAMESPACE_USE
          *
          * @return SBaseList
          */
-	ListWrapper<SedBase>* getListOfAllElements()
-	{
-		List* list = $self->getAllElements();
-		return new ListWrapper<SedBase>(list);
-	}
+  ListWrapper<SedBase>* getListOfAllElements()
+  {
+    List* list = $self->getAllElements();
+    return new ListWrapper<SedBase>(list);
+  }
 
 }
 
@@ -375,6 +376,11 @@ LIBSEDML_CPP_NAMESPACE_USE
 %include "std_vector.i"
 %template(DoubleStdVector) std::vector<double>;
 typedef std::vector<double> DoubleStdVector;
+%template(XmlErrorStdVector) std::vector<XMLError*>;
+typedef std::vector<XMLError*> XmlErrorStdVector;
+%template(SedErrorStdVector) std::vector<SedError>;
+typedef std::vector<SedError> SedErrorStdVector;
+
 
 %include sedml/common/libsedml-version.h
 %include sedml/common/operationReturnValues.h
@@ -404,6 +410,9 @@ typedef std::vector<double> DoubleStdVector;
 %include <sedml/SedAlgorithmParameter.h>
 %include <sedml/SedSimulation.h>
 %include <sedml/SedUniformTimeCourse.h>
+%include <sedml/SedSlice.h>
+%include <sedml/SedDataDescription.h>
+%include <sedml/SedDataSource.h>
 %include <sedml/SedDataSet.h>
 %include <sedml/SedCurve.h>
 %include <sedml/SedSurface.h>
@@ -429,7 +438,7 @@ typedef std::vector<double> DoubleStdVector;
 
 %include <sedml/SedReader.h>
 %include <sedml/SedWriter.h>
-%include sedml/SedTypes.h
+%include <sedml/SedTypes.h>
 
 %include sbml/math/MathML.h
 %include sbml/math/ASTNode.h
@@ -437,6 +446,13 @@ typedef std::vector<double> DoubleStdVector;
 %include sbml/math/FormulaFormatter.h
 %include sbml/math/L3Parser.h
 %include sbml/math/L3ParserSettings.h
+
+%include sbml/SBase.h
+%ignore convertToL2Strict;
+%include sbml/Model.h
+%include sbml/SBMLNamespaces.h
+%include sbml/annotation/CVTerm.h
+%include sbml/annotation/Date.h 
 
 %include sbml/xml/XMLAttributes.h
 %include sbml/xml/XMLConstructorException.h
@@ -449,4 +465,28 @@ typedef std::vector<double> DoubleStdVector;
 %include sbml/xml/XMLError.h
 %include sbml/xml/XMLErrorLog.h
 
+%include <numl/common/extern.h>
+%include <numl/common/libnuml-namespace.h>
+%include numl/common/libnuml-version.h
+%include numl/common/operationReturnValues.h
 
+%include <numl/NUMLNamespaces.h>
+%include numl/NUMLReader.h
+%include numl/NUMLWriter.h
+%include numl/NUMLTypeCodes.h
+%include <numl/NMBase.h>
+%include <numl/NUMLList.h>
+%include <numl/OntologyTerm.h>
+%include <numl/NUMLDocument.h>
+%include <numl/ResultComponent.h>
+%include <numl/Dimension.h>
+%include <numl/DimensionDescription.h>
+%include <numl/CompositeValue.h>
+%include <numl/Tuple.h>
+%include <numl/AtomicValue.h>
+%include <numl/CompositeDescription.h>
+%include <numl/TupleDescription.h>
+%include <numl/AtomicDescription.h>
+
+%include numl/NUMLErrorLog.h
+%include numl/NUMLError.h

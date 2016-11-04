@@ -5,22 +5,22 @@
  * <!--------------------------------------------------------------------------
  *
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
- * 
- * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ *
+ *
+ * Copyright (c) 2013-2014, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -31,7 +31,7 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  * ---------------------------------------------------------------------- -->
  *
  * Declaring all types up-front avoids compilation errors of the form
@@ -326,6 +326,27 @@ typedef CLASS_OR_STRUCT SedCurve                     SedCurve_t;
  * @copydoc SedDataSet
  */
 typedef CLASS_OR_STRUCT SedDataSet                     SedDataSet_t;
+
+/**
+* @var typedef class SedDataDescription SedDataDescription_t
+* @copydoc SedDataDescription
+*/
+typedef CLASS_OR_STRUCT SedDataDescription                     SedDataDescription_t;
+
+typedef CLASS_OR_STRUCT DimensionDescription                     DimensionDescription_t;
+
+/**
+* @var typedef class SedDataSource SedDataSource_t
+* @copydoc SedDataSource
+*/
+typedef CLASS_OR_STRUCT SedDataSource                     SedDataSource_t;
+
+/**
+* @var typedef class SedSlice SedSlice_t
+* @copydoc SedSlice
+*/
+typedef CLASS_OR_STRUCT SedSlice                     SedSlice_t;
+
 
 LIBSEDML_CPP_NAMESPACE_END
 

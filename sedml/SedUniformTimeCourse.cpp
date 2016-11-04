@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,64 +48,57 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedUniformTimeCourse with the given level, version, and package version.
  */
-SedUniformTimeCourse::SedUniformTimeCourse (unsigned int level, unsigned int version)
-	: SedSimulation(level, version)
-	, mInitialTime (numeric_limits<double>::quiet_NaN())
-	, mIsSetInitialTime (false)
-	, mOutputStartTime (numeric_limits<double>::quiet_NaN())
-	, mIsSetOutputStartTime (false)
-	, mOutputEndTime (numeric_limits<double>::quiet_NaN())
-	, mIsSetOutputEndTime (false)
-	, mNumberOfPoints (SEDML_INT_MAX)
-	, mIsSetNumberOfPoints (false)
+SedUniformTimeCourse::SedUniformTimeCourse(unsigned int level, unsigned int version)
+  : SedSimulation(level, version)
+  , mInitialTime(numeric_limits<double>::quiet_NaN())
+  , mIsSetInitialTime(false)
+  , mOutputStartTime(numeric_limits<double>::quiet_NaN())
+  , mIsSetOutputStartTime(false)
+  , mOutputEndTime(numeric_limits<double>::quiet_NaN())
+  , mIsSetOutputEndTime(false)
+  , mNumberOfPoints(SEDML_INT_MAX)
+  , mIsSetNumberOfPoints(false)
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedUniformTimeCourse with the given SedNamespaces object.
  */
-SedUniformTimeCourse::SedUniformTimeCourse (SedNamespaces* sedns)
-	: SedSimulation(sedns)
-	, mInitialTime (numeric_limits<double>::quiet_NaN())
-	, mIsSetInitialTime (false)
-	, mOutputStartTime (numeric_limits<double>::quiet_NaN())
-	, mIsSetOutputStartTime (false)
-	, mOutputEndTime (numeric_limits<double>::quiet_NaN())
-	, mIsSetOutputEndTime (false)
-	, mNumberOfPoints (SEDML_INT_MAX)
-	, mIsSetNumberOfPoints (false)
+SedUniformTimeCourse::SedUniformTimeCourse(SedNamespaces* sedns)
+  : SedSimulation(sedns)
+  , mInitialTime(numeric_limits<double>::quiet_NaN())
+  , mIsSetInitialTime(false)
+  , mOutputStartTime(numeric_limits<double>::quiet_NaN())
+  , mIsSetOutputStartTime(false)
+  , mOutputEndTime(numeric_limits<double>::quiet_NaN())
+  , mIsSetOutputEndTime(false)
+  , mNumberOfPoints(SEDML_INT_MAX)
+  , mIsSetNumberOfPoints(false)
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedUniformTimeCourse.
  */
-SedUniformTimeCourse::SedUniformTimeCourse (const SedUniformTimeCourse& orig)
-	: SedSimulation(orig)
+SedUniformTimeCourse::SedUniformTimeCourse(const SedUniformTimeCourse& orig)
+  : SedSimulation(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mInitialTime  = orig.mInitialTime;
-		mIsSetInitialTime  = orig.mIsSetInitialTime;
-		mOutputStartTime  = orig.mOutputStartTime;
-		mIsSetOutputStartTime  = orig.mIsSetOutputStartTime;
-		mOutputEndTime  = orig.mOutputEndTime;
-		mIsSetOutputEndTime  = orig.mIsSetOutputEndTime;
-		mNumberOfPoints  = orig.mNumberOfPoints;
-		mIsSetNumberOfPoints  = orig.mIsSetNumberOfPoints;
-	}
+  mInitialTime  = orig.mInitialTime;
+  mIsSetInitialTime  = orig.mIsSetInitialTime;
+  mOutputStartTime  = orig.mOutputStartTime;
+  mIsSetOutputStartTime  = orig.mIsSetOutputStartTime;
+  mOutputEndTime  = orig.mOutputEndTime;
+  mIsSetOutputEndTime  = orig.mIsSetOutputEndTime;
+  mNumberOfPoints  = orig.mNumberOfPoints;
+  mIsSetNumberOfPoints  = orig.mIsSetNumberOfPoints;
 }
 
 
@@ -115,23 +108,20 @@ SedUniformTimeCourse::SedUniformTimeCourse (const SedUniformTimeCourse& orig)
 SedUniformTimeCourse&
 SedUniformTimeCourse::operator=(const SedUniformTimeCourse& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedSimulation::operator=(rhs);
-		mInitialTime  = rhs.mInitialTime;
-		mIsSetInitialTime  = rhs.mIsSetInitialTime;
-		mOutputStartTime  = rhs.mOutputStartTime;
-		mIsSetOutputStartTime  = rhs.mIsSetOutputStartTime;
-		mOutputEndTime  = rhs.mOutputEndTime;
-		mIsSetOutputEndTime  = rhs.mIsSetOutputEndTime;
-		mNumberOfPoints  = rhs.mNumberOfPoints;
-		mIsSetNumberOfPoints  = rhs.mIsSetNumberOfPoints;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedSimulation::operator=(rhs);
+      mInitialTime  = rhs.mInitialTime;
+      mIsSetInitialTime  = rhs.mIsSetInitialTime;
+      mOutputStartTime  = rhs.mOutputStartTime;
+      mIsSetOutputStartTime  = rhs.mIsSetOutputStartTime;
+      mOutputEndTime  = rhs.mOutputEndTime;
+      mIsSetOutputEndTime  = rhs.mIsSetOutputEndTime;
+      mNumberOfPoints  = rhs.mNumberOfPoints;
+      mIsSetNumberOfPoints  = rhs.mIsSetNumberOfPoints;
+    }
+
+  return *this;
 }
 
 
@@ -139,16 +129,16 @@ SedUniformTimeCourse::operator=(const SedUniformTimeCourse& rhs)
  * Clone for SedUniformTimeCourse.
  */
 SedUniformTimeCourse*
-SedUniformTimeCourse::clone () const
+SedUniformTimeCourse::clone() const
 {
-	return new SedUniformTimeCourse(*this);
+  return new SedUniformTimeCourse(*this);
 }
 
 
 /*
  * Destructor for SedUniformTimeCourse.
  */
-SedUniformTimeCourse::~SedUniformTimeCourse ()
+SedUniformTimeCourse::~SedUniformTimeCourse()
 {
 }
 
@@ -159,7 +149,7 @@ SedUniformTimeCourse::~SedUniformTimeCourse ()
 const double
 SedUniformTimeCourse::getInitialTime() const
 {
-	return mInitialTime;
+  return mInitialTime;
 }
 
 
@@ -169,7 +159,7 @@ SedUniformTimeCourse::getInitialTime() const
 const double
 SedUniformTimeCourse::getOutputStartTime() const
 {
-	return mOutputStartTime;
+  return mOutputStartTime;
 }
 
 
@@ -179,7 +169,7 @@ SedUniformTimeCourse::getOutputStartTime() const
 const double
 SedUniformTimeCourse::getOutputEndTime() const
 {
-	return mOutputEndTime;
+  return mOutputEndTime;
 }
 
 
@@ -189,7 +179,7 @@ SedUniformTimeCourse::getOutputEndTime() const
 const int
 SedUniformTimeCourse::getNumberOfPoints() const
 {
-	return mNumberOfPoints;
+  return mNumberOfPoints;
 }
 
 
@@ -199,7 +189,7 @@ SedUniformTimeCourse::getNumberOfPoints() const
 bool
 SedUniformTimeCourse::isSetInitialTime() const
 {
-	return mIsSetInitialTime;
+  return mIsSetInitialTime;
 }
 
 
@@ -209,7 +199,7 @@ SedUniformTimeCourse::isSetInitialTime() const
 bool
 SedUniformTimeCourse::isSetOutputStartTime() const
 {
-	return mIsSetOutputStartTime;
+  return mIsSetOutputStartTime;
 }
 
 
@@ -219,7 +209,7 @@ SedUniformTimeCourse::isSetOutputStartTime() const
 bool
 SedUniformTimeCourse::isSetOutputEndTime() const
 {
-	return mIsSetOutputEndTime;
+  return mIsSetOutputEndTime;
 }
 
 
@@ -229,7 +219,7 @@ SedUniformTimeCourse::isSetOutputEndTime() const
 bool
 SedUniformTimeCourse::isSetNumberOfPoints() const
 {
-	return mIsSetNumberOfPoints;
+  return mIsSetNumberOfPoints;
 }
 
 
@@ -239,9 +229,9 @@ SedUniformTimeCourse::isSetNumberOfPoints() const
 int
 SedUniformTimeCourse::setInitialTime(double initialTime)
 {
-	mInitialTime = initialTime;
-	mIsSetInitialTime = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mInitialTime = initialTime;
+  mIsSetInitialTime = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -251,9 +241,9 @@ SedUniformTimeCourse::setInitialTime(double initialTime)
 int
 SedUniformTimeCourse::setOutputStartTime(double outputStartTime)
 {
-	mOutputStartTime = outputStartTime;
-	mIsSetOutputStartTime = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mOutputStartTime = outputStartTime;
+  mIsSetOutputStartTime = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -263,9 +253,9 @@ SedUniformTimeCourse::setOutputStartTime(double outputStartTime)
 int
 SedUniformTimeCourse::setOutputEndTime(double outputEndTime)
 {
-	mOutputEndTime = outputEndTime;
-	mIsSetOutputEndTime = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mOutputEndTime = outputEndTime;
+  mIsSetOutputEndTime = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -275,9 +265,9 @@ SedUniformTimeCourse::setOutputEndTime(double outputEndTime)
 int
 SedUniformTimeCourse::setNumberOfPoints(int numberOfPoints)
 {
-	mNumberOfPoints = numberOfPoints;
-	mIsSetNumberOfPoints = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mNumberOfPoints = numberOfPoints;
+  mIsSetNumberOfPoints = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -287,17 +277,17 @@ SedUniformTimeCourse::setNumberOfPoints(int numberOfPoints)
 int
 SedUniformTimeCourse::unsetInitialTime()
 {
-	mInitialTime = numeric_limits<double>::quiet_NaN();
-	mIsSetInitialTime = false;
+  mInitialTime = numeric_limits<double>::quiet_NaN();
+  mIsSetInitialTime = false;
 
-	if (isSetInitialTime() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetInitialTime() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -307,17 +297,17 @@ SedUniformTimeCourse::unsetInitialTime()
 int
 SedUniformTimeCourse::unsetOutputStartTime()
 {
-	mOutputStartTime = numeric_limits<double>::quiet_NaN();
-	mIsSetOutputStartTime = false;
+  mOutputStartTime = numeric_limits<double>::quiet_NaN();
+  mIsSetOutputStartTime = false;
 
-	if (isSetOutputStartTime() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetOutputStartTime() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -327,17 +317,17 @@ SedUniformTimeCourse::unsetOutputStartTime()
 int
 SedUniformTimeCourse::unsetOutputEndTime()
 {
-	mOutputEndTime = numeric_limits<double>::quiet_NaN();
-	mIsSetOutputEndTime = false;
+  mOutputEndTime = numeric_limits<double>::quiet_NaN();
+  mIsSetOutputEndTime = false;
 
-	if (isSetOutputEndTime() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetOutputEndTime() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -347,17 +337,17 @@ SedUniformTimeCourse::unsetOutputEndTime()
 int
 SedUniformTimeCourse::unsetNumberOfPoints()
 {
-	mNumberOfPoints = SEDML_INT_MAX;
-	mIsSetNumberOfPoints = false;
+  mNumberOfPoints = SEDML_INT_MAX;
+  mIsSetNumberOfPoints = false;
 
-	if (isSetNumberOfPoints() == false)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (isSetNumberOfPoints() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -365,10 +355,10 @@ SedUniformTimeCourse::unsetNumberOfPoints()
  * Returns the XML element name of this object
  */
 const std::string&
-SedUniformTimeCourse::getElementName () const
+SedUniformTimeCourse::getElementName() const
 {
-	static const string name = "uniformTimeCourse";
-	return name;
+  static const string name = "uniformTimeCourse";
+  return name;
 }
 
 
@@ -378,11 +368,11 @@ SedUniformTimeCourse::getElementName () const
 SedBase*
 SedUniformTimeCourse::createObject(XMLInputStream& stream)
 {
-	SedBase* object = SedSimulation::createObject(stream);
+  SedBase* object = SedSimulation::createObject(stream);
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -390,9 +380,9 @@ SedUniformTimeCourse::createObject(XMLInputStream& stream)
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedUniformTimeCourse::getTypeCode () const
+SedUniformTimeCourse::getTypeCode() const
 {
-	return SEDML_SIMULATION_UNIFORMTIMECOURSE;
+  return SEDML_SIMULATION_UNIFORMTIMECOURSE;
 }
 
 
@@ -400,23 +390,23 @@ SedUniformTimeCourse::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedUniformTimeCourse::hasRequiredAttributes () const
+SedUniformTimeCourse::hasRequiredAttributes() const
 {
-	bool allPresent = SedSimulation::hasRequiredAttributes();
+  bool allPresent = SedSimulation::hasRequiredAttributes();
 
-	if (isSetInitialTime() == false)
-		allPresent = false;
+  if (isSetInitialTime() == false)
+    allPresent = false;
 
-	if (isSetOutputStartTime() == false)
-		allPresent = false;
+  if (isSetOutputStartTime() == false)
+    allPresent = false;
 
-	if (isSetOutputEndTime() == false)
-		allPresent = false;
+  if (isSetOutputEndTime() == false)
+    allPresent = false;
 
-	if (isSetNumberOfPoints() == false)
-		allPresent = false;
+  if (isSetNumberOfPoints() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -426,9 +416,9 @@ SedUniformTimeCourse::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedUniformTimeCourse::writeElements (XMLOutputStream& stream) const
+SedUniformTimeCourse::writeElements(XMLOutputStream& stream) const
 {
-	SedSimulation::writeElements(stream);
+  SedSimulation::writeElements(stream);
 }
 
 
@@ -441,9 +431,9 @@ SedUniformTimeCourse::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedUniformTimeCourse::accept (SedVisitor& v) const
+SedUniformTimeCourse::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -457,9 +447,9 @@ SedUniformTimeCourse::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedUniformTimeCourse::setSedDocument (SedDocument* d)
+SedUniformTimeCourse::setSedDocument(SedDocument* d)
 {
-	SedSimulation::setSedDocument(d);
+  SedSimulation::setSedDocument(d);
 }
 
 
@@ -474,12 +464,12 @@ SedUniformTimeCourse::setSedDocument (SedDocument* d)
 void
 SedUniformTimeCourse::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedSimulation::addExpectedAttributes(attributes);
+  SedSimulation::addExpectedAttributes(attributes);
 
-	attributes.add("initialTime");
-	attributes.add("outputStartTime");
-	attributes.add("outputEndTime");
-	attributes.add("numberOfPoints");
+  attributes.add("initialTime");
+  attributes.add("outputStartTime");
+  attributes.add("outputEndTime");
+  attributes.add("numberOfPoints");
 }
 
 
@@ -492,32 +482,32 @@ SedUniformTimeCourse::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedUniformTimeCourse::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedUniformTimeCourse::readAttributes(const XMLAttributes& attributes,
+                                     const ExpectedAttributes& expectedAttributes)
 {
-	SedSimulation::readAttributes(attributes, expectedAttributes);
+  SedSimulation::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  //bool assigned = false;
 
-	//
-	// initialTime double   ( use = "required" )
-	//
-	mIsSetInitialTime = attributes.readInto("initialTime", mInitialTime, getErrorLog(), true);
+  //
+  // initialTime double   ( use = "required" )
+  //
+  mIsSetInitialTime = attributes.readInto("initialTime", mInitialTime, getErrorLog(), true);
 
-	//
-	// outputStartTime double   ( use = "required" )
-	//
-	mIsSetOutputStartTime = attributes.readInto("outputStartTime", mOutputStartTime, getErrorLog(), true);
+  //
+  // outputStartTime double   ( use = "required" )
+  //
+  mIsSetOutputStartTime = attributes.readInto("outputStartTime", mOutputStartTime, getErrorLog(), true);
 
-	//
-	// outputEndTime double   ( use = "required" )
-	//
-	mIsSetOutputEndTime = attributes.readInto("outputEndTime", mOutputEndTime, getErrorLog(), true);
+  //
+  // outputEndTime double   ( use = "required" )
+  //
+  mIsSetOutputEndTime = attributes.readInto("outputEndTime", mOutputEndTime, getErrorLog(), true);
 
-	//
-	// numberOfPoints int   ( use = "required" )
-	//
-	mIsSetNumberOfPoints = attributes.readInto("numberOfPoints", mNumberOfPoints, getErrorLog(), true);
+  //
+  // numberOfPoints int   ( use = "required" )
+  //
+  mIsSetNumberOfPoints = attributes.readInto("numberOfPoints", mNumberOfPoints, getErrorLog(), true);
 
 }
 
@@ -530,22 +520,22 @@ SedUniformTimeCourse::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedUniformTimeCourse::writeAttributes (XMLOutputStream& stream) const
+void
+SedUniformTimeCourse::writeAttributes(XMLOutputStream& stream) const
 {
-	SedSimulation::writeAttributes(stream);
+  SedSimulation::writeAttributes(stream);
 
-	if (isSetInitialTime() == true)
-		stream.writeAttribute("initialTime", getPrefix(), mInitialTime);
+  if (isSetInitialTime() == true)
+    stream.writeAttribute("initialTime", getPrefix(), mInitialTime);
 
-	if (isSetOutputStartTime() == true)
-		stream.writeAttribute("outputStartTime", getPrefix(), mOutputStartTime);
+  if (isSetOutputStartTime() == true)
+    stream.writeAttribute("outputStartTime", getPrefix(), mOutputStartTime);
 
-	if (isSetOutputEndTime() == true)
-		stream.writeAttribute("outputEndTime", getPrefix(), mOutputEndTime);
+  if (isSetOutputEndTime() == true)
+    stream.writeAttribute("outputEndTime", getPrefix(), mOutputEndTime);
 
-	if (isSetNumberOfPoints() == true)
-		stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfPoints);
+  if (isSetNumberOfPoints() == true)
+    stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfPoints);
 
 }
 
@@ -560,7 +550,7 @@ LIBSEDML_EXTERN
 SedUniformTimeCourse_t *
 SedUniformTimeCourse_create(unsigned int level, unsigned int version)
 {
-	return new SedUniformTimeCourse(level, version);
+  return new SedUniformTimeCourse(level, version);
 }
 
 
@@ -571,8 +561,8 @@ LIBSEDML_EXTERN
 void
 SedUniformTimeCourse_free(SedUniformTimeCourse_t * sutc)
 {
-	if (sutc != NULL)
-		delete sutc;
+  if (sutc != NULL)
+    delete sutc;
 }
 
 
@@ -583,14 +573,14 @@ LIBSEDML_EXTERN
 SedUniformTimeCourse_t *
 SedUniformTimeCourse_clone(SedUniformTimeCourse_t * sutc)
 {
-	if (sutc != NULL)
-	{
-		return static_cast<SedUniformTimeCourse_t*>(sutc->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sutc != NULL)
+    {
+      return static_cast<SedUniformTimeCourse_t*>(sutc->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -601,7 +591,7 @@ LIBSEDML_EXTERN
 double
 SedUniformTimeCourse_getInitialTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->getInitialTime() : numeric_limits<double>::quiet_NaN();
+  return (sutc != NULL) ? sutc->getInitialTime() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -612,7 +602,7 @@ LIBSEDML_EXTERN
 double
 SedUniformTimeCourse_getOutputStartTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->getOutputStartTime() : numeric_limits<double>::quiet_NaN();
+  return (sutc != NULL) ? sutc->getOutputStartTime() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -623,7 +613,7 @@ LIBSEDML_EXTERN
 double
 SedUniformTimeCourse_getOutputEndTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->getOutputEndTime() : numeric_limits<double>::quiet_NaN();
+  return (sutc != NULL) ? sutc->getOutputEndTime() : numeric_limits<double>::quiet_NaN();
 }
 
 
@@ -634,7 +624,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_getNumberOfPoints(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->getNumberOfPoints() : SEDML_INT_MAX;
+  return (sutc != NULL) ? sutc->getNumberOfPoints() : SEDML_INT_MAX;
 }
 
 
@@ -645,7 +635,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_isSetInitialTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? static_cast<int>(sutc->isSetInitialTime()) : 0;
+  return (sutc != NULL) ? static_cast<int>(sutc->isSetInitialTime()) : 0;
 }
 
 
@@ -656,7 +646,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_isSetOutputStartTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? static_cast<int>(sutc->isSetOutputStartTime()) : 0;
+  return (sutc != NULL) ? static_cast<int>(sutc->isSetOutputStartTime()) : 0;
 }
 
 
@@ -667,7 +657,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_isSetOutputEndTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? static_cast<int>(sutc->isSetOutputEndTime()) : 0;
+  return (sutc != NULL) ? static_cast<int>(sutc->isSetOutputEndTime()) : 0;
 }
 
 
@@ -678,7 +668,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_isSetNumberOfPoints(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? static_cast<int>(sutc->isSetNumberOfPoints()) : 0;
+  return (sutc != NULL) ? static_cast<int>(sutc->isSetNumberOfPoints()) : 0;
 }
 
 
@@ -689,7 +679,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_setInitialTime(SedUniformTimeCourse_t * sutc, double initialTime)
 {
-	return (sutc != NULL) ? sutc->setInitialTime(initialTime) : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->setInitialTime(initialTime) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -700,7 +690,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_setOutputStartTime(SedUniformTimeCourse_t * sutc, double outputStartTime)
 {
-	return (sutc != NULL) ? sutc->setOutputStartTime(outputStartTime) : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->setOutputStartTime(outputStartTime) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -711,7 +701,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_setOutputEndTime(SedUniformTimeCourse_t * sutc, double outputEndTime)
 {
-	return (sutc != NULL) ? sutc->setOutputEndTime(outputEndTime) : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->setOutputEndTime(outputEndTime) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -722,7 +712,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_setNumberOfPoints(SedUniformTimeCourse_t * sutc, int numberOfPoints)
 {
-	return (sutc != NULL) ? sutc->setNumberOfPoints(numberOfPoints) : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->setNumberOfPoints(numberOfPoints) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -733,7 +723,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_unsetInitialTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->unsetInitialTime() : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->unsetInitialTime() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -744,7 +734,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_unsetOutputStartTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->unsetOutputStartTime() : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->unsetOutputStartTime() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -755,7 +745,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_unsetOutputEndTime(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->unsetOutputEndTime() : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->unsetOutputEndTime() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -766,7 +756,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_unsetNumberOfPoints(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? sutc->unsetNumberOfPoints() : LIBSEDML_INVALID_OBJECT;
+  return (sutc != NULL) ? sutc->unsetNumberOfPoints() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -777,7 +767,7 @@ LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_hasRequiredAttributes(SedUniformTimeCourse_t * sutc)
 {
-	return (sutc != NULL) ? static_cast<int>(sutc->hasRequiredAttributes()) : 0;
+  return (sutc != NULL) ? static_cast<int>(sutc->hasRequiredAttributes()) : 0;
 }
 
 

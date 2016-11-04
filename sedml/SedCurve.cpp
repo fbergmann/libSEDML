@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,64 +48,75 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedCurve with the given level, version, and package version.
  */
-SedCurve::SedCurve (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
-	, mName ("")
-	, mLogX (false)
-	, mIsSetLogX (false)
-	, mLogY (false)
-	, mIsSetLogY (false)
-	, mXDataReference ("")
-	, mYDataReference ("")
+SedCurve::SedCurve(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
+  , mName("")
+  , mLogX(false)
+  , mIsSetLogX(false)
+  , mLogY(false)
+  , mIsSetLogY(false)
+  , mXDataReference("")
+  , mYDataReference("")
+  , mLineColor("")
+  , mFillColor("")
+  , mSymbol("")
+  , mLineThickness(numeric_limits<double>::quiet_NaN())
+  , mIsSetLineThickness(false)
+  , mLineStyle("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
  * Creates a new SedCurve with the given SedNamespaces object.
  */
-SedCurve::SedCurve (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
-	, mName ("")
-	, mLogX (false)
-	, mIsSetLogX (false)
-	, mLogY (false)
-	, mIsSetLogY (false)
-	, mXDataReference ("")
-	, mYDataReference ("")
+SedCurve::SedCurve(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
+  , mName("")
+  , mLogX(false)
+  , mIsSetLogX(false)
+  , mLogY(false)
+  , mIsSetLogY(false)
+  , mXDataReference("")
+  , mYDataReference("")
+  , mLineColor("")
+  , mFillColor("")
+  , mSymbol("")
+  , mLineThickness(numeric_limits<double>::quiet_NaN())
+  , mIsSetLineThickness(false)
+  , mLineStyle("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
  * Copy constructor for SedCurve.
  */
-SedCurve::SedCurve (const SedCurve& orig)
-	: SedBase(orig)
+SedCurve::SedCurve(const SedCurve& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-		mName  = orig.mName;
-		mLogX  = orig.mLogX;
-		mIsSetLogX  = orig.mIsSetLogX;
-		mLogY  = orig.mLogY;
-		mIsSetLogY  = orig.mIsSetLogY;
-		mXDataReference  = orig.mXDataReference;
-		mYDataReference  = orig.mYDataReference;
-	}
+  mId  = orig.mId;
+  mName  = orig.mName;
+  mLogX  = orig.mLogX;
+  mIsSetLogX  = orig.mIsSetLogX;
+  mLogY  = orig.mLogY;
+  mIsSetLogY  = orig.mIsSetLogY;
+  mXDataReference  = orig.mXDataReference;
+  mYDataReference  = orig.mYDataReference;
+  mLineColor  = orig.mLineColor;
+  mFillColor  = orig.mFillColor;
+  mSymbol  = orig.mSymbol;
+  mLineThickness  = orig.mLineThickness;
+  mIsSetLineThickness  = orig.mIsSetLineThickness;
+  mLineStyle  = orig.mLineStyle;
 }
 
 
@@ -115,23 +126,26 @@ SedCurve::SedCurve (const SedCurve& orig)
 SedCurve&
 SedCurve::operator=(const SedCurve& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-		mName  = rhs.mName;
-		mLogX  = rhs.mLogX;
-		mIsSetLogX  = rhs.mIsSetLogX;
-		mLogY  = rhs.mLogY;
-		mIsSetLogY  = rhs.mIsSetLogY;
-		mXDataReference  = rhs.mXDataReference;
-		mYDataReference  = rhs.mYDataReference;
-	}
-	return *this;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+      mName  = rhs.mName;
+      mLogX  = rhs.mLogX;
+      mIsSetLogX  = rhs.mIsSetLogX;
+      mLogY  = rhs.mLogY;
+      mIsSetLogY  = rhs.mIsSetLogY;
+      mXDataReference  = rhs.mXDataReference;
+      mYDataReference  = rhs.mYDataReference;
+      mLineColor  = rhs.mLineColor;
+      mFillColor  = rhs.mFillColor;
+      mSymbol  = rhs.mSymbol;
+      mLineThickness  = rhs.mLineThickness;
+      mIsSetLineThickness  = rhs.mIsSetLineThickness;
+      mLineStyle  = rhs.mLineStyle;
+    }
+
+  return *this;
 }
 
 
@@ -139,16 +153,16 @@ SedCurve::operator=(const SedCurve& rhs)
  * Clone for SedCurve.
  */
 SedCurve*
-SedCurve::clone () const
+SedCurve::clone() const
 {
-	return new SedCurve(*this);
+  return new SedCurve(*this);
 }
 
 
 /*
  * Destructor for SedCurve.
  */
-SedCurve::~SedCurve ()
+SedCurve::~SedCurve()
 {
 }
 
@@ -159,7 +173,7 @@ SedCurve::~SedCurve ()
 const std::string&
 SedCurve::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -169,7 +183,7 @@ SedCurve::getId() const
 const std::string&
 SedCurve::getName() const
 {
-	return mName;
+  return mName;
 }
 
 
@@ -179,7 +193,7 @@ SedCurve::getName() const
 const bool
 SedCurve::getLogX() const
 {
-	return mLogX;
+  return mLogX;
 }
 
 
@@ -189,7 +203,7 @@ SedCurve::getLogX() const
 const bool
 SedCurve::getLogY() const
 {
-	return mLogY;
+  return mLogY;
 }
 
 
@@ -199,7 +213,7 @@ SedCurve::getLogY() const
 const std::string&
 SedCurve::getXDataReference() const
 {
-	return mXDataReference;
+  return mXDataReference;
 }
 
 
@@ -209,7 +223,57 @@ SedCurve::getXDataReference() const
 const std::string&
 SedCurve::getYDataReference() const
 {
-	return mYDataReference;
+  return mYDataReference;
+}
+
+
+/*
+ * Returns the value of the "lineColor" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getLineColor() const
+{
+  return mLineColor;
+}
+
+
+/*
+ * Returns the value of the "fillColor" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getFillColor() const
+{
+  return mFillColor;
+}
+
+
+/*
+ * Returns the value of the "symbol" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getSymbol() const
+{
+  return mSymbol;
+}
+
+
+/*
+ * Returns the value of the "lineThickness" attribute of this SedCurve.
+ */
+const double
+SedCurve::getLineThickness() const
+{
+  return mLineThickness;
+}
+
+
+/*
+ * Returns the value of the "lineStyle" attribute of this SedCurve.
+ */
+const std::string&
+SedCurve::getLineStyle() const
+{
+  return mLineStyle;
 }
 
 
@@ -219,7 +283,7 @@ SedCurve::getYDataReference() const
 bool
 SedCurve::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -229,7 +293,7 @@ SedCurve::isSetId() const
 bool
 SedCurve::isSetName() const
 {
-	return (mName.empty() == false);
+  return (mName.empty() == false);
 }
 
 
@@ -239,7 +303,7 @@ SedCurve::isSetName() const
 bool
 SedCurve::isSetLogX() const
 {
-	return mIsSetLogX;
+  return mIsSetLogX;
 }
 
 
@@ -249,7 +313,7 @@ SedCurve::isSetLogX() const
 bool
 SedCurve::isSetLogY() const
 {
-	return mIsSetLogY;
+  return mIsSetLogY;
 }
 
 
@@ -259,7 +323,7 @@ SedCurve::isSetLogY() const
 bool
 SedCurve::isSetXDataReference() const
 {
-	return (mXDataReference.empty() == false);
+  return (mXDataReference.empty() == false);
 }
 
 
@@ -269,7 +333,57 @@ SedCurve::isSetXDataReference() const
 bool
 SedCurve::isSetYDataReference() const
 {
-	return (mYDataReference.empty() == false);
+  return (mYDataReference.empty() == false);
+}
+
+
+/*
+ * Returns true/false if lineColor is set.
+ */
+bool
+SedCurve::isSetLineColor() const
+{
+  return (mLineColor.empty() == false);
+}
+
+
+/*
+ * Returns true/false if fillColor is set.
+ */
+bool
+SedCurve::isSetFillColor() const
+{
+  return (mFillColor.empty() == false);
+}
+
+
+/*
+ * Returns true/false if symbol is set.
+ */
+bool
+SedCurve::isSetSymbol() const
+{
+  return (mSymbol.empty() == false);
+}
+
+
+/*
+ * Returns true/false if lineThickness is set.
+ */
+bool
+SedCurve::isSetLineThickness() const
+{
+  return mIsSetLineThickness;
+}
+
+
+/*
+ * Returns true/false if lineStyle is set.
+ */
+bool
+SedCurve::isSetLineStyle() const
+{
+  return (mLineStyle.empty() == false);
 }
 
 
@@ -279,7 +393,7 @@ SedCurve::isSetYDataReference() const
 int
 SedCurve::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -289,15 +403,10 @@ SedCurve::setId(const std::string& id)
 int
 SedCurve::setName(const std::string& name)
 {
-	if (&(name) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mName = name;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -307,9 +416,9 @@ SedCurve::setName(const std::string& name)
 int
 SedCurve::setLogX(bool logX)
 {
-	mLogX = logX;
-	mIsSetLogX = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mLogX = logX;
+  mIsSetLogX = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -319,9 +428,9 @@ SedCurve::setLogX(bool logX)
 int
 SedCurve::setLogY(bool logY)
 {
-	mLogY = logY;
-	mIsSetLogY = true;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mLogY = logY;
+  mIsSetLogY = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -331,19 +440,15 @@ SedCurve::setLogY(bool logY)
 int
 SedCurve::setXDataReference(const std::string& xDataReference)
 {
-	if (&(xDataReference) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(xDataReference)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mXDataReference = xDataReference;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(xDataReference)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mXDataReference = xDataReference;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
 }
 
 
@@ -353,19 +458,79 @@ SedCurve::setXDataReference(const std::string& xDataReference)
 int
 SedCurve::setYDataReference(const std::string& yDataReference)
 {
-	if (&(yDataReference) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else if (!(SyntaxChecker::isValidInternalSId(yDataReference)))
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mYDataReference = yDataReference;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  if (!(SyntaxChecker::isValidInternalSId(yDataReference)))
+    {
+      return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+    }
+  else
+    {
+      mYDataReference = yDataReference;
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+}
+
+
+/*
+ * Sets lineColor and returns value indicating success.
+ */
+int
+SedCurve::setLineColor(const std::string& lineColor)
+{
+  {
+    mLineColor = lineColor;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets fillColor and returns value indicating success.
+ */
+int
+SedCurve::setFillColor(const std::string& fillColor)
+{
+  {
+    mFillColor = fillColor;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets symbol and returns value indicating success.
+ */
+int
+SedCurve::setSymbol(const std::string& symbol)
+{
+  {
+    mSymbol = symbol;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets lineThickness and returns value indicating success.
+ */
+int
+SedCurve::setLineThickness(double lineThickness)
+{
+  mLineThickness = lineThickness;
+  mIsSetLineThickness = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets lineStyle and returns value indicating success.
+ */
+int
+SedCurve::setLineStyle(const std::string& lineStyle)
+{
+  {
+    mLineStyle = lineStyle;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -375,16 +540,16 @@ SedCurve::setYDataReference(const std::string& yDataReference)
 int
 SedCurve::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -394,16 +559,16 @@ SedCurve::unsetId()
 int
 SedCurve::unsetName()
 {
-	mName.erase();
+  mName.erase();
 
-	if (mName.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -413,9 +578,9 @@ SedCurve::unsetName()
 int
 SedCurve::unsetLogX()
 {
-	mLogX = false;
-	mIsSetLogX = false;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mLogX = false;
+  mIsSetLogX = false;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -425,9 +590,9 @@ SedCurve::unsetLogX()
 int
 SedCurve::unsetLogY()
 {
-	mLogY = false;
-	mIsSetLogY = false;
-	return LIBSEDML_OPERATION_SUCCESS;
+  mLogY = false;
+  mIsSetLogY = false;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -437,16 +602,16 @@ SedCurve::unsetLogY()
 int
 SedCurve::unsetXDataReference()
 {
-	mXDataReference.erase();
+  mXDataReference.erase();
 
-	if (mXDataReference.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mXDataReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -456,16 +621,112 @@ SedCurve::unsetXDataReference()
 int
 SedCurve::unsetYDataReference()
 {
-	mYDataReference.erase();
+  mYDataReference.erase();
 
-	if (mYDataReference.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mYDataReference.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets lineColor and returns value indicating success.
+ */
+int
+SedCurve::unsetLineColor()
+{
+  mLineColor.erase();
+
+  if (mLineColor.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets fillColor and returns value indicating success.
+ */
+int
+SedCurve::unsetFillColor()
+{
+  mFillColor.erase();
+
+  if (mFillColor.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets symbol and returns value indicating success.
+ */
+int
+SedCurve::unsetSymbol()
+{
+  mSymbol.erase();
+
+  if (mSymbol.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets lineThickness and returns value indicating success.
+ */
+int
+SedCurve::unsetLineThickness()
+{
+  mLineThickness = numeric_limits<double>::quiet_NaN();
+  mIsSetLineThickness = false;
+
+  if (isSetLineThickness() == false)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets lineStyle and returns value indicating success.
+ */
+int
+SedCurve::unsetLineStyle()
+{
+  mLineStyle.erase();
+
+  if (mLineStyle.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -473,10 +734,10 @@ SedCurve::unsetYDataReference()
  * Returns the XML element name of this object
  */
 const std::string&
-SedCurve::getElementName () const
+SedCurve::getElementName() const
 {
-	static const string name = "curve";
-	return name;
+  static const string name = "curve";
+  return name;
 }
 
 
@@ -484,9 +745,9 @@ SedCurve::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedCurve::getTypeCode () const
+SedCurve::getTypeCode() const
 {
-	return SEDML_OUTPUT_CURVE;
+  return SEDML_OUTPUT_CURVE;
 }
 
 
@@ -494,23 +755,23 @@ SedCurve::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedCurve::hasRequiredAttributes () const
+SedCurve::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetLogX() == false)
-		allPresent = false;
+  if (isSetLogX() == false)
+    allPresent = false;
 
-	if (isSetLogY() == false)
-		allPresent = false;
+  if (isSetLogY() == false)
+    allPresent = false;
 
-	if (isSetXDataReference() == false)
-		allPresent = false;
+  if (isSetXDataReference() == false)
+    allPresent = false;
 
-	if (isSetYDataReference() == false)
-		allPresent = false;
+  if (isSetYDataReference() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -520,9 +781,9 @@ SedCurve::hasRequiredAttributes () const
  * write contained elements
  */
 void
-SedCurve::writeElements (XMLOutputStream& stream) const
+SedCurve::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -535,9 +796,9 @@ SedCurve::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedCurve::accept (SedVisitor& v) const
+SedCurve::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -551,9 +812,9 @@ SedCurve::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedCurve::setSedDocument (SedDocument* d)
+SedCurve::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -568,14 +829,19 @@ SedCurve::setSedDocument (SedDocument* d)
 void
 SedCurve::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
-	attributes.add("name");
-	attributes.add("logX");
-	attributes.add("logY");
-	attributes.add("xDataReference");
-	attributes.add("yDataReference");
+  attributes.add("id");
+  attributes.add("name");
+  attributes.add("logX");
+  attributes.add("logY");
+  attributes.add("xDataReference");
+  attributes.add("yDataReference");
+  attributes.add("lineColor");
+  attributes.add("fillColor");
+  attributes.add("symbol");
+  attributes.add("lineThickness");
+  attributes.add("lineStyle");
 }
 
 
@@ -588,94 +854,159 @@ SedCurve::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedCurve::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedCurve::readAttributes(const XMLAttributes& attributes,
+                         const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "optional" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), false);
+  //
+  // id SId  ( use = "optional" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedCurve>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedCurve>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// name string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("name", mName, getErrorLog(), false);
+  //
+  // name string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("name", mName, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mName.empty() == true)
-		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedCurve>");
-		}
-	}
+      if (mName.empty() == true)
+        {
+          logEmptyString(mName, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
 
-	//
-	// logX bool   ( use = "required" )
-	//
-	mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), true);
+  //
+  // logX bool   ( use = "required" )
+  //
+  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), true);
 
-	//
-	// logY bool   ( use = "required" )
-	//
-	mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), true);
+  //
+  // logY bool   ( use = "required" )
+  //
+  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), true);
 
-	//
-	// xDataReference SIdRef   ( use = "required" )
-	//
-	assigned = attributes.readInto("xDataReference", mXDataReference, getErrorLog(), true);
+  //
+  // xDataReference SIdRef   ( use = "required" )
+  //
+  assigned = attributes.readInto("xDataReference", mXDataReference, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mXDataReference.empty() == true)
-		{
-			logEmptyString(mXDataReference, getLevel(), getVersion(), "<SedCurve>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mXDataReference) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mXDataReference.empty() == true)
+        {
+          logEmptyString(mXDataReference, getLevel(), getVersion(), "<SedCurve>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mXDataReference) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// yDataReference SIdRef   ( use = "required" )
-	//
-	assigned = attributes.readInto("yDataReference", mYDataReference, getErrorLog(), true);
+  //
+  // yDataReference SIdRef   ( use = "required" )
+  //
+  assigned = attributes.readInto("yDataReference", mYDataReference, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mYDataReference.empty() == true)
-		{
-			logEmptyString(mYDataReference, getLevel(), getVersion(), "<SedCurve>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mYDataReference) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mYDataReference.empty() == true)
+        {
+          logEmptyString(mYDataReference, getLevel(), getVersion(), "<SedCurve>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mYDataReference) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
+
+  //
+  // lineColor string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("lineColor", mLineColor, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mLineColor.empty() == true)
+        {
+          logEmptyString(mLineColor, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
+  //
+  // fillColor string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("fillColor", mFillColor, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mFillColor.empty() == true)
+        {
+          logEmptyString(mFillColor, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
+  //
+  // symbol string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("symbol", mSymbol, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mSymbol.empty() == true)
+        {
+          logEmptyString(mSymbol, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
+
+  //
+  // lineThickness double   ( use = "optional" )
+  //
+  mIsSetLineThickness = attributes.readInto("lineThickness", mLineThickness, getErrorLog(), false);
+
+  //
+  // lineStyle string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("lineStyle", mLineStyle, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mLineStyle.empty() == true)
+        {
+          logEmptyString(mLineStyle, getLevel(), getVersion(), "<SedCurve>");
+        }
+    }
 
 }
 
@@ -688,28 +1019,43 @@ SedCurve::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedCurve::writeAttributes (XMLOutputStream& stream) const
+void
+SedCurve::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
-	if (isSetName() == true)
-		stream.writeAttribute("name", getPrefix(), mName);
+  if (isSetName() == true)
+    stream.writeAttribute("name", getPrefix(), mName);
 
-	if (isSetLogX() == true)
-		stream.writeAttribute("logX", getPrefix(), mLogX);
+  if (isSetLogX() == true)
+    stream.writeAttribute("logX", getPrefix(), mLogX);
 
-	if (isSetLogY() == true)
-		stream.writeAttribute("logY", getPrefix(), mLogY);
+  if (isSetLogY() == true)
+    stream.writeAttribute("logY", getPrefix(), mLogY);
 
-	if (isSetXDataReference() == true)
-		stream.writeAttribute("xDataReference", getPrefix(), mXDataReference);
+  if (isSetXDataReference() == true)
+    stream.writeAttribute("xDataReference", getPrefix(), mXDataReference);
 
-	if (isSetYDataReference() == true)
-		stream.writeAttribute("yDataReference", getPrefix(), mYDataReference);
+  if (isSetYDataReference() == true)
+    stream.writeAttribute("yDataReference", getPrefix(), mYDataReference);
+
+  if (isSetLineColor() == true)
+    stream.writeAttribute("lineColor", getPrefix(), mLineColor);
+
+  if (isSetFillColor() == true)
+    stream.writeAttribute("fillColor", getPrefix(), mFillColor);
+
+  if (isSetSymbol() == true)
+    stream.writeAttribute("symbol", getPrefix(), mSymbol);
+
+  if (isSetLineThickness() == true)
+    stream.writeAttribute("lineThickness", getPrefix(), mLineThickness);
+
+  if (isSetLineStyle() == true)
+    stream.writeAttribute("lineStyle", getPrefix(), mLineStyle);
 
 }
 
@@ -718,33 +1064,33 @@ SedCurve::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfCurves::SedListOfCurves(unsigned int level, 
-	                unsigned int version)
- : SedListOf(level, version)
+SedListOfCurves::SedListOfCurves(unsigned int level,
+                                 unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfCurves::SedListOfCurves(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfCurves 
+ * Returns a deep copy of this SedListOfCurves
  */
-SedListOfCurves* 
-SedListOfCurves::clone () const
- {
-	return new SedListOfCurves(*this);
+SedListOfCurves*
+SedListOfCurves::clone() const
+{
+  return new SedListOfCurves(*this);
 }
 
 
@@ -754,7 +1100,7 @@ SedListOfCurves::clone () const
 SedCurve*
 SedListOfCurves::get(unsigned int n)
 {
-	return static_cast<SedCurve*>(SedListOf::get(n));
+  return static_cast<SedCurve*>(SedListOf::get(n));
 }
 
 
@@ -764,7 +1110,7 @@ SedListOfCurves::get(unsigned int n)
 const SedCurve*
 SedListOfCurves::get(unsigned int n) const
 {
-	return static_cast<const SedCurve*>(SedListOf::get(n));
+  return static_cast<const SedCurve*>(SedListOf::get(n));
 }
 
 
@@ -774,8 +1120,8 @@ SedListOfCurves::get(unsigned int n) const
 SedCurve*
 SedListOfCurves::get(const std::string& sid)
 {
-	return const_cast<SedCurve*>(
-	  static_cast<const SedListOfCurves&>(*this).get(sid));
+  return const_cast<SedCurve*>(
+           static_cast<const SedListOfCurves&>(*this).get(sid));
 }
 
 
@@ -785,10 +1131,10 @@ SedListOfCurves::get(const std::string& sid)
 const SedCurve*
 SedListOfCurves::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedCurve>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedCurve*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedCurve>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedCurve*>(*result);
 }
 
 
@@ -807,9 +1153,10 @@ SedListOfCurves::get(const std::string& sid) const
 int
 SedListOfCurves::addCurve(const SedCurve* sc)
 {
-	if(sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(sc);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (sc == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(sc);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -818,26 +1165,28 @@ SedListOfCurves::addCurve(const SedCurve* sc)
  *
  * @return the number of SedCurve objects in this SedListOfCurves
  */
-unsigned int 
+unsigned int
 SedListOfCurves::getNumCurves() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedCurve object, adds it to this SedListOfCurvess
- * SedCurve and returns the SedCurve object created. 
+ * SedCurve and returns the SedCurve object created.
  *
  * @return a new SedCurve object instance
  *
  * @see addSedCurve(const SedCurve* sc)
  */
-SedCurve* 
+SedCurve*
 SedListOfCurves::createCurve()
 {
-	SedCurve *temp = new SedCurve();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedCurve *temp = new SedCurve();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -846,7 +1195,7 @@ SedListOfCurves::createCurve()
 SedCurve*
 SedListOfCurves::remove(unsigned int n)
 {
-	return static_cast<SedCurve*>(SedListOf::remove(n));
+  return static_cast<SedCurve*>(SedListOf::remove(n));
 }
 
 
@@ -856,18 +1205,18 @@ SedListOfCurves::remove(unsigned int n)
 SedCurve*
 SedListOfCurves::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedCurve>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedCurve>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedCurve*> (item);
+  return static_cast <SedCurve*>(item);
 }
 
 
@@ -875,10 +1224,10 @@ SedListOfCurves::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfCurves::getElementName () const
+SedListOfCurves::getElementName() const
 {
-	static const string name = "listOfCurves";
-	return name;
+  static const string name = "listOfCurves";
+  return name;
 }
 
 
@@ -886,9 +1235,9 @@ SedListOfCurves::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfCurves::getTypeCode () const
+SedListOfCurves::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -896,9 +1245,9 @@ SedListOfCurves::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfCurves::getItemTypeCode () const
+SedListOfCurves::getItemTypeCode() const
 {
-	return SEDML_OUTPUT_CURVE;
+  return SEDML_OUTPUT_CURVE;
 }
 
 
@@ -910,16 +1259,16 @@ SedListOfCurves::getItemTypeCode () const
 SedBase*
 SedListOfCurves::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "curve")
-	{
-		object = new SedCurve(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "curve")
+    {
+      object = new SedCurve(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -934,20 +1283,21 @@ SedListOfCurves::createObject(XMLInputStream& stream)
 void
 SedListOfCurves::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V3))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else if (getVersion() == 3) xmlns.add(SEDML_XMLNS_L1V3, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -961,7 +1311,7 @@ LIBSEDML_EXTERN
 SedCurve_t *
 SedCurve_create(unsigned int level, unsigned int version)
 {
-	return new SedCurve(level, version);
+  return new SedCurve(level, version);
 }
 
 
@@ -972,8 +1322,8 @@ LIBSEDML_EXTERN
 void
 SedCurve_free(SedCurve_t * sc)
 {
-	if (sc != NULL)
-		delete sc;
+  if (sc != NULL)
+    delete sc;
 }
 
 
@@ -984,14 +1334,14 @@ LIBSEDML_EXTERN
 SedCurve_t *
 SedCurve_clone(SedCurve_t * sc)
 {
-	if (sc != NULL)
-	{
-		return static_cast<SedCurve_t*>(sc->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (sc != NULL)
+    {
+      return static_cast<SedCurve_t*>(sc->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -1002,10 +1352,10 @@ LIBSEDML_EXTERN
 char *
 SedCurve_getId(SedCurve_t * sc)
 {
-	if (sc == NULL)
-		return NULL;
+  if (sc == NULL)
+    return NULL;
 
-	return sc->getId().empty() ? NULL : safe_strdup(sc->getId().c_str());
+  return sc->getId().empty() ? NULL : safe_strdup(sc->getId().c_str());
 }
 
 
@@ -1016,10 +1366,10 @@ LIBSEDML_EXTERN
 char *
 SedCurve_getName(SedCurve_t * sc)
 {
-	if (sc == NULL)
-		return NULL;
+  if (sc == NULL)
+    return NULL;
 
-	return sc->getName().empty() ? NULL : safe_strdup(sc->getName().c_str());
+  return sc->getName().empty() ? NULL : safe_strdup(sc->getName().c_str());
 }
 
 
@@ -1030,7 +1380,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_getLogX(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->getLogX()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->getLogX()) : 0;
 }
 
 
@@ -1041,7 +1391,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_getLogY(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->getLogY()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->getLogY()) : 0;
 }
 
 
@@ -1052,10 +1402,10 @@ LIBSEDML_EXTERN
 char *
 SedCurve_getXDataReference(SedCurve_t * sc)
 {
-	if (sc == NULL)
-		return NULL;
+  if (sc == NULL)
+    return NULL;
 
-	return sc->getXDataReference().empty() ? NULL : safe_strdup(sc->getXDataReference().c_str());
+  return sc->getXDataReference().empty() ? NULL : safe_strdup(sc->getXDataReference().c_str());
 }
 
 
@@ -1066,10 +1416,77 @@ LIBSEDML_EXTERN
 char *
 SedCurve_getYDataReference(SedCurve_t * sc)
 {
-	if (sc == NULL)
-		return NULL;
+  if (sc == NULL)
+    return NULL;
 
-	return sc->getYDataReference().empty() ? NULL : safe_strdup(sc->getYDataReference().c_str());
+  return sc->getYDataReference().empty() ? NULL : safe_strdup(sc->getYDataReference().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getLineColor(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getLineColor().empty() ? NULL : safe_strdup(sc->getLineColor().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getFillColor(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getFillColor().empty() ? NULL : safe_strdup(sc->getFillColor().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getSymbol(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getSymbol().empty() ? NULL : safe_strdup(sc->getSymbol().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+double
+SedCurve_getLineThickness(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->getLineThickness() : numeric_limits<double>::quiet_NaN();
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
+SedCurve_getLineStyle(SedCurve_t * sc)
+{
+  if (sc == NULL)
+    return NULL;
+
+  return sc->getLineStyle().empty() ? NULL : safe_strdup(sc->getLineStyle().c_str());
 }
 
 
@@ -1080,7 +1497,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_isSetId(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->isSetId()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->isSetId()) : 0;
 }
 
 
@@ -1091,7 +1508,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_isSetName(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->isSetName()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->isSetName()) : 0;
 }
 
 
@@ -1102,7 +1519,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_isSetLogX(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->isSetLogX()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->isSetLogX()) : 0;
 }
 
 
@@ -1113,7 +1530,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_isSetLogY(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->isSetLogY()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->isSetLogY()) : 0;
 }
 
 
@@ -1124,7 +1541,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_isSetXDataReference(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->isSetXDataReference()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->isSetXDataReference()) : 0;
 }
 
 
@@ -1135,7 +1552,62 @@ LIBSEDML_EXTERN
 int
 SedCurve_isSetYDataReference(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->isSetYDataReference()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->isSetYDataReference()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetLineColor()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetFillColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetFillColor()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetSymbol(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetSymbol()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineThickness(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetLineThickness()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_isSetLineStyle(SedCurve_t * sc)
+{
+  return (sc != NULL) ? static_cast<int>(sc->isSetLineStyle()) : 0;
 }
 
 
@@ -1146,7 +1618,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_setId(SedCurve_t * sc, const char * id)
 {
-	return (sc != NULL) ? sc->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1157,7 +1629,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_setName(SedCurve_t * sc, const char * name)
 {
-	return (sc != NULL) ? sc->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1168,7 +1640,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_setLogX(SedCurve_t * sc, int logX)
 {
-	return (sc != NULL) ? sc->setLogX(logX) : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->setLogX(logX) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1179,7 +1651,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_setLogY(SedCurve_t * sc, int logY)
 {
-	return (sc != NULL) ? sc->setLogY(logY) : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->setLogY(logY) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1190,7 +1662,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_setXDataReference(SedCurve_t * sc, const char * xDataReference)
 {
-	return (sc != NULL) ? sc->setXDataReference(xDataReference) : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->setXDataReference(xDataReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1201,7 +1673,62 @@ LIBSEDML_EXTERN
 int
 SedCurve_setYDataReference(SedCurve_t * sc, const char * yDataReference)
 {
-	return (sc != NULL) ? sc->setYDataReference(yDataReference) : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->setYDataReference(yDataReference) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setLineColor(SedCurve_t * sc, const char * lineColor)
+{
+  return (sc != NULL) ? sc->setLineColor(lineColor) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setFillColor(SedCurve_t * sc, const char * fillColor)
+{
+  return (sc != NULL) ? sc->setFillColor(fillColor) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setSymbol(SedCurve_t * sc, const char * symbol)
+{
+  return (sc != NULL) ? sc->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setLineThickness(SedCurve_t * sc, double lineThickness)
+{
+  return (sc != NULL) ? sc->setLineThickness(lineThickness) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_setLineStyle(SedCurve_t * sc, const char * lineStyle)
+{
+  return (sc != NULL) ? sc->setLineStyle(lineStyle) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1212,7 +1739,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_unsetId(SedCurve_t * sc)
 {
-	return (sc != NULL) ? sc->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1223,7 +1750,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_unsetName(SedCurve_t * sc)
 {
-	return (sc != NULL) ? sc->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1234,7 +1761,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_unsetLogX(SedCurve_t * sc)
 {
-	return (sc != NULL) ? sc->unsetLogX() : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->unsetLogX() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1245,7 +1772,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_unsetLogY(SedCurve_t * sc)
 {
-	return (sc != NULL) ? sc->unsetLogY() : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->unsetLogY() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1256,7 +1783,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_unsetXDataReference(SedCurve_t * sc)
 {
-	return (sc != NULL) ? sc->unsetXDataReference() : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->unsetXDataReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1267,7 +1794,62 @@ LIBSEDML_EXTERN
 int
 SedCurve_unsetYDataReference(SedCurve_t * sc)
 {
-	return (sc != NULL) ? sc->unsetYDataReference() : LIBSEDML_INVALID_OBJECT;
+  return (sc != NULL) ? sc->unsetYDataReference() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetLineColor() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetFillColor(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetFillColor() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetSymbol(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineThickness(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetLineThickness() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedCurve_unsetLineStyle(SedCurve_t * sc)
+{
+  return (sc != NULL) ? sc->unsetLineStyle() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1278,7 +1860,7 @@ LIBSEDML_EXTERN
 int
 SedCurve_hasRequiredAttributes(SedCurve_t * sc)
 {
-	return (sc != NULL) ? static_cast<int>(sc->hasRequiredAttributes()) : 0;
+  return (sc != NULL) ? static_cast<int>(sc->hasRequiredAttributes()) : 0;
 }
 
 
@@ -1289,10 +1871,10 @@ LIBSEDML_EXTERN
 SedCurve_t *
 SedListOfCurves_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfCurves *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfCurves *>(lo)->get(sid) : NULL;
 }
 
 
@@ -1303,10 +1885,10 @@ LIBSEDML_EXTERN
 SedCurve_t *
 SedListOfCurves_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfCurves *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfCurves *>(lo)->remove(sid) : NULL;
 }
 
 

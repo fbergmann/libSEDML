@@ -1,3 +1,15 @@
+## libSEDML 0.3.1
+
+This is a bugfix release before bigger changes. Thanks to all the people that made the new release possible especially to: David Nickerson, Antonio Trande, Alan Garny and Kyle Medley
+
+Bug fixes: 
+
+* sorted issues with C++ namespaces
+* removed a number of warnings in the code base
+* allow to customize whether to link against libc++ or libstdc++
+* reformatted code 
+* fix debugging with newer versions of MSVC & cmake
+ 
 ## libSEDML 0.3.0
 
 New Features

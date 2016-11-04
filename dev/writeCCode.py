@@ -21,7 +21,7 @@ def writeConstructors(element, package, output):
   output.write('{0}_create'.format(element))
   output.write('(unsigned int level, unsigned int version)\n')
   output.write('{\n')
-  output.write('\treturn new {0}(level, version);\n'.format(element))
+  output.write('  return new {0}(level, version);\n'.format(element))
   output.write('}\n\n\n')
 #  output.write('/**\n')
 #  output.write(' * write comments\n')
@@ -31,7 +31,7 @@ def writeConstructors(element, package, output):
 #  output.write('{0}_createWithNS'.format(element))
 #  output.write('(SedNamespaces_t *sedmlns)\n')
 #  output.write('{\n')
-#  output.write('\treturn new {0}(sedmlns);\n'.format(element))
+#  output.write('  return new {0}(sedmlns);\n'.format(element))
 #  output.write('}\n\n\n')
   output.write('/**\n')
   output.write(' * write comments\n')
@@ -41,8 +41,8 @@ def writeConstructors(element, package, output):
   output.write('{0}_free'.format(element))
   output.write('({0}_t * {1})\n'.format(element, strFunctions.objAbbrev(element)))
   output.write('{\n')
-  output.write('\tif ({0} != NULL)\n'.format(strFunctions.objAbbrev(element)))
-  output.write('\t\tdelete {0};\n'.format(strFunctions.objAbbrev(element)))
+  output.write('  if ({0} != NULL)\n'.format(strFunctions.objAbbrev(element)))
+  output.write('    delete {0};\n'.format(strFunctions.objAbbrev(element)))
   output.write('}\n\n\n')
   output.write('/**\n')
   output.write(' * write comments\n')
@@ -52,29 +52,29 @@ def writeConstructors(element, package, output):
   output.write('{0}_clone'.format(element))
   output.write('({0}_t * {1})\n'.format(element, strFunctions.objAbbrev(element)))
   output.write('{\n')
-  output.write('\tif ({0} != NULL)\n'.format(strFunctions.objAbbrev(element)))
-  output.write('\t{\n')
-  output.write('\t\treturn static_cast<{0}_t*>({1}->clone());\n'.format(element, strFunctions.objAbbrev(element)))
-  output.write('\t}\n')
-  output.write('\telse\n')
-  output.write('\t{\n')
-  output.write('\t\treturn NULL;\n')
-  output.write('\t}\n')
+  output.write('  if ({0} != NULL)\n'.format(strFunctions.objAbbrev(element)))
+  output.write('  {\n')
+  output.write('    return static_cast<{0}_t*>({1}->clone());\n'.format(element, strFunctions.objAbbrev(element)))
+  output.write('  }\n')
+  output.write('  else\n')
+  output.write('  {\n')
+  output.write('    return NULL;\n')
+  output.write('  }\n')
   output.write('}\n\n\n')
 
 def writeAttributeFunctions(attrs, output, element):
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeGetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeGetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeIsSetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeIsSetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeSetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeSetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
-	if attrs[i]['type'] != 'lo_element':
-		writeUnsetFunction(attrs[i], output, element)
+    if attrs[i]['type'] != 'lo_element':
+        writeUnsetFunction(attrs[i], output, element)
   for i in range(0, len(attrs)):
     if attrs[i]['type'] == 'lo_element':
       writeListOfSubElements(attrs[i], output, element)
@@ -86,14 +86,14 @@ def writeListOfSubElements(attrib, output, element):
   output.write('{0}_add{1}({0}_t * {2}, '.format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
   output.write('{0}_t * {1})\n'.format(attrib['element'], strFunctions.objAbbrev(attrib['element'])))
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->add{1}({2}) : LIBSBML_INVALID_OBJECT;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name']),strFunctions.objAbbrev(attrib['element'])))
+  output.write('  return  ({0} != NULL) ? {0}->add{1}({2}) : LIBSBML_INVALID_OBJECT;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name']),strFunctions.objAbbrev(attrib['element'])))
   output.write('}\n\n')
   if attrib.has_key('abstract') == False or (attrib.has_key('abstract') and attrib['abstract'] == False):
     output.write('LIBSEDML_EXTERN\n')
     output.write('{0}_t *\n'.format(attrib['element']))
     output.write('{0}_create{1}({0}_t * {2})\n' .format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
     output.write('{\n')
-    output.write('\treturn  ({0} != NULL) ? {0}->create{1}() : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+    output.write('  return  ({0} != NULL) ? {0}->create{1}() : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
     output.write('}\n\n')
   elif attrib.has_key('concrete'):
     for elem in attrib['concrete']:
@@ -101,47 +101,47 @@ def writeListOfSubElements(attrib, output, element):
      output.write('{0}_t *\n'.format(elem['element']))
      output.write('{0}_create{1}({0}_t * {2})\n' .format(element, strFunctions.cap(elem['name']), strFunctions.objAbbrev(element)))
      output.write('{\n')
-     output.write('\treturn  ({0} != NULL) ? {0}->create{1}() : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(elem['name'])))
+     output.write('  return  ({0} != NULL) ? {0}->create{1}() : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(elem['name'])))
      output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('SedListOf_t *\n')
   output.write('{0}_get{1}({0}_t * {2})\n'.format(element, loname, strFunctions.objAbbrev(element)))
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? (SedListOf_t *){0}->getListOf{1}s() : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+  output.write('  return  ({0} != NULL) ? (SedListOf_t *){0}->getListOf{1}s() : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(attrib['element']))
   output.write('{0}_get{1}({0}_t * {2}, '.format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
   output.write('unsigned int n)\n')
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->get{1}(n) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+  output.write('  return  ({0} != NULL) ? {0}->get{1}(n) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(attrib['element']))
   output.write('{0}_get{1}ById({0}_t * {2}, '.format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
   output.write('const char * sid)\n')
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->get{1}(sid) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+  output.write('  return  ({0} != NULL) ? {0}->get{1}(sid) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('unsigned int\n')
   output.write('{0}_getNum{1}s({0}_t * {2})\n' .format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->getNum{1}s() : SEDML_INT_MAX;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+  output.write('  return  ({0} != NULL) ? {0}->getNum{1}s() : SEDML_INT_MAX;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(attrib['element']))
   output.write('{0}_remove{1}({0}_t * {2}, '.format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
   output.write('unsigned int n)\n')
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->remove{1}(n) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+  output.write('  return  ({0} != NULL) ? {0}->remove{1}(n) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
   output.write('}\n\n')
   output.write('LIBSEDML_EXTERN\n')
   output.write('{0}_t *\n'.format(attrib['element']))
   output.write('{0}_remove{1}ById({0}_t * {2}, '.format(element, strFunctions.cap(attrib['name']), strFunctions.objAbbrev(element)))
   output.write('const char * sid)\n')
   output.write('{\n')
-  output.write('\treturn  ({0} != NULL) ? {0}->remove{1}(sid) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
+  output.write('  return  ({0} != NULL) ? {0}->remove{1}(sid) : NULL;\n'.format(strFunctions.objAbbrev(element),strFunctions.cap(attrib['name'])))
   output.write('}\n\n')
  # writeListOfHeader.writeGetFunctions(output, attrib['element'], True, element)
  # writeListOfHeader.writeRemoveFunctions(output, attrib['element'], True, element)
@@ -170,16 +170,18 @@ def writeGetFunction(attrib, output, element):
     output.write('({0}_t * {1})\n'.format(element, varname))
     output.write('{\n')
     if attType == 'string':
-      output.write('\tif ({0} == NULL)\n'.format(varname))
-      output.write('\t\treturn NULL;\n\n')
-      output.write('\treturn {0}->get{1}().empty() ? NULL : safe_strdup({0}->get{1}().c_str());\n'.format(varname, capAttName))
+      output.write('  if ({0} == NULL)\n'.format(varname))
+      output.write('    return NULL;\n\n')
+      output.write('  return {0}->get{1}().empty() ? NULL : safe_strdup({0}->get{1}().c_str());\n'.format(varname, capAttName))
     elif num == True:
       if attTypeCode == 'double':
-        output.write('\treturn ({0} != NULL) ? {0}->get{1}() : numeric_limits<double>::quiet_NaN();\n'.format(varname, capAttName))
+        output.write('  return ({0} != NULL) ? {0}->get{1}() : numeric_limits<double>::quiet_NaN();\n'.format(varname, capAttName))
       else:
-        output.write('\treturn ({0} != NULL) ? {0}->get{1}() : SEDML_INT_MAX;\n'.format(varname, capAttName))
+        output.write('  return ({0} != NULL) ? {0}->get{1}() : SEDML_INT_MAX;\n'.format(varname, capAttName))
     elif attType == 'boolean':
-      output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->get{1}()) : 0;\n'.format(varname, capAttName))
+      output.write('  return ({0} != NULL) ? static_cast<int>({0}->get{1}()) : 0;\n'.format(varname, capAttName))
+    elif attType == 'DimensionDescription*': 
+      output.write('  return ({0} != NULL) ? NULL : const_cast<DimensionDescription*>({0}->get{1}());\n'.format(varname, capAttName))
     output.write('}\n\n\n')
   elif attrib['type'] == 'XMLNode*':
       output.write('LIBSEDML_EXTERN\n')
@@ -187,9 +189,9 @@ def writeGetFunction(attrib, output, element):
       output.write('{0}_get{1}'.format(element, capAttName))
       output.write('({0}_t * {1})\n'.format(element, varname))
       output.write('{\n')
-      output.write('\tif ({0} == NULL)\n'.format(varname))
-      output.write('\t\treturn NULL;\n\n')
-      output.write('\treturn ({0}_t*){1}->get{2}();\n'.format('XMLNode',varname, capAttName))
+      output.write('  if ({0} == NULL)\n'.format(varname))
+      output.write('    return NULL;\n\n')
+      output.write('  return ({0}_t*){1}->get{2}();\n'.format('XMLNode',varname, capAttName))
       output.write('}\n\n\n')
   elif attrib['type'] == 'element':
     if attrib['name'] == 'Math' or attrib['name'] == 'math':
@@ -198,9 +200,9 @@ def writeGetFunction(attrib, output, element):
       output.write('{0}_get{1}'.format(element, capAttName))
       output.write('({0}_t * {1})\n'.format(element, varname))
       output.write('{\n')
-      output.write('\tif ({0} == NULL)\n'.format(varname))
-      output.write('\t\treturn NULL;\n\n')
-      output.write('\treturn (ASTNode_t*){0}->get{1}();\n'.format(varname, capAttName))
+      output.write('  if ({0} == NULL)\n'.format(varname))
+      output.write('    return NULL;\n\n')
+      output.write('  return (ASTNode_t*){0}->get{1}();\n'.format(varname, capAttName))
       output.write('}\n\n\n')
     else:
       output.write('LIBSEDML_EXTERN\n')
@@ -208,18 +210,18 @@ def writeGetFunction(attrib, output, element):
       output.write('{0}_get{1}'.format(element, capAttName))
       output.write('({0}_t * {1})\n'.format(element, varname))
       output.write('{\n')
-      output.write('\tif ({0} == NULL)\n'.format(varname))
-      output.write('\t\treturn NULL;\n\n')
-      output.write('\treturn ({0}_t*){1}->get{2}();\n'.format(attrib['element'],varname, capAttName))
+      output.write('  if ({0} == NULL)\n'.format(varname))
+      output.write('    return NULL;\n\n')
+      output.write('  return ({0}_t*){1}->get{2}();\n'.format(attrib['element'],varname, capAttName))
       output.write('}\n\n\n')
       output.write('LIBSEDML_EXTERN\n')
       output.write('{0}_t*\n'.format(attrib['element']))
       output.write('{0}_create{1}'.format(element, capAttName))
       output.write('({0}_t * {1})\n'.format(element, varname))
       output.write('{\n')
-      output.write('\tif ({0} == NULL)\n'.format(varname))
-      output.write('\t\treturn NULL;\n\n')
-      output.write('\treturn ({0}_t*){1}->create{2}();\n'.format(attrib['element'],varname, capAttName))
+      output.write('  if ({0} == NULL)\n'.format(varname))
+      output.write('    return NULL;\n\n')
+      output.write('  return ({0}_t*){1}->create{2}();\n'.format(attrib['element'],varname, capAttName))
       output.write('}\n\n\n')
   
  
@@ -243,7 +245,7 @@ def writeIsSetFunction(attrib, output, element):
   output.write('{0}_isSet{1}'.format(element, capAttName))
   output.write('({0}_t * {1})\n'.format(element, varname))
   output.write('{\n')
-  output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->isSet{1}()) : 0;\n'.format(varname, capAttName))
+  output.write('  return ({0} != NULL) ? static_cast<int>({0}->isSet{1}()) : 0;\n'.format(varname, capAttName))
   output.write('}\n\n\n')
     
  
@@ -269,7 +271,7 @@ def writeSetFunction(attrib, output, element):
     output.write('({0}_t * {1},'.format(element, varname))
     output.write(' {0} {1})\n'.format(attTypeCode, attName))
     output.write('{\n')
-    output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
+    output.write('  return ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
     output.write('}\n\n\n')
   elif attrib['type'] == 'element':
     if attrib['name'] == 'Math' or attrib['name'] == 'math':
@@ -279,7 +281,7 @@ def writeSetFunction(attrib, output, element):
       output.write('({0}_t * {1},'.format(element, varname))
       output.write(' {0} {1})\n'.format('ASTNode_t*', attName))
       output.write('{\n')
-      output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
+      output.write('  return ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
       output.write('}\n\n\n')
     else:
       output.write('LIBSEDML_EXTERN\n')
@@ -288,7 +290,7 @@ def writeSetFunction(attrib, output, element):
       output.write('({0}_t * {1},'.format(element, varname))
       output.write(' {0}_t* {1})\n'.format(attrib['element'], attName))
       output.write('{\n')
-      output.write('\treturn ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
+      output.write('  return ({0} != NULL) ? {0}->set{1}({2}) : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName, attName))
       output.write('}\n\n\n')
     
 def writeUnsetFunction(attrib, output, element):
@@ -311,7 +313,7 @@ def writeUnsetFunction(attrib, output, element):
   output.write('{0}_unset{1}'.format(element, capAttName))
   output.write('({0}_t * {1})\n'.format(element, varname))
   output.write('{\n')
-  output.write('\treturn ({0} != NULL) ? {0}->unset{1}() : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName))
+  output.write('  return ({0} != NULL) ? {0}->unset{1}() : LIBSEDML_INVALID_OBJECT;\n'.format(varname, capAttName))
   output.write('}\n\n\n')
     
  
@@ -325,7 +327,7 @@ def writeHasReqdAttrFunction(output, element):
   output.write('{0}_hasRequiredAttributes'.format(element))
   output.write('({0}_t * {1})\n'.format(element, varname))
   output.write('{\n')
-  output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->hasRequiredAttributes()) : 0;\n'.format(varname))
+  output.write('  return ({0} != NULL) ? static_cast<int>({0}->hasRequiredAttributes()) : 0;\n'.format(varname))
   output.write('}\n\n\n')
 
 def writeHasReqdElementsFunction(output, element):
@@ -338,7 +340,7 @@ def writeHasReqdElementsFunction(output, element):
   output.write('{0}_hasRequiredElements'.format(element))
   output.write('({0}_t * {1})\n'.format(element, varname))
   output.write('{\n')
-  output.write('\treturn ({0} != NULL) ? static_cast<int>({0}->hasRequiredElements()) : 0;\n'.format(varname))
+  output.write('  return ({0} != NULL) ? static_cast<int>({0}->hasRequiredElements()) : 0;\n'.format(varname))
   output.write('}\n\n\n')
     
 def writeListOfCode(output, element, type):
@@ -351,9 +353,9 @@ def writeListOfCode(output, element, type):
   output.write('{0}_getById'.format(loelement))
   output.write('(SedListOf_t * lo, const char * sid)\n')
   output.write('{\n')
-  output.write('\tif (lo == NULL)\n')
-  output.write('\t\treturn NULL;\n\n')
-  output.write('\treturn (sid != NULL) ? static_cast <{0} *>(lo)->get(sid) : NULL;\n'.format(loelement))
+  output.write('  if (lo == NULL)\n')
+  output.write('    return NULL;\n\n')
+  output.write('  return (sid != NULL) ? static_cast <{0} *>(lo)->get(sid) : NULL;\n'.format(loelement))
   output.write('}\n\n\n')
   output.write('/**\n')
   output.write(' * write comments\n')
@@ -363,9 +365,9 @@ def writeListOfCode(output, element, type):
   output.write('{0}_removeById'.format(loelement))
   output.write('(SedListOf_t * lo, const char * sid)\n')
   output.write('{\n')
-  output.write('\tif (lo == NULL)\n')
-  output.write('\t\treturn NULL;\n\n')
-  output.write('\treturn (sid != NULL) ? static_cast <{0} *>(lo)->remove(sid) : NULL;\n'.format(loelement))
+  output.write('  if (lo == NULL)\n')
+  output.write('    return NULL;\n\n')
+  output.write('  return (sid != NULL) ? static_cast <{0} *>(lo)->remove(sid) : NULL;\n'.format(loelement))
   output.write('}\n\n\n')
  
 # write the code file      

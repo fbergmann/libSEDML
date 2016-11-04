@@ -619,7 +619,9 @@ def createSedReport() :
 
 def createSedPlot2D() :
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'curve', 'element': 'SedCurve'})
-  attributes = [lo1]
+  a2 = dict({'type': 'bool', 'reqd' : True, 'name':'logX'})
+  a3 = dict({'type': 'bool', 'reqd' : True, 'name':'logY'})
+  attributes = [lo1, a2, a3]
   element = dict({
                  'name': 'SedPlot2D',
                  'package': 'Sed',
@@ -674,7 +676,12 @@ def createSedCurve() :
   a3 = dict({'type': 'bool', 'reqd' : True, 'name':'logY'})
   a4 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'xDataReference'})
   a5 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'yDataReference'})
-  attributes = [a0, a1, a2, a3, a4, a5]
+  a6 = dict({'type': 'string', 'reqd' : False, 'name':'lineColor'})
+  a7 = dict({'type': 'string', 'reqd' : False, 'name':'fillColor'})
+  a8 = dict({'type': 'string', 'reqd' : False, 'name':'symbol'})
+  a9 = dict({'type': 'double', 'reqd' : False, 'name':'lineThickness'})
+  a10 = dict({'type': 'string', 'reqd' : False, 'name':'lineStyle'})
+  attributes = [a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10]
   element = dict({
                  'name': 'SedCurve',
                  'package': 'Sed',

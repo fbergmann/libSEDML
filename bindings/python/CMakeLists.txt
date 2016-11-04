@@ -45,12 +45,12 @@ include(FindPythonInterp)
 # 
 
 file(GLOB SWIG_DEPENDENCIES 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.i 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.h 
-	${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
-	${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
-	)
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.i 
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.h 
+  ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+  ${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.i
+  ${CMAKE_CURRENT_SOURCE_DIR}/../swig/*.h
+  )
 
 #
 # Remove SWIG wrappers if requested
@@ -66,32 +66,33 @@ if (LIBSEDML_REMOVE_WRAPPERS)
 endif(LIBSEDML_REMOVE_WRAPPERS)
 
 
-set(SWIG_EXTRA_FLAGS -DSWIGEXPORT -DLIBSBML_CPP_NAMESPACE_BEGIN -DLIBSBML_CPP_NAMESPACE_END)
+set(SWIG_EXTRA_FLAGS -DSWIGEXPORT -DLIBSBML_CPP_NAMESPACE_BEGIN -DLIBSBML_CPP_NAMESPACE_END -DLIBSBML_CPP_NAMESPACE_QUALIFIER -DLIBSBML_CPP_NAMESPACE_USE)
 if(NOT UNIX)
-	set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
+  set(SWIG_EXTRA_FLAGS ${SWIG_EXTRA_FLAGS} -DSWIGWIN -DSWIG_CSHARP_NO_WSTRING_HELPER )
 endif()
 
 
-ADD_CUSTOM_COMMAND(	
+ADD_CUSTOM_COMMAND(  
     OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp
     COMMAND "${SWIG_EXECUTABLE}"
-    ARGS	-I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
-			-I${CMAKE_CURRENT_SOURCE_DIR}/../../
-			-I${CMAKE_CURRENT_BINARY_DIR}/../../
-			-I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
-			-I${CMAKE_CURRENT_SOURCE_DIR}
-			-I${LIBSBML_INCLUDE_DIR}/
-			-c++
-			-python		
-			${SWIG_EXTRA_FLAGS}		 
-			${SWIG_EXTRA_ARGS}		 
-			-o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
-			${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
-	DEPENDS local.i local.cpp local-contrib.i
+    ARGS  -I${CMAKE_CURRENT_SOURCE_DIR}/../swig/
+      -I${CMAKE_CURRENT_SOURCE_DIR}/../../
+      -I${CMAKE_CURRENT_BINARY_DIR}/../../
+      -I${CMAKE_CURRENT_SOURCE_DIR}/../../sedml
+      -I${CMAKE_CURRENT_SOURCE_DIR}
+      -I${LIBSBML_INCLUDE_DIR}/
+      -I${LIBNUML_INCLUDE_DIR}/
+      -c++
+      -python    
+      ${SWIG_EXTRA_FLAGS}     
+      ${SWIG_EXTRA_ARGS}     
+      -o ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp 
+      ${CMAKE_CURRENT_SOURCE_DIR}/libsedml.i
+  DEPENDS local.i local.cpp local-contrib.i
     COMMENT "Swig Python source") 
 
 add_custom_target(binding_python_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
-	
+  
 ####################################################################
 #
 # Build native library
@@ -100,6 +101,7 @@ add_custom_target(binding_python_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/li
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
 include_directories(${LIBSBML_INCLUDE_DIR})
+include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSEDML_STATIC)
@@ -119,18 +121,30 @@ add_dependencies( binding_python_lib binding_python_swig)
 
 set_target_properties (binding_python_lib PROPERTIES OUTPUT_NAME "_libsedml")
 if (UNIX)
-	set_target_properties (binding_python_lib PROPERTIES PREFIX "")
-	set_target_properties (binding_python_lib PROPERTIES SUFFIX ".so")
-else()		
-	if (CYGWIN)
-		set_target_properties (binding_python_lib PROPERTIES PREFIX "")
-		set_target_properties (binding_python_lib PROPERTIES SUFFIX ".dll")
-	else()
-		set_target_properties (binding_python_lib PROPERTIES SUFFIX ".pyd")	
-	endif()
+  set_target_properties (binding_python_lib PROPERTIES PREFIX "")
+  set_target_properties (binding_python_lib PROPERTIES SUFFIX ".so")
+else()    
+  if (CYGWIN)
+    set_target_properties (binding_python_lib PROPERTIES PREFIX "")
+    set_target_properties (binding_python_lib PROPERTIES SUFFIX ".dll")
+  else()
+    set_target_properties (binding_python_lib PROPERTIES SUFFIX ".pyd")  
+  endif()
 endif()
 
-target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static ${PYTHON_LIBRARIES})
+
+if(APPLE)
+  option (PYTHON_USE_DYNAMIC_LOOKUP
+  "Do not actually link against the python library, instead use the undefined lookup mechanism, that ." OFF)
+  mark_as_advanced(PYTHON_USE_DYNAMIC_LOOKUP)
+endif(APPLE)
+
+if (APPLE AND PYTHON_USE_DYNAMIC_LOOKUP)
+  set_target_properties (binding_python_lib PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
+  target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static)
+else()
+  target_link_libraries(binding_python_lib ${LIBSEDML_LIBRARY}-static ${PYTHON_LIBRARIES})
+endif()
 
 # 
 # Determine the python installation directory

@@ -37,6 +37,8 @@
 #include <sedml/SedTypes.h>
 #include <sbml/math/FormulaParser.h>
 
+#include <numl/NUMLTypes.h>
+
 using namespace std;
 LIBSEDML_CPP_NAMESPACE_USE
 
@@ -51,8 +53,43 @@ main (int argc, char* argv[])
   }
 
   // create the document
-  SedDocument doc(1,2);
+  SedDocument doc(1,3);
   doc.setAnnotation("<test xmlns='http://test.org/test/annotation' attribute='test' />");
+
+  {
+    SedDataDescription* dataDesc =  doc.createDataDescription();
+    dataDesc->setId("oscli");
+    dataDesc->setName("Oscli Timecourse data");
+    dataDesc->setSource("oscli.numl");
+
+    DimensionDescription* dimDesc = dataDesc->createDimensionDescription();
+    
+    CompositeDescription* timeDesc = new CompositeDescription();
+    timeDesc->setIndexType("double");
+    timeDesc->setId("time");
+    timeDesc->setName("time");
+
+    CompositeDescription* speciesDesc = timeDesc->createCompositeDescription();
+    speciesDesc->setIndexType("string");
+    speciesDesc->setId("SpeciesIds");
+    speciesDesc->setName("SpeciesIds");
+
+    AtomicDescription* concentrationDesc = speciesDesc->createAtomicDescription();
+    concentrationDesc->setValueType("double");
+    concentrationDesc->setName("Concentrations");
+
+    dimDesc->appendAndOwn(timeDesc);
+
+    SedDataSource* dataSource = dataDesc->createDataSource();
+    dataSource->setId("dataS1");
+
+    SedSlice* slice = dataSource->createSlice();
+    slice->setReference("SpeciesIds");
+    slice->setValue("S1");
+
+    dataSource = dataDesc->createDataSource();
+    dataSource->setIndexSet("time");
+  }
 
   {
     // create a first model referencing an sbml file

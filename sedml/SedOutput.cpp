@@ -5,21 +5,21 @@
  *
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SED-ML. The latest version of libSEDML can be found on 
+ * information about SED-ML. The latest version of libSEDML can be found on
  * github: https://github.com/fbergmann/libSEDML/
  *
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2016, Frank T. Bergmann
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 
- * 
+ * modification, are permitted provided that the following conditions are met:
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer. 
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
  *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution. 
- * 
+ *    and/or other materials provided with the distribution.
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -48,55 +48,48 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 /*
  * Creates a new SedOutput with the given level, version, and package version.
  */
-SedOutput::SedOutput (unsigned int level, unsigned int version)
-	: SedBase(level, version)
-	, mId ("")
-	, mName ("")
+SedOutput::SedOutput(unsigned int level, unsigned int version)
+  : SedBase(level, version)
+  , mId("")
+  , mName("")
 
 {
-	// set an SedNamespaces derived object of this package
-	setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  // set an SedNamespaces derived object of this package
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Creates a new SedOutput with the given SedNamespaces object.
  */
-SedOutput::SedOutput (SedNamespaces* sedns)
-	: SedBase(sedns)
-	, mId ("")
-	, mName ("")
+SedOutput::SedOutput(SedNamespaces* sedns)
+  : SedBase(sedns)
+  , mId("")
+  , mName("")
 
 {
-	// set the element namespace of this object
-	setElementNamespace(sedns->getURI());
+  // set the element namespace of this object
+  setElementNamespace(sedns->getURI());
 
-	// connect to child objects
-	connectToChild();
+  // connect to child objects
+  connectToChild();
 }
 
 
 /*
  * Copy constructor for SedOutput.
  */
-SedOutput::SedOutput (const SedOutput& orig)
-	: SedBase(orig)
+SedOutput::SedOutput(const SedOutput& orig)
+  : SedBase(orig)
 {
-	if (&orig == NULL)
-	{
-		throw SedConstructorException("Null argument to copy constructor");
-	}
-	else
-	{
-		mId  = orig.mId;
-		mName  = orig.mName;
+  mId  = orig.mId;
+  mName  = orig.mName;
 
-		// connect to child objects
-		connectToChild();
-	}
+  // connect to child objects
+  connectToChild();
 }
 
 
@@ -106,20 +99,17 @@ SedOutput::SedOutput (const SedOutput& orig)
 SedOutput&
 SedOutput::operator=(const SedOutput& rhs)
 {
-	if (&rhs == NULL)
-	{
-		throw SedConstructorException("Null argument to assignment");
-	}
-	else if (&rhs != this)
-	{
-		SedBase::operator=(rhs);
-		mId  = rhs.mId;
-		mName  = rhs.mName;
+  if (&rhs != this)
+    {
+      SedBase::operator=(rhs);
+      mId  = rhs.mId;
+      mName  = rhs.mName;
 
-		// connect to child objects
-		connectToChild();
-	}
-	return *this;
+      // connect to child objects
+      connectToChild();
+    }
+
+  return *this;
 }
 
 
@@ -127,16 +117,16 @@ SedOutput::operator=(const SedOutput& rhs)
  * Clone for SedOutput.
  */
 SedOutput*
-SedOutput::clone () const
+SedOutput::clone() const
 {
-	return new SedOutput(*this);
+  return new SedOutput(*this);
 }
 
 
 /*
  * Destructor for SedOutput.
  */
-SedOutput::~SedOutput ()
+SedOutput::~SedOutput()
 {
 }
 
@@ -147,7 +137,7 @@ SedOutput::~SedOutput ()
 const std::string&
 SedOutput::getId() const
 {
-	return mId;
+  return mId;
 }
 
 
@@ -157,7 +147,7 @@ SedOutput::getId() const
 const std::string&
 SedOutput::getName() const
 {
-	return mName;
+  return mName;
 }
 
 
@@ -167,7 +157,7 @@ SedOutput::getName() const
 bool
 SedOutput::isSetId() const
 {
-	return (mId.empty() == false);
+  return (mId.empty() == false);
 }
 
 
@@ -177,7 +167,7 @@ SedOutput::isSetId() const
 bool
 SedOutput::isSetName() const
 {
-	return (mName.empty() == false);
+  return (mName.empty() == false);
 }
 
 
@@ -187,7 +177,7 @@ SedOutput::isSetName() const
 int
 SedOutput::setId(const std::string& id)
 {
-	return SyntaxChecker::checkAndSetSId(id, mId);
+  return SyntaxChecker::checkAndSetSId(id, mId);
 }
 
 
@@ -197,15 +187,10 @@ SedOutput::setId(const std::string& id)
 int
 SedOutput::setName(const std::string& name)
 {
-	if (&(name) == NULL)
-	{
-		return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	}
-	else
-	{
-		mName = name;
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
+  {
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -215,16 +200,16 @@ SedOutput::setName(const std::string& name)
 int
 SedOutput::unsetId()
 {
-	mId.erase();
+  mId.erase();
 
-	if (mId.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mId.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -234,16 +219,16 @@ SedOutput::unsetId()
 int
 SedOutput::unsetName()
 {
-	mName.erase();
+  mName.erase();
 
-	if (mName.empty() == true)
-	{
-		return LIBSEDML_OPERATION_SUCCESS;
-	}
-	else
-	{
-		return LIBSEDML_OPERATION_FAILED;
-	}
+  if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -251,10 +236,10 @@ SedOutput::unsetName()
  * Returns the XML element name of this object
  */
 const std::string&
-SedOutput::getElementName () const
+SedOutput::getElementName() const
 {
-	static const string name = "output";
-	return name;
+  static const string name = "output";
+  return name;
 }
 
 
@@ -264,13 +249,13 @@ SedOutput::getElementName () const
 SedBase*
 SedOutput::createObject(XMLInputStream& stream)
 {
-	SedBase* object = NULL;
+  SedBase* object = NULL;
 
-	const string& name   = stream.peek().getName();
+  //const string& name   = stream.peek().getName();
 
-	connectToChild();
+  connectToChild();
 
-	return object;
+  return object;
 }
 
 
@@ -278,9 +263,9 @@ SedOutput::createObject(XMLInputStream& stream)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedOutput::connectToChild ()
+SedOutput::connectToChild()
 {
-	SedBase::connectToChild();
+  SedBase::connectToChild();
 
 }
 
@@ -289,9 +274,9 @@ SedOutput::connectToChild ()
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedOutput::getTypeCode () const
+SedOutput::getTypeCode() const
 {
-	return SEDML_OUTPUT;
+  return SEDML_OUTPUT;
 }
 
 
@@ -299,14 +284,14 @@ SedOutput::getTypeCode () const
  * check if all the required attributes are set
  */
 bool
-SedOutput::hasRequiredAttributes () const
+SedOutput::hasRequiredAttributes() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	if (isSetId() == false)
-		allPresent = false;
+  if (isSetId() == false)
+    allPresent = false;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -314,11 +299,11 @@ SedOutput::hasRequiredAttributes () const
  * check if all the required elements are set
  */
 bool
-SedOutput::hasRequiredElements () const
+SedOutput::hasRequiredElements() const
 {
-	bool allPresent = true;
+  bool allPresent = true;
 
-	return allPresent;
+  return allPresent;
 }
 
 
@@ -328,9 +313,9 @@ SedOutput::hasRequiredElements () const
  * write contained elements
  */
 void
-SedOutput::writeElements (XMLOutputStream& stream) const
+SedOutput::writeElements(XMLOutputStream& stream) const
 {
-	SedBase::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 
@@ -343,9 +328,9 @@ SedOutput::writeElements (XMLOutputStream& stream) const
  * Accepts the given SedVisitor.
  */
 bool
-SedOutput::accept (SedVisitor& v) const
+SedOutput::accept(SedVisitor& v) const
 {
-	return false;
+  return false;
 
 }
 
@@ -359,9 +344,9 @@ SedOutput::accept (SedVisitor& v) const
  * Sets the parent SedDocument.
  */
 void
-SedOutput::setSedDocument (SedDocument* d)
+SedOutput::setSedDocument(SedDocument* d)
 {
-	SedBase::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 
@@ -376,10 +361,10 @@ SedOutput::setSedDocument (SedDocument* d)
 void
 SedOutput::addExpectedAttributes(ExpectedAttributes& attributes)
 {
-	SedBase::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-	attributes.add("id");
-	attributes.add("name");
+  attributes.add("id");
+  attributes.add("name");
 }
 
 
@@ -392,46 +377,46 @@ SedOutput::addExpectedAttributes(ExpectedAttributes& attributes)
  * Read values from the given XMLAttributes set into their specific fields.
  */
 void
-SedOutput::readAttributes (const XMLAttributes& attributes,
-                             const ExpectedAttributes& expectedAttributes)
+SedOutput::readAttributes(const XMLAttributes& attributes,
+                          const ExpectedAttributes& expectedAttributes)
 {
-	SedBase::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
-	bool assigned = false;
+  bool assigned = false;
 
-	//
-	// id SId  ( use = "required" )
-	//
-	assigned = attributes.readInto("id", mId, getErrorLog(), true);
+  //
+  // id SId  ( use = "required" )
+  //
+  assigned = attributes.readInto("id", mId, getErrorLog(), true);
 
-	if (assigned == true)
-	{
-		// check string is not empty and correct syntax
+  if (assigned == true)
+    {
+      // check string is not empty and correct syntax
 
-		if (mId.empty() == true)
-		{
-			logEmptyString(mId, getLevel(), getVersion(), "<SedOutput>");
-		}
-		else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-		{
-			logError(SedInvalidIdSyntax);
-		}
-	}
+      if (mId.empty() == true)
+        {
+          logEmptyString(mId, getLevel(), getVersion(), "<SedOutput>");
+        }
+      else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+        {
+          logError(SedInvalidIdSyntax);
+        }
+    }
 
-	//
-	// name string   ( use = "optional" )
-	//
-	assigned = attributes.readInto("name", mName, getErrorLog(), false);
+  //
+  // name string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("name", mName, getErrorLog(), false);
 
-	if (assigned == true)
-	{
-		// check string is not empty
+  if (assigned == true)
+    {
+      // check string is not empty
 
-		if (mName.empty() == true)
-		{
-			logEmptyString(mName, getLevel(), getVersion(), "<SedOutput>");
-		}
-	}
+      if (mName.empty() == true)
+        {
+          logEmptyString(mName, getLevel(), getVersion(), "<SedOutput>");
+        }
+    }
 
 }
 
@@ -444,16 +429,16 @@ SedOutput::readAttributes (const XMLAttributes& attributes,
 /*
  * Write values of XMLAttributes to the output stream.
  */
-	void
-SedOutput::writeAttributes (XMLOutputStream& stream) const
+void
+SedOutput::writeAttributes(XMLOutputStream& stream) const
 {
-	SedBase::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-	if (isSetId() == true)
-		stream.writeAttribute("id", getPrefix(), mId);
+  if (isSetId() == true)
+    stream.writeAttribute("id", getPrefix(), mId);
 
-	if (isSetName() == true)
-		stream.writeAttribute("name", getPrefix(), mName);
+  if (isSetName() == true)
+    stream.writeAttribute("name", getPrefix(), mName);
 
 }
 
@@ -462,33 +447,33 @@ SedOutput::writeAttributes (XMLOutputStream& stream) const
 
 
 /*
- * Constructor 
+ * Constructor
  */
-SedListOfOutputs::SedListOfOutputs(unsigned int level, 
-	                 unsigned int version)
- : SedListOf(level, version)
+SedListOfOutputs::SedListOfOutputs(unsigned int level,
+                                   unsigned int version)
+  : SedListOf(level, version)
 {
-	setSedNamespacesAndOwn(new SedNamespaces(level, version)); 
+  setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
 
 
 /*
- * Constructor 
+ * Constructor
  */
 SedListOfOutputs::SedListOfOutputs(SedNamespaces* sedns)
   : SedListOf(sedns)
 {
-	setElementNamespace(sedns->getURI());
+  setElementNamespace(sedns->getURI());
 }
 
 
 /*
- * Returns a deep copy of this SedListOfOutputs 
+ * Returns a deep copy of this SedListOfOutputs
  */
-SedListOfOutputs* 
-SedListOfOutputs::clone () const
- {
-	return new SedListOfOutputs(*this);
+SedListOfOutputs*
+SedListOfOutputs::clone() const
+{
+  return new SedListOfOutputs(*this);
 }
 
 
@@ -498,7 +483,7 @@ SedListOfOutputs::clone () const
 SedOutput*
 SedListOfOutputs::get(unsigned int n)
 {
-	return static_cast<SedOutput*>(SedListOf::get(n));
+  return static_cast<SedOutput*>(SedListOf::get(n));
 }
 
 
@@ -508,7 +493,7 @@ SedListOfOutputs::get(unsigned int n)
 const SedOutput*
 SedListOfOutputs::get(unsigned int n) const
 {
-	return static_cast<const SedOutput*>(SedListOf::get(n));
+  return static_cast<const SedOutput*>(SedListOf::get(n));
 }
 
 
@@ -518,8 +503,8 @@ SedListOfOutputs::get(unsigned int n) const
 SedOutput*
 SedListOfOutputs::get(const std::string& sid)
 {
-	return const_cast<SedOutput*>(
-	  static_cast<const SedListOfOutputs&>(*this).get(sid));
+  return const_cast<SedOutput*>(
+           static_cast<const SedListOfOutputs&>(*this).get(sid));
 }
 
 
@@ -529,10 +514,10 @@ SedListOfOutputs::get(const std::string& sid)
 const SedOutput*
 SedListOfOutputs::get(const std::string& sid) const
 {
-	vector<SedBase*>::const_iterator result;
+  vector<SedBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedOutput>(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <SedOutput*> (*result);
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedOutput>(sid));
+  return (result == mItems.end()) ? 0 : static_cast <SedOutput*>(*result);
 }
 
 
@@ -551,9 +536,10 @@ SedListOfOutputs::get(const std::string& sid) const
 int
 SedListOfOutputs::addOutput(const SedOutput* so)
 {
-	if(so == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
-	append(so);
-	return LIBSEDML_OPERATION_SUCCESS;
+  if (so == NULL) return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+
+  append(so);
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -562,58 +548,64 @@ SedListOfOutputs::addOutput(const SedOutput* so)
  *
  * @return the number of SedOutput objects in this SedListOfOutputs
  */
-unsigned int 
+unsigned int
 SedListOfOutputs::getNumOutputs() const
 {
-	return size();
+  return size();
 }
 
 /**
  * Creates a new SedReport object, adds it to this SedListOfOutputs
- * report and returns the SedReport object created. 
+ * report and returns the SedReport object created.
  *
  * @return a new SedReport object instance
  *
  * @see addReport(const SedOutput* so)
  */
-SedReport* 
+SedReport*
 SedListOfOutputs::createReport()
 {
-	SedReport *temp = new SedReport();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedReport *temp = new SedReport();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedPlot2D object, adds it to this SedListOfOutputs
- * plot2D and returns the SedPlot2D object created. 
+ * plot2D and returns the SedPlot2D object created.
  *
  * @return a new SedPlot2D object instance
  *
  * @see addPlot2D(const SedOutput* so)
  */
-SedPlot2D* 
+SedPlot2D*
 SedListOfOutputs::createPlot2D()
 {
-	SedPlot2D *temp = new SedPlot2D();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedPlot2D *temp = new SedPlot2D();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /**
  * Creates a new SedPlot3D object, adds it to this SedListOfOutputs
- * plot3D and returns the SedPlot3D object created. 
+ * plot3D and returns the SedPlot3D object created.
  *
  * @return a new SedPlot3D object instance
  *
  * @see addPlot3D(const SedOutput* so)
  */
-SedPlot3D* 
+SedPlot3D*
 SedListOfOutputs::createPlot3D()
 {
-	SedPlot3D *temp = new SedPlot3D();
-	if (temp != NULL) appendAndOwn(temp);
-	return temp;
+  SedPlot3D *temp = new SedPlot3D();
+
+  if (temp != NULL) appendAndOwn(temp);
+
+  return temp;
 }
 
 /*
@@ -622,7 +614,7 @@ SedListOfOutputs::createPlot3D()
 SedOutput*
 SedListOfOutputs::remove(unsigned int n)
 {
-	return static_cast<SedOutput*>(SedListOf::remove(n));
+  return static_cast<SedOutput*>(SedListOf::remove(n));
 }
 
 
@@ -632,18 +624,18 @@ SedListOfOutputs::remove(unsigned int n)
 SedOutput*
 SedListOfOutputs::remove(const std::string& sid)
 {
-	SedBase* item = NULL;
-	vector<SedBase*>::iterator result;
+  SedBase* item = NULL;
+  vector<SedBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), SedIdEq<SedOutput>(sid) );
+  result = find_if(mItems.begin(), mItems.end(), SedIdEq<SedOutput>(sid));
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+    {
+      item = *result;
+      mItems.erase(result);
+    }
 
-	return static_cast <SedOutput*> (item);
+  return static_cast <SedOutput*>(item);
 }
 
 
@@ -651,10 +643,10 @@ SedListOfOutputs::remove(const std::string& sid)
  * Returns the XML element name of this object
  */
 const std::string&
-SedListOfOutputs::getElementName () const
+SedListOfOutputs::getElementName() const
 {
-	static const string name = "listOfOutputs";
-	return name;
+  static const string name = "listOfOutputs";
+  return name;
 }
 
 
@@ -662,9 +654,9 @@ SedListOfOutputs::getElementName () const
  * Returns the libSEDML type code for this SEDML object.
  */
 int
-SedListOfOutputs::getTypeCode () const
+SedListOfOutputs::getTypeCode() const
 {
-	return SEDML_LIST_OF;
+  return SEDML_LIST_OF;
 }
 
 
@@ -672,9 +664,9 @@ SedListOfOutputs::getTypeCode () const
  * Returns the libSEDML type code for the objects in this LIST_OF.
  */
 int
-SedListOfOutputs::getItemTypeCode () const
+SedListOfOutputs::getItemTypeCode() const
 {
-	return SEDML_OUTPUT;
+  return SEDML_OUTPUT;
 }
 
 
@@ -686,28 +678,28 @@ SedListOfOutputs::getItemTypeCode () const
 SedBase*
 SedListOfOutputs::createObject(XMLInputStream& stream)
 {
-	const std::string& name   = stream.peek().getName();
-	SedBase* object = NULL;
+  const std::string& name   = stream.peek().getName();
+  SedBase* object = NULL;
 
-	if (name == "report")
-	{
-		object = new SedReport(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "report")
+    {
+      object = new SedReport(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	if (name == "plot2D")
-	{
-		object = new SedPlot2D(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "plot2D")
+    {
+      object = new SedPlot2D(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	if (name == "plot3D")
-	{
-		object = new SedPlot3D(getSedNamespaces());
-		appendAndOwn(object);
-	}
+  if (name == "plot3D")
+    {
+      object = new SedPlot3D(getSedNamespaces());
+      appendAndOwn(object);
+    }
 
-	return object;
+  return object;
 }
 
 
@@ -722,20 +714,21 @@ SedListOfOutputs::createObject(XMLInputStream& stream)
 void
 SedListOfOutputs::writeXMLNS(XMLOutputStream& stream) const
 {
-	XMLNamespaces xmlns;
+  XMLNamespaces xmlns;
 
-	std::string prefix = getPrefix();
+  std::string prefix = getPrefix();
 
-	if (prefix.empty())
-	{
-		if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2))
-		{
-			if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2,prefix);
-			else xmlns.add(SEDML_XMLNS_L1V2,prefix);
-		}
-	}
+  if (prefix.empty())
+    {
+      if (getNamespaces() != NULL && !getNamespaces()->hasURI(SEDML_XMLNS_L1) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V2) && !getNamespaces()->hasURI(SEDML_XMLNS_L1V3))
+        {
+          if (getVersion() == 2) xmlns.add(SEDML_XMLNS_L1V2, prefix);
+          else if (getVersion() == 3) xmlns.add(SEDML_XMLNS_L1V3, prefix);
+          else xmlns.add(SEDML_XMLNS_L1V2, prefix);
+        }
+    }
 
-	stream << xmlns;
+  stream << xmlns;
 }
 
 
@@ -749,7 +742,7 @@ LIBSEDML_EXTERN
 SedOutput_t *
 SedOutput_create(unsigned int level, unsigned int version)
 {
-	return new SedOutput(level, version);
+  return new SedOutput(level, version);
 }
 
 
@@ -760,8 +753,8 @@ LIBSEDML_EXTERN
 void
 SedOutput_free(SedOutput_t * so)
 {
-	if (so != NULL)
-		delete so;
+  if (so != NULL)
+    delete so;
 }
 
 
@@ -772,14 +765,14 @@ LIBSEDML_EXTERN
 SedOutput_t *
 SedOutput_clone(SedOutput_t * so)
 {
-	if (so != NULL)
-	{
-		return static_cast<SedOutput_t*>(so->clone());
-	}
-	else
-	{
-		return NULL;
-	}
+  if (so != NULL)
+    {
+      return static_cast<SedOutput_t*>(so->clone());
+    }
+  else
+    {
+      return NULL;
+    }
 }
 
 
@@ -790,10 +783,10 @@ LIBSEDML_EXTERN
 char *
 SedOutput_getId(SedOutput_t * so)
 {
-	if (so == NULL)
-		return NULL;
+  if (so == NULL)
+    return NULL;
 
-	return so->getId().empty() ? NULL : safe_strdup(so->getId().c_str());
+  return so->getId().empty() ? NULL : safe_strdup(so->getId().c_str());
 }
 
 
@@ -804,10 +797,10 @@ LIBSEDML_EXTERN
 char *
 SedOutput_getName(SedOutput_t * so)
 {
-	if (so == NULL)
-		return NULL;
+  if (so == NULL)
+    return NULL;
 
-	return so->getName().empty() ? NULL : safe_strdup(so->getName().c_str());
+  return so->getName().empty() ? NULL : safe_strdup(so->getName().c_str());
 }
 
 
@@ -818,7 +811,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_isSetId(SedOutput_t * so)
 {
-	return (so != NULL) ? static_cast<int>(so->isSetId()) : 0;
+  return (so != NULL) ? static_cast<int>(so->isSetId()) : 0;
 }
 
 
@@ -829,7 +822,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_isSetName(SedOutput_t * so)
 {
-	return (so != NULL) ? static_cast<int>(so->isSetName()) : 0;
+  return (so != NULL) ? static_cast<int>(so->isSetName()) : 0;
 }
 
 
@@ -840,7 +833,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_setId(SedOutput_t * so, const char * id)
 {
-	return (so != NULL) ? so->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (so != NULL) ? so->setId(id) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -851,7 +844,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_setName(SedOutput_t * so, const char * name)
 {
-	return (so != NULL) ? so->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (so != NULL) ? so->setName(name) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -862,7 +855,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_unsetId(SedOutput_t * so)
 {
-	return (so != NULL) ? so->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (so != NULL) ? so->unsetId() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -873,7 +866,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_unsetName(SedOutput_t * so)
 {
-	return (so != NULL) ? so->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (so != NULL) ? so->unsetName() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -884,7 +877,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_hasRequiredAttributes(SedOutput_t * so)
 {
-	return (so != NULL) ? static_cast<int>(so->hasRequiredAttributes()) : 0;
+  return (so != NULL) ? static_cast<int>(so->hasRequiredAttributes()) : 0;
 }
 
 
@@ -895,7 +888,7 @@ LIBSEDML_EXTERN
 int
 SedOutput_hasRequiredElements(SedOutput_t * so)
 {
-	return (so != NULL) ? static_cast<int>(so->hasRequiredElements()) : 0;
+  return (so != NULL) ? static_cast<int>(so->hasRequiredElements()) : 0;
 }
 
 
@@ -906,10 +899,10 @@ LIBSEDML_EXTERN
 SedOutput_t *
 SedListOfOutputs_getById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->get(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->get(sid) : NULL;
 }
 
 
@@ -920,10 +913,10 @@ LIBSEDML_EXTERN
 SedOutput_t *
 SedListOfOutputs_removeById(SedListOf_t * lo, const char * sid)
 {
-	if (lo == NULL)
-		return NULL;
+  if (lo == NULL)
+    return NULL;
 
-	return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->remove(sid) : NULL;
+  return (sid != NULL) ? static_cast <SedListOfOutputs *>(lo)->remove(sid) : NULL;
 }
 
 
