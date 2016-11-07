@@ -164,6 +164,3 @@ pip-log.txt
 # Mac crap
 .DS_Store
 
-# QtCreator
-CMakeLists.txt.user*
-
