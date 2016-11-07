@@ -44,6 +44,10 @@
 
 LIBSBML_CPP_NAMESPACE_USE
 
+#include <numl/common/libnuml-namespace.h>
+
+LIBNUML_CPP_NAMESPACE_USE
+
 #endif
 
 /*
