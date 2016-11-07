@@ -83,6 +83,11 @@ MATH(EXPR LIBSEDML_VERSION_NUMERIC "${LIBSEDML_VERSION_MAJOR} * 10000 + ${LIBSED
 set(PACKAGE_VERSION "${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH}${LIBSEDML_VERSION_RELEASE}")
 set(PACKAGE_NAME "libSEDML")
 
+# PACKAGE_VERSION gets overridden by using other packages, so setting
+# the PROJECT_VERSION, which will be used when exporting targets in
+# src/CMakeLists.txt
+set(PROJECT_VERSION ${PACKAGE_VERSION})
+
 # add make dist and make check target as they are already familiar for
 # everyone using the gnumake build
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
@@ -257,22 +262,27 @@ endif(WITH_SWIG)
 #
 # Locate libsbml
 #
-find_library(LIBSBML_LIBRARY
-    NAMES libsbml-static.lib sbml-static libsbml.lib sbml
-    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-    /usr/local/lib          
-          /usr/lib 
-    DOC "The file name of the sbml library."
-)
+find_package(sbml-static CONFIG REQUIRED)
+find_package(numl-static CONFIG REQUIRED)
+find_package(ZLIB ${ZLIB_VERSION} CONFIG REQUIRED)
+find_package(LibXml2 ${ZLIB_VERSION} CONFIG REQUIRED)
 
-find_path(LIBSBML_INCLUDE_DIR
-    NAMES sbml/SBase.h
-    PATHS 
-          ${LIBSEDML_DEPENDENCY_DIR}/include
-    /usr/local/include
-          /usr/include 
-    DOC "The directory containing the sbml include files."
-)
+#find_library(LIBSBML_LIBRARY
+#    NAMES libsbml-static.lib sbml-static libsbml.lib sbml
+#    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
+#    /usr/local/lib
+#          /usr/lib
+#    DOC "The file name of the sbml library."
+#)
+
+#find_path(LIBSBML_INCLUDE_DIR
+#    NAMES sbml/SBase.h
+#    PATHS
+#          ${LIBSEDML_DEPENDENCY_DIR}/include
+#    /usr/local/include
+#          /usr/include
+#    DOC "The directory containing the sbml include files."
+#)
 
 set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
 if (WIN32 AND NOT CYGWIN)
@@ -283,30 +293,30 @@ if (WIN32 AND NOT CYGWIN)
   endif()
 endif()
 
-if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
-    message(FATAL_ERROR 
-"The include directory specified for sbml appears to be invalid.  It should contain the 
-file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
-)
-endif()
+#if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
+#    message(FATAL_ERROR
+#"The include directory specified for sbml appears to be invalid.  It should contain the
+#file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
+#)
+#endif()
 
 
-find_library(LIBNUML_LIBRARY
-    NAMES libnuml-static.lib numl-static libnuml.lib numl
-    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-    /usr/local/lib          
-          /usr/lib 
-    DOC "The file name of the numl library."
-)
+#find_library(LIBNUML_LIBRARY
+#    NAMES libnuml-static.lib numl-static libnuml.lib numl
+#    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
+#    /usr/local/lib
+#          /usr/lib
+#    DOC "The file name of the numl library."
+#)
 
-find_path(LIBNUML_INCLUDE_DIR
-    NAMES numl/NMBase.h
-    PATHS 
-          ${LIBSEDML_DEPENDENCY_DIR}/include
-    /usr/local/include
-          /usr/include 
-    DOC "The directory containing the numl include files."
-)
+#find_path(LIBNUML_INCLUDE_DIR
+#    NAMES numl/NMBase.h
+#    PATHS
+#          ${LIBSEDML_DEPENDENCY_DIR}/include
+#    /usr/local/include
+#          /usr/include
+#    DOC "The directory containing the numl include files."
+#)
 
 set(LIBNUML_STATIC OFF CACHE BOOL "is libnuml statically compiled")
 if (WIN32 AND NOT CYGWIN)
@@ -324,7 +334,7 @@ endif()
 # list of additional files to link against.
 #
 
-set(EXTRA_LIBS "" CACHE STRING "List of additional libraries to link against." )
+set(EXTRA_LIBS "numl-static;sbml-static;xml2;zlib" CACHE STRING "List of additional libraries to link against." )
 set(EXTRA_INCLUDE "" CACHE STRING "List of additional include directories to add." )
 set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
 
@@ -334,46 +344,46 @@ set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
 # Locate zlib
 #
 
-set(ZLIB_INITIAL_VALUE)
-find_library(LIBZ_LIBRARY
-    NAMES zdll.lib z zlib.lib
-    PATHS /usr/lib /usr/local/lib
-          ${LIBSEDML_DEPENDENCY_DIR}/lib
-    DOC "The file name of the zip compression library."
-    )
+set(ZLIB_INITIAL_VALUE ON)
+#find_library(LIBZ_LIBRARY
+#    NAMES zdll.lib z zlib.lib
+#    PATHS /usr/lib /usr/local/lib
+#          ${LIBSEDML_DEPENDENCY_DIR}/lib
+#    DOC "The file name of the zip compression library."
+#    )
 
-if(EXISTS ${LIBZ_LIBRARY})
-    set(ZLIB_INITIAL_VALUE ON)
-else()
-    set(ZLIB_INITIAL_VALUE OFF)
-endif()
+#if(EXISTS ${LIBZ_LIBRARY})
+#    set(ZLIB_INITIAL_VALUE ON)
+#else()
+#    set(ZLIB_INITIAL_VALUE OFF)
+#endif()
 option(WITH_ZLIB     "Enable the use of zip compression."    ${ZLIB_INITIAL_VALUE} )
 
 if(WITH_ZLIB)
 
-    find_path(LIBZ_INCLUDE_DIR
-        NAMES zlib.h zlib/zlib.h
-        PATHS /usr/include /usr/local/include
-              ${LIBSEDML_DEPENDENCY_DIR}/include
-        DOC "The directory containing the zlib include files."
-              )
+#    find_path(LIBZ_INCLUDE_DIR
+#        NAMES zlib.h zlib/zlib.h
+#        PATHS /usr/include /usr/local/include
+#              ${LIBSEDML_DEPENDENCY_DIR}/include
+#        DOC "The directory containing the zlib include files."
+#              )
 
     add_definitions( -DUSE_ZLIB )
 
-    # make sure that we have a valid zip library
-    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
-    if(NOT LIBZ_FOUND_SYMBOL)
-        # this is odd, but on windows this check always fails! must be a
-        # bug in the current cmake version so for now only issue this
-        # warning on linux
-        if(UNIX)
-            message(WARNING "The zlib library does not appear to be valid because it is missing certain required symbols. Please check that ${LIBZ_LIBRARY} is the zlib library. For details about the error, please see ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
-        endif()
-    endif()
+#    # make sure that we have a valid zip library
+#    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
+#    if(NOT LIBZ_FOUND_SYMBOL)
+#        # this is odd, but on windows this check always fails! must be a
+#        # bug in the current cmake version so for now only issue this
+#        # warning on linux
+#        if(UNIX)
+#            message(WARNING "The zlib library does not appear to be valid because it is missing certain required symbols. Please check that ${LIBZ_LIBRARY} is the zlib library. For details about the error, please see ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
+#        endif()
+#    endif()
 
-    if(NOT EXISTS "${LIBZ_INCLUDE_DIR}/zlib.h")
-        message(FATAL_ERROR "The zlib include directory does not appear to be valid. It should contain the file zlib.h, but it does not.")
-    endif()
+#    if(NOT EXISTS "${LIBZ_INCLUDE_DIR}/zlib.h")
+#        message(FATAL_ERROR "The zlib include directory does not appear to be valid. It should contain the file zlib.h, but it does not.")
+#    endif()
 
 endif(WITH_ZLIB)
 
