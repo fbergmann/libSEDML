@@ -333,8 +333,6 @@ typedef CLASS_OR_STRUCT SedDataSet                     SedDataSet_t;
 */
 typedef CLASS_OR_STRUCT SedDataDescription                     SedDataDescription_t;
 
-typedef CLASS_OR_STRUCT DimensionDescription                     DimensionDescription_t;
-
 /**
 * @var typedef class SedDataSource SedDataSource_t
 * @copydoc SedDataSource
@@ -349,6 +347,12 @@ typedef CLASS_OR_STRUCT SedSlice                     SedSlice_t;
 
 
 LIBSEDML_CPP_NAMESPACE_END
+
+LIBNUML_CPP_NAMESPACE_BEGIN
+
+typedef CLASS_OR_STRUCT DimensionDescription                     DimensionDescription_t;
+
+LIBNUML_CPP_NAMESPACE_END
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
