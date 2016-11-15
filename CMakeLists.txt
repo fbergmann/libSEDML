@@ -228,10 +228,21 @@ if(WITH_CPP_NAMESPACE)
     set (LIBSEDML_USE_CPP_NAMESPACE 1)
 endif()
 
+if (SWIG_EXECUTABLE AND NOT EXISTS "${SWIG_EXECUTABLE}")
+unset(SWIG_EXECUTABLE CACHE )
+unset(SWIG_DIR CACHE )
+unset(SWIG_VERSION CACHE )
+endif()
+
 if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
       NAMES swig
       PATHS
+        c:/swigwin-3.0.10
+        c:/swigwin-3.0.9
+        c:/swigwin-3.0.8
+        c:/swigwin-3.0.7
+        c:/swigwin-3.0.6
         c:/swigwin-3.0.5
         c:/swigwin-3.0.2
         c:/swigwin-3.0.0
