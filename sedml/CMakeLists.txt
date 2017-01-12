@@ -48,7 +48,7 @@ configure_file(
   "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-config-common.h"
   )
 
-# Replace: @PACKAGE_VERSION@ and @LIBSEDML_VERSION_NUMERIC@
+# Replace: @LIBSEDML_VERSION@ and @LIBSEDML_VERSION_NUMERIC@
 configure_file (
   "${CMAKE_CURRENT_SOURCE_DIR}/common/libsedml-version.h.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/common/libsedml-version.h"
