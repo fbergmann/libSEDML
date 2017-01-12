@@ -49,11 +49,11 @@
 #define PACKAGE_NAME "libSEDML"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "libSEDML @PACKAGE_VERSION@"
+#define PACKAGE_STRING "libSEDML @LIBSEDML_VERSION@"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "libsedml"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "@PACKAGE_VERSION@"
+#define PACKAGE_VERSION "@LIBSEDML_VERSION@"
 
