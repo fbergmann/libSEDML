@@ -48,6 +48,7 @@
 #include <sedml/common/libsedml-namespace.h>
 #include <sedml/common/libsedml-config.h>
 
+#include <numl/common/libnuml-namespace.h>
 
 #ifdef __cplusplus
 /**
