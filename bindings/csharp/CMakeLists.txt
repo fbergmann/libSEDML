@@ -144,10 +144,11 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
-include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
+include_directories(${LIBSBML_INCLUDE_DIR})
+include_directories(${LIBNUML_INCLUDE_DIR})
+
 add_definitions(-DLIBSEDML_STATIC)
 add_library(binding_csharp_native_lib SHARED ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp )
 add_dependencies(binding_csharp_native_lib binding_csharp_swig)

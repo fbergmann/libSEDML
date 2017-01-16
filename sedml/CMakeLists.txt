@@ -92,10 +92,10 @@ install(FILES
 # specify include directories
 #
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(BEFORE ${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/..)
+include_directories(BEFORE ${LIBSBML_INCLUDE_DIR})
+include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 
 if (EXTRA_DEFS)
 add_definitions(${EXTRA_DEFS})
@@ -165,7 +165,7 @@ if (${CMAKE_VERSION} VERSION_GREATER "2.8.11")
   set(INCLUDE_DESTINATION INCLUDES DESTINATION include)
 endif()
 
-if (NOT LIBSEDML_SKIP_SHARED_LIBRARY)
+if (LIBSEDML_SHARED_VERSION OR NOT LIBSEDML_SKIP_SHARED_LIBRARY)
 
 add_library (${LIBSEDML_LIBRARY} SHARED ${LIBSEDML_SOURCES} )
 
@@ -176,7 +176,7 @@ if (LIBSEDML_SHARED_VERSION)
                       VERSION ${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH})
 endif()
 
-target_link_libraries(${LIBSEDML_LIBRARY} ${LIBSBML_LIBRARY} ${LIBNUML_LIBRARY} ${EXTRA_LIBS})
+target_link_libraries(${LIBSEDML_LIBRARY} ${LIBSBML_LIBRARY_NAME} ${LIBNUML_LIBRARY} ${EXTRA_LIBS})
 
 # Create the exported target
 INSTALL(TARGETS ${LIBSEDML_LIBRARY} 
@@ -207,10 +207,10 @@ endif()
 add_library (${LIBSEDML_LIBRARY}-static STATIC ${LIBSEDML_SOURCES} )
 if (WIN32 AND NOT CYGWIN)
   # don't decorate static library 
-  set_target_properties(${LIBSEDML_LIBRARY}-static PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
+  set_target_properties(${LIBSEDML_LIBRARY}-static PROPERTIES COMPILE_DEFINITIONS "LIBLAX_STATIC=1;LIBSEDML_STATIC=1")
 endif(WIN32 AND NOT CYGWIN)
 
-target_link_libraries(${LIBSEDML_LIBRARY}-static ${LIBSBML_LIBRARY} ${LIBNUML_LIBRARY} ${EXTRA_LIBS})
+target_link_libraries(${LIBSEDML_LIBRARY}-static ${LIBSBML_LIBRARY_NAME} ${LIBNUML_LIBRARY} ${EXTRA_LIBS})
 
 # Create the exported target for the static library
 INSTALL(TARGETS ${LIBSEDML_LIBRARY}-static 

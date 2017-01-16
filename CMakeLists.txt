@@ -226,6 +226,14 @@ if("${LIBSEDML_DEPENDENCY_DIR}" STREQUAL "")
 endif()
 
 
+# Update cmake path variables
+if (LIBSEDML_DEPENDENCY_DIR AND EXISTS ${LIBSEDML_DEPENDENCY_DIR})
+  set(CMAKE_PREFIX_PATH "${LIBSEDML_DEPENDENCY_DIR}/lib/cmake;${CMAKE_PREFIX_PATH}")
+endif()
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
+
+
 ###############################################################################
 #
 # If WITH_SWIG is selected, we need to find swig
@@ -282,25 +290,19 @@ endif(WITH_SWIG)
 #
 
 set( MISC_PREFIX )
-if(UNIX OR CYGWIN)
+if(UNIX OR CYGWIN OR MINGW)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
     set( MISC_PREFIX "share/libsedml/" )
     set(LIBSEDML_LIBRARY sedml)
-    set(LIBSBML_LIBRARY sbml)
-    set(LIBNUML_LIBRARY numl)
 else()
     set( MISC_PREFIX "" )
     set(PATH_SEP "\\")
     set(FILE_SEP ";")
     if(MINGW)
         set(LIBSEDML_LIBRARY sedml)
-        set(LIBSBML_LIBRARY sbml)
-        set(LIBNUML_LIBRARY numl)
     else()
         set(LIBSEDML_LIBRARY libsedml)
-        set(LIBSBML_LIBRARY libsbml)
-        set(LIBNUML_LIBRARY libnuml)
     endif()
 endif()
 
@@ -308,25 +310,8 @@ endif()
 #
 # Locate libsbml
 #
-find_package(${LIBSBML_LIBRARY}-static CONFIG REQUIRED)
-find_package(${LIBNUML_LIBRARY}-static CONFIG REQUIRED)
-
-#find_library(LIBSBML_LIBRARY
-#    NAMES libsbml-static.lib sbml-static libsbml.lib sbml
-#    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-#    /usr/local/lib
-#          /usr/lib
-#    DOC "The file name of the sbml library."
-#)
-
-#find_path(LIBSBML_INCLUDE_DIR
-#    NAMES sbml/SBase.h
-#    PATHS
-#          ${LIBSEDML_DEPENDENCY_DIR}/include
-#    /usr/local/include
-#          /usr/include
-#    DOC "The directory containing the sbml include files."
-#)
+find_package(LIBSBML REQUIRED)
+find_package(LIBNUML REQUIRED)
 
 set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
 if (WIN32 AND NOT CYGWIN)
@@ -337,34 +322,9 @@ if (WIN32 AND NOT CYGWIN)
   endif()
 endif()
 
-#if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
-#    message(FATAL_ERROR
-#"The include directory specified for sbml appears to be invalid.  It should contain the
-#file sbml/SBase.h, but it does not. Please specify the LIBSBML_INCLUDE_DIR variable."
-#)
-#endif()
-
-
-#find_library(LIBNUML_LIBRARY
-#    NAMES libnuml-static.lib numl-static libnuml.lib numl
-#    PATHS ${LIBSEDML_DEPENDENCY_DIR}/lib
-#    /usr/local/lib
-#          /usr/lib
-#    DOC "The file name of the numl library."
-#)
-
-#find_path(LIBNUML_INCLUDE_DIR
-#    NAMES numl/NMBase.h
-#    PATHS
-#          ${LIBSEDML_DEPENDENCY_DIR}/include
-#    /usr/local/include
-#          /usr/include
-#    DOC "The directory containing the numl include files."
-#)
-
 set(LIBNUML_STATIC OFF CACHE BOOL "is libnuml statically compiled")
 if (WIN32 AND NOT CYGWIN)
-  if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+  if (LIBNUML_LIBRARY AND LIBNUML_LIBRARY MATCHES ".*-static*$")
     set(LIBNUML_STATIC ON CACHE BOOL "is libnuml statically compiled")
   else()
     option(LIBNUML_STATIC "The LibNUML library was statically compiled" ON)
@@ -438,9 +398,11 @@ endif(WITH_ZLIB)
 #
 
 if(WITH_CSHARP)
+   FILE(TO_CMAKE_PATH "$ENV{WINDIR}" windir)
     find_program(CSHARP_COMPILER
-        NAMES gmcs csc
-        PATHS C:/Windows/Microsoft.NET/Framework/v2.0.50727/ /usr/bin /usr/local/bin
+        NAMES gmcs csc mcs
+        PATHS ${windir}/Microsoft.NET/Framework/v2.0.50727/ 
+              /usr/bin /usr/local/bin
         DOC "The file name of the C# compiler."
         )
     if(UNIX)
