@@ -53,10 +53,10 @@ if (NOT LIBNUML_INCLUDE_DIR)
 endif (NOT LIBNUML_INCLUDE_DIR)
 
 find_library(LIBNUML_LIBRARY 
-    NAMES sbml-static 
-          sbml
-          libsbml-static 
-          libsbml
+    NAMES numl-static 
+          numl
+          libnuml-static 
+          libnuml
     PATHS $ENV{LIBNUML_DIR}/lib
           $ENV{LIBNUML_DIR}
           ${LIBSEDML_DEPENDENCY_DIR}
@@ -72,8 +72,8 @@ find_library(LIBNUML_LIBRARY
 
 if (NOT LIBNUML_LIBRARY)
     find_library(LIBNUML_LIBRARY 
-        NAMES sbml-static 
-              sbml)
+        NAMES numl-static 
+              numl)
 endif (NOT LIBNUML_LIBRARY)
 
 if (NOT LIBNUML_LIBRARY)
