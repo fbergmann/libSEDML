@@ -30,7 +30,7 @@ if (${LIBNUML_LIBRARY_NAME}_FOUND)
 
 else()
 
-find_path(LIBNUML_INCLUDE_DIR sbml/SBase.h
+find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h
     PATHS $ENV{LIBNUML_DIR}/include
           $ENV{LIBNUML_DIR}
           ${LIBSEDML_DEPENDENCY_DIR}
@@ -45,11 +45,11 @@ find_path(LIBNUML_INCLUDE_DIR sbml/SBase.h
     NO_DEFAULT_PATH)
 
 if (NOT LIBNUML_INCLUDE_DIR)
-    message(FATAL_ERROR "libsbml include dir not found not found!")
+    message(FATAL_ERROR "libnuml include dir not found not found!")
 endif (NOT LIBNUML_INCLUDE_DIR)
 
 if (NOT LIBNUML_INCLUDE_DIR)
-    find_path(LIBNUML_INCLUDE_DIR sbml/SBase.h)
+    find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h)
 endif (NOT LIBNUML_INCLUDE_DIR)
 
 find_library(LIBNUML_LIBRARY 
