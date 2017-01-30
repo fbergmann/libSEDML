@@ -45,11 +45,11 @@ find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h
     NO_DEFAULT_PATH)
 
 if (NOT LIBNUML_INCLUDE_DIR)
-    message(FATAL_ERROR "libnuml include dir not found not found!")
+    find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h)
 endif (NOT LIBNUML_INCLUDE_DIR)
 
 if (NOT LIBNUML_INCLUDE_DIR)
-    find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h)
+    message(FATAL_ERROR "libnuml include dir not found not found!")
 endif (NOT LIBNUML_INCLUDE_DIR)
 
 find_library(LIBNUML_LIBRARY 

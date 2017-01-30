@@ -45,12 +45,14 @@ find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h
     NO_DEFAULT_PATH)
 
 if (NOT LIBSBML_INCLUDE_DIR)
+    find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h)
+endif (NOT LIBSBML_INCLUDE_DIR)
+
+
+if (NOT LIBSBML_INCLUDE_DIR)
     message(FATAL_ERROR "libsbml include dir not found not found!")
 endif (NOT LIBSBML_INCLUDE_DIR)
 
-if (NOT LIBSBML_INCLUDE_DIR)
-    find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h)
-endif (NOT LIBSBML_INCLUDE_DIR)
 
 find_library(LIBSBML_LIBRARY 
     NAMES sbml-static 
