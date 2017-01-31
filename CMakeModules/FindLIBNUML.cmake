@@ -20,6 +20,16 @@ message (STATUS "Looking for ${LIBNUML_LIBRARY_NAME}")
 
 find_package(${LIBNUML_LIBRARY_NAME} CONFIG QUIET)
 
+if (NOT ${LIBNUML_LIBRARY_NAME}_FOUND)
+  find_package(${LIBNUML_LIBRARY_NAME} CONFIG QUIET
+    PATHS /usr/lib/cmake
+          /usr/local/lib/cmake
+          /opt/lib/cmake
+          /opt/local/lib/cmake
+          /sw/lib/cmake
+  )
+endif()
+
 if (${LIBNUML_LIBRARY_NAME}_FOUND)
 
   get_target_property(LIBNUML_LIBRARY ${LIBNUML_LIBRARY_NAME} LOCATION)
@@ -100,3 +110,4 @@ include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(LIBNUML DEFAULT_MSG LIBNUML_LIBRARY_NAME LIBNUML_LIBRARY LIBNUML_INCLUDE_DIR)
 
 mark_as_advanced(LIBNUML_INCLUDE_DIR LIBNUML_LIBRARY LIBNUML_LIBRARY_NAME)
+

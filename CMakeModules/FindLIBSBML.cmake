@@ -20,6 +20,16 @@ message (STATUS "Looking for ${LIBSBML_LIBRARY_NAME}")
 
 find_package(${LIBSBML_LIBRARY_NAME} CONFIG QUIET)
 
+if (NOT ${LIBSBML_LIBRARY_NAME}_FOUND)
+  find_package(${LIBSBML_LIBRARY_NAME} CONFIG QUIET
+    PATHS /usr/lib/cmake
+          /usr/local/lib/cmake
+          /opt/lib/cmake
+          /opt/local/lib/cmake
+          /sw/lib/cmake
+  )
+endif()
+
 if (${LIBSBML_LIBRARY_NAME}_FOUND)
 
   get_target_property(LIBSBML_LIBRARY ${LIBSBML_LIBRARY_NAME} LOCATION)
@@ -102,3 +112,4 @@ include(FindPackageHandleStandardArgs)
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(LIBSBML DEFAULT_MSG LIBSBML_LIBRARY_NAME LIBSBML_LIBRARY LIBSBML_INCLUDE_DIR)
 
 mark_as_advanced(LIBSBML_INCLUDE_DIR LIBSBML_LIBRARY LIBSBML_LIBRARY_NAME)
+
