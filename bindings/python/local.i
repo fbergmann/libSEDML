@@ -378,29 +378,17 @@ METHOD_NAME
 // ListOf
 // ----------------------------------------------------------------------
 
-//#if SWIG_VERSION > 0x010336
 TAKEOVER_OWNERSHIP(ListOf::appendAndOwn(SedBase*),item)
-//#else
-//TAKEOVER_OWNERSHIP(ListOf::appendAndOwn(SedBase*),1)
-//#endif
 
 // ----------------------------------------------------------------------
 // ASTNode
 // ----------------------------------------------------------------------
 
-//#if SWIG_VERSION > 0x010336
 TAKEOVER_OWNERSHIP(ASTNode::addChild(ASTNode*),disownedChild)
 TAKEOVER_OWNERSHIP(ASTNode::prependChild(ASTNode*),disownedChild)
 TAKEOVER_OWNERSHIP(ASTNode::insertChild(unsigned int, ASTNode*),disownedChild)
 TAKEOVER_OWNERSHIP(ASTNode::replaceChild(unsigned int, ASTNode*),disownedChild)
 TAKEOVER_OWNERSHIP(ASTNode::addSemanticsAnnotation(XMLNode*),disownedAnnotation)
-//#else
-//TAKEOVER_OWNERSHIP(ASTNode::addChild(ASTNode*),1)
-//TAKEOVER_OWNERSHIP(ASTNode::prependChild(ASTNode*),1)
-//TAKEOVER_OWNERSHIP(ASTNode::insertChild(unsigned int, ASTNode*),2)
-//TAKEOVER_OWNERSHIP(ASTNode::replaceChild(unsigned int, ASTNode*),2)
-//TAKEOVER_OWNERSHIP(ASTNode::addSemanticsAnnotation(XMLNode*),1)
-//#endif
 
 /**
  *
