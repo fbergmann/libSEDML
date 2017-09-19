@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" xmlns:addedPrefix="http://sed-ml.org/sed-ml/level1/version2" level="1" version="3">
+  <listOfSimulations>
+    <uniformTimeCourse id="sim0_model0_teusink" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfPoints="1000">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfModels>
+    <model id="model0_teusink" name="teusink" language="urn:sedml:language:sbml" source="teusink.sbml">
+      <listOfChanges>
+        <changeAttribute target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;&apos;]/@initialConcentration" newValue="0.28"/>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+  <listOfTasks>
+    <task id="task0_model0_teusink" modelReference="model0_teusink" simulationReference="sim0_model0_teusink"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="task0_model0_teusink_TRIO">
+      <listOfVariables>
+        <variable id="TRIO" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;TRIO&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> TRIO </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_Prb">
+      <listOfVariables>
+        <variable id="Prb" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;Prb&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> Prb </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_PYR">
+      <listOfVariables>
+        <variable id="PYR" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;PYR&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> PYR </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_PEP">
+      <listOfVariables>
+        <variable id="PEP" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;PEP&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> PEP </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_P3G">
+      <listOfVariables>
+        <variable id="P3G" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;P3G&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> P3G </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_P2G">
+      <listOfVariables>
+        <variable id="P2G" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;P2G&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> P2G </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_NADH">
+      <listOfVariables>
+        <variable id="NADH" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NADH&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> NADH </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_NAD">
+      <listOfVariables>
+        <variable id="NAD" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;NAD&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> NAD </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_GLCi">
+      <listOfVariables>
+        <variable id="GLCi" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;GLCi&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> GLCi </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_G6P">
+      <listOfVariables>
+        <variable id="G6P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;G6P&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> G6P </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_F6P">
+      <listOfVariables>
+        <variable id="F6P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;F6P&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> F6P </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_F16P">
+      <listOfVariables>
+        <variable id="F16P" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;F16P&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> F16P </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_BPG">
+      <listOfVariables>
+        <variable id="BPG" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;BPG&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> BPG </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_ACE">
+      <listOfVariables>
+        <variable id="ACE" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;ACE&apos;]" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> ACE </ci>
+      </math>
+    </dataGenerator>
+    <dataGenerator id="task0_model0_teusink_time">
+      <listOfVariables>
+        <variable id="time" symbol="urn:sedml:symbol:time" taskReference="task0_model0_teusink"/>
+      </listOfVariables>
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> time </ci>
+      </math>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <plot2D id="plot0">
+      <listOfCurves>
+        <curve id="plot0_TRIO" name="TRIO" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_TRIO"/>
+        <curve id="plot0_Prb" name="Prb" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_Prb"/>
+        <curve id="plot0_PYR" name="PYR" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_PYR"/>
+        <curve id="plot0_PEP" name="PEP" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_PEP"/>
+        <curve id="plot0_P3G" name="P3G" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_P3G"/>
+        <curve id="plot0_P2G" name="P2G" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_P2G"/>
+        <curve id="plot0_NADH" name="NADH" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_NADH"/>
+        <curve id="plot0_NAD" name="NAD" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_NAD"/>
+        <curve id="plot0_GLCi" name="GLCi" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_GLCi"/>
+        <curve id="plot0_G6P" name="G6P" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_G6P"/>
+        <curve id="plot0_F6P" name="F6P" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_F6P"/>
+        <curve id="plot0_F16P" name="F16P" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_F16P"/>
+        <curve id="plot0_BPG" name="BPG" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_BPG"/>
+        <curve id="plot0_ACE" name="ACE" logX="false" logY="false" xDataReference="task0_model0_teusink_time" yDataReference="task0_model0_teusink_ACE"/>
+      </listOfCurves>
+    </plot2D>
+    <report id="csv0">
+      <listOfDataSets>
+        <dataSet id="csv0_time" label="time" name="time" dataReference="task0_model0_teusink_time"/>
+        <dataSet id="csv0_ACE" label="ACE" name="ACE" dataReference="task0_model0_teusink_ACE"/>
+        <dataSet id="csv0_BPG" label="BPG" name="BPG" dataReference="task0_model0_teusink_BPG"/>
+        <dataSet id="csv0_F16P" label="F16P" name="F16P" dataReference="task0_model0_teusink_F16P"/>
+        <dataSet id="csv0_F6P" label="F6P" name="F6P" dataReference="task0_model0_teusink_F6P"/>
+        <dataSet id="csv0_G6P" label="G6P" name="G6P" dataReference="task0_model0_teusink_G6P"/>
+        <dataSet id="csv0_GLCi" label="GLCi" name="GLCi" dataReference="task0_model0_teusink_GLCi"/>
+        <dataSet id="csv0_NAD" label="NAD" name="NAD" dataReference="task0_model0_teusink_NAD"/>
+        <dataSet id="csv0_NADH" label="NADH" name="NADH" dataReference="task0_model0_teusink_NADH"/>
+        <dataSet id="csv0_P2G" label="P2G" name="P2G" dataReference="task0_model0_teusink_P2G"/>
+        <dataSet id="csv0_P3G" label="P3G" name="P3G" dataReference="task0_model0_teusink_P3G"/>
+        <dataSet id="csv0_PEP" label="PEP" name="PEP" dataReference="task0_model0_teusink_PEP"/>
+        <dataSet id="csv0_PYR" label="PYR" name="PYR" dataReference="task0_model0_teusink_PYR"/>
+        <dataSet id="csv0_Prb" label="Prb" name="Prb" dataReference="task0_model0_teusink_Prb"/>
+        <dataSet id="csv0_TRIO" label="TRIO" name="TRIO" dataReference="task0_model0_teusink_TRIO"/>
+      </listOfDataSets>
+    </report>
+  </listOfOutputs>
+</sedML>
