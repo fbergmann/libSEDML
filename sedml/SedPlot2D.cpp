@@ -520,14 +520,14 @@ SedPlot2D::readAttributes(const XMLAttributes& attributes,
   bool assigned = false;
 
   //
-  // logX bool   ( use = "required" )
+  // logX bool   ( use = "optional" )
   //
-  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), getLevel() > 1 || (getLevel() == 1 && getVersion() > 2));
+  mIsSetLogX = attributes.readInto("logX", mLogX, getErrorLog(), false);
 
   //
-  // logY bool   ( use = "required" )
+  // logY bool   ( use = "optional" )
   //
-  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), getLevel() > 1 || (getLevel() == 1 && getVersion() > 2));
+  mIsSetLogY = attributes.readInto("logY", mLogY, getErrorLog(), false);
 
 }
 
