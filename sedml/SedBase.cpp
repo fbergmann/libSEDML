@@ -2409,12 +2409,6 @@ SedBase::readNotes(XMLInputStream& stream)
 
   if (name == "notes")
     {
-      // If this is a level 1 document then notes are not allowed on
-      // the sbml container
-      if (getLevel() == 1 && getTypeCode() == SEDML_DOCUMENT)
-        {
-          logError(SedAnnotationNotesNotAllowedLevel1);
-        }
 
       // If a notes element already exists, then it is an error.
       // If an annotation element already exists, then the ordering is wrong.
