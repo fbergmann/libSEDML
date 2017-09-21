@@ -339,7 +339,7 @@ endif()
 #
 
 set(EXTRA_LIBS "" CACHE STRING "List of additional libraries to link against." )
-set(EXTRA_INCLUDE "" CACHE STRING "List of additional include directories to add." )
+set(EXTRA_INCLUDE_DIRS "" CACHE STRING "List of additional include directories to add." )
 set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
 
 
