@@ -13,6 +13,9 @@ import writeHeader
 def createElements():
   elements = [
                 createSedDocument(),
+                createSedDataDescription(),
+                createSedDataSource(),
+                createSedSlice(),
                 createSedModel(),
                 createSedChange(),
                 createSedParameter(),
@@ -50,10 +53,82 @@ def createElements():
     writeCode.createCode(element)
     writeHeader.createHeader(element)
 
+def createSedDataDescription():
+  a1 = dict({'type': 'SId', 'reqd' : True, 'name':'id'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'string', 'reqd' : False, 'name':'format'})
+  a4 = dict({'type': 'string', 'reqd' : False, 'name':'source'})
+  a5 = dict({'type': 'DimensionDescription*', 'reqd' : True, 'name':'dimensionDescription'})
+  lo0 = dict({
+              'type': 'lo_element', 
+              'reqd' : False, 
+              'name':'dataSource', 
+              'element': 'SedDataSource',
+              'abstract':False
+              })
+  attributes = [a1, a2, a3, a4, a5, lo0]
+  element = dict({
+           'name': 'SedDataDescription', 
+           'package': 'Sed', 
+           'typecode': 'SEDML_DATA_DESCRIPTION', 
+           'hasSedListOf': True, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'dataDescription'
+           })
+  return element
+
+def createSedDataSource():
+  a1 = dict({'type': 'SId', 'reqd' : False, 'name':'id'})
+  a2 = dict({'type': 'string', 'reqd' : False, 'name':'name'})
+  a3 = dict({'type': 'string', 'reqd' : False, 'name':'indexSet'})
+  lo0 = dict({
+              'type': 'lo_element', 
+              'reqd' : False, 
+              'name':'slice', 
+              'element': 'SedSlice',
+              'abstract':False
+              })
+  attributes = [a1, a2, a3, lo0]
+  element = dict({
+           'name': 'SedDataSource', 
+           'package': 'Sed', 
+           'typecode': 'SEDML_DATA_SOURCE', 
+           'hasSedListOf': True, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'dataSource'
+           })
+  return element
+
+def createSedSlice():
+  a1 = dict({'type': 'SIdRef', 'reqd' : True, 'name':'reference'})
+  a2 = dict({'type': 'string', 'reqd' : True, 'name':'value'})
+  attributes = [a1, a2]
+  element = dict({
+           'name': 'SedSlice', 
+           'package': 'Sed', 
+           'typecode': 'SEDML_DATA_SLICE', 
+           'hasSedListOf': True, 
+           'attribs':attributes, 
+           'hasChildren':True, 
+           'hasMath':False, 
+           'elementName':'slice'
+           })
+  return element
 
 def createSedDocument() :
   a1 = dict({'type': 'int', 'reqd' : True, 'name':'level'})
   a2 = dict({'type': 'int', 'reqd' : True, 'name':'version'})
+  lo0 = dict({
+                 'type': 'lo_element', 
+              'reqd' : False, 
+              'name':'dataDescription', 
+              'element': 'SedDataDescription',
+              'abstract':False
+              })
   lo1 = dict({
                  'type': 'lo_element', 
 			  'reqd' : False, 
@@ -92,7 +167,7 @@ def createSedDocument() :
 				           dict({ 'name':'plot3D', 'element':'SedPlot3D'}),
 						   ]
 			  })
-  attributes = [a1, a2, lo1, lo2, lo3, lo4, lo5]
+  attributes = [a1, a2, lo0, lo1, lo2, lo3, lo4, lo5]
   element = dict({
            'name': 'SedDocument', 
 		   'package': 'Sed', 
@@ -188,7 +263,9 @@ def createSedAlgorithmParameter() :
                  'attribs':attributes,
                  'hasChildren':False,
                  'hasMath':False,
-                 'elementName':'algorithmParameter'
+                 'elementName':'algorithmParameter',
+                 'additionalCPPDecls':'../dev/algorithmparameter_headers.h',
+                 'additionalCPPImpls':'../dev/algorithmparameter_code.cpp'
                  })
   return element
 
@@ -204,7 +281,9 @@ def createSedAlgorithm() :
                  'attribs':attributes,
                  'hasChildren':True,
                  'hasMath':False,
-                 'elementName':'algorithm'
+                 'elementName':'algorithm',
+                 'additionalCPPDecls':'../dev/algorithm_headers.h',
+                 'additionalCPPImpls':'../dev/algorithm_code.cpp'
                  })
   return element
 
@@ -619,8 +698,8 @@ def createSedReport() :
 
 def createSedPlot2D() :
   lo1 = dict({'type': 'lo_element', 'reqd' : False, 'name':'curve', 'element': 'SedCurve'})
-  a2 = dict({'type': 'bool', 'reqd' : True, 'name':'logX'})
-  a3 = dict({'type': 'bool', 'reqd' : True, 'name':'logY'})
+  a2 = dict({'type': 'bool', 'reqd' : False, 'name':'logX'})
+  a3 = dict({'type': 'bool', 'reqd' : False, 'name':'logY'})
   attributes = [lo1, a2, a3]
   element = dict({
                  'name': 'SedPlot2D',
