@@ -414,12 +414,6 @@ SedPlot2D::hasRequiredAttributes() const
 {
   bool allPresent = SedOutput::hasRequiredAttributes();
 
-  if (isSetLogX() == false)
-    allPresent = false;
-
-  if (isSetLogY() == false)
-    allPresent = false;
-
   return allPresent;
 }
 
