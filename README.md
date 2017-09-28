@@ -28,7 +28,7 @@ for linking against `expat` and indicating, that libSBML was compiled without co
 This project is open source and freely available under the [Simplified BSD](http://opensource.org/licenses/BSD-2-Clause) license. Should that license not meet your needs, please contact me. 
 
 
-Copyright (c) 2013-2015, Frank T. Bergmann  
+Copyright (c) 2013-2017, Frank T. Bergmann  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
