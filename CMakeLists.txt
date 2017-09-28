@@ -111,6 +111,7 @@ set(CPACK_PACKAGE_VENDOR "The SEDML Team")
 set(CPACK_PACKAGE_CONTACT "LibSEDML Team <libsedml-team@caltech.edu>")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")
 set(CPACK_PACKAGE_VERSION_MAJOR "${LIBSEDML_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${LIBSEDML_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${LIBSEDML_VERSION_PATCH}")
@@ -255,6 +256,8 @@ if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
       NAMES swig
       PATHS
+        c:/swigwin-3.0.12
+        c:/swigwin-3.0.11
         c:/swigwin-3.0.10
         c:/swigwin-3.0.9
         c:/swigwin-3.0.8
@@ -273,6 +276,8 @@ if(WITH_SWIG)
         c:/swigwin-2.0.2
         c:/swigwin-2.0.1
         c:/swigwin-2.0.0
+        $ENV{ProgramFiles}/swig
+        $ENV{ProgramW6432}/swig
         /usr/local/bin
         /opt/local/bin
         /usr/bin
