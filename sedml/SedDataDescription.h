@@ -67,6 +67,7 @@ protected:
 
   std::string   mId;
   std::string   mName;
+  std::string   mFormat;
   std::string   mSource;
   DimensionDescription*   mDimensionDescription;
   SedListOfDataSources   mDataSources;
@@ -216,6 +217,52 @@ public:
    * @li LIBSEDML_OPERATION_FAILED
    */
   virtual int unsetName();
+
+
+  /**
+   * Returns the value of the "format" attribute of this SedDataDescription.
+   *
+   * @return the value of the "format" attribute of this SedDataDescription as a string.
+   */
+  virtual const std::string& getFormat() const;
+
+
+  /**
+   * Predicate returning @c true or @c false depending on whether this
+   * SedDataDescription's "format" attribute has been set.
+   *
+   * @return @c true if this SedDataDescription's "format" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetFormat() const;
+
+
+  /**
+   * Sets the value of the "format" attribute of this SedDataDescription.
+   *
+   * @param format; const std::string& value of the "format" attribute to be set
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_INVALID_ATTRIBUTE_VALUE
+   */
+  virtual int setFormat(const std::string& format);
+
+
+  /**
+   * Unsets the value of the "format" attribute of this SedDataDescription.
+   *
+   * @return integer value indicating success/failure of the
+   * function.  @if clike The value is drawn from the
+   * enumeration #OperationReturnValues_t. @endif The possible values
+   * returned by this function are:
+   * @li LIBSEDML_OPERATION_SUCCESS
+   * @li LIBSEDML_OPERATION_FAILED
+   */
+  virtual int unsetFormat();
 
 
   /**
@@ -923,6 +970,11 @@ SedDataDescription_getName(SedDataDescription_t * sdd);
 
 LIBSEDML_EXTERN
 char *
+SedDataDescription_getFormat(SedDataDescription_t * sdd);
+
+
+LIBSEDML_EXTERN
+char *
 SedDataDescription_getSource(SedDataDescription_t * sdd);
 
 
@@ -939,6 +991,11 @@ SedDataDescription_isSetId(SedDataDescription_t * sdd);
 LIBSEDML_EXTERN
 int
 SedDataDescription_isSetName(SedDataDescription_t * sdd);
+
+
+LIBSEDML_EXTERN
+int
+SedDataDescription_isSetFormat(SedDataDescription_t * sdd);
 
 
 LIBSEDML_EXTERN
@@ -963,6 +1020,11 @@ SedDataDescription_setName(SedDataDescription_t * sdd, const char * name);
 
 LIBSEDML_EXTERN
 int
+SedDataDescription_setFormat(SedDataDescription_t * sdd, const char * format);
+
+
+LIBSEDML_EXTERN
+int
 SedDataDescription_setSource(SedDataDescription_t * sdd, const char * source);
 
 
@@ -979,6 +1041,11 @@ SedDataDescription_unsetId(SedDataDescription_t * sdd);
 LIBSEDML_EXTERN
 int
 SedDataDescription_unsetName(SedDataDescription_t * sdd);
+
+
+LIBSEDML_EXTERN
+int
+SedDataDescription_unsetFormat(SedDataDescription_t * sdd);
 
 
 LIBSEDML_EXTERN

@@ -60,6 +60,7 @@ main (int argc, char* argv[])
     SedDataDescription* dataDesc =  doc.createDataDescription();
     dataDesc->setId("oscli");
     dataDesc->setName("Oscli Timecourse data");
+    dataDesc->setFormat("urn:sedml:format:numl");
     dataDesc->setSource("oscli.numl");
 
     DimensionDescription* dimDesc = dataDesc->createDimensionDescription();

@@ -396,8 +396,6 @@ public:
    * for this SedPlot2D object have been set.
    *
    * @note The required attributes for a SedPlot2D object are:
-   * @li "logX"
-   * @li "logY"
    *
    * @return a boolean value indicating whether all the required
    * attributes for this object have been defined.

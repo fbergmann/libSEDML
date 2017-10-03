@@ -53,6 +53,7 @@ SedDataDescription::SedDataDescription(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mId("")
   , mName("")
+  , mFormat("")
   , mSource("")
   , mDimensionDescription(NULL)
   , mDataSources(level, version)
@@ -73,6 +74,7 @@ SedDataDescription::SedDataDescription(SedNamespaces* sedns)
   : SedBase(sedns)
   , mId("")
   , mName("")
+  , mFormat("")
   , mSource("")
   , mDimensionDescription(NULL)
   , mDataSources(sedns)
@@ -94,6 +96,7 @@ SedDataDescription::SedDataDescription(const SedDataDescription& orig)
 {
   mId  = orig.mId;
   mName  = orig.mName;
+  mFormat  = orig.mFormat;
   mSource  = orig.mSource;
   mDimensionDescription  = orig.mDimensionDescription != NULL ? orig.mDimensionDescription->clone() : NULL;
   mDataSources  = orig.mDataSources;
@@ -114,6 +117,7 @@ SedDataDescription::operator=(const SedDataDescription& rhs)
       SedBase::operator=(rhs);
       mId  = rhs.mId;
       mName  = rhs.mName;
+      mFormat  = rhs.mFormat;
       mSource  = rhs.mSource;
       mDimensionDescription  = rhs.mDimensionDescription != NULL ? rhs.mDimensionDescription->clone() : NULL;
       mDataSources  = rhs.mDataSources;
@@ -161,6 +165,16 @@ const std::string&
 SedDataDescription::getName() const
 {
   return mName;
+}
+
+
+/*
+ * Returns the value of the "format" attribute of this SedDataDescription.
+ */
+const std::string&
+SedDataDescription::getFormat() const
+{
+  return mFormat;
 }
 
 
@@ -219,6 +233,16 @@ SedDataDescription::isSetName() const
 
 
 /*
+ * Returns true/false if format is set.
+ */
+bool
+SedDataDescription::isSetFormat() const
+{
+  return (mFormat.empty() == false);
+}
+
+
+/*
  * Returns true/false if source is set.
  */
 bool
@@ -256,6 +280,19 @@ SedDataDescription::setName(const std::string& name)
 {
   {
     mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets format and returns value indicating success.
+ */
+int
+SedDataDescription::setFormat(const std::string& format)
+{
+  {
+    mFormat = format;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
@@ -326,6 +363,25 @@ SedDataDescription::unsetName()
   mName.erase();
 
   if (mName.empty() == true)
+    {
+      return LIBSEDML_OPERATION_SUCCESS;
+    }
+  else
+    {
+      return LIBSEDML_OPERATION_FAILED;
+    }
+}
+
+
+/*
+ * Unsets format and returns value indicating success.
+ */
+int
+SedDataDescription::unsetFormat()
+{
+  mFormat.erase();
+
+  if (mFormat.empty() == true)
     {
       return LIBSEDML_OPERATION_SUCCESS;
     }
@@ -641,6 +697,7 @@ SedDataDescription::addExpectedAttributes(ExpectedAttributes& attributes)
 
   attributes.add("id");
   attributes.add("name");
+  attributes.add("format");
   attributes.add("source");
   attributes.add("dimensionDescription");
 }
@@ -693,6 +750,21 @@ SedDataDescription::readAttributes(const XMLAttributes& attributes,
       if (mName.empty() == true)
         {
           logEmptyString(mName, getLevel(), getVersion(), "<SedDataDescription>");
+        }
+    }
+
+  //
+  // format string   ( use = "optional" )
+  //
+  assigned = attributes.readInto("format", mFormat, getErrorLog(), false);
+
+  if (assigned == true)
+    {
+      // check string is not empty
+
+      if (mFormat.empty() == true)
+        {
+          logEmptyString(mFormat, getLevel(), getVersion(), "<SedDataDescription>");
         }
     }
 
@@ -762,6 +834,9 @@ SedDataDescription::writeAttributes(XMLOutputStream& stream) const
 
   if (isSetName() == true)
     stream.writeAttribute("name", getPrefix(), mName);
+
+  if (isSetFormat() == true)
+    stream.writeAttribute("format", getPrefix(), mFormat);
 
   if (isSetSource() == true)
     stream.writeAttribute("source", getPrefix(), mSource);
@@ -1087,6 +1162,20 @@ SedDataDescription_getName(SedDataDescription_t * sdd)
  */
 LIBSEDML_EXTERN
 char *
+SedDataDescription_getFormat(SedDataDescription_t * sdd)
+{
+  if (sdd == NULL)
+    return NULL;
+
+  return sdd->getFormat().empty() ? NULL : safe_strdup(sdd->getFormat().c_str());
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+char *
 SedDataDescription_getSource(SedDataDescription_t * sdd)
 {
   if (sdd == NULL)
@@ -1126,6 +1215,17 @@ int
 SedDataDescription_isSetName(SedDataDescription_t * sdd)
 {
   return (sdd != NULL) ? static_cast<int>(sdd->isSetName()) : 0;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedDataDescription_isSetFormat(SedDataDescription_t * sdd)
+{
+  return (sdd != NULL) ? static_cast<int>(sdd->isSetFormat()) : 0;
 }
 
 
@@ -1178,6 +1278,17 @@ SedDataDescription_setName(SedDataDescription_t * sdd, const char * name)
  */
 LIBSEDML_EXTERN
 int
+SedDataDescription_setFormat(SedDataDescription_t * sdd, const char * format)
+{
+  return (sdd != NULL) ? sdd->setFormat(format) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
 SedDataDescription_setSource(SedDataDescription_t * sdd, const char * source)
 {
   return (sdd != NULL) ? sdd->setSource(source) : LIBSEDML_INVALID_OBJECT;
@@ -1214,6 +1325,17 @@ int
 SedDataDescription_unsetName(SedDataDescription_t * sdd)
 {
   return (sdd != NULL) ? sdd->unsetName() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/**
+ * write comments
+ */
+LIBSEDML_EXTERN
+int
+SedDataDescription_unsetFormat(SedDataDescription_t * sdd)
+{
+  return (sdd != NULL) ? sdd->unsetFormat() : LIBSEDML_INVALID_OBJECT;
 }
 
 

@@ -94,8 +94,12 @@ install(FILES
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/..)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/..)
-include_directories(BEFORE ${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
+include_directories(${LIBSBML_INCLUDE_DIR})
+include_directories(${LIBNUML_INCLUDE_DIR})
+
+if (EXTRA_INCLUDE_DIRS)
+include_directories(${EXTRA_INCLUDE_DIRS})
+endif(EXTRA_INCLUDE_DIRS)
 
 if (EXTRA_DEFS)
 add_definitions(${EXTRA_DEFS})
@@ -196,6 +200,7 @@ if (${CMAKE_VERSION} VERSION_GREATER 2.8.7)
 
   WRITE_BASIC_PACKAGE_VERSION_FILE(
      ${CMAKE_CURRENT_BINARY_DIR}/${LIBSEDML_LIBRARY}-config-version.cmake 
+     VERSION ${PROJECT_VERSION}
      COMPATIBILITY AnyNewerVersion
   )
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBSEDML_LIBRARY}-config-version.cmake
@@ -228,6 +233,7 @@ install(EXPORT ${LIBSEDML_LIBRARY}-static-config
 if (${CMAKE_VERSION} VERSION_GREATER 2.8.7)
   WRITE_BASIC_PACKAGE_VERSION_FILE(
     ${CMAKE_CURRENT_BINARY_DIR}/${LIBSEDML_LIBRARY}-static-config-version.cmake 
+    VERSION ${PROJECT_VERSION}
     COMPATIBILITY AnyNewerVersion
   )
   install(
