@@ -68,9 +68,6 @@
 /* Define to 1 if you have the <errno.h> header file. */
 #cmakedefine HAVE_ERRNO_H 1 
 
-/* Define to 1 if you have the <ieeefp.h> header file. */
-#cmakedefine HAVE_IEEEFP_H 1
-
 /* Define to 1 if you have the ANSI C header files. */
 #cmakedefine STDC_HEADERS 1
 

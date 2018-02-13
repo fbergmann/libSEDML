@@ -57,10 +57,6 @@
 #  include <math.h>
 #endif
 
-#if HAVE_IEEFP_H
-#  include <ieeefp.h>
-#endif
-
 #ifndef errno
 extern int errno;
 #endif
