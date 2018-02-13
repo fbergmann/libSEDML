@@ -40,7 +40,6 @@
 
 
 include(CheckLibraryExists)
-check_library_exists(m sqrt "" HAVE_LIBM)
 
 # generate configuration for this system
 configure_file(
