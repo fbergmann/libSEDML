@@ -51,6 +51,7 @@ include (CheckCCompilerFlag)
 include (CheckCSourceRuns)
 include (CheckSymbolExists)
 include (CheckTypeSize)
+include(GNUInstallDirs)
 
 ###############################################################################
 #
@@ -84,7 +85,7 @@ set(LIBSEDML_VERSION "${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBS
 set(PACKAGE_NAME "libSEDML")
 
 
-set(PACKAGE_CONFIG_DIR lib/cmake CACHE PATH
+set(PACKAGE_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/cmake" CACHE PATH
     "Path into which the cmake config files should be installed")
 
 # PACKAGE_VERSION gets overridden by using other packages, so setting
@@ -298,10 +299,10 @@ set( MISC_PREFIX )
 if(UNIX OR CYGWIN OR MINGW)
     set(PATH_SEP "/")
     set(FILE_SEP ":")
-    set( MISC_PREFIX "share/libsedml/" )
+    set( MISC_PREFIX "${CMAKE_INSTALL_DATADIR}/libsedml/" )
     set(LIBSEDML_LIBRARY sedml)
 else()
-    set( MISC_PREFIX "" )
+    set( MISC_PREFIX "." )
     set(PATH_SEP "\\")
     set(FILE_SEP ";")
     if(MINGW)
@@ -599,9 +600,9 @@ else(UNIX)
       endif()
         
       file(GLOB WIN32_BINARIES ${LIBSEDML_DEPENDENCY_DIR}/bin/*.dll)
-      INSTALL(FILES ${WIN32_BINARIES} DESTINATION bin)
+      INSTALL(FILES ${WIN32_BINARIES} DESTINATION "${CMAKE_INSTALL_BINDIR}")
       file(GLOB WIN32_DEPENDENCIES ${LIBSEDML_DEPENDENCY_DIR}/lib/*.lib)
-      install(FILES ${WIN32_DEPENDENCIES} DESTINATION lib)
+      install(FILES ${WIN32_DEPENDENCIES} DESTINATION "${CMAKE_INSTALL_LIBDIR}")
       if(WITH_LIBXML AND WITH_STATIC_RUNTIME)
         if (EXTRA_LIBS STREQUAL "")
         # populate EXTRA_LIBS variable
@@ -764,7 +765,7 @@ set(DOCUMENTATION_FILES
         VERSION.txt
 )
 
-install(FILES ${DOCUMENTATION_FILES} DESTINATION ${MISC_PREFIX}.)
+install(FILES ${DOCUMENTATION_FILES} DESTINATION ${MISC_PREFIX})
 
 
 ###############################################################################
