@@ -690,7 +690,7 @@ SedOutput::readAttributes(
   }
 
   // 
-  // id SId (use = "required" )
+  // id SId (use = "optional" )
   // 
 
   assigned = attributes.readInto("id", mId);
@@ -707,12 +707,6 @@ SedOutput::readAttributes(
         getElementName() + "> is '" + mId + "', which does not conform to the "
           "syntax.");
     }
-  }
-  else
-  {
-    std::string message = "Sedml attribute 'id' is missing from the <SedOutput> "
-      "element.";
-    log->logError(SedmlOutputAllowedAttributes, level, version, message);
   }
 
   // 
