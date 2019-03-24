@@ -264,9 +264,9 @@ public:
   /**
    * Returns the XML element name of this SedAbstractTask object.
    *
-   * For SedAbstractTask, the XML element name is always @c "abstractTask".
+   * For SedAbstractTask, the XML element name is always @c "task".
    *
-   * @return the name of this element, i.e. @c "abstractTask".
+   * @return the name of this element, i.e. @c "task".
    */
   virtual const std::string& getElementName() const;
 

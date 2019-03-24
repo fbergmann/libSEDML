@@ -81,7 +81,6 @@ SedDocument::SedDocument(unsigned int level, unsigned int version)
   setLevel(level);
   setVersion(version);
   setSedDocument(this);
-  mAbstractTasks.setElementName("task");
   connectToChild();
 }
 
@@ -107,7 +106,6 @@ SedDocument::SedDocument(SedNamespaces *sedmlns)
   setLevel(sedmlns->getLevel());
   setVersion(sedmlns->getVersion());
   setSedDocument(this);
-  mAbstractTasks.setElementName("task");
   connectToChild();
 }
 
@@ -2771,20 +2769,73 @@ void
 SedDocument::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
-  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
-  std::string prefix = getPrefix();
+ // need to check that we have indeed a namespace set!
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces * thisNs = 
+    const_cast<LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces *>(getNamespaces());
 
-  if (prefix.empty())
-  {
-    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
-      getNamespaces();
-    if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
+  // the SED-ML namespace is missing - add it
+  if (thisNs == NULL)
     {
-      xmlns.add(SEDML_XMLNS_L1V1, prefix);
-    }
-  }
+      XMLNamespaces xmlns;
 
-  stream << xmlns;
+      if (getVersion() == 1)
+        xmlns.add(SEDML_XMLNS_L1V1);
+      else if (getVersion() == 2)
+        xmlns.add(SEDML_XMLNS_L1V2);
+      else if (getVersion() == 3)
+        xmlns.add(SEDML_XMLNS_L1V3);
+      else
+        xmlns.add(SEDML_XMLNS_L1V4);
+
+      mSedNamespaces->setNamespaces(&xmlns);
+      thisNs =  const_cast<LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces *>(getNamespaces());
+    }
+  else if (thisNs->getLength() == 0)
+    {
+      if (getVersion() == 1)
+        thisNs->add(SEDML_XMLNS_L1V1);
+      else if (getVersion() == 2)
+        thisNs->add(SEDML_XMLNS_L1V2);
+      else if (getVersion() == 3)
+        thisNs->add(SEDML_XMLNS_L1V3);
+      else
+        thisNs->add(SEDML_XMLNS_L1V4);
+    }
+  else
+    {
+      // check that there is an SED-ML namespace
+      std::string sedmlURI = SedNamespaces::getSedNamespaceURI(getLevel(), getVersion());
+      std::string sedmlPrefix = thisNs->getPrefix(sedmlURI);
+
+      if (thisNs->hasNS(sedmlURI, sedmlPrefix) == false)
+        {
+          // the SED-ML ns is not present
+          std::string other = thisNs->getURI(sedmlPrefix);
+
+          if (other.empty() == false)
+            {
+              // there is another ns with the prefix that the SED-ML ns expects to have
+              //remove the this ns, add the sbml ns and
+              //add the new ns with a new prefix
+              thisNs->remove(sedmlPrefix);
+              thisNs->add(sedmlURI, sedmlPrefix);
+              thisNs->add(other, "addedPrefix");
+            }
+          else
+            {
+              thisNs->add(sedmlURI, sedmlPrefix);
+            }
+        }
+    }
+
+  XMLNamespaces * xmlns = thisNs->clone();
+
+  if (xmlns != NULL)
+    {
+      stream << *(xmlns);
+      delete xmlns;
+    }
+
 }
 
 /** @endcond */

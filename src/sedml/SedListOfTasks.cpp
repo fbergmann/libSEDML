@@ -58,7 +58,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedListOfTasks::SedListOfTasks(unsigned int level, unsigned int version)
   : SedListOf(level, version)
-  , mElementName("abstractTask")
+  , mElementName("listOfTasks")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -70,7 +70,7 @@ SedListOfTasks::SedListOfTasks(unsigned int level, unsigned int version)
  */
 SedListOfTasks::SedListOfTasks(SedNamespaces *sedmlns)
   : SedListOf(sedmlns)
-  , mElementName("abstractTask")
+  , mElementName("listOfTasks")
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -407,18 +407,7 @@ SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   const std::string& name = stream.peek().getName();
   SedBase* object = NULL;
 
-  if (name == mElementName)
-  {
-    object = new SedAbstractTask(getSedNamespaces());
-    if (object)
-    {
-      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
-    }
-
-    appendAndOwn(object);
-  }
-
-  if (name == mElementName)
+  if (name == "task")
   {
     object = new SedTask(getSedNamespaces());
     if (object)
@@ -429,7 +418,7 @@ SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     appendAndOwn(object);
   }
 
-  if (name == mElementName)
+  if (name == "repeatedTask")
   {
     object = new SedRepeatedTask(getSedNamespaces());
     if (object)
@@ -440,7 +429,7 @@ SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     appendAndOwn(object);
   }
 
-  if (name == mElementName)
+  if (name == "parameterEstimationTask")
   {
     object = new SedParameterEstimationTask(getSedNamespaces());
     if (object)
@@ -451,7 +440,7 @@ SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     appendAndOwn(object);
   }
 
-  if (name == mElementName)
+  if (name == "simpleRepeatedTask")
   {
     object = new SedSimpleRepeatedTask(getSedNamespaces());
     if (object)

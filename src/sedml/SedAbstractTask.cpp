@@ -60,7 +60,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mName ("")
-  , mElementName("abstractTask")
+  , mElementName("task")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -73,7 +73,7 @@ SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
 SedAbstractTask::SedAbstractTask(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mName ("")
-  , mElementName("abstractTask")
+  , mElementName("task")
 {
   setElementNamespace(sedmlns->getURI());
 }
