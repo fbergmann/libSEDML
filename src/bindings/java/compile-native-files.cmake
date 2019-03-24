@@ -53,8 +53,8 @@ endif()
 # compile files
 execute_process(
 	COMMAND "${Java_JAVAC_EXECUTABLE}"
-		 -source 1.5
-		 -target 1.5
+		 -source 1.6
+		 -target 1.6
 		 -d java-files
 		 ${NATIVE_FILES}	
 	WORKING_DIRECTORY "${BIN_DIRECTORY}"
