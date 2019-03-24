@@ -16,7 +16,7 @@
  *
  * A version string of the form "1.2.3".
  */
-#define LIBSEDML_DOTTED_VERSION	"@PACKAGE_VERSION@"
+#define LIBSEDML_DOTTED_VERSION	"@LIBSEDML_DOTTED_VERSION@"
 
 
 /**
