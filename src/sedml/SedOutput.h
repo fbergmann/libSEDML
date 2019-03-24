@@ -50,7 +50,7 @@
 #include <string>
 
 
-#include <sedML/SedBase.h>
+#include <sedml/SedBase.h>
 #include <sbml/common/libsbml-namespace.h>
 
 

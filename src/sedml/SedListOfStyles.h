@@ -50,8 +50,8 @@
 #include <string>
 
 
-#include <sedML/SedListOf.h>
-#include <sedML/SedStyle.h>
+#include <sedml/SedListOf.h>
+#include <sedml/SedStyle.h>
 #include <sbml/common/libsbml-namespace.h>
 
 

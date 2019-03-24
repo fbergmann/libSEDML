@@ -31,7 +31,7 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sedML/SedListOfStyles.h>
+#include <sedml/SedListOfStyles.h>
 #include <sbml/xml/XMLInputStream.h>
 
 

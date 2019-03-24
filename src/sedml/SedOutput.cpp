@@ -31,14 +31,14 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sedML/SedOutput.h>
-#include <sedML/SedListOfOutputs.h>
+#include <sedml/SedOutput.h>
+#include <sedml/SedListOfOutputs.h>
 #include <sbml/xml/XMLInputStream.h>
 
-#include <sedML/SedReport.h>
-#include <sedML/SedPlot2D.h>
-#include <sedML/SedPlot3D.h>
-#include <sedML/SedFigure.h>
+#include <sedml/SedReport.h>
+#include <sedml/SedPlot2D.h>
+#include <sedml/SedPlot3D.h>
+#include <sedml/SedFigure.h>
 
 
 using namespace std;
