@@ -1,4 +1,0 @@
-#import(methods)
-useDynLib(libSEDML, .registration = TRUE)
-
-exportPattern(".")
