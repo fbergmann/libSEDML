@@ -154,7 +154,6 @@ namespace std
   typedef basic_ostream<char>       ostream ;
   typedef basic_ostringstream<char> ostringstream ;
 
-  %template()              basic_ios<char>;
   %template(ostream)       basic_ostream<char>;
   %template(ostringstream) basic_ostringstream<char>;
 
@@ -199,7 +198,7 @@ namespace std
  *
  *   - To be indexed and sliced, e.g. lst[0].
  */
-%extend SedSedListOf
+%extend SedListOf
 {
   int __len__()
   {
