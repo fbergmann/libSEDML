@@ -2069,7 +2069,7 @@ public:
    * @warning This is primarily provided for testing and debugging
    * purposes.  It may be removed in a future version of libSed.
    */
-  char* toSed();
+  std::string toSed();
 
 
   /** @cond doxygen-libsbml-internal */

@@ -2067,7 +2067,7 @@ SedBase::getSedNamespaces() const
 /*
  * @return the partial Sed that describes this Sed object.
  */
-char*
+std::string
 SedBase::toSed()
 {
   ostringstream    os;
@@ -2075,7 +2075,7 @@ SedBase::toSed()
 
   write(stream);
 
-  return safe_strdup(os.str().c_str());
+  return os.str();
 }
 
 
@@ -3138,7 +3138,7 @@ SedBase::checkAnnotation()
 
       if (match > 0)
         {
-          logError(SedSedNamespaceInAnnotation);
+          logError(SedNamespaceInAnnotation);
           break;
         }
 
@@ -3152,7 +3152,7 @@ SedBase::checkAnnotation()
               logError(SedMissingAnnotationNamespace);
             }
 
-          logError(SedSedNamespaceInAnnotation);
+          logError(SedNamespaceInAnnotation);
         }
 
       nNodes++;
