@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import sys
-sys.path.insert(0, 'C:\\Users\\fbergmann\\Desktop\\deviser_out\\ninja_sedml\\src\\bindings\\python')
 import libsedml
 
 
