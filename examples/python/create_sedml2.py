@@ -41,14 +41,14 @@ import libsedml
 def main (args):
   """Usage: create_sedml2 output-filename
   """
-  if (len(args) != 2):
+  if len(args) != 2:
     print(main.__doc__)
-    sys.exit(1);
+    sys.exit(1)
 
   # create the document
-  doc = libsedml.SedDocument();
-  doc.setLevel(1);
-  doc.setVersion(3);
+  doc = libsedml.SedDocument()
+  doc.setLevel(1)
+  doc.setVersion(3)
 
   # create a data description
   
@@ -85,7 +85,7 @@ def main (args):
   dimDesc.append(timeDesc)
   
   # write the document
-  libsedml.writeSedML(doc, args[1]);
+  libsedml.writeSedML(doc, args[1])
 
 
 if __name__ == '__main__':

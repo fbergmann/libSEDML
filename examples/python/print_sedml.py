@@ -33,6 +33,7 @@
 ## ------------------------------------------------------------------------ -.
 ## 
 
+from __future__ import print_function
 import sys
 import os.path
 import libsedml
@@ -44,57 +45,57 @@ def main (args):
     print(main.__doc__)
     sys.exit(1)
 
-  doc = libsedml.readSedML(args[1]);
-  if ( doc.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0):  
-    print doc.getErrorLog().toString();
-    sys.exit(2); 
+  doc = libsedml.readSedML(args[1])
+  if doc.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0:
+    print (doc.getErrorLog().toString())
+    sys.exit(2) 
   
-  print 'The document has {0}" simulation(s).'.format(doc.getNumSimulations());
+  print ('The document has {0}" simulation(s).'.format(doc.getNumSimulations()))
   for i  in range(0, doc.getNumSimulations()):
-    current = doc.getSimulation(i);
-    if (current.getTypeCode() == libsedml.SEDML_SIMULATION_UNIFORMTIMECOURSE):
-      tc = current;
+    current = doc.getSimulation(i)
+    if current.getTypeCode() == libsedml.SEDML_SIMULATION_UNIFORMTIMECOURSE:
+      tc = current
       kisaoid="none"
       if tc.isSetAlgorithm():
-		kisaoid=tc.getAlgorithm().getKisaoID()
-      print "\tTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," numPoints=",tc.getNumberOfPoints()," kisao=",kisaoid,"\n";
+        kisaoid=tc.getAlgorithm().getKisaoID()
+      print ("\tTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," numPoints=",tc.getNumberOfPoints()," kisao=",kisaoid,"\n")
     else:
-	  print "\tUncountered unknown simulation. ",current.getId(),"\n";
+      print ("\tUncountered unknown simulation. ",current.getId(),"\n")
   
-  print "\n"
-  print "The document has ",doc.getNumModels() , " model(s)." , "\n";
+  print ("\n")
+  print ("The document has ", doc.getNumModels() , " model(s)." , "\n")
   for i in range(0,doc.getNumModels()):
-    current = doc.getModel(i);
-    print "\tModel id=" , current.getId() , " language=" , current.getLanguage() , " source=" , current.getSource() , " numChanges=" , current.getNumChanges() , "\n";
+    current = doc.getModel(i)
+    print ("\tModel id=" , current.getId() , " language=" , current.getLanguage() , " source=" , current.getSource() , " numChanges=" , current.getNumChanges() , "\n")
   
-  print "\n";
-  print "The document has " , doc.getNumTasks() , " task(s)." , "\n";
+  print ("\n")
+  print ("The document has %d task(s)." % doc.getNumTasks())
   for i in range(0,doc.getNumTasks()):
-    current = doc.getTask(i);
-    print "\tTask id=" , current.getId() , " model=" , current.getModelReference() , " sim=" , current.getSimulationReference() , "\n";
+    current = doc.getTask(i)
+    print ("\tTask id=" , current.getId() , " model=" , current.getModelReference() , " sim=" , current.getSimulationReference() , "\n")
 
-  print "\n";
-  print "The document has " , doc.getNumDataGenerators() , " datagenerators(s)." , "\n";
+  print ("\n")
+  print ("The document has " , doc.getNumDataGenerators() , " datagenerators(s)." , "\n")
   for i in range( 0,  doc.getNumDataGenerators()):
-    current = doc.getDataGenerator(i);
-    print "\tDG id=" , current.getId() , " math=" , libsedml.formulaToString(current.getMath()) , "\n";
+    current = doc.getDataGenerator(i)
+    print ("\tDG id=" , current.getId() , " math=" , libsedml.formulaToString(current.getMath()) , "\n")
   
-  print "\n";
-  print "The document has " , doc.getNumOutputs() , " output(s)." , "\n";
+  print ("\n")
+  print ("The document has " , doc.getNumOutputs() , " output(s)." , "\n")
   for i in range (0, doc.getNumOutputs()):
-    current = doc.getOutput(i);
-    tc = current.getTypeCode();
+    current = doc.getOutput(i)
+    tc = current.getTypeCode()
     if tc == libsedml.SEDML_OUTPUT_REPORT:
-      r = (current);
-      print "\tReport id=" , current.getId() , " numDataSets=" , r.getNumDataSets() , "\n";
+      r = current
+      print ("\tReport id=" , current.getId() , " numDataSets=" , r.getNumDataSets() , "\n")
     elif tc == libsedml.SEDML_OUTPUT_PLOT2D:
-      p = (current);
-      print "\tPlot2d id=" , current.getId() , " numCurves=" , p.getNumCurves() , "\n";
+      p = current
+      print ("\tPlot2d id=" , current.getId() , " numCurves=" , p.getNumCurves() , "\n")
     elif tc == libsedml.SEDML_OUTPUT_PLOT3D:
-      p = (current);
-      print "\tPlot3d id=" , current.getId() , " numSurfaces=" , p.getNumSurfaces() , "\n";
+      p = current
+      print ("\tPlot3d id=" , current.getId() , " numSurfaces=" , p.getNumSurfaces() , "\n")
     else: 
-      print "\tEncountered unknown output " , current.getId() , "\n";
+      print ("\tEncountered unknown output " , current.getId() , "\n")
   
 if __name__ == '__main__':
-  main(sys.argv)  
+  main(sys.argv)

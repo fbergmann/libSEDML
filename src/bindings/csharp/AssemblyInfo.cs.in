@@ -1,0 +1,19 @@
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+
+[assembly: AssemblyTitle("libSEDML C# Binding Proxy Class DLL")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("The SEDML Team")]
+[assembly: AssemblyProduct("libsedmlcsP.dll")]
+[assembly: AssemblyCopyright("Copyright (C) Frank T. Bergmann 2019")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+
+[assembly: ComVisible(false)]
+
+[assembly: Guid("f9d0f5fa-7cf1-4b6a-b2a2-54ad86dafdf7")]
+
+[assembly: AssemblyVersion("${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH}.0")]
+[assembly: AssemblyFileVersion("${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH}.0")]

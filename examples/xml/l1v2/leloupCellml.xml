@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sedML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://sed-ml.org/ sed-ml-L1-V1.xsd"
+ xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns="http://sed-ml.org/sed-ml/level1/version2" level="1" version="1">
+ <notes><p xmlns="http://www.w3.org/1999/xhtml">Comparing Limit Cycles and strange attractors for
+        oscillation in Drosophila</p></notes> 
+ <listOfSimulations>
+   <uniformTimeCourse id="simulation1" 
+    initialTime="0" outputStartTime="0" outputEndTime="380" 
+    numberOfPoints="1000" >
+     <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+ </listOfSimulations>
+ <listOfModels>
+  <model id="model1" name="Circadian Oscillations" language="urn:sedml:language:cellml" source="http://models.cellml.org/workspace/leloup_gonze_goldbeter_1999/@@rawfile/7606a47e222bc3b3d9117baa08d2e7246d67eedd/leloup_gonze_goldbeter_1999_a.cellml"/>
+  <model id="model2" name="Circadian Chaos" language="urn:sedml:language:cellml" source="model1">
+   <listOfChanges>
+    <changeAttribute target="/cellml:model/cellml:component[@name='MT']/cellml:variable[@name='vmT']/@initial_value" newValue="0.28"/>
+    <changeAttribute target="/cellml:model/cellml:component[@name='T2']/cellml:variable[@name='vdT']/@initial_value" newValue="4.8"/>        
+   </listOfChanges>
+  </model>
+ </listOfModels>
+ 
+  <listOfTasks>
+    <task id="task1" name="Limit Cycle" modelReference="model1" simulationReference="simulation1"/>
+    <task id="task2" name="Strange attractors" modelReference="model2" simulationReference="simulation1"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="time" name="time">
+      <listOfVariables>
+        <variable id="t" taskReference="task1" target="/cellml:model/cellml:component[@name='environment']/cellml:variable[@name='time']" />
+      </listOfVariables>
+      <math:math>
+        <math:ci>t</math:ci>
+      </math:math>
+    </dataGenerator>
+    
+    <dataGenerator id="tim1" name="tim mRNA">
+      <listOfVariables>
+        <variable id="v0" taskReference="task1" target="/cellml:model/cellml:component[@name='MT']/cellml:variable[@name='MT']" />
+      </listOfVariables>
+      <math:math>
+        <math:ci>v0</math:ci>
+      </math:math>
+    </dataGenerator>
+
+    <dataGenerator id="per_tim" name="nuclear PER-TIM complex">
+      <listOfVariables>
+        <variable id="v1" taskReference="task1" target="/cellml:model/cellml:component[@name='CN']/cellml:variable[@name='CN']" />
+      </listOfVariables>
+      <math:math>
+        <math:ci>v1</math:ci>
+      </math:math>
+    </dataGenerator>
+    
+    <dataGenerator id="tim2" name="tim mRNA (changed parameters)">
+      <listOfVariables>
+        <variable id="v2" taskReference="task2" target="/cellml:model/cellml:component[@name='MT']/cellml:variable[@name='MT']" />
+      </listOfVariables>  
+        <math:math>
+          <math:ci>v2</math:ci>
+        </math:math>
+    </dataGenerator>
+    
+    <dataGenerator id="per_tim2" name="nuclear PER-TIM complex">
+      <listOfVariables>
+        <variable id="v3" taskReference="task2" target="/cellml:model/cellml:component[@name='CN']/cellml:variable[@name='CN']" />
+      </listOfVariables>
+      <math:math>
+        <math:ci>v3</math:ci>
+      </math:math>
+    </dataGenerator>
+  </listOfDataGenerators>
+  
+  <listOfOutputs>
+    <plot2D id="plot1" name="tim mRNA with Oscillation and Chaos">
+      <listOfCurves>
+        <curve id="c1" logX="false" logY="false" xDataReference="time" yDataReference="tim1" />
+        <curve id="c2" logX="false" logY="false" xDataReference="time" yDataReference="tim2" />
+      </listOfCurves>
+    </plot2D>
+   <plot2D id="plot2" name="tim mRNA limit cycle (Oscillation)">
+      <listOfCurves>
+        <curve id="c3" logX="false" logY="false" xDataReference="per_tim" yDataReference="tim1" />
+      </listOfCurves>
+    </plot2D>	
+   <plot2D id="plot3" name="tim mRNA limit cycle (chaos)">
+      <listOfCurves>
+        <curve id="c4" logX="false" logY="false" xDataReference="per_tim2" yDataReference="tim2" />
+      </listOfCurves>
+    </plot2D>	
+  </listOfOutputs>
+</sedML>

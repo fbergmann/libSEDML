@@ -1,0 +1,4 @@
+Name: org.sedml.libsedml
+Implementation-Title: "@PACKAGE_NAME@ Java API"
+Implementation-Version: "@LIBSEDML_VERSION@"
+Implementation-Vendor: "Frank T. Bergmann"

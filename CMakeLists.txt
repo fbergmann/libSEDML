@@ -726,13 +726,13 @@ endif()
 #
 # create library
 # 
-add_subdirectory(sedml)
+add_subdirectory(src/sedml)
 
 ##############################################################################
 #
 # create language bindings
 # 
-add_subdirectory(bindings)
+add_subdirectory(src/bindings)
 
 
 

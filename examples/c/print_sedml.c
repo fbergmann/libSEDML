@@ -35,12 +35,14 @@
 
 #include <stdio.h>
 #include <sedml/SedTypes.h>
+#include <sbml/math/FormulaFormatter.h>
+
 
 int
 main (int argc, char* argv[])
 {
   SedDocument_t *doc;
-  unsigned int i;
+  unsigned int i;  
   
   if (argc != 2)
   {
@@ -49,7 +51,18 @@ main (int argc, char* argv[])
   }
 
   doc = readSedML(argv[1]);
-  
+
+  printf("The document has %d data description(s).\n", SedDocument_getNumDataDescriptions(doc));
+  for (i = 0; i < SedDocument_getNumDataDescriptions(doc); i++)
+  {
+    SedDataDescription_t* dd = SedDocument_getDataDescription(doc, i);
+    printf("\tDataDescription id=%s format=%s source=%s",
+      SedDataDescription_getId(dd),
+      SedDataDescription_getFormat(dd),
+      SedDataDescription_getSource(dd)
+    );
+  }
+
   printf("The document has %d simulation(s).\n",SedDocument_getNumSimulations(doc));
   for (i = 0; i < SedDocument_getNumSimulations(doc); i++)
   {
@@ -97,11 +110,16 @@ main (int argc, char* argv[])
   printf("The document has %d task(s).\n",SedDocument_getNumTasks(doc));
   for (i = 0; i < SedDocument_getNumTasks(doc); ++i)
   {
-    SedTask_t* current =  SedDocument_getTask(doc,i);
-    printf("\tTask id=%s  model=%s sim=%s\n", 
-	  SedTask_getId(current),
-	  SedTask_getModelReference(current),
-	  SedTask_getSimulationReference(current));
+    SedAbstractTask_t* abstractTask = SedDocument_getTask(doc, i);
+    int typeCode = SedBase_getTypeCode((SedBase_t*)abstractTask);
+    if (typeCode == SEDML_TASK_SIMPLEREPEATEDTASK || typeCode == SEDML_TASK)
+    {
+      SedTask_t* current =  (SedTask_t*)SedDocument_getTask(doc,i);
+      printf("\tTask id=%s  model=%s sim=%s\n", 
+	    SedAbstractTask_getId((SedAbstractTask_t*)current),
+	    SedTask_getModelReference(current),
+	    SedTask_getSimulationReference(current));
+    }
   }
 
   printf("\n");

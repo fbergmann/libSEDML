@@ -40,14 +40,21 @@ foreach( example
 	
 )
 
+file(TO_NATIVE_PATH ${CMAKE_CURRENT_BINARY_DIR}/../../src/bindings/csharp MANAGED_LIB)
+get_filename_component(MANAGED_LIB ${MANAGED_LIB} ABSOLUTE)
+file(TO_NATIVE_PATH ${MANAGED_LIB} MANAGED_LIB)
+file(TO_NATIVE_PATH ${CMAKE_CURRENT_SOURCE_DIR}${PATH_SEP}${example}.cs SOURCE_FILE)
+
+
 	add_custom_command(	
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${example}.exe
 		COMMAND "${CSHARP_COMPILER}"
-		ARGS -r:${CMAKE_CURRENT_BINARY_DIR}/../../bindings/csharp/libsedmlcsP.dll
+		ARGS -r:libsedmlcsP.dll
+      -lib:${MANAGED_LIB}
 			-target:exe
 			-out:${example}.exe
 			${CSHARP_EXTRA_ARGS}
-			${CMAKE_CURRENT_SOURCE_DIR}${PATH_SEP}${example}.cs
+			${SOURCE_FILE}
 		MAIN_DEPENDENCY ${CMAKE_CURRENT_SOURCE_DIR}/${example}.cs
 		COMMENT "Build C# example: ${example}") 
 	

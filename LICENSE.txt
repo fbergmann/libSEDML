@@ -1,4 +1,4 @@
-  Copyright (c) 2013-2017, Frank T. Bergmann  
+  Copyright (c) 2013-2019, Frank T. Bergmann  
   All rights reserved.
   
   Redistribution and use in source and binary forms, with or without

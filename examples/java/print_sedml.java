@@ -86,7 +86,7 @@ public static void main (String[] args)
   System.out.println( "The document has " + doc.getNumTasks() + " task(s).\n");
   for (int i = 0; i < doc.getNumTasks(); ++i)
   {
-    SedTask current = doc.getTask(i);
+    SedTask current = (SedTask)doc.getTask(i);
     System.out.println( "\tTask id=" + current.getId() + " model=" + current.getModelReference() + " sim=" + current.getSimulationReference() + "\n");
   }
 

@@ -86,7 +86,7 @@ public static int Main (string[] args)
   Console.WriteLine( "The document has " + doc.getNumTasks() + " task(s)." + Environment.NewLine);
   for (int i = 0; i < doc.getNumTasks(); ++i)
   {
-    SedTask current = doc.getTask(i);
+    SedTask current = (SedTask)doc.getTask(i);
     Console.WriteLine( "\tTask id=" + current.getId() + " model=" + current.getModelReference() + " sim=" + current.getSimulationReference() + Environment.NewLine);
   }
 

@@ -218,12 +218,18 @@ main (int argc, char* argv[])
   cout << "The document has " << doc->getNumTasks() << " task(s)." << endl;
   for (unsigned int i = 0; i < doc->getNumTasks(); ++i)
   {
-    SedTask* current = doc->getTask(i);
-    SedRepeatedTask* repeat = dynamic_cast<SedRepeatedTask*>(current);
-    if (repeat != NULL) 
-	printRepeatedTask(repeat);
+    SedAbstractTask* abstract = doc->getTask(i);
+    SedRepeatedTask* repeat = dynamic_cast<SedRepeatedTask*>(abstract);
+    if (repeat != NULL)
+    {
+      printRepeatedTask(repeat);
+    }
     else
-    cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
+    {
+      SedTask* current = dynamic_cast<SedTask*>(abstract);
+      if (current == NULL) continue;
+      cout << "\tTask id=" << current->getId() << " model=" << current->getModelReference() << " sim=" << current->getSimulationReference() << endl;
+    }
   }
 
   cout << endl;

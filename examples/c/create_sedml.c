@@ -115,7 +115,7 @@ main (int argc, char* argv[])
 
   /* create a task that uses the simulation and the model above */
   task = SedDocument_createTask(doc);
-  SedTask_setId(task, "task1");
+  SedAbstractTask_setId((SedAbstractTask_t*)task, "task1");
   SedTask_setModelReference(task, "model1");
   SedTask_setSimulationReference(task, "sim1");
 
@@ -158,11 +158,12 @@ main (int argc, char* argv[])
   SedOutput_setId((SedOutput_t*)plot2d,"p1");
   SedOutput_setName((SedOutput_t*)plot2d,"S1 Timecourse");
   curve = SedPlot2D_createCurve(plot2d);
-  SedCurve_setId(curve, "c1");
-  SedCurve_setName(curve, "S1");
-  SedCurve_setLogX(curve, 0);
+  SedAbstractCurve_setId((SedAbstractCurve_t*)curve, "c1");
+  SedAbstractCurve_setName((SedAbstractCurve_t*)curve, "S1");
+  SedAbstractCurve_setLogX((SedAbstractCurve_t*)curve, 0);
   SedCurve_setLogY(curve, 0);
-  SedCurve_setXDataReference(curve, "time");
+  SedCurve_setType(curve, SEDML_CURVETYPE_POINTS);
+  SedAbstractCurve_setXDataReference((SedAbstractCurve_t*)curve, "time");
   SedCurve_setYDataReference(curve, "S1");
 
   /* add a 3D Plot */
@@ -170,11 +171,12 @@ main (int argc, char* argv[])
   SedOutput_setId((SedOutput_t*)plot3d,"p2");
   SedOutput_setName((SedOutput_t*)plot3d,"S1 Plane");
   surf = SedPlot3D_createSurface(plot3d);
-  SedCurve_setId((SedCurve_t*)surf,"surf1");
-  SedCurve_setName((SedCurve_t*)surf,"S1");
-  SedCurve_setLogX((SedCurve_t*)surf, 0);
+  SedAbstractCurve_setId((SedAbstractCurve_t*)surf,"surf1");
+  SedAbstractCurve_setName((SedAbstractCurve_t*)surf,"S1");
+  SedAbstractCurve_setLogX((SedAbstractCurve_t*)surf, 0);
   SedCurve_setLogY((SedCurve_t*)surf, 0);
-  SedCurve_setXDataReference((SedCurve_t*)surf, "time");
+  
+  SedAbstractCurve_setXDataReference((SedAbstractCurve_t*)surf, "time");
   SedCurve_setYDataReference((SedCurve_t*)surf, "S1");
   SedSurface_setLogZ(surf, 0);
   SedSurface_setZDataReference(surf, "S1");

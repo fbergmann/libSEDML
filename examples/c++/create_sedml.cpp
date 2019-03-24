@@ -53,7 +53,7 @@ main (int argc, char* argv[])
   }
 
   // create the document
-  SedDocument doc;
+  SedDocument doc(1,3);
   doc.setAnnotation("<test xmlns='http://test.org/test/annotation' attribute='test' />");
 
   {
@@ -202,7 +202,7 @@ main (int argc, char* argv[])
   vrange->addValue(0.1);
 
 
-  SedSetValue* setValue = repeat->createTaskChange();
+  SedSetValue* setValue = repeat->createSetValue(); //createTaskChange();
   setValue->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J0_v0']");
   setValue->setRange("current");
   setValue->setModelReference("model1");

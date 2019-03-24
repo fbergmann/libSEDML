@@ -44,11 +44,11 @@ def main (args):
     print(main.__doc__)
     sys.exit(1)
 
-  d = libsedml.readSedML(args[1]);
-  if ( d.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0):
-    print (d.getErrorLog().toString());
+  d = libsedml.readSedML(args[1])
+  if d.getErrorLog().getNumFailsWithSeverity(libsedml.LIBSEDML_SEV_ERROR) > 0:
+    print (d.getErrorLog().toString())
   else:
-    libsedml.writeSedML(d, args[2]);
+    libsedml.writeSedML(d, args[2])
 
   return 0;
 
