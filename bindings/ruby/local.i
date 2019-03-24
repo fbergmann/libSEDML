@@ -283,7 +283,7 @@ namespace std
   }
   catch (const SedConstructorException &e){
     static VALUE cpperror = rb_define_class("SedConstructorException", rb_eArgError);
-    rb_raise(cpperror, e.what());    
+    rb_raise(cpperror, "%s", e.what());    
   }
 }
 %enddef
@@ -362,7 +362,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(ListOfUnits)
   }
   catch (const XMLConstructorException &e){
     static VALUE cpperror = rb_define_class("XMLConstructorException", rb_eArgError);
-    rb_raise(cpperror, e.what());    
+    rb_raise(cpperror, "%s", e.what());    
   }
 }
 %enddef
