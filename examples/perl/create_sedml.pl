@@ -58,27 +58,27 @@ $model->setLanguage("urn:sedml:sbml");
 
 # create a second $model modifying a variable of that other sbml file
 $model = $doc->createModel();
-$model->setId("$model2");
-$model->setSource("$model1");
+$model->setId("model2");
+$model->setSource("model1");
 $model->setLanguage("urn:sedml:sbml");
 
 # change a paramerter 'k' to 0.1
 $change = $model->createChangeAttribute();
-$change->setTarget("/sbml:sbml/sbml:$model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
+$change->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='k']/@value");
 $change->setNewValue("0.1");
 
 # remove species 's1'
 $remove = $model->createRemoveXML();
-$remove->setTarget("/sbml:sbml/sbml:$model/sbml:listOfSpecies/sbml:species[@id='S1']");
+$remove->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
 
 # now for something tricky we want to update the initialConcentration of 'S2' to be
 # half what it was in the original $model
 $compute = $model->createComputeChange();
-$compute->setTarget("/sbml:sbml/sbml:$model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
+$compute->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
 $variable = $compute->createVariable();
 $variable->setId("S2");
-$variable->setModelReference("$model1");
-$variable->setTarget("/sbml:sbml/sbml:$model/sbml:listOfSpecies/sbml:species[@id='S2']");
+$variable->setModelReference("model1");
+$variable->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
 $compute->setMath(LibSEDML::parseFormula("S2 / 2"));  
 
 # create simulation
@@ -95,7 +95,7 @@ $alg->setKisaoID("KISAO:0000019");
 # create a task that uses the simulation and the $model above
 $task = $doc->createTask();
 $task->setId("task1");
-$task->setModelReference("$model1");
+$task->setModelReference("model1");
 $task->setSimulationReference("sim1");
 
 # add a DataGenerator to hold the output for time
@@ -117,7 +117,7 @@ $var = $dg->createVariable();
 $var->setId("v1");
 $var->setName("S1");
 $var->setTaskReference("task1");
-$var->setTarget("/sbml:sbml/sbml:$model/sbml:listOfSpecies/sbml:species[@id='S1']");
+$var->setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
 $dg->setMath(LibSEDML::parseFormula("v1"));
 
 # add a report
