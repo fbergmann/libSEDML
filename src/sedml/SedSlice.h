@@ -65,6 +65,11 @@ protected:
 
   std::string mReference;
   std::string mValue;
+  std::string mIndex;
+  int mStartIndex;
+  bool mIsSetStartIndex;
+  int mEndIndex;
+  bool mIsSetEndIndex;
 
   /** @endcond */
 
@@ -143,6 +148,32 @@ public:
 
 
   /**
+   * Returns the value of the "index" attribute of this SedSlice.
+   *
+   * @return the value of the "index" attribute of this SedSlice as a string.
+   */
+  const std::string& getIndex() const;
+
+
+  /**
+   * Returns the value of the "startIndex" attribute of this SedSlice.
+   *
+   * @return the value of the "startIndex" attribute of this SedSlice as a
+   * integer.
+   */
+  int getStartIndex() const;
+
+
+  /**
+   * Returns the value of the "endIndex" attribute of this SedSlice.
+   *
+   * @return the value of the "endIndex" attribute of this SedSlice as a
+   * integer.
+   */
+  int getEndIndex() const;
+
+
+  /**
    * Predicate returning @c true if this SedSlice's "reference" attribute is
    * set.
    *
@@ -159,6 +190,35 @@ public:
    * otherwise @c false is returned.
    */
   bool isSetValue() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSlice's "index" attribute is set.
+   *
+   * @return @c true if this SedSlice's "index" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetIndex() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSlice's "startIndex" attribute is
+   * set.
+   *
+   * @return @c true if this SedSlice's "startIndex" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetStartIndex() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSlice's "endIndex" attribute is
+   * set.
+   *
+   * @return @c true if this SedSlice's "endIndex" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetEndIndex() const;
 
 
   /**
@@ -190,6 +250,45 @@ public:
 
 
   /**
+   * Sets the value of the "index" attribute of this SedSlice.
+   *
+   * @param index std::string& value of the "index" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setIndex(const std::string& index);
+
+
+  /**
+   * Sets the value of the "startIndex" attribute of this SedSlice.
+   *
+   * @param startIndex int value of the "startIndex" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setStartIndex(int startIndex);
+
+
+  /**
+   * Sets the value of the "endIndex" attribute of this SedSlice.
+   *
+   * @param endIndex int value of the "endIndex" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setEndIndex(int endIndex);
+
+
+  /**
    * Unsets the value of the "reference" attribute of this SedSlice.
    *
    * @copydetails doc_returns_success_code
@@ -207,6 +306,36 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetValue();
+
+
+  /**
+   * Unsets the value of the "index" attribute of this SedSlice.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetIndex();
+
+
+  /**
+   * Unsets the value of the "startIndex" attribute of this SedSlice.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetStartIndex();
+
+
+  /**
+   * Unsets the value of the "endIndex" attribute of this SedSlice.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetEndIndex();
 
 
   /**
@@ -232,7 +361,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_DATA_SLICE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_DATA_SLICE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -680,6 +809,53 @@ SedSlice_getValue(const SedSlice_t * ss);
 
 
 /**
+ * Returns the value of the "index" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure whose index is sought.
+ *
+ * @return the value of the "index" attribute of this SedSlice_t as a pointer
+ * to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+char *
+SedSlice_getIndex(const SedSlice_t * ss);
+
+
+/**
+ * Returns the value of the "startIndex" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure whose startIndex is sought.
+ *
+ * @return the value of the "startIndex" attribute of this SedSlice_t as a
+ * integer.
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_getStartIndex(const SedSlice_t * ss);
+
+
+/**
+ * Returns the value of the "endIndex" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure whose endIndex is sought.
+ *
+ * @return the value of the "endIndex" attribute of this SedSlice_t as a
+ * integer.
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_getEndIndex(const SedSlice_t * ss);
+
+
+/**
  * Predicate returning @c 1 (true) if this SedSlice_t's "reference" attribute
  * is set.
  *
@@ -709,6 +885,54 @@ SedSlice_isSetReference(const SedSlice_t * ss);
 LIBSEDML_EXTERN
 int
 SedSlice_isSetValue(const SedSlice_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSlice_t's "index" attribute is
+ * set.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @return @c 1 (true) if this SedSlice_t's "index" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_isSetIndex(const SedSlice_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSlice_t's "startIndex" attribute
+ * is set.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @return @c 1 (true) if this SedSlice_t's "startIndex" attribute has been
+ * set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_isSetStartIndex(const SedSlice_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSlice_t's "endIndex" attribute is
+ * set.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @return @c 1 (true) if this SedSlice_t's "endIndex" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_isSetEndIndex(const SedSlice_t * ss);
 
 
 /**
@@ -753,6 +977,66 @@ SedSlice_setValue(SedSlice_t * ss, const char * value);
 
 
 /**
+ * Sets the value of the "index" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @param index const char * value of the "index" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_setIndex(SedSlice_t * ss, const char * index);
+
+
+/**
+ * Sets the value of the "startIndex" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @param startIndex int value of the "startIndex" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_setStartIndex(SedSlice_t * ss, int startIndex);
+
+
+/**
+ * Sets the value of the "endIndex" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @param endIndex int value of the "endIndex" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_setEndIndex(SedSlice_t * ss, int endIndex);
+
+
+/**
  * Unsets the value of the "reference" attribute of this SedSlice_t.
  *
  * @param ss the SedSlice_t structure.
@@ -784,6 +1068,57 @@ SedSlice_unsetReference(SedSlice_t * ss);
 LIBSEDML_EXTERN
 int
 SedSlice_unsetValue(SedSlice_t * ss);
+
+
+/**
+ * Unsets the value of the "index" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_unsetIndex(SedSlice_t * ss);
+
+
+/**
+ * Unsets the value of the "startIndex" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_unsetStartIndex(SedSlice_t * ss);
+
+
+/**
+ * Unsets the value of the "endIndex" attribute of this SedSlice_t.
+ *
+ * @param ss the SedSlice_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSlice_t
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_unsetEndIndex(SedSlice_t * ss);
 
 
 /**

@@ -55,6 +55,11 @@ SedSlice::SedSlice(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mReference ("")
   , mValue ("")
+  , mIndex ("")
+  , mStartIndex (SEDML_INT_MAX)
+  , mIsSetStartIndex (false)
+  , mEndIndex (SEDML_INT_MAX)
+  , mIsSetEndIndex (false)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -67,6 +72,11 @@ SedSlice::SedSlice(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mReference ("")
   , mValue ("")
+  , mIndex ("")
+  , mStartIndex (SEDML_INT_MAX)
+  , mIsSetStartIndex (false)
+  , mEndIndex (SEDML_INT_MAX)
+  , mIsSetEndIndex (false)
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -79,6 +89,11 @@ SedSlice::SedSlice(const SedSlice& orig)
   : SedBase( orig )
   , mReference ( orig.mReference )
   , mValue ( orig.mValue )
+  , mIndex ( orig.mIndex )
+  , mStartIndex ( orig.mStartIndex )
+  , mIsSetStartIndex ( orig.mIsSetStartIndex )
+  , mEndIndex ( orig.mEndIndex )
+  , mIsSetEndIndex ( orig.mIsSetEndIndex )
 {
 }
 
@@ -94,6 +109,11 @@ SedSlice::operator=(const SedSlice& rhs)
     SedBase::operator=(rhs);
     mReference = rhs.mReference;
     mValue = rhs.mValue;
+    mIndex = rhs.mIndex;
+    mStartIndex = rhs.mStartIndex;
+    mIsSetStartIndex = rhs.mIsSetStartIndex;
+    mEndIndex = rhs.mEndIndex;
+    mIsSetEndIndex = rhs.mIsSetEndIndex;
   }
 
   return *this;
@@ -139,6 +159,36 @@ SedSlice::getValue() const
 
 
 /*
+ * Returns the value of the "index" attribute of this SedSlice.
+ */
+const std::string&
+SedSlice::getIndex() const
+{
+  return mIndex;
+}
+
+
+/*
+ * Returns the value of the "startIndex" attribute of this SedSlice.
+ */
+int
+SedSlice::getStartIndex() const
+{
+  return mStartIndex;
+}
+
+
+/*
+ * Returns the value of the "endIndex" attribute of this SedSlice.
+ */
+int
+SedSlice::getEndIndex() const
+{
+  return mEndIndex;
+}
+
+
+/*
  * Predicate returning @c true if this SedSlice's "reference" attribute is set.
  */
 bool
@@ -155,6 +205,37 @@ bool
 SedSlice::isSetValue() const
 {
   return (mValue.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSlice's "index" attribute is set.
+ */
+bool
+SedSlice::isSetIndex() const
+{
+  return (mIndex.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSlice's "startIndex" attribute is
+ * set.
+ */
+bool
+SedSlice::isSetStartIndex() const
+{
+  return mIsSetStartIndex;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSlice's "endIndex" attribute is set.
+ */
+bool
+SedSlice::isSetEndIndex() const
+{
+  return mIsSetEndIndex;
 }
 
 
@@ -183,6 +264,48 @@ int
 SedSlice::setValue(const std::string& value)
 {
   mValue = value;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "index" attribute of this SedSlice.
+ */
+int
+SedSlice::setIndex(const std::string& index)
+{
+  if (!(SyntaxChecker::isValidInternalSId(index)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mIndex = index;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets the value of the "startIndex" attribute of this SedSlice.
+ */
+int
+SedSlice::setStartIndex(int startIndex)
+{
+  mStartIndex = startIndex;
+  mIsSetStartIndex = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "endIndex" attribute of this SedSlice.
+ */
+int
+SedSlice::setEndIndex(int endIndex)
+{
+  mEndIndex = endIndex;
+  mIsSetEndIndex = true;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -226,6 +349,65 @@ SedSlice::unsetValue()
 
 
 /*
+ * Unsets the value of the "index" attribute of this SedSlice.
+ */
+int
+SedSlice::unsetIndex()
+{
+  mIndex.erase();
+
+  if (mIndex.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "startIndex" attribute of this SedSlice.
+ */
+int
+SedSlice::unsetStartIndex()
+{
+  mStartIndex = SEDML_INT_MAX;
+  mIsSetStartIndex = false;
+
+  if (isSetStartIndex() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "endIndex" attribute of this SedSlice.
+ */
+int
+SedSlice::unsetEndIndex()
+{
+  mEndIndex = SEDML_INT_MAX;
+  mIsSetEndIndex = false;
+
+  if (isSetEndIndex() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -234,6 +416,11 @@ SedSlice::renameSIdRefs(const std::string& oldid, const std::string& newid)
   if (isSetReference() && mReference == oldid)
   {
     setReference(newid);
+  }
+
+  if (isSetIndex() && mIndex == oldid)
+  {
+    setIndex(newid);
   }
 }
 
@@ -356,6 +543,22 @@ SedSlice::getAttribute(const std::string& attributeName, int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
 
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "startIndex")
+  {
+    value = getStartIndex();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "endIndex")
+  {
+    value = getEndIndex();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -424,6 +627,11 @@ SedSlice::getAttribute(const std::string& attributeName,
     value = getValue();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "index")
+  {
+    value = getIndex();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -450,6 +658,18 @@ SedSlice::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "value")
   {
     value = isSetValue();
+  }
+  else if (attributeName == "index")
+  {
+    value = isSetIndex();
+  }
+  else if (attributeName == "startIndex")
+  {
+    value = isSetStartIndex();
+  }
+  else if (attributeName == "endIndex")
+  {
+    value = isSetEndIndex();
   }
 
   return value;
@@ -485,6 +705,15 @@ int
 SedSlice::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "startIndex")
+  {
+    return_value = setStartIndex(value);
+  }
+  else if (attributeName == "endIndex")
+  {
+    return_value = setEndIndex(value);
+  }
 
   return return_value;
 }
@@ -546,6 +775,10 @@ SedSlice::setAttribute(const std::string& attributeName,
   {
     return_value = setValue(value);
   }
+  else if (attributeName == "index")
+  {
+    return_value = setIndex(value);
+  }
 
   return return_value;
 }
@@ -572,6 +805,18 @@ SedSlice::unsetAttribute(const std::string& attributeName)
   {
     value = unsetValue();
   }
+  else if (attributeName == "index")
+  {
+    value = unsetIndex();
+  }
+  else if (attributeName == "startIndex")
+  {
+    value = unsetStartIndex();
+  }
+  else if (attributeName == "endIndex")
+  {
+    value = unsetEndIndex();
+  }
 
   return value;
 }
@@ -594,6 +839,12 @@ SedSlice::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   attributes.add("reference");
 
   attributes.add("value");
+
+  attributes.add("index");
+
+  attributes.add("startIndex");
+
+  attributes.add("endIndex");
 }
 
 /** @endcond */
@@ -646,7 +897,8 @@ SedSlice::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSliceAllowedAttributes, level, version, details);
+        log->logError(SedmlSliceAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -673,7 +925,7 @@ SedSlice::readAttributes(
       }
 
       msg += " is '" + mReference + "', which does not conform to the syntax.";
-      logError(SedmlSliceReferenceMustBe, level, version, msg);
+      logError(SedmlSliceReferenceMustBeSId, level, version, msg);
     }
   }
   else
@@ -702,6 +954,71 @@ SedSlice::readAttributes(
       "<SedSlice> element.";
     log->logError(SedmlSliceAllowedAttributes, level, version, message);
   }
+
+  // 
+  // index SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("index", mIndex);
+
+  if (assigned == true)
+  {
+    if (mIndex.empty() == true)
+    {
+      logEmptyString(mIndex, level, version, "<SedSlice>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mIndex) == false)
+    {
+      std::string msg = "The index attribute on the <" + getElementName() +
+        ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mIndex + "', which does not conform to the syntax.";
+      logError(SedmlSliceIndexMustBeSId, level, version, msg);
+    }
+  }
+
+  // 
+  // startIndex int (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetStartIndex = attributes.readInto("startIndex", mStartIndex);
+
+  if ( mIsSetStartIndex == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Sedml attribute 'startIndex' from the <SedSlice> "
+        "element must be an integer.";
+      log->logError(SedmlSliceStartIndexMustBeInteger, level, version,
+        message);
+    }
+  }
+
+  // 
+  // endIndex int (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetEndIndex = attributes.readInto("endIndex", mEndIndex);
+
+  if ( mIsSetEndIndex == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Sedml attribute 'endIndex' from the <SedSlice> "
+        "element must be an integer.";
+      log->logError(SedmlSliceEndIndexMustBeInteger, level, version, message);
+    }
+  }
 }
 
 /** @endcond */
@@ -727,6 +1044,21 @@ SedSlice::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (isSetValue() == true)
   {
     stream.writeAttribute("value", getPrefix(), mValue);
+  }
+
+  if (isSetIndex() == true)
+  {
+    stream.writeAttribute("index", getPrefix(), mIndex);
+  }
+
+  if (isSetStartIndex() == true)
+  {
+    stream.writeAttribute("startIndex", getPrefix(), mStartIndex);
+  }
+
+  if (isSetEndIndex() == true)
+  {
+    stream.writeAttribute("endIndex", getPrefix(), mEndIndex);
   }
 }
 
@@ -815,6 +1147,44 @@ SedSlice_getValue(const SedSlice_t * ss)
 
 
 /*
+ * Returns the value of the "index" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedSlice_getIndex(const SedSlice_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getIndex().empty() ? NULL : safe_strdup(ss->getIndex().c_str());
+}
+
+
+/*
+ * Returns the value of the "startIndex" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_getStartIndex(const SedSlice_t * ss)
+{
+  return (ss != NULL) ? ss->getStartIndex() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Returns the value of the "endIndex" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_getEndIndex(const SedSlice_t * ss)
+{
+  return (ss != NULL) ? ss->getEndIndex() : SEDML_INT_MAX;
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this SedSlice_t's "reference" attribute
  * is set.
  */
@@ -835,6 +1205,42 @@ int
 SedSlice_isSetValue(const SedSlice_t * ss)
 {
   return (ss != NULL) ? static_cast<int>(ss->isSetValue()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSlice_t's "index" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_isSetIndex(const SedSlice_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetIndex()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSlice_t's "startIndex" attribute
+ * is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_isSetStartIndex(const SedSlice_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetStartIndex()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSlice_t's "endIndex" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_isSetEndIndex(const SedSlice_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetEndIndex()) : 0;
 }
 
 
@@ -861,6 +1267,40 @@ SedSlice_setValue(SedSlice_t * ss, const char * value)
 
 
 /*
+ * Sets the value of the "index" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_setIndex(SedSlice_t * ss, const char * index)
+{
+  return (ss != NULL) ? ss->setIndex(index) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "startIndex" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_setStartIndex(SedSlice_t * ss, int startIndex)
+{
+  return (ss != NULL) ? ss->setStartIndex(startIndex) :
+    LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "endIndex" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_setEndIndex(SedSlice_t * ss, int endIndex)
+{
+  return (ss != NULL) ? ss->setEndIndex(endIndex) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "reference" attribute of this SedSlice_t.
  */
 LIBSEDML_EXTERN
@@ -879,6 +1319,39 @@ int
 SedSlice_unsetValue(SedSlice_t * ss)
 {
   return (ss != NULL) ? ss->unsetValue() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "index" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_unsetIndex(SedSlice_t * ss)
+{
+  return (ss != NULL) ? ss->unsetIndex() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "startIndex" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_unsetStartIndex(SedSlice_t * ss)
+{
+  return (ss != NULL) ? ss->unsetStartIndex() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "endIndex" attribute of this SedSlice_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSlice_unsetEndIndex(SedSlice_t * ss)
+{
+  return (ss != NULL) ? ss->unsetEndIndex() : LIBSEDML_INVALID_OBJECT;
 }
 
 

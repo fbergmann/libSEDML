@@ -605,7 +605,7 @@ SedDataRange::readAttributes(
       }
 
       msg += " is '" + mSourceRef + "', which does not conform to the syntax.";
-      logError(SedmlDataRangeSourceRefMustBe, level, version, msg);
+      logError(SedmlDataRangeSourceRefMustBeSId, level, version, msg);
     }
   }
   else

@@ -1133,7 +1133,7 @@ SedDataSource::readAttributes(
       }
 
       msg += " is '" + mIndexSet + "', which does not conform to the syntax.";
-      logError(SedmlDataSourceIndexSetMustBe, level, version, msg);
+      logError(SedmlDataSourceIndexSetMustBeSId, level, version, msg);
     }
   }
 }
