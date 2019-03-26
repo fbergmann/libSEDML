@@ -137,7 +137,7 @@
         </element>
         <element name="Output" typeCode="SEDML_OUTPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfOutputs">
           <attributes>
-            <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
           </attributes>
           <concretes>
@@ -189,7 +189,7 @@
         </element>
         <element name="Curve" typeCode="SEDML_OUTPUT_CURVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractCurve" abstract="false" elementName="curve">
           <attributes>
-            <attribute name="logY" required="true" type="bool" abstract="false"/>
+            <attribute name="logY" required="false" type="bool" abstract="false"/>
             <attribute name="yDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="CurveType" abstract="false"/>
             <attribute name="xErrorUpper" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
@@ -202,11 +202,19 @@
             <concrete name="surface" element="Surface" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
-        <element name="Surface" typeCode="SEDML_OUTPUT_SURFACE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="Curve" abstract="false" elementName="surface">
+        <element name="Surface" typeCode="SEDML_OUTPUT_SURFACE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="surface">
           <attributes>
-            <attribute name="logZ" required="true" type="bool" abstract="false"/>
+            <attribute name="id" required="false" type="SId" abstract="false"/>
+            <attribute name="name" required="false" type="string" abstract="false"/>
+            <attribute name="xDataReference" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
+            <attribute name="yDataReference" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="zDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
-            <attribute name="surfaceType" required="false" type="enum" element="SurfaceType" abstract="false"/>
+            <attribute name="type" required="false" type="enum" element="SurfaceType" abstract="false"/>
+            <attribute name="style" required="false" type="SIdRef" element="Style" abstract="false"/>
+            <attribute name="logX" required="false" type="bool" abstract="false"/>
+            <attribute name="logY" required="false" type="bool" abstract="false"/>
+            <attribute name="logZ" required="false" type="bool" abstract="false"/>
+            <attribute name="order" required="false" type="int" abstract="false"/>
           </attributes>
         </element>
         <element name="DataSet" typeCode="SEDML_OUTPUT_DATASET" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" elementName="dataSet">
@@ -326,6 +334,9 @@
           <attributes>
             <attribute name="reference" required="true" type="SIdRef" abstract="false"/>
             <attribute name="value" required="true" type="string" abstract="false"/>
+            <attribute name="index" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="startIndex" required="false" type="int" abstract="false"/>
+            <attribute name="endIndex" required="false" type="int" abstract="false"/>
           </attributes>
         </element>
         <element name="ParameterEstimationTask" typeCode="SEDML_TASK_PARAMETER_ESTIMATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false">
