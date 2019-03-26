@@ -44,15 +44,14 @@
  * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
  *
  *
- * @class doc_sedsurface_surfaceType
+ * @class doc_sedsurface_type
  *
  * @par
- * The attribute "surfaceType" on a SedSurface object is used to TODO:add
- * explanation
+ * The attribute "type" on a SedSurface object is used to TODO:add explanation
  *
  * In the SBML
  * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
- * allowable values for "surfaceType":
+ * allowable values for "type":
  * <ul>
  * <li> @c "parametricCurve", TODO:add description
  *
@@ -87,23 +86,33 @@
 #include <string>
 
 
-#include <sedml/SedCurve.h>
+#include <sedml/SedBase.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSEDML_EXTERN SedSurface : public SedCurve
+class LIBSEDML_EXTERN SedSurface : public SedBase
 {
 protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
+  std::string mName;
+  std::string mXDataReference;
+  std::string mYDataReference;
+  std::string mZDataReference;
+  SurfaceType_t mType;
+  std::string mStyle;
+  bool mLogX;
+  bool mIsSetLogX;
+  bool mLogY;
+  bool mIsSetLogY;
   bool mLogZ;
   bool mIsSetLogZ;
-  std::string mZDataReference;
-  SurfaceType_t mSurfaceType;
+  int mOrder;
+  bool mIsSetOrder;
 
   /** @endcond */
 
@@ -167,11 +176,37 @@ public:
 
 
   /**
-   * Returns the value of the "logZ" attribute of this SedSurface.
+   * Returns the value of the "id" attribute of this SedSurface.
    *
-   * @return the value of the "logZ" attribute of this SedSurface as a boolean.
+   * @return the value of the "id" attribute of this SedSurface as a string.
    */
-  bool getLogZ() const;
+  virtual const std::string& getId() const;
+
+
+  /**
+   * Returns the value of the "name" attribute of this SedSurface.
+   *
+   * @return the value of the "name" attribute of this SedSurface as a string.
+   */
+  virtual const std::string& getName() const;
+
+
+  /**
+   * Returns the value of the "xDataReference" attribute of this SedSurface.
+   *
+   * @return the value of the "xDataReference" attribute of this SedSurface as
+   * a string.
+   */
+  const std::string& getXDataReference() const;
+
+
+  /**
+   * Returns the value of the "yDataReference" attribute of this SedSurface.
+   *
+   * @return the value of the "yDataReference" attribute of this SedSurface as
+   * a string.
+   */
+  const std::string& getYDataReference() const;
 
 
   /**
@@ -184,12 +219,12 @@ public:
 
 
   /**
-   * Returns the value of the "surfaceType" attribute of this SedSurface.
+   * Returns the value of the "type" attribute of this SedSurface.
    *
-   * @return the value of the "surfaceType" attribute of this SedSurface as a
+   * @return the value of the "type" attribute of this SedSurface as a
    * SurfaceType_t.
    *
-   * @copydetails doc_sedsurface_surfaceType
+   * @copydetails doc_sedsurface_type
    * @if clike The value is drawn from the enumeration @ref SurfaceType_t
    * @endif
    * The possible values returned by this method are:
@@ -202,16 +237,15 @@ public:
    * @li @sbmlconstant{SEDML_SURFACETYPE_BAR, SurfaceType_t}
    * @li @sbmlconstant{SEDML_SURFACETYPE_INVALID, SurfaceType_t}
    */
-  SurfaceType_t getSurfaceType() const;
+  SurfaceType_t getType() const;
 
 
   /**
-   * Returns the value of the "surfaceType" attribute of this SedSurface.
+   * Returns the value of the "type" attribute of this SedSurface.
    *
-   * @return the value of the "surfaceType" attribute of this SedSurface as a
-   * string.
+   * @return the value of the "type" attribute of this SedSurface as a string.
    *
-   * @copydetails doc_sedsurface_surfaceType
+   * @copydetails doc_sedsurface_type
    * The possible values returned by this method are:
    * @li @c "parametricCurve"
    * @li @c "surfaceMesh"
@@ -222,16 +256,86 @@ public:
    * @li @c "bar"
    * @li @c "invalid SurfaceType value"
    */
-  std::string getSurfaceTypeAsString() const;
+  std::string getTypeAsString() const;
 
 
   /**
-   * Predicate returning @c true if this SedSurface's "logZ" attribute is set.
+   * Returns the value of the "style" attribute of this SedSurface.
    *
-   * @return @c true if this SedSurface's "logZ" attribute has been set,
+   * @return the value of the "style" attribute of this SedSurface as a string.
+   */
+  const std::string& getStyle() const;
+
+
+  /**
+   * Returns the value of the "logX" attribute of this SedSurface.
+   *
+   * @return the value of the "logX" attribute of this SedSurface as a boolean.
+   */
+  bool getLogX() const;
+
+
+  /**
+   * Returns the value of the "logY" attribute of this SedSurface.
+   *
+   * @return the value of the "logY" attribute of this SedSurface as a boolean.
+   */
+  bool getLogY() const;
+
+
+  /**
+   * Returns the value of the "logZ" attribute of this SedSurface.
+   *
+   * @return the value of the "logZ" attribute of this SedSurface as a boolean.
+   */
+  bool getLogZ() const;
+
+
+  /**
+   * Returns the value of the "order" attribute of this SedSurface.
+   *
+   * @return the value of the "order" attribute of this SedSurface as a
+   * integer.
+   */
+  int getOrder() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "id" attribute is set.
+   *
+   * @return @c true if this SedSurface's "id" attribute has been set,
    * otherwise @c false is returned.
    */
-  bool isSetLogZ() const;
+  virtual bool isSetId() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "name" attribute is set.
+   *
+   * @return @c true if this SedSurface's "name" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetName() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "xDataReference"
+   * attribute is set.
+   *
+   * @return @c true if this SedSurface's "xDataReference" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetXDataReference() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "yDataReference"
+   * attribute is set.
+   *
+   * @return @c true if this SedSurface's "yDataReference" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetYDataReference() const;
 
 
   /**
@@ -245,28 +349,117 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedSurface's "surfaceType" attribute
-   * is set.
+   * Predicate returning @c true if this SedSurface's "type" attribute is set.
    *
-   * @return @c true if this SedSurface's "surfaceType" attribute has been set,
+   * @return @c true if this SedSurface's "type" attribute has been set,
    * otherwise @c false is returned.
    *
-   * @copydetails doc_sedsurface_surfaceType
+   * @copydetails doc_sedsurface_type
    */
-  bool isSetSurfaceType() const;
+  bool isSetType() const;
 
 
   /**
-   * Sets the value of the "logZ" attribute of this SedSurface.
+   * Predicate returning @c true if this SedSurface's "style" attribute is set.
    *
-   * @param logZ bool value of the "logZ" attribute to be set.
+   * @return @c true if this SedSurface's "style" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetStyle() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "logX" attribute is set.
+   *
+   * @return @c true if this SedSurface's "logX" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetLogX() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "logY" attribute is set.
+   *
+   * @return @c true if this SedSurface's "logY" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetLogY() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "logZ" attribute is set.
+   *
+   * @return @c true if this SedSurface's "logZ" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetLogZ() const;
+
+
+  /**
+   * Predicate returning @c true if this SedSurface's "order" attribute is set.
+   *
+   * @return @c true if this SedSurface's "order" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetOrder() const;
+
+
+  /**
+   * Sets the value of the "id" attribute of this SedSurface.
+   *
+   * @param id std::string& value of the "id" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * Calling this function with @p id = @c NULL or an empty string is
+   * equivalent to calling unsetId().
+   */
+  virtual int setId(const std::string& id);
+
+
+  /**
+   * Sets the value of the "name" attribute of this SedSurface.
+   *
+   * @param name std::string& value of the "name" attribute to be set.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * Calling this function with @p name = @c NULL or an empty string is
+   * equivalent to calling unsetName().
+   */
+  virtual int setName(const std::string& name);
+
+
+  /**
+   * Sets the value of the "xDataReference" attribute of this SedSurface.
+   *
+   * @param xDataReference std::string& value of the "xDataReference" attribute
+   * to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setLogZ(bool logZ);
+  int setXDataReference(const std::string& xDataReference);
+
+
+  /**
+   * Sets the value of the "yDataReference" attribute of this SedSurface.
+   *
+   * @param yDataReference std::string& value of the "yDataReference" attribute
+   * to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setYDataReference(const std::string& yDataReference);
 
 
   /**
@@ -284,44 +477,139 @@ public:
 
 
   /**
-   * Sets the value of the "surfaceType" attribute of this SedSurface.
+   * Sets the value of the "type" attribute of this SedSurface.
    *
-   * @param surfaceType @if clike SurfaceType_t@else int@endif value of the
-   * "surfaceType" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * @copydetails doc_sedsurface_surfaceType
-   */
-  int setSurfaceType(const SurfaceType_t surfaceType);
-
-
-  /**
-   * Sets the value of the "surfaceType" attribute of this SedSurface.
-   *
-   * @param surfaceType std::string& of the "surfaceType" attribute to be set.
+   * @param type @if clike SurfaceType_t@else int@endif value of the "type"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedsurface_surfaceType
+   * @copydetails doc_sedsurface_type
    */
-  int setSurfaceType(const std::string& surfaceType);
+  int setType(const SurfaceType_t type);
 
 
   /**
-   * Unsets the value of the "logZ" attribute of this SedSurface.
+   * Sets the value of the "type" attribute of this SedSurface.
+   *
+   * @param type std::string& of the "type" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_sedsurface_type
+   */
+  int setType(const std::string& type);
+
+
+  /**
+   * Sets the value of the "style" attribute of this SedSurface.
+   *
+   * @param style std::string& value of the "style" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setStyle(const std::string& style);
+
+
+  /**
+   * Sets the value of the "logX" attribute of this SedSurface.
+   *
+   * @param logX bool value of the "logX" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setLogX(bool logX);
+
+
+  /**
+   * Sets the value of the "logY" attribute of this SedSurface.
+   *
+   * @param logY bool value of the "logY" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setLogY(bool logY);
+
+
+  /**
+   * Sets the value of the "logZ" attribute of this SedSurface.
+   *
+   * @param logZ bool value of the "logZ" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setLogZ(bool logZ);
+
+
+  /**
+   * Sets the value of the "order" attribute of this SedSurface.
+   *
+   * @param order int value of the "order" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setOrder(int order);
+
+
+  /**
+   * Unsets the value of the "id" attribute of this SedSurface.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetLogZ();
+  virtual int unsetId();
+
+
+  /**
+   * Unsets the value of the "name" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int unsetName();
+
+
+  /**
+   * Unsets the value of the "xDataReference" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetXDataReference();
+
+
+  /**
+   * Unsets the value of the "yDataReference" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetYDataReference();
 
 
   /**
@@ -335,14 +623,64 @@ public:
 
 
   /**
-   * Unsets the value of the "surfaceType" attribute of this SedSurface.
+   * Unsets the value of the "type" attribute of this SedSurface.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    *
-   * @copydetails doc_sedsurface_surfaceType
+   * @copydetails doc_sedsurface_type
    */
-  int unsetSurfaceType();
+  int unsetType();
+
+
+  /**
+   * Unsets the value of the "style" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetStyle();
+
+
+  /**
+   * Unsets the value of the "logX" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetLogX();
+
+
+  /**
+   * Unsets the value of the "logY" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetLogY();
+
+
+  /**
+   * Unsets the value of the "logZ" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetLogZ();
+
+
+  /**
+   * Unsets the value of the "order" attribute of this SedSurface.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetOrder();
 
 
   /**
@@ -368,7 +706,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_OUTPUT_SURFACE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT_SURFACE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -386,7 +724,6 @@ public:
    *
    *
    * @note The required attributes for the SedSurface object are:
-   * @li "logZ"
    * @li "zDataReference"
    */
   virtual bool hasRequiredAttributes() const;
@@ -672,18 +1009,6 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Creates a new object from the next XMLToken on the XMLInputStream
-   */
-  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-    stream);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * Adds the expected attributes for this element
    */
   virtual void addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
@@ -796,17 +1121,71 @@ SedSurface_free(SedSurface_t* ss);
 
 
 /**
- * Returns the value of the "logZ" attribute of this SedSurface_t.
+ * Returns the value of the "id" attribute of this SedSurface_t.
  *
- * @param ss the SedSurface_t structure whose logZ is sought.
+ * @param ss the SedSurface_t structure whose id is sought.
  *
- * @return the value of the "logZ" attribute of this SedSurface_t as a boolean.
+ * @return the value of the "id" attribute of this SedSurface_t as a pointer to
+ * a string.
+ *
+ * @copydetails doc_returned_owned_char
  *
  * @memberof SedSurface_t
  */
 LIBSEDML_EXTERN
-int
-SedSurface_getLogZ(const SedSurface_t * ss);
+char *
+SedSurface_getId(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "name" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose name is sought.
+ *
+ * @return the value of the "name" attribute of this SedSurface_t as a pointer
+ * to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getName(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "xDataReference" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose xDataReference is sought.
+ *
+ * @return the value of the "xDataReference" attribute of this SedSurface_t as
+ * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getXDataReference(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "yDataReference" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose yDataReference is sought.
+ *
+ * @return the value of the "yDataReference" attribute of this SedSurface_t as
+ * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getYDataReference(const SedSurface_t * ss);
 
 
 /**
@@ -827,14 +1206,14 @@ SedSurface_getZDataReference(const SedSurface_t * ss);
 
 
 /**
- * Returns the value of the "surfaceType" attribute of this SedSurface_t.
+ * Returns the value of the "type" attribute of this SedSurface_t.
  *
- * @param ss the SedSurface_t structure whose surfaceType is sought.
+ * @param ss the SedSurface_t structure whose type is sought.
  *
- * @return the value of the "surfaceType" attribute of this SedSurface_t as a
+ * @return the value of the "type" attribute of this SedSurface_t as a
  * SurfaceType_t.
  *
- * @copydetails doc_sedsurface_surfaceType
+ * @copydetails doc_sedsurface_type
  * @if clike The value is drawn from the enumeration @ref SurfaceType_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SEDML_SURFACETYPE_PARAMETRICCURVE, SurfaceType_t}
@@ -850,20 +1229,20 @@ SedSurface_getZDataReference(const SedSurface_t * ss);
  */
 LIBSEDML_EXTERN
 SurfaceType_t
-SedSurface_getSurfaceType(const SedSurface_t * ss);
+SedSurface_getType(const SedSurface_t * ss);
 
 
 /**
- * Returns the value of the "surfaceType" attribute of this SedSurface_t.
+ * Returns the value of the "type" attribute of this SedSurface_t.
  *
- * @param ss the SedSurface_t structure whose surfaceType is sought.
+ * @param ss the SedSurface_t structure whose type is sought.
  *
- * @return the value of the "surfaceType" attribute of this SedSurface_t as a
- * const char *.
+ * @return the value of the "type" attribute of this SedSurface_t as a const
+ * char *.
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sedsurface_surfaceType
+ * @copydetails doc_sedsurface_type
  * The possible values returned by this method are:
  * @li @c "parametricCurve"
  * @li @c "surfaceMesh"
@@ -878,23 +1257,145 @@ SedSurface_getSurfaceType(const SedSurface_t * ss);
  */
 LIBSEDML_EXTERN
 char *
-SedSurface_getSurfaceTypeAsString(const SedSurface_t * ss);
+SedSurface_getTypeAsString(const SedSurface_t * ss);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedSurface_t's "logZ" attribute is
+ * Returns the value of the "style" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose style is sought.
+ *
+ * @return the value of the "style" attribute of this SedSurface_t as a pointer
+ * to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getStyle(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "logX" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose logX is sought.
+ *
+ * @return the value of the "logX" attribute of this SedSurface_t as a boolean.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getLogX(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "logY" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose logY is sought.
+ *
+ * @return the value of the "logY" attribute of this SedSurface_t as a boolean.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getLogY(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "logZ" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose logZ is sought.
+ *
+ * @return the value of the "logZ" attribute of this SedSurface_t as a boolean.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getLogZ(const SedSurface_t * ss);
+
+
+/**
+ * Returns the value of the "order" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure whose order is sought.
+ *
+ * @return the value of the "order" attribute of this SedSurface_t as a
+ * integer.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getOrder(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "id" attribute is
  * set.
  *
  * @param ss the SedSurface_t structure.
  *
- * @return @c 1 (true) if this SedSurface_t's "logZ" attribute has been set,
+ * @return @c 1 (true) if this SedSurface_t's "id" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
  * @memberof SedSurface_t
  */
 LIBSEDML_EXTERN
 int
-SedSurface_isSetLogZ(const SedSurface_t * ss);
+SedSurface_isSetId(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "name" attribute is
+ * set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetName(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "xDataReference"
+ * attribute is set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "xDataReference" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetXDataReference(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "yDataReference"
+ * attribute is set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "yDataReference" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetYDataReference(const SedSurface_t * ss);
 
 
 /**
@@ -914,29 +1415,154 @@ SedSurface_isSetZDataReference(const SedSurface_t * ss);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedSurface_t's "surfaceType"
- * attribute is set.
+ * Predicate returning @c 1 (true) if this SedSurface_t's "type" attribute is
+ * set.
  *
  * @param ss the SedSurface_t structure.
  *
- * @return @c 1 (true) if this SedSurface_t's "surfaceType" attribute has been
- * set, otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this SedSurface_t's "type" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sedsurface_surfaceType
+ * @copydetails doc_sedsurface_type
  *
  * @memberof SedSurface_t
  */
 LIBSEDML_EXTERN
 int
-SedSurface_isSetSurfaceType(const SedSurface_t * ss);
+SedSurface_isSetType(const SedSurface_t * ss);
 
 
 /**
- * Sets the value of the "logZ" attribute of this SedSurface_t.
+ * Predicate returning @c 1 (true) if this SedSurface_t's "style" attribute is
+ * set.
  *
  * @param ss the SedSurface_t structure.
  *
- * @param logZ int value of the "logZ" attribute to be set.
+ * @return @c 1 (true) if this SedSurface_t's "style" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetStyle(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "logX" attribute is
+ * set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "logX" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetLogX(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "logY" attribute is
+ * set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "logY" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetLogY(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "logZ" attribute is
+ * set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "logZ" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetLogZ(const SedSurface_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedSurface_t's "order" attribute is
+ * set.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @return @c 1 (true) if this SedSurface_t's "order" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetOrder(const SedSurface_t * ss);
+
+
+/**
+ * Sets the value of the "id" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param id const char * value of the "id" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling SedSurface_unsetId().
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setId(SedSurface_t * ss, const char * id);
+
+
+/**
+ * Sets the value of the "name" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param name const char * value of the "name" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p name = @c NULL or an empty string is
+ * equivalent to calling SedSurface_unsetName().
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setName(SedSurface_t * ss, const char * name);
+
+
+/**
+ * Sets the value of the "xDataReference" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param xDataReference const char * value of the "xDataReference" attribute
+ * to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -948,7 +1574,28 @@ SedSurface_isSetSurfaceType(const SedSurface_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedSurface_setLogZ(SedSurface_t * ss, int logZ);
+SedSurface_setXDataReference(SedSurface_t * ss, const char * xDataReference);
+
+
+/**
+ * Sets the value of the "yDataReference" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param yDataReference const char * value of the "yDataReference" attribute
+ * to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setYDataReference(SedSurface_t * ss, const char * yDataReference);
 
 
 /**
@@ -973,12 +1620,11 @@ SedSurface_setZDataReference(SedSurface_t * ss, const char * zDataReference);
 
 
 /**
- * Sets the value of the "surfaceType" attribute of this SedSurface_t.
+ * Sets the value of the "type" attribute of this SedSurface_t.
  *
  * @param ss the SedSurface_t structure.
  *
- * @param surfaceType SurfaceType_t value of the "surfaceType" attribute to be
- * set.
+ * @param type SurfaceType_t value of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -986,21 +1632,21 @@ SedSurface_setZDataReference(SedSurface_t * ss, const char * zDataReference);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedsurface_surfaceType
+ * @copydetails doc_sedsurface_type
  *
  * @memberof SedSurface_t
  */
 LIBSEDML_EXTERN
 int
-SedSurface_setSurfaceType(SedSurface_t * ss, SurfaceType_t surfaceType);
+SedSurface_setType(SedSurface_t * ss, SurfaceType_t type);
 
 
 /**
- * Sets the value of the "surfaceType" attribute of this SedSurface_t.
+ * Sets the value of the "type" attribute of this SedSurface_t.
  *
  * @param ss the SedSurface_t structure.
  *
- * @param surfaceType const char * of the "surfaceType" attribute to be set.
+ * @param type const char * of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1008,18 +1654,117 @@ SedSurface_setSurfaceType(SedSurface_t * ss, SurfaceType_t surfaceType);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedsurface_surfaceType
+ * @copydetails doc_sedsurface_type
  *
  * @memberof SedSurface_t
  */
 LIBSEDML_EXTERN
 int
-SedSurface_setSurfaceTypeAsString(SedSurface_t * ss,
-                                  const char * surfaceType);
+SedSurface_setTypeAsString(SedSurface_t * ss, const char * type);
 
 
 /**
- * Unsets the value of the "logZ" attribute of this SedSurface_t.
+ * Sets the value of the "style" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param style const char * value of the "style" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setStyle(SedSurface_t * ss, const char * style);
+
+
+/**
+ * Sets the value of the "logX" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param logX int value of the "logX" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setLogX(SedSurface_t * ss, int logX);
+
+
+/**
+ * Sets the value of the "logY" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param logY int value of the "logY" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setLogY(SedSurface_t * ss, int logY);
+
+
+/**
+ * Sets the value of the "logZ" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param logZ int value of the "logZ" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setLogZ(SedSurface_t * ss, int logZ);
+
+
+/**
+ * Sets the value of the "order" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @param order int value of the "order" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setOrder(SedSurface_t * ss, int order);
+
+
+/**
+ * Unsets the value of the "id" attribute of this SedSurface_t.
  *
  * @param ss the SedSurface_t structure.
  *
@@ -1032,7 +1777,58 @@ SedSurface_setSurfaceTypeAsString(SedSurface_t * ss,
  */
 LIBSEDML_EXTERN
 int
-SedSurface_unsetLogZ(SedSurface_t * ss);
+SedSurface_unsetId(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "name" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetName(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "xDataReference" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetXDataReference(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "yDataReference" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetYDataReference(SedSurface_t * ss);
 
 
 /**
@@ -1053,7 +1849,7 @@ SedSurface_unsetZDataReference(SedSurface_t * ss);
 
 
 /**
- * Unsets the value of the "surfaceType" attribute of this SedSurface_t.
+ * Unsets the value of the "type" attribute of this SedSurface_t.
  *
  * @param ss the SedSurface_t structure.
  *
@@ -1061,13 +1857,98 @@ SedSurface_unsetZDataReference(SedSurface_t * ss);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedsurface_surfaceType
+ * @copydetails doc_sedsurface_type
  *
  * @memberof SedSurface_t
  */
 LIBSEDML_EXTERN
 int
-SedSurface_unsetSurfaceType(SedSurface_t * ss);
+SedSurface_unsetType(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "style" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetStyle(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "logX" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetLogX(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "logY" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetLogY(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "logZ" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetLogZ(SedSurface_t * ss);
+
+
+/**
+ * Unsets the value of the "order" attribute of this SedSurface_t.
+ *
+ * @param ss the SedSurface_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedSurface_t
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetOrder(SedSurface_t * ss);
 
 
 /**
@@ -1081,7 +1962,6 @@ SedSurface_unsetSurfaceType(SedSurface_t * ss);
  *
  *
  * @note The required attributes for the SedSurface_t object are:
- * @li "logZ"
  * @li "zDataReference"
  *
  * @memberof SedSurface_t

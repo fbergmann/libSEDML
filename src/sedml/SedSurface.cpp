@@ -52,11 +52,21 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  * Creates a new SedSurface using the given SEDML Level and @ p version values.
  */
 SedSurface::SedSurface(unsigned int level, unsigned int version)
-  : SedCurve(level, version)
+  : SedBase(level, version)
+  , mName ("")
+  , mXDataReference ("")
+  , mYDataReference ("")
+  , mZDataReference ("")
+  , mType (SEDML_SURFACETYPE_INVALID)
+  , mStyle ("")
+  , mLogX (false)
+  , mIsSetLogX (false)
+  , mLogY (false)
+  , mIsSetLogY (false)
   , mLogZ (false)
   , mIsSetLogZ (false)
-  , mZDataReference ("")
-  , mSurfaceType (SEDML_SURFACETYPE_INVALID)
+  , mOrder (SEDML_INT_MAX)
+  , mIsSetOrder (false)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -66,11 +76,21 @@ SedSurface::SedSurface(unsigned int level, unsigned int version)
  * Creates a new SedSurface using the given SedNamespaces object @p sedmlns.
  */
 SedSurface::SedSurface(SedNamespaces *sedmlns)
-  : SedCurve(sedmlns)
+  : SedBase(sedmlns)
+  , mName ("")
+  , mXDataReference ("")
+  , mYDataReference ("")
+  , mZDataReference ("")
+  , mType (SEDML_SURFACETYPE_INVALID)
+  , mStyle ("")
+  , mLogX (false)
+  , mIsSetLogX (false)
+  , mLogY (false)
+  , mIsSetLogY (false)
   , mLogZ (false)
   , mIsSetLogZ (false)
-  , mZDataReference ("")
-  , mSurfaceType (SEDML_SURFACETYPE_INVALID)
+  , mOrder (SEDML_INT_MAX)
+  , mIsSetOrder (false)
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -80,11 +100,21 @@ SedSurface::SedSurface(SedNamespaces *sedmlns)
  * Copy constructor for SedSurface.
  */
 SedSurface::SedSurface(const SedSurface& orig)
-  : SedCurve( orig )
+  : SedBase( orig )
+  , mName ( orig.mName )
+  , mXDataReference ( orig.mXDataReference )
+  , mYDataReference ( orig.mYDataReference )
+  , mZDataReference ( orig.mZDataReference )
+  , mType ( orig.mType )
+  , mStyle ( orig.mStyle )
+  , mLogX ( orig.mLogX )
+  , mIsSetLogX ( orig.mIsSetLogX )
+  , mLogY ( orig.mLogY )
+  , mIsSetLogY ( orig.mIsSetLogY )
   , mLogZ ( orig.mLogZ )
   , mIsSetLogZ ( orig.mIsSetLogZ )
-  , mZDataReference ( orig.mZDataReference )
-  , mSurfaceType ( orig.mSurfaceType )
+  , mOrder ( orig.mOrder )
+  , mIsSetOrder ( orig.mIsSetOrder )
 {
 }
 
@@ -97,11 +127,21 @@ SedSurface::operator=(const SedSurface& rhs)
 {
   if (&rhs != this)
   {
-    SedCurve::operator=(rhs);
+    SedBase::operator=(rhs);
+    mName = rhs.mName;
+    mXDataReference = rhs.mXDataReference;
+    mYDataReference = rhs.mYDataReference;
+    mZDataReference = rhs.mZDataReference;
+    mType = rhs.mType;
+    mStyle = rhs.mStyle;
+    mLogX = rhs.mLogX;
+    mIsSetLogX = rhs.mIsSetLogX;
+    mLogY = rhs.mLogY;
+    mIsSetLogY = rhs.mIsSetLogY;
     mLogZ = rhs.mLogZ;
     mIsSetLogZ = rhs.mIsSetLogZ;
-    mZDataReference = rhs.mZDataReference;
-    mSurfaceType = rhs.mSurfaceType;
+    mOrder = rhs.mOrder;
+    mIsSetOrder = rhs.mIsSetOrder;
   }
 
   return *this;
@@ -127,12 +167,42 @@ SedSurface::~SedSurface()
 
 
 /*
- * Returns the value of the "logZ" attribute of this SedSurface.
+ * Returns the value of the "id" attribute of this SedSurface.
  */
-bool
-SedSurface::getLogZ() const
+const std::string&
+SedSurface::getId() const
 {
-  return mLogZ;
+  return mId;
+}
+
+
+/*
+ * Returns the value of the "name" attribute of this SedSurface.
+ */
+const std::string&
+SedSurface::getName() const
+{
+  return mName;
+}
+
+
+/*
+ * Returns the value of the "xDataReference" attribute of this SedSurface.
+ */
+const std::string&
+SedSurface::getXDataReference() const
+{
+  return mXDataReference;
+}
+
+
+/*
+ * Returns the value of the "yDataReference" attribute of this SedSurface.
+ */
+const std::string&
+SedSurface::getYDataReference() const
+{
+  return mYDataReference;
 }
 
 
@@ -147,33 +217,115 @@ SedSurface::getZDataReference() const
 
 
 /*
- * Returns the value of the "surfaceType" attribute of this SedSurface.
+ * Returns the value of the "type" attribute of this SedSurface.
  */
 SurfaceType_t
-SedSurface::getSurfaceType() const
+SedSurface::getType() const
 {
-  return mSurfaceType;
+  return mType;
 }
 
 
 /*
- * Returns the value of the "surfaceType" attribute of this SedSurface.
+ * Returns the value of the "type" attribute of this SedSurface.
  */
 std::string
-SedSurface::getSurfaceTypeAsString() const
+SedSurface::getTypeAsString() const
 {
-  std::string code_str = SurfaceType_toString(mSurfaceType);
+  std::string code_str = SurfaceType_toString(mType);
   return code_str;
 }
 
 
 /*
- * Predicate returning @c true if this SedSurface's "logZ" attribute is set.
+ * Returns the value of the "style" attribute of this SedSurface.
+ */
+const std::string&
+SedSurface::getStyle() const
+{
+  return mStyle;
+}
+
+
+/*
+ * Returns the value of the "logX" attribute of this SedSurface.
  */
 bool
-SedSurface::isSetLogZ() const
+SedSurface::getLogX() const
 {
-  return mIsSetLogZ;
+  return mLogX;
+}
+
+
+/*
+ * Returns the value of the "logY" attribute of this SedSurface.
+ */
+bool
+SedSurface::getLogY() const
+{
+  return mLogY;
+}
+
+
+/*
+ * Returns the value of the "logZ" attribute of this SedSurface.
+ */
+bool
+SedSurface::getLogZ() const
+{
+  return mLogZ;
+}
+
+
+/*
+ * Returns the value of the "order" attribute of this SedSurface.
+ */
+int
+SedSurface::getOrder() const
+{
+  return mOrder;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "id" attribute is set.
+ */
+bool
+SedSurface::isSetId() const
+{
+  return (mId.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "name" attribute is set.
+ */
+bool
+SedSurface::isSetName() const
+{
+  return (mName.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "xDataReference" attribute
+ * is set.
+ */
+bool
+SedSurface::isSetXDataReference() const
+{
+  return (mXDataReference.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "yDataReference" attribute
+ * is set.
+ */
+bool
+SedSurface::isSetYDataReference() const
+{
+  return (mYDataReference.empty() == false);
 }
 
 
@@ -189,25 +341,120 @@ SedSurface::isSetZDataReference() const
 
 
 /*
- * Predicate returning @c true if this SedSurface's "surfaceType" attribute is
- * set.
+ * Predicate returning @c true if this SedSurface's "type" attribute is set.
  */
 bool
-SedSurface::isSetSurfaceType() const
+SedSurface::isSetType() const
 {
-  return (mSurfaceType != SEDML_SURFACETYPE_INVALID);
+  return (mType != SEDML_SURFACETYPE_INVALID);
 }
 
 
 /*
- * Sets the value of the "logZ" attribute of this SedSurface.
+ * Predicate returning @c true if this SedSurface's "style" attribute is set.
+ */
+bool
+SedSurface::isSetStyle() const
+{
+  return (mStyle.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "logX" attribute is set.
+ */
+bool
+SedSurface::isSetLogX() const
+{
+  return mIsSetLogX;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "logY" attribute is set.
+ */
+bool
+SedSurface::isSetLogY() const
+{
+  return mIsSetLogY;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "logZ" attribute is set.
+ */
+bool
+SedSurface::isSetLogZ() const
+{
+  return mIsSetLogZ;
+}
+
+
+/*
+ * Predicate returning @c true if this SedSurface's "order" attribute is set.
+ */
+bool
+SedSurface::isSetOrder() const
+{
+  return mIsSetOrder;
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this SedSurface.
  */
 int
-SedSurface::setLogZ(bool logZ)
+SedSurface::setId(const std::string& id)
 {
-  mLogZ = logZ;
-  mIsSetLogZ = true;
+  mId = id;
   return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "name" attribute of this SedSurface.
+ */
+int
+SedSurface::setName(const std::string& name)
+{
+  mName = name;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "xDataReference" attribute of this SedSurface.
+ */
+int
+SedSurface::setXDataReference(const std::string& xDataReference)
+{
+  if (!(SyntaxChecker::isValidInternalSId(xDataReference)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mXDataReference = xDataReference;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
+ * Sets the value of the "yDataReference" attribute of this SedSurface.
+ */
+int
+SedSurface::setYDataReference(const std::string& yDataReference)
+{
+  if (!(SyntaxChecker::isValidInternalSId(yDataReference)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mYDataReference = yDataReference;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
 }
 
 
@@ -230,33 +477,33 @@ SedSurface::setZDataReference(const std::string& zDataReference)
 
 
 /*
- * Sets the value of the "surfaceType" attribute of this SedSurface.
+ * Sets the value of the "type" attribute of this SedSurface.
  */
 int
-SedSurface::setSurfaceType(const SurfaceType_t surfaceType)
+SedSurface::setType(const SurfaceType_t type)
 {
-  if (SurfaceType_isValid(surfaceType) == 0)
+  if (SurfaceType_isValid(type) == 0)
   {
-    mSurfaceType = SEDML_SURFACETYPE_INVALID;
+    mType = SEDML_SURFACETYPE_INVALID;
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mSurfaceType = surfaceType;
+    mType = type;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Sets the value of the "surfaceType" attribute of this SedSurface.
+ * Sets the value of the "type" attribute of this SedSurface.
  */
 int
-SedSurface::setSurfaceType(const std::string& surfaceType)
+SedSurface::setType(const std::string& type)
 {
-  mSurfaceType = SurfaceType_fromString(surfaceType.c_str());
+  mType = SurfaceType_fromString(type.c_str());
 
-  if (mSurfaceType == SEDML_SURFACETYPE_INVALID)
+  if (mType == SEDML_SURFACETYPE_INVALID)
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -266,15 +513,137 @@ SedSurface::setSurfaceType(const std::string& surfaceType)
 
 
 /*
- * Unsets the value of the "logZ" attribute of this SedSurface.
+ * Sets the value of the "style" attribute of this SedSurface.
  */
 int
-SedSurface::unsetLogZ()
+SedSurface::setStyle(const std::string& style)
 {
-  mLogZ = false;
-  mIsSetLogZ = false;
+  if (!(SyntaxChecker::isValidInternalSId(style)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mStyle = style;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
 
-  if (isSetLogZ() == false)
+
+/*
+ * Sets the value of the "logX" attribute of this SedSurface.
+ */
+int
+SedSurface::setLogX(bool logX)
+{
+  mLogX = logX;
+  mIsSetLogX = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "logY" attribute of this SedSurface.
+ */
+int
+SedSurface::setLogY(bool logY)
+{
+  mLogY = logY;
+  mIsSetLogY = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "logZ" attribute of this SedSurface.
+ */
+int
+SedSurface::setLogZ(bool logZ)
+{
+  mLogZ = logZ;
+  mIsSetLogZ = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "order" attribute of this SedSurface.
+ */
+int
+SedSurface::setOrder(int order)
+{
+  mOrder = order;
+  mIsSetOrder = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetId()
+{
+  mId.erase();
+
+  if (mId.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetName()
+{
+  mName.erase();
+
+  if (mName.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "xDataReference" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetXDataReference()
+{
+  mXDataReference.erase();
+
+  if (mXDataReference.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "yDataReference" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetYDataReference()
+{
+  mYDataReference.erase();
+
+  if (mYDataReference.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -305,13 +674,112 @@ SedSurface::unsetZDataReference()
 
 
 /*
- * Unsets the value of the "surfaceType" attribute of this SedSurface.
+ * Unsets the value of the "type" attribute of this SedSurface.
  */
 int
-SedSurface::unsetSurfaceType()
+SedSurface::unsetType()
 {
-  mSurfaceType = SEDML_SURFACETYPE_INVALID;
+  mType = SEDML_SURFACETYPE_INVALID;
   return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "style" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetStyle()
+{
+  mStyle.erase();
+
+  if (mStyle.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "logX" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetLogX()
+{
+  mLogX = false;
+  mIsSetLogX = false;
+
+  if (isSetLogX() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "logY" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetLogY()
+{
+  mLogY = false;
+  mIsSetLogY = false;
+
+  if (isSetLogY() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "logZ" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetLogZ()
+{
+  mLogZ = false;
+  mIsSetLogZ = false;
+
+  if (isSetLogZ() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "order" attribute of this SedSurface.
+ */
+int
+SedSurface::unsetOrder()
+{
+  mOrder = SEDML_INT_MAX;
+  mIsSetOrder = false;
+
+  if (isSetOrder() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
 }
 
 
@@ -321,9 +789,24 @@ SedSurface::unsetSurfaceType()
 void
 SedSurface::renameSIdRefs(const std::string& oldid, const std::string& newid)
 {
+  if (isSetXDataReference() && mXDataReference == oldid)
+  {
+    setXDataReference(newid);
+  }
+
+  if (isSetYDataReference() && mYDataReference == oldid)
+  {
+    setYDataReference(newid);
+  }
+
   if (isSetZDataReference() && mZDataReference == oldid)
   {
     setZDataReference(newid);
+  }
+
+  if (isSetStyle() && mStyle == oldid)
+  {
+    setStyle(newid);
   }
 }
 
@@ -356,12 +839,7 @@ SedSurface::getTypeCode() const
 bool
 SedSurface::hasRequiredAttributes() const
 {
-  bool allPresent = SedCurve::hasRequiredAttributes();
-
-  if (isSetLogZ() == false)
-  {
-    allPresent = false;
-  }
+  bool allPresent = true;
 
   if (isSetZDataReference() == false)
   {
@@ -382,7 +860,7 @@ void
 SedSurface::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
-  SedCurve::writeElements(stream);
+  SedBase::writeElements(stream);
 }
 
 /** @endcond */
@@ -412,7 +890,7 @@ SedSurface::accept(SedVisitor& v) const
 void
 SedSurface::setSedDocument(SedDocument* d)
 {
-  SedCurve::setSedDocument(d);
+  SedBase::setSedDocument(d);
 }
 
 /** @endcond */
@@ -427,14 +905,24 @@ SedSurface::setSedDocument(SedDocument* d)
 int
 SedSurface::getAttribute(const std::string& attributeName, bool& value) const
 {
-  int return_value = SedCurve::getAttribute(attributeName, value);
+  int return_value = SedBase::getAttribute(attributeName, value);
 
   if (return_value == LIBSEDML_OPERATION_SUCCESS)
   {
     return return_value;
   }
 
-  if (attributeName == "logZ")
+  if (attributeName == "logX")
+  {
+    value = getLogX();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "logY")
+  {
+    value = getLogY();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "logZ")
   {
     value = getLogZ();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -455,7 +943,18 @@ SedSurface::getAttribute(const std::string& attributeName, bool& value) const
 int
 SedSurface::getAttribute(const std::string& attributeName, int& value) const
 {
-  int return_value = SedCurve::getAttribute(attributeName, value);
+  int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "order")
+  {
+    value = getOrder();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -473,7 +972,7 @@ int
 SedSurface::getAttribute(const std::string& attributeName,
                          double& value) const
 {
-  int return_value = SedCurve::getAttribute(attributeName, value);
+  int return_value = SedBase::getAttribute(attributeName, value);
 
   return return_value;
 }
@@ -491,7 +990,7 @@ int
 SedSurface::getAttribute(const std::string& attributeName,
                          unsigned int& value) const
 {
-  int return_value = SedCurve::getAttribute(attributeName, value);
+  int return_value = SedBase::getAttribute(attributeName, value);
 
   return return_value;
 }
@@ -509,21 +1008,46 @@ int
 SedSurface::getAttribute(const std::string& attributeName,
                          std::string& value) const
 {
-  int return_value = SedCurve::getAttribute(attributeName, value);
+  int return_value = SedBase::getAttribute(attributeName, value);
 
   if (return_value == LIBSEDML_OPERATION_SUCCESS)
   {
     return return_value;
   }
 
-  if (attributeName == "zDataReference")
+  if (attributeName == "id")
+  {
+    value = getId();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "name")
+  {
+    value = getName();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "xDataReference")
+  {
+    value = getXDataReference();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "yDataReference")
+  {
+    value = getYDataReference();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "zDataReference")
   {
     value = getZDataReference();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "surfaceType")
+  else if (attributeName == "type")
   {
-    value = getSurfaceTypeAsString();
+    value = getTypeAsString();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "style")
+  {
+    value = getStyle();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -543,19 +1067,51 @@ SedSurface::getAttribute(const std::string& attributeName,
 bool
 SedSurface::isSetAttribute(const std::string& attributeName) const
 {
-  bool value = SedCurve::isSetAttribute(attributeName);
+  bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "logZ")
+  if (attributeName == "id")
   {
-    value = isSetLogZ();
+    value = isSetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = isSetName();
+  }
+  else if (attributeName == "xDataReference")
+  {
+    value = isSetXDataReference();
+  }
+  else if (attributeName == "yDataReference")
+  {
+    value = isSetYDataReference();
   }
   else if (attributeName == "zDataReference")
   {
     value = isSetZDataReference();
   }
-  else if (attributeName == "surfaceType")
+  else if (attributeName == "type")
   {
-    value = isSetSurfaceType();
+    value = isSetType();
+  }
+  else if (attributeName == "style")
+  {
+    value = isSetStyle();
+  }
+  else if (attributeName == "logX")
+  {
+    value = isSetLogX();
+  }
+  else if (attributeName == "logY")
+  {
+    value = isSetLogY();
+  }
+  else if (attributeName == "logZ")
+  {
+    value = isSetLogZ();
+  }
+  else if (attributeName == "order")
+  {
+    value = isSetOrder();
   }
 
   return value;
@@ -573,9 +1129,17 @@ SedSurface::isSetAttribute(const std::string& attributeName) const
 int
 SedSurface::setAttribute(const std::string& attributeName, bool value)
 {
-  int return_value = SedCurve::setAttribute(attributeName, value);
+  int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "logZ")
+  if (attributeName == "logX")
+  {
+    return_value = setLogX(value);
+  }
+  else if (attributeName == "logY")
+  {
+    return_value = setLogY(value);
+  }
+  else if (attributeName == "logZ")
   {
     return_value = setLogZ(value);
   }
@@ -595,7 +1159,12 @@ SedSurface::setAttribute(const std::string& attributeName, bool value)
 int
 SedSurface::setAttribute(const std::string& attributeName, int value)
 {
-  int return_value = SedCurve::setAttribute(attributeName, value);
+  int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "order")
+  {
+    return_value = setOrder(value);
+  }
 
   return return_value;
 }
@@ -612,7 +1181,7 @@ SedSurface::setAttribute(const std::string& attributeName, int value)
 int
 SedSurface::setAttribute(const std::string& attributeName, double value)
 {
-  int return_value = SedCurve::setAttribute(attributeName, value);
+  int return_value = SedBase::setAttribute(attributeName, value);
 
   return return_value;
 }
@@ -629,7 +1198,7 @@ SedSurface::setAttribute(const std::string& attributeName, double value)
 int
 SedSurface::setAttribute(const std::string& attributeName, unsigned int value)
 {
-  int return_value = SedCurve::setAttribute(attributeName, value);
+  int return_value = SedBase::setAttribute(attributeName, value);
 
   return return_value;
 }
@@ -647,15 +1216,35 @@ int
 SedSurface::setAttribute(const std::string& attributeName,
                          const std::string& value)
 {
-  int return_value = SedCurve::setAttribute(attributeName, value);
+  int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "zDataReference")
+  if (attributeName == "id")
+  {
+    return_value = setId(value);
+  }
+  else if (attributeName == "name")
+  {
+    return_value = setName(value);
+  }
+  else if (attributeName == "xDataReference")
+  {
+    return_value = setXDataReference(value);
+  }
+  else if (attributeName == "yDataReference")
+  {
+    return_value = setYDataReference(value);
+  }
+  else if (attributeName == "zDataReference")
   {
     return_value = setZDataReference(value);
   }
-  else if (attributeName == "surfaceType")
+  else if (attributeName == "type")
   {
-    return_value = setSurfaceType(value);
+    return_value = setType(value);
+  }
+  else if (attributeName == "style")
+  {
+    return_value = setStyle(value);
   }
 
   return return_value;
@@ -673,42 +1262,54 @@ SedSurface::setAttribute(const std::string& attributeName,
 int
 SedSurface::unsetAttribute(const std::string& attributeName)
 {
-  int value = SedCurve::unsetAttribute(attributeName);
+  int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "logZ")
+  if (attributeName == "id")
   {
-    value = unsetLogZ();
+    value = unsetId();
+  }
+  else if (attributeName == "name")
+  {
+    value = unsetName();
+  }
+  else if (attributeName == "xDataReference")
+  {
+    value = unsetXDataReference();
+  }
+  else if (attributeName == "yDataReference")
+  {
+    value = unsetYDataReference();
   }
   else if (attributeName == "zDataReference")
   {
     value = unsetZDataReference();
   }
-  else if (attributeName == "surfaceType")
+  else if (attributeName == "type")
   {
-    value = unsetSurfaceType();
+    value = unsetType();
+  }
+  else if (attributeName == "style")
+  {
+    value = unsetStyle();
+  }
+  else if (attributeName == "logX")
+  {
+    value = unsetLogX();
+  }
+  else if (attributeName == "logY")
+  {
+    value = unsetLogY();
+  }
+  else if (attributeName == "logZ")
+  {
+    value = unsetLogZ();
+  }
+  else if (attributeName == "order")
+  {
+    value = unsetOrder();
   }
 
   return value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Creates a new object from the next XMLToken on the XMLInputStream
- */
-SedBase*
-SedSurface::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
-{
-  SedBase* obj = SedCurve::createObject(stream);
-
-  connectToChild();
-
-  return obj;
 }
 
 /** @endcond */
@@ -724,13 +1325,29 @@ void
 SedSurface::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
-  SedCurve::addExpectedAttributes(attributes);
+  SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("logZ");
+  attributes.add("id");
+
+  attributes.add("name");
+
+  attributes.add("xDataReference");
+
+  attributes.add("yDataReference");
 
   attributes.add("zDataReference");
 
-  attributes.add("surfaceType");
+  attributes.add("type");
+
+  attributes.add("style");
+
+  attributes.add("logX");
+
+  attributes.add("logY");
+
+  attributes.add("logZ");
+
+  attributes.add("order");
 }
 
 /** @endcond */
@@ -771,7 +1388,7 @@ SedSurface::readAttributes(
     }
   }
 
-  SedCurve::readAttributes(attributes, expectedAttributes);
+  SedBase::readAttributes(attributes, expectedAttributes);
 
   if (log)
   {
@@ -783,31 +1400,99 @@ SedSurface::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSurfaceAllowedAttributes, level, version, details);
+        log->logError(SedmlSurfaceAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
 
   // 
-  // logZ bool (use = "required" )
+  // id SId (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
-  mIsSetLogZ = attributes.readInto("logZ", mLogZ);
+  assigned = attributes.readInto("id", mId);
 
-  if (mIsSetLogZ == false)
+  if (assigned == true)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
-      log->contains(XMLAttributeTypeMismatch))
+    if (mId.empty() == true)
     {
-      log->remove(XMLAttributeTypeMismatch);
-      log->logError(SedmlSurfaceLogZMustBeBoolean, level, version);
+      logEmptyString(mId, level, version, "<SedSurface>");
     }
-    else
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
     {
-      std::string message = "Sedml attribute 'logZ' is missing from the "
-        "<SedSurface> element.";
-      log->logError(SedmlSurfaceAllowedAttributes, level, version, message);
+      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
+        getElementName() + "> is '" + mId + "', which does not conform to the "
+          "syntax.");
+    }
+  }
+
+  // 
+  // name string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("name", mName);
+
+  if (assigned == true)
+  {
+    if (mName.empty() == true)
+    {
+      logEmptyString(mName, level, version, "<SedSurface>");
+    }
+  }
+
+  // 
+  // xDataReference SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("xDataReference", mXDataReference);
+
+  if (assigned == true)
+  {
+    if (mXDataReference.empty() == true)
+    {
+      logEmptyString(mXDataReference, level, version, "<SedSurface>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mXDataReference) == false)
+    {
+      std::string msg = "The xDataReference attribute on the <" +
+        getElementName() + ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mXDataReference + "', which does not conform to the "
+        "syntax.";
+      logError(SedmlSurfaceXDataReferenceMustBeDataGenerator, level, version,
+        msg);
+    }
+  }
+
+  // 
+  // yDataReference SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("yDataReference", mYDataReference);
+
+  if (assigned == true)
+  {
+    if (mYDataReference.empty() == true)
+    {
+      logEmptyString(mYDataReference, level, version, "<SedSurface>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mYDataReference) == false)
+    {
+      std::string msg = "The yDataReference attribute on the <" +
+        getElementName() + ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mYDataReference + "', which does not conform to the "
+        "syntax.";
+      logError(SedmlSurfaceYDataReferenceMustBeDataGenerator, level, version,
+        msg);
     }
   }
 
@@ -846,35 +1531,132 @@ SedSurface::readAttributes(
   }
 
   // 
-  // surfaceType enum (use = "optional" )
+  // type enum (use = "optional" )
   // 
 
-  std::string surfaceType;
-  assigned = attributes.readInto("surfaceType", surfaceType);
+  std::string type;
+  assigned = attributes.readInto("type", type);
 
   if (assigned == true)
   {
-    if (surfaceType.empty() == true)
+    if (type.empty() == true)
     {
-      logEmptyString(surfaceType, level, version, "<SedSurface>");
+      logEmptyString(type, level, version, "<SedSurface>");
     }
     else
     {
-      mSurfaceType = SurfaceType_fromString(surfaceType.c_str());
+      mType = SurfaceType_fromString(type.c_str());
 
-      if (SurfaceType_isValid(mSurfaceType) == 0)
+      if (SurfaceType_isValid(mType) == 0)
       {
-        std::string msg = "The surfaceType on the <SedSurface> ";
+        std::string msg = "The type on the <SedSurface> ";
 
         if (isSetId())
         {
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + surfaceType + "', which is not a valid option.";
+        msg += "is '" + type + "', which is not a valid option.";
 
-        log->logError(SedmlSurfaceAllowedAttributes, level, version, msg);
+        log->logError(SedmlSurfaceTypeMustBeSurfaceTypeEnum, level, version,
+          msg);
       }
+    }
+  }
+
+  // 
+  // style SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("style", mStyle);
+
+  if (assigned == true)
+  {
+    if (mStyle.empty() == true)
+    {
+      logEmptyString(mStyle, level, version, "<SedSurface>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mStyle) == false)
+    {
+      std::string msg = "The style attribute on the <" + getElementName() +
+        ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mStyle + "', which does not conform to the syntax.";
+      logError(SedmlSurfaceStyleMustBeStyle, level, version, msg);
+    }
+  }
+
+  // 
+  // logX bool (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetLogX = attributes.readInto("logX", mLogX);
+
+  if (mIsSetLogX == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logError(SedmlSurfaceLogXMustBeBoolean, level, version);
+    }
+  }
+
+  // 
+  // logY bool (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetLogY = attributes.readInto("logY", mLogY);
+
+  if (mIsSetLogY == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logError(SedmlSurfaceLogYMustBeBoolean, level, version);
+    }
+  }
+
+  // 
+  // logZ bool (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetLogZ = attributes.readInto("logZ", mLogZ);
+
+  if (mIsSetLogZ == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      log->logError(SedmlSurfaceLogZMustBeBoolean, level, version);
+    }
+  }
+
+  // 
+  // order int (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetOrder = attributes.readInto("order", mOrder);
+
+  if ( mIsSetOrder == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Sedml attribute 'order' from the <SedSurface> "
+        "element must be an integer.";
+      log->logError(SedmlSurfaceOrderMustBeInteger, level, version, message);
     }
   }
 }
@@ -892,11 +1674,26 @@ void
 SedSurface::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
-  SedCurve::writeAttributes(stream);
+  SedBase::writeAttributes(stream);
 
-  if (isSetLogZ() == true)
+  if (isSetId() == true)
   {
-    stream.writeAttribute("logZ", getPrefix(), mLogZ);
+    stream.writeAttribute("id", getPrefix(), mId);
+  }
+
+  if (isSetName() == true)
+  {
+    stream.writeAttribute("name", getPrefix(), mName);
+  }
+
+  if (isSetXDataReference() == true)
+  {
+    stream.writeAttribute("xDataReference", getPrefix(), mXDataReference);
+  }
+
+  if (isSetYDataReference() == true)
+  {
+    stream.writeAttribute("yDataReference", getPrefix(), mYDataReference);
   }
 
   if (isSetZDataReference() == true)
@@ -904,10 +1701,34 @@ SedSurface::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
     stream.writeAttribute("zDataReference", getPrefix(), mZDataReference);
   }
 
-  if (isSetSurfaceType() == true)
+  if (isSetType() == true)
   {
-    stream.writeAttribute("surfaceType", getPrefix(),
-      SurfaceType_toString(mSurfaceType));
+    stream.writeAttribute("type", getPrefix(), SurfaceType_toString(mType));
+  }
+
+  if (isSetStyle() == true)
+  {
+    stream.writeAttribute("style", getPrefix(), mStyle);
+  }
+
+  if (isSetLogX() == true)
+  {
+    stream.writeAttribute("logX", getPrefix(), mLogX);
+  }
+
+  if (isSetLogY() == true)
+  {
+    stream.writeAttribute("logY", getPrefix(), mLogY);
+  }
+
+  if (isSetLogZ() == true)
+  {
+    stream.writeAttribute("logZ", getPrefix(), mLogZ);
+  }
+
+  if (isSetOrder() == true)
+  {
+    stream.writeAttribute("order", getPrefix(), mOrder);
   }
 }
 
@@ -964,13 +1785,68 @@ SedSurface_free(SedSurface_t* ss)
 
 
 /*
- * Returns the value of the "logZ" attribute of this SedSurface_t.
+ * Returns the value of the "id" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
-int
-SedSurface_getLogZ(const SedSurface_t * ss)
+char *
+SedSurface_getId(const SedSurface_t * ss)
 {
-  return (ss != NULL) ? static_cast<int>(ss->getLogZ()) : 0;
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getId().empty() ? NULL : safe_strdup(ss->getId().c_str());
+}
+
+
+/*
+ * Returns the value of the "name" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getName(const SedSurface_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getName().empty() ? NULL : safe_strdup(ss->getName().c_str());
+}
+
+
+/*
+ * Returns the value of the "xDataReference" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getXDataReference(const SedSurface_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getXDataReference().empty() ? NULL :
+    safe_strdup(ss->getXDataReference().c_str());
+}
+
+
+/*
+ * Returns the value of the "yDataReference" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getYDataReference(const SedSurface_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getYDataReference().empty() ? NULL :
+    safe_strdup(ss->getYDataReference().c_str());
 }
 
 
@@ -992,41 +1868,137 @@ SedSurface_getZDataReference(const SedSurface_t * ss)
 
 
 /*
- * Returns the value of the "surfaceType" attribute of this SedSurface_t.
+ * Returns the value of the "type" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
 SurfaceType_t
-SedSurface_getSurfaceType(const SedSurface_t * ss)
+SedSurface_getType(const SedSurface_t * ss)
 {
   if (ss == NULL)
   {
     return SEDML_SURFACETYPE_INVALID;
   }
 
-  return ss->getSurfaceType();
+  return ss->getType();
 }
 
 
 /*
- * Returns the value of the "surfaceType" attribute of this SedSurface_t.
+ * Returns the value of the "type" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
 char *
-SedSurface_getSurfaceTypeAsString(const SedSurface_t * ss)
+SedSurface_getTypeAsString(const SedSurface_t * ss)
 {
-  return (char*)(SurfaceType_toString(ss->getSurfaceType()));
+  return (char*)(SurfaceType_toString(ss->getType()));
 }
 
 
 /*
- * Predicate returning @c 1 (true) if this SedSurface_t's "logZ" attribute is
+ * Returns the value of the "style" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedSurface_getStyle(const SedSurface_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getStyle().empty() ? NULL : safe_strdup(ss->getStyle().c_str());
+}
+
+
+/*
+ * Returns the value of the "logX" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getLogX(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->getLogX()) : 0;
+}
+
+
+/*
+ * Returns the value of the "logY" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getLogY(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->getLogY()) : 0;
+}
+
+
+/*
+ * Returns the value of the "logZ" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getLogZ(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->getLogZ()) : 0;
+}
+
+
+/*
+ * Returns the value of the "order" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_getOrder(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->getOrder() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "id" attribute is
  * set.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_isSetLogZ(const SedSurface_t * ss)
+SedSurface_isSetId(const SedSurface_t * ss)
 {
-  return (ss != NULL) ? static_cast<int>(ss->isSetLogZ()) : 0;
+  return (ss != NULL) ? static_cast<int>(ss->isSetId()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "name" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetName(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetName()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "xDataReference"
+ * attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetXDataReference(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetXDataReference()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "yDataReference"
+ * attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetYDataReference(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetYDataReference()) : 0;
 }
 
 
@@ -1043,25 +2015,120 @@ SedSurface_isSetZDataReference(const SedSurface_t * ss)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedSurface_t's "surfaceType"
- * attribute is set.
+ * Predicate returning @c 1 (true) if this SedSurface_t's "type" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_isSetSurfaceType(const SedSurface_t * ss)
+SedSurface_isSetType(const SedSurface_t * ss)
 {
-  return (ss != NULL) ? static_cast<int>(ss->isSetSurfaceType()) : 0;
+  return (ss != NULL) ? static_cast<int>(ss->isSetType()) : 0;
 }
 
 
 /*
- * Sets the value of the "logZ" attribute of this SedSurface_t.
+ * Predicate returning @c 1 (true) if this SedSurface_t's "style" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_setLogZ(SedSurface_t * ss, int logZ)
+SedSurface_isSetStyle(const SedSurface_t * ss)
 {
-  return (ss != NULL) ? ss->setLogZ(logZ) : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? static_cast<int>(ss->isSetStyle()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "logX" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetLogX(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetLogX()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "logY" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetLogY(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetLogY()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "logZ" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetLogZ(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetLogZ()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedSurface_t's "order" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_isSetOrder(const SedSurface_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetOrder()) : 0;
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setId(SedSurface_t * ss, const char * id)
+{
+  return (ss != NULL) ? ss->setId(id) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "name" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setName(SedSurface_t * ss, const char * name)
+{
+  return (ss != NULL) ? ss->setName(name) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "xDataReference" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setXDataReference(SedSurface_t * ss, const char * xDataReference)
+{
+  return (ss != NULL) ? ss->setXDataReference(xDataReference) :
+    LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "yDataReference" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setYDataReference(SedSurface_t * ss, const char * yDataReference)
+{
+  return (ss != NULL) ? ss->setYDataReference(yDataReference) :
+    LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1078,37 +2145,123 @@ SedSurface_setZDataReference(SedSurface_t * ss, const char * zDataReference)
 
 
 /*
- * Sets the value of the "surfaceType" attribute of this SedSurface_t.
+ * Sets the value of the "type" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_setSurfaceType(SedSurface_t * ss, SurfaceType_t surfaceType)
+SedSurface_setType(SedSurface_t * ss, SurfaceType_t type)
 {
-  return (ss != NULL) ? ss->setSurfaceType(surfaceType) :
-    LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setType(type) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Sets the value of the "surfaceType" attribute of this SedSurface_t.
+ * Sets the value of the "type" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_setSurfaceTypeAsString(SedSurface_t * ss, const char * surfaceType)
+SedSurface_setTypeAsString(SedSurface_t * ss, const char * type)
 {
-  return (ss != NULL) ? ss->setSurfaceType(surfaceType):
-    LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setType(type): LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Unsets the value of the "logZ" attribute of this SedSurface_t.
+ * Sets the value of the "style" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_unsetLogZ(SedSurface_t * ss)
+SedSurface_setStyle(SedSurface_t * ss, const char * style)
 {
-  return (ss != NULL) ? ss->unsetLogZ() : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setStyle(style) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "logX" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setLogX(SedSurface_t * ss, int logX)
+{
+  return (ss != NULL) ? ss->setLogX(logX) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "logY" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setLogY(SedSurface_t * ss, int logY)
+{
+  return (ss != NULL) ? ss->setLogY(logY) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "logZ" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setLogZ(SedSurface_t * ss, int logZ)
+{
+  return (ss != NULL) ? ss->setLogZ(logZ) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "order" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_setOrder(SedSurface_t * ss, int order)
+{
+  return (ss != NULL) ? ss->setOrder(order) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetId(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetId() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetName(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetName() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "xDataReference" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetXDataReference(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetXDataReference() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "yDataReference" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetYDataReference(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetYDataReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1124,13 +2277,68 @@ SedSurface_unsetZDataReference(SedSurface_t * ss)
 
 
 /*
- * Unsets the value of the "surfaceType" attribute of this SedSurface_t.
+ * Unsets the value of the "type" attribute of this SedSurface_t.
  */
 LIBSEDML_EXTERN
 int
-SedSurface_unsetSurfaceType(SedSurface_t * ss)
+SedSurface_unsetType(SedSurface_t * ss)
 {
-  return (ss != NULL) ? ss->unsetSurfaceType() : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->unsetType() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "style" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetStyle(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetStyle() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "logX" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetLogX(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetLogX() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "logY" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetLogY(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetLogY() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "logZ" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetLogZ(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetLogZ() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "order" attribute of this SedSurface_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSurface_unsetOrder(SedSurface_t * ss)
+{
+  return (ss != NULL) ? ss->unsetOrder() : LIBSEDML_INVALID_OBJECT;
 }
 
 

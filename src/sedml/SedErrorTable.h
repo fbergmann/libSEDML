@@ -1824,27 +1824,16 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <curve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <curve> object must have the required attributes 'sedml:logY', "
-    "'sedml:yDataReference' and 'sedml:type', and may have the optional "
-    "attributes 'sedml:xErrorUpper', 'sedml:xErrorLower', 'sedml:yErrorUpper' "
-    "and 'sedml:yErrorLower'. No other attributes from the SBML Level 3 SEDML "
+    "A <curve> object must have the required attributes 'sedml:yDataReference' "
+    "and 'sedml:type', and may have the optional attributes 'sedml:logY', "
+    "'sedml:xErrorUpper', 'sedml:xErrorLower', 'sedml:yErrorUpper' and "
+    "'sedml:yErrorLower'. No other attributes from the SBML Level 3 SEDML "
     "namespaces are permitted on a <curve> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 22004
-  { SedmlCurveLogYMustBeBoolean,
-    "The 'logY' attribute must be Boolean.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:logY' on a <curve> must have a value of data type "
-    "'boolean'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 22005
   { SedmlCurveYDataReferenceMustBeDataGenerator,
     "The attribute 'yDataReference' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -1856,7 +1845,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 22006
+  // 22005
   { SedmlCurveTypeMustBeCurveTypeEnum,
     "The 'type' attribute must be CurveTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -1865,6 +1854,17 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "to the syntax of SBML data type 'CurveType' and may only take on the "
     "allowed values of 'CurveType' defined in SBML; that is, the value must be "
     "one of the following: 'points', 'bar' or 'barStacked'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22006
+  { SedmlCurveLogYMustBeBoolean,
+    "The 'logY' attribute must be Boolean.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:logY' on a <curve> must have a value of data type "
+    "'boolean'.",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1946,26 +1946,17 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <surface>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <surface> object must have the required attributes 'sedml:logZ' and "
-    "'sedml:zDataReference', and may have the optional attribute "
-    "'sedml:surfaceType'. No other attributes from the SBML Level 3 SEDML "
-    "namespaces are permitted on a <surface> object. ",
+    "A <surface> object must have the required attribute "
+    "'sedml:zDataReference', and may have the optional attributes 'sedml:id', "
+    "'sedml:name', 'sedml:xDataReference', 'sedml:yDataReference', "
+    "'sedml:type', 'sedml:style', 'sedml:logX', 'sedml:logY', 'sedml:logZ' and "
+    "'sedml:order'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "are permitted on a <surface> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 22104
-  { SedmlSurfaceLogZMustBeBoolean,
-    "The 'logZ' attribute must be Boolean.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:logZ' on a <surface> must have a value of data type "
-    "'boolean'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 22105
   { SedmlSurfaceZDataReferenceMustBeDataGenerator,
     "The attribute 'zDataReference' must point to DataGenerator object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
@@ -1977,16 +1968,107 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 22106
-  { SedmlSurfaceSurfaceTypeMustBeSurfaceTypeEnum,
-    "The 'surfaceType' attribute must be SurfaceTypeEnum.",
+  // 22105
+  { SedmlSurfaceNameMustBeString,
+    "The 'name' attribute must be String.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:surfaceType' of a <surface> object must "
-    "conform to the syntax of SBML data type 'SurfaceType' and may only take on "
-    "the allowed values of 'SurfaceType' defined in SBML; that is, the value "
-    "must be one of the following: 'parametricCurve', 'surfaceMesh', "
+    "The attribute 'sedml:name' on a <surface> must have a value of data type "
+    "'string'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22106
+  { SedmlSurfaceXDataReferenceMustBeDataGenerator,
+    "The attribute 'xDataReference' must point to DataGenerator object.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:xDataReference' of a <surface> object "
+    "must be the identifier of an existing <dataGenerator> object defined in "
+    "the enclosing <model> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22107
+  { SedmlSurfaceYDataReferenceMustBeDataGenerator,
+    "The attribute 'yDataReference' must point to DataGenerator object.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:yDataReference' of a <surface> object "
+    "must be the identifier of an existing <dataGenerator> object defined in "
+    "the enclosing <model> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22108
+  { SedmlSurfaceTypeMustBeSurfaceTypeEnum,
+    "The 'type' attribute must be SurfaceTypeEnum.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:type' of a <surface> object must conform "
+    "to the syntax of SBML data type 'SurfaceType' and may only take on the "
+    "allowed values of 'SurfaceType' defined in SBML; that is, the value must "
+    "be one of the following: 'parametricCurve', 'surfaceMesh', "
     "'surfaceContour', 'contour', 'heatMap', 'stackedCurves' or 'bar'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22109
+  { SedmlSurfaceStyleMustBeStyle,
+    "The attribute 'style' must point to Style object.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The value of the attribute 'sedml:style' of a <surface> object must be the "
+    "identifier of an existing <style> object defined in the enclosing <model> "
+    "object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22110
+  { SedmlSurfaceLogXMustBeBoolean,
+    "The 'logX' attribute must be Boolean.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:logX' on a <surface> must have a value of data type "
+    "'boolean'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22111
+  { SedmlSurfaceLogYMustBeBoolean,
+    "The 'logY' attribute must be Boolean.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:logY' on a <surface> must have a value of data type "
+    "'boolean'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22112
+  { SedmlSurfaceLogZMustBeBoolean,
+    "The 'logZ' attribute must be Boolean.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:logZ' on a <surface> must have a value of data type "
+    "'boolean'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 22113
+  { SedmlSurfaceOrderMustBeInteger,
+    "The 'order' attribute must be Integer.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:order' on a <surface> must have a value of data type "
+    "'integer'.",
     { "L3V1 Sedml V1 Section"
     }
   },
