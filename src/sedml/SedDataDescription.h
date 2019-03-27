@@ -68,7 +68,7 @@ protected:
   std::string mName;
   std::string mFormat;
   std::string mSource;
-  DimensionDescription* mDimensionDescription;
+  LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* mDimensionDescription;
   SedListOfDataSources mDataSources;
 
   /** @endcond */
@@ -312,9 +312,9 @@ public:
    * SedDataDescription.
    *
    * @return the value of the "dimensionDescription" element of this
-   * SedDataDescription as a DimensionDescription*.
+   * SedDataDescription as a LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*.
    */
-  const DimensionDescription* getDimensionDescription() const;
+  const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* getDimensionDescription() const;
 
 
   /**
@@ -322,9 +322,9 @@ public:
    * SedDataDescription.
    *
    * @return the value of the "dimensionDescription" element of this
-   * SedDataDescription as a DimensionDescription*.
+   * SedDataDescription as a LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*.
    */
-  DimensionDescription* getDimensionDescription();
+  LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* getDimensionDescription();
 
 
   /**
@@ -341,7 +341,7 @@ public:
    * Sets the value of the "dimensionDescription" element of this
    * SedDataDescription.
    *
-   * @param dimensionDescription DimensionDescription* value of the
+   * @param dimensionDescription LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* value of the
    * "dimensionDescription" element to be set.
    *
    * @copydetails doc_returns_success_code
@@ -349,7 +349,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setDimensionDescription(const DimensionDescription*
+  int setDimensionDescription(const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*
     dimensionDescription);
 
 
@@ -360,7 +360,7 @@ public:
    *
    * @return a new DimensionDescription object instance.
    */
-  DimensionDescription* createDimensionDescription();
+  LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* createDimensionDescription();
 
 
   /**
@@ -1499,12 +1499,12 @@ SedDataDescription_unsetSource(SedDataDescription_t * sdd);
  * sought.
  *
  * @return the value of the "dimensionDescription" element of this
- * SedDataDescription_t as a DimensionDescription*.
+ * SedDataDescription_t as a LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*.
  *
  * @memberof SedDataDescription_t
  */
 LIBSEDML_EXTERN
-const DimensionDescription_t*
+const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*
 SedDataDescription_getDimensionDescription(const SedDataDescription_t * sdd);
 
 
@@ -1544,7 +1544,7 @@ SedDataDescription_isSetDimensionDescription(const SedDataDescription_t * sdd);
 LIBSEDML_EXTERN
 int
 SedDataDescription_setDimensionDescription(SedDataDescription_t * sdd,
-                                           const DimensionDescription_t*
+                                           const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*
                                              dimensionDescription);
 
 
@@ -1561,7 +1561,7 @@ SedDataDescription_setDimensionDescription(SedDataDescription_t * sdd,
  * @memberof SedDataDescription_t
  */
 LIBSEDML_EXTERN
-DimensionDescription_t*
+LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*
 SedDataDescription_createDimensionDescription(SedDataDescription_t* sdd);
 
 

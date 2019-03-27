@@ -361,7 +361,7 @@ SedDataDescription::unsetSource()
  * Returns the value of the "dimensionDescription" element of this
  * SedDataDescription.
  */
-const DimensionDescription*
+const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*
 SedDataDescription::getDimensionDescription() const
 {
   return mDimensionDescription;
@@ -372,7 +372,7 @@ SedDataDescription::getDimensionDescription() const
  * Returns the value of the "dimensionDescription" element of this
  * SedDataDescription.
  */
-DimensionDescription*
+LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*
 SedDataDescription::getDimensionDescription()
 {
   return mDimensionDescription;
@@ -395,7 +395,7 @@ SedDataDescription::isSetDimensionDescription() const
  * SedDataDescription.
  */
 int
-SedDataDescription::setDimensionDescription(const DimensionDescription*
+SedDataDescription::setDimensionDescription(const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*
   dimensionDescription)
 {
   if (mDimensionDescription == dimensionDescription)
@@ -428,7 +428,7 @@ SedDataDescription::setDimensionDescription(const DimensionDescription*
  * SedDataDescription object and returns the DimensionDescription object
  * created.
  */
-DimensionDescription*
+LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription*
 SedDataDescription::createDimensionDescription()
 {
   if (mDimensionDescription != NULL)
@@ -436,7 +436,7 @@ SedDataDescription::createDimensionDescription()
     delete mDimensionDescription;
   }
 
-  mDimensionDescription = new DimensionDescription();
+  mDimensionDescription = new LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription();
 
   connectToChild();
 
@@ -1389,7 +1389,7 @@ SedDataDescription::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "dimensionDescription")
   {
-    mDimensionDescription = new DimensionDescription();
+    mDimensionDescription = new LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription();
     mDimensionDescription->read(stream);
     read = true;
   }
@@ -1695,7 +1695,7 @@ SedDataDescription_unsetSource(SedDataDescription_t * sdd)
  * SedDataDescription_t.
  */
 LIBSEDML_EXTERN
-const DimensionDescription_t*
+const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*
 SedDataDescription_getDimensionDescription(const SedDataDescription_t * sdd)
 {
   if (sdd == NULL)
@@ -1703,7 +1703,7 @@ SedDataDescription_getDimensionDescription(const SedDataDescription_t * sdd)
     return NULL;
   }
 
-  return (DimensionDescription_t*)(sdd->getDimensionDescription());
+  return (LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*)(sdd->getDimensionDescription());
 }
 
 
@@ -1727,7 +1727,7 @@ SedDataDescription_isSetDimensionDescription(const SedDataDescription_t * sdd)
 LIBSEDML_EXTERN
 int
 SedDataDescription_setDimensionDescription(SedDataDescription_t * sdd,
-                                           const DimensionDescription_t*
+                                           const LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*
                                              dimensionDescription)
 {
   return (sdd != NULL) ? sdd->setDimensionDescription(dimensionDescription) :
@@ -1741,7 +1741,7 @@ SedDataDescription_setDimensionDescription(SedDataDescription_t * sdd,
  * created.
  */
 LIBSEDML_EXTERN
-DimensionDescription_t*
+LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*
 SedDataDescription_createDimensionDescription(SedDataDescription_t* sdd)
 {
   if (sdd == NULL)
@@ -1749,7 +1749,7 @@ SedDataDescription_createDimensionDescription(SedDataDescription_t* sdd)
     return NULL;
   }
 
-  return (DimensionDescription_t*)(sdd->createDimensionDescription());
+  return (LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription_t*)(sdd->createDimensionDescription());
 }
 
 

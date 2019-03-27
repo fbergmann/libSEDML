@@ -63,7 +63,7 @@ main (int argc, char* argv[])
     dataDesc->setFormat("urn:sedml:format:numl");
     dataDesc->setSource("oscli.numl");
 
-    DimensionDescription* dimDesc = dataDesc->createDimensionDescription();
+    LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* dimDesc = dataDesc->createDimensionDescription();
     
     CompositeDescription* timeDesc = new CompositeDescription();
     timeDesc->setIndexType("double");

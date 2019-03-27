@@ -307,7 +307,7 @@ SedWriter::writeSedMLToFile (const SedDocument* d, const std::string& filename)
 bool 
 SedWriter::hasZlib() 
 {
-  return LIBSEDML_CPP_NAMESPACE ::hasZlib();
+  return LIBSBML_CPP_NAMESPACE ::hasZlib();
 }
 
 
@@ -320,7 +320,7 @@ SedWriter::hasZlib()
 bool 
 SedWriter::hasBzip2() 
 {
-  return LIBSEDML_CPP_NAMESPACE ::hasBzip2();
+  return LIBSBML_CPP_NAMESPACE ::hasBzip2();
 }
 
 
