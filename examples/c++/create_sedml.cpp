@@ -65,17 +65,17 @@ main (int argc, char* argv[])
 
     LIBNUML_CPP_NAMESPACE_QUALIFIER DimensionDescription* dimDesc = dataDesc->createDimensionDescription();
     
-    CompositeDescription* timeDesc = new CompositeDescription();
+    LIBNUML_CPP_NAMESPACE_QUALIFIER CompositeDescription* timeDesc = new LIBNUML_CPP_NAMESPACE_QUALIFIER CompositeDescription();
     timeDesc->setIndexType("double");
     timeDesc->setId("time");
     timeDesc->setName("time");
 
-    CompositeDescription* speciesDesc = timeDesc->createCompositeDescription();
+    LIBNUML_CPP_NAMESPACE_QUALIFIER CompositeDescription* speciesDesc = timeDesc->createCompositeDescription();
     speciesDesc->setIndexType("string");
     speciesDesc->setId("SpeciesIds");
     speciesDesc->setName("SpeciesIds");
 
-    AtomicDescription* concentrationDesc = speciesDesc->createAtomicDescription();
+    LIBNUML_CPP_NAMESPACE_QUALIFIER AtomicDescription* concentrationDesc = speciesDesc->createAtomicDescription();
     concentrationDesc->setValueType("double");
     concentrationDesc->setName("Concentrations");
 

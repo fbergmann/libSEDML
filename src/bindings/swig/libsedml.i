@@ -61,6 +61,8 @@ public class"
 #include "libsedml.h"
 
 LIBSEDML_CPP_NAMESPACE_USE
+LIBSBML_CPP_NAMESPACE_USE
+LIBNUML_CPP_NAMESPACE_USE
 
 #include "local.cpp"
 %}
