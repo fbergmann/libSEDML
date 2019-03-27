@@ -62,6 +62,7 @@ class SedReport;
 class SedPlot2D;
 class SedPlot3D;
 class SedFigure;
+class SedParameterEstimationResultPlot;
 
 class LIBSEDML_EXTERN SedListOfOutputs : public SedListOf
 {
@@ -93,13 +94,13 @@ public:
 
   /**
    * Creates a new SedListOfOutputs using the given SedNamespaces object @p
-   * sedMLns.
+   * sedmlns.
    *
-   * @param sedMLns the SedNamespaces object.
+   * @param sedmlns the SedNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedListOfOutputs(SedNamespaces *sedMLns);
+  SedListOfOutputs(SedNamespaces *sedmlns);
 
 
   /**
@@ -264,13 +265,13 @@ public:
    * @param so the SedOutput object to add.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
    *
    * @copydetails doc_note_object_is_copied
    *
@@ -372,6 +373,25 @@ public:
 
 
   /**
+   * Creates a new SedParameterEstimationResultPlot object, adds it to this
+   * SedListOfOutputs object and returns the SedParameterEstimationResultPlot
+   * object created.
+   *
+   * @return a new SedParameterEstimationResultPlot object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumOutputs()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
+   */
+  SedParameterEstimationResultPlot* createParameterEstimationResultPlot();
+
+
+  /**
    * Returns the XML element name of this SedListOfOutputs object.
    *
    * For SedListOfOutputs, the XML element name is always @c "listOfOutputs".
@@ -398,7 +418,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedMLconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -413,7 +433,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfOutputs:
-   * @sedMLconstant{SEDML_OUTPUT, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -442,6 +462,18 @@ protected:
    */
   virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     stream);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Writes the namespace for the Sedml package
+   */
+  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 

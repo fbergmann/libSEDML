@@ -100,6 +100,9 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_OUTPUT_PLOT3D:
       return SWIGTYPE_p_SedPlot3D;
 
+    case SEDML_PARAMETERESTIMATIONRESULTPLOT:
+      return SWIGTYPE_p_SedParameterEstimationResultPlot;
+
     case SEDML_ABSTRACTCURVE:
       return SWIGTYPE_p_SedAbstractCurve;
 

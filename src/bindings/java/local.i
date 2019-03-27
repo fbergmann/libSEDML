@@ -212,6 +212,7 @@ COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
 COVARIANT_RTYPE_CLONE(SedListOfRemainingDimensions)
+COVARIANT_RTYPE_CLONE(SedParameterEstimationResultPlot)
 
 
 
@@ -646,6 +647,9 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
 
     case (int) libsedml.SEDML_OUTPUT_PLOT3D:
       return new SedPlot3D(cPtr, owner);
+
+    case (int) libsedml.SEDML_PARAMETERESTIMATIONRESULTPLOT:
+      return new SedParameterEstimationResultPlot(cPtr, owner);
 
     case (int) libsedml.SEDML_ABSTRACTCURVE:
       return new SedAbstractCurve(cPtr, owner);

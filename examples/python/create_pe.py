@@ -65,7 +65,7 @@ def create_pe_task(doc):
     fp.setModelReference('model1')
     fp.setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J2_q']")
     bounds = fp.createBounds()
-    bounds.setStartingValue(2.4)
+    bounds.setInitialValue(2.4)
     bounds.setLowerBound(0.0001)
     bounds.setUpperBound(10)
 
@@ -75,7 +75,7 @@ def create_pe_task(doc):
     fp.setModelReference('model1')
     fp.setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J2_q']")
     bounds = fp.createBounds()
-    bounds.setStartingValue(2.4)
+    bounds.setInitialValue(2.4)
     bounds.setLowerBound(0.0001)
     bounds.setUpperBound(10)
 
@@ -95,23 +95,18 @@ def create_pe_task(doc):
     dg.setMath(libsedml.parseFormula("s1"))
 
     map = fe.createFitMapping()
-    #map.setColNumber(0) # should this not be the sidref to a datasource? YES it should
     map.setDataSource('dataS1')
     map.setDataGenerator('s1_conc')
     map.setType('Variable')
-    scale = map.createValueScaling()
-    scale.setWeight('1')
+    map.setWeight(1)
 
 
 def create_plot(doc):
     # type: (libsedml.SedDocument) -> None
-    plot = doc.createPlot2D()
-
-    # how to do a plot here we need
-    # time course simulation with the computed values that would mean
-    # - repeated task .. making a all the changes from final parameter set
-    #   - which is hard, as we dont' know the how to iterate over the set of parameters found
-    # - creating data generators for all variables + residuals?
+    plot = doc.createParameterEstimationResultPlot()
+    plot.setTaskRef('pe1')
+    plot.setName('Result Plot')
+    plot.setId('plot1')
 
 
 def create_report(doc):
@@ -125,8 +120,8 @@ def create_report(doc):
 
     set = report.createDataSet()
     set.setId('set2')
-    set.setLabel('PARAMS')
-    set.setDataReference('pe_params') # this is 1D data
+    set.setLabel('FEVAL')
+    set.setDataReference('pe_feval') # this is 1D data
 
 
 def create_observables(doc):
@@ -136,24 +131,16 @@ def create_observables(doc):
     var = dg.createVariable()
     var.setId("obj")
     var.setTaskReference("pe1")
-    var.setSymbol("sedml:parameter_estimation:objective_value")
+    var.setSymbol("sedml:parameterestimation:objective_value")
     dg.setMath(libsedml.parseFormula("obj"))
 
     dg = doc.createDataGenerator()
-    dg.setId('pe_params')
+    dg.setId('pe_feval')
     var = dg.createVariable()
-    var.setId("params")
+    var.setId("feval")
     var.setTaskReference("pe1")
-    var.setSymbol("sedml:parameter_estimation:best_parameters")
-    dg.setMath(libsedml.parseFormula("params"))
-
-    dg = doc.createDataGenerator()
-    dg.setId('pe_std')
-    var = dg.createVariable()
-    var.setId("std")
-    var.setTaskReference("pe1")
-    var.setSymbol("sedml:parameter_estimation:parameters_std")
-    dg.setMath(libsedml.parseFormula("std"))
+    var.setSymbol("sedml:parameterestimation:number_function_evaluations")
+    dg.setMath(libsedml.parseFormula("feval"))
 
 
 

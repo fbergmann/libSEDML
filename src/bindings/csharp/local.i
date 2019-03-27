@@ -247,6 +247,9 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     case (int) libsedml.SEDML_OUTPUT_PLOT3D:
       return new SedPlot3D(cPtr, owner);
 
+    case (int) libsedml.SEDML_PARAMETERESTIMATIONRESULTPLOT:
+      return new SedParameterEstimationResultPlot(cPtr, owner);
+
     case (int) libsedml.SEDML_ABSTRACTCURVE:
       return new SedAbstractCurve(cPtr, owner);
 

@@ -429,7 +429,7 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedDataRange.h>
 %include <sedml/SedSimpleRepeatedTask.h>
 %include <sedml/SedShadedArea.h>
-#include <sedml/SedParameterEstimationResultPlot.h>
+%include <sedml/SedParameterEstimationResultPlot.h>
 
 
 %include sbml/SyntaxChecker.h

@@ -38,6 +38,7 @@
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
 #include <sedml/SedFigure.h>
+#include <sedml/SedParameterEstimationResultPlot.h>
 
 
 using namespace std;
@@ -58,7 +59,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedListOfOutputs::SedListOfOutputs(unsigned int level, unsigned int version)
   : SedListOf(level, version)
-  , mElementName("listOfOutputs")
+  , mElementName("output")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -66,13 +67,13 @@ SedListOfOutputs::SedListOfOutputs(unsigned int level, unsigned int version)
 
 /*
  * Creates a new SedListOfOutputs using the given SedNamespaces object @p
- * sedMLns.
+ * sedmlns.
  */
-SedListOfOutputs::SedListOfOutputs(SedNamespaces *sedMLns)
-  : SedListOf(sedMLns)
-  , mElementName("listOfOutputs")
+SedListOfOutputs::SedListOfOutputs(SedNamespaces *sedmlns)
+  : SedListOf(sedmlns)
+  , mElementName("output")
 {
-  setElementNamespace(sedMLns->getURI());
+  setElementNamespace(sedmlns->getURI());
 }
 
 
@@ -346,6 +347,33 @@ SedListOfOutputs::createFigure()
 
 
 /*
+ * Creates a new SedParameterEstimationResultPlot object, adds it to this
+ * SedListOfOutputs object and returns the SedParameterEstimationResultPlot
+ * object created.
+ */
+SedParameterEstimationResultPlot*
+SedListOfOutputs::createParameterEstimationResultPlot()
+{
+  SedParameterEstimationResultPlot* sperp = NULL;
+
+  try
+  {
+    sperp = new SedParameterEstimationResultPlot(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sperp != NULL)
+  {
+    appendAndOwn(sperp);
+  }
+
+  return sperp;
+}
+
+
+/*
  * Returns the XML element name of this SedListOfOutputs object.
  */
 const std::string&
@@ -434,7 +462,42 @@ SedListOfOutputs::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     appendAndOwn(object);
   }
 
+  if (name == "parameterEstimationResultPlot")
+  {
+    object = new SedParameterEstimationResultPlot(getSedNamespaces());
+    appendAndOwn(object);
+  }
+
   return object;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Writes the namespace for the Sedml package
+ */
+void
+SedListOfOutputs::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+  stream) const
+{
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
+  std::string prefix = getPrefix();
+
+  if (prefix.empty())
+  {
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
+      getNamespaces();
+    if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
+    {
+      xmlns.add(SEDML_XMLNS_L1V1, prefix);
+    }
+  }
+
+  stream << xmlns;
 }
 
 /** @endcond */
@@ -452,7 +515,8 @@ SedListOfOutputs::isValidTypeForList(SedBase* item)
   unsigned int tc = item->getTypeCode();
 
   return ((tc == SEDML_OUTPUT_REPORT) || (tc == SEDML_OUTPUT_PLOT2D) || (tc ==
-    SEDML_OUTPUT_PLOT3D) || (tc == SEDML_FIGURE));
+    SEDML_OUTPUT_PLOT3D) || (tc == SEDML_FIGURE) || (tc ==
+      SEDML_PARAMETERESTIMATIONRESULTPLOT));
 }
 
 /** @endcond */
