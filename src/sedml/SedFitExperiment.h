@@ -489,6 +489,37 @@ public:
 
 
   /**
+   * Get a SedFitMapping from the SedFitExperiment based on the PointWeight to
+   * which it refers.
+   *
+   * @param sid a string representing the "pointWeight" attribute of the
+   * SedFitMapping object to retrieve.
+   *
+   * @return the first SedFitMapping in this SedFitExperiment based on the
+   * given pointWeight attribute or NULL if no such SedFitMapping exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedFitMapping* getFitMappingByPointWeight(const std::string& sid)
+    const;
+
+
+  /**
+   * Get a SedFitMapping from the SedFitExperiment based on the PointWeight to
+   * which it refers.
+   *
+   * @param sid a string representing the "pointWeight" attribute of the
+   * SedFitMapping object to retrieve.
+   *
+   * @return the first SedFitMapping in this SedFitExperiment based on the
+   * given pointWeight attribute or NULL if no such SedFitMapping exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedFitMapping* getFitMappingByPointWeight(const std::string& sid);
+
+
+  /**
    * Adds a copy of the given SedFitMapping to this SedFitExperiment.
    *
    * @param sfm the SedFitMapping object to add.
@@ -584,7 +615,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_FIT_EXPERIMENT, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_FIT_EXPERIMENT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1494,6 +1525,28 @@ LIBSEDML_EXTERN
 SedFitMapping_t*
 SedFitExperiment_getFitMappingByDataGenerator(SedFitExperiment_t* sfe,
                                               const char *sid);
+
+
+/**
+ * Get a SedFitMapping_t from the SedFitExperiment_t based on the PointWeight
+ * to which it refers.
+ *
+ * @param sfe the SedFitExperiment_t structure to search.
+ *
+ * @param sid a string representing the "pointWeight" attribute of the
+ * SedFitMapping_t object to retrieve.
+ *
+ * @return the first SedFitMapping_t in this SedFitExperiment_t based on the
+ * given pointWeight attribute or NULL if no such SedFitMapping_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedFitExperiment_t
+ */
+LIBSEDML_EXTERN
+SedFitMapping_t*
+SedFitExperiment_getFitMappingByPointWeight(SedFitExperiment_t* sfe,
+                                            const char *sid);
 
 
 /**

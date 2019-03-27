@@ -88,9 +88,6 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "ExperimentRef"
   , "FitExperiment"
   , "FitMapping"
-  , "Scaling"
-  , "ValueScaling"
-  , "ColumnScaling"
   , "Bounds"
   , "Figure"
   , "SubPlot"
@@ -104,6 +101,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "DataRange"
   , "SimpleRepeatedTask"
   , "ShadedArea"
+  , "ParameterEstimationResultPlot"
   , "SedListOf"
 };
 

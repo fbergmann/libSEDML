@@ -63,8 +63,8 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  double mStartingValue;
-  bool mIsSetStartingValue;
+  double mInitialValue;
+  bool mIsSetInitialValue;
   double mLowerBound;
   bool mIsSetLowerBound;
   double mUpperBound;
@@ -131,12 +131,12 @@ public:
 
 
   /**
-   * Returns the value of the "startingValue" attribute of this SedBounds.
+   * Returns the value of the "initialValue" attribute of this SedBounds.
    *
-   * @return the value of the "startingValue" attribute of this SedBounds as a
+   * @return the value of the "initialValue" attribute of this SedBounds as a
    * double.
    */
-  double getStartingValue() const;
+  double getInitialValue() const;
 
 
   /**
@@ -158,13 +158,13 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedBounds's "startingValue" attribute
+   * Predicate returning @c true if this SedBounds's "initialValue" attribute
    * is set.
    *
-   * @return @c true if this SedBounds's "startingValue" attribute has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this SedBounds's "initialValue" attribute has been set,
+   * otherwise @c false is returned.
    */
-  bool isSetStartingValue() const;
+  bool isSetInitialValue() const;
 
 
   /**
@@ -188,9 +188,9 @@ public:
 
 
   /**
-   * Sets the value of the "startingValue" attribute of this SedBounds.
+   * Sets the value of the "initialValue" attribute of this SedBounds.
    *
-   * @param startingValue double value of the "startingValue" attribute to be
+   * @param initialValue double value of the "initialValue" attribute to be
    * set.
    *
    * @copydetails doc_returns_success_code
@@ -198,7 +198,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setStartingValue(double startingValue);
+  int setInitialValue(double initialValue);
 
 
   /**
@@ -228,13 +228,13 @@ public:
 
 
   /**
-   * Unsets the value of the "startingValue" attribute of this SedBounds.
+   * Unsets the value of the "initialValue" attribute of this SedBounds.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetStartingValue();
+  int unsetInitialValue();
 
 
   /**
@@ -273,7 +273,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_BOUNDS, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_BOUNDS, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -683,18 +683,18 @@ SedBounds_free(SedBounds_t* sb);
 
 
 /**
- * Returns the value of the "startingValue" attribute of this SedBounds_t.
+ * Returns the value of the "initialValue" attribute of this SedBounds_t.
  *
- * @param sb the SedBounds_t structure whose startingValue is sought.
+ * @param sb the SedBounds_t structure whose initialValue is sought.
  *
- * @return the value of the "startingValue" attribute of this SedBounds_t as a
+ * @return the value of the "initialValue" attribute of this SedBounds_t as a
  * double.
  *
  * @memberof SedBounds_t
  */
 LIBSEDML_EXTERN
 double
-SedBounds_getStartingValue(const SedBounds_t * sb);
+SedBounds_getInitialValue(const SedBounds_t * sb);
 
 
 /**
@@ -728,19 +728,19 @@ SedBounds_getUpperBound(const SedBounds_t * sb);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedBounds_t's "startingValue"
+ * Predicate returning @c 1 (true) if this SedBounds_t's "initialValue"
  * attribute is set.
  *
  * @param sb the SedBounds_t structure.
  *
- * @return @c 1 (true) if this SedBounds_t's "startingValue" attribute has been
+ * @return @c 1 (true) if this SedBounds_t's "initialValue" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedBounds_t
  */
 LIBSEDML_EXTERN
 int
-SedBounds_isSetStartingValue(const SedBounds_t * sb);
+SedBounds_isSetInitialValue(const SedBounds_t * sb);
 
 
 /**
@@ -776,12 +776,11 @@ SedBounds_isSetUpperBound(const SedBounds_t * sb);
 
 
 /**
- * Sets the value of the "startingValue" attribute of this SedBounds_t.
+ * Sets the value of the "initialValue" attribute of this SedBounds_t.
  *
  * @param sb the SedBounds_t structure.
  *
- * @param startingValue double value of the "startingValue" attribute to be
- * set.
+ * @param initialValue double value of the "initialValue" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -793,7 +792,7 @@ SedBounds_isSetUpperBound(const SedBounds_t * sb);
  */
 LIBSEDML_EXTERN
 int
-SedBounds_setStartingValue(SedBounds_t * sb, double startingValue);
+SedBounds_setInitialValue(SedBounds_t * sb, double initialValue);
 
 
 /**
@@ -837,7 +836,7 @@ SedBounds_setUpperBound(SedBounds_t * sb, double upperBound);
 
 
 /**
- * Unsets the value of the "startingValue" attribute of this SedBounds_t.
+ * Unsets the value of the "initialValue" attribute of this SedBounds_t.
  *
  * @param sb the SedBounds_t structure.
  *
@@ -850,7 +849,7 @@ SedBounds_setUpperBound(SedBounds_t * sb, double upperBound);
  */
 LIBSEDML_EXTERN
 int
-SedBounds_unsetStartingValue(SedBounds_t * sb);
+SedBounds_unsetInitialValue(SedBounds_t * sb);
 
 
 /**

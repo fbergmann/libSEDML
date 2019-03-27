@@ -1664,6 +1664,25 @@ public:
 
 
   /**
+   * Creates a new SedParameterEstimationResultPlot object, adds it to this
+   * SedDocument object and returns the SedParameterEstimationResultPlot object
+   * created.
+   *
+   * @return a new SedParameterEstimationResultPlot object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addOutput(const SedOutput* object)
+   * @see getOutput(const std::string& sid)
+   * @see getOutput(unsigned int n)
+   * @see getNumOutputs()
+   * @see removeOutput(const std::string& sid)
+   * @see removeOutput(unsigned int n)
+   */
+  SedParameterEstimationResultPlot* createParameterEstimationResultPlot();
+
+
+  /**
    * Removes the nth SedOutput from this SedDocument and returns a pointer to
    * it.
    *
@@ -3822,6 +3841,25 @@ SedDocument_createPlot3D(SedDocument_t* sd);
 LIBSEDML_EXTERN
 SedFigure_t*
 SedDocument_createFigure(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedParameterEstimationResultPlot_t object, adds it to this
+ * SedDocument_t object and returns the SedParameterEstimationResultPlot_t
+ * object created.
+ *
+ * @param sd the SedDocument_t structure to which the
+ * SedParameterEstimationResultPlot_t should be added.
+ *
+ * @return a new SedParameterEstimationResultPlot_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedParameterEstimationResultPlot_t*
+SedDocument_createParameterEstimationResultPlot(SedDocument_t* sd);
 
 
 /**

@@ -452,6 +452,28 @@ SedFitExperiment::getFitMappingByDataGenerator(const std::string& sid)
 
 
 /*
+ * Get a SedFitMapping from the SedFitExperiment based on the PointWeight to
+ * which it refers.
+ */
+const SedFitMapping*
+SedFitExperiment::getFitMappingByPointWeight(const std::string& sid) const
+{
+  return mFitMappings.getByPointWeight(sid);
+}
+
+
+/*
+ * Get a SedFitMapping from the SedFitExperiment based on the PointWeight to
+ * which it refers.
+ */
+SedFitMapping*
+SedFitExperiment::getFitMappingByPointWeight(const std::string& sid)
+{
+  return mFitMappings.getByPointWeight(sid);
+}
+
+
+/*
  * Adds a copy of the given SedFitMapping to this SedFitExperiment.
  */
 int
@@ -1200,7 +1222,7 @@ SedFitExperiment::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlFitExperimentAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1582,6 +1604,20 @@ SedFitExperiment_getFitMappingByDataGenerator(SedFitExperiment_t* sfe,
 {
   return (sfe != NULL && sid != NULL) ? sfe->getFitMappingByDataGenerator(sid)
     : NULL;
+}
+
+
+/*
+ * Get a SedFitMapping_t from the SedFitExperiment_t based on the PointWeight
+ * to which it refers.
+ */
+LIBSEDML_EXTERN
+SedFitMapping_t*
+SedFitExperiment_getFitMappingByPointWeight(SedFitExperiment_t* sfe,
+                                            const char *sid)
+{
+  return (sfe != NULL && sid != NULL) ? sfe->getFitMappingByPointWeight(sid) :
+    NULL;
 }
 
 

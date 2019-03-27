@@ -184,15 +184,6 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_FITMAPPING:
       return SWIGTYPE_p_SedFitMapping;
 
-    case SEDML_SCALING:
-      return SWIGTYPE_p_SedScaling;
-
-    case SEDML_VALUESCALING:
-      return SWIGTYPE_p_SedValueScaling;
-
-    case SEDML_COLUMNSCALING:
-      return SWIGTYPE_p_SedColumnScaling;
-
     case SEDML_BOUNDS:
       return SWIGTYPE_p_SedBounds;
 

@@ -102,9 +102,6 @@ class SedAdjustableParameter;
 class SedExperimentRef;
 class SedFitExperiment;
 class SedFitMapping;
-class SedScaling;
-class SedValueScaling;
-class SedColumnScaling;
 class SedBounds;
 class SedFigure;
 class SedSubPlot;
@@ -118,6 +115,7 @@ class SedRemainingDimension;
 class SedDataRange;
 class SedSimpleRepeatedTask;
 class SedShadedArea;
+class SedParameterEstimationResultPlot;
 
 
 class SedVisitor
@@ -609,36 +607,6 @@ virtual bool visit (const SedFitMapping &x);
  *
  * @param x the SedBase object to visit.
  */
-virtual bool visit (const SedScaling &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to visit.
- */
-virtual bool visit (const SedValueScaling &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to visit.
- */
-virtual bool visit (const SedColumnScaling &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to visit.
- */
 virtual bool visit (const SedBounds &x);
 
 
@@ -760,6 +728,16 @@ virtual bool visit (const SedSimpleRepeatedTask &x);
  * @param x the SedBase object to visit.
  */
 virtual bool visit (const SedShadedArea &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedParameterEstimationResultPlot &x);
 
 
   /**
@@ -1242,36 +1220,6 @@ virtual void leave (const SedFitMapping &x);
  *
  * @param x the SedBase object to leave.
  */
-virtual void leave (const SedScaling &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to leave.
- */
-virtual void leave (const SedValueScaling &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to leave.
- */
-virtual void leave (const SedColumnScaling &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to leave.
- */
 virtual void leave (const SedBounds &x);
 
 
@@ -1393,6 +1341,16 @@ virtual void leave (const SedSimpleRepeatedTask &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedShadedArea &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedParameterEstimationResultPlot &x);
 };
 
 LIBSEDML_CPP_NAMESPACE_END

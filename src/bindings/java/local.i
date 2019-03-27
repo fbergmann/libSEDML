@@ -731,15 +731,6 @@ XMLCONSTRUCTOR_EXCEPTION(XMLTripple)
     case (int) libsedml.SEDML_FITMAPPING:
       return new SedFitMapping(cPtr, owner);
 
-    case (int) libsedml.SEDML_SCALING:
-      return new SedScaling(cPtr, owner);
-
-    case (int) libsedml.SEDML_VALUESCALING:
-      return new SedValueScaling(cPtr, owner);
-
-    case (int) libsedml.SEDML_COLUMNSCALING:
-      return new SedColumnScaling(cPtr, owner);
-
     case (int) libsedml.SEDML_BOUNDS:
       return new SedBounds(cPtr, owner);
 

@@ -52,8 +52,8 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedBounds::SedBounds(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mStartingValue (util_NaN())
-  , mIsSetStartingValue (false)
+  , mInitialValue (util_NaN())
+  , mIsSetInitialValue (false)
   , mLowerBound (util_NaN())
   , mIsSetLowerBound (false)
   , mUpperBound (util_NaN())
@@ -68,8 +68,8 @@ SedBounds::SedBounds(unsigned int level, unsigned int version)
  */
 SedBounds::SedBounds(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mStartingValue (util_NaN())
-  , mIsSetStartingValue (false)
+  , mInitialValue (util_NaN())
+  , mIsSetInitialValue (false)
   , mLowerBound (util_NaN())
   , mIsSetLowerBound (false)
   , mUpperBound (util_NaN())
@@ -84,8 +84,8 @@ SedBounds::SedBounds(SedNamespaces *sedmlns)
  */
 SedBounds::SedBounds(const SedBounds& orig)
   : SedBase( orig )
-  , mStartingValue ( orig.mStartingValue )
-  , mIsSetStartingValue ( orig.mIsSetStartingValue )
+  , mInitialValue ( orig.mInitialValue )
+  , mIsSetInitialValue ( orig.mIsSetInitialValue )
   , mLowerBound ( orig.mLowerBound )
   , mIsSetLowerBound ( orig.mIsSetLowerBound )
   , mUpperBound ( orig.mUpperBound )
@@ -103,8 +103,8 @@ SedBounds::operator=(const SedBounds& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mStartingValue = rhs.mStartingValue;
-    mIsSetStartingValue = rhs.mIsSetStartingValue;
+    mInitialValue = rhs.mInitialValue;
+    mIsSetInitialValue = rhs.mIsSetInitialValue;
     mLowerBound = rhs.mLowerBound;
     mIsSetLowerBound = rhs.mIsSetLowerBound;
     mUpperBound = rhs.mUpperBound;
@@ -134,12 +134,12 @@ SedBounds::~SedBounds()
 
 
 /*
- * Returns the value of the "startingValue" attribute of this SedBounds.
+ * Returns the value of the "initialValue" attribute of this SedBounds.
  */
 double
-SedBounds::getStartingValue() const
+SedBounds::getInitialValue() const
 {
-  return mStartingValue;
+  return mInitialValue;
 }
 
 
@@ -164,13 +164,13 @@ SedBounds::getUpperBound() const
 
 
 /*
- * Predicate returning @c true if this SedBounds's "startingValue" attribute is
+ * Predicate returning @c true if this SedBounds's "initialValue" attribute is
  * set.
  */
 bool
-SedBounds::isSetStartingValue() const
+SedBounds::isSetInitialValue() const
 {
-  return mIsSetStartingValue;
+  return mIsSetInitialValue;
 }
 
 
@@ -197,13 +197,13 @@ SedBounds::isSetUpperBound() const
 
 
 /*
- * Sets the value of the "startingValue" attribute of this SedBounds.
+ * Sets the value of the "initialValue" attribute of this SedBounds.
  */
 int
-SedBounds::setStartingValue(double startingValue)
+SedBounds::setInitialValue(double initialValue)
 {
-  mStartingValue = startingValue;
-  mIsSetStartingValue = true;
+  mInitialValue = initialValue;
+  mIsSetInitialValue = true;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -233,15 +233,15 @@ SedBounds::setUpperBound(double upperBound)
 
 
 /*
- * Unsets the value of the "startingValue" attribute of this SedBounds.
+ * Unsets the value of the "initialValue" attribute of this SedBounds.
  */
 int
-SedBounds::unsetStartingValue()
+SedBounds::unsetInitialValue()
 {
-  mStartingValue = util_NaN();
-  mIsSetStartingValue = false;
+  mInitialValue = util_NaN();
+  mIsSetInitialValue = false;
 
-  if (isSetStartingValue() == false)
+  if (isSetInitialValue() == false)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -422,9 +422,9 @@ SedBounds::getAttribute(const std::string& attributeName, double& value) const
     return return_value;
   }
 
-  if (attributeName == "startingValue")
+  if (attributeName == "initialValue")
   {
-    value = getStartingValue();
+    value = getInitialValue();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
   else if (attributeName == "lowerBound")
@@ -492,9 +492,9 @@ SedBounds::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "startingValue")
+  if (attributeName == "initialValue")
   {
-    value = isSetStartingValue();
+    value = isSetInitialValue();
   }
   else if (attributeName == "lowerBound")
   {
@@ -556,9 +556,9 @@ SedBounds::setAttribute(const std::string& attributeName, double value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "startingValue")
+  if (attributeName == "initialValue")
   {
-    return_value = setStartingValue(value);
+    return_value = setInitialValue(value);
   }
   else if (attributeName == "lowerBound")
   {
@@ -621,9 +621,9 @@ SedBounds::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "startingValue")
+  if (attributeName == "initialValue")
   {
-    value = unsetStartingValue();
+    value = unsetInitialValue();
   }
   else if (attributeName == "lowerBound")
   {
@@ -652,7 +652,7 @@ SedBounds::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("startingValue");
+  attributes.add("initialValue");
 
   attributes.add("lowerBound");
 
@@ -693,27 +693,28 @@ SedBounds::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlBoundsAllowedAttributes, level, version, details);
+        log->logError(SedmlBoundsAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
 
   // 
-  // startingValue double (use = "optional" )
+  // initialValue double (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
-  mIsSetStartingValue = attributes.readInto("startingValue", mStartingValue);
+  mIsSetInitialValue = attributes.readInto("initialValue", mInitialValue);
 
-  if ( mIsSetStartingValue == false)
+  if ( mIsSetInitialValue == false)
   {
     if (log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Sedml attribute 'startingValue' from the "
+      std::string message = "Sedml attribute 'initialValue' from the "
         "<SedBounds> element must be an integer.";
-      log->logError(SedmlBoundsStartingValueMustBeDouble, level, version,
+      log->logError(SedmlBoundsInitialValueMustBeDouble, level, version,
         message);
     }
   }
@@ -774,9 +775,9 @@ SedBounds::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeAttributes(stream);
 
-  if (isSetStartingValue() == true)
+  if (isSetInitialValue() == true)
   {
-    stream.writeAttribute("startingValue", getPrefix(), mStartingValue);
+    stream.writeAttribute("initialValue", getPrefix(), mInitialValue);
   }
 
   if (isSetLowerBound() == true)
@@ -843,13 +844,13 @@ SedBounds_free(SedBounds_t* sb)
 
 
 /*
- * Returns the value of the "startingValue" attribute of this SedBounds_t.
+ * Returns the value of the "initialValue" attribute of this SedBounds_t.
  */
 LIBSEDML_EXTERN
 double
-SedBounds_getStartingValue(const SedBounds_t * sb)
+SedBounds_getInitialValue(const SedBounds_t * sb)
 {
-  return (sb != NULL) ? sb->getStartingValue() : util_NaN();
+  return (sb != NULL) ? sb->getInitialValue() : util_NaN();
 }
 
 
@@ -876,14 +877,14 @@ SedBounds_getUpperBound(const SedBounds_t * sb)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedBounds_t's "startingValue"
+ * Predicate returning @c 1 (true) if this SedBounds_t's "initialValue"
  * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedBounds_isSetStartingValue(const SedBounds_t * sb)
+SedBounds_isSetInitialValue(const SedBounds_t * sb)
 {
-  return (sb != NULL) ? static_cast<int>(sb->isSetStartingValue()) : 0;
+  return (sb != NULL) ? static_cast<int>(sb->isSetInitialValue()) : 0;
 }
 
 
@@ -912,13 +913,13 @@ SedBounds_isSetUpperBound(const SedBounds_t * sb)
 
 
 /*
- * Sets the value of the "startingValue" attribute of this SedBounds_t.
+ * Sets the value of the "initialValue" attribute of this SedBounds_t.
  */
 LIBSEDML_EXTERN
 int
-SedBounds_setStartingValue(SedBounds_t * sb, double startingValue)
+SedBounds_setInitialValue(SedBounds_t * sb, double initialValue)
 {
-  return (sb != NULL) ? sb->setStartingValue(startingValue) :
+  return (sb != NULL) ? sb->setInitialValue(initialValue) :
     LIBSEDML_INVALID_OBJECT;
 }
 
@@ -948,13 +949,13 @@ SedBounds_setUpperBound(SedBounds_t * sb, double upperBound)
 
 
 /*
- * Unsets the value of the "startingValue" attribute of this SedBounds_t.
+ * Unsets the value of the "initialValue" attribute of this SedBounds_t.
  */
 LIBSEDML_EXTERN
 int
-SedBounds_unsetStartingValue(SedBounds_t * sb)
+SedBounds_unsetInitialValue(SedBounds_t * sb)
 {
-  return (sb != NULL) ? sb->unsetStartingValue() : LIBSEDML_INVALID_OBJECT;
+  return (sb != NULL) ? sb->unsetInitialValue() : LIBSEDML_INVALID_OBJECT;
 }
 
 

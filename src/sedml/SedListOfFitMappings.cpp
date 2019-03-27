@@ -344,6 +344,48 @@ SedListOfFitMappings::getByDataGenerator(const std::string& sid)
 
 
 /*
+ * Used by SedListOfFitMappings::get() to lookup a SedFitMapping based on its
+ * PointWeight.
+ */
+struct SedIdEqPW : public std::unary_function<SedBase*, bool>
+{
+  const string& id;
+   
+  SedIdEqPW (const string& id) : id(id) { }
+  bool operator() (SedBase* sb)
+  {
+  return (static_cast<SedFitMapping*>(sb)->getPointWeight() == id);
+  }
+};
+
+
+/*
+ * Get a SedFitMapping from the SedListOfFitMappings based on the PointWeight
+ * to which it refers.
+ */
+const SedFitMapping*
+SedListOfFitMappings::getByPointWeight(const std::string& sid) const
+{
+  vector<SedBase*>::const_iterator result;
+  result = find_if(mItems.begin(), mItems.end(), SedIdEqPW(sid));
+  return (result == mItems.end()) ? 0 : static_cast <const SedFitMapping*>
+    (*result);
+}
+
+
+/*
+ * Get a SedFitMapping from the SedListOfFitMappings based on the PointWeight
+ * to which it refers.
+ */
+SedFitMapping*
+SedListOfFitMappings::getByPointWeight(const std::string& sid)
+{
+  return const_cast<SedFitMapping*>(static_cast<const
+    SedListOfFitMappings&>(*this).getByPointWeight(sid));
+}
+
+
+/*
  * Returns the XML element name of this SedListOfFitMappings object.
  */
 const std::string&
@@ -395,6 +437,35 @@ SedListOfFitMappings::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
   }
 
   return object;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Writes the namespace for the Sedml package
+ */
+void
+SedListOfFitMappings::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER
+  XMLOutputStream& stream) const
+{
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces xmlns;
+  std::string prefix = getPrefix();
+
+  if (prefix.empty())
+  {
+    const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* thisxmlns =
+      getNamespaces();
+    if (thisxmlns && thisxmlns->hasURI(SEDML_XMLNS_L1V1))
+    {
+      xmlns.add(SEDML_XMLNS_L1V1, prefix);
+    }
+  }
+
+  stream << xmlns;
 }
 
 /** @endcond */

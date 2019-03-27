@@ -414,9 +414,6 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedListOfFitExperiments.h>
 %include <sedml/SedFitMapping.h>
 %include <sedml/SedListOfFitMappings.h>
-%include <sedml/SedScaling.h>
-%include <sedml/SedValueScaling.h>
-%include <sedml/SedColumnScaling.h>
 %include <sedml/SedBounds.h>
 %include <sedml/SedFigure.h>
 %include <sedml/SedSubPlot.h>
@@ -432,6 +429,7 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedDataRange.h>
 %include <sedml/SedSimpleRepeatedTask.h>
 %include <sedml/SedShadedArea.h>
+#include <sedml/SedParameterEstimationResultPlot.h>
 
 
 %include sbml/SyntaxChecker.h

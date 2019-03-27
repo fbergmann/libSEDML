@@ -54,6 +54,7 @@
 #include <numl/DimensionDescription.h>
 #include <sedml/SedListOfDataSources.h>
 #include <sbml/common/libsbml-namespace.h>
+#include <numl/common/libnuml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN

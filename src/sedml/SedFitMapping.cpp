@@ -35,9 +35,6 @@
 #include <sedml/SedListOfFitMappings.h>
 #include <sbml/xml/XMLInputStream.h>
 
-#include <sedml/SedValueScaling.h>
-#include <sedml/SedColumnScaling.h>
-
 
 using namespace std;
 
@@ -60,10 +57,11 @@ SedFitMapping::SedFitMapping(unsigned int level, unsigned int version)
   , mDataSource ("")
   , mDataGenerator ("")
   , mType (SEDML_MAPPINGTYPE_INVALID)
-  , mScaling (NULL)
+  , mWeight (util_NaN())
+  , mIsSetWeight (false)
+  , mPointWeight ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
-  connectToChild();
 }
 
 
@@ -75,10 +73,11 @@ SedFitMapping::SedFitMapping(SedNamespaces *sedmlns)
   , mDataSource ("")
   , mDataGenerator ("")
   , mType (SEDML_MAPPINGTYPE_INVALID)
-  , mScaling (NULL)
+  , mWeight (util_NaN())
+  , mIsSetWeight (false)
+  , mPointWeight ("")
 {
   setElementNamespace(sedmlns->getURI());
-  connectToChild();
 }
 
 
@@ -90,14 +89,10 @@ SedFitMapping::SedFitMapping(const SedFitMapping& orig)
   , mDataSource ( orig.mDataSource )
   , mDataGenerator ( orig.mDataGenerator )
   , mType ( orig.mType )
-  , mScaling ( NULL )
+  , mWeight ( orig.mWeight )
+  , mIsSetWeight ( orig.mIsSetWeight )
+  , mPointWeight ( orig.mPointWeight )
 {
-  if (orig.mScaling != NULL)
-  {
-    mScaling = orig.mScaling->clone();
-  }
-
-  connectToChild();
 }
 
 
@@ -113,17 +108,9 @@ SedFitMapping::operator=(const SedFitMapping& rhs)
     mDataSource = rhs.mDataSource;
     mDataGenerator = rhs.mDataGenerator;
     mType = rhs.mType;
-    delete mScaling;
-    if (rhs.mScaling != NULL)
-    {
-      mScaling = rhs.mScaling->clone();
-    }
-    else
-    {
-      mScaling = NULL;
-    }
-
-    connectToChild();
+    mWeight = rhs.mWeight;
+    mIsSetWeight = rhs.mIsSetWeight;
+    mPointWeight = rhs.mPointWeight;
   }
 
   return *this;
@@ -145,8 +132,6 @@ SedFitMapping::clone() const
  */
 SedFitMapping::~SedFitMapping()
 {
-  delete mScaling;
-  mScaling = NULL;
 }
 
 
@@ -192,6 +177,26 @@ SedFitMapping::getTypeAsString() const
 
 
 /*
+ * Returns the value of the "weight" attribute of this SedFitMapping.
+ */
+double
+SedFitMapping::getWeight() const
+{
+  return mWeight;
+}
+
+
+/*
+ * Returns the value of the "pointWeight" attribute of this SedFitMapping.
+ */
+const std::string&
+SedFitMapping::getPointWeight() const
+{
+  return mPointWeight;
+}
+
+
+/*
  * Predicate returning @c true if this SedFitMapping's "dataSource" attribute
  * is set.
  */
@@ -220,6 +225,28 @@ bool
 SedFitMapping::isSetType() const
 {
   return (mType != SEDML_MAPPINGTYPE_INVALID);
+}
+
+
+/*
+ * Predicate returning @c true if this SedFitMapping's "weight" attribute is
+ * set.
+ */
+bool
+SedFitMapping::isSetWeight() const
+{
+  return mIsSetWeight;
+}
+
+
+/*
+ * Predicate returning @c true if this SedFitMapping's "pointWeight" attribute
+ * is set.
+ */
+bool
+SedFitMapping::isSetPointWeight() const
+{
+  return (mPointWeight.empty() == false);
 }
 
 
@@ -296,6 +323,36 @@ SedFitMapping::setType(const std::string& type)
 
 
 /*
+ * Sets the value of the "weight" attribute of this SedFitMapping.
+ */
+int
+SedFitMapping::setWeight(double weight)
+{
+  mWeight = weight;
+  mIsSetWeight = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "pointWeight" attribute of this SedFitMapping.
+ */
+int
+SedFitMapping::setPointWeight(const std::string& pointWeight)
+{
+  if (!(SyntaxChecker::isValidInternalSId(pointWeight)))
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+  else
+  {
+    mPointWeight = pointWeight;
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+}
+
+
+/*
  * Unsets the value of the "dataSource" attribute of this SedFitMapping.
  */
 int
@@ -345,115 +402,41 @@ SedFitMapping::unsetType()
 
 
 /*
- * Returns the value of the "scaling" element of this SedFitMapping.
- */
-const SedScaling*
-SedFitMapping::getScaling() const
-{
-  return mScaling;
-}
-
-
-/*
- * Returns the value of the "scaling" element of this SedFitMapping.
- */
-SedScaling*
-SedFitMapping::getScaling()
-{
-  return mScaling;
-}
-
-
-/*
- * Predicate returning @c true if this SedFitMapping's "scaling" element is
- * set.
- */
-bool
-SedFitMapping::isSetScaling() const
-{
-  return (mScaling != NULL);
-}
-
-
-/*
- * Sets the value of the "scaling" element of this SedFitMapping.
+ * Unsets the value of the "weight" attribute of this SedFitMapping.
  */
 int
-SedFitMapping::setScaling(const SedScaling* scaling)
+SedFitMapping::unsetWeight()
 {
-  if (mScaling == scaling)
+  mWeight = util_NaN();
+  mIsSetWeight = false;
+
+  if (isSetWeight() == false)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (scaling == NULL)
-  {
-    delete mScaling;
-    mScaling = NULL;
     return LIBSEDML_OPERATION_SUCCESS;
   }
   else
   {
-    delete mScaling;
-    mScaling = (scaling != NULL) ? scaling->clone() : NULL;
-    if (mScaling != NULL)
-    {
-      mScaling->connectToParent(this);
-    }
-
-    return LIBSEDML_OPERATION_SUCCESS;
+    return LIBSEDML_OPERATION_FAILED;
   }
 }
 
 
 /*
- * Creates a new SedValueScaling object, adds it to this SedFitMapping object
- * and returns the SedValueScaling object created.
- */
-SedValueScaling*
-SedFitMapping::createValueScaling()
-{
-  if (mScaling != NULL)
-  {
-    delete mScaling;
-  }
-
-  mScaling = new SedValueScaling(getSedNamespaces());
-
-  connectToChild();
-
-  return static_cast<SedValueScaling*>(mScaling);
-}
-
-
-/*
- * Creates a new SedColumnScaling object, adds it to this SedFitMapping object
- * and returns the SedColumnScaling object created.
- */
-SedColumnScaling*
-SedFitMapping::createColumnScaling()
-{
-  if (mScaling != NULL)
-  {
-    delete mScaling;
-  }
-
-  mScaling = new SedColumnScaling(getSedNamespaces());
-
-  connectToChild();
-
-  return static_cast<SedColumnScaling*>(mScaling);
-}
-
-
-/*
- * Unsets the value of the "scaling" element of this SedFitMapping.
+ * Unsets the value of the "pointWeight" attribute of this SedFitMapping.
  */
 int
-SedFitMapping::unsetScaling()
+SedFitMapping::unsetPointWeight()
 {
-  delete mScaling;
-  mScaling = NULL;
-  return LIBSEDML_OPERATION_SUCCESS;
+  mPointWeight.erase();
+
+  if (mPointWeight.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
 }
 
 
@@ -472,6 +455,11 @@ SedFitMapping::renameSIdRefs(const std::string& oldid,
   if (isSetDataGenerator() && mDataGenerator == oldid)
   {
     setDataGenerator(newid);
+  }
+
+  if (isSetPointWeight() && mPointWeight == oldid)
+  {
+    setPointWeight(newid);
   }
 }
 
@@ -525,24 +513,6 @@ SedFitMapping::hasRequiredAttributes() const
 }
 
 
-/*
- * Predicate returning @c true if all the required elements for this
- * SedFitMapping object have been set.
- */
-bool
-SedFitMapping::hasRequiredElements() const
-{
-  bool allPresent = true;
-
-  if (isSetScaling() == false)
-  {
-    allPresent = false;
-  }
-
-  return allPresent;
-}
-
-
 
 /** @cond doxygenLibSEDMLInternal */
 
@@ -554,11 +524,6 @@ SedFitMapping::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeElements(stream);
-
-  if (isSetScaling() == true)
-  {
-    mScaling->write(stream);
-  }
 }
 
 /** @endcond */
@@ -589,31 +554,6 @@ void
 SedFitMapping::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
-
-  if (mScaling != NULL)
-  {
-    mScaling->setSedDocument(d);
-  }
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Connects to child elements
- */
-void
-SedFitMapping::connectToChild()
-{
-  SedBase::connectToChild();
-
-  if (mScaling != NULL)
-  {
-    mScaling->connectToParent(this);
-  }
 }
 
 /** @endcond */
@@ -666,6 +606,17 @@ SedFitMapping::getAttribute(const std::string& attributeName,
                             double& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
+
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "weight")
+  {
+    value = getWeight();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -723,6 +674,11 @@ SedFitMapping::getAttribute(const std::string& attributeName,
     value = getTypeAsString();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "pointWeight")
+  {
+    value = getPointWeight();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -753,6 +709,14 @@ SedFitMapping::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "type")
   {
     value = isSetType();
+  }
+  else if (attributeName == "weight")
+  {
+    value = isSetWeight();
+  }
+  else if (attributeName == "pointWeight")
+  {
+    value = isSetPointWeight();
   }
 
   return value;
@@ -806,6 +770,11 @@ SedFitMapping::setAttribute(const std::string& attributeName, double value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
+  if (attributeName == "weight")
+  {
+    return_value = setWeight(value);
+  }
+
   return return_value;
 }
 
@@ -854,6 +823,10 @@ SedFitMapping::setAttribute(const std::string& attributeName,
   {
     return_value = setType(value);
   }
+  else if (attributeName == "pointWeight")
+  {
+    return_value = setPointWeight(value);
+  }
 
   return return_value;
 }
@@ -884,215 +857,16 @@ SedFitMapping::unsetAttribute(const std::string& attributeName)
   {
     value = unsetType();
   }
+  else if (attributeName == "weight")
+  {
+    value = unsetWeight();
+  }
+  else if (attributeName == "pointWeight")
+  {
+    value = unsetPointWeight();
+  }
 
   return value;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Creates and returns an new "elementName" object in this SedFitMapping.
- */
-SedBase*
-SedFitMapping::createChildObject(const std::string& elementName)
-{
-  SedBase* obj = NULL;
-
-  if (elementName == "valueScaling")
-  {
-    return createValueScaling();
-  }
-  else if (elementName == "columnScaling")
-  {
-    return createColumnScaling();
-  }
-
-  return obj;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Adds a new "elementName" object to this SedFitMapping.
- */
-int
-SedFitMapping::addChildObject(const std::string& elementName,
-                              const SedBase* element)
-{
-  if (elementName == "valueScaling" && element->getTypeCode() ==
-    SEDML_VALUESCALING)
-  {
-    return setScaling((const SedScaling*)(element));
-  }
-  else if (elementName == "columnScaling" && element->getTypeCode() ==
-    SEDML_COLUMNSCALING)
-  {
-    return setScaling((const SedScaling*)(element));
-  }
-
-  return LIBSBML_OPERATION_FAILED;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Removes and returns the new "elementName" object with the given id in this
- * SedFitMapping.
- */
-SedBase*
-SedFitMapping::removeChildObject(const std::string& elementName,
-                                 const std::string& id)
-{
-  if (elementName == "valueScaling")
-  {
-    SedScaling * obj = getScaling();
-    if (unsetScaling() == LIBSBML_OPERATION_SUCCESS) return obj;
-  }
-  else if (elementName == "columnScaling")
-  {
-    SedScaling * obj = getScaling();
-    if (unsetScaling() == LIBSBML_OPERATION_SUCCESS) return obj;
-  }
-
-  return NULL;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Returns the number of "elementName" in this SedFitMapping.
- */
-unsigned int
-SedFitMapping::getNumObjects(const std::string& elementName)
-{
-  unsigned int n = 0;
-
-  if (elementName == "scaling")
-  {
-    if (isSetScaling())
-    {
-      return 1;
-    }
-  }
-
-  return n;
-}
-
-/** @endcond */
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Returns the nth object of "objectName" in this SedFitMapping.
- */
-SedBase*
-SedFitMapping::getObject(const std::string& elementName, unsigned int index)
-{
-  SedBase* obj = NULL;
-
-  if (elementName == "scaling")
-  {
-    return getScaling();
-  }
-
-  return obj;
-}
-
-/** @endcond */
-
-
-/*
- * Returns the first child element that has the given @p id in the model-wide
- * SId namespace, or @c NULL if no such object is found.
- */
-SedBase*
-SedFitMapping::getElementBySId(const std::string& id)
-{
-  if (id.empty())
-  {
-    return NULL;
-  }
-
-  SedBase* obj = NULL;
-
-  if (mScaling != NULL)
-  {
-    if (mScaling->getId() == id)
-    {
-      return mScaling;
-    }
-
-    obj = mScaling->getElementBySId(id);
-    if (obj != NULL)
-    {
-      return obj;
-    }
-  }
-
-  return obj;
-}
-
-
-
-/** @cond doxygenLibSEDMLInternal */
-
-/*
- * Creates a new object from the next XMLToken on the XMLInputStream
- */
-SedBase*
-SedFitMapping::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-  stream)
-{
-  SedBase* obj = NULL;
-
-  const std::string& name = stream.peek().getName();
-
-  if (name == "valueScaling")
-  {
-    if (isSetScaling())
-    {
-      getErrorLog()->logError(SedmlFitMappingAllowedElements, getLevel(),
-        getVersion());
-    }
-
-    delete mScaling;
-    mScaling = new SedValueScaling(getSedNamespaces());
-    obj = mScaling;
-  }
-  else if (name == "columnScaling")
-  {
-    if (isSetScaling())
-    {
-      getErrorLog()->logError(SedmlFitMappingAllowedElements, getLevel(),
-        getVersion());
-    }
-
-    delete mScaling;
-    mScaling = new SedColumnScaling(getSedNamespaces());
-    obj = mScaling;
-  }
-
-  connectToChild();
-
-  return obj;
 }
 
 /** @endcond */
@@ -1115,6 +889,10 @@ SedFitMapping::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   attributes.add("dataGenerator");
 
   attributes.add("type");
+
+  attributes.add("weight");
+
+  attributes.add("pointWeight");
 }
 
 /** @endcond */
@@ -1168,7 +946,7 @@ SedFitMapping::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlFitMappingAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1278,6 +1056,54 @@ SedFitMapping::readAttributes(
     std::string message = "Sedml attribute 'type' is missing.";
     log->logError(SedmlFitMappingAllowedAttributes, level, version, message);
   }
+
+  // 
+  // weight double (use = "optional" )
+  // 
+
+  numErrs = log->getNumErrors();
+  mIsSetWeight = attributes.readInto("weight", mWeight);
+
+  if ( mIsSetWeight == false)
+  {
+    if (log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Sedml attribute 'weight' from the <SedFitMapping> "
+        "element must be an integer.";
+      log->logError(SedmlFitMappingWeightMustBeDouble, level, version,
+        message);
+    }
+  }
+
+  // 
+  // pointWeight SIdRef (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("pointWeight", mPointWeight);
+
+  if (assigned == true)
+  {
+    if (mPointWeight.empty() == true)
+    {
+      logEmptyString(mPointWeight, level, version, "<SedFitMapping>");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mPointWeight) == false)
+    {
+      std::string msg = "The pointWeight attribute on the <" + getElementName()
+        + ">";
+      if (isSetId())
+      {
+        msg += " with id '" + getId() + "'";
+      }
+
+      msg += " is '" + mPointWeight + "', which does not conform to the "
+        "syntax.";
+      logError(SedmlFitMappingPointWeightMustBeDataSource, level, version,
+        msg);
+    }
+  }
 }
 
 /** @endcond */
@@ -1308,6 +1134,16 @@ SedFitMapping::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (isSetType() == true)
   {
     stream.writeAttribute("type", getPrefix(), MappingType_toString(mType));
+  }
+
+  if (isSetWeight() == true)
+  {
+    stream.writeAttribute("weight", getPrefix(), mWeight);
+  }
+
+  if (isSetPointWeight() == true)
+  {
+    stream.writeAttribute("pointWeight", getPrefix(), mPointWeight);
   }
 }
 
@@ -1425,6 +1261,34 @@ SedFitMapping_getTypeAsString(const SedFitMapping_t * sfm)
 
 
 /*
+ * Returns the value of the "weight" attribute of this SedFitMapping_t.
+ */
+LIBSEDML_EXTERN
+double
+SedFitMapping_getWeight(const SedFitMapping_t * sfm)
+{
+  return (sfm != NULL) ? sfm->getWeight() : util_NaN();
+}
+
+
+/*
+ * Returns the value of the "pointWeight" attribute of this SedFitMapping_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedFitMapping_getPointWeight(const SedFitMapping_t * sfm)
+{
+  if (sfm == NULL)
+  {
+    return NULL;
+  }
+
+  return sfm->getPointWeight().empty() ? NULL :
+    safe_strdup(sfm->getPointWeight().c_str());
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this SedFitMapping_t's "dataSource"
  * attribute is set.
  */
@@ -1457,6 +1321,30 @@ int
 SedFitMapping_isSetType(const SedFitMapping_t * sfm)
 {
   return (sfm != NULL) ? static_cast<int>(sfm->isSetType()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedFitMapping_t's "weight" attribute
+ * is set.
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_isSetWeight(const SedFitMapping_t * sfm)
+{
+  return (sfm != NULL) ? static_cast<int>(sfm->isSetWeight()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedFitMapping_t's "pointWeight"
+ * attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_isSetPointWeight(const SedFitMapping_t * sfm)
+{
+  return (sfm != NULL) ? static_cast<int>(sfm->isSetPointWeight()) : 0;
 }
 
 
@@ -1508,6 +1396,29 @@ SedFitMapping_setTypeAsString(SedFitMapping_t * sfm, const char * type)
 
 
 /*
+ * Sets the value of the "weight" attribute of this SedFitMapping_t.
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_setWeight(SedFitMapping_t * sfm, double weight)
+{
+  return (sfm != NULL) ? sfm->setWeight(weight) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "pointWeight" attribute of this SedFitMapping_t.
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_setPointWeight(SedFitMapping_t * sfm, const char * pointWeight)
+{
+  return (sfm != NULL) ? sfm->setPointWeight(pointWeight) :
+    LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "dataSource" attribute of this SedFitMapping_t.
  */
 LIBSEDML_EXTERN
@@ -1541,76 +1452,24 @@ SedFitMapping_unsetType(SedFitMapping_t * sfm)
 
 
 /*
- * Returns the value of the "scaling" element of this SedFitMapping_t.
- */
-LIBSEDML_EXTERN
-const SedScaling_t*
-SedFitMapping_getScaling(const SedFitMapping_t * sfm)
-{
-  if (sfm == NULL)
-  {
-    return NULL;
-  }
-
-  return (SedScaling_t*)(sfm->getScaling());
-}
-
-
-/*
- * Predicate returning @c 1 (true) if this SedFitMapping_t's "scaling" element
- * is set.
+ * Unsets the value of the "weight" attribute of this SedFitMapping_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_isSetScaling(const SedFitMapping_t * sfm)
+SedFitMapping_unsetWeight(SedFitMapping_t * sfm)
 {
-  return (sfm != NULL) ? static_cast<int>(sfm->isSetScaling()) : 0;
+  return (sfm != NULL) ? sfm->unsetWeight() : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Sets the value of the "scaling" element of this SedFitMapping_t.
+ * Unsets the value of the "pointWeight" attribute of this SedFitMapping_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_setScaling(SedFitMapping_t * sfm, const SedScaling_t* scaling)
+SedFitMapping_unsetPointWeight(SedFitMapping_t * sfm)
 {
-  return (sfm != NULL) ? sfm->setScaling(scaling) : LIBSEDML_INVALID_OBJECT;
-}
-
-
-/*
- * Creates a new SedValueScaling_t object, adds it to this SedFitMapping_t
- * object and returns the SedValueScaling_t object created.
- */
-LIBSEDML_EXTERN
-SedValueScaling_t*
-SedFitMapping_createValueScaling(SedFitMapping_t* sfm)
-{
-  return (sfm != NULL) ? sfm->createValueScaling() : NULL;
-}
-
-
-/*
- * Creates a new SedColumnScaling_t object, adds it to this SedFitMapping_t
- * object and returns the SedColumnScaling_t object created.
- */
-LIBSEDML_EXTERN
-SedColumnScaling_t*
-SedFitMapping_createColumnScaling(SedFitMapping_t* sfm)
-{
-  return (sfm != NULL) ? sfm->createColumnScaling() : NULL;
-}
-
-
-/*
- * Unsets the value of the "scaling" element of this SedFitMapping_t.
- */
-LIBSEDML_EXTERN
-int
-SedFitMapping_unsetScaling(SedFitMapping_t * sfm)
-{
-  return (sfm != NULL) ? sfm->unsetScaling() : LIBSEDML_INVALID_OBJECT;
+  return (sfm != NULL) ? sfm->unsetPointWeight() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1623,18 +1482,6 @@ int
 SedFitMapping_hasRequiredAttributes(const SedFitMapping_t * sfm)
 {
   return (sfm != NULL) ? static_cast<int>(sfm->hasRequiredAttributes()) : 0;
-}
-
-
-/*
- * Predicate returning @c 1 (true) if all the required elements for this
- * SedFitMapping_t object have been set.
- */
-LIBSEDML_EXTERN
-int
-SedFitMapping_hasRequiredElements(const SedFitMapping_t * sfm)
-{
-  return (sfm != NULL) ? static_cast<int>(sfm->hasRequiredElements()) : 0;
 }
 
 

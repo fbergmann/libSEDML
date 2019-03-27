@@ -39,6 +39,7 @@
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
 #include <sedml/SedFigure.h>
+#include <sedml/SedParameterEstimationResultPlot.h>
 
 
 using namespace std;
@@ -66,14 +67,14 @@ SedOutput::SedOutput(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedOutput using the given SedNamespaces object @p sedMLns.
+ * Creates a new SedOutput using the given SedNamespaces object @p sedmlns.
  */
-SedOutput::SedOutput(SedNamespaces *sedMLns)
-  : SedBase(sedMLns)
+SedOutput::SedOutput(SedNamespaces *sedmlns)
+  : SedBase(sedmlns)
   , mName ("")
   , mElementName("output")
 {
-  setElementNamespace(sedMLns->getURI());
+  setElementNamespace(sedmlns->getURI());
 }
 
 
@@ -268,6 +269,17 @@ SedOutput::isSedFigure() const
 
 
 /*
+ * Predicate returning @c true if this abstract "SedOutput" is of type
+ * SedParameterEstimationResultPlot
+ */
+bool
+SedOutput::isSedParameterEstimationResultPlot() const
+{
+  return dynamic_cast<const SedParameterEstimationResultPlot*>(this) != NULL;
+}
+
+
+/*
  * Returns the XML element name of this SedOutput object.
  */
 const std::string&
@@ -310,11 +322,6 @@ bool
 SedOutput::hasRequiredAttributes() const
 {
   bool allPresent = true;
-
-  if (isSetId() == false)
-  {
-    allPresent = false;
-  }
 
   return allPresent;
 }
@@ -684,7 +691,8 @@ SedOutput::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlOutputAllowedAttributes, level, version, details);
+        log->logError(SedmlOutputAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -799,6 +807,19 @@ SedFigure_t *
 SedOutput_createFigure(unsigned int level, unsigned int version)
 {
   return new SedFigure(level, version);
+}
+
+
+/*
+ * Creates a new SedParameterEstimationResultPlot using the given SEDML Level
+ * and @ p version values.
+ */
+LIBSEDML_EXTERN
+SedParameterEstimationResultPlot_t *
+SedOutput_createParameterEstimationResultPlot(unsigned int level,
+                                              unsigned int version)
+{
+  return new SedParameterEstimationResultPlot(level, version);
 }
 
 
@@ -974,6 +995,19 @@ int
 SedOutput_isSedFigure(const SedOutput_t * so)
 {
   return (so != NULL) ? static_cast<int>(so->isSedFigure()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedOutput_t is of type
+ * SedParameterEstimationResultPlot_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_isSedParameterEstimationResultPlot(const SedOutput_t * so)
+{
+  return (so != NULL) ?
+    static_cast<int>(so->isSedParameterEstimationResultPlot()) : 0;
 }
 
 

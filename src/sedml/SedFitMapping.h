@@ -78,7 +78,6 @@
 
 
 #include <sedml/SedBase.h>
-#include <sedml/SedScaling.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
@@ -94,7 +93,9 @@ protected:
   std::string mDataSource;
   std::string mDataGenerator;
   MappingType_t mType;
-  SedScaling* mScaling;
+  double mWeight;
+  bool mIsSetWeight;
+  std::string mPointWeight;
 
   /** @endcond */
 
@@ -209,6 +210,24 @@ public:
 
 
   /**
+   * Returns the value of the "weight" attribute of this SedFitMapping.
+   *
+   * @return the value of the "weight" attribute of this SedFitMapping as a
+   * double.
+   */
+  double getWeight() const;
+
+
+  /**
+   * Returns the value of the "pointWeight" attribute of this SedFitMapping.
+   *
+   * @return the value of the "pointWeight" attribute of this SedFitMapping as
+   * a string.
+   */
+  const std::string& getPointWeight() const;
+
+
+  /**
    * Predicate returning @c true if this SedFitMapping's "dataSource" attribute
    * is set.
    *
@@ -238,6 +257,26 @@ public:
    * @copydetails doc_sedfitmapping_type
    */
   bool isSetType() const;
+
+
+  /**
+   * Predicate returning @c true if this SedFitMapping's "weight" attribute is
+   * set.
+   *
+   * @return @c true if this SedFitMapping's "weight" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetWeight() const;
+
+
+  /**
+   * Predicate returning @c true if this SedFitMapping's "pointWeight"
+   * attribute is set.
+   *
+   * @return @c true if this SedFitMapping's "pointWeight" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetPointWeight() const;
 
 
   /**
@@ -300,6 +339,33 @@ public:
 
 
   /**
+   * Sets the value of the "weight" attribute of this SedFitMapping.
+   *
+   * @param weight double value of the "weight" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setWeight(double weight);
+
+
+  /**
+   * Sets the value of the "pointWeight" attribute of this SedFitMapping.
+   *
+   * @param pointWeight std::string& value of the "pointWeight" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setPointWeight(const std::string& pointWeight);
+
+
+  /**
    * Unsets the value of the "dataSource" attribute of this SedFitMapping.
    *
    * @copydetails doc_returns_success_code
@@ -331,72 +397,23 @@ public:
 
 
   /**
-   * Returns the value of the "scaling" element of this SedFitMapping.
-   *
-   * @return the value of the "scaling" element of this SedFitMapping as a
-   * SedScaling*.
-   */
-  const SedScaling* getScaling() const;
-
-
-  /**
-   * Returns the value of the "scaling" element of this SedFitMapping.
-   *
-   * @return the value of the "scaling" element of this SedFitMapping as a
-   * SedScaling*.
-   */
-  SedScaling* getScaling();
-
-
-  /**
-   * Predicate returning @c true if this SedFitMapping's "scaling" element is
-   * set.
-   *
-   * @return @c true if this SedFitMapping's "scaling" element has been set,
-   * otherwise @c false is returned.
-   */
-  bool isSetScaling() const;
-
-
-  /**
-   * Sets the value of the "scaling" element of this SedFitMapping.
-   *
-   * @param scaling SedScaling* value of the "scaling" element to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setScaling(const SedScaling* scaling);
-
-
-  /**
-   * Creates a new SedValueScaling object, adds it to this SedFitMapping object
-   * and returns the SedValueScaling object created.
-   *
-   * @return a new SedValueScaling object instance.
-   */
-  SedValueScaling* createValueScaling();
-
-
-  /**
-   * Creates a new SedColumnScaling object, adds it to this SedFitMapping
-   * object and returns the SedColumnScaling object created.
-   *
-   * @return a new SedColumnScaling object instance.
-   */
-  SedColumnScaling* createColumnScaling();
-
-
-  /**
-   * Unsets the value of the "scaling" element of this SedFitMapping.
+   * Unsets the value of the "weight" attribute of this SedFitMapping.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetScaling();
+  int unsetWeight();
+
+
+  /**
+   * Unsets the value of the "pointWeight" attribute of this SedFitMapping.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetPointWeight();
 
 
   /**
@@ -422,7 +439,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_FITMAPPING, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_FITMAPPING, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -445,20 +462,6 @@ public:
    * @li "type"
    */
   virtual bool hasRequiredAttributes() const;
-
-
-  /**
-   * Predicate returning @c true if all the required elements for this
-   * SedFitMapping object have been set.
-   *
-   * @return @c true to indicate that all the required elements of this
-   * SedFitMapping have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required elements for the SedFitMapping object are:
-   * @li "scaling"
-   */
-  virtual bool hasRequiredElements() const;
 
 
 
@@ -491,17 +494,6 @@ public:
    * Sets the parent SedDocument
    */
   virtual void setSedDocument(SedDocument* d);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Connects to child elements
-   */
-  virtual void connectToChild();
 
   /** @endcond */
 
@@ -742,123 +734,11 @@ public:
 
 
 
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Creates and returns an new "elementName" object in this SedFitMapping.
-   *
-   * @param elementName, the name of the element to create.
-   *
-   * @return pointer to the element created.
-   */
-  virtual SedBase* createChildObject(const std::string& elementName);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Adds a new "elementName" object to this SedFitMapping.
-   *
-   * @param elementName, the name of the element to create.
-   *
-   * @param element, pointer to the element to be added.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int addChildObject(const std::string& elementName,
-                             const SedBase* element);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Removes and returns the new "elementName" object with the given id in this
-   * SedFitMapping.
-   *
-   * @param elementName, the name of the element to remove.
-   *
-   * @param id, the id of the element to remove.
-   *
-   * @return pointer to the element removed.
-   */
-  virtual SedBase* removeChildObject(const std::string& elementName,
-                                     const std::string& id);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Returns the number of "elementName" in this SedFitMapping.
-   *
-   * @param elementName, the name of the element to get number of.
-   *
-   * @return unsigned int number of elements.
-   */
-  virtual unsigned int getNumObjects(const std::string& elementName);
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Returns the nth object of "objectName" in this SedFitMapping.
-   *
-   * @param elementName, the name of the element to get number of.
-   *
-   * @param index, unsigned int the index of the object to retrieve.
-   *
-   * @return pointer to the object.
-   */
-  virtual SedBase* getObject(const std::string& elementName,
-                             unsigned int index);
-
-  /** @endcond */
-
-
-
 
   #endif /* !SWIG */
 
 
-  /**
-   * Returns the first child element that has the given @p id in the model-wide
-   * SId namespace, or @c NULL if no such object is found.
-   *
-   * @param id a string representing the id attribute of the object to
-   * retrieve.
-   *
-   * @return a pointer to the SedBase element with the given @p id. If no such
-   * object is found, this method returns @c NULL.
-   */
-  virtual SedBase* getElementBySId(const std::string& id);
-
-
 protected:
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Creates a new object from the next XMLToken on the XMLInputStream
-   */
-  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
-    stream);
-
-  /** @endcond */
-
 
 
   /** @cond doxygenLibSEDMLInternal */
@@ -1055,6 +935,38 @@ SedFitMapping_getTypeAsString(const SedFitMapping_t * sfm);
 
 
 /**
+ * Returns the value of the "weight" attribute of this SedFitMapping_t.
+ *
+ * @param sfm the SedFitMapping_t structure whose weight is sought.
+ *
+ * @return the value of the "weight" attribute of this SedFitMapping_t as a
+ * double.
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+double
+SedFitMapping_getWeight(const SedFitMapping_t * sfm);
+
+
+/**
+ * Returns the value of the "pointWeight" attribute of this SedFitMapping_t.
+ *
+ * @param sfm the SedFitMapping_t structure whose pointWeight is sought.
+ *
+ * @return the value of the "pointWeight" attribute of this SedFitMapping_t as
+ * a pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+char *
+SedFitMapping_getPointWeight(const SedFitMapping_t * sfm);
+
+
+/**
  * Predicate returning @c 1 (true) if this SedFitMapping_t's "dataSource"
  * attribute is set.
  *
@@ -1102,6 +1014,38 @@ SedFitMapping_isSetDataGenerator(const SedFitMapping_t * sfm);
 LIBSEDML_EXTERN
 int
 SedFitMapping_isSetType(const SedFitMapping_t * sfm);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedFitMapping_t's "weight" attribute
+ * is set.
+ *
+ * @param sfm the SedFitMapping_t structure.
+ *
+ * @return @c 1 (true) if this SedFitMapping_t's "weight" attribute has been
+ * set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_isSetWeight(const SedFitMapping_t * sfm);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedFitMapping_t's "pointWeight"
+ * attribute is set.
+ *
+ * @param sfm the SedFitMapping_t structure.
+ *
+ * @return @c 1 (true) if this SedFitMapping_t's "pointWeight" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_isSetPointWeight(const SedFitMapping_t * sfm);
 
 
 /**
@@ -1192,6 +1136,47 @@ SedFitMapping_setTypeAsString(SedFitMapping_t * sfm, const char * type);
 
 
 /**
+ * Sets the value of the "weight" attribute of this SedFitMapping_t.
+ *
+ * @param sfm the SedFitMapping_t structure.
+ *
+ * @param weight double value of the "weight" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_setWeight(SedFitMapping_t * sfm, double weight);
+
+
+/**
+ * Sets the value of the "pointWeight" attribute of this SedFitMapping_t.
+ *
+ * @param sfm the SedFitMapping_t structure.
+ *
+ * @param pointWeight const char * value of the "pointWeight" attribute to be
+ * set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_setPointWeight(SedFitMapping_t * sfm, const char * pointWeight);
+
+
+/**
  * Unsets the value of the "dataSource" attribute of this SedFitMapping_t.
  *
  * @param sfm the SedFitMapping_t structure.
@@ -1244,90 +1229,7 @@ SedFitMapping_unsetType(SedFitMapping_t * sfm);
 
 
 /**
- * Returns the value of the "scaling" element of this SedFitMapping_t.
- *
- * @param sfm the SedFitMapping_t structure whose scaling is sought.
- *
- * @return the value of the "scaling" element of this SedFitMapping_t as a
- * SedScaling*.
- *
- * @memberof SedFitMapping_t
- */
-LIBSEDML_EXTERN
-const SedScaling_t*
-SedFitMapping_getScaling(const SedFitMapping_t * sfm);
-
-
-/**
- * Predicate returning @c 1 (true) if this SedFitMapping_t's "scaling" element
- * is set.
- *
- * @param sfm the SedFitMapping_t structure.
- *
- * @return @c 1 (true) if this SedFitMapping_t's "scaling" element has been
- * set, otherwise @c 0 (false) is returned.
- *
- * @memberof SedFitMapping_t
- */
-LIBSEDML_EXTERN
-int
-SedFitMapping_isSetScaling(const SedFitMapping_t * sfm);
-
-
-/**
- * Sets the value of the "scaling" element of this SedFitMapping_t.
- *
- * @param sfm the SedFitMapping_t structure.
- *
- * @param scaling SedScaling_t* value of the "scaling" element to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedFitMapping_t
- */
-LIBSEDML_EXTERN
-int
-SedFitMapping_setScaling(SedFitMapping_t * sfm, const SedScaling_t* scaling);
-
-
-/**
- * Creates a new SedValueScaling_t object, adds it to this SedFitMapping_t
- * object and returns the SedValueScaling_t object created.
- *
- * @param sfm the SedFitMapping_t structure to which the SedValueScaling_t
- * should be added.
- *
- * @return a new SedValueScaling_t object instance.
- *
- * @memberof SedFitMapping_t
- */
-LIBSEDML_EXTERN
-SedValueScaling_t*
-SedFitMapping_createValueScaling(SedFitMapping_t* sfm);
-
-
-/**
- * Creates a new SedColumnScaling_t object, adds it to this SedFitMapping_t
- * object and returns the SedColumnScaling_t object created.
- *
- * @param sfm the SedFitMapping_t structure to which the SedColumnScaling_t
- * should be added.
- *
- * @return a new SedColumnScaling_t object instance.
- *
- * @memberof SedFitMapping_t
- */
-LIBSEDML_EXTERN
-SedColumnScaling_t*
-SedFitMapping_createColumnScaling(SedFitMapping_t* sfm);
-
-
-/**
- * Unsets the value of the "scaling" element of this SedFitMapping_t.
+ * Unsets the value of the "weight" attribute of this SedFitMapping_t.
  *
  * @param sfm the SedFitMapping_t structure.
  *
@@ -1340,7 +1242,24 @@ SedFitMapping_createColumnScaling(SedFitMapping_t* sfm);
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_unsetScaling(SedFitMapping_t * sfm);
+SedFitMapping_unsetWeight(SedFitMapping_t * sfm);
+
+
+/**
+ * Unsets the value of the "pointWeight" attribute of this SedFitMapping_t.
+ *
+ * @param sfm the SedFitMapping_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedFitMapping_t
+ */
+LIBSEDML_EXTERN
+int
+SedFitMapping_unsetPointWeight(SedFitMapping_t * sfm);
 
 
 /**
@@ -1363,26 +1282,6 @@ SedFitMapping_unsetScaling(SedFitMapping_t * sfm);
 LIBSEDML_EXTERN
 int
 SedFitMapping_hasRequiredAttributes(const SedFitMapping_t * sfm);
-
-
-/**
- * Predicate returning @c 1 (true) if all the required elements for this
- * SedFitMapping_t object have been set.
- *
- * @param sfm the SedFitMapping_t structure.
- *
- * @return @c 1 (true) to indicate that all the required elements of this
- * SedFitMapping_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required elements for the SedFitMapping_t object are:
- * @li "scaling"
- *
- * @memberof SedFitMapping_t
- */
-LIBSEDML_EXTERN
-int
-SedFitMapping_hasRequiredElements(const SedFitMapping_t * sfm);
 
 
 

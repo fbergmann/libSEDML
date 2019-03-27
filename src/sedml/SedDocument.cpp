@@ -45,6 +45,7 @@
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
 #include <sedml/SedFigure.h>
+#include <sedml/SedParameterEstimationResultPlot.h>
 
 
 using namespace std;
@@ -1426,6 +1427,33 @@ SedDocument::createFigure()
 
 
 /*
+ * Creates a new SedParameterEstimationResultPlot object, adds it to this
+ * SedDocument object and returns the SedParameterEstimationResultPlot object
+ * created.
+ */
+SedParameterEstimationResultPlot*
+SedDocument::createParameterEstimationResultPlot()
+{
+  SedParameterEstimationResultPlot* sperp = NULL;
+
+  try
+  {
+    sperp = new SedParameterEstimationResultPlot(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sperp != NULL)
+  {
+    mOutputs.appendAndOwn(sperp);
+  }
+
+  return sperp;
+}
+
+
+/*
  * Removes the nth SedOutput from this SedDocument and returns a pointer to it.
  */
 SedOutput*
@@ -2111,6 +2139,10 @@ SedDocument::createChildObject(const std::string& elementName)
   {
     return createFigure();
   }
+  else if (elementName == "parameterEstimationResultPlot")
+  {
+    return createParameterEstimationResultPlot();
+  }
   else if (elementName == "style")
   {
     return createStyle();
@@ -2199,6 +2231,11 @@ SedDocument::addChildObject(const std::string& elementName,
   {
     return addOutput((const SedOutput*)(element));
   }
+  else if (elementName == "parameterEstimationResultPlot" &&
+    element->getTypeCode() == SEDML_PARAMETERESTIMATIONRESULTPLOT)
+  {
+    return addOutput((const SedOutput*)(element));
+  }
   else if (elementName == "style" && element->getTypeCode() == SEDML_STYLE)
   {
     return addStyle((const SedStyle*)(element));
@@ -2274,6 +2311,10 @@ SedDocument::removeChildObject(const std::string& elementName,
     return removeOutput(id);
   }
   else if (elementName == "figure")
+  {
+    return removeOutput(id);
+  }
+  else if (elementName == "parameterEstimationResultPlot")
   {
     return removeOutput(id);
   }
@@ -2672,7 +2713,8 @@ SedDocument::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlDocumentAllowedAttributes, level, version, details);
+        log->logError(SedmlDocumentAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -3601,6 +3643,19 @@ SedFigure_t*
 SedDocument_createFigure(SedDocument_t* sd)
 {
   return (sd != NULL) ? sd->createFigure() : NULL;
+}
+
+
+/*
+ * Creates a new SedParameterEstimationResultPlot_t object, adds it to this
+ * SedDocument_t object and returns the SedParameterEstimationResultPlot_t
+ * object created.
+ */
+LIBSEDML_EXTERN
+SedParameterEstimationResultPlot_t*
+SedDocument_createParameterEstimationResultPlot(SedDocument_t* sd)
+{
+  return (sd != NULL) ? sd->createParameterEstimationResultPlot() : NULL;
 }
 
 

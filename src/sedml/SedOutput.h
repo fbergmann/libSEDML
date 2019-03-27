@@ -61,6 +61,7 @@ class SedReport;
 class SedPlot2D;
 class SedPlot3D;
 class SedFigure;
+class SedParameterEstimationResultPlot;
 
 class LIBSEDML_EXTERN SedOutput : public SedBase
 {
@@ -91,13 +92,13 @@ public:
 
 
   /**
-   * Creates a new SedOutput using the given SedNamespaces object @p sedMLns.
+   * Creates a new SedOutput using the given SedNamespaces object @p sedmlns.
    *
-   * @param sedMLns the SedNamespaces object.
+   * @param sedmlns the SedNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedOutput(SedNamespaces *sedMLns);
+  SedOutput(SedNamespaces *sedmlns);
 
 
   /**
@@ -171,8 +172,8 @@ public:
    * @param id std::string& value of the "id" attribute to be set.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
    * Calling this function with @p id = @c NULL or an empty string is
@@ -187,7 +188,7 @@ public:
    * @param name std::string& value of the "name" attribute to be set.
    *
    * @copydetails doc_returns_one_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    *
    * Calling this function with @p name = @c NULL or an empty string is
    * equivalent to calling unsetName().
@@ -199,8 +200,8 @@ public:
    * Unsets the value of the "id" attribute of this SedOutput.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int unsetId();
 
@@ -209,8 +210,8 @@ public:
    * Unsets the value of the "name" attribute of this SedOutput.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int unsetName();
 
@@ -256,6 +257,16 @@ public:
 
 
   /**
+   * Predicate returning @c true if this abstract "SedOutput" is of type
+   * SedParameterEstimationResultPlot
+   *
+   * @return @c true if this abstract "SedOutput" is of type
+   * SedParameterEstimationResultPlot, @c false otherwise
+   */
+  virtual bool isSedParameterEstimationResultPlot() const;
+
+
+  /**
    * Returns the XML element name of this SedOutput object.
    *
    * For SedOutput, the XML element name is always @c "output".
@@ -282,7 +293,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedMLconstant{SEDML_OUTPUT, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -297,10 +308,6 @@ public:
    *
    * @return @c true to indicate that all the required attributes of this
    * SedOutput have been set, otherwise @c false is returned.
-   *
-   *
-   * @note The required attributes for the SedOutput object are:
-   * @li "id"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -355,8 +362,8 @@ public:
    * @param value, the address of the value to record.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int getAttribute(const std::string& attributeName, bool& value)
     const;
@@ -375,8 +382,8 @@ public:
    * @param value, the address of the value to record.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int getAttribute(const std::string& attributeName, int& value) const;
 
@@ -394,8 +401,8 @@ public:
    * @param value, the address of the value to record.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int getAttribute(const std::string& attributeName,
                            double& value) const;
@@ -414,8 +421,8 @@ public:
    * @param value, the address of the value to record.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int getAttribute(const std::string& attributeName,
                            unsigned int& value) const;
@@ -434,8 +441,8 @@ public:
    * @param value, the address of the value to record.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int getAttribute(const std::string& attributeName,
                            std::string& value) const;
@@ -471,8 +478,8 @@ public:
    * @param value, the value of the attribute to set.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int setAttribute(const std::string& attributeName, bool value);
 
@@ -490,8 +497,8 @@ public:
    * @param value, the value of the attribute to set.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int setAttribute(const std::string& attributeName, int value);
 
@@ -509,8 +516,8 @@ public:
    * @param value, the value of the attribute to set.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int setAttribute(const std::string& attributeName, double value);
 
@@ -528,8 +535,8 @@ public:
    * @param value, the value of the attribute to set.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int setAttribute(const std::string& attributeName,
                            unsigned int value);
@@ -548,8 +555,8 @@ public:
    * @param value, the value of the attribute to set.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int setAttribute(const std::string& attributeName,
                            const std::string& value);
@@ -566,8 +573,8 @@ public:
    * @param attributeName, the name of the attribute to query.
    *
    * @copydetails doc_returns_success_code
-   * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   virtual int unsetAttribute(const std::string& attributeName);
 
@@ -724,6 +731,27 @@ SedOutput_createFigure(unsigned int level, unsigned int version);
 
 
 /**
+ * Creates a new SedParameterEstimationResultPlot using the given SEDML Level
+ * and @ p version values.
+ *
+ * @param level an unsigned int, the SEDML Level to assign to this SedOutput_t.
+ *
+ * @param version an unsigned int, the SEDML Version to assign to this
+ * SedOutput_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+SedParameterEstimationResultPlot_t *
+SedOutput_createParameterEstimationResultPlot(unsigned int level,
+                                              unsigned int version);
+
+
+/**
  * Creates and returns a deep copy of this SedOutput_t object.
  *
  * @param so the SedOutput_t structure.
@@ -824,10 +852,10 @@ SedOutput_isSetName(const SedOutput_t * so);
  * @param id const char * value of the "id" attribute to be set.
  *
  * @copydetails doc_returns_success_code
- * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
  * OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * Calling this function with @p id = @c NULL or an empty string is equivalent
  * to calling SedOutput_unsetId().
@@ -847,8 +875,8 @@ SedOutput_setId(SedOutput_t * so, const char * id);
  * @param name const char * value of the "name" attribute to be set.
  *
  * @copydetails doc_returns_success_code
- * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * Calling this function with @p name = @c NULL or an empty string is
  * equivalent to calling SedOutput_unsetName().
@@ -866,9 +894,9 @@ SedOutput_setName(SedOutput_t * so, const char * name);
  * @param so the SedOutput_t structure.
  *
  * @copydetails doc_returns_success_code
- * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedOutput_t
  */
@@ -883,9 +911,9 @@ SedOutput_unsetId(SedOutput_t * so);
  * @param so the SedOutput_t structure.
  *
  * @copydetails doc_returns_success_code
- * @li @sedMLconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sedMLconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
  * @memberof SedOutput_t
  */
@@ -951,6 +979,22 @@ SedOutput_isSedFigure(const SedOutput_t * so);
 
 
 /**
+ * Predicate returning @c 1 if this SedOutput_t is of type
+ * SedParameterEstimationResultPlot_t
+ *
+ * @param so the SedOutput_t structure.
+ *
+ * @return @c 1 if this SedOutput_t is of type
+ * SedParameterEstimationResultPlot_t, @c 0 otherwise
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_isSedParameterEstimationResultPlot(const SedOutput_t * so);
+
+
+/**
  * Predicate returning @c 1 (true) if all the required attributes for this
  * SedOutput_t object have been set.
  *
@@ -958,10 +1002,6 @@ SedOutput_isSedFigure(const SedOutput_t * so);
  *
  * @return @c 1 (true) to indicate that all the required attributes of this
  * SedOutput_t have been set, otherwise @c 0 (false) is returned.
- *
- *
- * @note The required attributes for the SedOutput_t object are:
- * @li "id"
  *
  * @memberof SedOutput_t
  */

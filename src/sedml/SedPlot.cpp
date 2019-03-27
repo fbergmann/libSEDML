@@ -1220,7 +1220,8 @@ SedPlot::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlPlotAllowedAttributes, level, version, details);
+        log->logError(SedmlPlotAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

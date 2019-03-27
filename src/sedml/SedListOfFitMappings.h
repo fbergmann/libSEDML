@@ -366,6 +366,36 @@ public:
 
 
   /**
+   * Get a SedFitMapping from the SedListOfFitMappings based on the PointWeight
+   * to which it refers.
+   *
+   * @param sid a string representing the "pointWeight" attribute of the
+   * SedFitMapping object to retrieve.
+   *
+   * @return the first SedFitMapping in this SedListOfFitMappings based on the
+   * given pointWeight attribute or NULL if no such SedFitMapping exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedFitMapping* getByPointWeight(const std::string& sid) const;
+
+
+  /**
+   * Get a SedFitMapping from the SedListOfFitMappings based on the PointWeight
+   * to which it refers.
+   *
+   * @param sid a string representing the "pointWeight" attribute of the
+   * SedFitMapping object to retrieve.
+   *
+   * @return the first SedFitMapping in this SedListOfFitMappings based on the
+   * given pointWeight attribute or NULL if no such SedFitMapping exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedFitMapping* getByPointWeight(const std::string& sid);
+
+
+  /**
    * Returns the XML element name of this SedListOfFitMappings object.
    *
    * For SedListOfFitMappings, the XML element name is always
@@ -382,7 +412,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -397,7 +427,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfFitMappings:
-   * @sedmlconstant{SEDML_FITMAPPING, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_FITMAPPING, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -426,6 +456,18 @@ protected:
    */
   virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     stream);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Writes the namespace for the Sedml package
+   */
+  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
+    stream) const;
 
   /** @endcond */
 

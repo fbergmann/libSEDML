@@ -508,36 +508,6 @@ SedVisitor::visit(const SedFitMapping& x)
 
 
 /*
- * Visit the SedScaling
- */
-bool
-SedVisitor::visit(const SedScaling& x)
-{
-  return visit(static_cast<const SedBase&>(x));
-}
-
-
-/*
- * Visit the SedValueScaling
- */
-bool
-SedVisitor::visit(const SedValueScaling& x)
-{
-  return visit(static_cast<const SedBase&>(x));
-}
-
-
-/*
- * Visit the SedColumnScaling
- */
-bool
-SedVisitor::visit(const SedColumnScaling& x)
-{
-  return visit(static_cast<const SedBase&>(x));
-}
-
-
-/*
  * Visit the SedBounds
  */
 bool
@@ -662,6 +632,16 @@ SedVisitor::visit(const SedSimpleRepeatedTask& x)
  */
 bool
 SedVisitor::visit(const SedShadedArea& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
+ * Visit the SedParameterEstimationResultPlot
+ */
+bool
+SedVisitor::visit(const SedParameterEstimationResultPlot& x)
 {
   return visit(static_cast<const SedBase&>(x));
 }
@@ -1082,33 +1062,6 @@ SedVisitor::leave(const SedFitMapping& x)
 
 
 /*
- * Leave the SedScaling
- */
-void
-SedVisitor::leave(const SedScaling& x)
-{
-}
-
-
-/*
- * Leave the SedValueScaling
- */
-void
-SedVisitor::leave(const SedValueScaling& x)
-{
-}
-
-
-/*
- * Leave the SedColumnScaling
- */
-void
-SedVisitor::leave(const SedColumnScaling& x)
-{
-}
-
-
-/*
  * Leave the SedBounds
  */
 void
@@ -1221,6 +1174,15 @@ SedVisitor::leave(const SedSimpleRepeatedTask& x)
  */
 void
 SedVisitor::leave(const SedShadedArea& x)
+{
+}
+
+
+/*
+ * Leave the SedParameterEstimationResultPlot
+ */
+void
+SedVisitor::leave(const SedParameterEstimationResultPlot& x)
 {
 }
 

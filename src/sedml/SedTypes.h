@@ -37,6 +37,7 @@
 #ifndef SedTypes_h
 #define SedTypes_h
 
+
 #include <sedml/common/sedmlfwd.h>
 
 #include <sedml/SedBase.h>
@@ -87,9 +88,6 @@
 #include <sedml/SedExperimentRef.h>
 #include <sedml/SedFitExperiment.h>
 #include <sedml/SedFitMapping.h>
-#include <sedml/SedScaling.h>
-#include <sedml/SedValueScaling.h>
-#include <sedml/SedColumnScaling.h>
 #include <sedml/SedBounds.h>
 #include <sedml/SedFigure.h>
 #include <sedml/SedSubPlot.h>
@@ -103,10 +101,11 @@
 #include <sedml/SedDataRange.h>
 #include <sedml/SedSimpleRepeatedTask.h>
 #include <sedml/SedShadedArea.h>
+#include <sedml/SedParameterEstimationResultPlot.h>
 
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>
 
-#include <sbml/math/FormulaFormatter.h>
+#include <sbml/math/FormulaFormatter.h>  
 
 #endif  /* SedTypes_h */
