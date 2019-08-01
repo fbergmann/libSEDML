@@ -27,6 +27,7 @@ if (NOT ${LIBSBML_LIBRARY_NAME}_FOUND)
           /opt/lib/cmake
           /opt/local/lib/cmake
           /sw/lib/cmake
+          ${CONAN_LIB_DIRS_LIBSBML}/cmake
   )
 endif()
 
@@ -73,6 +74,7 @@ find_library(LIBSBML_LIBRARY
           $ENV{LIBSBML_DIR}
           ${LIBSEDML_DEPENDENCY_DIR}
           ${LIBSEDML_DEPENDENCY_DIR}/lib
+          ${CONAN_LIB_DIRS_LIBSBML}
           ~/Library/Frameworks
           /Library/Frameworks
           /sw/lib        # Fink
