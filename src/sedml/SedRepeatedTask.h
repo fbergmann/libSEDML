@@ -671,6 +671,23 @@ public:
    */
   SedSetValue* createSetValue();
 
+  /**
+   * Creates a new SedSetValue object, adds it to this SedRepeatedTask object
+   * and returns the SedSetValue object created.
+   *
+   * @return a new SedSetValue object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  SedSetValue* createTaskChange();
+
 
   /**
    * Removes the nth SedSetValue from this SedRepeatedTask and returns a

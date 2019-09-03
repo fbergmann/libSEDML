@@ -593,6 +593,12 @@ SedRepeatedTask::getNumTaskChanges() const
   return mSetValues.size();
 }
 
+SedSetValue*
+SedRepeatedTask::createTaskChange()
+{
+  return createSetValue();
+}
+
 
 /*
  * Creates a new SedSetValue object, adds it to this SedRepeatedTask object and
