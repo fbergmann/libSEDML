@@ -38,8 +38,9 @@ file(GLOB H_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.h )
 set(TEST_FILES ${CPP_FILES} ${C_FILES} ${H_FILES})
 
 include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${CMAKE_BINARY_DIR})
-include_directories(BEFORE ${CMAKE_BINARY_DIR}/sedml/common)
+include_directories(${libsedml_SOURCE_DIR}/src)
+include_directories(BEFORE ${libsedml_BINARY_DIR}/src)
+include_directories(BEFORE ${libsedml_BINARY_DIR}/src/sedml/common)
 
 
 if (EXTRA_INCLUDE_DIRS) 
@@ -51,4 +52,4 @@ target_link_libraries(test_sedml ${LIBSEDML_LIBRARY}-static  ${LIBSBML_LIBRARY} 
 	if (WIN32 AND NOT CYGWIN)
 	set_target_properties(test_sedml PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
 	endif()
-add_test(test_sedml_run ${CMAKE_CURRENT_BINARY_DIR}/test_sedml )
+add_test(NAME test_sedml_run COMMAND "$<TARGET_FILE:test_sedml>")

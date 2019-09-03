@@ -39,7 +39,26 @@
 ###############################################################################
 
 cmake_minimum_required(VERSION 2.8)
-project(libsedml)
+project (libsedml)
+
+SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/../conan_paths.cmake)
+if (NOT EXISTS ${CONAN_PATHS})
+SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/conan_paths.cmake)
+endif()
+
+if (EXISTS ${CONAN_PATHS})
+include (${CONAN_PATHS})
+endif()
+
+set (CONAN_BUILDINFO ${CMAKE_BINARY_DIR}/../conanbuildinfo.cmake)
+if (NOT EXISTS ${CONAN_BUILDINFO})
+set (CONAN_BUILDINFO ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+endif()
+
+if (EXISTS ${CONAN_BUILDINFO})
+include(${CONAN_BUILDINFO})
+conan_basic_setup()
+endif()
 
 include (CMakeTestCCompiler)
 include (CheckCSourceCompiles)
