@@ -1175,7 +1175,7 @@ SedCurve::readAttributes(
   }
 
   // 
-  // type enum (use = "required" )
+  // type enum (use = "optional" )
   // 
 
   std::string type;
@@ -1208,8 +1208,8 @@ SedCurve::readAttributes(
   }
   else if(version > 3)
   {
-    std::string message = "Sedml attribute 'type' is missing.";
-    log->logError(SedmlCurveAllowedAttributes, level, version, message);
+    //std::string message = "Sedml attribute 'type' is missing.";
+    //log->logError(SedmlCurveAllowedAttributes, level, version, message);
   }
 
   // 

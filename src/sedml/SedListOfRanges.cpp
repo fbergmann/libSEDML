@@ -58,7 +58,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedListOfRanges::SedListOfRanges(unsigned int level, unsigned int version)
   : SedListOf(level, version)
-  , mElementName("range")
+  , mElementName("listOfRanges")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -70,7 +70,7 @@ SedListOfRanges::SedListOfRanges(unsigned int level, unsigned int version)
  */
 SedListOfRanges::SedListOfRanges(SedNamespaces *sedmlns)
   : SedListOf(sedmlns)
-  , mElementName("range")
+  , mElementName("listOfRanges")
 {
   setElementNamespace(sedmlns->getURI());
 }

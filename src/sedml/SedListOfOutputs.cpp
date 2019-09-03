@@ -59,7 +59,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedListOfOutputs::SedListOfOutputs(unsigned int level, unsigned int version)
   : SedListOf(level, version)
-  , mElementName("output")
+  , mElementName("listOfOutputs")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -71,7 +71,7 @@ SedListOfOutputs::SedListOfOutputs(unsigned int level, unsigned int version)
  */
 SedListOfOutputs::SedListOfOutputs(SedNamespaces *sedmlns)
   : SedListOf(sedmlns)
-  , mElementName("output")
+  , mElementName("listOfOutputs")
 {
   setElementNamespace(sedmlns->getURI());
 }

@@ -54,6 +54,9 @@
 #include <sbml/math/L3FormulaFormatter.h>
 #include <sbml/math/L3Parser.h>
 
+#include <sedml/SedTypes.h>
+#include <cstdlib>
+
 /** @cond doxygenIgnored */
 
 using namespace std;
@@ -61,6 +64,33 @@ LIBSBML_CPP_NAMESPACE_USE
 LIBSEDML_CPP_NAMESPACE_USE
 
 /** @endcond */
+
+
+
+/**
+ * Tries to find the test file in the srcdir environment variable.
+ *
+ * @param fileName the filename relative to this tests srcdir
+ *        environment variable.
+ *
+ * If the filename cannot be found, the test from which this function
+ * is called will fail.
+ *
+ * @return the full path to the test file
+ */
+std::string getTestFile(const std::string& fileName)
+{
+  std::stringstream str;
+  char* srcDir = getenv("srcdir");
+  
+  if (srcDir != NULL) str << srcDir;
+  else str << ".";
+
+  str << "/" << fileName;
+  std::string fullName = str.str();
+
+  return fullName;
+}
 
 TEST_CASE("test mathml issue1", "[sedml]")
 {  
@@ -85,6 +115,31 @@ TEST_CASE("test mathml issue1", "[sedml]")
 
   sw.writeSedML(&doc, stream);
   string v2 = stream.str();
-  cout << v1 << endl << endl << v2 << endl << endl;
+  //cout << v1 << endl << endl << v2 << endl << endl;
   REQUIRE( v1 == v2 );
+}
+
+TEST_CASE("Reading / Writing L1V4", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/noble_1962_local.sedml");
+  auto doc = readSedMLFromFile(fileName.c_str());
+  REQUIRE (doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+
+  
+  // convert to l1v4
+  doc->setLevel(1); doc->setVersion(4);
+
+  // write to string
+  SedWriter sw;
+  std::string l1v4 = sw.writeSedMLToStdString(doc);
+  REQUIRE(l1v4.find("version=\"4\"") != std::string::npos);
+
+  // don't need doc anymore
+  delete doc;
+
+  // read back
+  doc = readSedMLFromString(l1v4.c_str());
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+
+  delete doc;
 }

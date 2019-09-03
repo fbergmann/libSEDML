@@ -53,3 +53,5 @@ target_link_libraries(test_sedml ${LIBSEDML_LIBRARY}-static  ${LIBSBML_LIBRARY} 
 	set_target_properties(test_sedml PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
 	endif()
 add_test(NAME test_sedml_run COMMAND "$<TARGET_FILE:test_sedml>")
+set_tests_properties(test_sedml_run PROPERTIES ENVIRONMENT 
+	"srcdir=${CMAKE_CURRENT_SOURCE_DIR}")
