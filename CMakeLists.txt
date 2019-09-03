@@ -189,14 +189,6 @@ endif()
 option (LIBSEDML_SHARED_VERSION "Build the libsedml shared library with version information" ON)
 mark_as_advanced(LIBSEDML_SHARED_VERSION)
 
-# Enable the generation of unit tests. If enabled, all test runners
-# will be created and can be run with "make test" or ctest.
-# This won't work in Visual Studio 2003, so we disable this option there.
-#
-if(NOT ${CMAKE_GENERATOR} MATCHES "Visual Studio 6" AND NOT ${CMAKE_GENERATOR} MATCHES "Visual Studio 7")
-    option(WITH_CHECK    "Compile unit tests. Run with 'make test' or 'ctest'." OFF)
-endif()
-
 # Use C++ namespace.
 option(WITH_CPP_NAMESPACE "Use a C++ namespace for libSEDML."   OFF)
 
@@ -432,36 +424,10 @@ endif(WITH_CSHARP)
 # or make test
 #
 
-if(WITH_CHECK)
+# we do use tests, that require 2.8.4
+cmake_minimum_required(VERSION 2.8.4)
 
-    # we do use tests, that require 2.8.4
-    cmake_minimum_required(VERSION 2.8.4)
-
-    enable_testing()
-
-    find_library(LIBCHECK_LIBRARY
-        NAMES check libcheck
-        PATHS /usr/lib /usr/local/lib ${LIBSEDML_DEPENDENCY_DIR}/lib
-        DOC "The file name of the libcheck library."
-    )
-
-    find_path(LIBCHECK_INCLUDE_DIR
-        NAMES check.h
-        PATHS /usr/include /usr/local/include  ${LIBSEDML_DEPENDENCY_DIR}/include
-        DOC "The directory containing the libcheck include files."
-              )
-
-    if(NOT EXISTS "${LIBCHECK_INCLUDE_DIR}/check.h")
-        message(FATAL_ERROR "The 'check' include directory appears to be invalid. It should contain the file check.h, but it does not.")
-    endif()
-
-    if(${CMAKE_GENERATOR} MATCHES "Visual Studio 6" OR ${CMAKE_GENERATOR} MATCHES "Visual Studio 7")
-        message(WARNING "Libcheck is not compatible with Visual Studio 2003 (or earlier versions).")
-    endif()
-
-endif(WITH_CHECK)
-
-
+enable_testing()
 
 
 # On some Linux  (64bit) systems (64bit) the libraries should be installed into lib64 rather
@@ -927,12 +893,7 @@ message(STATUS "
 ----------------------------------------------------------------------")
 
 
-if(WITH_CHECK)
-
-    add_subdirectory(tests)
-
-endif(WITH_CHECK)
-
+add_subdirectory(tests)
 
 ## To compile a test program simply comment out the lines below ...
 #

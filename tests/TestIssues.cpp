@@ -37,10 +37,10 @@
  * 
  */
 
+#include "catch.hpp"
 #include <limits>
 
 #include <iostream>
-#include <check.h>
 #include <string>
 #include <sstream>
 
@@ -62,16 +62,8 @@ LIBSEDML_CPP_NAMESPACE_USE
 
 /** @endcond */
 
-
-CK_CPPSTART
-
-
-
-START_TEST (test_mathml_issue1)
-{
-  
-  
-  
+TEST_CASE("test mathml issue1", "[sedml]")
+{  
   SedDocument doc;
   SedDataGenerator* sdg = doc.createDataGenerator();
   ASTNode* astn = SBML_parseL3Formula("S1/S2");
@@ -93,35 +85,6 @@ START_TEST (test_mathml_issue1)
 
   sw.writeSedML(&doc, stream);
   string v2 = stream.str();
-  //cout << v1 << endl << endl << v2 << endl << endl;
-  fail_unless( v1 == v2 );
+  cout << v1 << endl << endl << v2 << endl << endl;
+  REQUIRE( v1 == v2 );
 }
-END_TEST
-
-
-
-Suite *
-create_suite_SedMLIssues (void)
-{
-  Suite *suite = suite_create("SedMLIssues");
-  TCase *tcase = tcase_create("SedMLIssues");
-
-  cout << "Testing issues reported using: " << endl;
-  cout << "  libSBML  : " << getLibSBMLDottedVersion()
-  #if LIBSBML_USE_LEGACY_MATH
-      << " (using legacy math) "
-  #else 
-      << " (using new ASTnode implementation) "
-  #endif
-      << endl;
-  cout << "  libSEDML : " << getLibSEDMLDottedVersion() << endl << endl;
- 
-  tcase_add_test( tcase, test_mathml_issue1         );
-
-  suite_add_tcase(suite, tcase);
-
-  return suite;
-}
-
-
-CK_CPPEND
