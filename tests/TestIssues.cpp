@@ -122,7 +122,7 @@ TEST_CASE("test mathml issue1", "[sedml]")
 TEST_CASE("Reading / Writing L1V4", "[sedml]")
 {
   std::string fileName = getTestFile("/test-data/noble_1962_local.sedml");
-  auto doc = readSedMLFromFile(fileName.c_str());
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
   REQUIRE (doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
 
   
