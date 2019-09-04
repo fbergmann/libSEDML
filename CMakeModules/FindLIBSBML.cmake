@@ -110,9 +110,6 @@ endif (NOT LIBSBML_LIBRARY)
   add_library(${LIBSBML_LIBRARY_NAME} UNKNOWN IMPORTED)
   set_target_properties(${LIBSBML_LIBRARY_NAME} PROPERTIES IMPORTED_LOCATION ${LIBSBML_LIBRARY})
   
-  include(CheckLibraryExists)
-  check_library_exists(ExpartParser "" HAVE_EXPAT)
-
 endif()
 
 
