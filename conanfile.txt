@@ -1,0 +1,8 @@
+[requires]
+Expat/2.2.7@pix4d/stable
+libsbml/5.18.1@fbergmann/stable
+libnuml/1.1.1@fbergmann/stable
+
+[generators]
+cmake
+cmake_paths
