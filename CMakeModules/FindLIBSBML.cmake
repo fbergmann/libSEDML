@@ -19,6 +19,7 @@ endif()
 message (STATUS "Looking for ${LIBSBML_LIBRARY_NAME}")
 
 find_package(${LIBSBML_LIBRARY_NAME} CONFIG QUIET)
+message (STATUS "${${LIBSBML_LIBRARY_NAME}_FOUND}")
 
 if (NOT ${LIBSBML_LIBRARY_NAME}_FOUND)
   find_package(${LIBSBML_LIBRARY_NAME} CONFIG QUIET
@@ -27,7 +28,9 @@ if (NOT ${LIBSBML_LIBRARY_NAME}_FOUND)
           /opt/lib/cmake
           /opt/local/lib/cmake
           /sw/lib/cmake
+          ${CONAN_LIB_DIRS_LIBSBML}
           ${CONAN_LIB_DIRS_LIBSBML}/cmake
+          ${CONAN_LIB_DIRS_LIBSBML}/lib/cmake
   )
 endif()
 
@@ -38,6 +41,16 @@ if (${LIBSBML_LIBRARY_NAME}_FOUND)
   file(TO_CMAKE_PATH ${LIB_PATH}/../include LIBSBML_INCLUDE_DIR)  
   get_filename_component (LIBSBML_INCLUDE_DIR ${LIBSBML_INCLUDE_DIR} REALPATH)
   get_target_property(LIBSBML_VERSION ${LIBSBML_LIBRARY_NAME} VERSION)
+  get_target_property(LIBSBML_INTERFACE_LINK_LIBRARIES ${LIBSBML_LIBRARY_NAME} INTERFACE_LINK_LIBRARIES)
+
+  if (NOT LIBSBML_INTERFACE_LINK_LIBRARIES)
+  get_target_property(LIBSBML_INTERFACE_LINK_LIBRARIES ${LIBSBML_LIBRARY_NAME} IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE)
+  endif()
+
+  if (LIBSBML_INTERFACE_LINK_LIBRARIES)
+    set(LIBSBML_LIBRARY ${LIBSBML_LIBRARY} ${LIBSBML_INTERFACE_LINK_LIBRARIES})
+  endif (LIBSBML_INTERFACE_LINK_LIBRARIES)
+  
 
 else()
 
@@ -96,6 +109,9 @@ endif (NOT LIBSBML_LIBRARY)
 
   add_library(${LIBSBML_LIBRARY_NAME} UNKNOWN IMPORTED)
   set_target_properties(${LIBSBML_LIBRARY_NAME} PROPERTIES IMPORTED_LOCATION ${LIBSBML_LIBRARY})
+  
+  include(CheckLibraryExists)
+  check_library_exists(ExpartParser "" HAVE_EXPAT)
 
 endif()
 
