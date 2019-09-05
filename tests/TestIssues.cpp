@@ -143,3 +143,11 @@ TEST_CASE("Reading / Writing L1V4", "[sedml]")
 
   delete doc;
 }
+
+TEST_CASE("Reading L1V4 curve should not require logY", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/issue_63.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  REQUIRE (doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+  delete doc;
+}

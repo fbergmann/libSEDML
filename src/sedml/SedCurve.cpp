@@ -1118,7 +1118,7 @@ SedCurve::readAttributes(
   }
 
   // 
-  // logY bool (use = "required" )
+  // logY bool (use = "optional" )
   // 
 
   numErrs = log->getNumErrors();
@@ -1131,12 +1131,6 @@ SedCurve::readAttributes(
     {
       log->remove(XMLAttributeTypeMismatch);
       log->logError(SedmlCurveLogYMustBeBoolean, level, version);
-    }
-    else
-    {
-      std::string message = "Sedml attribute 'logY' is missing from the "
-        "<SedCurve> element.";
-      log->logError(SedmlCurveAllowedAttributes, level, version, message);
     }
   }
 
@@ -1205,12 +1199,7 @@ SedCurve::readAttributes(
         log->logError(SedmlCurveTypeMustBeCurveTypeEnum, level, version, msg);
       }
     }
-  }
-  else if(version > 3)
-  {
-    //std::string message = "Sedml attribute 'type' is missing.";
-    //log->logError(SedmlCurveAllowedAttributes, level, version, message);
-  }
+  }  
 
   // 
   // xErrorUpper SIdRef (use = "optional" )
