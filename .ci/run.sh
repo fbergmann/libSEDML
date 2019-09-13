@@ -22,9 +22,10 @@ conan install .. --build=missing
 cmake -DBUILD_GUI=OFF -DCMAKE_CXX_FLAGS=-D_GLIBCXX_USE_CXX11_ABI=0 ../
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    build-wrapper-linux-x86-64 --out-dir bw-output make 
+    build-wrapper-linux-x86-64 --out-dir ../bw-output make 
     ctest
-    sonar-scanner  -X -Dproject.settings=../.sonarcloud.properties
+    cd ..
+    sonar-scanner  -X -Dproject.settings=./.sonarcloud.properties
 else 
     cmake --build . --config Release
     ctest
