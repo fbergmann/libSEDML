@@ -19,5 +19,12 @@ mkdir build
 cd build
 conan install .. --build=missing
 cmake -DBUILD_GUI=OFF -DCMAKE_CXX_FLAGS=-D_GLIBCXX_USE_CXX11_ABI=0 ../
-cmake --build . --config Release
-ctest
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    build-wrapper-linux-x86-64 --out-dir bw-output make 
+    ctest
+    sonar-scanner
+else 
+    cmake --build . --config Release
+    ctest
+fi
