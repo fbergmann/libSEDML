@@ -8,6 +8,7 @@ env:
   - CONAN_BUILD_POLICY: missing
   - CONAN_UPLOAD_ONLY_WHEN_STABLE: 1
   - CONAN_DOCKER_32_IMAGES: 1
+  - CONAN_UPLOAD_DEPENDENCIES: "all"
 addons:
   sonarcloud:
     organization: "fbergmann"
