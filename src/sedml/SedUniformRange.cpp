@@ -828,7 +828,7 @@ SedUniformRange::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlUniformRangeAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -837,26 +837,26 @@ SedUniformRange::readAttributes(
   // start double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetStart = attributes.readInto("start", mStart);
 
-  if ( mIsSetStart == false)
+  if ( mIsSetStart == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'start' from the <SedUniformRange> "
         "element must be an integer.";
       log->logError(SedmlUniformRangeStartMustBeDouble, level, version,
-        message);
+        message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'start' is missing from the "
         "<SedUniformRange> element.";
       log->logError(SedmlUniformRangeAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -864,25 +864,26 @@ SedUniformRange::readAttributes(
   // end double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetEnd = attributes.readInto("end", mEnd);
 
-  if ( mIsSetEnd == false)
+  if ( mIsSetEnd == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'end' from the <SedUniformRange> "
         "element must be an integer.";
-      log->logError(SedmlUniformRangeEndMustBeDouble, level, version, message);
+      log->logError(SedmlUniformRangeEndMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'end' is missing from the "
         "<SedUniformRange> element.";
       log->logError(SedmlUniformRangeAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -890,27 +891,27 @@ SedUniformRange::readAttributes(
   // numberOfPoints int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumberOfPoints = attributes.readInto("numberOfPoints",
     mNumberOfPoints);
 
-  if ( mIsSetNumberOfPoints == false)
+  if ( mIsSetNumberOfPoints == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'numberOfPoints' from the "
         "<SedUniformRange> element must be an integer.";
       log->logError(SedmlUniformRangeNumberOfPointsMustBeInteger, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'numberOfPoints' is missing from "
         "the <SedUniformRange> element.";
       log->logError(SedmlUniformRangeAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -929,9 +930,13 @@ SedUniformRange::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'type' is missing from the "
-      "<SedUniformRange> element.";
-    log->logError(SedmlUniformRangeAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'type' is missing from the "
+        "<SedUniformRange> element.";
+      log->logError(SedmlUniformRangeAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 }
 

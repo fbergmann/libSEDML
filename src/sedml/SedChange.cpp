@@ -610,7 +610,7 @@ SedChange::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlModelLOChangesAllowedCoreAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -627,7 +627,8 @@ SedChange::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlChangeAllowedAttributes, level, version, details);
+        log->logError(SedmlChangeAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -647,9 +648,13 @@ SedChange::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'target' is missing from the "
-      "<SedChange> element.";
-    log->logError(SedmlChangeAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'target' is missing from the "
+        "<SedChange> element.";
+      log->logError(SedmlChangeAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

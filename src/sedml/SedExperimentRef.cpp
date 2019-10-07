@@ -554,7 +554,7 @@ SedExperimentRef::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlAdjustableParameterLOExperimentRefsAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -572,7 +572,7 @@ SedExperimentRef::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlExperimentRefAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }

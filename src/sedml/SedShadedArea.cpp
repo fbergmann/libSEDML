@@ -672,7 +672,7 @@ SedShadedArea::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlShadedAreaAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -706,9 +706,13 @@ SedShadedArea::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'yDataReferenceFrom' is missing from "
-      "the <SedShadedArea> element.";
-    log->logError(SedmlShadedAreaAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'yDataReferenceFrom' is missing "
+        "from the <SedShadedArea> element.";
+      log->logError(SedmlShadedAreaAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -740,9 +744,13 @@ SedShadedArea::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'yDataReferenceTo' is missing from "
-      "the <SedShadedArea> element.";
-    log->logError(SedmlShadedAreaAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'yDataReferenceTo' is missing from "
+        "the <SedShadedArea> element.";
+      log->logError(SedmlShadedAreaAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

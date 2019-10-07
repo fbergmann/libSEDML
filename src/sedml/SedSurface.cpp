@@ -1383,7 +1383,7 @@ SedSurface::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlPlot3DLOSurfacesAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -1525,9 +1525,13 @@ SedSurface::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'zDataReference' is missing from the "
-      "<SedSurface> element.";
-    log->logError(SedmlSurfaceAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'zDataReference' is missing from "
+        "the <SedSurface> element.";
+      log->logError(SedmlSurfaceAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1547,7 +1551,7 @@ SedSurface::readAttributes(
     {
       mType = SurfaceType_fromString(type.c_str());
 
-      if (SurfaceType_isValid(mType) == 0)
+      if (log && SurfaceType_isValid(mType) == 0)
       {
         std::string msg = "The type on the <SedSurface> ";
 
@@ -1559,7 +1563,7 @@ SedSurface::readAttributes(
         msg += "is '" + type + "', which is not a valid option.";
 
         log->logError(SedmlSurfaceTypeMustBeSurfaceTypeEnum, level, version,
-          msg);
+          msg, getLine(), getColumn());
       }
     }
   }
@@ -1645,18 +1649,19 @@ SedSurface::readAttributes(
   // order int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOrder = attributes.readInto("order", mOrder);
 
-  if ( mIsSetOrder == false)
+  if ( mIsSetOrder == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'order' from the <SedSurface> "
         "element must be an integer.";
-      log->logError(SedmlSurfaceOrderMustBeInteger, level, version, message);
+      log->logError(SedmlSurfaceOrderMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

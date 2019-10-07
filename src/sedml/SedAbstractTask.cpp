@@ -673,7 +673,8 @@ SedAbstractTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlTaskAllowedAttributes, level, version, details);
+        log->logError(SedmlTaskAllowedAttributes, level,
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -691,7 +692,7 @@ SedAbstractTask::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlAbstractTaskAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -717,9 +718,13 @@ SedAbstractTask::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedAbstractTask> element.";
-    log->logError(SedmlAbstractTaskAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedAbstractTask> element.";
+      log->logError(SedmlAbstractTaskAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 
   // 

@@ -1137,7 +1137,7 @@ SedPlot::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetXAxis())
     {
       getErrorLog()->logError(SedmlPlotAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mXAxis;
@@ -1150,7 +1150,7 @@ SedPlot::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetYAxis())
     {
       getErrorLog()->logError(SedmlPlotAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mYAxis;
@@ -1247,18 +1247,19 @@ SedPlot::readAttributes(
   // height double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetHeight = attributes.readInto("height", mHeight);
 
-  if ( mIsSetHeight == false)
+  if ( mIsSetHeight == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'height' from the <SedPlot> "
         "element must be an integer.";
-      log->logError(SedmlPlotHeightMustBeDouble, level, version, message);
+      log->logError(SedmlPlotHeightMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -1266,18 +1267,19 @@ SedPlot::readAttributes(
   // width double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetWidth = attributes.readInto("width", mWidth);
 
-  if ( mIsSetWidth == false)
+  if ( mIsSetWidth == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'width' from the <SedPlot> element "
         "must be an integer.";
-      log->logError(SedmlPlotWidthMustBeDouble, level, version, message);
+      log->logError(SedmlPlotWidthMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

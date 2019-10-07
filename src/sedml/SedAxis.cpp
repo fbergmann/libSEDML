@@ -921,7 +921,8 @@ SedAxis::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlAxisAllowedAttributes, level, version, details);
+        log->logError(SedmlAxisAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -943,7 +944,7 @@ SedAxis::readAttributes(
     {
       mType = AxisType_fromString(type.c_str());
 
-      if (AxisType_isValid(mType) == 0)
+      if (log && AxisType_isValid(mType) == 0)
       {
         std::string msg = "The type on the <SedAxis> ";
 
@@ -954,32 +955,38 @@ SedAxis::readAttributes(
 
         msg += "is '" + type + "', which is not a valid option.";
 
-        log->logError(SedmlAxisTypeMustBeAxisTypeEnum, level, version, msg);
+        log->logError(SedmlAxisTypeMustBeAxisTypeEnum, level, version, msg,
+          getLine(), getColumn());
       }
     }
   }
   else
   {
-    std::string message = "Sedml attribute 'type' is missing.";
-    log->logError(SedmlAxisAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'type' is missing.";
+      log->logError(SedmlAxisAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
   // min double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetMin = attributes.readInto("min", mMin);
 
-  if ( mIsSetMin == false)
+  if ( mIsSetMin == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'min' from the <SedAxis> element "
         "must be an integer.";
-      log->logError(SedmlAxisMinMustBeDouble, level, version, message);
+      log->logError(SedmlAxisMinMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -987,18 +994,19 @@ SedAxis::readAttributes(
   // max double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetMax = attributes.readInto("max", mMax);
 
-  if ( mIsSetMax == false)
+  if ( mIsSetMax == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'max' from the <SedAxis> element "
         "must be an integer.";
-      log->logError(SedmlAxisMaxMustBeDouble, level, version, message);
+      log->logError(SedmlAxisMaxMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 

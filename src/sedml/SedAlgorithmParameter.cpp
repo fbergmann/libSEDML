@@ -913,7 +913,7 @@ SedAlgorithmParameter::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (name == "listOfAlgorithmParameters")
   {
-    if (mAlgorithmParameters->size() != 0)
+    if (getErrorLog() && mAlgorithmParameters->size() != 0)
     {
       getErrorLog()->logError(SedmlAlgorithmParameterAllowedElements,
         getLevel(), getVersion(), "", getLine(), getColumn());
@@ -1018,10 +1018,13 @@ SedAlgorithmParameter::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'kisaoID' is missing from the "
-      "<SedAlgorithmParameter> element.";
-    log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
-      message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'kisaoID' is missing from the "
+        "<SedAlgorithmParameter> element.";
+      log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 
   // 
@@ -1039,10 +1042,13 @@ SedAlgorithmParameter::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'value' is missing from the "
-      "<SedAlgorithmParameter> element.";
-    log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
-      message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'value' is missing from the "
+        "<SedAlgorithmParameter> element.";
+      log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 }
 

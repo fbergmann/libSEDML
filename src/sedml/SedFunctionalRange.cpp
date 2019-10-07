@@ -1243,20 +1243,20 @@ SedFunctionalRange::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (name == "listOfVariables")
   {
-    if (mVariables.size() != 0)
+    if (getErrorLog() && mVariables.size() != 0)
     {
       getErrorLog()->logError(SedmlFunctionalRangeAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mVariables;
   }
   else if (name == "listOfParameters")
   {
-    if (mParameters.size() != 0)
+    if (getErrorLog() && mParameters.size() != 0)
     {
       getErrorLog()->logError(SedmlFunctionalRangeAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mParameters;
@@ -1320,7 +1320,7 @@ SedFunctionalRange::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlFunctionalRangeAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1352,10 +1352,13 @@ SedFunctionalRange::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'range' is missing from the "
-      "<SedFunctionalRange> element.";
-    log->logError(SedmlFunctionalRangeAllowedAttributes, level, version,
-      message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'range' is missing from the "
+        "<SedFunctionalRange> element.";
+      log->logError(SedmlFunctionalRangeAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 }
 

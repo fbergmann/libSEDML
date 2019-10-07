@@ -922,7 +922,7 @@ SedSimulation::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlSimulationAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mAlgorithm;
@@ -987,8 +987,8 @@ SedSimulation::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlDocumentLOSimulationsAllowedCoreAttributes,
-          level, version, details);
+        log->logError(SedmlDocumentLOSimulationsAllowedCoreAttributes, level,
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -1006,7 +1006,7 @@ SedSimulation::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlSimulationAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1032,9 +1032,13 @@ SedSimulation::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedSimulation> element.";
-    log->logError(SedmlSimulationAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedSimulation> element.";
+      log->logError(SedmlSimulationAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

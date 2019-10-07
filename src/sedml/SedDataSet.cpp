@@ -778,7 +778,7 @@ SedDataSet::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlReportLODataSetsAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -795,7 +795,8 @@ SedDataSet::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlDataSetAllowedAttributes, level, version, details);
+        log->logError(SedmlDataSetAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -821,9 +822,13 @@ SedDataSet::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedDataSet> element.";
-    log->logError(SedmlDataSetAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedDataSet> element.";
+      log->logError(SedmlDataSetAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -841,9 +846,13 @@ SedDataSet::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'label' is missing from the "
-      "<SedDataSet> element.";
-    log->logError(SedmlDataSetAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'label' is missing from the "
+        "<SedDataSet> element.";
+      log->logError(SedmlDataSetAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -889,9 +898,13 @@ SedDataSet::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'dataReference' is missing from the "
-      "<SedDataSet> element.";
-    log->logError(SedmlDataSetAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'dataReference' is missing from "
+        "the <SedDataSet> element.";
+      log->logError(SedmlDataSetAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

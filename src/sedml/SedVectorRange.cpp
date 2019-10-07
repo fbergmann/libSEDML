@@ -564,7 +564,7 @@ SedVectorRange::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlVectorRangeAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }

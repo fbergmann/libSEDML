@@ -1163,9 +1163,13 @@ SedCurve::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'yDataReference' is missing from the "
-      "<SedCurve> element.";
-    log->logError(SedmlCurveAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'yDataReference' is missing from "
+        "the <SedCurve> element.";
+      log->logError(SedmlCurveAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1185,7 +1189,7 @@ SedCurve::readAttributes(
     {
       mType = CurveType_fromString(type.c_str());
 
-      if (CurveType_isValid(mType) == 0)
+      if (log && CurveType_isValid(mType) == 0)
       {
         std::string msg = "The type on the <SedCurve> ";
 
@@ -1196,10 +1200,11 @@ SedCurve::readAttributes(
 
         msg += "is '" + type + "', which is not a valid option.";
 
-        log->logError(SedmlCurveTypeMustBeCurveTypeEnum, level, version, msg);
+        log->logError(SedmlCurveTypeMustBeCurveTypeEnum, level, version, msg,
+          getLine(), getColumn());
       }
     }
-  }  
+  }
 
   // 
   // xErrorUpper SIdRef (use = "optional" )

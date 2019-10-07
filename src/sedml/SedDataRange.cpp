@@ -577,8 +577,8 @@ SedDataRange::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlDataRangeAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlDataRangeAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -610,9 +610,13 @@ SedDataRange::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'sourceRef' is missing from the "
-      "<SedDataRange> element.";
-    log->logError(SedmlDataRangeAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'sourceRef' is missing from the "
+        "<SedDataRange> element.";
+      log->logError(SedmlDataRangeAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

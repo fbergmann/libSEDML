@@ -435,6 +435,24 @@ public:
 
 
   /**
+   * Creates a new SedDataRange object, adds it to this SedRepeatedTask object
+   * and returns the SedDataRange object created.
+   *
+   * @return a new SedDataRange object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addRange(const SedRange* object)
+   * @see getRange(const std::string& sid)
+   * @see getRange(unsigned int n)
+   * @see getNumRanges()
+   * @see removeRange(const std::string& sid)
+   * @see removeRange(unsigned int n)
+   */
+  SedDataRange* createDataRange();
+
+
+  /**
    * Removes the nth SedRange from this SedRepeatedTask and returns a pointer
    * to it.
    *

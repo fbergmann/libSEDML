@@ -736,7 +736,7 @@ SedLine::readAttributes(
     {
       mStyle = LineType_fromString(style.c_str());
 
-      if (LineType_isValid(mStyle) == 0)
+      if (log && LineType_isValid(mStyle) == 0)
       {
         std::string msg = "The style on the <SedLine> ";
 
@@ -771,12 +771,12 @@ SedLine::readAttributes(
   // thickness double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetThickness = attributes.readInto("thickness", mThickness);
 
-  if ( mIsSetThickness == false)
+  if ( mIsSetThickness == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

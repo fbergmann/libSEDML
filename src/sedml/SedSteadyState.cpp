@@ -470,7 +470,8 @@ SedSteadyState::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSimulationAllowedAttributes, level, version, details);
+        log->logError(SedmlSimulationAllowedAttributes, level, version,
+          details, getLine(), getColumn());
       }
     }
   }

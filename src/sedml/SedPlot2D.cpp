@@ -1005,7 +1005,7 @@ SedPlot2D::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetRightYAxis())
     {
       getErrorLog()->logError(SedmlPlot2DAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mRightYAxis;
@@ -1015,10 +1015,10 @@ SedPlot2D::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "listOfCurves")
   {
-    if (mAbstractCurves.size() != 0)
+    if (getErrorLog() && mAbstractCurves.size() != 0)
     {
       getErrorLog()->logError(SedmlPlot2DAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mAbstractCurves;
@@ -1079,7 +1079,8 @@ SedPlot2D::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlPlotAllowedAttributes, level, version, details);
+        log->logError(SedmlPlotAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

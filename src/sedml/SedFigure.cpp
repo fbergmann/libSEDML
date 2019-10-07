@@ -900,10 +900,10 @@ SedFigure::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "listOfSubPlots")
   {
-    if (mSubPlots.size() != 0)
+    if (getErrorLog() && mSubPlots.size() != 0)
     {
       getErrorLog()->logError(SedmlFigureAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSubPlots;
@@ -968,7 +968,8 @@ SedFigure::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlFigureAllowedAttributes, level, version, details);
+        log->logError(SedmlFigureAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -977,18 +978,19 @@ SedFigure::readAttributes(
   // numRows int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumRows = attributes.readInto("numRows", mNumRows);
 
-  if ( mIsSetNumRows == false)
+  if ( mIsSetNumRows == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'numRows' from the <SedFigure> "
         "element must be an integer.";
-      log->logError(SedmlFigureNumRowsMustBeInteger, level, version, message);
+      log->logError(SedmlFigureNumRowsMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -996,18 +998,19 @@ SedFigure::readAttributes(
   // numCols int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumCols = attributes.readInto("numCols", mNumCols);
 
-  if ( mIsSetNumCols == false)
+  if ( mIsSetNumCols == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'numCols' from the <SedFigure> "
         "element must be an integer.";
-      log->logError(SedmlFigureNumColsMustBeInteger, level, version, message);
+      log->logError(SedmlFigureNumColsMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

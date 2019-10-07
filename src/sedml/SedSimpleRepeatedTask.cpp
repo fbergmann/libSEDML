@@ -676,7 +676,7 @@ SedSimpleRepeatedTask::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlSimpleRepeatedTaskAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -710,26 +710,26 @@ SedSimpleRepeatedTask::readAttributes(
   // numRepeats int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumRepeats = attributes.readInto("numRepeats", mNumRepeats);
 
-  if ( mIsSetNumRepeats == false)
+  if ( mIsSetNumRepeats == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'numRepeats' from the "
         "<SedSimpleRepeatedTask> element must be an integer.";
       log->logError(SedmlSimpleRepeatedTaskNumRepeatsMustBeInteger, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'numRepeats' is missing from the "
         "<SedSimpleRepeatedTask> element.";
       log->logError(SedmlSimpleRepeatedTaskAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 }

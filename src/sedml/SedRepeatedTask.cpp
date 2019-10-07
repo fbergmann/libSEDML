@@ -37,6 +37,7 @@
 #include <sedml/SedUniformRange.h>
 #include <sedml/SedVectorRange.h>
 #include <sedml/SedFunctionalRange.h>
+#include <sedml/SedDataRange.h>
 
 
 using namespace std;
@@ -437,6 +438,32 @@ SedRepeatedTask::createFunctionalRange()
   }
 
   return sfr;
+}
+
+
+/*
+ * Creates a new SedDataRange object, adds it to this SedRepeatedTask object
+ * and returns the SedDataRange object created.
+ */
+SedDataRange*
+SedRepeatedTask::createDataRange()
+{
+  SedDataRange* sdr = NULL;
+
+  try
+  {
+    sdr = new SedDataRange(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sdr != NULL)
+  {
+    mRanges.appendAndOwn(sdr);
+  }
+
+  return sdr;
 }
 
 
@@ -1214,6 +1241,10 @@ SedRepeatedTask::createChildObject(const std::string& elementName)
   {
     return createFunctionalRange();
   }
+  else if (elementName == "dataRange")
+  {
+    return createDataRange();
+  }
   else if (elementName == "setValue")
   {
     return createSetValue();
@@ -1254,6 +1285,11 @@ SedRepeatedTask::addChildObject(const std::string& elementName,
   {
     return addRange((const SedRange*)(element));
   }
+  else if (elementName == "dataRange" && element->getTypeCode() ==
+    SEDML_DATA_RANGE)
+  {
+    return addRange((const SedRange*)(element));
+  }
   else if (elementName == "setValue" && element->getTypeCode() ==
     SEDML_TASK_SETVALUE)
   {
@@ -1291,6 +1327,10 @@ SedRepeatedTask::removeChildObject(const std::string& elementName,
     return removeRange(id);
   }
   else if (elementName == "functionalRange")
+  {
+    return removeRange(id);
+  }
+  else if (elementName == "dataRange")
   {
     return removeRange(id);
   }
@@ -1436,30 +1476,30 @@ SedRepeatedTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "listOfRanges")
   {
-    if (mRanges.size() != 0)
+    if (getErrorLog() && mRanges.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mRanges;
   }
   else if (name == "listOfChanges")
   {
-    if (mSetValues.size() != 0)
+    if (getErrorLog() && mSetValues.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSetValues;
   }
   else if (name == "listOfSubTasks")
   {
-    if (mSubTasks.size() != 0)
+    if (getErrorLog() && mSubTasks.size() != 0)
     {
       getErrorLog()->logError(SedmlRepeatedTaskAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSubTasks;
@@ -1525,7 +1565,7 @@ SedRepeatedTask::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlRepeatedTaskAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1560,12 +1600,12 @@ SedRepeatedTask::readAttributes(
   // resetModel bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetResetModel = attributes.readInto("resetModel", mResetModel);
 
   if (mIsSetResetModel == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

@@ -1226,10 +1226,10 @@ SedVariable::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "listOfRemainingDimensions")
   {
-    if (mRemainingDimensions.size() != 0)
+    if (getErrorLog() && mRemainingDimensions.size() != 0)
     {
       getErrorLog()->logError(SedmlVariableAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mRemainingDimensions;
@@ -1301,7 +1301,7 @@ SedVariable::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataGeneratorLOVariablesAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -1318,7 +1318,8 @@ SedVariable::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlVariableAllowedAttributes, level, version, details);
+        log->logError(SedmlVariableAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -1344,9 +1345,13 @@ SedVariable::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedVariable> element.";
-    log->logError(SedmlVariableAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedVariable> element.";
+      log->logError(SedmlVariableAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

@@ -594,7 +594,7 @@ SedRange::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlRepeatedTaskLORangesAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -611,7 +611,8 @@ SedRange::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlRangeAllowedAttributes, level, version, details);
+        log->logError(SedmlRangeAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -637,9 +638,13 @@ SedRange::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the <SedRange> "
-      "element.";
-    log->logError(SedmlRangeAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedRange> element.";
+      log->logError(SedmlRangeAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

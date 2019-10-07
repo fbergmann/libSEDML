@@ -643,7 +643,7 @@ SedSubTask::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlRepeatedTaskLOSubTasksAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -660,7 +660,8 @@ SedSubTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSubTaskAllowedAttributes, level, version, details);
+        log->logError(SedmlSubTaskAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -669,24 +670,26 @@ SedSubTask::readAttributes(
   // order int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOrder = attributes.readInto("order", mOrder);
 
-  if ( mIsSetOrder == false)
+  if ( mIsSetOrder == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'order' from the <SedSubTask> "
         "element must be an integer.";
-      log->logError(SedmlSubTaskOrderMustBeInteger, level, version, message);
+      log->logError(SedmlSubTaskOrderMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'order' is missing from the "
         "<SedSubTask> element.";
-      log->logError(SedmlSubTaskAllowedAttributes, level, version, message);
+      log->logError(SedmlSubTaskAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -716,9 +719,13 @@ SedSubTask::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'task' is missing from the "
-      "<SedSubTask> element.";
-    log->logError(SedmlSubTaskAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'task' is missing from the "
+        "<SedSubTask> element.";
+      log->logError(SedmlSubTaskAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

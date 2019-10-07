@@ -605,7 +605,8 @@ SedFill::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlFillAllowedAttributes, level, version, details);
+        log->logError(SedmlFillAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -625,9 +626,13 @@ SedFill::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'color' is missing from the "
-      "<SedFill> element.";
-    log->logError(SedmlFillAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'color' is missing from the "
+        "<SedFill> element.";
+      log->logError(SedmlFillAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

@@ -652,7 +652,8 @@ SedTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlTaskAllowedAttributes, level, version, details);
+        log->logError(SedmlTaskAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

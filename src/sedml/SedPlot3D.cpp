@@ -911,7 +911,7 @@ SedPlot3D::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     if (isSetZAxis())
     {
       getErrorLog()->logError(SedmlPlot3DAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mZAxis;
@@ -921,10 +921,10 @@ SedPlot3D::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "listOfSurfaces")
   {
-    if (mSurfaces.size() != 0)
+    if (getErrorLog() && mSurfaces.size() != 0)
     {
       getErrorLog()->logError(SedmlPlot3DAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSurfaces;
@@ -985,7 +985,8 @@ SedPlot3D::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlPlotAllowedAttributes, level, version, details);
+        log->logError(SedmlPlotAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

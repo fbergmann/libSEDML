@@ -695,7 +695,7 @@ SedParameter::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataGeneratorLOParametersAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -712,8 +712,8 @@ SedParameter::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlParameterAllowedAttributes, level, version,
-          details);
+        log->logError(SedmlParameterAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -739,9 +739,13 @@ SedParameter::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedParameter> element.";
-    log->logError(SedmlParameterAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedParameter> element.";
+      log->logError(SedmlParameterAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -762,24 +766,26 @@ SedParameter::readAttributes(
   // value double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetValue = attributes.readInto("value", mValue);
 
-  if ( mIsSetValue == false)
+  if ( mIsSetValue == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'value' from the <SedParameter> "
         "element must be an integer.";
-      log->logError(SedmlParameterValueMustBeDouble, level, version, message);
+      log->logError(SedmlParameterValueMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'value' is missing from the "
         "<SedParameter> element.";
-      log->logError(SedmlParameterAllowedAttributes, level, version, message);
+      log->logError(SedmlParameterAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

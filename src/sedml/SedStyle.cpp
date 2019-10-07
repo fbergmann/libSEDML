@@ -289,7 +289,7 @@ SedStyle::unsetBaseStyle()
  * Returns the value of the "line" element of this SedStyle.
  */
 const SedLine*
-SedStyle::getLine() const
+SedStyle::getLineStyle() const
 {
   return mLine;
 }
@@ -299,7 +299,7 @@ SedStyle::getLine() const
  * Returns the value of the "line" element of this SedStyle.
  */
 SedLine*
-SedStyle::getLine()
+SedStyle::getLineStyle()
 {
   return mLine;
 }
@@ -349,7 +349,7 @@ SedStyle::getFill()
  * Predicate returning @c true if this SedStyle's "line" element is set.
  */
 bool
-SedStyle::isSetLine() const
+SedStyle::isSetLineStyle() const
 {
   return (mLine != NULL);
 }
@@ -379,7 +379,7 @@ SedStyle::isSetFill() const
  * Sets the value of the "line" element of this SedStyle.
  */
 int
-SedStyle::setLine(const SedLine* line)
+SedStyle::setLineStyle(const SedLine* line)
 {
   if (mLine == line)
   {
@@ -470,7 +470,7 @@ SedStyle::setFill(const SedFill* fill)
  * the SedLine object created.
  */
 SedLine*
-SedStyle::createLine()
+SedStyle::createLineStyle()
 {
   if (mLine != NULL)
   {
@@ -529,7 +529,7 @@ SedStyle::createFill()
  * Unsets the value of the "line" element of this SedStyle.
  */
 int
-SedStyle::unsetLine()
+SedStyle::unsetLineStyle()
 {
   delete mLine;
   mLine = NULL;
@@ -625,7 +625,7 @@ SedStyle::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeElements(stream);
 
-  if (isSetLine() == true)
+  if (isSetLineStyle() == true)
   {
     mLine->write(stream);
   }
@@ -983,7 +983,7 @@ SedStyle::createChildObject(const std::string& elementName)
 
   if (elementName == "line")
   {
-    return createLine();
+    return createLineStyle();
   }
   else if (elementName == "marker")
   {
@@ -1012,7 +1012,7 @@ SedStyle::addChildObject(const std::string& elementName,
 {
   if (elementName == "line" && element->getTypeCode() == SEDML_LINE)
   {
-    return setLine((const SedLine*)(element));
+    return setLineStyle((const SedLine*)(element));
   }
   else if (elementName == "marker" && element->getTypeCode() == SEDML_MARKER)
   {
@@ -1042,8 +1042,8 @@ SedStyle::removeChildObject(const std::string& elementName,
 {
   if (elementName == "line")
   {
-    SedLine * obj = getLine();
-    if (unsetLine() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedLine * obj = getLineStyle();
+    if (unsetLineStyle() == LIBSBML_OPERATION_SUCCESS) return obj;
   }
   else if (elementName == "marker")
   {
@@ -1075,7 +1075,7 @@ SedStyle::getNumObjects(const std::string& elementName)
 
   if (elementName == "line")
   {
-    if (isSetLine())
+    if (isSetLineStyle())
     {
       return 1;
     }
@@ -1114,7 +1114,7 @@ SedStyle::getObject(const std::string& elementName, unsigned int index)
 
   if (elementName == "line")
   {
-    return getLine();
+    return getLineStyle();
   }
   else if (elementName == "marker")
   {
@@ -1206,10 +1206,10 @@ SedStyle::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "line")
   {
-    if (isSetLine())
+    if (getErrorLog() && isSetLineStyle())
     {
       getErrorLog()->logError(SedmlStyleAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mLine;
@@ -1218,10 +1218,10 @@ SedStyle::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "marker")
   {
-    if (isSetMarker())
+    if (getErrorLog() && isSetMarker())
     {
       getErrorLog()->logError(SedmlStyleAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mMarker;
@@ -1230,10 +1230,10 @@ SedStyle::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "fill")
   {
-    if (isSetFill())
+    if (getErrorLog() && isSetFill())
     {
       getErrorLog()->logError(SedmlStyleAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mFill;
@@ -1299,7 +1299,7 @@ SedStyle::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDocumentLOStylesAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -1316,7 +1316,8 @@ SedStyle::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlStyleAllowedAttributes, level, version, details);
+        log->logError(SedmlStyleAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -1342,9 +1343,13 @@ SedStyle::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the <SedStyle> "
-      "element.";
-    log->logError(SedmlStyleAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedStyle> element.";
+      log->logError(SedmlStyleAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1606,7 +1611,7 @@ LIBSEDML_EXTERN
 int
 SedStyle_isSetLine(const SedStyle_t * ss)
 {
-  return (ss != NULL) ? static_cast<int>(ss->isSetLine()) : 0;
+  return (ss != NULL) ? static_cast<int>(ss->isSetLineStyle()) : 0;
 }
 
 
@@ -1640,7 +1645,7 @@ LIBSEDML_EXTERN
 int
 SedStyle_setLine(SedStyle_t * ss, const SedLine_t* line)
 {
-  return (ss != NULL) ? ss->setLine(line) : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setLineStyle(line) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1679,7 +1684,7 @@ SedStyle_createLine(SedStyle_t* ss)
     return NULL;
   }
 
-  return (SedLine_t*)(ss->createLine());
+  return (SedLine_t*)(ss->createLineStyle());
 }
 
 
@@ -1724,7 +1729,7 @@ LIBSEDML_EXTERN
 int
 SedStyle_unsetLine(SedStyle_t * ss)
 {
-  return (ss != NULL) ? ss->unsetLine() : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->unsetLineStyle() : LIBSEDML_INVALID_OBJECT;
 }
 
 

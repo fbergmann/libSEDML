@@ -1326,7 +1326,7 @@ SedParameterEstimationTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
     if (isSetObjective())
     {
       getErrorLog()->logError(SedmlParameterEstimationTaskAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mObjective;
@@ -1338,7 +1338,7 @@ SedParameterEstimationTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
     if (isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlParameterEstimationTaskAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mAlgorithm;
@@ -1348,20 +1348,20 @@ SedParameterEstimationTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (name == "listOfAdjustableParameters")
   {
-    if (mAdjustableParameters.size() != 0)
+    if (getErrorLog() && mAdjustableParameters.size() != 0)
     {
       getErrorLog()->logError(SedmlParameterEstimationTaskAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mAdjustableParameters;
   }
   else if (name == "listOfFitExperiments")
   {
-    if (mFitExperiments.size() != 0)
+    if (getErrorLog() && mFitExperiments.size() != 0)
     {
       getErrorLog()->logError(SedmlParameterEstimationTaskAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mFitExperiments;
@@ -1425,7 +1425,8 @@ SedParameterEstimationTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlTaskAllowedAttributes, level, version, details);
+        log->logError(SedmlAbstractTaskAllowedAttributes, level, version,
+          details, getLine(), getColumn());
       }
     }
   }

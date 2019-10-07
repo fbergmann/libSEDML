@@ -562,7 +562,7 @@ SedChangeAttribute::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlChangeAttributeAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -582,10 +582,13 @@ SedChangeAttribute::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'newValue' is missing from the "
-      "<SedChangeAttribute> element.";
-    log->logError(SedmlChangeAttributeAllowedAttributes, level, version,
-      message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'newValue' is missing from the "
+        "<SedChangeAttribute> element.";
+      log->logError(SedmlChangeAttributeAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 }
 

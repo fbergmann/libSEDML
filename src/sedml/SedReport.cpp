@@ -769,10 +769,10 @@ SedReport::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "listOfDataSets")
   {
-    if (mDataSets.size() != 0)
+    if (getErrorLog() && mDataSets.size() != 0)
     {
       getErrorLog()->logError(SedmlReportAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mDataSets;
@@ -833,7 +833,8 @@ SedReport::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlOutputAllowedAttributes, level, version, details);
+        log->logError(SedmlOutputAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

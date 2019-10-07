@@ -979,10 +979,10 @@ SedDataSource::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "listOfSlices")
   {
-    if (mSlices.size() != 0)
+    if (getErrorLog() && mSlices.size() != 0)
     {
       getErrorLog()->logError(SedmlDataSourceAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mSlices;
@@ -1048,7 +1048,7 @@ SedDataSource::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataDescriptionLODataSourcesAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -1066,7 +1066,7 @@ SedDataSource::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataSourceAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1092,9 +1092,13 @@ SedDataSource::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the "
-      "<SedDataSource> element.";
-    log->logError(SedmlDataSourceAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedDataSource> element.";
+      log->logError(SedmlDataSourceAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

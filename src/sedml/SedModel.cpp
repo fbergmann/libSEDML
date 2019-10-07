@@ -1190,10 +1190,10 @@ SedModel::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "listOfChanges")
   {
-    if (mChanges.size() != 0)
+    if (getErrorLog() && mChanges.size() != 0)
     {
       getErrorLog()->logError(SedmlModelAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mChanges;
@@ -1261,7 +1261,7 @@ SedModel::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDocumentLOModelsAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -1278,7 +1278,8 @@ SedModel::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlModelAllowedAttributes, level, version, details);
+        log->logError(SedmlModelAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -1304,9 +1305,13 @@ SedModel::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'id' is missing from the <SedModel> "
-      "element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'id' is missing from the "
+        "<SedModel> element.";
+      log->logError(SedmlModelAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1352,9 +1357,13 @@ SedModel::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'source' is missing from the "
-      "<SedModel> element.";
-    log->logError(SedmlModelAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'source' is missing from the "
+        "<SedModel> element.";
+      log->logError(SedmlModelAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 }
 

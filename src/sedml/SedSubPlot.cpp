@@ -885,7 +885,7 @@ SedSubPlot::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlFigureLOSubPlotsAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -902,7 +902,8 @@ SedSubPlot::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSubPlotAllowedAttributes, level, version, details);
+        log->logError(SedmlSubPlotAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -933,33 +934,39 @@ SedSubPlot::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'plot' is missing from the "
-      "<SedSubPlot> element.";
-    log->logError(SedmlSubPlotAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'plot' is missing from the "
+        "<SedSubPlot> element.";
+      log->logError(SedmlSubPlotAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
   // row int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetRow = attributes.readInto("row", mRow);
 
-  if ( mIsSetRow == false)
+  if ( mIsSetRow == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'row' from the <SedSubPlot> "
         "element must be an integer.";
-      log->logError(SedmlSubPlotRowMustBeInteger, level, version, message);
+      log->logError(SedmlSubPlotRowMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'row' is missing from the "
         "<SedSubPlot> element.";
-      log->logError(SedmlSubPlotAllowedAttributes, level, version, message);
+      log->logError(SedmlSubPlotAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -967,24 +974,26 @@ SedSubPlot::readAttributes(
   // col int (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetCol = attributes.readInto("col", mCol);
 
-  if ( mIsSetCol == false)
+  if ( mIsSetCol == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'col' from the <SedSubPlot> "
         "element must be an integer.";
-      log->logError(SedmlSubPlotColMustBeInteger, level, version, message);
+      log->logError(SedmlSubPlotColMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'col' is missing from the "
         "<SedSubPlot> element.";
-      log->logError(SedmlSubPlotAllowedAttributes, level, version, message);
+      log->logError(SedmlSubPlotAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -992,18 +1001,19 @@ SedSubPlot::readAttributes(
   // rowSpan int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetRowSpan = attributes.readInto("rowSpan", mRowSpan);
 
-  if ( mIsSetRowSpan == false)
+  if ( mIsSetRowSpan == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'rowSpan' from the <SedSubPlot> "
         "element must be an integer.";
-      log->logError(SedmlSubPlotRowSpanMustBeInteger, level, version, message);
+      log->logError(SedmlSubPlotRowSpanMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -1011,18 +1021,19 @@ SedSubPlot::readAttributes(
   // colSpan int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetColSpan = attributes.readInto("colSpan", mColSpan);
 
-  if ( mIsSetColSpan == false)
+  if ( mIsSetColSpan == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'colSpan' from the <SedSubPlot> "
         "element must be an integer.";
-      log->logError(SedmlSubPlotColSpanMustBeInteger, level, version, message);
+      log->logError(SedmlSubPlotColSpanMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

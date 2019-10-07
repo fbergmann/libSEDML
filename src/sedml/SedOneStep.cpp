@@ -558,7 +558,8 @@ SedOneStep::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlOneStepAllowedAttributes, level, version, details);
+        log->logError(SedmlOneStepAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -567,24 +568,26 @@ SedOneStep::readAttributes(
   // step double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetStep = attributes.readInto("step", mStep);
 
-  if ( mIsSetStep == false)
+  if ( mIsSetStep == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'step' from the <SedOneStep> "
         "element must be an integer.";
-      log->logError(SedmlOneStepStepMustBeDouble, level, version, message);
+      log->logError(SedmlOneStepStepMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'step' is missing from the "
         "<SedOneStep> element.";
-      log->logError(SedmlOneStepAllowedAttributes, level, version, message);
+      log->logError(SedmlOneStepAllowedAttributes, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

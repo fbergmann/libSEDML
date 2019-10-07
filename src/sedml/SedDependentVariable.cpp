@@ -742,10 +742,13 @@ SedDependentVariable::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'term' is missing from the "
-      "<SedDependentVariable> element.";
-    log->logError(SedmlDependentVariableAllowedAttributes, level, version,
-      message, getLine(), getColumn());
+    if (log)
+    {
+      std::string message = "Sedml attribute 'term' is missing from the "
+        "<SedDependentVariable> element.";
+      log->logError(SedmlDependentVariableAllowedAttributes, level, version,
+        message, getLine(), getColumn());
+    }
   }
 
   // 

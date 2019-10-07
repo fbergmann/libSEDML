@@ -880,7 +880,7 @@ SedSlice::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataSourceLOSlicesAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -930,9 +930,13 @@ SedSlice::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'reference' is missing from the "
-      "<SedSlice> element.";
-    log->logError(SedmlSliceAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'reference' is missing from the "
+        "<SedSlice> element.";
+      log->logError(SedmlSliceAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -950,9 +954,13 @@ SedSlice::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'value' is missing from the "
-      "<SedSlice> element.";
-    log->logError(SedmlSliceAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'value' is missing from the "
+        "<SedSlice> element.";
+      log->logError(SedmlSliceAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -985,19 +993,19 @@ SedSlice::readAttributes(
   // startIndex int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetStartIndex = attributes.readInto("startIndex", mStartIndex);
 
-  if ( mIsSetStartIndex == false)
+  if ( mIsSetStartIndex == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'startIndex' from the <SedSlice> "
         "element must be an integer.";
-      log->logError(SedmlSliceStartIndexMustBeInteger, level, version,
-        message);
+      log->logError(SedmlSliceStartIndexMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -1005,18 +1013,19 @@ SedSlice::readAttributes(
   // endIndex int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetEndIndex = attributes.readInto("endIndex", mEndIndex);
 
-  if ( mIsSetEndIndex == false)
+  if ( mIsSetEndIndex == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'endIndex' from the <SedSlice> "
         "element must be an integer.";
-      log->logError(SedmlSliceEndIndexMustBeInteger, level, version, message);
+      log->logError(SedmlSliceEndIndexMustBeInteger, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

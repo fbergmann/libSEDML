@@ -867,7 +867,8 @@ SedMarker::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlMarkerAllowedAttributes, level, version, details);
+        log->logError(SedmlMarkerAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -876,18 +877,19 @@ SedMarker::readAttributes(
   // size double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetSize = attributes.readInto("size", mSize);
 
-  if ( mIsSetSize == false)
+  if ( mIsSetSize == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'size' from the <SedMarker> "
         "element must be an integer.";
-      log->logError(SedmlMarkerSizeMustBeDouble, level, version, message);
+      log->logError(SedmlMarkerSizeMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -908,7 +910,7 @@ SedMarker::readAttributes(
     {
       mStyle = MarkerType_fromString(style.c_str());
 
-      if (MarkerType_isValid(mStyle) == 0)
+      if (log && MarkerType_isValid(mStyle) == 0)
       {
         std::string msg = "The style on the <SedMarker> ";
 
@@ -920,7 +922,7 @@ SedMarker::readAttributes(
         msg += "is '" + style + "', which is not a valid option.";
 
         log->logError(SedmlMarkerStyleMustBeMarkerTypeEnum, level, version,
-          msg);
+          msg, getLine(), getColumn());
       }
     }
   }
@@ -957,19 +959,19 @@ SedMarker::readAttributes(
   // lineThickness double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetLineThickness = attributes.readInto("lineThickness", mLineThickness);
 
-  if ( mIsSetLineThickness == false)
+  if ( mIsSetLineThickness == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'lineThickness' from the "
         "<SedMarker> element must be an integer.";
       log->logError(SedmlMarkerLineThicknessMustBeDouble, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 }

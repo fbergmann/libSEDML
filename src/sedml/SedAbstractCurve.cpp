@@ -1075,7 +1075,8 @@ SedAbstractCurve::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlCurveAllowedAttributes, level, version, details);
+        log->logError(SedmlCurveAllowedAttributes, level, version,
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1093,7 +1094,7 @@ SedAbstractCurve::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlAbstractCurveAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1153,19 +1154,19 @@ SedAbstractCurve::readAttributes(
   // order int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOrder = attributes.readInto("order", mOrder);
 
-  if ( mIsSetOrder == false)
+  if ( mIsSetOrder == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'order' from the "
         "<SedAbstractCurve> element must be an integer.";
       log->logError(SedmlAbstractCurveOrderMustBeInteger, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -1305,7 +1306,7 @@ LIBSEDML_EXTERN
 SedCurve_t *
 SedAbstractCurve_createCurve(unsigned int level, unsigned int version)
 {
-  return new SedCurve_t(level, version);
+  return new SedCurve(level, version);
 }
 
 

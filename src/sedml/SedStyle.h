@@ -221,7 +221,7 @@ public:
    *
    * @return the value of the "line" element of this SedStyle as a SedLine*.
    */
-  const SedLine* getLine() const;
+  const SedLine* getLineStyle() const;
 
 
   /**
@@ -229,7 +229,7 @@ public:
    *
    * @return the value of the "line" element of this SedStyle as a SedLine*.
    */
-  SedLine* getLine();
+  SedLine* getLineStyle();
 
 
   /**
@@ -272,7 +272,7 @@ public:
    * @return @c true if this SedStyle's "line" element has been set, otherwise
    * @c false is returned.
    */
-  bool isSetLine() const;
+  bool isSetLineStyle() const;
 
 
   /**
@@ -303,7 +303,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setLine(const SedLine* line);
+  int setLineStyle(const SedLine* line);
 
 
   /**
@@ -338,7 +338,7 @@ public:
    *
    * @return a new SedLine object instance.
    */
-  SedLine* createLine();
+  SedLine* createLineStyle();
 
 
   /**
@@ -366,7 +366,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetLine();
+  int unsetLineStyle();
 
 
   /**

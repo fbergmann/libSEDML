@@ -1128,7 +1128,7 @@ SedFitExperiment::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlFitExperimentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     delete mAlgorithm;
@@ -1137,10 +1137,10 @@ SedFitExperiment::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   }
   else if (name == "listOfFitMappings")
   {
-    if (mFitMappings.size() != 0)
+    if (getErrorLog() && mFitMappings.size() != 0)
     {
       getErrorLog()->logError(SedmlFitExperimentAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mFitMappings;
@@ -1204,7 +1204,7 @@ SedFitExperiment::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlParameterEstimationTaskLOFitExperimentsAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -1264,7 +1264,7 @@ SedFitExperiment::readAttributes(
     {
       mRepresents = ExperimentType_fromString(represents.c_str());
 
-      if (ExperimentType_isValid(mRepresents) == 0)
+      if (log && ExperimentType_isValid(mRepresents) == 0)
       {
         std::string msg = "The represents on the <SedFitExperiment> ";
 
@@ -1276,7 +1276,7 @@ SedFitExperiment::readAttributes(
         msg += "is '" + represents + "', which is not a valid option.";
 
         log->logError(SedmlFitExperimentRepresentsMustBeExperimentTypeEnum,
-          level, version, msg);
+          level, version, msg, getLine(), getColumn());
       }
     }
   }

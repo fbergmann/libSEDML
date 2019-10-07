@@ -907,7 +907,7 @@ SedSetValue::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlRepeatedTaskLOSetValuesAllowedCoreAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
@@ -924,7 +924,8 @@ SedSetValue::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlSetValueAllowedAttributes, level, version, details);
+        log->logError(SedmlSetValueAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -957,9 +958,13 @@ SedSetValue::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'modelReference' is missing from the "
-      "<SedSetValue> element.";
-    log->logError(SedmlSetValueAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'modelReference' is missing from "
+        "the <SedSetValue> element.";
+      log->logError(SedmlSetValueAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 

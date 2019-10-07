@@ -594,7 +594,8 @@ SedChangeXML::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlChangeAllowedAttributes, level, version, details);
+        log->logError(SedmlChangeAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }

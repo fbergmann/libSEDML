@@ -1117,10 +1117,10 @@ SedAdjustableParameter::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (name == "bounds")
   {
-    if (isSetBounds())
+    if (getErrorLog() && isSetBounds())
     {
       getErrorLog()->logError(SedmlAdjustableParameterAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     delete mBounds;
@@ -1129,10 +1129,10 @@ SedAdjustableParameter::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
   }
   else if (name == "listOfExperimentRefs")
   {
-    if (mExperimentRefs.size() != 0)
+    if (getErrorLog() && mExperimentRefs.size() != 0)
     {
       getErrorLog()->logError(SedmlAdjustableParameterAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mExperimentRefs;
@@ -1197,7 +1197,7 @@ SedAdjustableParameter::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlParameterEstimationTaskLOAdjustableParametersAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -1215,7 +1215,7 @@ SedAdjustableParameter::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlAdjustableParameterAllowedAttributes, level,
-          version, details);
+          version, details, getLine(), getColumn());
       }
     }
   }
