@@ -67,7 +67,8 @@
             <attribute name="remainingDimension" required="false" type="lo_element" element="RemainingDimension" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="remainingDimension" element="RemainingDimension" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="variable" element="Variable" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="dependentVariable" element="DependentVariable" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="Parameter" typeCode="SEDML_PARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" elementName="parameter">
