@@ -911,7 +911,7 @@ SedAlgorithmParameter::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   const std::string& name = stream.peek().getName();
 
-  if (name == "listOfAlgorithmParameters *")
+  if (name == "listOfAlgorithmParameters")
   {
     if (mAlgorithmParameters->size() != 0)
     {
