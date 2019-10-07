@@ -32,6 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedDataGenerator.h>
+#include <sedml/SedDependentVariable.h>
 #include <sedml/SedListOfDataGenerators.h>
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/math/MathML.h>
@@ -487,6 +488,33 @@ SedDataGenerator::createVariable()
   try
   {
     sv = new SedVariable(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sv != NULL)
+  {
+    mVariables.appendAndOwn(sv);
+  }
+
+  return sv;
+}
+
+
+
+/*
+ * Creates a new SedVariable object, adds it to this SedDataGenerator object
+ * and returns the SedVariable object created.
+ */
+SedDependentVariable*
+SedDataGenerator::createDependentVariable()
+{
+  SedDependentVariable* sv = NULL;
+
+  try
+  {
+    sv = new SedDependentVariable(getSedNamespaces());
   }
   catch (...)
   {
@@ -1086,7 +1114,13 @@ SedDataGenerator::createChildObject(const std::string& elementName)
   {
     return createVariable();
   }
-  else if (elementName == "parameter")
+  
+  if (elementName == "dependentVariable")
+  {
+    return createDependentVariable();
+  }
+
+  if (elementName == "parameter")
   {
     return createParameter();
   }
@@ -1253,7 +1287,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mVariables.size() != 0)
     {
       getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mVariables;
@@ -1263,7 +1297,7 @@ SedDataGenerator::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mParameters.size() != 0)
     {
       getErrorLog()->logError(SedmlDataGeneratorAllowedElements, getLevel(),
-        getVersion());
+        getVersion(), "", getLine(), getColumn());
     }
 
     obj = &mParameters;
@@ -1327,7 +1361,7 @@ SedDataGenerator::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDocumentLODataGeneratorsAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -1345,7 +1379,7 @@ SedDataGenerator::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDataGeneratorAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1373,8 +1407,8 @@ SedDataGenerator::readAttributes(
   {
     std::string message = "Sedml attribute 'id' is missing from the "
       "<SedDataGenerator> element.";
-    log->logError(SedmlDataGeneratorAllowedAttributes, level, version,
-      message);
+    log->logError(SedmlDataGeneratorAllowedAttributes, level, version, message,
+      getLine(), getColumn());
   }
 
   // 

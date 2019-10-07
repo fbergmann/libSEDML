@@ -32,6 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedFunctionalRange.h>
+#include <sedml/SedDependentVariable.h>
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/math/MathML.h>
 
@@ -444,6 +445,32 @@ SedFunctionalRange::createVariable()
   try
   {
     sv = new SedVariable(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sv != NULL)
+  {
+    mVariables.appendAndOwn(sv);
+  }
+
+  return sv;
+}
+
+
+/*
+ * Creates a new SedVariable object, adds it to this SedFunctionalRange object
+ * and returns the SedVariable object created.
+ */
+SedDependentVariable*
+SedFunctionalRange::createDependentVariable()
+{
+  SedDependentVariable* sv = NULL;
+
+  try
+  {
+    sv = new SedDependentVariable(getSedNamespaces());
   }
   catch (...)
   {
@@ -1046,7 +1073,13 @@ SedFunctionalRange::createChildObject(const std::string& elementName)
   {
     return createVariable();
   }
-  else if (elementName == "parameter")
+  
+  if (elementName == "dependentVariable")
+  {
+    return createDependentVariable();
+  }
+
+  if (elementName == "parameter")
   {
     return createParameter();
   }

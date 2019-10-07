@@ -515,6 +515,24 @@ public:
 
 
   /**
+   * Creates a new SedDependentVariable object, adds it to this SedDataGenerator object
+   * and returns the SedDependentVariable object created.
+   *
+   * @return a new SedDependentVariable object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addVariable(const SedVariable* object)
+   * @see getVariable(const std::string& sid)
+   * @see getVariable(unsigned int n)
+   * @see getNumVariables()
+   * @see removeVariable(const std::string& sid)
+   * @see removeVariable(unsigned int n)
+   */
+  SedDependentVariable* createDependentVariable();
+
+
+  /**
    * Removes the nth SedVariable from this SedDataGenerator and returns a
    * pointer to it.
    *
@@ -549,10 +567,10 @@ public:
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
-   * @see getSedVariable(const std::string& sid)
-   * @see getSedVariable(unsigned int n)
+   * @see getVariable(const std::string& sid)
+   * @see getVariable(unsigned int n)
    * @see getNumVariables()
-   * @see removeSedVariable(unsigned int n)
+   * @see removeVariable(unsigned int n)
    */
   SedVariable* removeVariable(const std::string& sid);
 
@@ -773,10 +791,10 @@ public:
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
-   * @see getSedParameter(const std::string& sid)
-   * @see getSedParameter(unsigned int n)
+   * @see getParameter(const std::string& sid)
+   * @see getParameter(unsigned int n)
    * @see getNumParameters()
-   * @see removeSedParameter(unsigned int n)
+   * @see removeParameter(unsigned int n)
    */
   SedParameter* removeParameter(const std::string& sid);
 

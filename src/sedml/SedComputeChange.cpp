@@ -32,6 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedComputeChange.h>
+#include <sedml/SedDependentVariable.h>
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/math/MathML.h>
 
@@ -393,6 +394,32 @@ SedComputeChange::createVariable()
   return sv;
 }
 
+
+
+/*
+ * Creates a new SedVariable object, adds it to this SedComputeChange object
+ * and returns the SedVariable object created.
+ */
+SedDependentVariable*
+SedComputeChange::createDependentVariable()
+{
+  SedDependentVariable* sv = NULL;
+
+  try
+  {
+    sv = new SedDependentVariable(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sv != NULL)
+  {
+    mVariables.appendAndOwn(sv);
+  }
+
+  return sv;
+}
 
 /*
  * Removes the nth SedVariable from this SedComputeChange and returns a pointer
@@ -944,7 +971,13 @@ SedComputeChange::createChildObject(const std::string& elementName)
   {
     return createVariable();
   }
-  else if (elementName == "parameter")
+  
+  if (elementName == "dependentVariable")
+  {
+    return createDependentVariable();
+  }
+
+  if (elementName == "parameter")
   {
     return createParameter();
   }
