@@ -55,16 +55,12 @@ def create_dependent_variable_example(file_name):
     dg = doc.createDataGenerator()
     dg.setId("dS1dt")
     dg.setName("d[S1]/dt")
-    # var = dg.createDependentVariable() # BUG this should work
-    var = libsedml.SedDependentVariable(1,4)
-    print var.setId("v2")
-    print var.setTerm('urn:sedml:symbol:rateOfChange')
-    print var.setName("d[S1]/dt")
-    print var.setTaskReference("task1")
-    print var.setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']")
-    print var.toSed()
-    print var.hasRequiredAttributes()
-    print dg.addVariable(var)
+    var = dg.createDependentVariable()
+    var.setId("v2")
+    var.setTerm('urn:sedml:symbol:rateOfChange')
+    var.setName("d[S1]/dt")
+    var.setTaskReference("task1")
+    var.setTarget("/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']")
     dg.setMath(libsedml.parseFormula("v2"))
 
     # add a 2d plot
