@@ -39,7 +39,7 @@ set(TEST_FILES ${CPP_FILES} ${C_FILES} ${H_FILES})
 
 include_directories(${LIBNUML_INCLUDE_DIR})
 include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(${libsedml_SOURCE_DIR}/src)
+include_directories(BEFORE ${libsedml_SOURCE_DIR}/src)
 include_directories(BEFORE ${libsedml_BINARY_DIR}/src)
 include_directories(BEFORE ${libsedml_BINARY_DIR}/src/sedml/common)
 
@@ -49,6 +49,11 @@ if (EXTRA_INCLUDE_DIRS)
 endif(EXTRA_INCLUDE_DIRS)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 add_executable(test_sedml ${TEST_FILES})
+set_target_properties(test_sedml PROPERTIES
+    CXX_STANDARD 11
+    CXX_STANDARD_REQUIRED YES
+    CXX_EXTENSIONS NO
+)
 target_link_libraries(test_sedml ${LIBSEDML_LIBRARY}-static ${EXTRA_LIBS})
 	if (WIN32 AND NOT CYGWIN)
 	set_target_properties(test_sedml PROPERTIES COMPILE_DEFINITIONS "LIBSEDML_STATIC=1")
