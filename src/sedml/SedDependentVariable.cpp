@@ -722,7 +722,7 @@ SedDependentVariable::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlDependentVariableAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -745,7 +745,7 @@ SedDependentVariable::readAttributes(
     std::string message = "Sedml attribute 'term' is missing from the "
       "<SedDependentVariable> element.";
     log->logError(SedmlDependentVariableAllowedAttributes, level, version,
-      message);
+      message, getLine(), getColumn());
   }
 
   // 

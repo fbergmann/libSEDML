@@ -931,7 +931,7 @@ SedUniformTimeCourse::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlUniformTimeCourseAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -952,14 +952,14 @@ SedUniformTimeCourse::readAttributes(
       std::string message = "Sedml attribute 'initialTime' from the "
         "<SedUniformTimeCourse> element must be an integer.";
       log->logError(SedmlUniformTimeCourseInitialTimeMustBeDouble, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'initialTime' is missing from the "
         "<SedUniformTimeCourse> element.";
       log->logError(SedmlUniformTimeCourseAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -980,14 +980,14 @@ SedUniformTimeCourse::readAttributes(
       std::string message = "Sedml attribute 'outputStartTime' from the "
         "<SedUniformTimeCourse> element must be an integer.";
       log->logError(SedmlUniformTimeCourseOutputStartTimeMustBeDouble, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'outputStartTime' is missing from "
         "the <SedUniformTimeCourse> element.";
       log->logError(SedmlUniformTimeCourseAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -1007,14 +1007,14 @@ SedUniformTimeCourse::readAttributes(
       std::string message = "Sedml attribute 'outputEndTime' from the "
         "<SedUniformTimeCourse> element must be an integer.";
       log->logError(SedmlUniformTimeCourseOutputEndTimeMustBeDouble, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
     else
     {
       std::string message = "Sedml attribute 'outputEndTime' is missing from "
         "the <SedUniformTimeCourse> element.";
       log->logError(SedmlUniformTimeCourseAllowedAttributes, level, version,
-        message);
+        message, getLine(), getColumn());
     }
   }
 
@@ -1035,7 +1035,7 @@ SedUniformTimeCourse::readAttributes(
       std::string message = "Sedml attribute 'numberOfPoints' from the "
         "<SedUniformTimeCourse> element must be an integer.";
       log->logError(SedmlUniformTimeCourseNumberOfPointsMustBeInteger, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
   }
 
@@ -1055,7 +1055,7 @@ SedUniformTimeCourse::readAttributes(
       std::string message = "Sedml attribute 'numberOfSteps' from the "
         "<SedUniformTimeCourse> element must be an integer.";
       log->logError(SedmlUniformTimeCourseNumberOfStepsMustBeInteger, level,
-        version, message);
+        version, message, getLine(), getColumn());
     }
   }
 }

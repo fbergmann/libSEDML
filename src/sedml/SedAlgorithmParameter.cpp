@@ -916,7 +916,7 @@ SedAlgorithmParameter::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
     if (mAlgorithmParameters->size() != 0)
     {
       getErrorLog()->logError(SedmlAlgorithmParameterAllowedElements,
-        getLevel(), getVersion());
+        getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
     obj = mAlgorithmParameters;
@@ -980,7 +980,7 @@ SedAlgorithmParameter::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlAlgorithmLOAlgorithmParametersAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -998,7 +998,7 @@ SedAlgorithmParameter::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
-          details);
+          details, getLine(), getColumn());
       }
     }
   }
@@ -1021,7 +1021,7 @@ SedAlgorithmParameter::readAttributes(
     std::string message = "Sedml attribute 'kisaoID' is missing from the "
       "<SedAlgorithmParameter> element.";
     log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
-      message);
+      message, getLine(), getColumn());
   }
 
   // 
@@ -1042,7 +1042,7 @@ SedAlgorithmParameter::readAttributes(
     std::string message = "Sedml attribute 'value' is missing from the "
       "<SedAlgorithmParameter> element.";
     log->logError(SedmlAlgorithmParameterAllowedAttributes, level, version,
-      message);
+      message, getLine(), getColumn());
   }
 }
 
