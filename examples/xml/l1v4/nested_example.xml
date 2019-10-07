@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version4" level="1" version="4">
+  <listOfSimulations>
+    <uniformTimeCourse id="sim1" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfPoints="1000">
+      <algorithm kisaoID="KISAO:0000352">
+        <notes>
+          <p xmlns="http://www.w3.org/1999/xhtml">a hybrid algorithm</p>
+        </notes>
+        <listOfAlgorithmParameters>
+          <algorithmParameter kisaoID="KISAO:0000203" value="2000">
+            <notes>
+              <p xmlns="http://www.w3.org/1999/xhtml">particle number lower limit</p>
+            </notes>
+            <listOfAlgorithmParameters>
+              <algorithmParameter kisaoID="KISAO:0000029" value="something">
+                <notes>
+                  <p xmlns="http://www.w3.org/1999/xhtml">Gillespie Parameter here</p>
+                </notes>
+              </algorithmParameter>
+              <algorithmParameter kisaoID="KISAO:0000089" value="something else">
+                <notes>
+                  <p xmlns="http://www.w3.org/1999/xhtml">LSODA parameter here</p>
+                </notes>
+              </algorithmParameter>
+            </listOfAlgorithmParameters>
+          </algorithmParameter>
+        </listOfAlgorithmParameters>
+      </algorithm>
+    </uniformTimeCourse>
+  </listOfSimulations>
+</sedML>
