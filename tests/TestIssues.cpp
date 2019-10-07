@@ -151,3 +151,71 @@ TEST_CASE("Reading L1V4 curve should not require logY", "[sedml]")
   REQUIRE (doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
   delete doc;
 }
+
+TEST_CASE("create and add nested algorithm parameter", "[sedml]")
+{
+  SedDocument doc(1, 4);
+  auto* sim = doc.createUniformTimeCourse();
+  sim->setId("sim1");
+  sim->setInitialTime(0.0);
+  sim->setOutputStartTime(0.0);
+  sim->setOutputEndTime(10.0);
+  auto* alg = sim->createAlgorithm();
+  alg->setKisaoID("KISAO:0000352");
+  auto* p = alg->createAlgorithmParameter();
+  p->setKisaoID("KISAO:0000203");
+  p->setValue("something");
+
+  auto* p1 = p->createAlgorithmParameter();
+  p1->setKisaoID("KISAO:0000029");
+  p1->setValue("something");
+
+  REQUIRE(p->getNumAlgorithmParameters() == 1);
+
+  p1 = new SedAlgorithmParameter(1, 4);
+  p1->setKisaoID("KISAO:0000089");
+  p1->setValue("something");
+  REQUIRE( p->addAlgorithmParameter(p1) == LIBSEDML_OPERATION_SUCCESS);
+  REQUIRE(p->getNumAlgorithmParameters() == 2);
+  REQUIRE(alg->getNumAlgorithmParameters() == 1);
+  SedWriter sw;
+  std::string l1v4 = sw.writeSedMLToStdString(&doc);
+  auto* doc2 = readSedMLFromString(l1v4.c_str());
+  REQUIRE(doc2->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+  delete doc2;
+
+}
+
+TEST_CASE("create and add dependent variables", "[sedml]")
+{
+  SedDocument doc(1, 4);
+
+  auto* dg = doc.createDataGenerator();
+  dg->setId("dg1");
+  
+  auto* var = dg->createVariable();
+  var->setId("v0");
+  var->setModelReference("task1");
+  var->setSymbol("urn:sedml:time");
+
+  auto* var1 = dg->createDependentVariable();
+  var1->setId("v1");
+  var1->setModelReference("task1");
+  var1->setTerm("urn:sedml:rateOfChange");
+
+  var1 = new SedDependentVariable(1,4);
+  var1->setId("v2");
+  var1->setModelReference("task1");
+  var1->setTerm("urn:sedml:rateOfChange");
+  REQUIRE(dg->addVariable(var1) == LIBSEDML_OPERATION_SUCCESS);
+
+
+  dg->setMath(SBML_parseL3Formula("v0 + v1 + v2"));
+
+
+  SedWriter sw;
+  std::string l1v4 = sw.writeSedMLToStdString(&doc);
+  auto* doc2 = readSedMLFromString(l1v4.c_str());
+  REQUIRE(doc2->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+  delete doc2;
+}
