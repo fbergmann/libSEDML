@@ -75,8 +75,7 @@ LIBSEDML_EXTERN
 MappingType_t
 MappingType_fromString(const char* code)
 {
-  static int size =
-    sizeof(SEDML_MAPPING_TYPE_STRINGS)/sizeof(SEDML_MAPPING_TYPE_STRINGS[0]);
+  static int size = sizeof(SEDML_MAPPING_TYPE_STRINGS)/sizeof(SEDML_MAPPING_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)
@@ -306,6 +305,7 @@ const char* SEDML_LINE_TYPE_STRINGS[] =
 , "dash"
 , "dot"
 , "dashDot"
+, "dashDotDot"
 , "invalid LineType value"
 };
 
@@ -615,8 +615,7 @@ LIBSEDML_EXTERN
 SurfaceType_t
 SurfaceType_fromString(const char* code)
 {
-  static int size =
-    sizeof(SEDML_SURFACE_TYPE_STRINGS)/sizeof(SEDML_SURFACE_TYPE_STRINGS[0]);
+  static int size = sizeof(SEDML_SURFACE_TYPE_STRINGS)/sizeof(SEDML_SURFACE_TYPE_STRINGS[0]);
   std::string type(code);
 
   for (int i = 0; i < size; i++)

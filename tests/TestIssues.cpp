@@ -219,3 +219,11 @@ TEST_CASE("create and add dependent variables", "[sedml]")
   REQUIRE(doc2->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
   delete doc2;
 }
+
+TEST_CASE("allow dashDotDot", "[sedml]")
+{
+  SedLine line(1, 4);
+  REQUIRE(line.setStyle("dashDotDot") == LIBSEDML_OPERATION_SUCCESS);
+  REQUIRE(line.setStyle(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
+
+}

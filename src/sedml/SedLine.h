@@ -63,6 +63,8 @@
  *
  * <li> @c "dashDot", TODO:add description
  *
+ * <li> @c "dashDotDot", TODO:add description
+ *
  * </ul>
  */
 
@@ -173,6 +175,7 @@ public:
    * @li @sbmlconstant{SEDML_LINETYPE_DASH, LineType_t}
    * @li @sbmlconstant{SEDML_LINETYPE_DOT, LineType_t}
    * @li @sbmlconstant{SEDML_LINETYPE_DASHDOT, LineType_t}
+   * @li @sbmlconstant{SEDML_LINETYPE_DASHDOTDOT, LineType_t}
    * @li @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t}
    */
   LineType_t getStyle() const;
@@ -190,6 +193,7 @@ public:
    * @li @c "dash"
    * @li @c "dot"
    * @li @c "dashDot"
+   * @li @c "dashDotDot"
    * @li @c "invalid LineType value"
    */
   std::string getStyleAsString() const;
@@ -347,7 +351,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LINE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_LINE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -771,6 +775,7 @@ SedLine_free(SedLine_t* sl);
  * @li @sbmlconstant{SEDML_LINETYPE_DASH, LineType_t}
  * @li @sbmlconstant{SEDML_LINETYPE_DOT, LineType_t}
  * @li @sbmlconstant{SEDML_LINETYPE_DASHDOT, LineType_t}
+ * @li @sbmlconstant{SEDML_LINETYPE_DASHDOTDOT, LineType_t}
  * @li @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t}
  *
  * @memberof SedLine_t
@@ -797,6 +802,7 @@ SedLine_getStyle(const SedLine_t * sl);
  * @li @c "dash"
  * @li @c "dot"
  * @li @c "dashDot"
+ * @li @c "dashDotDot"
  * @li @c "invalid LineType value"
  *
  * @memberof SedLine_t

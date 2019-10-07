@@ -713,7 +713,8 @@ SedLine::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlLineAllowedAttributes, level, version, details);
+        log->logError(SedmlLineAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -746,7 +747,8 @@ SedLine::readAttributes(
 
         msg += "is '" + style + "', which is not a valid option.";
 
-        log->logError(SedmlLineStyleMustBeLineTypeEnum, level, version, msg);
+        log->logError(SedmlLineStyleMustBeLineTypeEnum, level, version, msg,
+          getLine(), getColumn());
       }
     }
   }
@@ -780,7 +782,8 @@ SedLine::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'thickness' from the <SedLine> "
         "element must be an integer.";
-      log->logError(SedmlLineThicknessMustBeDouble, level, version, message);
+      log->logError(SedmlLineThicknessMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 }

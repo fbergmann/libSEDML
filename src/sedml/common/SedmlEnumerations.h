@@ -369,12 +369,13 @@ AxisType_isValidString(const char* code);
  */
 typedef enum
 {
-  SEDML_LINETYPE_NONE          /*!< The sedml linetype is @c "none". */
-, SEDML_LINETYPE_SOLID         /*!< The sedml linetype is @c "solid". */
-, SEDML_LINETYPE_DASH          /*!< The sedml linetype is @c "dash". */
-, SEDML_LINETYPE_DOT           /*!< The sedml linetype is @c "dot". */
-, SEDML_LINETYPE_DASHDOT       /*!< The sedml linetype is @c "dashDot". */
-, SEDML_LINETYPE_INVALID       /*!< Invalid LineType value. */
+  SEDML_LINETYPE_NONE             /*!< The sedml linetype is @c "none". */
+, SEDML_LINETYPE_SOLID            /*!< The sedml linetype is @c "solid". */
+, SEDML_LINETYPE_DASH             /*!< The sedml linetype is @c "dash". */
+, SEDML_LINETYPE_DOT              /*!< The sedml linetype is @c "dot". */
+, SEDML_LINETYPE_DASHDOT          /*!< The sedml linetype is @c "dashDot". */
+, SEDML_LINETYPE_DASHDOTDOT       /*!< The sedml linetype is @c "dashDotDot". */
+, SEDML_LINETYPE_INVALID          /*!< Invalid LineType value. */
 } LineType_t;
 
 
@@ -389,6 +390,7 @@ typedef enum
  * "dash",
  * "dot",
  * "dashDot",
+ * "dashDotDot",
  * "invalid LineType value",
  * or @c NULL if the value is @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t}
  * or another invalid enumeration value.
@@ -436,8 +438,9 @@ LineType_fromString(const char* code);
  * @sbmlconstant{SEDML_LINETYPE_NONE, LineType_t},
  * @sbmlconstant{SEDML_LINETYPE_SOLID, LineType_t},
  * @sbmlconstant{SEDML_LINETYPE_DASH, LineType_t},
- * @sbmlconstant{SEDML_LINETYPE_DOT, LineType_t}, or
- * @sbmlconstant{SEDML_LINETYPE_DASHDOT, LineType_t};
+ * @sbmlconstant{SEDML_LINETYPE_DOT, LineType_t},
+ * @sbmlconstant{SEDML_LINETYPE_DASHDOT, LineType_t}, or
+ * @sbmlconstant{SEDML_LINETYPE_DASHDOTDOT, LineType_t};
  * @c 0 (false) otherwise (including @sbmlconstant{SEDML_LINETYPE_INVALID,
  * LineType_t}).
  *
@@ -461,7 +464,8 @@ LineType_isValid(LineType_t lt);
  * "solid",
  * "dash",
  * "dot",
- * "dashDot", or
+ * "dashDot",
+ * "dashDotDot", or
  * "invalid LineType value";
  * @c 0 (false) otherwise.
  *
