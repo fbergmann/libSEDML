@@ -513,6 +513,7 @@
             <enumValue name="SEDML_LINETYPE_DASH" value="dash"/>
             <enumValue name="SEDML_LINETYPE_DOT" value="dot"/>
             <enumValue name="SEDML_LINETYPE_DASHDOT" value="dashDot"/>
+            <enumValue name="SEDML_LINETYPE_DASHDOTDOT" value="dashDotDot"/>
           </enumValues>
         </enum>
         <enum name="MarkerType">
