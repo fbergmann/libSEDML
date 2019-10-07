@@ -430,6 +430,16 @@ protected:
   /** @endcond */
 
 
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * checks concrete types
+   */
+  virtual bool isValidTypeForList(SedBase* item);
+
+  /** @endcond */
+
+
 };
 
 

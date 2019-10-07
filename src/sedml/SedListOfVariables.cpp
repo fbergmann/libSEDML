@@ -258,6 +258,21 @@ SedListOfVariables::createVariable()
   return sv;
 }
 
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * checks concrete types
+ */
+bool
+SedListOfVariables::isValidTypeForList(SedBase* item)
+{
+  unsigned int tc = item->getTypeCode();
+
+  return ((tc == SEDML_VARIABLE) || (tc == SEDML_DEPENDENTVARIABLE));
+}
+
+/** @endcond */
+
 
 /*
  * Used by SedListOfVariables::get() to lookup a SedVariable based on its
