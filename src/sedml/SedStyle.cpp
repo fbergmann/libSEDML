@@ -1568,7 +1568,7 @@ SedStyle_getLine(const SedStyle_t * ss)
     return NULL;
   }
 
-  return (SedLine_t*)(ss->getLine());
+  return (SedLine_t*)(ss->getLineStyle());
 }
 
 

@@ -516,8 +516,9 @@ SedDataGenerator::createDependentVariable()
   {
     sv = new SedDependentVariable(getSedNamespaces());
   }
-  catch (...)
+  catch (const SedConstructorException&)
   {
+    return NULL;
   }
 
   if (sv != NULL)
