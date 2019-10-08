@@ -454,8 +454,9 @@ SedRepeatedTask::createDataRange()
   {
     sdr = new SedDataRange(getSedNamespaces());
   }
-  catch (...)
+  catch (const SedConstructorException&)
   {
+    return NULL;
   }
 
   if (sdr != NULL)
