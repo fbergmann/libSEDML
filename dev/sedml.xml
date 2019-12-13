@@ -67,6 +67,7 @@
             <attribute name="remainingDimension" required="false" type="lo_element" element="RemainingDimension" abstract="false"/>
           </attributes>
           <concretes>
+            <concrete name="remainingDimension" element="RemainingDimension" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="variable" element="Variable" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="dependentVariable" element="DependentVariable" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
@@ -380,28 +381,13 @@
             <attribute name="dataSource" required="true" type="SIdRef" element="DataSource" abstract="false"/>
             <attribute name="dataGenerator" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="MappingType" abstract="false"/>
-            <attribute name="scaling" required="true" type="element" element="Scaling" abstract="true"/>
-          </attributes>
-        </element>
-        <element name="Scaling" typeCode="SEDML_SCALING" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="true">
-          <concretes>
-            <concrete name="valueScaling" element="ValueScaling" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="columnScaling" element="ColumnScaling" minNumChildren="0" maxNumChildren="0"/>
-          </concretes>
-        </element>
-        <element name="ValueScaling" typeCode="SEDML_VALUESCALING" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Scaling" abstract="false">
-          <attributes>
-            <attribute name="weight" required="true" type="string" abstract="false"/>
-          </attributes>
-        </element>
-        <element name="ColumnScaling" typeCode="SEDML_COLUMNSCALING" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Scaling" abstract="false">
-          <attributes>
-            <attribute name="dataSource" required="true" type="SIdRef" element="DataSource" abstract="false"/>
+            <attribute name="weight" required="false" type="double" abstract="false"/>
+            <attribute name="pointWeight" required="false" type="SIdRef" element="DataSource" abstract="false"/>
           </attributes>
         </element>
         <element name="Bounds" typeCode="SEDML_BOUNDS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
-            <attribute name="startingValue" required="false" type="double" abstract="false"/>
+            <attribute name="initialValue" required="false" type="double" abstract="false"/>
             <attribute name="lowerBound" required="false" type="double" abstract="false"/>
             <attribute name="upperBound" required="false" type="double" abstract="false"/>
           </attributes>
@@ -435,9 +421,9 @@
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="baseStyle" required="false" type="SIdRef" element="Style" abstract="false"/>
-            <attribute name="line" required="false" type="element" element="Line" xmlName="line" abstract="false"/>
-            <attribute name="marker" required="false" type="element" element="Marker" abstract="false"/>
-            <attribute name="fill" required="false" type="element" element="Fill" abstract="false"/>
+            <attribute name="lineStyle" required="false" type="element" element="Line" xmlName="lineStyle" abstract="false"/>
+            <attribute name="markerStyle" required="false" type="element" element="Marker" xmlName="markerStyle" abstract="false"/>
+            <attribute name="fillStyle" required="false" type="element" element="Fill" xmlName="fillStyle" abstract="false"/>
           </attributes>
         </element>
         <element name="Line" typeCode="SEDML_LINE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
