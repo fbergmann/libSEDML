@@ -76,7 +76,10 @@ SedErrorLog::SedErrorLog (const SedErrorLog& other)
 */
 SedErrorLog& SedErrorLog::operator=(const SedErrorLog& other)
 {
-  XMLErrorLog::operator=(other);
+  if (&other != this)
+  {
+    XMLErrorLog::operator=(other);
+  }
   return *this;
 }
 

@@ -101,19 +101,15 @@ std::string SedError::stringForSeverity(unsigned int code) const
     {
       case LIBSEDML_SEV_SCHEMA_ERROR:
         return "Schema error";
-        break;
 
       case LIBSEDML_SEV_GENERAL_WARNING:
         return "General warning";
-        break;
 
       case LIBSEDML_SEV_NOT_APPLICABLE:
         return "Not applicable";
-        break;
 
       default:
         return "";
-        break;
     }
   }
 }
@@ -310,6 +306,15 @@ SedError::SedError(const SedError& orig) :
 {
 }
 
+SedError& 
+SedError::operator=(const SedError& rhs)
+{
+  if (&rhs != this)
+  {
+    XMLError::operator=(rhs);
+  }
+  return *this;
+}
 
  /*
  * Destroys this SedError.

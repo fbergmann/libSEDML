@@ -680,6 +680,7 @@ public:
    */
   virtual ~SedError();
 
+  SedError& operator=(const SedError& rhs);
 
 #ifndef SWIG
 

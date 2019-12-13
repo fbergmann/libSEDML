@@ -688,7 +688,7 @@ SedSimpleRepeatedTask::readAttributes(
   numErrs = log ? log->getNumErrors() : 0;
   mIsSetResetModel = attributes.readInto("resetModel", mResetModel);
 
-  if (mIsSetResetModel == false)
+  if (log && mIsSetResetModel == false)
   {
     if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
