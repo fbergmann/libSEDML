@@ -875,8 +875,8 @@ SedPlot2D::removeChildObject(const std::string& elementName,
 {
   if (elementName == "rightYAxis")
   {
-    SedAxis * obj = getRightYAxis();
-    if (unsetRightYAxis() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAxis * obj = mRightYAxis;
+    mRightYAxis = NULL; return obj;
   }
   else if (elementName == "curve")
   {
@@ -1002,7 +1002,7 @@ SedPlot2D::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "rightYAxis")
   {
-    if (isSetRightYAxis())
+    if (getErrorLog() && isSetRightYAxis())
     {
       getErrorLog()->logError(SedmlPlot2DAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());

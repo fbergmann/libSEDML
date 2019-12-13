@@ -273,6 +273,70 @@ SedPlot3D::getSurface(unsigned int n) const
 
 
 /*
+ * Get a SedSurface from the SedPlot3D based on its identifier.
+ */
+SedSurface*
+SedPlot3D::getSurface(const std::string& sid)
+{
+  return mSurfaces.get(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on its identifier.
+ */
+const SedSurface*
+SedPlot3D::getSurface(const std::string& sid) const
+{
+  return mSurfaces.get(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on the XDataReference to which it
+ * refers.
+ */
+const SedSurface*
+SedPlot3D::getSurfaceByXDataReference(const std::string& sid) const
+{
+  return mSurfaces.getByXDataReference(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on the XDataReference to which it
+ * refers.
+ */
+SedSurface*
+SedPlot3D::getSurfaceByXDataReference(const std::string& sid)
+{
+  return mSurfaces.getByXDataReference(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on the YDataReference to which it
+ * refers.
+ */
+const SedSurface*
+SedPlot3D::getSurfaceByYDataReference(const std::string& sid) const
+{
+  return mSurfaces.getByYDataReference(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on the YDataReference to which it
+ * refers.
+ */
+SedSurface*
+SedPlot3D::getSurfaceByYDataReference(const std::string& sid)
+{
+  return mSurfaces.getByYDataReference(sid);
+}
+
+
+/*
  * Get a SedSurface from the SedPlot3D based on the ZDataReference to which it
  * refers.
  */
@@ -291,6 +355,26 @@ SedSurface*
 SedPlot3D::getSurfaceByZDataReference(const std::string& sid)
 {
   return mSurfaces.getByZDataReference(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on the Style to which it refers.
+ */
+const SedSurface*
+SedPlot3D::getSurfaceByStyle(const std::string& sid) const
+{
+  return mSurfaces.getByStyle(sid);
+}
+
+
+/*
+ * Get a SedSurface from the SedPlot3D based on the Style to which it refers.
+ */
+SedSurface*
+SedPlot3D::getSurfaceByStyle(const std::string& sid)
+{
+  return mSurfaces.getByStyle(sid);
 }
 
 
@@ -320,6 +404,10 @@ SedPlot3D::addSurface(const SedSurface* ss)
     SedBase*>(ss)) == false)
   {
     return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (ss->isSetId() && (mSurfaces.get(ss->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
   }
   else
   {
@@ -371,6 +459,17 @@ SedSurface*
 SedPlot3D::removeSurface(unsigned int n)
 {
   return mSurfaces.remove(n);
+}
+
+
+/*
+ * Removes the SedSurface from this SedPlot3D based on its identifier and
+ * returns a pointer to it.
+ */
+SedSurface*
+SedPlot3D::removeSurface(const std::string& sid)
+{
+  return mSurfaces.remove(sid);
 }
 
 
@@ -779,18 +878,12 @@ SedPlot3D::removeChildObject(const std::string& elementName,
 {
   if (elementName == "zAxis")
   {
-    SedAxis * obj = getZAxis();
-    if (unsetZAxis() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAxis * obj = mZAxis;
+    mZAxis = NULL; return obj;
   }
   else if (elementName == "surface")
   {
-    for (unsigned int i = 0; i < getNumSurfaces(); i++)
-    {
-      if (getSurface(i)->getId() == id)
-      {
-        return removeSurface(i);
-      }
-    }
+    return removeSurface(id);
   }
 
   return NULL;
@@ -908,7 +1001,7 @@ SedPlot3D::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "zAxis")
   {
-    if (isSetZAxis())
+    if (getErrorLog() && isSetZAxis())
     {
       getErrorLog()->logError(SedmlPlot3DAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1150,6 +1243,43 @@ SedPlot3D_getSurface(SedPlot3D_t* spd, unsigned int n)
 
 
 /*
+ * Get a SedSurface_t from the SedPlot3D_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceById(SedPlot3D_t* spd, const char *sid)
+{
+  return (spd != NULL && sid != NULL) ? spd->getSurface(sid) : NULL;
+}
+
+
+/*
+ * Get a SedSurface_t from the SedPlot3D_t based on the XDataReference to which
+ * it refers.
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceByXDataReference(SedPlot3D_t* spd, const char *sid)
+{
+  return (spd != NULL && sid != NULL) ? spd->getSurfaceByXDataReference(sid) :
+    NULL;
+}
+
+
+/*
+ * Get a SedSurface_t from the SedPlot3D_t based on the YDataReference to which
+ * it refers.
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceByYDataReference(SedPlot3D_t* spd, const char *sid)
+{
+  return (spd != NULL && sid != NULL) ? spd->getSurfaceByYDataReference(sid) :
+    NULL;
+}
+
+
+/*
  * Get a SedSurface_t from the SedPlot3D_t based on the ZDataReference to which
  * it refers.
  */
@@ -1159,6 +1289,18 @@ SedPlot3D_getSurfaceByZDataReference(SedPlot3D_t* spd, const char *sid)
 {
   return (spd != NULL && sid != NULL) ? spd->getSurfaceByZDataReference(sid) :
     NULL;
+}
+
+
+/*
+ * Get a SedSurface_t from the SedPlot3D_t based on the Style to which it
+ * refers.
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceByStyle(SedPlot3D_t* spd, const char *sid)
+{
+  return (spd != NULL && sid != NULL) ? spd->getSurfaceByStyle(sid) : NULL;
 }
 
 
@@ -1205,6 +1347,18 @@ SedSurface_t*
 SedPlot3D_removeSurface(SedPlot3D_t* spd, unsigned int n)
 {
   return (spd != NULL) ? spd->removeSurface(n) : NULL;
+}
+
+
+/*
+ * Removes the SedSurface_t from this SedPlot3D_t based on its identifier and
+ * returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_removeSurfaceById(SedPlot3D_t* spd, const char* sid)
+{
+  return (spd != NULL && sid != NULL) ? spd->removeSurface(sid) : NULL;
 }
 
 

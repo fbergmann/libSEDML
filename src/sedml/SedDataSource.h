@@ -365,6 +365,36 @@ public:
 
 
   /**
+   * Get a SedSlice from the SedDataSource based on the Index to which it
+   * refers.
+   *
+   * @param sid a string representing the "index" attribute of the SedSlice
+   * object to retrieve.
+   *
+   * @return the first SedSlice in this SedDataSource based on the given index
+   * attribute or NULL if no such SedSlice exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSlice* getSliceByIndex(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSlice from the SedDataSource based on the Index to which it
+   * refers.
+   *
+   * @param sid a string representing the "index" attribute of the SedSlice
+   * object to retrieve.
+   *
+   * @return the first SedSlice in this SedDataSource based on the given index
+   * attribute or NULL if no such SedSlice exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSlice* getSliceByIndex(const std::string& sid);
+
+
+  /**
    * Adds a copy of the given SedSlice to this SedDataSource.
    *
    * @param ss the SedSlice object to add.
@@ -1280,6 +1310,27 @@ SedDataSource_getSlice(SedDataSource_t* sds, unsigned int n);
 LIBSEDML_EXTERN
 SedSlice_t*
 SedDataSource_getSliceByReference(SedDataSource_t* sds, const char *sid);
+
+
+/**
+ * Get a SedSlice_t from the SedDataSource_t based on the Index to which it
+ * refers.
+ *
+ * @param sds the SedDataSource_t structure to search.
+ *
+ * @param sid a string representing the "index" attribute of the SedSlice_t
+ * object to retrieve.
+ *
+ * @return the first SedSlice_t in this SedDataSource_t based on the given
+ * index attribute or NULL if no such SedSlice_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDataSource_t
+ */
+LIBSEDML_EXTERN
+SedSlice_t*
+SedDataSource_getSliceByIndex(SedDataSource_t* sds, const char *sid);
 
 
 /**

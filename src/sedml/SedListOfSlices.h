@@ -334,6 +334,36 @@ public:
 
 
   /**
+   * Get a SedSlice from the SedListOfSlices based on the Index to which it
+   * refers.
+   *
+   * @param sid a string representing the "index" attribute of the SedSlice
+   * object to retrieve.
+   *
+   * @return the first SedSlice in this SedListOfSlices based on the given
+   * index attribute or NULL if no such SedSlice exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSlice* getByIndex(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSlice from the SedListOfSlices based on the Index to which it
+   * refers.
+   *
+   * @param sid a string representing the "index" attribute of the SedSlice
+   * object to retrieve.
+   *
+   * @return the first SedSlice in this SedListOfSlices based on the given
+   * index attribute or NULL if no such SedSlice exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSlice* getByIndex(const std::string& sid);
+
+
+  /**
    * Returns the XML element name of this SedListOfSlices object.
    *
    * For SedListOfSlices, the XML element name is always @c "listOfSlices".

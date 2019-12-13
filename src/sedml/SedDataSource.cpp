@@ -348,6 +348,26 @@ SedDataSource::getSliceByReference(const std::string& sid)
 
 
 /*
+ * Get a SedSlice from the SedDataSource based on the Index to which it refers.
+ */
+const SedSlice*
+SedDataSource::getSliceByIndex(const std::string& sid) const
+{
+  return mSlices.getByIndex(sid);
+}
+
+
+/*
+ * Get a SedSlice from the SedDataSource based on the Index to which it refers.
+ */
+SedSlice*
+SedDataSource::getSliceByIndex(const std::string& sid)
+{
+  return mSlices.getByIndex(sid);
+}
+
+
+/*
  * Adds a copy of the given SedSlice to this SedDataSource.
  */
 int
@@ -1408,6 +1428,18 @@ SedSlice_t*
 SedDataSource_getSliceByReference(SedDataSource_t* sds, const char *sid)
 {
   return (sds != NULL && sid != NULL) ? sds->getSliceByReference(sid) : NULL;
+}
+
+
+/*
+ * Get a SedSlice_t from the SedDataSource_t based on the Index to which it
+ * refers.
+ */
+LIBSEDML_EXTERN
+SedSlice_t*
+SedDataSource_getSliceByIndex(SedDataSource_t* sds, const char *sid)
+{
+  return (sds != NULL && sid != NULL) ? sds->getSliceByIndex(sid) : NULL;
 }
 
 

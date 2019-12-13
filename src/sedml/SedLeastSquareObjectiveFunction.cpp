@@ -498,7 +498,8 @@ SedLeastSquareObjectiveFunction::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlLeastSquareObjectiveFunctionAllowedCoreAttributes, level, version, details);
+        log->logError(SedUnknown, level, version, details, getLine(),
+          getColumn());
       }
     }
   }

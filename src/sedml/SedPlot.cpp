@@ -1000,13 +1000,13 @@ SedPlot::removeChildObject(const std::string& elementName,
 {
   if (elementName == "xAxis")
   {
-    SedAxis * obj = getXAxis();
-    if (unsetXAxis() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAxis * obj = mXAxis;
+    mXAxis = NULL; return obj;
   }
   else if (elementName == "yAxis")
   {
-    SedAxis * obj = getYAxis();
-    if (unsetYAxis() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAxis * obj = mYAxis;
+    mYAxis = NULL; return obj;
   }
 
   return NULL;
@@ -1134,7 +1134,7 @@ SedPlot::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   if (name == "xAxis")
   {
-    if (isSetXAxis())
+    if (getErrorLog() && isSetXAxis())
     {
       getErrorLog()->logError(SedmlPlotAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1147,7 +1147,7 @@ SedPlot::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   }
   else if (name == "yAxis")
   {
-    if (isSetYAxis())
+    if (getErrorLog() && isSetYAxis())
     {
       getErrorLog()->logError(SedmlPlotAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1230,12 +1230,12 @@ SedPlot::readAttributes(
   // legend bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetLegend = attributes.readInto("legend", mLegend);
 
   if (mIsSetLegend == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

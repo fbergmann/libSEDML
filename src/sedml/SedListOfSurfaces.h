@@ -306,6 +306,66 @@ public:
 
 
   /**
+   * Get a SedSurface from the SedListOfSurfaces based on the XDataReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "xDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedListOfSurfaces based on the given
+   * xDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSurface* getByXDataReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedListOfSurfaces based on the XDataReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "xDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedListOfSurfaces based on the given
+   * xDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSurface* getByXDataReference(const std::string& sid);
+
+
+  /**
+   * Get a SedSurface from the SedListOfSurfaces based on the YDataReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "yDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedListOfSurfaces based on the given
+   * yDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSurface* getByYDataReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedListOfSurfaces based on the YDataReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "yDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedListOfSurfaces based on the given
+   * yDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSurface* getByYDataReference(const std::string& sid);
+
+
+  /**
    * Get a SedSurface from the SedListOfSurfaces based on the ZDataReference to
    * which it refers.
    *
@@ -333,6 +393,36 @@ public:
    * @copydetails doc_returned_unowned_pointer
    */
   SedSurface* getByZDataReference(const std::string& sid);
+
+
+  /**
+   * Get a SedSurface from the SedListOfSurfaces based on the Style to which it
+   * refers.
+   *
+   * @param sid a string representing the "style" attribute of the SedSurface
+   * object to retrieve.
+   *
+   * @return the first SedSurface in this SedListOfSurfaces based on the given
+   * style attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSurface* getByStyle(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedListOfSurfaces based on the Style to which it
+   * refers.
+   *
+   * @param sid a string representing the "style" attribute of the SedSurface
+   * object to retrieve.
+   *
+   * @return the first SedSurface in this SedListOfSurfaces based on the given
+   * style attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSurface* getByStyle(const std::string& sid);
 
 
   /**

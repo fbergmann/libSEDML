@@ -260,6 +260,90 @@ SedListOfSurfaces::createSurface()
 
 /*
  * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its
+ * XDataReference.
+ */
+struct SedIdEqXDR : public std::unary_function<SedBase*, bool>
+{
+  const string& id;
+   
+  SedIdEqXDR (const string& id) : id(id) { }
+  bool operator() (SedBase* sb)
+  {
+  return (static_cast<SedSurface*>(sb)->getXDataReference() == id);
+  }
+};
+
+
+/*
+ * Get a SedSurface from the SedListOfSurfaces based on the XDataReference to
+ * which it refers.
+ */
+const SedSurface*
+SedListOfSurfaces::getByXDataReference(const std::string& sid) const
+{
+  vector<SedBase*>::const_iterator result;
+  result = find_if(mItems.begin(), mItems.end(), SedIdEqXDR(sid));
+  return (result == mItems.end()) ? 0 : static_cast <const SedSurface*>
+    (*result);
+}
+
+
+/*
+ * Get a SedSurface from the SedListOfSurfaces based on the XDataReference to
+ * which it refers.
+ */
+SedSurface*
+SedListOfSurfaces::getByXDataReference(const std::string& sid)
+{
+  return const_cast<SedSurface*>(static_cast<const
+    SedListOfSurfaces&>(*this).getByXDataReference(sid));
+}
+
+
+/*
+ * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its
+ * YDataReference.
+ */
+struct SedIdEqYDR : public std::unary_function<SedBase*, bool>
+{
+  const string& id;
+   
+  SedIdEqYDR (const string& id) : id(id) { }
+  bool operator() (SedBase* sb)
+  {
+  return (static_cast<SedSurface*>(sb)->getYDataReference() == id);
+  }
+};
+
+
+/*
+ * Get a SedSurface from the SedListOfSurfaces based on the YDataReference to
+ * which it refers.
+ */
+const SedSurface*
+SedListOfSurfaces::getByYDataReference(const std::string& sid) const
+{
+  vector<SedBase*>::const_iterator result;
+  result = find_if(mItems.begin(), mItems.end(), SedIdEqYDR(sid));
+  return (result == mItems.end()) ? 0 : static_cast <const SedSurface*>
+    (*result);
+}
+
+
+/*
+ * Get a SedSurface from the SedListOfSurfaces based on the YDataReference to
+ * which it refers.
+ */
+SedSurface*
+SedListOfSurfaces::getByYDataReference(const std::string& sid)
+{
+  return const_cast<SedSurface*>(static_cast<const
+    SedListOfSurfaces&>(*this).getByYDataReference(sid));
+}
+
+
+/*
+ * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its
  * ZDataReference.
  */
 struct SedIdEqZDR : public std::unary_function<SedBase*, bool>
@@ -297,6 +381,47 @@ SedListOfSurfaces::getByZDataReference(const std::string& sid)
 {
   return const_cast<SedSurface*>(static_cast<const
     SedListOfSurfaces&>(*this).getByZDataReference(sid));
+}
+
+
+/*
+ * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its Style.
+ */
+struct SedIdEqS : public std::unary_function<SedBase*, bool>
+{
+  const string& id;
+   
+  SedIdEqS (const string& id) : id(id) { }
+  bool operator() (SedBase* sb)
+  {
+  return (static_cast<SedSurface*>(sb)->getStyle() == id);
+  }
+};
+
+
+/*
+ * Get a SedSurface from the SedListOfSurfaces based on the Style to which it
+ * refers.
+ */
+const SedSurface*
+SedListOfSurfaces::getByStyle(const std::string& sid) const
+{
+  vector<SedBase*>::const_iterator result;
+  result = find_if(mItems.begin(), mItems.end(), SedIdEqS(sid));
+  return (result == mItems.end()) ? 0 : static_cast <const SedSurface*>
+    (*result);
+}
+
+
+/*
+ * Get a SedSurface from the SedListOfSurfaces based on the Style to which it
+ * refers.
+ */
+SedSurface*
+SedListOfSurfaces::getByStyle(const std::string& sid)
+{
+  return const_cast<SedSurface*>(static_cast<const
+    SedListOfSurfaces&>(*this).getByStyle(sid));
 }
 
 

@@ -940,12 +940,12 @@ SedUniformTimeCourse::readAttributes(
   // initialTime double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetInitialTime = attributes.readInto("initialTime", mInitialTime);
 
-  if ( mIsSetInitialTime == false)
+  if ( mIsSetInitialTime == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -967,13 +967,13 @@ SedUniformTimeCourse::readAttributes(
   // outputStartTime double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOutputStartTime = attributes.readInto("outputStartTime",
     mOutputStartTime);
 
-  if ( mIsSetOutputStartTime == false)
+  if ( mIsSetOutputStartTime == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -995,12 +995,12 @@ SedUniformTimeCourse::readAttributes(
   // outputEndTime double (use = "required" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetOutputEndTime = attributes.readInto("outputEndTime", mOutputEndTime);
 
-  if ( mIsSetOutputEndTime == false)
+  if ( mIsSetOutputEndTime == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1022,13 +1022,13 @@ SedUniformTimeCourse::readAttributes(
   // numberOfPoints int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumberOfPoints = attributes.readInto("numberOfPoints",
     mNumberOfPoints);
 
-  if ( mIsSetNumberOfPoints == false)
+  if ( mIsSetNumberOfPoints == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1043,12 +1043,12 @@ SedUniformTimeCourse::readAttributes(
   // numberOfSteps int (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumberOfSteps = attributes.readInto("numberOfSteps", mNumberOfSteps);
 
-  if ( mIsSetNumberOfSteps == false)
+  if ( mIsSetNumberOfSteps == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);

@@ -979,9 +979,13 @@ SedFitMapping::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'dataSource' is missing from the "
-      "<SedFitMapping> element.";
-    log->logError(SedmlFitMappingAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'dataSource' is missing from the "
+        "<SedFitMapping> element.";
+      log->logError(SedmlFitMappingAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1013,9 +1017,13 @@ SedFitMapping::readAttributes(
   }
   else
   {
-    std::string message = "Sedml attribute 'dataGenerator' is missing from the "
-      "<SedFitMapping> element.";
-    log->logError(SedmlFitMappingAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'dataGenerator' is missing from "
+        "the <SedFitMapping> element.";
+      log->logError(SedmlFitMappingAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
@@ -1035,7 +1043,7 @@ SedFitMapping::readAttributes(
     {
       mType = MappingType_fromString(type.c_str());
 
-      if (MappingType_isValid(mType) == 0)
+      if (log && MappingType_isValid(mType) == 0)
       {
         std::string msg = "The type on the <SedFitMapping> ";
 
@@ -1047,33 +1055,37 @@ SedFitMapping::readAttributes(
         msg += "is '" + type + "', which is not a valid option.";
 
         log->logError(SedmlFitMappingTypeMustBeMappingTypeEnum, level, version,
-          msg);
+          msg, getLine(), getColumn());
       }
     }
   }
   else
   {
-    std::string message = "Sedml attribute 'type' is missing.";
-    log->logError(SedmlFitMappingAllowedAttributes, level, version, message);
+    if (log)
+    {
+      std::string message = "Sedml attribute 'type' is missing.";
+      log->logError(SedmlFitMappingAllowedAttributes, level, version, message,
+        getLine(), getColumn());
+    }
   }
 
   // 
   // weight double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetWeight = attributes.readInto("weight", mWeight);
 
-  if ( mIsSetWeight == false)
+  if ( mIsSetWeight == false && log)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'weight' from the <SedFitMapping> "
         "element must be an integer.";
-      log->logError(SedmlFitMappingWeightMustBeDouble, level, version,
-        message);
+      log->logError(SedmlFitMappingWeightMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 

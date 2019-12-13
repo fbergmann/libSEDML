@@ -1137,12 +1137,12 @@ SedAbstractCurve::readAttributes(
   // logX bool (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetLogX = attributes.readInto("logX", mLogX);
 
   if (mIsSetLogX == false)
   {
-    if (log->getNumErrors() == numErrs + 1 &&
+    if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
@@ -1299,8 +1299,7 @@ SedAbstractCurve::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedCurve (SedAbstractCurve_t) using the given SEDML Level and
- * @ p version values.
+ * Creates a new SedCurve using the given SEDML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedCurve_t *
@@ -1311,8 +1310,8 @@ SedAbstractCurve_createCurve(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedShadedArea (SedAbstractCurve_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedShadedArea using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 SedShadedArea_t *

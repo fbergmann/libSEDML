@@ -703,10 +703,10 @@ SedBounds::readAttributes(
   // initialValue double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetInitialValue = attributes.readInto("initialValue", mInitialValue);
 
-  if ( mIsSetInitialValue == false)
+  if ( mIsSetInitialValue == false && log)
   {
     if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
@@ -723,10 +723,10 @@ SedBounds::readAttributes(
   // lowerBound double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetLowerBound = attributes.readInto("lowerBound", mLowerBound);
 
-  if ( mIsSetLowerBound == false)
+  if ( mIsSetLowerBound == false && log)
   {
     if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
@@ -743,10 +743,10 @@ SedBounds::readAttributes(
   // upperBound double (use = "optional" )
   // 
 
-  numErrs = log->getNumErrors();
+  numErrs = log ? log->getNumErrors() : 0;
   mIsSetUpperBound = attributes.readInto("upperBound", mUpperBound);
 
-  if ( mIsSetUpperBound == false)
+  if ( mIsSetUpperBound == false && log)
   {
     if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))

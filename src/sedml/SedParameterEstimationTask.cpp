@@ -1143,13 +1143,14 @@ SedParameterEstimationTask::removeChildObject(const std::string& elementName,
 {
   if (elementName == "algorithm")
   {
-    SedAlgorithm * obj = getAlgorithm();
-    if (unsetAlgorithm() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAlgorithm * obj = mAlgorithm;
+    mAlgorithm = NULL; return obj;
   }
   else if (elementName == "leastSquareObjectiveFunction")
   {
-    SedObjective * obj = getObjective();
-    if (unsetObjective() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedObjective * obj = mObjective;
+    mObjective = NULL;
+    return obj;
   }
   else if (elementName == "adjustableParameter")
   {
@@ -1323,7 +1324,7 @@ SedParameterEstimationTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (name == "leastSquareObjectiveFunction")
   {
-    if (isSetObjective())
+    if (getErrorLog() && isSetObjective())
     {
       getErrorLog()->logError(SedmlParameterEstimationTaskAllowedElements,
         getLevel(), getVersion(), "", getLine(), getColumn());
@@ -1335,7 +1336,7 @@ SedParameterEstimationTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
   }
   else if (name == "algorithm")
   {
-    if (isSetAlgorithm())
+    if (getErrorLog() && isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlParameterEstimationTaskAllowedElements,
         getLevel(), getVersion(), "", getLine(), getColumn());

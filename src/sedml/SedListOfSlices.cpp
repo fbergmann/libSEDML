@@ -300,6 +300,47 @@ SedListOfSlices::getByReference(const std::string& sid)
 
 
 /*
+ * Used by SedListOfSlices::get() to lookup a SedSlice based on its Index.
+ */
+struct SedIdEqI : public std::unary_function<SedBase*, bool>
+{
+  const string& id;
+   
+  SedIdEqI (const string& id) : id(id) { }
+  bool operator() (SedBase* sb)
+  {
+  return (static_cast<SedSlice*>(sb)->getIndex() == id);
+  }
+};
+
+
+/*
+ * Get a SedSlice from the SedListOfSlices based on the Index to which it
+ * refers.
+ */
+const SedSlice*
+SedListOfSlices::getByIndex(const std::string& sid) const
+{
+  vector<SedBase*>::const_iterator result;
+  result = find_if(mItems.begin(), mItems.end(), SedIdEqI(sid));
+  return (result == mItems.end()) ? 0 : static_cast <const SedSlice*>
+    (*result);
+}
+
+
+/*
+ * Get a SedSlice from the SedListOfSlices based on the Index to which it
+ * refers.
+ */
+SedSlice*
+SedListOfSlices::getByIndex(const std::string& sid)
+{
+  return const_cast<SedSlice*>(static_cast<const
+    SedListOfSlices&>(*this).getByIndex(sid));
+}
+
+
+/*
  * Returns the XML element name of this SedListOfSlices object.
  */
 const std::string&

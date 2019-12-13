@@ -239,7 +239,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_RANGE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_RANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -605,8 +605,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedUniformRange (SedRange_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedUniformRange using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedRange_t.
  *
@@ -625,8 +625,8 @@ SedRange_createUniformRange(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedVectorRange (SedRange_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedVectorRange using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedRange_t.
  *
@@ -645,8 +645,8 @@ SedRange_createVectorRange(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedFunctionalRange (SedRange_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedFunctionalRange using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedRange_t.
  *
@@ -665,8 +665,8 @@ SedRange_createFunctionalRange(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedDataRange (SedRange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedDataRange using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedRange_t.
  *

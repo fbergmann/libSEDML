@@ -275,7 +275,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_DEPENDENTVARIABLE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_DEPENDENTVARIABLE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

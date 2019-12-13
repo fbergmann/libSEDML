@@ -994,8 +994,8 @@ SedFitExperiment::removeChildObject(const std::string& elementName,
 {
   if (elementName == "algorithm")
   {
-    SedAlgorithm * obj = getAlgorithm();
-    if (unsetAlgorithm() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAlgorithm * obj = mAlgorithm;
+    mAlgorithm = NULL; return obj;
   }
   else if (elementName == "fitMapping")
   {
@@ -1125,7 +1125,7 @@ SedFitExperiment::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "algorithm")
   {
-    if (isSetAlgorithm())
+    if (getErrorLog() && isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlFitExperimentAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());

@@ -227,7 +227,8 @@ public:
    * @param n an unsigned int representing the index of the SedSurface to
    * retrieve.
    *
-   * @return the nth SedSurface in the SedListOfSurfaces within this SedPlot3D.
+   * @return the nth SedSurface in the SedListOfSurfaces within this SedPlot3D
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -247,7 +248,8 @@ public:
    * @param n an unsigned int representing the index of the SedSurface to
    * retrieve.
    *
-   * @return the nth SedSurface in the SedListOfSurfaces within this SedPlot3D.
+   * @return the nth SedSurface in the SedListOfSurfaces within this SedPlot3D
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -259,6 +261,108 @@ public:
    * @see removeSurface(unsigned int n)
    */
   const SedSurface* getSurface(unsigned int n) const;
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedSurface to
+   * retrieve.
+   *
+   * @return the SedSurface in the SedListOfSurfaces within this SedPlot3D with
+   * the given @p sid or @c NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSurface(const SedSurface* object)
+   * @see createSurface()
+   * @see getSurface(unsigned int n)
+   * @see getNumSurfaces()
+   * @see removeSurface(const std::string& sid)
+   * @see removeSurface(unsigned int n)
+   */
+  SedSurface* getSurface(const std::string& sid);
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedSurface to
+   * retrieve.
+   *
+   * @return the SedSurface in the SedListOfSurfaces within this SedPlot3D with
+   * the given @p sid or @c NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSurface(const SedSurface* object)
+   * @see createSurface()
+   * @see getSurface(unsigned int n)
+   * @see getNumSurfaces()
+   * @see removeSurface(const std::string& sid)
+   * @see removeSurface(unsigned int n)
+   */
+  const SedSurface* getSurface(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on the XDataReference to which
+   * it refers.
+   *
+   * @param sid a string representing the "xDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedPlot3D based on the given
+   * xDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSurface* getSurfaceByXDataReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on the XDataReference to which
+   * it refers.
+   *
+   * @param sid a string representing the "xDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedPlot3D based on the given
+   * xDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSurface* getSurfaceByXDataReference(const std::string& sid);
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on the YDataReference to which
+   * it refers.
+   *
+   * @param sid a string representing the "yDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedPlot3D based on the given
+   * yDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSurface* getSurfaceByYDataReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on the YDataReference to which
+   * it refers.
+   *
+   * @param sid a string representing the "yDataReference" attribute of the
+   * SedSurface object to retrieve.
+   *
+   * @return the first SedSurface in this SedPlot3D based on the given
+   * yDataReference attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSurface* getSurfaceByYDataReference(const std::string& sid);
 
 
   /**
@@ -289,6 +393,34 @@ public:
    * @copydetails doc_returned_unowned_pointer
    */
   SedSurface* getSurfaceByZDataReference(const std::string& sid);
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on the Style to which it refers.
+   *
+   * @param sid a string representing the "style" attribute of the SedSurface
+   * object to retrieve.
+   *
+   * @return the first SedSurface in this SedPlot3D based on the given style
+   * attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSurface* getSurfaceByStyle(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSurface from the SedPlot3D based on the Style to which it refers.
+   *
+   * @param sid a string representing the "style" attribute of the SedSurface
+   * object to retrieve.
+   *
+   * @return the first SedSurface in this SedPlot3D based on the given style
+   * attribute or NULL if no such SedSurface exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSurface* getSurfaceByStyle(const std::string& sid);
 
 
   /**
@@ -359,7 +491,7 @@ public:
    *
    * @return a pointer to the nth SedSurface in this SedPlot3D.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSurface(const SedSurface* object)
    * @see createSurface()
@@ -369,6 +501,28 @@ public:
    * @see removeSurface(const std::string& sid)
    */
   SedSurface* removeSurface(unsigned int n);
+
+
+  /**
+   * Removes the SedSurface from this SedPlot3D based on its identifier and
+   * returns a pointer to it.
+   *
+   * @param sid a string representing the identifier of the SedSurface to
+   * remove.
+   *
+   * @return the SedSurface in this SedPlot3D based on the identifier or NULL
+   * if no such SedSurface exists.
+   *
+   * @copydetails doc_warning_returns_owned_pointer
+   *
+   * @see addSurface(const SedSurface* object)
+   * @see createSurface()
+   * @see getSurface(const std::string& sid)
+   * @see getSurface(unsigned int n)
+   * @see getNumSurfaces()
+   * @see removeSurface(unsigned int n)
+   */
+  SedSurface* removeSurface(const std::string& sid);
 
 
   /**
@@ -387,7 +541,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_OUTPUT_PLOT3D, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT_PLOT3D, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1046,7 +1200,8 @@ SedPlot3D_getListOfSurfaces(SedPlot3D_t* spd);
  * @param n an unsigned int representing the index of the SedSurface_t to
  * retrieve.
  *
- * @return the nth SedSurface_t in the SedListOfSurfaces within this SedPlot3D.
+ * @return the nth SedSurface_t in the SedListOfSurfaces within this SedPlot3D
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1055,6 +1210,68 @@ SedPlot3D_getListOfSurfaces(SedPlot3D_t* spd);
 LIBSEDML_EXTERN
 SedSurface_t*
 SedPlot3D_getSurface(SedPlot3D_t* spd, unsigned int n);
+
+
+/**
+ * Get a SedSurface_t from the SedPlot3D_t based on its identifier.
+ *
+ * @param spd the SedPlot3D_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedSurface_t to
+ * retrieve.
+ *
+ * @return the SedSurface_t in the SedListOfSurfaces within this SedPlot3D with
+ * the given @p sid or @c NULL if no such SedSurface_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedPlot3D_t
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceById(SedPlot3D_t* spd, const char *sid);
+
+
+/**
+ * Get a SedSurface_t from the SedPlot3D_t based on the XDataReference to which
+ * it refers.
+ *
+ * @param spd the SedPlot3D_t structure to search.
+ *
+ * @param sid a string representing the "xDataReference" attribute of the
+ * SedSurface_t object to retrieve.
+ *
+ * @return the first SedSurface_t in this SedPlot3D_t based on the given
+ * xDataReference attribute or NULL if no such SedSurface_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedPlot3D_t
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceByXDataReference(SedPlot3D_t* spd, const char *sid);
+
+
+/**
+ * Get a SedSurface_t from the SedPlot3D_t based on the YDataReference to which
+ * it refers.
+ *
+ * @param spd the SedPlot3D_t structure to search.
+ *
+ * @param sid a string representing the "yDataReference" attribute of the
+ * SedSurface_t object to retrieve.
+ *
+ * @return the first SedSurface_t in this SedPlot3D_t based on the given
+ * yDataReference attribute or NULL if no such SedSurface_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedPlot3D_t
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceByYDataReference(SedPlot3D_t* spd, const char *sid);
 
 
 /**
@@ -1076,6 +1293,27 @@ SedPlot3D_getSurface(SedPlot3D_t* spd, unsigned int n);
 LIBSEDML_EXTERN
 SedSurface_t*
 SedPlot3D_getSurfaceByZDataReference(SedPlot3D_t* spd, const char *sid);
+
+
+/**
+ * Get a SedSurface_t from the SedPlot3D_t based on the Style to which it
+ * refers.
+ *
+ * @param spd the SedPlot3D_t structure to search.
+ *
+ * @param sid a string representing the "style" attribute of the SedSurface_t
+ * object to retrieve.
+ *
+ * @return the first SedSurface_t in this SedPlot3D_t based on the given style
+ * attribute or NULL if no such SedSurface_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedPlot3D_t
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_getSurfaceByStyle(SedPlot3D_t* spd, const char *sid);
 
 
 /**
@@ -1145,13 +1383,34 @@ SedPlot3D_createSurface(SedPlot3D_t* spd);
  *
  * @return a pointer to the nth SedSurface_t in this SedPlot3D_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedPlot3D_t
  */
 LIBSEDML_EXTERN
 SedSurface_t*
 SedPlot3D_removeSurface(SedPlot3D_t* spd, unsigned int n);
+
+
+/**
+ * Removes the SedSurface_t from this SedPlot3D_t based on its identifier and
+ * returns a pointer to it.
+ *
+ * @param spd the SedPlot3D_t structure to search.
+ *
+ * @param sid a string representing the identifier of the SedSurface_t to
+ * remove.
+ *
+ * @return the SedSurface_t in this SedPlot3D_t based on the identifier or NULL
+ * if no such SedSurface_t exists.
+ *
+ * @copydetails doc_warning_returns_owned_pointer
+ *
+ * @memberof SedPlot3D_t
+ */
+LIBSEDML_EXTERN
+SedSurface_t*
+SedPlot3D_removeSurfaceById(SedPlot3D_t* spd, const char* sid);
 
 
 /**

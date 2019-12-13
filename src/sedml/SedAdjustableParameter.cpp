@@ -986,8 +986,8 @@ SedAdjustableParameter::removeChildObject(const std::string& elementName,
 {
   if (elementName == "bounds")
   {
-    SedBounds * obj = getBounds();
-    if (unsetBounds() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedBounds * obj = mBounds;
+    mBounds = NULL; return obj;
   }
   else if (elementName == "experimentRef")
   {

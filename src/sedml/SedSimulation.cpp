@@ -814,8 +814,8 @@ SedSimulation::removeChildObject(const std::string& elementName,
 {
   if (elementName == "algorithm")
   {
-    SedAlgorithm * obj = getAlgorithm();
-    if (unsetAlgorithm() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedAlgorithm * obj = mAlgorithm;
+    mAlgorithm = NULL; return obj;
   }
 
   return NULL;
@@ -919,7 +919,7 @@ SedSimulation::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   if (name == "algorithm")
   {
-    if (isSetAlgorithm())
+    if (getErrorLog() && isSetAlgorithm())
     {
       getErrorLog()->logError(SedmlSimulationAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
@@ -1099,7 +1099,7 @@ SedSimulation_t *
 SedSimulation_createUniformTimeCourse(unsigned int level,
                                          unsigned int version)
 {
-  return new SedSimulation(level, version);
+  return new SedUniformTimeCourse(level, version);
 }
 
 
@@ -1111,7 +1111,7 @@ LIBSEDML_EXTERN
 SedSimulation_t *
 SedSimulation_createOneStep(unsigned int level, unsigned int version)
 {
-  return new SedSimulation(level, version);
+  return new SedOneStep(level, version);
 }
 
 
@@ -1123,7 +1123,7 @@ LIBSEDML_EXTERN
 SedSimulation_t *
 SedSimulation_createSteadyState(unsigned int level, unsigned int version)
 {
-  return new SedSimulation(level, version);
+  return new SedSteadyState(level, version);
 }
 
 
