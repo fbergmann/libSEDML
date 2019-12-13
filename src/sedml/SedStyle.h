@@ -67,9 +67,9 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   std::string mBaseStyle;
-  SedLine* mLine;
-  SedMarker* mMarker;
-  SedFill* mFill;
+  SedLine* mLineStyle;
+  SedMarker* mMarkerStyle;
+  SedFill* mFillStyle;
 
   /** @endcond */
 
@@ -238,7 +238,7 @@ public:
    * @return the value of the "marker" element of this SedStyle as a
    * SedMarker*.
    */
-  const SedMarker* getMarker() const;
+  const SedMarker* getMarkerStyle() const;
 
 
   /**
@@ -247,7 +247,16 @@ public:
    * @return the value of the "marker" element of this SedStyle as a
    * SedMarker*.
    */
-  SedMarker* getMarker();
+  SedMarker* getMarkerStyle();
+
+
+  /**
+   * Returns the value of the "fill" element of this SedStyle.
+   *
+   * @return the value of the "fill" element of this SedStyle as a SedFill*.
+   * SedFill*.
+   */
+  const SedFill* getFillStyle() const;
 
 
   /**
@@ -255,15 +264,7 @@ public:
    *
    * @return the value of the "fill" element of this SedStyle as a SedFill*.
    */
-  const SedFill* getFill() const;
-
-
-  /**
-   * Returns the value of the "fill" element of this SedStyle.
-   *
-   * @return the value of the "fill" element of this SedStyle as a SedFill*.
-   */
-  SedFill* getFill();
+  SedFill* getFillStyle();
 
 
   /**
@@ -281,7 +282,7 @@ public:
    * @return @c true if this SedStyle's "marker" element has been set,
    * otherwise @c false is returned.
    */
-  bool isSetMarker() const;
+  bool isSetMarkerStyle() const;
 
 
   /**
@@ -290,7 +291,7 @@ public:
    * @return @c true if this SedStyle's "fill" element has been set, otherwise
    * @c false is returned.
    */
-  bool isSetFill() const;
+  bool isSetFillStyle() const;
 
 
   /**
@@ -303,7 +304,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setLineStyle(const SedLine* line);
+  int setLineStyle(const SedLine* lineStyle);
 
 
   /**
@@ -316,7 +317,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setMarker(const SedMarker* marker);
+  int setMarkerStyle(const SedMarker* markerStyle);
 
 
   /**
@@ -329,7 +330,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setFill(const SedFill* fill);
+  int setFillStyle(const SedFill* fillStyle);
 
 
   /**
@@ -347,7 +348,7 @@ public:
    *
    * @return a new SedMarker object instance.
    */
-  SedMarker* createMarker();
+  SedMarker* createMarkerStyle();
 
 
   /**
@@ -356,7 +357,7 @@ public:
    *
    * @return a new SedFill object instance.
    */
-  SedFill* createFill();
+  SedFill* createFillStyle();
 
 
   /**
@@ -376,7 +377,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetMarker();
+  int unsetMarkerStyle();
 
 
   /**
@@ -386,7 +387,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetFill();
+  int unsetFillStyle();
 
 
   /**
@@ -1100,7 +1101,7 @@ SedStyle_unsetBaseStyle(SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 const SedLine_t*
-SedStyle_getLine(const SedStyle_t * ss);
+SedStyle_getLineStyle(const SedStyle_t * ss);
 
 
 /**
@@ -1115,7 +1116,7 @@ SedStyle_getLine(const SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 const SedMarker_t*
-SedStyle_getMarker(const SedStyle_t * ss);
+SedStyle_getMarkerStyle(const SedStyle_t * ss);
 
 
 /**
@@ -1129,7 +1130,7 @@ SedStyle_getMarker(const SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 const SedFill_t*
-SedStyle_getFill(const SedStyle_t * ss);
+SedStyle_getFillStyle(const SedStyle_t * ss);
 
 
 /**
@@ -1144,7 +1145,7 @@ SedStyle_getFill(const SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_isSetLine(const SedStyle_t * ss);
+SedStyle_isSetLineStyle(const SedStyle_t * ss);
 
 
 /**
@@ -1160,7 +1161,7 @@ SedStyle_isSetLine(const SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_isSetMarker(const SedStyle_t * ss);
+SedStyle_isSetMarkerStyle(const SedStyle_t * ss);
 
 
 /**
@@ -1175,7 +1176,7 @@ SedStyle_isSetMarker(const SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_isSetFill(const SedStyle_t * ss);
+SedStyle_isSetFillStyle(const SedStyle_t * ss);
 
 
 /**
@@ -1195,7 +1196,7 @@ SedStyle_isSetFill(const SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_setLine(SedStyle_t * ss, const SedLine_t* line);
+SedStyle_setLineStyle(SedStyle_t * ss, const SedLine_t* lineStyle);
 
 
 /**
@@ -1215,7 +1216,7 @@ SedStyle_setLine(SedStyle_t * ss, const SedLine_t* line);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_setMarker(SedStyle_t * ss, const SedMarker_t* marker);
+SedStyle_setMarkerStyle(SedStyle_t * ss, const SedMarker_t* markerStyle);
 
 
 /**
@@ -1235,7 +1236,7 @@ SedStyle_setMarker(SedStyle_t * ss, const SedMarker_t* marker);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_setFill(SedStyle_t * ss, const SedFill_t* fill);
+SedStyle_setFillStyle(SedStyle_t * ss, const SedFill_t* fillStyle);
 
 
 /**
@@ -1250,7 +1251,7 @@ SedStyle_setFill(SedStyle_t * ss, const SedFill_t* fill);
  */
 LIBSEDML_EXTERN
 SedLine_t*
-SedStyle_createLine(SedStyle_t* ss);
+SedStyle_createLineStyle(SedStyle_t* ss);
 
 
 /**
@@ -1265,7 +1266,7 @@ SedStyle_createLine(SedStyle_t* ss);
  */
 LIBSEDML_EXTERN
 SedMarker_t*
-SedStyle_createMarker(SedStyle_t* ss);
+SedStyle_createMarkerStyle(SedStyle_t* ss);
 
 
 /**
@@ -1280,7 +1281,7 @@ SedStyle_createMarker(SedStyle_t* ss);
  */
 LIBSEDML_EXTERN
 SedFill_t*
-SedStyle_createFill(SedStyle_t* ss);
+SedStyle_createFillStyle(SedStyle_t* ss);
 
 
 /**
@@ -1297,7 +1298,7 @@ SedStyle_createFill(SedStyle_t* ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_unsetLine(SedStyle_t * ss);
+SedStyle_unsetLineStyle(SedStyle_t * ss);
 
 
 /**
@@ -1314,7 +1315,7 @@ SedStyle_unsetLine(SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_unsetMarker(SedStyle_t * ss);
+SedStyle_unsetMarkerStyle(SedStyle_t * ss);
 
 
 /**
@@ -1331,7 +1332,7 @@ SedStyle_unsetMarker(SedStyle_t * ss);
  */
 LIBSEDML_EXTERN
 int
-SedStyle_unsetFill(SedStyle_t * ss);
+SedStyle_unsetFillStyle(SedStyle_t * ss);
 
 
 /**

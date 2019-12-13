@@ -227,3 +227,13 @@ TEST_CASE("allow dashDotDot", "[sedml]")
   REQUIRE(line.setStyle(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
 
 }
+
+TEST_CASE("ensure SedStyle members are labled consistently", "[sedml]")
+{
+  SedStyle style(1, 4);
+  REQUIRE(style.isSetLineStyle() == false);
+  REQUIRE(style.isSetMarkerStyle() == false);
+  REQUIRE(style.isSetFillStyle() == false);
+
+}
+

@@ -54,9 +54,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedStyle::SedStyle(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mBaseStyle ("")
-  , mLine (NULL)
-  , mMarker (NULL)
-  , mFill (NULL)
+  , mLineStyle (NULL)
+  , mMarkerStyle (NULL)
+  , mFillStyle (NULL)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
@@ -69,9 +69,9 @@ SedStyle::SedStyle(unsigned int level, unsigned int version)
 SedStyle::SedStyle(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mBaseStyle ("")
-  , mLine (NULL)
-  , mMarker (NULL)
-  , mFill (NULL)
+  , mLineStyle (NULL)
+  , mMarkerStyle (NULL)
+  , mFillStyle (NULL)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
@@ -84,23 +84,23 @@ SedStyle::SedStyle(SedNamespaces *sedmlns)
 SedStyle::SedStyle(const SedStyle& orig)
   : SedBase( orig )
   , mBaseStyle ( orig.mBaseStyle )
-  , mLine ( NULL )
-  , mMarker ( NULL )
-  , mFill ( NULL )
+  , mLineStyle ( NULL )
+  , mMarkerStyle ( NULL )
+  , mFillStyle ( NULL )
 {
-  if (orig.mLine != NULL)
+  if (orig.mLineStyle != NULL)
   {
-    mLine = orig.mLine->clone();
+    mLineStyle = orig.mLineStyle->clone();
   }
 
-  if (orig.mMarker != NULL)
+  if (orig.mMarkerStyle != NULL)
   {
-    mMarker = orig.mMarker->clone();
+    mMarkerStyle = orig.mMarkerStyle->clone();
   }
 
-  if (orig.mFill != NULL)
+  if (orig.mFillStyle != NULL)
   {
-    mFill = orig.mFill->clone();
+    mFillStyle = orig.mFillStyle->clone();
   }
 
   connectToChild();
@@ -117,34 +117,34 @@ SedStyle::operator=(const SedStyle& rhs)
   {
     SedBase::operator=(rhs);
     mBaseStyle = rhs.mBaseStyle;
-    delete mLine;
-    if (rhs.mLine != NULL)
+    delete mLineStyle;
+    if (rhs.mLineStyle != NULL)
     {
-      mLine = rhs.mLine->clone();
+      mLineStyle = rhs.mLineStyle->clone();
     }
     else
     {
-      mLine = NULL;
+      mLineStyle = NULL;
     }
 
-    delete mMarker;
-    if (rhs.mMarker != NULL)
+    delete mMarkerStyle;
+    if (rhs.mMarkerStyle != NULL)
     {
-      mMarker = rhs.mMarker->clone();
+      mMarkerStyle = rhs.mMarkerStyle->clone();
     }
     else
     {
-      mMarker = NULL;
+      mMarkerStyle = NULL;
     }
 
-    delete mFill;
-    if (rhs.mFill != NULL)
+    delete mFillStyle;
+    if (rhs.mFillStyle != NULL)
     {
-      mFill = rhs.mFill->clone();
+      mFillStyle = rhs.mFillStyle->clone();
     }
     else
     {
-      mFill = NULL;
+      mFillStyle = NULL;
     }
 
     connectToChild();
@@ -169,12 +169,12 @@ SedStyle::clone() const
  */
 SedStyle::~SedStyle()
 {
-  delete mLine;
-  mLine = NULL;
-  delete mMarker;
-  mMarker = NULL;
-  delete mFill;
-  mFill = NULL;
+  delete mLineStyle;
+  mLineStyle = NULL;
+  delete mMarkerStyle;
+  mMarkerStyle = NULL;
+  delete mFillStyle;
+  mFillStyle = NULL;
 }
 
 
@@ -291,7 +291,7 @@ SedStyle::unsetBaseStyle()
 const SedLine*
 SedStyle::getLineStyle() const
 {
-  return mLine;
+  return mLineStyle;
 }
 
 
@@ -301,7 +301,7 @@ SedStyle::getLineStyle() const
 SedLine*
 SedStyle::getLineStyle()
 {
-  return mLine;
+  return mLineStyle;
 }
 
 
@@ -309,9 +309,9 @@ SedStyle::getLineStyle()
  * Returns the value of the "marker" element of this SedStyle.
  */
 const SedMarker*
-SedStyle::getMarker() const
+SedStyle::getMarkerStyle() const
 {
-  return mMarker;
+  return mMarkerStyle;
 }
 
 
@@ -319,9 +319,9 @@ SedStyle::getMarker() const
  * Returns the value of the "marker" element of this SedStyle.
  */
 SedMarker*
-SedStyle::getMarker()
+SedStyle::getMarkerStyle()
 {
-  return mMarker;
+  return mMarkerStyle;
 }
 
 
@@ -329,9 +329,9 @@ SedStyle::getMarker()
  * Returns the value of the "fill" element of this SedStyle.
  */
 const SedFill*
-SedStyle::getFill() const
+SedStyle::getFillStyle() const
 {
-  return mFill;
+  return mFillStyle;
 }
 
 
@@ -339,9 +339,9 @@ SedStyle::getFill() const
  * Returns the value of the "fill" element of this SedStyle.
  */
 SedFill*
-SedStyle::getFill()
+SedStyle::getFillStyle()
 {
-  return mFill;
+  return mFillStyle;
 }
 
 
@@ -351,7 +351,7 @@ SedStyle::getFill()
 bool
 SedStyle::isSetLineStyle() const
 {
-  return (mLine != NULL);
+  return (mLineStyle != NULL);
 }
 
 
@@ -359,9 +359,9 @@ SedStyle::isSetLineStyle() const
  * Predicate returning @c true if this SedStyle's "marker" element is set.
  */
 bool
-SedStyle::isSetMarker() const
+SedStyle::isSetMarkerStyle() const
 {
-  return (mMarker != NULL);
+  return (mMarkerStyle != NULL);
 }
 
 
@@ -369,9 +369,9 @@ SedStyle::isSetMarker() const
  * Predicate returning @c true if this SedStyle's "fill" element is set.
  */
 bool
-SedStyle::isSetFill() const
+SedStyle::isSetFillStyle() const
 {
-  return (mFill != NULL);
+  return (mFillStyle != NULL);
 }
 
 
@@ -379,25 +379,25 @@ SedStyle::isSetFill() const
  * Sets the value of the "line" element of this SedStyle.
  */
 int
-SedStyle::setLineStyle(const SedLine* line)
+SedStyle::setLineStyle(const SedLine* lineStyle)
 {
-  if (mLine == line)
+  if (mLineStyle == lineStyle)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (line == NULL)
+  else if (lineStyle == NULL)
   {
-    delete mLine;
-    mLine = NULL;
+    delete mLineStyle;
+    mLineStyle = NULL;
     return LIBSEDML_OPERATION_SUCCESS;
   }
   else
   {
-    delete mLine;
-    mLine = (line != NULL) ? line->clone() : NULL;
-    if (mLine != NULL)
+    delete mLineStyle;
+    mLineStyle = (lineStyle != NULL) ? lineStyle->clone() : NULL;
+    if (mLineStyle != NULL)
     {
-      mLine->connectToParent(this);
+      mLineStyle->connectToParent(this);
     }
 
     return LIBSEDML_OPERATION_SUCCESS;
@@ -409,25 +409,25 @@ SedStyle::setLineStyle(const SedLine* line)
  * Sets the value of the "marker" element of this SedStyle.
  */
 int
-SedStyle::setMarker(const SedMarker* marker)
+SedStyle::setMarkerStyle(const SedMarker* markerStyle)
 {
-  if (mMarker == marker)
+  if (mMarkerStyle == markerStyle)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (marker == NULL)
+  else if (markerStyle == NULL)
   {
-    delete mMarker;
-    mMarker = NULL;
+    delete mMarkerStyle;
+    mMarkerStyle = NULL;
     return LIBSEDML_OPERATION_SUCCESS;
   }
   else
   {
-    delete mMarker;
-    mMarker = (marker != NULL) ? marker->clone() : NULL;
-    if (mMarker != NULL)
+    delete mMarkerStyle;
+    mMarkerStyle = (markerStyle != NULL) ? markerStyle->clone() : NULL;
+    if (mMarkerStyle != NULL)
     {
-      mMarker->connectToParent(this);
+      mMarkerStyle->connectToParent(this);
     }
 
     return LIBSEDML_OPERATION_SUCCESS;
@@ -439,25 +439,25 @@ SedStyle::setMarker(const SedMarker* marker)
  * Sets the value of the "fill" element of this SedStyle.
  */
 int
-SedStyle::setFill(const SedFill* fill)
+SedStyle::setFillStyle(const SedFill* fillStyle)
 {
-  if (mFill == fill)
+  if (mFillStyle == fillStyle)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (fill == NULL)
+  else if (fillStyle == NULL)
   {
-    delete mFill;
-    mFill = NULL;
+    delete mFillStyle;
+    mFillStyle = NULL;
     return LIBSEDML_OPERATION_SUCCESS;
   }
   else
   {
-    delete mFill;
-    mFill = (fill != NULL) ? fill->clone() : NULL;
-    if (mFill != NULL)
+    delete mFillStyle;
+    mFillStyle = (fillStyle != NULL) ? fillStyle->clone() : NULL;
+    if (mFillStyle != NULL)
     {
-      mFill->connectToParent(this);
+      mFillStyle->connectToParent(this);
     }
 
     return LIBSEDML_OPERATION_SUCCESS;
@@ -472,16 +472,17 @@ SedStyle::setFill(const SedFill* fill)
 SedLine*
 SedStyle::createLineStyle()
 {
-  if (mLine != NULL)
+  if (mLineStyle != NULL)
   {
-    delete mLine;
+    delete mLineStyle;
   }
 
-  mLine = new SedLine(getSedNamespaces());
+  mLineStyle = new SedLine(getSedNamespaces());
+
 
   connectToChild();
 
-  return mLine;
+  return mLineStyle;
 }
 
 
@@ -490,18 +491,19 @@ SedStyle::createLineStyle()
  * the SedMarker object created.
  */
 SedMarker*
-SedStyle::createMarker()
+SedStyle::createMarkerStyle()
 {
-  if (mMarker != NULL)
+  if (mMarkerStyle != NULL)
   {
-    delete mMarker;
+    delete mMarkerStyle;
   }
 
-  mMarker = new SedMarker(getSedNamespaces());
+  mMarkerStyle = new SedMarker(getSedNamespaces());
+
 
   connectToChild();
 
-  return mMarker;
+  return mMarkerStyle;
 }
 
 
@@ -510,18 +512,19 @@ SedStyle::createMarker()
  * the SedFill object created.
  */
 SedFill*
-SedStyle::createFill()
+SedStyle::createFillStyle()
 {
-  if (mFill != NULL)
+  if (mFillStyle != NULL)
   {
-    delete mFill;
+    delete mFillStyle;
   }
 
-  mFill = new SedFill(getSedNamespaces());
+  mFillStyle = new SedFill(getSedNamespaces());
+
 
   connectToChild();
 
-  return mFill;
+  return mFillStyle;
 }
 
 
@@ -531,8 +534,8 @@ SedStyle::createFill()
 int
 SedStyle::unsetLineStyle()
 {
-  delete mLine;
-  mLine = NULL;
+  delete mLineStyle;
+  mLineStyle = NULL;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -541,10 +544,10 @@ SedStyle::unsetLineStyle()
  * Unsets the value of the "marker" element of this SedStyle.
  */
 int
-SedStyle::unsetMarker()
+SedStyle::unsetMarkerStyle()
 {
-  delete mMarker;
-  mMarker = NULL;
+  delete mMarkerStyle;
+  mMarkerStyle = NULL;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -553,10 +556,10 @@ SedStyle::unsetMarker()
  * Unsets the value of the "fill" element of this SedStyle.
  */
 int
-SedStyle::unsetFill()
+SedStyle::unsetFillStyle()
 {
-  delete mFill;
-  mFill = NULL;
+  delete mFillStyle;
+  mFillStyle = NULL;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -627,17 +630,17 @@ SedStyle::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
   if (isSetLineStyle() == true)
   {
-    mLine->write(stream);
+    mLineStyle->write(stream);
   }
 
-  if (isSetMarker() == true)
+  if (isSetMarkerStyle() == true)
   {
-    mMarker->write(stream);
+    mMarkerStyle->write(stream);
   }
 
-  if (isSetFill() == true)
+  if (isSetFillStyle() == true)
   {
-    mFill->write(stream);
+    mFillStyle->write(stream);
   }
 }
 
@@ -670,19 +673,19 @@ SedStyle::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
 
-  if (mLine != NULL)
+  if (mLineStyle != NULL)
   {
-    mLine->setSedDocument(d);
+    mLineStyle->setSedDocument(d);
   }
 
-  if (mMarker != NULL)
+  if (mMarkerStyle != NULL)
   {
-    mMarker->setSedDocument(d);
+    mMarkerStyle->setSedDocument(d);
   }
 
-  if (mFill != NULL)
+  if (mFillStyle != NULL)
   {
-    mFill->setSedDocument(d);
+    mFillStyle->setSedDocument(d);
   }
 }
 
@@ -700,19 +703,19 @@ SedStyle::connectToChild()
 {
   SedBase::connectToChild();
 
-  if (mLine != NULL)
+  if (mLineStyle != NULL)
   {
-    mLine->connectToParent(this);
+    mLineStyle->connectToParent(this);
   }
 
-  if (mMarker != NULL)
+  if (mMarkerStyle != NULL)
   {
-    mMarker->connectToParent(this);
+    mMarkerStyle->connectToParent(this);
   }
 
-  if (mFill != NULL)
+  if (mFillStyle != NULL)
   {
-    mFill->connectToParent(this);
+    mFillStyle->connectToParent(this);
   }
 }
 
@@ -981,17 +984,17 @@ SedStyle::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "line")
+  if (elementName == "lineStyle")
   {
     return createLineStyle();
   }
-  else if (elementName == "marker")
+  else if (elementName == "markerStyle")
   {
-    return createMarker();
+    return createMarkerStyle();
   }
-  else if (elementName == "fill")
+  else if (elementName == "fillStyle")
   {
-    return createFill();
+    return createFillStyle();
   }
 
   return obj;
@@ -1016,11 +1019,11 @@ SedStyle::addChildObject(const std::string& elementName,
   }
   else if (elementName == "marker" && element->getTypeCode() == SEDML_MARKER)
   {
-    return setMarker((const SedMarker*)(element));
+    return setMarkerStyle((const SedMarker*)(element));
   }
   else if (elementName == "fill" && element->getTypeCode() == SEDML_FILL)
   {
-    return setFill((const SedFill*)(element));
+    return setFillStyle((const SedFill*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1042,18 +1045,18 @@ SedStyle::removeChildObject(const std::string& elementName,
 {
   if (elementName == "line")
   {
-    SedLine * obj = getLineStyle();
-    if (unsetLineStyle() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedLine * obj = mLineStyle;
+    mLineStyle = NULL; return obj;
   }
   else if (elementName == "marker")
   {
-    SedMarker * obj = getMarker();
-    if (unsetMarker() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedMarker * obj = mMarkerStyle;
+    mMarkerStyle = NULL; return obj;
   }
   else if (elementName == "fill")
   {
-    SedFill * obj = getFill();
-    if (unsetFill() == LIBSBML_OPERATION_SUCCESS) return obj;
+    SedFill * obj = mFillStyle;
+    mFillStyle = NULL; return obj;
   }
 
   return NULL;
@@ -1082,14 +1085,14 @@ SedStyle::getNumObjects(const std::string& elementName)
   }
   else if (elementName == "marker")
   {
-    if (isSetMarker())
+    if (isSetMarkerStyle())
     {
       return 1;
     }
   }
   else if (elementName == "fill")
   {
-    if (isSetFill())
+    if (isSetFillStyle())
     {
       return 1;
     }
@@ -1118,11 +1121,11 @@ SedStyle::getObject(const std::string& elementName, unsigned int index)
   }
   else if (elementName == "marker")
   {
-    return getMarker();
+    return getMarkerStyle();
   }
   else if (elementName == "fill")
   {
-    return getFill();
+    return getFillStyle();
   }
 
   return obj;
@@ -1145,42 +1148,42 @@ SedStyle::getElementBySId(const std::string& id)
 
   SedBase* obj = NULL;
 
-  if (mLine != NULL)
+  if (mLineStyle != NULL)
   {
-    if (mLine->getId() == id)
+    if (mLineStyle->getId() == id)
     {
-      return mLine;
+      return mLineStyle;
     }
 
-    obj = mLine->getElementBySId(id);
+    obj = mLineStyle->getElementBySId(id);
     if (obj != NULL)
     {
       return obj;
     }
   }
 
-  if (mMarker != NULL)
+  if (mMarkerStyle != NULL)
   {
-    if (mMarker->getId() == id)
+    if (mMarkerStyle->getId() == id)
     {
-      return mMarker;
+      return mMarkerStyle;
     }
 
-    obj = mMarker->getElementBySId(id);
+    obj = mMarkerStyle->getElementBySId(id);
     if (obj != NULL)
     {
       return obj;
     }
   }
 
-  if (mFill != NULL)
+  if (mFillStyle != NULL)
   {
-    if (mFill->getId() == id)
+    if (mFillStyle->getId() == id)
     {
-      return mFill;
+      return mFillStyle;
     }
 
-    obj = mFill->getElementBySId(id);
+    obj = mFillStyle->getElementBySId(id);
     if (obj != NULL)
     {
       return obj;
@@ -1212,33 +1215,36 @@ SedStyle::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         getVersion(), "", getLine(), getColumn());
     }
 
-    delete mLine;
-    mLine = new SedLine(getSedNamespaces());
-    obj = mLine;
+    delete mLineStyle;
+    mLineStyle = new SedLine(getSedNamespaces());
+
+    obj = mLineStyle;
   }
   else if (name == "marker")
   {
-    if (getErrorLog() && isSetMarker())
+    if (getErrorLog() && isSetMarkerStyle())
     {
       getErrorLog()->logError(SedmlStyleAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
     }
 
-    delete mMarker;
-    mMarker = new SedMarker(getSedNamespaces());
-    obj = mMarker;
+    delete mMarkerStyle;
+    mMarkerStyle = new SedMarker(getSedNamespaces());
+
+    obj = mMarkerStyle;
   }
   else if (name == "fill")
   {
-    if (getErrorLog() && isSetFill())
+    if (getErrorLog() && isSetFillStyle())
     {
       getErrorLog()->logError(SedmlStyleAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
     }
 
-    delete mFill;
-    mFill = new SedFill(getSedNamespaces());
-    obj = mFill;
+    delete mFillStyle;
+    mFillStyle = new SedFill(getSedNamespaces());
+
+    obj = mFillStyle;
   }
 
   connectToChild();
@@ -1561,7 +1567,7 @@ SedStyle_unsetBaseStyle(SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 const SedLine_t*
-SedStyle_getLine(const SedStyle_t * ss)
+SedStyle_getLineStyle(const SedStyle_t * ss)
 {
   if (ss == NULL)
   {
@@ -1577,14 +1583,14 @@ SedStyle_getLine(const SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 const SedMarker_t*
-SedStyle_getMarker(const SedStyle_t * ss)
+SedStyle_getMarkerStyle(const SedStyle_t * ss)
 {
   if (ss == NULL)
   {
     return NULL;
   }
 
-  return (SedMarker_t*)(ss->getMarker());
+  return (SedMarker_t*)(ss->getMarkerStyle());
 }
 
 
@@ -1593,14 +1599,14 @@ SedStyle_getMarker(const SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 const SedFill_t*
-SedStyle_getFill(const SedStyle_t * ss)
+SedStyle_getFillStyle(const SedStyle_t * ss)
 {
   if (ss == NULL)
   {
     return NULL;
   }
 
-  return (SedFill_t*)(ss->getFill());
+  return (SedFill_t*)(ss->getFillStyle());
 }
 
 
@@ -1609,7 +1615,7 @@ SedStyle_getFill(const SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_isSetLine(const SedStyle_t * ss)
+SedStyle_isSetLineStyle(const SedStyle_t * ss)
 {
   return (ss != NULL) ? static_cast<int>(ss->isSetLineStyle()) : 0;
 }
@@ -1621,9 +1627,9 @@ SedStyle_isSetLine(const SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_isSetMarker(const SedStyle_t * ss)
+SedStyle_isSetMarkerStyle(const SedStyle_t * ss)
 {
-  return (ss != NULL) ? static_cast<int>(ss->isSetMarker()) : 0;
+  return (ss != NULL) ? static_cast<int>(ss->isSetMarkerStyle()) : 0;
 }
 
 
@@ -1632,9 +1638,9 @@ SedStyle_isSetMarker(const SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_isSetFill(const SedStyle_t * ss)
+SedStyle_isSetFillStyle(const SedStyle_t * ss)
 {
-  return (ss != NULL) ? static_cast<int>(ss->isSetFill()) : 0;
+  return (ss != NULL) ? static_cast<int>(ss->isSetFillStyle()) : 0;
 }
 
 
@@ -1643,9 +1649,9 @@ SedStyle_isSetFill(const SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_setLine(SedStyle_t * ss, const SedLine_t* line)
+SedStyle_setLineStyle(SedStyle_t * ss, const SedLine_t* lineStyle)
 {
-  return (ss != NULL) ? ss->setLineStyle(line) : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setLineStyle(lineStyle) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1654,9 +1660,10 @@ SedStyle_setLine(SedStyle_t * ss, const SedLine_t* line)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_setMarker(SedStyle_t * ss, const SedMarker_t* marker)
+SedStyle_setMarkerStyle(SedStyle_t * ss, const SedMarker_t* markerStyle)
 {
-  return (ss != NULL) ? ss->setMarker(marker) : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setMarkerStyle(markerStyle) :
+    LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1665,9 +1672,9 @@ SedStyle_setMarker(SedStyle_t * ss, const SedMarker_t* marker)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_setFill(SedStyle_t * ss, const SedFill_t* fill)
+SedStyle_setFillStyle(SedStyle_t * ss, const SedFill_t* fillStyle)
 {
-  return (ss != NULL) ? ss->setFill(fill) : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->setFillStyle(fillStyle) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1677,7 +1684,7 @@ SedStyle_setFill(SedStyle_t * ss, const SedFill_t* fill)
  */
 LIBSEDML_EXTERN
 SedLine_t*
-SedStyle_createLine(SedStyle_t* ss)
+SedStyle_createLineStyle(SedStyle_t* ss)
 {
   if (ss == NULL)
   {
@@ -1694,14 +1701,14 @@ SedStyle_createLine(SedStyle_t* ss)
  */
 LIBSEDML_EXTERN
 SedMarker_t*
-SedStyle_createMarker(SedStyle_t* ss)
+SedStyle_createMarkerStyle(SedStyle_t* ss)
 {
   if (ss == NULL)
   {
     return NULL;
   }
 
-  return (SedMarker_t*)(ss->createMarker());
+  return (SedMarker_t*)(ss->createMarkerStyle());
 }
 
 
@@ -1711,14 +1718,14 @@ SedStyle_createMarker(SedStyle_t* ss)
  */
 LIBSEDML_EXTERN
 SedFill_t*
-SedStyle_createFill(SedStyle_t* ss)
+SedStyle_createFillStyle(SedStyle_t* ss)
 {
   if (ss == NULL)
   {
     return NULL;
   }
 
-  return (SedFill_t*)(ss->createFill());
+  return (SedFill_t*)(ss->createFillStyle());
 }
 
 
@@ -1727,7 +1734,7 @@ SedStyle_createFill(SedStyle_t* ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_unsetLine(SedStyle_t * ss)
+SedStyle_unsetLineStyle(SedStyle_t * ss)
 {
   return (ss != NULL) ? ss->unsetLineStyle() : LIBSEDML_INVALID_OBJECT;
 }
@@ -1738,9 +1745,9 @@ SedStyle_unsetLine(SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_unsetMarker(SedStyle_t * ss)
+SedStyle_unsetMarkerStyle(SedStyle_t * ss)
 {
-  return (ss != NULL) ? ss->unsetMarker() : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->unsetMarkerStyle() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1749,9 +1756,9 @@ SedStyle_unsetMarker(SedStyle_t * ss)
  */
 LIBSEDML_EXTERN
 int
-SedStyle_unsetFill(SedStyle_t * ss)
+SedStyle_unsetFillStyle(SedStyle_t * ss)
 {
-  return (ss != NULL) ? ss->unsetFill() : LIBSEDML_INVALID_OBJECT;
+  return (ss != NULL) ? ss->unsetFillStyle() : LIBSEDML_INVALID_OBJECT;
 }
 
 
