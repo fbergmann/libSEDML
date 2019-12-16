@@ -1857,8 +1857,9 @@ protected:
   void logError (  unsigned int       id
                  , const unsigned int level   = 2
                  , const unsigned int version = 3
-                 , const std::string& details = "" );
-
+                 , const std::string& details = ""
+                 , unsigned int line = 0
+                 , unsigned int column = 0 );
 
   /**
    * Helper to log a common type of error.

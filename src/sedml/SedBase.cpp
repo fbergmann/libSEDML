@@ -2545,14 +2545,19 @@ void
 SedBase::logError (  unsigned int       id
                  , const unsigned int level
                  , const unsigned int version
-                 , const std::string& details )
+                 , const std::string& details
+                 , unsigned int line
+                 , unsigned int column )
 {
+  if (line == 0) line = getLine();
+  if (column == 0) column = getColumn();
+
   //
   // (TODO) Needs to be fixed so that error can be added when
   // no SedDocument attached.
   //
   if ( SedBase::getErrorLog() != NULL && mSed != NULL)
-    getErrorLog()->logError(id, getLevel(), getVersion(), details, getLine(), getColumn());
+    getErrorLog()->logError(id, getLevel(), getVersion(), details, line, column);
 }
 /** @endcond */
 
