@@ -478,6 +478,11 @@
             <attribute name="yDataReferenceTo" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
           </attributes>
         </element>
+        <element name="ParameterEstimationResultPlot" typeCode="SEDML_PARAMETERESTIMATIONRESULTPLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Plot" abstract="false">
+          <attributes>
+            <attribute name="taskRef" required="true" type="SIdRef" element="Task" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
       <enums>
         <enum name="MappingType">
