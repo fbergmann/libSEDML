@@ -70,6 +70,7 @@ LIBNUML_CPP_NAMESPACE_USE
 %import  sedml/common/libsedml-namespace.h
 %import  sedml/common/extern.h
 %import  sedml/common/sedmlfwd.h
+%include sedml/common/SedmlEnumerations.h
 %import  sbml/common/extern.h
 %import  sbml/xml/XMLExtern.h
 

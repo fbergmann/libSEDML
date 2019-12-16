@@ -36,6 +36,7 @@
 
 #include <sedml/common/libsedml-version.h>
 #include <sedml/common/SedOperationReturnValues.h>
+#include <sedml/common/SedmlEnumerations.h>
 
 #include <sedml/SedTypes.h>
 
