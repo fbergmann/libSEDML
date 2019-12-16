@@ -8,3 +8,36 @@ global __version__
 __version__ = '${VERSION}'
 ")
 endif()
+
+
+message ("Python: create 3.x version")
+
+file(READ ${CUR_BIN_DIRECTORY}/libsedml.py init_script)
+file(WRITE ${CUR_BIN_DIRECTORY}/libsedml2.py ${init_script})
+
+string(REPLACE 
+  "class SBase(_object):"
+  "class SBase(_object, metaclass=AutoProperty):"
+  init3_script ${init_script}
+)
+
+string(REPLACE 
+  "class SedBase(_object):"
+  "class SedBase(_object, metaclass=AutoProperty):"
+  init3_script ${init_script}
+)
+
+string(REPLACE 
+  "class SBase(object):"
+  "class SBase(object, metaclass=AutoProperty):"
+  init3_script ${init3_script}
+)
+
+string(REPLACE 
+  "class SedBase(object):"
+  "class SedBase(object, metaclass=AutoProperty):"
+  init3_script ${init3_script}
+)
+
+
+file(WRITE ${CUR_BIN_DIRECTORY}/libsedml3.py ${init3_script})

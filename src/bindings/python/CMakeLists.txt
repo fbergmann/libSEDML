@@ -72,7 +72,7 @@ ADD_CUSTOM_COMMAND(
   DEPENDS local.i local.cpp local-contrib.i
   COMMENT "Swig Python source") 
 
-add_custom_target(binding_python_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp)
+add_custom_target(binding_python_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libsedml_wrap.cpp ${CMAKE_CURRENT_SOURCE_DIR}/add_version.cmake)
   
 ####################################################################
 #
