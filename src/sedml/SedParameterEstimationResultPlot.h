@@ -64,7 +64,6 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mName;
   std::string mTaskRef;
 
   /** @endcond */
@@ -134,26 +133,6 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this
-   * SedParameterEstimationResultPlot.
-   *
-   * @return the value of the "id" attribute of this
-   * SedParameterEstimationResultPlot as a string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this
-   * SedParameterEstimationResultPlot.
-   *
-   * @return the value of the "name" attribute of this
-   * SedParameterEstimationResultPlot as a string.
-   */
-  virtual const std::string& getName() const;
-
-
-  /**
    * Returns the value of the "taskRef" attribute of this
    * SedParameterEstimationResultPlot.
    *
@@ -165,64 +144,12 @@ public:
 
   /**
    * Predicate returning @c true if this SedParameterEstimationResultPlot's
-   * "id" attribute is set.
-   *
-   * @return @c true if this SedParameterEstimationResultPlot's "id" attribute
-   * has been set, otherwise @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedParameterEstimationResultPlot's
-   * "name" attribute is set.
-   *
-   * @return @c true if this SedParameterEstimationResultPlot's "name"
-   * attribute has been set, otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
-
-
-  /**
-   * Predicate returning @c true if this SedParameterEstimationResultPlot's
    * "taskRef" attribute is set.
    *
    * @return @c true if this SedParameterEstimationResultPlot's "taskRef"
    * attribute has been set, otherwise @c false is returned.
    */
   bool isSetTaskRef() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this
-   * SedParameterEstimationResultPlot.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Sets the value of the "name" attribute of this
-   * SedParameterEstimationResultPlot.
-   *
-   * @param name std::string& value of the "name" attribute to be set.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * Calling this function with @p name = @c NULL or an empty string is
-   * equivalent to calling unsetName().
-   */
-  virtual int setName(const std::string& name);
 
 
   /**
@@ -237,28 +164,6 @@ public:
    * OperationReturnValues_t}
    */
   int setTaskRef(const std::string& taskRef);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this
-   * SedParameterEstimationResultPlot.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this
-   * SedParameterEstimationResultPlot.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetName();
 
 
   /**
@@ -314,6 +219,11 @@ public:
    * @return @c true to indicate that all the required attributes of this
    * SedParameterEstimationResultPlot have been set, otherwise @c false is
    * returned.
+   *
+   *
+   * @note The required attributes for the SedParameterEstimationResultPlot
+   * object are:
+   * @li "taskRef"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -737,46 +647,6 @@ SedParameterEstimationResultPlot_free(SedParameterEstimationResultPlot_t*
 
 
 /**
- * Returns the value of the "id" attribute of this
- * SedParameterEstimationResultPlot_t.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure whose id is
- * sought.
- *
- * @return the value of the "id" attribute of this
- * SedParameterEstimationResultPlot_t as a pointer to a string.
- *
- * @copydetails doc_returned_owned_char
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-char *
-SedParameterEstimationResultPlot_getId(const SedParameterEstimationResultPlot_t
-  * sperp);
-
-
-/**
- * Returns the value of the "name" attribute of this
- * SedParameterEstimationResultPlot_t.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure whose name is
- * sought.
- *
- * @return the value of the "name" attribute of this
- * SedParameterEstimationResultPlot_t as a pointer to a string.
- *
- * @copydetails doc_returned_owned_char
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-char *
-SedParameterEstimationResultPlot_getName(const
-  SedParameterEstimationResultPlot_t * sperp);
-
-
-/**
  * Returns the value of the "taskRef" attribute of this
  * SedParameterEstimationResultPlot_t.
  *
@@ -798,40 +668,6 @@ SedParameterEstimationResultPlot_getTaskRef(const
 
 /**
  * Predicate returning @c 1 (true) if this SedParameterEstimationResultPlot_t's
- * "id" attribute is set.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure.
- *
- * @return @c 1 (true) if this SedParameterEstimationResultPlot_t's "id"
- * attribute has been set, otherwise @c 0 (false) is returned.
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-int
-SedParameterEstimationResultPlot_isSetId(const
-  SedParameterEstimationResultPlot_t * sperp);
-
-
-/**
- * Predicate returning @c 1 (true) if this SedParameterEstimationResultPlot_t's
- * "name" attribute is set.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure.
- *
- * @return @c 1 (true) if this SedParameterEstimationResultPlot_t's "name"
- * attribute has been set, otherwise @c 0 (false) is returned.
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-int
-SedParameterEstimationResultPlot_isSetName(const
-  SedParameterEstimationResultPlot_t * sperp);
-
-
-/**
- * Predicate returning @c 1 (true) if this SedParameterEstimationResultPlot_t's
  * "taskRef" attribute is set.
  *
  * @param sperp the SedParameterEstimationResultPlot_t structure.
@@ -845,58 +681,6 @@ LIBSEDML_EXTERN
 int
 SedParameterEstimationResultPlot_isSetTaskRef(const
   SedParameterEstimationResultPlot_t * sperp);
-
-
-/**
- * Sets the value of the "id" attribute of this
- * SedParameterEstimationResultPlot_t.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure.
- *
- * @param id const char * value of the "id" attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * Calling this function with @p id = @c NULL or an empty string is equivalent
- * to calling SedParameterEstimationResultPlot_unsetId().
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-int
-SedParameterEstimationResultPlot_setId(
-                                       SedParameterEstimationResultPlot_t *
-                                         sperp,
-                                       const char * id);
-
-
-/**
- * Sets the value of the "name" attribute of this
- * SedParameterEstimationResultPlot_t.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure.
- *
- * @param name const char * value of the "name" attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * Calling this function with @p name = @c NULL or an empty string is
- * equivalent to calling SedParameterEstimationResultPlot_unsetName().
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-int
-SedParameterEstimationResultPlot_setName(
-                                         SedParameterEstimationResultPlot_t *
-                                           sperp,
-                                         const char * name);
 
 
 /**
@@ -921,44 +705,6 @@ SedParameterEstimationResultPlot_setTaskRef(
                                             SedParameterEstimationResultPlot_t
                                               * sperp,
                                             const char * taskRef);
-
-
-/**
- * Unsets the value of the "id" attribute of this
- * SedParameterEstimationResultPlot_t.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-int
-SedParameterEstimationResultPlot_unsetId(SedParameterEstimationResultPlot_t *
-  sperp);
-
-
-/**
- * Unsets the value of the "name" attribute of this
- * SedParameterEstimationResultPlot_t.
- *
- * @param sperp the SedParameterEstimationResultPlot_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedParameterEstimationResultPlot_t
- */
-LIBSEDML_EXTERN
-int
-SedParameterEstimationResultPlot_unsetName(SedParameterEstimationResultPlot_t *
-  sperp);
 
 
 /**
@@ -989,6 +735,11 @@ SedParameterEstimationResultPlot_unsetTaskRef(SedParameterEstimationResultPlot_t
  * @return @c 1 (true) to indicate that all the required attributes of this
  * SedParameterEstimationResultPlot_t have been set, otherwise @c 0 (false) is
  * returned.
+ *
+ *
+ * @note The required attributes for the SedParameterEstimationResultPlot_t
+ * object are:
+ * @li "taskRef"
  *
  * @memberof SedParameterEstimationResultPlot_t
  */
