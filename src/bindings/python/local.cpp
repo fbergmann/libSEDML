@@ -344,3 +344,5 @@ GetDowncastSwigType (SedBase* sb)
 #if (PY_MAJOR_VERSION >= 3)
 #define PyInt_FromSize_t(x) PyLong_FromSize_t(x)
 #endif
+
+#include "local_numl.cpp"

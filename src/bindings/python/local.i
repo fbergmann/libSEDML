@@ -263,6 +263,18 @@ namespace std
                                $owner | %newpointer_flags);
 }
 
+%typemap(out) SedBase*, SedSimulation*, SedAbstractTask*, SedTask*, SedOutput*, SedChange*, SedRange*, SedAbstractCurve*
+{
+  $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), GetDowncastSwigType($1),
+                               $owner | %newpointer_flags);
+}
+
+%typemap(out) NMBase*, NUMLList*, ResultComponent*, Dimension*, DimensionDescription*, CompositeDescription*, CompositeValue*, TupleDescription*, Tuple*, AtomicDescription*, AtomicValue*, OntologyTerm*
+{
+  $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), GetNumlDowncastSwigType($1),
+                               $owner | %newpointer_flags);
+}
+
 
 /*
  * SWIG-generated wrapper code wrongly invokes 
