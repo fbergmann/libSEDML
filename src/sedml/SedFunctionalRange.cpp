@@ -1348,7 +1348,8 @@ SedFunctionalRange::readAttributes(
       }
 
       msg += " is '" + mRange + "', which does not conform to the syntax.";
-      logError(SedmlFunctionalRangeRangeMustBeRange, level, version, msg);
+      logError(SedmlFunctionalRangeRangeMustBeRange, level, version, msg,
+        getLine(), getColumn());
     }
   }
   else

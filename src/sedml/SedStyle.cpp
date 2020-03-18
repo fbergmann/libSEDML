@@ -1344,7 +1344,7 @@ SedStyle::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
@@ -1380,7 +1380,8 @@ SedStyle::readAttributes(
       }
 
       msg += " is '" + mBaseStyle + "', which does not conform to the syntax.";
-      logError(SedmlStyleBaseStyleMustBeStyle, level, version, msg);
+      logError(SedmlStyleBaseStyleMustBeStyle, level, version, msg, getLine(),
+        getColumn());
     }
   }
 }

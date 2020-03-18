@@ -688,8 +688,7 @@ SedChange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedAddXML (SedChange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedAddXML using the given SEDML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedAddXML_t *
@@ -700,8 +699,8 @@ SedChange_createAddXML(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedChangeXML (SedChange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedChangeXML using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 SedChangeXML_t *
@@ -712,8 +711,8 @@ SedChange_createChangeXML(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedRemoveXML (SedChange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedRemoveXML using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 SedRemoveXML_t *
@@ -724,8 +723,8 @@ SedChange_createRemoveXML(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedChangeAttribute (SedChange_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedChangeAttribute using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 SedChangeAttribute_t *
@@ -736,8 +735,8 @@ SedChange_createChangeAttribute(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedComputeChange (SedChange_t) using the given SEDML Level and
- * @ p version values.
+ * Creates a new SedComputeChange using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 SedComputeChange_t *

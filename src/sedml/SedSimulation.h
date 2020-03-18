@@ -337,7 +337,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_SIMULATION, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_SIMULATION, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -358,6 +358,20 @@ public:
    * @li "id"
    */
   virtual bool hasRequiredAttributes() const;
+
+
+  /**
+   * Predicate returning @c true if all the required elements for this
+   * SedSimulation object have been set.
+   *
+   * @return @c true to indicate that all the required elements of this
+   * SedSimulation have been set, otherwise @c false is returned.
+   *
+   *
+   * @note The required elements for the SedSimulation object are:
+   * @li "algorithm"
+   */
+  virtual bool hasRequiredElements() const;
 
 
 
@@ -826,8 +840,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedUniformTimeCourse (SedSimulation_t) using the given SEDML
- * Level and @ p version values.
+ * Creates a new SedUniformTimeCourse using the given SEDML Level and @ p
+ * version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedSimulation_t.
@@ -842,14 +856,13 @@ BEGIN_C_DECLS
  * @memberof SedSimulation_t
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
+SedUniformTimeCourse_t *
 SedSimulation_createUniformTimeCourse(unsigned int level,
-                                         unsigned int version);
+                                      unsigned int version);
 
 
 /**
- * Creates a new SedOneStep (SedSimulation_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedOneStep using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedSimulation_t.
@@ -864,13 +877,13 @@ SedSimulation_createUniformTimeCourse(unsigned int level,
  * @memberof SedSimulation_t
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
+SedOneStep_t *
 SedSimulation_createOneStep(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedSteadyState (SedSimulation_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedSteadyState using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedSimulation_t.
@@ -885,7 +898,7 @@ SedSimulation_createOneStep(unsigned int level, unsigned int version);
  * @memberof SedSimulation_t
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
+SedSteadyState_t *
 SedSimulation_createSteadyState(unsigned int level, unsigned int version);
 
 
@@ -1209,6 +1222,26 @@ SedSimulation_isSedSteadyState(const SedSimulation_t * ss);
 LIBSEDML_EXTERN
 int
 SedSimulation_hasRequiredAttributes(const SedSimulation_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * SedSimulation_t object have been set.
+ *
+ * @param ss the SedSimulation_t structure.
+ *
+ * @return @c 1 (true) to indicate that all the required elements of this
+ * SedSimulation_t have been set, otherwise @c 0 (false) is returned.
+ *
+ *
+ * @note The required elements for the SedSimulation_t object are:
+ * @li "algorithm"
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_hasRequiredElements(const SedSimulation_t * ss);
 
 
 

@@ -338,7 +338,8 @@ public:
    * @param n an unsigned int representing the index of the SedChange to
    * retrieve.
    *
-   * @return the nth SedChange in the SedListOfChanges within this SedModel.
+   * @return the nth SedChange in the SedListOfChanges within this SedModel or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -358,7 +359,8 @@ public:
    * @param n an unsigned int representing the index of the SedChange to
    * retrieve.
    *
-   * @return the nth SedChange in the SedListOfChanges within this SedModel.
+   * @return the nth SedChange in the SedListOfChanges within this SedModel or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -511,7 +513,7 @@ public:
    *
    * @return a pointer to the nth SedChange in this SedModel.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addChange(const SedChange* object)
    * @see createChange()
@@ -539,7 +541,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_MODEL, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_MODEL, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1392,7 +1394,8 @@ SedModel_getListOfChanges(SedModel_t* sm);
  * @param n an unsigned int representing the index of the SedChange_t to
  * retrieve.
  *
- * @return the nth SedChange_t in the SedListOfChanges within this SedModel.
+ * @return the nth SedChange_t in the SedListOfChanges within this SedModel or
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1540,7 +1543,7 @@ SedModel_createComputeChange(SedModel_t* sm);
  *
  * @return a pointer to the nth SedChange_t in this SedModel_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedModel_t
  */

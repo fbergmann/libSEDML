@@ -303,43 +303,43 @@ SedListOfFitMappings::getByDataSource(const std::string& sid)
 
 /*
  * Used by SedListOfFitMappings::get() to lookup a SedFitMapping based on its
- * DataGenerator.
+ * Target.
  */
-struct SedIdEqDG : public std::unary_function<SedBase*, bool>
+struct SedIdEqT : public std::unary_function<SedBase*, bool>
 {
   const string& id;
    
-  SedIdEqDG (const string& id) : id(id) { }
+  SedIdEqT (const string& id) : id(id) { }
   bool operator() (SedBase* sb)
   {
-  return (static_cast<SedFitMapping*>(sb)->getDataGenerator() == id);
+  return (static_cast<SedFitMapping*>(sb)->getTarget() == id);
   }
 };
 
 
 /*
- * Get a SedFitMapping from the SedListOfFitMappings based on the DataGenerator
- * to which it refers.
+ * Get a SedFitMapping from the SedListOfFitMappings based on the Target to
+ * which it refers.
  */
 const SedFitMapping*
-SedListOfFitMappings::getByDataGenerator(const std::string& sid) const
+SedListOfFitMappings::getByTarget(const std::string& sid) const
 {
   vector<SedBase*>::const_iterator result;
-  result = find_if(mItems.begin(), mItems.end(), SedIdEqDG(sid));
+  result = find_if(mItems.begin(), mItems.end(), SedIdEqT(sid));
   return (result == mItems.end()) ? 0 : static_cast <const SedFitMapping*>
     (*result);
 }
 
 
 /*
- * Get a SedFitMapping from the SedListOfFitMappings based on the DataGenerator
- * to which it refers.
+ * Get a SedFitMapping from the SedListOfFitMappings based on the Target to
+ * which it refers.
  */
 SedFitMapping*
-SedListOfFitMappings::getByDataGenerator(const std::string& sid)
+SedListOfFitMappings::getByTarget(const std::string& sid)
 {
   return const_cast<SedFitMapping*>(static_cast<const
-    SedListOfFitMappings&>(*this).getByDataGenerator(sid));
+    SedListOfFitMappings&>(*this).getByTarget(sid));
 }
 
 

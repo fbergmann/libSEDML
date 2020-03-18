@@ -1340,7 +1340,7 @@ SedVariable::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
@@ -1419,7 +1419,8 @@ SedVariable::readAttributes(
 
       msg += " is '" + mTaskReference + "', which does not conform to the "
         "syntax.";
-      logError(SedmlVariableTaskReferenceMustBeTask, level, version, msg);
+      logError(SedmlVariableTaskReferenceMustBeTask, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1446,7 +1447,8 @@ SedVariable::readAttributes(
 
       msg += " is '" + mModelReference + "', which does not conform to the "
         "syntax.";
-      logError(SedmlVariableModelReferenceMustBeModel, level, version, msg);
+      logError(SedmlVariableModelReferenceMustBeModel, level, version, msg,
+        getLine(), getColumn());
     }
   }
 }

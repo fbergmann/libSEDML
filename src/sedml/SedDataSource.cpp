@@ -1107,7 +1107,7 @@ SedDataSource::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
@@ -1157,7 +1157,8 @@ SedDataSource::readAttributes(
       }
 
       msg += " is '" + mIndexSet + "', which does not conform to the syntax.";
-      logError(SedmlDataSourceIndexSetMustBeSId, level, version, msg);
+      logError(SedmlDataSourceIndexSetMustBeSId, level, version, msg,
+        getLine(), getColumn());
     }
   }
 }

@@ -136,7 +136,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_SIMULATION_STEADYSTATE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_SIMULATION_STEADYSTATE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

@@ -133,7 +133,8 @@ public:
    * @param n an unsigned int representing the index of the SedChange to
    * retrieve.
    *
-   * @return the nth SedChange in this SedListOfChanges.
+   * @return the nth SedChange in this SedListOfChanges or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -153,7 +154,8 @@ public:
    * @param n an unsigned int representing the index of the SedChange to
    * retrieve.
    *
-   * @return the nth SedChange in this SedListOfChanges.
+   * @return the nth SedChange in this SedListOfChanges or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -218,7 +220,7 @@ public:
    *
    * @return a pointer to the nth SedChange in this SedListOfChanges.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addChange(const SedChange* object)
    * @see createChange()
@@ -240,7 +242,7 @@ public:
    * @return the SedChange in this SedListOfChanges based on the identifier or
    * NULL if no such SedChange exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addChange(const SedChange* object)
    * @see createChange()
@@ -399,7 +401,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -414,7 +416,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfChanges:
-   * @sedmlconstant{SEDML_CHANGE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_CHANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -493,7 +495,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedChange_t to
  * retrieve.
  *
- * @return the nth SedChange_t in this SedListOf_t.
+ * @return the nth SedChange_t in this SedListOf_t or @c NULL if no such object
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -535,7 +538,7 @@ SedListOfChanges_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedChange_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfChanges_t
  */
@@ -556,7 +559,7 @@ SedListOfChanges_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedChange_t in this SedListOf_t based on the identifier or NULL
  * if no such SedChange_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfChanges_t
  */

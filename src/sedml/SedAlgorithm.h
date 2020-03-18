@@ -215,7 +215,7 @@ public:
    * SedAlgorithmParameter to retrieve.
    *
    * @return the nth SedAlgorithmParameter in the SedListOfAlgorithmParameters
-   * within this SedAlgorithm.
+   * within this SedAlgorithm or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -236,7 +236,7 @@ public:
    * SedAlgorithmParameter to retrieve.
    *
    * @return the nth SedAlgorithmParameter in the SedListOfAlgorithmParameters
-   * within this SedAlgorithm.
+   * within this SedAlgorithm or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -318,7 +318,7 @@ public:
    *
    * @return a pointer to the nth SedAlgorithmParameter in this SedAlgorithm.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
    * @see createAlgorithmParameter()
@@ -346,7 +346,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_SIMULATION_ALGORITHM, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_SIMULATION_ALGORITHM, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1003,7 +1003,7 @@ SedAlgorithm_getListOfAlgorithmParameters(SedAlgorithm_t* sa);
  * SedAlgorithmParameter_t to retrieve.
  *
  * @return the nth SedAlgorithmParameter_t in the SedListOfAlgorithmParameters
- * within this SedAlgorithm.
+ * within this SedAlgorithm or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1083,7 +1083,7 @@ SedAlgorithm_createAlgorithmParameter(SedAlgorithm_t* sa);
  *
  * @return a pointer to the nth SedAlgorithmParameter_t in this SedAlgorithm_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedAlgorithm_t
  */

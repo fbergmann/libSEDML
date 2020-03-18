@@ -431,7 +431,8 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedSimpleRepeatedTask.h>
 %include <sedml/SedShadedArea.h>
 %include <sedml/SedParameterEstimationResultPlot.h>
-
+%include <sedml/SedWaterfallPlot.h>
+%include <sedml/SedParameterEstimationReport.h>
 
 %include sbml/SyntaxChecker.h
 %include sbml/ExpectedAttributes.h

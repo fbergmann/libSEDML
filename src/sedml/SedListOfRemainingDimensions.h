@@ -129,8 +129,8 @@ public:
    * @param n an unsigned int representing the index of the
    * SedRemainingDimension to retrieve.
    *
-   * @return the nth SedRemainingDimension in this
-   * SedListOfRemainingDimensions.
+   * @return the nth SedRemainingDimension in this SedListOfRemainingDimensions
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -150,8 +150,8 @@ public:
    * @param n an unsigned int representing the index of the
    * SedRemainingDimension to retrieve.
    *
-   * @return the nth SedRemainingDimension in this
-   * SedListOfRemainingDimensions.
+   * @return the nth SedRemainingDimension in this SedListOfRemainingDimensions
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -219,7 +219,7 @@ public:
    * @return a pointer to the nth SedRemainingDimension in this
    * SedListOfRemainingDimensions.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRemainingDimension(const SedRemainingDimension* object)
    * @see createRemainingDimension()
@@ -241,7 +241,7 @@ public:
    * @return the SedRemainingDimension in this SedListOfRemainingDimensions
    * based on the identifier or NULL if no such SedRemainingDimension exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRemainingDimension(const SedRemainingDimension* object)
    * @see createRemainingDimension()
@@ -399,7 +399,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -414,7 +414,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfRemainingDimensions:
-   * @sedmlconstant{SEDML_REMAININGDIMENSION, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_REMAININGDIMENSION, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -482,7 +482,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the
  * SedRemainingDimension_t to retrieve.
  *
- * @return the nth SedRemainingDimension_t in this SedListOf_t.
+ * @return the nth SedRemainingDimension_t in this SedListOf_t or @c NULL if no
+ * such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -525,7 +526,7 @@ SedListOfRemainingDimensions_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedRemainingDimension_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfRemainingDimensions_t
  */
@@ -546,7 +547,7 @@ SedListOfRemainingDimensions_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedRemainingDimension_t in this SedListOf_t based on the
  * identifier or NULL if no such SedRemainingDimension_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfRemainingDimensions_t
  */

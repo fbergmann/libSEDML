@@ -270,7 +270,7 @@ public:
    * retrieve.
    *
    * @return the nth SedVariable in the SedListOfVariables within this
-   * SedFunctionalRange.
+   * SedFunctionalRange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -291,7 +291,7 @@ public:
    * retrieve.
    *
    * @return the nth SedVariable in the SedListOfVariables within this
-   * SedFunctionalRange.
+   * SedFunctionalRange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -494,7 +494,7 @@ public:
    *
    * @return a pointer to the nth SedVariable in this SedFunctionalRange.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
@@ -516,14 +516,14 @@ public:
    * @return the SedVariable in this SedFunctionalRange based on the identifier
    * or NULL if no such SedVariable exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
-   * @see getSedVariable(const std::string& sid)
-   * @see getSedVariable(unsigned int n)
+   * @see getVariable(const std::string& sid)
+   * @see getVariable(unsigned int n)
    * @see getNumVariables()
-   * @see removeSedVariable(unsigned int n)
+   * @see removeVariable(unsigned int n)
    */
   SedVariable* removeVariable(const std::string& sid);
 
@@ -571,7 +571,7 @@ public:
    * retrieve.
    *
    * @return the nth SedParameter in the SedListOfParameters within this
-   * SedFunctionalRange.
+   * SedFunctionalRange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -592,7 +592,7 @@ public:
    * retrieve.
    *
    * @return the nth SedParameter in the SedListOfParameters within this
-   * SedFunctionalRange.
+   * SedFunctionalRange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -718,7 +718,7 @@ public:
    *
    * @return a pointer to the nth SedParameter in this SedFunctionalRange.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
@@ -740,14 +740,14 @@ public:
    * @return the SedParameter in this SedFunctionalRange based on the
    * identifier or NULL if no such SedParameter exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
-   * @see getSedParameter(const std::string& sid)
-   * @see getSedParameter(unsigned int n)
+   * @see getParameter(const std::string& sid)
+   * @see getParameter(unsigned int n)
    * @see getNumParameters()
-   * @see removeSedParameter(unsigned int n)
+   * @see removeParameter(unsigned int n)
    */
   SedParameter* removeParameter(const std::string& sid);
 
@@ -776,7 +776,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_RANGE_FUNCTIONALRANGE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_RANGE_FUNCTIONALRANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1527,7 +1527,7 @@ SedFunctionalRange_getListOfVariables(SedFunctionalRange_t* sfr);
  * retrieve.
  *
  * @return the nth SedVariable_t in the SedListOfVariables within this
- * SedFunctionalRange.
+ * SedFunctionalRange or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1672,7 +1672,7 @@ SedFunctionalRange_createVariable(SedFunctionalRange_t* sfr);
  *
  * @return a pointer to the nth SedVariable_t in this SedFunctionalRange_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedFunctionalRange_t
  */
@@ -1693,7 +1693,7 @@ SedFunctionalRange_removeVariable(SedFunctionalRange_t* sfr, unsigned int n);
  * @return the SedVariable_t in this SedFunctionalRange_t based on the
  * identifier or NULL if no such SedVariable_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedFunctionalRange_t
  */
@@ -1739,7 +1739,7 @@ SedFunctionalRange_getListOfParameters(SedFunctionalRange_t* sfr);
  * retrieve.
  *
  * @return the nth SedParameter_t in the SedListOfParameters within this
- * SedFunctionalRange.
+ * SedFunctionalRange or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1840,7 +1840,7 @@ SedFunctionalRange_createParameter(SedFunctionalRange_t* sfr);
  *
  * @return a pointer to the nth SedParameter_t in this SedFunctionalRange_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedFunctionalRange_t
  */
@@ -1861,7 +1861,7 @@ SedFunctionalRange_removeParameter(SedFunctionalRange_t* sfr, unsigned int n);
  * @return the SedParameter_t in this SedFunctionalRange_t based on the
  * identifier or NULL if no such SedParameter_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedFunctionalRange_t
  */

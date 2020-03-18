@@ -59,6 +59,10 @@
  *
  * <li> @c "barStacked", TODO:add description
  *
+ * <li> @c "horizontalBar", TODO:add description
+ *
+ * <li> @c "horizontalBarStacked", TODO:add description
+ *
  * </ul>
  */
 
@@ -188,6 +192,8 @@ public:
    * @li @sbmlconstant{SEDML_CURVETYPE_POINTS, CurveType_t}
    * @li @sbmlconstant{SEDML_CURVETYPE_BAR, CurveType_t}
    * @li @sbmlconstant{SEDML_CURVETYPE_BARSTACKED, CurveType_t}
+   * @li @sbmlconstant{SEDML_CURVETYPE_HORIZONTALBAR, CurveType_t}
+   * @li @sbmlconstant{SEDML_CURVETYPE_HORIZONTALBARSTACKED, CurveType_t}
    * @li @sbmlconstant{SEDML_CURVETYPE_INVALID, CurveType_t}
    */
   CurveType_t getType() const;
@@ -203,6 +209,8 @@ public:
    * @li @c "points"
    * @li @c "bar"
    * @li @c "barStacked"
+   * @li @c "horizontalBar"
+   * @li @c "horizontalBarStacked"
    * @li @c "invalid CurveType value"
    */
   std::string getTypeAsString() const;
@@ -522,7 +530,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_OUTPUT_CURVE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT_CURVE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -540,9 +548,7 @@ public:
    *
    *
    * @note The required attributes for the SedCurve object are:
-   * @li "logY"
    * @li "yDataReference"
-   * @li "type"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -993,6 +999,8 @@ SedCurve_getYDataReference(const SedCurve_t * sc);
  * @li @sbmlconstant{SEDML_CURVETYPE_POINTS, CurveType_t}
  * @li @sbmlconstant{SEDML_CURVETYPE_BAR, CurveType_t}
  * @li @sbmlconstant{SEDML_CURVETYPE_BARSTACKED, CurveType_t}
+ * @li @sbmlconstant{SEDML_CURVETYPE_HORIZONTALBAR, CurveType_t}
+ * @li @sbmlconstant{SEDML_CURVETYPE_HORIZONTALBARSTACKED, CurveType_t}
  * @li @sbmlconstant{SEDML_CURVETYPE_INVALID, CurveType_t}
  *
  * @memberof SedCurve_t
@@ -1017,6 +1025,8 @@ SedCurve_getType(const SedCurve_t * sc);
  * @li @c "points"
  * @li @c "bar"
  * @li @c "barStacked"
+ * @li @c "horizontalBar"
+ * @li @c "horizontalBarStacked"
  * @li @c "invalid CurveType value"
  *
  * @memberof SedCurve_t
@@ -1508,9 +1518,7 @@ SedCurve_unsetYErrorLower(SedCurve_t * sc);
  *
  *
  * @note The required attributes for the SedCurve_t object are:
- * @li "logY"
  * @li "yDataReference"
- * @li "type"
  *
  * @memberof SedCurve_t
  */

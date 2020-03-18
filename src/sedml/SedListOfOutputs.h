@@ -140,7 +140,8 @@ public:
    * @param n an unsigned int representing the index of the SedOutput to
    * retrieve.
    *
-   * @return the nth SedOutput in this SedListOfOutputs.
+   * @return the nth SedOutput in this SedListOfOutputs or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -160,7 +161,8 @@ public:
    * @param n an unsigned int representing the index of the SedOutput to
    * retrieve.
    *
-   * @return the nth SedOutput in this SedListOfOutputs.
+   * @return the nth SedOutput in this SedListOfOutputs or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -225,7 +227,7 @@ public:
    *
    * @return a pointer to the nth SedOutput in this SedListOfOutputs.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOutput(const SedOutput* object)
    * @see createOutput()
@@ -247,7 +249,7 @@ public:
    * @return the SedOutput in this SedListOfOutputs based on the identifier or
    * NULL if no such SedOutput exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addOutput(const SedOutput* object)
    * @see createOutput()
@@ -524,7 +526,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedOutput_t to
  * retrieve.
  *
- * @return the nth SedOutput_t in this SedListOf_t.
+ * @return the nth SedOutput_t in this SedListOf_t or @c NULL if no such object
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -566,7 +569,7 @@ SedListOfOutputs_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedOutput_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfOutputs_t
  */
@@ -587,7 +590,7 @@ SedListOfOutputs_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedOutput_t in this SedListOf_t based on the identifier or NULL
  * if no such SedOutput_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfOutputs_t
  */

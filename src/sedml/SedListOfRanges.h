@@ -139,7 +139,8 @@ public:
    * @param n an unsigned int representing the index of the SedRange to
    * retrieve.
    *
-   * @return the nth SedRange in this SedListOfRanges.
+   * @return the nth SedRange in this SedListOfRanges or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -159,7 +160,8 @@ public:
    * @param n an unsigned int representing the index of the SedRange to
    * retrieve.
    *
-   * @return the nth SedRange in this SedListOfRanges.
+   * @return the nth SedRange in this SedListOfRanges or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -223,7 +225,7 @@ public:
    *
    * @return a pointer to the nth SedRange in this SedListOfRanges.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
@@ -244,7 +246,7 @@ public:
    * @return the SedRange in this SedListOfRanges based on the identifier or
    * NULL if no such SedRange exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
@@ -396,7 +398,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -411,7 +413,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfRanges:
-   * @sedmlconstant{SEDML_RANGE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_RANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -490,7 +492,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedRange_t to
  * retrieve.
  *
- * @return the nth SedRange_t in this SedListOf_t.
+ * @return the nth SedRange_t in this SedListOf_t or @c NULL if no such object
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -531,7 +534,7 @@ SedListOfRanges_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedRange_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfRanges_t
  */
@@ -551,7 +554,7 @@ SedListOfRanges_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedRange_t in this SedListOf_t based on the identifier or NULL
  * if no such SedRange_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfRanges_t
  */

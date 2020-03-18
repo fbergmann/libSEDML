@@ -714,7 +714,8 @@ SedSubTask::readAttributes(
       }
 
       msg += " is '" + mTask + "', which does not conform to the syntax.";
-      logError(SedmlSubTaskTaskMustBeAbstractTask, level, version, msg);
+      logError(SedmlSubTaskTaskMustBeAbstractTask, level, version, msg,
+        getLine(), getColumn());
     }
   }
   else

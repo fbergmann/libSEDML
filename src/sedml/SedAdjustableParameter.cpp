@@ -55,6 +55,8 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedAdjustableParameter::SedAdjustableParameter(unsigned int level,
                                                unsigned int version)
   : SedBase(level, version)
+  , mInitialValue (util_NaN())
+  , mIsSetInitialValue (false)
   , mBounds (NULL)
   , mExperimentRefs (level, version)
   , mModelReference ("")
@@ -71,6 +73,8 @@ SedAdjustableParameter::SedAdjustableParameter(unsigned int level,
  */
 SedAdjustableParameter::SedAdjustableParameter(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
+  , mInitialValue (util_NaN())
+  , mIsSetInitialValue (false)
   , mBounds (NULL)
   , mExperimentRefs (sedmlns)
   , mModelReference ("")
@@ -87,6 +91,8 @@ SedAdjustableParameter::SedAdjustableParameter(SedNamespaces *sedmlns)
 SedAdjustableParameter::SedAdjustableParameter(const SedAdjustableParameter&
   orig)
   : SedBase( orig )
+  , mInitialValue ( orig.mInitialValue )
+  , mIsSetInitialValue ( orig.mIsSetInitialValue )
   , mBounds ( NULL )
   , mExperimentRefs ( orig.mExperimentRefs )
   , mModelReference ( orig.mModelReference )
@@ -110,6 +116,8 @@ SedAdjustableParameter::operator=(const SedAdjustableParameter& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
+    mInitialValue = rhs.mInitialValue;
+    mIsSetInitialValue = rhs.mIsSetInitialValue;
     mExperimentRefs = rhs.mExperimentRefs;
     mModelReference = rhs.mModelReference;
     mTarget = rhs.mTarget;
@@ -151,6 +159,17 @@ SedAdjustableParameter::~SedAdjustableParameter()
 
 
 /*
+ * Returns the value of the "initialValue" attribute of this
+ * SedAdjustableParameter.
+ */
+double
+SedAdjustableParameter::getInitialValue() const
+{
+  return mInitialValue;
+}
+
+
+/*
  * Returns the value of the "modelReference" attribute of this
  * SedAdjustableParameter.
  */
@@ -168,6 +187,17 @@ const std::string&
 SedAdjustableParameter::getTarget() const
 {
   return mTarget;
+}
+
+
+/*
+ * Predicate returning @c true if this SedAdjustableParameter's "initialValue"
+ * attribute is set.
+ */
+bool
+SedAdjustableParameter::isSetInitialValue() const
+{
+  return mIsSetInitialValue;
 }
 
 
@@ -190,6 +220,19 @@ bool
 SedAdjustableParameter::isSetTarget() const
 {
   return (mTarget.empty() == false);
+}
+
+
+/*
+ * Sets the value of the "initialValue" attribute of this
+ * SedAdjustableParameter.
+ */
+int
+SedAdjustableParameter::setInitialValue(double initialValue)
+{
+  mInitialValue = initialValue;
+  mIsSetInitialValue = true;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -220,6 +263,27 @@ SedAdjustableParameter::setTarget(const std::string& target)
 {
   mTarget = target;
   return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Unsets the value of the "initialValue" attribute of this
+ * SedAdjustableParameter.
+ */
+int
+SedAdjustableParameter::unsetInitialValue()
+{
+  mInitialValue = util_NaN();
+  mIsSetInitialValue = false;
+
+  if (isSetInitialValue() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
 }
 
 
@@ -702,6 +766,17 @@ SedAdjustableParameter::getAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::getAttribute(attributeName, value);
 
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "initialValue")
+  {
+    value = getInitialValue();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -774,7 +849,11 @@ SedAdjustableParameter::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "modelReference")
+  if (attributeName == "initialValue")
+  {
+    value = isSetInitialValue();
+  }
+  else if (attributeName == "modelReference")
   {
     value = isSetModelReference();
   }
@@ -839,6 +918,11 @@ SedAdjustableParameter::setAttribute(const std::string& attributeName,
                                      double value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
+
+  if (attributeName == "initialValue")
+  {
+    return_value = setInitialValue(value);
+  }
 
   return return_value;
 }
@@ -905,7 +989,11 @@ SedAdjustableParameter::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "modelReference")
+  if (attributeName == "initialValue")
+  {
+    value = unsetInitialValue();
+  }
+  else if (attributeName == "modelReference")
   {
     value = unsetModelReference();
   }
@@ -1158,6 +1246,8 @@ SedAdjustableParameter::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
+  attributes.add("initialValue");
+
   attributes.add("modelReference");
 
   attributes.add("target");
@@ -1221,6 +1311,26 @@ SedAdjustableParameter::readAttributes(
   }
 
   // 
+  // initialValue double (use = "optional" )
+  // 
+
+  numErrs = log ? log->getNumErrors() : 0;
+  mIsSetInitialValue = attributes.readInto("initialValue", mInitialValue);
+
+  if ( mIsSetInitialValue == false && log)
+  {
+    if (log && log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Sedml attribute 'initialValue' from the "
+        "<SedAdjustableParameter> element must be an integer.";
+      log->logError(SedmlAdjustableParameterInitialValueMustBeDouble, level,
+        version, message, getLine(), getColumn());
+    }
+  }
+
+  // 
   // modelReference SIdRef (use = "optional" )
   // 
 
@@ -1278,6 +1388,11 @@ SedAdjustableParameter::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
+
+  if (isSetInitialValue() == true)
+  {
+    stream.writeAttribute("initialValue", getPrefix(), mInitialValue);
+  }
 
   if (isSetModelReference() == true)
   {
@@ -1343,6 +1458,18 @@ SedAdjustableParameter_free(SedAdjustableParameter_t* sap)
 
 
 /*
+ * Returns the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t.
+ */
+LIBSEDML_EXTERN
+double
+SedAdjustableParameter_getInitialValue(const SedAdjustableParameter_t * sap)
+{
+  return (sap != NULL) ? sap->getInitialValue() : util_NaN();
+}
+
+
+/*
  * Returns the value of the "modelReference" attribute of this
  * SedAdjustableParameter_t.
  */
@@ -1380,6 +1507,18 @@ SedAdjustableParameter_getTarget(const SedAdjustableParameter_t * sap)
 
 /*
  * Predicate returning @c 1 (true) if this SedAdjustableParameter_t's
+ * "initialValue" attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedAdjustableParameter_isSetInitialValue(const SedAdjustableParameter_t * sap)
+{
+  return (sap != NULL) ? static_cast<int>(sap->isSetInitialValue()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedAdjustableParameter_t's
  * "modelReference" attribute is set.
  */
 LIBSEDML_EXTERN
@@ -1400,6 +1539,20 @@ int
 SedAdjustableParameter_isSetTarget(const SedAdjustableParameter_t * sap)
 {
   return (sap != NULL) ? static_cast<int>(sap->isSetTarget()) : 0;
+}
+
+
+/*
+ * Sets the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t.
+ */
+LIBSEDML_EXTERN
+int
+SedAdjustableParameter_setInitialValue(SedAdjustableParameter_t * sap,
+                                       double initialValue)
+{
+  return (sap != NULL) ? sap->setInitialValue(initialValue) :
+    LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1426,6 +1579,18 @@ SedAdjustableParameter_setTarget(SedAdjustableParameter_t * sap,
                                  const char * target)
 {
   return (sap != NULL) ? sap->setTarget(target) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t.
+ */
+LIBSEDML_EXTERN
+int
+SedAdjustableParameter_unsetInitialValue(SedAdjustableParameter_t * sap)
+{
+  return (sap != NULL) ? sap->unsetInitialValue() : LIBSEDML_INVALID_OBJECT;
 }
 
 

@@ -256,7 +256,8 @@ public:
    * @param n an unsigned int representing the index of the SedSubPlot to
    * retrieve.
    *
-   * @return the nth SedSubPlot in the SedListOfSubPlots within this SedFigure.
+   * @return the nth SedSubPlot in the SedListOfSubPlots within this SedFigure
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -276,7 +277,8 @@ public:
    * @param n an unsigned int representing the index of the SedSubPlot to
    * retrieve.
    *
-   * @return the nth SedSubPlot in the SedListOfSubPlots within this SedFigure.
+   * @return the nth SedSubPlot in the SedListOfSubPlots within this SedFigure
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -386,7 +388,7 @@ public:
    *
    * @return a pointer to the nth SedSubPlot in this SedFigure.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSubPlot(const SedSubPlot* object)
    * @see createSubPlot()
@@ -1127,7 +1129,8 @@ SedFigure_getListOfSubPlots(SedFigure_t* sf);
  * @param n an unsigned int representing the index of the SedSubPlot_t to
  * retrieve.
  *
- * @return the nth SedSubPlot_t in the SedListOfSubPlots within this SedFigure.
+ * @return the nth SedSubPlot_t in the SedListOfSubPlots within this SedFigure
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1226,7 +1229,7 @@ SedFigure_createSubPlot(SedFigure_t* sf);
  *
  * @return a pointer to the nth SedSubPlot_t in this SedFigure_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedFigure_t
  */

@@ -658,7 +658,7 @@ SedRemainingDimension::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlVariableLORemainingDimensionsAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -703,7 +703,8 @@ SedRemainingDimension::readAttributes(
       }
 
       msg += " is '" + mTarget + "', which does not conform to the syntax.";
-      logError(SedmlRemainingDimensionTargetMustBeSId, level, version, msg);
+      logError(SedmlRemainingDimensionTargetMustBeSId, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -732,7 +733,7 @@ SedRemainingDimension::readAttributes(
       msg += " is '" + mDimensionTarget + "', which does not conform to the "
         "syntax.";
       logError(SedmlRemainingDimensionDimensionTargetMustBeSId, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
 }

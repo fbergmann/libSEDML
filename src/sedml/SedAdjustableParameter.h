@@ -65,6 +65,8 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
+  double mInitialValue;
+  bool mIsSetInitialValue;
   SedBounds* mBounds;
   SedListOfExperimentRefs mExperimentRefs;
   std::string mModelReference;
@@ -133,6 +135,16 @@ public:
 
 
   /**
+   * Returns the value of the "initialValue" attribute of this
+   * SedAdjustableParameter.
+   *
+   * @return the value of the "initialValue" attribute of this
+   * SedAdjustableParameter as a double.
+   */
+  double getInitialValue() const;
+
+
+  /**
    * Returns the value of the "modelReference" attribute of this
    * SedAdjustableParameter.
    *
@@ -154,6 +166,16 @@ public:
 
   /**
    * Predicate returning @c true if this SedAdjustableParameter's
+   * "initialValue" attribute is set.
+   *
+   * @return @c true if this SedAdjustableParameter's "initialValue" attribute
+   * has been set, otherwise @c false is returned.
+   */
+  bool isSetInitialValue() const;
+
+
+  /**
+   * Predicate returning @c true if this SedAdjustableParameter's
    * "modelReference" attribute is set.
    *
    * @return @c true if this SedAdjustableParameter's "modelReference"
@@ -170,6 +192,21 @@ public:
    * been set, otherwise @c false is returned.
    */
   bool isSetTarget() const;
+
+
+  /**
+   * Sets the value of the "initialValue" attribute of this
+   * SedAdjustableParameter.
+   *
+   * @param initialValue double value of the "initialValue" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setInitialValue(double initialValue);
 
 
   /**
@@ -199,6 +236,17 @@ public:
    * equivalent to calling unsetTarget().
    */
   int setTarget(const std::string& target);
+
+
+  /**
+   * Unsets the value of the "initialValue" attribute of this
+   * SedAdjustableParameter.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetInitialValue();
 
 
   /**
@@ -500,7 +548,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_ADJUSTABLE_PARAMETER, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_ADJUSTABLE_PARAMETER, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1060,6 +1108,23 @@ SedAdjustableParameter_free(SedAdjustableParameter_t* sap);
 
 
 /**
+ * Returns the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t.
+ *
+ * @param sap the SedAdjustableParameter_t structure whose initialValue is
+ * sought.
+ *
+ * @return the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t as a double.
+ *
+ * @memberof SedAdjustableParameter_t
+ */
+LIBSEDML_EXTERN
+double
+SedAdjustableParameter_getInitialValue(const SedAdjustableParameter_t * sap);
+
+
+/**
  * Returns the value of the "modelReference" attribute of this
  * SedAdjustableParameter_t.
  *
@@ -1098,6 +1163,22 @@ SedAdjustableParameter_getTarget(const SedAdjustableParameter_t * sap);
 
 /**
  * Predicate returning @c 1 (true) if this SedAdjustableParameter_t's
+ * "initialValue" attribute is set.
+ *
+ * @param sap the SedAdjustableParameter_t structure.
+ *
+ * @return @c 1 (true) if this SedAdjustableParameter_t's "initialValue"
+ * attribute has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedAdjustableParameter_t
+ */
+LIBSEDML_EXTERN
+int
+SedAdjustableParameter_isSetInitialValue(const SedAdjustableParameter_t * sap);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedAdjustableParameter_t's
  * "modelReference" attribute is set.
  *
  * @param sap the SedAdjustableParameter_t structure.
@@ -1127,6 +1208,28 @@ SedAdjustableParameter_isSetModelReference(const SedAdjustableParameter_t *
 LIBSEDML_EXTERN
 int
 SedAdjustableParameter_isSetTarget(const SedAdjustableParameter_t * sap);
+
+
+/**
+ * Sets the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t.
+ *
+ * @param sap the SedAdjustableParameter_t structure.
+ *
+ * @param initialValue double value of the "initialValue" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedAdjustableParameter_t
+ */
+LIBSEDML_EXTERN
+int
+SedAdjustableParameter_setInitialValue(SedAdjustableParameter_t * sap,
+                                       double initialValue);
 
 
 /**
@@ -1172,6 +1275,24 @@ LIBSEDML_EXTERN
 int
 SedAdjustableParameter_setTarget(SedAdjustableParameter_t * sap,
                                  const char * target);
+
+
+/**
+ * Unsets the value of the "initialValue" attribute of this
+ * SedAdjustableParameter_t.
+ *
+ * @param sap the SedAdjustableParameter_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedAdjustableParameter_t
+ */
+LIBSEDML_EXTERN
+int
+SedAdjustableParameter_unsetInitialValue(SedAdjustableParameter_t * sap);
 
 
 /**

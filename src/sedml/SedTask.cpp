@@ -681,7 +681,8 @@ SedTask::readAttributes(
 
       msg += " is '" + mModelReference + "', which does not conform to the "
         "syntax.";
-      logError(SedmlTaskModelReferenceMustBeModel, level, version, msg);
+      logError(SedmlTaskModelReferenceMustBeModel, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -709,7 +710,7 @@ SedTask::readAttributes(
       msg += " is '" + mSimulationReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlTaskSimulationReferenceMustBeSimulation, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
 }

@@ -54,9 +54,11 @@
  * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
  * allowable values for "type":
  * <ul>
- * <li> @c "Variable", TODO:add description
+ * <li> @c "time", TODO:add description
  *
- * <li> @c "Parameter", TODO:add description
+ * <li> @c "experimentalCondition", TODO:add description
+ *
+ * <li> @c "observable", TODO:add description
  *
  * </ul>
  */
@@ -91,7 +93,7 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   std::string mDataSource;
-  std::string mDataGenerator;
+  std::string mTarget;
   MappingType_t mType;
   double mWeight;
   bool mIsSetWeight;
@@ -169,12 +171,12 @@ public:
 
 
   /**
-   * Returns the value of the "dataGenerator" attribute of this SedFitMapping.
+   * Returns the value of the "target" attribute of this SedFitMapping.
    *
-   * @return the value of the "dataGenerator" attribute of this SedFitMapping
-   * as a string.
+   * @return the value of the "target" attribute of this SedFitMapping as a
+   * string.
    */
-  const std::string& getDataGenerator() const;
+  const std::string& getTarget() const;
 
 
   /**
@@ -187,8 +189,9 @@ public:
    * @if clike The value is drawn from the enumeration @ref MappingType_t
    * @endif
    * The possible values returned by this method are:
-   * @li @sbmlconstant{SEDML_MAPPINGTYPE_VARIABLE, MappingType_t}
-   * @li @sbmlconstant{SEDML_MAPPINGTYPE_PARAMETER, MappingType_t}
+   * @li @sbmlconstant{SEDML_MAPPINGTYPE_TIME, MappingType_t}
+   * @li @sbmlconstant{SEDML_MAPPINGTYPE_EXPERIMENTALCONDITION, MappingType_t}
+   * @li @sbmlconstant{SEDML_MAPPINGTYPE_OBSERVABLE, MappingType_t}
    * @li @sbmlconstant{SEDML_MAPPINGTYPE_INVALID, MappingType_t}
    */
   MappingType_t getType() const;
@@ -202,8 +205,9 @@ public:
    *
    * @copydetails doc_sedfitmapping_type
    * The possible values returned by this method are:
-   * @li @c "Variable"
-   * @li @c "Parameter"
+   * @li @c "time"
+   * @li @c "experimentalCondition"
+   * @li @c "observable"
    * @li @c "invalid MappingType value"
    */
   std::string getTypeAsString() const;
@@ -238,13 +242,13 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedFitMapping's "dataGenerator"
-   * attribute is set.
+   * Predicate returning @c true if this SedFitMapping's "target" attribute is
+   * set.
    *
-   * @return @c true if this SedFitMapping's "dataGenerator" attribute has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this SedFitMapping's "target" attribute has been set,
+   * otherwise @c false is returned.
    */
-  bool isSetDataGenerator() const;
+  bool isSetTarget() const;
 
 
   /**
@@ -294,17 +298,16 @@ public:
 
 
   /**
-   * Sets the value of the "dataGenerator" attribute of this SedFitMapping.
+   * Sets the value of the "target" attribute of this SedFitMapping.
    *
-   * @param dataGenerator std::string& value of the "dataGenerator" attribute
-   * to be set.
+   * @param target std::string& value of the "target" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setDataGenerator(const std::string& dataGenerator);
+  int setTarget(const std::string& target);
 
 
   /**
@@ -376,13 +379,13 @@ public:
 
 
   /**
-   * Unsets the value of the "dataGenerator" attribute of this SedFitMapping.
+   * Unsets the value of the "target" attribute of this SedFitMapping.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetDataGenerator();
+  int unsetTarget();
 
 
   /**
@@ -458,7 +461,7 @@ public:
    *
    * @note The required attributes for the SedFitMapping object are:
    * @li "dataSource"
-   * @li "dataGenerator"
+   * @li "target"
    * @li "type"
    */
   virtual bool hasRequiredAttributes() const;
@@ -873,12 +876,12 @@ SedFitMapping_getDataSource(const SedFitMapping_t * sfm);
 
 
 /**
- * Returns the value of the "dataGenerator" attribute of this SedFitMapping_t.
+ * Returns the value of the "target" attribute of this SedFitMapping_t.
  *
- * @param sfm the SedFitMapping_t structure whose dataGenerator is sought.
+ * @param sfm the SedFitMapping_t structure whose target is sought.
  *
- * @return the value of the "dataGenerator" attribute of this SedFitMapping_t
- * as a pointer to a string.
+ * @return the value of the "target" attribute of this SedFitMapping_t as a
+ * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
@@ -886,7 +889,7 @@ SedFitMapping_getDataSource(const SedFitMapping_t * sfm);
  */
 LIBSEDML_EXTERN
 char *
-SedFitMapping_getDataGenerator(const SedFitMapping_t * sfm);
+SedFitMapping_getTarget(const SedFitMapping_t * sfm);
 
 
 /**
@@ -900,8 +903,9 @@ SedFitMapping_getDataGenerator(const SedFitMapping_t * sfm);
  * @copydetails doc_sedfitmapping_type
  * @if clike The value is drawn from the enumeration @ref MappingType_t @endif
  * The possible values returned by this method are:
- * @li @sbmlconstant{SEDML_MAPPINGTYPE_VARIABLE, MappingType_t}
- * @li @sbmlconstant{SEDML_MAPPINGTYPE_PARAMETER, MappingType_t}
+ * @li @sbmlconstant{SEDML_MAPPINGTYPE_TIME, MappingType_t}
+ * @li @sbmlconstant{SEDML_MAPPINGTYPE_EXPERIMENTALCONDITION, MappingType_t}
+ * @li @sbmlconstant{SEDML_MAPPINGTYPE_OBSERVABLE, MappingType_t}
  * @li @sbmlconstant{SEDML_MAPPINGTYPE_INVALID, MappingType_t}
  *
  * @memberof SedFitMapping_t
@@ -923,8 +927,9 @@ SedFitMapping_getType(const SedFitMapping_t * sfm);
  *
  * @copydetails doc_sedfitmapping_type
  * The possible values returned by this method are:
- * @li @c "Variable"
- * @li @c "Parameter"
+ * @li @c "time"
+ * @li @c "experimentalCondition"
+ * @li @c "observable"
  * @li @c "invalid MappingType value"
  *
  * @memberof SedFitMapping_t
@@ -983,19 +988,19 @@ SedFitMapping_isSetDataSource(const SedFitMapping_t * sfm);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedFitMapping_t's "dataGenerator"
- * attribute is set.
+ * Predicate returning @c 1 (true) if this SedFitMapping_t's "target" attribute
+ * is set.
  *
  * @param sfm the SedFitMapping_t structure.
  *
- * @return @c 1 (true) if this SedFitMapping_t's "dataGenerator" attribute has
- * been set, otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this SedFitMapping_t's "target" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedFitMapping_t
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_isSetDataGenerator(const SedFitMapping_t * sfm);
+SedFitMapping_isSetTarget(const SedFitMapping_t * sfm);
 
 
 /**
@@ -1070,12 +1075,11 @@ SedFitMapping_setDataSource(SedFitMapping_t * sfm, const char * dataSource);
 
 
 /**
- * Sets the value of the "dataGenerator" attribute of this SedFitMapping_t.
+ * Sets the value of the "target" attribute of this SedFitMapping_t.
  *
  * @param sfm the SedFitMapping_t structure.
  *
- * @param dataGenerator const char * value of the "dataGenerator" attribute to
- * be set.
+ * @param target const char * value of the "target" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1087,8 +1091,7 @@ SedFitMapping_setDataSource(SedFitMapping_t * sfm, const char * dataSource);
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_setDataGenerator(SedFitMapping_t * sfm,
-                               const char * dataGenerator);
+SedFitMapping_setTarget(SedFitMapping_t * sfm, const char * target);
 
 
 /**
@@ -1194,7 +1197,7 @@ SedFitMapping_unsetDataSource(SedFitMapping_t * sfm);
 
 
 /**
- * Unsets the value of the "dataGenerator" attribute of this SedFitMapping_t.
+ * Unsets the value of the "target" attribute of this SedFitMapping_t.
  *
  * @param sfm the SedFitMapping_t structure.
  *
@@ -1207,7 +1210,7 @@ SedFitMapping_unsetDataSource(SedFitMapping_t * sfm);
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_unsetDataGenerator(SedFitMapping_t * sfm);
+SedFitMapping_unsetTarget(SedFitMapping_t * sfm);
 
 
 /**
@@ -1274,7 +1277,7 @@ SedFitMapping_unsetPointWeight(SedFitMapping_t * sfm);
  *
  * @note The required attributes for the SedFitMapping_t object are:
  * @li "dataSource"
- * @li "dataGenerator"
+ * @li "target"
  * @li "type"
  *
  * @memberof SedFitMapping_t

@@ -494,7 +494,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_ABSTRACTCURVE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_ABSTRACTCURVE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -857,8 +857,7 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedCurve (SedAbstractCurve_t) using the given SEDML Level and
- * @ p version values.
+ * Creates a new SedCurve using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedAbstractCurve_t.
@@ -878,8 +877,8 @@ SedAbstractCurve_createCurve(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedShadedArea (SedAbstractCurve_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedShadedArea using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedAbstractCurve_t.
@@ -895,8 +894,7 @@ SedAbstractCurve_createCurve(unsigned int level, unsigned int version);
  */
 LIBSEDML_EXTERN
 SedShadedArea_t *
-SedAbstractCurve_createShadedArea(unsigned int level,
-                                     unsigned int version);
+SedAbstractCurve_createShadedArea(unsigned int level, unsigned int version);
 
 
 /**

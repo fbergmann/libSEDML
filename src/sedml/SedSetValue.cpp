@@ -953,7 +953,8 @@ SedSetValue::readAttributes(
 
       msg += " is '" + mModelReference + "', which does not conform to the "
         "syntax.";
-      logError(SedmlSetValueModelReferenceMustBeModel, level, version, msg);
+      logError(SedmlSetValueModelReferenceMustBeModel, level, version, msg,
+        getLine(), getColumn());
     }
   }
   else
@@ -1017,7 +1018,8 @@ SedSetValue::readAttributes(
       }
 
       msg += " is '" + mRange + "', which does not conform to the syntax.";
-      logError(SedmlSetValueRangeMustBeRange, level, version, msg);
+      logError(SedmlSetValueRangeMustBeRange, level, version, msg, getLine(),
+        getColumn());
     }
   }
 }

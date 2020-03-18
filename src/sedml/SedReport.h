@@ -168,7 +168,8 @@ public:
    * @param n an unsigned int representing the index of the SedDataSet to
    * retrieve.
    *
-   * @return the nth SedDataSet in the SedListOfDataSets within this SedReport.
+   * @return the nth SedDataSet in the SedListOfDataSets within this SedReport
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -188,7 +189,8 @@ public:
    * @param n an unsigned int representing the index of the SedDataSet to
    * retrieve.
    *
-   * @return the nth SedDataSet in the SedListOfDataSets within this SedReport.
+   * @return the nth SedDataSet in the SedListOfDataSets within this SedReport
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -342,7 +344,7 @@ public:
    *
    * @return a pointer to the nth SedDataSet in this SedReport.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDataSet(const SedDataSet* object)
    * @see createDataSet()
@@ -364,14 +366,14 @@ public:
    * @return the SedDataSet in this SedReport based on the identifier or NULL
    * if no such SedDataSet exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addDataSet(const SedDataSet* object)
    * @see createDataSet()
-   * @see getSedDataSet(const std::string& sid)
-   * @see getSedDataSet(unsigned int n)
+   * @see getDataSet(const std::string& sid)
+   * @see getDataSet(unsigned int n)
    * @see getNumDataSets()
-   * @see removeSedDataSet(unsigned int n)
+   * @see removeDataSet(unsigned int n)
    */
   SedDataSet* removeDataSet(const std::string& sid);
 
@@ -392,7 +394,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_OUTPUT_REPORT, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT_REPORT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -969,7 +971,8 @@ SedReport_getListOfDataSets(SedReport_t* sr);
  * @param n an unsigned int representing the index of the SedDataSet_t to
  * retrieve.
  *
- * @return the nth SedDataSet_t in the SedListOfDataSets within this SedReport.
+ * @return the nth SedDataSet_t in the SedListOfDataSets within this SedReport
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1088,7 +1091,7 @@ SedReport_createDataSet(SedReport_t* sr);
  *
  * @return a pointer to the nth SedDataSet_t in this SedReport_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedReport_t
  */
@@ -1109,7 +1112,7 @@ SedReport_removeDataSet(SedReport_t* sr, unsigned int n);
  * @return the SedDataSet_t in this SedReport_t based on the identifier or NULL
  * if no such SedDataSet_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedReport_t
  */

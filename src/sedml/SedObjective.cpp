@@ -425,13 +425,13 @@ SedObjective::unsetAttribute(const std::string& attributeName)
 
 
 /*
- * Creates a new SedLeastSquareObjectiveFunction (SedObjective_t) using the
- * given SEDML Level and @ p version values.
+ * Creates a new SedLeastSquareObjectiveFunction using the given SEDML Level
+ * and @ p version values.
  */
 LIBSEDML_EXTERN
 SedLeastSquareObjectiveFunction_t *
 SedObjective_createLeastSquareObjectiveFunction(unsigned int level,
-                                                   unsigned int version)
+                                                unsigned int version)
 {
   return new SedLeastSquareObjectiveFunction(level, version);
 }

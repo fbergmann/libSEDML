@@ -431,7 +431,7 @@ public:
    * SedRemainingDimension to retrieve.
    *
    * @return the nth SedRemainingDimension in the SedListOfRemainingDimensions
-   * within this SedVariable.
+   * within this SedVariable or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -452,7 +452,7 @@ public:
    * SedRemainingDimension to retrieve.
    *
    * @return the nth SedRemainingDimension in the SedListOfRemainingDimensions
-   * within this SedVariable.
+   * within this SedVariable or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -599,7 +599,7 @@ public:
    *
    * @return a pointer to the nth SedRemainingDimension in this SedVariable.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRemainingDimension(const SedRemainingDimension* object)
    * @see createRemainingDimension()
@@ -634,7 +634,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_VARIABLE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_VARIABLE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1636,7 +1636,7 @@ SedVariable_getListOfRemainingDimensions(SedVariable_t* sv);
  * SedRemainingDimension_t to retrieve.
  *
  * @return the nth SedRemainingDimension_t in the SedListOfRemainingDimensions
- * within this SedVariable.
+ * within this SedVariable or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1759,7 +1759,7 @@ SedVariable_createRemainingDimension(SedVariable_t* sv);
  *
  * @return a pointer to the nth SedRemainingDimension_t in this SedVariable_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedVariable_t
  */

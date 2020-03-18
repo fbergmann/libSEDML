@@ -713,7 +713,7 @@ SedAbstractTask::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
@@ -777,8 +777,7 @@ SedAbstractTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedTask (SedAbstractTask_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedTask using the given SEDML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedTask_t *
@@ -789,39 +788,38 @@ SedAbstractTask_createTask(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedRepeatedTask (SedAbstractTask_t) using the given SEDML
- * Level and @ p version values.
+ * Creates a new SedRepeatedTask using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
 SedRepeatedTask_t *
-SedAbstractTask_createRepeatedTask(unsigned int level,
-                                      unsigned int version)
+SedAbstractTask_createRepeatedTask(unsigned int level, unsigned int version)
 {
   return new SedRepeatedTask(level, version);
 }
 
 
 /*
- * Creates a new SedParameterEstimationTask (SedAbstractTask_t) using the given
- * SEDML Level and @ p version values.
+ * Creates a new SedParameterEstimationTask using the given SEDML Level and @ p
+ * version values.
  */
 LIBSEDML_EXTERN
 SedParameterEstimationTask_t *
 SedAbstractTask_createParameterEstimationTask(unsigned int level,
-                                                 unsigned int version)
+                                              unsigned int version)
 {
   return new SedParameterEstimationTask(level, version);
 }
 
 
 /*
- * Creates a new SedSimpleRepeatedTask (SedAbstractTask_t) using the given
- * SEDML Level and @ p version values.
+ * Creates a new SedSimpleRepeatedTask using the given SEDML Level and @ p
+ * version values.
  */
 LIBSEDML_EXTERN
 SedSimpleRepeatedTask_t *
 SedAbstractTask_createSimpleRepeatedTask(unsigned int level,
-                                            unsigned int version)
+                                         unsigned int version)
 {
   return new SedSimpleRepeatedTask(level, version);
 }

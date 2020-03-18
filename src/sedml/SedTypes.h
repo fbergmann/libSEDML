@@ -102,6 +102,8 @@
 #include <sedml/SedSimpleRepeatedTask.h>
 #include <sedml/SedShadedArea.h>
 #include <sedml/SedParameterEstimationResultPlot.h>
+#include <sedml/SedWaterfallPlot.h>
+#include <sedml/SedParameterEstimationReport.h>
 
 #include <sedml/SedReader.h>
 #include <sedml/SedWriter.h>

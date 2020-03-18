@@ -1422,7 +1422,7 @@ SedSurface::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
 
@@ -1464,7 +1464,7 @@ SedSurface::readAttributes(
       msg += " is '" + mXDataReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlSurfaceXDataReferenceMustBeDataGenerator, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
 
@@ -1492,7 +1492,7 @@ SedSurface::readAttributes(
       msg += " is '" + mYDataReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlSurfaceYDataReferenceMustBeDataGenerator, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
 
@@ -1520,7 +1520,7 @@ SedSurface::readAttributes(
       msg += " is '" + mZDataReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlSurfaceZDataReferenceMustBeDataGenerator, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
   else
@@ -1590,7 +1590,8 @@ SedSurface::readAttributes(
       }
 
       msg += " is '" + mStyle + "', which does not conform to the syntax.";
-      logError(SedmlSurfaceStyleMustBeStyle, level, version, msg);
+      logError(SedmlSurfaceStyleMustBeStyle, level, version, msg, getLine(),
+        getColumn());
     }
   }
 

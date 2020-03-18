@@ -166,7 +166,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_OBJECTIVE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OBJECTIVE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -479,8 +479,8 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedLeastSquareObjectiveFunction (SedObjective_t) using the
- * given SEDML Level and @ p version values.
+ * Creates a new SedLeastSquareObjectiveFunction using the given SEDML Level
+ * and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
  * SedObjective_t.
@@ -497,7 +497,7 @@ BEGIN_C_DECLS
 LIBSEDML_EXTERN
 SedLeastSquareObjectiveFunction_t *
 SedObjective_createLeastSquareObjectiveFunction(unsigned int level,
-                                                   unsigned int version);
+                                                unsigned int version);
 
 
 /**

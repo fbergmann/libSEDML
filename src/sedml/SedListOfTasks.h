@@ -139,7 +139,8 @@ public:
    * @param n an unsigned int representing the index of the SedAbstractTask to
    * retrieve.
    *
-   * @return the nth SedAbstractTask in this SedListOfTasks.
+   * @return the nth SedAbstractTask in this SedListOfTasks or @c NULL if no
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -159,7 +160,8 @@ public:
    * @param n an unsigned int representing the index of the SedAbstractTask to
    * retrieve.
    *
-   * @return the nth SedAbstractTask in this SedListOfTasks.
+   * @return the nth SedAbstractTask in this SedListOfTasks or @c NULL if no
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -224,7 +226,7 @@ public:
    *
    * @return a pointer to the nth SedAbstractTask in this SedListOfTasks.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAbstractTask(const SedAbstractTask* object)
    * @see createAbstractTask()
@@ -246,7 +248,7 @@ public:
    * @return the SedAbstractTask in this SedListOfTasks based on the identifier
    * or NULL if no such SedAbstractTask exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAbstractTask(const SedAbstractTask* object)
    * @see createAbstractTask()
@@ -415,7 +417,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfTasks:
-   * @sedmlconstant{SEDML_SEDML_ABSTRACTTASK, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_SEDML_ABSTRACTTASK, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -494,7 +496,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedAbstractTask_t to
  * retrieve.
  *
- * @return the nth SedAbstractTask_t in this SedListOf_t.
+ * @return the nth SedAbstractTask_t in this SedListOf_t or @c NULL if no such
+ * object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -536,7 +539,7 @@ SedListOfTasks_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedAbstractTask_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfTasks_t
  */
@@ -557,7 +560,7 @@ SedListOfTasks_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedAbstractTask_t in this SedListOf_t based on the identifier or
  * NULL if no such SedAbstractTask_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfTasks_t
  */

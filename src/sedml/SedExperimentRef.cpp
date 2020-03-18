@@ -601,7 +601,7 @@ SedExperimentRef::readAttributes(
       msg += " is '" + mExperimentId + "', which does not conform to the "
         "syntax.";
       logError(SedmlExperimentRefExperimentIdMustBeFitExperiment, level,
-        version, msg);
+        version, msg, getLine(), getColumn());
     }
   }
 }

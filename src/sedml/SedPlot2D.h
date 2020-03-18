@@ -231,7 +231,7 @@ public:
    * retrieve.
    *
    * @return the nth SedAbstractCurve in the SedListOfCurves within this
-   * SedPlot2D.
+   * SedPlot2D or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -252,7 +252,7 @@ public:
    * retrieve.
    *
    * @return the nth SedAbstractCurve in the SedListOfCurves within this
-   * SedPlot2D.
+   * SedPlot2D or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -320,8 +320,7 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedAbstractCurve* getCurveByStyle(const std::string& sid)
-    const;
+  const SedAbstractCurve* getCurveByStyle(const std::string& sid) const;
 
 
   /**
@@ -351,8 +350,8 @@ public:
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedAbstractCurve* getCurveByXDataReference(const std::string&
-    sid) const;
+  const SedAbstractCurve* getCurveByXDataReference(const std::string& sid)
+    const;
 
 
   /**
@@ -456,7 +455,7 @@ public:
    *
    * @return a pointer to the nth SedAbstractCurve in this SedPlot2D.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCurve(const SedAbstractCurve* object)
    * @see createCurve()
@@ -478,14 +477,14 @@ public:
    * @return the SedAbstractCurve in this SedPlot2D based on the identifier or
    * NULL if no such SedAbstractCurve exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCurve(const SedAbstractCurve* object)
    * @see createCurve()
-   * @see getSedAbstractCurve(const std::string& sid)
-   * @see getSedAbstractCurve(unsigned int n)
+   * @see getCurve(const std::string& sid)
+   * @see getCurve(unsigned int n)
    * @see getNumCurves()
-   * @see removeSedAbstractCurve(unsigned int n)
+   * @see removeCurve(unsigned int n)
    */
   SedAbstractCurve* removeCurve(const std::string& sid);
 
@@ -506,7 +505,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_OUTPUT_PLOT2D, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_OUTPUT_PLOT2D, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1168,7 +1167,7 @@ SedPlot2D_getListOfCurves(SedPlot2D_t* spd);
  * retrieve.
  *
  * @return the nth SedAbstractCurve_t in the SedListOfCurves within this
- * SedPlot2D.
+ * SedPlot2D or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1326,7 +1325,7 @@ SedPlot2D_createShadedArea(SedPlot2D_t* spd);
  *
  * @return a pointer to the nth SedAbstractCurve_t in this SedPlot2D_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedPlot2D_t
  */
@@ -1347,7 +1346,7 @@ SedPlot2D_removeCurve(SedPlot2D_t* spd, unsigned int n);
  * @return the SedAbstractCurve_t in this SedPlot2D_t based on the identifier
  * or NULL if no such SedAbstractCurve_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedPlot2D_t
  */

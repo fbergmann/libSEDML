@@ -130,7 +130,8 @@ public:
    * @param n an unsigned int representing the index of the SedAbstractCurve to
    * retrieve.
    *
-   * @return the nth SedAbstractCurve in this SedListOfCurves.
+   * @return the nth SedAbstractCurve in this SedListOfCurves or @c NULL if no
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -150,7 +151,8 @@ public:
    * @param n an unsigned int representing the index of the SedAbstractCurve to
    * retrieve.
    *
-   * @return the nth SedAbstractCurve in this SedListOfCurves.
+   * @return the nth SedAbstractCurve in this SedListOfCurves or @c NULL if no
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -215,7 +217,7 @@ public:
    *
    * @return a pointer to the nth SedAbstractCurve in this SedListOfCurves.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCurve(const SedAbstractCurve* object)
    * @see createCurve()
@@ -237,7 +239,7 @@ public:
    * @return the SedAbstractCurve in this SedListOfCurves based on the
    * identifier or NULL if no such SedAbstractCurve exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addCurve(const SedAbstractCurve* object)
    * @see createCurve()
@@ -539,7 +541,7 @@ SedListOfCurves_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedAbstractCurve_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfCurves_t
  */

@@ -925,7 +925,8 @@ SedSlice::readAttributes(
       }
 
       msg += " is '" + mReference + "', which does not conform to the syntax.";
-      logError(SedmlSliceReferenceMustBeSId, level, version, msg);
+      logError(SedmlSliceReferenceMustBeSId, level, version, msg, getLine(),
+        getColumn());
     }
   }
   else
@@ -985,7 +986,8 @@ SedSlice::readAttributes(
       }
 
       msg += " is '" + mIndex + "', which does not conform to the syntax.";
-      logError(SedmlSliceIndexMustBeSId, level, version, msg);
+      logError(SedmlSliceIndexMustBeSId, level, version, msg, getLine(),
+        getColumn());
     }
   }
 

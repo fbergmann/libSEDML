@@ -250,7 +250,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_CHANGE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_CHANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -616,8 +616,7 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedAddXML (SedChange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedAddXML using the given SEDML Level and @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedChange_t.
  *
@@ -636,8 +635,8 @@ SedChange_createAddXML(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedChangeXML (SedChange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedChangeXML using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedChange_t.
  *
@@ -656,8 +655,8 @@ SedChange_createChangeXML(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedRemoveXML (SedChange_t) using the given SEDML Level and @ p
- * version values.
+ * Creates a new SedRemoveXML using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedChange_t.
  *
@@ -676,8 +675,8 @@ SedChange_createRemoveXML(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedChangeAttribute (SedChange_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedChangeAttribute using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedChange_t.
  *
@@ -696,8 +695,8 @@ SedChange_createChangeAttribute(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedComputeChange (SedChange_t) using the given SEDML Level and
- * @ p version values.
+ * Creates a new SedComputeChange using the given SEDML Level and @ p version
+ * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this SedChange_t.
  *

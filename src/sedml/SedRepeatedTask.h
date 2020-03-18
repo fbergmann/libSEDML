@@ -262,7 +262,7 @@ public:
    * retrieve.
    *
    * @return the nth SedRange in the SedListOfRanges within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -283,7 +283,7 @@ public:
    * retrieve.
    *
    * @return the nth SedRange in the SedListOfRanges within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -460,7 +460,7 @@ public:
    *
    * @return a pointer to the nth SedRange in this SedRepeatedTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
@@ -481,14 +481,14 @@ public:
    * @return the SedRange in this SedRepeatedTask based on the identifier or
    * NULL if no such SedRange exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addRange(const SedRange* object)
    * @see createRange()
-   * @see getSedRange(const std::string& sid)
-   * @see getSedRange(unsigned int n)
+   * @see getRange(const std::string& sid)
+   * @see getRange(unsigned int n)
    * @see getNumRanges()
-   * @see removeSedRange(unsigned int n)
+   * @see removeRange(unsigned int n)
    */
   SedRange* removeRange(const std::string& sid);
 
@@ -501,7 +501,7 @@ public:
    * @copydetails doc_returned_unowned_pointer
    *
    * @see addTaskChange(const SedSetValue* object)
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
@@ -519,7 +519,7 @@ public:
    * @copydetails doc_returned_unowned_pointer
    *
    * @see addTaskChange(const SedSetValue* object)
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
@@ -536,12 +536,12 @@ public:
    * retrieve.
    *
    * @return the nth SedSetValue in the SedListOfSetValues within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
    * @see addTaskChange(const SedSetValue* object)
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getNumTaskChanges()
    * @see removeTaskChange(const std::string& sid)
@@ -557,12 +557,12 @@ public:
    * retrieve.
    *
    * @return the nth SedSetValue in the SedListOfSetValues within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
    * @see addTaskChange(const SedSetValue* object)
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getNumTaskChanges()
    * @see removeTaskChange(const std::string& sid)
@@ -647,7 +647,7 @@ public:
    *
    * @copydetails doc_note_object_is_copied
    *
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
@@ -663,7 +663,7 @@ public:
    * @return the number of SedSetValue objects in this SedRepeatedTask.
    *
    * @see addTaskChange(const SedSetValue* object)
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see removeTaskChange(const std::string& sid)
@@ -671,23 +671,6 @@ public:
    */
   unsigned int getNumTaskChanges() const;
 
-
-  /**
-   * Creates a new SedSetValue object, adds it to this SedRepeatedTask object
-   * and returns the SedSetValue object created.
-   *
-   * @return a new SedSetValue object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addTaskChange(const SedSetValue* object)
-   * @see getTaskChange(const std::string& sid)
-   * @see getTaskChange(unsigned int n)
-   * @see getNumTaskChanges()
-   * @see removeTaskChange(const std::string& sid)
-   * @see removeTaskChange(unsigned int n)
-   */
-  SedSetValue* createSetValue();
 
   /**
    * Creates a new SedSetValue object, adds it to this SedRepeatedTask object
@@ -716,10 +699,10 @@ public:
    *
    * @return a pointer to the nth SedSetValue in this SedRepeatedTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addTaskChange(const SedSetValue* object)
-   * @see createSetValue()
+   * @see createTaskChange()
    * @see getTaskChange(const std::string& sid)
    * @see getTaskChange(unsigned int n)
    * @see getNumTaskChanges()
@@ -771,7 +754,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSubTask in the SedListOfSubTasks within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -792,7 +775,7 @@ public:
    * retrieve.
    *
    * @return the nth SedSubTask in the SedListOfSubTasks within this
-   * SedRepeatedTask.
+   * SedRepeatedTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -904,7 +887,7 @@ public:
    *
    * @return a pointer to the nth SedSubTask in this SedRepeatedTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSubTask(const SedSubTask* object)
    * @see createSubTask()
@@ -939,7 +922,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_TASK_REPEATEDTASK, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_TASK_REPEATEDTASK, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1657,7 +1640,7 @@ SedRepeatedTask_getListOfRanges(SedRepeatedTask_t* srt);
  * retrieve.
  *
  * @return the nth SedRange_t in the SedListOfRanges within this
- * SedRepeatedTask.
+ * SedRepeatedTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1781,6 +1764,24 @@ SedRepeatedTask_createFunctionalRange(SedRepeatedTask_t* srt);
 
 
 /**
+ * Creates a new SedDataRange_t object, adds it to this SedRepeatedTask_t
+ * object and returns the SedDataRange_t object created.
+ *
+ * @param srt the SedRepeatedTask_t structure to which the SedDataRange_t
+ * should be added.
+ *
+ * @return a new SedDataRange_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedDataRange_t*
+SedRepeatedTask_createDataRange(SedRepeatedTask_t* srt);
+
+
+/**
  * Removes the nth SedRange_t from this SedRepeatedTask_t and returns a pointer
  * to it.
  *
@@ -1790,7 +1791,7 @@ SedRepeatedTask_createFunctionalRange(SedRepeatedTask_t* srt);
  *
  * @return a pointer to the nth SedRange_t in this SedRepeatedTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -1810,7 +1811,7 @@ SedRepeatedTask_removeRange(SedRepeatedTask_t* srt, unsigned int n);
  * @return the SedRange_t in this SedRepeatedTask_t based on the identifier or
  * NULL if no such SedRange_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -1831,7 +1832,7 @@ SedRepeatedTask_removeRangeById(SedRepeatedTask_t* srt, const char* sid);
  * @copydetails doc_returned_unowned_pointer
  *
  * @see SedRepeatedTask_addTaskChange()
- * @see SedRepeatedTask_createSetValue()
+ * @see SedRepeatedTask_createTaskChange()
  * @see SedRepeatedTask_getTaskChangeById()
  * @see SedRepeatedTask_getTaskChange()
  * @see SedRepeatedTask_getNumTaskChanges()
@@ -1854,7 +1855,7 @@ SedRepeatedTask_getListOfTaskChanges(SedRepeatedTask_t* srt);
  * retrieve.
  *
  * @return the nth SedSetValue_t in the SedListOfSetValues within this
- * SedRepeatedTask.
+ * SedRepeatedTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1884,7 +1885,7 @@ SedRepeatedTask_getTaskChange(SedRepeatedTask_t* srt, unsigned int n);
 LIBSEDML_EXTERN
 SedSetValue_t*
 SedRepeatedTask_getTaskChangeByModelReference(SedRepeatedTask_t* srt,
-                                            const char *sid);
+                                              const char *sid);
 
 
 /**
@@ -1929,7 +1930,8 @@ SedRepeatedTask_getTaskChangeByRange(SedRepeatedTask_t* srt, const char *sid);
  */
 LIBSEDML_EXTERN
 int
-SedRepeatedTask_addTaskChange(SedRepeatedTask_t* srt, const SedSetValue_t* ssv);
+SedRepeatedTask_addTaskChange(SedRepeatedTask_t* srt,
+                              const SedSetValue_t* ssv);
 
 
 /**
@@ -1961,7 +1963,7 @@ SedRepeatedTask_getNumTaskChanges(SedRepeatedTask_t* srt);
  */
 LIBSEDML_EXTERN
 SedSetValue_t*
-SedRepeatedTask_createSetValue(SedRepeatedTask_t* srt);
+SedRepeatedTask_createTaskChange(SedRepeatedTask_t* srt);
 
 
 /**
@@ -1975,7 +1977,7 @@ SedRepeatedTask_createSetValue(SedRepeatedTask_t* srt);
  *
  * @return a pointer to the nth SedSetValue_t in this SedRepeatedTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */
@@ -2019,7 +2021,7 @@ SedRepeatedTask_getListOfSubTasks(SedRepeatedTask_t* srt);
  * retrieve.
  *
  * @return the nth SedSubTask_t in the SedListOfSubTasks within this
- * SedRepeatedTask.
+ * SedRepeatedTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -2118,7 +2120,7 @@ SedRepeatedTask_createSubTask(SedRepeatedTask_t* srt);
  *
  * @return a pointer to the nth SedSubTask_t in this SedRepeatedTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedRepeatedTask_t
  */

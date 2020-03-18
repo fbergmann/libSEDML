@@ -300,7 +300,8 @@ public:
    * @param n an unsigned int representing the index of the SedSlice to
    * retrieve.
    *
-   * @return the nth SedSlice in the SedListOfSlices within this SedDataSource.
+   * @return the nth SedSlice in the SedListOfSlices within this SedDataSource
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -320,7 +321,8 @@ public:
    * @param n an unsigned int representing the index of the SedSlice to
    * retrieve.
    *
-   * @return the nth SedSlice in the SedListOfSlices within this SedDataSource.
+   * @return the nth SedSlice in the SedListOfSlices within this SedDataSource
+   * or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -461,7 +463,7 @@ public:
    *
    * @return a pointer to the nth SedSlice in this SedDataSource.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addSlice(const SedSlice* object)
    * @see createSlice()
@@ -496,7 +498,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_DATA_SOURCE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_DATA_SOURCE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1280,7 +1282,8 @@ SedDataSource_getListOfSlices(SedDataSource_t* sds);
  * @param n an unsigned int representing the index of the SedSlice_t to
  * retrieve.
  *
- * @return the nth SedSlice_t in the SedListOfSlices within this SedDataSource.
+ * @return the nth SedSlice_t in the SedListOfSlices within this SedDataSource
+ * or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1399,7 +1402,7 @@ SedDataSource_createSlice(SedDataSource_t* sds);
  *
  * @return a pointer to the nth SedSlice_t in this SedDataSource_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedDataSource_t
  */

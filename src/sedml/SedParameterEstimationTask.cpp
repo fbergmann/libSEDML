@@ -718,6 +718,26 @@ SedParameterEstimationTask::hasRequiredElements() const
 {
   bool allPresent = SedAbstractTask::hasRequiredElements();
 
+  if (isSetAlgorithm() == false)
+  {
+    allPresent = false;
+  }
+
+  if (isSetObjective() == false)
+  {
+    allPresent = false;
+  }
+
+  if (getNumAdjustableParameters() == 0)
+  {
+    allPresent = false;
+  }
+
+  if (getNumFitExperiments() == 0)
+  {
+    allPresent = false;
+  }
+
   return allPresent;
 }
 

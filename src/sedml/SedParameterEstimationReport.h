@@ -1,6 +1,6 @@
 /**
- * @file SedShadedArea.h
- * @brief Definition of the SedShadedArea class.
+ * @file SedParameterEstimationReport.h
+ * @brief Definition of the SedParameterEstimationReport class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,13 +31,13 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class SedShadedArea
- * @sbmlbrief{sedml} TODO:Definition of the SedShadedArea class.
+ * @class SedParameterEstimationReport
+ * @sbmlbrief{sedml} TODO:Definition of the SedParameterEstimationReport class.
  */
 
 
-#ifndef SedShadedArea_H__
-#define SedShadedArea_H__
+#ifndef SedParameterEstimationReport_H__
+#define SedParameterEstimationReport_H__
 
 
 #include <sedml/common/extern.h>
@@ -50,173 +50,128 @@
 #include <string>
 
 
-#include <sedml/SedAbstractCurve.h>
+#include <sedml/SedOutput.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSEDML_EXTERN SedShadedArea : public SedAbstractCurve
+class LIBSEDML_EXTERN SedParameterEstimationReport : public SedOutput
 {
 protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mYDataReferenceFrom;
-  std::string mYDataReferenceTo;
+  std::string mTaskRef;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new SedShadedArea using the given SEDML Level and @ p version
-   * values.
+   * Creates a new SedParameterEstimationReport using the given SEDML Level and
+   * @ p version values.
    *
    * @param level an unsigned int, the SEDML Level to assign to this
-   * SedShadedArea.
+   * SedParameterEstimationReport.
    *
    * @param version an unsigned int, the SEDML Version to assign to this
-   * SedShadedArea.
+   * SedParameterEstimationReport.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedShadedArea(unsigned int level = SEDML_DEFAULT_LEVEL,
-                unsigned int version = SEDML_DEFAULT_VERSION);
+  SedParameterEstimationReport(unsigned int level = SEDML_DEFAULT_LEVEL,
+                               unsigned int version = SEDML_DEFAULT_VERSION);
 
 
   /**
-   * Creates a new SedShadedArea using the given SedNamespaces object @p
-   * sedmlns.
+   * Creates a new SedParameterEstimationReport using the given SedNamespaces
+   * object @p sedmlns.
    *
    * @param sedmlns the SedNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedShadedArea(SedNamespaces *sedmlns);
+  SedParameterEstimationReport(SedNamespaces *sedmlns);
 
 
   /**
-   * Copy constructor for SedShadedArea.
+   * Copy constructor for SedParameterEstimationReport.
    *
-   * @param orig the SedShadedArea instance to copy.
+   * @param orig the SedParameterEstimationReport instance to copy.
    */
-  SedShadedArea(const SedShadedArea& orig);
+  SedParameterEstimationReport(const SedParameterEstimationReport& orig);
 
 
   /**
-   * Assignment operator for SedShadedArea.
+   * Assignment operator for SedParameterEstimationReport.
    *
-   * @param rhs the SedShadedArea object whose values are to be used as the
-   * basis of the assignment.
+   * @param rhs the SedParameterEstimationReport object whose values are to be
+   * used as the basis of the assignment.
    */
-  SedShadedArea& operator=(const SedShadedArea& rhs);
+  SedParameterEstimationReport& operator=(const SedParameterEstimationReport&
+    rhs);
 
 
   /**
-   * Creates and returns a deep copy of this SedShadedArea object.
+   * Creates and returns a deep copy of this SedParameterEstimationReport
+   * object.
    *
-   * @return a (deep) copy of this SedShadedArea object.
+   * @return a (deep) copy of this SedParameterEstimationReport object.
    */
-  virtual SedShadedArea* clone() const;
+  virtual SedParameterEstimationReport* clone() const;
 
 
   /**
-   * Destructor for SedShadedArea.
+   * Destructor for SedParameterEstimationReport.
    */
-  virtual ~SedShadedArea();
+  virtual ~SedParameterEstimationReport();
 
 
   /**
-   * Returns the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea.
+   * Returns the value of the "taskRef" attribute of this
+   * SedParameterEstimationReport.
    *
-   * @return the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea as a string.
+   * @return the value of the "taskRef" attribute of this
+   * SedParameterEstimationReport as a string.
    */
-  const std::string& getYDataReferenceFrom() const;
+  const std::string& getTaskRef() const;
 
 
   /**
-   * Returns the value of the "yDataReferenceTo" attribute of this
-   * SedShadedArea.
+   * Predicate returning @c true if this SedParameterEstimationReport's
+   * "taskRef" attribute is set.
    *
-   * @return the value of the "yDataReferenceTo" attribute of this
-   * SedShadedArea as a string.
+   * @return @c true if this SedParameterEstimationReport's "taskRef" attribute
+   * has been set, otherwise @c false is returned.
    */
-  const std::string& getYDataReferenceTo() const;
+  bool isSetTaskRef() const;
 
 
   /**
-   * Predicate returning @c true if this SedShadedArea's "yDataReferenceFrom"
-   * attribute is set.
+   * Sets the value of the "taskRef" attribute of this
+   * SedParameterEstimationReport.
    *
-   * @return @c true if this SedShadedArea's "yDataReferenceFrom" attribute has
-   * been set, otherwise @c false is returned.
-   */
-  bool isSetYDataReferenceFrom() const;
-
-
-  /**
-   * Predicate returning @c true if this SedShadedArea's "yDataReferenceTo"
-   * attribute is set.
-   *
-   * @return @c true if this SedShadedArea's "yDataReferenceTo" attribute has
-   * been set, otherwise @c false is returned.
-   */
-  bool isSetYDataReferenceTo() const;
-
-
-  /**
-   * Sets the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea.
-   *
-   * @param yDataReferenceFrom std::string& value of the "yDataReferenceFrom"
-   * attribute to be set.
+   * @param taskRef std::string& value of the "taskRef" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setYDataReferenceFrom(const std::string& yDataReferenceFrom);
+  int setTaskRef(const std::string& taskRef);
 
 
   /**
-   * Sets the value of the "yDataReferenceTo" attribute of this SedShadedArea.
-   *
-   * @param yDataReferenceTo std::string& value of the "yDataReferenceTo"
-   * attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setYDataReferenceTo(const std::string& yDataReferenceTo);
-
-
-  /**
-   * Unsets the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea.
+   * Unsets the value of the "taskRef" attribute of this
+   * SedParameterEstimationReport.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetYDataReferenceFrom();
-
-
-  /**
-   * Unsets the value of the "yDataReferenceTo" attribute of this
-   * SedShadedArea.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  int unsetYDataReferenceTo();
+  int unsetTaskRef();
 
 
   /**
@@ -227,22 +182,24 @@ public:
 
 
   /**
-   * Returns the XML element name of this SedShadedArea object.
+   * Returns the XML element name of this SedParameterEstimationReport object.
    *
-   * For SedShadedArea, the XML element name is always @c "shadedArea".
+   * For SedParameterEstimationReport, the XML element name is always
+   * @c "parameterEstimationReport".
    *
-   * @return the name of this element, i.e. @c "shadedArea".
+   * @return the name of this element, i.e. @c "parameterEstimationReport".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSEDML type code for this SedShadedArea object.
+   * Returns the libSEDML type code for this SedParameterEstimationReport
+   * object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_SHADEDAREA, SedTypeCode_t}.
+   * @sedmlconstant{SEDML_PARAMETERESTIMATIONREPORT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -253,15 +210,16 @@ public:
 
   /**
    * Predicate returning @c true if all the required attributes for this
-   * SedShadedArea object have been set.
+   * SedParameterEstimationReport object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * SedShadedArea have been set, otherwise @c false is returned.
+   * SedParameterEstimationReport have been set, otherwise @c false is
+   * returned.
    *
    *
-   * @note The required attributes for the SedShadedArea object are:
-   * @li "yDataReferenceFrom"
-   * @li "yDataReferenceTo"
+   * @note The required attributes for the SedParameterEstimationReport object
+   * are:
+   * @li "taskRef"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -309,7 +267,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -329,7 +288,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -348,7 +308,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -368,7 +329,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -388,7 +350,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -408,13 +371,13 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Predicate returning @c true if this SedShadedArea's attribute
-   * "attributeName" is set.
+   * Predicate returning @c true if this SedParameterEstimationReport's
+   * attribute "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this SedShadedArea's attribute "attributeName" has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this SedParameterEstimationReport's attribute
+   * "attributeName" has been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -425,7 +388,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -444,7 +408,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -463,7 +428,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -482,7 +448,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -502,7 +469,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -522,7 +490,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this SedShadedArea.
+   * Unsets the value of the "attributeName" attribute of this
+   * SedParameterEstimationReport.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -621,130 +590,99 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedShadedArea_t using the given SEDML Level and @ p version
- * values.
+ * Creates a new SedParameterEstimationReport_t using the given SEDML Level and
+ * @ p version values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
- * SedShadedArea_t.
+ * SedParameterEstimationReport_t.
  *
  * @param version an unsigned int, the SEDML Version to assign to this
- * SedShadedArea_t.
+ * SedParameterEstimationReport_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
-SedShadedArea_t *
-SedShadedArea_create(unsigned int level, unsigned int version);
+SedParameterEstimationReport_t *
+SedParameterEstimationReport_create(unsigned int level, unsigned int version);
 
 
 /**
- * Creates and returns a deep copy of this SedShadedArea_t object.
+ * Creates and returns a deep copy of this SedParameterEstimationReport_t
+ * object.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param sper the SedParameterEstimationReport_t structure.
  *
- * @return a (deep) copy of this SedShadedArea_t object.
+ * @return a (deep) copy of this SedParameterEstimationReport_t object.
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
-SedShadedArea_t*
-SedShadedArea_clone(const SedShadedArea_t* ssa);
+SedParameterEstimationReport_t*
+SedParameterEstimationReport_clone(const SedParameterEstimationReport_t* sper);
 
 
 /**
- * Frees this SedShadedArea_t object.
+ * Frees this SedParameterEstimationReport_t object.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param sper the SedParameterEstimationReport_t structure.
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
 void
-SedShadedArea_free(SedShadedArea_t* ssa);
+SedParameterEstimationReport_free(SedParameterEstimationReport_t* sper);
 
 
 /**
- * Returns the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t.
+ * Returns the value of the "taskRef" attribute of this
+ * SedParameterEstimationReport_t.
  *
- * @param ssa the SedShadedArea_t structure whose yDataReferenceFrom is sought.
+ * @param sper the SedParameterEstimationReport_t structure whose taskRef is
+ * sought.
  *
- * @return the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t as a pointer to a string.
+ * @return the value of the "taskRef" attribute of this
+ * SedParameterEstimationReport_t as a pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
 char *
-SedShadedArea_getYDataReferenceFrom(const SedShadedArea_t * ssa);
+SedParameterEstimationReport_getTaskRef(const SedParameterEstimationReport_t *
+  sper);
 
 
 /**
- * Returns the value of the "yDataReferenceTo" attribute of this
- * SedShadedArea_t.
+ * Predicate returning @c 1 (true) if this SedParameterEstimationReport_t's
+ * "taskRef" attribute is set.
  *
- * @param ssa the SedShadedArea_t structure whose yDataReferenceTo is sought.
+ * @param sper the SedParameterEstimationReport_t structure.
  *
- * @return the value of the "yDataReferenceTo" attribute of this
- * SedShadedArea_t as a pointer to a string.
+ * @return @c 1 (true) if this SedParameterEstimationReport_t's "taskRef"
+ * attribute has been set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_returned_owned_char
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-char *
-SedShadedArea_getYDataReferenceTo(const SedShadedArea_t * ssa);
-
-
-/**
- * Predicate returning @c 1 (true) if this SedShadedArea_t's
- * "yDataReferenceFrom" attribute is set.
- *
- * @param ssa the SedShadedArea_t structure.
- *
- * @return @c 1 (true) if this SedShadedArea_t's "yDataReferenceFrom" attribute
- * has been set, otherwise @c 0 (false) is returned.
- *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_isSetYDataReferenceFrom(const SedShadedArea_t * ssa);
+SedParameterEstimationReport_isSetTaskRef(const SedParameterEstimationReport_t
+  * sper);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedShadedArea_t's "yDataReferenceTo"
- * attribute is set.
+ * Sets the value of the "taskRef" attribute of this
+ * SedParameterEstimationReport_t.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param sper the SedParameterEstimationReport_t structure.
  *
- * @return @c 1 (true) if this SedShadedArea_t's "yDataReferenceTo" attribute
- * has been set, otherwise @c 0 (false) is returned.
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-int
-SedShadedArea_isSetYDataReferenceTo(const SedShadedArea_t * ssa);
-
-
-/**
- * Sets the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t.
- *
- * @param ssa the SedShadedArea_t structure.
- *
- * @param yDataReferenceFrom const char * value of the "yDataReferenceFrom"
- * attribute to be set.
+ * @param taskRef const char * value of the "taskRef" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -752,91 +690,54 @@ SedShadedArea_isSetYDataReferenceTo(const SedShadedArea_t * ssa);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_setYDataReferenceFrom(SedShadedArea_t * ssa,
-                                    const char * yDataReferenceFrom);
+SedParameterEstimationReport_setTaskRef(SedParameterEstimationReport_t * sper,
+                                        const char * taskRef);
 
 
 /**
- * Sets the value of the "yDataReferenceTo" attribute of this SedShadedArea_t.
+ * Unsets the value of the "taskRef" attribute of this
+ * SedParameterEstimationReport_t.
  *
- * @param ssa the SedShadedArea_t structure.
- *
- * @param yDataReferenceTo const char * value of the "yDataReferenceTo"
- * attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-int
-SedShadedArea_setYDataReferenceTo(SedShadedArea_t * ssa,
-                                  const char * yDataReferenceTo);
-
-
-/**
- * Unsets the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t.
- *
- * @param ssa the SedShadedArea_t structure.
+ * @param sper the SedParameterEstimationReport_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_unsetYDataReferenceFrom(SedShadedArea_t * ssa);
-
-
-/**
- * Unsets the value of the "yDataReferenceTo" attribute of this
- * SedShadedArea_t.
- *
- * @param ssa the SedShadedArea_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-int
-SedShadedArea_unsetYDataReferenceTo(SedShadedArea_t * ssa);
+SedParameterEstimationReport_unsetTaskRef(SedParameterEstimationReport_t *
+  sper);
 
 
 /**
  * Predicate returning @c 1 (true) if all the required attributes for this
- * SedShadedArea_t object have been set.
+ * SedParameterEstimationReport_t object have been set.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param sper the SedParameterEstimationReport_t structure.
  *
  * @return @c 1 (true) to indicate that all the required attributes of this
- * SedShadedArea_t have been set, otherwise @c 0 (false) is returned.
+ * SedParameterEstimationReport_t have been set, otherwise @c 0 (false) is
+ * returned.
  *
  *
- * @note The required attributes for the SedShadedArea_t object are:
- * @li "yDataReferenceFrom"
- * @li "yDataReferenceTo"
+ * @note The required attributes for the SedParameterEstimationReport_t object
+ * are:
+ * @li "taskRef"
  *
- * @memberof SedShadedArea_t
+ * @memberof SedParameterEstimationReport_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_hasRequiredAttributes(const SedShadedArea_t * ssa);
+SedParameterEstimationReport_hasRequiredAttributes(const
+  SedParameterEstimationReport_t * sper);
 
 
 
@@ -856,6 +757,6 @@ LIBSEDML_CPP_NAMESPACE_END
 
 
 
-#endif /* !SedShadedArea_H__ */
+#endif /* !SedParameterEstimationReport_H__ */
 
 

@@ -624,11 +624,6 @@ SedCurve::hasRequiredAttributes() const
 {
   bool allPresent = SedAbstractCurve::hasRequiredAttributes();
 
-  if (isSetLogY() == false)
-  {
-    allPresent = false;
-  }
-
   if (isSetYDataReference() == false)
   {
     allPresent = false;
@@ -1112,7 +1107,8 @@ SedCurve::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlCurveAllowedAttributes, level, version, details);
+        log->logError(SedmlCurveAllowedAttributes, level, version, details,
+          getLine(), getColumn());
       }
     }
   }
@@ -1158,7 +1154,7 @@ SedCurve::readAttributes(
       msg += " is '" + mYDataReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlCurveYDataReferenceMustBeDataGenerator, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
   else
@@ -1229,7 +1225,8 @@ SedCurve::readAttributes(
 
       msg += " is '" + mXErrorUpper + "', which does not conform to the "
         "syntax.";
-      logError(SedmlCurveXErrorUpperMustBeDataGenerator, level, version, msg);
+      logError(SedmlCurveXErrorUpperMustBeDataGenerator, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1256,7 +1253,8 @@ SedCurve::readAttributes(
 
       msg += " is '" + mXErrorLower + "', which does not conform to the "
         "syntax.";
-      logError(SedmlCurveXErrorLowerMustBeDataGenerator, level, version, msg);
+      logError(SedmlCurveXErrorLowerMustBeDataGenerator, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1283,7 +1281,8 @@ SedCurve::readAttributes(
 
       msg += " is '" + mYErrorUpper + "', which does not conform to the "
         "syntax.";
-      logError(SedmlCurveYErrorUpperMustBeDataGenerator, level, version, msg);
+      logError(SedmlCurveYErrorUpperMustBeDataGenerator, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1310,7 +1309,8 @@ SedCurve::readAttributes(
 
       msg += " is '" + mYErrorLower + "', which does not conform to the "
         "syntax.";
-      logError(SedmlCurveYErrorLowerMustBeDataGenerator, level, version, msg);
+      logError(SedmlCurveYErrorLowerMustBeDataGenerator, level, version, msg,
+        getLine(), getColumn());
     }
   }
 }

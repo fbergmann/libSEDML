@@ -817,7 +817,7 @@ SedDataSet::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
@@ -893,7 +893,7 @@ SedDataSet::readAttributes(
       msg += " is '" + mDataReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlDataSetDataReferenceMustBeDataGenerator, level, version,
-        msg);
+        msg, getLine(), getColumn());
     }
   }
   else

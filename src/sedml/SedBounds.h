@@ -35,6 +35,33 @@
  * @sbmlbrief{sedml} TODO:Definition of the SedBounds class.
  */
 
+/**
+ * <!-- ~ ~ ~ ~ ~ Start of common documentation strings ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+ * The following text is used as common documentation blocks copied multiple
+ * times elsewhere in this file. The use of @class is a hack needed because
+ * Doxygen's @copydetails command has limited functionality. Symbols
+ * beginning with "doc_" are marked as ignored in our Doxygen configuration.
+ * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
+ *
+ *
+ * @class doc_sedbounds_scale
+ *
+ * @par
+ * The attribute "scale" on a SedBounds object is used to TODO:add explanation
+ *
+ * In the SBML
+ * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
+ * allowable values for "scale":
+ * <ul>
+ * <li> @c "lin", TODO:add description
+ *
+ * <li> @c "log", TODO:add description
+ *
+ * <li> @c "log10", TODO:add description
+ *
+ * </ul>
+ */
+
 
 #ifndef SedBounds_H__
 #define SedBounds_H__
@@ -42,6 +69,7 @@
 
 #include <sedml/common/extern.h>
 #include <sedml/common/sedmlfwd.h>
+#include <sedml/common/SedmlEnumerations.h>
 
 
 #ifdef __cplusplus
@@ -63,12 +91,11 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  double mInitialValue;
-  bool mIsSetInitialValue;
   double mLowerBound;
   bool mIsSetLowerBound;
   double mUpperBound;
   bool mIsSetUpperBound;
+  ScaleType_t mScale;
 
   /** @endcond */
 
@@ -131,15 +158,6 @@ public:
 
 
   /**
-   * Returns the value of the "initialValue" attribute of this SedBounds.
-   *
-   * @return the value of the "initialValue" attribute of this SedBounds as a
-   * double.
-   */
-  double getInitialValue() const;
-
-
-  /**
    * Returns the value of the "lowerBound" attribute of this SedBounds.
    *
    * @return the value of the "lowerBound" attribute of this SedBounds as a
@@ -158,13 +176,35 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedBounds's "initialValue" attribute
-   * is set.
+   * Returns the value of the "scale" attribute of this SedBounds.
    *
-   * @return @c true if this SedBounds's "initialValue" attribute has been set,
-   * otherwise @c false is returned.
+   * @return the value of the "scale" attribute of this SedBounds as a
+   * ScaleType_t.
+   *
+   * @copydetails doc_sedbounds_scale
+   * @if clike The value is drawn from the enumeration @ref ScaleType_t @endif
+   * The possible values returned by this method are:
+   * @li @sbmlconstant{SEDML_SCALETYPE_LIN, ScaleType_t}
+   * @li @sbmlconstant{SEDML_SCALETYPE_LOG, ScaleType_t}
+   * @li @sbmlconstant{SEDML_SCALETYPE_LOG10, ScaleType_t}
+   * @li @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t}
    */
-  bool isSetInitialValue() const;
+  ScaleType_t getScale() const;
+
+
+  /**
+   * Returns the value of the "scale" attribute of this SedBounds.
+   *
+   * @return the value of the "scale" attribute of this SedBounds as a string.
+   *
+   * @copydetails doc_sedbounds_scale
+   * The possible values returned by this method are:
+   * @li @c "lin"
+   * @li @c "log"
+   * @li @c "log10"
+   * @li @c "invalid ScaleType value"
+   */
+  std::string getScaleAsString() const;
 
 
   /**
@@ -188,17 +228,14 @@ public:
 
 
   /**
-   * Sets the value of the "initialValue" attribute of this SedBounds.
+   * Predicate returning @c true if this SedBounds's "scale" attribute is set.
    *
-   * @param initialValue double value of the "initialValue" attribute to be
-   * set.
+   * @return @c true if this SedBounds's "scale" attribute has been set,
+   * otherwise @c false is returned.
    *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
+   * @copydetails doc_sedbounds_scale
    */
-  int setInitialValue(double initialValue);
+  bool isSetScale() const;
 
 
   /**
@@ -228,13 +265,34 @@ public:
 
 
   /**
-   * Unsets the value of the "initialValue" attribute of this SedBounds.
+   * Sets the value of the "scale" attribute of this SedBounds.
+   *
+   * @param scale @if clike ScaleType_t@else int@endif value of the "scale"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_sedbounds_scale
    */
-  int unsetInitialValue();
+  int setScale(const ScaleType_t scale);
+
+
+  /**
+   * Sets the value of the "scale" attribute of this SedBounds.
+   *
+   * @param scale std::string& of the "scale" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   *
+   * @copydetails doc_sedbounds_scale
+   */
+  int setScale(const std::string& scale);
 
 
   /**
@@ -255,6 +313,17 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetUpperBound();
+
+
+  /**
+   * Unsets the value of the "scale" attribute of this SedBounds.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * @copydetails doc_sedbounds_scale
+   */
+  int unsetScale();
 
 
   /**
@@ -683,21 +752,6 @@ SedBounds_free(SedBounds_t* sb);
 
 
 /**
- * Returns the value of the "initialValue" attribute of this SedBounds_t.
- *
- * @param sb the SedBounds_t structure whose initialValue is sought.
- *
- * @return the value of the "initialValue" attribute of this SedBounds_t as a
- * double.
- *
- * @memberof SedBounds_t
- */
-LIBSEDML_EXTERN
-double
-SedBounds_getInitialValue(const SedBounds_t * sb);
-
-
-/**
  * Returns the value of the "lowerBound" attribute of this SedBounds_t.
  *
  * @param sb the SedBounds_t structure whose lowerBound is sought.
@@ -728,19 +782,51 @@ SedBounds_getUpperBound(const SedBounds_t * sb);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedBounds_t's "initialValue"
- * attribute is set.
+ * Returns the value of the "scale" attribute of this SedBounds_t.
  *
- * @param sb the SedBounds_t structure.
+ * @param sb the SedBounds_t structure whose scale is sought.
  *
- * @return @c 1 (true) if this SedBounds_t's "initialValue" attribute has been
- * set, otherwise @c 0 (false) is returned.
+ * @return the value of the "scale" attribute of this SedBounds_t as a
+ * ScaleType_t.
+ *
+ * @copydetails doc_sedbounds_scale
+ * @if clike The value is drawn from the enumeration @ref ScaleType_t @endif
+ * The possible values returned by this method are:
+ * @li @sbmlconstant{SEDML_SCALETYPE_LIN, ScaleType_t}
+ * @li @sbmlconstant{SEDML_SCALETYPE_LOG, ScaleType_t}
+ * @li @sbmlconstant{SEDML_SCALETYPE_LOG10, ScaleType_t}
+ * @li @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t}
  *
  * @memberof SedBounds_t
  */
 LIBSEDML_EXTERN
-int
-SedBounds_isSetInitialValue(const SedBounds_t * sb);
+ScaleType_t
+SedBounds_getScale(const SedBounds_t * sb);
+
+
+/**
+ * Returns the value of the "scale" attribute of this SedBounds_t.
+ *
+ * @param sb the SedBounds_t structure whose scale is sought.
+
+ *
+ * @return the value of the "scale" attribute of this SedBounds_t as a const
+ * char *.
+ *
+ * @copydetails doc_returned_unowned_char
+ *
+ * @copydetails doc_sedbounds_scale
+ * The possible values returned by this method are:
+ * @li @c "lin"
+ * @li @c "log"
+ * @li @c "log10"
+ * @li @c "invalid ScaleType value"
+ *
+ * @memberof SedBounds_t
+ */
+LIBSEDML_EXTERN
+char *
+SedBounds_getScaleAsString(const SedBounds_t * sb);
 
 
 /**
@@ -776,23 +862,21 @@ SedBounds_isSetUpperBound(const SedBounds_t * sb);
 
 
 /**
- * Sets the value of the "initialValue" attribute of this SedBounds_t.
+ * Predicate returning @c 1 (true) if this SedBounds_t's "scale" attribute is
+ * set.
  *
  * @param sb the SedBounds_t structure.
  *
- * @param initialValue double value of the "initialValue" attribute to be set.
+ * @return @c 1 (true) if this SedBounds_t's "scale" attribute has been set,
+ * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @copydetails doc_sedbounds_scale
  *
  * @memberof SedBounds_t
  */
 LIBSEDML_EXTERN
 int
-SedBounds_setInitialValue(SedBounds_t * sb, double initialValue);
+SedBounds_isSetScale(const SedBounds_t * sb);
 
 
 /**
@@ -836,20 +920,47 @@ SedBounds_setUpperBound(SedBounds_t * sb, double upperBound);
 
 
 /**
- * Unsets the value of the "initialValue" attribute of this SedBounds_t.
+ * Sets the value of the "scale" attribute of this SedBounds_t.
  *
  * @param sb the SedBounds_t structure.
  *
+ * @param scale ScaleType_t value of the "scale" attribute to be set.
+ *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_sedbounds_scale
  *
  * @memberof SedBounds_t
  */
 LIBSEDML_EXTERN
 int
-SedBounds_unsetInitialValue(SedBounds_t * sb);
+SedBounds_setScale(SedBounds_t * sb, ScaleType_t scale);
+
+
+/**
+ * Sets the value of the "scale" attribute of this SedBounds_t.
+ *
+ * @param sb the SedBounds_t structure.
+ *
+ * @param scale const char * of the "scale" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_sedbounds_scale
+ *
+ * @memberof SedBounds_t
+ */
+LIBSEDML_EXTERN
+int
+SedBounds_setScaleAsString(SedBounds_t * sb, const char * scale);
 
 
 /**
@@ -884,6 +995,24 @@ SedBounds_unsetLowerBound(SedBounds_t * sb);
 LIBSEDML_EXTERN
 int
 SedBounds_unsetUpperBound(SedBounds_t * sb);
+
+
+/**
+ * Unsets the value of the "scale" attribute of this SedBounds_t.
+ *
+ * @param sb the SedBounds_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @copydetails doc_sedbounds_scale
+ *
+ * @memberof SedBounds_t
+ */
+LIBSEDML_EXTERN
+int
+SedBounds_unsetScale(SedBounds_t * sb);
 
 
 /**

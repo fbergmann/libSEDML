@@ -54,7 +54,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedFitExperiment::SedFitExperiment(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mRepresents (SEDML_EXPERIMENTTYPE_INVALID)
+  , mType (SEDML_EXPERIMENTTYPE_INVALID)
   , mAlgorithm (NULL)
   , mFitMappings (level, version)
 {
@@ -69,7 +69,7 @@ SedFitExperiment::SedFitExperiment(unsigned int level, unsigned int version)
  */
 SedFitExperiment::SedFitExperiment(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mRepresents (SEDML_EXPERIMENTTYPE_INVALID)
+  , mType (SEDML_EXPERIMENTTYPE_INVALID)
   , mAlgorithm (NULL)
   , mFitMappings (sedmlns)
 {
@@ -83,7 +83,7 @@ SedFitExperiment::SedFitExperiment(SedNamespaces *sedmlns)
  */
 SedFitExperiment::SedFitExperiment(const SedFitExperiment& orig)
   : SedBase( orig )
-  , mRepresents ( orig.mRepresents )
+  , mType ( orig.mType )
   , mAlgorithm ( NULL )
   , mFitMappings ( orig.mFitMappings )
 {
@@ -105,7 +105,7 @@ SedFitExperiment::operator=(const SedFitExperiment& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mRepresents = rhs.mRepresents;
+    mType = rhs.mType;
     mFitMappings = rhs.mFitMappings;
     delete mAlgorithm;
     if (rhs.mAlgorithm != NULL)
@@ -155,22 +155,22 @@ SedFitExperiment::getId() const
 
 
 /*
- * Returns the value of the "represents" attribute of this SedFitExperiment.
+ * Returns the value of the "type" attribute of this SedFitExperiment.
  */
 ExperimentType_t
-SedFitExperiment::getRepresents() const
+SedFitExperiment::getType() const
 {
-  return mRepresents;
+  return mType;
 }
 
 
 /*
- * Returns the value of the "represents" attribute of this SedFitExperiment.
+ * Returns the value of the "type" attribute of this SedFitExperiment.
  */
 std::string
-SedFitExperiment::getRepresentsAsString() const
+SedFitExperiment::getTypeAsString() const
 {
-  std::string code_str = ExperimentType_toString(mRepresents);
+  std::string code_str = ExperimentType_toString(mType);
   return code_str;
 }
 
@@ -187,13 +187,13 @@ SedFitExperiment::isSetId() const
 
 
 /*
- * Predicate returning @c true if this SedFitExperiment's "represents"
- * attribute is set.
+ * Predicate returning @c true if this SedFitExperiment's "type" attribute is
+ * set.
  */
 bool
-SedFitExperiment::isSetRepresents() const
+SedFitExperiment::isSetType() const
 {
-  return (mRepresents != SEDML_EXPERIMENTTYPE_INVALID);
+  return (mType != SEDML_EXPERIMENTTYPE_INVALID);
 }
 
 
@@ -209,33 +209,33 @@ SedFitExperiment::setId(const std::string& id)
 
 
 /*
- * Sets the value of the "represents" attribute of this SedFitExperiment.
+ * Sets the value of the "type" attribute of this SedFitExperiment.
  */
 int
-SedFitExperiment::setRepresents(const ExperimentType_t represents)
+SedFitExperiment::setType(const ExperimentType_t type)
 {
-  if (ExperimentType_isValid(represents) == 0)
+  if (ExperimentType_isValid(type) == 0)
   {
-    mRepresents = SEDML_EXPERIMENTTYPE_INVALID;
+    mType = SEDML_EXPERIMENTTYPE_INVALID;
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mRepresents = represents;
+    mType = type;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Sets the value of the "represents" attribute of this SedFitExperiment.
+ * Sets the value of the "type" attribute of this SedFitExperiment.
  */
 int
-SedFitExperiment::setRepresents(const std::string& represents)
+SedFitExperiment::setType(const std::string& type)
 {
-  mRepresents = ExperimentType_fromString(represents.c_str());
+  mType = ExperimentType_fromString(type.c_str());
 
-  if (mRepresents == SEDML_EXPERIMENTTYPE_INVALID)
+  if (mType == SEDML_EXPERIMENTTYPE_INVALID)
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -264,12 +264,12 @@ SedFitExperiment::unsetId()
 
 
 /*
- * Unsets the value of the "represents" attribute of this SedFitExperiment.
+ * Unsets the value of the "type" attribute of this SedFitExperiment.
  */
 int
-SedFitExperiment::unsetRepresents()
+SedFitExperiment::unsetType()
 {
-  mRepresents = SEDML_EXPERIMENTTYPE_INVALID;
+  mType = SEDML_EXPERIMENTTYPE_INVALID;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -430,24 +430,24 @@ SedFitExperiment::getFitMappingByDataSource(const std::string& sid)
 
 
 /*
- * Get a SedFitMapping from the SedFitExperiment based on the DataGenerator to
- * which it refers.
+ * Get a SedFitMapping from the SedFitExperiment based on the Target to which
+ * it refers.
  */
 const SedFitMapping*
-SedFitExperiment::getFitMappingByDataGenerator(const std::string& sid) const
+SedFitExperiment::getFitMappingByTarget(const std::string& sid) const
 {
-  return mFitMappings.getByDataGenerator(sid);
+  return mFitMappings.getByTarget(sid);
 }
 
 
 /*
- * Get a SedFitMapping from the SedFitExperiment based on the DataGenerator to
- * which it refers.
+ * Get a SedFitMapping from the SedFitExperiment based on the Target to which
+ * it refers.
  */
 SedFitMapping*
-SedFitExperiment::getFitMappingByDataGenerator(const std::string& sid)
+SedFitExperiment::getFitMappingByTarget(const std::string& sid)
 {
-  return mFitMappings.getByDataGenerator(sid);
+  return mFitMappings.getByTarget(sid);
 }
 
 
@@ -767,9 +767,9 @@ SedFitExperiment::getAttribute(const std::string& attributeName,
     value = getId();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "represents")
+  else if (attributeName == "type")
   {
-    value = getRepresentsAsString();
+    value = getTypeAsString();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -795,9 +795,9 @@ SedFitExperiment::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetId();
   }
-  else if (attributeName == "represents")
+  else if (attributeName == "type")
   {
-    value = isSetRepresents();
+    value = isSetType();
   }
 
   return value;
@@ -891,9 +891,9 @@ SedFitExperiment::setAttribute(const std::string& attributeName,
   {
     return_value = setId(value);
   }
-  else if (attributeName == "represents")
+  else if (attributeName == "type")
   {
-    return_value = setRepresents(value);
+    return_value = setType(value);
   }
 
   return return_value;
@@ -917,9 +917,9 @@ SedFitExperiment::unsetAttribute(const std::string& attributeName)
   {
     value = unsetId();
   }
-  else if (attributeName == "represents")
+  else if (attributeName == "type")
   {
-    value = unsetRepresents();
+    value = unsetType();
   }
 
   return value;
@@ -1168,7 +1168,7 @@ SedFitExperiment::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("id");
 
-  attributes.add("represents");
+  attributes.add("type");
 }
 
 /** @endcond */
@@ -1243,40 +1243,40 @@ SedFitExperiment::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
 
   // 
-  // represents enum (use = "optional" )
+  // type enum (use = "optional" )
   // 
 
-  std::string represents;
-  assigned = attributes.readInto("represents", represents);
+  std::string type;
+  assigned = attributes.readInto("type", type);
 
   if (assigned == true)
   {
-    if (represents.empty() == true)
+    if (type.empty() == true)
     {
-      logEmptyString(represents, level, version, "<SedFitExperiment>");
+      logEmptyString(type, level, version, "<SedFitExperiment>");
     }
     else
     {
-      mRepresents = ExperimentType_fromString(represents.c_str());
+      mType = ExperimentType_fromString(type.c_str());
 
-      if (log && ExperimentType_isValid(mRepresents) == 0)
+      if (log && ExperimentType_isValid(mType) == 0)
       {
-        std::string msg = "The represents on the <SedFitExperiment> ";
+        std::string msg = "The type on the <SedFitExperiment> ";
 
         if (isSetId())
         {
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + represents + "', which is not a valid option.";
+        msg += "is '" + type + "', which is not a valid option.";
 
-        log->logError(SedmlFitExperimentRepresentsMustBeExperimentTypeEnum,
-          level, version, msg, getLine(), getColumn());
+        log->logError(SedmlFitExperimentTypeMustBeExperimentTypeEnum, level,
+          version, msg, getLine(), getColumn());
       }
     }
   }
@@ -1302,10 +1302,9 @@ SedFitExperiment::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
     stream.writeAttribute("id", getPrefix(), mId);
   }
 
-  if (isSetRepresents() == true)
+  if (isSetType() == true)
   {
-    stream.writeAttribute("represents", getPrefix(),
-      ExperimentType_toString(mRepresents));
+    stream.writeAttribute("type", getPrefix(), ExperimentType_toString(mType));
   }
 }
 
@@ -1378,29 +1377,29 @@ SedFitExperiment_getId(const SedFitExperiment_t * sfe)
 
 
 /*
- * Returns the value of the "represents" attribute of this SedFitExperiment_t.
+ * Returns the value of the "type" attribute of this SedFitExperiment_t.
  */
 LIBSEDML_EXTERN
 ExperimentType_t
-SedFitExperiment_getRepresents(const SedFitExperiment_t * sfe)
+SedFitExperiment_getType(const SedFitExperiment_t * sfe)
 {
   if (sfe == NULL)
   {
     return SEDML_EXPERIMENTTYPE_INVALID;
   }
 
-  return sfe->getRepresents();
+  return sfe->getType();
 }
 
 
 /*
- * Returns the value of the "represents" attribute of this SedFitExperiment_t.
+ * Returns the value of the "type" attribute of this SedFitExperiment_t.
  */
 LIBSEDML_EXTERN
 char *
-SedFitExperiment_getRepresentsAsString(const SedFitExperiment_t * sfe)
+SedFitExperiment_getTypeAsString(const SedFitExperiment_t * sfe)
 {
-  return (char*)(ExperimentType_toString(sfe->getRepresents()));
+  return (char*)(ExperimentType_toString(sfe->getType()));
 }
 
 
@@ -1417,14 +1416,14 @@ SedFitExperiment_isSetId(const SedFitExperiment_t * sfe)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedFitExperiment_t's "represents"
+ * Predicate returning @c 1 (true) if this SedFitExperiment_t's "type"
  * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_isSetRepresents(const SedFitExperiment_t * sfe)
+SedFitExperiment_isSetType(const SedFitExperiment_t * sfe)
 {
-  return (sfe != NULL) ? static_cast<int>(sfe->isSetRepresents()) : 0;
+  return (sfe != NULL) ? static_cast<int>(sfe->isSetType()) : 0;
 }
 
 
@@ -1440,28 +1439,24 @@ SedFitExperiment_setId(SedFitExperiment_t * sfe, const char * id)
 
 
 /*
- * Sets the value of the "represents" attribute of this SedFitExperiment_t.
+ * Sets the value of the "type" attribute of this SedFitExperiment_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_setRepresents(SedFitExperiment_t * sfe,
-                               ExperimentType_t represents)
+SedFitExperiment_setType(SedFitExperiment_t * sfe, ExperimentType_t type)
 {
-  return (sfe != NULL) ? sfe->setRepresents(represents) :
-    LIBSEDML_INVALID_OBJECT;
+  return (sfe != NULL) ? sfe->setType(type) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Sets the value of the "represents" attribute of this SedFitExperiment_t.
+ * Sets the value of the "type" attribute of this SedFitExperiment_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_setRepresentsAsString(SedFitExperiment_t * sfe,
-                                       const char * represents)
+SedFitExperiment_setTypeAsString(SedFitExperiment_t * sfe, const char * type)
 {
-  return (sfe != NULL) ? sfe->setRepresents(represents):
-    LIBSEDML_INVALID_OBJECT;
+  return (sfe != NULL) ? sfe->setType(type): LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1477,13 +1472,13 @@ SedFitExperiment_unsetId(SedFitExperiment_t * sfe)
 
 
 /*
- * Unsets the value of the "represents" attribute of this SedFitExperiment_t.
+ * Unsets the value of the "type" attribute of this SedFitExperiment_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_unsetRepresents(SedFitExperiment_t * sfe)
+SedFitExperiment_unsetType(SedFitExperiment_t * sfe)
 {
-  return (sfe != NULL) ? sfe->unsetRepresents() : LIBSEDML_INVALID_OBJECT;
+  return (sfe != NULL) ? sfe->unsetType() : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1594,16 +1589,15 @@ SedFitExperiment_getFitMappingByDataSource(SedFitExperiment_t* sfe,
 
 
 /*
- * Get a SedFitMapping_t from the SedFitExperiment_t based on the DataGenerator
- * to which it refers.
+ * Get a SedFitMapping_t from the SedFitExperiment_t based on the Target to
+ * which it refers.
  */
 LIBSEDML_EXTERN
 SedFitMapping_t*
-SedFitExperiment_getFitMappingByDataGenerator(SedFitExperiment_t* sfe,
-                                              const char *sid)
+SedFitExperiment_getFitMappingByTarget(SedFitExperiment_t* sfe,
+                                       const char *sid)
 {
-  return (sfe != NULL && sid != NULL) ? sfe->getFitMappingByDataGenerator(sid)
-    : NULL;
+  return (sfe != NULL && sid != NULL) ? sfe->getFitMappingByTarget(sid) : NULL;
 }
 
 

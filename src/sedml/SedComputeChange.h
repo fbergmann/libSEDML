@@ -227,7 +227,7 @@ public:
    * retrieve.
    *
    * @return the nth SedVariable in the SedListOfVariables within this
-   * SedComputeChange.
+   * SedComputeChange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -248,7 +248,7 @@ public:
    * retrieve.
    *
    * @return the nth SedVariable in the SedListOfVariables within this
-   * SedComputeChange.
+   * SedComputeChange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -452,7 +452,7 @@ public:
    *
    * @return a pointer to the nth SedVariable in this SedComputeChange.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
@@ -474,14 +474,14 @@ public:
    * @return the SedVariable in this SedComputeChange based on the identifier
    * or NULL if no such SedVariable exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
-   * @see getSedVariable(const std::string& sid)
-   * @see getSedVariable(unsigned int n)
+   * @see getVariable(const std::string& sid)
+   * @see getVariable(unsigned int n)
    * @see getNumVariables()
-   * @see removeSedVariable(unsigned int n)
+   * @see removeVariable(unsigned int n)
    */
   SedVariable* removeVariable(const std::string& sid);
 
@@ -529,7 +529,7 @@ public:
    * retrieve.
    *
    * @return the nth SedParameter in the SedListOfParameters within this
-   * SedComputeChange.
+   * SedComputeChange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -550,7 +550,7 @@ public:
    * retrieve.
    *
    * @return the nth SedParameter in the SedListOfParameters within this
-   * SedComputeChange.
+   * SedComputeChange or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -676,7 +676,7 @@ public:
    *
    * @return a pointer to the nth SedParameter in this SedComputeChange.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
@@ -698,14 +698,14 @@ public:
    * @return the SedParameter in this SedComputeChange based on the identifier
    * or NULL if no such SedParameter exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addParameter(const SedParameter* object)
    * @see createParameter()
-   * @see getSedParameter(const std::string& sid)
-   * @see getSedParameter(unsigned int n)
+   * @see getParameter(const std::string& sid)
+   * @see getParameter(unsigned int n)
    * @see getNumParameters()
-   * @see removeSedParameter(unsigned int n)
+   * @see removeParameter(unsigned int n)
    */
   SedParameter* removeParameter(const std::string& sid);
 
@@ -733,7 +733,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_CHANGE_COMPUTECHANGE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_CHANGE_COMPUTECHANGE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -1398,7 +1398,7 @@ SedComputeChange_getListOfVariables(SedComputeChange_t* scc);
  * retrieve.
  *
  * @return the nth SedVariable_t in the SedListOfVariables within this
- * SedComputeChange.
+ * SedComputeChange or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1542,7 +1542,7 @@ SedComputeChange_createVariable(SedComputeChange_t* scc);
  *
  * @return a pointer to the nth SedVariable_t in this SedComputeChange_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedComputeChange_t
  */
@@ -1563,7 +1563,7 @@ SedComputeChange_removeVariable(SedComputeChange_t* scc, unsigned int n);
  * @return the SedVariable_t in this SedComputeChange_t based on the identifier
  * or NULL if no such SedVariable_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedComputeChange_t
  */
@@ -1608,7 +1608,7 @@ SedComputeChange_getListOfParameters(SedComputeChange_t* scc);
  * retrieve.
  *
  * @return the nth SedParameter_t in the SedListOfParameters within this
- * SedComputeChange.
+ * SedComputeChange or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1708,7 +1708,7 @@ SedComputeChange_createParameter(SedComputeChange_t* scc);
  *
  * @return a pointer to the nth SedParameter_t in this SedComputeChange_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedComputeChange_t
  */
@@ -1729,7 +1729,7 @@ SedComputeChange_removeParameter(SedComputeChange_t* scc, unsigned int n);
  * @return the SedParameter_t in this SedComputeChange_t based on the
  * identifier or NULL if no such SedParameter_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedComputeChange_t
  */

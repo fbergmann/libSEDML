@@ -1049,7 +1049,8 @@ SedAxis::readAttributes(
       }
 
       msg += " is '" + mStyle + "', which does not conform to the syntax.";
-      logError(SedmlAxisStyleMustBeStyle, level, version, msg);
+      logError(SedmlAxisStyleMustBeStyle, level, version, msg, getLine(),
+        getColumn());
     }
   }
 }

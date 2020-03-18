@@ -41,8 +41,9 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 static
 const char* SEDML_MAPPING_TYPE_STRINGS[] =
 {
-  "Variable"
-, "Parameter"
+  "time"
+, "experimentalCondition"
+, "observable"
 , "invalid MappingType value"
 };
 
@@ -54,7 +55,7 @@ LIBSEDML_EXTERN
 const char*
 MappingType_toString(MappingType_t mt)
 {
-  int min = SEDML_MAPPINGTYPE_VARIABLE;
+  int min = SEDML_MAPPINGTYPE_TIME;
   int max = SEDML_MAPPINGTYPE_INVALID;
 
   if (mt < min || mt > max)
@@ -98,7 +99,7 @@ LIBSEDML_EXTERN
 int
 MappingType_isValid(MappingType_t mt)
 {
-  int min = SEDML_MAPPINGTYPE_VARIABLE;
+  int min = SEDML_MAPPINGTYPE_TIME;
   int max = SEDML_MAPPINGTYPE_INVALID;
 
   if (mt < min || mt >= max)
@@ -121,93 +122,6 @@ int
 MappingType_isValidString(const char* code)
 {
   return MappingType_isValid(MappingType_fromString(code));
-}
-
-
-static
-const char* SEDML_EXPERIMENT_TYPE_STRINGS[] =
-{
-  "TimeCourse"
-, "SteadyState"
-, "invalid ExperimentType value"
-};
-
-
-/*
- * Returns the string version of the provided #ExperimentType_t enumeration.
- */
-LIBSEDML_EXTERN
-const char*
-ExperimentType_toString(ExperimentType_t et)
-{
-  int min = SEDML_EXPERIMENTTYPE_TIMECOURSE;
-  int max = SEDML_EXPERIMENTTYPE_INVALID;
-
-  if (et < min || et > max)
-  {
-    return "(Unknown ExperimentType value)";
-  }
-
-  return SEDML_EXPERIMENT_TYPE_STRINGS[et - min];
-}
-
-
-/*
- * Returns the #ExperimentType_t enumeration corresponding to the given string
- * or @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if there is
- * no such match.
- */
-LIBSEDML_EXTERN
-ExperimentType_t
-ExperimentType_fromString(const char* code)
-{
-  static int size =
-    sizeof(SEDML_EXPERIMENT_TYPE_STRINGS)/sizeof(SEDML_EXPERIMENT_TYPE_STRINGS[0]);
-  std::string type(code);
-
-  for (int i = 0; i < size; i++)
-  {
-    if (type == SEDML_EXPERIMENT_TYPE_STRINGS[i])
-    {
-      return (ExperimentType_t)(i);
-    }
-  }
-
-  return SEDML_EXPERIMENTTYPE_INVALID;
-}
-
-
-/*
- * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given #ExperimentType_t is valid.
- */
-LIBSEDML_EXTERN
-int
-ExperimentType_isValid(ExperimentType_t et)
-{
-  int min = SEDML_EXPERIMENTTYPE_TIMECOURSE;
-  int max = SEDML_EXPERIMENTTYPE_INVALID;
-
-  if (et < min || et >= max)
-  {
-    return 0;
-  }
-  else
-  {
-    return 1;
-  }
-}
-
-
-/*
- * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
- * given string is a valid #ExperimentType_t.
- */
-LIBSEDML_EXTERN
-int
-ExperimentType_isValidString(const char* code)
-{
-  return ExperimentType_isValid(ExperimentType_fromString(code));
 }
 
 
@@ -491,6 +405,8 @@ const char* SEDML_CURVE_TYPE_STRINGS[] =
   "points"
 , "bar"
 , "barStacked"
+, "horizontalBar"
+, "horizontalBarStacked"
 , "invalid CurveType value"
 };
 
@@ -661,6 +577,180 @@ int
 SurfaceType_isValidString(const char* code)
 {
   return SurfaceType_isValid(SurfaceType_fromString(code));
+}
+
+
+static
+const char* SEDML_EXPERIMENT_TYPE_STRINGS[] =
+{
+  "steadyState"
+, "timeCourse"
+, "invalid ExperimentType value"
+};
+
+
+/*
+ * Returns the string version of the provided #ExperimentType_t enumeration.
+ */
+LIBSEDML_EXTERN
+const char*
+ExperimentType_toString(ExperimentType_t et)
+{
+  int min = SEDML_EXPERIMENTTYPE_STEADYSTATE;
+  int max = SEDML_EXPERIMENTTYPE_INVALID;
+
+  if (et < min || et > max)
+  {
+    return "(Unknown ExperimentType value)";
+  }
+
+  return SEDML_EXPERIMENT_TYPE_STRINGS[et - min];
+}
+
+
+/*
+ * Returns the #ExperimentType_t enumeration corresponding to the given string
+ * or @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t} if there is
+ * no such match.
+ */
+LIBSEDML_EXTERN
+ExperimentType_t
+ExperimentType_fromString(const char* code)
+{
+  static int size = sizeof(SEDML_EXPERIMENT_TYPE_STRINGS)/sizeof(SEDML_EXPERIMENT_TYPE_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SEDML_EXPERIMENT_TYPE_STRINGS[i])
+    {
+      return (ExperimentType_t)(i);
+    }
+  }
+
+  return SEDML_EXPERIMENTTYPE_INVALID;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #ExperimentType_t is valid.
+ */
+LIBSEDML_EXTERN
+int
+ExperimentType_isValid(ExperimentType_t et)
+{
+  int min = SEDML_EXPERIMENTTYPE_STEADYSTATE;
+  int max = SEDML_EXPERIMENTTYPE_INVALID;
+
+  if (et < min || et >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #ExperimentType_t.
+ */
+LIBSEDML_EXTERN
+int
+ExperimentType_isValidString(const char* code)
+{
+  return ExperimentType_isValid(ExperimentType_fromString(code));
+}
+
+
+static
+const char* SEDML_SCALE_TYPE_STRINGS[] =
+{
+  "lin"
+, "log"
+, "log10"
+, "invalid ScaleType value"
+};
+
+
+/*
+ * Returns the string version of the provided #ScaleType_t enumeration.
+ */
+LIBSEDML_EXTERN
+const char*
+ScaleType_toString(ScaleType_t st)
+{
+  int min = SEDML_SCALETYPE_LIN;
+  int max = SEDML_SCALETYPE_INVALID;
+
+  if (st < min || st > max)
+  {
+    return "(Unknown ScaleType value)";
+  }
+
+  return SEDML_SCALE_TYPE_STRINGS[st - min];
+}
+
+
+/*
+ * Returns the #ScaleType_t enumeration corresponding to the given string or
+ * @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t} if there is no such
+ * match.
+ */
+LIBSEDML_EXTERN
+ScaleType_t
+ScaleType_fromString(const char* code)
+{
+  static int size =
+    sizeof(SEDML_SCALE_TYPE_STRINGS)/sizeof(SEDML_SCALE_TYPE_STRINGS[0]);
+  std::string type(code);
+
+  for (int i = 0; i < size; i++)
+  {
+    if (type == SEDML_SCALE_TYPE_STRINGS[i])
+    {
+      return (ScaleType_t)(i);
+    }
+  }
+
+  return SEDML_SCALETYPE_INVALID;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given #ScaleType_t is valid.
+ */
+LIBSEDML_EXTERN
+int
+ScaleType_isValid(ScaleType_t st)
+{
+  int min = SEDML_SCALETYPE_LIN;
+  int max = SEDML_SCALETYPE_INVALID;
+
+  if (st < min || st >= max)
+  {
+    return 0;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+
+/*
+ * Predicate returning @c 1 (true) or @c 0 (false) depending on whether the
+ * given string is a valid #ScaleType_t.
+ */
+LIBSEDML_EXTERN
+int
+ScaleType_isValidString(const char* code)
+{
+  return ScaleType_isValid(ScaleType_fromString(code));
 }
 
 

@@ -116,6 +116,8 @@ class SedDataRange;
 class SedSimpleRepeatedTask;
 class SedShadedArea;
 class SedParameterEstimationResultPlot;
+class SedWaterfallPlot;
+class SedParameterEstimationReport;
 
 
 class SedVisitor
@@ -740,6 +742,26 @@ virtual bool visit (const SedShadedArea &x);
 virtual bool visit (const SedParameterEstimationResultPlot &x);
 
 
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedWaterfallPlot &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit (const SedParameterEstimationReport &x);
+
+
   /**
    * Interface method for using the <a target="_blank" 
    * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
@@ -1351,6 +1373,26 @@ virtual void leave (const SedShadedArea &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedParameterEstimationResultPlot &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedWaterfallPlot &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave (const SedParameterEstimationReport &x);
 };
 
 LIBSEDML_CPP_NAMESPACE_END

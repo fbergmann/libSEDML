@@ -1,6 +1,6 @@
 /**
- * @file SedShadedArea.h
- * @brief Definition of the SedShadedArea class.
+ * @file SedWaterfallPlot.h
+ * @brief Definition of the SedWaterfallPlot class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,13 +31,13 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class SedShadedArea
- * @sbmlbrief{sedml} TODO:Definition of the SedShadedArea class.
+ * @class SedWaterfallPlot
+ * @sbmlbrief{sedml} TODO:Definition of the SedWaterfallPlot class.
  */
 
 
-#ifndef SedShadedArea_H__
-#define SedShadedArea_H__
+#ifndef SedWaterfallPlot_H__
+#define SedWaterfallPlot_H__
 
 
 #include <sedml/common/extern.h>
@@ -50,173 +50,123 @@
 #include <string>
 
 
-#include <sedml/SedAbstractCurve.h>
+#include <sedml/SedPlot.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSEDML_EXTERN SedShadedArea : public SedAbstractCurve
+class LIBSEDML_EXTERN SedWaterfallPlot : public SedPlot
 {
 protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mYDataReferenceFrom;
-  std::string mYDataReferenceTo;
+  std::string mTaskRef;
 
   /** @endcond */
 
 public:
 
   /**
-   * Creates a new SedShadedArea using the given SEDML Level and @ p version
+   * Creates a new SedWaterfallPlot using the given SEDML Level and @ p version
    * values.
    *
    * @param level an unsigned int, the SEDML Level to assign to this
-   * SedShadedArea.
+   * SedWaterfallPlot.
    *
    * @param version an unsigned int, the SEDML Version to assign to this
-   * SedShadedArea.
+   * SedWaterfallPlot.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedShadedArea(unsigned int level = SEDML_DEFAULT_LEVEL,
-                unsigned int version = SEDML_DEFAULT_VERSION);
+  SedWaterfallPlot(unsigned int level = SEDML_DEFAULT_LEVEL,
+                   unsigned int version = SEDML_DEFAULT_VERSION);
 
 
   /**
-   * Creates a new SedShadedArea using the given SedNamespaces object @p
+   * Creates a new SedWaterfallPlot using the given SedNamespaces object @p
    * sedmlns.
    *
    * @param sedmlns the SedNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedShadedArea(SedNamespaces *sedmlns);
+  SedWaterfallPlot(SedNamespaces *sedmlns);
 
 
   /**
-   * Copy constructor for SedShadedArea.
+   * Copy constructor for SedWaterfallPlot.
    *
-   * @param orig the SedShadedArea instance to copy.
+   * @param orig the SedWaterfallPlot instance to copy.
    */
-  SedShadedArea(const SedShadedArea& orig);
+  SedWaterfallPlot(const SedWaterfallPlot& orig);
 
 
   /**
-   * Assignment operator for SedShadedArea.
+   * Assignment operator for SedWaterfallPlot.
    *
-   * @param rhs the SedShadedArea object whose values are to be used as the
+   * @param rhs the SedWaterfallPlot object whose values are to be used as the
    * basis of the assignment.
    */
-  SedShadedArea& operator=(const SedShadedArea& rhs);
+  SedWaterfallPlot& operator=(const SedWaterfallPlot& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this SedShadedArea object.
+   * Creates and returns a deep copy of this SedWaterfallPlot object.
    *
-   * @return a (deep) copy of this SedShadedArea object.
+   * @return a (deep) copy of this SedWaterfallPlot object.
    */
-  virtual SedShadedArea* clone() const;
+  virtual SedWaterfallPlot* clone() const;
 
 
   /**
-   * Destructor for SedShadedArea.
+   * Destructor for SedWaterfallPlot.
    */
-  virtual ~SedShadedArea();
+  virtual ~SedWaterfallPlot();
 
 
   /**
-   * Returns the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea.
+   * Returns the value of the "taskRef" attribute of this SedWaterfallPlot.
    *
-   * @return the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea as a string.
+   * @return the value of the "taskRef" attribute of this SedWaterfallPlot as a
+   * string.
    */
-  const std::string& getYDataReferenceFrom() const;
+  const std::string& getTaskRef() const;
 
 
   /**
-   * Returns the value of the "yDataReferenceTo" attribute of this
-   * SedShadedArea.
+   * Predicate returning @c true if this SedWaterfallPlot's "taskRef" attribute
+   * is set.
    *
-   * @return the value of the "yDataReferenceTo" attribute of this
-   * SedShadedArea as a string.
+   * @return @c true if this SedWaterfallPlot's "taskRef" attribute has been
+   * set, otherwise @c false is returned.
    */
-  const std::string& getYDataReferenceTo() const;
+  bool isSetTaskRef() const;
 
 
   /**
-   * Predicate returning @c true if this SedShadedArea's "yDataReferenceFrom"
-   * attribute is set.
+   * Sets the value of the "taskRef" attribute of this SedWaterfallPlot.
    *
-   * @return @c true if this SedShadedArea's "yDataReferenceFrom" attribute has
-   * been set, otherwise @c false is returned.
-   */
-  bool isSetYDataReferenceFrom() const;
-
-
-  /**
-   * Predicate returning @c true if this SedShadedArea's "yDataReferenceTo"
-   * attribute is set.
-   *
-   * @return @c true if this SedShadedArea's "yDataReferenceTo" attribute has
-   * been set, otherwise @c false is returned.
-   */
-  bool isSetYDataReferenceTo() const;
-
-
-  /**
-   * Sets the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea.
-   *
-   * @param yDataReferenceFrom std::string& value of the "yDataReferenceFrom"
-   * attribute to be set.
+   * @param taskRef std::string& value of the "taskRef" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setYDataReferenceFrom(const std::string& yDataReferenceFrom);
+  int setTaskRef(const std::string& taskRef);
 
 
   /**
-   * Sets the value of the "yDataReferenceTo" attribute of this SedShadedArea.
-   *
-   * @param yDataReferenceTo std::string& value of the "yDataReferenceTo"
-   * attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   */
-  int setYDataReferenceTo(const std::string& yDataReferenceTo);
-
-
-  /**
-   * Unsets the value of the "yDataReferenceFrom" attribute of this
-   * SedShadedArea.
+   * Unsets the value of the "taskRef" attribute of this SedWaterfallPlot.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetYDataReferenceFrom();
-
-
-  /**
-   * Unsets the value of the "yDataReferenceTo" attribute of this
-   * SedShadedArea.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  int unsetYDataReferenceTo();
+  int unsetTaskRef();
 
 
   /**
@@ -227,22 +177,22 @@ public:
 
 
   /**
-   * Returns the XML element name of this SedShadedArea object.
+   * Returns the XML element name of this SedWaterfallPlot object.
    *
-   * For SedShadedArea, the XML element name is always @c "shadedArea".
+   * For SedWaterfallPlot, the XML element name is always @c "waterfallPlot".
    *
-   * @return the name of this element, i.e. @c "shadedArea".
+   * @return the name of this element, i.e. @c "waterfallPlot".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSEDML type code for this SedShadedArea object.
+   * Returns the libSEDML type code for this SedWaterfallPlot object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_SHADEDAREA, SedTypeCode_t}.
+   * @sedmlconstant{SEDML_WATERFALLPLOT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -253,15 +203,14 @@ public:
 
   /**
    * Predicate returning @c true if all the required attributes for this
-   * SedShadedArea object have been set.
+   * SedWaterfallPlot object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * SedShadedArea have been set, otherwise @c false is returned.
+   * SedWaterfallPlot have been set, otherwise @c false is returned.
    *
    *
-   * @note The required attributes for the SedShadedArea object are:
-   * @li "yDataReferenceFrom"
-   * @li "yDataReferenceTo"
+   * @note The required attributes for the SedWaterfallPlot object are:
+   * @li "taskRef"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -309,7 +258,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -329,7 +278,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -348,7 +297,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -368,7 +317,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -388,7 +337,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Gets the value of the "attributeName" attribute of this SedShadedArea.
+   * Gets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -408,13 +357,13 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Predicate returning @c true if this SedShadedArea's attribute
+   * Predicate returning @c true if this SedWaterfallPlot's attribute
    * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this SedShadedArea's attribute "attributeName" has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this SedWaterfallPlot's attribute "attributeName" has
+   * been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
 
@@ -425,7 +374,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -444,7 +393,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -463,7 +412,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -482,7 +431,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -502,7 +451,7 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Sets the value of the "attributeName" attribute of this SedShadedArea.
+   * Sets the value of the "attributeName" attribute of this SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -522,7 +471,8 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Unsets the value of the "attributeName" attribute of this SedShadedArea.
+   * Unsets the value of the "attributeName" attribute of this
+   * SedWaterfallPlot.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -621,130 +571,93 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedShadedArea_t using the given SEDML Level and @ p version
+ * Creates a new SedWaterfallPlot_t using the given SEDML Level and @ p version
  * values.
  *
  * @param level an unsigned int, the SEDML Level to assign to this
- * SedShadedArea_t.
+ * SedWaterfallPlot_t.
  *
  * @param version an unsigned int, the SEDML Version to assign to this
- * SedShadedArea_t.
+ * SedWaterfallPlot_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
-SedShadedArea_t *
-SedShadedArea_create(unsigned int level, unsigned int version);
+SedWaterfallPlot_t *
+SedWaterfallPlot_create(unsigned int level, unsigned int version);
 
 
 /**
- * Creates and returns a deep copy of this SedShadedArea_t object.
+ * Creates and returns a deep copy of this SedWaterfallPlot_t object.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param swp the SedWaterfallPlot_t structure.
  *
- * @return a (deep) copy of this SedShadedArea_t object.
+ * @return a (deep) copy of this SedWaterfallPlot_t object.
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
-SedShadedArea_t*
-SedShadedArea_clone(const SedShadedArea_t* ssa);
+SedWaterfallPlot_t*
+SedWaterfallPlot_clone(const SedWaterfallPlot_t* swp);
 
 
 /**
- * Frees this SedShadedArea_t object.
+ * Frees this SedWaterfallPlot_t object.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param swp the SedWaterfallPlot_t structure.
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 void
-SedShadedArea_free(SedShadedArea_t* ssa);
+SedWaterfallPlot_free(SedWaterfallPlot_t* swp);
 
 
 /**
- * Returns the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t.
+ * Returns the value of the "taskRef" attribute of this SedWaterfallPlot_t.
  *
- * @param ssa the SedShadedArea_t structure whose yDataReferenceFrom is sought.
+ * @param swp the SedWaterfallPlot_t structure whose taskRef is sought.
  *
- * @return the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t as a pointer to a string.
+ * @return the value of the "taskRef" attribute of this SedWaterfallPlot_t as a
+ * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 char *
-SedShadedArea_getYDataReferenceFrom(const SedShadedArea_t * ssa);
+SedWaterfallPlot_getTaskRef(const SedWaterfallPlot_t * swp);
 
 
 /**
- * Returns the value of the "yDataReferenceTo" attribute of this
- * SedShadedArea_t.
- *
- * @param ssa the SedShadedArea_t structure whose yDataReferenceTo is sought.
- *
- * @return the value of the "yDataReferenceTo" attribute of this
- * SedShadedArea_t as a pointer to a string.
- *
- * @copydetails doc_returned_owned_char
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-char *
-SedShadedArea_getYDataReferenceTo(const SedShadedArea_t * ssa);
-
-
-/**
- * Predicate returning @c 1 (true) if this SedShadedArea_t's
- * "yDataReferenceFrom" attribute is set.
- *
- * @param ssa the SedShadedArea_t structure.
- *
- * @return @c 1 (true) if this SedShadedArea_t's "yDataReferenceFrom" attribute
- * has been set, otherwise @c 0 (false) is returned.
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-int
-SedShadedArea_isSetYDataReferenceFrom(const SedShadedArea_t * ssa);
-
-
-/**
- * Predicate returning @c 1 (true) if this SedShadedArea_t's "yDataReferenceTo"
+ * Predicate returning @c 1 (true) if this SedWaterfallPlot_t's "taskRef"
  * attribute is set.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param swp the SedWaterfallPlot_t structure.
  *
- * @return @c 1 (true) if this SedShadedArea_t's "yDataReferenceTo" attribute
- * has been set, otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this SedWaterfallPlot_t's "taskRef" attribute has
+ * been set, otherwise @c 0 (false) is returned.
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_isSetYDataReferenceTo(const SedShadedArea_t * ssa);
+SedWaterfallPlot_isSetTaskRef(const SedWaterfallPlot_t * swp);
 
 
 /**
- * Sets the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t.
+ * Sets the value of the "taskRef" attribute of this SedWaterfallPlot_t.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param swp the SedWaterfallPlot_t structure.
  *
- * @param yDataReferenceFrom const char * value of the "yDataReferenceFrom"
- * attribute to be set.
+ * @param taskRef const char * value of the "taskRef" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -752,91 +665,48 @@ SedShadedArea_isSetYDataReferenceTo(const SedShadedArea_t * ssa);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_setYDataReferenceFrom(SedShadedArea_t * ssa,
-                                    const char * yDataReferenceFrom);
+SedWaterfallPlot_setTaskRef(SedWaterfallPlot_t * swp, const char * taskRef);
 
 
 /**
- * Sets the value of the "yDataReferenceTo" attribute of this SedShadedArea_t.
+ * Unsets the value of the "taskRef" attribute of this SedWaterfallPlot_t.
  *
- * @param ssa the SedShadedArea_t structure.
- *
- * @param yDataReferenceTo const char * value of the "yDataReferenceTo"
- * attribute to be set.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
- * OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-int
-SedShadedArea_setYDataReferenceTo(SedShadedArea_t * ssa,
-                                  const char * yDataReferenceTo);
-
-
-/**
- * Unsets the value of the "yDataReferenceFrom" attribute of this
- * SedShadedArea_t.
- *
- * @param ssa the SedShadedArea_t structure.
+ * @param swp the SedWaterfallPlot_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_unsetYDataReferenceFrom(SedShadedArea_t * ssa);
-
-
-/**
- * Unsets the value of the "yDataReferenceTo" attribute of this
- * SedShadedArea_t.
- *
- * @param ssa the SedShadedArea_t structure.
- *
- * @copydetails doc_returns_success_code
- * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
- * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
- *
- * @memberof SedShadedArea_t
- */
-LIBSEDML_EXTERN
-int
-SedShadedArea_unsetYDataReferenceTo(SedShadedArea_t * ssa);
+SedWaterfallPlot_unsetTaskRef(SedWaterfallPlot_t * swp);
 
 
 /**
  * Predicate returning @c 1 (true) if all the required attributes for this
- * SedShadedArea_t object have been set.
+ * SedWaterfallPlot_t object have been set.
  *
- * @param ssa the SedShadedArea_t structure.
+ * @param swp the SedWaterfallPlot_t structure.
  *
  * @return @c 1 (true) to indicate that all the required attributes of this
- * SedShadedArea_t have been set, otherwise @c 0 (false) is returned.
+ * SedWaterfallPlot_t have been set, otherwise @c 0 (false) is returned.
  *
  *
- * @note The required attributes for the SedShadedArea_t object are:
- * @li "yDataReferenceFrom"
- * @li "yDataReferenceTo"
+ * @note The required attributes for the SedWaterfallPlot_t object are:
+ * @li "taskRef"
  *
- * @memberof SedShadedArea_t
+ * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 int
-SedShadedArea_hasRequiredAttributes(const SedShadedArea_t * ssa);
+SedWaterfallPlot_hasRequiredAttributes(const SedWaterfallPlot_t * swp);
 
 
 
@@ -856,6 +726,6 @@ LIBSEDML_CPP_NAMESPACE_END
 
 
 
-#endif /* !SedShadedArea_H__ */
+#endif /* !SedWaterfallPlot_H__ */
 
 

@@ -265,7 +265,7 @@ public:
    * SedAlgorithmParameter to retrieve.
    *
    * @return the nth SedAlgorithmParameter in the SedListOfAlgorithmParameters
-   * * within this SedAlgorithmParameter.
+   * * within this SedAlgorithmParameter or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -286,7 +286,7 @@ public:
    * SedAlgorithmParameter to retrieve.
    *
    * @return the nth SedAlgorithmParameter in the SedListOfAlgorithmParameters
-   * * within this SedAlgorithmParameter.
+   * * within this SedAlgorithmParameter or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -373,7 +373,7 @@ public:
    * @return a pointer to the nth SedAlgorithmParameter in this
    * SedAlgorithmParameter.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
    * @see createAlgorithmParameter()
@@ -1147,7 +1147,7 @@ SedAlgorithmParameter_getListOfAlgorithmParameters(SedAlgorithmParameter_t*
  * SedAlgorithmParameter_t to retrieve.
  *
  * @return the nth SedAlgorithmParameter_t in the SedListOfAlgorithmParameters
- * * within this SedAlgorithmParameter.
+ * * within this SedAlgorithmParameter or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1233,7 +1233,7 @@ SedAlgorithmParameter_createAlgorithmParameter(SedAlgorithmParameter_t* sap);
  * @return a pointer to the nth SedAlgorithmParameter_t in this
  * SedAlgorithmParameter_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedAlgorithmParameter_t
  */

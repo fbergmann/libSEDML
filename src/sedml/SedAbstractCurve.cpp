@@ -1115,7 +1115,7 @@ SedAbstractCurve::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
 
@@ -1192,7 +1192,8 @@ SedAbstractCurve::readAttributes(
       }
 
       msg += " is '" + mStyle + "', which does not conform to the syntax.";
-      logError(SedmlAbstractCurveStyleMustBeStyle, level, version, msg);
+      logError(SedmlAbstractCurveStyleMustBeStyle, level, version, msg,
+        getLine(), getColumn());
     }
   }
 
@@ -1234,7 +1235,7 @@ SedAbstractCurve::readAttributes(
       msg += " is '" + mXDataReference + "', which does not conform to the "
         "syntax.";
       logError(SedmlAbstractCurveXDataReferenceMustBeDataReference, level,
-        version, msg);
+        version, msg, getLine(), getColumn());
     }
   }
 }

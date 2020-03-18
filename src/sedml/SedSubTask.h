@@ -232,7 +232,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_TASK_SUBTASK, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_TASK_SUBTASK, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *

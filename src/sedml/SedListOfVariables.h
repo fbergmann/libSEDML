@@ -127,7 +127,8 @@ public:
    * @param n an unsigned int representing the index of the SedVariable to
    * retrieve.
    *
-   * @return the nth SedVariable in this SedListOfVariables.
+   * @return the nth SedVariable in this SedListOfVariables or @c NULL if no
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -147,7 +148,8 @@ public:
    * @param n an unsigned int representing the index of the SedVariable to
    * retrieve.
    *
-   * @return the nth SedVariable in this SedListOfVariables.
+   * @return the nth SedVariable in this SedListOfVariables or @c NULL if no
+   * such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -212,7 +214,7 @@ public:
    *
    * @return a pointer to the nth SedVariable in this SedListOfVariables.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
@@ -234,7 +236,7 @@ public:
    * @return the SedVariable in this SedListOfVariables based on the identifier
    * or NULL if no such SedVariable exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addVariable(const SedVariable* object)
    * @see createVariable()
@@ -399,7 +401,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -414,7 +416,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfVariables:
-   * @sedmlconstant{SEDML_VARIABLE, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_VARIABLE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -492,7 +494,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedVariable_t to
  * retrieve.
  *
- * @return the nth SedVariable_t in this SedListOf_t.
+ * @return the nth SedVariable_t in this SedListOf_t or @c NULL if no such
+ * object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -534,7 +537,7 @@ SedListOfVariables_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedVariable_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfVariables_t
  */
@@ -555,7 +558,7 @@ SedListOfVariables_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedVariable_t in this SedListOf_t based on the identifier or
  * NULL if no such SedVariable_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfVariables_t
  */

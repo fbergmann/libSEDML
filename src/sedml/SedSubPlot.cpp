@@ -929,7 +929,8 @@ SedSubPlot::readAttributes(
       }
 
       msg += " is '" + mPlot + "', which does not conform to the syntax.";
-      logError(SedmlSubPlotPlotMustBePlot, level, version, msg);
+      logError(SedmlSubPlotPlotMustBePlot, level, version, msg, getLine(),
+        getColumn());
     }
   }
   else

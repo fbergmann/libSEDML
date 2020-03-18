@@ -44,15 +44,15 @@
  * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
  *
  *
- * @class doc_sedfitexperiment_represents
+ * @class doc_sedfitexperiment_type
  *
  * @par
- * The attribute "represents" on a SedFitExperiment object is used to TODO:add
+ * The attribute "type" on a SedFitExperiment object is used to TODO:add
  * explanation
  *
  * In the SBML
  * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
- * allowable values for "represents":
+ * allowable values for "type":
  * <ul>
  * <li> @c "SteadyState", TODO:add description
  *
@@ -92,7 +92,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  ExperimentType_t mRepresents;
+  ExperimentType_t mType;
   SedAlgorithm* mAlgorithm;
   SedListOfFitMappings mFitMappings;
 
@@ -168,12 +168,12 @@ public:
 
 
   /**
-   * Returns the value of the "represents" attribute of this SedFitExperiment.
+   * Returns the value of the "type" attribute of this SedFitExperiment.
    *
-   * @return the value of the "represents" attribute of this SedFitExperiment
-   * as a ExperimentType_t.
+   * @return the value of the "type" attribute of this SedFitExperiment as a
+   * ExperimentType_t.
    *
-   * @copydetails doc_sedfitexperiment_represents
+   * @copydetails doc_sedfitexperiment_type
    * @if clike The value is drawn from the enumeration @ref ExperimentType_t
    * @endif
    * The possible values returned by this method are:
@@ -181,22 +181,22 @@ public:
    * @li @sbmlconstant{SEDML_EXPERIMENTTYPE_TIMECOURSE, ExperimentType_t}
    * @li @sbmlconstant{SEDML_EXPERIMENTTYPE_INVALID, ExperimentType_t}
    */
-  ExperimentType_t getRepresents() const;
+  ExperimentType_t getType() const;
 
 
   /**
-   * Returns the value of the "represents" attribute of this SedFitExperiment.
+   * Returns the value of the "type" attribute of this SedFitExperiment.
    *
-   * @return the value of the "represents" attribute of this SedFitExperiment
-   * as a string.
+   * @return the value of the "type" attribute of this SedFitExperiment as a
+   * string.
    *
-   * @copydetails doc_sedfitexperiment_represents
+   * @copydetails doc_sedfitexperiment_type
    * The possible values returned by this method are:
    * @li @c "SteadyState"
    * @li @c "TimeCourse"
    * @li @c "invalid ExperimentType value"
    */
-  std::string getRepresentsAsString() const;
+  std::string getTypeAsString() const;
 
 
   /**
@@ -210,15 +210,15 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedFitExperiment's "represents"
-   * attribute is set.
+   * Predicate returning @c true if this SedFitExperiment's "type" attribute is
+   * set.
    *
-   * @return @c true if this SedFitExperiment's "represents" attribute has been
-   * set, otherwise @c false is returned.
+   * @return @c true if this SedFitExperiment's "type" attribute has been set,
+   * otherwise @c false is returned.
    *
-   * @copydetails doc_sedfitexperiment_represents
+   * @copydetails doc_sedfitexperiment_type
    */
-  bool isSetRepresents() const;
+  bool isSetType() const;
 
 
   /**
@@ -238,34 +238,34 @@ public:
 
 
   /**
-   * Sets the value of the "represents" attribute of this SedFitExperiment.
+   * Sets the value of the "type" attribute of this SedFitExperiment.
    *
-   * @param represents @if clike ExperimentType_t@else int@endif value of the
-   * "represents" attribute to be set.
+   * @param type @if clike ExperimentType_t@else int@endif value of the "type"
+   * attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedfitexperiment_represents
+   * @copydetails doc_sedfitexperiment_type
    */
-  int setRepresents(const ExperimentType_t represents);
+  int setType(const ExperimentType_t type);
 
 
   /**
-   * Sets the value of the "represents" attribute of this SedFitExperiment.
+   * Sets the value of the "type" attribute of this SedFitExperiment.
    *
-   * @param represents std::string& of the "represents" attribute to be set.
+   * @param type std::string& of the "type" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedfitexperiment_represents
+   * @copydetails doc_sedfitexperiment_type
    */
-  int setRepresents(const std::string& represents);
+  int setType(const std::string& type);
 
 
   /**
@@ -279,14 +279,14 @@ public:
 
 
   /**
-   * Unsets the value of the "represents" attribute of this SedFitExperiment.
+   * Unsets the value of the "type" attribute of this SedFitExperiment.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    *
-   * @copydetails doc_sedfitexperiment_represents
+   * @copydetails doc_sedfitexperiment_type
    */
-  int unsetRepresents();
+  int unsetType();
 
 
   /**
@@ -392,7 +392,7 @@ public:
    * retrieve.
    *
    * @return the nth SedFitMapping in the SedListOfFitMappings within this
-   * SedFitExperiment.
+   * SedFitExperiment or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -413,7 +413,7 @@ public:
    * retrieve.
    *
    * @return the nth SedFitMapping in the SedListOfFitMappings within this
-   * SedFitExperiment.
+   * SedFitExperiment or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -458,34 +458,33 @@ public:
 
 
   /**
-   * Get a SedFitMapping from the SedFitExperiment based on the DataGenerator
-   * to which it refers.
+   * Get a SedFitMapping from the SedFitExperiment based on the Target to which
+   * it refers.
    *
-   * @param sid a string representing the "dataGenerator" attribute of the
+   * @param sid a string representing the "target" attribute of the
    * SedFitMapping object to retrieve.
    *
    * @return the first SedFitMapping in this SedFitExperiment based on the
-   * given dataGenerator attribute or NULL if no such SedFitMapping exists.
+   * given target attribute or NULL if no such SedFitMapping exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedFitMapping* getFitMappingByDataGenerator(const std::string& sid)
-    const;
+  const SedFitMapping* getFitMappingByTarget(const std::string& sid) const;
 
 
   /**
-   * Get a SedFitMapping from the SedFitExperiment based on the DataGenerator
-   * to which it refers.
+   * Get a SedFitMapping from the SedFitExperiment based on the Target to which
+   * it refers.
    *
-   * @param sid a string representing the "dataGenerator" attribute of the
+   * @param sid a string representing the "target" attribute of the
    * SedFitMapping object to retrieve.
    *
    * @return the first SedFitMapping in this SedFitExperiment based on the
-   * given dataGenerator attribute or NULL if no such SedFitMapping exists.
+   * given target attribute or NULL if no such SedFitMapping exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  SedFitMapping* getFitMappingByDataGenerator(const std::string& sid);
+  SedFitMapping* getFitMappingByTarget(const std::string& sid);
 
 
   /**
@@ -587,7 +586,7 @@ public:
    *
    * @return a pointer to the nth SedFitMapping in this SedFitExperiment.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFitMapping(const SedFitMapping* object)
    * @see createFitMapping()
@@ -1167,14 +1166,14 @@ SedFitExperiment_getId(const SedFitExperiment_t * sfe);
 
 
 /**
- * Returns the value of the "represents" attribute of this SedFitExperiment_t.
+ * Returns the value of the "type" attribute of this SedFitExperiment_t.
  *
- * @param sfe the SedFitExperiment_t structure whose represents is sought.
+ * @param sfe the SedFitExperiment_t structure whose type is sought.
  *
- * @return the value of the "represents" attribute of this SedFitExperiment_t
- * as a ExperimentType_t.
+ * @return the value of the "type" attribute of this SedFitExperiment_t as a
+ * ExperimentType_t.
  *
- * @copydetails doc_sedfitexperiment_represents
+ * @copydetails doc_sedfitexperiment_type
  * @if clike The value is drawn from the enumeration @ref ExperimentType_t
  * @endif
  * The possible values returned by this method are:
@@ -1186,20 +1185,20 @@ SedFitExperiment_getId(const SedFitExperiment_t * sfe);
  */
 LIBSEDML_EXTERN
 ExperimentType_t
-SedFitExperiment_getRepresents(const SedFitExperiment_t * sfe);
+SedFitExperiment_getType(const SedFitExperiment_t * sfe);
 
 
 /**
- * Returns the value of the "represents" attribute of this SedFitExperiment_t.
+ * Returns the value of the "type" attribute of this SedFitExperiment_t.
  *
- * @param sfe the SedFitExperiment_t structure whose represents is sought.
+ * @param sfe the SedFitExperiment_t structure whose type is sought.
  *
- * @return the value of the "represents" attribute of this SedFitExperiment_t
- * as a const char *.
+ * @return the value of the "type" attribute of this SedFitExperiment_t as a
+ * const char *.
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sedfitexperiment_represents
+ * @copydetails doc_sedfitexperiment_type
  * The possible values returned by this method are:
  * @li @c "SteadyState"
  * @li @c "TimeCourse"
@@ -1209,7 +1208,7 @@ SedFitExperiment_getRepresents(const SedFitExperiment_t * sfe);
  */
 LIBSEDML_EXTERN
 char *
-SedFitExperiment_getRepresentsAsString(const SedFitExperiment_t * sfe);
+SedFitExperiment_getTypeAsString(const SedFitExperiment_t * sfe);
 
 
 /**
@@ -1229,21 +1228,21 @@ SedFitExperiment_isSetId(const SedFitExperiment_t * sfe);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedFitExperiment_t's "represents"
+ * Predicate returning @c 1 (true) if this SedFitExperiment_t's "type"
  * attribute is set.
  *
  * @param sfe the SedFitExperiment_t structure.
  *
- * @return @c 1 (true) if this SedFitExperiment_t's "represents" attribute has
- * been set, otherwise @c 0 (false) is returned.
+ * @return @c 1 (true) if this SedFitExperiment_t's "type" attribute has been
+ * set, otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sedfitexperiment_represents
+ * @copydetails doc_sedfitexperiment_type
  *
  * @memberof SedFitExperiment_t
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_isSetRepresents(const SedFitExperiment_t * sfe);
+SedFitExperiment_isSetType(const SedFitExperiment_t * sfe);
 
 
 /**
@@ -1270,12 +1269,11 @@ SedFitExperiment_setId(SedFitExperiment_t * sfe, const char * id);
 
 
 /**
- * Sets the value of the "represents" attribute of this SedFitExperiment_t.
+ * Sets the value of the "type" attribute of this SedFitExperiment_t.
  *
  * @param sfe the SedFitExperiment_t structure.
  *
- * @param represents ExperimentType_t value of the "represents" attribute to be
- * set.
+ * @param type ExperimentType_t value of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1283,22 +1281,21 @@ SedFitExperiment_setId(SedFitExperiment_t * sfe, const char * id);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedfitexperiment_represents
+ * @copydetails doc_sedfitexperiment_type
  *
  * @memberof SedFitExperiment_t
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_setRepresents(SedFitExperiment_t * sfe,
-                               ExperimentType_t represents);
+SedFitExperiment_setType(SedFitExperiment_t * sfe, ExperimentType_t type);
 
 
 /**
- * Sets the value of the "represents" attribute of this SedFitExperiment_t.
+ * Sets the value of the "type" attribute of this SedFitExperiment_t.
  *
  * @param sfe the SedFitExperiment_t structure.
  *
- * @param represents const char * of the "represents" attribute to be set.
+ * @param type const char * of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1306,14 +1303,13 @@ SedFitExperiment_setRepresents(SedFitExperiment_t * sfe,
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedfitexperiment_represents
+ * @copydetails doc_sedfitexperiment_type
  *
  * @memberof SedFitExperiment_t
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_setRepresentsAsString(SedFitExperiment_t * sfe,
-                                       const char * represents);
+SedFitExperiment_setTypeAsString(SedFitExperiment_t * sfe, const char * type);
 
 
 /**
@@ -1334,7 +1330,7 @@ SedFitExperiment_unsetId(SedFitExperiment_t * sfe);
 
 
 /**
- * Unsets the value of the "represents" attribute of this SedFitExperiment_t.
+ * Unsets the value of the "type" attribute of this SedFitExperiment_t.
  *
  * @param sfe the SedFitExperiment_t structure.
  *
@@ -1342,13 +1338,13 @@ SedFitExperiment_unsetId(SedFitExperiment_t * sfe);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedfitexperiment_represents
+ * @copydetails doc_sedfitexperiment_type
  *
  * @memberof SedFitExperiment_t
  */
 LIBSEDML_EXTERN
 int
-SedFitExperiment_unsetRepresents(SedFitExperiment_t * sfe);
+SedFitExperiment_unsetType(SedFitExperiment_t * sfe);
 
 
 /**
@@ -1472,7 +1468,7 @@ SedFitExperiment_getListOfFitMappings(SedFitExperiment_t* sfe);
  * retrieve.
  *
  * @return the nth SedFitMapping_t in the SedListOfFitMappings within this
- * SedFitExperiment.
+ * SedFitExperiment or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1506,16 +1502,16 @@ SedFitExperiment_getFitMappingByDataSource(SedFitExperiment_t* sfe,
 
 
 /**
- * Get a SedFitMapping_t from the SedFitExperiment_t based on the DataGenerator
- * to which it refers.
+ * Get a SedFitMapping_t from the SedFitExperiment_t based on the Target to
+ * which it refers.
  *
  * @param sfe the SedFitExperiment_t structure to search.
  *
- * @param sid a string representing the "dataGenerator" attribute of the
+ * @param sid a string representing the "target" attribute of the
  * SedFitMapping_t object to retrieve.
  *
  * @return the first SedFitMapping_t in this SedFitExperiment_t based on the
- * given dataGenerator attribute or NULL if no such SedFitMapping_t exists.
+ * given target attribute or NULL if no such SedFitMapping_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1523,8 +1519,8 @@ SedFitExperiment_getFitMappingByDataSource(SedFitExperiment_t* sfe,
  */
 LIBSEDML_EXTERN
 SedFitMapping_t*
-SedFitExperiment_getFitMappingByDataGenerator(SedFitExperiment_t* sfe,
-                                              const char *sid);
+SedFitExperiment_getFitMappingByTarget(SedFitExperiment_t* sfe,
+                                       const char *sid);
 
 
 /**
@@ -1617,7 +1613,7 @@ SedFitExperiment_createFitMapping(SedFitExperiment_t* sfe);
  *
  * @return a pointer to the nth SedFitMapping_t in this SedFitExperiment_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedFitExperiment_t
  */

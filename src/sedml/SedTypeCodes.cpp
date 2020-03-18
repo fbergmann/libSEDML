@@ -102,6 +102,8 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "SimpleRepeatedTask"
   , "ShadedArea"
   , "ParameterEstimationResultPlot"
+  , "WaterfallPlot"
+  , "ParameterEstimationReport"
   , "SedListOf"
 };
 

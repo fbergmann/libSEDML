@@ -127,7 +127,8 @@ public:
    * @param n an unsigned int representing the index of the SedFitMapping to
    * retrieve.
    *
-   * @return the nth SedFitMapping in this SedListOfFitMappings.
+   * @return the nth SedFitMapping in this SedListOfFitMappings or @c NULL if
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -147,7 +148,8 @@ public:
    * @param n an unsigned int representing the index of the SedFitMapping to
    * retrieve.
    *
-   * @return the nth SedFitMapping in this SedListOfFitMappings.
+   * @return the nth SedFitMapping in this SedListOfFitMappings or @c NULL if
+   * no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -212,7 +214,7 @@ public:
    *
    * @return a pointer to the nth SedFitMapping in this SedListOfFitMappings.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFitMapping(const SedFitMapping* object)
    * @see createFitMapping()
@@ -234,7 +236,7 @@ public:
    * @return the SedFitMapping in this SedListOfFitMappings based on the
    * identifier or NULL if no such SedFitMapping exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFitMapping(const SedFitMapping* object)
    * @see createFitMapping()
@@ -336,33 +338,33 @@ public:
 
 
   /**
-   * Get a SedFitMapping from the SedListOfFitMappings based on the
-   * DataGenerator to which it refers.
+   * Get a SedFitMapping from the SedListOfFitMappings based on the Target to
+   * which it refers.
    *
-   * @param sid a string representing the "dataGenerator" attribute of the
+   * @param sid a string representing the "target" attribute of the
    * SedFitMapping object to retrieve.
    *
    * @return the first SedFitMapping in this SedListOfFitMappings based on the
-   * given dataGenerator attribute or NULL if no such SedFitMapping exists.
+   * given target attribute or NULL if no such SedFitMapping exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedFitMapping* getByDataGenerator(const std::string& sid) const;
+  const SedFitMapping* getByTarget(const std::string& sid) const;
 
 
   /**
-   * Get a SedFitMapping from the SedListOfFitMappings based on the
-   * DataGenerator to which it refers.
+   * Get a SedFitMapping from the SedListOfFitMappings based on the Target to
+   * which it refers.
    *
-   * @param sid a string representing the "dataGenerator" attribute of the
+   * @param sid a string representing the "target" attribute of the
    * SedFitMapping object to retrieve.
    *
    * @return the first SedFitMapping in this SedListOfFitMappings based on the
-   * given dataGenerator attribute or NULL if no such SedFitMapping exists.
+   * given target attribute or NULL if no such SedFitMapping exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  SedFitMapping* getByDataGenerator(const std::string& sid);
+  SedFitMapping* getByTarget(const std::string& sid);
 
 
   /**
@@ -507,7 +509,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedFitMapping_t to
  * retrieve.
  *
- * @return the nth SedFitMapping_t in this SedListOf_t.
+ * @return the nth SedFitMapping_t in this SedListOf_t or @c NULL if no such
+ * object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -549,7 +552,7 @@ SedListOfFitMappings_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedFitMapping_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfFitMappings_t
  */
@@ -570,7 +573,7 @@ SedListOfFitMappings_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedFitMapping_t in this SedListOf_t based on the identifier or
  * NULL if no such SedFitMapping_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfFitMappings_t
  */

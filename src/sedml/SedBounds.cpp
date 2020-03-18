@@ -52,12 +52,11 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedBounds::SedBounds(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mInitialValue (util_NaN())
-  , mIsSetInitialValue (false)
   , mLowerBound (util_NaN())
   , mIsSetLowerBound (false)
   , mUpperBound (util_NaN())
   , mIsSetUpperBound (false)
+  , mScale (SEDML_SCALETYPE_INVALID)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -68,12 +67,11 @@ SedBounds::SedBounds(unsigned int level, unsigned int version)
  */
 SedBounds::SedBounds(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mInitialValue (util_NaN())
-  , mIsSetInitialValue (false)
   , mLowerBound (util_NaN())
   , mIsSetLowerBound (false)
   , mUpperBound (util_NaN())
   , mIsSetUpperBound (false)
+  , mScale (SEDML_SCALETYPE_INVALID)
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -84,12 +82,11 @@ SedBounds::SedBounds(SedNamespaces *sedmlns)
  */
 SedBounds::SedBounds(const SedBounds& orig)
   : SedBase( orig )
-  , mInitialValue ( orig.mInitialValue )
-  , mIsSetInitialValue ( orig.mIsSetInitialValue )
   , mLowerBound ( orig.mLowerBound )
   , mIsSetLowerBound ( orig.mIsSetLowerBound )
   , mUpperBound ( orig.mUpperBound )
   , mIsSetUpperBound ( orig.mIsSetUpperBound )
+  , mScale ( orig.mScale )
 {
 }
 
@@ -103,12 +100,11 @@ SedBounds::operator=(const SedBounds& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mInitialValue = rhs.mInitialValue;
-    mIsSetInitialValue = rhs.mIsSetInitialValue;
     mLowerBound = rhs.mLowerBound;
     mIsSetLowerBound = rhs.mIsSetLowerBound;
     mUpperBound = rhs.mUpperBound;
     mIsSetUpperBound = rhs.mIsSetUpperBound;
+    mScale = rhs.mScale;
   }
 
   return *this;
@@ -134,16 +130,6 @@ SedBounds::~SedBounds()
 
 
 /*
- * Returns the value of the "initialValue" attribute of this SedBounds.
- */
-double
-SedBounds::getInitialValue() const
-{
-  return mInitialValue;
-}
-
-
-/*
  * Returns the value of the "lowerBound" attribute of this SedBounds.
  */
 double
@@ -164,13 +150,23 @@ SedBounds::getUpperBound() const
 
 
 /*
- * Predicate returning @c true if this SedBounds's "initialValue" attribute is
- * set.
+ * Returns the value of the "scale" attribute of this SedBounds.
  */
-bool
-SedBounds::isSetInitialValue() const
+ScaleType_t
+SedBounds::getScale() const
 {
-  return mIsSetInitialValue;
+  return mScale;
+}
+
+
+/*
+ * Returns the value of the "scale" attribute of this SedBounds.
+ */
+std::string
+SedBounds::getScaleAsString() const
+{
+  std::string code_str = ScaleType_toString(mScale);
+  return code_str;
 }
 
 
@@ -197,14 +193,12 @@ SedBounds::isSetUpperBound() const
 
 
 /*
- * Sets the value of the "initialValue" attribute of this SedBounds.
+ * Predicate returning @c true if this SedBounds's "scale" attribute is set.
  */
-int
-SedBounds::setInitialValue(double initialValue)
+bool
+SedBounds::isSetScale() const
 {
-  mInitialValue = initialValue;
-  mIsSetInitialValue = true;
-  return LIBSEDML_OPERATION_SUCCESS;
+  return (mScale != SEDML_SCALETYPE_INVALID);
 }
 
 
@@ -233,22 +227,38 @@ SedBounds::setUpperBound(double upperBound)
 
 
 /*
- * Unsets the value of the "initialValue" attribute of this SedBounds.
+ * Sets the value of the "scale" attribute of this SedBounds.
  */
 int
-SedBounds::unsetInitialValue()
+SedBounds::setScale(const ScaleType_t scale)
 {
-  mInitialValue = util_NaN();
-  mIsSetInitialValue = false;
-
-  if (isSetInitialValue() == false)
+  if (ScaleType_isValid(scale) == 0)
   {
-    return LIBSEDML_OPERATION_SUCCESS;
+    mScale = SEDML_SCALETYPE_INVALID;
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    return LIBSEDML_OPERATION_FAILED;
+    mScale = scale;
+    return LIBSEDML_OPERATION_SUCCESS;
   }
+}
+
+
+/*
+ * Sets the value of the "scale" attribute of this SedBounds.
+ */
+int
+SedBounds::setScale(const std::string& scale)
+{
+  mScale = ScaleType_fromString(scale.c_str());
+
+  if (mScale == SEDML_SCALETYPE_INVALID)
+  {
+    return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
+  }
+
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -289,6 +299,17 @@ SedBounds::unsetUpperBound()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+
+/*
+ * Unsets the value of the "scale" attribute of this SedBounds.
+ */
+int
+SedBounds::unsetScale()
+{
+  mScale = SEDML_SCALETYPE_INVALID;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -422,12 +443,7 @@ SedBounds::getAttribute(const std::string& attributeName, double& value) const
     return return_value;
   }
 
-  if (attributeName == "initialValue")
-  {
-    value = getInitialValue();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "lowerBound")
+  if (attributeName == "lowerBound")
   {
     value = getLowerBound();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -474,6 +490,17 @@ SedBounds::getAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::getAttribute(attributeName, value);
 
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+    return return_value;
+  }
+
+  if (attributeName == "scale")
+  {
+    value = getScaleAsString();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -492,17 +519,17 @@ SedBounds::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "initialValue")
-  {
-    value = isSetInitialValue();
-  }
-  else if (attributeName == "lowerBound")
+  if (attributeName == "lowerBound")
   {
     value = isSetLowerBound();
   }
   else if (attributeName == "upperBound")
   {
     value = isSetUpperBound();
+  }
+  else if (attributeName == "scale")
+  {
+    value = isSetScale();
   }
 
   return value;
@@ -556,11 +583,7 @@ SedBounds::setAttribute(const std::string& attributeName, double value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "initialValue")
-  {
-    return_value = setInitialValue(value);
-  }
-  else if (attributeName == "lowerBound")
+  if (attributeName == "lowerBound")
   {
     return_value = setLowerBound(value);
   }
@@ -604,6 +627,11 @@ SedBounds::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
+  if (attributeName == "scale")
+  {
+    return_value = setScale(value);
+  }
+
   return return_value;
 }
 
@@ -621,17 +649,17 @@ SedBounds::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "initialValue")
-  {
-    value = unsetInitialValue();
-  }
-  else if (attributeName == "lowerBound")
+  if (attributeName == "lowerBound")
   {
     value = unsetLowerBound();
   }
   else if (attributeName == "upperBound")
   {
     value = unsetUpperBound();
+  }
+  else if (attributeName == "scale")
+  {
+    value = unsetScale();
   }
 
   return value;
@@ -652,11 +680,11 @@ SedBounds::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("initialValue");
-
   attributes.add("lowerBound");
 
   attributes.add("upperBound");
+
+  attributes.add("scale");
 }
 
 /** @endcond */
@@ -700,26 +728,6 @@ SedBounds::readAttributes(
   }
 
   // 
-  // initialValue double (use = "optional" )
-  // 
-
-  numErrs = log ? log->getNumErrors() : 0;
-  mIsSetInitialValue = attributes.readInto("initialValue", mInitialValue);
-
-  if ( mIsSetInitialValue == false && log)
-  {
-    if (log && log->getNumErrors() == numErrs + 1 &&
-      log->contains(XMLAttributeTypeMismatch))
-    {
-      log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Sedml attribute 'initialValue' from the "
-        "<SedBounds> element must be an integer.";
-      log->logError(SedmlBoundsInitialValueMustBeDouble, level, version,
-        message);
-    }
-  }
-
-  // 
   // lowerBound double (use = "optional" )
   // 
 
@@ -734,8 +742,8 @@ SedBounds::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'lowerBound' from the <SedBounds> "
         "element must be an integer.";
-      log->logError(SedmlBoundsLowerBoundMustBeDouble, level, version,
-        message);
+      log->logError(SedmlBoundsLowerBoundMustBeDouble, level, version, message,
+        getLine(), getColumn());
     }
   }
 
@@ -754,8 +762,42 @@ SedBounds::readAttributes(
       log->remove(XMLAttributeTypeMismatch);
       std::string message = "Sedml attribute 'upperBound' from the <SedBounds> "
         "element must be an integer.";
-      log->logError(SedmlBoundsUpperBoundMustBeDouble, level, version,
-        message);
+      log->logError(SedmlBoundsUpperBoundMustBeDouble, level, version, message,
+        getLine(), getColumn());
+    }
+  }
+
+  // 
+  // scale enum (use = "optional" )
+  // 
+
+  std::string scale;
+  assigned = attributes.readInto("scale", scale);
+
+  if (assigned == true)
+  {
+    if (scale.empty() == true)
+    {
+      logEmptyString(scale, level, version, "<SedBounds>");
+    }
+    else
+    {
+      mScale = ScaleType_fromString(scale.c_str());
+
+      if (log && ScaleType_isValid(mScale) == 0)
+      {
+        std::string msg = "The scale on the <SedBounds> ";
+
+        if (isSetId())
+        {
+          msg += "with id '" + getId() + "'";
+        }
+
+        msg += "is '" + scale + "', which is not a valid option.";
+
+        log->logError(SedmlBoundsScaleMustBeScaleTypeEnum, level, version, msg,
+          getLine(), getColumn());
+      }
     }
   }
 }
@@ -775,11 +817,6 @@ SedBounds::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeAttributes(stream);
 
-  if (isSetInitialValue() == true)
-  {
-    stream.writeAttribute("initialValue", getPrefix(), mInitialValue);
-  }
-
   if (isSetLowerBound() == true)
   {
     stream.writeAttribute("lowerBound", getPrefix(), mLowerBound);
@@ -788,6 +825,11 @@ SedBounds::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (isSetUpperBound() == true)
   {
     stream.writeAttribute("upperBound", getPrefix(), mUpperBound);
+  }
+
+  if (isSetScale() == true)
+  {
+    stream.writeAttribute("scale", getPrefix(), ScaleType_toString(mScale));
   }
 }
 
@@ -844,17 +886,6 @@ SedBounds_free(SedBounds_t* sb)
 
 
 /*
- * Returns the value of the "initialValue" attribute of this SedBounds_t.
- */
-LIBSEDML_EXTERN
-double
-SedBounds_getInitialValue(const SedBounds_t * sb)
-{
-  return (sb != NULL) ? sb->getInitialValue() : util_NaN();
-}
-
-
-/*
  * Returns the value of the "lowerBound" attribute of this SedBounds_t.
  */
 LIBSEDML_EXTERN
@@ -877,14 +908,29 @@ SedBounds_getUpperBound(const SedBounds_t * sb)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedBounds_t's "initialValue"
- * attribute is set.
+ * Returns the value of the "scale" attribute of this SedBounds_t.
  */
 LIBSEDML_EXTERN
-int
-SedBounds_isSetInitialValue(const SedBounds_t * sb)
+ScaleType_t
+SedBounds_getScale(const SedBounds_t * sb)
 {
-  return (sb != NULL) ? static_cast<int>(sb->isSetInitialValue()) : 0;
+  if (sb == NULL)
+  {
+    return SEDML_SCALETYPE_INVALID;
+  }
+
+  return sb->getScale();
+}
+
+
+/*
+ * Returns the value of the "scale" attribute of this SedBounds_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedBounds_getScaleAsString(const SedBounds_t * sb)
+{
+  return (char*)(ScaleType_toString(sb->getScale()));
 }
 
 
@@ -913,14 +959,14 @@ SedBounds_isSetUpperBound(const SedBounds_t * sb)
 
 
 /*
- * Sets the value of the "initialValue" attribute of this SedBounds_t.
+ * Predicate returning @c 1 (true) if this SedBounds_t's "scale" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
-SedBounds_setInitialValue(SedBounds_t * sb, double initialValue)
+SedBounds_isSetScale(const SedBounds_t * sb)
 {
-  return (sb != NULL) ? sb->setInitialValue(initialValue) :
-    LIBSEDML_INVALID_OBJECT;
+  return (sb != NULL) ? static_cast<int>(sb->isSetScale()) : 0;
 }
 
 
@@ -949,13 +995,24 @@ SedBounds_setUpperBound(SedBounds_t * sb, double upperBound)
 
 
 /*
- * Unsets the value of the "initialValue" attribute of this SedBounds_t.
+ * Sets the value of the "scale" attribute of this SedBounds_t.
  */
 LIBSEDML_EXTERN
 int
-SedBounds_unsetInitialValue(SedBounds_t * sb)
+SedBounds_setScale(SedBounds_t * sb, ScaleType_t scale)
 {
-  return (sb != NULL) ? sb->unsetInitialValue() : LIBSEDML_INVALID_OBJECT;
+  return (sb != NULL) ? sb->setScale(scale) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "scale" attribute of this SedBounds_t.
+ */
+LIBSEDML_EXTERN
+int
+SedBounds_setScaleAsString(SedBounds_t * sb, const char * scale)
+{
+  return (sb != NULL) ? sb->setScale(scale): LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -978,6 +1035,17 @@ int
 SedBounds_unsetUpperBound(SedBounds_t * sb)
 {
   return (sb != NULL) ? sb->unsetUpperBound() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "scale" attribute of this SedBounds_t.
+ */
+LIBSEDML_EXTERN
+int
+SedBounds_unsetScale(SedBounds_t * sb)
+{
+  return (sb != NULL) ? sb->unsetScale() : LIBSEDML_INVALID_OBJECT;
 }
 
 

@@ -55,7 +55,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedFitMapping::SedFitMapping(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mDataSource ("")
-  , mDataGenerator ("")
+  , mTarget ("")
   , mType (SEDML_MAPPINGTYPE_INVALID)
   , mWeight (util_NaN())
   , mIsSetWeight (false)
@@ -71,7 +71,7 @@ SedFitMapping::SedFitMapping(unsigned int level, unsigned int version)
 SedFitMapping::SedFitMapping(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mDataSource ("")
-  , mDataGenerator ("")
+  , mTarget ("")
   , mType (SEDML_MAPPINGTYPE_INVALID)
   , mWeight (util_NaN())
   , mIsSetWeight (false)
@@ -87,7 +87,7 @@ SedFitMapping::SedFitMapping(SedNamespaces *sedmlns)
 SedFitMapping::SedFitMapping(const SedFitMapping& orig)
   : SedBase( orig )
   , mDataSource ( orig.mDataSource )
-  , mDataGenerator ( orig.mDataGenerator )
+  , mTarget ( orig.mTarget )
   , mType ( orig.mType )
   , mWeight ( orig.mWeight )
   , mIsSetWeight ( orig.mIsSetWeight )
@@ -106,7 +106,7 @@ SedFitMapping::operator=(const SedFitMapping& rhs)
   {
     SedBase::operator=(rhs);
     mDataSource = rhs.mDataSource;
-    mDataGenerator = rhs.mDataGenerator;
+    mTarget = rhs.mTarget;
     mType = rhs.mType;
     mWeight = rhs.mWeight;
     mIsSetWeight = rhs.mIsSetWeight;
@@ -146,12 +146,12 @@ SedFitMapping::getDataSource() const
 
 
 /*
- * Returns the value of the "dataGenerator" attribute of this SedFitMapping.
+ * Returns the value of the "target" attribute of this SedFitMapping.
  */
 const std::string&
-SedFitMapping::getDataGenerator() const
+SedFitMapping::getTarget() const
 {
-  return mDataGenerator;
+  return mTarget;
 }
 
 
@@ -208,13 +208,13 @@ SedFitMapping::isSetDataSource() const
 
 
 /*
- * Predicate returning @c true if this SedFitMapping's "dataGenerator"
- * attribute is set.
+ * Predicate returning @c true if this SedFitMapping's "target" attribute is
+ * set.
  */
 bool
-SedFitMapping::isSetDataGenerator() const
+SedFitMapping::isSetTarget() const
 {
-  return (mDataGenerator.empty() == false);
+  return (mTarget.empty() == false);
 }
 
 
@@ -269,18 +269,18 @@ SedFitMapping::setDataSource(const std::string& dataSource)
 
 
 /*
- * Sets the value of the "dataGenerator" attribute of this SedFitMapping.
+ * Sets the value of the "target" attribute of this SedFitMapping.
  */
 int
-SedFitMapping::setDataGenerator(const std::string& dataGenerator)
+SedFitMapping::setTarget(const std::string& target)
 {
-  if (!(SyntaxChecker::isValidInternalSId(dataGenerator)))
+  if (!(SyntaxChecker::isValidInternalSId(target)))
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mDataGenerator = dataGenerator;
+    mTarget = target;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
@@ -372,14 +372,14 @@ SedFitMapping::unsetDataSource()
 
 
 /*
- * Unsets the value of the "dataGenerator" attribute of this SedFitMapping.
+ * Unsets the value of the "target" attribute of this SedFitMapping.
  */
 int
-SedFitMapping::unsetDataGenerator()
+SedFitMapping::unsetTarget()
 {
-  mDataGenerator.erase();
+  mTarget.erase();
 
-  if (mDataGenerator.empty() == true)
+  if (mTarget.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -452,9 +452,9 @@ SedFitMapping::renameSIdRefs(const std::string& oldid,
     setDataSource(newid);
   }
 
-  if (isSetDataGenerator() && mDataGenerator == oldid)
+  if (isSetTarget() && mTarget == oldid)
   {
-    setDataGenerator(newid);
+    setTarget(newid);
   }
 
   if (isSetPointWeight() && mPointWeight == oldid)
@@ -499,7 +499,7 @@ SedFitMapping::hasRequiredAttributes() const
     allPresent = false;
   }
 
-  if (isSetDataGenerator() == false)
+  if (isSetTarget() == false)
   {
     allPresent = false;
   }
@@ -664,9 +664,9 @@ SedFitMapping::getAttribute(const std::string& attributeName,
     value = getDataSource();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "dataGenerator")
+  else if (attributeName == "target")
   {
-    value = getDataGenerator();
+    value = getTarget();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
   else if (attributeName == "type")
@@ -702,9 +702,9 @@ SedFitMapping::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetDataSource();
   }
-  else if (attributeName == "dataGenerator")
+  else if (attributeName == "target")
   {
-    value = isSetDataGenerator();
+    value = isSetTarget();
   }
   else if (attributeName == "type")
   {
@@ -815,9 +815,9 @@ SedFitMapping::setAttribute(const std::string& attributeName,
   {
     return_value = setDataSource(value);
   }
-  else if (attributeName == "dataGenerator")
+  else if (attributeName == "target")
   {
-    return_value = setDataGenerator(value);
+    return_value = setTarget(value);
   }
   else if (attributeName == "type")
   {
@@ -849,9 +849,9 @@ SedFitMapping::unsetAttribute(const std::string& attributeName)
   {
     value = unsetDataSource();
   }
-  else if (attributeName == "dataGenerator")
+  else if (attributeName == "target")
   {
-    value = unsetDataGenerator();
+    value = unsetTarget();
   }
   else if (attributeName == "type")
   {
@@ -886,7 +886,7 @@ SedFitMapping::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("dataSource");
 
-  attributes.add("dataGenerator");
+  attributes.add("target");
 
   attributes.add("type");
 
@@ -928,7 +928,7 @@ SedFitMapping::readAttributes(
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
         log->logError(SedmlFitExperimentLOFitMappingsAllowedCoreAttributes,
-          level, version, details);
+          level, version, details, getLine(), getColumn());
       }
     }
   }
@@ -974,7 +974,8 @@ SedFitMapping::readAttributes(
 
       msg += " is '" + mDataSource + "', which does not conform to the "
         "syntax.";
-      logError(SedmlFitMappingDataSourceMustBeDataSource, level, version, msg);
+      logError(SedmlFitMappingDataSourceMustBeDataSource, level, version, msg,
+        getLine(), getColumn());
     }
   }
   else
@@ -989,38 +990,37 @@ SedFitMapping::readAttributes(
   }
 
   // 
-  // dataGenerator SIdRef (use = "required" )
+  // target SIdRef (use = "required" )
   // 
 
-  assigned = attributes.readInto("dataGenerator", mDataGenerator);
+  assigned = attributes.readInto("target", mTarget);
 
   if (assigned == true)
   {
-    if (mDataGenerator.empty() == true)
+    if (mTarget.empty() == true)
     {
-      logEmptyString(mDataGenerator, level, version, "<SedFitMapping>");
+      logEmptyString(mTarget, level, version, "<SedFitMapping>");
     }
-    else if (SyntaxChecker::isValidSBMLSId(mDataGenerator) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mTarget) == false)
     {
-      std::string msg = "The dataGenerator attribute on the <" +
-        getElementName() + ">";
+      std::string msg = "The target attribute on the <" + getElementName() +
+        ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
       }
 
-      msg += " is '" + mDataGenerator + "', which does not conform to the "
-        "syntax.";
-      logError(SedmlFitMappingDataGeneratorMustBeDataGenerator, level, version,
-        msg);
+      msg += " is '" + mTarget + "', which does not conform to the syntax.";
+      logError(SedmlFitMappingTargetMustBeDataGenerator, level, version, msg,
+        getLine(), getColumn());
     }
   }
   else
   {
     if (log)
     {
-      std::string message = "Sedml attribute 'dataGenerator' is missing from "
-        "the <SedFitMapping> element.";
+      std::string message = "Sedml attribute 'target' is missing from the "
+        "<SedFitMapping> element.";
       log->logError(SedmlFitMappingAllowedAttributes, level, version, message,
         getLine(), getColumn());
     }
@@ -1112,8 +1112,8 @@ SedFitMapping::readAttributes(
 
       msg += " is '" + mPointWeight + "', which does not conform to the "
         "syntax.";
-      logError(SedmlFitMappingPointWeightMustBeDataSource, level, version,
-        msg);
+      logError(SedmlFitMappingPointWeightMustBeDataSource, level, version, msg,
+        getLine(), getColumn());
     }
   }
 }
@@ -1138,9 +1138,9 @@ SedFitMapping::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
     stream.writeAttribute("dataSource", getPrefix(), mDataSource);
   }
 
-  if (isSetDataGenerator() == true)
+  if (isSetTarget() == true)
   {
-    stream.writeAttribute("dataGenerator", getPrefix(), mDataGenerator);
+    stream.writeAttribute("target", getPrefix(), mTarget);
   }
 
   if (isSetType() == true)
@@ -1229,19 +1229,19 @@ SedFitMapping_getDataSource(const SedFitMapping_t * sfm)
 
 
 /*
- * Returns the value of the "dataGenerator" attribute of this SedFitMapping_t.
+ * Returns the value of the "target" attribute of this SedFitMapping_t.
  */
 LIBSEDML_EXTERN
 char *
-SedFitMapping_getDataGenerator(const SedFitMapping_t * sfm)
+SedFitMapping_getTarget(const SedFitMapping_t * sfm)
 {
   if (sfm == NULL)
   {
     return NULL;
   }
 
-  return sfm->getDataGenerator().empty() ? NULL :
-    safe_strdup(sfm->getDataGenerator().c_str());
+  return sfm->getTarget().empty() ? NULL :
+    safe_strdup(sfm->getTarget().c_str());
 }
 
 
@@ -1313,14 +1313,14 @@ SedFitMapping_isSetDataSource(const SedFitMapping_t * sfm)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedFitMapping_t's "dataGenerator"
- * attribute is set.
+ * Predicate returning @c 1 (true) if this SedFitMapping_t's "target" attribute
+ * is set.
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_isSetDataGenerator(const SedFitMapping_t * sfm)
+SedFitMapping_isSetTarget(const SedFitMapping_t * sfm)
 {
-  return (sfm != NULL) ? static_cast<int>(sfm->isSetDataGenerator()) : 0;
+  return (sfm != NULL) ? static_cast<int>(sfm->isSetTarget()) : 0;
 }
 
 
@@ -1373,15 +1373,13 @@ SedFitMapping_setDataSource(SedFitMapping_t * sfm, const char * dataSource)
 
 
 /*
- * Sets the value of the "dataGenerator" attribute of this SedFitMapping_t.
+ * Sets the value of the "target" attribute of this SedFitMapping_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_setDataGenerator(SedFitMapping_t * sfm,
-                               const char * dataGenerator)
+SedFitMapping_setTarget(SedFitMapping_t * sfm, const char * target)
 {
-  return (sfm != NULL) ? sfm->setDataGenerator(dataGenerator) :
-    LIBSEDML_INVALID_OBJECT;
+  return (sfm != NULL) ? sfm->setTarget(target) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1442,13 +1440,13 @@ SedFitMapping_unsetDataSource(SedFitMapping_t * sfm)
 
 
 /*
- * Unsets the value of the "dataGenerator" attribute of this SedFitMapping_t.
+ * Unsets the value of the "target" attribute of this SedFitMapping_t.
  */
 LIBSEDML_EXTERN
 int
-SedFitMapping_unsetDataGenerator(SedFitMapping_t * sfm)
+SedFitMapping_unsetTarget(SedFitMapping_t * sfm)
 {
-  return (sfm != NULL) ? sfm->unsetDataGenerator() : LIBSEDML_INVALID_OBJECT;
+  return (sfm != NULL) ? sfm->unsetTarget() : LIBSEDML_INVALID_OBJECT;
 }
 
 

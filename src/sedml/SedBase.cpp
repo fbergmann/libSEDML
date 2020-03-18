@@ -3191,7 +3191,7 @@ SedBase::getElementNamespace() const
 
 LIBSEDML_EXTERN
 int
-SedBase_getTypeCode(const SedBase_t *sb)
+SedBase_getTypeCode (const SedBase_t *sb)
 {
   return (sb != NULL) ? sb->getTypeCode() : SEDML_UNKNOWN;
 }

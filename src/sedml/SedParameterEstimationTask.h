@@ -311,7 +311,8 @@ public:
    * SedAdjustableParameter to retrieve.
    *
    * @return the nth SedAdjustableParameter in the
-   * SedListOfAdjustableParameters within this SedParameterEstimationTask.
+   * SedListOfAdjustableParameters within this SedParameterEstimationTask or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -332,7 +333,8 @@ public:
    * SedAdjustableParameter to retrieve.
    *
    * @return the nth SedAdjustableParameter in the
-   * SedListOfAdjustableParameters within this SedParameterEstimationTask.
+   * SedListOfAdjustableParameters within this SedParameterEstimationTask or
+   * @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -453,7 +455,7 @@ public:
    * @return a pointer to the nth SedAdjustableParameter in this
    * SedParameterEstimationTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addAdjustableParameter(const SedAdjustableParameter* object)
    * @see createAdjustableParameter()
@@ -508,7 +510,7 @@ public:
    * retrieve.
    *
    * @return the nth SedFitExperiment in the SedListOfFitExperiments within
-   * this SedParameterEstimationTask.
+   * this SedParameterEstimationTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -529,7 +531,7 @@ public:
    * retrieve.
    *
    * @return the nth SedFitExperiment in the SedListOfFitExperiments within
-   * this SedParameterEstimationTask.
+   * this SedParameterEstimationTask or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -662,7 +664,7 @@ public:
    * @return a pointer to the nth SedFitExperiment in this
    * SedParameterEstimationTask.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFitExperiment(const SedFitExperiment* object)
    * @see createFitExperiment()
@@ -684,14 +686,14 @@ public:
    * @return the SedFitExperiment in this SedParameterEstimationTask based on
    * the identifier or NULL if no such SedFitExperiment exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addFitExperiment(const SedFitExperiment* object)
    * @see createFitExperiment()
-   * @see getSedFitExperiment(const std::string& sid)
-   * @see getSedFitExperiment(unsigned int n)
+   * @see getFitExperiment(const std::string& sid)
+   * @see getFitExperiment(unsigned int n)
    * @see getNumFitExperiments()
-   * @see removeSedFitExperiment(unsigned int n)
+   * @see removeFitExperiment(unsigned int n)
    */
   SedFitExperiment* removeFitExperiment(const std::string& sid);
 
@@ -713,7 +715,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedmlconstant{SEDML_TASK_PARAMETER_ESTIMATION, SedmlmlTypeCode_t}.
+   * @sedmlconstant{SEDML_TASK_PARAMETER_ESTIMATION, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -741,6 +743,10 @@ public:
    *
    *
    * @note The required elements for the SedParameterEstimationTask object are:
+   * @li "algorithm"
+   * @li "objective"
+   * @li "adjustableParameter"
+   * @li "fitExperiment"
    */
   virtual bool hasRequiredElements() const;
 
@@ -1493,7 +1499,8 @@ SedParameterEstimationTask_getListOfAdjustableParameters(SedParameterEstimationT
  * SedAdjustableParameter_t to retrieve.
  *
  * @return the nth SedAdjustableParameter_t in the
- * SedListOfAdjustableParameters within this SedParameterEstimationTask.
+ * @return the nth SedAdjustableParameter_t in the SedListOfAdjustableParameters within this SedParameterEstimationTask or
+ * @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1612,7 +1619,7 @@ SedParameterEstimationTask_createAdjustableParameter(SedParameterEstimationTask_
  * @return a pointer to the nth SedAdjustableParameter_t in this
  * SedParameterEstimationTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedParameterEstimationTask_t
  */
@@ -1661,7 +1668,7 @@ SedParameterEstimationTask_getListOfFitExperiments(SedParameterEstimationTask_t*
  * retrieve.
  *
  * @return the nth SedFitExperiment_t in the SedListOfFitExperiments within
- * this SedParameterEstimationTask.
+ * this SedParameterEstimationTask or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -1773,7 +1780,7 @@ SedParameterEstimationTask_createFitExperiment(SedParameterEstimationTask_t*
  * @return a pointer to the nth SedFitExperiment_t in this
  * SedParameterEstimationTask_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedParameterEstimationTask_t
  */
@@ -1797,7 +1804,7 @@ SedParameterEstimationTask_removeFitExperiment(
  * @return the SedFitExperiment_t in this SedParameterEstimationTask_t based on
  * the identifier or NULL if no such SedFitExperiment_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedParameterEstimationTask_t
  */
@@ -1839,6 +1846,10 @@ SedParameterEstimationTask_hasRequiredAttributes(const
  *
  *
  * @note The required elements for the SedParameterEstimationTask_t object are:
+ * @li "algorithm"
+ * @li "objective"
+ * @li "adjustableParameter"
+ * @li "fitExperiment"
  *
  * @memberof SedParameterEstimationTask_t
  */

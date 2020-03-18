@@ -701,7 +701,7 @@ SedShadedArea::readAttributes(
       msg += " is '" + mYDataReferenceFrom + "', which does not conform to the "
         "syntax.";
       logError(SedmlShadedAreaYDataReferenceFromMustBeDataGenerator, level,
-        version, msg);
+        version, msg, getLine(), getColumn());
     }
   }
   else
@@ -739,7 +739,7 @@ SedShadedArea::readAttributes(
       msg += " is '" + mYDataReferenceTo + "', which does not conform to the "
         "syntax.";
       logError(SedmlShadedAreaYDataReferenceToMustBeDataGenerator, level,
-        version, msg);
+        version, msg, getLine(), getColumn());
     }
   }
   else

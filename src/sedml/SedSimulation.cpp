@@ -426,6 +426,24 @@ SedSimulation::hasRequiredAttributes() const
 }
 
 
+/*
+ * Predicate returning @c true if all the required elements for this
+ * SedSimulation object have been set.
+ */
+bool
+SedSimulation::hasRequiredElements() const
+{
+  bool allPresent = true;
+
+  if (isSetAlgorithm() == false)
+  {
+    allPresent = false;
+  }
+
+  return allPresent;
+}
+
+
 
 /** @cond doxygenLibSEDMLInternal */
 
@@ -1027,7 +1045,7 @@ SedSimulation::readAttributes(
     {
       logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
         getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
+          "syntax.", getLine(), getColumn());
     }
   }
   else
@@ -1091,24 +1109,23 @@ SedSimulation::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedUniformTimeCourse (SedSimulation_t) using the given SEDML
- * Level and @ p version values.
+ * Creates a new SedUniformTimeCourse using the given SEDML Level and @ p
+ * version values.
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
+SedUniformTimeCourse_t *
 SedSimulation_createUniformTimeCourse(unsigned int level,
-                                         unsigned int version)
+                                      unsigned int version)
 {
   return new SedUniformTimeCourse(level, version);
 }
 
 
 /*
- * Creates a new SedOneStep (SedSimulation_t) using the given SEDML Level and @
- * p version values.
+ * Creates a new SedOneStep using the given SEDML Level and @ p version values.
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
+SedOneStep_t *
 SedSimulation_createOneStep(unsigned int level, unsigned int version)
 {
   return new SedOneStep(level, version);
@@ -1116,11 +1133,11 @@ SedSimulation_createOneStep(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedSteadyState (SedSimulation_t) using the given SEDML Level
- * and @ p version values.
+ * Creates a new SedSteadyState using the given SEDML Level and @ p version
+ * values.
  */
 LIBSEDML_EXTERN
-SedSimulation_t *
+SedSteadyState_t *
 SedSimulation_createSteadyState(unsigned int level, unsigned int version)
 {
   return new SedSteadyState(level, version);
@@ -1370,6 +1387,18 @@ int
 SedSimulation_hasRequiredAttributes(const SedSimulation_t * ss)
 {
   return (ss != NULL) ? static_cast<int>(ss->hasRequiredAttributes()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if all the required elements for this
+ * SedSimulation_t object have been set.
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_hasRequiredElements(const SedSimulation_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->hasRequiredElements()) : 0;
 }
 
 

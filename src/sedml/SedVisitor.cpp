@@ -647,6 +647,26 @@ SedVisitor::visit(const SedParameterEstimationResultPlot& x)
 }
 
 
+/*
+ * Visit the SedWaterfallPlot
+ */
+bool
+SedVisitor::visit(const SedWaterfallPlot& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
+ * Visit the SedParameterEstimationReport
+ */
+bool
+SedVisitor::visit(const SedParameterEstimationReport& x)
+{
+  return visit(static_cast<const SedBase&>(x));
+}
+
+
 void
 SedVisitor::leave (const SedDocument& x)
 {
@@ -1183,6 +1203,24 @@ SedVisitor::leave(const SedShadedArea& x)
  */
 void
 SedVisitor::leave(const SedParameterEstimationResultPlot& x)
+{
+}
+
+
+/*
+ * Leave the SedWaterfallPlot
+ */
+void
+SedVisitor::leave(const SedWaterfallPlot& x)
+{
+}
+
+
+/*
+ * Leave the SedParameterEstimationReport
+ */
+void
+SedVisitor::leave(const SedParameterEstimationReport& x)
 {
 }
 

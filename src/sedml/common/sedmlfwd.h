@@ -117,6 +117,8 @@ typedef CLASS_OR_STRUCT SedDataRange                     SedDataRange_t;
 typedef CLASS_OR_STRUCT SedSimpleRepeatedTask            SedSimpleRepeatedTask_t;
 typedef CLASS_OR_STRUCT SedShadedArea                    SedShadedArea_t;
 typedef CLASS_OR_STRUCT SedParameterEstimationResultPlot SedParameterEstimationResultPlot_t;
+typedef CLASS_OR_STRUCT SedWaterfallPlot                 SedWaterfallPlot_t;
+typedef CLASS_OR_STRUCT SedParameterEstimationReport     SedParameterEstimationReport_t;
 typedef CLASS_OR_STRUCT SedBase                          SedBase_t;
 typedef CLASS_OR_STRUCT SedListOf                        SedListOf_t;
 typedef CLASS_OR_STRUCT SedReader                        SedReader_t;

@@ -127,7 +127,8 @@ public:
    * @param n an unsigned int representing the index of the SedStyle to
    * retrieve.
    *
-   * @return the nth SedStyle in this SedListOfStyles.
+   * @return the nth SedStyle in this SedListOfStyles or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -147,7 +148,8 @@ public:
    * @param n an unsigned int representing the index of the SedStyle to
    * retrieve.
    *
-   * @return the nth SedStyle in this SedListOfStyles.
+   * @return the nth SedStyle in this SedListOfStyles or @c NULL if no such
+   * object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
@@ -211,7 +213,7 @@ public:
    *
    * @return a pointer to the nth SedStyle in this SedListOfStyles.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addStyle(const SedStyle* object)
    * @see createStyle()
@@ -232,7 +234,7 @@ public:
    * @return the SedStyle in this SedListOfStyles based on the identifier or
    * NULL if no such SedStyle exists.
    *
-   * @copydetails doc_returned_owned_pointer
+   * @copydetails doc_warning_returns_owned_pointer
    *
    * @see addStyle(const SedStyle* object)
    * @see createStyle()
@@ -349,7 +351,7 @@ public:
    * @copydetails doc_what_are_typecodes
    *
    * @return the SEDML type code for this object:
-   * @sedMLconstant{SEDML_LIST_OF, SEDMLTypeCode_t}.
+   * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    */
@@ -364,7 +366,7 @@ public:
    *
    * @return the SEDML typecode for the objects contained in this
    * SedListOfStyles:
-   * @sedMLconstant{SEDML_STYLE, SEDMLSedmlTypeCode_t}.
+   * @sedmlconstant{SEDML_STYLE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -432,7 +434,8 @@ BEGIN_C_DECLS
  * @param n an unsigned int representing the index of the SedStyle_t to
  * retrieve.
  *
- * @return the nth SedStyle_t in this SedListOf_t.
+ * @return the nth SedStyle_t in this SedListOf_t or @c NULL if no such object
+ * exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
@@ -473,7 +476,7 @@ SedListOfStyles_getById(SedListOf_t* slo, const char *sid);
  *
  * @return a pointer to the nth SedStyle_t in this SedListOf_t.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfStyles_t
  */
@@ -493,7 +496,7 @@ SedListOfStyles_remove(SedListOf_t* slo, unsigned int n);
  * @return the SedStyle_t in this SedListOf_t based on the identifier or NULL
  * if no such SedStyle_t exists.
  *
- * @copydetails doc_returned_owned_pointer
+ * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedListOfStyles_t
  */
