@@ -193,7 +193,7 @@
           <attributes>
             <attribute name="logY" required="false" type="bool" abstract="false"/>
             <attribute name="yDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
-            <attribute name="type" required="false" type="enum" element="CurveType" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="CurveType" abstract="false"/>
             <attribute name="xErrorUpper" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="xErrorLower" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="yErrorUpper" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
