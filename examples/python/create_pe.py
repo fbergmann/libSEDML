@@ -64,8 +64,8 @@ def create_pe_task(doc):
     fp.setId('fitParameter1')
     fp.setModelReference('model1')
     fp.setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J2_q']")
+    fp.setInitialValue(2.4)
     bounds = fp.createBounds()
-    bounds.setInitialValue(2.4)
     bounds.setLowerBound(0.0001)
     bounds.setUpperBound(10)
 
@@ -74,15 +74,16 @@ def create_pe_task(doc):
     fp.setId('fitParameter1')
     fp.setModelReference('model1')
     fp.setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J2_q']")
+    fp.setInitialValue(2.4)
     bounds = fp.createBounds()
-    bounds.setInitialValue(2.4)
     bounds.setLowerBound(0.0001)
     bounds.setUpperBound(10)
+    bounds.setScale('lin')
 
     # create fit experiment, mapping the data
     fe = pe.createFitExperiment()
     fe.setId('exp1')
-    fe.setRepresents('TimeCourse')
+    fe.setType('timeCourse')
     #fe.setSource('dataS1') # is this needed here? NO
 
     # map the first column
@@ -96,8 +97,8 @@ def create_pe_task(doc):
 
     map = fe.createFitMapping()
     map.setDataSource('dataS1')
-    map.setDataGenerator('s1_conc')
-    map.setType('Variable')
+    map.setTarget('s1_conc')
+    map.setType('observable')
     map.setWeight(1)
 
 
@@ -124,7 +125,7 @@ def create_report(doc):
     set.setDataReference('pe_feval') # this is 1D data
 
 
-def create_observables(doc):
+def create_output_datagenerators(doc):
     # type: (libsedml.SedDocument) -> None
     dg = doc.createDataGenerator()
     dg.setId('pe_obj')
@@ -158,7 +159,7 @@ def create_pe_example(file_name):
 
     create_pe_task(doc)
 
-    create_observables(doc)
+    create_output_datagenerators(doc)
 
     create_plot(doc)
 
