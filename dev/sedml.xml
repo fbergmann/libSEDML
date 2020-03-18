@@ -83,7 +83,7 @@
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
             <attribute name="name" required="false" type="string" abstract="false"/>
-            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
+            <attribute name="algorithm" required="true" type="element" element="Algorithm" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="uniformTimeCourse" element="UniformTimeCourse" minNumChildren="0" maxNumChildren="0"/>
@@ -343,10 +343,10 @@
         </element>
         <element name="ParameterEstimationTask" typeCode="SEDML_TASK_PARAMETER_ESTIMATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false">
           <attributes>
-            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
-            <attribute name="objective" required="false" type="element" element="Objective" abstract="true"/>
-            <attribute name="adjustableParameter" required="false" type="lo_element" element="AdjustableParameter" abstract="false"/>
-            <attribute name="fitExperiment" required="false" type="lo_element" element="FitExperiment" abstract="false"/>
+            <attribute name="algorithm" required="true" type="element" element="Algorithm" abstract="false"/>
+            <attribute name="objective" required="true" type="element" element="Objective" abstract="true"/>
+            <attribute name="adjustableParameter" required="true" type="lo_element" element="AdjustableParameter" abstract="false"/>
+            <attribute name="fitExperiment" required="true" type="lo_element" element="FitExperiment" abstract="false"/>
           </attributes>
         </element>
         <element name="Objective" typeCode="SEDML_OBJECTIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="true">
@@ -357,6 +357,7 @@
         <element name="LeastSquareObjectiveFunction" typeCode="SEDML_LEAST_SQUARE_OBJECTIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Objective" abstract="false"/>
         <element name="AdjustableParameter" typeCode="SEDML_ADJUSTABLE_PARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
+            <attribute name="initialValue" required="false" type="double" abstract="false"/>
             <attribute name="bounds" required="true" type="element" element="Bounds" abstract="false"/>
             <attribute name="experimentSet" required="false" type="lo_element" element="ExperimentRef" abstract="false"/>
             <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
@@ -371,7 +372,7 @@
         <element name="FitExperiment" typeCode="SEDML_FIT_EXPERIMENT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="id" required="false" type="SId" abstract="false"/>
-            <attribute name="represents" required="false" type="enum" element="ExperimentType" abstract="false"/>
+            <attribute name="type" required="false" type="enum" element="ExperimentType" abstract="false"/>
             <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
             <attribute name="fitMapping" required="false" type="lo_element" element="FitMapping" abstract="false"/>
           </attributes>
@@ -379,7 +380,7 @@
         <element name="FitMapping" typeCode="SEDML_FITMAPPING" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
           <attributes>
             <attribute name="dataSource" required="true" type="SIdRef" element="DataSource" abstract="false"/>
-            <attribute name="dataGenerator" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
+            <attribute name="target" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="type" required="true" type="enum" element="MappingType" abstract="false"/>
             <attribute name="weight" required="false" type="double" abstract="false"/>
             <attribute name="pointWeight" required="false" type="SIdRef" element="DataSource" abstract="false"/>
@@ -387,9 +388,9 @@
         </element>
         <element name="Bounds" typeCode="SEDML_BOUNDS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
           <attributes>
-            <attribute name="initialValue" required="false" type="double" abstract="false"/>
             <attribute name="lowerBound" required="false" type="double" abstract="false"/>
             <attribute name="upperBound" required="false" type="double" abstract="false"/>
+            <attribute name="scale" required="false" type="enum" element="ScaleType" abstract="false"/>
           </attributes>
         </element>
         <element name="Figure" typeCode="SEDML_FIGURE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="false">
@@ -483,12 +484,23 @@
             <attribute name="taskRef" required="true" type="SIdRef" element="Task" abstract="false"/>
           </attributes>
         </element>
+        <element name="WaterfallPlot" typeCode="SEDML_WATERFALLPLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Plot" abstract="false">
+          <attributes>
+            <attribute name="taskRef" required="true" type="SIdRef" element="Task" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="ParameterEstimationReport" typeCode="SEDML_PARAMETERESTIMATIONREPORT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="false">
+          <attributes>
+            <attribute name="taskRef" required="true" type="SIdRef" element="Task" abstract="false"/>
+          </attributes>
+        </element>
       </elements>
       <enums>
         <enum name="MappingType">
           <enumValues>
-            <enumValue name="SEDML_MAPPINGTYPE_VARIABLE" value="Variable"/>
-            <enumValue name="SEDML_MAPPINGTYPE_PARAMETER" value="Parameter"/>
+            <enumValue name="SEDML_MAPPINGTYPE_TIME" value="time"/>
+            <enumValue name="SEDML_MAPPINGTYPE_EXPERIMENTALCONDITION" value="experimentalCondition"/>
+            <enumValue name="SEDML_MAPPINGTYPE_OBSERVABLE" value="observable"/>
           </enumValues>
         </enum>
         <enum name="AxisType">
@@ -529,6 +541,8 @@
             <enumValue name="SEDML_CURVETYPE_POINTS" value="points"/>
             <enumValue name="SEDML_CURVETYPE_BAR" value="bar"/>
             <enumValue name="SEDML_CURVETYPE_BARSTACKED" value="barStacked"/>
+            <enumValue name="SEDML_CURVETYPE_HORIZONTALBAR" value="horizontalBar"/>
+            <enumValue name="SEDML_CURVETYPE_HORIZONTALBARSTACKED" value="horizontalBarStacked"/>
           </enumValues>
         </enum>
         <enum name="SurfaceType">
@@ -544,8 +558,15 @@
         </enum>
         <enum name="ExperimentType">
           <enumValues>
-            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="SteadyState"/>
-            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="TimeCourse"/>
+            <enumValue name="SEDML_EXPERIMENTTYPE_STEADYSTATE" value="steadyState"/>
+            <enumValue name="SEDML_EXPERIMENTTYPE_TIMECOURSE" value="timeCourse"/>
+          </enumValues>
+        </enum>
+        <enum name="ScaleType">
+          <enumValues>
+            <enumValue name="SEDML_SCALETYPE_LIN" value="lin"/>
+            <enumValue name="SEDML_SCALETYPE_LOG" value="log"/>
+            <enumValue name="SEDML_SCALETYPE_LOG10" value="log10"/>
           </enumValues>
         </enum>
       </enums>
