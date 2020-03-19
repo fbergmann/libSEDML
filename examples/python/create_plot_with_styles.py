@@ -20,16 +20,16 @@ def create_styles(doc):
     # create styles
     style = doc.createStyle()
     style.setId('line_black')
-    line = style.createLine()
+    line = style.createLineStyle()
     line.setStyle('solid')
     line.setColor('#000000FF')
     style = doc.createStyle()
     style.setId('area_blue')
-    fill = style.createFill()
+    fill = style.createFillStyle()
     fill.setColor('#0000FF7F')
     style = doc.createStyle()
     style.setId('area_red')
-    fill = style.createFill()
+    fill = style.createFillStyle()
     fill.setColor('#0000FF7F')
 
 
