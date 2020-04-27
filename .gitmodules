@@ -1,0 +1,9 @@
+[submodule "submodules/libSBML-dependencies"]
+	path = submodules/libSBML-dependencies
+	url = https://github.com/sbmlteam/libSBML-dependencies.git
+[submodule "submodules/libSBML"]
+	path = submodules/libSBML
+	url = https://github.com/fbergmann/libsbml_test.git
+[submodule "submodules/NuML"]
+	path = submodules/NuML
+	url = https://github.com/NuML/NuML
