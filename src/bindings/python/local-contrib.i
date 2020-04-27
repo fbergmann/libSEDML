@@ -51,6 +51,11 @@ class AutoProperty(type):
 
         import re
         import keyword
+        import sys
+        if sys.version_info < (3, 0):
+          from inspect import getargspec as mygetargspec
+        else:
+          from inspect import getfullargspec as mygetargspec
 
         re_mangle = re.compile(r'[A-Za-z][a-z]+|[A-Z]+(?=$|[A-Z0-9])|\d+')
         re_id = re.compile(r'^[A-Za-z_][A-Za-z0-9_]*$')
@@ -91,46 +96,69 @@ class AutoProperty(type):
             getter = setter = deleter = None
             if name in get_methods:
                 getter = classdict['get'+name]
-            
+
                 #this is a very dirty way of checking if the get method
                 #requires extra arguments (and hence cannot be a property)
                 #it should be possible to do this properly in SWIG?
-                if getter.__doc__:
-                    if not re_getdoc.match(getter.__doc__):
+                try:
+                    argspec = mygetargspec(getter)
+                    numargs = len(argspec.args)
+                    if numargs > 1 or (numargs == 1 and argspec.args[0] != 'self')  \
+                       or (argspec.varargs!=None and name not in allowed_methods and not name.startswith('ListOf') ):
                         continue
+                except Exception:
+                    continue
 
                 #use the c-level get function if the python function
                 #only consists of a call to it
                 cname = classname + '_get' + name
                 #test if function is "return _libsedml.CLASS_getNAME(__args__)"
-                if getter.func_code.co_names == ('_libsedml', cname):
-                    getter = getattr(_libsedml, cname)
-    
+                try:
+                    if getter.func_code.co_names == ('_libsedml', cname):
+                        getter = getattr(_libsedml, cname)
+                except:
+                    if getter.__code__.co_names == ('_libsedml', cname):
+                        getter = getattr(_libsedml, cname)
+
             if name in set_methods:
                 setter = classdict['set'+name]
-                if setter.__doc__:
-                    if not re_setdoc.match(setter.__doc__):
-                        continue
+                try:
+                    argspec = mygetargspec(getter)
+                    numargs = len(argspec.args)
+                    if numargs > 1 and argspec.args[0] == 'self':
+                        cname = classname + '_set' + name
+                        try:
+                            if setter.func_code.co_names == ('_libsedml', cname):
+                                setter = getattr(_libsedml, cname)
+                        except:
+                            if setter.__code__.co_names == ('_libsedml', cname):
+                                setter = getattr(_libsedml, cname)
 
-                cname = classname + '_set' + name
-                if setter.func_code.co_names == ('_libsedml', cname):
-                    setter = getattr(_libsedml, cname)
-                #property fget does not get intercepted by __getattr__
-                #but fset does, so we implement property setting via
-                #the __swig_setmethods__ dict
-                swig_setter[mangled] = setter
-            
+                        #property fget does not get intercepted by __getattr__
+                        #but fset does, so we implement property setting via
+                        #the __swig_setmethods__ dict
+                        swig_setter[mangled] = setter
+                        continue
+                except:
+                    pass
+
             if 'unset' + name in classdict:
                 deleter = classdict['unset'+name]
-                if deleter.__doc__:
-                    #like a get method, a delete method should
-                    #only require a self argument
-                    if not re_getdoc.match(deleter.__doc__):
-                        continue
-                
-                cname = classname + '_unset' + name
-                if deleter.func_code.co_names == ('_libsedml', cname):
-                    deleter = getattr(_libsedml, cname)
+
+                try:
+                    argspec = mygetargspec(getter)
+                    numargs = len(argspec.args)
+                    if numargs == 1 and argspec.args[0] == 'self' and \
+                       (argspec.varargs==None or name in allowed_methods):
+                        cname = classname + '_unset' + name
+                        try:
+                            if deleter.func_code.co_names == ('_libsedml', cname):
+                                deleter = getattr(_libsedml, cname)
+                        except:
+                            if deleter.__code__.co_names == ('_libsedml', cname):
+                                deleter = getattr(_libsedml, cname)
+                except:
+                    pass
 
             if getter or setter or deleter:
                 #fset is technically redundant since the method is dispatched
@@ -148,10 +176,9 @@ class AutoProperty(type):
                 if hasattr(self, 'name') and self.name:
                     desc += ' "%s"' % self.name
                 return '<' + desc + '>'
-                
+
             if classdict.get('__repr__', None) in (_swig_repr, None):
                 classdict['__repr__'] = __repr__
-
 
         return type.__new__(cls, classname, bases, classdict)
 

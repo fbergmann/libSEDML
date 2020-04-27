@@ -52,7 +52,7 @@ string(REPLACE
 string(REPLACE 
   "class SedBase(_object):"
   "class SedBase(_object, metaclass=AutoProperty):"
-  init3_script ${init_script}
+  init3_script ${init3_script}
 )
 
 string(REPLACE 
