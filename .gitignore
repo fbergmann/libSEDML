@@ -166,3 +166,7 @@ pip-log.txt
 
 .vs
 .vscode
+
+build*
+install*
+
