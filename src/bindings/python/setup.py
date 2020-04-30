@@ -190,6 +190,10 @@ class CMakeBuild(build_ext):
           'CMAKE_GENERATOR'
         ])
 
+        if is_osx: 
+          cmake_args.append('-DCLANG_USE_LIBCPP=ON')
+          cmake_args.append('-DCMAKE_OSX_DEPLOYMENT_TARGET=10.9')
+
         # example of build args
         build_args = [
             '--config', config,
@@ -305,9 +309,6 @@ class CMakeBuild(build_ext):
           if DEP_DIR64:
             cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR64)
             cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR64, 'include'))
-        elif is_osx: 
-          cmake_args.append('-DCLANG_USE_LIBCPP=ON')
-          cmake_args.append('-DCMAKE_OSX_DEPLOYMENT_TARGET=10.9')
 
         os.chdir(build_temp)
         self.spawn(['cmake', SRC_DIR] + cmake_args)
