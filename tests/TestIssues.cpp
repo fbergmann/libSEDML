@@ -152,6 +152,32 @@ TEST_CASE("Reading L1V4 curve should not require logY", "[sedml]")
   delete doc;
 }
 
+
+
+TEST_CASE("Reading a file with custom namespaces on element should have it available", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/issue_77.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  REQUIRE (doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+  // not defined on document
+  REQUIRE ( doc->getNamespaces()->getIndex("http://www.cellml.org/cellml/1.0#") == -1 );
+  
+  auto* dg = doc->getDataGenerator("xDataGenerator1_1");
+  REQUIRE ( dg != NULL );
+  auto* var = dg->getVariable("xVariable1_1");
+  REQUIRE ( var != NULL );
+  // defined on element 
+  auto* ns = var->getElementNamespaces();
+  REQUIRE ( ns != NULL );  
+  REQUIRE ( ns->getIndex("http://www.cellml.org/cellml/1.0#") != -1 );
+  REQUIRE ( ns->getIndexByPrefix("cellml") != -1 );
+  REQUIRE ( ns->containsUri("http://www.cellml.org/cellml/1.0#"));
+  
+  
+  delete doc;
+}
+
+
 TEST_CASE("create and add nested algorithm parameter", "[sedml]")
 {
   SedDocument doc(1, 4);

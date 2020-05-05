@@ -437,6 +437,16 @@ SedBase::getNamespaces()
 }
 
 
+/*
+ * @return the Namespaces associated with this SEDML object
+ */
+const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
+SedBase::getElementNamespaces() const
+{
+  if (mSedNamespaces == NULL) return NULL;
+  return mSedNamespaces->getNamespaces();
+}
+
 const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
 SedBase::getNamespaces() const
 {

@@ -420,6 +420,17 @@ public:
    */
   virtual const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces() const ;
 
+  /**
+   * Returns a list of the XML Namespaces declared on this object.
+   *
+   * @return the XML Namespaces associated with this SEDML object, or @c NULL
+   * in certain very usual circumstances where a namespace is not set.
+   *
+   * @see getLevel()
+   * @see getVersion()
+   */
+  virtual const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getElementNamespaces() const;
+
 
   /**
    * Returns a list of the XML Namespaces declared on the SEDML document
