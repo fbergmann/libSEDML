@@ -30,6 +30,7 @@ import os
 import sys
 import shutil
 import platform
+import sysconfig 
 from os.path import abspath, exists, join, split
 
 from setuptools import setup, Extension
@@ -203,8 +204,9 @@ class CMakeBuild(build_ext):
         global DEP_DIR
         if not DEP_DIR and not self.dry_run:
             print("compiling dependencies")
-            dep_build_dir = os.path.join(cwd, 'build_dependencies_' + suffix)
-            dep_inst_dir = os.path.join(cwd, 'install_dependencies_' + suffix)
+            dep_suffix = sysconfig.get_platform()
+            dep_build_dir = os.path.join(cwd, 'build_dependencies_' + dep_suffix)
+            dep_inst_dir = os.path.join(cwd, 'install_dependencies_' + dep_suffix)
             dep_src_dir = DEP_SRC_DIR
             makedirs(dep_build_dir)
             os.chdir(dep_build_dir)
@@ -281,7 +283,8 @@ class CMakeBuild(build_ext):
             '-DWITH_SWIG=ON',
             '-DWITH_ZLIB=ON',
             '-DWITH_PYTHON=ON',
-            '-DPYTHON_EXECUTABLE=' + sys.executable
+            '-DPYTHON_EXECUTABLE=' + sys.executable,
+            '-DPYTHON_INCLUDE_DIR=' + sysconfig.get_paths()['include']
         ]
 
         libsedml_args = prepend_variables(libsedml_args, [
@@ -297,6 +300,8 @@ class CMakeBuild(build_ext):
         if DEP_DIR:
           cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR)
           cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR, 'include'))
+          cmake_args.append('-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'))
+          cmake_args.append('-DLIBZ_LIBRARY=' + zlib)
 
         if is_win_32:
           if not '-G' in str(cmake_args):
