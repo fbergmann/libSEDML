@@ -191,6 +191,11 @@ class CMakeBuild(build_ext):
           'CMAKE_GENERATOR'
         ])
 
+        if is_win_32:
+          if not '-G' in str(cmake_args):
+            cmake_args.append('-A')
+            cmake_args.append('win32')
+
         if is_osx: 
           cmake_args.append('-DCLANG_USE_LIBCPP=ON')
           cmake_args.append('-DCMAKE_OSX_DEPLOYMENT_TARGET=10.9')
@@ -226,7 +231,7 @@ class CMakeBuild(build_ext):
             
             os.chdir(cwd)
             
-            dep_build_dir = os.path.join(cwd, 'build_libSBML_' + suffix)
+            dep_build_dir = os.path.join(cwd, 'build_libSBML_' + dep_suffix)
             makedirs(dep_build_dir)
             os.chdir(dep_build_dir)
             zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zlib')
@@ -253,7 +258,7 @@ class CMakeBuild(build_ext):
             
             os.chdir(cwd)
             
-            dep_build_dir = os.path.join(cwd, 'build_libnuml_' + suffix)
+            dep_build_dir = os.path.join(cwd, 'build_libnuml_' + dep_suffix)
             makedirs(dep_build_dir)
             os.chdir(dep_build_dir)
             zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zlib')
@@ -304,9 +309,6 @@ class CMakeBuild(build_ext):
           cmake_args.append('-DLIBZ_LIBRARY=' + zlib)
 
         if is_win_32:
-          if not '-G' in str(cmake_args):
-            cmake_args.append('-A')
-            cmake_args.append('win32')
           if DEP_DIR32:
             cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR32)
             cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR32, 'include'))
