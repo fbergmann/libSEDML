@@ -30,12 +30,20 @@ import os
 import sys
 import shutil
 import platform
-import sysconfig 
+import sysconfig
 from os.path import abspath, exists, join, split
 
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
+def get_python_include(): 
+  dir = sysconfig.get_paths()['include']
+  if exists(dir):
+    return dir
+  dir = dir.replace('/local', '/')
+  if exists(dir):
+    return dir
+  return ''
 
 def prepend_variables(args, variables):
   for var in variables: 
@@ -82,7 +90,9 @@ def get_dir_if_exists(variable, default):
 global SRC_DIR
 SRC_DIR = get_dir_if_exists('LIBSEDML_SRC_DIR', '.')
 global DEP_DIR
-DEP_DIR = get_dir_if_exists('LIBSEDML_DEP_DIR', '../libsedml_dependencies/')
+cwd = os.getcwd()
+dep_suffix = sysconfig.get_platform()
+DEP_DIR = get_dir_if_exists('LIBSEDML_DEP_DIR', os.path.join(cwd, 'install_dependencies_' + dep_suffix))
 DEP_SRC_DIR = get_dir_if_exists('LIBSEDML_DEP_SRC', './submodules/libSBML-dependencies/')
 DEP_SBML_SRC_DIR = get_dir_if_exists('LIBSEDML_SBML_DEP_SRC', './submodules/libSBML/')
 DEP_NUML_SRC_DIR = get_dir_if_exists('LIBSEDML_NUML_DEP_SRC', './submodules/NuML/libnuml/')
@@ -147,7 +157,6 @@ class CMakeBuild(build_ext):
 
     def build_cmake(self, extension):
         """Configure `extension` with CMake and build modules."""
-        cwd = os.getcwd()
         build_temp = self.build_temp
         suffix = build_temp[build_temp.find('temp.') + 5:]
         if '/' in suffix:
@@ -209,7 +218,6 @@ class CMakeBuild(build_ext):
         global DEP_DIR
         if not DEP_DIR and not self.dry_run:
             print("compiling dependencies")
-            dep_suffix = sysconfig.get_platform()
             dep_build_dir = os.path.join(cwd, 'build_dependencies_' + dep_suffix)
             dep_inst_dir = os.path.join(cwd, 'install_dependencies_' + dep_suffix)
             dep_src_dir = DEP_SRC_DIR
@@ -289,7 +297,7 @@ class CMakeBuild(build_ext):
             '-DWITH_ZLIB=ON',
             '-DWITH_PYTHON=ON',
             '-DPYTHON_EXECUTABLE=' + sys.executable,
-            '-DPYTHON_INCLUDE_DIR=' + sysconfig.get_paths()['include']
+            '-DPYTHON_INCLUDE_DIR=' + get_python_include()
         ]
 
         libsedml_args = prepend_variables(libsedml_args, [
@@ -305,7 +313,11 @@ class CMakeBuild(build_ext):
         if DEP_DIR:
           cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR)
           cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR, 'include'))
-          cmake_args.append('-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'))
+          cmake_args.append('-DLIBZ_INCLUDE_DIR=' + os.path.join(DEP_DIR, 'include'))
+          zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zlib')
+          if not zlib: 
+            zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zdll')
+
           cmake_args.append('-DLIBZ_LIBRARY=' + zlib)
 
         if is_win_32:
