@@ -79,7 +79,7 @@ SedConstructorException::SedConstructorException (std::string elementName, SedNa
 }
 
 
-SedConstructorException::~SedConstructorException()
+SedConstructorException::~SedConstructorException() throw
 {
 }
 

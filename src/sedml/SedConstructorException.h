@@ -61,7 +61,7 @@ public:
   SedConstructorException (std::string errmsg = "");
   SedConstructorException (std::string errmsg, std::string sedmlErrMsg);
   SedConstructorException (std::string elementName, SedNamespaces* xmlns);
-  virtual ~SedConstructorException ();
+  virtual ~SedConstructorException () throw;
   
  /** @endcond */
 
