@@ -60,8 +60,6 @@ SedUniformTimeCourse::SedUniformTimeCourse(unsigned int level,
   , mIsSetOutputStartTime (false)
   , mOutputEndTime (util_NaN())
   , mIsSetOutputEndTime (false)
-  , mNumberOfPoints (SEDML_INT_MAX)
-  , mIsSetNumberOfPoints (false)
   , mNumberOfSteps (SEDML_INT_MAX)
   , mIsSetNumberOfSteps (false)
 {
@@ -81,8 +79,6 @@ SedUniformTimeCourse::SedUniformTimeCourse(SedNamespaces *sedmlns)
   , mIsSetOutputStartTime (false)
   , mOutputEndTime (util_NaN())
   , mIsSetOutputEndTime (false)
-  , mNumberOfPoints (SEDML_INT_MAX)
-  , mIsSetNumberOfPoints (false)
   , mNumberOfSteps (SEDML_INT_MAX)
   , mIsSetNumberOfSteps (false)
 {
@@ -101,8 +97,6 @@ SedUniformTimeCourse::SedUniformTimeCourse(const SedUniformTimeCourse& orig)
   , mIsSetOutputStartTime ( orig.mIsSetOutputStartTime )
   , mOutputEndTime ( orig.mOutputEndTime )
   , mIsSetOutputEndTime ( orig.mIsSetOutputEndTime )
-  , mNumberOfPoints ( orig.mNumberOfPoints )
-  , mIsSetNumberOfPoints ( orig.mIsSetNumberOfPoints )
   , mNumberOfSteps ( orig.mNumberOfSteps )
   , mIsSetNumberOfSteps ( orig.mIsSetNumberOfSteps )
 {
@@ -124,8 +118,6 @@ SedUniformTimeCourse::operator=(const SedUniformTimeCourse& rhs)
     mIsSetOutputStartTime = rhs.mIsSetOutputStartTime;
     mOutputEndTime = rhs.mOutputEndTime;
     mIsSetOutputEndTime = rhs.mIsSetOutputEndTime;
-    mNumberOfPoints = rhs.mNumberOfPoints;
-    mIsSetNumberOfPoints = rhs.mIsSetNumberOfPoints;
     mNumberOfSteps = rhs.mNumberOfSteps;
     mIsSetNumberOfSteps = rhs.mIsSetNumberOfSteps;
   }
@@ -186,13 +178,13 @@ SedUniformTimeCourse::getOutputEndTime() const
 
 
 /*
- * Returns the value of the "numberOfPoints" attribute of this
+ * Returns the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse.
  */
 int
 SedUniformTimeCourse::getNumberOfPoints() const
 {
-  return mNumberOfPoints;
+  return mNumberOfSteps;
 }
 
 
@@ -241,13 +233,13 @@ SedUniformTimeCourse::isSetOutputEndTime() const
 
 
 /*
- * Predicate returning @c true if this SedUniformTimeCourse's "numberOfPoints"
+ * Predicate returning @c true if this SedUniformTimeCourse's "numberOfSteps"
  * attribute is set.
  */
 bool
 SedUniformTimeCourse::isSetNumberOfPoints() const
 {
-  return mIsSetNumberOfPoints;
+  return mIsSetNumberOfSteps;
 }
 
 
@@ -305,10 +297,10 @@ SedUniformTimeCourse::setOutputEndTime(double outputEndTime)
  * SedUniformTimeCourse.
  */
 int
-SedUniformTimeCourse::setNumberOfPoints(int numberOfPoints)
+SedUniformTimeCourse::setNumberOfPoints(int numberOfSteps)
 {
-  mNumberOfPoints = numberOfPoints;
-  mIsSetNumberOfPoints = true;
+  mNumberOfSteps = numberOfSteps;
+  mIsSetNumberOfSteps = true;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -390,16 +382,16 @@ SedUniformTimeCourse::unsetOutputEndTime()
 
 
 /*
- * Unsets the value of the "numberOfPoints" attribute of this
+ * Unsets the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse.
  */
 int
 SedUniformTimeCourse::unsetNumberOfPoints()
 {
-  mNumberOfPoints = SEDML_INT_MAX;
-  mIsSetNumberOfPoints = false;
+  mNumberOfSteps= SEDML_INT_MAX;
+  mIsSetNumberOfSteps= false;
 
-  if (isSetNumberOfPoints() == false)
+  if (isSetNumberOfSteps() == false)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -563,12 +555,7 @@ SedUniformTimeCourse::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "numberOfPoints")
-  {
-    value = getNumberOfPoints();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "numberOfSteps")
+  if (attributeName == "numberOfPoints" || attributeName == "numberOfSteps")
   {
     value = getNumberOfSteps();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -682,11 +669,7 @@ SedUniformTimeCourse::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetOutputEndTime();
   }
-  else if (attributeName == "numberOfPoints")
-  {
-    value = isSetNumberOfPoints();
-  }
-  else if (attributeName == "numberOfSteps")
+  else if (attributeName == "numberOfPoints" || attributeName == "numberOfSteps")
   {
     value = isSetNumberOfSteps();
   }
@@ -729,11 +712,7 @@ SedUniformTimeCourse::setAttribute(const std::string& attributeName,
 {
   int return_value = SedSimulation::setAttribute(attributeName, value);
 
-  if (attributeName == "numberOfPoints")
-  {
-    return_value = setNumberOfPoints(value);
-  }
-  else if (attributeName == "numberOfSteps")
+  if (attributeName == "numberOfPoints" || attributeName == "numberOfSteps")
   {
     return_value = setNumberOfSteps(value);
   }
@@ -838,11 +817,7 @@ SedUniformTimeCourse::unsetAttribute(const std::string& attributeName)
   {
     value = unsetOutputEndTime();
   }
-  else if (attributeName == "numberOfPoints")
-  {
-    value = unsetNumberOfPoints();
-  }
-  else if (attributeName == "numberOfSteps")
+  else if (attributeName == "numberOfPoints" || attributeName == "numberOfSteps")
   {
     value = unsetNumberOfSteps();
   }
@@ -893,7 +868,9 @@ SedUniformTimeCourse::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("numberOfPoints");
 
-  attributes.add("numberOfSteps");
+  if (getVersion() >= 4 || getLevel() > 1) {
+      attributes.add("numberOfSteps");
+  }
 }
 
 /** @endcond */
@@ -1019,32 +996,15 @@ SedUniformTimeCourse::readAttributes(
   }
 
   // 
-  // numberOfPoints int (use = "optional" )
-  // 
-
-  numErrs = log ? log->getNumErrors() : 0;
-  mIsSetNumberOfPoints = attributes.readInto("numberOfPoints",
-    mNumberOfPoints);
-
-  if ( mIsSetNumberOfPoints == false && log)
-  {
-    if (log && log->getNumErrors() == numErrs + 1 &&
-      log->contains(XMLAttributeTypeMismatch))
-    {
-      log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Sedml attribute 'numberOfPoints' from the "
-        "<SedUniformTimeCourse> element must be an integer.";
-      log->logError(SedmlUniformTimeCourseNumberOfPointsMustBeInteger, level,
-        version, message, getLine(), getColumn());
-    }
-  }
-
-  // 
   // numberOfSteps int (use = "optional" )
   // 
 
   numErrs = log ? log->getNumErrors() : 0;
   mIsSetNumberOfSteps = attributes.readInto("numberOfSteps", mNumberOfSteps);
+
+  if (!mIsSetNumberOfSteps) {
+      mIsSetNumberOfSteps = attributes.readInto("numberOfPoints", mNumberOfSteps);
+  }
 
   if ( mIsSetNumberOfSteps == false && log)
   {
@@ -1090,14 +1050,14 @@ SedUniformTimeCourse::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
     stream.writeAttribute("outputEndTime", getPrefix(), mOutputEndTime);
   }
 
-  if (isSetNumberOfPoints() == true)
-  {
-    stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfPoints);
-  }
-
   if (isSetNumberOfSteps() == true)
   {
-    stream.writeAttribute("numberOfSteps", getPrefix(), mNumberOfSteps);
+      if (getVersion() >= 4 || getLevel() > 1) {
+          stream.writeAttribute("numberOfSteps", getPrefix(), mNumberOfSteps);
+      }
+      else {
+          stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfSteps);
+      }
   }
 }
 
@@ -1190,7 +1150,7 @@ SedUniformTimeCourse_getOutputEndTime(const SedUniformTimeCourse_t * sutc)
 
 
 /*
- * Returns the value of the "numberOfPoints" attribute of this
+ * Returns the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t.
  */
 LIBSEDML_EXTERN
@@ -1251,7 +1211,7 @@ SedUniformTimeCourse_isSetOutputEndTime(const SedUniformTimeCourse_t * sutc)
 
 /*
  * Predicate returning @c 1 (true) if this SedUniformTimeCourse_t's
- * "numberOfPoints" attribute is set.
+ * "numberOfSteps" attribute is set.
  */
 LIBSEDML_EXTERN
 int
@@ -1316,15 +1276,15 @@ SedUniformTimeCourse_setOutputEndTime(SedUniformTimeCourse_t * sutc,
 
 
 /*
- * Sets the value of the "numberOfPoints" attribute of this
+ * Sets the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t.
  */
 LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_setNumberOfPoints(SedUniformTimeCourse_t * sutc,
-                                       int numberOfPoints)
+                                       int numberOfSteps)
 {
-  return (sutc != NULL) ? sutc->setNumberOfPoints(numberOfPoints) :
+  return (sutc != NULL) ? sutc->setNumberOfPoints(numberOfSteps) :
     LIBSEDML_INVALID_OBJECT;
 }
 
@@ -1381,7 +1341,7 @@ SedUniformTimeCourse_unsetOutputEndTime(SedUniformTimeCourse_t * sutc)
 
 
 /*
- * Unsets the value of the "numberOfPoints" attribute of this
+ * Unsets the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t.
  */
 LIBSEDML_EXTERN
