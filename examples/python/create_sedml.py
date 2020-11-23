@@ -54,7 +54,7 @@ def main (args):
   model = doc.createModel();
   model.setId("model1");
   model.setSource("file.xml");
-  model.setLanguage("urn:sedml:sbml");
+  model.setLanguage("urn:sedml:language:sbml");
 
   # create a second model modifying a variable of that other sbml file
   model = doc.createModel();
