@@ -1081,7 +1081,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <uniformTimeCourse> object must have the required attributes "
     "'sedml:initialTime', 'sedml:outputStartTime' and 'sedml:outputEndTime', "
-    "and may have the optional attributes 'sedml:numberOfPoints' and "
+    "and may have one of the optional attributes 'sedml:numberOfPoints' or "
     "'sedml:numberOfSteps'. No other attributes from the SBML Level 3 SEDML "
     "namespaces are permitted on an <uniformTimeCourse> object. ",
     { "L3V1 Sedml V1 Section"

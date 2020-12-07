@@ -57,8 +57,8 @@ SedUniformRange::SedUniformRange(unsigned int level, unsigned int version)
   , mIsSetStart (false)
   , mEnd (util_NaN())
   , mIsSetEnd (false)
-  , mNumberOfPoints (SEDML_INT_MAX)
-  , mIsSetNumberOfPoints (false)
+  , mNumberOfSteps (SEDML_INT_MAX)
+  , mIsSetNumberOfSteps (false)
   , mType ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
@@ -75,8 +75,8 @@ SedUniformRange::SedUniformRange(SedNamespaces *sedmlns)
   , mIsSetStart (false)
   , mEnd (util_NaN())
   , mIsSetEnd (false)
-  , mNumberOfPoints (SEDML_INT_MAX)
-  , mIsSetNumberOfPoints (false)
+  , mNumberOfSteps (SEDML_INT_MAX)
+  , mIsSetNumberOfSteps (false)
   , mType ("")
 {
   setElementNamespace(sedmlns->getURI());
@@ -92,8 +92,8 @@ SedUniformRange::SedUniformRange(const SedUniformRange& orig)
   , mIsSetStart ( orig.mIsSetStart )
   , mEnd ( orig.mEnd )
   , mIsSetEnd ( orig.mIsSetEnd )
-  , mNumberOfPoints ( orig.mNumberOfPoints )
-  , mIsSetNumberOfPoints ( orig.mIsSetNumberOfPoints )
+  , mNumberOfSteps ( orig.mNumberOfSteps )
+  , mIsSetNumberOfSteps ( orig.mIsSetNumberOfSteps )
   , mType ( orig.mType )
 {
 }
@@ -112,8 +112,8 @@ SedUniformRange::operator=(const SedUniformRange& rhs)
     mIsSetStart = rhs.mIsSetStart;
     mEnd = rhs.mEnd;
     mIsSetEnd = rhs.mIsSetEnd;
-    mNumberOfPoints = rhs.mNumberOfPoints;
-    mIsSetNumberOfPoints = rhs.mIsSetNumberOfPoints;
+    mNumberOfSteps = rhs.mNumberOfSteps;
+    mIsSetNumberOfSteps = rhs.mIsSetNumberOfSteps;
     mType = rhs.mType;
   }
 
@@ -160,12 +160,22 @@ SedUniformRange::getEnd() const
 
 
 /*
- * Returns the value of the "numberOfPoints" attribute of this SedUniformRange.
+ * Returns the value of the "numberOfSteps" attribute of this SedUniformRange.
  */
 int
 SedUniformRange::getNumberOfPoints() const
 {
-  return mNumberOfPoints;
+  return mNumberOfSteps;
+}
+
+
+/*
+ * Returns the value of the "numberOfSteps" attribute of this SedUniformRange.
+ */
+int
+SedUniformRange::getNumberOfSteps() const
+{
+    return mNumberOfSteps;
 }
 
 
@@ -202,13 +212,24 @@ SedUniformRange::isSetEnd() const
 
 
 /*
- * Predicate returning @c true if this SedUniformRange's "numberOfPoints"
+ * Predicate returning @c true if this SedUniformRange's "numberOfSteps"
  * attribute is set.
  */
 bool
 SedUniformRange::isSetNumberOfPoints() const
 {
-  return mIsSetNumberOfPoints;
+  return mIsSetNumberOfSteps;
+}
+
+
+/*
+ * Predicate returning @c true if this SedUniformRange's "numberOfSteps"
+ * attribute is set.
+ */
+bool
+SedUniformRange::isSetNumberOfSteps() const
+{
+    return mIsSetNumberOfSteps;
 }
 
 
@@ -248,14 +269,26 @@ SedUniformRange::setEnd(double end)
 
 
 /*
- * Sets the value of the "numberOfPoints" attribute of this SedUniformRange.
+ * Sets the value of the "numberOfSteps" attribute of this SedUniformRange.
  */
 int
-SedUniformRange::setNumberOfPoints(int numberOfPoints)
+SedUniformRange::setNumberOfPoints(int numberOfSteps)
 {
-  mNumberOfPoints = numberOfPoints;
-  mIsSetNumberOfPoints = true;
+  mNumberOfSteps = numberOfSteps;
+  mIsSetNumberOfSteps = true;
   return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "numberOfSteps" attribute of this SedUniformRange.
+ */
+int
+SedUniformRange::setNumberOfSteps(int numberOfSteps)
+{
+    mNumberOfSteps = numberOfSteps;
+    mIsSetNumberOfSteps = true;
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -311,15 +344,15 @@ SedUniformRange::unsetEnd()
 
 
 /*
- * Unsets the value of the "numberOfPoints" attribute of this SedUniformRange.
+ * Unsets the value of the "numberOfSteps" attribute of this SedUniformRange.
  */
 int
 SedUniformRange::unsetNumberOfPoints()
 {
-  mNumberOfPoints = SEDML_INT_MAX;
-  mIsSetNumberOfPoints = false;
+  mNumberOfSteps = SEDML_INT_MAX;
+  mIsSetNumberOfSteps = false;
 
-  if (isSetNumberOfPoints() == false)
+  if (isSetNumberOfSteps() == false)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -327,6 +360,26 @@ SedUniformRange::unsetNumberOfPoints()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+
+/*
+ * Unsets the value of the "numberOfSteps" attribute of this SedUniformRange.
+ */
+int
+SedUniformRange::unsetNumberOfSteps()
+{
+    mNumberOfSteps = SEDML_INT_MAX;
+    mIsSetNumberOfSteps = false;
+
+    if (isSetNumberOfSteps() == false)
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -389,7 +442,7 @@ SedUniformRange::hasRequiredAttributes() const
     allPresent = false;
   }
 
-  if (isSetNumberOfPoints() == false)
+  if (isSetNumberOfSteps() == false)
   {
     allPresent = false;
   }
@@ -484,9 +537,9 @@ SedUniformRange::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "numberOfPoints")
+  if (attributeName == "numberOfSteps" || attributeName == "numberOfPoints")
   {
-    value = getNumberOfPoints();
+    value = getNumberOfSteps();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -597,9 +650,9 @@ SedUniformRange::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetEnd();
   }
-  else if (attributeName == "numberOfPoints")
+  else if (attributeName == "numberOfSteps" || attributeName == "numberOfPoints")
   {
-    value = isSetNumberOfPoints();
+    value = isSetNumberOfSteps();
   }
   else if (attributeName == "type")
   {
@@ -640,9 +693,9 @@ SedUniformRange::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SedRange::setAttribute(attributeName, value);
 
-  if (attributeName == "numberOfPoints")
+  if (attributeName == "numberOfSteps" || attributeName == "numberOfPoints")
   {
-    return_value = setNumberOfPoints(value);
+    return_value = setNumberOfSteps(value);
   }
 
   return return_value;
@@ -737,9 +790,9 @@ SedUniformRange::unsetAttribute(const std::string& attributeName)
   {
     value = unsetEnd();
   }
-  else if (attributeName == "numberOfPoints")
+  else if (attributeName == "numberOfSteps" || attributeName == "numberOfPoints")
   {
-    value = unsetNumberOfPoints();
+    value = unsetNumberOfSteps();
   }
   else if (attributeName == "type")
   {
@@ -788,7 +841,7 @@ SedUniformRange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("end");
 
-  attributes.add("numberOfPoints");
+  attributes.add("numberOfSteps");
 
   attributes.add("type");
 }
@@ -888,27 +941,32 @@ SedUniformRange::readAttributes(
   }
 
   // 
-  // numberOfPoints int (use = "required" )
+  // numberOfSteps int (use = "required" )
   // 
 
   numErrs = log ? log->getNumErrors() : 0;
-  mIsSetNumberOfPoints = attributes.readInto("numberOfPoints",
-    mNumberOfPoints);
+  mIsSetNumberOfSteps = attributes.readInto("numberOfSteps",
+    mNumberOfSteps);
 
-  if ( mIsSetNumberOfPoints == false && log)
+  if (!mIsSetNumberOfSteps) {
+      mIsSetNumberOfSteps = attributes.readInto("numberOfPoints",
+          mNumberOfSteps);
+  }
+
+  if ( mIsSetNumberOfSteps == false && log)
   {
     if (log && log->getNumErrors() == numErrs + 1 &&
       log->contains(XMLAttributeTypeMismatch))
     {
       log->remove(XMLAttributeTypeMismatch);
-      std::string message = "Sedml attribute 'numberOfPoints' from the "
+      std::string message = "Sedml attribute 'numberOfSteps' from the "
         "<SedUniformRange> element must be an integer.";
       log->logError(SedmlUniformRangeNumberOfPointsMustBeInteger, level,
         version, message, getLine(), getColumn());
     }
     else
     {
-      std::string message = "Sedml attribute 'numberOfPoints' is missing from "
+      std::string message = "Sedml attribute 'numberOfSteps' is missing from "
         "the <SedUniformRange> element.";
       log->logError(SedmlUniformRangeAllowedAttributes, level, version,
         message, getLine(), getColumn());
@@ -965,9 +1023,14 @@ SedUniformRange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
     stream.writeAttribute("end", getPrefix(), mEnd);
   }
 
-  if (isSetNumberOfPoints() == true)
+  if (isSetNumberOfSteps() == true)
   {
-    stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfPoints);
+      if (getVersion() >= 4 || getLevel() > 1) {
+          stream.writeAttribute("numberOfSteps", getPrefix(), mNumberOfSteps);
+      }
+      else {
+          stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfSteps);
+      }
   }
 
   if (isSetType() == true)
@@ -1051,7 +1114,7 @@ SedUniformRange_getEnd(const SedUniformRange_t * sur)
 
 
 /*
- * Returns the value of the "numberOfPoints" attribute of this
+ * Returns the value of the "numberOfSteps" attribute of this
  * SedUniformRange_t.
  */
 LIBSEDML_EXTERN
@@ -1059,6 +1122,18 @@ int
 SedUniformRange_getNumberOfPoints(const SedUniformRange_t * sur)
 {
   return (sur != NULL) ? sur->getNumberOfPoints() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Returns the value of the "numberOfSteps" attribute of this
+ * SedUniformRange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_getNumberOfSteps(const SedUniformRange_t* sur)
+{
+    return (sur != NULL) ? sur->getNumberOfSteps() : SEDML_INT_MAX;
 }
 
 
@@ -1103,7 +1178,7 @@ SedUniformRange_isSetEnd(const SedUniformRange_t * sur)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedUniformRange_t's "numberOfPoints"
+ * Predicate returning @c 1 (true) if this SedUniformRange_t's "numberOfSteps"
  * attribute is set.
  */
 LIBSEDML_EXTERN
@@ -1111,6 +1186,18 @@ int
 SedUniformRange_isSetNumberOfPoints(const SedUniformRange_t * sur)
 {
   return (sur != NULL) ? static_cast<int>(sur->isSetNumberOfPoints()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedUniformRange_t's "numberOfSteps"
+ * attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_isSetNumberOfSteps(const SedUniformRange_t* sur)
+{
+    return (sur != NULL) ? static_cast<int>(sur->isSetNumberOfSteps()) : 0;
 }
 
 
@@ -1149,14 +1236,26 @@ SedUniformRange_setEnd(SedUniformRange_t * sur, double end)
 
 
 /*
- * Sets the value of the "numberOfPoints" attribute of this SedUniformRange_t.
+ * Sets the value of the "numberOfSteps" attribute of this SedUniformRange_t.
  */
 LIBSEDML_EXTERN
 int
-SedUniformRange_setNumberOfPoints(SedUniformRange_t * sur, int numberOfPoints)
+SedUniformRange_setNumberOfPoints(SedUniformRange_t * sur, int numberOfSteps)
 {
-  return (sur != NULL) ? sur->setNumberOfPoints(numberOfPoints) :
+  return (sur != NULL) ? sur->setNumberOfPoints(numberOfSteps) :
     LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "numberOfSteps" attribute of this SedUniformRange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_setNumberOfSteps(SedUniformRange_t* sur, int numberOfSteps)
+{
+    return (sur != NULL) ? sur->setNumberOfSteps(numberOfSteps) :
+        LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1194,7 +1293,7 @@ SedUniformRange_unsetEnd(SedUniformRange_t * sur)
 
 
 /*
- * Unsets the value of the "numberOfPoints" attribute of this
+ * Unsets the value of the "numberOfSteps" attribute of this
  * SedUniformRange_t.
  */
 LIBSEDML_EXTERN
@@ -1202,6 +1301,18 @@ int
 SedUniformRange_unsetNumberOfPoints(SedUniformRange_t * sur)
 {
   return (sur != NULL) ? sur->unsetNumberOfPoints() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "numberOfSteps" attribute of this
+ * SedUniformRange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_unsetNumberOfSteps(SedUniformRange_t* sur)
+{
+    return (sur != NULL) ? sur->unsetNumberOfSteps() : LIBSEDML_INVALID_OBJECT;
 }
 
 

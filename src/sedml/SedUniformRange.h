@@ -67,8 +67,8 @@ protected:
   bool mIsSetStart;
   double mEnd;
   bool mIsSetEnd;
-  int mNumberOfPoints;
-  bool mIsSetNumberOfPoints;
+  int mNumberOfSteps;
+  bool mIsSetNumberOfSteps;
   std::string mType;
 
   /** @endcond */
@@ -152,13 +152,23 @@ public:
 
 
   /**
-   * Returns the value of the "numberOfPoints" attribute of this
+   * Returns the value of the "numberOfSteps" attribute of this
    * SedUniformRange.
    *
-   * @return the value of the "numberOfPoints" attribute of this
+   * @return the value of the "numberOfSteps" attribute of this
    * SedUniformRange as a integer.
    */
   int getNumberOfPoints() const;
+
+
+  /**
+   * Returns the value of the "numberOfSteps" attribute of this
+   * SedUniformRange.
+   *
+   * @return the value of the "numberOfSteps" attribute of this
+   * SedUniformRange as a integer.
+   */
+  int getNumberOfSteps() const;
 
 
   /**
@@ -191,13 +201,23 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedUniformRange's "numberOfPoints"
+   * Predicate returning @c true if this SedUniformRange's "numberOfSteps"
    * attribute is set.
    *
-   * @return @c true if this SedUniformRange's "numberOfPoints" attribute has
+   * @return @c true if this SedUniformRange's "numberOfSteps" attribute has
    * been set, otherwise @c false is returned.
    */
   bool isSetNumberOfPoints() const;
+
+
+  /**
+   * Predicate returning @c true if this SedUniformRange's "numberOfSteps"
+   * attribute is set.
+   *
+   * @return @c true if this SedUniformRange's "numberOfSteps" attribute has
+   * been set, otherwise @c false is returned.
+   */
+  bool isSetNumberOfSteps() const;
 
 
   /**
@@ -237,9 +257,9 @@ public:
 
 
   /**
-   * Sets the value of the "numberOfPoints" attribute of this SedUniformRange.
+   * Sets the value of the "numberOfSteps" attribute of this SedUniformRange.
    *
-   * @param numberOfPoints int value of the "numberOfPoints" attribute to be
+   * @param numberOfSteps int value of the "numberOfSteps" attribute to be
    * set.
    *
    * @copydetails doc_returns_success_code
@@ -247,7 +267,21 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setNumberOfPoints(int numberOfPoints);
+  int setNumberOfPoints(int numberOfSteps);
+
+
+  /**
+   * Sets the value of the "numberOfSteps" attribute of this SedUniformRange.
+   *
+   * @param numberOfSteps int value of the "numberOfSteps" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setNumberOfSteps(int numberOfSteps);
 
 
   /**
@@ -285,7 +319,7 @@ public:
 
 
   /**
-   * Unsets the value of the "numberOfPoints" attribute of this
+   * Unsets the value of the "numberOfSteps" attribute of this
    * SedUniformRange.
    *
    * @copydetails doc_returns_success_code
@@ -293,6 +327,17 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetNumberOfPoints();
+
+
+  /**
+   * Unsets the value of the "numberOfSteps" attribute of this
+   * SedUniformRange.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetNumberOfSteps();
 
 
   /**
@@ -341,7 +386,7 @@ public:
    * @note The required attributes for the SedUniformRange object are:
    * @li "start"
    * @li "end"
-   * @li "numberOfPoints"
+   * @li "numberOfSteps"
    * @li "type"
    */
   virtual bool hasRequiredAttributes() const;
@@ -781,12 +826,12 @@ SedUniformRange_getEnd(const SedUniformRange_t * sur);
 
 
 /**
- * Returns the value of the "numberOfPoints" attribute of this
+ * Returns the value of the "numberOfSteps" attribute of this
  * SedUniformRange_t.
  *
- * @param sur the SedUniformRange_t structure whose numberOfPoints is sought.
+ * @param sur the SedUniformRange_t structure whose numberOfSteps is sought.
  *
- * @return the value of the "numberOfPoints" attribute of this
+ * @return the value of the "numberOfSteps" attribute of this
  * SedUniformRange_t as a integer.
  *
  * @memberof SedUniformRange_t
@@ -794,6 +839,22 @@ SedUniformRange_getEnd(const SedUniformRange_t * sur);
 LIBSEDML_EXTERN
 int
 SedUniformRange_getNumberOfPoints(const SedUniformRange_t * sur);
+
+
+/**
+ * Returns the value of the "numberOfSteps" attribute of this
+ * SedUniformRange_t.
+ *
+ * @param sur the SedUniformRange_t structure whose numberOfSteps is sought.
+ *
+ * @return the value of the "numberOfSteps" attribute of this
+ * SedUniformRange_t as a integer.
+ *
+ * @memberof SedUniformRange_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_getNumberOfSteps(const SedUniformRange_t* sur);
 
 
 /**
@@ -846,12 +907,12 @@ SedUniformRange_isSetEnd(const SedUniformRange_t * sur);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedUniformRange_t's "numberOfPoints"
+ * Predicate returning @c 1 (true) if this SedUniformRange_t's "numberOfSteps"
  * attribute is set.
  *
  * @param sur the SedUniformRange_t structure.
  *
- * @return @c 1 (true) if this SedUniformRange_t's "numberOfPoints" attribute
+ * @return @c 1 (true) if this SedUniformRange_t's "numberOfSteps" attribute
  * has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedUniformRange_t
@@ -859,6 +920,22 @@ SedUniformRange_isSetEnd(const SedUniformRange_t * sur);
 LIBSEDML_EXTERN
 int
 SedUniformRange_isSetNumberOfPoints(const SedUniformRange_t * sur);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedUniformRange_t's "numberOfSteps"
+ * attribute is set.
+ *
+ * @param sur the SedUniformRange_t structure.
+ *
+ * @return @c 1 (true) if this SedUniformRange_t's "numberOfSteps" attribute
+ * has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedUniformRange_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_isSetNumberOfSteps(const SedUniformRange_t* sur);
 
 
 /**
@@ -918,11 +995,11 @@ SedUniformRange_setEnd(SedUniformRange_t * sur, double end);
 
 
 /**
- * Sets the value of the "numberOfPoints" attribute of this SedUniformRange_t.
+ * Sets the value of the "numberOfSteps" attribute of this SedUniformRange_t.
  *
  * @param sur the SedUniformRange_t structure.
  *
- * @param numberOfPoints int value of the "numberOfPoints" attribute to be set.
+ * @param numberOfSteps int value of the "numberOfSteps" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -935,7 +1012,28 @@ SedUniformRange_setEnd(SedUniformRange_t * sur, double end);
 LIBSEDML_EXTERN
 int
 SedUniformRange_setNumberOfPoints(SedUniformRange_t * sur,
-                                  int numberOfPoints);
+                                  int numberOfSteps);
+
+
+/**
+ * Sets the value of the "numberOfSteps" attribute of this SedUniformRange_t.
+ *
+ * @param sur the SedUniformRange_t structure.
+ *
+ * @param numberOfSteps int value of the "numberOfSteps" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedUniformRange_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_setNumberOfSteps(SedUniformRange_t* sur,
+    int numberOfSteps);
 
 
 /**
@@ -994,7 +1092,7 @@ SedUniformRange_unsetEnd(SedUniformRange_t * sur);
 
 
 /**
- * Unsets the value of the "numberOfPoints" attribute of this
+ * Unsets the value of the "numberOfSteps" attribute of this
  * SedUniformRange_t.
  *
  * @param sur the SedUniformRange_t structure.
@@ -1009,6 +1107,24 @@ SedUniformRange_unsetEnd(SedUniformRange_t * sur);
 LIBSEDML_EXTERN
 int
 SedUniformRange_unsetNumberOfPoints(SedUniformRange_t * sur);
+
+
+/**
+ * Unsets the value of the "numberOfSteps" attribute of this
+ * SedUniformRange_t.
+ *
+ * @param sur the SedUniformRange_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedUniformRange_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformRange_unsetNumberOfSteps(SedUniformRange_t* sur);
 
 
 /**
@@ -1041,7 +1157,7 @@ SedUniformRange_unsetType(SedUniformRange_t * sur);
  * @note The required attributes for the SedUniformRange_t object are:
  * @li "start"
  * @li "end"
- * @li "numberOfPoints"
+ * @li "numberOfSteps"
  * @li "type"
  *
  * @memberof SedUniformRange_t

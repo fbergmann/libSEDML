@@ -69,8 +69,6 @@ protected:
   bool mIsSetOutputStartTime;
   double mOutputEndTime;
   bool mIsSetOutputEndTime;
-  int mNumberOfPoints;
-  bool mIsSetNumberOfPoints;
   int mNumberOfSteps;
   bool mIsSetNumberOfSteps;
 
@@ -167,10 +165,10 @@ public:
 
 
   /**
-   * Returns the value of the "numberOfPoints" attribute of this
+   * Returns the value of the "numberOfSteps" attribute of this
    * SedUniformTimeCourse.
    *
-   * @return the value of the "numberOfPoints" attribute of this
+   * @return the value of the "numberOfSteps" attribute of this
    * SedUniformTimeCourse as a integer.
    */
   int getNumberOfPoints() const;
@@ -218,9 +216,9 @@ public:
 
   /**
    * Predicate returning @c true if this SedUniformTimeCourse's
-   * "numberOfPoints" attribute is set.
+   * "numberOfSteps" attribute is set.
    *
-   * @return @c true if this SedUniformTimeCourse's "numberOfPoints" attribute
+   * @return @c true if this SedUniformTimeCourse's "numberOfSteps" attribute
    * has been set, otherwise @c false is returned.
    */
   bool isSetNumberOfPoints() const;
@@ -281,10 +279,10 @@ public:
 
 
   /**
-   * Sets the value of the "numberOfPoints" attribute of this
+   * Sets the value of the "numberOfSteps" attribute of this
    * SedUniformTimeCourse.
    *
-   * @param numberOfPoints int value of the "numberOfPoints" attribute to be
+   * @param numberOfSteps int value of the "numberOfSteps" attribute to be
    * set.
    *
    * @copydetails doc_returns_success_code
@@ -292,7 +290,7 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setNumberOfPoints(int numberOfPoints);
+  int setNumberOfPoints(int numberOfSteps);
 
 
   /**
@@ -343,7 +341,7 @@ public:
 
 
   /**
-   * Unsets the value of the "numberOfPoints" attribute of this
+   * Unsets the value of the "numberOfSteps" attribute of this
    * SedUniformTimeCourse.
    *
    * @copydetails doc_returns_success_code
@@ -872,13 +870,13 @@ SedUniformTimeCourse_getOutputEndTime(const SedUniformTimeCourse_t * sutc);
 
 
 /**
- * Returns the value of the "numberOfPoints" attribute of this
+ * Returns the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t.
  *
- * @param sutc the SedUniformTimeCourse_t structure whose numberOfPoints is
+ * @param sutc the SedUniformTimeCourse_t structure whose numberOfSteps is
  * sought.
  *
- * @return the value of the "numberOfPoints" attribute of this
+ * @return the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t as a integer.
  *
  * @memberof SedUniformTimeCourse_t
@@ -955,11 +953,11 @@ SedUniformTimeCourse_isSetOutputEndTime(const SedUniformTimeCourse_t * sutc);
 
 /**
  * Predicate returning @c 1 (true) if this SedUniformTimeCourse_t's
- * "numberOfPoints" attribute is set.
+ * "numberOfSteps" attribute is set.
  *
  * @param sutc the SedUniformTimeCourse_t structure.
  *
- * @return @c 1 (true) if this SedUniformTimeCourse_t's "numberOfPoints"
+ * @return @c 1 (true) if this SedUniformTimeCourse_t's "numberOfSteps"
  * attribute has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedUniformTimeCourse_t
@@ -1054,12 +1052,12 @@ SedUniformTimeCourse_setOutputEndTime(SedUniformTimeCourse_t * sutc,
 
 
 /**
- * Sets the value of the "numberOfPoints" attribute of this
+ * Sets the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t.
  *
  * @param sutc the SedUniformTimeCourse_t structure.
  *
- * @param numberOfPoints int value of the "numberOfPoints" attribute to be set.
+ * @param numberOfSteps int value of the "numberOfSteps" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1072,7 +1070,7 @@ SedUniformTimeCourse_setOutputEndTime(SedUniformTimeCourse_t * sutc,
 LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_setNumberOfPoints(SedUniformTimeCourse_t * sutc,
-                                       int numberOfPoints);
+                                       int numberOfSteps);
 
 
 /**
@@ -1152,7 +1150,7 @@ SedUniformTimeCourse_unsetOutputEndTime(SedUniformTimeCourse_t * sutc);
 
 
 /**
- * Unsets the value of the "numberOfPoints" attribute of this
+ * Unsets the value of the "numberOfSteps" attribute of this
  * SedUniformTimeCourse_t.
  *
  * @param sutc the SedUniformTimeCourse_t structure.
