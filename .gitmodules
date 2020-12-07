@@ -3,7 +3,8 @@
 	url = https://github.com/sbmlteam/libSBML-dependencies.git
 [submodule "submodules/libSBML"]
 	path = submodules/libSBML
-	url = https://github.com/fbergmann/libsbml_test.git
+	url = https://github.com/sbmlteam/libsbml.git
+	branch = development
 [submodule "submodules/NuML"]
 	path = submodules/NuML
 	url = https://github.com/NuML/NuML
