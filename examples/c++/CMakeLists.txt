@@ -47,7 +47,7 @@ foreach(example
 	create_sedml
 	echo_sedml
 	print_sedml
-	
+	create_nested_task
 )
 	add_executable(example_cpp_${example} ${example}.cpp)
 	set_target_properties(example_cpp_${example} PROPERTIES  OUTPUT_NAME ${example})

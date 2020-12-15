@@ -1,6 +1,6 @@
 /**
  * @file    create_sedml.cpp
- * @brief   cerates a SED-ML document.
+ * @brief   creates a SED-ML document.
  * @author  Frank T. Bergmann
  *
  * <!--------------------------------------------------------------------------
@@ -202,7 +202,7 @@ main (int argc, char* argv[])
   vrange->addValue(0.1);
 
 
-  SedSetValue* setValue = repeat->createSetValue(); //createTaskChange();
+  SedSetValue* setValue = repeat->createTaskChange();
   setValue->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id='J0_v0']");
   setValue->setRange("current");
   setValue->setModelReference("model1");
