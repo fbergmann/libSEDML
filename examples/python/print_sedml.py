@@ -38,6 +38,26 @@ import sys
 import os.path
 import libsedml
 
+
+def print_change(change):
+  # type: (libsedml.SedSetValue) -> None
+  print("\t\tChange model=", change.getModelReference(), " target=", change.getTarget(), 
+        " range=", change.getRange(), 
+        " math=", libsedml.formulaToString(change.getMath()), "\n")
+
+def print_repeated_task(current):
+  # type: (libsedml.SedRepeatedTask) -> None
+  print ("\tRepeatedTask id=" , current.getId() , " range=" , current.getRangeId() , " resetModel=" , current.getResetModel() , "\n")
+  for i in range(current.getNumRanges()):
+    print("\t\tRange: id=",current.getRange(i).getId())
+  
+  for i in range(current.getNumTaskChanges()):
+    print_change(current.getTaskChange(i))
+
+  for i in range(current.getNumSubTasks()):
+    print("\t\tSubtask order=",current.getSubTask(i).getOrder(), 
+          " task=", current.getSubTask(i).getTask(), "\n")
+
 def main (args):
   """Usage: print_sedml input-filename
   """
@@ -59,6 +79,8 @@ def main (args):
       if tc.isSetAlgorithm():
         kisaoid=tc.getAlgorithm().getKisaoID()
       print ("\tTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," numPoints=",tc.getNumberOfPoints()," kisao=",kisaoid,"\n")
+    elif current.getTypeCode() == libsedml.SEDML_SIMULATION_STEADYSTATE:
+      print ("\tSteadyState id=", current.getId(),"\n")
     else:
       print ("\tUncountered unknown simulation. ",current.getId(),"\n")
   
@@ -72,7 +94,10 @@ def main (args):
   print ("The document has %d task(s)." % doc.getNumTasks())
   for i in range(0,doc.getNumTasks()):
     current = doc.getTask(i)
-    print ("\tTask id=" , current.getId() , " model=" , current.getModelReference() , " sim=" , current.getSimulationReference() , "\n")
+    if current.getTypeCode() == libsedml.SEDML_TASK_REPEATEDTASK:
+      print_repeated_task(current)
+    else: 
+      print ("\tTask id=" , current.getId() , " model=" , current.getModelReference() , " sim=" , current.getSimulationReference() , "\n")
 
   print ("\n")
   print ("The document has " , doc.getNumDataGenerators() , " datagenerators(s)." , "\n")
