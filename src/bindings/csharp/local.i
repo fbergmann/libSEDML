@@ -477,10 +477,6 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
       {
          return new SedListOfSubPlots(cPtr, owner);
       }
-      else if (name == "listOfStyles")
-      {
-         return new SedListOfStyles(cPtr, owner);
-      }
       else if (name == "listOfRemainingDimensions")
       {
          return new SedListOfRemainingDimensions(cPtr, owner);
@@ -921,7 +917,6 @@ COVARIANT_RTYPE_CLONE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
-COVARIANT_RTYPE_CLONE(SedListOfStyles)
 COVARIANT_RTYPE_CLONE(SedListOfRemainingDimensions)
 
 /**
@@ -994,7 +989,6 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitExperiments)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitMappings)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSubPlots)
-COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfStyles)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfRemainingDimensions)
 
 %define COVARIANT_GETID(_CNAME_)
