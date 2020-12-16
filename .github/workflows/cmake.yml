@@ -55,13 +55,22 @@ jobs:
             cmake -E make_directory ${{runner.workspace}}/build_libsbml
             cmake -E make_directory ${{runner.workspace}}/build_libnuml
 
+
+    - name: Create Build Environment
+      # Some projects don't allow in-source building, so create a separate build directory
+      # We'll use this as our working directory for all subsequent commands
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+
+# W I N D O W S
+
     - name: Configure and build libsbml dependencies (win)
       # build dependencies
       if: matrix.os == 'windows-latest'
       working-directory: ${{runner.workspace}}/build_libsbml_dependencies
       shell: cmd
       run: |
-          cmake -DCMAKE_INSTALL_PREFIX=%{{runner.workspace}}%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF DWITH_LIBXML=OFF %GITHUB_WORKSPACE%\submodules\libSBML-dependencies
+          cmake -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF DWITH_LIBXML=OFF %GITHUB_WORKSPACE%\submodules\libSBML-dependencies
           cmake --build . --config %BUILD_TYPE% --target install
 
 
@@ -71,10 +80,8 @@ jobs:
       working-directory: ${{runner.workspace}}/build_libsbml
       shell: cmd
       run: |
-          cmake -DLIBSBML_DEPENDENCY_DIR=%{{runner.workspace}}%/install_dependencies -DCMAKE_INSTALL_PREFIX=%{{runner.workspace}}%/install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBEXPAT_INCLUDE_DIR=%{{runner.workspace}}%\install_dependencies\include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  %GITHUB_WORKSPACE%\submodules\libSBML
-          cmake --build . --config %BUILD_TYPE% --target install    
-
-
+          cmake -DLIBSBML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBEXPAT_INCLUDE_DIR=%GITHUB_WORKSPACE%\install_dependencies\include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  %GITHUB_WORKSPACE%\submodules\libSBML
+          cmake --build . --config %BUILD_TYPE% --target install
 
     - name: Configure and build libnuml (win)
       # build libsbml
@@ -82,8 +89,22 @@ jobs:
       working-directory: ${{runner.workspace}}/build_libnuml
       shell: cmd
       run: |
-          cmake -DLIBNUML_DEPENDENCY_DIR=%{{runner.workspace}}%\install_dependencies -DCMAKE_INSTALL_PREFIX=%{{runner.workspace}}%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE%  %GITHUB_WORKSPACE%\submodules\NuML\libnuml
+          cmake -DLIBNUML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE%  %GITHUB_WORKSPACE%\submodules\NuML\libnuml
           cmake --build . --config %BUILD_TYPE% --target install
+
+    - name: Configure CMake
+      # Use a bash shell so we can use the same syntax for environment variable
+      # access regardless of the host operating system
+      if: matrix.os == 'windows-latest'
+      shell: cmd
+      working-directory: ${{runner.workspace}}/build
+      # Note the current convention is to use the -S and -B options here to specify source 
+      # and build directories, but this is only available with CMake 3.13 and higher.  
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBSEDML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%/install_dependencies  %GITHUB_WORKSPACE%
+
+
+# N O T  WINDOWS
 
     - name: Configure and build libsbml dependencies (mac / linux)
       # build dependencies
@@ -102,8 +123,6 @@ jobs:
       run: |
           cmake -DLIBSBML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBEXPAT_INCLUDE_DIR=${{runner.workspace}}/install_dependencies/include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  $GITHUB_WORKSPACE/submodules/libSBML
           cmake --build . --config $BUILD_TYPE --target install    
-          
-
 
     - name: Configure and build libnuml (mac / linux)
       # build libsbml
@@ -114,14 +133,10 @@ jobs:
           cmake -DLIBNUML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE  $GITHUB_WORKSPACE/submodules/NuML/libnuml
           cmake --build . --config $BUILD_TYPE --target install
 
-    - name: Create Build Environment
-      # Some projects don't allow in-source building, so create a separate build directory
-      # We'll use this as our working directory for all subsequent commands
-      run: cmake -E make_directory ${{runner.workspace}}/build
-
     - name: Configure CMake
       # Use a bash shell so we can use the same syntax for environment variable
       # access regardless of the host operating system
+      if: matrix.os != 'windows-latest'
       shell: bash
       working-directory: ${{runner.workspace}}/build
       # Note the current convention is to use the -S and -B options here to specify source 
