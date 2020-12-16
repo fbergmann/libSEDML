@@ -13,7 +13,7 @@ jobs:
     # cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
@@ -88,7 +88,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build_libnuml
       shell: cmd
       run: |
-          cmake -DLIBNUML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE%  %GITHUB_WORKSPACE%\submodules\NuML\libnuml
+          cmake -DLIBNUML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DLIBNUML_SKIP_SHARED_LIBRARY=ON -DCMAKE_BUILD_TYPE=%BUILD_TYPE%  %GITHUB_WORKSPACE%\submodules\NuML\libnuml
           cmake --build . --config %BUILD_TYPE% --target install
 
     - name: Configure CMake
@@ -129,7 +129,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build_libnuml
       shell: bash
       run: |
-          cmake -DLIBNUML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE  $GITHUB_WORKSPACE/submodules/NuML/libnuml
+          cmake -DLIBNUML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DLIBNUML_SKIP_SHARED_LIBRARY=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE  $GITHUB_WORKSPACE/submodules/NuML/libnuml
           cmake --build . --config $BUILD_TYPE --target install
 
     - name: Configure CMake
@@ -167,5 +167,5 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v1
       with:
-        path: ./build/binaries_${{ matrix.os }}.tar.gz
+        path: ${{runner.workspace}}/build/binaries_${{ matrix.os }}.tar.gz
         name: binaries_${{ matrix.os }}.tar.gz
