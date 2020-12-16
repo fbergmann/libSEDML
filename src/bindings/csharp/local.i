@@ -373,6 +373,12 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     case (int) libsedml.SEDML_SHADEDAREA:
       return new SedShadedArea(cPtr, owner);
 
+    case (int) libsedml.SEDML_WATERFALLPLOT:
+      return new SedWaterfallPlot(cPtr, owner);
+
+    case (int) libsedml.SEDML_PARAMETERESTIMATIONREPORT:
+      return new SedParameterEstimationReport(cPtr, owner);
+
     case (int) libsedml.SEDML_LIST_OF:
       String name = sb.getElementName();
       if(name == "listOf")
@@ -470,6 +476,10 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
       else if (name == "listOfSubPlots")
       {
          return new SedListOfSubPlots(cPtr, owner);
+      }
+      else if (name == "listOfStyles")
+      {
+         return new SedListOfStyles(cPtr, owner);
       }
       else if (name == "listOfRemainingDimensions")
       {
@@ -886,6 +896,8 @@ COVARIANT_RTYPE_CLONE(SedRemainingDimension)
 COVARIANT_RTYPE_CLONE(SedDataRange)
 COVARIANT_RTYPE_CLONE(SedSimpleRepeatedTask)
 COVARIANT_RTYPE_CLONE(SedShadedArea)
+COVARIANT_RTYPE_CLONE(SedWaterfallPlot)
+COVARIANT_RTYPE_CLONE(SedParameterEstimationReport)
 COVARIANT_RTYPE_CLONE(SedListOfModels)
 COVARIANT_RTYPE_CLONE(SedListOfChanges)
 COVARIANT_RTYPE_CLONE(SedListOfVariables)
@@ -909,6 +921,7 @@ COVARIANT_RTYPE_CLONE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
+COVARIANT_RTYPE_CLONE(SedListOfStyles)
 COVARIANT_RTYPE_CLONE(SedListOfRemainingDimensions)
 
 /**
@@ -981,6 +994,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitExperiments)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitMappings)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSubPlots)
+COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfStyles)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfRemainingDimensions)
 
 %define COVARIANT_GETID(_CNAME_)

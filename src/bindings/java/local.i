@@ -211,8 +211,11 @@ COVARIANT_RTYPE_CLONE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
+COVARIANT_RTYPE_CLONE(SedListOfStyles)
 COVARIANT_RTYPE_CLONE(SedListOfRemainingDimensions)
 COVARIANT_RTYPE_CLONE(SedParameterEstimationResultPlot)
+COVARIANT_RTYPE_CLONE(SedParameterEstimationReport)
+COVARIANT_RTYPE_CLONE(SedWaterfallPlot)
 
 
 
@@ -273,6 +276,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitExperiments)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitMappings)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSubPlots)
+COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfStyles)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfRemainingDimensions)
 
 /**
@@ -748,6 +752,12 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
     case (int) libsedml.SEDML_SHADEDAREA:
       return new SedShadedArea(cPtr, owner);
 
+    case (int) libsedml.SEDML_WATERFALLPLOT:
+      return new SedWaterfallPlot(cPtr, owner);
+
+    case (int) libsedml.SEDML_PARAMETERESTIMATIONREPORT:
+      return new SedParameterEstimationReport(cPtr, owner);
+
     case (int) libsedml.SEDML_LIST_OF:
       String name = sb.getElementName();
       if(name.equals("listOf"))
@@ -845,6 +855,10 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
       else if (name == "listOfSubPlots")
       {
          return new SedListOfSubPlots(cPtr, owner);
+      }
+      else if (name == "listOfStyles")
+      {
+         return new SedListOfStyles(cPtr, owner);
       }
       else if (name == "listOfRemainingDimensions")
       {
