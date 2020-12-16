@@ -82,7 +82,11 @@ void create_nested_task(const std::string& file_name)
     change->setModelReference("model1");
     change->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&quot;J0_v0&quot;]");
     change->setRange("current");
-    change->setMath(SBML_parseFormula("current"));
+    change->setMath(SBML_parseFormula("current + var1"));
+    
+    auto* var = change->createVariable();
+    var->setId("var1");
+    var->setTarget("/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&quot;J0_v0&quot;]");
 
     auto* subtask = task->createSubTask();
     subtask->setOrder(1);

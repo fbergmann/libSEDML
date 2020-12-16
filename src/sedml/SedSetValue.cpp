@@ -60,6 +60,8 @@ SedSetValue::SedSetValue(unsigned int level, unsigned int version)
   , mTarget ("")
   , mRange ("")
   , mMath (NULL)
+  , mVariables (level, version)
+  , mParameters (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
@@ -76,6 +78,8 @@ SedSetValue::SedSetValue(SedNamespaces *sedmlns)
   , mTarget ("")
   , mRange ("")
   , mMath (NULL)
+  , mVariables (sedmlns)
+  , mParameters (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
@@ -92,6 +96,8 @@ SedSetValue::SedSetValue(const SedSetValue& orig)
   , mTarget ( orig.mTarget )
   , mRange ( orig.mRange )
   , mMath ( NULL )
+  , mVariables ( orig.mVariables )
+  , mParameters ( orig.mParameters )
 {
   if (orig.mMath != NULL)
   {
@@ -115,6 +121,8 @@ SedSetValue::operator=(const SedSetValue& rhs)
     mSymbol = rhs.mSymbol;
     mTarget = rhs.mTarget;
     mRange = rhs.mRange;
+    mVariables = rhs.mVariables;
+    mParameters = rhs.mParameters;
     delete mMath;
     if (rhs.mMath != NULL)
     {
@@ -439,6 +447,362 @@ SedSetValue::unsetMath()
 
 
 /*
+ * Returns the SedListOfVariables from this SedSetValue.
+ */
+const SedListOfVariables*
+SedSetValue::getListOfVariables() const
+{
+  return &mVariables;
+}
+
+
+/*
+ * Returns the SedListOfVariables from this SedSetValue.
+ */
+SedListOfVariables*
+SedSetValue::getListOfVariables()
+{
+  return &mVariables;
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue.
+ */
+SedVariable*
+SedSetValue::getVariable(unsigned int n)
+{
+  return mVariables.get(n);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue.
+ */
+const SedVariable*
+SedSetValue::getVariable(unsigned int n) const
+{
+  return mVariables.get(n);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue based on its identifier.
+ */
+SedVariable*
+SedSetValue::getVariable(const std::string& sid)
+{
+  return mVariables.get(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue based on its identifier.
+ */
+const SedVariable*
+SedSetValue::getVariable(const std::string& sid) const
+{
+  return mVariables.get(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue based on the TaskReference to which
+ * it refers.
+ */
+const SedVariable*
+SedSetValue::getVariableByTaskReference(const std::string& sid) const
+{
+  return mVariables.getByTaskReference(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue based on the TaskReference to which
+ * it refers.
+ */
+SedVariable*
+SedSetValue::getVariableByTaskReference(const std::string& sid)
+{
+  return mVariables.getByTaskReference(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue based on the ModelReference to which
+ * it refers.
+ */
+const SedVariable*
+SedSetValue::getVariableByModelReference(const std::string& sid) const
+{
+  return mVariables.getByModelReference(sid);
+}
+
+
+/*
+ * Get a SedVariable from the SedSetValue based on the ModelReference to which
+ * it refers.
+ */
+SedVariable*
+SedSetValue::getVariableByModelReference(const std::string& sid)
+{
+  return mVariables.getByModelReference(sid);
+}
+
+
+/*
+ * Adds a copy of the given SedVariable to this SedSetValue.
+ */
+int
+SedSetValue::addVariable(const SedVariable* sv)
+{
+  if (sv == NULL)
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+  else if (sv->hasRequiredAttributes() == false)
+  {
+    return LIBSEDML_INVALID_OBJECT;
+  }
+  else if (getLevel() != sv->getLevel())
+  {
+    return LIBSEDML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != sv->getVersion())
+  {
+    return LIBSEDML_VERSION_MISMATCH;
+  }
+  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+    SedBase*>(sv)) == false)
+  {
+    return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (sv->isSetId() && (mVariables.get(sv->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
+  }
+  else
+  {
+    return mVariables.append(sv);
+  }
+}
+
+
+/*
+ * Get the number of SedVariable objects in this SedSetValue.
+ */
+unsigned int
+SedSetValue::getNumVariables() const
+{
+  return mVariables.size();
+}
+
+
+/*
+ * Creates a new SedVariable object, adds it to this SedSetValue object and
+ * returns the SedVariable object created.
+ */
+SedVariable*
+SedSetValue::createVariable()
+{
+  SedVariable* sv = NULL;
+
+  try
+  {
+    sv = new SedVariable(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sv != NULL)
+  {
+    mVariables.appendAndOwn(sv);
+  }
+
+  return sv;
+}
+
+
+/*
+ * Removes the nth SedVariable from this SedSetValue and returns a pointer to
+ * it.
+ */
+SedVariable*
+SedSetValue::removeVariable(unsigned int n)
+{
+  return mVariables.remove(n);
+}
+
+
+/*
+ * Removes the SedVariable from this SedSetValue based on its identifier and
+ * returns a pointer to it.
+ */
+SedVariable*
+SedSetValue::removeVariable(const std::string& sid)
+{
+  return mVariables.remove(sid);
+}
+
+
+/*
+ * Returns the SedListOfParameters from this SedSetValue.
+ */
+const SedListOfParameters*
+SedSetValue::getListOfParameters() const
+{
+  return &mParameters;
+}
+
+
+/*
+ * Returns the SedListOfParameters from this SedSetValue.
+ */
+SedListOfParameters*
+SedSetValue::getListOfParameters()
+{
+  return &mParameters;
+}
+
+
+/*
+ * Get a SedParameter from the SedSetValue.
+ */
+SedParameter*
+SedSetValue::getParameter(unsigned int n)
+{
+  return mParameters.get(n);
+}
+
+
+/*
+ * Get a SedParameter from the SedSetValue.
+ */
+const SedParameter*
+SedSetValue::getParameter(unsigned int n) const
+{
+  return mParameters.get(n);
+}
+
+
+/*
+ * Get a SedParameter from the SedSetValue based on its identifier.
+ */
+SedParameter*
+SedSetValue::getParameter(const std::string& sid)
+{
+  return mParameters.get(sid);
+}
+
+
+/*
+ * Get a SedParameter from the SedSetValue based on its identifier.
+ */
+const SedParameter*
+SedSetValue::getParameter(const std::string& sid) const
+{
+  return mParameters.get(sid);
+}
+
+
+/*
+ * Adds a copy of the given SedParameter to this SedSetValue.
+ */
+int
+SedSetValue::addParameter(const SedParameter* sp)
+{
+  if (sp == NULL)
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+  else if (sp->hasRequiredAttributes() == false)
+  {
+    return LIBSEDML_INVALID_OBJECT;
+  }
+  else if (getLevel() != sp->getLevel())
+  {
+    return LIBSEDML_LEVEL_MISMATCH;
+  }
+  else if (getVersion() != sp->getVersion())
+  {
+    return LIBSEDML_VERSION_MISMATCH;
+  }
+  else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+    SedBase*>(sp)) == false)
+  {
+    return LIBSEDML_NAMESPACES_MISMATCH;
+  }
+  else if (sp->isSetId() && (mParameters.get(sp->getId())) != NULL)
+  {
+    return LIBSEDML_DUPLICATE_OBJECT_ID;
+  }
+  else
+  {
+    return mParameters.append(sp);
+  }
+}
+
+
+/*
+ * Get the number of SedParameter objects in this SedSetValue.
+ */
+unsigned int
+SedSetValue::getNumParameters() const
+{
+  return mParameters.size();
+}
+
+
+/*
+ * Creates a new SedParameter object, adds it to this SedSetValue object and
+ * returns the SedParameter object created.
+ */
+SedParameter*
+SedSetValue::createParameter()
+{
+  SedParameter* sp = NULL;
+
+  try
+  {
+    sp = new SedParameter(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sp != NULL)
+  {
+    mParameters.appendAndOwn(sp);
+  }
+
+  return sp;
+}
+
+
+/*
+ * Removes the nth SedParameter from this SedSetValue and returns a pointer to
+ * it.
+ */
+SedParameter*
+SedSetValue::removeParameter(unsigned int n)
+{
+  return mParameters.remove(n);
+}
+
+
+/*
+ * Removes the SedParameter from this SedSetValue based on its identifier and
+ * returns a pointer to it.
+ */
+SedParameter*
+SedSetValue::removeParameter(const std::string& sid)
+{
+  return mParameters.remove(sid);
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -516,6 +880,16 @@ SedSetValue::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   {
     writeMathML(getMath(), stream, NULL);
   }
+
+  if (getNumVariables() > 0)
+  {
+    mVariables.write(stream);
+  }
+
+  if (getNumParameters() > 0)
+  {
+    mParameters.write(stream);
+  }
 }
 
 /** @endcond */
@@ -546,6 +920,10 @@ void
 SedSetValue::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
+
+  mVariables.setSedDocument(d);
+
+  mParameters.setSedDocument(d);
 }
 
 /** @endcond */
@@ -561,6 +939,10 @@ void
 SedSetValue::connectToChild()
 {
   SedBase::connectToChild();
+
+  mVariables.connectToParent(this);
+
+  mParameters.connectToParent(this);
 }
 
 /** @endcond */
@@ -848,6 +1230,211 @@ SedSetValue::unsetAttribute(const std::string& attributeName)
   }
 
   return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this SedSetValue.
+ */
+SedBase*
+SedSetValue::createChildObject(const std::string& elementName)
+{
+  SedBase* obj = NULL;
+
+  if (elementName == "variable")
+  {
+    return createVariable();
+  }
+  else if (elementName == "parameter")
+  {
+    return createParameter();
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds a new "elementName" object to this SedSetValue.
+ */
+int
+SedSetValue::addChildObject(const std::string& elementName,
+                            const SedBase* element)
+{
+  if (elementName == "variable" && element->getTypeCode() == SEDML_VARIABLE)
+  {
+    return addVariable((const SedVariable*)(element));
+  }
+  else if (elementName == "parameter" && element->getTypeCode() ==
+    SEDML_PARAMETER)
+  {
+    return addParameter((const SedParameter*)(element));
+  }
+
+  return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedSetValue.
+ */
+SedBase*
+SedSetValue::removeChildObject(const std::string& elementName,
+                               const std::string& id)
+{
+  if (elementName == "variable")
+  {
+    return removeVariable(id);
+  }
+  else if (elementName == "parameter")
+  {
+    return removeParameter(id);
+  }
+
+  return NULL;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the number of "elementName" in this SedSetValue.
+ */
+unsigned int
+SedSetValue::getNumObjects(const std::string& elementName)
+{
+  unsigned int n = 0;
+
+  if (elementName == "variable")
+  {
+    return getNumVariables();
+  }
+  else if (elementName == "parameter")
+  {
+    return getNumParameters();
+  }
+
+  return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the nth object of "objectName" in this SedSetValue.
+ */
+SedBase*
+SedSetValue::getObject(const std::string& elementName, unsigned int index)
+{
+  SedBase* obj = NULL;
+
+  if (elementName == "variable")
+  {
+    return getVariable(index);
+  }
+  else if (elementName == "parameter")
+  {
+    return getParameter(index);
+  }
+
+  return obj;
+}
+
+/** @endcond */
+
+
+/*
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
+ */
+SedBase*
+SedSetValue::getElementBySId(const std::string& id)
+{
+  if (id.empty())
+  {
+    return NULL;
+  }
+
+  SedBase* obj = NULL;
+
+  obj = mVariables.getElementBySId(id);
+
+  if (obj != NULL)
+  {
+    return obj;
+  }
+
+  obj = mParameters.getElementBySId(id);
+
+  if (obj != NULL)
+  {
+    return obj;
+  }
+
+  return obj;
+}
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SedBase*
+SedSetValue::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+  stream)
+{
+  SedBase* obj = NULL;
+
+  const std::string& name = stream.peek().getName();
+
+  if (name == "listOfVariables")
+  {
+    if (getErrorLog() && mVariables.size() != 0)
+    {
+      getErrorLog()->logError(SedmlSetValueAllowedElements, getLevel(),
+        getVersion(), "", getLine(), getColumn());
+    }
+
+    obj = &mVariables;
+  }
+  else if (name == "listOfParameters")
+  {
+    if (getErrorLog() && mParameters.size() != 0)
+    {
+      getErrorLog()->logError(SedmlSetValueAllowedElements, getLevel(),
+        getVersion(), "", getLine(), getColumn());
+    }
+
+    obj = &mParameters;
+  }
+
+  connectToChild();
+
+  return obj;
 }
 
 /** @endcond */
@@ -1398,6 +1985,216 @@ int
 SedSetValue_unsetMath(SedSetValue_t * ssv)
 {
   return (ssv != NULL) ? ssv->unsetMath() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns a ListOf_t * containing SedVariable_t objects from this
+ * SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedSetValue_getListOfVariables(SedSetValue_t* ssv)
+{
+  return (ssv != NULL) ? ssv->getListOfVariables() : NULL;
+}
+
+
+/*
+ * Get a SedVariable_t from the SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_getVariable(SedSetValue_t* ssv, unsigned int n)
+{
+  return (ssv != NULL) ? ssv->getVariable(n) : NULL;
+}
+
+
+/*
+ * Get a SedVariable_t from the SedSetValue_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_getVariableById(SedSetValue_t* ssv, const char *sid)
+{
+  return (ssv != NULL && sid != NULL) ? ssv->getVariable(sid) : NULL;
+}
+
+
+/*
+ * Get a SedVariable_t from the SedSetValue_t based on the TaskReference to
+ * which it refers.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_getVariableByTaskReference(SedSetValue_t* ssv, const char *sid)
+{
+  return (ssv != NULL && sid != NULL) ? ssv->getVariableByTaskReference(sid) :
+    NULL;
+}
+
+
+/*
+ * Get a SedVariable_t from the SedSetValue_t based on the ModelReference to
+ * which it refers.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_getVariableByModelReference(SedSetValue_t* ssv, const char *sid)
+{
+  return (ssv != NULL && sid != NULL) ? ssv->getVariableByModelReference(sid) :
+    NULL;
+}
+
+
+/*
+ * Adds a copy of the given SedVariable_t to this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_addVariable(SedSetValue_t* ssv, const SedVariable_t* sv)
+{
+  return (ssv != NULL) ? ssv->addVariable(sv) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of SedVariable_t objects in this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedSetValue_getNumVariables(SedSetValue_t* ssv)
+{
+  return (ssv != NULL) ? ssv->getNumVariables() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Creates a new SedVariable_t object, adds it to this SedSetValue_t object and
+ * returns the SedVariable_t object created.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_createVariable(SedSetValue_t* ssv)
+{
+  return (ssv != NULL) ? ssv->createVariable() : NULL;
+}
+
+
+/*
+ * Removes the nth SedVariable_t from this SedSetValue_t and returns a pointer
+ * to it.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_removeVariable(SedSetValue_t* ssv, unsigned int n)
+{
+  return (ssv != NULL) ? ssv->removeVariable(n) : NULL;
+}
+
+
+/*
+ * Removes the SedVariable_t from this SedSetValue_t based on its identifier
+ * and returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedVariable_t*
+SedSetValue_removeVariableById(SedSetValue_t* ssv, const char* sid)
+{
+  return (ssv != NULL && sid != NULL) ? ssv->removeVariable(sid) : NULL;
+}
+
+
+/*
+ * Returns a ListOf_t * containing SedParameter_t objects from this
+ * SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedSetValue_getListOfParameters(SedSetValue_t* ssv)
+{
+  return (ssv != NULL) ? ssv->getListOfParameters() : NULL;
+}
+
+
+/*
+ * Get a SedParameter_t from the SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedSetValue_getParameter(SedSetValue_t* ssv, unsigned int n)
+{
+  return (ssv != NULL) ? ssv->getParameter(n) : NULL;
+}
+
+
+/*
+ * Get a SedParameter_t from the SedSetValue_t based on its identifier.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedSetValue_getParameterById(SedSetValue_t* ssv, const char *sid)
+{
+  return (ssv != NULL && sid != NULL) ? ssv->getParameter(sid) : NULL;
+}
+
+
+/*
+ * Adds a copy of the given SedParameter_t to this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSetValue_addParameter(SedSetValue_t* ssv, const SedParameter_t* sp)
+{
+  return (ssv != NULL) ? ssv->addParameter(sp) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of SedParameter_t objects in this SedSetValue_t.
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedSetValue_getNumParameters(SedSetValue_t* ssv)
+{
+  return (ssv != NULL) ? ssv->getNumParameters() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Creates a new SedParameter_t object, adds it to this SedSetValue_t object
+ * and returns the SedParameter_t object created.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedSetValue_createParameter(SedSetValue_t* ssv)
+{
+  return (ssv != NULL) ? ssv->createParameter() : NULL;
+}
+
+
+/*
+ * Removes the nth SedParameter_t from this SedSetValue_t and returns a pointer
+ * to it.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedSetValue_removeParameter(SedSetValue_t* ssv, unsigned int n)
+{
+  return (ssv != NULL) ? ssv->removeParameter(n) : NULL;
+}
+
+
+/*
+ * Removes the SedParameter_t from this SedSetValue_t based on its identifier
+ * and returns a pointer to it.
+ */
+LIBSEDML_EXTERN
+SedParameter_t*
+SedSetValue_removeParameterById(SedSetValue_t* ssv, const char* sid)
+{
+  return (ssv != NULL && sid != NULL) ? ssv->removeParameter(sid) : NULL;
 }
 
 

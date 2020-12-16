@@ -79,6 +79,16 @@ void printRepeatedTask(const SedRepeatedTask* repeat)
   {
 	const SedSetValue* current = repeat->getTaskChange(i);
 	cout << "\t\tSetvalue range='" << current->getRange() << "' modelReference='" << current->getModelReference() << "' target='" << current->getTarget() << " math='" << SBML_formulaToString(current->getMath()) <<"'" << endl;
+  for (unsigned int j = 0; j < current->getNumVariables(); ++j)
+  {
+    const SedVariable* var = current->getVariable(j);
+    cout << "\t\t\tSetVariable id='" << var->getId() << "'" << std::endl;
+  }
+  for (unsigned int j = 0; j < current->getNumParameters(); ++j)
+  {
+    const SedParameter* p = current->getParameter(j);
+    cout << "\t\t\tSedParameter id='" << p->getId() << "'" << std::endl;
+  }
   }
   cout << endl;
   for (unsigned int i = 0; i < repeat->getNumSubTasks(); ++i)

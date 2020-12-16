@@ -263,6 +263,8 @@
             <attribute name="target" required="false" type="string" abstract="false"/>
             <attribute name="range" required="false" type="SIdRef" element="Range" abstract="false"/>
             <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
+            <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
+            <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
           </attributes>
         </element>
         <element name="UniformRange" typeCode="SEDML_RANGE_UNIFORMRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="uniformRange">
