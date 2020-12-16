@@ -15,7 +15,8 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        #os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -61,17 +62,28 @@ jobs:
       shell: cmd
       run: |
           cmake -DCMAKE_INSTALL_PREFIX=%{{runner.workspace}}%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF DWITH_LIBXML=OFF %GITHUB_WORKSPACE%\submodules\libSBML-dependencies
-          cmake --build . --config $BUILD_TYPE --target install
+          cmake --build . --config %BUILD_TYPE% --target install
 
 
-    - name: Configure and build libsbml for windows
+    - name: Configure and build libsbml (win)
       # build libsbml
       if: matrix.os == 'windows-latest'
       working-directory: ${{runner.workspace}}/build_libsbml
       shell: cmd
       run: |
           cmake -DLIBSBML_DEPENDENCY_DIR=%{{runner.workspace}}%/install_dependencies -DCMAKE_INSTALL_PREFIX=%{{runner.workspace}}%/install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBEXPAT_INCLUDE_DIR=%{{runner.workspace}}%\install_dependencies\include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  %GITHUB_WORKSPACE%\submodules\libSBML
-          cmake --build . --config $BUILD_TYPE --target install    
+          cmake --build . --config %BUILD_TYPE% --target install    
+
+
+
+    - name: Configure and build libnuml (win)
+      # build libsbml
+      if: matrix.os == 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libnuml
+      shell: cmd
+      run: |
+          cmake -DLIBNUML_DEPENDENCY_DIR=%{{runner.workspace}}%\install_dependencies -DCMAKE_INSTALL_PREFIX=%{{runner.workspace}}%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE%  %GITHUB_WORKSPACE%\submodules\NuML\libnuml
+          cmake --build . --config %BUILD_TYPE% --target install
 
     - name: Configure and build libsbml dependencies (mac / linux)
       # build dependencies
@@ -82,7 +94,7 @@ jobs:
           cmake -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF DWITH_LIBXML=OFF $GITHUB_WORKSPACE/submodules/libSBML-dependencies
           cmake --build . --config $BUILD_TYPE --target install
 
-    - name: Configure and build libsbml for mac / linux
+    - name: Configure and build libsbml for (mac / linux)
       # build libsbml
       if: matrix.os != 'windows-latest'
       working-directory: ${{runner.workspace}}/build_libsbml
@@ -93,8 +105,9 @@ jobs:
           
 
 
-    - name: Configure and build libnuml
+    - name: Configure and build libnuml (mac / linux)
       # build libsbml
+      if: matrix.os != 'windows-latest'
       working-directory: ${{runner.workspace}}/build_libnuml
       shell: bash
       run: |
