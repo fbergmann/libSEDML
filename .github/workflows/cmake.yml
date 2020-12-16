@@ -28,20 +28,20 @@ jobs:
 
     - name: add SWIG to windows
       # this is separate from the SWIG download itself, because it needs to be added to the path also when SWIG is cached
-      if: matrix.platform == 'windows-latest'
+      if: matrix.os == 'windows-latest'
       shell: bash
       run: |
            choco install -y swig
 
     - name: add linux dependencies
-      if: matrix.platform == 'ubuntu-latest'
+      if: matrix.os == 'ubuntu-latest'
       shell: bash
       run: |
            sudo apt-get install swig
 
     - name: Install MacOS dependencies
       # MacOS already has libxml2 by default
-      if: matrix.platform == 'macos-latest'
+      if: matrix.os == 'macos-latest'
       shell: bash
       run: |
             brew install swig
@@ -63,14 +63,25 @@ jobs:
           cmake --build . --config $BUILD_TYPE --target install
 
 
-    - name: Configure and build libsbml
+    - name: Configure and build libsbml for windows
       # build libsbml
+      if: matrix.os == 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libsbml
+      shell: cmd
+      run: |
+          cmake -DLIBSBML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBEXPAT_INCLUDE_DIR=${{runner.workspace}}/install_dependencies/include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  $GITHUB_WORKSPACE/submodules/libSBML
+          cmake --build . --config $BUILD_TYPE --target install    
+
+    - name: Configure and build libsbml for mac / linux
+      # build libsbml
+      if: matrix.os != 'windows-latest'
       working-directory: ${{runner.workspace}}/build_libsbml
       shell: bash
       run: |
           cmake -DLIBSBML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBEXPAT_INCLUDE_DIR=${{runner.workspace}}/install_dependencies/include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  $GITHUB_WORKSPACE/submodules/libSBML
-          cmake --build . --config $BUILD_TYPE --target install
+          cmake --build . --config $BUILD_TYPE --target install    
           
+
 
     - name: Configure and build libnuml
       # build libsbml
