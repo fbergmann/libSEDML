@@ -157,14 +157,15 @@ jobs:
       run: ctest -C $BUILD_TYPE
       
     - name: Install Strip
-      run: cmake --install build --prefix instdir --strip
+      working-directory: ${{runner.workspace}}/build
+      run: cmake --install . --prefix instdir --strip
 
     - name: Pack
-      working-directory: instdir
-      run: cmake -E tar cvzf ../binaries_${ { matrix.os } }.tar.gz .
+      working-directory: ${{runner.workspace}}/build/instdir
+      run: cmake -E tar cvzf ../binaries_${{ matrix.os }}.tar.gz .
 
     - name: Upload
       uses: actions/upload-artifact@v1
       with:
-        path: ./binaries_${ { matrix.os } }.tar.gz
-        name: binaries_${ { matrix.os } }.tar.gz
+        path: ./build/binaries_${{ matrix.os }}.tar.gz
+        name: binaries_${{ matrix.os }}.tar.gz
