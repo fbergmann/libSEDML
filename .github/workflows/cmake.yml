@@ -15,8 +15,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        #os: [macos-latest, ubuntu-latest, windows-latest]
-        os: [windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -70,7 +69,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build_libsbml_dependencies
       shell: cmd
       run: |
-          cmake -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF DWITH_LIBXML=OFF %GITHUB_WORKSPACE%\submodules\libSBML-dependencies
+          cmake -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF -DWITH_LIBXML=OFF %GITHUB_WORKSPACE%\submodules\libSBML-dependencies
           cmake --build . --config %BUILD_TYPE% --target install
 
 
@@ -101,7 +100,7 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBSEDML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%/install_dependencies  %GITHUB_WORKSPACE%
+      run: cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBSEDML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%/install_dependencies -DWITH_JAVA=ON  %GITHUB_WORKSPACE%
 
 
 # N O T  WINDOWS
@@ -112,7 +111,7 @@ jobs:
       working-directory: ${{runner.workspace}}/build_libsbml_dependencies
       shell: bash
       run: |
-          cmake -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF DWITH_LIBXML=OFF $GITHUB_WORKSPACE/submodules/libSBML-dependencies
+          cmake -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF -DWITH_LIBXML=OFF $GITHUB_WORKSPACE/submodules/libSBML-dependencies
           cmake --build . --config $BUILD_TYPE --target install
 
     - name: Configure and build libsbml for (mac / linux)
@@ -142,7 +141,7 @@ jobs:
       # Note the current convention is to use the -S and -B options here to specify source 
       # and build directories, but this is only available with CMake 3.13 and higher.  
       # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
-      run: cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBSEDML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies  $GITHUB_WORKSPACE
+      run: cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBSEDML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DWITH_JAVA=ON $GITHUB_WORKSPACE
 
     - name: Build
       working-directory: ${{runner.workspace}}/build
