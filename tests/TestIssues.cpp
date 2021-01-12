@@ -263,3 +263,30 @@ TEST_CASE("ensure SedStyle members are labled consistently", "[sedml]")
 
 }
 
+TEST_CASE("Reading / Writing changexml with multipme elements", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/issue_89.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+
+  auto* model = doc->getModel(0);
+  REQUIRE(model != NULL);
+  auto* change = dynamic_cast<SedChangeXML*>(model->getChange(0));
+  REQUIRE(change != NULL);
+  auto* newXML = change->getNewXML();
+  REQUIRE(newXML != NULL);
+  REQUIRE(newXML->getNumChildren() == 2);
+  std::string newString = newXML->toXMLString();
+  REQUIRE(!newString.empty());
+
+  change = dynamic_cast<SedChangeXML*>(model->getChange(1));
+  REQUIRE(change != NULL);
+  newXML = change->getNewXML();
+  REQUIRE(newXML != NULL);
+  newString = newXML->toXMLString();
+  REQUIRE(!newString.empty());
+
+
+  delete doc;
+
+}

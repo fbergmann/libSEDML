@@ -620,14 +620,60 @@ SedChangeXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
   if (name == "newXML")
   {
     const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken& token = stream.next();
+    
     stream.skipText();
+    
     delete mNewXML;
-    LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* xml = new
-      LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(stream);
-    mNewXML = new LIBSBML_CPP_NAMESPACE_QUALIFIER
-      XMLNode(*(static_cast<LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken*>(xml)));
-    stream.skipPastEnd(token);
-    delete xml;
+    mNewXML = NULL;
+
+    while (stream.isGood())
+    {
+      const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken& next = stream.peek();
+      if (!stream.isGood()) break;
+
+      if (next.isEndFor(token))
+      {
+        stream.next();
+        break;
+      }
+      else if (next.isStart())
+      {
+        if (mNewXML == NULL)
+        {
+          mNewXML = new
+            LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode();
+        }
+
+        mNewXML->addChild(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(stream));
+      }
+      else if (next.isText())
+      {
+        std::string s = next.getCharacters();
+        static const string whitespace(" \t\r\n");
+
+        string::size_type begin = s.find_first_not_of(whitespace);
+        string::size_type end = s.find_last_not_of(whitespace);
+
+        s = (begin == string::npos) ? std::string() : s.substr(begin, end - begin + 1);
+
+        if (s != "" && mNewXML != NULL)
+          mNewXML->addChild(stream.next());
+        else
+          stream.skipText();
+      }
+      else
+      {
+        stream.skipPastEnd(stream.next());
+      }
+    }
+
+    if (mNewXML != NULL && mNewXML->getNumChildren() == 1)
+    {
+      // for convenience if we have just one element hide the nesting
+      mNewXML = new
+        LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(mNewXML->getChild(0));
+    }
+
     read = true;
   }
 
