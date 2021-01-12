@@ -670,8 +670,10 @@ SedChangeXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     if (mNewXML != NULL && mNewXML->getNumChildren() == 1)
     {
       // for convenience if we have just one element hide the nesting
-      mNewXML = new
+      LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* copy = new
         LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(mNewXML->getChild(0));
+      delete mNewXML;
+      mNewXML = copy;
     }
 
     read = true;
