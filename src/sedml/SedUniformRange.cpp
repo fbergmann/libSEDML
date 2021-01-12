@@ -843,6 +843,10 @@ SedUniformRange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("numberOfSteps");
 
+  if (getVersion() >= 4 || getLevel() > 1) {
+      attributes.add("numberOfSteps");
+  }
+
   attributes.add("type");
 }
 
