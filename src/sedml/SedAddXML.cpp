@@ -615,12 +615,17 @@ SedAddXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   bool read = false;
   const string& name = stream.peek().getName();
+  std::string newElementText;
 
   if (name == "newXML")
   {
     const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken& token = stream.next();
 
-    stream.skipText();
+    while (stream.isGood() && stream.peek().isText())
+    {
+      newElementText += stream.next().getCharacters();
+    }
+    newElementText = _trim(newElementText);
 
     delete mNewXML;
     mNewXML = NULL;
@@ -641,19 +646,16 @@ SedAddXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         {
           mNewXML = new
             LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode();
+
+          if (!newElementText.empty())
+            mNewXML->addChild(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(newElementText));
         }
 
         mNewXML->addChild(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(stream));
       }
       else if (next.isText())
       {
-        std::string s = next.getCharacters();
-        static const string whitespace(" \t\r\n");
-
-        string::size_type begin = s.find_first_not_of(whitespace);
-        string::size_type end = s.find_last_not_of(whitespace);
-
-        s = (begin == string::npos) ? std::string() : s.substr(begin, end - begin + 1);
+        std::string s = _trim(next.getCharacters());
 
         if (s != "" && mNewXML != NULL)
           mNewXML->addChild(stream.next());
@@ -674,6 +676,10 @@ SedAddXML::readOtherXML(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
       delete mNewXML;
       mNewXML = copy;
     }
+
+    if (mNewXML == NULL && !newElementText.empty())
+      mNewXML = new
+      LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(newElementText);
 
     read = true;
   }

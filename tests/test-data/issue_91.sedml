@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3">
+  <listOfModels>
+    <model id="model" language="urn:sedml:language:sbml" source="model.sbml">
+      <listOfChanges>
+        <addXML target="/sbml:sbml/sbml:model[id=&apos;b&apos;]/sbml:listOfParameters">
+          <newXML>1.9</newXML>
+        </addXML>
+      </listOfChanges>
+    </model>
+    <model id="model1" language="urn:sedml:language:sbml" source="model.sbml">
+      <listOfChanges>
+        <changeXML target="/sbml:sbml/sbml:model[id=&apos;b&apos;]/sbml:listOfParameters">
+          <newXML>
+          
+          1.9
+          
+          </newXML>
+        </changeXML>
+      </listOfChanges>
+    </model>
+    <model id="model2" language="urn:sedml:language:sbml" source="model.sbml">
+      <listOfChanges>
+        <addXML target="/sbml:sbml/sbml:model[id=&apos;b&apos;]/sbml:listOfParameters">
+          <newXML>1.9 <other/> </newXML>
+        </addXML>
+      </listOfChanges>
+    </model>
+    <model id="model3" language="urn:sedml:language:sbml" source="model.sbml">
+      <listOfChanges>
+        <changeXML target="/sbml:sbml/sbml:model[id=&apos;b&apos;]/sbml:listOfParameters">
+          <newXML>1.9 <other/> </newXML>
+        </changeXML>
+      </listOfChanges>
+    </model>
+  </listOfModels>
+</sedML>

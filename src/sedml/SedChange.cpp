@@ -679,6 +679,15 @@ SedChange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   }
 }
 
+std::string SedChange::_trim(const std::string& text)
+{
+  static const string whitespace(" \t\r\n");
+
+  string::size_type begin = text.find_first_not_of(whitespace);
+  string::size_type end = text.find_last_not_of(whitespace);
+
+  return (begin == string::npos) ? std::string() : text.substr(begin, end - begin + 1);
+}
 /** @endcond */
 
 

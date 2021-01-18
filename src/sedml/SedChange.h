@@ -587,6 +587,7 @@ protected:
 
   /** @endcond */
 
+  static std::string _trim(const std::string& text);
 
 };
 

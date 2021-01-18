@@ -10,7 +10,7 @@
  * github: https://github.com/fbergmann/libSEDML/
  * 
  * 
- * Copyright (c) 2013-2014, Frank T. Bergmann  
+ * Copyright (c) 2013-2021, Frank T. Bergmann  
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -290,3 +290,39 @@ TEST_CASE("Reading / Writing changexml with multipme elements", "[sedml]")
   delete doc;
 
 }
+
+
+TEST_CASE("Reading / Writing changexml only text node", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/issue_91.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+
+  {
+    auto* model = doc->getModel(0);
+    REQUIRE(model != NULL);
+    auto* change = dynamic_cast<SedAddXML*>(model->getChange(0));
+    REQUIRE(change != NULL);
+    auto* newXML = change->getNewXML();
+    REQUIRE(newXML != NULL);
+    REQUIRE(newXML->getNumChildren() == 0);
+    std::string newString = newXML->toXMLString();
+    REQUIRE(!newString.empty());
+  }
+
+
+  {
+    auto* model = doc->getModel(1);
+    REQUIRE(model != NULL);
+    auto* change = dynamic_cast<SedChangeXML*>(model->getChange(0));
+    REQUIRE(change != NULL);
+    auto* newXML = change->getNewXML();
+    REQUIRE(newXML != NULL);
+    REQUIRE(newXML->getNumChildren() == 0);
+    std::string newString = newXML->toXMLString();
+    REQUIRE(!newString.empty());
+  }
+
+  delete doc;
+}
+
