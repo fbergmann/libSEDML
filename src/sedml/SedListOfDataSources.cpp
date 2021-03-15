@@ -263,7 +263,7 @@ SedListOfDataSources::createDataSource()
  * Used by SedListOfDataSources::get() to lookup a SedDataSource based on its
  * IndexSet.
  */
-struct SedIdEqIS : public std::unary_function<SedBase*, bool>
+struct SedIdEqIS
 {
   const string& id;
    

@@ -65,7 +65,7 @@ class SedVisitor;
  */
 #ifndef SWIG
 template<class CNAME>
-struct SedIdEq : public std::unary_function<SedBase*, bool>
+struct SedIdEq
 {
   const std::string& id;
 

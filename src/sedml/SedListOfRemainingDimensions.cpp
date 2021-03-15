@@ -275,7 +275,7 @@ SedListOfRemainingDimensions::createRemainingDimension()
  * Used by SedListOfRemainingDimensions::get() to lookup a
  * SedRemainingDimension based on its Target.
  */
-struct SedIdEqT : public std::unary_function<SedBase*, bool>
+struct SedIdEqT
 {
   const string& id;
    
@@ -317,7 +317,7 @@ SedListOfRemainingDimensions::getByTarget(const std::string& sid)
  * Used by SedListOfRemainingDimensions::get() to lookup a
  * SedRemainingDimension based on its DimensionTarget.
  */
-struct SedIdEqDT : public std::unary_function<SedBase*, bool>
+struct SedIdEqDT
 {
   const string& id;
    

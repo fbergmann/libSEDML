@@ -261,7 +261,7 @@ SedListOfSubTasks::createSubTask()
 /*
  * Used by SedListOfSubTasks::get() to lookup a SedSubTask based on its Task.
  */
-struct SedIdEqT : public std::unary_function<SedBase*, bool>
+struct SedIdEqT
 {
   const string& id;
    

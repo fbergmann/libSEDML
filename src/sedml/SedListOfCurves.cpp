@@ -293,7 +293,7 @@ SedListOfCurves::createShadedArea()
  * Used by SedListOfCurves::get() to lookup a SedAbstractCurve based on its
  * Style.
  */
-struct SedIdEqS : public std::unary_function<SedBase*, bool>
+struct SedIdEqS
 {
   const string& id;
    
@@ -335,7 +335,7 @@ SedListOfCurves::getByStyle(const std::string& sid)
  * Used by SedListOfCurves::get() to lookup a SedAbstractCurve based on its
  * XDataReference.
  */
-struct SedIdEqXDR : public std::unary_function<SedBase*, bool>
+struct SedIdEqXDR
 {
   const string& id;
    

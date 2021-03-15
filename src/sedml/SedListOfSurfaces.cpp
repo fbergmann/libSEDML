@@ -262,7 +262,7 @@ SedListOfSurfaces::createSurface()
  * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its
  * XDataReference.
  */
-struct SedIdEqXDR : public std::unary_function<SedBase*, bool>
+struct SedIdEqXDR
 {
   const string& id;
    
@@ -304,7 +304,7 @@ SedListOfSurfaces::getByXDataReference(const std::string& sid)
  * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its
  * YDataReference.
  */
-struct SedIdEqYDR : public std::unary_function<SedBase*, bool>
+struct SedIdEqYDR
 {
   const string& id;
    
@@ -346,7 +346,7 @@ SedListOfSurfaces::getByYDataReference(const std::string& sid)
  * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its
  * ZDataReference.
  */
-struct SedIdEqZDR : public std::unary_function<SedBase*, bool>
+struct SedIdEqZDR
 {
   const string& id;
    
@@ -387,7 +387,7 @@ SedListOfSurfaces::getByZDataReference(const std::string& sid)
 /*
  * Used by SedListOfSurfaces::get() to lookup a SedSurface based on its Style.
  */
-struct SedIdEqS : public std::unary_function<SedBase*, bool>
+struct SedIdEqS
 {
   const string& id;
    

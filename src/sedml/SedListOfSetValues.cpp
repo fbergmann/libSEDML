@@ -268,7 +268,7 @@ SedListOfSetValues::createSetValue()
  * Used by SedListOfSetValues::get() to lookup a SedSetValue based on its
  * ModelReference.
  */
-struct SedIdEqMR : public std::unary_function<SedBase*, bool>
+struct SedIdEqMR
 {
   const string& id;
    
@@ -310,7 +310,7 @@ SedListOfSetValues::getByModelReference(const std::string& sid)
  * Used by SedListOfSetValues::get() to lookup a SedSetValue based on its
  * Range.
  */
-struct SedIdEqR : public std::unary_function<SedBase*, bool>
+struct SedIdEqR
 {
   const string& id;
    

@@ -263,7 +263,7 @@ SedListOfFitMappings::createFitMapping()
  * Used by SedListOfFitMappings::get() to lookup a SedFitMapping based on its
  * DataSource.
  */
-struct SedIdEqDS : public std::unary_function<SedBase*, bool>
+struct SedIdEqDS
 {
   const string& id;
    
@@ -305,7 +305,7 @@ SedListOfFitMappings::getByDataSource(const std::string& sid)
  * Used by SedListOfFitMappings::get() to lookup a SedFitMapping based on its
  * Target.
  */
-struct SedIdEqT : public std::unary_function<SedBase*, bool>
+struct SedIdEqT
 {
   const string& id;
    
@@ -347,7 +347,7 @@ SedListOfFitMappings::getByTarget(const std::string& sid)
  * Used by SedListOfFitMappings::get() to lookup a SedFitMapping based on its
  * PointWeight.
  */
-struct SedIdEqPW : public std::unary_function<SedBase*, bool>
+struct SedIdEqPW
 {
   const string& id;
    

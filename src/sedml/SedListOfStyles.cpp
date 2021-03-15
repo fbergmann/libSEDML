@@ -261,7 +261,7 @@ SedListOfStyles::createStyle()
 /*
  * Used by SedListOfStyles::get() to lookup a SedStyle based on its BaseStyle.
  */
-struct SedIdEqBS : public std::unary_function<SedBase*, bool>
+struct SedIdEqBS
 {
   const string& id;
    

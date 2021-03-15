@@ -278,7 +278,7 @@ SedListOfAdjustableParameters::createAdjustableParameter()
  * Used by SedListOfAdjustableParameters::get() to lookup a
  * SedAdjustableParameter based on its ModelReference.
  */
-struct SedIdEqMR : public std::unary_function<SedBase*, bool>
+struct SedIdEqMR
 {
   const string& id;
    

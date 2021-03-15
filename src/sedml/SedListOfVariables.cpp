@@ -306,7 +306,7 @@ SedListOfVariables::isValidTypeForList(SedBase* item)
  * Used by SedListOfVariables::get() to lookup a SedVariable based on its
  * TaskReference.
  */
-struct SedIdEqTR : public std::unary_function<SedBase*, bool>
+struct SedIdEqTR
 {
   const string& id;
    
@@ -348,7 +348,7 @@ SedListOfVariables::getByTaskReference(const std::string& sid)
  * Used by SedListOfVariables::get() to lookup a SedVariable based on its
  * ModelReference.
  */
-struct SedIdEqMR : public std::unary_function<SedBase*, bool>
+struct SedIdEqMR
 {
   const string& id;
    

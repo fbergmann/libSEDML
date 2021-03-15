@@ -262,7 +262,7 @@ SedListOfDataSets::createDataSet()
  * Used by SedListOfDataSets::get() to lookup a SedDataSet based on its
  * DataReference.
  */
-struct SedIdEqDR : public std::unary_function<SedBase*, bool>
+struct SedIdEqDR
 {
   const string& id;
    

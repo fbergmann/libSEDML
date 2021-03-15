@@ -261,7 +261,7 @@ SedListOfSlices::createSlice()
 /*
  * Used by SedListOfSlices::get() to lookup a SedSlice based on its Reference.
  */
-struct SedIdEqR : public std::unary_function<SedBase*, bool>
+struct SedIdEqR
 {
   const string& id;
    
@@ -302,7 +302,7 @@ SedListOfSlices::getByReference(const std::string& sid)
 /*
  * Used by SedListOfSlices::get() to lookup a SedSlice based on its Index.
  */
-struct SedIdEqI : public std::unary_function<SedBase*, bool>
+struct SedIdEqI
 {
   const string& id;
    

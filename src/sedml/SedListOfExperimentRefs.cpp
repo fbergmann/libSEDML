@@ -269,7 +269,7 @@ SedListOfExperimentRefs::createExperimentRef()
  * Used by SedListOfExperimentRefs::get() to lookup a SedExperimentRef based on
  * its ExperimentId.
  */
-struct SedIdEqEI : public std::unary_function<SedBase*, bool>
+struct SedIdEqEI
 {
   const string& id;
    

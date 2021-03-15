@@ -261,7 +261,7 @@ SedListOfSubPlots::createSubPlot()
 /*
  * Used by SedListOfSubPlots::get() to lookup a SedSubPlot based on its Plot.
  */
-struct SedIdEqP : public std::unary_function<SedBase*, bool>
+struct SedIdEqP
 {
   const string& id;
    

@@ -74,7 +74,7 @@ SedListOf::SedListOf (SedNamespaces* sedmlns)
 /**
  * Used by the Destructor to delete each item in mItems.
  */
-struct Delete : public unary_function<SedBase*, void>
+struct Delete
 {
   void operator() (SedBase* sb) { delete sb; }
 };
@@ -92,7 +92,7 @@ SedListOf::~SedListOf ()
 /**
  * Used by the Copy Constructor to clone each item in mItems.
  */
-struct Clone : public unary_function<SedBase*, SedBase*>
+struct Clone
 {
   SedBase* operator() (SedBase* sb) { return sb->clone(); }
 };
@@ -390,7 +390,7 @@ SedListOf::size () const
 /**
  * Used by SedListOf::setSedDocument().
  */
-struct SetSedDocument : public unary_function<SedBase*, void>
+struct SetSedDocument
 {
   SedDocument* d;
 
@@ -402,7 +402,7 @@ struct SetSedDocument : public unary_function<SedBase*, void>
 /**
  * Used by SedListOf::setParentSedObject().
  */
-struct SetParentSedObject : public unary_function<SedBase*, void>
+struct SetParentSedObject
 {
   SedBase* sb;
 
@@ -474,7 +474,7 @@ SedListOf::getElementName () const
 /**
  * Used by SedListOf::writeElements().
  */
-struct Write : public unary_function<SedBase*, void>
+struct Write
 {
   XMLOutputStream& stream;
 
