@@ -306,7 +306,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20102
-  { AllowedAttributes,
+  { SedAllowedAttributes,
     "Allowed attributes",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,

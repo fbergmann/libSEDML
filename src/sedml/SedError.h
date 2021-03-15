@@ -71,7 +71,7 @@ typedef enum
 , SedmlIdSyntaxRule      = 10302
 , SedInvalidMetaidSyntax      = 10303
 , InvalidNamespaceOnSed      = 20101
-, AllowedAttributes      = 20102
+, SedAllowedAttributes      = 20102
 , SedEmptyListElement      = 20103
 , SedmlDocumentAllowedCoreAttributes      = 20201
 , SedmlDocumentAllowedCoreElements      = 20202
