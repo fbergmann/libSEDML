@@ -984,15 +984,15 @@ SedStyle::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "lineStyle")
+  if (elementName == "line")
   {
     return createLineStyle();
   }
-  else if (elementName == "markerStyle")
+  else if (elementName == "marker")
   {
     return createMarkerStyle();
   }
-  else if (elementName == "fillStyle")
+  else if (elementName == "fill")
   {
     return createFillStyle();
   }
