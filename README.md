@@ -3,7 +3,20 @@ Some time ago I developed [libSedML](http://libsedml.sf.net) a C# library that f
 
 ## Dependencies
 
-This library requires libSBML to be present, as its XML parsing layer will be used. for that either expat, xerces-c or libXML2 needs to be available.
+This library requires libSBML to be present, as its XML parsing layer will be used. for that either expat, xerces-c or libXML2 needs to be available. Additionally libSEDML makes use of libnuml. All dependencies are available as git submodule. 
+
+## Building Python wheels
+
+Since all dependencies are included as submodules, be sure to checkout the project with submodules:
+
+	git clone --recurse-submodules https://github.com/fbergmann/libSEDML
+
+Then a build is as easy as: 
+
+	cd libSEDML
+	python src/bindings/python/setup.py build
+
+or install, if you prefer. It requires cmake and swig installed. 
 
 ## Building
 
@@ -31,7 +44,7 @@ for linking against `expat` and indicating, that libSBML was compiled without co
 This project is open source and freely available under the [Simplified BSD](http://opensource.org/licenses/BSD-2-Clause) license. Should that license not meet your needs, please contact me.
 
 
-Copyright (c) 2013-2019, Frank T. Bergmann  
+Copyright (c) 2013-2021, Frank T. Bergmann  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
