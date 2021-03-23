@@ -1,0 +1,171 @@
+name: CMake
+
+on: [push]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally
+    # well on Windows or Mac.  You can convert this to a matrix build if you need
+    # cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: level1-version4
+
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+
+    - name: add SWIG to windows
+      # this is separate from the SWIG download itself, because it needs to be added to the path also when SWIG is cached
+      if: matrix.os == 'windows-latest'
+      shell: bash
+      run: |
+           choco install -y swig
+
+    - name: add linux dependencies
+      if: matrix.os == 'ubuntu-latest'
+      shell: bash
+      run: |
+           sudo apt-get install swig
+
+    - name: Install MacOS dependencies
+      # MacOS already has libxml2 by default
+      if: matrix.os == 'macos-latest'
+      shell: bash
+      run: |
+            brew install swig
+
+    - name: Create Build Environment for dependencies
+      # Some projects don't allow in-source building, so create a separate build directory
+      # We'll use this as our working directory for all subsequent commands
+      run: |
+            cmake -E make_directory ${{runner.workspace}}/build_libsbml_dependencies
+            cmake -E make_directory ${{runner.workspace}}/build_libsbml
+            cmake -E make_directory ${{runner.workspace}}/build_libnuml
+
+
+    - name: Create Build Environment
+      # Some projects don't allow in-source building, so create a separate build directory
+      # We'll use this as our working directory for all subsequent commands
+      run: cmake -E make_directory ${{runner.workspace}}/build
+
+
+# W I N D O W S
+
+    - name: Configure and build libsbml dependencies (win)
+      # build dependencies
+      if: matrix.os == 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libsbml_dependencies
+      shell: cmd
+      run: |
+          cmake -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF -DWITH_LIBXML=OFF %GITHUB_WORKSPACE%\submodules\libSBML-dependencies
+          cmake --build . --config %BUILD_TYPE% --target install
+
+
+    - name: Configure and build libsbml (win)
+      # build libsbml
+      if: matrix.os == 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libsbml
+      shell: cmd
+      run: |
+          cmake -DLIBSBML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBEXPAT_INCLUDE_DIR=%GITHUB_WORKSPACE%\install_dependencies\include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  %GITHUB_WORKSPACE%\submodules\libSBML
+          cmake --build . --config %BUILD_TYPE% --target install
+
+    - name: Configure and build libnuml (win)
+      # build libsbml
+      if: matrix.os == 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libnuml
+      shell: cmd
+      run: |
+          cmake -DLIBNUML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%\install_dependencies -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\install_dependencies -DLIBNUML_SKIP_SHARED_LIBRARY=ON -DCMAKE_BUILD_TYPE=%BUILD_TYPE%  %GITHUB_WORKSPACE%\submodules\NuML\libnuml
+          cmake --build . --config %BUILD_TYPE% --target install
+
+    - name: Configure CMake
+      # Use a bash shell so we can use the same syntax for environment variable
+      # access regardless of the host operating system
+      if: matrix.os == 'windows-latest'
+      shell: cmd
+      working-directory: ${{runner.workspace}}/build
+      # Note the current convention is to use the -S and -B options here to specify source 
+      # and build directories, but this is only available with CMake 3.13 and higher.  
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% -DLIBSEDML_DEPENDENCY_DIR=%GITHUB_WORKSPACE%/install_dependencies  -DCMAKE_INSTALL_PREFIX=%GITHUB_WORKSPACE%\build\instdir -DWITH_JAVA=ON  %GITHUB_WORKSPACE%
+
+
+# N O T  WINDOWS
+
+    - name: Configure and build libsbml dependencies (mac / linux)
+      # build dependencies
+      if: matrix.os != 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libsbml_dependencies
+      shell: bash
+      run: |
+          cmake -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DWITH_BZIP2=ON -DWITH_CHECK=OFF -DWITH_EXPAT=ON -DWITH_XERCES=OFF -DWITH_ICONV=OFF -DWITH_LIBXML=OFF $GITHUB_WORKSPACE/submodules/libSBML-dependencies
+          cmake --build . --config $BUILD_TYPE --target install
+
+    - name: Configure and build libsbml for (mac / linux)
+      # build libsbml
+      if: matrix.os != 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libsbml
+      shell: bash
+      run: |
+          cmake -DLIBSBML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBEXPAT_INCLUDE_DIR=${{runner.workspace}}/install_dependencies/include -DWITH_ZLIB=OFF -DWITH_BZIP2=OFF -DWITH_EXPAT=ON -DWITH_LIBXML=OFF -DLIBSBML_SKIP_SHARED_LIBRARY=ON  $GITHUB_WORKSPACE/submodules/libSBML
+          cmake --build . --config $BUILD_TYPE --target install    
+
+    - name: Configure and build libnuml (mac / linux)
+      # build libsbml
+      if: matrix.os != 'windows-latest'
+      working-directory: ${{runner.workspace}}/build_libnuml
+      shell: bash
+      run: |
+          cmake -DLIBNUML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/install_dependencies -DLIBNUML_SKIP_SHARED_LIBRARY=ON -DCMAKE_BUILD_TYPE=$BUILD_TYPE  $GITHUB_WORKSPACE/submodules/NuML/libnuml
+          cmake --build . --config $BUILD_TYPE --target install
+
+    - name: Configure CMake
+      # Use a bash shell so we can use the same syntax for environment variable
+      # access regardless of the host operating system
+      if: matrix.os != 'windows-latest'
+      shell: bash
+      working-directory: ${{runner.workspace}}/build
+      # Note the current convention is to use the -S and -B options here to specify source 
+      # and build directories, but this is only available with CMake 3.13 and higher.  
+      # The CMake binaries on the Github Actions machines are (as of this writing) 3.12
+      run: cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DLIBSEDML_DEPENDENCY_DIR=${{runner.workspace}}/install_dependencies -DCMAKE_INSTALL_PREFIX=${{runner.workspace}}/build/instdir -DWITH_JAVA=ON $GITHUB_WORKSPACE
+
+    - name: Build
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      # Execute the build.  You can specify a specific target with "--target <NAME>"
+      run: cmake --build . --config $BUILD_TYPE
+
+    - name: Test
+      working-directory: ${{runner.workspace}}/build
+      shell: bash
+      # Execute tests defined by the CMake configuration.  
+      # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: ctest -C $BUILD_TYPE
+      
+    - name: Install Strip
+      working-directory: ${{runner.workspace}}/build
+      run: cmake --install . --prefix instdir --strip
+
+    - name: Pack
+      working-directory: ${{runner.workspace}}/build/instdir
+      run: cmake -E tar cvzf ../binaries_${{ matrix.os }}.tar.gz .
+
+    - name: Upload
+      uses: actions/upload-artifact@v1
+      with:
+        path: ${{runner.workspace}}/build/binaries_${{ matrix.os }}.tar.gz
+        name: binaries_${{ matrix.os }}.tar.gz
