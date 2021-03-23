@@ -218,6 +218,13 @@ public:
    */
   virtual const std::string& getId() const;
 
+
+  /**
+   * @return the value of the "name" attribute (or an empty string).
+   */
+  virtual const std::string& getName() const;
+
+
   /**
    * Returns the content of the "notes" subelement of this object as
    * a tree of XMLNode objects.
@@ -661,6 +668,14 @@ public:
   virtual bool isSetId() const;
 
   /**
+   * Predicate returning @c true if this element's "name" attribute is set.
+   *
+   * @return @c true if this element's "name" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  virtual bool isSetName() const;
+
+  /**
    * Predicate returning @c true if this
    * object's "notes" subelement exists and has content.
    *
@@ -757,6 +772,20 @@ public:
    * @copydetails doc_set_id
    */
   virtual int setId(const std::string& sid);
+
+
+  /**
+   * Sets the value of the "name" attribute of this element.
+   *
+   * @param name std::string& value of the "name" attribute to be set.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * Calling this function with @p name = @c NULL or an empty string is
+   * equivalent to calling unsetName().
+   */
+  virtual int setName(const std::string& name);
 
 
   /**
@@ -1289,6 +1318,15 @@ public:
    * @copydetails doc_unset_id
    */
   virtual int unsetId ();
+
+  /**
+    * Unsets the value of the "name" attribute of this SedSurface.
+    *
+    * @copydetails doc_returns_success_code
+    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+    */
+   virtual int unsetName();
 
 
   /**

@@ -284,6 +284,12 @@ SedBase::getId() const
   return mId;
 }
 
+const std::string& SedBase::getName() const
+{
+  static string empty;
+  return empty;
+}
+
 
 /*
  * @return the notes of this SEDML object.
@@ -607,6 +613,11 @@ SedBase::isSetId() const
   return (getId().empty() == false);
 }
 
+bool SedBase::isSetName() const
+{
+    return false;
+}
+
 
 /*
  * @return true if the notes of this SEDML object is set, false
@@ -672,6 +683,11 @@ SedBase::setId (const std::string& sid)
     mId = sid;
     return LIBSEDML_OPERATION_SUCCESS;
   }
+}
+
+int SedBase::setName(const std::string& name)
+{
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 
@@ -1658,6 +1674,11 @@ SedBase::unsetId ()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+int SedBase::unsetName()
+{
+  return LIBSEDML_OPERATION_FAILED;
 }
 
 
