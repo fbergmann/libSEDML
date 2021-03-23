@@ -1848,6 +1848,19 @@ public:
    */
   const SedStyle* getStyle(const std::string& sid) const;
 
+  /**
+   * Get the effecive SedStyle from the SedDocument based on its identifier.
+   *
+   * @param sid a string representing the identifier of the SedStyle to
+   * retrieve.
+   *
+   * @return a new SedStyle based on the SedStyle in the 
+   * SedListOfStyles, but changed so that any referenced styles
+   * are applied.
+   *
+   */
+  SedStyle getEffectiveStyle(const std::string& sid) const;
+
 
   /**
    * Get a SedStyle from the SedDocument based on the BaseStyle to which it

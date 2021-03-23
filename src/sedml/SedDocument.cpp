@@ -1535,6 +1535,85 @@ SedDocument::getStyle(const std::string& sid) const
 
 
 /*
+ * Get a SedStyle from the SedDocument based on its identifier.
+ */
+SedStyle
+SedDocument::getEffectiveStyle(const std::string& sid) const
+{
+    const SedStyle* top =  mStyles.get(sid);
+    if (top == NULL) {
+        //Maybe throw?
+        return SedStyle(mLevel, mVersion);
+    }
+    if (!top->isSetBaseStyle()) {
+        return SedStyle(*top);
+    }
+    SedStyle base = getEffectiveStyle(top->getBaseStyle());
+    base.setId(top->getId());
+    base.setName(top->getName());
+    base.unsetBaseStyle();
+    if (top->isSetLineStyle()) {
+        if (base.isSetLineStyle()) {
+            const SedLine* topline = top->getLineStyle();
+            SedLine* baseline = base.getLineStyle();
+            if (topline->isSetColor()) {
+                baseline->setColor(topline->getColor());
+            }
+            if (topline->isSetStyle()) {
+                baseline->setStyle(topline->getStyle());
+            }
+            if (topline->isSetThickness()) {
+                baseline->setThickness(topline->getThickness());
+            }
+        }
+        else {
+            base.setLineStyle(top->getLineStyle());
+        }
+    }
+    if (top->isSetMarkerStyle()) {
+        if (base.isSetMarkerStyle()) {
+            const SedMarker* topmarker = top->getMarkerStyle();
+            SedMarker* basemarker = base.getMarkerStyle();
+            if (topmarker->isSetStyle()) {
+                basemarker->setStyle(topmarker->getStyle());
+            }
+            if (topmarker->isSetSize()) {
+                basemarker->setSize(topmarker->getSize());
+            }
+            if (topmarker->isSetFill()) {
+                basemarker->setFill(topmarker->getFill());
+            }
+            if (topmarker->isSetLineColor()) {
+                basemarker->setLineColor(topmarker->getLineColor());
+            }
+            if (topmarker->isSetLineThickness()) {
+                basemarker->setLineThickness(topmarker->getLineThickness());
+            }
+        }
+        else {
+            base.setMarkerStyle(top->getMarkerStyle());
+        }
+    }
+    if (top->isSetFillStyle()) {
+        if (base.isSetFillStyle()) {
+            const SedFill* topfill = top->getFillStyle();
+            SedFill* basefill = base.getFillStyle();
+            if (topfill->isSetColor()) {
+                basefill->setColor(topfill->getColor());
+            }
+            if (topfill->isSetSecondColor()) {
+                basefill->setSecondColor(topfill->getSecondColor());
+            }
+        }
+        else {
+            base.setFillStyle(top->getFillStyle());
+        }
+    }
+    return base;
+}
+
+
+/*
  * Get a SedStyle from the SedDocument based on the BaseStyle to which it
  * refers.
  */
