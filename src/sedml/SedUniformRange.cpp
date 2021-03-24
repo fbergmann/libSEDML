@@ -841,7 +841,7 @@ SedUniformRange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("end");
 
-  attributes.add("numberOfSteps");
+  attributes.add("numberOfPoints");
 
   if (getVersion() >= 4 || getLevel() > 1) {
       attributes.add("numberOfSteps");

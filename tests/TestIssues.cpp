@@ -326,3 +326,28 @@ TEST_CASE("Reading / Writing changexml only text node", "[sedml]")
   delete doc;
 }
 
+
+
+
+
+TEST_CASE("Reading numberOfPoints", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/issue_93.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  bool haveErrors = doc->getNumErrors(LIBSEDML_SEV_ERROR) != 0;
+  
+  if (haveErrors)
+    doc->getErrorLog()->printErrors();
+  
+  REQUIRE(!haveErrors);
+
+  {
+    auto* task = dynamic_cast<SedRepeatedTask*> (doc->getTask(0));
+    REQUIRE(task != NULL);
+    auto* range = dynamic_cast<SedUniformRange*> (task->getRange(0));
+    REQUIRE(range != NULL);
+    REQUIRE(range->isSetNumberOfPoints());
+    REQUIRE(range->getNumberOfPoints() == 10);
+  }
+  delete doc;
+}
