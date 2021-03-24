@@ -120,6 +120,13 @@ public:
    */
   virtual ~SedListOfSubTasks();
 
+  
+  /**
+   * Sort the SedListOfSubTasks according to the 'order' attribute.
+   * 
+   */
+  void sort();
+
 
   /**
    * Get a SedSubTask from the SedListOfSubTasks.

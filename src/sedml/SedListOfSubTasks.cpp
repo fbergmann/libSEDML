@@ -111,6 +111,33 @@ SedListOfSubTasks::~SedListOfSubTasks()
 }
 
 
+struct SubTaskOrderComparator
+{
+    // Compare two SedSubTasks objects using the 'order' attribute.
+    bool operator ()(const SedBase* obj1, const SedBase* obj2)
+    {
+        if (obj1 == NULL || obj2 == NULL)
+        {
+            return true;
+        }
+        const SedSubTask* at1 = static_cast<const SedSubTask*>(obj1);
+        const SedSubTask* at2 = static_cast<const SedSubTask*>(obj2);
+        if (!at1->isSetOrder() || at2->isSetOrder())
+        {
+            return true;
+        }
+
+        return at1->getOrder() < at2->getOrder();
+    }
+};
+
+void SedListOfSubTasks::sort()
+{
+    std::sort(mItems.begin(), mItems.end(), SubTaskOrderComparator());
+}
+
+
+
 /*
  * Get a SedSubTask from the SedListOfSubTasks.
  */

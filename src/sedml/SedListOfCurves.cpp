@@ -96,6 +96,31 @@ SedListOfCurves::operator=(const SedListOfCurves& rhs)
 }
 
 
+struct AbstractCurvesOrderComparator
+{
+    // Compare two SedSubTasks objects using the 'order' attribute.
+    bool operator ()(const SedBase* obj1, const SedBase* obj2)
+    {
+        if (obj1 == NULL || obj2 == NULL)
+        {
+            return true;
+        }
+        const SedAbstractCurve* at1 = static_cast<const SedAbstractCurve*>(obj1);
+        const SedAbstractCurve* at2 = static_cast<const SedAbstractCurve*>(obj2);
+        if (!at1->isSetOrder() || at2->isSetOrder())
+        {
+            return true;
+        }
+
+        return at1->getOrder() < at2->getOrder();
+    }
+};
+
+void SedListOfCurves::sort()
+{
+    std::sort(mItems.begin(), mItems.end(), AbstractCurvesOrderComparator());
+}
+
 /*
  * Creates and returns a deep copy of this SedListOfCurves object.
  */

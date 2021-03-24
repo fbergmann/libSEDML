@@ -2680,6 +2680,35 @@ SedDocument::getNumErrors(unsigned int severity) const
   return getErrorLog()->getNumFailsWithSeverity(severity);
 }
 
+void SedDocument::sortOrderedObjects()
+{
+    for (size_t o = 0; o < mOutputs.size(); o++)
+    {
+        SedOutput* output = mOutputs.get(o);
+        int type = output->getTypeCode();
+        if (type == SEDML_OUTPUT_PLOT2D) 
+        {
+            SedPlot2D* sp2d = static_cast<SedPlot2D*>(output);
+            sp2d->getListOfCurves()->sort();
+        }
+        else if (type == SEDML_OUTPUT_PLOT3D) 
+        {
+            SedPlot3D* sp3d = static_cast<SedPlot3D*>(output);
+            sp3d->getListOfSurfaces()->sort();
+        }
+    }
+    for (size_t t = 0; t < mAbstractTasks.size(); t++)
+    {
+        SedAbstractTask* task = mAbstractTasks.get(t);
+        int type = task->getTypeCode();
+        if (type == SEDML_TASK_REPEATEDTASK)
+        {
+            SedRepeatedTask* rtask = static_cast<SedRepeatedTask*>(task);
+            rtask->getListOfSubTasks()->sort();
+        }
+    }
+}
+
 
 
 /** @cond doxygenLibSEDMLInternal */
