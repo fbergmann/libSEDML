@@ -111,6 +111,13 @@ public:
 
 
   /**
+   * Sort the SedListOfCurves according to the 'order' attribute.
+   *
+   */
+  void sort();
+
+
+  /**
    * Creates and returns a deep copy of this SedListOfCurves object.
    *
    * @return a (deep) copy of this SedListOfCurves object.

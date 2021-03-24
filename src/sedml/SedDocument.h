@@ -2509,6 +2509,12 @@ public:
   unsigned int getNumErrors(unsigned int severity) const;
 
 
+  /**
+  * Sort any SubTasks or Curves in the document according to
+  * their 'order' attributes.
+  */
+  void sortOrderedObjects();
+
 protected:
 
 

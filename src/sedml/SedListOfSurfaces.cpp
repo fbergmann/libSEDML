@@ -93,6 +93,31 @@ SedListOfSurfaces::operator=(const SedListOfSurfaces& rhs)
 }
 
 
+struct SurfaceOrderComparator
+{
+    // Compare two SedSubTasks objects using the 'order' attribute.
+    bool operator ()(const SedBase* obj1, const SedBase* obj2)
+    {
+        if (obj1 == NULL || obj2 == NULL)
+        {
+            return true;
+        }
+        const SedSurface* at1 = static_cast<const SedSurface*>(obj1);
+        const SedSurface* at2 = static_cast<const SedSurface*>(obj2);
+        if (!at1->isSetOrder() || at2->isSetOrder())
+        {
+            return true;
+        }
+
+        return at1->getOrder() < at2->getOrder();
+    }
+};
+
+void SedListOfSurfaces::sort()
+{
+    std::sort(mItems.begin(), mItems.end(), SurfaceOrderComparator());
+}
+
 /*
  * Creates and returns a deep copy of this SedListOfSurfaces object.
  */
