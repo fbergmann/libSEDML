@@ -104,7 +104,7 @@ struct SurfaceOrderComparator
         }
         const SedSurface* at1 = static_cast<const SedSurface*>(obj1);
         const SedSurface* at2 = static_cast<const SedSurface*>(obj2);
-        if (!at1->isSetOrder() || at2->isSetOrder())
+        if (!at1->isSetOrder() || !at2->isSetOrder())
         {
             return true;
         }

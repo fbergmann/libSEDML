@@ -328,6 +328,10 @@ GetDowncastSwigType (SedBase* sb)
       {
          return SWIGTYPE_p_SedListOfRemainingDimensions;
       }
+      else if (name == "listOfStyles")
+      {
+         return SWIGTYPE_p_SedListOfStyles;
+      }
     
     return SWIGTYPE_p_SedListOf;
     
