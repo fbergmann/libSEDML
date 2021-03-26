@@ -122,7 +122,7 @@ struct SubTaskOrderComparator
         }
         const SedSubTask* at1 = static_cast<const SedSubTask*>(obj1);
         const SedSubTask* at2 = static_cast<const SedSubTask*>(obj2);
-        if (!at1->isSetOrder() || at2->isSetOrder())
+        if (!at1->isSetOrder() || !at2->isSetOrder())
         {
             return true;
         }
