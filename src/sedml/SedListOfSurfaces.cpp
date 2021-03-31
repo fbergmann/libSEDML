@@ -100,13 +100,13 @@ struct SurfaceOrderComparator
     {
         if (obj1 == NULL || obj2 == NULL)
         {
-            return true;
+            return false;
         }
         const SedSurface* at1 = static_cast<const SedSurface*>(obj1);
         const SedSurface* at2 = static_cast<const SedSurface*>(obj2);
         if (!at1->isSetOrder() || !at2->isSetOrder())
         {
-            return true;
+            return false;
         }
 
         return at1->getOrder() < at2->getOrder();
