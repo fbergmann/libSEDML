@@ -54,10 +54,10 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedDataSet::SedDataSet(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mLabel ("")
-  , mName ("")
   , mDataReference ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -67,10 +67,10 @@ SedDataSet::SedDataSet(unsigned int level, unsigned int version)
 SedDataSet::SedDataSet(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mLabel ("")
-  , mName ("")
   , mDataReference ("")
 {
   setElementNamespace(sedmlns->getURI());
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -80,7 +80,6 @@ SedDataSet::SedDataSet(SedNamespaces *sedmlns)
 SedDataSet::SedDataSet(const SedDataSet& orig)
   : SedBase( orig )
   , mLabel ( orig.mLabel )
-  , mName ( orig.mName )
   , mDataReference ( orig.mDataReference )
 {
 }
@@ -96,7 +95,6 @@ SedDataSet::operator=(const SedDataSet& rhs)
   {
     SedBase::operator=(rhs);
     mLabel = rhs.mLabel;
-    mName = rhs.mName;
     mDataReference = rhs.mDataReference;
   }
 
@@ -123,32 +121,12 @@ SedDataSet::~SedDataSet()
 
 
 /*
- * Returns the value of the "id" attribute of this SedDataSet.
- */
-const std::string&
-SedDataSet::getId() const
-{
-  return mId;
-}
-
-
-/*
  * Returns the value of the "label" attribute of this SedDataSet.
  */
 const std::string&
 SedDataSet::getLabel() const
 {
   return mLabel;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedDataSet.
- */
-const std::string&
-SedDataSet::getName() const
-{
-  return mName;
 }
 
 
@@ -163,32 +141,12 @@ SedDataSet::getDataReference() const
 
 
 /*
- * Predicate returning @c true if this SedDataSet's "id" attribute is set.
- */
-bool
-SedDataSet::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
  * Predicate returning @c true if this SedDataSet's "label" attribute is set.
  */
 bool
 SedDataSet::isSetLabel() const
 {
   return (mLabel.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedDataSet's "name" attribute is set.
- */
-bool
-SedDataSet::isSetName() const
-{
-  return (mName.empty() == false);
 }
 
 
@@ -204,34 +162,12 @@ SedDataSet::isSetDataReference() const
 
 
 /*
- * Sets the value of the "id" attribute of this SedDataSet.
- */
-int
-SedDataSet::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
  * Sets the value of the "label" attribute of this SedDataSet.
  */
 int
 SedDataSet::setLabel(const std::string& label)
 {
   mLabel = label;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedDataSet.
- */
-int
-SedDataSet::setName(const std::string& name)
-{
-  mName = name;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -255,25 +191,6 @@ SedDataSet::setDataReference(const std::string& dataReference)
 
 
 /*
- * Unsets the value of the "id" attribute of this SedDataSet.
- */
-int
-SedDataSet::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
  * Unsets the value of the "label" attribute of this SedDataSet.
  */
 int
@@ -282,25 +199,6 @@ SedDataSet::unsetLabel()
   mLabel.erase();
 
   if (mLabel.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedDataSet.
- */
-int
-SedDataSet::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -525,19 +423,9 @@ SedDataSet::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "label")
+  if (attributeName == "label")
   {
     value = getLabel();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
   else if (attributeName == "dataReference")
@@ -564,17 +452,9 @@ SedDataSet::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "label")
+  if (attributeName == "label")
   {
     value = isSetLabel();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
   }
   else if (attributeName == "dataReference")
   {
@@ -667,17 +547,9 @@ SedDataSet::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "label")
+  if (attributeName == "label")
   {
     return_value = setLabel(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
   }
   else if (attributeName == "dataReference")
   {
@@ -701,17 +573,9 @@ SedDataSet::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "label")
+  if (attributeName == "label")
   {
     value = unsetLabel();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
   }
   else if (attributeName == "dataReference")
   {
@@ -736,11 +600,7 @@ SedDataSet::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("id");
-
   attributes.add("label");
-
-  attributes.add("name");
 
   attributes.add("dataReference");
 }
@@ -801,26 +661,7 @@ SedDataSet::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedDataSet>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-  else
+  if(!isSetId())
   {
     if (log)
     {
@@ -852,20 +693,6 @@ SedDataSet::readAttributes(
         "<SedDataSet> element.";
       log->logError(SedmlDataSetAllowedAttributes, level, version, message,
         getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedDataSet>");
     }
   }
 
@@ -923,19 +750,9 @@ SedDataSet::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeAttributes(stream);
 
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
   if (isSetLabel() == true)
   {
     stream.writeAttribute("label", getPrefix(), mLabel);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
   }
 
   if (isSetDataReference() == true)

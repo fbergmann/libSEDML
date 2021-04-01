@@ -53,7 +53,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedSurface::SedSurface(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mXDataReference ("")
   , mYDataReference ("")
   , mZDataReference ("")
@@ -69,6 +68,7 @@ SedSurface::SedSurface(unsigned int level, unsigned int version)
   , mIsSetOrder (false)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -77,7 +77,6 @@ SedSurface::SedSurface(unsigned int level, unsigned int version)
  */
 SedSurface::SedSurface(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mXDataReference ("")
   , mYDataReference ("")
   , mZDataReference ("")
@@ -93,6 +92,7 @@ SedSurface::SedSurface(SedNamespaces *sedmlns)
   , mIsSetOrder (false)
 {
   setElementNamespace(sedmlns->getURI());
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -101,7 +101,6 @@ SedSurface::SedSurface(SedNamespaces *sedmlns)
  */
 SedSurface::SedSurface(const SedSurface& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mXDataReference ( orig.mXDataReference )
   , mYDataReference ( orig.mYDataReference )
   , mZDataReference ( orig.mZDataReference )
@@ -128,7 +127,6 @@ SedSurface::operator=(const SedSurface& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mXDataReference = rhs.mXDataReference;
     mYDataReference = rhs.mYDataReference;
     mZDataReference = rhs.mZDataReference;
@@ -163,26 +161,6 @@ SedSurface::clone() const
  */
 SedSurface::~SedSurface()
 {
-}
-
-
-/*
- * Returns the value of the "id" attribute of this SedSurface.
- */
-const std::string&
-SedSurface::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedSurface.
- */
-const std::string&
-SedSurface::getName() const
-{
-  return mName;
 }
 
 
@@ -288,26 +266,6 @@ SedSurface::getOrder() const
 
 
 /*
- * Predicate returning @c true if this SedSurface's "id" attribute is set.
- */
-bool
-SedSurface::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedSurface's "name" attribute is set.
- */
-bool
-SedSurface::isSetName() const
-{
-  return (mName.empty() == false);
-}
-
-
-/*
  * Predicate returning @c true if this SedSurface's "xDataReference" attribute
  * is set.
  */
@@ -397,28 +355,6 @@ bool
 SedSurface::isSetOrder() const
 {
   return mIsSetOrder;
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedSurface.
- */
-int
-SedSurface::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedSurface.
- */
-int
-SedSurface::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -575,44 +511,6 @@ SedSurface::setOrder(int order)
   mOrder = order;
   mIsSetOrder = true;
   return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedSurface.
- */
-int
-SedSurface::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedSurface.
- */
-int
-SedSurface::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
 }
 
 
@@ -1015,17 +913,7 @@ SedSurface::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "xDataReference")
+  if (attributeName == "xDataReference")
   {
     value = getXDataReference();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -1069,15 +957,7 @@ SedSurface::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
-  else if (attributeName == "xDataReference")
+  if (attributeName == "xDataReference")
   {
     value = isSetXDataReference();
   }
@@ -1218,15 +1098,7 @@ SedSurface::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "xDataReference")
+  if (attributeName == "xDataReference")
   {
     return_value = setXDataReference(value);
   }
@@ -1264,15 +1136,7 @@ SedSurface::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
-  else if (attributeName == "xDataReference")
+  if (attributeName == "xDataReference")
   {
     value = unsetXDataReference();
   }
@@ -1326,10 +1190,6 @@ SedSurface::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
-
-  attributes.add("id");
-
-  attributes.add("name");
 
   attributes.add("xDataReference");
 
@@ -1403,40 +1263,6 @@ SedSurface::readAttributes(
         log->logError(SedmlSurfaceAllowedAttributes, level, version, details,
           getLine(), getColumn());
       }
-    }
-  }
-
-  // 
-  // id SId (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedSurface>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedSurface>");
     }
   }
 
@@ -1681,16 +1507,6 @@ SedSurface::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 
   if (isSetXDataReference() == true)
   {

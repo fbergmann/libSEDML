@@ -66,7 +66,6 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mName;
   bool mLogX;
   bool mIsSetLogX;
   int mOrder;
@@ -139,24 +138,6 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this SedAbstractCurve.
-   *
-   * @return the value of the "id" attribute of this SedAbstractCurve as a
-   * string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this SedAbstractCurve.
-   *
-   * @return the value of the "name" attribute of this SedAbstractCurve as a
-   * string.
-   */
-  virtual const std::string& getName() const;
-
-
-  /**
    * Returns the value of the "logX" attribute of this SedAbstractCurve.
    *
    * @return the value of the "logX" attribute of this SedAbstractCurve as a
@@ -200,26 +181,6 @@ public:
    * SedAbstractCurve as a string.
    */
   const std::string& getXDataReference() const;
-
-
-  /**
-   * Predicate returning @c true if this SedAbstractCurve's "id" attribute is
-   * set.
-   *
-   * @return @c true if this SedAbstractCurve's "id" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedAbstractCurve's "name" attribute is
-   * set.
-   *
-   * @return @c true if this SedAbstractCurve's "name" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
 
 
   /**
@@ -270,36 +231,6 @@ public:
    * been set, otherwise @c false is returned.
    */
   bool isSetXDataReference() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedAbstractCurve.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Sets the value of the "name" attribute of this SedAbstractCurve.
-   *
-   * @param name std::string& value of the "name" attribute to be set.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * Calling this function with @p name = @c NULL or an empty string is
-   * equivalent to calling unsetName().
-   */
-  virtual int setName(const std::string& name);
 
 
   /**
@@ -367,26 +298,6 @@ public:
    * OperationReturnValues_t}
    */
   int setXDataReference(const std::string& xDataReference);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedAbstractCurve.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this SedAbstractCurve.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetName();
 
 
   /**

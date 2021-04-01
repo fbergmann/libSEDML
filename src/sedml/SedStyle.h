@@ -131,29 +131,12 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this SedStyle.
-   *
-   * @return the value of the "id" attribute of this SedStyle as a string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
    * Returns the value of the "baseStyle" attribute of this SedStyle.
    *
    * @return the value of the "baseStyle" attribute of this SedStyle as a
    * string.
    */
   const std::string& getBaseStyle() const;
-
-
-  /**
-   * Predicate returning @c true if this SedStyle's "id" attribute is set.
-   *
-   * @return @c true if this SedStyle's "id" attribute has been set, otherwise
-   * @c false is returned.
-   */
-  virtual bool isSetId() const;
 
 
   /**
@@ -164,22 +147,6 @@ public:
    * otherwise @c false is returned.
    */
   bool isSetBaseStyle() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedStyle.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
 
 
   /**
@@ -194,16 +161,6 @@ public:
    * OperationReturnValues_t}
    */
   int setBaseStyle(const std::string& baseStyle);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedStyle.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
 
 
   /**

@@ -54,12 +54,13 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedDataSource::SedDataSource(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mIndexSet ("")
   , mSlices (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -68,12 +69,13 @@ SedDataSource::SedDataSource(unsigned int level, unsigned int version)
  */
 SedDataSource::SedDataSource(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mIndexSet ("")
   , mSlices (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -82,7 +84,6 @@ SedDataSource::SedDataSource(SedNamespaces *sedmlns)
  */
 SedDataSource::SedDataSource(const SedDataSource& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mIndexSet ( orig.mIndexSet )
   , mSlices ( orig.mSlices )
 {
@@ -99,7 +100,6 @@ SedDataSource::operator=(const SedDataSource& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mIndexSet = rhs.mIndexSet;
     mSlices = rhs.mSlices;
     connectToChild();
@@ -128,52 +128,12 @@ SedDataSource::~SedDataSource()
 
 
 /*
- * Returns the value of the "id" attribute of this SedDataSource.
- */
-const std::string&
-SedDataSource::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedDataSource.
- */
-const std::string&
-SedDataSource::getName() const
-{
-  return mName;
-}
-
-
-/*
  * Returns the value of the "indexSet" attribute of this SedDataSource.
  */
 const std::string&
 SedDataSource::getIndexSet() const
 {
   return mIndexSet;
-}
-
-
-/*
- * Predicate returning @c true if this SedDataSource's "id" attribute is set.
- */
-bool
-SedDataSource::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedDataSource's "name" attribute is set.
- */
-bool
-SedDataSource::isSetName() const
-{
-  return (mName.empty() == false);
 }
 
 
@@ -185,28 +145,6 @@ bool
 SedDataSource::isSetIndexSet() const
 {
   return (mIndexSet.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedDataSource.
- */
-int
-SedDataSource::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedDataSource.
- */
-int
-SedDataSource::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -224,44 +162,6 @@ SedDataSource::setIndexSet(const std::string& indexSet)
   {
     mIndexSet = indexSet;
     return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedDataSource.
- */
-int
-SedDataSource::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedDataSource.
- */
-int
-SedDataSource::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
   }
 }
 
@@ -660,17 +560,7 @@ SedDataSource::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "indexSet")
+  if (attributeName == "indexSet")
   {
     value = getIndexSet();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -694,15 +584,7 @@ SedDataSource::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
-  else if (attributeName == "indexSet")
+  if (attributeName == "indexSet")
   {
     value = isSetIndexSet();
   }
@@ -794,15 +676,7 @@ SedDataSource::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "indexSet")
+  if (attributeName == "indexSet")
   {
     return_value = setIndexSet(value);
   }
@@ -824,15 +698,7 @@ SedDataSource::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
-  else if (attributeName == "indexSet")
+  if (attributeName == "indexSet")
   {
     value = unsetIndexSet();
   }
@@ -1028,10 +894,6 @@ SedDataSource::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("id");
-
-  attributes.add("name");
-
   attributes.add("indexSet");
 }
 
@@ -1091,26 +953,7 @@ SedDataSource::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedDataSource>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-  else
+  if(!isSetId())
   {
     if (log)
     {
@@ -1118,20 +961,6 @@ SedDataSource::readAttributes(
         "<SedDataSource> element.";
       log->logError(SedmlDataSourceAllowedAttributes, level, version, message,
         getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedDataSource>");
     }
   }
 
@@ -1177,16 +1006,6 @@ SedDataSource::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 
   if (isSetIndexSet() == true)
   {

@@ -109,6 +109,9 @@ SedBase::getAllElements()
 SedBase::SedBase (unsigned int level, unsigned int version) 
  : mMetaId ("")
  , mId ("")
+ , mName("")
+ , mIdAllowedPreV4(false)
+ , mNameAllowedPreV4(false)
  , mNotes(NULL)
  , mAnnotation( NULL )
  , mSed      ( NULL )
@@ -140,16 +143,19 @@ SedBase::SedBase (unsigned int level, unsigned int version)
 SedBase::SedBase (SedNamespaces *sedmlns) 
  : mMetaId("")
  , mId("")
+ , mName("")
+ , mIdAllowedPreV4(false)
+ , mNameAllowedPreV4(false)
  , mNotes(NULL)
- , mAnnotation( NULL )
- , mSed      ( NULL )
- , mSedNamespaces (NULL)
+ , mAnnotation(NULL)
+ , mSed(NULL)
+ , mSedNamespaces(NULL)
  , mUserData(NULL)
- , mLine      ( 0 )
- , mColumn    ( 0 )
- , mParentSedObject (NULL)
-  , mHasBeenDeleted(false)
-  , mEmptyString("")
+ , mLine(0)
+ , mColumn(0)
+ , mParentSedObject(NULL)
+ , mHasBeenDeleted(false)
+ , mEmptyString("")
  , mURI("")
 {
   if (!sedmlns)
@@ -171,6 +177,9 @@ SedBase::SedBase (SedNamespaces *sedmlns)
 SedBase::SedBase(const SedBase& orig)
   : mMetaId (orig.mMetaId)
   , mId (orig.mId)
+  , mName(orig.mName)
+  , mIdAllowedPreV4(orig.mIdAllowedPreV4)
+  , mNameAllowedPreV4(orig.mNameAllowedPreV4)
   , mNotes (NULL)
   , mAnnotation (NULL)
   , mSed (NULL)
@@ -221,6 +230,9 @@ SedBase& SedBase::operator=(const SedBase& rhs)
   {
     this->mMetaId = rhs.mMetaId;
     this->mId = rhs.mId;
+    this->mName = rhs.mName;
+    this->mIdAllowedPreV4 = rhs.mIdAllowedPreV4;
+    this->mNameAllowedPreV4 = rhs.mNameAllowedPreV4;
 
     delete this->mNotes;
 
@@ -281,13 +293,20 @@ SedBase::getMetaId ()
 const string&
 SedBase::getId() const
 {
-  return mId;
+    if (!mIdAllowedPreV4 && getVersion() < 4 && getLevel() == 1) {
+        static string empty;
+        return empty;
+    }
+    return mId;
 }
 
 const std::string& SedBase::getName() const
 {
-  static string empty;
-  return empty;
+    if (!mNameAllowedPreV4 && getVersion() < 4 && getLevel() == 1) {
+        static string empty;
+        return empty;
+    }
+    return mName;
 }
 
 
@@ -615,7 +634,7 @@ SedBase::isSetId() const
 
 bool SedBase::isSetName() const
 {
-    return false;
+  return (getName().empty() == false);
 }
 
 
@@ -678,16 +697,27 @@ SedBase::setId (const std::string& sid)
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
-  else
+  else if (!mIdAllowedPreV4 && getVersion() < 4 && getLevel() == 1)
   {
-    mId = sid;
-    return LIBSEDML_OPERATION_SUCCESS;
+      return LIBSEDML_UNEXPECTED_ATTRIBUTE;
   }
+  mId = sid;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 int SedBase::setName(const std::string& name)
 {
-  return LIBSEDML_OPERATION_FAILED;
+    if (name.empty())
+    {
+        mId.erase();
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else if (!mNameAllowedPreV4 && getVersion() < 4 && getLevel() == 1)
+    {
+        return LIBSEDML_UNEXPECTED_ATTRIBUTE;
+    }
+    mName = name;
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -1678,7 +1708,16 @@ SedBase::unsetId ()
 
 int SedBase::unsetName()
 {
-  return LIBSEDML_OPERATION_FAILED;
+    mName.erase();
+
+    if (mName.empty())
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -2008,6 +2047,11 @@ SedBase::getAttribute(const std::string& attributeName, std::string& value) cons
     value = getId();
     return LIBSEDML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "name")
+  {
+      value = getName();
+      return LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return LIBSEDML_OPERATION_FAILED;
 }
@@ -2026,6 +2070,10 @@ SedBase::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "id")
   {
     value = isSetId();
+  }
+  else if (attributeName == "name")
+  {
+      value = isSetName();
   }
 
   return value;
@@ -2082,6 +2130,10 @@ SedBase::setAttribute(const std::string& attributeName, const std::string& value
   {
     return_value = setId(value);
   }
+  else if (attributeName == "name")
+  {
+      return_value = setName(value);
+  }
 
   return return_value;
 }
@@ -2100,6 +2152,10 @@ SedBase::unsetAttribute(const std::string& attributeName)
   else if (attributeName == "id")
   {
     value = unsetId();
+  }
+  else if (attributeName == "name")
+  {
+      value = unsetName();
   }
 
   return value;
@@ -2607,6 +2663,10 @@ SedBase::addExpectedAttributes(ExpectedAttributes& attributes)
   // metaid: ID { use="optional" }  (L2v1 ->)
   //
   attributes.add("metaid");
+  //Can't check version here because it might not have been set yet, so just
+  // add id and name as expected all the time, and deal with pre-v4 elsewhere.
+  attributes.add("id");
+  attributes.add("name");
 }
 
 
@@ -2666,7 +2726,41 @@ SedBase::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& at
     }
   }
 
-    bool assigned = attributes.readInto("metaid", mMetaId, getErrorLog(), false, getLine(), getColumn());
+  // 
+  // id SId (use = "optional" )
+  // 
+
+  bool assigned = attributes.readInto("id", mId, getErrorLog(), false, getLine(), getColumn());
+
+  if (assigned == true)
+  {
+    if (mId.empty() == true)
+    {
+      logEmptyString(mId, level, version, (string)"<" + getElementName() + ">");
+    }
+    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
+    {
+      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
+        getElementName() + "> is '" + mId + "', which does not conform to the "
+          "syntax.", getLine(), getColumn());
+    }
+  }
+
+  // 
+  // name string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("name", mName, getErrorLog(), false, getLine(), getColumn());
+
+  if (assigned == true)
+  {
+    if (mName.empty() == true)
+    {
+      logEmptyString(mName, level, version, (string)"<" + getElementName() + ">");
+    }
+  }
+
+  assigned = attributes.readInto("metaid", mMetaId, getErrorLog(), false, getLine(), getColumn());
 
     if (assigned && mMetaId.empty())
     {
@@ -2761,6 +2855,14 @@ void
 SedBase::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   string sedmlPrefix    = getSedPrefix();
+  if (!mId.empty() && (mIdAllowedPreV4 || getVersion()>=4) || getLevel()>1)
+  {
+      stream.writeAttribute("id", sedmlPrefix, mId);
+  }
+  if (!mName.empty() && (mNameAllowedPreV4 || getVersion() >= 4 || getLevel()>1))
+  {
+      stream.writeAttribute("name", sedmlPrefix, mName);
+  }
   if ( !mMetaId.empty() )
   {
     stream.writeAttribute("metaid", sedmlPrefix, mMetaId);
