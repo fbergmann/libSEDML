@@ -103,13 +103,13 @@ struct AbstractCurvesOrderComparator
     {
         if (obj1 == NULL || obj2 == NULL)
         {
-            return true;
+            return false;
         }
         const SedAbstractCurve* at1 = static_cast<const SedAbstractCurve*>(obj1);
         const SedAbstractCurve* at2 = static_cast<const SedAbstractCurve*>(obj2);
         if (!at1->isSetOrder() || !at2->isSetOrder())
         {
-            return true;
+            return false;
         }
 
         return at1->getOrder() < at2->getOrder();

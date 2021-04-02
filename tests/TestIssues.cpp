@@ -153,6 +153,102 @@ TEST_CASE("Reading L1V4 curve should not require logY", "[sedml]")
 }
 
 
+TEST_CASE("Test sortOrderedObjects: curves", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/sort_curves.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    doc->sortOrderedObjects();
+    SedOutput* out = doc->getOutput(0);
+    REQUIRE(out->getTypeCode() == SEDML_OUTPUT_PLOT2D);
+    SedPlot2D* sp2d = static_cast<SedPlot2D*>(out);
+
+    SedAbstractCurve* curve = sp2d->getCurve(0);
+    REQUIRE(curve->isSetOrder() == true);
+    REQUIRE(curve->getOrder() == 1);
+    REQUIRE(curve->getStyle() == "green_line");
+
+    curve = sp2d->getCurve(1);
+    REQUIRE(curve->isSetOrder() == true);
+    REQUIRE(curve->getOrder() == 2);
+    REQUIRE(curve->getStyle() == "purple_line");
+
+    curve = sp2d->getCurve(2);
+    REQUIRE(curve->isSetOrder() == true);
+    REQUIRE(curve->getOrder() == 3);
+    REQUIRE(curve->getStyle() == "red_line");
+
+    delete doc;
+}
+
+
+TEST_CASE("Test sortOrderedObjects: surfaces", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/sort_surfaces.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    doc->sortOrderedObjects();
+
+    SedOutput* out = doc->getOutput(0);
+    REQUIRE(out->getTypeCode() == SEDML_OUTPUT_PLOT3D);
+    SedPlot3D* sp3d = static_cast<SedPlot3D*>(out);
+
+    SedSurface* surface = sp3d->getSurface(0);
+    REQUIRE(surface->isSetOrder() == true);
+    REQUIRE(surface->getOrder() == 0);
+    REQUIRE(surface->getId() == "surfaceA");
+
+    surface = sp3d->getSurface(1);
+    REQUIRE(surface->isSetOrder() == true);
+    REQUIRE(surface->getOrder() == 2);
+    REQUIRE(surface->getId() == "surfaceC");
+
+    surface = sp3d->getSurface(2);
+    REQUIRE(surface->isSetOrder() == true);
+    REQUIRE(surface->getOrder() == 5);
+    REQUIRE(surface->getId() == "surfaceB");
+
+    delete doc;
+}
+
+
+TEST_CASE("Test sortOrderedObjects: subtasks", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/sort_subtasks.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    doc->sortOrderedObjects();
+
+    SedAbstractTask* task = doc->getTask(0);
+    REQUIRE(task->getTypeCode() == SEDML_TASK_REPEATEDTASK);
+    SedRepeatedTask* rt = static_cast<SedRepeatedTask*>(task);
+
+    SedSubTask* subtask = rt->getSubTask(0);
+    REQUIRE(subtask->isSetOrder() == true);
+    REQUIRE(subtask->getOrder() == 1);
+
+    subtask = rt->getSubTask(1);
+    REQUIRE(subtask->isSetOrder() == true);
+    REQUIRE(subtask->getOrder() == 2);
+
+    subtask = rt->getSubTask(2);
+    REQUIRE(subtask->isSetOrder() == true);
+    REQUIRE(subtask->getOrder() == 3);
+
+    delete doc;
+}
+
+
+TEST_CASE("Test sortOrderedObjects doesn't crash", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/BIOMD0000000087_fig5.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    doc->sortOrderedObjects();
+    delete doc;
+}
+
+
 
 TEST_CASE("Reading a file with custom namespaces on element should have it available", "[sedml]")
 {

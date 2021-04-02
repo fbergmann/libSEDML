@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version4" level="1" version="4">
+  <listOfModels>
+    <model id="model0" language="urn:sedml:language:sbml.level-3.version-1" source="case_02.xml"/>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="sim0" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfSteps="10">
+      <algorithm kisaoID="KISAO:0000019">
+        <listOfAlgorithmParameters>
+          <algorithmParameter kisaoID="KISAO:0000211" value="0.04"/>
+        </listOfAlgorithmParameters>
+      </algorithm>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task0" modelReference="model0" simulationReference="sim0"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="plot_0_0_0" name="task0.time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task0_____time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task0_____time" symbol="urn:sedml:symbol:time" taskReference="task0" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="plot_0_0_1" name="task0.S1">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task0_____S1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task0_____S1" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S1&apos;]" taskReference="task0" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="plot_0_1_1" name="task0.S2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task0_____S2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task0_____S2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S2&apos;]" taskReference="task0" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="plot_0_2_1" name="task0.S3">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task0_____S3 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task0_____S3" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S3&apos;]" taskReference="task0" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <plot2D id="plot_0" name="UniformTimecourse">
+      <listOfCurves>
+        <curve id="plot_0__plot_0_0_0__plot_0_0_1" logX="false" order="2" style="purple_line" xDataReference="plot_0_0_0" logY="false" yDataReference="plot_0_0_1" type="points"/>
+        <curve id="plot_0__plot_0_0_0__plot_0_1_1" logX="false" order="3" style="red_line" xDataReference="plot_0_0_0" logY="false" yDataReference="plot_0_1_1" type="points"/>
+        <curve id="plot_0__plot_0_0_0__plot_0_2_1" logX="false" order="1" style="green_line" xDataReference="plot_0_0_0" logY="false" yDataReference="plot_0_2_1" type="points"/>
+      </listOfCurves>
+    </plot2D>
+    <report id="report_1">
+      <listOfDataSets>
+        <dataSet id="plot_0_0_0_dataset" label="task0.time" dataReference="plot_0_0_0"/>
+        <dataSet id="plot_0_0_1_dataset" label="task0.S1" dataReference="plot_0_0_1"/>
+      </listOfDataSets>
+    </report>
+  </listOfOutputs>
+  <listOfStyles>
+    <style id="purple_line">
+      <line style="solid" color="#FF00FF" thickness="18"/>
+    </style>
+    <style id="red_line">
+      <line style="solid" color="#FF0000" thickness="18"/>
+    </style>
+    <style id="green_line">
+      <line style="solid" color="#00FF00" thickness="18"/>
+    </style>
+  </listOfStyles>
+</sedML>
