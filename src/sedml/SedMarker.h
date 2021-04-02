@@ -44,14 +44,14 @@
  * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
  *
  *
- * @class doc_sedmarker_style
+ * @class doc_sedmarker_type
  *
  * @par
- * The attribute "style" on a SedMarker object is used to TODO:add explanation
+ * The attribute "type" on a SedMarker object is used to TODO:add explanation
  *
  * In the SBML
  * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
- * allowable values for "style":
+ * allowable values for "type":
  * <ul>
  * <li> @c "none", TODO:add description
  *
@@ -113,7 +113,7 @@ protected:
 
   double mSize;
   bool mIsSetSize;
-  MarkerType_t mStyle;
+  MarkerType_t mType;
   std::string mFill;
   std::string mLineColor;
   double mLineThickness;
@@ -188,12 +188,12 @@ public:
 
 
   /**
-   * Returns the value of the "style" attribute of this SedMarker.
+   * Returns the value of the "type" attribute of this SedMarker.
    *
-   * @return the value of the "style" attribute of this SedMarker as a
+   * @return the value of the "type" attribute of this SedMarker as a
    * MarkerType_t.
    *
-   * @copydetails doc_sedmarker_style
+   * @copydetails doc_sedmarker_type
    * @if clike The value is drawn from the enumeration @ref MarkerType_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SEDML_MARKERTYPE_NONE, MarkerType_t}
@@ -211,15 +211,15 @@ public:
    * @li @sbmlconstant{SEDML_MARKERTYPE_VDASH, MarkerType_t}
    * @li @sbmlconstant{SEDML_MARKERTYPE_INVALID, MarkerType_t}
    */
-  MarkerType_t getStyle() const;
+  MarkerType_t getType() const;
 
 
   /**
-   * Returns the value of the "style" attribute of this SedMarker.
+   * Returns the value of the "type" attribute of this SedMarker.
    *
-   * @return the value of the "style" attribute of this SedMarker as a string.
+   * @return the value of the "type" attribute of this SedMarker as a string.
    *
-   * @copydetails doc_sedmarker_style
+   * @copydetails doc_sedmarker_type
    * The possible values returned by this method are:
    * @li @c "none"
    * @li @c "square"
@@ -236,7 +236,7 @@ public:
    * @li @c "vDash"
    * @li @c "invalid MarkerType value"
    */
-  std::string getStyleAsString() const;
+  std::string getTypeAsString() const;
 
 
   /**
@@ -275,14 +275,14 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedMarker's "style" attribute is set.
+   * Predicate returning @c true if this SedMarker's "type" attribute is set.
    *
-   * @return @c true if this SedMarker's "style" attribute has been set,
+   * @return @c true if this SedMarker's "type" attribute has been set,
    * otherwise @c false is returned.
    *
-   * @copydetails doc_sedmarker_style
+   * @copydetails doc_sedmarker_type
    */
-  bool isSetStyle() const;
+  bool isSetType() const;
 
 
   /**
@@ -328,9 +328,9 @@ public:
 
 
   /**
-   * Sets the value of the "style" attribute of this SedMarker.
+   * Sets the value of the "type" attribute of this SedMarker.
    *
-   * @param style @if clike MarkerType_t@else int@endif value of the "style"
+   * @param type @if clike MarkerType_t@else int@endif value of the "type"
    * attribute to be set.
    *
    * @copydetails doc_returns_success_code
@@ -338,24 +338,24 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedmarker_style
+   * @copydetails doc_sedmarker_type
    */
-  int setStyle(const MarkerType_t style);
+  int setType(const MarkerType_t type);
 
 
   /**
-   * Sets the value of the "style" attribute of this SedMarker.
+   * Sets the value of the "type" attribute of this SedMarker.
    *
-   * @param style std::string& of the "style" attribute to be set.
+   * @param type std::string& of the "type" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedmarker_style
+   * @copydetails doc_sedmarker_type
    */
-  int setStyle(const std::string& style);
+  int setType(const std::string& type);
 
 
   /**
@@ -412,14 +412,14 @@ public:
 
 
   /**
-   * Unsets the value of the "style" attribute of this SedMarker.
+   * Unsets the value of the "type" attribute of this SedMarker.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    *
-   * @copydetails doc_sedmarker_style
+   * @copydetails doc_sedmarker_type
    */
-  int unsetStyle();
+  int unsetType();
 
 
   /**
@@ -892,14 +892,14 @@ SedMarker_getSize(const SedMarker_t * sm);
 
 
 /**
- * Returns the value of the "style" attribute of this SedMarker_t.
+ * Returns the value of the "type" attribute of this SedMarker_t.
  *
- * @param sm the SedMarker_t structure whose style is sought.
+ * @param sm the SedMarker_t structure whose type is sought.
  *
- * @return the value of the "style" attribute of this SedMarker_t as a
+ * @return the value of the "type" attribute of this SedMarker_t as a
  * MarkerType_t.
  *
- * @copydetails doc_sedmarker_style
+ * @copydetails doc_sedmarker_type
  * @if clike The value is drawn from the enumeration @ref MarkerType_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SEDML_MARKERTYPE_NONE, MarkerType_t}
@@ -921,20 +921,20 @@ SedMarker_getSize(const SedMarker_t * sm);
  */
 LIBSEDML_EXTERN
 MarkerType_t
-SedMarker_getStyle(const SedMarker_t * sm);
+SedMarker_getType(const SedMarker_t * sm);
 
 
 /**
- * Returns the value of the "style" attribute of this SedMarker_t.
+ * Returns the value of the "type" attribute of this SedMarker_t.
  *
- * @param sm the SedMarker_t structure whose style is sought.
+ * @param sm the SedMarker_t structure whose type is sought.
  *
- * @return the value of the "style" attribute of this SedMarker_t as a const
+ * @return the value of the "type" attribute of this SedMarker_t as a const
  * char *.
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sedmarker_style
+ * @copydetails doc_sedmarker_type
  * The possible values returned by this method are:
  * @li @c "none"
  * @li @c "square"
@@ -955,7 +955,7 @@ SedMarker_getStyle(const SedMarker_t * sm);
  */
 LIBSEDML_EXTERN
 char *
-SedMarker_getStyleAsString(const SedMarker_t * sm);
+SedMarker_getTypeAsString(const SedMarker_t * sm);
 
 
 /**
@@ -1024,21 +1024,21 @@ SedMarker_isSetSize(const SedMarker_t * sm);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedMarker_t's "style" attribute is
+ * Predicate returning @c 1 (true) if this SedMarker_t's "type" attribute is
  * set.
  *
  * @param sm the SedMarker_t structure.
  *
- * @return @c 1 (true) if this SedMarker_t's "style" attribute has been set,
+ * @return @c 1 (true) if this SedMarker_t's "type" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sedmarker_style
+ * @copydetails doc_sedmarker_type
  *
  * @memberof SedMarker_t
  */
 LIBSEDML_EXTERN
 int
-SedMarker_isSetStyle(const SedMarker_t * sm);
+SedMarker_isSetType(const SedMarker_t * sm);
 
 
 /**
@@ -1110,11 +1110,11 @@ SedMarker_setSize(SedMarker_t * sm, double size);
 
 
 /**
- * Sets the value of the "style" attribute of this SedMarker_t.
+ * Sets the value of the "type" attribute of this SedMarker_t.
  *
  * @param sm the SedMarker_t structure.
  *
- * @param style MarkerType_t value of the "style" attribute to be set.
+ * @param type MarkerType_t value of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1122,21 +1122,21 @@ SedMarker_setSize(SedMarker_t * sm, double size);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedmarker_style
+ * @copydetails doc_sedmarker_type
  *
  * @memberof SedMarker_t
  */
 LIBSEDML_EXTERN
 int
-SedMarker_setStyle(SedMarker_t * sm, MarkerType_t style);
+SedMarker_setType(SedMarker_t * sm, MarkerType_t type);
 
 
 /**
- * Sets the value of the "style" attribute of this SedMarker_t.
+ * Sets the value of the "type" attribute of this SedMarker_t.
  *
  * @param sm the SedMarker_t structure.
  *
- * @param style const char * of the "style" attribute to be set.
+ * @param type const char * of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1144,13 +1144,13 @@ SedMarker_setStyle(SedMarker_t * sm, MarkerType_t style);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedmarker_style
+ * @copydetails doc_sedmarker_type
  *
  * @memberof SedMarker_t
  */
 LIBSEDML_EXTERN
 int
-SedMarker_setStyleAsString(SedMarker_t * sm, const char * style);
+SedMarker_setTypeAsString(SedMarker_t * sm, const char * type);
 
 
 /**
@@ -1234,7 +1234,7 @@ SedMarker_unsetSize(SedMarker_t * sm);
 
 
 /**
- * Unsets the value of the "style" attribute of this SedMarker_t.
+ * Unsets the value of the "type" attribute of this SedMarker_t.
  *
  * @param sm the SedMarker_t structure.
  *
@@ -1242,13 +1242,13 @@ SedMarker_unsetSize(SedMarker_t * sm);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedmarker_style
+ * @copydetails doc_sedmarker_type
  *
  * @memberof SedMarker_t
  */
 LIBSEDML_EXTERN
 int
-SedMarker_unsetStyle(SedMarker_t * sm);
+SedMarker_unsetType(SedMarker_t * sm);
 
 
 /**

@@ -4304,7 +4304,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <line>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <line> object may have the optional attributes 'sedml:style', "
+    "A <line> object may have the optional attributes 'sedml:type', "
     "'sedml:color' and 'sedml:thickness'. No other attributes from the SBML "
     "Level 3 SEDML namespaces are permitted on a <line> object. ",
     { "L3V1 Sedml V1 Section"
@@ -4312,11 +4312,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25204
-  { SedmlLineStyleMustBeLineTypeEnum,
+  { SedmlLineTypeMustBeLineTypeEnum,
     "The 'style' attribute must be LineTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:style' of a <line> object must conform "
+    "The value of the attribute 'sedml:type' of a <line> object must conform "
     "to the syntax of SBML data type 'LineType' and may only take on the "
     "allowed values of 'LineType' defined in SBML; that is, the value must be "
     "one of the following: 'none', 'solid', 'dash', 'dot', 'dashDot' or "
@@ -4377,7 +4377,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <marker> object may have the optional attributes 'sedml:size', "
-    "'sedml:style', 'sedml:fill', 'sedml:lineColor' and 'sedml:lineThickness'. "
+    "'sedml:type', 'sedml:fill', 'sedml:lineColor' and 'sedml:lineThickness'. "
     "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
     "on a <marker> object. ",
     { "L3V1 Sedml V1 Section"
@@ -4396,11 +4396,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25305
-  { SedmlMarkerStyleMustBeMarkerTypeEnum,
+  { SedmlMarkerTypeMustBeMarkerTypeEnum,
     "The 'style' attribute must be MarkerTypeEnum.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:style' of a <marker> object must conform "
+    "The value of the attribute 'sedml:type' of a <marker> object must conform "
     "to the syntax of SBML data type 'MarkerType' and may only take on the "
     "allowed values of 'MarkerType' defined in SBML; that is, the value must be "
     "one of the following: 'none', 'square', 'circle', 'diamond', 'xCross', "

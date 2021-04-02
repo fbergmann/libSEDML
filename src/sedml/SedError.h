@@ -407,14 +407,14 @@ typedef enum
 , SedmlLineAllowedCoreAttributes      = 25201
 , SedmlLineAllowedCoreElements      = 25202
 , SedmlLineAllowedAttributes      = 25203
-, SedmlLineStyleMustBeLineTypeEnum      = 25204
+, SedmlLineTypeMustBeLineTypeEnum      = 25204
 , SedmlLineColorMustBeString      = 25205
 , SedmlLineThicknessMustBeDouble      = 25206
 , SedmlMarkerAllowedCoreAttributes      = 25301
 , SedmlMarkerAllowedCoreElements      = 25302
 , SedmlMarkerAllowedAttributes      = 25303
 , SedmlMarkerSizeMustBeDouble      = 25304
-, SedmlMarkerStyleMustBeMarkerTypeEnum      = 25305
+, SedmlMarkerTypeMustBeMarkerTypeEnum      = 25305
 , SedmlMarkerFillMustBeString      = 25306
 , SedmlMarkerLineColorMustBeString      = 25307
 , SedmlMarkerLineThicknessMustBeDouble      = 25308

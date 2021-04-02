@@ -345,8 +345,8 @@ TEST_CASE("create and add dependent variables", "[sedml]")
 TEST_CASE("allow dashDotDot", "[sedml]")
 {
   SedLine line(1, 4);
-  REQUIRE(line.setStyle("dashDotDot") == LIBSEDML_OPERATION_SUCCESS);
-  REQUIRE(line.setStyle(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
+  REQUIRE(line.setType("dashDotDot") == LIBSEDML_OPERATION_SUCCESS);
+  REQUIRE(line.setType(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
 
 }
 
@@ -447,3 +447,29 @@ TEST_CASE("Reading numberOfPoints", "[sedml]")
   }
   delete doc;
 }
+
+TEST_CASE("Reading old 'style' attribute on line should give error", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/line_uses_style.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 3);
+    SedError* err1 = doc->getError(0);
+    CHECK(err1->getErrorId() == SedmlLineAllowedAttributes);
+
+    delete doc;
+}
+
+
+TEST_CASE("Reading old 'style' attribute on marker should give error", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/marker_uses_style.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 3);
+    SedError* err1 = doc->getError(0);
+    CHECK(err1->getErrorId() == SedmlMarkerAllowedAttributes);
+
+    delete doc;
+}
+
+
+

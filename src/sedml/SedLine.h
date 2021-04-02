@@ -44,14 +44,14 @@
  * ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ -->
  *
  *
- * @class doc_sedline_style
+ * @class doc_sedline_type
  *
  * @par
- * The attribute "style" on a SedLine object is used to TODO:add explanation
+ * The attribute "type" on a SedLine object is used to TODO:add explanation
  *
  * In the SBML
  * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
- * allowable values for "style":
+ * allowable values for "type":
  * <ul>
  * <li> @c "none", TODO:add description
  *
@@ -97,7 +97,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  LineType_t mStyle;
+  LineType_t mType;
   std::string mColor;
   double mThickness;
   bool mIsSetThickness;
@@ -162,12 +162,12 @@ public:
 
 
   /**
-   * Returns the value of the "style" attribute of this SedLine.
+   * Returns the value of the "type" attribute of this SedLine.
    *
-   * @return the value of the "style" attribute of this SedLine as a
+   * @return the value of the "type" attribute of this SedLine as a
    * LineType_t.
    *
-   * @copydetails doc_sedline_style
+   * @copydetails doc_sedline_type
    * @if clike The value is drawn from the enumeration @ref LineType_t @endif
    * The possible values returned by this method are:
    * @li @sbmlconstant{SEDML_LINETYPE_NONE, LineType_t}
@@ -178,15 +178,15 @@ public:
    * @li @sbmlconstant{SEDML_LINETYPE_DASHDOTDOT, LineType_t}
    * @li @sbmlconstant{SEDML_LINETYPE_INVALID, LineType_t}
    */
-  LineType_t getStyle() const;
+  LineType_t getType() const;
 
 
   /**
-   * Returns the value of the "style" attribute of this SedLine.
+   * Returns the value of the "type" attribute of this SedLine.
    *
-   * @return the value of the "style" attribute of this SedLine as a string.
+   * @return the value of the "type" attribute of this SedLine as a string.
    *
-   * @copydetails doc_sedline_style
+   * @copydetails doc_sedline_type
    * The possible values returned by this method are:
    * @li @c "none"
    * @li @c "solid"
@@ -196,7 +196,7 @@ public:
    * @li @c "dashDotDot"
    * @li @c "invalid LineType value"
    */
-  std::string getStyleAsString() const;
+  std::string getTypeAsString() const;
 
 
   /**
@@ -217,14 +217,14 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedLine's "style" attribute is set.
+   * Predicate returning @c true if this SedLine's "type" attribute is set.
    *
-   * @return @c true if this SedLine's "style" attribute has been set,
+   * @return @c true if this SedLine's "type" attribute has been set,
    * otherwise @c false is returned.
    *
-   * @copydetails doc_sedline_style
+   * @copydetails doc_sedline_type
    */
-  bool isSetStyle() const;
+  bool isSetType() const;
 
 
   /**
@@ -247,9 +247,9 @@ public:
 
 
   /**
-   * Sets the value of the "style" attribute of this SedLine.
+   * Sets the value of the "type" attribute of this SedLine.
    *
-   * @param style @if clike LineType_t@else int@endif value of the "style"
+   * @param type @if clike LineType_t@else int@endif value of the "type"
    * attribute to be set.
    *
    * @copydetails doc_returns_success_code
@@ -257,24 +257,24 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedline_style
+   * @copydetails doc_sedline_type
    */
-  int setStyle(const LineType_t style);
+  int setType(const LineType_t type);
 
 
   /**
-   * Sets the value of the "style" attribute of this SedLine.
+   * Sets the value of the "type" attribute of this SedLine.
    *
-   * @param style std::string& of the "style" attribute to be set.
+   * @param type std::string& of the "type" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    *
-   * @copydetails doc_sedline_style
+   * @copydetails doc_sedline_type
    */
-  int setStyle(const std::string& style);
+  int setType(const std::string& type);
 
 
   /**
@@ -305,14 +305,14 @@ public:
 
 
   /**
-   * Unsets the value of the "style" attribute of this SedLine.
+   * Unsets the value of the "type" attribute of this SedLine.
    *
    * @copydetails doc_returns_one_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    *
-   * @copydetails doc_sedline_style
+   * @copydetails doc_sedline_type
    */
-  int unsetStyle();
+  int unsetType();
 
 
   /**
@@ -760,14 +760,14 @@ SedLine_free(SedLine_t* sl);
 
 
 /**
- * Returns the value of the "style" attribute of this SedLine_t.
+ * Returns the value of the "type" attribute of this SedLine_t.
  *
- * @param sl the SedLine_t structure whose style is sought.
+ * @param sl the SedLine_t structure whose type is sought.
  *
- * @return the value of the "style" attribute of this SedLine_t as a
+ * @return the value of the "type" attribute of this SedLine_t as a
  * LineType_t.
  *
- * @copydetails doc_sedline_style
+ * @copydetails doc_sedline_type
  * @if clike The value is drawn from the enumeration @ref LineType_t @endif
  * The possible values returned by this method are:
  * @li @sbmlconstant{SEDML_LINETYPE_NONE, LineType_t}
@@ -782,20 +782,20 @@ SedLine_free(SedLine_t* sl);
  */
 LIBSEDML_EXTERN
 LineType_t
-SedLine_getStyle(const SedLine_t * sl);
+SedLine_getType(const SedLine_t * sl);
 
 
 /**
- * Returns the value of the "style" attribute of this SedLine_t.
+ * Returns the value of the "type" attribute of this SedLine_t.
  *
- * @param sl the SedLine_t structure whose style is sought.
+ * @param sl the SedLine_t structure whose type is sought.
  *
- * @return the value of the "style" attribute of this SedLine_t as a const char
+ * @return the value of the "type" attribute of this SedLine_t as a const char
  * *.
  *
  * @copydetails doc_returned_unowned_char
  *
- * @copydetails doc_sedline_style
+ * @copydetails doc_sedline_type
  * The possible values returned by this method are:
  * @li @c "none"
  * @li @c "solid"
@@ -809,7 +809,7 @@ SedLine_getStyle(const SedLine_t * sl);
  */
 LIBSEDML_EXTERN
 char *
-SedLine_getStyleAsString(const SedLine_t * sl);
+SedLine_getTypeAsString(const SedLine_t * sl);
 
 
 /**
@@ -845,21 +845,21 @@ SedLine_getThickness(const SedLine_t * sl);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedLine_t's "style" attribute is
+ * Predicate returning @c 1 (true) if this SedLine_t's "type" attribute is
  * set.
  *
  * @param sl the SedLine_t structure.
  *
- * @return @c 1 (true) if this SedLine_t's "style" attribute has been set,
+ * @return @c 1 (true) if this SedLine_t's "type" attribute has been set,
  * otherwise @c 0 (false) is returned.
  *
- * @copydetails doc_sedline_style
+ * @copydetails doc_sedline_type
  *
  * @memberof SedLine_t
  */
 LIBSEDML_EXTERN
 int
-SedLine_isSetStyle(const SedLine_t * sl);
+SedLine_isSetType(const SedLine_t * sl);
 
 
 /**
@@ -895,11 +895,11 @@ SedLine_isSetThickness(const SedLine_t * sl);
 
 
 /**
- * Sets the value of the "style" attribute of this SedLine_t.
+ * Sets the value of the "type" attribute of this SedLine_t.
  *
  * @param sl the SedLine_t structure.
  *
- * @param style LineType_t value of the "style" attribute to be set.
+ * @param type LineType_t value of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -907,21 +907,21 @@ SedLine_isSetThickness(const SedLine_t * sl);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedline_style
+ * @copydetails doc_sedline_type
  *
  * @memberof SedLine_t
  */
 LIBSEDML_EXTERN
 int
-SedLine_setStyle(SedLine_t * sl, LineType_t style);
+SedLine_setType(SedLine_t * sl, LineType_t type);
 
 
 /**
- * Sets the value of the "style" attribute of this SedLine_t.
+ * Sets the value of the "type" attribute of this SedLine_t.
  *
  * @param sl the SedLine_t structure.
  *
- * @param style const char * of the "style" attribute to be set.
+ * @param type const char * of the "type" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -929,13 +929,13 @@ SedLine_setStyle(SedLine_t * sl, LineType_t style);
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedline_style
+ * @copydetails doc_sedline_type
  *
  * @memberof SedLine_t
  */
 LIBSEDML_EXTERN
 int
-SedLine_setStyleAsString(SedLine_t * sl, const char * style);
+SedLine_setTypeAsString(SedLine_t * sl, const char * type);
 
 
 /**
@@ -980,7 +980,7 @@ SedLine_setThickness(SedLine_t * sl, double thickness);
 
 
 /**
- * Unsets the value of the "style" attribute of this SedLine_t.
+ * Unsets the value of the "type" attribute of this SedLine_t.
  *
  * @param sl the SedLine_t structure.
  *
@@ -988,13 +988,13 @@ SedLine_setThickness(SedLine_t * sl, double thickness);
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @copydetails doc_sedline_style
+ * @copydetails doc_sedline_type
  *
  * @memberof SedLine_t
  */
 LIBSEDML_EXTERN
 int
-SedLine_unsetStyle(SedLine_t * sl);
+SedLine_unsetType(SedLine_t * sl);
 
 
 /**
