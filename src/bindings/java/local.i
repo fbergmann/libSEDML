@@ -211,6 +211,7 @@ COVARIANT_RTYPE_CLONE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
+COVARIANT_RTYPE_CLONE(SedListOfStyles)
 COVARIANT_RTYPE_CLONE(SedListOfRemainingDimensions)
 COVARIANT_RTYPE_CLONE(SedParameterEstimationResultPlot)
 COVARIANT_RTYPE_CLONE(SedParameterEstimationReport)
@@ -270,6 +271,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSubTasks)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfDataDescriptions)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfDataSources)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSlices)
+COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfStyles)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfAdjustableParameters)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitExperiments)
@@ -434,6 +436,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedListOfSubTasks)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfSurfaces)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfTasks)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfVariables)
+SEDMLCONSTRUCTOR_EXCEPTION(SedListOfStyles)
 SEDMLCONSTRUCTOR_EXCEPTION(SedMarker)
 SEDMLCONSTRUCTOR_EXCEPTION(SedModel)
 SEDMLCONSTRUCTOR_EXCEPTION(SedNamespaces)
@@ -762,101 +765,105 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
       {
         return new SedListOf(cPtr, owner);
       }
-      else if (name == "listOfModels")
+      else if (name.equals("listOfModels"))
       {
          return new SedListOfModels(cPtr, owner);
       }
-      else if (name == "listOfChanges")
+      else if (name.equals("listOfChanges"))
       {
          return new SedListOfChanges(cPtr, owner);
       }
-      else if (name == "listOfVariables")
+      else if (name.equals("listOfVariables"))
       {
          return new SedListOfVariables(cPtr, owner);
       }
-      else if (name == "listOfParameters")
+      else if (name.equals("listOfParameters"))
       {
          return new SedListOfParameters(cPtr, owner);
       }
-      else if (name == "listOfSimulations")
+      else if (name.equals("listOfSimulations"))
       {
          return new SedListOfSimulations(cPtr, owner);
       }
-      else if (name == "listOfTasks")
+      else if (name.equals("listOfTasks"))
       {
          return new SedListOfTasks(cPtr, owner);
       }
-      else if (name == "listOfDataGenerators")
+      else if (name.equals("listOfDataGenerators"))
       {
          return new SedListOfDataGenerators(cPtr, owner);
       }
-      else if (name == "listOfOutputs")
+      else if (name.equals("listOfOutputs"))
       {
          return new SedListOfOutputs(cPtr, owner);
       }
-      else if (name == "listOfCurves")
+      else if (name.equals("listOfCurves"))
       {
          return new SedListOfCurves(cPtr, owner);
       }
-      else if (name == "listOfSurfaces")
+      else if (name.equals("listOfSurfaces"))
       {
          return new SedListOfSurfaces(cPtr, owner);
       }
-      else if (name == "listOfDataSets")
+      else if (name.equals("listOfDataSets"))
       {
          return new SedListOfDataSets(cPtr, owner);
       }
-      else if (name == "listOfAlgorithmParameters")
+      else if (name.equals("listOfAlgorithmParameters"))
       {
          return new SedListOfAlgorithmParameters(cPtr, owner);
       }
-      else if (name == "listOfRanges")
+      else if (name.equals("listOfRanges"))
       {
          return new SedListOfRanges(cPtr, owner);
       }
-      else if (name == "listOfChanges")
+      else if (name.equals("listOfChanges"))
       {
          return new SedListOfSetValues(cPtr, owner);
       }
-      else if (name == "listOfSubTasks")
+      else if (name.equals("listOfSubTasks"))
       {
          return new SedListOfSubTasks(cPtr, owner);
       }
-      else if (name == "listOfDataDescriptions")
+      else if (name.equals("listOfDataDescriptions"))
       {
          return new SedListOfDataDescriptions(cPtr, owner);
       }
-      else if (name == "listOfDataSources")
+      else if (name.equals("listOfDataSources"))
       {
          return new SedListOfDataSources(cPtr, owner);
       }
-      else if (name == "listOfSlices")
+      else if (name.equals("listOfSlices"))
       {
          return new SedListOfSlices(cPtr, owner);
       }
-      else if (name == "listOfAdjustableParameters")
+      else if (name.equals("listOfAdjustableParameters"))
       {
          return new SedListOfAdjustableParameters(cPtr, owner);
       }
-      else if (name == "listOfExperimentRefs")
+      else if (name.equals("listOfExperimentRefs"))
       {
          return new SedListOfExperimentRefs(cPtr, owner);
       }
-      else if (name == "listOfFitExperiments")
+      else if (name.equals("listOfFitExperiments"))
       {
          return new SedListOfFitExperiments(cPtr, owner);
       }
-      else if (name == "listOfFitMappings")
+      else if (name.equals("listOfFitMappings"))
       {
          return new SedListOfFitMappings(cPtr, owner);
       }
-      else if (name == "listOfSubPlots")
+      else if (name.equals("listOfSubPlots"))
       {
          return new SedListOfSubPlots(cPtr, owner);
       }
-      else if (name == "listOfRemainingDimensions")
+      else if (name.equals("listOfRemainingDimensions"))
       {
          return new SedListOfRemainingDimensions(cPtr, owner);
+      }
+      else if (name.equals("listOfStyles"))
+      {
+         return new SedListOfStyles(cPtr, owner);
       }
       
       return new SedListOf(cPtr, owner);        

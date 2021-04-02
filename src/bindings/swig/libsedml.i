@@ -421,6 +421,7 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedListOfSubPlots.h>
 %include <sedml/SedAxis.h>
 %include <sedml/SedStyle.h>
+%include <sedml/SedListOfStyles.h>
 %include <sedml/SedLine.h>
 %include <sedml/SedMarker.h>
 %include <sedml/SedFill.h>
