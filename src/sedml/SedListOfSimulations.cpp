@@ -52,7 +52,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfSimulations using the given SEDML Level and @ p
+ * Creates a new SedListOfSimulations using the given SED-ML Level and @ p
  * version values.
  */
 SedListOfSimulations::SedListOfSimulations(unsigned int level,
@@ -342,7 +342,7 @@ SedListOfSimulations::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfSimulations object.
  */
 int

@@ -61,7 +61,7 @@ public:
   /**
    * Creates a new SedReader object and returns it.
    *
-   * The libSEDML SedReader object offers methods for reading SEDML in
+   * The libSEDML SedReader object offers methods for reading SED-ML in
    * XML form from files and text strings.
    */
   SedReader ();
@@ -79,7 +79,7 @@ public:
    *
    * @param filename the name or full pathname of the file to be read.
    *
-   * @return a pointer to the SedDocument object created from the SEDML
+   * @return a pointer to the SedDocument object created from the SED-ML
    * content in @p filename.
    *
    * @see readSedMLFromString(@if java String@endif)

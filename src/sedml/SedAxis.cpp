@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedAxis using the given SEDML Level and @ p version values.
+ * Creates a new SedAxis using the given SED-ML Level and @ p version values.
  */
 SedAxis::SedAxis(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -1105,7 +1105,7 @@ SedAxis::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedAxis_t using the given SEDML Level and @ p version values.
+ * Creates a new SedAxis_t using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedAxis_t *

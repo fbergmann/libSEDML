@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedSteadyState using the given SEDML Level and @ p version
+ * Creates a new SedSteadyState using the given SED-ML Level and @ p version
  * values.
  */
 SedSteadyState::SedSteadyState(unsigned int level, unsigned int version)
@@ -502,7 +502,7 @@ SedSteadyState::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedSteadyState_t using the given SEDML Level and @ p version
+ * Creates a new SedSteadyState_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

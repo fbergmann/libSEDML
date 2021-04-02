@@ -49,7 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedParameter using the given SEDML Level and @ p version
+ * Creates a new SedParameter using the given SED-ML Level and @ p version
  * values.
  */
 SedParameter::SedParameter(unsigned int level, unsigned int version)
@@ -830,7 +830,7 @@ SedParameter::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedParameter_t using the given SEDML Level and @ p version
+ * Creates a new SedParameter_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

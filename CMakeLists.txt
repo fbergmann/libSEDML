@@ -126,9 +126,9 @@ add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 include(InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "An API library for reading/writing/manipulating SEDML.")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "An API library for reading/writing/manipulating SED-ML.")
 set(CPACK_PACKAGE_NAME "${PACKAGE_NAME}")
-set(CPACK_PACKAGE_VENDOR "The SEDML Team")
+set(CPACK_PACKAGE_VENDOR "The SED-ML Team")
 set(CPACK_PACKAGE_CONTACT "LibSEDML Team <libsedml-team@caltech.edu>")
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
@@ -637,7 +637,7 @@ endif()
 
 ###############################################################################
 #
-# Initialize SEDML sources
+# Initialize SED-ML sources
 #
 set(LIBSEDML_SOURCES)
 

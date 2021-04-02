@@ -84,10 +84,10 @@ public:
   /**
    * Creates a new SedListOf object.
    *
-   * @param level the SEDML Level; if not assigned, defaults to the
+   * @param level the SED-ML Level; if not assigned, defaults to the
    * value of SEDML_DEFAULT_LEVEL.
    *
-   * @param version the Version within the SEDML Level; if not assigned,
+   * @param version the Version within the SED-ML Level; if not assigned,
    * defaults to the value of SEDML_DEFAULT_VERSION.
    */
   SedListOf (unsigned int level   = SEDML_DEFAULT_LEVEL,
@@ -97,7 +97,7 @@ public:
   /**
    * Creates a new SedListOf with a given SedNamespaces object.
    *
-   * @param sedmlns the set of SEDML namespaces that this SedListOf should
+   * @param sedmlns the set of SED-ML namespaces that this SedListOf should
    * contain.
    */
   SedListOf (SedNamespaces* sedmlns);
@@ -361,7 +361,7 @@ public:
 
   /** @cond doxygenLibsedmlInternal */
   /**
-   * Sets the parent SedDocument of this SEDML object.
+   * Sets the parent SedDocument of this SED-ML object.
    *
    * @param d the SedDocument that should become the parent of this
    * SedListOf.
@@ -372,7 +372,7 @@ public:
 
   /** @cond doxygenLibsedmlInternal */
   /**
-   * Sets this SEDML object to child SEDML objects (if any).
+   * Sets this SED-ML object to child SED-ML objects (if any).
    * (Creates a child-parent relationship by the parent)
    *
    * Subclasses must override this function if they define
@@ -395,12 +395,12 @@ public:
    * 
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML type code for this object:
+   * @return the SED-ML type code for this object:
    * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t} (default).
    *
    * @note The various SedListOf classes mostly differ from each other in what they
    * contain.  Hence, one must call getItemTypeCode() to fully determine the
-   * class of this SEDML object.
+   * class of this SED-ML object.
    *
    * @see getItemTypeCode()
    * @see getElementName()
@@ -412,11 +412,11 @@ public:
    * Get the type code of the objects contained in this SedListOf.
    *
    * Classes that inherit from the SedListOf class should override this method
-   * to return the SEDML type code for the objects contained in this SedListOf.
+   * to return the SED-ML type code for the objects contained in this SedListOf.
    * If they do not, this method will return
    * @sedmlconstant{SEDML_UNKNOWN, SedTypeCode_t}
    *
-   * @return The SedListOf base class contains no SEDML objects, and therefore
+   * @return The SedListOf base class contains no SED-ML objects, and therefore
    * this method returns @sedmlconstant{SEDML_UNKNOWN, SedTypeCode_t}.
    *
    * @see getElementName()
@@ -437,7 +437,7 @@ public:
   /** @cond doxygenLibsedmlInternal */
   /**
    * Subclasses should override this method to write out their contained
-   * SEDML objects as XML elements.  Be sure to call your parents
+   * SED-ML objects as XML elements.  Be sure to call your parents
    * implementation of this method as well.
    */
   virtual void writeElements (XMLOutputStream& stream) const;
@@ -499,10 +499,10 @@ BEGIN_C_DECLS
 /**
  * Creates a new instance of a SedListOf_t structure.
  *
- * @param level an unsigned int, the SEDML Level to assign to this
+ * @param level an unsigned int, the SED-ML Level to assign to this
  * SedListOf_t structure.
  *
- * @param version an unsigned int, the SEDML Version to assign to this
+ * @param version an unsigned int, the SED-ML Version to assign to this
  * SedListOf_t structure.
  *
  * @return a pointer to the newly-created SedListOf_t structure.

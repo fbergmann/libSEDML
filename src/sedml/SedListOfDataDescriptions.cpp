@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfDataDescriptions using the given SEDML Level and @ p
+ * Creates a new SedListOfDataDescriptions using the given SED-ML Level and @ p
  * version values.
  */
 SedListOfDataDescriptions::SedListOfDataDescriptions(unsigned int level,
@@ -289,7 +289,7 @@ SedListOfDataDescriptions::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfDataDescriptions object.
  */
 int

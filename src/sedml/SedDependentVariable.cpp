@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedDependentVariable using the given SEDML Level and @ p
+ * Creates a new SedDependentVariable using the given SED-ML Level and @ p
  * version values.
  */
 SedDependentVariable::SedDependentVariable(unsigned int level,
@@ -820,7 +820,7 @@ SedDependentVariable::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedDependentVariable_t using the given SEDML Level and @ p
+ * Creates a new SedDependentVariable_t using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN

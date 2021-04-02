@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedShadedArea using the given SEDML Level and @ p version
+ * Creates a new SedShadedArea using the given SED-ML Level and @ p version
  * values.
  */
 SedShadedArea::SedShadedArea(unsigned int level, unsigned int version)
@@ -790,7 +790,7 @@ SedShadedArea::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedShadedArea_t using the given SEDML Level and @ p version
+ * Creates a new SedShadedArea_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

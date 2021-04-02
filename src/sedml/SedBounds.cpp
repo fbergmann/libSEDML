@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedBounds using the given SEDML Level and @ p version values.
+ * Creates a new SedBounds using the given SED-ML Level and @ p version values.
  */
 SedBounds::SedBounds(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -842,7 +842,7 @@ SedBounds::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedBounds_t using the given SEDML Level and @ p version
+ * Creates a new SedBounds_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedParameterEstimationReport using the given SEDML Level and @
+ * Creates a new SedParameterEstimationReport using the given SED-ML Level and @
  * p version values.
  */
 SedParameterEstimationReport::SedParameterEstimationReport(unsigned int level,
@@ -678,7 +678,7 @@ SedParameterEstimationReport::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedParameterEstimationReport_t using the given SEDML Level and
+ * Creates a new SedParameterEstimationReport_t using the given SED-ML Level and
  * @ p version values.
  */
 LIBSEDML_EXTERN

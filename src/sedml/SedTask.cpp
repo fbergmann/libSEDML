@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedTask using the given SEDML Level and @ p version values.
+ * Creates a new SedTask using the given SED-ML Level and @ p version values.
  */
 SedTask::SedTask(unsigned int level, unsigned int version)
   : SedAbstractTask(level, version)
@@ -751,7 +751,7 @@ SedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedTask_t using the given SEDML Level and @ p version values.
+ * Creates a new SedTask_t using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedTask_t *

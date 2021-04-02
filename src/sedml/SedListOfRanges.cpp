@@ -53,7 +53,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfRanges using the given SEDML Level and @ p version
+ * Creates a new SedListOfRanges using the given SED-ML Level and @ p version
  * values.
  */
 SedListOfRanges::SedListOfRanges(unsigned int level, unsigned int version)
@@ -381,7 +381,7 @@ SedListOfRanges::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfRanges object.
  */
 int

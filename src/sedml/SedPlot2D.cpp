@@ -51,7 +51,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedPlot2D using the given SEDML Level and @ p version values.
+ * Creates a new SedPlot2D using the given SED-ML Level and @ p version values.
  */
 SedPlot2D::SedPlot2D(unsigned int level, unsigned int version)
   : SedPlot(level, version)
@@ -1111,7 +1111,7 @@ SedPlot2D::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedPlot2D_t using the given SEDML Level and @ p version
+ * Creates a new SedPlot2D_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

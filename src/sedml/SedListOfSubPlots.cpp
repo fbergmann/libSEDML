@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfSubPlots using the given SEDML Level and @ p version
+ * Creates a new SedListOfSubPlots using the given SED-ML Level and @ p version
  * values.
  */
 SedListOfSubPlots::SedListOfSubPlots(unsigned int level, unsigned int version)
@@ -321,7 +321,7 @@ SedListOfSubPlots::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfSubPlots object.
  */
 int

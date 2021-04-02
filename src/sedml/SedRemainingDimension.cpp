@@ -49,7 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedRemainingDimension using the given SEDML Level and @ p
+ * Creates a new SedRemainingDimension using the given SED-ML Level and @ p
  * version values.
  */
 SedRemainingDimension::SedRemainingDimension(unsigned int level,
@@ -773,7 +773,7 @@ SedRemainingDimension::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedRemainingDimension_t using the given SEDML Level and @ p
+ * Creates a new SedRemainingDimension_t using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN

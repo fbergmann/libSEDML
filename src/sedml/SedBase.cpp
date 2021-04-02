@@ -124,7 +124,7 @@ SedBase::SedBase (unsigned int level, unsigned int version)
   mSedNamespaces = new SedNamespaces(level, version);
 
   //
-  // Sets the XMLNS URI of corresponding SEDML Level/Version to
+  // Sets the XMLNS URI of corresponding SED-ML Level/Version to
   // the element namespace (mURI) of this object.
   //
   //
@@ -259,7 +259,7 @@ SedBase& SedBase::operator=(const SedBase& rhs)
 
 
 /*
- * @return the metaid of this SEDML object.
+ * @return the metaid of this SED-ML object.
  */
 const string&
 SedBase::getMetaId () const
@@ -269,7 +269,7 @@ SedBase::getMetaId () const
 
 
 /*
- * @return the metaid of this SEDML object.
+ * @return the metaid of this SED-ML object.
  */
 string&
 SedBase::getMetaId ()
@@ -292,7 +292,7 @@ const std::string& SedBase::getName() const
 
 
 /*
- * @return the notes of this SEDML object.
+ * @return the notes of this SED-ML object.
  */
 LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*
 SedBase::getNotes()
@@ -309,7 +309,7 @@ SedBase::getNotes() const
 
 
 /*
- * @return the notes of this SEDML object by string.
+ * @return the notes of this SED-ML object by string.
  */
 std::string
 SedBase::getNotesString()
@@ -326,7 +326,7 @@ SedBase::getNotesString() const
 
 
 /*
- * @return the annotation of this SEDML object.
+ * @return the annotation of this SED-ML object.
  */
 LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*
 SedBase::getAnnotation ()
@@ -343,7 +343,7 @@ SedBase::getAnnotation () const
 
 
 /*
- * @return the annotation of this SEDML object by string.
+ * @return the annotation of this SED-ML object by string.
  */
 std::string
 SedBase::getAnnotationString ()
@@ -431,7 +431,7 @@ SedBase::unsetUserData()
 }
 
 /*
- * @return the Namespaces associated with this SEDML object
+ * @return the Namespaces associated with this SED-ML object
  */
 LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
 SedBase::getNamespaces()
@@ -444,7 +444,7 @@ SedBase::getNamespaces()
 
 
 /*
- * @return the Namespaces associated with this SEDML object
+ * @return the Namespaces associated with this SED-ML object
  */
 const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces*
 SedBase::getElementNamespaces() const
@@ -464,7 +464,7 @@ SedBase::getNamespaces() const
 
 
 /*
- * @return the parent SedDocument of this SEDML object.
+ * @return the parent SedDocument of this SED-ML object.
  */
 const SedDocument*
 SedBase::getSedDocument () const
@@ -494,7 +494,7 @@ SedBase::getSedDocument () const
 }
 
 /*
- * @return the parent SedDocument of this SEDML object.
+ * @return the parent SedDocument of this SED-ML object.
  */
 SedDocument*
 SedBase::getSedDocument ()
@@ -577,7 +577,7 @@ SedBase::getParentSedObject () const
 
 
 /*
- * @return the line number of this SEDML object.
+ * @return the line number of this SED-ML object.
  */
 unsigned int
 SedBase::getLine () const
@@ -587,7 +587,7 @@ SedBase::getLine () const
 
 
 /*
- * @return the column number of this SEDML object.
+ * @return the column number of this SED-ML object.
  */
 unsigned int
 SedBase::getColumn () const
@@ -597,7 +597,7 @@ SedBase::getColumn () const
 
 
 /*
- * @return true if the metaid of this SEDML object is set, false
+ * @return true if the metaid of this SED-ML object is set, false
  * otherwise.
  */
 bool
@@ -620,7 +620,7 @@ bool SedBase::isSetName() const
 
 
 /*
- * @return true if the notes of this SEDML object is set, false
+ * @return true if the notes of this SED-ML object is set, false
  * otherwise.
  */
 bool
@@ -631,7 +631,7 @@ SedBase::isSetNotes () const
 
 
 /*
- * @return true if the annotation of this SEDML object is set,
+ * @return true if the annotation of this SED-ML object is set,
  * false otherwise.
  */
 bool
@@ -642,7 +642,7 @@ SedBase::isSetAnnotation () const
 
 
 /*
- * Sets the metaid field of the given SEDML object to a copy of metaid.
+ * Sets the metaid field of the given SED-ML object to a copy of metaid.
  */
 int
 SedBase::setMetaId (const std::string& metaid)
@@ -664,7 +664,7 @@ SedBase::setMetaId (const std::string& metaid)
 }
 
 /*
- * Sets the id field of the given SEDML object to a copy of sid.
+ * Sets the id field of the given SED-ML object to a copy of sid.
  */
 int
 SedBase::setId (const std::string& sid)
@@ -692,7 +692,7 @@ int SedBase::setName(const std::string& name)
 
 
 /*
- * Sets the annotation of this SEDML object to a copy of annotation.
+ * Sets the annotation of this SED-ML object to a copy of annotation.
  */
 int
 SedBase::setAnnotation (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* annotation)
@@ -714,7 +714,7 @@ SedBase::setAnnotation (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* annotation)
 }
 
 /*
- * Sets the annotation (by string) of this SEDML object to a copy of annotation.
+ * Sets the annotation (by string) of this SED-ML object to a copy of annotation.
  */
 int
 SedBase::setAnnotation (const std::string& annotation)
@@ -1003,7 +1003,7 @@ SedBase::replaceTopLevelAnnotationElement(const std::string& annotation)
 
 
 /*
- * Sets the notes of this SEDML object to a copy of notes.
+ * Sets the notes of this SED-ML object to a copy of notes.
  */
 int
 SedBase::setNotes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* notes)
@@ -1068,7 +1068,7 @@ SedBase::setNotes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* notes)
 }
 
 /*
- * Sets the notes (by std::string) of this SEDML object to a copy of notes.
+ * Sets the notes (by std::string) of this SED-ML object to a copy of notes.
  */
 int
 SedBase::setNotes(const std::string& notes, bool addXHTMLMarkup)
@@ -1148,7 +1148,7 @@ SedBase::appendNotes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* notes)
 
   const string&  name = notes->getName();
 
-  // The content of notes in SEDML can consist only of the following
+  // The content of notes in SED-ML can consist only of the following
   // possibilities:
   //
   //  1. A complete XHTML document (minus the XML and DOCTYPE
@@ -1513,7 +1513,7 @@ SedBase::appendNotes(const std::string& notes)
 
 /** @cond doxygenLibsedmlInternal */
 /*
- * Sets the parent SedDocument of this SEDML object.
+ * Sets the parent SedDocument of this SED-ML object.
  */
 void
 SedBase::setSedDocument (SedDocument* d)
@@ -1523,9 +1523,9 @@ SedBase::setSedDocument (SedDocument* d)
 
 
 /*
-  * Sets the parent SEDML object of this SEDML object.
+  * Sets the parent SED-ML object of this SED-ML object.
   *
-  * @param sb the SEDML object to use
+  * @param sb the SED-ML object to use
   */
 void
 SedBase::connectToParent (SedBase* parent)
@@ -1547,7 +1547,7 @@ SedBase::connectToParent (SedBase* parent)
 
 
 /*
- * Sets this SEDML object to child SEDML objects (if any).
+ * Sets this SED-ML object to child SED-ML objects (if any).
  * (Creates a child-parent relationship by the parent)
  *
  * Subclasses must override this function if they define
@@ -1618,7 +1618,7 @@ SedBase::getAncestorOfType(int type) const
 
 
 /*
- * Sets the namespaces relevant of this SEDML object.
+ * Sets the namespaces relevant of this SED-ML object.
  *
  * @param xmlns the namespaces to set
  */
@@ -1640,7 +1640,7 @@ SedBase::setNamespaces(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* xmlns)
 
 
 /*
- * Unsets the metaid of this SEDML object.
+ * Unsets the metaid of this SED-ML object.
  */
 int
 SedBase::unsetMetaId ()
@@ -1659,7 +1659,7 @@ SedBase::unsetMetaId ()
 
 
 /*
- * Unsets the id of this SEDML object.
+ * Unsets the id of this SED-ML object.
  */
 int
 SedBase::unsetId ()
@@ -1683,7 +1683,7 @@ int SedBase::unsetName()
 
 
 /*
- * Unsets the notes of this SEDML object.
+ * Unsets the notes of this SED-ML object.
  */
 int
 SedBase::unsetNotes ()
@@ -1695,7 +1695,7 @@ SedBase::unsetNotes ()
 
 
 /*
- * Unsets the annotation of this SEDML object.
+ * Unsets the annotation of this SED-ML object.
  */
 int
 SedBase::unsetAnnotation ()
@@ -1706,7 +1706,7 @@ SedBase::unsetAnnotation ()
 
 
 /*
- * @return the SEDML level of this SEDML object.
+ * @return the SED-ML level of this SED-ML object.
  */
 unsigned int
 SedBase::getLevel () const
@@ -1721,7 +1721,7 @@ SedBase::getLevel () const
 
 
 /*
- * @return the SEDML version of this SEDML object.
+ * @return the SED-ML version of this SED-ML object.
  */
 unsigned int
 SedBase::getVersion () const
@@ -1736,10 +1736,10 @@ SedBase::getVersion () const
 
 
 /*
- * @return the typecode (int) of this SEDML object or SEDML_UNKNOWN
+ * @return the typecode (int) of this SED-ML object or SEDML_UNKNOWN
  * (default).
  *
- * This method MAY return the typecode of this SEDML object or it MAY
+ * This method MAY return the typecode of this SED-ML object or it MAY
  * return SEDML_UNKNOWN.  That is, subclasses of SedBase are not required to
  * implement this method to return a typecode.  This method is meant
  * primarily for the LibSEDML C interface where class and subclass
@@ -1862,7 +1862,7 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, LIBSBML_CPP_NAME
 
   //
   // (TODO) Currently, the following check code works only for
-  //        elements in SEDML core.
+  //        elements in SED-ML core.
   //        This function may need to be extented for other elements
   //        defined in each package extension.
   //
@@ -1877,13 +1877,13 @@ SedBase::hasValidLevelVersionNamespaceCombination(int typecode, LIBSBML_CPP_NAME
 
     if (xmlns->hasURI(SEDML_XMLNS_L1V1))
     {
-      // checks different SEDML XMLNamespaces
+      // checks different SED-ML XMLNamespaces
       if (numNS > 0) return false;
       ++numNS;
       declaredURI.assign(SEDML_XMLNS_L1V1);
     }
 
-    // checks if the SEDML Namespace is explicitly defined.
+    // checks if the SED-ML Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
       if (!declaredURI.empty() &&
@@ -1934,7 +1934,7 @@ SedBase::getSedNamespaces() const
   if (mSed != NULL)
     return mSed->mSedNamespaces;
   
-  // initialize SEDML namespace if need be
+  // initialize SED-ML namespace if need be
   if (mSedNamespaces == NULL)
     const_cast<SedBase*>(this)->mSedNamespaces = new SedNamespaces(getLevel(), getVersion());
   return mSedNamespaces;  
@@ -1944,7 +1944,7 @@ SedBase::getSedNamespaces() const
 
 
 /*
- * @return the partial SEDML that describes this SEDML object.
+ * @return the partial SED-ML that describes this SED-ML object.
  */
 char*
 SedBase::toSed ()
@@ -2151,7 +2151,7 @@ SedBase::getObject(const std::string& objectName, unsigned int index)
   /** @endcond */
 /** @cond doxygenLibsedmlInternal */
 /*
- * Reads (initializes) this SEDML object by reading from XMLInputStream.
+ * Reads (initializes) this SED-ML object by reading from XMLInputStream.
  */
 void
 SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
@@ -2168,9 +2168,9 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   readAttributes( element.getAttributes(), expectedAttributes );
 
   /* if we are reading a document pass the
-   * SEDML Namespace information to the input stream object
+   * SED-ML Namespace information to the input stream object
    * thus the MathML reader can find out what level/version
-   * of SEDML it is parsing
+   * of SED-ML it is parsing
    */
   if (element.getName() == "sedML")
   {      
@@ -2224,7 +2224,7 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
           static ostringstream errMsg;
           errMsg.str("");
           errMsg << "The prefix for the <sedml> element does not match "
-            << "the prefix for the SEDML namespace.  This means that "
+            << "the prefix for the SED-ML namespace.  This means that "
             << "the <sedml> element in not in the SedNamespace."<< endl;
 
           logError(InvalidNamespaceOnSed,
@@ -2238,7 +2238,7 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   {
     //
     // checks if the given default namespace (if any) is a valid
-    // SEDML namespace
+    // SED-ML namespace
     //
     checkDefaultNamespace(mSedNamespaces->getNamespaces(), element.getName());
     if (!element.getPrefix().empty())
@@ -2316,7 +2316,7 @@ SedBase::setElementText(const std::string &text)
 
 /** @cond doxygenLibsedmlInternal */
 /*
- * Writes (serializes) this SEDML object by writing it to XMLOutputStream.
+ * Writes (serializes) this SED-ML object by writing it to XMLOutputStream.
  */
 void
 SedBase::write (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
@@ -2336,7 +2336,7 @@ SedBase::write (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 /** @cond doxygenLibsedmlInternal */
 /*
  * Subclasses should override this method to write out their contained
- * SEDML objects as XML elements.  Be sure to call your parents
+ * SED-ML objects as XML elements.  Be sure to call your parents
  * implementation of this method as well.
  */
 void
@@ -2351,10 +2351,10 @@ SedBase::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream)
 /** @cond doxygenLibsedmlInternal */
 /*
  * Subclasses should override this method to create, store, and then
- * return an SEDML object corresponding to the next XMLToken in the
+ * return an SED-ML object corresponding to the next XMLToken in the
  * XMLInputStream.
  *
- * @return the SEDML object corresponding to next XMLToken in the
+ * @return the SED-ML object corresponding to next XMLToken in the
  * XMLInputStream or @c NULL if the token was not recognized.
  */
 SedBase*
@@ -2399,7 +2399,7 @@ SedBase::readAnnotation (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
     if (mAnnotation != NULL)
     {
-      string msg = "An SEDML <" + getElementName() + "> element ";
+      string msg = "A SED-ML <" + getElementName() + "> element ";
       msg += "has multiple <annotation> children.";
       logError(SedMultipleAnnotations, getLevel(), getVersion(), msg);
     }
@@ -2440,7 +2440,7 @@ SedBase::readNotes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
     //
     // checks if the given default namespace (if any) is a valid
-    // SEDML namespace
+    // SED-ML namespace
     //
     const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces &xmlns = mNotes->getNamespaces();
     checkDefaultNamespace(&xmlns,"notes");
@@ -2495,7 +2495,7 @@ SedBase::logUnknownAttribute( const string& attribute,
   ostringstream msg;
 
     msg << "Attribute '" << attribute << "' is not part of the "
-        << "definition of an SEDML Level " << level
+        << "definition of a SED-ML Level " << level
         << " Version " << version << " <" << element << "> element.";
 
   if (mSed)
@@ -2525,7 +2525,7 @@ SedBase::logUnknownElement( const string& element,
     ostringstream msg;
 
     msg << "Element '" << element << "' is not part of the definition of "
-        << "SEDML Level " << level << " Version " << version << ".";
+        << "SED-ML Level " << level << " Version " << version << ".";
 
     if (mSed != NULL)
     {
@@ -2732,7 +2732,7 @@ SedBase::getSedPrefix() const
  *
  * @note The root element may not be an SedDocument element. For example,
  * this element is the root element if this element doesn't have a parent
- * SEDML object (i.e. mParentSedObject is NULL)
+ * SED-ML object (i.e. mParentSedObject is NULL)
  */
 SedBase*
 SedBase::getRootElement()
@@ -2787,7 +2787,7 @@ SedBase::writeXMLNS (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) co
 
 /** @cond doxygenLibsedmlInternal */
 /*
-  * Checks that an SEDML SedListOf element has been populated.
+  * Checks that an SED-ML SedListOf element has been populated.
   * If a listOf element has been declared with no elements,
   * an error is logged.
   */
@@ -2887,7 +2887,7 @@ SedBase::checkDefaultNamespace(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespac
 {
   //
   // checks if the given default namespace (if any) is a valid
-  // SEDML namespace
+  // SED-ML namespace
   //
   if (xmlns == NULL || xmlns->getLength() == 0)
     return;
@@ -2897,7 +2897,7 @@ SedBase::checkDefaultNamespace(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespac
     return;
 
   // if this element (SedBase derived) has notes or annotation elements,
-  // it is ok for them to be in the SEDML namespace!
+  // it is ok for them to be in the SED-ML namespace!
   if ( SedNamespaces::isSedNamespace(defaultURI)
        && !SedNamespaces::isSedNamespace(mURI)
        && (elementName == "notes" || elementName == "annotation"))
@@ -2929,7 +2929,7 @@ SedBase::checkAnnotation()
 
   //
   // checks if the given default namespace (if any) is a valid
-  // SEDML namespace
+  // SED-ML namespace
   //
   const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces &xmlns = mAnnotation->getNamespaces();
   checkDefaultNamespace(&xmlns,"annotation");
@@ -2964,7 +2964,7 @@ SedBase::checkAnnotation()
       if (find(uri_list.begin(), uri_list.end(), uri)
                                                != uri_list.end())
       {
-        string msg = "An SEDML <" + getElementName() + "> element ";
+        string msg = "A SED-ML <" + getElementName() + "> element ";
         msg += "has an <annotation> child with multiple children with the same namespace.";
         logError(SedDuplicateAnnotationNamespaces, getLevel(), getVersion(), msg);
       }
@@ -3006,7 +3006,7 @@ SedBase::checkAnnotation()
                                           "http://sed-ml.org/");
       n++;
     }
-    string msg = "An SEDML <" + getElementName() + "> element ";
+    string msg = "A SED-ML <" + getElementName() + "> element ";
     if (match > 0)
     {
       msg += "uses a restricted namespace on an element in its child <annotation>.";
@@ -3176,7 +3176,7 @@ SedBase::checkCompatibility(const SedBase * object) const
 /** @cond doxygenLibsedmlInternal */
 /*
  * Stores the location (line and column) and any XML namespaces (for
- * roundtripping) declared on this SEDML (XML) element.
+ * roundtripping) declared on this SED-ML (XML) element.
  */
 void
 SedBase::setSedBaseFields (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken& element)

@@ -50,7 +50,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedParameterEstimationTask using the given SEDML Level and @ p
+ * Creates a new SedParameterEstimationTask using the given SED-ML Level and @ p
  * version values.
  */
 SedParameterEstimationTask::SedParameterEstimationTask(unsigned int level,
@@ -1478,7 +1478,7 @@ SedParameterEstimationTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedParameterEstimationTask_t using the given SEDML Level and @
+ * Creates a new SedParameterEstimationTask_t using the given SED-ML Level and @
  * p version values.
  */
 LIBSEDML_EXTERN

@@ -311,7 +311,7 @@ SedNamespaces::removeNamespace(const std::string &uri)
 
 /*
  * Predicate returning @c true if the given
- * URL is one of SEDML XML namespaces.
+ * URL is one of SED-ML XML namespaces.
  */
 bool 
 SedNamespaces::isSedNamespace(const std::string& uri)
@@ -358,7 +358,7 @@ SedNamespaces::isValidCombination()
       declaredURI.assign(SEDML_XMLNS_L1V4);
     }
 
-    // checks if the SEDML Namespace is explicitly defined.
+    // checks if the SED-ML Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
       if (!declaredURI.empty() && 

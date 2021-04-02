@@ -49,7 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedExperimentRef using the given SEDML Level and @ p version
+ * Creates a new SedExperimentRef using the given SED-ML Level and @ p version
  * values.
  */
 SedExperimentRef::SedExperimentRef(unsigned int level, unsigned int version)
@@ -636,7 +636,7 @@ SedExperimentRef::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedExperimentRef_t using the given SEDML Level and @ p version
+ * Creates a new SedExperimentRef_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

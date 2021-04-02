@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfSubTasks using the given SEDML Level and @ p version
+ * Creates a new SedListOfSubTasks using the given SED-ML Level and @ p version
  * values.
  */
 SedListOfSubTasks::SedListOfSubTasks(unsigned int level, unsigned int version)
@@ -348,7 +348,7 @@ SedListOfSubTasks::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfSubTasks object.
  */
 int

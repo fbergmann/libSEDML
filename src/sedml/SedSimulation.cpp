@@ -53,7 +53,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedSimulation using the given SEDML Level and @ p version
+ * Creates a new SedSimulation using the given SED-ML Level and @ p version
  * values.
  */
 SedSimulation::SedSimulation(unsigned int level, unsigned int version)
@@ -1109,7 +1109,7 @@ SedSimulation::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedUniformTimeCourse using the given SEDML Level and @ p
+ * Creates a new SedUniformTimeCourse using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN
@@ -1122,7 +1122,7 @@ SedSimulation_createUniformTimeCourse(unsigned int level,
 
 
 /*
- * Creates a new SedOneStep using the given SEDML Level and @ p version values.
+ * Creates a new SedOneStep using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedOneStep_t *
@@ -1133,7 +1133,7 @@ SedSimulation_createOneStep(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedSteadyState using the given SEDML Level and @ p version
+ * Creates a new SedSteadyState using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

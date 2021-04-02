@@ -54,7 +54,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedRange using the given SEDML Level and @ p version values.
+ * Creates a new SedRange using the given SED-ML Level and @ p version values.
  */
 SedRange::SedRange(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -678,7 +678,7 @@ SedRange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedUniformRange using the given SEDML Level and @ p version
+ * Creates a new SedUniformRange using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -690,7 +690,7 @@ SedRange_createUniformRange(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedVectorRange using the given SEDML Level and @ p version
+ * Creates a new SedVectorRange using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -702,7 +702,7 @@ SedRange_createVectorRange(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedFunctionalRange using the given SEDML Level and @ p version
+ * Creates a new SedFunctionalRange using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -714,7 +714,7 @@ SedRange_createFunctionalRange(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedDataRange using the given SEDML Level and @ p version
+ * Creates a new SedDataRange using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

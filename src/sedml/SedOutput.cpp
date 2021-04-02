@@ -55,7 +55,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedOutput using the given SEDML Level and @ p version values.
+ * Creates a new SedOutput using the given SED-ML Level and @ p version values.
  */
 SedOutput::SedOutput(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -767,7 +767,7 @@ SedOutput::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedReport using the given SEDML Level and @ p version values.
+ * Creates a new SedReport using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedReport_t *
@@ -778,7 +778,7 @@ SedOutput_createReport(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedPlot2D using the given SEDML Level and @ p version values.
+ * Creates a new SedPlot2D using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedPlot2D_t *
@@ -789,7 +789,7 @@ SedOutput_createPlot2D(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedPlot3D using the given SEDML Level and @ p version values.
+ * Creates a new SedPlot3D using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedPlot3D_t *
@@ -800,7 +800,7 @@ SedOutput_createPlot3D(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedFigure using the given SEDML Level and @ p version values.
+ * Creates a new SedFigure using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedFigure_t *
@@ -811,7 +811,7 @@ SedOutput_createFigure(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedParameterEstimationResultPlot using the given SEDML Level
+ * Creates a new SedParameterEstimationResultPlot using the given SED-ML Level
  * and @ p version values.
  */
 LIBSEDML_EXTERN

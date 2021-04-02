@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfAlgorithmParameters using the given SEDML Level and @
+ * Creates a new SedListOfAlgorithmParameters using the given SED-ML Level and @
  * p version values.
  */
 SedListOfAlgorithmParameters::SedListOfAlgorithmParameters(unsigned int level,
@@ -293,7 +293,7 @@ SedListOfAlgorithmParameters::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfAlgorithmParameters object.
  */
 int

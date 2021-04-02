@@ -50,7 +50,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedObjective using the given SEDML Level and @ p version
+ * Creates a new SedObjective using the given SED-ML Level and @ p version
  * values.
  */
 SedObjective::SedObjective(unsigned int level, unsigned int version)
@@ -425,7 +425,7 @@ SedObjective::unsetAttribute(const std::string& attributeName)
 
 
 /*
- * Creates a new SedLeastSquareObjectiveFunction using the given SEDML Level
+ * Creates a new SedLeastSquareObjectiveFunction using the given SED-ML Level
  * and @ p version values.
  */
 LIBSEDML_EXTERN

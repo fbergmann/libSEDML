@@ -75,12 +75,12 @@ protected:
 public:
 
   /**
-   * Creates a new SedFigure using the given SEDML Level and @ p version
+   * Creates a new SedFigure using the given SED-ML Level and @ p version
    * values.
    *
-   * @param level an unsigned int, the SEDML Level to assign to this SedFigure.
+   * @param level an unsigned int, the SED-ML Level to assign to this SedFigure.
    *
-   * @param version an unsigned int, the SEDML Version to assign to this
+   * @param version an unsigned int, the SED-ML Version to assign to this
    * SedFigure.
    *
    * @copydetails doc_note_setting_lv_pkg
@@ -415,7 +415,7 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML type code for this object:
+   * @return the SED-ML type code for this object:
    * @sedmlconstant{SEDML_FIGURE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
@@ -914,12 +914,12 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedFigure_t using the given SEDML Level and @ p version
+ * Creates a new SedFigure_t using the given SED-ML Level and @ p version
  * values.
  *
- * @param level an unsigned int, the SEDML Level to assign to this SedFigure_t.
+ * @param level an unsigned int, the SED-ML Level to assign to this SedFigure_t.
  *
- * @param version an unsigned int, the SEDML Version to assign to this
+ * @param version an unsigned int, the SED-ML Version to assign to this
  * SedFigure_t.
  *
  * @copydetails doc_note_setting_lv_pkg
