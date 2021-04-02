@@ -1676,15 +1676,7 @@ int
 SedBase::unsetMetaId ()
 {
   mMetaId.erase();
-
-  if (mMetaId.empty())
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -1695,29 +1687,13 @@ int
 SedBase::unsetId ()
 {
   mId.erase();
-
-  if (mId.empty())
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 int SedBase::unsetName()
 {
     mName.erase();
-
-    if (mName.empty())
-    {
-        return LIBSEDML_OPERATION_SUCCESS;
-    }
-    else
-    {
-        return LIBSEDML_OPERATION_FAILED;
-    }
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
