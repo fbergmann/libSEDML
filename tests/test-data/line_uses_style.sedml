@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version4" level="1" version="4">
+  <listOfStyles>
+    <style id="purple_line">
+      <line style="solid" color="#FF00FF" thickness="18"/>
+    </style>
+    <style id="red_line">
+      <line style="solid" color="#FF0000" thickness="18"/>
+    </style>
+    <style id="green_line">
+      <line style="solid" color="#00FF00" thickness="18"/>
+    </style>
+  </listOfStyles>
+</sedML>
