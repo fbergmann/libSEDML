@@ -54,7 +54,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedAbstractTask using the given SEDML Level and @ p version
+ * Creates a new SedAbstractTask using the given SED-ML Level and @ p version
  * values.
  */
 SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
@@ -595,7 +595,7 @@ SedAbstractTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedTask using the given SEDML Level and @ p version values.
+ * Creates a new SedTask using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedTask_t *
@@ -606,7 +606,7 @@ SedAbstractTask_createTask(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedRepeatedTask using the given SEDML Level and @ p version
+ * Creates a new SedRepeatedTask using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -618,7 +618,7 @@ SedAbstractTask_createRepeatedTask(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedParameterEstimationTask using the given SEDML Level and @ p
+ * Creates a new SedParameterEstimationTask using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN
@@ -631,7 +631,7 @@ SedAbstractTask_createParameterEstimationTask(unsigned int level,
 
 
 /*
- * Creates a new SedSimpleRepeatedTask using the given SEDML Level and @ p
+ * Creates a new SedSimpleRepeatedTask using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN

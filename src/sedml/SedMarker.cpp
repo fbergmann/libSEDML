@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedMarker using the given SEDML Level and @ p version values.
+ * Creates a new SedMarker using the given SED-ML Level and @ p version values.
  */
 SedMarker::SedMarker(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -1026,7 +1026,7 @@ SedMarker::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedMarker_t using the given SEDML Level and @ p version
+ * Creates a new SedMarker_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

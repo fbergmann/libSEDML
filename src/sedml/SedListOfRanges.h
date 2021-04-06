@@ -76,13 +76,13 @@ protected:
 public:
 
   /**
-   * Creates a new SedListOfRanges using the given SEDML Level and @ p version
+   * Creates a new SedListOfRanges using the given SED-ML Level and @ p version
    * values.
    *
-   * @param level an unsigned int, the SEDML Level to assign to this
+   * @param level an unsigned int, the SED-ML Level to assign to this
    * SedListOfRanges.
    *
-   * @param version an unsigned int, the SEDML Version to assign to this
+   * @param version an unsigned int, the SED-ML Version to assign to this
    * SedListOfRanges.
    *
    * @copydetails doc_note_setting_lv_pkg
@@ -397,7 +397,7 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML type code for this object:
+   * @return the SED-ML type code for this object:
    * @sedmlconstant{SEDML_LIST_OF, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
@@ -406,12 +406,12 @@ public:
 
 
   /**
-   * Returns the libSEDML type code for the SEDML objects contained in this
+   * Returns the libSEDML type code for the SED-ML objects contained in this
    * SedListOfRanges object.
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML typecode for the objects contained in this
+   * @return the SED-ML typecode for the objects contained in this
    * SedListOfRanges:
    * @sedmlconstant{SEDML_RANGE, SedTypeCode_t}.
    *

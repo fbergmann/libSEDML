@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedParameterEstimationResultPlot using the given SEDML Level
+ * Creates a new SedParameterEstimationResultPlot using the given SED-ML Level
  * and @ p version values.
  */
 SedParameterEstimationResultPlot::SedParameterEstimationResultPlot(
@@ -704,7 +704,7 @@ SedParameterEstimationResultPlot::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIE
 
 
 /*
- * Creates a new SedParameterEstimationResultPlot_t using the given SEDML Level
+ * Creates a new SedParameterEstimationResultPlot_t using the given SED-ML Level
  * and @ p version values.
  */
 LIBSEDML_EXTERN

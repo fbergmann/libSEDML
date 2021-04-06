@@ -50,7 +50,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedComputeChange using the given SEDML Level and @ p version
+ * Creates a new SedComputeChange using the given SED-ML Level and @ p version
  * values.
  */
 SedComputeChange::SedComputeChange(unsigned int level, unsigned int version)
@@ -1281,7 +1281,7 @@ SedComputeChange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedComputeChange_t using the given SEDML Level and @ p version
+ * Creates a new SedComputeChange_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

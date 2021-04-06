@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedVectorRange using the given SEDML Level and @ p version
+ * Creates a new SedVectorRange using the given SED-ML Level and @ p version
  * values.
  */
 SedVectorRange::SedVectorRange(unsigned int level, unsigned int version)
@@ -638,7 +638,7 @@ SedVectorRange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedVectorRange_t using the given SEDML Level and @ p version
+ * Creates a new SedVectorRange_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

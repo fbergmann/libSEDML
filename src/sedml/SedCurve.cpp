@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedCurve using the given SEDML Level and @ p version values.
+ * Creates a new SedCurve using the given SED-ML Level and @ p version values.
  */
 SedCurve::SedCurve(unsigned int level, unsigned int version)
   : SedAbstractCurve(level, version)
@@ -1375,7 +1375,7 @@ SedCurve::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedCurve_t using the given SEDML Level and @ p version values.
+ * Creates a new SedCurve_t using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedCurve_t *

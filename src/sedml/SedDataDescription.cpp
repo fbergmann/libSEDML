@@ -49,7 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedDataDescription using the given SEDML Level and @ p version
+ * Creates a new SedDataDescription using the given SED-ML Level and @ p version
  * values.
  */
 SedDataDescription::SedDataDescription(unsigned int level,
@@ -1274,7 +1274,7 @@ SedDataDescription::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedDataDescription_t using the given SEDML Level and @ p
+ * Creates a new SedDataDescription_t using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN

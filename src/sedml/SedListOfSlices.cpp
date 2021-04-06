@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfSlices using the given SEDML Level and @ p version
+ * Creates a new SedListOfSlices using the given SED-ML Level and @ p version
  * values.
  */
 SedListOfSlices::SedListOfSlices(unsigned int level, unsigned int version)
@@ -362,7 +362,7 @@ SedListOfSlices::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfSlices object.
  */
 int

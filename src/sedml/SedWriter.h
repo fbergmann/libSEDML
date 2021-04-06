@@ -62,7 +62,7 @@ public:
   /**
    * Creates a new SedWriter.
    *
-   * The libSEDML SedWriter objects offer methods for writing SEDML in
+   * The libSEDML SedWriter objects offer methods for writing SED-ML in
    * XML form to files and text strings.
    */
   SedWriter  ();
@@ -135,7 +135,7 @@ public:
    *
    * @param d the SedDocument to be written
    *
-   * @param filename the name or full pathname of the file where the SEDML
+   * @param filename the name or full pathname of the file where the SED-ML
    * is to be written. 
    *
    * @return @c true on success and @c false if the filename could not be
@@ -154,7 +154,7 @@ public:
    *
    * @param d the SedDocument to be written
    *
-   * @param stream the stream object where the SEDML is to be written.
+   * @param stream the stream object where the SED-ML is to be written.
    *
    * @return @c true on success and @c false if one of the underlying
    * parser components fail (rare).
@@ -193,7 +193,7 @@ public:
    *
    * @param d the SedDocument to be written
    *
-   * @param filename the name or full pathname of the file where the SEDML
+   * @param filename the name or full pathname of the file where the SED-ML
    * is to be written. 
    *
    * @return @c true on success and @c false if the filename could not be
@@ -493,7 +493,7 @@ SedWriter_hasBzip2 ();
  *
  * @return @c 1 on success and @c 0 (zero) if @p filename could not be
  * written.  Some possible reasons for failure include (a) being unable to
- * open the file, and (b) using a filename that indicates a compressed SEDML
+ * open the file, and (b) using a filename that indicates a compressed SED-ML
  * file (i.e., a filename ending in <code>&quot;.zip&quot;</code> or
  * similar) when the compression functionality has not been enabled in
  * the underlying copy of libSEDML.

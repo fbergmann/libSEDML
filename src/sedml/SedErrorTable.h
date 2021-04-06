@@ -75,7 +75,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "File does not use UTF-8 encoding",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An SEDML XML file must use UTF-8 as the character encoding. More "
+    "A SED-ML XML file must use UTF-8 as the character encoding. More "
     "precisely, the 'encoding' attribute of the XML declaration at the "
     "beginning of the XML data stream cannot have a value other than "
     "'UTF-8'. An example valid declaration is "
@@ -90,9 +90,9 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Encountered unrecognized element",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An SEDML XML document must not contain undefined elements or attributes "
-    "in the SEDML namespace. Documents containing unknown elements or "
-    "attributes placed in the SEDML namespace do not conform to the SEDML "
+    "A SED-ML XML document must not contain undefined elements or attributes "
+    "in the SED-ML namespace. Documents containing unknown elements or "
+    "attributes placed in the SED-ML namespace do not conform to the SED-ML "
     "specification.",  
     {""
     }
@@ -101,13 +101,13 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   //10003
   {
     SedNotSchemaConformant,
-    "Document does not conform to the SEDML XML schema",
+    "Document does not conform to the SED-ML XML schema",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "An SEDML XML document must conform to the XML Schema for the corresponding "
-    "SEDML Level, Version and Release. The XML Schema for SEDML defines the "
-    "basic SEDML object structure, the data types used by those objects, and the "
-    "order in which the objects may appear in an SEDML document.",
+    "A SED-ML XML document must conform to the XML Schema for the corresponding "
+    "SED-ML Level, Version and Release. The XML Schema for SED-ML defines the "
+    "basic SED-ML object structure, the data types used by those objects, and the "
+    "order in which the objects may appear in a SED-ML document.",
     {""
     }
   },
@@ -118,7 +118,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Invalid MathML",
     LIBSEDML_CAT_MATHML_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "All MathML content in SEDML must appear within a <math> element, and the "
+    "All MathML content in SED-ML must appear within a <math> element, and the "
     "<math> element must be either explicitly or implicitly in the XML "
     "namespace \"http://www.w3.org/1998/Math/MathML\".",
     {""
@@ -152,10 +152,10 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   //10403
   {
     SedNamespaceInAnnotation,
-    "The SEDML XML namespace cannot be used in an Annotation object",
+    "The SED-ML XML namespace cannot be used in an Annotation object",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "Top-level elements within an annotation element cannot use any SEDML "
+    "Top-level elements within an annotation element cannot use any SED-ML "
     "namespace, whether explicitly or implicitly (by failing "
     "to declare any namespace).",
     {""
@@ -165,10 +165,10 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   //10404
   {
     SedMultipleAnnotations,
-    "Only one Annotation object is permitted under a given SEDML object",
+    "Only one Annotation object is permitted under a given SED-ML object",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "A given SEDML object may contain at most one <annotation> element.",
+    "A given SED-ML object may contain at most one <annotation> element.",
     {""
     }
   },
@@ -224,16 +224,16 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   //10805
   {
     SedOnlyOneNotesElementAllowed,
-    "Only one Notes subobject is permitted on a given SEDML object",
+    "Only one Notes subobject is permitted on a given SED-ML object",
     LIBSEDML_CAT_SEDML,
     LIBSEDML_SEV_ERROR,
-    "A given SEDML object may contain at most one <notes> element. ",
+    "A given SED-ML object may contain at most one <notes> element. ",
     {""
     }
   },
 
   /* --------------------------------------------------------------------------
-   * Boundary marker.  SEDML specific errors.
+   * Boundary marker.  SED-ML specific errors.
    * ----------------------------------------------------------------------- */
 
   // 10101
@@ -355,7 +355,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <document> object must have the required attributes 'sedml:level' and "
-    "'sedml:version'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:version'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <document> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -369,7 +369,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <document> object may contain one and only one instance of each of the "
     "<listOfDataDescriptions,> <listOfModels,> <listOfSimulations,> "
     "<listOfAbstractTasks,> <listOfDataGenerators,> <listOfOutputs> and "
-    "<listOfStyles> elements. No other elements from the SBML Level 3 SEDML "
+    "<listOfStyles> elements. No other elements from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <document> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -596,7 +596,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <model> object must have the required attributes 'sedml:id' and "
     "'sedml:source', and may have the optional attributes 'sedml:name' and "
-    "'sedml:language'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:language'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <model> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -608,7 +608,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <model> object may contain one and only one instance of the "
-    "<listOfChanges> element. No other elements from the SBML Level 3 SEDML "
+    "<listOfChanges> element. No other elements from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <model> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -701,7 +701,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <change> object must have the required attribute 'sedml:target'. No "
-    "other attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "other attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<change> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -748,7 +748,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "An <addXML> object must contain one and only one instance of the XMLNode "
-    "element. No other elements from the SBML Level 3 SEDML namespaces are "
+    "element. No other elements from the SBML Level 3 SED-ML namespaces are "
     "permitted on an <addXML> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -784,7 +784,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <changeAttribute> object must have the required attribute "
-    "'sedml:newValue'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:newValue'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <changeAttribute> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -833,7 +833,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <variable> object must have the required attribute 'sedml:id', and may "
     "have the optional attributes 'sedml:name', 'sedml:symbol', 'sedml:target', "
     "'sedml:taskReference' and 'sedml:modelReference'. No other attributes from "
-    "the SBML Level 3 SEDML namespaces are permitted on a <variable> object. ",
+    "the SBML Level 3 SED-ML namespaces are permitted on a <variable> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -845,7 +845,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <variable> object may contain one and only one instance of the "
     "<listOfRemainingDimensions> element. No other elements from the SBML Level "
-    "3 SEDML namespaces are permitted on a <variable> object. ",
+    "3 SED-ML namespaces are permitted on a <variable> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -963,7 +963,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <parameter> object must have the required attributes 'sedml:id' and "
     "'sedml:value', and may have the optional attribute 'sedml:name'. No other "
-    "attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<parameter> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1022,7 +1022,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <simulation> object must have the required attribute 'sedml:id', and may "
     "have the optional attribute 'sedml:name'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <simulation> object. ",
+    "SBML Level 3 SED-ML namespaces are permitted on a <simulation> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1033,7 +1033,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <simulation> object must contain one and only one instance of the "
-    "SedAlgorithm element. No other elements from the SBML Level 3 SEDML "
+    "SedAlgorithm element. No other elements from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <simulation> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1082,7 +1082,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "An <uniformTimeCourse> object must have the required attributes "
     "'sedml:initialTime', 'sedml:outputStartTime' and 'sedml:outputEndTime', "
     "and may have one of the optional attributes 'sedml:numberOfPoints' or "
-    "'sedml:numberOfSteps'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:numberOfSteps'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on an <uniformTimeCourse> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1173,7 +1173,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "An <algorithm> object must have the required attribute 'sedml:kisaoID'. No "
-    "other attributes from the SBML Level 3 SEDML namespaces are permitted on "
+    "other attributes from the SBML Level 3 SED-ML namespaces are permitted on "
     "an <algorithm> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1186,7 +1186,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <algorithm> object may contain one and only one instance of the "
     "<listOfAlgorithmParameters> element. No other elements from the SBML Level "
-    "3 SEDML namespaces are permitted on an <algorithm> object. ",
+    "3 SED-ML namespaces are permitted on an <algorithm> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1258,7 +1258,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <abstractTask> object must have the required attribute 'sedml:id', and "
     "may have the optional attribute 'sedml:name'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on an <abstractTask> object. ",
+    "SBML Level 3 SED-ML namespaces are permitted on an <abstractTask> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1305,7 +1305,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <task> object may have the optional attributes 'sedml:modelReference' "
     "and 'sedml:simulationReference'. No other attributes from the SBML Level 3 "
-    "SEDML namespaces are permitted on a <task> object. ",
+    "SED-ML namespaces are permitted on a <task> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1365,7 +1365,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dataGenerator> object must have the required attribute 'sedml:id', and "
     "may have the optional attribute 'sedml:name'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <dataGenerator> object. ",
+    "SBML Level 3 SED-ML namespaces are permitted on a <dataGenerator> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1377,7 +1377,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dataGenerator> object may contain one and only one instance of each of "
     "the <listOfVariables,> <listOfParameters> and ASTNode elements. No other "
-    "elements from the SBML Level 3 SEDML namespaces are permitted on a "
+    "elements from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<dataGenerator> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1472,7 +1472,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "An <output> object may have the optional attributes 'sedml:id' and "
-    "'sedml:name'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "'sedml:name'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on an <output> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1520,7 +1520,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <plot> object may have the optional attributes 'sedml:legend', "
     "'sedml:height' and 'sedml:width'. No other attributes from the SBML Level "
-    "3 SEDML namespaces are permitted on a <plot> object. ",
+    "3 SED-ML namespaces are permitted on a <plot> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1532,7 +1532,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <plot> object may contain one and only one instance of each of the "
     "SedAxis and SedAxis elements. No other elements from the SBML Level 3 "
-    "SEDML namespaces are permitted on a <plot> object. ",
+    "SED-ML namespaces are permitted on a <plot> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1601,7 +1601,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <plot2D> object may contain one and only one instance of each of the "
     "<listOfAbstractCurves> and SedAxis elements. No other elements from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <plot2D> object. ",
+    "SBML Level 3 SED-ML namespaces are permitted on a <plot2D> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1661,7 +1661,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <plot3D> object may contain one and only one instance of each of the "
     "<listOfSurfaces> and SedAxis elements. No other elements from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <plot3D> object. ",
+    "Level 3 SED-ML namespaces are permitted on a <plot3D> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1722,7 +1722,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "An <abstractCurve> object may have the optional attributes 'sedml:id', "
     "'sedml:name', 'sedml:logX', 'sedml:order', 'sedml:style', 'sedml:yAxis' "
     "and 'sedml:xDataReference'. No other attributes from the SBML Level 3 "
-    "SEDML namespaces are permitted on an <abstractCurve> object. ",
+    "SED-ML namespaces are permitted on an <abstractCurve> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -1827,7 +1827,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <curve> object must have the required attribute 'sedml:yDataReference', "
     "and may have the optional attributes 'sedml:logY', 'sedml:type', "
     "'sedml:xErrorUpper', 'sedml:xErrorLower', 'sedml:yErrorUpper' and "
-    "'sedml:yErrorLower'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:yErrorLower'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <curve> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1951,7 +1951,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "'sedml:zDataReference', and may have the optional attributes 'sedml:id', "
     "'sedml:name', 'sedml:xDataReference', 'sedml:yDataReference', "
     "'sedml:type', 'sedml:style', 'sedml:logX', 'sedml:logY', 'sedml:logZ' and "
-    "'sedml:order'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "'sedml:order'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on a <surface> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2105,7 +2105,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dataSet> object must have the required attributes 'sedml:id', "
     "'sedml:label' and 'sedml:dataReference', and may have the optional "
-    "attribute 'sedml:name'. No other attributes from the SBML Level 3 SEDML "
+    "attribute 'sedml:name'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <dataSet> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2175,7 +2175,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <report> object may contain one and only one instance of the "
-    "<listOfDataSets> element. No other elements from the SBML Level 3 SEDML "
+    "<listOfDataSets> element. No other elements from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <report> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2236,7 +2236,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <algorithmParameter> object must have the required attributes "
     "'sedml:kisaoID' and 'sedml:value'. No other attributes from the SBML Level "
-    "3 SEDML namespaces are permitted on an <algorithmParameter> object. ",
+    "3 SED-ML namespaces are permitted on an <algorithmParameter> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -2248,7 +2248,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <algorithmParameter> object may contain one and only one instance of "
     "the <listOfAlgorithmParameters> element. No other elements from the SBML "
-    "Level 3 SEDML namespaces are permitted on an <algorithmParameter> object. ",
+    "Level 3 SED-ML namespaces are permitted on an <algorithmParameter> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -2330,7 +2330,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <range> object must have the required attribute 'sedml:id'. No other "
-    "attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<range> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2366,7 +2366,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <changeXML> object may contain one and only one instance of the XMLNode "
-    "element. No other elements from the SBML Level 3 SEDML namespaces are "
+    "element. No other elements from the SBML Level 3 SED-ML namespaces are "
     "permitted on a <changeXML> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2428,7 +2428,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <setValue> object must have the required attribute "
     "'sedml:modelReference', and may have the optional attributes "
     "'sedml:symbol', 'sedml:target' and 'sedml:range'. No other attributes from "
-    "the SBML Level 3 SEDML namespaces are permitted on a <setValue> object. ",
+    "the SBML Level 3 SED-ML namespaces are permitted on a <setValue> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -2439,7 +2439,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <setValue> object may contain one and only one instance of the ASTNode "
-    "element. No other elements from the SBML Level 3 SEDML namespaces are "
+    "element. No other elements from the SBML Level 3 SED-ML namespaces are "
     "permitted on a <setValue> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2522,7 +2522,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <uniformRange> object must have the required attributes 'sedml:start', "
     "'sedml:end', 'sedml:numberOfPoints' and 'sedml:type'. No other attributes "
-    "from the SBML Level 3 SEDML namespaces are permitted on an <uniformRange> "
+    "from the SBML Level 3 SED-ML namespaces are permitted on an <uniformRange> "
     "object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2602,7 +2602,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <vectorRange> object may have the optional attribute 'sedml:value'. No "
-    "other attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "other attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<vectorRange> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2649,7 +2649,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <functionalRange> object must have the required attribute 'sedml:range'. "
-    "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
+    "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <functionalRange> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2662,7 +2662,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <functionalRange> object may contain one and only one instance of each "
     "of the <listOfVariables,> <listOfParameters> and ASTNode elements. No "
-    "other elements from the SBML Level 3 SEDML namespaces are permitted on a "
+    "other elements from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<functionalRange> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2758,7 +2758,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <subTask> object must have the required attributes 'sedml:order' and "
-    "'sedml:task'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "'sedml:task'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on a <subTask> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2817,7 +2817,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "An <oneStep> object must have the required attribute 'sedml:step'. No "
-    "other attributes from the SBML Level 3 SEDML namespaces are permitted on "
+    "other attributes from the SBML Level 3 SED-ML namespaces are permitted on "
     "an <oneStep> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2888,7 +2888,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <repeatedTask> object may have the optional attributes 'sedml:rangeId' "
-    "and 'sedml:resetModel'. No other attributes from the SBML Level 3 SEDML "
+    "and 'sedml:resetModel'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <repeatedTask> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -2901,7 +2901,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <repeatedTask> object may contain one and only one instance of each of "
     "the <listOfRanges,> <listOfSetValues> and <listOfSubTasks> elements. No "
-    "other elements from the SBML Level 3 SEDML namespaces are permitted on a "
+    "other elements from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<repeatedTask> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3033,7 +3033,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <computeChange> object may contain one and only one instance of each of "
     "the ASTNode, <listOfVariables> and <listOfParameters> elements. No other "
-    "elements from the SBML Level 3 SEDML namespaces are permitted on a "
+    "elements from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<computeChange> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3118,7 +3118,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dataDescription> object must have the required attribute 'sedml:id', "
     "and may have the optional attributes 'sedml:name', 'sedml:format' and "
-    "'sedml:source'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "'sedml:source'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on a <dataDescription> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3131,7 +3131,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dataDescription> object may contain one and only one instance of each "
     "of the SedDimensionDescription and <listOfDataSources> elements. No other "
-    "elements from the SBML Level 3 SEDML namespaces are permitted on a "
+    "elements from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<dataDescription> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3225,7 +3225,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dataSource> object must have the required attribute 'sedml:id', and may "
     "have the optional attributes 'sedml:name' and 'sedml:indexSet'. No other "
-    "attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<dataSource> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3237,7 +3237,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <dataSource> object may contain one and only one instance of the "
-    "<listOfSlices> element. No other elements from the SBML Level 3 SEDML "
+    "<listOfSlices> element. No other elements from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <dataSource> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3322,7 +3322,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <slice> object must have the required attributes 'sedml:reference' and "
     "'sedml:value', and may have the optional attributes 'sedml:index', "
     "'sedml:startIndex' and 'sedml:endIndex'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <slice> object. ",
+    "Level 3 SED-ML namespaces are permitted on a <slice> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3416,7 +3416,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <parameterEstimationTask> object must contain one and only one instance "
     "of each of the SedAlgorithm, SedObjective, <listOfAdjustableParameters> "
     "and <listOfFitExperiments> elements. No other elements from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <parameterEstimationTask> "
+    "Level 3 SED-ML namespaces are permitted on a <parameterEstimationTask> "
     "object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3552,7 +3552,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <adjustableParameter> object may have the optional attributes "
     "'sedml:initialValue', 'sedml:modelReference' and 'sedml:target'. No other "
-    "attributes from the SBML Level 3 SEDML namespaces are permitted on an "
+    "attributes from the SBML Level 3 SED-ML namespaces are permitted on an "
     "<adjustableParameter> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3566,7 +3566,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "An <adjustableParameter> object must contain one and only one instance of "
     "the SedBounds element, and may contain one and only one instance of the "
     "<listOfExperimentRefs> element. No other elements from the SBML Level 3 "
-    "SEDML namespaces are permitted on an <adjustableParameter> object. ",
+    "SED-ML namespaces are permitted on an <adjustableParameter> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3659,7 +3659,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "An <experimentRef> object may have the optional attribute "
-    "'sedml:experimentId'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:experimentId'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on an <experimentRef> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3707,7 +3707,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <fitExperiment> object may have the optional attributes 'sedml:id' and "
-    "'sedml:type'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "'sedml:type'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on a <fitExperiment> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3720,7 +3720,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <fitExperiment> object may contain one and only one instance of each of "
     "the SedAlgorithm and <listOfFitMappings> elements. No other elements from "
-    "the SBML Level 3 SEDML namespaces are permitted on a <fitExperiment> "
+    "the SBML Level 3 SED-ML namespaces are permitted on a <fitExperiment> "
     "object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3795,7 +3795,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <fitMapping> object must have the required attributes "
     "'sedml:dataSource', 'sedml:target' and 'sedml:type', and may have the "
     "optional attributes 'sedml:weight' and 'sedml:pointWeight'. No other "
-    "attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<fitMapping> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3893,7 +3893,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <bounds> object may have the optional attributes 'sedml:lowerBound', "
     "'sedml:upperBound' and 'sedml:scale'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <bounds> object. ",
+    "Level 3 SED-ML namespaces are permitted on a <bounds> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3963,7 +3963,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <figure> object may have the optional attributes 'sedml:numRows' and "
-    "'sedml:numCols'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:numCols'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <figure> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3975,7 +3975,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <figure> object may contain one and only one instance of the "
-    "<listOfSubPlots> element. No other elements from the SBML Level 3 SEDML "
+    "<listOfSubPlots> element. No other elements from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <figure> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4059,7 +4059,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <subPlot> object must have the required attributes 'sedml:plot', "
     "'sedml:row' and 'sedml:col', and may have the optional attributes "
     "'sedml:rowSpan' and 'sedml:colSpan'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <subPlot> object. ",
+    "Level 3 SED-ML namespaces are permitted on a <subPlot> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -4151,7 +4151,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <axis> object must have the required attribute 'sedml:type', and may "
     "have the optional attributes 'sedml:min', 'sedml:max', 'sedml:grid' and "
-    "'sedml:style'. No other attributes from the SBML Level 3 SEDML namespaces "
+    "'sedml:style'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on an <axis> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4246,7 +4246,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <style> object must have the required attribute 'sedml:id', and may have "
     "the optional attribute 'sedml:baseStyle'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <style> object. ",
+    "SBML Level 3 SED-ML namespaces are permitted on a <style> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -4258,7 +4258,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <style> object may contain one and only one instance of each of the "
     "SedLine, SedMarker and SedFill elements. No other elements from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <style> object. ",
+    "Level 3 SED-ML namespaces are permitted on a <style> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -4306,7 +4306,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <line> object may have the optional attributes 'sedml:type', "
     "'sedml:color' and 'sedml:thickness'. No other attributes from the SBML "
-    "Level 3 SEDML namespaces are permitted on a <line> object. ",
+    "Level 3 SED-ML namespaces are permitted on a <line> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -4377,8 +4377,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <marker> object may have the optional attributes 'sedml:size', "
-    "'sedml:type', 'sedml:fill', 'sedml:lineColor' and 'sedml:lineThickness'. "
-    "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
+    "'sedml:style', 'sedml:fill', 'sedml:lineColor' and 'sedml:lineThickness'. "
+    "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <marker> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4474,7 +4474,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <fill> object must have the required attribute 'sedml:color', and may "
     "have the optional attribute 'sedml:secondColor'. No other attributes from "
-    "the SBML Level 3 SEDML namespaces are permitted on a <fill> object. ",
+    "the SBML Level 3 SED-ML namespaces are permitted on a <fill> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -4532,7 +4532,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <dependentVariable> object must have the required attribute "
     "'sedml:term', and may have the optional attributes 'sedml:targetTwo' and "
-    "'sedml:symbolTwo'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:symbolTwo'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <dependentVariable> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4602,7 +4602,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <remainingDimension> object may have the optional attributes "
     "'sedml:target' and 'sedml:dimensionTarget'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <remainingDimension> "
+    "SBML Level 3 SED-ML namespaces are permitted on a <remainingDimension> "
     "object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4662,7 +4662,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <dataRange> object must have the required attribute 'sedml:sourceRef'. "
-    "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
+    "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <dataRange> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4711,7 +4711,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <simpleRepeatedTask> object must have the required attributes "
     "'sedml:resetModel' and 'sedml:numRepeats'. No other attributes from the "
-    "SBML Level 3 SEDML namespaces are permitted on a <simpleRepeatedTask> "
+    "SBML Level 3 SED-ML namespaces are permitted on a <simpleRepeatedTask> "
     "object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4770,7 +4770,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <shadedArea> object must have the required attributes "
     "'sedml:yDataReferenceFrom' and 'sedml:yDataReferenceTo'. No other "
-    "attributes from the SBML Level 3 SEDML namespaces are permitted on a "
+    "attributes from the SBML Level 3 SED-ML namespaces are permitted on a "
     "<shadedArea> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4832,7 +4832,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <parameterEstimationResultPlot> object must have the required attribute "
-    "'sedml:taskRef'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:taskRef'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <parameterEstimationResultPlot> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4880,7 +4880,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <waterfallPlot> object must have the required attribute 'sedml:taskRef'. "
-    "No other attributes from the SBML Level 3 SEDML namespaces are permitted "
+    "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <waterfallPlot> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4928,7 +4928,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <parameterEstimationReport> object must have the required attribute "
-    "'sedml:taskRef'. No other attributes from the SBML Level 3 SEDML "
+    "'sedml:taskRef'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <parameterEstimationReport> object. ",
     { "L3V1 Sedml V1 Section"
     }

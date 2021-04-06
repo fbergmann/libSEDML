@@ -55,7 +55,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedChange using the given SEDML Level and @ p version values.
+ * Creates a new SedChange using the given SED-ML Level and @ p version values.
  */
 SedChange::SedChange(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -697,7 +697,7 @@ std::string SedChange::_trim(const std::string& text)
 
 
 /*
- * Creates a new SedAddXML using the given SEDML Level and @ p version values.
+ * Creates a new SedAddXML using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedAddXML_t *
@@ -708,7 +708,7 @@ SedChange_createAddXML(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedChangeXML using the given SEDML Level and @ p version
+ * Creates a new SedChangeXML using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -720,7 +720,7 @@ SedChange_createChangeXML(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedRemoveXML using the given SEDML Level and @ p version
+ * Creates a new SedRemoveXML using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -732,7 +732,7 @@ SedChange_createRemoveXML(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedChangeAttribute using the given SEDML Level and @ p version
+ * Creates a new SedChangeAttribute using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
@@ -744,7 +744,7 @@ SedChange_createChangeAttribute(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedComputeChange using the given SEDML Level and @ p version
+ * Creates a new SedComputeChange using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

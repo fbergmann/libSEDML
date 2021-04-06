@@ -49,7 +49,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedAlgorithmParameter using the given SEDML Level and @ p
+ * Creates a new SedAlgorithmParameter using the given SED-ML Level and @ p
  * version values.
  */
 SedAlgorithmParameter::SedAlgorithmParameter(unsigned int level,
@@ -1119,7 +1119,7 @@ SedAlgorithmParameter::setKisaoID(int kisaoID)
 
 
 /*
- * Creates a new SedAlgorithmParameter_t using the given SEDML Level and @ p
+ * Creates a new SedAlgorithmParameter_t using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN

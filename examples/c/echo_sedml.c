@@ -5,7 +5,7 @@
  * 
  * <!--------------------------------------------------------------------------
  * This file is part of libSEDML.  Please visit http://sed-ml.org for more
- * information about SEDML, and the latest version of libSEDML.
+ * information about SED-ML, and the latest version of libSEDML.
  *
  * Copyright (c) 2013, Frank T. Bergmann  
  * All rights reserved.

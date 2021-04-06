@@ -169,9 +169,9 @@ public:
    *
    * @param errorId an unsigned int, the identification number of the error.
    *
-   * @param level an unsigned int, the SEDML Level
+   * @param level an unsigned int, the SED-ML Level
    *
-   * @param version an unsigned int, the SEDML Level's Version
+   * @param version an unsigned int, the SED-ML Level's Version
    * 
    * @param details a string containing additional details about the error.
    * If the error code in @p errorId is one that is recognized by SedError,

@@ -71,13 +71,13 @@ protected:
 public:
 
   /**
-   * Creates a new SedParameterEstimationResultPlot using the given SEDML Level
+   * Creates a new SedParameterEstimationResultPlot using the given SED-ML Level
    * and @ p version values.
    *
-   * @param level an unsigned int, the SEDML Level to assign to this
+   * @param level an unsigned int, the SED-ML Level to assign to this
    * SedParameterEstimationResultPlot.
    *
-   * @param version an unsigned int, the SEDML Version to assign to this
+   * @param version an unsigned int, the SED-ML Version to assign to this
    * SedParameterEstimationResultPlot.
    *
    * @copydetails doc_note_setting_lv_pkg
@@ -202,7 +202,7 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML type code for this object:
+   * @return the SED-ML type code for this object:
    * @sedmlconstant{SEDML_PARAMETERESTIMATIONRESULTPLOT, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
@@ -594,13 +594,13 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedParameterEstimationResultPlot_t using the given SEDML Level
+ * Creates a new SedParameterEstimationResultPlot_t using the given SED-ML Level
  * and @ p version values.
  *
- * @param level an unsigned int, the SEDML Level to assign to this
+ * @param level an unsigned int, the SED-ML Level to assign to this
  * SedParameterEstimationResultPlot_t.
  *
- * @param version an unsigned int, the SEDML Version to assign to this
+ * @param version an unsigned int, the SED-ML Version to assign to this
  * SedParameterEstimationResultPlot_t.
  *
  * @copydetails doc_note_setting_lv_pkg

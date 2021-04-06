@@ -51,7 +51,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedDataGenerator using the given SEDML Level and @ p version
+ * Creates a new SedDataGenerator using the given SED-ML Level and @ p version
  * values.
  */
 SedDataGenerator::SedDataGenerator(unsigned int level, unsigned int version)
@@ -1312,7 +1312,7 @@ SedDataGenerator::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedDataGenerator_t using the given SEDML Level and @ p version
+ * Creates a new SedDataGenerator_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

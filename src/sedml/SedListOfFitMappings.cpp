@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedListOfFitMappings using the given SEDML Level and @ p
+ * Creates a new SedListOfFitMappings using the given SED-ML Level and @ p
  * version values.
  */
 SedListOfFitMappings::SedListOfFitMappings(unsigned int level,
@@ -407,7 +407,7 @@ SedListOfFitMappings::getTypeCode() const
 
 
 /*
- * Returns the libSEDML type code for the SEDML objects contained in this
+ * Returns the libSEDML type code for the SED-ML objects contained in this
  * SedListOfFitMappings object.
  */
 int

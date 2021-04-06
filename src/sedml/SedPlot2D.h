@@ -73,12 +73,12 @@ protected:
 public:
 
   /**
-   * Creates a new SedPlot2D using the given SEDML Level and @ p version
+   * Creates a new SedPlot2D using the given SED-ML Level and @ p version
    * values.
    *
-   * @param level an unsigned int, the SEDML Level to assign to this SedPlot2D.
+   * @param level an unsigned int, the SED-ML Level to assign to this SedPlot2D.
    *
-   * @param version an unsigned int, the SEDML Version to assign to this
+   * @param version an unsigned int, the SED-ML Version to assign to this
    * SedPlot2D.
    *
    * @copydetails doc_note_setting_lv_pkg
@@ -504,7 +504,7 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML type code for this object:
+   * @return the SED-ML type code for this object:
    * @sedmlconstant{SEDML_OUTPUT_PLOT2D, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
@@ -1003,12 +1003,12 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedPlot2D_t using the given SEDML Level and @ p version
+ * Creates a new SedPlot2D_t using the given SED-ML Level and @ p version
  * values.
  *
- * @param level an unsigned int, the SEDML Level to assign to this SedPlot2D_t.
+ * @param level an unsigned int, the SED-ML Level to assign to this SedPlot2D_t.
  *
- * @param version an unsigned int, the SEDML Version to assign to this
+ * @param version an unsigned int, the SED-ML Version to assign to this
  * SedPlot2D_t.
  *
  * @copydetails doc_note_setting_lv_pkg

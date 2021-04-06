@@ -80,13 +80,13 @@ protected:
 public:
 
   /**
-   * Creates a new SedAbstractCurve using the given SEDML Level and @ p version
+   * Creates a new SedAbstractCurve using the given SED-ML Level and @ p version
    * values.
    *
-   * @param level an unsigned int, the SEDML Level to assign to this
+   * @param level an unsigned int, the SED-ML Level to assign to this
    * SedAbstractCurve.
    *
-   * @param version an unsigned int, the SEDML Version to assign to this
+   * @param version an unsigned int, the SED-ML Version to assign to this
    * SedAbstractCurve.
    *
    * @copydetails doc_note_setting_lv_pkg
@@ -404,7 +404,7 @@ public:
    *
    * @copydetails doc_what_are_typecodes
    *
-   * @return the SEDML type code for this object:
+   * @return the SED-ML type code for this object:
    * @sedmlconstant{SEDML_ABSTRACTCURVE, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
@@ -768,12 +768,12 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedCurve using the given SEDML Level and @ p version values.
+ * Creates a new SedCurve using the given SED-ML Level and @ p version values.
  *
- * @param level an unsigned int, the SEDML Level to assign to this
+ * @param level an unsigned int, the SED-ML Level to assign to this
  * SedAbstractCurve_t.
  *
- * @param version an unsigned int, the SEDML Version to assign to this
+ * @param version an unsigned int, the SED-ML Version to assign to this
  * SedAbstractCurve_t.
  *
  * @copydetails doc_note_setting_lv_pkg
@@ -788,13 +788,13 @@ SedAbstractCurve_createCurve(unsigned int level, unsigned int version);
 
 
 /**
- * Creates a new SedShadedArea using the given SEDML Level and @ p version
+ * Creates a new SedShadedArea using the given SED-ML Level and @ p version
  * values.
  *
- * @param level an unsigned int, the SEDML Level to assign to this
+ * @param level an unsigned int, the SED-ML Level to assign to this
  * SedAbstractCurve_t.
  *
- * @param version an unsigned int, the SEDML Version to assign to this
+ * @param version an unsigned int, the SED-ML Version to assign to this
  * SedAbstractCurve_t.
  *
  * @copydetails doc_note_setting_lv_pkg

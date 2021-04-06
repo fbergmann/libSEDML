@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedAddXML using the given SEDML Level and @ p version values.
+ * Creates a new SedAddXML using the given SED-ML Level and @ p version values.
  */
 SedAddXML::SedAddXML(unsigned int level, unsigned int version)
   : SedChange(level, version)
@@ -717,7 +717,7 @@ SedAddXML::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedAddXML_t using the given SEDML Level and @ p version
+ * Creates a new SedAddXML_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN

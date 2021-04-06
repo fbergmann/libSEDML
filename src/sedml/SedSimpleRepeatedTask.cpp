@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedSimpleRepeatedTask using the given SEDML Level and @ p
+ * Creates a new SedSimpleRepeatedTask using the given SED-ML Level and @ p
  * version values.
  */
 SedSimpleRepeatedTask::SedSimpleRepeatedTask(unsigned int level,
@@ -769,7 +769,7 @@ SedSimpleRepeatedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedSimpleRepeatedTask_t using the given SEDML Level and @ p
+ * Creates a new SedSimpleRepeatedTask_t using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN

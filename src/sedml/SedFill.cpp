@@ -48,7 +48,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedFill using the given SEDML Level and @ p version values.
+ * Creates a new SedFill using the given SED-ML Level and @ p version values.
  */
 SedFill::SedFill(unsigned int level, unsigned int version)
   : SedBase(level, version)
@@ -685,7 +685,7 @@ SedFill::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 
 
 /*
- * Creates a new SedFill_t using the given SEDML Level and @ p version values.
+ * Creates a new SedFill_t using the given SED-ML Level and @ p version values.
  */
 LIBSEDML_EXTERN
 SedFill_t *
