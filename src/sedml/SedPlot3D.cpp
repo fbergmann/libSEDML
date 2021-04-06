@@ -986,6 +986,23 @@ SedPlot3D::getElementBySId(const std::string& id)
 }
 
 
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedPlot3D::getAllElements(SedElementFilter* filter)
+{
+  List* ret = new List();
+  List* sublist = NULL;
+  SED_ADD_FILTERED_POINTER(ret, sublist, mZAxis, filter);
+
+  SED_ADD_FILTERED_LIST(ret, sublist, mSurfaces, filter);
+
+  return ret;
+}
+
+
 
 /** @cond doxygenLibSEDMLInternal */
 
