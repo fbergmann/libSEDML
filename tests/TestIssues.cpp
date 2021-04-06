@@ -488,7 +488,7 @@ TEST_CASE("Id and name on different levels/versions", "[sedml]")
     CHECK(variable13.getName() == "");
     CHECK(variable14.getName() == "");
 
-    //An element that had name but not id in l1v3:
+    {
     SedCurve curve13(&l1v3), curve14(&l1v4);
     CHECK(curve13.isSetId() == false);
     CHECK(curve14.isSetId() == false);
@@ -523,6 +523,46 @@ TEST_CASE("Id and name on different levels/versions", "[sedml]")
     CHECK(curve14.isSetName() == false);
     CHECK(curve13.getName() == "");
     CHECK(curve14.getName() == "");
+    }
+
+
+    {
+    SedSurface curve13(&l1v3), curve14(&l1v4);
+    CHECK(curve13.isSetId() == false);
+    CHECK(curve14.isSetId() == false);
+    CHECK(curve13.getId() == "");
+    CHECK(curve14.getId() == "");
+    CHECK(curve13.setId("curve") == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve14.setId("curve") == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve13.isSetId() == true);
+    CHECK(curve14.isSetId() == true);
+    CHECK(curve13.getId() == "curve");
+    CHECK(curve14.getId() == "curve");
+    CHECK(curve13.unsetId() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve14.unsetId() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve13.isSetId() == false);
+    CHECK(curve14.isSetId() == false);
+    CHECK(curve13.getId() == "");
+    CHECK(curve14.getId() == "");
+
+    CHECK(curve13.isSetName() == false);
+    CHECK(curve14.isSetName() == false);
+    CHECK(curve13.getName() == "");
+    CHECK(curve14.getName() == "");
+    CHECK(curve13.setName("curve") == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve14.setName("curve") == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve13.isSetName() == true);
+    CHECK(curve14.isSetName() == true);
+    CHECK(curve13.getName() == "curve");
+    CHECK(curve14.getName() == "curve");
+    CHECK(curve13.unsetName() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve14.unsetName() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(curve13.isSetName() == false);
+    CHECK(curve14.isSetName() == false);
+    CHECK(curve13.getName() == "");
+    CHECK(curve14.getName() == "");
+    }
+
 
     //An element that had id but not name in l1v3:
     SedRange range13(&l1v3), range14(&l1v4);
