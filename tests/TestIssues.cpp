@@ -597,3 +597,39 @@ TEST_CASE("Id and name on different levels/versions", "[sedml]")
     CHECK(algorithm14.getName() == "");
 
 }
+
+
+TEST_CASE("Reading/writing of dashDotDot", "[sedml]")
+{
+  SedDocument* doc = new SedDocument(1, 4);
+  {
+    auto* style = doc->createStyle();
+    REQUIRE(style != NULL);
+    style->setId("test");
+    auto* line = style->createLineStyle();
+    REQUIRE(line != NULL);
+    REQUIRE(line->setStyle(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
+    REQUIRE(line->getStyle() == SEDML_LINETYPE_DASHDOTDOT);
+    REQUIRE(line->setStyle("dashDotDot") == LIBSEDML_OPERATION_SUCCESS);
+    REQUIRE(line->getStyle() == SEDML_LINETYPE_DASHDOTDOT);
+
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+  }
+
+  std::string sedml = writeSedMLToStdString(doc);
+  delete doc;
+
+  doc = readSedMLFromString(sedml.c_str());
+  doc->getErrorLog()->printErrors();
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+  {
+    auto* style = doc->getStyle(0);
+    REQUIRE(style != NULL);
+    auto* line = style->getLineStyle();
+    REQUIRE(line != NULL);
+    REQUIRE(line->getStyle() == SEDML_LINETYPE_DASHDOTDOT);
+
+  }
+  delete doc;
+}
+
