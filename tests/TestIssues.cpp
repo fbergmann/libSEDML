@@ -608,10 +608,10 @@ TEST_CASE("Reading/writing of dashDotDot", "[sedml]")
     style->setId("test");
     auto* line = style->createLineStyle();
     REQUIRE(line != NULL);
-    REQUIRE(line->setStyle(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
-    REQUIRE(line->getStyle() == SEDML_LINETYPE_DASHDOTDOT);
-    REQUIRE(line->setStyle("dashDotDot") == LIBSEDML_OPERATION_SUCCESS);
-    REQUIRE(line->getStyle() == SEDML_LINETYPE_DASHDOTDOT);
+    REQUIRE(line->setType(SEDML_LINETYPE_DASHDOTDOT) == LIBSEDML_OPERATION_SUCCESS);
+    REQUIRE(line->getType() == SEDML_LINETYPE_DASHDOTDOT);
+    REQUIRE(line->setType("dashDotDot") == LIBSEDML_OPERATION_SUCCESS);
+    REQUIRE(line->getType() == SEDML_LINETYPE_DASHDOTDOT);
 
     REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
   }
@@ -627,7 +627,7 @@ TEST_CASE("Reading/writing of dashDotDot", "[sedml]")
     REQUIRE(style != NULL);
     auto* line = style->getLineStyle();
     REQUIRE(line != NULL);
-    REQUIRE(line->getStyle() == SEDML_LINETYPE_DASHDOTDOT);
+    REQUIRE(line->getType() == SEDML_LINETYPE_DASHDOTDOT);
 
   }
   delete doc;
