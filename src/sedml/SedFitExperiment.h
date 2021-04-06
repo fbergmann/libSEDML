@@ -159,15 +159,6 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this SedFitExperiment.
-   *
-   * @return the value of the "id" attribute of this SedFitExperiment as a
-   * string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
    * Returns the value of the "type" attribute of this SedFitExperiment.
    *
    * @return the value of the "type" attribute of this SedFitExperiment as a
@@ -200,16 +191,6 @@ public:
 
 
   /**
-   * Predicate returning @c true if this SedFitExperiment's "id" attribute is
-   * set.
-   *
-   * @return @c true if this SedFitExperiment's "id" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
    * Predicate returning @c true if this SedFitExperiment's "type" attribute is
    * set.
    *
@@ -219,22 +200,6 @@ public:
    * @copydetails doc_sedfitexperiment_type
    */
   bool isSetType() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedFitExperiment.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
 
 
   /**
@@ -266,16 +231,6 @@ public:
    * @copydetails doc_sedfitexperiment_type
    */
   int setType(const std::string& type);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedFitExperiment.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
 
 
   /**

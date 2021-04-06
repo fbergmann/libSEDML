@@ -57,7 +57,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedAbstractCurve::SedAbstractCurve(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mLogX (false)
   , mIsSetLogX (false)
   , mOrder (SEDML_INT_MAX)
@@ -68,6 +67,8 @@ SedAbstractCurve::SedAbstractCurve(unsigned int level, unsigned int version)
   , mElementName("abstractCurve")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
+  mNameAllowedPreV4 = true;
+  mIdAllowedPreV4 = true;
 }
 
 
@@ -77,7 +78,6 @@ SedAbstractCurve::SedAbstractCurve(unsigned int level, unsigned int version)
  */
 SedAbstractCurve::SedAbstractCurve(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mLogX (false)
   , mIsSetLogX (false)
   , mOrder (SEDML_INT_MAX)
@@ -88,6 +88,8 @@ SedAbstractCurve::SedAbstractCurve(SedNamespaces *sedmlns)
   , mElementName("abstractCurve")
 {
   setElementNamespace(sedmlns->getURI());
+  mNameAllowedPreV4 = true;
+  mIdAllowedPreV4 = true;
 }
 
 
@@ -96,7 +98,6 @@ SedAbstractCurve::SedAbstractCurve(SedNamespaces *sedmlns)
  */
 SedAbstractCurve::SedAbstractCurve(const SedAbstractCurve& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mLogX ( orig.mLogX )
   , mIsSetLogX ( orig.mIsSetLogX )
   , mOrder ( orig.mOrder )
@@ -118,7 +119,6 @@ SedAbstractCurve::operator=(const SedAbstractCurve& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mLogX = rhs.mLogX;
     mIsSetLogX = rhs.mIsSetLogX;
     mOrder = rhs.mOrder;
@@ -148,26 +148,6 @@ SedAbstractCurve::clone() const
  */
 SedAbstractCurve::~SedAbstractCurve()
 {
-}
-
-
-/*
- * Returns the value of the "id" attribute of this SedAbstractCurve.
- */
-const std::string&
-SedAbstractCurve::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedAbstractCurve.
- */
-const std::string&
-SedAbstractCurve::getName() const
-{
-  return mName;
 }
 
 
@@ -223,28 +203,6 @@ SedAbstractCurve::getXDataReference() const
 
 
 /*
- * Predicate returning @c true if this SedAbstractCurve's "id" attribute is
- * set.
- */
-bool
-SedAbstractCurve::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedAbstractCurve's "name" attribute is
- * set.
- */
-bool
-SedAbstractCurve::isSetName() const
-{
-  return (mName.empty() == false);
-}
-
-
-/*
  * Predicate returning @c true if this SedAbstractCurve's "logX" attribute is
  * set.
  */
@@ -296,28 +254,6 @@ bool
 SedAbstractCurve::isSetXDataReference() const
 {
   return (mXDataReference.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedAbstractCurve.
- */
-int
-SedAbstractCurve::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedAbstractCurve.
- */
-int
-SedAbstractCurve::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -388,44 +324,6 @@ SedAbstractCurve::setXDataReference(const std::string& xDataReference)
   {
     mXDataReference = xDataReference;
     return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedAbstractCurve.
- */
-int
-SedAbstractCurve::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedAbstractCurve.
- */
-int
-SedAbstractCurve::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
   }
 }
 
@@ -773,17 +671,7 @@ SedAbstractCurve::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "style")
+  if (attributeName == "style")
   {
     value = getStyle();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -817,15 +705,7 @@ SedAbstractCurve::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
-  else if (attributeName == "logX")
+  if (attributeName == "logX")
   {
     value = isSetLogX();
   }
@@ -943,15 +823,7 @@ SedAbstractCurve::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "style")
+  if (attributeName == "style")
   {
     return_value = setStyle(value);
   }
@@ -981,15 +853,7 @@ SedAbstractCurve::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
-  else if (attributeName == "logX")
+  if (attributeName == "logX")
   {
     value = unsetLogX();
   }
@@ -1027,10 +891,6 @@ SedAbstractCurve::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
-
-  attributes.add("id");
-
-  attributes.add("name");
 
   attributes.add("logX");
 
@@ -1096,40 +956,6 @@ SedAbstractCurve::readAttributes(
         log->logError(SedmlAbstractCurveAllowedAttributes, level, version,
           details, getLine(), getColumn());
       }
-    }
-  }
-
-  // 
-  // id SId (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedAbstractCurve>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedAbstractCurve>");
     }
   }
 
@@ -1254,16 +1080,6 @@ SedAbstractCurve::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 
   if (isSetLogX() == true)
   {

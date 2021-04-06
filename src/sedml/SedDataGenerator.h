@@ -66,7 +66,6 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mName;
   SedListOfVariables mVariables;
   SedListOfParameters mParameters;
   LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode* mMath;
@@ -131,94 +130,6 @@ public:
    * Destructor for SedDataGenerator.
    */
   virtual ~SedDataGenerator();
-
-
-  /**
-   * Returns the value of the "id" attribute of this SedDataGenerator.
-   *
-   * @return the value of the "id" attribute of this SedDataGenerator as a
-   * string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this SedDataGenerator.
-   *
-   * @return the value of the "name" attribute of this SedDataGenerator as a
-   * string.
-   */
-  virtual const std::string& getName() const;
-
-
-  /**
-   * Predicate returning @c true if this SedDataGenerator's "id" attribute is
-   * set.
-   *
-   * @return @c true if this SedDataGenerator's "id" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedDataGenerator's "name" attribute is
-   * set.
-   *
-   * @return @c true if this SedDataGenerator's "name" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedDataGenerator.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Sets the value of the "name" attribute of this SedDataGenerator.
-   *
-   * @param name std::string& value of the "name" attribute to be set.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * Calling this function with @p name = @c NULL or an empty string is
-   * equivalent to calling unsetName().
-   */
-  virtual int setName(const std::string& name);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedDataGenerator.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this SedDataGenerator.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetName();
 
 
   /**

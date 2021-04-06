@@ -130,49 +130,6 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this SedRange.
-   *
-   * @return the value of the "id" attribute of this SedRange as a string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedRange's "id" attribute is set.
-   *
-   * @return @c true if this SedRange's "id" attribute has been set, otherwise
-   * @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedRange.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedRange.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
    * Predicate returning @c true if this abstract "SedRange" is of type
    * SedUniformRange
    *

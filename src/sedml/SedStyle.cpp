@@ -179,16 +179,6 @@ SedStyle::~SedStyle()
 
 
 /*
- * Returns the value of the "id" attribute of this SedStyle.
- */
-const std::string&
-SedStyle::getId() const
-{
-  return mId;
-}
-
-
-/*
  * Returns the value of the "baseStyle" attribute of this SedStyle.
  */
 const std::string&
@@ -199,33 +189,12 @@ SedStyle::getBaseStyle() const
 
 
 /*
- * Predicate returning @c true if this SedStyle's "id" attribute is set.
- */
-bool
-SedStyle::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
  * Predicate returning @c true if this SedStyle's "baseStyle" attribute is set.
  */
 bool
 SedStyle::isSetBaseStyle() const
 {
   return (mBaseStyle.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedStyle.
- */
-int
-SedStyle::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -243,25 +212,6 @@ SedStyle::setBaseStyle(const std::string& baseStyle)
   {
     mBaseStyle = baseStyle;
     return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedStyle.
- */
-int
-SedStyle::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
   }
 }
 
@@ -1328,26 +1278,7 @@ SedStyle::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedStyle>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-  else
+  if(!isSetId())
   {
     if (log)
     {
@@ -1400,11 +1331,6 @@ SedStyle::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
 
   if (isSetBaseStyle() == true)
   {
