@@ -325,7 +325,6 @@ SedListOf::getAllElements(SedElementFilter* filter)
     SedBase* obj = get(i);
     if (filter == NULL || filter->filter(obj))
       ret->add(obj);
-    ret->add(obj);
     sublist = obj->getAllElements(filter);
     ret->transferFrom(sublist);
     delete sublist;
