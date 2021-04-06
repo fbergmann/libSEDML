@@ -494,11 +494,11 @@ TEST_CASE("Id and name on different levels/versions", "[sedml]")
     CHECK(curve14.isSetId() == false);
     CHECK(curve13.getId() == "");
     CHECK(curve14.getId() == "");
-    CHECK(curve13.setId("curve") == LIBSEDML_UNEXPECTED_ATTRIBUTE);
+    CHECK(curve13.setId("curve") == LIBSEDML_OPERATION_SUCCESS);
     CHECK(curve14.setId("curve") == LIBSEDML_OPERATION_SUCCESS);
-    CHECK(curve13.isSetId() == false);
+    CHECK(curve13.isSetId() == true);
     CHECK(curve14.isSetId() == true);
-    CHECK(curve13.getId() == "");
+    CHECK(curve13.getId() == "curve");
     CHECK(curve14.getId() == "curve");
     CHECK(curve13.unsetId() == LIBSEDML_OPERATION_SUCCESS);
     CHECK(curve14.unsetId() == LIBSEDML_OPERATION_SUCCESS);

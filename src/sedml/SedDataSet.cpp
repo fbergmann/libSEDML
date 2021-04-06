@@ -58,6 +58,7 @@ SedDataSet::SedDataSet(unsigned int level, unsigned int version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   mNameAllowedPreV4 = true;
+  mIdAllowedPreV4 = true;
 }
 
 
@@ -71,6 +72,7 @@ SedDataSet::SedDataSet(SedNamespaces *sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   mNameAllowedPreV4 = true;
+  mIdAllowedPreV4 = true;
 }
 
 
