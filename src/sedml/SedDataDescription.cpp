@@ -55,7 +55,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedDataDescription::SedDataDescription(unsigned int level,
                                        unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mFormat ("")
   , mSource ("")
   , mDimensionDescription (NULL)
@@ -63,6 +62,8 @@ SedDataDescription::SedDataDescription(unsigned int level,
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -72,7 +73,6 @@ SedDataDescription::SedDataDescription(unsigned int level,
  */
 SedDataDescription::SedDataDescription(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mFormat ("")
   , mSource ("")
   , mDimensionDescription (NULL)
@@ -80,6 +80,8 @@ SedDataDescription::SedDataDescription(SedNamespaces *sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -88,7 +90,6 @@ SedDataDescription::SedDataDescription(SedNamespaces *sedmlns)
  */
 SedDataDescription::SedDataDescription(const SedDataDescription& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mFormat ( orig.mFormat )
   , mSource ( orig.mSource )
   , mDimensionDescription ( NULL )
@@ -112,7 +113,6 @@ SedDataDescription::operator=(const SedDataDescription& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mFormat = rhs.mFormat;
     mSource = rhs.mSource;
     mDataSources = rhs.mDataSources;
@@ -154,26 +154,6 @@ SedDataDescription::~SedDataDescription()
 
 
 /*
- * Returns the value of the "id" attribute of this SedDataDescription.
- */
-const std::string&
-SedDataDescription::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedDataDescription.
- */
-const std::string&
-SedDataDescription::getName() const
-{
-  return mName;
-}
-
-
-/*
  * Returns the value of the "format" attribute of this SedDataDescription.
  */
 const std::string&
@@ -190,28 +170,6 @@ const std::string&
 SedDataDescription::getSource() const
 {
   return mSource;
-}
-
-
-/*
- * Predicate returning @c true if this SedDataDescription's "id" attribute is
- * set.
- */
-bool
-SedDataDescription::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedDataDescription's "name" attribute is
- * set.
- */
-bool
-SedDataDescription::isSetName() const
-{
-  return (mName.empty() == false);
 }
 
 
@@ -238,28 +196,6 @@ SedDataDescription::isSetSource() const
 
 
 /*
- * Sets the value of the "id" attribute of this SedDataDescription.
- */
-int
-SedDataDescription::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedDataDescription.
- */
-int
-SedDataDescription::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
  * Sets the value of the "format" attribute of this SedDataDescription.
  */
 int
@@ -278,44 +214,6 @@ SedDataDescription::setSource(const std::string& source)
 {
   mSource = source;
   return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedDataDescription.
- */
-int
-SedDataDescription::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedDataDescription.
- */
-int
-SedDataDescription::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
 }
 
 
@@ -848,17 +746,7 @@ SedDataDescription::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "format")
+  if (attributeName == "format")
   {
     value = getFormat();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -887,15 +775,7 @@ SedDataDescription::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
-  else if (attributeName == "format")
+  if (attributeName == "format")
   {
     value = isSetFormat();
   }
@@ -992,15 +872,7 @@ SedDataDescription::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "format")
+  if (attributeName == "format")
   {
     return_value = setFormat(value);
   }
@@ -1243,10 +1115,6 @@ SedDataDescription::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("id");
-
-  attributes.add("name");
-
   attributes.add("format");
 
   attributes.add("source");
@@ -1308,26 +1176,7 @@ SedDataDescription::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedDataDescription>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
-    }
-  }
-  else
+  if (!isSetId())
   {
     if (log)
     {
@@ -1335,20 +1184,6 @@ SedDataDescription::readAttributes(
         "<SedDataDescription> element.";
       log->logError(SedmlDataDescriptionAllowedAttributes, level, version,
         message, getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedDataDescription>");
     }
   }
 
@@ -1418,16 +1253,6 @@ SedDataDescription::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 
   if (isSetFormat() == true)
   {

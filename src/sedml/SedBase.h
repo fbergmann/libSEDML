@@ -204,16 +204,12 @@ public:
   /*
    * @return the id of this SEDML object.
    *
-   * @note The fact that the value of attribute "id" is defined on the
-   * SedBase parent class object is a convenience provided by libSEDML, and
-   * <b>does not strictly follow SEDML specifications</b>.  This libSEDML
-   * implementation of SedBase allows client applications to use more
-   * generalized code in some situations (for instance, when manipulating
-   * objects that are all known to have identifiers), but beware that not
-   * all SEDML object classes provide an "id" attribute.  LibSEDML will allow
-   * the identifier to be set, but it will not read nor write "id"
-   * attributes for objects that do not possess them according to the SEDML
-   * specification for the Level and Version in use.
+   * @note The "id" attribute was added to the SedBase class in 
+   * Level 1 version 4, and its presence here does not indicate
+   * whether the attribute was allowed on any given class in
+   * previous levels or versions.  LibSEDML will return an empty
+   * string if the attribute was not allowed on the current 
+   * level/version of the class.
    *
    */
   virtual const std::string& getId() const;
@@ -221,6 +217,13 @@ public:
 
   /**
    * @return the value of the "name" attribute (or an empty string).
+   *
+   * @note The "name" attribute was added to the SedBase class in
+   * Level 1 version 4, and its presence here does not indicate
+   * whether the attribute was allowed on any given class in
+   * previous levels or versions.  LibSEDML will return an empty
+   * string if the attribute was not allowed on the current
+   * level/version of the class.
    */
   virtual const std::string& getName() const;
 
@@ -2065,11 +2068,14 @@ protected:
 
   std::string     mMetaId;
   std::string     mId;
+  std::string     mName;
+  bool            mIdAllowedPreV4;
+  bool            mNameAllowedPreV4;
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*        mNotes;
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*        mAnnotation;
   SedDocument*   mSed;
   SedNamespaces* mSedNamespaces;
-  void*           mUserData;
+  void*          mUserData;
 
   unsigned int mLine;
   unsigned int mColumn;
