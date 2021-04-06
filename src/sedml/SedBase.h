@@ -1,5 +1,5 @@
-/**
  * @file SedBase.h
+/**
  * @brief Definition of the SedBase class.
  * @author DEVISER
  *
@@ -221,6 +221,13 @@ public:
 
   /**
    * @return the value of the "name" attribute (or an empty string).
+   *
+   * @note The "name" attribute was added to the SedBase class in
+   * Level 1 version 4, and its presence here does not indicate
+   * whether the attribute was allowed on any given class in
+   * previous levels or versions.  LibSEDML will return an empty
+   * string if the attribute was not allowed on the current
+   * level/version of the class.
    */
   virtual const std::string& getName() const;
 
@@ -2065,11 +2072,14 @@ protected:
 
   std::string     mMetaId;
   std::string     mId;
+  std::string     mName;
+  bool            mIdAllowedPreV4;
+  bool            mNameAllowedPreV4;
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*        mNotes;
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode*        mAnnotation;
   SedDocument*   mSed;
   SedNamespaces* mSedNamespaces;
-  void*           mUserData;
+  void*          mUserData;
 
   unsigned int mLine;
   unsigned int mColumn;

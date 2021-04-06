@@ -66,13 +66,13 @@
   </listOfOutputs>
   <listOfStyles>
     <style id="purple_line">
-      <line style="solid" color="#FF00FF" thickness="18"/>
+      <line type="solid" color="#FF00FF" thickness="18"/>
     </style>
     <style id="red_line">
-      <line style="solid" color="#FF0000" thickness="18"/>
+      <line type="solid" color="#FF0000" thickness="18"/>
     </style>
     <style id="green_line">
-      <line style="solid" color="#00FF00" thickness="18"/>
+      <line type="solid" color="#00FF00" thickness="18"/>
     </style>
   </listOfStyles>
 </sedML>

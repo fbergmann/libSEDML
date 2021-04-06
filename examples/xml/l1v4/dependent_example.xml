@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version4" level="1" version="4">
+  <listOfModels>
+    <model id="model1" language="urn:sedml:sbml" source="oscli.xml"/>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="sim1" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfPoints="1000">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task1" modelReference="model1" simulationReference="sim1"/>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="time" name="time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> t </ci>
+      </math>
+      <listOfVariables>
+        <variable id="t" name="time" symbol="urn:sedml:symbol:time" taskReference="task1"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="S1" name="[S1]">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> v1 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="v1" name="[S1]" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S1&apos;]" taskReference="task1"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="dS1dt" name="d[S1]/dt">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> v2 </ci>
+      </math>
+      <listOfVariables>
+        <dependentVariable id="v2" name="d[S1]/dt" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S1&apos;]" taskReference="task1" term="urn:sedml:symbol:rateOfChange"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <plot2D id="p1" name="S1 Timecourse">
+      <listOfCurves>
+        <curve id="c1" name="[S1]" xDataReference="time" yDataReference="S1"/>
+        <curve id="c1" name="d[S1]/dt" xDataReference="time" yDataReference="dS1dt"/>
+      </listOfCurves>
+    </plot2D>
+  </listOfOutputs>
+</sedML>

@@ -63,7 +63,6 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mName;
   double mValue;
   bool mIsSetValue;
 
@@ -130,48 +129,12 @@ public:
 
 
   /**
-   * Returns the value of the "id" attribute of this SedParameter.
-   *
-   * @return the value of the "id" attribute of this SedParameter as a string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this SedParameter.
-   *
-   * @return the value of the "name" attribute of this SedParameter as a
-   * string.
-   */
-  virtual const std::string& getName() const;
-
-
-  /**
    * Returns the value of the "value" attribute of this SedParameter.
    *
    * @return the value of the "value" attribute of this SedParameter as a
    * double.
    */
   double getValue() const;
-
-
-  /**
-   * Predicate returning @c true if this SedParameter's "id" attribute is set.
-   *
-   * @return @c true if this SedParameter's "id" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedParameter's "name" attribute is
-   * set.
-   *
-   * @return @c true if this SedParameter's "name" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
 
 
   /**
@@ -185,36 +148,6 @@ public:
 
 
   /**
-   * Sets the value of the "id" attribute of this SedParameter.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Sets the value of the "name" attribute of this SedParameter.
-   *
-   * @param name std::string& value of the "name" attribute to be set.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * Calling this function with @p name = @c NULL or an empty string is
-   * equivalent to calling unsetName().
-   */
-  virtual int setName(const std::string& name);
-
-
-  /**
    * Sets the value of the "value" attribute of this SedParameter.
    *
    * @param value double value of the "value" attribute to be set.
@@ -225,26 +158,6 @@ public:
    * OperationReturnValues_t}
    */
   int setValue(double value);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedParameter.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this SedParameter.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetName();
 
 
   /**

@@ -68,7 +68,6 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mName;
   SedAlgorithm* mAlgorithm;
   std::string mElementName;
 
@@ -132,92 +131,6 @@ public:
    * Destructor for SedSimulation.
    */
   virtual ~SedSimulation();
-
-
-  /**
-   * Returns the value of the "id" attribute of this SedSimulation.
-   *
-   * @return the value of the "id" attribute of this SedSimulation as a string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this SedSimulation.
-   *
-   * @return the value of the "name" attribute of this SedSimulation as a
-   * string.
-   */
-  virtual const std::string& getName() const;
-
-
-  /**
-   * Predicate returning @c true if this SedSimulation's "id" attribute is set.
-   *
-   * @return @c true if this SedSimulation's "id" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedSimulation's "name" attribute is
-   * set.
-   *
-   * @return @c true if this SedSimulation's "name" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedSimulation.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Sets the value of the "name" attribute of this SedSimulation.
-   *
-   * @param name std::string& value of the "name" attribute to be set.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * Calling this function with @p name = @c NULL or an empty string is
-   * equivalent to calling unsetName().
-   */
-  virtual int setName(const std::string& name);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedSimulation.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this SedSimulation.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetName();
 
 
   /**

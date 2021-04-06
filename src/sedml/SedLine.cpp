@@ -52,7 +52,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedLine::SedLine(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mStyle (SEDML_LINETYPE_INVALID)
+  , mType (SEDML_LINETYPE_INVALID)
   , mColor ("")
   , mThickness (util_NaN())
   , mIsSetThickness (false)
@@ -66,7 +66,7 @@ SedLine::SedLine(unsigned int level, unsigned int version)
  */
 SedLine::SedLine(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mStyle (SEDML_LINETYPE_INVALID)
+  , mType (SEDML_LINETYPE_INVALID)
   , mColor ("")
   , mThickness (util_NaN())
   , mIsSetThickness (false)
@@ -80,7 +80,7 @@ SedLine::SedLine(SedNamespaces *sedmlns)
  */
 SedLine::SedLine(const SedLine& orig)
   : SedBase( orig )
-  , mStyle ( orig.mStyle )
+  , mType ( orig.mType )
   , mColor ( orig.mColor )
   , mThickness ( orig.mThickness )
   , mIsSetThickness ( orig.mIsSetThickness )
@@ -97,7 +97,7 @@ SedLine::operator=(const SedLine& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mStyle = rhs.mStyle;
+    mType = rhs.mType;
     mColor = rhs.mColor;
     mThickness = rhs.mThickness;
     mIsSetThickness = rhs.mIsSetThickness;
@@ -126,22 +126,22 @@ SedLine::~SedLine()
 
 
 /*
- * Returns the value of the "style" attribute of this SedLine.
+ * Returns the value of the "type" attribute of this SedLine.
  */
 LineType_t
-SedLine::getStyle() const
+SedLine::getType() const
 {
-  return mStyle;
+  return mType;
 }
 
 
 /*
- * Returns the value of the "style" attribute of this SedLine.
+ * Returns the value of the "type" attribute of this SedLine.
  */
 std::string
-SedLine::getStyleAsString() const
+SedLine::getTypeAsString() const
 {
-  std::string code_str = LineType_toString(mStyle);
+  std::string code_str = LineType_toString(mType);
   return code_str;
 }
 
@@ -167,12 +167,12 @@ SedLine::getThickness() const
 
 
 /*
- * Predicate returning @c true if this SedLine's "style" attribute is set.
+ * Predicate returning @c true if this SedLine's "type" attribute is set.
  */
 bool
-SedLine::isSetStyle() const
+SedLine::isSetType() const
 {
-  return (mStyle != SEDML_LINETYPE_INVALID);
+  return (mType != SEDML_LINETYPE_INVALID);
 }
 
 
@@ -197,33 +197,33 @@ SedLine::isSetThickness() const
 
 
 /*
- * Sets the value of the "style" attribute of this SedLine.
+ * Sets the value of the "type" attribute of this SedLine.
  */
 int
-SedLine::setStyle(const LineType_t style)
+SedLine::setType(const LineType_t type)
 {
-  if (LineType_isValid(style) == 0)
+  if (LineType_isValid(type) == 0)
   {
-    mStyle = SEDML_LINETYPE_INVALID;
+    mType = SEDML_LINETYPE_INVALID;
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mStyle = style;
+    mType = type;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Sets the value of the "style" attribute of this SedLine.
+ * Sets the value of the "type" attribute of this SedLine.
  */
 int
-SedLine::setStyle(const std::string& style)
+SedLine::setType(const std::string& type)
 {
-  mStyle = LineType_fromString(style.c_str());
+  mType = LineType_fromString(type.c_str());
 
-  if (mStyle == SEDML_LINETYPE_INVALID)
+  if (mType == SEDML_LINETYPE_INVALID)
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -256,12 +256,12 @@ SedLine::setThickness(double thickness)
 
 
 /*
- * Unsets the value of the "style" attribute of this SedLine.
+ * Unsets the value of the "type" attribute of this SedLine.
  */
 int
-SedLine::unsetStyle()
+SedLine::unsetType()
 {
-  mStyle = SEDML_LINETYPE_INVALID;
+  mType = SEDML_LINETYPE_INVALID;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -482,9 +482,9 @@ SedLine::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "style")
+  if (attributeName == "type")
   {
-    value = getStyleAsString();
+    value = getTypeAsString();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
   else if (attributeName == "color")
@@ -511,9 +511,9 @@ SedLine::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "style")
+  if (attributeName == "type")
   {
-    value = isSetStyle();
+    value = isSetType();
   }
   else if (attributeName == "color")
   {
@@ -615,9 +615,9 @@ SedLine::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "style")
+  if (attributeName == "type")
   {
-    return_value = setStyle(value);
+    return_value = setType(value);
   }
   else if (attributeName == "color")
   {
@@ -641,9 +641,9 @@ SedLine::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "style")
+  if (attributeName == "type")
   {
-    value = unsetStyle();
+    value = unsetType();
   }
   else if (attributeName == "color")
   {
@@ -672,7 +672,7 @@ SedLine::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("style");
+  attributes.add("type");
 
   attributes.add("color");
 
@@ -720,34 +720,34 @@ SedLine::readAttributes(
   }
 
   // 
-  // style enum (use = "optional" )
+  // type enum (use = "optional" )
   // 
 
-  std::string style;
-  assigned = attributes.readInto("style", style);
+  std::string type;
+  assigned = attributes.readInto("type", type);
 
   if (assigned == true)
   {
-    if (style.empty() == true)
+    if (type.empty() == true)
     {
-      logEmptyString(style, level, version, "<SedLine>");
+      logEmptyString(type, level, version, "<SedLine>");
     }
     else
     {
-      mStyle = LineType_fromString(style.c_str());
+      mType = LineType_fromString(type.c_str());
 
-      if (log && LineType_isValid(mStyle) == 0)
+      if (log && LineType_isValid(mType) == 0)
       {
-        std::string msg = "The style on the <SedLine> ";
+        std::string msg = "The type on the <SedLine> ";
 
         if (isSetId())
         {
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + style + "', which is not a valid option.";
+        msg += "is '" + type + "', which is not a valid option.";
 
-        log->logError(SedmlLineStyleMustBeLineTypeEnum, level, version, msg,
+        log->logError(SedmlLineTypeMustBeLineTypeEnum, level, version, msg,
           getLine(), getColumn());
       }
     }
@@ -803,9 +803,9 @@ SedLine::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeAttributes(stream);
 
-  if (isSetStyle() == true)
+  if (isSetType() == true)
   {
-    stream.writeAttribute("style", getPrefix(), LineType_toString(mStyle));
+    stream.writeAttribute("type", getPrefix(), LineType_toString(mType));
   }
 
   if (isSetColor() == true)
@@ -871,29 +871,29 @@ SedLine_free(SedLine_t* sl)
 
 
 /*
- * Returns the value of the "style" attribute of this SedLine_t.
+ * Returns the value of the "type" attribute of this SedLine_t.
  */
 LIBSEDML_EXTERN
 LineType_t
-SedLine_getStyle(const SedLine_t * sl)
+SedLine_getType(const SedLine_t * sl)
 {
   if (sl == NULL)
   {
     return SEDML_LINETYPE_INVALID;
   }
 
-  return sl->getStyle();
+  return sl->getType();
 }
 
 
 /*
- * Returns the value of the "style" attribute of this SedLine_t.
+ * Returns the value of the "type" attribute of this SedLine_t.
  */
 LIBSEDML_EXTERN
 char *
-SedLine_getStyleAsString(const SedLine_t * sl)
+SedLine_getTypeAsString(const SedLine_t * sl)
 {
-  return (char*)(LineType_toString(sl->getStyle()));
+  return (char*)(LineType_toString(sl->getType()));
 }
 
 
@@ -925,14 +925,14 @@ SedLine_getThickness(const SedLine_t * sl)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedLine_t's "style" attribute is
+ * Predicate returning @c 1 (true) if this SedLine_t's "type" attribute is
  * set.
  */
 LIBSEDML_EXTERN
 int
-SedLine_isSetStyle(const SedLine_t * sl)
+SedLine_isSetType(const SedLine_t * sl)
 {
-  return (sl != NULL) ? static_cast<int>(sl->isSetStyle()) : 0;
+  return (sl != NULL) ? static_cast<int>(sl->isSetType()) : 0;
 }
 
 
@@ -961,24 +961,24 @@ SedLine_isSetThickness(const SedLine_t * sl)
 
 
 /*
- * Sets the value of the "style" attribute of this SedLine_t.
+ * Sets the value of the "type" attribute of this SedLine_t.
  */
 LIBSEDML_EXTERN
 int
-SedLine_setStyle(SedLine_t * sl, LineType_t style)
+SedLine_setType(SedLine_t * sl, LineType_t type)
 {
-  return (sl != NULL) ? sl->setStyle(style) : LIBSEDML_INVALID_OBJECT;
+  return (sl != NULL) ? sl->setType(type) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Sets the value of the "style" attribute of this SedLine_t.
+ * Sets the value of the "type" attribute of this SedLine_t.
  */
 LIBSEDML_EXTERN
 int
-SedLine_setStyleAsString(SedLine_t * sl, const char * style)
+SedLine_setTypeAsString(SedLine_t * sl, const char * type)
 {
-  return (sl != NULL) ? sl->setStyle(style): LIBSEDML_INVALID_OBJECT;
+  return (sl != NULL) ? sl->setType(type): LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1005,13 +1005,13 @@ SedLine_setThickness(SedLine_t * sl, double thickness)
 
 
 /*
- * Unsets the value of the "style" attribute of this SedLine_t.
+ * Unsets the value of the "type" attribute of this SedLine_t.
  */
 LIBSEDML_EXTERN
 int
-SedLine_unsetStyle(SedLine_t * sl)
+SedLine_unsetType(SedLine_t * sl)
 {
-  return (sl != NULL) ? sl->unsetStyle() : LIBSEDML_INVALID_OBJECT;
+  return (sl != NULL) ? sl->unsetType () : LIBSEDML_INVALID_OBJECT;
 }
 
 

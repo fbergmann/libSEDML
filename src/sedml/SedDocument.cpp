@@ -1566,9 +1566,9 @@ SedDocument::getEffectiveStyle(const std::string& sid) const
                 baseline->setColor(topline->getColor());
             }
 
-            if (topline->isSetStyle())
+            if (topline->isSetType())
             {
-                baseline->setStyle(topline->getStyle());
+                baseline->setType(topline->getType());
             }
 
             if (topline->isSetThickness())
@@ -1589,9 +1589,9 @@ SedDocument::getEffectiveStyle(const std::string& sid) const
             const SedMarker* topmarker = top->getMarkerStyle();
             SedMarker* basemarker = base.getMarkerStyle();
 
-            if (topmarker->isSetStyle())
+            if (topmarker->isSetType())
             {
-                basemarker->setStyle(topmarker->getStyle());
+                basemarker->setType(topmarker->getType());
             }
 
             if (topmarker->isSetSize())

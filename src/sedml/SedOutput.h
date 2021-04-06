@@ -69,7 +69,6 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mName;
   std::string mElementName;
 
   /** @endcond */
@@ -130,90 +129,6 @@ public:
    * Destructor for SedOutput.
    */
   virtual ~SedOutput();
-
-
-  /**
-   * Returns the value of the "id" attribute of this SedOutput.
-   *
-   * @return the value of the "id" attribute of this SedOutput as a string.
-   */
-  virtual const std::string& getId() const;
-
-
-  /**
-   * Returns the value of the "name" attribute of this SedOutput.
-   *
-   * @return the value of the "name" attribute of this SedOutput as a string.
-   */
-  virtual const std::string& getName() const;
-
-
-  /**
-   * Predicate returning @c true if this SedOutput's "id" attribute is set.
-   *
-   * @return @c true if this SedOutput's "id" attribute has been set, otherwise
-   * @c false is returned.
-   */
-  virtual bool isSetId() const;
-
-
-  /**
-   * Predicate returning @c true if this SedOutput's "name" attribute is set.
-   *
-   * @return @c true if this SedOutput's "name" attribute has been set,
-   * otherwise @c false is returned.
-   */
-  virtual bool isSetName() const;
-
-
-  /**
-   * Sets the value of the "id" attribute of this SedOutput.
-   *
-   * @param id std::string& value of the "id" attribute to be set.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
-   * OperationReturnValues_t}
-   *
-   * Calling this function with @p id = @c NULL or an empty string is
-   * equivalent to calling unsetId().
-   */
-  virtual int setId(const std::string& id);
-
-
-  /**
-   * Sets the value of the "name" attribute of this SedOutput.
-   *
-   * @param name std::string& value of the "name" attribute to be set.
-   *
-   * @copydetails doc_returns_one_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   *
-   * Calling this function with @p name = @c NULL or an empty string is
-   * equivalent to calling unsetName().
-   */
-  virtual int setName(const std::string& name);
-
-
-  /**
-   * Unsets the value of the "id" attribute of this SedOutput.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetId();
-
-
-  /**
-   * Unsets the value of the "name" attribute of this SedOutput.
-   *
-   * @copydetails doc_returns_success_code
-   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
-   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
-   */
-  virtual int unsetName();
 
 
   /**

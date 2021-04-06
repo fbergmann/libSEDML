@@ -54,7 +54,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedVariable::SedVariable(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mSymbol ("")
   , mTarget ("")
   , mTaskReference ("")
@@ -63,6 +62,8 @@ SedVariable::SedVariable(unsigned int level, unsigned int version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -71,7 +72,6 @@ SedVariable::SedVariable(unsigned int level, unsigned int version)
  */
 SedVariable::SedVariable(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mSymbol ("")
   , mTarget ("")
   , mTaskReference ("")
@@ -80,6 +80,8 @@ SedVariable::SedVariable(SedNamespaces *sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -88,7 +90,6 @@ SedVariable::SedVariable(SedNamespaces *sedmlns)
  */
 SedVariable::SedVariable(const SedVariable& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mSymbol ( orig.mSymbol )
   , mTarget ( orig.mTarget )
   , mTaskReference ( orig.mTaskReference )
@@ -108,7 +109,6 @@ SedVariable::operator=(const SedVariable& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mSymbol = rhs.mSymbol;
     mTarget = rhs.mTarget;
     mTaskReference = rhs.mTaskReference;
@@ -136,26 +136,6 @@ SedVariable::clone() const
  */
 SedVariable::~SedVariable()
 {
-}
-
-
-/*
- * Returns the value of the "id" attribute of this SedVariable.
- */
-const std::string&
-SedVariable::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedVariable.
- */
-const std::string&
-SedVariable::getName() const
-{
-  return mName;
 }
 
 
@@ -200,26 +180,6 @@ SedVariable::getModelReference() const
 
 
 /*
- * Predicate returning @c true if this SedVariable's "id" attribute is set.
- */
-bool
-SedVariable::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedVariable's "name" attribute is set.
- */
-bool
-SedVariable::isSetName() const
-{
-  return (mName.empty() == false);
-}
-
-
-/*
  * Predicate returning @c true if this SedVariable's "symbol" attribute is set.
  */
 bool
@@ -258,28 +218,6 @@ bool
 SedVariable::isSetModelReference() const
 {
   return (mModelReference.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedVariable.
- */
-int
-SedVariable::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedVariable.
- */
-int
-SedVariable::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -337,44 +275,6 @@ SedVariable::setModelReference(const std::string& modelReference)
   {
     mModelReference = modelReference;
     return LIBSEDML_OPERATION_SUCCESS;
-  }
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedVariable.
- */
-int
-SedVariable::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedVariable.
- */
-int
-SedVariable::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
   }
 }
 
@@ -835,17 +735,7 @@ SedVariable::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "symbol")
+  if (attributeName == "symbol")
   {
     value = getSymbol();
     return_value = LIBSEDML_OPERATION_SUCCESS;
@@ -884,15 +774,7 @@ SedVariable::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
-  else if (attributeName == "symbol")
+  if (attributeName == "symbol")
   {
     value = isSetSymbol();
   }
@@ -996,15 +878,7 @@ SedVariable::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-  else if (attributeName == "symbol")
+  if (attributeName == "symbol")
   {
     return_value = setSymbol(value);
   }
@@ -1038,15 +912,7 @@ SedVariable::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
-  else if (attributeName == "symbol")
+  if (attributeName == "symbol")
   {
     value = unsetSymbol();
   }
@@ -1255,10 +1121,6 @@ SedVariable::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedBase::addExpectedAttributes(attributes);
 
-  attributes.add("id");
-
-  attributes.add("name");
-
   attributes.add("symbol");
 
   attributes.add("target");
@@ -1324,26 +1186,7 @@ SedVariable::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedVariable>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-  else
+  if(!isSetId())
   {
     if (log)
     {
@@ -1351,20 +1194,6 @@ SedVariable::readAttributes(
         "<SedVariable> element.";
       log->logError(SedmlVariableAllowedAttributes, level, version, message,
         getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedVariable>");
     }
   }
 
@@ -1467,16 +1296,6 @@ SedVariable::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 
   if (isSetSymbol() == true)
   {

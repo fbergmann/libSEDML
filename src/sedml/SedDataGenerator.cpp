@@ -56,13 +56,14 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedDataGenerator::SedDataGenerator(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mVariables (level, version)
   , mParameters (level, version)
   , mMath (NULL)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -72,13 +73,14 @@ SedDataGenerator::SedDataGenerator(unsigned int level, unsigned int version)
  */
 SedDataGenerator::SedDataGenerator(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mVariables (sedmlns)
   , mParameters (sedmlns)
   , mMath (NULL)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -87,7 +89,6 @@ SedDataGenerator::SedDataGenerator(SedNamespaces *sedmlns)
  */
 SedDataGenerator::SedDataGenerator(const SedDataGenerator& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mVariables ( orig.mVariables )
   , mParameters ( orig.mParameters )
   , mMath ( NULL )
@@ -110,7 +111,6 @@ SedDataGenerator::operator=(const SedDataGenerator& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mVariables = rhs.mVariables;
     mParameters = rhs.mParameters;
     delete mMath;
@@ -147,108 +147,6 @@ SedDataGenerator::~SedDataGenerator()
 {
   delete mMath;
   mMath = NULL;
-}
-
-
-/*
- * Returns the value of the "id" attribute of this SedDataGenerator.
- */
-const std::string&
-SedDataGenerator::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedDataGenerator.
- */
-const std::string&
-SedDataGenerator::getName() const
-{
-  return mName;
-}
-
-
-/*
- * Predicate returning @c true if this SedDataGenerator's "id" attribute is
- * set.
- */
-bool
-SedDataGenerator::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedDataGenerator's "name" attribute is
- * set.
- */
-bool
-SedDataGenerator::isSetName() const
-{
-  return (mName.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedDataGenerator.
- */
-int
-SedDataGenerator::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedDataGenerator.
- */
-int
-SedDataGenerator::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedDataGenerator.
- */
-int
-SedDataGenerator::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedDataGenerator.
- */
-int
-SedDataGenerator::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
 }
 
 
@@ -934,17 +832,6 @@ SedDataGenerator::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
   return return_value;
 }
 
@@ -962,15 +849,6 @@ bool
 SedDataGenerator::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
 
   return value;
 }
@@ -1059,15 +937,6 @@ SedDataGenerator::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-
   return return_value;
 }
 
@@ -1084,15 +953,6 @@ int
 SedDataGenerator::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
 
   return value;
 }
@@ -1323,10 +1183,6 @@ SedDataGenerator::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
-
-  attributes.add("id");
-
-  attributes.add("name");
 }
 
 /** @endcond */
@@ -1385,26 +1241,7 @@ SedDataGenerator::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedDataGenerator>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.");
-    }
-  }
-  else
+  if(!isSetId())
   {
     if (log)
     {
@@ -1415,19 +1252,6 @@ SedDataGenerator::readAttributes(
     }
   }
 
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedDataGenerator>");
-    }
-  }
 }
 
 /** @endcond */
@@ -1477,16 +1301,6 @@ SedDataGenerator::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 }
 
 /** @endcond */

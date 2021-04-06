@@ -58,12 +58,13 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedSimulation::SedSimulation(unsigned int level, unsigned int version)
   : SedBase(level, version)
-  , mName ("")
   , mAlgorithm (NULL)
   , mElementName("simulation")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -72,12 +73,13 @@ SedSimulation::SedSimulation(unsigned int level, unsigned int version)
  */
 SedSimulation::SedSimulation(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
-  , mName ("")
   , mAlgorithm (NULL)
   , mElementName("simulation")
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
+  mIdAllowedPreV4 = true;
+  mNameAllowedPreV4 = true;
 }
 
 
@@ -86,7 +88,6 @@ SedSimulation::SedSimulation(SedNamespaces *sedmlns)
  */
 SedSimulation::SedSimulation(const SedSimulation& orig)
   : SedBase( orig )
-  , mName ( orig.mName )
   , mAlgorithm ( NULL )
   , mElementName ( orig.mElementName )
 {
@@ -108,7 +109,6 @@ SedSimulation::operator=(const SedSimulation& rhs)
   if (&rhs != this)
   {
     SedBase::operator=(rhs);
-    mName = rhs.mName;
     mElementName = rhs.mElementName;
     delete mAlgorithm;
     if (rhs.mAlgorithm != NULL)
@@ -144,106 +144,6 @@ SedSimulation::~SedSimulation()
 {
   delete mAlgorithm;
   mAlgorithm = NULL;
-}
-
-
-/*
- * Returns the value of the "id" attribute of this SedSimulation.
- */
-const std::string&
-SedSimulation::getId() const
-{
-  return mId;
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedSimulation.
- */
-const std::string&
-SedSimulation::getName() const
-{
-  return mName;
-}
-
-
-/*
- * Predicate returning @c true if this SedSimulation's "id" attribute is set.
- */
-bool
-SedSimulation::isSetId() const
-{
-  return (mId.empty() == false);
-}
-
-
-/*
- * Predicate returning @c true if this SedSimulation's "name" attribute is set.
- */
-bool
-SedSimulation::isSetName() const
-{
-  return (mName.empty() == false);
-}
-
-
-/*
- * Sets the value of the "id" attribute of this SedSimulation.
- */
-int
-SedSimulation::setId(const std::string& id)
-{
-  mId = id;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Sets the value of the "name" attribute of this SedSimulation.
- */
-int
-SedSimulation::setName(const std::string& name)
-{
-  mName = name;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
-
-
-/*
- * Unsets the value of the "id" attribute of this SedSimulation.
- */
-int
-SedSimulation::unsetId()
-{
-  mId.erase();
-
-  if (mId.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
-
-
-/*
- * Unsets the value of the "name" attribute of this SedSimulation.
- */
-int
-SedSimulation::unsetName()
-{
-  mName.erase();
-
-  if (mName.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
 }
 
 
@@ -609,17 +509,6 @@ SedSimulation::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "id")
-  {
-    value = getId();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-  else if (attributeName == "name")
-  {
-    value = getName();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
-
   return return_value;
 }
 
@@ -637,15 +526,6 @@ bool
 SedSimulation::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = isSetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = isSetName();
-  }
 
   return value;
 }
@@ -734,15 +614,6 @@ SedSimulation::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "id")
-  {
-    return_value = setId(value);
-  }
-  else if (attributeName == "name")
-  {
-    return_value = setName(value);
-  }
-
   return return_value;
 }
 
@@ -759,15 +630,6 @@ int
 SedSimulation::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
-
-  if (attributeName == "id")
-  {
-    value = unsetId();
-  }
-  else if (attributeName == "name")
-  {
-    value = unsetName();
-  }
 
   return value;
 }
@@ -967,10 +829,6 @@ SedSimulation::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
-
-  attributes.add("id");
-
-  attributes.add("name");
 }
 
 /** @endcond */
@@ -1029,26 +887,7 @@ SedSimulation::readAttributes(
     }
   }
 
-  // 
-  // id SId (use = "required" )
-  // 
-
-  assigned = attributes.readInto("id", mId);
-
-  if (assigned == true)
-  {
-    if (mId.empty() == true)
-    {
-      logEmptyString(mId, level, version, "<SedSimulation>");
-    }
-    else if (SyntaxChecker::isValidSBMLSId(mId) == false)
-    {
-      logError(SedmlIdSyntaxRule, level, version, "The id on the <" +
-        getElementName() + "> is '" + mId + "', which does not conform to the "
-          "syntax.", getLine(), getColumn());
-    }
-  }
-  else
+  if(!isSetId())
   {
     if (log)
     {
@@ -1056,20 +895,6 @@ SedSimulation::readAttributes(
         "<SedSimulation> element.";
       log->logError(SedmlSimulationAllowedAttributes, level, version, message,
         getLine(), getColumn());
-    }
-  }
-
-  // 
-  // name string (use = "optional" )
-  // 
-
-  assigned = attributes.readInto("name", mName);
-
-  if (assigned == true)
-  {
-    if (mName.empty() == true)
-    {
-      logEmptyString(mName, level, version, "<SedSimulation>");
     }
   }
 }
@@ -1088,16 +913,6 @@ SedSimulation::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeAttributes(stream);
-
-  if (isSetId() == true)
-  {
-    stream.writeAttribute("id", getPrefix(), mId);
-  }
-
-  if (isSetName() == true)
-  {
-    stream.writeAttribute("name", getPrefix(), mName);
-  }
 }
 
 /** @endcond */

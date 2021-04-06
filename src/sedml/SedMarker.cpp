@@ -54,7 +54,7 @@ SedMarker::SedMarker(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mSize (util_NaN())
   , mIsSetSize (false)
-  , mStyle (SEDML_MARKERTYPE_INVALID)
+  , mType (SEDML_MARKERTYPE_INVALID)
   , mFill ("")
   , mLineColor ("")
   , mLineThickness (util_NaN())
@@ -71,7 +71,7 @@ SedMarker::SedMarker(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mSize (util_NaN())
   , mIsSetSize (false)
-  , mStyle (SEDML_MARKERTYPE_INVALID)
+  , mType (SEDML_MARKERTYPE_INVALID)
   , mFill ("")
   , mLineColor ("")
   , mLineThickness (util_NaN())
@@ -88,7 +88,7 @@ SedMarker::SedMarker(const SedMarker& orig)
   : SedBase( orig )
   , mSize ( orig.mSize )
   , mIsSetSize ( orig.mIsSetSize )
-  , mStyle ( orig.mStyle )
+  , mType ( orig.mType )
   , mFill ( orig.mFill )
   , mLineColor ( orig.mLineColor )
   , mLineThickness ( orig.mLineThickness )
@@ -108,7 +108,7 @@ SedMarker::operator=(const SedMarker& rhs)
     SedBase::operator=(rhs);
     mSize = rhs.mSize;
     mIsSetSize = rhs.mIsSetSize;
-    mStyle = rhs.mStyle;
+    mType = rhs.mType;
     mFill = rhs.mFill;
     mLineColor = rhs.mLineColor;
     mLineThickness = rhs.mLineThickness;
@@ -148,22 +148,22 @@ SedMarker::getSize() const
 
 
 /*
- * Returns the value of the "style" attribute of this SedMarker.
+ * Returns the value of the "type" attribute of this SedMarker.
  */
 MarkerType_t
-SedMarker::getStyle() const
+SedMarker::getType() const
 {
-  return mStyle;
+  return mType;
 }
 
 
 /*
- * Returns the value of the "style" attribute of this SedMarker.
+ * Returns the value of the "type" attribute of this SedMarker.
  */
 std::string
-SedMarker::getStyleAsString() const
+SedMarker::getTypeAsString() const
 {
-  std::string code_str = MarkerType_toString(mStyle);
+  std::string code_str = MarkerType_toString(mType);
   return code_str;
 }
 
@@ -209,12 +209,12 @@ SedMarker::isSetSize() const
 
 
 /*
- * Predicate returning @c true if this SedMarker's "style" attribute is set.
+ * Predicate returning @c true if this SedMarker's "type" attribute is set.
  */
 bool
-SedMarker::isSetStyle() const
+SedMarker::isSetType() const
 {
-  return (mStyle != SEDML_MARKERTYPE_INVALID);
+  return (mType != SEDML_MARKERTYPE_INVALID);
 }
 
 
@@ -263,33 +263,33 @@ SedMarker::setSize(double size)
 
 
 /*
- * Sets the value of the "style" attribute of this SedMarker.
+ * Sets the value of the "type" attribute of this SedMarker.
  */
 int
-SedMarker::setStyle(const MarkerType_t style)
+SedMarker::setType(const MarkerType_t type)
 {
-  if (MarkerType_isValid(style) == 0)
+  if (MarkerType_isValid(type) == 0)
   {
-    mStyle = SEDML_MARKERTYPE_INVALID;
+    mType = SEDML_MARKERTYPE_INVALID;
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mStyle = style;
+    mType = type;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Sets the value of the "style" attribute of this SedMarker.
+ * Sets the value of the "type" attribute of this SedMarker.
  */
 int
-SedMarker::setStyle(const std::string& style)
+SedMarker::setType(const std::string& type)
 {
-  mStyle = MarkerType_fromString(style.c_str());
+  mType = MarkerType_fromString(type.c_str());
 
-  if (mStyle == SEDML_MARKERTYPE_INVALID)
+  if (mType == SEDML_MARKERTYPE_INVALID)
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
@@ -353,12 +353,12 @@ SedMarker::unsetSize()
 
 
 /*
- * Unsets the value of the "style" attribute of this SedMarker.
+ * Unsets the value of the "type" attribute of this SedMarker.
  */
 int
-SedMarker::unsetStyle()
+SedMarker::unsetType()
 {
-  mStyle = SEDML_MARKERTYPE_INVALID;
+  mType = SEDML_MARKERTYPE_INVALID;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -603,9 +603,9 @@ SedMarker::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "style")
+  if (attributeName == "type")
   {
-    value = getStyleAsString();
+    value = getTypeAsString();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
   else if (attributeName == "fill")
@@ -641,9 +641,9 @@ SedMarker::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetSize();
   }
-  else if (attributeName == "style")
+  else if (attributeName == "type")
   {
-    value = isSetStyle();
+    value = isSetType();
   }
   else if (attributeName == "fill")
   {
@@ -753,9 +753,9 @@ SedMarker::setAttribute(const std::string& attributeName,
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
-  if (attributeName == "style")
+  if (attributeName == "type")
   {
-    return_value = setStyle(value);
+    return_value = setType(value);
   }
   else if (attributeName == "fill")
   {
@@ -787,9 +787,9 @@ SedMarker::unsetAttribute(const std::string& attributeName)
   {
     value = unsetSize();
   }
-  else if (attributeName == "style")
+  else if (attributeName == "type")
   {
-    value = unsetStyle();
+    value = unsetType();
   }
   else if (attributeName == "fill")
   {
@@ -824,7 +824,7 @@ SedMarker::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("size");
 
-  attributes.add("style");
+  attributes.add("type");
 
   attributes.add("fill");
 
@@ -894,34 +894,34 @@ SedMarker::readAttributes(
   }
 
   // 
-  // style enum (use = "optional" )
+  // type enum (use = "optional" )
   // 
 
-  std::string style;
-  assigned = attributes.readInto("style", style);
+  std::string type;
+  assigned = attributes.readInto("type", type);
 
   if (assigned == true)
   {
-    if (style.empty() == true)
+    if (type.empty() == true)
     {
-      logEmptyString(style, level, version, "<SedMarker>");
+      logEmptyString(type, level, version, "<SedMarker>");
     }
     else
     {
-      mStyle = MarkerType_fromString(style.c_str());
+      mType = MarkerType_fromString(type.c_str());
 
-      if (log && MarkerType_isValid(mStyle) == 0)
+      if (log && MarkerType_isValid(mType) == 0)
       {
-        std::string msg = "The style on the <SedMarker> ";
+        std::string msg = "The type on the <SedMarker> ";
 
         if (isSetId())
         {
           msg += "with id '" + getId() + "'";
         }
 
-        msg += "is '" + style + "', which is not a valid option.";
+        msg += "is '" + type + "', which is not a valid option.";
 
-        log->logError(SedmlMarkerStyleMustBeMarkerTypeEnum, level, version,
+        log->logError(SedmlMarkerTypeMustBeMarkerTypeEnum, level, version,
           msg, getLine(), getColumn());
       }
     }
@@ -996,9 +996,9 @@ SedMarker::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
     stream.writeAttribute("size", getPrefix(), mSize);
   }
 
-  if (isSetStyle() == true)
+  if (isSetType() == true)
   {
-    stream.writeAttribute("style", getPrefix(), MarkerType_toString(mStyle));
+    stream.writeAttribute("type", getPrefix(), MarkerType_toString(mType));
   }
 
   if (isSetFill() == true)
@@ -1081,29 +1081,29 @@ SedMarker_getSize(const SedMarker_t * sm)
 
 
 /*
- * Returns the value of the "style" attribute of this SedMarker_t.
+ * Returns the value of the "type" attribute of this SedMarker_t.
  */
 LIBSEDML_EXTERN
 MarkerType_t
-SedMarker_getStyle(const SedMarker_t * sm)
+SedMarker_getType(const SedMarker_t * sm)
 {
   if (sm == NULL)
   {
     return SEDML_MARKERTYPE_INVALID;
   }
 
-  return sm->getStyle();
+  return sm->getType();
 }
 
 
 /*
- * Returns the value of the "style" attribute of this SedMarker_t.
+ * Returns the value of the "type" attribute of this SedMarker_t.
  */
 LIBSEDML_EXTERN
 char *
-SedMarker_getStyleAsString(const SedMarker_t * sm)
+SedMarker_getTypeAsString(const SedMarker_t * sm)
 {
-  return (char*)(MarkerType_toString(sm->getStyle()));
+  return (char*)(MarkerType_toString(sm->getType()));
 }
 
 
@@ -1164,14 +1164,14 @@ SedMarker_isSetSize(const SedMarker_t * sm)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedMarker_t's "style" attribute is
+ * Predicate returning @c 1 (true) if this SedMarker_t's "type" attribute is
  * set.
  */
 LIBSEDML_EXTERN
 int
-SedMarker_isSetStyle(const SedMarker_t * sm)
+SedMarker_isSetType(const SedMarker_t * sm)
 {
-  return (sm != NULL) ? static_cast<int>(sm->isSetStyle()) : 0;
+  return (sm != NULL) ? static_cast<int>(sm->isSetType()) : 0;
 }
 
 
@@ -1223,24 +1223,24 @@ SedMarker_setSize(SedMarker_t * sm, double size)
 
 
 /*
- * Sets the value of the "style" attribute of this SedMarker_t.
+ * Sets the value of the "type" attribute of this SedMarker_t.
  */
 LIBSEDML_EXTERN
 int
-SedMarker_setStyle(SedMarker_t * sm, MarkerType_t style)
+SedMarker_setType(SedMarker_t * sm, MarkerType_t type)
 {
-  return (sm != NULL) ? sm->setStyle(style) : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->setType(type) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Sets the value of the "style" attribute of this SedMarker_t.
+ * Sets the value of the "type" attribute of this SedMarker_t.
  */
 LIBSEDML_EXTERN
 int
-SedMarker_setStyleAsString(SedMarker_t * sm, const char * style)
+SedMarker_setTypeAsString(SedMarker_t * sm, const char * type)
 {
-  return (sm != NULL) ? sm->setStyle(style): LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->setType(type): LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1290,13 +1290,13 @@ SedMarker_unsetSize(SedMarker_t * sm)
 
 
 /*
- * Unsets the value of the "style" attribute of this SedMarker_t.
+ * Unsets the value of the "type" attribute of this SedMarker_t.
  */
 LIBSEDML_EXTERN
 int
-SedMarker_unsetStyle(SedMarker_t * sm)
+SedMarker_unsetType(SedMarker_t * sm)
 {
-  return (sm != NULL) ? sm->unsetStyle() : LIBSEDML_INVALID_OBJECT;
+  return (sm != NULL) ? sm->unsetType() : LIBSEDML_INVALID_OBJECT;
 }
 
 
