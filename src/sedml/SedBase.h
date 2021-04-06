@@ -1,5 +1,5 @@
- * @file SedBase.h
 /**
+ * @file SedBase.h
  * @brief Definition of the SedBase class.
  * @author DEVISER
  *
