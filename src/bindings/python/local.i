@@ -253,10 +253,26 @@ namespace std
 }
 
 
+%extend SedBase
+{
+  SedBase* downcast()
+  {
+    return $self;
+  }
+}
+
+
 
 /**
  * Convert objects into the most specific type possible.
  */
+
+%typemap(directorin) SedBase*
+{
+  $input = SWIG_NewPointerObj(SWIG_as_voidptr($1), GetDowncastSwigType(const_cast<SedBase*>($1)),
+                               $owner | %newpointer_flags);
+}
+
 %typemap(out) SedBase*, SedSimulation*, SedAbstractTask*, SedTask*, SedOutput*, SedChange*, SedRange*, SedAbstractCurve*
 {
   $result = SWIG_NewPointerObj(SWIG_as_voidptr($1), GetDowncastSwigType($1),

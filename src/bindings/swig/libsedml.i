@@ -34,6 +34,7 @@
 
 
 %module(directors="1") libsedml
+%feature("director") SedElementFilter;
 
 %pragma(java) moduleclassmodifiers="
 /**
@@ -86,8 +87,8 @@ LIBNUML_CPP_NAMESPACE_USE
 
 %include "ListWrapper.h"
 %template(ASTNodeList)        ListWrapper<ASTNode>;
-%template(SedNamespacesList) ListWrapper<SedNamespaces>;
-%template(SedBaseList)          ListWrapper<SedBase>;
+%template(SedNamespacesList)  ListWrapper<SedNamespaces>;
+%template(SedBaseList)        ListWrapper<SedBase>;
 %template(SBaseList)          ListWrapper<SBase>;
 
 /**
@@ -296,9 +297,9 @@ LIBNUML_CPP_NAMESPACE_USE
 
 %extend SedBase
 {
-	ListWrapper<SedBase>* getListOfAllElements()
+	ListWrapper<SedBase>* getListOfAllElements(SedElementFilter* filter=NULL)
 	{
-		List* list = $self->getAllElements();
+		List* list = $self->getAllElements(filter);
 		return new ListWrapper<SedBase>(list);
 	}
 }
@@ -341,6 +342,7 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedTypeCodes.h>
 %include <sedml/SedTypes.h>
 %include <sedml/SedBase.h>
+%include <sedml/SedElementFilter.h>
 %include <sedml/SedListOf.h>
 %include <sedml/SedDocument.h>
 %include <sedml/SedErrorLog.h>
