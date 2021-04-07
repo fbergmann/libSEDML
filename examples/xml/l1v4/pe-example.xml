@@ -27,17 +27,17 @@
       <algorithm kisaoID="KISAO:0000472"/>
       <leastSquareObjectiveFunction/>
       <listOfAdjustableParameters>
-        <adjustableParameter modelReference="model1" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;J2_q&apos;]">
-          <bounds initialValue="2.4" lowerBound="0.0001" upperBound="10"/>
+        <adjustableParameter modelReference="model1" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;J2_q&apos;]" initialValue="2.4">
+          <bounds lowerBound="0.0001" upperBound="10" scale="lin"/>
         </adjustableParameter>
-        <adjustableParameter modelReference="model1" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;J2_q&apos;]">
-          <bounds initialValue="2.4" lowerBound="0.0001" upperBound="10"/>
+        <adjustableParameter modelReference="model1" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;J2_q&apos;]" initialValue="2.4">
+          <bounds lowerBound="0.0001" upperBound="10" scale="lin"/>
         </adjustableParameter>
       </listOfAdjustableParameters>
       <listOfFitExperiments>
-        <fitExperiment id="exp1" represents="TimeCourse">
+        <fitExperiment id="exp1" type="timeCourse">
           <listOfFitMappings>
-            <fitMapping dataSource="dataS1" dataGenerator="s1_conc" type="Variable" weight="1"/>
+            <fitMapping dataSource="dataS1" target="s1_conc" type="observable" weight="1"/>
           </listOfFitMappings>
         </fitExperiment>
       </listOfFitExperiments>
@@ -69,13 +69,13 @@
       </listOfVariables>
     </dataGenerator>
   </listOfDataGenerators>
-  <output>
-    <parameterEstimationResultPlot id="plot1" id="plot1" name="Result Plot" taskRef="pe1"/>
+  <listOfOutputs>
+    <parameterEstimationResultPlot id="plot1" name="Result Plot" taskRef="pe1"/>
     <report id="report1">
       <listOfDataSets>
         <dataSet id="set1" label="OBJ" dataReference="pe_obj"/>
         <dataSet id="set2" label="FEVAL" dataReference="pe_feval"/>
       </listOfDataSets>
     </report>
-  </output>
+  </listOfOutputs>
 </sedML>
