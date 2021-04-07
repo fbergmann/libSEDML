@@ -47,6 +47,7 @@
 #include <sedml/SedTypeCodes.h>
 #include <sedml/SedNamespaces.h>
 #include <sedml/SedConstructorException.h>
+#include <sedml/SedElementFilter.h>
 #include <sbml/util/List.h>
 #include <sbml/SyntaxChecker.h>
 #include <sbml/ExpectedAttributes.h>
@@ -172,7 +173,7 @@ public:
    *
    * @return a pointer to a List of pointers to all children objects.
    */
-  virtual List* getAllElements();
+  virtual List* getAllElements(SedElementFilter* filter = NULL);
 
 
   /**

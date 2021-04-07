@@ -442,6 +442,18 @@ TEST_CASE("Reading numberOfPoints", "[sedml]")
         REQUIRE(range->isSetNumberOfPoints());
         REQUIRE(range->getNumberOfPoints() == 10);
     }
+    
+    {
+      auto* list = doc->getAllElements(); 
+      REQUIRE(list != NULL);
+      REQUIRE(list->getSize() == 4);
+      REQUIRE(static_cast<SedBase*>(list->get(0))->getTypeCode() == SEDML_LIST_OF);
+      REQUIRE(static_cast<SedBase*>(list->get(1))->getTypeCode() == SEDML_TASK_REPEATEDTASK);
+      REQUIRE(static_cast<SedBase*>(list->get(2))->getTypeCode() == SEDML_LIST_OF);
+      REQUIRE(static_cast<SedBase*>(list->get(3))->getTypeCode() == SEDML_RANGE_UNIFORMRANGE);
+      delete list;
+    }
+    
     delete doc;
 }
 

@@ -96,7 +96,7 @@ SedBase::getElementByMetaId(const std::string& metaid) const
 
 
 List*
-SedBase::getAllElements()
+SedBase::getAllElements(SedElementFilter* filter)
 {
   return NULL;
 }

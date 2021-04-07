@@ -300,7 +300,7 @@ public:
    *
    * @return a List of pointers to all child objects.
    */
-  virtual List* getAllElements();
+  virtual List* getAllElements(SedElementFilter* filter = NULL);
 
 
   /**

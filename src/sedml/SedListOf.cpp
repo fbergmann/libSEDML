@@ -315,7 +315,7 @@ SedListOf::getElementByMetaId(const std::string& metaid)
 
 
 List*
-SedListOf::getAllElements()
+SedListOf::getAllElements(SedElementFilter* filter)
 {
   List* ret = new List();
   List* sublist = NULL;
@@ -323,8 +323,9 @@ SedListOf::getAllElements()
   for (unsigned int i = 0; i < size(); i++) 
   {
     SedBase* obj = get(i);
-    ret->add(obj);
-    sublist = obj->getAllElements();
+    if (filter == NULL || filter->filter(obj))
+      ret->add(obj);
+    sublist = obj->getAllElements(filter);
     ret->transferFrom(sublist);
     delete sublist;
   }
