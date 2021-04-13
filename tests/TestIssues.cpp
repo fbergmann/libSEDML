@@ -708,5 +708,30 @@ TEST_CASE("Reading old 'style' attribute on marker should give error", "[sedml]"
     delete doc;
 }
 
+TEST_CASE("Set new symbol on ComputeChange", "[sedml]")
+{
+    SedComputeChange scc(1, 4);
+    CHECK(scc.isSetSymbol() == false);
+    CHECK(scc.setSymbol("some_urn") == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(scc.getSymbol() == "some_urn");
+    char* sccstr = scc.toSed();
+    CHECK(string(sccstr) == "<computeChange symbol=\"some_urn\"/>");
+    delete sccstr;
+    CHECK(scc.isSetSymbol() == true);
+    CHECK(scc.unsetSymbol() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(scc.isSetSymbol() == false);
+
+    SedComputeChange scc2(1, 3);
+    CHECK(scc2.isSetSymbol() == false);
+    CHECK(scc2.setSymbol("some_urn") == LIBSEDML_UNEXPECTED_ATTRIBUTE);
+    sccstr = scc.toSed();
+    CHECK(string(sccstr) == "<computeChange/>");
+    delete sccstr;
+    CHECK(scc2.getSymbol() == "");
+    CHECK(scc2.isSetSymbol() == false);
+    CHECK(scc2.unsetSymbol() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(scc2.isSetSymbol() == false);
+}
+
 
 
