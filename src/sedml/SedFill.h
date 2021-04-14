@@ -64,7 +64,7 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   std::string mColor;
-  std::string mSecondColor;
+  //std::string mSecondColor;
 
   /** @endcond */
 
@@ -133,13 +133,13 @@ public:
   const std::string& getColor() const;
 
 
-  /**
+  /*
    * Returns the value of the "secondColor" attribute of this SedFill.
    *
    * @return the value of the "secondColor" attribute of this SedFill as a
    * string.
    */
-  const std::string& getSecondColor() const;
+  //const std::string& getSecondColor() const;
 
 
   /**
@@ -151,14 +151,14 @@ public:
   bool isSetColor() const;
 
 
-  /**
+  /*
    * Predicate returning @c true if this SedFill's "secondColor" attribute is
    * set.
    *
    * @return @c true if this SedFill's "secondColor" attribute has been set,
    * otherwise @c false is returned.
    */
-  bool isSetSecondColor() const;
+  //bool isSetSecondColor() const;
 
 
   /**
@@ -175,7 +175,7 @@ public:
   int setColor(const std::string& color);
 
 
-  /**
+  /*
    * Sets the value of the "secondColor" attribute of this SedFill.
    *
    * @param secondColor std::string& value of the "secondColor" attribute to be
@@ -187,7 +187,7 @@ public:
    * Calling this function with @p secondColor = @c NULL or an empty string is
    * equivalent to calling unsetSecondColor().
    */
-  int setSecondColor(const std::string& secondColor);
+  //int setSecondColor(const std::string& secondColor);
 
 
   /**
@@ -200,14 +200,14 @@ public:
   int unsetColor();
 
 
-  /**
+  /*
    * Unsets the value of the "secondColor" attribute of this SedFill.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetSecondColor();
+  //int unsetSecondColor();
 
 
   /**
@@ -655,7 +655,7 @@ char *
 SedFill_getColor(const SedFill_t * sf);
 
 
-/**
+/*
  * Returns the value of the "secondColor" attribute of this SedFill_t.
  *
  * @param sf the SedFill_t structure whose secondColor is sought.
@@ -667,9 +667,9 @@ SedFill_getColor(const SedFill_t * sf);
  *
  * @memberof SedFill_t
  */
-LIBSEDML_EXTERN
-char *
-SedFill_getSecondColor(const SedFill_t * sf);
+//LIBSEDML_EXTERN
+//char *
+//SedFill_getSecondColor(const SedFill_t * sf);
 
 
 /**
@@ -688,7 +688,7 @@ int
 SedFill_isSetColor(const SedFill_t * sf);
 
 
-/**
+/*
  * Predicate returning @c 1 (true) if this SedFill_t's "secondColor" attribute
  * is set.
  *
@@ -699,9 +699,9 @@ SedFill_isSetColor(const SedFill_t * sf);
  *
  * @memberof SedFill_t
  */
-LIBSEDML_EXTERN
-int
-SedFill_isSetSecondColor(const SedFill_t * sf);
+//LIBSEDML_EXTERN
+//int
+//SedFill_isSetSecondColor(const SedFill_t * sf);
 
 
 /**
@@ -725,7 +725,7 @@ int
 SedFill_setColor(SedFill_t * sf, const char * color);
 
 
-/**
+/*
  * Sets the value of the "secondColor" attribute of this SedFill_t.
  *
  * @param sf the SedFill_t structure.
@@ -742,9 +742,9 @@ SedFill_setColor(SedFill_t * sf, const char * color);
  *
  * @memberof SedFill_t
  */
-LIBSEDML_EXTERN
-int
-SedFill_setSecondColor(SedFill_t * sf, const char * secondColor);
+//LIBSEDML_EXTERN
+//int
+//SedFill_setSecondColor(SedFill_t * sf, const char * secondColor);
 
 
 /**
@@ -764,7 +764,7 @@ int
 SedFill_unsetColor(SedFill_t * sf);
 
 
-/**
+/*
  * Unsets the value of the "secondColor" attribute of this SedFill_t.
  *
  * @param sf the SedFill_t structure.
@@ -776,9 +776,9 @@ SedFill_unsetColor(SedFill_t * sf);
  *
  * @memberof SedFill_t
  */
-LIBSEDML_EXTERN
-int
-SedFill_unsetSecondColor(SedFill_t * sf);
+//LIBSEDML_EXTERN
+//int
+//SedFill_unsetSecondColor(SedFill_t * sf);
 
 
 /**

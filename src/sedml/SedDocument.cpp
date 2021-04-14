@@ -1796,10 +1796,10 @@ SedDocument::getEffectiveStyle(const std::string& sid) const
                 basefill->setColor(topfill->getColor());
             }
 
-            if (topfill->isSetSecondColor())
-            {
-                basefill->setSecondColor(topfill->getSecondColor());
-            }
+            //if (topfill->isSetSecondColor())
+            //{
+            //    basefill->setSecondColor(topfill->getSecondColor());
+            //}
         }
         else
         {
