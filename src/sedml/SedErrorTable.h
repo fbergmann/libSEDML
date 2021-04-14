@@ -1719,9 +1719,10 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <abstractCurve>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "An <abstractCurve> object may have the optional attributes 'sedml:id', "
-    "'sedml:name', 'sedml:logX', 'sedml:order', 'sedml:style', 'sedml:yAxis' "
-    "and 'sedml:xDataReference'. No other attributes from the SBML Level 3 "
+    "An <abstractCurve> object must have the required attribute "
+    "'sedml:xDataReference' (optional before Level 1 Version 4), and may have the optional attributes 'sedml:id', "
+    "'sedml:name', 'sedml:logX', 'sedml:order', 'sedml:style', and 'sedml:yAxis'. "
+    "No other attributes from the SBML Level 3 "
     "SED-ML namespaces are permitted on an <abstractCurve> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -1947,9 +1948,10 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <surface>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <surface> object must have the required attribute "
+    "A <surface> object must have the required attributes "
+    "'sedml:xDataReference', 'sedml:yDataReference' (optional before Level 1 Version 4), and"
     "'sedml:zDataReference', and may have the optional attributes 'sedml:id', "
-    "'sedml:name', 'sedml:xDataReference', 'sedml:yDataReference', "
+    "'sedml:name', "
     "'sedml:type', 'sedml:style', 'sedml:logX', 'sedml:logY', 'sedml:logZ' and "
     "'sedml:order'. No other attributes from the SBML Level 3 SED-ML namespaces "
     "are permitted on a <surface> object. ",

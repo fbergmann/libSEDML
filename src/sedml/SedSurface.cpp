@@ -1269,7 +1269,7 @@ SedSurface::readAttributes(
   }
 
   // 
-  // xDataReference SIdRef (use = "optional" )
+  // xDataReference SIdRef (use = "required" )
   // 
 
   assigned = attributes.readInto("xDataReference", mXDataReference);
@@ -1295,9 +1295,19 @@ SedSurface::readAttributes(
         msg, getLine(), getColumn());
     }
   }
+  else if (getLevel() > 1 || getVersion() >= 4)
+  {
+      if (log)
+      {
+          std::string message = "Sedml attribute 'xDataReference' is missing from "
+              "the <SedSurface> element.";
+          log->logError(SedmlSurfaceAllowedAttributes, level, version, message,
+              getLine(), getColumn());
+      }
+  }
 
   // 
-  // yDataReference SIdRef (use = "optional" )
+  // yDataReference SIdRef (use = "required" )
   // 
 
   assigned = attributes.readInto("yDataReference", mYDataReference);
@@ -1322,6 +1332,16 @@ SedSurface::readAttributes(
       logError(SedmlSurfaceYDataReferenceMustBeDataGenerator, level, version,
         msg, getLine(), getColumn());
     }
+  }
+  else if (getLevel() >1 || getVersion() >= 4)
+  {
+      if (log)
+      {
+          std::string message = "Sedml attribute 'yDataReference' is missing from "
+              "the <SedSurface> element.";
+          log->logError(SedmlSurfaceAllowedAttributes, level, version, message,
+              getLine(), getColumn());
+      }
   }
 
   // 
