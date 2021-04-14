@@ -709,4 +709,29 @@ TEST_CASE("Reading old 'style' attribute on marker should give error", "[sedml]"
 }
 
 
+TEST_CASE("Add algorithm parameters on SedDocument", "[sedml]")
+{
+    SedDocument doc(1, 4);
+    SedAlgorithmParameter* ap = doc.createAlgorithmParameter();
+    CHECK(ap != NULL);
+    ap->setId("ap1");
+    SedAlgorithmParameter* ret_ap = doc.getAlgorithmParameter("ap1");
+    CHECK(ret_ap == ap);
+    ret_ap = doc.getAlgorithmParameter(0);
+    CHECK(ret_ap == ap);
+    char* docstr = doc.toSed();
+    CHECK(string(docstr) == "<sedML xmlns=\"http://sed-ml.org/sed-ml/level1/version4\" level=\"1\" version=\"4\">\n  <listOfAlgorithmParameters>\n    <algorithmParameter id=\"ap1\"/>\n  </listOfAlgorithmParameters>\n</sedML>");
+
+    SedDocument doc2(1, 3);
+    ap = doc2.createAlgorithmParameter();
+    CHECK(ap == NULL);
+    ret_ap = doc2.getAlgorithmParameter("ap1");
+    CHECK(ret_ap == ap);
+    ret_ap = doc2.getAlgorithmParameter(0);
+    CHECK(ret_ap == ap);
+    char* doc2str = doc2.toSed();
+    CHECK(string(doc2str) == "<sedML xmlns=\"http://sed-ml.org/sed-ml/level1/version3\" level=\"1\" version=\"3\"/>");
+}
+
+
 

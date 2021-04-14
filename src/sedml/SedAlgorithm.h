@@ -331,6 +331,27 @@ public:
 
 
   /**
+   * Removes the SedAlgorithmParameter with the given id from this SedAlgorithm and returns a
+   * pointer to it.
+   *
+   * @param id a string representing the id of the
+   * SedAlgorithmParameter to remove.
+   *
+   * @return a pointer to the nth SedAlgorithmParameter in this SedAlgorithm.
+   *
+   * @copydetails doc_warning_returns_owned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   */
+  SedAlgorithmParameter* removeAlgorithmParameter(const std::string& id);
+
+
+  /**
    * Returns the XML element name of this SedAlgorithm object.
    *
    * For SedAlgorithm, the XML element name is always @c "algorithm".

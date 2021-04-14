@@ -70,6 +70,7 @@ SedDocument::SedDocument(unsigned int level, unsigned int version)
   , mIsSetLevel (false)
   , mVersion (SEDML_INT_MAX)
   , mIsSetVersion (false)
+  , mAlgorithmParameters (level, version)
   , mDataDescriptions (level, version)
   , mModels (level, version)
   , mSimulations (level, version)
@@ -95,6 +96,7 @@ SedDocument::SedDocument(SedNamespaces *sedmlns)
   , mIsSetLevel (false)
   , mVersion (SEDML_INT_MAX)
   , mIsSetVersion (false)
+  , mAlgorithmParameters (sedmlns)
   , mDataDescriptions (sedmlns)
   , mModels (sedmlns)
   , mSimulations (sedmlns)
@@ -120,6 +122,7 @@ SedDocument::SedDocument(const SedDocument& orig)
   , mIsSetLevel ( orig.mIsSetLevel )
   , mVersion ( orig.mVersion )
   , mIsSetVersion ( orig.mIsSetVersion )
+  , mAlgorithmParameters (orig.mAlgorithmParameters)
   , mDataDescriptions ( orig.mDataDescriptions )
   , mModels ( orig.mModels )
   , mSimulations ( orig.mSimulations )
@@ -147,6 +150,7 @@ SedDocument::operator=(const SedDocument& rhs)
     mIsSetLevel = rhs.mIsSetLevel;
     mVersion = rhs.mVersion;
     mIsSetVersion = rhs.mIsSetVersion;
+    mAlgorithmParameters = rhs.mAlgorithmParameters;
     mDataDescriptions = rhs.mDataDescriptions;
     mModels = rhs.mModels;
     mSimulations = rhs.mSimulations;
@@ -294,6 +298,166 @@ SedDocument::unsetVersion()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+
+/*
+ * Returns the SedListOfAlgorithmParameters from this SedDocument.
+ */
+const SedListOfAlgorithmParameters*
+SedDocument::getListOfAlgorithmParameters() const
+{
+    return &mAlgorithmParameters;
+}
+
+
+/*
+ * Returns the SedListOfAlgorithmParameters from this SedDocument.
+ */
+SedListOfAlgorithmParameters*
+SedDocument::getListOfAlgorithmParameters()
+{
+    return &mAlgorithmParameters;
+}
+
+
+/*
+ * Get a SedAlgorithmParameter from the SedDocument.
+ */
+SedAlgorithmParameter*
+SedDocument::getAlgorithmParameter(unsigned int n)
+{
+    return mAlgorithmParameters.get(n);
+}
+
+
+/*
+ * Get a SedAlgorithmParameter from the SedDocument.
+ */
+const SedAlgorithmParameter*
+SedDocument::getAlgorithmParameter(unsigned int n) const
+{
+    return mAlgorithmParameters.get(n);
+}
+
+
+/*
+ * Get a SedAlgorithmParameter from the SedDocument.
+ */
+SedAlgorithmParameter*
+SedDocument::getAlgorithmParameter(const string& id)
+{
+    return mAlgorithmParameters.get(id);
+}
+
+
+/*
+ * Get a SedAlgorithmParameter from the SedDocument.
+ */
+const SedAlgorithmParameter*
+SedDocument::getAlgorithmParameter(const string& id) const
+{
+    return mAlgorithmParameters.get(id);
+}
+
+
+/*
+ * Adds a copy of the given SedAlgorithmParameter to this SedDocument.
+ */
+int
+SedDocument::addAlgorithmParameter(const SedAlgorithmParameter* sap)
+{
+    if (sap == NULL)
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
+    else if (sap->hasRequiredAttributes() == false)
+    {
+        return LIBSEDML_INVALID_OBJECT;
+    }
+    else if (getLevel() != sap->getLevel())
+    {
+        return LIBSEDML_LEVEL_MISMATCH;
+    }
+    else if (getVersion() != sap->getVersion())
+    {
+        return LIBSEDML_VERSION_MISMATCH;
+    }
+    else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+        SedBase*>(sap)) == false)
+    {
+        return LIBSEDML_NAMESPACES_MISMATCH;
+    }
+    else if (getLevel() == 1 && getVersion() < 4)
+    {
+        return LIBSEDML_INVALID_OBJECT;
+    }
+    else
+    {
+        return mAlgorithmParameters.append(sap);
+    }
+}
+
+
+/*
+ * Get the number of SedAlgorithmParameter objects in this SedDocument.
+ */
+unsigned int
+SedDocument::getNumAlgorithmParameters() const
+{
+    return mAlgorithmParameters.size();
+}
+
+
+/*
+ * Creates a new SedAlgorithmParameter object, adds it to this SedDocument
+ * object and returns the SedAlgorithmParameter object created.
+ */
+SedAlgorithmParameter*
+SedDocument::createAlgorithmParameter()
+{
+    SedAlgorithmParameter* sap = NULL;
+    if (getLevel() == 1 && getVersion() < 4)
+    {
+        return sap;
+    }
+
+    try
+    {
+        sap = new SedAlgorithmParameter(getSedNamespaces());
+    }
+    catch (...)
+    {
+    }
+
+    if (sap != NULL)
+    {
+        mAlgorithmParameters.appendAndOwn(sap);
+    }
+
+    return sap;
+}
+
+
+/*
+ * Removes the nth SedAlgorithmParameter from this SedDocument and returns a
+ * pointer to it.
+ */
+SedAlgorithmParameter*
+SedDocument::removeAlgorithmParameter(unsigned int n)
+{
+    return mAlgorithmParameters.remove(n);
+}
+
+
+/*
+ * Removes the SedAlgorithmParameter with the given id from this SedDocument and returns a
+ * pointer to it.
+ */
+SedAlgorithmParameter*
+SedDocument::removeAlgorithmParameter(const string& id)
+{
+    return mAlgorithmParameters.remove(id);
 }
 
 
@@ -1819,6 +1983,11 @@ SedDocument::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeElements(stream);
 
+  if (getNumAlgorithmParameters() > 0 && (getLevel() > 1 || getVersion() >= 4))
+  {
+    mAlgorithmParameters.write(stream);
+  }
+
   if (getNumDataDescriptions() > 0)
   {
     mDataDescriptions.write(stream);
@@ -1884,6 +2053,8 @@ SedDocument::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
 
+  mAlgorithmParameters.setSedDocument(d);
+
   mDataDescriptions.setSedDocument(d);
 
   mModels.setSedDocument(d);
@@ -1912,6 +2083,8 @@ void
 SedDocument::connectToChild()
 {
   SedBase::connectToChild();
+
+  mAlgorithmParameters.connectToParent(this);
 
   mDataDescriptions.connectToParent(this);
 
@@ -2195,6 +2368,11 @@ SedDocument::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
+  if (elementName == "algorithmParameter")
+  {
+    return createAlgorithmParameter();
+  }
+
   if (elementName == "dataDescription")
   {
     return createDataDescription();
@@ -2276,7 +2454,12 @@ int
 SedDocument::addChildObject(const std::string& elementName,
                             const SedBase* element)
 {
-  if (elementName == "dataDescription" && element->getTypeCode() ==
+  if (elementName == "algorithmParameter" && element->getTypeCode() ==
+    SEDML_SIMULATION_ALGORITHM_PARAMETER)
+  {
+    return addAlgorithmParameter((const SedAlgorithmParameter*)(element));
+  }
+  else if (elementName == "dataDescription" && element->getTypeCode() ==
     SEDML_DATA_DESCRIPTION)
   {
     return addDataDescription((const SedDataDescription*)(element));
@@ -2370,6 +2553,10 @@ SedBase*
 SedDocument::removeChildObject(const std::string& elementName,
                                const std::string& id)
 {
+  if (elementName == "algorithmParameter")
+  {
+    return removeAlgorithmParameter(id);
+  }
   if (elementName == "dataDescription")
   {
     return removeDataDescription(id);
@@ -2452,9 +2639,13 @@ SedDocument::getNumObjects(const std::string& elementName)
 {
   unsigned int n = 0;
 
-  if (elementName == "dataDescription")
+  if (elementName == "algorithmParameter")
   {
-    return getNumDataDescriptions();
+    return getNumAlgorithmParameters();
+  }
+  else if (elementName == "dataDescription")
+  {
+      return getNumDataDescriptions();
   }
   else if (elementName == "model")
   {
@@ -2498,7 +2689,11 @@ SedDocument::getObject(const std::string& elementName, unsigned int index)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "dataDescription")
+  if (elementName == "algorithmParameter")
+  {
+    return getAlgorithmParameter(index);
+  }
+  else if (elementName == "dataDescription")
   {
     return getDataDescription(index);
   }
@@ -2546,6 +2741,13 @@ SedDocument::getElementBySId(const std::string& id)
   }
 
   SedBase* obj = NULL;
+
+  obj = mAlgorithmParameters.getElementBySId(id);
+
+  if (obj != NULL)
+  {
+      return obj;
+  }
 
   obj = mDataDescriptions.getElementBySId(id);
 
@@ -2610,6 +2812,7 @@ SedDocument::getAllElements(SedElementFilter* filter)
   List* ret = new List();
   List* sublist = NULL;
 
+  SED_ADD_FILTERED_LIST(ret, sublist, mAlgorithmParameters, filter);
   SED_ADD_FILTERED_LIST(ret, sublist, mDataDescriptions, filter);
   SED_ADD_FILTERED_LIST(ret, sublist, mModels, filter);
   SED_ADD_FILTERED_LIST(ret, sublist, mSimulations, filter);
@@ -2704,7 +2907,7 @@ SedDocument::getNumErrors(unsigned int severity) const
 
 void SedDocument::sortOrderedObjects()
 {
-    for (size_t o = 0; o < mOutputs.size(); o++)
+    for (unsigned int o = 0; o < mOutputs.size(); o++)
     {
         SedOutput* output = mOutputs.get(o);
         int type = output->getTypeCode();
@@ -2719,7 +2922,7 @@ void SedDocument::sortOrderedObjects()
             sp3d->getListOfSurfaces()->sort();
         }
     }
-    for (size_t t = 0; t < mAbstractTasks.size(); t++)
+    for (unsigned int t = 0; t < mAbstractTasks.size(); t++)
     {
         SedAbstractTask* task = mAbstractTasks.get(t);
         int type = task->getTypeCode();
@@ -2746,7 +2949,17 @@ SedDocument::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   const std::string& name = stream.peek().getName();
 
-  if (name == "listOfDataDescriptions")
+  if (name == "listOfAlgorithmParameters")
+  {
+      if (getErrorLog() && mAlgorithmParameters.size() != 0)
+      {
+          getErrorLog()->logError(SedmlAlgorithmAllowedElements, getLevel(),
+              getVersion(), "", getLine(), getColumn());
+      }
+
+      obj = &mAlgorithmParameters;
+  }
+  else if (name == "listOfDataDescriptions")
   {
     if (getErrorLog() && mDataDescriptions.size() != 0)
     {
