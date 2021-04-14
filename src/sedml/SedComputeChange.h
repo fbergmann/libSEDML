@@ -69,6 +69,7 @@ protected:
   LIBSBML_CPP_NAMESPACE_QUALIFIER ASTNode* mMath;
   SedListOfVariables mVariables;
   SedListOfParameters mParameters;
+  std::string mSymbol;
 
   /** @endcond */
 
@@ -130,6 +131,49 @@ public:
    * Destructor for SedComputeChange.
    */
   virtual ~SedComputeChange();
+
+
+  /**
+   * Returns the value of the "symbol" attribute of this SedComputeChange.
+   *
+   * @return the value of the "symbol" attribute of this SedComputeChange as a
+   * string.
+   */
+  const std::string& getSymbol() const;
+
+
+  /**
+   * Predicate returning @c true if this SedComputeChange's "symbol" attribute is
+   * set.
+   *
+   * @return @c true if this SedComputeChange's "symbol" attribute has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetSymbol() const;
+
+
+  /**
+   * Sets the value of the "symbol" attribute of this SedComputeChange.
+   *
+   * @param symbol std::string& value of the "symbol" attribute to be set.
+   *
+   * @copydetails doc_returns_one_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   *
+   * Calling this function with @p symbol = @c NULL or an empty string is
+   * equivalent to calling unsetSymbol().
+   */
+  int setSymbol(const std::string& symbol);
+
+
+  /**
+   * Unsets the value of the "symbol" attribute of this SedComputeChange.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetSymbol();
 
 
   /**
@@ -1303,6 +1347,77 @@ SedComputeChange_clone(const SedComputeChange_t* scc);
 LIBSEDML_EXTERN
 void
 SedComputeChange_free(SedComputeChange_t* scc);
+
+
+/**
+ * Returns the value of the "symbol" attribute of this SedComputeChange_t.
+ *
+ * @param sv the SedComputeChange_t structure whose symbol is sought.
+ *
+ * @return the value of the "symbol" attribute of this SedComputeChange_t as a
+ * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedComputeChange_t
+ */
+LIBSEDML_EXTERN
+char*
+SedComputeChange_getSymbol(const SedComputeChange_t* sv);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedComputeChange_t's "symbol" attribute
+ * is set.
+ *
+ * @param sv the SedComputeChange_t structure.
+ *
+ * @return @c 1 (true) if this SedComputeChange_t's "symbol" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedComputeChange_t
+ */
+LIBSEDML_EXTERN
+int
+SedComputeChange_isSetSymbol(const SedComputeChange_t* sv);
+
+
+/**
+ * Sets the value of the "symbol" attribute of this SedComputeChange_t.
+ *
+ * @param sv the SedComputeChange_t structure.
+ *
+ * @param symbol const char * value of the "symbol" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p symbol = @c NULL or an empty string is
+ * equivalent to calling SedComputeChange_unsetSymbol().
+ *
+ * @memberof SedComputeChange_t
+ */
+LIBSEDML_EXTERN
+int
+SedComputeChange_setSymbol(SedComputeChange_t* sv, const char* symbol);
+
+
+/**
+ * Unsets the value of the "symbol" attribute of this SedComputeChange_t.
+ *
+ * @param sv the SedComputeChange_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedComputeChange_t
+ */
+LIBSEDML_EXTERN
+int
+SedComputeChange_unsetSymbol(SedComputeChange_t* sv);
 
 
 /**
