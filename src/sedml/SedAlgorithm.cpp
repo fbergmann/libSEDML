@@ -295,6 +295,17 @@ SedAlgorithm::removeAlgorithmParameter(unsigned int n)
 
 
 /*
+ * Removes the SedAlgorithmParameter with the given id from this SedAlgorithm and returns a
+ * pointer to it.
+ */
+SedAlgorithmParameter*
+SedAlgorithm::removeAlgorithmParameter(const string& id)
+{
+    return mAlgorithmParameters.remove(id);
+}
+
+
+/*
  * Returns the XML element name of this SedAlgorithm object.
  */
 const std::string&

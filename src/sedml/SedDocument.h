@@ -51,6 +51,7 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedListOfAlgorithmParameters.h>
 #include <sedml/SedListOfDataDescriptions.h>
 #include <sedml/SedListOfModels.h>
 #include <sedml/SedListOfSimulations.h>
@@ -75,6 +76,7 @@ protected:
   bool mIsSetLevel;
   unsigned int mVersion;
   bool mIsSetVersion;
+  SedListOfAlgorithmParameters mAlgorithmParameters;
   SedListOfDataDescriptions mDataDescriptions;
   SedListOfModels mModels;
   SedListOfSimulations mSimulations;
@@ -227,6 +229,227 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetVersion();
+
+
+  /**
+ * Returns the SedListOfAlgorithmParameters from this SedDocument.
+ *
+ * @return the SedListOfAlgorithmParameters from this SedDocument.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+ * @see createAlgorithmParameter()
+ * @see getAlgorithmParameter(const std::string& sid)
+ * @see getAlgorithmParameter(unsigned int n)
+ * @see getNumAlgorithmParameters()
+ * @see removeAlgorithmParameter(const std::string& sid)
+ * @see removeAlgorithmParameter(unsigned int n)
+ */
+  const SedListOfAlgorithmParameters* getListOfAlgorithmParameters() const;
+
+
+  /**
+   * Returns the SedListOfAlgorithmParameters from this SedDocument.
+   *
+   * @return the SedListOfAlgorithmParameters from this SedDocument.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  SedListOfAlgorithmParameters* getListOfAlgorithmParameters();
+
+
+  /**
+   * Get a SedAlgorithmParameter from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the
+   * SedAlgorithmParameter to retrieve.
+   *
+   * @return the nth SedAlgorithmParameter in the SedListOfAlgorithmParameters
+   * within this SedDocument or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  SedAlgorithmParameter* getAlgorithmParameter(unsigned int n);
+
+
+  /**
+   * Get a SedAlgorithmParameter from the SedDocument.
+   *
+   * @param n an unsigned int representing the index of the
+   * SedAlgorithmParameter to retrieve.
+   *
+   * @return the nth SedAlgorithmParameter in the SedListOfAlgorithmParameters
+   * within this SedDocument or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  const SedAlgorithmParameter* getAlgorithmParameter(unsigned int n) const;
+
+
+  /**
+   * Get a SedAlgorithmParameter from the SedDocument.
+   *
+   * @param id id of the
+   * SedAlgorithmParameter to retrieve.
+   *
+   * @return the SedAlgorithmParameter in the SedListOfAlgorithmParameters
+   * within this SedDocument or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  SedAlgorithmParameter* getAlgorithmParameter(const std::string& id);
+
+
+  /**
+   * Get a SedAlgorithmParameter from the SedDocument.
+   *
+   * @param id id of the
+   * SedAlgorithmParameter to retrieve.
+   *
+   * @return the SedAlgorithmParameter in the SedListOfAlgorithmParameters
+   * within this SedDocument or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  const SedAlgorithmParameter* getAlgorithmParameter(const std::string& id) const;
+
+
+  /**
+   * Adds a copy of the given SedAlgorithmParameter to this SedDocument.
+   *
+   * @param sap the SedAlgorithmParameter object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  int addAlgorithmParameter(const SedAlgorithmParameter* sap);
+
+
+  /**
+   * Get the number of SedAlgorithmParameter objects in this SedDocument.
+   *
+   * @return the number of SedAlgorithmParameter objects in this SedDocument.
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  unsigned int getNumAlgorithmParameters() const;
+
+
+  /**
+   * Creates a new SedAlgorithmParameter object, adds it to this SedDocument
+   * object and returns the SedAlgorithmParameter object created.
+   *
+   * @return a new SedAlgorithmParameter object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   * @see removeAlgorithmParameter(unsigned int n)
+   */
+  SedAlgorithmParameter* createAlgorithmParameter();
+
+
+  /**
+   * Removes the nth SedAlgorithmParameter from this SedDocument and returns a
+   * pointer to it.
+   *
+   * @param n an unsigned int representing the index of the
+   * SedAlgorithmParameter to remove.
+   *
+   * @return a pointer to the nth SedAlgorithmParameter in this SedDocument.
+   *
+   * @copydetails doc_warning_returns_owned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   */
+  SedAlgorithmParameter* removeAlgorithmParameter(unsigned int n);
+
+
+  /**
+   * Removes the SedAlgorithmParameter with the given id from this SedAlgorithm and returns a
+   * pointer to it.
+   *
+   * @param id a string representing the id of the
+   * SedAlgorithmParameter to remove.
+   *
+   * @return a pointer to the nth SedAlgorithmParameter in this SedAlgorithm.
+   *
+   * @copydetails doc_warning_returns_owned_pointer
+   *
+   * @see addAlgorithmParameter(const SedAlgorithmParameter* object)
+   * @see createAlgorithmParameter()
+   * @see getAlgorithmParameter(const std::string& sid)
+   * @see getAlgorithmParameter(unsigned int n)
+   * @see getNumAlgorithmParameters()
+   * @see removeAlgorithmParameter(const std::string& sid)
+   */
+  SedAlgorithmParameter* removeAlgorithmParameter(const std::string& id);
 
 
   /**
@@ -2804,6 +3027,131 @@ SedDocument_unsetLevel(SedDocument_t * sd);
 LIBSEDML_EXTERN
 int
 SedDocument_unsetVersion(SedDocument_t * sd);
+
+
+/**
+ * Returns a ListOf_t * containing SedAlgorithmParameter_t objects from this
+ * SedDocument_t.
+ *
+ * @param sa the SedDocument_t structure whose SedListOfAlgorithmParameters is
+ * sought.
+ *
+ * @return the SedListOfAlgorithmParameters from this SedDocument_t as a
+ * ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedDocument_addAlgorithmParameter()
+ * @see SedDocument_createAlgorithmParameter()
+ * @see SedDocument_getAlgorithmParameterById()
+ * @see SedDocument_getAlgorithmParameter()
+ * @see SedDocument_getNumAlgorithmParameters()
+ * @see SedDocument_removeAlgorithmParameterById()
+ * @see SedDocument_removeAlgorithmParameter()
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedDocument_getListOfAlgorithmParameters(SedDocument_t* sa);
+
+
+/**
+ * Get a SedAlgorithmParameter_t from the SedDocument_t.
+ *
+ * @param sa the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the
+ * SedAlgorithmParameter_t to retrieve.
+ *
+ * @return the nth SedAlgorithmParameter_t in the SedListOfAlgorithmParameters
+ * within this SedDocument or @c NULL if no such object exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t*
+SedDocument_getAlgorithmParameter(SedDocument_t* sa, unsigned int n);
+
+
+/**
+ * Adds a copy of the given SedAlgorithmParameter_t to this SedDocument_t.
+ *
+ * @param sa the SedDocument_t structure to which the SedAlgorithmParameter_t
+ * should be added.
+ *
+ * @param sap the SedAlgorithmParameter_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+int
+SedDocument_addAlgorithmParameter(SedDocument_t* sa,
+    const SedAlgorithmParameter_t* sap);
+
+
+/**
+ * Get the number of SedAlgorithmParameter_t objects in this SedDocument_t.
+ *
+ * @param sa the SedDocument_t structure to query.
+ *
+ * @return the number of SedAlgorithmParameter_t objects in this
+ * SedDocument_t.
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedDocument_getNumAlgorithmParameters(SedDocument_t* sa);
+
+
+/**
+ * Creates a new SedAlgorithmParameter_t object, adds it to this SedDocument_t
+ * object and returns the SedAlgorithmParameter_t object created.
+ *
+ * @param sa the SedDocument_t structure to which the SedAlgorithmParameter_t
+ * should be added.
+ *
+ * @return a new SedAlgorithmParameter_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t*
+SedDocument_createAlgorithmParameter(SedDocument_t* sa);
+
+
+/**
+ * Removes the nth SedAlgorithmParameter_t from this SedDocument_t and returns
+ * a pointer to it.
+ *
+ * @param sa the SedDocument_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the
+ * SedAlgorithmParameter_t to remove.
+ *
+ * @return a pointer to the nth SedAlgorithmParameter_t in this SedDocument_t.
+ *
+ * @copydetails doc_warning_returns_owned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAlgorithmParameter_t*
+SedDocument_removeAlgorithmParameter(SedDocument_t* sa, unsigned int n);
 
 
 /**
