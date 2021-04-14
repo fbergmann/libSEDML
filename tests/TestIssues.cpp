@@ -760,3 +760,20 @@ TEST_CASE("Add algorithm parameters on SedDocument", "[sedml]")
 
 
 
+TEST_CASE("Model 'language' now required", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/model_nolang_l1v3.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    CHECK(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    delete doc;
+
+    fileName = getTestFile("/test-data/model_nolang_l1v4.sedml");
+    doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 1);
+    SedError* err1 = doc->getError(0);
+    CHECK(err1->getErrorId() == SedmlModelAllowedAttributes);
+    delete doc;
+}
+
+
+
