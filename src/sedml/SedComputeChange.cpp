@@ -58,6 +58,7 @@ SedComputeChange::SedComputeChange(unsigned int level, unsigned int version)
   , mMath (NULL)
   , mVariables (level, version)
   , mParameters (level, version)
+  , mSymbol ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
@@ -73,6 +74,7 @@ SedComputeChange::SedComputeChange(SedNamespaces *sedmlns)
   , mMath (NULL)
   , mVariables (sedmlns)
   , mParameters (sedmlns)
+  , mSymbol ("")
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
@@ -87,6 +89,7 @@ SedComputeChange::SedComputeChange(const SedComputeChange& orig)
   , mMath ( NULL )
   , mVariables ( orig.mVariables )
   , mParameters ( orig.mParameters )
+  , mSymbol (orig.mSymbol)
 {
   if (orig.mMath != NULL)
   {
@@ -108,6 +111,7 @@ SedComputeChange::operator=(const SedComputeChange& rhs)
     SedChange::operator=(rhs);
     mVariables = rhs.mVariables;
     mParameters = rhs.mParameters;
+    mSymbol = rhs.mSymbol;
     delete mMath;
     if (rhs.mMath != NULL)
     {
@@ -142,6 +146,66 @@ SedComputeChange::~SedComputeChange()
 {
   delete mMath;
   mMath = NULL;
+}
+
+
+/*
+ * Returns the value of the "symbol" attribute of this SedComputeChange.
+ */
+const std::string&
+SedComputeChange::getSymbol() const
+{
+    if (getLevel() > 1 || getVersion() >= 4) {
+        return mSymbol;
+    }
+    static string empty = "";
+    return empty;
+}
+
+
+/*
+ * Predicate returning @c true if this SedComputeChange's "symbol" attribute is set.
+ */
+bool
+SedComputeChange::isSetSymbol() const
+{
+    if (getLevel() > 1 || getVersion() >= 4) {
+        return (mSymbol.empty() == false);
+    }
+    return false;
+}
+
+
+/*
+ * Sets the value of the "symbol" attribute of this SedComputeChange.
+ */
+int
+SedComputeChange::setSymbol(const std::string& symbol)
+{
+    if (getLevel() > 1 || getVersion() >= 4) {
+        mSymbol = symbol;
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    return LIBSEDML_UNEXPECTED_ATTRIBUTE;
+}
+
+
+/*
+ * Unsets the value of the "symbol" attribute of this SedComputeChange.
+ */
+int
+SedComputeChange::unsetSymbol()
+{
+    mSymbol.erase();
+
+    if (mSymbol.empty() == true)
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -829,6 +893,17 @@ SedComputeChange::getAttribute(const std::string& attributeName,
 {
   int return_value = SedChange::getAttribute(attributeName, value);
 
+  if (return_value == LIBSEDML_OPERATION_SUCCESS)
+  {
+      return return_value;
+  }
+
+  if (attributeName == "symbol")
+  {
+      value = getSymbol();
+      return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -846,6 +921,11 @@ bool
 SedComputeChange::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedChange::isSetAttribute(attributeName);
+
+  if (attributeName == "symbol")
+  {
+      value = isSetSymbol();
+  }
 
   return value;
 }
@@ -934,6 +1014,10 @@ SedComputeChange::setAttribute(const std::string& attributeName,
 {
   int return_value = SedChange::setAttribute(attributeName, value);
 
+  if (attributeName == "symbol")
+  {
+      return_value = setSymbol(value);
+  }
   return return_value;
 }
 
@@ -950,6 +1034,11 @@ int
 SedComputeChange::unsetAttribute(const std::string& attributeName)
 {
   int value = SedChange::unsetAttribute(attributeName);
+
+  if (attributeName == "symbol")
+  {
+      value = unsetSymbol();
+  }
 
   return value;
 }
@@ -1197,6 +1286,8 @@ SedComputeChange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedChange::addExpectedAttributes(attributes);
+
+  attributes.add("symbol");
 }
 
 /** @endcond */
@@ -1237,6 +1328,20 @@ SedComputeChange::readAttributes(
           getLine(), getColumn());
       }
     }
+  }
+
+  // 
+  // symbol string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("symbol", mSymbol);
+
+  if (assigned == true)
+  {
+      if (mSymbol.empty() == true)
+      {
+          logEmptyString(mSymbol, level, version, "<SedComputeChange>");
+      }
   }
 }
 
@@ -1287,6 +1392,12 @@ SedComputeChange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedChange::writeAttributes(stream);
+
+  if (isSetSymbol() == true)
+  {
+      stream.writeAttribute("symbol", getPrefix(), mSymbol);
+  }
+
 }
 
 /** @endcond */
@@ -1338,6 +1449,56 @@ SedComputeChange_free(SedComputeChange_t* scc)
   {
     delete scc;
   }
+}
+
+
+/*
+ * Returns the value of the "symbol" attribute of this SedComputeChange_t.
+ */
+LIBSEDML_EXTERN
+char*
+SedComputeChange_getSymbol(const SedComputeChange_t* sv)
+{
+    if (sv == NULL)
+    {
+        return NULL;
+    }
+
+    return sv->getSymbol().empty() ? NULL : safe_strdup(sv->getSymbol().c_str());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedComputeChange_t's "symbol" attribute
+ * is set.
+ */
+LIBSEDML_EXTERN
+int
+SedComputeChange_isSetSymbol(const SedComputeChange_t* sv)
+{
+    return (sv != NULL) ? static_cast<int>(sv->isSetSymbol()) : 0;
+}
+
+
+/*
+ * Sets the value of the "symbol" attribute of this SedComputeChange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedComputeChange_setSymbol(SedComputeChange_t* sv, const char* symbol)
+{
+    return (sv != NULL) ? sv->setSymbol(symbol) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "symbol" attribute of this SedComputeChange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedComputeChange_unsetSymbol(SedComputeChange_t* sv)
+{
+    return (sv != NULL) ? sv->unsetSymbol() : LIBSEDML_INVALID_OBJECT;
 }
 
 
