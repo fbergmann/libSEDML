@@ -594,9 +594,10 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <model>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <model> object must have the required attributes 'sedml:id' and "
-    "'sedml:source', and may have the optional attributes 'sedml:name' and "
-    "'sedml:language'. No other attributes from the SBML Level 3 SED-ML "
+    "A <model> object must have the required attributes 'sedml:language' "
+    "(optional before Level 1 Version 4), 'sedml:id', and "
+    "'sedml:source', and may have the optional attribute 'sedml:name'. "
+    "No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <model> object. ",
     { "L3V1 Sedml V1 Section"
     }
