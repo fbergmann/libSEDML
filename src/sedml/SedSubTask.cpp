@@ -56,6 +56,7 @@ SedSubTask::SedSubTask(unsigned int level, unsigned int version)
   , mOrder (SEDML_INT_MAX)
   , mIsSetOrder (false)
   , mTask ("")
+  , mSetValues (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -69,6 +70,7 @@ SedSubTask::SedSubTask(SedNamespaces *sedmlns)
   , mOrder (SEDML_INT_MAX)
   , mIsSetOrder (false)
   , mTask ("")
+  , mSetValues (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -82,6 +84,7 @@ SedSubTask::SedSubTask(const SedSubTask& orig)
   , mOrder ( orig.mOrder )
   , mIsSetOrder ( orig.mIsSetOrder )
   , mTask ( orig.mTask )
+  , mSetValues ( orig.mSetValues )
 {
 }
 
@@ -98,6 +101,7 @@ SedSubTask::operator=(const SedSubTask& rhs)
     mOrder = rhs.mOrder;
     mIsSetOrder = rhs.mIsSetOrder;
     mTask = rhs.mTask;
+    mSetValues = rhs.mSetValues;
   }
 
   return *this;
@@ -232,6 +236,194 @@ SedSubTask::unsetTask()
 
 
 /*
+ * Returns the SedListOfSetValues from this SedSubTask.
+ */
+const SedListOfSetValues*
+SedSubTask::getListOfTaskChanges() const
+{
+    return &mSetValues;
+}
+
+
+/*
+ * Returns the SedListOfSetValues from this SedSubTask.
+ */
+SedListOfSetValues*
+SedSubTask::getListOfTaskChanges()
+{
+    return &mSetValues;
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask.
+ */
+SedSetValue*
+SedSubTask::getTaskChange(unsigned int n)
+{
+    return mSetValues.get(n);
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask.
+ */
+SedSetValue*
+SedSubTask::getTaskChange(const string& id)
+{
+    return mSetValues.get(id);
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask.
+ */
+const SedSetValue*
+SedSubTask::getTaskChange(unsigned int n) const
+{
+    return mSetValues.get(n);
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask based on the ModelReference to
+ * which it refers.
+ */
+const SedSetValue*
+SedSubTask::getTaskChangeByModelReference(const std::string& sid) const
+{
+    return mSetValues.getByModelReference(sid);
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask based on the ModelReference to
+ * which it refers.
+ */
+SedSetValue*
+SedSubTask::getTaskChangeByModelReference(const std::string& sid)
+{
+    return mSetValues.getByModelReference(sid);
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask based on the Range to which it
+ * refers.
+ */
+const SedSetValue*
+SedSubTask::getTaskChangeByRange(const std::string& sid) const
+{
+    return mSetValues.getByRange(sid);
+}
+
+
+/*
+ * Get a SedSetValue from the SedSubTask based on the Range to which it
+ * refers.
+ */
+SedSetValue*
+SedSubTask::getTaskChangeByRange(const std::string& sid)
+{
+    return mSetValues.getByRange(sid);
+}
+
+
+/*
+ * Adds a copy of the given SedSetValue to this SedSubTask.
+ */
+int
+SedSubTask::addTaskChange(const SedSetValue* ssv)
+{
+    if (ssv == NULL)
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
+    else if (getLevel() == 1 && getVersion() < 4)
+    {
+        return LIBSEDML_INVALID_OBJECT;
+    }
+    else if (ssv->hasRequiredAttributes() == false)
+    {
+        return LIBSEDML_INVALID_OBJECT;
+    }
+    else if (ssv->hasRequiredElements() == false)
+    {
+        return LIBSEDML_INVALID_OBJECT;
+    }
+    else if (getLevel() != ssv->getLevel())
+    {
+        return LIBSEDML_LEVEL_MISMATCH;
+    }
+    else if (getVersion() != ssv->getVersion())
+    {
+        return LIBSEDML_VERSION_MISMATCH;
+    }
+    else if (matchesRequiredSedNamespacesForAddition(static_cast<const
+        SedBase*>(ssv)) == false)
+    {
+        return LIBSEDML_NAMESPACES_MISMATCH;
+    }
+    else
+    {
+        return mSetValues.append(ssv);
+    }
+}
+
+
+/*
+ * Get the number of SedSetValue objects in this SedSubTask.
+ */
+unsigned int
+SedSubTask::getNumTaskChanges() const
+{
+    return mSetValues.size();
+}
+
+
+/*
+ * Creates a new SedSetValue object, adds it to this SedSubTask object and
+ * returns the SedSetValue object created.
+ */
+SedSetValue*
+SedSubTask::createTaskChange()
+{
+    SedSetValue* ssv = NULL;
+
+    if (getLevel() == 1 && getVersion() < 4)
+    {
+        return ssv;
+    }
+
+    try
+    {
+        ssv = new SedSetValue(getSedNamespaces());
+    }
+    catch (...)
+    {
+    }
+
+    if (ssv != NULL)
+    {
+        mSetValues.appendAndOwn(ssv);
+    }
+
+    return ssv;
+}
+
+
+/*
+ * Removes the nth SedSetValue from this SedSubTask and returns a pointer
+ * to it.
+ */
+SedSetValue*
+SedSubTask::removeTaskChange(unsigned int n)
+{
+    return mSetValues.remove(n);
+}
+
+
+/*
  * @copydoc doc_renamesidref_common
  */
 void
@@ -299,6 +491,11 @@ SedSubTask::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeElements(stream);
+
+  if ((getLevel() > 1 || getVersion() >= 4) && getNumTaskChanges() > 0)
+  {
+      mSetValues.write(stream);
+  }
 }
 
 /** @endcond */
@@ -329,6 +526,8 @@ void
 SedSubTask::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
+
+  mSetValues.setSedDocument(d);
 }
 
 /** @endcond */
@@ -336,6 +535,213 @@ SedSubTask::setSedDocument(SedDocument* d)
 
 
 /** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Connects to child elements
+ */
+void
+SedSubTask::connectToChild()
+{
+    SedBase::connectToChild();
+
+    mSetValues.connectToParent(this);
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this SedSubTask.
+ */
+SedBase*
+SedSubTask::createChildObject(const std::string& elementName)
+{
+    SedBase* obj = NULL;
+
+    if (elementName == "setValue")
+    {
+        return createTaskChange();
+    }
+
+    return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds a new "elementName" object to this SedSubTask.
+ */
+int
+SedSubTask::addChildObject(const std::string& elementName,
+    const SedBase* element)
+{
+    if (elementName == "setValue" && element->getTypeCode() ==
+        SEDML_TASK_SETVALUE)
+    {
+        return addTaskChange((const SedSetValue*)(element));
+    }
+
+    return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedSubTask.
+ */
+SedBase*
+SedSubTask::removeChildObject(const std::string& elementName,
+    const std::string& id)
+{
+    if (elementName == "setValue")
+    {
+        for (unsigned int i = 0; i < getNumTaskChanges(); i++)
+        {
+            if (getTaskChange(i)->getId() == id)
+            {
+                return removeTaskChange(i);
+            }
+        }
+    }
+
+    return NULL;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the number of "elementName" in this SedSubTask.
+ */
+unsigned int
+SedSubTask::getNumObjects(const std::string& elementName)
+{
+    unsigned int n = 0;
+
+    if (elementName == "setValue")
+    {
+        return getNumTaskChanges();
+    }
+
+    return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the nth object of "objectName" in this SedSubTask.
+ */
+SedBase*
+SedSubTask::getObject(const std::string& elementName, unsigned int index)
+{
+    SedBase* obj = NULL;
+
+    if (elementName == "setValue")
+    {
+        return getTaskChange(index);
+    }
+
+    return obj;
+}
+
+/** @endcond */
+
+
+/*
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
+ */
+SedBase*
+SedSubTask::getElementBySId(const std::string& id)
+{
+    if (id.empty())
+    {
+        return NULL;
+    }
+
+    SedBase* obj = NULL;
+
+    obj = mSetValues.getElementBySId(id);
+
+    if (obj != NULL)
+    {
+        return obj;
+    }
+
+    return obj;
+}
+
+
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedSubTask::getAllElements(SedElementFilter* filter)
+{
+    List* ret = new List();
+    List* sublist = NULL;
+
+    SED_ADD_FILTERED_LIST(ret, sublist, mSetValues, filter);
+
+    return ret;
+}
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SedBase*
+SedSubTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream)
+{
+    SedBase* obj = SedBase::createObject(stream);
+
+    const std::string& name = stream.peek().getName();
+
+    if (name == "listOfChanges")
+    {
+        if (getErrorLog() && mSetValues.size() != 0)
+        {
+            getErrorLog()->logError(SedmlSubTaskAllowedElements, getLevel(),
+                getVersion(), "", getLine(), getColumn());
+        }
+
+        obj = &mSetValues;
+    }
+
+    connectToChild();
+
+    return obj;
+}
+
+/** @endcond */
+
+
 
 /*
  * Gets the value of the "attributeName" attribute of this SedSubTask.
@@ -642,7 +1048,7 @@ SedSubTask::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlRepeatedTaskLOSubTasksAllowedCoreAttributes, level,
+        log->logError(SedmlModelLOChangesAllowedCoreElements, level,
           version, details, getLine(), getColumn());
       }
     }
@@ -900,6 +1306,102 @@ int
 SedSubTask_unsetTask(SedSubTask_t * sst)
 {
   return (sst != NULL) ? sst->unsetTask() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns a ListOf_t * containing SedSetValue_t objects from this
+ * SedSubTask_t.
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedSubTask_getListOfTaskChanges(SedSubTask_t* srt)
+{
+    return (srt != NULL) ? srt->getListOfTaskChanges() : NULL;
+}
+
+
+/*
+ * Get a SedSetValue_t from the SedSubTask_t.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedSubTask_getTaskChange(SedSubTask_t* srt, unsigned int n)
+{
+    return (srt != NULL) ? srt->getTaskChange(n) : NULL;
+}
+
+
+/*
+ * Get a SedSetValue_t from the SedSubTask_t based on the ModelReference
+ * to which it refers.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedSubTask_getTaskChangeByModelReference(SedSubTask_t* srt,
+    const char* sid)
+{
+    return (srt != NULL && sid != NULL) ? srt->getTaskChangeByModelReference(sid)
+        : NULL;
+}
+
+
+/*
+ * Get a SedSetValue_t from the SedSubTask_t based on the Range to which
+ * it refers.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedSubTask_getTaskChangeByRange(SedSubTask_t* srt, const char* sid)
+{
+    return (srt != NULL && sid != NULL) ? srt->getTaskChangeByRange(sid) : NULL;
+}
+
+
+/*
+ * Adds a copy of the given SedSetValue_t to this SedSubTask_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSubTask_addTaskChange(SedSubTask_t* srt,
+    const SedSetValue_t* ssv)
+{
+    return (srt != NULL) ? srt->addTaskChange(ssv) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Get the number of SedSetValue_t objects in this SedSubTask_t.
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedSubTask_getNumTaskChanges(SedSubTask_t* srt)
+{
+    return (srt != NULL) ? srt->getNumTaskChanges() : SEDML_INT_MAX;
+}
+
+
+/*
+ * Creates a new SedSetValue_t object, adds it to this SedSubTask_t object
+ * and returns the SedSetValue_t object created.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedSubTask_createTaskChange(SedSubTask_t* srt)
+{
+    return (srt != NULL) ? srt->createTaskChange() : NULL;
+}
+
+
+/*
+ * Removes the nth SedSetValue_t from this SedSubTask_t and returns a
+ * pointer to it.
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedSubTask_removeTaskChange(SedSubTask_t* srt, unsigned int n)
+{
+    return (srt != NULL) ? srt->removeTaskChange(n) : NULL;
 }
 
 

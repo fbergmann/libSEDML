@@ -280,6 +280,7 @@ typedef enum
 , SedmlSubTaskAllowedAttributes      = 23203
 , SedmlSubTaskOrderMustBeInteger      = 23204
 , SedmlSubTaskTaskMustBeAbstractTask      = 23205
+, SedmlSubTaskAllowedElements           = 23206
 , SedmlOneStepAllowedCoreAttributes      = 23301
 , SedmlOneStepAllowedCoreElements      = 23302
 , SedmlOneStepAllowedAttributes      = 23303

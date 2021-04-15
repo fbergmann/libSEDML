@@ -760,3 +760,29 @@ TEST_CASE("Add algorithm parameters on SedDocument", "[sedml]")
 
 
 
+TEST_CASE("Add change to subtask", "[sedml]")
+{
+    SedSubTask subtask(1, 4);
+    SedSetValue* ssv = subtask.createTaskChange();
+    CHECK(ssv != NULL);
+    ssv->setId("ssv1");
+    SedSetValue* ret_ssv = subtask.getTaskChange("ssv1");
+    CHECK(ret_ssv == ssv);
+    ret_ssv = subtask.getTaskChange(0);
+    CHECK(ret_ssv == ssv);
+    char* subtaskstr = subtask.toSed();
+    CHECK(string(subtaskstr) == "<subTask>\n  <listOfChanges>\n    <setValue id=\"ssv1\"/>\n  </listOfChanges>\n</subTask>");
+
+    SedSubTask subtask2(1, 3);
+    ssv = subtask2.createTaskChange();
+    CHECK(ssv == NULL);
+    ret_ssv = subtask2.getTaskChange("ssv1");
+    CHECK(ret_ssv == ssv);
+    ret_ssv = subtask2.getTaskChange(0);
+    CHECK(ret_ssv == ssv);
+    char* subtask2str = subtask2.toSed();
+    CHECK(string(subtask2str) == "<subTask/>");
+}
+
+
+
