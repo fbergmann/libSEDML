@@ -759,6 +759,77 @@ TEST_CASE("Add algorithm parameters on SedDocument", "[sedml]")
 }
 
 
+TEST_CASE("x, y, and z data now required", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/surface_noxy_l1v3.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    CHECK(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    delete doc;
+
+    fileName = getTestFile("/test-data/surface_noxy_l1v4.sedml");
+    doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 2);
+    SedError* err1 = doc->getError(0);
+    CHECK(err1->getErrorId() == SedmlSurfaceAllowedAttributes);
+    delete doc;
+
+    fileName = getTestFile("/test-data/curve_nox_l1v3.sedml");
+        doc = readSedMLFromFile(fileName.c_str());
+    CHECK(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    delete doc;
+
+    fileName = getTestFile("/test-data/curve_nox_l1v4.sedml");
+    doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 2);
+    err1 = doc->getError(0);
+    CHECK(err1->getErrorId() == SedmlAbstractCurveAllowedAttributes);
+    delete doc;
+}
+
+
+
+TEST_CASE("Model 'language' now required", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/model_nolang_l1v3.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    CHECK(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    delete doc;
+
+    fileName = getTestFile("/test-data/model_nolang_l1v4.sedml");
+    doc = readSedMLFromFile(fileName.c_str());
+    REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 1);
+    SedError* err1 = doc->getError(0);
+    CHECK(err1->getErrorId() == SedmlModelAllowedAttributes);
+    delete doc;
+}
+
+
+
+TEST_CASE("Add 'concatenate' to RepeatedTask", "[sedml]")
+{
+    SedRepeatedTask srt(1, 4);
+    CHECK(srt.isSetConcatenate() == false);
+    CHECK(srt.setConcatenate(true) == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(srt.getConcatenate() == true);
+    char* srtstr = srt.toSed();
+    CHECK(string(srtstr) == "<repeatedTask concatenate=\"true\"/>");
+    delete srtstr;
+    CHECK(srt.isSetConcatenate() == true);
+    CHECK(srt.unsetConcatenate() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(srt.isSetConcatenate() == false);
+
+    SedRepeatedTask srt2(1, 3);
+    CHECK(srt2.isSetConcatenate() == false);
+    CHECK(srt2.setConcatenate(true) == LIBSEDML_UNEXPECTED_ATTRIBUTE);
+    srtstr = srt.toSed();
+    CHECK(string(srtstr) == "<repeatedTask/>");
+    delete srtstr;
+    CHECK(srt2.isSetConcatenate() == false);
+    CHECK(srt2.unsetConcatenate() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(srt2.isSetConcatenate() == false);
+}
+
+
 
 TEST_CASE("Add change to subtask", "[sedml]")
 {
