@@ -2790,6 +2790,19 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  // 23206
+  { SedmlSubTaskAllowedElements,
+    "Elements allowed on <subTask>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <subTask> object may contain one and only one instance of "
+    "the <listOfChanges> element. No "
+    "other elements from the SBML Level 3 SED-ML namespaces are permitted on a "
+    "<repeatedTask> object. ",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
   // 23301
   { SedmlOneStepAllowedCoreAttributes,
     "Core attributes allowed on <oneStep>.",
