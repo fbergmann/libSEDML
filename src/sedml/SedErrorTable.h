@@ -2891,8 +2891,9 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <repeatedTask> object may have the optional attributes 'sedml:rangeId' "
-    "and 'sedml:resetModel'. No other attributes from the SBML Level 3 SED-ML "
-    "namespaces are permitted on a <repeatedTask> object. ",
+    "and 'sedml:resetModel', and may starting in level 1 version 4 contain "
+    "the optional attribute 'sedml:concatenate'. No other attributes from the "
+    "SED-ML namespaces are permitted on a <repeatedTask> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
@@ -3001,6 +3002,17 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "A <listOfSubTasks> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
     "3 Core namespaces are permitted on a <listOfSubTasks> object.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 23513
+  { SedmlRepeatedTaskConcatenateMustBeBoolean,
+    "The 'concatenate' attribute must be Boolean.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:concatenate' on a <repeatedTask> must have a value of "
+    "data type 'boolean'.",
     { "L3V1 Sedml V1 Section"
     }
   },

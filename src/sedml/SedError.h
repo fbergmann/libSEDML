@@ -298,6 +298,7 @@ typedef enum
 , SedmlRepeatedTaskLORangesAllowedCoreAttributes      = 23510
 , SedmlRepeatedTaskLOSetValuesAllowedCoreAttributes      = 23511
 , SedmlRepeatedTaskLOSubTasksAllowedCoreAttributes      = 23512
+, SedmlRepeatedTaskConcatenateMustBeBoolean = 23513
 , SedmlComputeChangeAllowedCoreAttributes      = 23601
 , SedmlComputeChangeAllowedCoreElements      = 23602
 , SedmlComputeChangeAllowedElements      = 23603

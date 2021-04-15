@@ -61,6 +61,8 @@ SedRepeatedTask::SedRepeatedTask(unsigned int level, unsigned int version)
   , mRange ("")
   , mResetModel (false)
   , mIsSetResetModel (false)
+  , mConcatenate (false)
+  , mIsSetConcatenate (false)
   , mRanges (level, version)
   , mSetValues (level, version)
   , mSubTasks (level, version)
@@ -79,6 +81,8 @@ SedRepeatedTask::SedRepeatedTask(SedNamespaces *sedmlns)
   , mRange ("")
   , mResetModel (false)
   , mIsSetResetModel (false)
+  , mConcatenate(false)
+  , mIsSetConcatenate(false)
   , mRanges (sedmlns)
   , mSetValues (sedmlns)
   , mSubTasks (sedmlns)
@@ -96,6 +100,8 @@ SedRepeatedTask::SedRepeatedTask(const SedRepeatedTask& orig)
   , mRange ( orig.mRange )
   , mResetModel ( orig.mResetModel )
   , mIsSetResetModel ( orig.mIsSetResetModel )
+  , mConcatenate( orig.mConcatenate)
+  , mIsSetConcatenate( orig.mIsSetConcatenate)
   , mRanges ( orig.mRanges )
   , mSetValues ( orig.mSetValues )
   , mSubTasks ( orig.mSubTasks )
@@ -116,6 +122,8 @@ SedRepeatedTask::operator=(const SedRepeatedTask& rhs)
     mRange = rhs.mRange;
     mResetModel = rhs.mResetModel;
     mIsSetResetModel = rhs.mIsSetResetModel;
+    mConcatenate = rhs.mConcatenate;
+    mIsSetConcatenate = rhs.mIsSetConcatenate;
     mRanges = rhs.mRanges;
     mSetValues = rhs.mSetValues;
     mSubTasks = rhs.mSubTasks;
@@ -165,6 +173,16 @@ SedRepeatedTask::getResetModel() const
 
 
 /*
+ * Returns the value of the "concatenate" attribute of this SedRepeatedTask.
+ */
+bool
+SedRepeatedTask::getConcatenate() const
+{
+    return mConcatenate;
+}
+
+
+/*
  * Predicate returning @c true if this SedRepeatedTask's "range" attribute is
  * set.
  */
@@ -183,6 +201,17 @@ bool
 SedRepeatedTask::isSetResetModel() const
 {
   return mIsSetResetModel;
+}
+
+
+/*
+ * Predicate returning @c true if this SedRepeatedTask's "concatenate" attribute
+ * is set.
+ */
+bool
+SedRepeatedTask::isSetConcatenate() const
+{
+    return mIsSetConcatenate;
 }
 
 
@@ -213,6 +242,22 @@ SedRepeatedTask::setResetModel(bool resetModel)
   mResetModel = resetModel;
   mIsSetResetModel = true;
   return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "concatenate" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::setConcatenate(bool concatenate)
+{
+    if (getLevel() == 1 && getVersion() < 4)
+    {
+        return LIBSEDML_UNEXPECTED_ATTRIBUTE;
+    }
+    mConcatenate= concatenate;
+    mIsSetConcatenate= true;
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -252,6 +297,26 @@ SedRepeatedTask::unsetResetModel()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+
+/*
+ * Unsets the value of the "concatenate" attribute of this SedRepeatedTask.
+ */
+int
+SedRepeatedTask::unsetConcatenate()
+{
+    mConcatenate = false;
+    mIsSetConcatenate = false;
+
+    if (isSetConcatenate() == false)
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -974,6 +1039,12 @@ SedRepeatedTask::getAttribute(const std::string& attributeName,
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
+  if (attributeName == "concatenate")
+  {
+      value = getConcatenate();
+      return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -1083,6 +1154,10 @@ SedRepeatedTask::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetResetModel();
   }
+  else if (attributeName == "concatenate")
+  {
+      value = isSetConcatenate();
+  }
 
   return value;
 }
@@ -1104,6 +1179,10 @@ SedRepeatedTask::setAttribute(const std::string& attributeName, bool value)
   if (attributeName == "resetModel")
   {
     return_value = setResetModel(value);
+  }
+  else if (attributeName == "concatenate")
+  {
+      return_value = setConcatenate(value);
   }
 
   return return_value;
@@ -1205,6 +1284,10 @@ SedRepeatedTask::unsetAttribute(const std::string& attributeName)
   else if (attributeName == "resetModel")
   {
     value = unsetResetModel();
+  }
+  else if (attributeName == "concatenate")
+  {
+      value = unsetConcatenate();
   }
 
   return value;
@@ -1541,6 +1624,8 @@ SedRepeatedTask::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   attributes.add("range");
 
   attributes.add("resetModel");
+
+  attributes.add("concatenate");
 }
 
 /** @endcond */
@@ -1626,6 +1711,23 @@ SedRepeatedTask::readAttributes(
       log->logError(SedmlRepeatedTaskResetModelMustBeBoolean, level, version);
     }
   }
+
+  // 
+  // concatentate bool (use = "optional" )
+  // 
+
+  numErrs = log ? log->getNumErrors() : 0;
+  mIsSetConcatenate = attributes.readInto("concatentate", mConcatenate);
+
+  if (mIsSetConcatenate == false)
+  {
+      if (log && log->getNumErrors() == numErrs + 1 &&
+          log->contains(XMLAttributeTypeMismatch))
+      {
+          log->remove(XMLAttributeTypeMismatch);
+          log->logError(SedmlRepeatedTaskConcatenateMustBeBoolean, level, version);
+      }
+  }
 }
 
 /** @endcond */
@@ -1651,6 +1753,11 @@ SedRepeatedTask::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   if (isSetResetModel() == true)
   {
     stream.writeAttribute("resetModel", getPrefix(), mResetModel);
+  }
+
+  if (isSetConcatenate() == true && (getLevel()>1 || getVersion() >=4))
+  {
+      stream.writeAttribute("concatenate", getPrefix(), mConcatenate);
   }
 }
 
@@ -1734,6 +1841,17 @@ SedRepeatedTask_getResetModel(const SedRepeatedTask_t * srt)
 
 
 /*
+ * Returns the value of the "concatenate" attribute of this SedRepeatedTask_t.
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_getConcatenate(const SedRepeatedTask_t* srt)
+{
+    return (srt != NULL) ? static_cast<int>(srt->getConcatenate()) : 0;
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "range"
  * attribute is set.
  */
@@ -1754,6 +1872,18 @@ int
 SedRepeatedTask_isSetResetModel(const SedRepeatedTask_t * srt)
 {
   return (srt != NULL) ? static_cast<int>(srt->isSetResetModel()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "concatenate"
+ * attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_isSetConcatenate(const SedRepeatedTask_t* srt)
+{
+    return (srt != NULL) ? static_cast<int>(srt->isSetConcatenate()) : 0;
 }
 
 
@@ -1781,6 +1911,18 @@ SedRepeatedTask_setResetModel(SedRepeatedTask_t * srt, int resetModel)
 
 
 /*
+ * Sets the value of the "concatenate" attribute of this SedRepeatedTask_t.
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_setConcatenate(SedRepeatedTask_t* srt, int concatenate)
+{
+    return (srt != NULL) ? srt->setConcatenate(concatenate) :
+        LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "range" attribute of this SedRepeatedTask_t.
  */
 LIBSEDML_EXTERN
@@ -1799,6 +1941,17 @@ int
 SedRepeatedTask_unsetResetModel(SedRepeatedTask_t * srt)
 {
   return (srt != NULL) ? srt->unsetResetModel() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "concatenate" attribute of this SedRepeatedTask_t.
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_unsetConcatenate(SedRepeatedTask_t* srt)
+{
+    return (srt != NULL) ? srt->unsetConcatenate() : LIBSEDML_INVALID_OBJECT;
 }
 
 

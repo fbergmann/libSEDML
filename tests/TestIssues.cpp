@@ -805,3 +805,29 @@ TEST_CASE("Model 'language' now required", "[sedml]")
 
 
 
+TEST_CASE("Add 'concatenate' to RepeatedTask", "[sedml]")
+{
+    SedRepeatedTask srt(1, 4);
+    CHECK(srt.isSetConcatenate() == false);
+    CHECK(srt.setConcatenate(true) == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(srt.getConcatenate() == true);
+    char* srtstr = srt.toSed();
+    CHECK(string(srtstr) == "<repeatedTask concatenate=\"true\"/>");
+    delete srtstr;
+    CHECK(srt.isSetConcatenate() == true);
+    CHECK(srt.unsetConcatenate() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(srt.isSetConcatenate() == false);
+
+    SedRepeatedTask srt2(1, 3);
+    CHECK(srt2.isSetConcatenate() == false);
+    CHECK(srt2.setConcatenate(true) == LIBSEDML_UNEXPECTED_ATTRIBUTE);
+    srtstr = srt.toSed();
+    CHECK(string(srtstr) == "<repeatedTask/>");
+    delete srtstr;
+    CHECK(srt2.isSetConcatenate() == false);
+    CHECK(srt2.unsetConcatenate() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(srt2.isSetConcatenate() == false);
+}
+
+
+
