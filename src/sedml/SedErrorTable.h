@@ -2892,8 +2892,8 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "A <repeatedTask> object may have the optional attributes 'sedml:rangeId' "
     "and 'sedml:resetModel', and may starting in level 1 version 4 contain "
-    "the optional attribute 'sedml:concatenate'.. No other attributes from the SBML Level 3 SED-ML "
-    "namespaces are permitted on a <repeatedTask> object. ",
+    "the optional attribute 'sedml:concatenate'. No other attributes from the "
+    "SED-ML namespaces are permitted on a <repeatedTask> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
