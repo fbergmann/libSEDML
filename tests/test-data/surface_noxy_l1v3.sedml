@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sedML xmlns="http://sed-ml.org/sed-ml/level1/version3" level="1" version="3">
+  <listOfModels>
+    <model id="model0" language="urn:sedml:language:sbml.level-3.version-1" source="hill.xml"/>
+  </listOfModels>
+  <listOfSimulations>
+    <uniformTimeCourse id="sim0" initialTime="0" outputStartTime="0" outputEndTime="35" numberOfPoints="30">
+      <algorithm kisaoID="KISAO:0000019"/>
+    </uniformTimeCourse>
+  </listOfSimulations>
+  <listOfTasks>
+    <task id="task0" modelReference="model0" simulationReference="sim0"/>
+    <repeatedTask id="task1" range="uniform_linear_for_n" resetModel="true">
+      <listOfRanges>
+        <uniformRange id="uniform_linear_for_n" start="1" end="15" numberOfPoints="25" type="linear"/>
+      </listOfRanges>
+      <listOfChanges>
+        <setValue modelReference="model0" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;n&apos;]" range="uniform_linear_for_n">
+          <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <ci> uniform_linear_for_n </ci>
+          </math>
+        </setValue>
+      </listOfChanges>
+      <listOfSubTasks>
+        <subTask order="0" task="task0"/>
+      </listOfSubTasks>
+    </repeatedTask>
+  </listOfTasks>
+  <listOfDataGenerators>
+    <dataGenerator id="plot_0_0_0" name="task1.time">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task1_____time </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task1_____time" symbol="urn:sedml:symbol:time" taskReference="task1" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="plot_0_0_1" name="task1.n">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task1_____n </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task1_____n" target="/sbml:sbml/sbml:model/sbml:listOfParameters/sbml:parameter[@id=&apos;n&apos;]" taskReference="task1" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+    <dataGenerator id="plot_0_0_2" name="task1.S2">
+      <math xmlns="http://www.w3.org/1998/Math/MathML">
+        <ci> task1_____S2 </ci>
+      </math>
+      <listOfVariables>
+        <variable id="task1_____S2" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S2&apos;]" taskReference="task1" modelReference="model0"/>
+      </listOfVariables>
+    </dataGenerator>
+  </listOfDataGenerators>
+  <listOfOutputs>
+    <plot3D id="plot_0" name="UniformTimecourse">
+      <listOfSurfaces>
+        <surface id="plot_0__plot_0_0_0__plot_0_0_1__plot_0_0_2" zDataReference="plot_0_0_2" type="heatMap" logX="false" logY="false" logZ="false"/>
+      </listOfSurfaces>
+    </plot3D>
+  </listOfOutputs>
+</sedML>
