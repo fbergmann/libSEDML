@@ -59,6 +59,8 @@ SedAxis::SedAxis(unsigned int level, unsigned int version)
   , mIsSetMax (false)
   , mGrid (false)
   , mIsSetGrid (false)
+  , mReverse (false)
+  , mIsSetReverse (false)
   , mStyle ("")
   , mElementName("axis")
 {
@@ -78,6 +80,8 @@ SedAxis::SedAxis(SedNamespaces *sedmlns)
   , mIsSetMax (false)
   , mGrid (false)
   , mIsSetGrid (false)
+  , mReverse (false)
+  , mIsSetReverse (false)
   , mStyle ("")
   , mElementName("axis")
 {
@@ -97,6 +101,8 @@ SedAxis::SedAxis(const SedAxis& orig)
   , mIsSetMax ( orig.mIsSetMax )
   , mGrid ( orig.mGrid )
   , mIsSetGrid ( orig.mIsSetGrid )
+  , mReverse ( orig.mReverse )
+  , mIsSetReverse ( orig.mIsSetReverse )
   , mStyle ( orig.mStyle )
   , mElementName ( orig.mElementName )
 {
@@ -119,6 +125,8 @@ SedAxis::operator=(const SedAxis& rhs)
     mIsSetMax = rhs.mIsSetMax;
     mGrid = rhs.mGrid;
     mIsSetGrid = rhs.mIsSetGrid;
+    mReverse = rhs.mReverse;
+    mIsSetReverse = rhs.mIsSetReverse;
     mStyle = rhs.mStyle;
     mElementName = rhs.mElementName;
   }
@@ -197,6 +205,16 @@ SedAxis::getGrid() const
 
 
 /*
+ * Returns the value of the "reverse" attribute of this SedAxis.
+ */
+bool
+SedAxis::getReverse() const
+{
+    return mReverse;
+}
+
+
+/*
  * Returns the value of the "style" attribute of this SedAxis.
  */
 const std::string&
@@ -243,6 +261,16 @@ bool
 SedAxis::isSetGrid() const
 {
   return mIsSetGrid;
+}
+
+
+/*
+ * Predicate returning @c true if this SedAxis's "reverse" attribute is set.
+ */
+bool
+SedAxis::isSetReverse() const
+{
+    return mIsSetReverse;
 }
 
 
@@ -325,6 +353,18 @@ SedAxis::setGrid(bool grid)
   mGrid = grid;
   mIsSetGrid = true;
   return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "reverse" attribute of this SedAxis.
+ */
+int
+SedAxis::setReverse(bool reverse)
+{
+    mReverse = reverse;
+    mIsSetReverse = true;
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -414,6 +454,26 @@ SedAxis::unsetGrid()
   {
     return LIBSEDML_OPERATION_FAILED;
   }
+}
+
+
+/*
+ * Unsets the value of the "reverse" attribute of this SedAxis.
+ */
+int
+SedAxis::unsetReverse()
+{
+    mReverse = false;
+    mIsSetReverse = false;
+
+    if (isSetReverse() == false)
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        return LIBSEDML_OPERATION_FAILED;
+    }
 }
 
 
@@ -570,6 +630,12 @@ SedAxis::getAttribute(const std::string& attributeName, bool& value) const
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
+  if (attributeName == "reverse")
+  {
+      value = getReverse();
+      return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+
   return return_value;
 }
 
@@ -706,6 +772,10 @@ SedAxis::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetGrid();
   }
+  else if (attributeName == "reverse")
+  {
+      value = isSetReverse();
+  }
   else if (attributeName == "style")
   {
     value = isSetStyle();
@@ -731,6 +801,10 @@ SedAxis::setAttribute(const std::string& attributeName, bool value)
   if (attributeName == "grid")
   {
     return_value = setGrid(value);
+  }
+  else if (attributeName == "reverse")
+  {
+      return_value = setReverse(value);
   }
 
   return return_value;
@@ -853,6 +927,10 @@ SedAxis::unsetAttribute(const std::string& attributeName)
   {
     value = unsetGrid();
   }
+  else if (attributeName == "reverse")
+  {
+      value = unsetReverse();
+  }
   else if (attributeName == "style")
   {
     value = unsetStyle();
@@ -883,6 +961,8 @@ SedAxis::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   attributes.add("max");
 
   attributes.add("grid");
+
+  attributes.add("reverse");
 
   attributes.add("style");
 }
@@ -1028,6 +1108,23 @@ SedAxis::readAttributes(
   }
 
   // 
+  // reverse bool (use = "optional" )
+  // 
+
+  numErrs = log ? log->getNumErrors() : 0;
+  mIsSetReverse = attributes.readInto("reverse", mReverse);
+
+  if (mIsSetReverse == false)
+  {
+      if (log && log->getNumErrors() == numErrs + 1 &&
+          log->contains(XMLAttributeTypeMismatch))
+      {
+          log->remove(XMLAttributeTypeMismatch);
+          log->logError(SedmlAxisReverseMustBeBoolean, level, version);
+      }
+  }
+
+  // 
   // style SIdRef (use = "optional" )
   // 
 
@@ -1088,6 +1185,11 @@ SedAxis::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (isSetGrid() == true)
   {
     stream.writeAttribute("grid", getPrefix(), mGrid);
+  }
+
+  if (isSetReverse() == true)
+  {
+      stream.writeAttribute("reverse", getPrefix(), mReverse);
   }
 
   if (isSetStyle() == true)
@@ -1208,6 +1310,17 @@ SedAxis_getGrid(const SedAxis_t * sa)
 
 
 /*
+ * Returns the value of the "reverse" attribute of this SedAxis_t.
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_getReverse(const SedAxis_t* sa)
+{
+    return (sa != NULL) ? static_cast<int>(sa->getReverse()) : 0;
+}
+
+
+/*
  * Returns the value of the "style" attribute of this SedAxis_t.
  */
 LIBSEDML_EXTERN
@@ -1264,6 +1377,17 @@ int
 SedAxis_isSetGrid(const SedAxis_t * sa)
 {
   return (sa != NULL) ? static_cast<int>(sa->isSetGrid()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedAxis_t's "reverse" attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_isSetReverse(const SedAxis_t* sa)
+{
+    return (sa != NULL) ? static_cast<int>(sa->isSetReverse()) : 0;
 }
 
 
@@ -1335,6 +1459,17 @@ SedAxis_setGrid(SedAxis_t * sa, int grid)
 
 
 /*
+ * Sets the value of the "reverse" attribute of this SedAxis_t.
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_setReverse(SedAxis_t* sa, int reverse)
+{
+    return (sa != NULL) ? sa->setReverse(reverse) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
  * Sets the value of the "style" attribute of this SedAxis_t.
  */
 LIBSEDML_EXTERN
@@ -1386,6 +1521,17 @@ int
 SedAxis_unsetGrid(SedAxis_t * sa)
 {
   return (sa != NULL) ? sa->unsetGrid() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "reverse" attribute of this SedAxis_t.
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_unsetReverse(SedAxis_t* sa)
+{
+    return (sa != NULL) ? sa->unsetReverse() : LIBSEDML_INVALID_OBJECT;
 }
 
 

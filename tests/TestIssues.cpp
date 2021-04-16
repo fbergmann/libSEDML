@@ -857,3 +857,18 @@ TEST_CASE("Add change to subtask", "[sedml]")
 
 
 
+TEST_CASE("Add reverse to axis", "[sedml]")
+{
+    SedAxis axis(1, 4);
+    CHECK(axis.isSetReverse() == false);
+    CHECK(axis.setReverse(true) == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(axis.isSetReverse() == true);
+    CHECK(axis.getReverse() == true);
+    CHECK(axis.unsetReverse() == LIBSEDML_OPERATION_SUCCESS);
+    CHECK(axis.isSetReverse() == false);
+
+    //Don't need to check l1v3--Axis was added in l1v4.
+}
+
+
+

@@ -4243,6 +4243,17 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  // 25007
+  { SedmlAxisReverseMustBeBoolean,
+    "The 'reverse' attribute must be Boolean.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "The attribute 'sedml:reverse' on an <axis> must have a value of data type "
+    "'boolean'.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
   // 25101
   { SedmlStyleAllowedCoreAttributes,
     "Core attributes allowed on <style>.",
