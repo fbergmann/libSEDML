@@ -96,6 +96,8 @@ protected:
   bool mIsSetMax;
   bool mGrid;
   bool mIsSetGrid;
+  bool mReverse;
+  bool mIsSetReverse;
   std::string mStyle;
   std::string mElementName;
 
@@ -212,6 +214,14 @@ public:
 
 
   /**
+   * Returns the value of the "reverse" attribute of this SedAxis.
+   *
+   * @return the value of the "reverse" attribute of this SedAxis as a boolean.
+   */
+  bool getReverse() const;
+
+
+  /**
    * Returns the value of the "style" attribute of this SedAxis.
    *
    * @return the value of the "style" attribute of this SedAxis as a string.
@@ -255,6 +265,15 @@ public:
    * @c false is returned.
    */
   bool isSetGrid() const;
+
+
+  /**
+   * Predicate returning @c true if this SedAxis's "reverse" attribute is set.
+   *
+   * @return @c true if this SedAxis's "reverse" attribute has been set, otherwise
+   * @c false is returned.
+   */
+  bool isSetReverse() const;
 
 
   /**
@@ -337,6 +356,19 @@ public:
 
 
   /**
+   * Sets the value of the "reverse" attribute of this SedAxis.
+   *
+   * @param reverse bool value of the "reverse" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setReverse(bool reverse);
+
+
+  /**
    * Sets the value of the "style" attribute of this SedAxis.
    *
    * @param style std::string& value of the "style" attribute to be set.
@@ -388,6 +420,16 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetGrid();
+
+
+  /**
+   * Unsets the value of the "reverse" attribute of this SedAxis.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetReverse();
 
 
   /**
@@ -933,6 +975,20 @@ SedAxis_getGrid(const SedAxis_t * sa);
 
 
 /**
+ * Returns the value of the "reverse" attribute of this SedAxis_t.
+ *
+ * @param sa the SedAxis_t structure whose reverse is sought.
+ *
+ * @return the value of the "reverse" attribute of this SedAxis_t as a boolean.
+ *
+ * @memberof SedAxis_t
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_getReverse(const SedAxis_t* sa);
+
+
+/**
  * Returns the value of the "style" attribute of this SedAxis_t.
  *
  * @param sa the SedAxis_t structure whose style is sought.
@@ -1009,6 +1065,21 @@ SedAxis_isSetMax(const SedAxis_t * sa);
 LIBSEDML_EXTERN
 int
 SedAxis_isSetGrid(const SedAxis_t * sa);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedAxis_t's "reverse" attribute is set.
+ *
+ * @param sa the SedAxis_t structure.
+ *
+ * @return @c 1 (true) if this SedAxis_t's "reverse" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedAxis_t
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_isSetReverse(const SedAxis_t* sa);
 
 
 /**
@@ -1132,6 +1203,26 @@ SedAxis_setGrid(SedAxis_t * sa, int grid);
 
 
 /**
+ * Sets the value of the "reverse" attribute of this SedAxis_t.
+ *
+ * @param sa the SedAxis_t structure.
+ *
+ * @param reverse int value of the "reverse" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedAxis_t
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_setReverse(SedAxis_t* sa, int reverse);
+
+
+/**
  * Sets the value of the "style" attribute of this SedAxis_t.
  *
  * @param sa the SedAxis_t structure.
@@ -1218,6 +1309,23 @@ SedAxis_unsetMax(SedAxis_t * sa);
 LIBSEDML_EXTERN
 int
 SedAxis_unsetGrid(SedAxis_t * sa);
+
+
+/**
+ * Unsets the value of the "reverse" attribute of this SedAxis_t.
+ *
+ * @param sa the SedAxis_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedAxis_t
+ */
+LIBSEDML_EXTERN
+int
+SedAxis_unsetReverse(SedAxis_t* sa);
 
 
 /**

@@ -401,6 +401,7 @@ typedef enum
 , SedmlAxisMaxMustBeDouble      = 25006
 , SedmlAxisGridMustBeBoolean      = 25007
 , SedmlAxisStyleMustBeStyle      = 25008
+, SedmlAxisReverseMustBeBoolean  = 25009
 , SedmlStyleAllowedCoreAttributes      = 25101
 , SedmlStyleAllowedCoreElements      = 25102
 , SedmlStyleAllowedAttributes      = 25103
