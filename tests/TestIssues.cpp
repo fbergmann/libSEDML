@@ -871,4 +871,26 @@ TEST_CASE("Add reverse to axis", "[sedml]")
 }
 
 
+TEST_CASE("Reading dependent variable", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/issue_140.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  // 2 dependent variables are invalid here (missing term)
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 2); 
 
+  {
+    REQUIRE(doc->getNumDataGenerators() > 3);
+    auto* dg = doc->getDataGenerator(3);
+    REQUIRE(dg != NULL);
+    REQUIRE(dg->getNumVariables() > 0);
+    auto* var = dynamic_cast<SedDependentVariable*> (dg->getVariable(0));
+    REQUIRE(var != NULL);
+
+    REQUIRE(var->getTarget() == "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
+    REQUIRE(var->getSymbol2() == "urn:sedml:symbol:time");
+
+  }
+
+  delete doc;
+
+}
