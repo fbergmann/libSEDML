@@ -23,13 +23,15 @@
             <attribute name="dataGenerator" required="false" type="lo_element" element="DataGenerator" abstract="false"/>
             <attribute name="output" required="false" type="lo_element" element="Output" abstract="true"/>
             <attribute name="style" required="false" type="lo_element" element="Style" abstract="false"/>
+            <attribute name="algorithmParameter" required="false" type="lo_element" element="AlgorithmParameter" abstract="false"/>
           </attributes>
         </element>
         <element name="Model" typeCode="SEDML_MODEL" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
-            <attribute name="language" required="false" type="string" abstract="false"/>
+            <attribute name="language" required="true" type="string" abstract="false"/>
             <attribute name="source" required="true" type="string" abstract="false"/>
             <attribute name="change" required="false" type="lo_element" element="Change" abstract="true"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
         <element name="Change" typeCode="SEDML_CHANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
@@ -71,6 +73,7 @@
         <element name="Parameter" typeCode="SEDML_PARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" elementName="parameter">
           <attributes>
             <attribute name="value" required="true" type="double" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
         <element name="Simulation" typeCode="SEDML_SIMULATION" hasListOf="true" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" elementName="simulation" listOfName="listOfSimulations">
@@ -81,6 +84,7 @@
             <concrete name="uniformTimeCourse" element="UniformTimeCourse" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="oneStep" element="OneStep" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="steadyState" element="SteadyState" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="analysis" element="Analysis" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="UniformTimeCourse" typeCode="SEDML_SIMULATION_UNIFORMTIMECOURSE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="uniformTimeCourse">
@@ -98,8 +102,9 @@
             <attribute name="algorithmParameter" required="false" type="lo_element" element="AlgorithmParameter" abstract="false"/>
           </attributes>
         </element>
-        <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="true" listOfName="listOfTasks" listOfClassName="SedListOfTasks">
+        <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfTasks" listOfClassName="SedListOfTasks">
           <attributes>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="task" element="Task" minNumChildren="0" maxNumChildren="0"/>
@@ -110,8 +115,8 @@
         </element>
         <element name="Task" typeCode="SEDML_TASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false" elementName="task">
           <attributes>
-            <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
-            <attribute name="simulationReference" required="false" type="SIdRef" element="Simulation" abstract="false"/>
+            <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
+            <attribute name="simulationReference" required="true" type="SIdRef" element="Simulation" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="task" element="Task" minNumChildren="0" maxNumChildren="0"/>
@@ -123,16 +128,16 @@
             <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
             <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
             <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
         <element name="Output" typeCode="SEDML_OUTPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfOutputs">
-          <attributes>
-          </attributes>
           <concretes>
             <concrete name="report" element="Report" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="plot2D" element="Plot2D" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="plot3D" element="Plot3D" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="figure" element="Figure" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="parameterEstimationReport" element="ParameterEstimationReport" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="Plot" typeCode="SEDML_OUTPUT_PLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="true">
@@ -160,13 +165,13 @@
             <attribute name="zAxis" required="false" type="element" element="Axis" xmlName="zAxis" abstract="false"/>
           </attributes>
         </element>
-        <element name="AbstractCurve" typeCode="SEDML_ABSTRACTCURVE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="true" listOfName="listOfCurves" listOfClassName="SedListOfCurves">
+        <element name="AbstractCurve" typeCode="SEDML_ABSTRACTCURVE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfCurves" listOfClassName="SedListOfCurves">
           <attributes>
             <attribute name="logX" required="false" type="bool" abstract="false"/>
             <attribute name="order" required="false" type="integer" abstract="false"/>
             <attribute name="style" required="false" type="SIdRef" element="Style" abstract="false"/>
             <attribute name="yAxis" required="false" type="string" abstract="false"/>
-            <attribute name="xDataReference" required="false" type="SIdRef" element="DataReference" abstract="false"/>
+            <attribute name="xDataReference" required="true" type="SIdRef" element="DataReference" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="curve" element="Curve" minNumChildren="0" maxNumChildren="0"/>
@@ -183,17 +188,13 @@
             <attribute name="yErrorUpper" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="yErrorLower" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
           </attributes>
-          <concretes>
-            <concrete name="curve" element="Curve" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="surface" element="Surface" minNumChildren="0" maxNumChildren="0"/>
-          </concretes>
         </element>
-        <element name="Surface" typeCode="SEDML_OUTPUT_SURFACE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false" elementName="surface">
+        <element name="Surface" typeCode="SEDML_OUTPUT_SURFACE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" elementName="surface">
           <attributes>
-            <attribute name="xDataReference" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
-            <attribute name="yDataReference" required="false" type="SIdRef" element="DataGenerator" abstract="false"/>
+            <attribute name="xDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
+            <attribute name="yDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
             <attribute name="zDataReference" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
-            <attribute name="type" required="false" type="enum" element="SurfaceType" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="SurfaceType" abstract="false"/>
             <attribute name="style" required="false" type="SIdRef" element="Style" abstract="false"/>
             <attribute name="logX" required="false" type="bool" abstract="false"/>
             <attribute name="logY" required="false" type="bool" abstract="false"/>
@@ -220,8 +221,6 @@
           </attributes>
         </element>
         <element name="Range" typeCode="SEDML_RANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
-          <attributes>
-          </attributes>
           <concretes>
             <concrete name="uniformRange" element="UniformRange" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="vectorRange" element="VectorRange" minNumChildren="0" maxNumChildren="0"/>
@@ -235,23 +234,19 @@
           </attributes>
         </element>
         <element name="RemoveXML" typeCode="SEDML_CHANGE_REMOVEXML" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Change" abstract="false" elementName="removeXML"/>
-        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
+        <element name="SetValue" typeCode="SEDML_TASK_SETVALUE" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="ComputeChange" abstract="false">
           <attributes>
             <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
-            <attribute name="symbol" required="false" type="string" abstract="false"/>
-            <attribute name="target" required="false" type="string" abstract="false"/>
             <attribute name="range" required="false" type="SIdRef" element="Range" abstract="false"/>
-            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
-            <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
-            <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
           </attributes>
         </element>
         <element name="UniformRange" typeCode="SEDML_RANGE_UNIFORMRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="uniformRange">
           <attributes>
             <attribute name="start" required="true" type="double" abstract="false"/>
             <attribute name="end" required="true" type="double" abstract="false"/>
-            <attribute name="numberOfPoints" required="true" type="int" abstract="false"/>
+            <attribute name="numberOfPoints" required="false" type="int" abstract="false"/>
             <attribute name="type" required="true" type="string" abstract="false"/>
+            <attribute name="numberOfSteps" required="false" type="int" abstract="false"/>
           </attributes>
         </element>
         <element name="VectorRange" typeCode="SEDML_RANGE_VECTORRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="vectorRange">
@@ -271,6 +266,7 @@
           <attributes>
             <attribute name="order" required="true" type="int" abstract="false"/>
             <attribute name="task" required="true" type="SIdRef" element="AbstractTask" abstract="false"/>
+            <attribute name="taskChange" required="false" type="lo_element" element="SetValue" abstract="false"/>
           </attributes>
         </element>
         <element name="OneStep" typeCode="SEDML_SIMULATION_ONESTEP" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="oneStep">
@@ -281,11 +277,12 @@
         <element name="SteadyState" typeCode="SEDML_SIMULATION_STEADYSTATE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="steadyState"/>
         <element name="RepeatedTask" typeCode="SEDML_TASK_REPEATEDTASK" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false">
           <attributes>
-            <attribute name="rangeId" required="false" type="SIdRef" element="Range" xmlName="range" abstract="false"/>
-            <attribute name="resetModel" required="false" type="bool" abstract="false"/>
+            <attribute name="rangeId" required="true" type="SIdRef" element="Range" xmlName="range" abstract="false"/>
+            <attribute name="resetModel" required="true" type="bool" abstract="false"/>
             <attribute name="range" required="false" type="lo_element" element="Range" abstract="true"/>
             <attribute name="taskChange" required="false" type="lo_element" element="SetValue" abstract="false"/>
             <attribute name="subTask" required="false" type="lo_element" element="SubTask" abstract="false"/>
+            <attribute name="concatenate" required="false" type="bool" abstract="false"/>
           </attributes>
         </element>
         <element name="ComputeChange" typeCode="SEDML_CHANGE_COMPUTECHANGE" hasListOf="false" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" baseClass="Change" abstract="false">
@@ -293,26 +290,29 @@
             <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
             <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
             <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
+            <attribute name="symbol" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="DataDescription" typeCode="SEDML_DATA_DESCRIPTION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="DataDescription" typeCode="SEDML_DATA_DESCRIPTION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="format" required="false" type="string" abstract="false"/>
-            <attribute name="source" required="false" type="string" abstract="false"/>
+            <attribute name="source" required="true" type="string" abstract="false"/>
             <attribute name="dimensionDescription" required="false" type="element" element="DimensionDescription" abstract="false"/>
             <attribute name="dataSource" required="false" type="lo_element" element="DataSource" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
-        <element name="DataSource" typeCode="SEDML_DATA_SOURCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="DataSource" typeCode="SEDML_DATA_SOURCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
-            <attribute name="indexSet" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="indexSet" required="true" type="SIdRef" abstract="false"/>
             <attribute name="slice" required="false" type="lo_element" element="Slice" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
-        <element name="Slice" typeCode="SEDML_DATA_SLICE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="Slice" typeCode="SEDML_DATA_SLICE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="reference" required="true" type="SIdRef" abstract="false"/>
-            <attribute name="value" required="true" type="string" abstract="false"/>
+            <attribute name="value" required="false" type="string" abstract="false"/>
             <attribute name="index" required="false" type="SIdRef" abstract="false"/>
             <attribute name="startIndex" required="false" type="int" abstract="false"/>
             <attribute name="endIndex" required="false" type="int" abstract="false"/>
@@ -324,36 +324,37 @@
             <attribute name="objective" required="true" type="element" element="Objective" abstract="true"/>
             <attribute name="adjustableParameter" required="true" type="lo_element" element="AdjustableParameter" abstract="false"/>
             <attribute name="fitExperiment" required="true" type="lo_element" element="FitExperiment" abstract="false"/>
+            <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
           </attributes>
         </element>
-        <element name="Objective" typeCode="SEDML_OBJECTIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="true">
+        <element name="Objective" typeCode="SEDML_OBJECTIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="true">
           <concretes>
             <concrete name="leastSquareObjectiveFunction" element="LeastSquareObjectiveFunction" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="LeastSquareObjectiveFunction" typeCode="SEDML_LEAST_SQUARE_OBJECTIVE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Objective" abstract="false"/>
-        <element name="AdjustableParameter" typeCode="SEDML_ADJUSTABLE_PARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="AdjustableParameter" typeCode="SEDML_ADJUSTABLE_PARAMETER" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="initialValue" required="false" type="double" abstract="false"/>
             <attribute name="bounds" required="true" type="element" element="Bounds" abstract="false"/>
             <attribute name="experimentSet" required="false" type="lo_element" element="ExperimentRef" abstract="false"/>
             <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
-            <attribute name="target" required="false" type="string" abstract="false"/>
+            <attribute name="target" required="true" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="ExperimentRef" typeCode="SEDML_EXPERIMENT_REF" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="ExperimentRef" typeCode="SEDML_EXPERIMENT_REF" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
-            <attribute name="experimentId" required="false" type="SIdRef" element="FitExperiment" abstract="false"/>
+            <attribute name="experimentId" required="true" type="SIdRef" element="FitExperiment" xmlName="experiment" abstract="false"/>
           </attributes>
         </element>
-        <element name="FitExperiment" typeCode="SEDML_FIT_EXPERIMENT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="FitExperiment" typeCode="SEDML_FIT_EXPERIMENT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
-            <attribute name="type" required="false" type="enum" element="ExperimentType" abstract="false"/>
-            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
-            <attribute name="fitMapping" required="false" type="lo_element" element="FitMapping" abstract="false"/>
+            <attribute name="type" required="true" type="enum" element="ExperimentType" abstract="false"/>
+            <attribute name="algorithm" required="true" type="element" element="Algorithm" abstract="false"/>
+            <attribute name="fitMapping" required="true" type="lo_element" element="FitMapping" abstract="false"/>
           </attributes>
         </element>
-        <element name="FitMapping" typeCode="SEDML_FITMAPPING" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="FitMapping" typeCode="SEDML_FITMAPPING" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="dataSource" required="true" type="SIdRef" element="DataSource" abstract="false"/>
             <attribute name="target" required="true" type="SIdRef" element="DataGenerator" abstract="false"/>
@@ -362,21 +363,21 @@
             <attribute name="pointWeight" required="false" type="SIdRef" element="DataSource" abstract="false"/>
           </attributes>
         </element>
-        <element name="Bounds" typeCode="SEDML_BOUNDS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Bounds" typeCode="SEDML_BOUNDS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>
-            <attribute name="lowerBound" required="false" type="double" abstract="false"/>
-            <attribute name="upperBound" required="false" type="double" abstract="false"/>
-            <attribute name="scale" required="false" type="enum" element="ScaleType" abstract="false"/>
+            <attribute name="lowerBound" required="true" type="double" abstract="false"/>
+            <attribute name="upperBound" required="true" type="double" abstract="false"/>
+            <attribute name="scale" required="true" type="enum" element="ScaleType" abstract="false"/>
           </attributes>
         </element>
         <element name="Figure" typeCode="SEDML_FIGURE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="false">
           <attributes>
-            <attribute name="numRows" required="false" type="integer" abstract="false"/>
-            <attribute name="numCols" required="false" type="integer" abstract="false"/>
+            <attribute name="numRows" required="true" type="integer" abstract="false"/>
+            <attribute name="numCols" required="true" type="integer" abstract="false"/>
             <attribute name="subPlot" required="false" type="lo_element" element="SubPlot" abstract="false"/>
           </attributes>
         </element>
-        <element name="SubPlot" typeCode="SEDML_SUBPLOT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="SubPlot" typeCode="SEDML_SUBPLOT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="plot" required="true" type="SIdRef" element="Plot" abstract="false"/>
             <attribute name="row" required="true" type="integer" abstract="false"/>
@@ -385,31 +386,33 @@
             <attribute name="colSpan" required="false" type="integer" abstract="false"/>
           </attributes>
         </element>
-        <element name="Axis" typeCode="SEDML_AXIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" abstract="false">
+        <element name="Axis" typeCode="SEDML_AXIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="type" required="true" type="enum" element="AxisType" abstract="false"/>
             <attribute name="min" required="false" type="double" abstract="false"/>
             <attribute name="max" required="false" type="double" abstract="false"/>
             <attribute name="grid" required="false" type="bool" abstract="false"/>
             <attribute name="style" required="false" type="SIdRef" element="Style" abstract="false"/>
+            <attribute name="reverse" required="false" type="bool" abstract="false"/>
           </attributes>
         </element>
-        <element name="Style" typeCode="SEDML_STYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="Style" typeCode="SEDML_STYLE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="baseStyle" required="false" type="SIdRef" element="Style" abstract="false"/>
-            <attribute name="lineStyle" required="false" type="element" element="Line" xmlName="lineStyle" abstract="false"/>
-            <attribute name="markerStyle" required="false" type="element" element="Marker" xmlName="markerStyle" abstract="false"/>
-            <attribute name="fillStyle" required="false" type="element" element="Fill" xmlName="fillStyle" abstract="false"/>
+            <attribute name="lineStyle" required="false" type="element" element="Line" xmlName="line" abstract="false"/>
+            <attribute name="markerStyle" required="false" type="element" element="Marker" xmlName="marker" abstract="false"/>
+            <attribute name="fillStyle" required="false" type="element" element="Fill" xmlName="fill" abstract="false"/>
+            <attribute name="id" required="true" type="SId" abstract="false"/>
           </attributes>
         </element>
-        <element name="Line" typeCode="SEDML_LINE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Line" typeCode="SEDML_LINE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="type" required="false" type="enum" element="LineType" abstract="false"/>
             <attribute name="color" required="false" type="string" abstract="false"/>
             <attribute name="thickness" required="false" type="double" abstract="false"/>
           </attributes>
         </element>
-        <element name="Marker" typeCode="SEDML_MARKER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Marker" typeCode="SEDML_MARKER" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="size" required="false" type="double" abstract="false"/>
             <attribute name="type" required="false" type="enum" element="MarkerType" abstract="false"/>
@@ -418,7 +421,7 @@
             <attribute name="lineThickness" required="false" type="double" abstract="false"/>
           </attributes>
         </element>
-        <element name="Fill" typeCode="SEDML_FILL" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" abstract="false">
+        <element name="Fill" typeCode="SEDML_FILL" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="color" required="true" type="string" abstract="false"/>
             <attribute name="secondColor" required="false" type="string" abstract="false"/>
@@ -431,7 +434,7 @@
             <attribute name="symbol2" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="RemainingDimension" typeCode="SEDML_REMAININGDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" abstract="false">
+        <element name="RemainingDimension" typeCode="SEDML_REMAININGDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="target" required="false" type="SIdRef" abstract="false"/>
             <attribute name="dimensionTarget" required="false" type="SIdRef" abstract="false"/>
@@ -467,6 +470,12 @@
         <element name="ParameterEstimationReport" typeCode="SEDML_PARAMETERESTIMATIONREPORT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="false">
           <attributes>
             <attribute name="taskRef" required="true" type="SIdRef" element="Task" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="Analysis" typeCode="SEDML_SIMULATION_ANALYSIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false"/>
+        <element name="DataRange" typeCode="SEDML_SEDML_DATARANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">
+          <attributes>
+            <attribute name="sourceRef" required="true" type="SIdRef" element="DataSource" abstract="false"/>
           </attributes>
         </element>
       </elements>
