@@ -292,6 +292,9 @@
             <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
             <attribute name="symbol" required="false" type="string" abstract="false"/>
           </attributes>
+          <concretes>
+            <concrete name="setValue" element="SetValue" minNumChildren="0" maxNumChildren="0"/>
+          </concretes>
         </element>
         <element name="DataDescription" typeCode="SEDML_DATA_DESCRIPTION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
@@ -313,7 +316,7 @@
           <attributes>
             <attribute name="reference" required="true" type="SIdRef" abstract="false"/>
             <attribute name="value" required="false" type="string" abstract="false"/>
-            <attribute name="index" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="index" required="false" type="SIdRef" element="RepeatedTask" abstract="false"/>
             <attribute name="startIndex" required="false" type="int" abstract="false"/>
             <attribute name="endIndex" required="false" type="int" abstract="false"/>
           </attributes>
@@ -436,16 +439,16 @@
         </element>
         <element name="RemainingDimension" typeCode="SEDML_REMAININGDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
-            <attribute name="target" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="target" required="false" type="SIdRef" element="SedBase" abstract="false"/>
             <attribute name="dimensionTarget" required="false" type="SIdRef" abstract="false"/>
           </attributes>
         </element>
         <element name="DataRange" typeCode="SEDML_DATA_RANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">
           <attributes>
-            <attribute name="sourceRef" required="true" type="SIdRef" abstract="false"/>
+            <attribute name="sourceRef" required="true" type="SIdRef" element="DataDescription" abstract="false"/>
           </attributes>
         </element>
-        <element name="SimpleRepeatedTask" typeCode="SEDML_TASK_SIMPLEREPEATEDTASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Task" abstract="false">
+        <element name="SimpleRepeatedTask" typeCode="SEDML_TASK_SIMPLEREPEATEDTASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false">
           <attributes>
             <attribute name="resetModel" required="true" type="bool" abstract="false"/>
             <attribute name="numRepeats" required="true" type="integer" abstract="false"/>
@@ -473,11 +476,6 @@
           </attributes>
         </element>
         <element name="Analysis" typeCode="SEDML_SIMULATION_ANALYSIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false"/>
-        <element name="DataRange" typeCode="SEDML_SEDML_DATARANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">
-          <attributes>
-            <attribute name="sourceRef" required="true" type="SIdRef" element="DataSource" abstract="false"/>
-          </attributes>
-        </element>
       </elements>
       <enums>
         <enum name="MappingType">
