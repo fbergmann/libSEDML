@@ -871,6 +871,18 @@ TEST_CASE("Add reverse to axis", "[sedml]")
 }
 
 
+TEST_CASE("Set KiSAO and name", "[sedml]")
+{
+    SedAlgorithm alg(1, 4);
+    alg.setKisaoID(64);
+    CHECK(alg.getName() == "Runge-Kutta based method");
+
+    SedAlgorithmParameter* param = alg.createAlgorithmParameter();
+    param->setKisaoID("KISAO:0000064");
+    CHECK(param->getName() == "Runge-Kutta based method");
+}
+
+
 TEST_CASE("Reading dependent variable", "[sedml]")
 {
   std::string fileName = getTestFile("/test-data/issue_140.sedml");
