@@ -388,6 +388,16 @@ SedVisitor::visit(const SedSteadyState& x)
 
 
 /*
+ * Visit the SedAnalysis
+ */
+bool
+SedVisitor::visit(const SedAnalysis& x)
+{
+    return visit(static_cast<const SedBase&>(x));
+}
+
+
+/*
  * Visit the SedRepeatedTask
  */
 bool
@@ -969,6 +979,15 @@ SedVisitor::leave(const SedOneStep& x)
  */
 void
 SedVisitor::leave(const SedSteadyState& x)
+{
+}
+
+
+/*
+ * Leave the SedAnalysis
+ */
+void
+SedVisitor::leave(const SedAnalysis& x)
 {
 }
 

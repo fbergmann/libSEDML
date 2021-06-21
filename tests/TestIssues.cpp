@@ -894,3 +894,28 @@ TEST_CASE("Reading dependent variable", "[sedml]")
   delete doc;
 
 }
+
+TEST_CASE("Create Analysis simulation", "[sedml]")
+{
+    SedDocument doc(1, 4);
+    auto* sim = doc.createAnalysis();
+    sim->setId("sim1");
+    auto* alg = sim->createAlgorithm();
+    alg->setKisaoID("KISAO:0000352");
+    auto* p = alg->createAlgorithmParameter();
+    p->setKisaoID("KISAO:0000203");
+    p->setValue("something");
+
+    REQUIRE(alg->getNumAlgorithmParameters() == 1);
+    REQUIRE(sim->getTypeCode() == SEDML_SIMULATION_ANALYSIS);
+
+    SedWriter sw;
+    std::string l1v4 = sw.writeSedMLToStdString(&doc);
+    auto* doc2 = readSedMLFromString(l1v4.c_str());
+    REQUIRE(doc2->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+    std::string l1v4_rt = sw.writeSedMLToStdString(&doc);
+    REQUIRE(l1v4 == l1v4_rt);
+    delete doc2;
+
+}
+

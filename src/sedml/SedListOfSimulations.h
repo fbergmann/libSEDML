@@ -61,6 +61,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 class SedUniformTimeCourse;
 class SedOneStep;
 class SedSteadyState;
+class SedAnalysis;
 
 class LIBSEDML_EXTERN SedListOfSimulations : public SedListOf
 {
@@ -346,6 +347,24 @@ public:
    * @see remove(unsigned int n)
    */
   SedSteadyState* createSteadyState();
+
+
+  /**
+   * Creates a new SedAnalysis object, adds it to this SedListOfSimulations
+   * object and returns the SedAnalysis object created.
+   *
+   * @return a new SedAnalysis object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSimulations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
+   */
+  SedAnalysis* createAnalysis();
 
 
   /**
