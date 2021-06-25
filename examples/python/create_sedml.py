@@ -92,6 +92,13 @@ def main (args):
   alg = tc.createAlgorithm()
   alg.setKisaoID("KISAO:0000019")
 
+  # create analysis 
+  a = doc.createAnalysis()
+  a.setId('a1')
+  alg = a.createAlgorithm()
+  alg.setKisaoID("KISAO:0000019")
+
+
   # create a task that uses the simulation and the model above
   task = doc.createTask()
   task.setId("task1")
