@@ -2831,7 +2831,7 @@ void
 SedBase::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   string sedmlPrefix    = getSedPrefix();
-  if (!mId.empty() && (mIdAllowedPreV4 || getVersion()>=4) || getLevel()>1)
+  if (!mId.empty() && (mIdAllowedPreV4 || getVersion()>=4 || getLevel()>1))
   {
       stream.writeAttribute("id", sedmlPrefix, mId);
   }
