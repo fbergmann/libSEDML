@@ -41,6 +41,10 @@
 cmake_minimum_required(VERSION 2.8.12)
 project (libsedml)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS NO)
+
 SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/../conan_paths.cmake)
 if (NOT EXISTS ${CONAN_PATHS})
 SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/conan_paths.cmake)
