@@ -38,7 +38,7 @@
 #
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 project (libsedml)
 
 SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/../conan_paths.cmake)
@@ -445,11 +445,7 @@ endif(WITH_CSHARP)
 # or make test
 #
 
-# we do use tests, that require 2.8.4
-cmake_minimum_required(VERSION 2.8.4)
-
 enable_testing()
-
 
 # On some Linux  (64bit) systems (64bit) the libraries should be installed into lib64 rather
 # than lib. It will default to 'lib' but can be overwritten.
