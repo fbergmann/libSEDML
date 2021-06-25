@@ -148,6 +148,9 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_SIMULATION_ONESTEP:
       return SWIGTYPE_p_SedOneStep;
 
+    case SEDML_SIMULATION_ANALYSIS:
+      return SWIGTYPE_p_SedAnalysis;
+      
     case SEDML_SIMULATION_STEADYSTATE:
       return SWIGTYPE_p_SedSteadyState;
 

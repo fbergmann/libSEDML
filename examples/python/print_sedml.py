@@ -81,6 +81,10 @@ def main (args):
       print ("\tTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," numPoints=",tc.getNumberOfPoints()," kisao=",kisaoid,"\n")
     elif current.getTypeCode() == libsedml.SEDML_SIMULATION_STEADYSTATE:
       print ("\tSteadyState id=", current.getId(),"\n")
+    elif current.getTypeCode() == libsedml.SEDML_SIMULATION_ONESTEP:
+      print ("\tOneStep id=", current.getId(),"\n")
+    elif current.getTypeCode() == libsedml.SEDML_SIMULATION_ANALYSIS:
+      print ("\tAnalysis id=", current.getId(),"\n")
     else:
       print ("\tUncountered unknown simulation. ",current.getId(),"\n")
   

@@ -37,6 +37,7 @@
 #include <sedml/SedUniformTimeCourse.h>
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
+#include <sedml/SedAnalysis.h>
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
@@ -959,6 +960,32 @@ SedDocument::createSteadyState()
   }
 
   return sss;
+}
+
+
+/*
+ * Creates a new SedAnalysis object, adds it to this SedDocument object and
+ * returns the SedAnalysis object created.
+ */
+SedAnalysis*
+SedDocument::createAnalysis()
+{
+    SedAnalysis* sss = NULL;
+
+    try
+    {
+        sss = new SedAnalysis(getSedNamespaces());
+    }
+    catch (...)
+    {
+    }
+
+    if (sss != NULL)
+    {
+        mSimulations.appendAndOwn(sss);
+    }
+
+    return sss;
 }
 
 
@@ -2393,6 +2420,10 @@ SedDocument::createChildObject(const std::string& elementName)
   {
     return createSteadyState();
   }
+  else if (elementName == "analysis")
+  {
+      return createAnalysis();
+  }
   else if (elementName == "task")
   {
     return createTask();
@@ -2482,6 +2513,11 @@ SedDocument::addChildObject(const std::string& elementName,
     SEDML_SIMULATION_STEADYSTATE)
   {
     return addSimulation((const SedSimulation*)(element));
+  }
+  else if (elementName == "analysis" && element->getTypeCode() ==
+      SEDML_SIMULATION_ANALYSIS)
+  {
+      return addSimulation((const SedSimulation*)(element));
   }
   else if (elementName == "task" && element->getTypeCode() == SEDML_TASK)
   {
@@ -2576,6 +2612,10 @@ SedDocument::removeChildObject(const std::string& elementName,
   else if (elementName == "steadyState")
   {
     return removeSimulation(id);
+  }
+  else if (elementName == "analysis")
+  {
+      return removeSimulation(id);
   }
   else if (elementName == "task")
   {
@@ -3673,6 +3713,18 @@ SedSteadyState_t*
 SedDocument_createSteadyState(SedDocument_t* sd)
 {
   return (sd != NULL) ? sd->createSteadyState() : NULL;
+}
+
+
+/*
+ * Creates a new SedAnalysis_t object, adds it to this SedDocument_t object
+ * and returns the SedAnalysis_t object created.
+ */
+LIBSEDML_EXTERN
+SedAnalysis_t*
+SedDocument_createAnalysis(SedDocument_t* sd)
+{
+    return (sd != NULL) ? sd->createAnalysis() : NULL;
 }
 
 

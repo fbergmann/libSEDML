@@ -90,6 +90,7 @@ class SedFunctionalRange;
 class SedSubTask;
 class SedOneStep;
 class SedSteadyState;
+class SedAnalysis;
 class SedRepeatedTask;
 class SedComputeChange;
 class SedDataDescription;
@@ -480,6 +481,16 @@ virtual bool visit (const SedOneStep &x);
  * @param x the SedBase object to visit.
  */
 virtual bool visit (const SedSteadyState &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
+virtual bool visit(const SedAnalysis& x);
 
 
 /**
@@ -1113,6 +1124,16 @@ virtual void leave (const SedOneStep &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedSteadyState &x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
+virtual void leave(const SedAnalysis& x);
 
 
 /**

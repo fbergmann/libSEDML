@@ -295,6 +295,9 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     case (int) libsedml.SEDML_SIMULATION_ONESTEP:
       return new SedOneStep(cPtr, owner);
 
+    case (int) libsedml.SEDML_SIMULATION_ANALYSIS:
+      return new SedAnalysis(cPtr, owner);
+
     case (int) libsedml.SEDML_SIMULATION_STEADYSTATE:
       return new SedSteadyState(cPtr, owner);
 
@@ -866,6 +869,7 @@ COVARIANT_RTYPE_CLONE(SedVectorRange)
 COVARIANT_RTYPE_CLONE(SedFunctionalRange)
 COVARIANT_RTYPE_CLONE(SedSubTask)
 COVARIANT_RTYPE_CLONE(SedOneStep)
+COVARIANT_RTYPE_CLONE(SedAnalysis)
 COVARIANT_RTYPE_CLONE(SedSteadyState)
 COVARIANT_RTYPE_CLONE(SedRepeatedTask)
 COVARIANT_RTYPE_CLONE(SedComputeChange)
@@ -1212,6 +1216,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedNamespaces)
 SEDMLCONSTRUCTOR_EXCEPTION(SedNamespacesList)
 SEDMLCONSTRUCTOR_EXCEPTION(SedObjective)
 SEDMLCONSTRUCTOR_EXCEPTION(SedOneStep)
+SEDMLCONSTRUCTOR_EXCEPTION(SedAnalysis)
 SEDMLCONSTRUCTOR_EXCEPTION(SedOutput)
 SEDMLCONSTRUCTOR_EXCEPTION(SedParameter)
 SEDMLCONSTRUCTOR_EXCEPTION(SedParameterEstimationReport)

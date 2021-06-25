@@ -472,18 +472,6 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Writes the namespace for the Sedml package
-   */
-  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
-
-  /** @endcond */
-
-
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
    * checks concrete types
    */
   virtual bool isValidTypeForList(SedBase* item);

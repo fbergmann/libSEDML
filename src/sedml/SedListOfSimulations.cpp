@@ -37,6 +37,7 @@
 #include <sedml/SedUniformTimeCourse.h>
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
+#include <sedml/SedAnalysis.h>
 
 
 using namespace std;
@@ -321,6 +322,32 @@ SedListOfSimulations::createSteadyState()
 
 
 /*
+ * Creates a new SedAnalysis object, adds it to this SedListOfSimulations
+ * object and returns the SedAnalysis object created.
+ */
+SedAnalysis*
+SedListOfSimulations::createAnalysis()
+{
+    SedAnalysis* sss = NULL;
+
+    try
+    {
+        sss = new SedAnalysis(getSedNamespaces());
+    }
+    catch (...)
+    {
+    }
+
+    if (sss != NULL)
+    {
+        appendAndOwn(sss);
+    }
+
+    return sss;
+}
+
+
+/*
  * Returns the XML element name of this SedListOfSimulations object.
  */
 const std::string&
@@ -389,6 +416,12 @@ SedListOfSimulations::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
     appendAndOwn(object);
   }
 
+  if (name == "analysis")
+  {
+      object = new SedAnalysis(getSedNamespaces());
+      appendAndOwn(object);
+  }
+
   return object;
 }
 
@@ -406,8 +439,10 @@ SedListOfSimulations::isValidTypeForList(SedBase* item)
 {
   unsigned int tc = item->getTypeCode();
 
-  return ((tc == SEDML_SIMULATION_UNIFORMTIMECOURSE) || (tc ==
-    SEDML_SIMULATION_ONESTEP) || (tc == SEDML_SIMULATION_STEADYSTATE));
+  return ((tc == SEDML_SIMULATION_UNIFORMTIMECOURSE) 
+      ||  (tc == SEDML_SIMULATION_ONESTEP) 
+      ||  (tc == SEDML_SIMULATION_STEADYSTATE)
+      ||  (tc == SEDML_SIMULATION_ANALYSIS));
 }
 
 /** @endcond */

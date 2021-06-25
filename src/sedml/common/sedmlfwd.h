@@ -68,6 +68,7 @@ typedef CLASS_OR_STRUCT SedParameter                     SedParameter_t;
 typedef CLASS_OR_STRUCT SedSimulation                    SedSimulation_t;
 typedef CLASS_OR_STRUCT SedUniformTimeCourse             SedUniformTimeCourse_t;
 typedef CLASS_OR_STRUCT SedAlgorithm                     SedAlgorithm_t;
+typedef CLASS_OR_STRUCT SedAnalysis                      SedAnalysis_t;
 typedef CLASS_OR_STRUCT SedAbstractTask                  SedAbstractTask_t;
 typedef CLASS_OR_STRUCT SedTask                          SedTask_t;
 typedef CLASS_OR_STRUCT SedDataGenerator                 SedDataGenerator_t;
