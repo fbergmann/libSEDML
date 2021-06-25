@@ -462,18 +462,6 @@ protected:
   /** @endcond */
 
 
-
-  /** @cond doxygenLibSEDMLInternal */
-
-  /**
-   * Writes the namespace for the Sedml package
-   */
-  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
-    stream) const;
-
-  /** @endcond */
-
-
 };
 
 

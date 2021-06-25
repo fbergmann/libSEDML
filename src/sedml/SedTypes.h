@@ -74,6 +74,7 @@
 #include <sedml/SedVectorRange.h>
 #include <sedml/SedFunctionalRange.h>
 #include <sedml/SedSubTask.h>
+#include <sedml/SedAnalysis.h>
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
 #include <sedml/SedRepeatedTask.h>

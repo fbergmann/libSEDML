@@ -397,6 +397,7 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedSubTask.h>
 %include <sedml/SedListOfSubTasks.h>
 %include <sedml/SedOneStep.h>
+%include <sedml/SedAnalysis.h>
 %include <sedml/SedSteadyState.h>
 %include <sedml/SedRepeatedTask.h>
 %include <sedml/SedComputeChange.h>

@@ -1114,6 +1114,24 @@ public:
 
 
   /**
+   * Creates a new SedAnalysis object, adds it to this SedDocument object
+   * and returns the SedAnalysis object created.
+   *
+   * @return a new SedAnalysis object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedAnalysis* createAnalysis();
+
+
+  /**
    * Removes the nth SedSimulation from this SedDocument and returns a pointer
    * to it.
    *
@@ -3635,6 +3653,24 @@ SedDocument_createOneStep(SedDocument_t* sd);
 LIBSEDML_EXTERN
 SedSteadyState_t*
 SedDocument_createSteadyState(SedDocument_t* sd);
+
+
+/**
+ * Creates a new SedAnalysis_t object, adds it to this SedDocument_t object
+ * and returns the SedAnalysis_t object created.
+ *
+ * @param sd the SedDocument_t structure to which the SedAnalysis_t should
+ * be added.
+ *
+ * @return a new SedAnalysis_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedDocument_t
+ */
+LIBSEDML_EXTERN
+SedAnalysis_t*
+SedDocument_createAnalysis(SedDocument_t* sd);
 
 
 /**

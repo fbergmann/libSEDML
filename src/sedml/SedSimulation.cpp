@@ -38,6 +38,7 @@
 #include <sedml/SedUniformTimeCourse.h>
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
+#include <sedml/SedAnalysis.h>
 
 
 using namespace std;
@@ -270,6 +271,17 @@ bool
 SedSimulation::isSedSteadyState() const
 {
   return dynamic_cast<const SedSteadyState*>(this) != NULL;
+}
+
+
+/*
+ * Predicate returning @c true if this abstract "SedSimulation" is of type
+ * SedAnalysis
+ */
+bool
+SedSimulation::isSedAnalysis() const
+{
+    return dynamic_cast<const SedAnalysis*>(this) != NULL;
 }
 
 
@@ -976,6 +988,18 @@ SedSimulation_createSteadyState(unsigned int level, unsigned int version)
 
 
 /*
+ * Creates a new SedAnalysis using the given SED-ML Level and @ p version
+ * values.
+ */
+LIBSEDML_EXTERN
+SedAnalysis_t*
+SedSimulation_createAnalysis(unsigned int level, unsigned int version)
+{
+    return new SedAnalysis(level, version);
+}
+
+
+/*
  * Creates and returns a deep copy of this SedSimulation_t object.
  */
 LIBSEDML_EXTERN
@@ -1206,6 +1230,17 @@ int
 SedSimulation_isSedSteadyState(const SedSimulation_t * ss)
 {
   return (ss != NULL) ? static_cast<int>(ss->isSedSteadyState()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 if this SedSimulation_t is of type SedAnalysis_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedAnalysis(const SedSimulation_t* ss)
+{
+    return (ss != NULL) ? static_cast<int>(ss->isSedAnalysis()) : 0;
 }
 
 

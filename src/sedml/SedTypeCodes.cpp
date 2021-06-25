@@ -74,6 +74,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "VectorRange"
   , "FunctionalRange"
   , "SubTask"
+  , "Analysis"
   , "OneStep"
   , "SteadyState"
   , "RepeatedTask"

@@ -2874,6 +2874,30 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
+  // 23403
+  { SedmlAnalysisAllowedCoreAttributes,
+    "Core attributes allowed on <analysis>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "A <Analysis> object may have the optional SBML Level 3 Core attributes "
+    "'metaid' and 'sboTerm'. No other attributes from the SBML Level 3 Core "
+    "namespaces are permitted on an <analysis>.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
+  // 23403
+  { SedmlAnalysisAllowedCoreElements,
+    "Core elements allowed on <analysis>.",
+    LIBSEDML_CAT_GENERAL_CONSISTENCY,
+    LIBSEDML_SEV_ERROR,
+    "An <analysis> object may have the optional SBML Level 3 Core subobjects "
+    "for notes and annotations. No other elements from the SBML Level 3 Core "
+    "namespaces are permitted on an <analysis>.",
+    { "L3V1 Sedml V1 Section"
+    }
+  },
+
   // 23501
   { SedmlRepeatedTaskAllowedCoreAttributes,
     "Core attributes allowed on <repeatedTask>.",

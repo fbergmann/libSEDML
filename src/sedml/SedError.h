@@ -287,6 +287,8 @@ typedef enum
 , SedmlOneStepStepMustBeDouble      = 23304
 , SedmlSteadyStateAllowedCoreAttributes      = 23401
 , SedmlSteadyStateAllowedCoreElements      = 23402
+, SedmlAnalysisAllowedCoreAttributes = 23403
+, SedmlAnalysisAllowedCoreElements = 23404
 , SedmlRepeatedTaskAllowedCoreAttributes      = 23501
 , SedmlRepeatedTaskAllowedCoreElements      = 23502
 , SedmlRepeatedTaskAllowedAttributes      = 23503
