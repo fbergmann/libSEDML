@@ -54,6 +54,7 @@ kcpp.write("""
 std::map<int, std::string> g_kisaomap = {
 """)
 
+entries = []
 with open('KISAO.csv', newline='') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
@@ -61,8 +62,12 @@ with open('KISAO.csv', newline='') as csvfile:
             continue
         k_id = int(row[0].split("_")[-1])
         k_name = row[1]
-        kcpp.write('   {' + str(k_id) + ', "' + k_name + '"},\n')
-        print(k_id, k_name)
+        entries.append((k_id, k_name))
+
+entries.sort()
+for entry in entries:
+    kcpp.write('   {' + str(entry[0]) + ', "' + entry[1] + '"},\n')
+    print(entry)
         
 kcpp.write("};\n")
 kcpp.close()
