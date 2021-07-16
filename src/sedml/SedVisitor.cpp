@@ -608,10 +608,10 @@ SedVisitor::visit(const SedDependentVariable& x)
 
 
 /*
- * Visit the SedRemainingDimension
+ * Visit the SedAppliedDimension
  */
 bool
-SedVisitor::visit(const SedRemainingDimension& x)
+SedVisitor::visit(const SedAppliedDimension& x)
 {
   return visit(static_cast<const SedBase&>(x));
 }
@@ -1182,10 +1182,10 @@ SedVisitor::leave(const SedDependentVariable& x)
 
 
 /*
- * Leave the SedRemainingDimension
+ * Leave the SedAppliedDimension
  */
 void
-SedVisitor::leave(const SedRemainingDimension& x)
+SedVisitor::leave(const SedAppliedDimension& x)
 {
 }
 

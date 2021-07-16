@@ -98,7 +98,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "Marker"
   , "Fill"
   , "DependentVariable"
-  , "RemainingDimension"
+  , "AppliedDimension"
   , "DataRange"
   , "SimpleRepeatedTask"
   , "ShadedArea"

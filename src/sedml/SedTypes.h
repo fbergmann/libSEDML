@@ -98,7 +98,7 @@
 #include <sedml/SedMarker.h>
 #include <sedml/SedFill.h>
 #include <sedml/SedDependentVariable.h>
-#include <sedml/SedRemainingDimension.h>
+#include <sedml/SedAppliedDimension.h>
 #include <sedml/SedDataRange.h>
 #include <sedml/SedSimpleRepeatedTask.h>
 #include <sedml/SedShadedArea.h>

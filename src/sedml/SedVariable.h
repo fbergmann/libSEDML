@@ -51,7 +51,7 @@
 
 
 #include <sedml/SedBase.h>
-#include <sedml/SedListOfRemainingDimensions.h>
+#include <sedml/SedListOfAppliedDimensions.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
@@ -68,7 +68,7 @@ protected:
   std::string mTarget;
   std::string mTaskReference;
   std::string mModelReference;
-  SedListOfRemainingDimensions mRemainingDimensions;
+  SedListOfAppliedDimensions mAppliedDimensions;
 
   /** @endcond */
 
@@ -304,152 +304,152 @@ public:
 
 
   /**
-   * Returns the SedListOfRemainingDimensions from this SedVariable.
+   * Returns the SedListOfAppliedDimensions from this SedVariable.
    *
-   * @return the SedListOfRemainingDimensions from this SedVariable.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getRemainingDimension(unsigned int n)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
-   */
-  const SedListOfRemainingDimensions* getListOfRemainingDimensions() const;
-
-
-  /**
-   * Returns the SedListOfRemainingDimensions from this SedVariable.
-   *
-   * @return the SedListOfRemainingDimensions from this SedVariable.
+   * @return the SedListOfAppliedDimensions from this SedVariable.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getRemainingDimension(unsigned int n)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getAppliedDimension(unsigned int n)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
    */
-  SedListOfRemainingDimensions* getListOfRemainingDimensions();
+  const SedListOfAppliedDimensions* getListOfAppliedDimensions() const;
 
 
   /**
-   * Get a SedRemainingDimension from the SedVariable.
+   * Returns the SedListOfAppliedDimensions from this SedVariable.
+   *
+   * @return the SedListOfAppliedDimensions from this SedVariable.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getAppliedDimension(unsigned int n)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
+   */
+  SedListOfAppliedDimensions* getListOfAppliedDimensions();
+
+
+  /**
+   * Get a SedAppliedDimension from the SedVariable.
    *
    * @param n an unsigned int representing the index of the
-   * SedRemainingDimension to retrieve.
+   * SedAppliedDimension to retrieve.
    *
-   * @return the nth SedRemainingDimension in the SedListOfRemainingDimensions
+   * @return the nth SedAppliedDimension in the SedListOfAppliedDimensions
    * within this SedVariable or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
    */
-  SedRemainingDimension* getRemainingDimension(unsigned int n);
+  SedAppliedDimension* getAppliedDimension(unsigned int n);
 
 
   /**
-   * Get a SedRemainingDimension from the SedVariable.
+   * Get a SedAppliedDimension from the SedVariable.
    *
    * @param n an unsigned int representing the index of the
-   * SedRemainingDimension to retrieve.
+   * SedAppliedDimension to retrieve.
    *
-   * @return the nth SedRemainingDimension in the SedListOfRemainingDimensions
+   * @return the nth SedAppliedDimension in the SedListOfAppliedDimensions
    * within this SedVariable or @c NULL if no such object exists.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
    */
-  const SedRemainingDimension* getRemainingDimension(unsigned int n) const;
+  const SedAppliedDimension* getAppliedDimension(unsigned int n) const;
 
 
   /**
-   * Get a SedRemainingDimension from the SedVariable based on the Target to
+   * Get a SedAppliedDimension from the SedVariable based on the Target to
    * which it refers.
    *
    * @param sid a string representing the "target" attribute of the
-   * SedRemainingDimension object to retrieve.
+   * SedAppliedDimension object to retrieve.
    *
-   * @return the first SedRemainingDimension in this SedVariable based on the
-   * given target attribute or NULL if no such SedRemainingDimension exists.
+   * @return the first SedAppliedDimension in this SedVariable based on the
+   * given target attribute or NULL if no such SedAppliedDimension exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedRemainingDimension* getRemainingDimensionByTarget(const std::string&
+  const SedAppliedDimension* getAppliedDimensionByTarget(const std::string&
     sid) const;
 
 
   /**
-   * Get a SedRemainingDimension from the SedVariable based on the Target to
+   * Get a SedAppliedDimension from the SedVariable based on the Target to
    * which it refers.
    *
    * @param sid a string representing the "target" attribute of the
-   * SedRemainingDimension object to retrieve.
+   * SedAppliedDimension object to retrieve.
    *
-   * @return the first SedRemainingDimension in this SedVariable based on the
-   * given target attribute or NULL if no such SedRemainingDimension exists.
+   * @return the first SedAppliedDimension in this SedVariable based on the
+   * given target attribute or NULL if no such SedAppliedDimension exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  SedRemainingDimension* getRemainingDimensionByTarget(const std::string& sid);
+  SedAppliedDimension* getAppliedDimensionByTarget(const std::string& sid);
 
 
   /**
-   * Get a SedRemainingDimension from the SedVariable based on the
+   * Get a SedAppliedDimension from the SedVariable based on the
    * DimensionTarget to which it refers.
    *
    * @param sid a string representing the "dimensionTarget" attribute of the
-   * SedRemainingDimension object to retrieve.
+   * SedAppliedDimension object to retrieve.
    *
-   * @return the first SedRemainingDimension in this SedVariable based on the
-   * given dimensionTarget attribute or NULL if no such SedRemainingDimension
+   * @return the first SedAppliedDimension in this SedVariable based on the
+   * given dimensionTarget attribute or NULL if no such SedAppliedDimension
    * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedRemainingDimension* getRemainingDimensionByDimensionTarget(const
+  const SedAppliedDimension* getAppliedDimensionByDimensionTarget(const
     std::string& sid) const;
 
 
   /**
-   * Get a SedRemainingDimension from the SedVariable based on the
+   * Get a SedAppliedDimension from the SedVariable based on the
    * DimensionTarget to which it refers.
    *
    * @param sid a string representing the "dimensionTarget" attribute of the
-   * SedRemainingDimension object to retrieve.
+   * SedAppliedDimension object to retrieve.
    *
-   * @return the first SedRemainingDimension in this SedVariable based on the
-   * given dimensionTarget attribute or NULL if no such SedRemainingDimension
+   * @return the first SedAppliedDimension in this SedVariable based on the
+   * given dimensionTarget attribute or NULL if no such SedAppliedDimension
    * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  SedRemainingDimension* getRemainingDimensionByDimensionTarget(const
+  SedAppliedDimension* getAppliedDimensionByDimensionTarget(const
     std::string& sid);
 
 
   /**
-   * Adds a copy of the given SedRemainingDimension to this SedVariable.
+   * Adds a copy of the given SedAppliedDimension to this SedVariable.
    *
-   * @param srd the SedRemainingDimension object to add.
+   * @param srd the SedAppliedDimension object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -462,68 +462,68 @@ public:
    *
    * @copydetails doc_note_object_is_copied
    *
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getRemainingDimension(unsigned int n)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getAppliedDimension(unsigned int n)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
    */
-  int addRemainingDimension(const SedRemainingDimension* srd);
+  int addAppliedDimension(const SedAppliedDimension* srd);
 
 
   /**
-   * Get the number of SedRemainingDimension objects in this SedVariable.
+   * Get the number of SedAppliedDimension objects in this SedVariable.
    *
-   * @return the number of SedRemainingDimension objects in this SedVariable.
+   * @return the number of SedAppliedDimension objects in this SedVariable.
    *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getRemainingDimension(unsigned int n)
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getAppliedDimension(unsigned int n)
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
    */
-  unsigned int getNumRemainingDimensions() const;
+  unsigned int getNumAppliedDimensions() const;
 
 
   /**
-   * Creates a new SedRemainingDimension object, adds it to this SedVariable
-   * object and returns the SedRemainingDimension object created.
+   * Creates a new SedAppliedDimension object, adds it to this SedVariable
+   * object and returns the SedAppliedDimension object created.
    *
-   * @return a new SedRemainingDimension object instance.
+   * @return a new SedAppliedDimension object instance.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getRemainingDimension(unsigned int n)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
-   * @see removeRemainingDimension(unsigned int n)
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getAppliedDimension(unsigned int n)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
+   * @see removeAppliedDimension(unsigned int n)
    */
-  SedRemainingDimension* createRemainingDimension();
+  SedAppliedDimension* createAppliedDimension();
 
 
   /**
-   * Removes the nth SedRemainingDimension from this SedVariable and returns a
+   * Removes the nth SedAppliedDimension from this SedVariable and returns a
    * pointer to it.
    *
    * @param n an unsigned int representing the index of the
-   * SedRemainingDimension to remove.
+   * SedAppliedDimension to remove.
    *
-   * @return a pointer to the nth SedRemainingDimension in this SedVariable.
+   * @return a pointer to the nth SedAppliedDimension in this SedVariable.
    *
    * @copydetails doc_warning_returns_owned_pointer
    *
-   * @see addRemainingDimension(const SedRemainingDimension* object)
-   * @see createRemainingDimension()
-   * @see getRemainingDimension(const std::string& sid)
-   * @see getRemainingDimension(unsigned int n)
-   * @see getNumRemainingDimensions()
-   * @see removeRemainingDimension(const std::string& sid)
+   * @see addAppliedDimension(const SedAppliedDimension* object)
+   * @see createAppliedDimension()
+   * @see getAppliedDimension(const std::string& sid)
+   * @see getAppliedDimension(unsigned int n)
+   * @see getNumAppliedDimensions()
+   * @see removeAppliedDimension(const std::string& sid)
    */
-  SedRemainingDimension* removeRemainingDimension(unsigned int n);
+  SedAppliedDimension* removeAppliedDimension(unsigned int n);
 
 
   /**
@@ -1529,41 +1529,41 @@ SedVariable_unsetModelReference(SedVariable_t * sv);
 
 
 /**
- * Returns a ListOf_t * containing SedRemainingDimension_t objects from this
+ * Returns a ListOf_t * containing SedAppliedDimension_t objects from this
  * SedVariable_t.
  *
- * @param sv the SedVariable_t structure whose SedListOfRemainingDimensions is
+ * @param sv the SedVariable_t structure whose SedListOfAppliedDimensions is
  * sought.
  *
- * @return the SedListOfRemainingDimensions from this SedVariable_t as a
+ * @return the SedListOfAppliedDimensions from this SedVariable_t as a
  * ListOf_t *.
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see SedVariable_addRemainingDimension()
- * @see SedVariable_createRemainingDimension()
- * @see SedVariable_getRemainingDimensionById()
- * @see SedVariable_getRemainingDimension()
- * @see SedVariable_getNumRemainingDimensions()
- * @see SedVariable_removeRemainingDimensionById()
- * @see SedVariable_removeRemainingDimension()
+ * @see SedVariable_addAppliedDimension()
+ * @see SedVariable_createAppliedDimension()
+ * @see SedVariable_getAppliedDimensionById()
+ * @see SedVariable_getAppliedDimension()
+ * @see SedVariable_getNumAppliedDimensions()
+ * @see SedVariable_removeAppliedDimensionById()
+ * @see SedVariable_removeAppliedDimension()
  *
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
 SedListOf_t*
-SedVariable_getListOfRemainingDimensions(SedVariable_t* sv);
+SedVariable_getListOfAppliedDimensions(SedVariable_t* sv);
 
 
 /**
- * Get a SedRemainingDimension_t from the SedVariable_t.
+ * Get a SedAppliedDimension_t from the SedVariable_t.
  *
  * @param sv the SedVariable_t structure to search.
  *
  * @param n an unsigned int representing the index of the
- * SedRemainingDimension_t to retrieve.
+ * SedAppliedDimension_t to retrieve.
  *
- * @return the nth SedRemainingDimension_t in the SedListOfRemainingDimensions
+ * @return the nth SedAppliedDimension_t in the SedListOfAppliedDimensions
  * within this SedVariable or @c NULL if no such object exists.
  *
  * @copydetails doc_returned_unowned_pointer
@@ -1571,42 +1571,42 @@ SedVariable_getListOfRemainingDimensions(SedVariable_t* sv);
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_getRemainingDimension(SedVariable_t* sv, unsigned int n);
+SedAppliedDimension_t*
+SedVariable_getAppliedDimension(SedVariable_t* sv, unsigned int n);
 
 
 /**
- * Get a SedRemainingDimension_t from the SedVariable_t based on the Target to
+ * Get a SedAppliedDimension_t from the SedVariable_t based on the Target to
  * which it refers.
  *
  * @param sv the SedVariable_t structure to search.
  *
  * @param sid a string representing the "target" attribute of the
- * SedRemainingDimension_t object to retrieve.
+ * SedAppliedDimension_t object to retrieve.
  *
- * @return the first SedRemainingDimension_t in this SedVariable_t based on the
- * given target attribute or NULL if no such SedRemainingDimension_t exists.
+ * @return the first SedAppliedDimension_t in this SedVariable_t based on the
+ * given target attribute or NULL if no such SedAppliedDimension_t exists.
  *
  * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_getRemainingDimensionByTarget(SedVariable_t* sv, const char *sid);
+SedAppliedDimension_t*
+SedVariable_getAppliedDimensionByTarget(SedVariable_t* sv, const char *sid);
 
 
 /**
- * Get a SedRemainingDimension_t from the SedVariable_t based on the
+ * Get a SedAppliedDimension_t from the SedVariable_t based on the
  * DimensionTarget to which it refers.
  *
  * @param sv the SedVariable_t structure to search.
  *
  * @param sid a string representing the "dimensionTarget" attribute of the
- * SedRemainingDimension_t object to retrieve.
+ * SedAppliedDimension_t object to retrieve.
  *
- * @return the first SedRemainingDimension_t in this SedVariable_t based on the
- * given dimensionTarget attribute or NULL if no such SedRemainingDimension_t
+ * @return the first SedAppliedDimension_t in this SedVariable_t based on the
+ * given dimensionTarget attribute or NULL if no such SedAppliedDimension_t
  * exists.
  *
  * @copydetails doc_returned_unowned_pointer
@@ -1614,18 +1614,18 @@ SedVariable_getRemainingDimensionByTarget(SedVariable_t* sv, const char *sid);
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_getRemainingDimensionByDimensionTarget(SedVariable_t* sv,
+SedAppliedDimension_t*
+SedVariable_getAppliedDimensionByDimensionTarget(SedVariable_t* sv,
                                                    const char *sid);
 
 
 /**
- * Adds a copy of the given SedRemainingDimension_t to this SedVariable_t.
+ * Adds a copy of the given SedAppliedDimension_t to this SedVariable_t.
  *
- * @param sv the SedVariable_t structure to which the SedRemainingDimension_t
+ * @param sv the SedVariable_t structure to which the SedAppliedDimension_t
  * should be added.
  *
- * @param srd the SedRemainingDimension_t object to add.
+ * @param srd the SedAppliedDimension_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1640,60 +1640,60 @@ SedVariable_getRemainingDimensionByDimensionTarget(SedVariable_t* sv,
  */
 LIBSEDML_EXTERN
 int
-SedVariable_addRemainingDimension(SedVariable_t* sv,
-                                  const SedRemainingDimension_t* srd);
+SedVariable_addAppliedDimension(SedVariable_t* sv,
+                                  const SedAppliedDimension_t* srd);
 
 
 /**
- * Get the number of SedRemainingDimension_t objects in this SedVariable_t.
+ * Get the number of SedAppliedDimension_t objects in this SedVariable_t.
  *
  * @param sv the SedVariable_t structure to query.
  *
- * @return the number of SedRemainingDimension_t objects in this SedVariable_t.
+ * @return the number of SedAppliedDimension_t objects in this SedVariable_t.
  *
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
 unsigned int
-SedVariable_getNumRemainingDimensions(SedVariable_t* sv);
+SedVariable_getNumAppliedDimensions(SedVariable_t* sv);
 
 
 /**
- * Creates a new SedRemainingDimension_t object, adds it to this SedVariable_t
- * object and returns the SedRemainingDimension_t object created.
+ * Creates a new SedAppliedDimension_t object, adds it to this SedVariable_t
+ * object and returns the SedAppliedDimension_t object created.
  *
- * @param sv the SedVariable_t structure to which the SedRemainingDimension_t
+ * @param sv the SedVariable_t structure to which the SedAppliedDimension_t
  * should be added.
  *
- * @return a new SedRemainingDimension_t object instance.
+ * @return a new SedAppliedDimension_t object instance.
  *
  * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_createRemainingDimension(SedVariable_t* sv);
+SedAppliedDimension_t*
+SedVariable_createAppliedDimension(SedVariable_t* sv);
 
 
 /**
- * Removes the nth SedRemainingDimension_t from this SedVariable_t and returns
+ * Removes the nth SedAppliedDimension_t from this SedVariable_t and returns
  * a pointer to it.
  *
  * @param sv the SedVariable_t structure to search.
  *
  * @param n an unsigned int representing the index of the
- * SedRemainingDimension_t to remove.
+ * SedAppliedDimension_t to remove.
  *
- * @return a pointer to the nth SedRemainingDimension_t in this SedVariable_t.
+ * @return a pointer to the nth SedAppliedDimension_t in this SedVariable_t.
  *
  * @copydetails doc_warning_returns_owned_pointer
  *
  * @memberof SedVariable_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_removeRemainingDimension(SedVariable_t* sv, unsigned int n);
+SedAppliedDimension_t*
+SedVariable_removeAppliedDimension(SedVariable_t* sv, unsigned int n);
 
 
 /**

@@ -122,8 +122,8 @@ typedef enum
 , SedmlVariableTargetMustBeString      = 20707
 , SedmlVariableTaskReferenceMustBeTask      = 20708
 , SedmlVariableModelReferenceMustBeModel      = 20709
-, SedmlVariableLORemainingDimensionsAllowedCoreElements      = 20710
-, SedmlVariableLORemainingDimensionsAllowedCoreAttributes      = 20711
+, SedmlVariableLOAppliedDimensionsAllowedCoreElements      = 20710
+, SedmlVariableLOAppliedDimensionsAllowedCoreAttributes      = 20711
 , SedmlParameterAllowedCoreAttributes      = 20801
 , SedmlParameterAllowedCoreElements      = 20802
 , SedmlParameterAllowedAttributes      = 20803
@@ -434,11 +434,11 @@ typedef enum
 , SedmlDependentVariableTermMustBeString      = 25504
 , SedmlDependentVariableTarget2MustBeString      = 25505
 , SedmlDependentVariableSymbol2MustBeString      = 25506
-, SedmlRemainingDimensionAllowedCoreAttributes      = 25601
-, SedmlRemainingDimensionAllowedCoreElements      = 25602
-, SedmlRemainingDimensionAllowedAttributes      = 25603
-, SedmlRemainingDimensionTargetMustBeSId      = 25604
-, SedmlRemainingDimensionDimensionTargetMustBeSId      = 25605
+, SedmlAppliedDimensionAllowedCoreAttributes      = 25601
+, SedmlAppliedDimensionAllowedCoreElements      = 25602
+, SedmlAppliedDimensionAllowedAttributes      = 25603
+, SedmlAppliedDimensionTargetMustBeSId      = 25604
+, SedmlAppliedDimensionDimensionTargetMustBeSId      = 25605
 , SedmlDataRangeAllowedCoreAttributes      = 25701
 , SedmlDataRangeAllowedCoreElements      = 25702
 , SedmlDataRangeAllowedAttributes      = 25703

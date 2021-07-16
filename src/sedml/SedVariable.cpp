@@ -58,7 +58,7 @@ SedVariable::SedVariable(unsigned int level, unsigned int version)
   , mTarget ("")
   , mTaskReference ("")
   , mModelReference ("")
-  , mRemainingDimensions (level, version)
+  , mAppliedDimensions (level, version)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
@@ -76,7 +76,7 @@ SedVariable::SedVariable(SedNamespaces *sedmlns)
   , mTarget ("")
   , mTaskReference ("")
   , mModelReference ("")
-  , mRemainingDimensions (sedmlns)
+  , mAppliedDimensions (sedmlns)
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
@@ -94,7 +94,7 @@ SedVariable::SedVariable(const SedVariable& orig)
   , mTarget ( orig.mTarget )
   , mTaskReference ( orig.mTaskReference )
   , mModelReference ( orig.mModelReference )
-  , mRemainingDimensions ( orig.mRemainingDimensions )
+  , mAppliedDimensions ( orig.mAppliedDimensions )
 {
   connectToChild();
 }
@@ -113,7 +113,7 @@ SedVariable::operator=(const SedVariable& rhs)
     mTarget = rhs.mTarget;
     mTaskReference = rhs.mTaskReference;
     mModelReference = rhs.mModelReference;
-    mRemainingDimensions = rhs.mRemainingDimensions;
+    mAppliedDimensions = rhs.mAppliedDimensions;
     connectToChild();
   }
 
@@ -356,95 +356,95 @@ SedVariable::unsetModelReference()
 
 
 /*
- * Returns the SedListOfRemainingDimensions from this SedVariable.
+ * Returns the SedListOfAppliedDimensions from this SedVariable.
  */
-const SedListOfRemainingDimensions*
-SedVariable::getListOfRemainingDimensions() const
+const SedListOfAppliedDimensions*
+SedVariable::getListOfAppliedDimensions() const
 {
-  return &mRemainingDimensions;
+  return &mAppliedDimensions;
 }
 
 
 /*
- * Returns the SedListOfRemainingDimensions from this SedVariable.
+ * Returns the SedListOfAppliedDimensions from this SedVariable.
  */
-SedListOfRemainingDimensions*
-SedVariable::getListOfRemainingDimensions()
+SedListOfAppliedDimensions*
+SedVariable::getListOfAppliedDimensions()
 {
-  return &mRemainingDimensions;
+  return &mAppliedDimensions;
 }
 
 
 /*
- * Get a SedRemainingDimension from the SedVariable.
+ * Get a SedAppliedDimension from the SedVariable.
  */
-SedRemainingDimension*
-SedVariable::getRemainingDimension(unsigned int n)
+SedAppliedDimension*
+SedVariable::getAppliedDimension(unsigned int n)
 {
-  return mRemainingDimensions.get(n);
+  return mAppliedDimensions.get(n);
 }
 
 
 /*
- * Get a SedRemainingDimension from the SedVariable.
+ * Get a SedAppliedDimension from the SedVariable.
  */
-const SedRemainingDimension*
-SedVariable::getRemainingDimension(unsigned int n) const
+const SedAppliedDimension*
+SedVariable::getAppliedDimension(unsigned int n) const
 {
-  return mRemainingDimensions.get(n);
+  return mAppliedDimensions.get(n);
 }
 
 
 /*
- * Get a SedRemainingDimension from the SedVariable based on the Target to
+ * Get a SedAppliedDimension from the SedVariable based on the Target to
  * which it refers.
  */
-const SedRemainingDimension*
-SedVariable::getRemainingDimensionByTarget(const std::string& sid) const
+const SedAppliedDimension*
+SedVariable::getAppliedDimensionByTarget(const std::string& sid) const
 {
-  return mRemainingDimensions.getByTarget(sid);
+  return mAppliedDimensions.getByTarget(sid);
 }
 
 
 /*
- * Get a SedRemainingDimension from the SedVariable based on the Target to
+ * Get a SedAppliedDimension from the SedVariable based on the Target to
  * which it refers.
  */
-SedRemainingDimension*
-SedVariable::getRemainingDimensionByTarget(const std::string& sid)
+SedAppliedDimension*
+SedVariable::getAppliedDimensionByTarget(const std::string& sid)
 {
-  return mRemainingDimensions.getByTarget(sid);
+  return mAppliedDimensions.getByTarget(sid);
 }
 
 
 /*
- * Get a SedRemainingDimension from the SedVariable based on the
+ * Get a SedAppliedDimension from the SedVariable based on the
  * DimensionTarget to which it refers.
  */
-const SedRemainingDimension*
-SedVariable::getRemainingDimensionByDimensionTarget(const std::string& sid)
+const SedAppliedDimension*
+SedVariable::getAppliedDimensionByDimensionTarget(const std::string& sid)
   const
 {
-  return mRemainingDimensions.getByDimensionTarget(sid);
+  return mAppliedDimensions.getByDimensionTarget(sid);
 }
 
 
 /*
- * Get a SedRemainingDimension from the SedVariable based on the
+ * Get a SedAppliedDimension from the SedVariable based on the
  * DimensionTarget to which it refers.
  */
-SedRemainingDimension*
-SedVariable::getRemainingDimensionByDimensionTarget(const std::string& sid)
+SedAppliedDimension*
+SedVariable::getAppliedDimensionByDimensionTarget(const std::string& sid)
 {
-  return mRemainingDimensions.getByDimensionTarget(sid);
+  return mAppliedDimensions.getByDimensionTarget(sid);
 }
 
 
 /*
- * Adds a copy of the given SedRemainingDimension to this SedVariable.
+ * Adds a copy of the given SedAppliedDimension to this SedVariable.
  */
 int
-SedVariable::addRemainingDimension(const SedRemainingDimension* srd)
+SedVariable::addAppliedDimension(const SedAppliedDimension* srd)
 {
   if (srd == NULL)
   {
@@ -469,33 +469,33 @@ SedVariable::addRemainingDimension(const SedRemainingDimension* srd)
   }
   else
   {
-    return mRemainingDimensions.append(srd);
+    return mAppliedDimensions.append(srd);
   }
 }
 
 
 /*
- * Get the number of SedRemainingDimension objects in this SedVariable.
+ * Get the number of SedAppliedDimension objects in this SedVariable.
  */
 unsigned int
-SedVariable::getNumRemainingDimensions() const
+SedVariable::getNumAppliedDimensions() const
 {
-  return mRemainingDimensions.size();
+  return mAppliedDimensions.size();
 }
 
 
 /*
- * Creates a new SedRemainingDimension object, adds it to this SedVariable
- * object and returns the SedRemainingDimension object created.
+ * Creates a new SedAppliedDimension object, adds it to this SedVariable
+ * object and returns the SedAppliedDimension object created.
  */
-SedRemainingDimension*
-SedVariable::createRemainingDimension()
+SedAppliedDimension*
+SedVariable::createAppliedDimension()
 {
-  SedRemainingDimension* srd = NULL;
+  SedAppliedDimension* srd = NULL;
 
   try
   {
-    srd = new SedRemainingDimension(getSedNamespaces());
+    srd = new SedAppliedDimension(getSedNamespaces());
   }
   catch (...)
   {
@@ -503,7 +503,7 @@ SedVariable::createRemainingDimension()
 
   if (srd != NULL)
   {
-    mRemainingDimensions.appendAndOwn(srd);
+    mAppliedDimensions.appendAndOwn(srd);
   }
 
   return srd;
@@ -511,13 +511,13 @@ SedVariable::createRemainingDimension()
 
 
 /*
- * Removes the nth SedRemainingDimension from this SedVariable and returns a
+ * Removes the nth SedAppliedDimension from this SedVariable and returns a
  * pointer to it.
  */
-SedRemainingDimension*
-SedVariable::removeRemainingDimension(unsigned int n)
+SedAppliedDimension*
+SedVariable::removeAppliedDimension(unsigned int n)
 {
-  return mRemainingDimensions.remove(n);
+  return mAppliedDimensions.remove(n);
 }
 
 
@@ -590,9 +590,9 @@ SedVariable::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedBase::writeElements(stream);
 
-  if (getNumRemainingDimensions() > 0)
+  if (getNumAppliedDimensions() > 0)
   {
-    mRemainingDimensions.write(stream);
+    mAppliedDimensions.write(stream);
   }
 }
 
@@ -625,7 +625,7 @@ SedVariable::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
 
-  mRemainingDimensions.setSedDocument(d);
+  mAppliedDimensions.setSedDocument(d);
 }
 
 /** @endcond */
@@ -642,7 +642,7 @@ SedVariable::connectToChild()
 {
   SedBase::connectToChild();
 
-  mRemainingDimensions.connectToParent(this);
+  mAppliedDimensions.connectToParent(this);
 }
 
 /** @endcond */
@@ -946,9 +946,9 @@ SedVariable::createChildObject(const std::string& elementName)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "remainingDimension")
+  if (elementName == "appliedDimension")
   {
-    return createRemainingDimension();
+    return createAppliedDimension();
   }
 
   return obj;
@@ -967,10 +967,10 @@ int
 SedVariable::addChildObject(const std::string& elementName,
                             const SedBase* element)
 {
-  if (elementName == "remainingDimension" && element->getTypeCode() ==
-    SEDML_REMAININGDIMENSION)
+  if (elementName == "appliedDimension" && element->getTypeCode() ==
+    SEDML_APPLIEDDIMENSION)
   {
-    return addRemainingDimension((const SedRemainingDimension*)(element));
+    return addAppliedDimension((const SedAppliedDimension*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -990,13 +990,13 @@ SedBase*
 SedVariable::removeChildObject(const std::string& elementName,
                                const std::string& id)
 {
-  if (elementName == "remainingDimension")
+  if (elementName == "appliedDimension")
   {
-    for (unsigned int i = 0; i < getNumRemainingDimensions(); i++)
+    for (unsigned int i = 0; i < getNumAppliedDimensions(); i++)
     {
-      if (getRemainingDimension(i)->getId() == id)
+      if (getAppliedDimension(i)->getId() == id)
       {
-        return removeRemainingDimension(i);
+        return removeAppliedDimension(i);
       }
     }
   }
@@ -1018,9 +1018,9 @@ SedVariable::getNumObjects(const std::string& elementName)
 {
   unsigned int n = 0;
 
-  if (elementName == "remainingDimension")
+  if (elementName == "appliedDimension")
   {
-    return getNumRemainingDimensions();
+    return getNumAppliedDimensions();
   }
 
   return n;
@@ -1040,9 +1040,9 @@ SedVariable::getObject(const std::string& elementName, unsigned int index)
 {
   SedBase* obj = NULL;
 
-  if (elementName == "remainingDimension")
+  if (elementName == "appliedDimension")
   {
-    return getRemainingDimension(index);
+    return getAppliedDimension(index);
   }
 
   return obj;
@@ -1065,7 +1065,7 @@ SedVariable::getElementBySId(const std::string& id)
 
   SedBase* obj = NULL;
 
-  obj = mRemainingDimensions.getElementBySId(id);
+  obj = mAppliedDimensions.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -1086,7 +1086,7 @@ SedVariable::getAllElements(SedElementFilter* filter)
   List* ret = new List();
   List* sublist = NULL;
 
-  SED_ADD_FILTERED_LIST(ret, sublist, mRemainingDimensions, filter);
+  SED_ADD_FILTERED_LIST(ret, sublist, mAppliedDimensions, filter);
 
   return ret;
 }
@@ -1106,15 +1106,15 @@ SedVariable::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
 
   const std::string& name = stream.peek().getName();
 
-  if (name == "listOfRemainingDimensions")
+  if (name == "listOfAppliedDimensions")
   {
-    if (getErrorLog() && mRemainingDimensions.size() != 0)
+    if (getErrorLog() && mAppliedDimensions.size() != 0)
     {
       getErrorLog()->logError(SedmlVariableAllowedElements, getLevel(),
         getVersion(), "", getLine(), getColumn());
     }
 
-    obj = &mRemainingDimensions;
+    obj = &mAppliedDimensions;
   }
 
   connectToChild();
@@ -1691,100 +1691,100 @@ SedVariable_unsetModelReference(SedVariable_t * sv)
 
 
 /*
- * Returns a ListOf_t * containing SedRemainingDimension_t objects from this
+ * Returns a ListOf_t * containing SedAppliedDimension_t objects from this
  * SedVariable_t.
  */
 LIBSEDML_EXTERN
 SedListOf_t*
-SedVariable_getListOfRemainingDimensions(SedVariable_t* sv)
+SedVariable_getListOfAppliedDimensions(SedVariable_t* sv)
 {
-  return (sv != NULL) ? sv->getListOfRemainingDimensions() : NULL;
+  return (sv != NULL) ? sv->getListOfAppliedDimensions() : NULL;
 }
 
 
 /*
- * Get a SedRemainingDimension_t from the SedVariable_t.
+ * Get a SedAppliedDimension_t from the SedVariable_t.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_getRemainingDimension(SedVariable_t* sv, unsigned int n)
+SedAppliedDimension_t*
+SedVariable_getAppliedDimension(SedVariable_t* sv, unsigned int n)
 {
-  return (sv != NULL) ? sv->getRemainingDimension(n) : NULL;
+  return (sv != NULL) ? sv->getAppliedDimension(n) : NULL;
 }
 
 
 /*
- * Get a SedRemainingDimension_t from the SedVariable_t based on the Target to
+ * Get a SedAppliedDimension_t from the SedVariable_t based on the Target to
  * which it refers.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_getRemainingDimensionByTarget(SedVariable_t* sv, const char *sid)
+SedAppliedDimension_t*
+SedVariable_getAppliedDimensionByTarget(SedVariable_t* sv, const char *sid)
 {
-  return (sv != NULL && sid != NULL) ? sv->getRemainingDimensionByTarget(sid) :
+  return (sv != NULL && sid != NULL) ? sv->getAppliedDimensionByTarget(sid) :
     NULL;
 }
 
 
 /*
- * Get a SedRemainingDimension_t from the SedVariable_t based on the
+ * Get a SedAppliedDimension_t from the SedVariable_t based on the
  * DimensionTarget to which it refers.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_getRemainingDimensionByDimensionTarget(SedVariable_t* sv,
+SedAppliedDimension_t*
+SedVariable_getAppliedDimensionByDimensionTarget(SedVariable_t* sv,
                                                    const char *sid)
 {
   return (sv != NULL && sid != NULL) ?
-    sv->getRemainingDimensionByDimensionTarget(sid) : NULL;
+    sv->getAppliedDimensionByDimensionTarget(sid) : NULL;
 }
 
 
 /*
- * Adds a copy of the given SedRemainingDimension_t to this SedVariable_t.
+ * Adds a copy of the given SedAppliedDimension_t to this SedVariable_t.
  */
 LIBSEDML_EXTERN
 int
-SedVariable_addRemainingDimension(SedVariable_t* sv,
-                                  const SedRemainingDimension_t* srd)
+SedVariable_addAppliedDimension(SedVariable_t* sv,
+                                  const SedAppliedDimension_t* srd)
 {
-  return (sv != NULL) ? sv->addRemainingDimension(srd) :
+  return (sv != NULL) ? sv->addAppliedDimension(srd) :
     LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Get the number of SedRemainingDimension_t objects in this SedVariable_t.
+ * Get the number of SedAppliedDimension_t objects in this SedVariable_t.
  */
 LIBSEDML_EXTERN
 unsigned int
-SedVariable_getNumRemainingDimensions(SedVariable_t* sv)
+SedVariable_getNumAppliedDimensions(SedVariable_t* sv)
 {
-  return (sv != NULL) ? sv->getNumRemainingDimensions() : SEDML_INT_MAX;
+  return (sv != NULL) ? sv->getNumAppliedDimensions() : SEDML_INT_MAX;
 }
 
 
 /*
- * Creates a new SedRemainingDimension_t object, adds it to this SedVariable_t
- * object and returns the SedRemainingDimension_t object created.
+ * Creates a new SedAppliedDimension_t object, adds it to this SedVariable_t
+ * object and returns the SedAppliedDimension_t object created.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_createRemainingDimension(SedVariable_t* sv)
+SedAppliedDimension_t*
+SedVariable_createAppliedDimension(SedVariable_t* sv)
 {
-  return (sv != NULL) ? sv->createRemainingDimension() : NULL;
+  return (sv != NULL) ? sv->createAppliedDimension() : NULL;
 }
 
 
 /*
- * Removes the nth SedRemainingDimension_t from this SedVariable_t and returns
+ * Removes the nth SedAppliedDimension_t from this SedVariable_t and returns
  * a pointer to it.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedVariable_removeRemainingDimension(SedVariable_t* sv, unsigned int n)
+SedAppliedDimension_t*
+SedVariable_removeAppliedDimension(SedVariable_t* sv, unsigned int n)
 {
-  return (sv != NULL) ? sv->removeRemainingDimension(n) : NULL;
+  return (sv != NULL) ? sv->removeAppliedDimension(n) : NULL;
 }
 
 
