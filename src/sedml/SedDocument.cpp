@@ -41,7 +41,6 @@
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
-#include <sedml/SedSimpleRepeatedTask.h>
 #include <sedml/SedReport.h>
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
@@ -1194,32 +1193,6 @@ SedDocument::createParameterEstimationTask()
   }
 
   return spet;
-}
-
-
-/*
- * Creates a new SedSimpleRepeatedTask object, adds it to this SedDocument
- * object and returns the SedSimpleRepeatedTask object created.
- */
-SedSimpleRepeatedTask*
-SedDocument::createSimpleRepeatedTask()
-{
-  SedSimpleRepeatedTask* ssrt = NULL;
-
-  try
-  {
-    ssrt = new SedSimpleRepeatedTask(getSedNamespaces());
-  }
-  catch (...)
-  {
-  }
-
-  if (ssrt != NULL)
-  {
-    mAbstractTasks.appendAndOwn(ssrt);
-  }
-
-  return ssrt;
 }
 
 
@@ -2436,10 +2409,6 @@ SedDocument::createChildObject(const std::string& elementName)
   {
     return createParameterEstimationTask();
   }
-  else if (elementName == "simpleRepeatedTask")
-  {
-    return createSimpleRepeatedTask();
-  }
   else if (elementName == "dataGenerator")
   {
     return createDataGenerator();
@@ -2533,11 +2502,6 @@ SedDocument::addChildObject(const std::string& elementName,
   {
     return addTask((const SedAbstractTask*)(element));
   }
-  else if (elementName == "simpleRepeatedTask" && element->getTypeCode() ==
-    SEDML_TASK_SIMPLEREPEATEDTASK)
-  {
-    return addTask((const SedAbstractTask*)(element));
-  }
   else if (elementName == "dataGenerator" && element->getTypeCode() ==
     SEDML_DATAGENERATOR)
   {
@@ -2626,10 +2590,6 @@ SedDocument::removeChildObject(const std::string& elementName,
     return removeTask(id);
   }
   else if (elementName == "parameterEstimationTask")
-  {
-    return removeTask(id);
-  }
-  else if (elementName == "simpleRepeatedTask")
   {
     return removeTask(id);
   }
@@ -3842,18 +3802,6 @@ SedParameterEstimationTask_t*
 SedDocument_createParameterEstimationTask(SedDocument_t* sd)
 {
   return (sd != NULL) ? sd->createParameterEstimationTask() : NULL;
-}
-
-
-/*
- * Creates a new SedSimpleRepeatedTask_t object, adds it to this SedDocument_t
- * object and returns the SedSimpleRepeatedTask_t object created.
- */
-LIBSEDML_EXTERN
-SedSimpleRepeatedTask_t*
-SedDocument_createSimpleRepeatedTask(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->createSimpleRepeatedTask() : NULL;
 }
 
 

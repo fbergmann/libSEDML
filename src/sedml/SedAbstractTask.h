@@ -60,7 +60,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 class SedTask;
 class SedRepeatedTask;
 class SedParameterEstimationTask;
-class SedSimpleRepeatedTask;
 
 class LIBSEDML_EXTERN SedAbstractTask : public SedBase
 {
@@ -161,16 +160,6 @@ public:
    * SedParameterEstimationTask, @c false otherwise
    */
   virtual bool isSedParameterEstimationTask() const;
-
-
-  /**
-   * Predicate returning @c true if this abstract "SedAbstractTask" is of type
-   * SedSimpleRepeatedTask
-   *
-   * @return @c true if this abstract "SedAbstractTask" is of type
-   * SedSimpleRepeatedTask, @c false otherwise
-   */
-  virtual bool isSedSimpleRepeatedTask() const;
 
 
   /**
@@ -629,28 +618,6 @@ SedAbstractTask_createParameterEstimationTask(unsigned int level,
 
 
 /**
- * Creates a new SedSimpleRepeatedTask using the given SED-ML Level and @ p
- * version values.
- *
- * @param level an unsigned int, the SED-ML Level to assign to this
- * SedAbstractTask_t.
- *
- * @param version an unsigned int, the SED-ML Version to assign to this
- * SedAbstractTask_t.
- *
- * @copydetails doc_note_setting_lv_pkg
- *
- * @copydetails doc_returned_owned_pointer
- *
- * @memberof SedAbstractTask_t
- */
-LIBSEDML_EXTERN
-SedSimpleRepeatedTask_t *
-SedAbstractTask_createSimpleRepeatedTask(unsigned int level,
-                                         unsigned int version);
-
-
-/**
  * Creates and returns a deep copy of this SedAbstractTask_t object.
  *
  * @param sat the SedAbstractTask_t structure.
@@ -866,22 +833,6 @@ SedAbstractTask_isSedRepeatedTask(const SedAbstractTask_t * sat);
 LIBSEDML_EXTERN
 int
 SedAbstractTask_isSedParameterEstimationTask(const SedAbstractTask_t * sat);
-
-
-/**
- * Predicate returning @c 1 if this SedAbstractTask_t is of type
- * SedSimpleRepeatedTask_t
- *
- * @param sat the SedAbstractTask_t structure.
- *
- * @return @c 1 if this SedAbstractTask_t is of type SedSimpleRepeatedTask_t,
- * @c 0 otherwise
- *
- * @memberof SedAbstractTask_t
- */
-LIBSEDML_EXTERN
-int
-SedAbstractTask_isSedSimpleRepeatedTask(const SedAbstractTask_t * sat);
 
 
 /**

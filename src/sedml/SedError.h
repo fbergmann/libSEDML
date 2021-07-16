@@ -443,11 +443,6 @@ typedef enum
 , SedmlDataRangeAllowedCoreElements      = 25702
 , SedmlDataRangeAllowedAttributes      = 25703
 , SedmlDataRangeSourceRefMustBeSId      = 25704
-, SedmlSimpleRepeatedTaskAllowedCoreAttributes      = 25801
-, SedmlSimpleRepeatedTaskAllowedCoreElements      = 25802
-, SedmlSimpleRepeatedTaskAllowedAttributes      = 25803
-, SedmlSimpleRepeatedTaskResetModelMustBeBoolean      = 25804
-, SedmlSimpleRepeatedTaskNumRepeatsMustBeInteger      = 25805
 , SedmlShadedAreaAllowedCoreAttributes      = 25901
 , SedmlShadedAreaAllowedCoreElements      = 25902
 , SedmlShadedAreaAllowedAttributes      = 25903

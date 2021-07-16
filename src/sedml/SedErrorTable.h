@@ -4743,65 +4743,6 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  // 25801
-  { SedmlSimpleRepeatedTaskAllowedCoreAttributes,
-    "Core attributes allowed on <simpleRepeatedTask>.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <simpleRepeatedTask> object may have the optional SBML Level 3 Core "
-    "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <simpleRepeatedTask>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 25802
-  { SedmlSimpleRepeatedTaskAllowedCoreElements,
-    "Core elements allowed on <simpleRepeatedTask>.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <simpleRepeatedTask> object may have the optional SBML Level 3 Core "
-    "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <simpleRepeatedTask>.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 25803
-  { SedmlSimpleRepeatedTaskAllowedAttributes,
-    "Attributes allowed on <simpleRepeatedTask>.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "A <simpleRepeatedTask> object must have the required attributes "
-    "'sedml:resetModel' and 'sedml:numRepeats'. No other attributes from the "
-    "SBML Level 3 SED-ML namespaces are permitted on a <simpleRepeatedTask> "
-    "object. ",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 25804
-  { SedmlSimpleRepeatedTaskResetModelMustBeBoolean,
-    "The 'resetModel' attribute must be Boolean.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:resetModel' on a <simpleRepeatedTask> must have a "
-    "value of data type 'boolean'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 25805
-  { SedmlSimpleRepeatedTaskNumRepeatsMustBeInteger,
-    "The 'numRepeats' attribute must be Integer.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:numRepeats' on a <simpleRepeatedTask> must have a "
-    "value of data type 'integer'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
   // 25901
   { SedmlShadedAreaAllowedCoreAttributes,
     "Core attributes allowed on <shadedArea>.",

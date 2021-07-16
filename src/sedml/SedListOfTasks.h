@@ -61,7 +61,6 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 class SedTask;
 class SedRepeatedTask;
 class SedParameterEstimationTask;
-class SedSimpleRepeatedTask;
 
 class LIBSEDML_EXTERN SedListOfTasks : public SedListOf
 {
@@ -354,24 +353,6 @@ public:
    * @see remove(unsigned int n)
    */
   SedParameterEstimationTask* createParameterEstimationTask();
-
-
-  /**
-   * Creates a new SedSimpleRepeatedTask object, adds it to this SedListOfTasks
-   * object and returns the SedSimpleRepeatedTask object created.
-   *
-   * @return a new SedSimpleRepeatedTask object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addAbstractTask(const SedAbstractTask* object)
-   * @see get(const std::string& sid)
-   * @see get(unsigned int n)
-   * @see getNumAbstractTasks()
-   * @see remove(const std::string& sid)
-   * @see remove(unsigned int n)
-   */
-  SedSimpleRepeatedTask* createSimpleRepeatedTask();
 
 
   /**
