@@ -1391,24 +1391,6 @@ public:
 
 
   /**
-   * Creates a new SedSimpleRepeatedTask object, adds it to this SedDocument
-   * object and returns the SedSimpleRepeatedTask object created.
-   *
-   * @return a new SedSimpleRepeatedTask object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addTask(const SedAbstractTask* object)
-   * @see getTask(const std::string& sid)
-   * @see getTask(unsigned int n)
-   * @see getNumTasks()
-   * @see removeTask(const std::string& sid)
-   * @see removeTask(unsigned int n)
-   */
-  SedSimpleRepeatedTask* createSimpleRepeatedTask();
-
-
-  /**
    * Removes the nth SedAbstractTask from this SedDocument and returns a
    * pointer to it.
    *
@@ -3870,24 +3852,6 @@ SedDocument_createRepeatedTask(SedDocument_t* sd);
 LIBSEDML_EXTERN
 SedParameterEstimationTask_t*
 SedDocument_createParameterEstimationTask(SedDocument_t* sd);
-
-
-/**
- * Creates a new SedSimpleRepeatedTask_t object, adds it to this SedDocument_t
- * object and returns the SedSimpleRepeatedTask_t object created.
- *
- * @param sd the SedDocument_t structure to which the SedSimpleRepeatedTask_t
- * should be added.
- *
- * @return a new SedSimpleRepeatedTask_t object instance.
- *
- * @copydetails doc_returned_unowned_pointer
- *
- * @memberof SedDocument_t
- */
-LIBSEDML_EXTERN
-SedSimpleRepeatedTask_t*
-SedDocument_createSimpleRepeatedTask(SedDocument_t* sd);
 
 
 /**

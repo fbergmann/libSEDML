@@ -100,7 +100,6 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "DependentVariable"
   , "AppliedDimension"
   , "DataRange"
-  , "SimpleRepeatedTask"
   , "ShadedArea"
   , "ParameterEstimationResultPlot"
   , "WaterfallPlot"

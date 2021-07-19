@@ -370,9 +370,6 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     case (int) libsedml.SEDML_DATA_RANGE:
       return new SedDataRange(cPtr, owner);
 
-    case (int) libsedml.SEDML_TASK_SIMPLEREPEATEDTASK:
-      return new SedSimpleRepeatedTask(cPtr, owner);
-
     case (int) libsedml.SEDML_SHADEDAREA:
       return new SedShadedArea(cPtr, owner);
 
@@ -897,7 +894,6 @@ COVARIANT_RTYPE_CLONE(SedFill)
 COVARIANT_RTYPE_CLONE(SedDependentVariable)
 COVARIANT_RTYPE_CLONE(SedAppliedDimension)
 COVARIANT_RTYPE_CLONE(SedDataRange)
-COVARIANT_RTYPE_CLONE(SedSimpleRepeatedTask)
 COVARIANT_RTYPE_CLONE(SedShadedArea)
 COVARIANT_RTYPE_CLONE(SedWaterfallPlot)
 COVARIANT_RTYPE_CLONE(SedParameterEstimationReport)
@@ -1232,7 +1228,6 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedRepeatedTask)
 SEDMLCONSTRUCTOR_EXCEPTION(SedReport)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSetValue)
 SEDMLCONSTRUCTOR_EXCEPTION(SedShadedArea)
-SEDMLCONSTRUCTOR_EXCEPTION(SedSimpleRepeatedTask)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSimulation)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSlice)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSteadyState)

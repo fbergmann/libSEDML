@@ -628,16 +628,6 @@ SedVisitor::visit(const SedDataRange& x)
 
 
 /*
- * Visit the SedSimpleRepeatedTask
- */
-bool
-SedVisitor::visit(const SedSimpleRepeatedTask& x)
-{
-  return visit(static_cast<const SedBase&>(x));
-}
-
-
-/*
  * Visit the SedShadedArea
  */
 bool
@@ -1195,15 +1185,6 @@ SedVisitor::leave(const SedAppliedDimension& x)
  */
 void
 SedVisitor::leave(const SedDataRange& x)
-{
-}
-
-
-/*
- * Leave the SedSimpleRepeatedTask
- */
-void
-SedVisitor::leave(const SedSimpleRepeatedTask& x)
 {
 }
 

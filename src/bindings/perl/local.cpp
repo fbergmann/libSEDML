@@ -223,9 +223,6 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_DATA_RANGE:
       return SWIGTYPE_p_SedDataRange;
 
-    case SEDML_TASK_SIMPLEREPEATEDTASK:
-      return SWIGTYPE_p_SedSimpleRepeatedTask;
-
     case SEDML_SHADEDAREA:
       return SWIGTYPE_p_SedShadedArea;
 

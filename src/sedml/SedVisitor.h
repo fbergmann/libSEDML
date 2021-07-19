@@ -114,7 +114,6 @@ class SedFill;
 class SedDependentVariable;
 class SedAppliedDimension;
 class SedDataRange;
-class SedSimpleRepeatedTask;
 class SedShadedArea;
 class SedParameterEstimationResultPlot;
 class SedWaterfallPlot;
@@ -721,16 +720,6 @@ virtual bool visit (const SedAppliedDimension &x);
  * @param x the SedBase object to visit.
  */
 virtual bool visit (const SedDataRange &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to visit.
- */
-virtual bool visit (const SedSimpleRepeatedTask &x);
 
 
 /**
@@ -1364,16 +1353,6 @@ virtual void leave (const SedAppliedDimension &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedDataRange &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to leave.
- */
-virtual void leave (const SedSimpleRepeatedTask &x);
 
 
 /**

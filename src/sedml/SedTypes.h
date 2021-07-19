@@ -100,7 +100,6 @@
 #include <sedml/SedDependentVariable.h>
 #include <sedml/SedAppliedDimension.h>
 #include <sedml/SedDataRange.h>
-#include <sedml/SedSimpleRepeatedTask.h>
 #include <sedml/SedShadedArea.h>
 #include <sedml/SedParameterEstimationResultPlot.h>
 #include <sedml/SedWaterfallPlot.h>

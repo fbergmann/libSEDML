@@ -110,7 +110,6 @@
             <concrete name="task" element="Task" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="repeatedTask" element="RepeatedTask" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="parameterEstimationTask" element="ParameterEstimationTask" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="simpleRepeatedTask" element="SimpleRepeatedTask" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="Task" typeCode="SEDML_TASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false" elementName="task">
@@ -120,7 +119,6 @@
           </attributes>
           <concretes>
             <concrete name="task" element="Task" minNumChildren="0" maxNumChildren="0"/>
-            <concrete name="simpleRepeatedTask" element="SimpleRepeatedTask" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="DataGenerator" typeCode="SEDML_DATAGENERATOR" hasListOf="true" hasChildren="true" hasMath="true" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false" elementName="dataGenerator">
@@ -446,12 +444,6 @@
         <element name="DataRange" typeCode="SEDML_DATA_RANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">
           <attributes>
             <attribute name="sourceRef" required="true" type="SIdRef" element="DataDescription" abstract="false"/>
-          </attributes>
-        </element>
-        <element name="SimpleRepeatedTask" typeCode="SEDML_TASK_SIMPLEREPEATEDTASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false">
-          <attributes>
-            <attribute name="resetModel" required="true" type="bool" abstract="false"/>
-            <attribute name="numRepeats" required="true" type="integer" abstract="false"/>
           </attributes>
         </element>
         <element name="ShadedArea" typeCode="SEDML_SHADEDAREA" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractCurve" abstract="false">
