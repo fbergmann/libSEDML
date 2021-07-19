@@ -113,7 +113,7 @@ typedef CLASS_OR_STRUCT SedLine                          SedLine_t;
 typedef CLASS_OR_STRUCT SedMarker                        SedMarker_t;
 typedef CLASS_OR_STRUCT SedFill                          SedFill_t;
 typedef CLASS_OR_STRUCT SedDependentVariable             SedDependentVariable_t;
-typedef CLASS_OR_STRUCT SedRemainingDimension            SedRemainingDimension_t;
+typedef CLASS_OR_STRUCT SedAppliedDimension              SedAppliedDimension_t;
 typedef CLASS_OR_STRUCT SedDataRange                     SedDataRange_t;
 typedef CLASS_OR_STRUCT SedShadedArea                    SedShadedArea_t;
 typedef CLASS_OR_STRUCT SedParameterEstimationResultPlot SedParameterEstimationResultPlot_t;

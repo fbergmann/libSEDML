@@ -217,8 +217,8 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_DEPENDENTVARIABLE:
       return SWIGTYPE_p_SedDependentVariable;
 
-    case SEDML_REMAININGDIMENSION:
-      return SWIGTYPE_p_SedRemainingDimension;
+    case SEDML_APPLIEDDIMENSION:
+      return SWIGTYPE_p_SedAppliedDimension;
 
     case SEDML_DATA_RANGE:
       return SWIGTYPE_p_SedDataRange;
@@ -324,9 +324,9 @@ GetDowncastSwigType (SedBase* sb)
       {
          return SWIGTYPE_p_SedListOfSubPlots;
       }
-      else if (name == "listOfRemainingDimensions")
+      else if (name == "listOfAppliedDimensions")
       {
-         return SWIGTYPE_p_SedListOfRemainingDimensions;
+         return SWIGTYPE_p_SedListOfAppliedDimensions;
       }
       else if (name == "listOfStyles")
       {

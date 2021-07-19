@@ -112,7 +112,7 @@ class SedLine;
 class SedMarker;
 class SedFill;
 class SedDependentVariable;
-class SedRemainingDimension;
+class SedAppliedDimension;
 class SedDataRange;
 class SedShadedArea;
 class SedParameterEstimationResultPlot;
@@ -709,7 +709,7 @@ virtual bool visit (const SedDependentVariable &x);
  *
  * @param x the SedBase object to visit.
  */
-virtual bool visit (const SedRemainingDimension &x);
+virtual bool visit (const SedAppliedDimension &x);
 
 
 /**
@@ -1342,7 +1342,7 @@ virtual void leave (const SedDependentVariable &x);
  *
  * @param x the SedBase object to leave.
  */
-virtual void leave (const SedRemainingDimension &x);
+virtual void leave (const SedAppliedDimension &x);
 
 
 /**
