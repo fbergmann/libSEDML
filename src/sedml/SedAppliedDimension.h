@@ -1,6 +1,6 @@
 /**
- * @file SedRemainingDimension.h
- * @brief Definition of the SedRemainingDimension class.
+ * @file SedAppliedDimension.h
+ * @brief Definition of the SedAppliedDimension class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,13 +31,13 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  *
- * @class SedRemainingDimension
- * @sbmlbrief{sedml} TODO:Definition of the SedRemainingDimension class.
+ * @class SedAppliedDimension
+ * @sbmlbrief{sedml} TODO:Definition of the SedAppliedDimension class.
  */
 
 
-#ifndef SedRemainingDimension_H__
-#define SedRemainingDimension_H__
+#ifndef SedAppliedDimension_H__
+#define SedAppliedDimension_H__
 
 
 #include <sedml/common/extern.h>
@@ -57,7 +57,7 @@
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
-class LIBSEDML_EXTERN SedRemainingDimension : public SedBase
+class LIBSEDML_EXTERN SedAppliedDimension : public SedBase
 {
 protected:
 
@@ -71,67 +71,67 @@ protected:
 public:
 
   /**
-   * Creates a new SedRemainingDimension using the given SED-ML Level and @ p
+   * Creates a new SedAppliedDimension using the given SED-ML Level and @ p
    * version values.
    *
    * @param level an unsigned int, the SED-ML Level to assign to this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param version an unsigned int, the SED-ML Version to assign to this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedRemainingDimension(unsigned int level = SEDML_DEFAULT_LEVEL,
+  SedAppliedDimension(unsigned int level = SEDML_DEFAULT_LEVEL,
                         unsigned int version = SEDML_DEFAULT_VERSION);
 
 
   /**
-   * Creates a new SedRemainingDimension using the given SedNamespaces object
+   * Creates a new SedAppliedDimension using the given SedNamespaces object
    * @p sedmlns.
    *
    * @param sedmlns the SedNamespaces object.
    *
    * @copydetails doc_note_setting_lv_pkg
    */
-  SedRemainingDimension(SedNamespaces *sedmlns);
+  SedAppliedDimension(SedNamespaces *sedmlns);
 
 
   /**
-   * Copy constructor for SedRemainingDimension.
+   * Copy constructor for SedAppliedDimension.
    *
-   * @param orig the SedRemainingDimension instance to copy.
+   * @param orig the SedAppliedDimension instance to copy.
    */
-  SedRemainingDimension(const SedRemainingDimension& orig);
+  SedAppliedDimension(const SedAppliedDimension& orig);
 
 
   /**
-   * Assignment operator for SedRemainingDimension.
+   * Assignment operator for SedAppliedDimension.
    *
-   * @param rhs the SedRemainingDimension object whose values are to be used as
+   * @param rhs the SedAppliedDimension object whose values are to be used as
    * the basis of the assignment.
    */
-  SedRemainingDimension& operator=(const SedRemainingDimension& rhs);
+  SedAppliedDimension& operator=(const SedAppliedDimension& rhs);
 
 
   /**
-   * Creates and returns a deep copy of this SedRemainingDimension object.
+   * Creates and returns a deep copy of this SedAppliedDimension object.
    *
-   * @return a (deep) copy of this SedRemainingDimension object.
+   * @return a (deep) copy of this SedAppliedDimension object.
    */
-  virtual SedRemainingDimension* clone() const;
+  virtual SedAppliedDimension* clone() const;
 
 
   /**
-   * Destructor for SedRemainingDimension.
+   * Destructor for SedAppliedDimension.
    */
-  virtual ~SedRemainingDimension();
+  virtual ~SedAppliedDimension();
 
 
   /**
-   * Returns the value of the "target" attribute of this SedRemainingDimension.
+   * Returns the value of the "target" attribute of this SedAppliedDimension.
    *
-   * @return the value of the "target" attribute of this SedRemainingDimension
+   * @return the value of the "target" attribute of this SedAppliedDimension
    * as a string.
    */
   const std::string& getTarget() const;
@@ -139,36 +139,36 @@ public:
 
   /**
    * Returns the value of the "dimensionTarget" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @return the value of the "dimensionTarget" attribute of this
-   * SedRemainingDimension as a string.
+   * SedAppliedDimension as a string.
    */
   const std::string& getDimensionTarget() const;
 
 
   /**
-   * Predicate returning @c true if this SedRemainingDimension's "target"
+   * Predicate returning @c true if this SedAppliedDimension's "target"
    * attribute is set.
    *
-   * @return @c true if this SedRemainingDimension's "target" attribute has
+   * @return @c true if this SedAppliedDimension's "target" attribute has
    * been set, otherwise @c false is returned.
    */
   bool isSetTarget() const;
 
 
   /**
-   * Predicate returning @c true if this SedRemainingDimension's
+   * Predicate returning @c true if this SedAppliedDimension's
    * "dimensionTarget" attribute is set.
    *
-   * @return @c true if this SedRemainingDimension's "dimensionTarget"
+   * @return @c true if this SedAppliedDimension's "dimensionTarget"
    * attribute has been set, otherwise @c false is returned.
    */
   bool isSetDimensionTarget() const;
 
 
   /**
-   * Sets the value of the "target" attribute of this SedRemainingDimension.
+   * Sets the value of the "target" attribute of this SedAppliedDimension.
    *
    * @param target std::string& value of the "target" attribute to be set.
    *
@@ -182,7 +182,7 @@ public:
 
   /**
    * Sets the value of the "dimensionTarget" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param dimensionTarget std::string& value of the "dimensionTarget"
    * attribute to be set.
@@ -196,7 +196,7 @@ public:
 
 
   /**
-   * Unsets the value of the "target" attribute of this SedRemainingDimension.
+   * Unsets the value of the "target" attribute of this SedAppliedDimension.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -207,7 +207,7 @@ public:
 
   /**
    * Unsets the value of the "dimensionTarget" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -224,23 +224,23 @@ public:
 
 
   /**
-   * Returns the XML element name of this SedRemainingDimension object.
+   * Returns the XML element name of this SedAppliedDimension object.
    *
-   * For SedRemainingDimension, the XML element name is always
-   * @c "remainingDimension".
+   * For SedAppliedDimension, the XML element name is always
+   * @c "appliedDimension".
    *
-   * @return the name of this element, i.e. @c "remainingDimension".
+   * @return the name of this element, i.e. @c "appliedDimension".
    */
   virtual const std::string& getElementName() const;
 
 
   /**
-   * Returns the libSEDML type code for this SedRemainingDimension object.
+   * Returns the libSEDML type code for this SedAppliedDimension object.
    *
    * @copydetails doc_what_are_typecodes
    *
    * @return the SED-ML type code for this object:
-   * @sedmlconstant{SEDML_REMAININGDIMENSION, SedTypeCode_t}.
+   * @sedmlconstant{SEDML_APPLIEDDIMENSION, SedTypeCode_t}.
    *
    * @copydetails doc_warning_typecodes_not_unique
    *
@@ -251,10 +251,10 @@ public:
 
   /**
    * Predicate returning @c true if all the required attributes for this
-   * SedRemainingDimension object have been set.
+   * SedAppliedDimension object have been set.
    *
    * @return @c true to indicate that all the required attributes of this
-   * SedRemainingDimension have been set, otherwise @c false is returned.
+   * SedAppliedDimension have been set, otherwise @c false is returned.
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -303,7 +303,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -324,7 +324,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -344,7 +344,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -365,7 +365,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -386,7 +386,7 @@ public:
 
   /**
    * Gets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to retrieve.
    *
@@ -406,12 +406,12 @@ public:
   /** @cond doxygenLibSEDMLInternal */
 
   /**
-   * Predicate returning @c true if this SedRemainingDimension's attribute
+   * Predicate returning @c true if this SedAppliedDimension's attribute
    * "attributeName" is set.
    *
    * @param attributeName, the name of the attribute to query.
    *
-   * @return @c true if this SedRemainingDimension's attribute "attributeName"
+   * @return @c true if this SedAppliedDimension's attribute "attributeName"
    * has been set, otherwise @c false is returned.
    */
   virtual bool isSetAttribute(const std::string& attributeName) const;
@@ -424,7 +424,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -444,7 +444,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -464,7 +464,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -484,7 +484,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -505,7 +505,7 @@ public:
 
   /**
    * Sets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to set.
    *
@@ -526,7 +526,7 @@ public:
 
   /**
    * Unsets the value of the "attributeName" attribute of this
-   * SedRemainingDimension.
+   * SedAppliedDimension.
    *
    * @param attributeName, the name of the attribute to query.
    *
@@ -613,127 +613,127 @@ BEGIN_C_DECLS
 
 
 /**
- * Creates a new SedRemainingDimension_t using the given SED-ML Level and @ p
+ * Creates a new SedAppliedDimension_t using the given SED-ML Level and @ p
  * version values.
  *
  * @param level an unsigned int, the SED-ML Level to assign to this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  *
  * @param version an unsigned int, the SED-ML Version to assign to this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  *
  * @copydetails doc_note_setting_lv_pkg
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t *
-SedRemainingDimension_create(unsigned int level, unsigned int version);
+SedAppliedDimension_t *
+SedAppliedDimension_create(unsigned int level, unsigned int version);
 
 
 /**
- * Creates and returns a deep copy of this SedRemainingDimension_t object.
+ * Creates and returns a deep copy of this SedAppliedDimension_t object.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
- * @return a (deep) copy of this SedRemainingDimension_t object.
+ * @return a (deep) copy of this SedAppliedDimension_t object.
  *
  * @copydetails doc_returned_owned_pointer
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedRemainingDimension_clone(const SedRemainingDimension_t* srd);
+SedAppliedDimension_t*
+SedAppliedDimension_clone(const SedAppliedDimension_t* srd);
 
 
 /**
- * Frees this SedRemainingDimension_t object.
+ * Frees this SedAppliedDimension_t object.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 void
-SedRemainingDimension_free(SedRemainingDimension_t* srd);
+SedAppliedDimension_free(SedAppliedDimension_t* srd);
 
 
 /**
- * Returns the value of the "target" attribute of this SedRemainingDimension_t.
+ * Returns the value of the "target" attribute of this SedAppliedDimension_t.
  *
- * @param srd the SedRemainingDimension_t structure whose target is sought.
+ * @param srd the SedAppliedDimension_t structure whose target is sought.
  *
- * @return the value of the "target" attribute of this SedRemainingDimension_t
+ * @return the value of the "target" attribute of this SedAppliedDimension_t
  * as a pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 char *
-SedRemainingDimension_getTarget(const SedRemainingDimension_t * srd);
+SedAppliedDimension_getTarget(const SedAppliedDimension_t * srd);
 
 
 /**
  * Returns the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  *
- * @param srd the SedRemainingDimension_t structure whose dimensionTarget is
+ * @param srd the SedAppliedDimension_t structure whose dimensionTarget is
  * sought.
  *
  * @return the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t as a pointer to a string.
+ * SedAppliedDimension_t as a pointer to a string.
  *
  * @copydetails doc_returned_owned_char
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 char *
-SedRemainingDimension_getDimensionTarget(const SedRemainingDimension_t * srd);
+SedAppliedDimension_getDimensionTarget(const SedAppliedDimension_t * srd);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedRemainingDimension_t's "target"
+ * Predicate returning @c 1 (true) if this SedAppliedDimension_t's "target"
  * attribute is set.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
- * @return @c 1 (true) if this SedRemainingDimension_t's "target" attribute has
+ * @return @c 1 (true) if this SedAppliedDimension_t's "target" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_isSetTarget(const SedRemainingDimension_t * srd);
+SedAppliedDimension_isSetTarget(const SedAppliedDimension_t * srd);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedRemainingDimension_t's
+ * Predicate returning @c 1 (true) if this SedAppliedDimension_t's
  * "dimensionTarget" attribute is set.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
- * @return @c 1 (true) if this SedRemainingDimension_t's "dimensionTarget"
+ * @return @c 1 (true) if this SedAppliedDimension_t's "dimensionTarget"
  * attribute has been set, otherwise @c 0 (false) is returned.
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_isSetDimensionTarget(const SedRemainingDimension_t *
+SedAppliedDimension_isSetDimensionTarget(const SedAppliedDimension_t *
   srd);
 
 
 /**
- * Sets the value of the "target" attribute of this SedRemainingDimension_t.
+ * Sets the value of the "target" attribute of this SedAppliedDimension_t.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
  * @param target const char * value of the "target" attribute to be set.
  *
@@ -743,19 +743,19 @@ SedRemainingDimension_isSetDimensionTarget(const SedRemainingDimension_t *
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_setTarget(SedRemainingDimension_t * srd,
+SedAppliedDimension_setTarget(SedAppliedDimension_t * srd,
                                 const char * target);
 
 
 /**
  * Sets the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
  * @param dimensionTarget const char * value of the "dimensionTarget" attribute
  * to be set.
@@ -766,63 +766,63 @@ SedRemainingDimension_setTarget(SedRemainingDimension_t * srd,
  * OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_setDimensionTarget(SedRemainingDimension_t * srd,
+SedAppliedDimension_setDimensionTarget(SedAppliedDimension_t * srd,
                                          const char * dimensionTarget);
 
 
 /**
- * Unsets the value of the "target" attribute of this SedRemainingDimension_t.
+ * Unsets the value of the "target" attribute of this SedAppliedDimension_t.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_unsetTarget(SedRemainingDimension_t * srd);
+SedAppliedDimension_unsetTarget(SedAppliedDimension_t * srd);
 
 
 /**
  * Unsets the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
  * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_unsetDimensionTarget(SedRemainingDimension_t * srd);
+SedAppliedDimension_unsetDimensionTarget(SedAppliedDimension_t * srd);
 
 
 /**
  * Predicate returning @c 1 (true) if all the required attributes for this
- * SedRemainingDimension_t object have been set.
+ * SedAppliedDimension_t object have been set.
  *
- * @param srd the SedRemainingDimension_t structure.
+ * @param srd the SedAppliedDimension_t structure.
  *
  * @return @c 1 (true) to indicate that all the required attributes of this
- * SedRemainingDimension_t have been set, otherwise @c 0 (false) is returned.
+ * SedAppliedDimension_t have been set, otherwise @c 0 (false) is returned.
  *
- * @memberof SedRemainingDimension_t
+ * @memberof SedAppliedDimension_t
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_hasRequiredAttributes(const SedRemainingDimension_t *
+SedAppliedDimension_hasRequiredAttributes(const SedAppliedDimension_t *
   srd);
 
 
@@ -843,6 +843,6 @@ LIBSEDML_CPP_NAMESPACE_END
 
 
 
-#endif /* !SedRemainingDimension_H__ */
+#endif /* !SedAppliedDimension_H__ */
 
 

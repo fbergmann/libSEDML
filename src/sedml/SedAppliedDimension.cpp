@@ -1,6 +1,6 @@
 /**
- * @file SedRemainingDimension.cpp
- * @brief Implementation of the SedRemainingDimension class.
+ * @file SedAppliedDimension.cpp
+ * @brief Implementation of the SedAppliedDimension class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,8 +31,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sedml/SedRemainingDimension.h>
-#include <sedml/SedListOfRemainingDimensions.h>
+#include <sedml/SedAppliedDimension.h>
+#include <sedml/SedListOfAppliedDimensions.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -49,10 +49,10 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedRemainingDimension using the given SED-ML Level and @ p
+ * Creates a new SedAppliedDimension using the given SED-ML Level and @ p
  * version values.
  */
-SedRemainingDimension::SedRemainingDimension(unsigned int level,
+SedAppliedDimension::SedAppliedDimension(unsigned int level,
                                              unsigned int version)
   : SedBase(level, version)
   , mTarget ("")
@@ -63,10 +63,10 @@ SedRemainingDimension::SedRemainingDimension(unsigned int level,
 
 
 /*
- * Creates a new SedRemainingDimension using the given SedNamespaces object @p
+ * Creates a new SedAppliedDimension using the given SedNamespaces object @p
  * sedmlns.
  */
-SedRemainingDimension::SedRemainingDimension(SedNamespaces *sedmlns)
+SedAppliedDimension::SedAppliedDimension(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mTarget ("")
   , mDimensionTarget ("")
@@ -76,9 +76,9 @@ SedRemainingDimension::SedRemainingDimension(SedNamespaces *sedmlns)
 
 
 /*
- * Copy constructor for SedRemainingDimension.
+ * Copy constructor for SedAppliedDimension.
  */
-SedRemainingDimension::SedRemainingDimension(const SedRemainingDimension& orig)
+SedAppliedDimension::SedAppliedDimension(const SedAppliedDimension& orig)
   : SedBase( orig )
   , mTarget ( orig.mTarget )
   , mDimensionTarget ( orig.mDimensionTarget )
@@ -87,10 +87,10 @@ SedRemainingDimension::SedRemainingDimension(const SedRemainingDimension& orig)
 
 
 /*
- * Assignment operator for SedRemainingDimension.
+ * Assignment operator for SedAppliedDimension.
  */
-SedRemainingDimension&
-SedRemainingDimension::operator=(const SedRemainingDimension& rhs)
+SedAppliedDimension&
+SedAppliedDimension::operator=(const SedAppliedDimension& rhs)
 {
   if (&rhs != this)
   {
@@ -104,28 +104,28 @@ SedRemainingDimension::operator=(const SedRemainingDimension& rhs)
 
 
 /*
- * Creates and returns a deep copy of this SedRemainingDimension object.
+ * Creates and returns a deep copy of this SedAppliedDimension object.
  */
-SedRemainingDimension*
-SedRemainingDimension::clone() const
+SedAppliedDimension*
+SedAppliedDimension::clone() const
 {
-  return new SedRemainingDimension(*this);
+  return new SedAppliedDimension(*this);
 }
 
 
 /*
- * Destructor for SedRemainingDimension.
+ * Destructor for SedAppliedDimension.
  */
-SedRemainingDimension::~SedRemainingDimension()
+SedAppliedDimension::~SedAppliedDimension()
 {
 }
 
 
 /*
- * Returns the value of the "target" attribute of this SedRemainingDimension.
+ * Returns the value of the "target" attribute of this SedAppliedDimension.
  */
 const std::string&
-SedRemainingDimension::getTarget() const
+SedAppliedDimension::getTarget() const
 {
   return mTarget;
 }
@@ -133,42 +133,42 @@ SedRemainingDimension::getTarget() const
 
 /*
  * Returns the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 const std::string&
-SedRemainingDimension::getDimensionTarget() const
+SedAppliedDimension::getDimensionTarget() const
 {
   return mDimensionTarget;
 }
 
 
 /*
- * Predicate returning @c true if this SedRemainingDimension's "target"
+ * Predicate returning @c true if this SedAppliedDimension's "target"
  * attribute is set.
  */
 bool
-SedRemainingDimension::isSetTarget() const
+SedAppliedDimension::isSetTarget() const
 {
   return (mTarget.empty() == false);
 }
 
 
 /*
- * Predicate returning @c true if this SedRemainingDimension's
+ * Predicate returning @c true if this SedAppliedDimension's
  * "dimensionTarget" attribute is set.
  */
 bool
-SedRemainingDimension::isSetDimensionTarget() const
+SedAppliedDimension::isSetDimensionTarget() const
 {
   return (mDimensionTarget.empty() == false);
 }
 
 
 /*
- * Sets the value of the "target" attribute of this SedRemainingDimension.
+ * Sets the value of the "target" attribute of this SedAppliedDimension.
  */
 int
-SedRemainingDimension::setTarget(const std::string& target)
+SedAppliedDimension::setTarget(const std::string& target)
 {
   if (!(SyntaxChecker::isValidInternalSId(target)))
   {
@@ -184,10 +184,10 @@ SedRemainingDimension::setTarget(const std::string& target)
 
 /*
  * Sets the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::setDimensionTarget(const std::string& dimensionTarget)
+SedAppliedDimension::setDimensionTarget(const std::string& dimensionTarget)
 {
   if (!(SyntaxChecker::isValidInternalSId(dimensionTarget)))
   {
@@ -202,10 +202,10 @@ SedRemainingDimension::setDimensionTarget(const std::string& dimensionTarget)
 
 
 /*
- * Unsets the value of the "target" attribute of this SedRemainingDimension.
+ * Unsets the value of the "target" attribute of this SedAppliedDimension.
  */
 int
-SedRemainingDimension::unsetTarget()
+SedAppliedDimension::unsetTarget()
 {
   mTarget.erase();
 
@@ -222,10 +222,10 @@ SedRemainingDimension::unsetTarget()
 
 /*
  * Unsets the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::unsetDimensionTarget()
+SedAppliedDimension::unsetDimensionTarget()
 {
   mDimensionTarget.erase();
 
@@ -244,7 +244,7 @@ SedRemainingDimension::unsetDimensionTarget()
  * @copydoc doc_renamesidref_common
  */
 void
-SedRemainingDimension::renameSIdRefs(const std::string& oldid,
+SedAppliedDimension::renameSIdRefs(const std::string& oldid,
                                      const std::string& newid)
 {
   if (isSetTarget() && mTarget == oldid)
@@ -260,32 +260,32 @@ SedRemainingDimension::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML element name of this SedRemainingDimension object.
+ * Returns the XML element name of this SedAppliedDimension object.
  */
 const std::string&
-SedRemainingDimension::getElementName() const
+SedAppliedDimension::getElementName() const
 {
-  static const string name = "remainingDimension";
+  static const string name = "appliedDimension";
   return name;
 }
 
 
 /*
- * Returns the libSEDML type code for this SedRemainingDimension object.
+ * Returns the libSEDML type code for this SedAppliedDimension object.
  */
 int
-SedRemainingDimension::getTypeCode() const
+SedAppliedDimension::getTypeCode() const
 {
-  return SEDML_REMAININGDIMENSION;
+  return SEDML_APPLIEDDIMENSION;
 }
 
 
 /*
  * Predicate returning @c true if all the required attributes for this
- * SedRemainingDimension object have been set.
+ * SedAppliedDimension object have been set.
  */
 bool
-SedRemainingDimension::hasRequiredAttributes() const
+SedAppliedDimension::hasRequiredAttributes() const
 {
   bool allPresent = true;
 
@@ -300,7 +300,7 @@ SedRemainingDimension::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedRemainingDimension::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
+SedAppliedDimension::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
@@ -316,7 +316,7 @@ SedRemainingDimension::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Accepts the given SedVisitor
  */
 bool
-SedRemainingDimension::accept(SedVisitor& v) const
+SedAppliedDimension::accept(SedVisitor& v) const
 {
   return false;
 }
@@ -331,7 +331,7 @@ SedRemainingDimension::accept(SedVisitor& v) const
  * Sets the parent SedDocument
  */
 void
-SedRemainingDimension::setSedDocument(SedDocument* d)
+SedAppliedDimension::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
 }
@@ -344,10 +344,10 @@ SedRemainingDimension::setSedDocument(SedDocument* d)
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::getAttribute(const std::string& attributeName,
+SedAppliedDimension::getAttribute(const std::string& attributeName,
                                     bool& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -363,10 +363,10 @@ SedRemainingDimension::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::getAttribute(const std::string& attributeName,
+SedAppliedDimension::getAttribute(const std::string& attributeName,
                                     int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -382,10 +382,10 @@ SedRemainingDimension::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::getAttribute(const std::string& attributeName,
+SedAppliedDimension::getAttribute(const std::string& attributeName,
                                     double& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -401,10 +401,10 @@ SedRemainingDimension::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::getAttribute(const std::string& attributeName,
+SedAppliedDimension::getAttribute(const std::string& attributeName,
                                     unsigned int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -420,10 +420,10 @@ SedRemainingDimension::getAttribute(const std::string& attributeName,
 
 /*
  * Gets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::getAttribute(const std::string& attributeName,
+SedAppliedDimension::getAttribute(const std::string& attributeName,
                                     std::string& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -454,11 +454,11 @@ SedRemainingDimension::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Predicate returning @c true if this SedRemainingDimension's attribute
+ * Predicate returning @c true if this SedAppliedDimension's attribute
  * "attributeName" is set.
  */
 bool
-SedRemainingDimension::isSetAttribute(const std::string& attributeName) const
+SedAppliedDimension::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
@@ -482,10 +482,10 @@ SedRemainingDimension::isSetAttribute(const std::string& attributeName) const
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::setAttribute(const std::string& attributeName,
+SedAppliedDimension::setAttribute(const std::string& attributeName,
                                     bool value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -501,10 +501,10 @@ SedRemainingDimension::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::setAttribute(const std::string& attributeName,
+SedAppliedDimension::setAttribute(const std::string& attributeName,
                                     int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -520,10 +520,10 @@ SedRemainingDimension::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::setAttribute(const std::string& attributeName,
+SedAppliedDimension::setAttribute(const std::string& attributeName,
                                     double value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -539,10 +539,10 @@ SedRemainingDimension::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::setAttribute(const std::string& attributeName,
+SedAppliedDimension::setAttribute(const std::string& attributeName,
                                     unsigned int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -558,10 +558,10 @@ SedRemainingDimension::setAttribute(const std::string& attributeName,
 
 /*
  * Sets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::setAttribute(const std::string& attributeName,
+SedAppliedDimension::setAttribute(const std::string& attributeName,
                                     const std::string& value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -586,10 +586,10 @@ SedRemainingDimension::setAttribute(const std::string& attributeName,
 
 /*
  * Unsets the value of the "attributeName" attribute of this
- * SedRemainingDimension.
+ * SedAppliedDimension.
  */
 int
-SedRemainingDimension::unsetAttribute(const std::string& attributeName)
+SedAppliedDimension::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
@@ -615,7 +615,7 @@ SedRemainingDimension::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-SedRemainingDimension::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+SedAppliedDimension::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
@@ -635,7 +635,7 @@ SedRemainingDimension::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedRemainingDimension::readAttributes(
+SedAppliedDimension::readAttributes(
                                       const LIBSBML_CPP_NAMESPACE_QUALIFIER
                                         XMLAttributes& attributes,
                                       const LIBSBML_CPP_NAMESPACE_QUALIFIER
@@ -648,7 +648,7 @@ SedRemainingDimension::readAttributes(
   SedErrorLog* log = getErrorLog();
 
   if (log && getParentSedObject() &&
-    static_cast<SedListOfRemainingDimensions*>(getParentSedObject())->size() < 2)
+    static_cast<SedListOfAppliedDimensions*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -657,7 +657,7 @@ SedRemainingDimension::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlVariableLORemainingDimensionsAllowedCoreAttributes,
+        log->logError(SedmlVariableLOAppliedDimensionsAllowedCoreAttributes,
           level, version, details, getLine(), getColumn());
       }
     }
@@ -675,7 +675,7 @@ SedRemainingDimension::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlRemainingDimensionAllowedAttributes, level, version,
+        log->logError(SedmlAppliedDimensionAllowedAttributes, level, version,
           details, getLine(), getColumn());
       }
     }
@@ -691,7 +691,7 @@ SedRemainingDimension::readAttributes(
   {
     if (mTarget.empty() == true)
     {
-      logEmptyString(mTarget, level, version, "<SedRemainingDimension>");
+      logEmptyString(mTarget, level, version, "<SedAppliedDimension>");
     }
     else if (SyntaxChecker::isValidSBMLSId(mTarget) == false)
     {
@@ -703,7 +703,7 @@ SedRemainingDimension::readAttributes(
       }
 
       msg += " is '" + mTarget + "', which does not conform to the syntax.";
-      logError(SedmlRemainingDimensionTargetMustBeSId, level, version, msg,
+      logError(SedmlAppliedDimensionTargetMustBeSId, level, version, msg,
         getLine(), getColumn());
     }
   }
@@ -719,7 +719,7 @@ SedRemainingDimension::readAttributes(
     if (mDimensionTarget.empty() == true)
     {
       logEmptyString(mDimensionTarget, level, version,
-        "<SedRemainingDimension>");
+        "<SedAppliedDimension>");
     }
     else if (SyntaxChecker::isValidSBMLSId(mDimensionTarget) == false)
     {
@@ -732,7 +732,7 @@ SedRemainingDimension::readAttributes(
 
       msg += " is '" + mDimensionTarget + "', which does not conform to the "
         "syntax.";
-      logError(SedmlRemainingDimensionDimensionTargetMustBeSId, level, version,
+      logError(SedmlAppliedDimensionDimensionTargetMustBeSId, level, version,
         msg, getLine(), getColumn());
     }
   }
@@ -748,7 +748,7 @@ SedRemainingDimension::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedRemainingDimension::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+SedAppliedDimension::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
@@ -773,27 +773,27 @@ SedRemainingDimension::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedRemainingDimension_t using the given SED-ML Level and @ p
+ * Creates a new SedAppliedDimension_t using the given SED-ML Level and @ p
  * version values.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t *
-SedRemainingDimension_create(unsigned int level, unsigned int version)
+SedAppliedDimension_t *
+SedAppliedDimension_create(unsigned int level, unsigned int version)
 {
-  return new SedRemainingDimension(level, version);
+  return new SedAppliedDimension(level, version);
 }
 
 
 /*
- * Creates and returns a deep copy of this SedRemainingDimension_t object.
+ * Creates and returns a deep copy of this SedAppliedDimension_t object.
  */
 LIBSEDML_EXTERN
-SedRemainingDimension_t*
-SedRemainingDimension_clone(const SedRemainingDimension_t* srd)
+SedAppliedDimension_t*
+SedAppliedDimension_clone(const SedAppliedDimension_t* srd)
 {
   if (srd != NULL)
   {
-    return static_cast<SedRemainingDimension_t*>(srd->clone());
+    return static_cast<SedAppliedDimension_t*>(srd->clone());
   }
   else
   {
@@ -803,11 +803,11 @@ SedRemainingDimension_clone(const SedRemainingDimension_t* srd)
 
 
 /*
- * Frees this SedRemainingDimension_t object.
+ * Frees this SedAppliedDimension_t object.
  */
 LIBSEDML_EXTERN
 void
-SedRemainingDimension_free(SedRemainingDimension_t* srd)
+SedAppliedDimension_free(SedAppliedDimension_t* srd)
 {
   if (srd != NULL)
   {
@@ -817,11 +817,11 @@ SedRemainingDimension_free(SedRemainingDimension_t* srd)
 
 
 /*
- * Returns the value of the "target" attribute of this SedRemainingDimension_t.
+ * Returns the value of the "target" attribute of this SedAppliedDimension_t.
  */
 LIBSEDML_EXTERN
 char *
-SedRemainingDimension_getTarget(const SedRemainingDimension_t * srd)
+SedAppliedDimension_getTarget(const SedAppliedDimension_t * srd)
 {
   if (srd == NULL)
   {
@@ -835,11 +835,11 @@ SedRemainingDimension_getTarget(const SedRemainingDimension_t * srd)
 
 /*
  * Returns the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  */
 LIBSEDML_EXTERN
 char *
-SedRemainingDimension_getDimensionTarget(const SedRemainingDimension_t * srd)
+SedAppliedDimension_getDimensionTarget(const SedAppliedDimension_t * srd)
 {
   if (srd == NULL)
   {
@@ -852,35 +852,35 @@ SedRemainingDimension_getDimensionTarget(const SedRemainingDimension_t * srd)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedRemainingDimension_t's "target"
+ * Predicate returning @c 1 (true) if this SedAppliedDimension_t's "target"
  * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_isSetTarget(const SedRemainingDimension_t * srd)
+SedAppliedDimension_isSetTarget(const SedAppliedDimension_t * srd)
 {
   return (srd != NULL) ? static_cast<int>(srd->isSetTarget()) : 0;
 }
 
 
 /*
- * Predicate returning @c 1 (true) if this SedRemainingDimension_t's
+ * Predicate returning @c 1 (true) if this SedAppliedDimension_t's
  * "dimensionTarget" attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_isSetDimensionTarget(const SedRemainingDimension_t * srd)
+SedAppliedDimension_isSetDimensionTarget(const SedAppliedDimension_t * srd)
 {
   return (srd != NULL) ? static_cast<int>(srd->isSetDimensionTarget()) : 0;
 }
 
 
 /*
- * Sets the value of the "target" attribute of this SedRemainingDimension_t.
+ * Sets the value of the "target" attribute of this SedAppliedDimension_t.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_setTarget(SedRemainingDimension_t * srd,
+SedAppliedDimension_setTarget(SedAppliedDimension_t * srd,
                                 const char * target)
 {
   return (srd != NULL) ? srd->setTarget(target) : LIBSEDML_INVALID_OBJECT;
@@ -889,11 +889,11 @@ SedRemainingDimension_setTarget(SedRemainingDimension_t * srd,
 
 /*
  * Sets the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_setDimensionTarget(SedRemainingDimension_t * srd,
+SedAppliedDimension_setDimensionTarget(SedAppliedDimension_t * srd,
                                          const char * dimensionTarget)
 {
   return (srd != NULL) ? srd->setDimensionTarget(dimensionTarget) :
@@ -902,11 +902,11 @@ SedRemainingDimension_setDimensionTarget(SedRemainingDimension_t * srd,
 
 
 /*
- * Unsets the value of the "target" attribute of this SedRemainingDimension_t.
+ * Unsets the value of the "target" attribute of this SedAppliedDimension_t.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_unsetTarget(SedRemainingDimension_t * srd)
+SedAppliedDimension_unsetTarget(SedAppliedDimension_t * srd)
 {
   return (srd != NULL) ? srd->unsetTarget() : LIBSEDML_INVALID_OBJECT;
 }
@@ -914,11 +914,11 @@ SedRemainingDimension_unsetTarget(SedRemainingDimension_t * srd)
 
 /*
  * Unsets the value of the "dimensionTarget" attribute of this
- * SedRemainingDimension_t.
+ * SedAppliedDimension_t.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_unsetDimensionTarget(SedRemainingDimension_t * srd)
+SedAppliedDimension_unsetDimensionTarget(SedAppliedDimension_t * srd)
 {
   return (srd != NULL) ? srd->unsetDimensionTarget() : LIBSEDML_INVALID_OBJECT;
 }
@@ -926,11 +926,11 @@ SedRemainingDimension_unsetDimensionTarget(SedRemainingDimension_t * srd)
 
 /*
  * Predicate returning @c 1 (true) if all the required attributes for this
- * SedRemainingDimension_t object have been set.
+ * SedAppliedDimension_t object have been set.
  */
 LIBSEDML_EXTERN
 int
-SedRemainingDimension_hasRequiredAttributes(const SedRemainingDimension_t *
+SedAppliedDimension_hasRequiredAttributes(const SedAppliedDimension_t *
   srd)
 {
   return (srd != NULL) ? static_cast<int>(srd->hasRequiredAttributes()) : 0;

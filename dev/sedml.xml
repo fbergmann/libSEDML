@@ -62,10 +62,10 @@
             <attribute name="target" required="false" type="string" abstract="false"/>
             <attribute name="taskReference" required="false" type="SIdRef" element="Task" abstract="false"/>
             <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
-            <attribute name="remainingDimension" required="false" type="lo_element" element="RemainingDimension" abstract="false"/>
+            <attribute name="appliedDimension" required="false" type="lo_element" element="AppliedDimension" abstract="false"/>
           </attributes>
           <concretes>
-            <concrete name="remainingDimension" element="RemainingDimension" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="appliedDimension" element="AppliedDimension" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="variable" element="Variable" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="dependentVariable" element="DependentVariable" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
@@ -437,7 +437,7 @@
             <attribute name="symbol2" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="RemainingDimension" typeCode="SEDML_REMAININGDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
+        <element name="AppliedDimension" typeCode="SEDML_APPLIEDDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="target" required="false" type="SIdRef" element="SedBase" abstract="false"/>
             <attribute name="dimensionTarget" required="false" type="SIdRef" abstract="false"/>

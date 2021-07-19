@@ -845,7 +845,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <variable> object may contain one and only one instance of the "
-    "<listOfRemainingDimensions> element. No other elements from the SBML Level "
+    "<listOfAppliedDimensions> element. No other elements from the SBML Level "
     "3 SED-ML namespaces are permitted on a <variable> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -909,25 +909,25 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 20710
-  { SedmlVariableLORemainingDimensionsAllowedCoreElements,
-    "Core elements allowed on <listOfRemainingDimensions>.",
+  { SedmlVariableLOAppliedDimensionsAllowedCoreElements,
+    "Core elements allowed on <listOfAppliedDimensions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfRemainingDimensions> container object may only "
-    "contain <remainingDimension> objects.",
+    "SBML objects, a <listOfAppliedDimensions> container object may only "
+    "contain <appliedDimension> objects.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 20711
-  { SedmlVariableLORemainingDimensionsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfRemainingDimensions>.",
+  { SedmlVariableLOAppliedDimensionsAllowedCoreAttributes,
+    "Core attributes allowed on <listOfAppliedDimensions>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <listOfRemainingDimensions> object may have the optional SBML Level 3 "
+    "A <listOfAppliedDimensions> object may have the optional SBML Level 3 "
     "Core attributes 'metaid' and 'sboTerm'. No other attributes from the SBML "
-    "Level 3 Core namespaces are permitted on a <listOfRemainingDimensions> "
+    "Level 3 Core namespaces are permitted on a <listOfAppliedDimensions> "
     "object.",
     { "L3V1 Sedml V1 Section"
     }
@@ -4635,48 +4635,48 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25601
-  { SedmlRemainingDimensionAllowedCoreAttributes,
-    "Core attributes allowed on <remainingDimension>.",
+  { SedmlAppliedDimensionAllowedCoreAttributes,
+    "Core attributes allowed on <appliedDimension>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <remainingDimension> object may have the optional SBML Level 3 Core "
+    "A <appliedDimension> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <remainingDimension>.",
+    "3 Core namespaces are permitted on a <appliedDimension>.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 25602
-  { SedmlRemainingDimensionAllowedCoreElements,
-    "Core elements allowed on <remainingDimension>.",
+  { SedmlAppliedDimensionAllowedCoreElements,
+    "Core elements allowed on <appliedDimension>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <remainingDimension> object may have the optional SBML Level 3 Core "
+    "A <appliedDimension> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on a <remainingDimension>.",
+    "Level 3 Core namespaces are permitted on a <appliedDimension>.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 25603
-  { SedmlRemainingDimensionAllowedAttributes,
-    "Attributes allowed on <remainingDimension>.",
+  { SedmlAppliedDimensionAllowedAttributes,
+    "Attributes allowed on <appliedDimension>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <remainingDimension> object may have the optional attributes "
+    "A <appliedDimension> object may have the optional attributes "
     "'sedml:target' and 'sedml:dimensionTarget'. No other attributes from the "
-    "SBML Level 3 SED-ML namespaces are permitted on a <remainingDimension> "
+    "SBML Level 3 SED-ML namespaces are permitted on a <appliedDimension> "
     "object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 25604
-  { SedmlRemainingDimensionTargetMustBeSId,
+  { SedmlAppliedDimensionTargetMustBeSId,
     "The attribute 'target' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:target' of a <remainingDimension> object "
+    "The value of the attribute 'sedml:target' of a <appliedDimension> object "
     "must be the identifier of an existing < object> defined in the enclosing "
     "<model> object.",
     { "L3V1 Sedml V1 Section"
@@ -4684,12 +4684,12 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25605
-  { SedmlRemainingDimensionDimensionTargetMustBeSId,
+  { SedmlAppliedDimensionDimensionTargetMustBeSId,
     "The attribute 'dimensionTarget' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "The value of the attribute 'sedml:dimensionTarget' of a "
-    "<remainingDimension> object must be the identifier of an existing < "
+    "<appliedDimension> object must be the identifier of an existing < "
     "object> defined in the enclosing <model> object.",
     { "L3V1 Sedml V1 Section"
     }
