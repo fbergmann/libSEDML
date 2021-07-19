@@ -37,7 +37,6 @@
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
-#include <sedml/SedSimpleRepeatedTask.h>
 
 
 using namespace std;
@@ -323,32 +322,6 @@ SedListOfTasks::createParameterEstimationTask()
 
 
 /*
- * Creates a new SedSimpleRepeatedTask object, adds it to this SedListOfTasks
- * object and returns the SedSimpleRepeatedTask object created.
- */
-SedSimpleRepeatedTask*
-SedListOfTasks::createSimpleRepeatedTask()
-{
-  SedSimpleRepeatedTask* ssrt = NULL;
-
-  try
-  {
-    ssrt = new SedSimpleRepeatedTask(getSedNamespaces());
-  }
-  catch (...)
-  {
-  }
-
-  if (ssrt != NULL)
-  {
-    appendAndOwn(ssrt);
-  }
-
-  return ssrt;
-}
-
-
-/*
  * Returns the XML element name of this SedListOfTasks object.
  */
 const std::string&
@@ -440,17 +413,6 @@ SedListOfTasks::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
     appendAndOwn(object);
   }
 
-  if (name == "simpleRepeatedTask")
-  {
-    object = new SedSimpleRepeatedTask(getSedNamespaces());
-    if (object)
-    {
-      dynamic_cast<SedAbstractTask*>(object)->setElementName(name);
-    }
-
-    appendAndOwn(object);
-  }
-
   return object;
 }
 
@@ -469,7 +431,7 @@ SedListOfTasks::isValidTypeForList(SedBase* item)
   unsigned int tc = item->getTypeCode();
 
   return ((tc == SEDML_TASK) || (tc == SEDML_TASK_REPEATEDTASK) || (tc ==
-    SEDML_TASK_PARAMETER_ESTIMATION) || (tc == SEDML_TASK_SIMPLEREPEATEDTASK));
+    SEDML_TASK_PARAMETER_ESTIMATION));
 }
 
 /** @endcond */

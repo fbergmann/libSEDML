@@ -37,10 +37,10 @@
 #include <sedml/SedUniformTimeCourse.h>
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
+#include <sedml/SedAnalysis.h>
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
-#include <sedml/SedSimpleRepeatedTask.h>
 #include <sedml/SedReport.h>
 #include <sedml/SedPlot2D.h>
 #include <sedml/SedPlot3D.h>
@@ -963,6 +963,32 @@ SedDocument::createSteadyState()
 
 
 /*
+ * Creates a new SedAnalysis object, adds it to this SedDocument object and
+ * returns the SedAnalysis object created.
+ */
+SedAnalysis*
+SedDocument::createAnalysis()
+{
+    SedAnalysis* sss = NULL;
+
+    try
+    {
+        sss = new SedAnalysis(getSedNamespaces());
+    }
+    catch (...)
+    {
+    }
+
+    if (sss != NULL)
+    {
+        mSimulations.appendAndOwn(sss);
+    }
+
+    return sss;
+}
+
+
+/*
  * Removes the nth SedSimulation from this SedDocument and returns a pointer to
  * it.
  */
@@ -1167,32 +1193,6 @@ SedDocument::createParameterEstimationTask()
   }
 
   return spet;
-}
-
-
-/*
- * Creates a new SedSimpleRepeatedTask object, adds it to this SedDocument
- * object and returns the SedSimpleRepeatedTask object created.
- */
-SedSimpleRepeatedTask*
-SedDocument::createSimpleRepeatedTask()
-{
-  SedSimpleRepeatedTask* ssrt = NULL;
-
-  try
-  {
-    ssrt = new SedSimpleRepeatedTask(getSedNamespaces());
-  }
-  catch (...)
-  {
-  }
-
-  if (ssrt != NULL)
-  {
-    mAbstractTasks.appendAndOwn(ssrt);
-  }
-
-  return ssrt;
 }
 
 
@@ -2393,6 +2393,10 @@ SedDocument::createChildObject(const std::string& elementName)
   {
     return createSteadyState();
   }
+  else if (elementName == "analysis")
+  {
+      return createAnalysis();
+  }
   else if (elementName == "task")
   {
     return createTask();
@@ -2404,10 +2408,6 @@ SedDocument::createChildObject(const std::string& elementName)
   else if (elementName == "parameterEstimationTask")
   {
     return createParameterEstimationTask();
-  }
-  else if (elementName == "simpleRepeatedTask")
-  {
-    return createSimpleRepeatedTask();
   }
   else if (elementName == "dataGenerator")
   {
@@ -2483,6 +2483,11 @@ SedDocument::addChildObject(const std::string& elementName,
   {
     return addSimulation((const SedSimulation*)(element));
   }
+  else if (elementName == "analysis" && element->getTypeCode() ==
+      SEDML_SIMULATION_ANALYSIS)
+  {
+      return addSimulation((const SedSimulation*)(element));
+  }
   else if (elementName == "task" && element->getTypeCode() == SEDML_TASK)
   {
     return addTask((const SedAbstractTask*)(element));
@@ -2494,11 +2499,6 @@ SedDocument::addChildObject(const std::string& elementName,
   }
   else if (elementName == "parameterEstimationTask" && element->getTypeCode()
     == SEDML_TASK_PARAMETER_ESTIMATION)
-  {
-    return addTask((const SedAbstractTask*)(element));
-  }
-  else if (elementName == "simpleRepeatedTask" && element->getTypeCode() ==
-    SEDML_TASK_SIMPLEREPEATEDTASK)
   {
     return addTask((const SedAbstractTask*)(element));
   }
@@ -2577,6 +2577,10 @@ SedDocument::removeChildObject(const std::string& elementName,
   {
     return removeSimulation(id);
   }
+  else if (elementName == "analysis")
+  {
+      return removeSimulation(id);
+  }
   else if (elementName == "task")
   {
     return removeTask(id);
@@ -2586,10 +2590,6 @@ SedDocument::removeChildObject(const std::string& elementName,
     return removeTask(id);
   }
   else if (elementName == "parameterEstimationTask")
-  {
-    return removeTask(id);
-  }
-  else if (elementName == "simpleRepeatedTask")
   {
     return removeTask(id);
   }
@@ -3677,6 +3677,18 @@ SedDocument_createSteadyState(SedDocument_t* sd)
 
 
 /*
+ * Creates a new SedAnalysis_t object, adds it to this SedDocument_t object
+ * and returns the SedAnalysis_t object created.
+ */
+LIBSEDML_EXTERN
+SedAnalysis_t*
+SedDocument_createAnalysis(SedDocument_t* sd)
+{
+    return (sd != NULL) ? sd->createAnalysis() : NULL;
+}
+
+
+/*
  * Removes the nth SedSimulation_t from this SedDocument_t and returns a
  * pointer to it.
  */
@@ -3790,18 +3802,6 @@ SedParameterEstimationTask_t*
 SedDocument_createParameterEstimationTask(SedDocument_t* sd)
 {
   return (sd != NULL) ? sd->createParameterEstimationTask() : NULL;
-}
-
-
-/*
- * Creates a new SedSimpleRepeatedTask_t object, adds it to this SedDocument_t
- * object and returns the SedSimpleRepeatedTask_t object created.
- */
-LIBSEDML_EXTERN
-SedSimpleRepeatedTask_t*
-SedDocument_createSimpleRepeatedTask(SedDocument_t* sd)
-{
-  return (sd != NULL) ? sd->createSimpleRepeatedTask() : NULL;
 }
 
 

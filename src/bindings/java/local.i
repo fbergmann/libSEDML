@@ -159,6 +159,7 @@ COVARIANT_RTYPE_CLONE(SedVectorRange)
 COVARIANT_RTYPE_CLONE(SedFunctionalRange)
 COVARIANT_RTYPE_CLONE(SedSubTask)
 COVARIANT_RTYPE_CLONE(SedOneStep)
+COVARIANT_RTYPE_CLONE(SedAnalysis)
 COVARIANT_RTYPE_CLONE(SedSteadyState)
 COVARIANT_RTYPE_CLONE(SedRepeatedTask)
 COVARIANT_RTYPE_CLONE(SedComputeChange)
@@ -184,9 +185,8 @@ COVARIANT_RTYPE_CLONE(SedLine)
 COVARIANT_RTYPE_CLONE(SedMarker)
 COVARIANT_RTYPE_CLONE(SedFill)
 COVARIANT_RTYPE_CLONE(SedDependentVariable)
-COVARIANT_RTYPE_CLONE(SedRemainingDimension)
+COVARIANT_RTYPE_CLONE(SedAppliedDimension)
 COVARIANT_RTYPE_CLONE(SedDataRange)
-COVARIANT_RTYPE_CLONE(SedSimpleRepeatedTask)
 COVARIANT_RTYPE_CLONE(SedShadedArea)
 COVARIANT_RTYPE_CLONE(SedListOfModels)
 COVARIANT_RTYPE_CLONE(SedListOfChanges)
@@ -212,7 +212,7 @@ COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
 COVARIANT_RTYPE_CLONE(SedListOfStyles)
-COVARIANT_RTYPE_CLONE(SedListOfRemainingDimensions)
+COVARIANT_RTYPE_CLONE(SedListOfAppliedDimensions)
 COVARIANT_RTYPE_CLONE(SedParameterEstimationResultPlot)
 COVARIANT_RTYPE_CLONE(SedParameterEstimationReport)
 COVARIANT_RTYPE_CLONE(SedWaterfallPlot)
@@ -277,7 +277,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentRefs)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitExperiments)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitMappings)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSubPlots)
-COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfRemainingDimensions)
+COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfAppliedDimensions)
 
 /**
 * Wraps the SedConstructorException
@@ -427,7 +427,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedListOfModels)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfOutputs)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfParameters)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfRanges)
-SEDMLCONSTRUCTOR_EXCEPTION(SedListOfRemainingDimensions)
+SEDMLCONSTRUCTOR_EXCEPTION(SedListOfAppliedDimensions)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfSetValues)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfSimulations)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfSlices)
@@ -443,6 +443,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedNamespaces)
 SEDMLCONSTRUCTOR_EXCEPTION(SedNamespacesList)
 SEDMLCONSTRUCTOR_EXCEPTION(SedObjective)
 SEDMLCONSTRUCTOR_EXCEPTION(SedOneStep)
+SEDMLCONSTRUCTOR_EXCEPTION(SedAnalysis)
 SEDMLCONSTRUCTOR_EXCEPTION(SedOutput)
 SEDMLCONSTRUCTOR_EXCEPTION(SedParameter)
 SEDMLCONSTRUCTOR_EXCEPTION(SedParameterEstimationReport)
@@ -452,13 +453,12 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedPlot)
 SEDMLCONSTRUCTOR_EXCEPTION(SedPlot2D)
 SEDMLCONSTRUCTOR_EXCEPTION(SedPlot3D)
 SEDMLCONSTRUCTOR_EXCEPTION(SedRange)
-SEDMLCONSTRUCTOR_EXCEPTION(SedRemainingDimension)
+SEDMLCONSTRUCTOR_EXCEPTION(SedAppliedDimension)
 SEDMLCONSTRUCTOR_EXCEPTION(SedRemoveXML)
 SEDMLCONSTRUCTOR_EXCEPTION(SedRepeatedTask)
 SEDMLCONSTRUCTOR_EXCEPTION(SedReport)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSetValue)
 SEDMLCONSTRUCTOR_EXCEPTION(SedShadedArea)
-SEDMLCONSTRUCTOR_EXCEPTION(SedSimpleRepeatedTask)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSimulation)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSlice)
 SEDMLCONSTRUCTOR_EXCEPTION(SedSteadyState)
@@ -675,6 +675,9 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
     case (int) libsedml.SEDML_SIMULATION_ONESTEP:
       return new SedOneStep(cPtr, owner);
 
+    case (int) libsedml.SEDML_SIMULATION_ANALYSIS:
+      return new SedAnalysis(cPtr, owner);
+
     case (int) libsedml.SEDML_SIMULATION_STEADYSTATE:
       return new SedSteadyState(cPtr, owner);
 
@@ -741,14 +744,11 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
     case (int) libsedml.SEDML_DEPENDENTVARIABLE:
       return new SedDependentVariable(cPtr, owner);
 
-    case (int) libsedml.SEDML_REMAININGDIMENSION:
-      return new SedRemainingDimension(cPtr, owner);
+    case (int) libsedml.SEDML_APPLIEDDIMENSION:
+      return new SedAppliedDimension(cPtr, owner);
 
     case (int) libsedml.SEDML_DATA_RANGE:
       return new SedDataRange(cPtr, owner);
-
-    case (int) libsedml.SEDML_TASK_SIMPLEREPEATEDTASK:
-      return new SedSimpleRepeatedTask(cPtr, owner);
 
     case (int) libsedml.SEDML_SHADEDAREA:
       return new SedShadedArea(cPtr, owner);
@@ -857,9 +857,9 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
       {
          return new SedListOfSubPlots(cPtr, owner);
       }
-      else if (name.equals("listOfRemainingDimensions"))
+      else if (name.equals("listOfAppliedDimensions"))
       {
-         return new SedListOfRemainingDimensions(cPtr, owner);
+         return new SedListOfAppliedDimensions(cPtr, owner);
       }
       else if (name.equals("listOfStyles"))
       {

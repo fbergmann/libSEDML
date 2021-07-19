@@ -38,7 +38,6 @@
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
-#include <sedml/SedSimpleRepeatedTask.h>
 
 
 using namespace std;
@@ -155,17 +154,6 @@ bool
 SedAbstractTask::isSedParameterEstimationTask() const
 {
   return dynamic_cast<const SedParameterEstimationTask*>(this) != NULL;
-}
-
-
-/*
- * Predicate returning @c true if this abstract "SedAbstractTask" is of type
- * SedSimpleRepeatedTask
- */
-bool
-SedAbstractTask::isSedSimpleRepeatedTask() const
-{
-  return dynamic_cast<const SedSimpleRepeatedTask*>(this) != NULL;
 }
 
 
@@ -631,19 +619,6 @@ SedAbstractTask_createParameterEstimationTask(unsigned int level,
 
 
 /*
- * Creates a new SedSimpleRepeatedTask using the given SED-ML Level and @ p
- * version values.
- */
-LIBSEDML_EXTERN
-SedSimpleRepeatedTask_t *
-SedAbstractTask_createSimpleRepeatedTask(unsigned int level,
-                                         unsigned int version)
-{
-  return new SedSimpleRepeatedTask(level, version);
-}
-
-
-/*
  * Creates and returns a deep copy of this SedAbstractTask_t object.
  */
 LIBSEDML_EXTERN
@@ -808,18 +783,6 @@ SedAbstractTask_isSedParameterEstimationTask(const SedAbstractTask_t * sat)
 {
   return (sat != NULL) ? static_cast<int>(sat->isSedParameterEstimationTask())
     : 0;
-}
-
-
-/*
- * Predicate returning @c 1 if this SedAbstractTask_t is of type
- * SedSimpleRepeatedTask_t
- */
-LIBSEDML_EXTERN
-int
-SedAbstractTask_isSedSimpleRepeatedTask(const SedAbstractTask_t * sat)
-{
-  return (sat != NULL) ? static_cast<int>(sat->isSedSimpleRepeatedTask()) : 0;
 }
 
 

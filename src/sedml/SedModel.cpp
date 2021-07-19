@@ -1174,7 +1174,7 @@ SedModel::readAttributes(
   }
 
   // 
-  // language string (use = "optional" )
+  // language string (use = "required" )
   // 
 
   assigned = attributes.readInto("language", mLanguage);
@@ -1185,6 +1185,16 @@ SedModel::readAttributes(
     {
       logEmptyString(mLanguage, level, version, "<SedModel>");
     }
+  }
+  else if (getLevel() > 1 || getVersion() >= 4)
+  {
+      if (log)
+      {
+          std::string message = "Sedml attribute 'language' is missing from the "
+              "<SedModel> element.";
+          log->logError(SedmlModelAllowedAttributes, level, version, message,
+              getLine(), getColumn());
+      }
   }
 
   // 

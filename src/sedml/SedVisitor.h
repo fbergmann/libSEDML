@@ -90,6 +90,7 @@ class SedFunctionalRange;
 class SedSubTask;
 class SedOneStep;
 class SedSteadyState;
+class SedAnalysis;
 class SedRepeatedTask;
 class SedComputeChange;
 class SedDataDescription;
@@ -111,9 +112,8 @@ class SedLine;
 class SedMarker;
 class SedFill;
 class SedDependentVariable;
-class SedRemainingDimension;
+class SedAppliedDimension;
 class SedDataRange;
-class SedSimpleRepeatedTask;
 class SedShadedArea;
 class SedParameterEstimationResultPlot;
 class SedWaterfallPlot;
@@ -489,6 +489,16 @@ virtual bool visit (const SedSteadyState &x);
  *
  * @param x the SedBase object to visit.
  */
+virtual bool visit(const SedAnalysis& x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to visit.
+ */
 virtual bool visit (const SedRepeatedTask &x);
 
 
@@ -699,7 +709,7 @@ virtual bool visit (const SedDependentVariable &x);
  *
  * @param x the SedBase object to visit.
  */
-virtual bool visit (const SedRemainingDimension &x);
+virtual bool visit (const SedAppliedDimension &x);
 
 
 /**
@@ -710,16 +720,6 @@ virtual bool visit (const SedRemainingDimension &x);
  * @param x the SedBase object to visit.
  */
 virtual bool visit (const SedDataRange &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to visit.
- */
-virtual bool visit (const SedSimpleRepeatedTask &x);
 
 
 /**
@@ -1122,6 +1122,16 @@ virtual void leave (const SedSteadyState &x);
  *
  * @param x the SedBase object to leave.
  */
+virtual void leave(const SedAnalysis& x);
+
+
+/**
+ * Interface method for using the <a target="_blank"
+ * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
+ * Pattern</i></a> to perform operations on SedBase objects.
+ *
+ * @param x the SedBase object to leave.
+ */
 virtual void leave (const SedRepeatedTask &x);
 
 
@@ -1332,7 +1342,7 @@ virtual void leave (const SedDependentVariable &x);
  *
  * @param x the SedBase object to leave.
  */
-virtual void leave (const SedRemainingDimension &x);
+virtual void leave (const SedAppliedDimension &x);
 
 
 /**
@@ -1343,16 +1353,6 @@ virtual void leave (const SedRemainingDimension &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedDataRange &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to leave.
- */
-virtual void leave (const SedSimpleRepeatedTask &x);
 
 
 /**

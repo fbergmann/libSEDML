@@ -34,7 +34,7 @@
 #include <sedml/SedAlgorithmParameter.h>
 #include <sedml/SedListOfAlgorithmParameters.h>
 #include <sbml/xml/XMLInputStream.h>
-
+#include <map>
 
 using namespace std;
 
@@ -42,6 +42,7 @@ using namespace std;
 
 LIBSEDML_CPP_NAMESPACE_BEGIN
 
+extern map<int, string> g_kisaomap;
 
 
 
@@ -194,6 +195,12 @@ int
 SedAlgorithmParameter::setKisaoID(const std::string& kisaoID)
 {
   mKisaoID = kisaoID;
+  if (!isSetName()) {
+      int knum = getKisaoIDasInt();
+      if (g_kisaomap.find(knum) != g_kisaomap.end()) {
+          setName(g_kisaomap[knum]);
+      }
+  }
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -1128,6 +1135,9 @@ SedAlgorithmParameter::setKisaoID(int kisaoID)
       << std::setw(7)
       << kisaoID; 
   mKisaoID = str.str();
+  if (!isSetName() && g_kisaomap.find(kisaoID) != g_kisaomap.end()) {
+      setName(g_kisaomap[kisaoID]);
+  }
   return LIBSEDML_OPERATION_SUCCESS;
 }
 

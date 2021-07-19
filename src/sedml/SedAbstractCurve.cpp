@@ -1038,7 +1038,7 @@ SedAbstractCurve::readAttributes(
   }
 
   // 
-  // xDataReference SIdRef (use = "optional" )
+  // xDataReference SIdRef (use = "required" )
   // 
 
   assigned = attributes.readInto("xDataReference", mXDataReference);
@@ -1063,6 +1063,16 @@ SedAbstractCurve::readAttributes(
       logError(SedmlAbstractCurveXDataReferenceMustBeDataReference, level,
         version, msg, getLine(), getColumn());
     }
+  }
+  else if (getLevel() > 1 || getVersion() >= 4)
+  {
+      if (log)
+      {
+          std::string message = "Sedml attribute 'xDataReference' is missing from the "
+              "<SedAbstractCurve> element.";
+          log->logError(SedmlAbstractCurveAllowedAttributes, level, version, message,
+              getLine(), getColumn());
+      }
   }
 }
 

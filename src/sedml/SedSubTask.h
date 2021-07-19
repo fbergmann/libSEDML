@@ -51,6 +51,7 @@
 
 
 #include <sedml/SedBase.h>
+#include <sedml/SedListOfSetValues.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
@@ -66,6 +67,7 @@ protected:
   int mOrder;
   bool mIsSetOrder;
   std::string mTask;
+  SedListOfSetValues mSetValues;
 
   /** @endcond */
 
@@ -210,6 +212,245 @@ public:
 
 
   /**
+   * Returns the SedListOfSetValues from this SedRepeatedTask.
+   *
+   * @return the SedListOfSetValues from this SedRepeatedTask.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  const SedListOfSetValues* getListOfTaskChanges() const;
+
+
+  /**
+   * Returns the SedListOfSetValues from this SedRepeatedTask.
+   *
+   * @return the SedListOfSetValues from this SedRepeatedTask.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  SedListOfSetValues* getListOfTaskChanges();
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask.
+   *
+   * @param n an unsigned int representing the index of the SedSetValue to
+   * retrieve.
+   *
+   * @return the nth SedSetValue in the SedListOfSetValues within this
+   * SedRepeatedTask or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  SedSetValue* getTaskChange(unsigned int n);
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask.
+   *
+   * @param id the id of the SedSetValue to
+   * retrieve.
+   *
+   * @return the SedSetValue in the SedListOfSetValues within this
+   * SedRepeatedTask or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  SedSetValue* getTaskChange(const std::string& id);
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask.
+   *
+   * @param n an unsigned int representing the index of the SedSetValue to
+   * retrieve.
+   *
+   * @return the nth SedSetValue in the SedListOfSetValues within this
+   * SedRepeatedTask or @c NULL if no such object exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  const SedSetValue* getTaskChange(unsigned int n) const;
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask based on the ModelReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "modelReference" attribute of the
+   * SedSetValue object to retrieve.
+   *
+   * @return the first SedSetValue in this SedRepeatedTask based on the given
+   * modelReference attribute or NULL if no such SedSetValue exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSetValue* getTaskChangeByModelReference(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask based on the ModelReference to
+   * which it refers.
+   *
+   * @param sid a string representing the "modelReference" attribute of the
+   * SedSetValue object to retrieve.
+   *
+   * @return the first SedSetValue in this SedRepeatedTask based on the given
+   * modelReference attribute or NULL if no such SedSetValue exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSetValue* getTaskChangeByModelReference(const std::string& sid);
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask based on the Range to which it
+   * refers.
+   *
+   * @param sid a string representing the "range" attribute of the SedSetValue
+   * object to retrieve.
+   *
+   * @return the first SedSetValue in this SedRepeatedTask based on the given
+   * range attribute or NULL if no such SedSetValue exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  const SedSetValue* getTaskChangeByRange(const std::string& sid) const;
+
+
+  /**
+   * Get a SedSetValue from the SedRepeatedTask based on the Range to which it
+   * refers.
+   *
+   * @param sid a string representing the "range" attribute of the SedSetValue
+   * object to retrieve.
+   *
+   * @return the first SedSetValue in this SedRepeatedTask based on the given
+   * range attribute or NULL if no such SedSetValue exists.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   */
+  SedSetValue* getTaskChangeByRange(const std::string& sid);
+
+
+  /**
+   * Adds a copy of the given SedSetValue to this SedRepeatedTask.
+   *
+   * @param ssv the SedSetValue object to add.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+   *
+   * @copydetails doc_note_object_is_copied
+   *
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  int addTaskChange(const SedSetValue* ssv);
+
+
+  /**
+   * Get the number of SedSetValue objects in this SedRepeatedTask.
+   *
+   * @return the number of SedSetValue objects in this SedRepeatedTask.
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  unsigned int getNumTaskChanges() const;
+
+
+  /**
+   * Creates a new SedSetValue object, adds it to this SedRepeatedTask object
+   * and returns the SedSetValue object created.
+   *
+   * @return a new SedSetValue object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   * @see removeTaskChange(unsigned int n)
+   */
+  SedSetValue* createTaskChange();
+
+
+  /**
+   * Removes the nth SedSetValue from this SedRepeatedTask and returns a
+   * pointer to it.
+   *
+   * @param n an unsigned int representing the index of the SedSetValue to
+   * remove.
+   *
+   * @return a pointer to the nth SedSetValue in this SedRepeatedTask.
+   *
+   * @copydetails doc_warning_returns_owned_pointer
+   *
+   * @see addTaskChange(const SedSetValue* object)
+   * @see createTaskChange()
+   * @see getTaskChange(const std::string& sid)
+   * @see getTaskChange(unsigned int n)
+   * @see getNumTaskChanges()
+   * @see removeTaskChange(const std::string& sid)
+   */
+  SedSetValue* removeTaskChange(unsigned int n);
+
+
+  /**
    * @copydoc doc_renamesidref_common
    */
   virtual void renameSIdRefs(const std::string& oldid,
@@ -289,6 +530,16 @@ public:
 
   /** @endcond */
 
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  
+  /**
+   * Connects to child elements
+   */
+  virtual void connectToChild();
+
+  /** @endcond */
 
 
 
@@ -527,10 +778,136 @@ public:
 
 
 
-  #endif /* !SWIG */
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Creates and returns an new "elementName" object in this SedRepeatedTask.
+   *
+   * @param elementName, the name of the element to create.
+   *
+   * @return pointer to the element created.
+   */
+  virtual SedBase* createChildObject(const std::string& elementName);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Adds a new "elementName" object to this SedRepeatedTask.
+   *
+   * @param elementName, the name of the element to create.
+   *
+   * @param element, pointer to the element to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int addChildObject(const std::string& elementName,
+      const SedBase* element);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Removes and returns the new "elementName" object with the given id in this
+   * SedRepeatedTask.
+   *
+   * @param elementName, the name of the element to remove.
+   *
+   * @param id, the id of the element to remove.
+   *
+   * @return pointer to the element removed.
+   */
+  virtual SedBase* removeChildObject(const std::string& elementName,
+      const std::string& id);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Returns the number of "elementName" in this SedRepeatedTask.
+   *
+   * @param elementName, the name of the element to get number of.
+   *
+   * @return unsigned int number of elements.
+   */
+  virtual unsigned int getNumObjects(const std::string& elementName);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Returns the nth object of "objectName" in this SedRepeatedTask.
+   *
+   * @param elementName, the name of the element to get number of.
+   *
+   * @param index, unsigned int the index of the object to retrieve.
+   *
+   * @return pointer to the object.
+   */
+  virtual SedBase* getObject(const std::string& elementName,
+      unsigned int index);
+
+  /** @endcond */
+
+
+
+
+#endif /* !SWIG */
+
+
+/**
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
+ *
+ * @param id a string representing the id attribute of the object to
+ * retrieve.
+ *
+ * @return a pointer to the SedBase element with the given @p id. If no such
+ * object is found, this method returns @c NULL.
+ */
+  virtual SedBase* getElementBySId(const std::string& id);
+
+
+  /**
+   * Returns a List of all child SedBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all SedBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(SedElementFilter* filter = NULL);
 
 
 protected:
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Creates a new object from the next XMLToken on the XMLInputStream
+   */
+  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream);
+
+  /** @endcond */
+
 
 
   /** @cond doxygenLibSEDMLInternal */
@@ -783,6 +1160,172 @@ SedSubTask_unsetOrder(SedSubTask_t * sst);
 LIBSEDML_EXTERN
 int
 SedSubTask_unsetTask(SedSubTask_t * sst);
+
+
+/**
+ * Returns a ListOf_t * containing SedSetValue_t objects from this
+ * SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure whose SedListOfSetValues is
+ * sought.
+ *
+ * @return the SedListOfSetValues from this SedRepeatedTask_t as a ListOf_t *.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @see SedRepeatedTask_addTaskChange()
+ * @see SedRepeatedTask_createTaskChange()
+ * @see SedRepeatedTask_getTaskChangeById()
+ * @see SedRepeatedTask_getTaskChange()
+ * @see SedRepeatedTask_getNumTaskChanges()
+ * @see SedRepeatedTask_removeTaskChangeById()
+ * @see SedRepeatedTask_removeTaskChange()
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedListOf_t*
+SedRepeatedTask_getListOfTaskChanges(SedRepeatedTask_t* srt);
+
+
+/**
+ * Get a SedSetValue_t from the SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedSetValue_t to
+ * retrieve.
+ *
+ * @return the nth SedSetValue_t in the SedListOfSetValues within this
+ * SedRepeatedTask or @c NULL if no such object exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedRepeatedTask_getTaskChange(SedRepeatedTask_t* srt, unsigned int n);
+
+
+/**
+ * Get a SedSetValue_t from the SedRepeatedTask_t based on the ModelReference
+ * to which it refers.
+ *
+ * @param srt the SedRepeatedTask_t structure to search.
+ *
+ * @param sid a string representing the "modelReference" attribute of the
+ * SedSetValue_t object to retrieve.
+ *
+ * @return the first SedSetValue_t in this SedRepeatedTask_t based on the given
+ * modelReference attribute or NULL if no such SedSetValue_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedRepeatedTask_getTaskChangeByModelReference(SedRepeatedTask_t* srt,
+    const char* sid);
+
+
+/**
+ * Get a SedSetValue_t from the SedRepeatedTask_t based on the Range to which
+ * it refers.
+ *
+ * @param srt the SedRepeatedTask_t structure to search.
+ *
+ * @param sid a string representing the "range" attribute of the SedSetValue_t
+ * object to retrieve.
+ *
+ * @return the first SedSetValue_t in this SedRepeatedTask_t based on the given
+ * range attribute or NULL if no such SedSetValue_t exists.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedRepeatedTask_getTaskChangeByRange(SedRepeatedTask_t* srt, const char* sid);
+
+
+/**
+ * Adds a copy of the given SedSetValue_t to this SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure to which the SedSetValue_t should
+ * be added.
+ *
+ * @param ssv the SedSetValue_t object to add.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_LEVEL_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_PKG_VERSION_MISMATCH, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_DUPLICATE_OBJECT_ID, OperationReturnValues_t}
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_addTaskChange(SedRepeatedTask_t* srt,
+    const SedSetValue_t* ssv);
+
+
+/**
+ * Get the number of SedSetValue_t objects in this SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure to query.
+ *
+ * @return the number of SedSetValue_t objects in this SedRepeatedTask_t.
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+unsigned int
+SedRepeatedTask_getNumTaskChanges(SedRepeatedTask_t* srt);
+
+
+/**
+ * Creates a new SedSetValue_t object, adds it to this SedRepeatedTask_t object
+ * and returns the SedSetValue_t object created.
+ *
+ * @param srt the SedRepeatedTask_t structure to which the SedSetValue_t should
+ * be added.
+ *
+ * @return a new SedSetValue_t object instance.
+ *
+ * @copydetails doc_returned_unowned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedRepeatedTask_createTaskChange(SedRepeatedTask_t* srt);
+
+
+/**
+ * Removes the nth SedSetValue_t from this SedRepeatedTask_t and returns a
+ * pointer to it.
+ *
+ * @param srt the SedRepeatedTask_t structure to search.
+ *
+ * @param n an unsigned int representing the index of the SedSetValue_t to
+ * remove.
+ *
+ * @return a pointer to the nth SedSetValue_t in this SedRepeatedTask_t.
+ *
+ * @copydetails doc_warning_returns_owned_pointer
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+SedSetValue_t*
+SedRepeatedTask_removeTaskChange(SedRepeatedTask_t* srt, unsigned int n);
 
 
 /**

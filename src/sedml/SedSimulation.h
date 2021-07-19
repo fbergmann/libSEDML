@@ -61,6 +61,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 class SedUniformTimeCourse;
 class SedOneStep;
 class SedSteadyState;
+class SedAnalysis;
 
 class LIBSEDML_EXTERN SedSimulation : public SedBase
 {
@@ -221,6 +222,16 @@ public:
    * SedSteadyState, @c false otherwise
    */
   virtual bool isSedSteadyState() const;
+
+
+  /**
+   * Predicate returning @c true if this abstract "SedSimulation" is of type
+   * SedAnalysis
+   *
+   * @return @c true if this abstract "SedSimulation" is of type
+   * SedAnalysis, @c false otherwise
+   */
+  virtual bool isSedAnalysis() const;
 
 
   /**
@@ -827,6 +838,27 @@ SedSimulation_createSteadyState(unsigned int level, unsigned int version);
 
 
 /**
+ * Creates a new SedAnalysis using the given SED-ML Level and @ p version
+ * values.
+ *
+ * @param level an unsigned int, the SED-ML Level to assign to this
+ * SedSimulation_t.
+ *
+ * @param version an unsigned int, the SED-ML Version to assign to this
+ * SedSimulation_t.
+ *
+ * @copydetails doc_note_setting_lv_pkg
+ *
+ * @copydetails doc_returned_owned_pointer
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+SedAnalysis_t*
+SedSimulation_createAnalysis(unsigned int level, unsigned int version);
+
+
+/**
  * Creates and returns a deep copy of this SedSimulation_t object.
  *
  * @param ss the SedSimulation_t structure.
@@ -1126,6 +1158,21 @@ SedSimulation_isSedOneStep(const SedSimulation_t * ss);
 LIBSEDML_EXTERN
 int
 SedSimulation_isSedSteadyState(const SedSimulation_t * ss);
+
+
+/**
+ * Predicate returning @c 1 if this SedSimulation_t is of type SedAnalysis_t
+ *
+ * @param ss the SedSimulation_t structure.
+ *
+ * @return @c 1 if this SedSimulation_t is of type SedAnalysis_t, @c 0
+ * otherwise
+ *
+ * @memberof SedSimulation_t
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSedAnalysis(const SedSimulation_t* ss);
 
 
 /**

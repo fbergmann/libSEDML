@@ -69,6 +69,8 @@ protected:
   std::string mRange;
   bool mResetModel;
   bool mIsSetResetModel;
+  bool mConcatenate;
+  bool mIsSetConcatenate;
   SedListOfRanges mRanges;
   SedListOfSetValues mSetValues;
   SedListOfSubTasks mSubTasks;
@@ -154,6 +156,15 @@ public:
 
 
   /**
+   * Returns the value of the "concatenate" attribute of this SedRepeatedTask.
+   *
+   * @return the value of the "concatenate" attribute of this SedRepeatedTask as
+   * a boolean.
+   */
+  bool getConcatenate() const;
+
+
+  /**
    * Predicate returning @c true if this SedRepeatedTask's "range" attribute is
    * set.
    *
@@ -171,6 +182,16 @@ public:
    * set, otherwise @c false is returned.
    */
   bool isSetResetModel() const;
+
+
+  /**
+   * Predicate returning @c true if this SedRepeatedTask's "concatenate"
+   * attribute is set.
+   *
+   * @return @c true if this SedRepeatedTask's "concatenate" attribute has been
+   * set, otherwise @c false is returned.
+   */
+  bool isSetConcatenate() const;
 
 
   /**
@@ -200,6 +221,19 @@ public:
 
 
   /**
+   * Sets the value of the "concatenate" attribute of this SedRepeatedTask.
+   *
+   * @param concatenate bool value of the "concatenate" attribute to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setConcatenate(bool concatenate);
+
+
+  /**
    * Unsets the value of the "range" attribute of this SedRepeatedTask.
    *
    * @copydetails doc_returns_success_code
@@ -217,6 +251,16 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetResetModel();
+
+
+  /**
+   * Unsets the value of the "concatenate" attribute of this SedRepeatedTask.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetConcatenate();
 
 
   /**
@@ -1514,6 +1558,21 @@ SedRepeatedTask_getResetModel(const SedRepeatedTask_t * srt);
 
 
 /**
+ * Returns the value of the "concatenate" attribute of this SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure whose concatenate is sought.
+ *
+ * @return the value of the "concatenate" attribute of this SedRepeatedTask_t as
+ * a boolean.
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_getConcatenate(const SedRepeatedTask_t* srt);
+
+
+/**
  * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "range"
  * attribute is set.
  *
@@ -1543,6 +1602,22 @@ SedRepeatedTask_isSetRangeId(const SedRepeatedTask_t * srt);
 LIBSEDML_EXTERN
 int
 SedRepeatedTask_isSetResetModel(const SedRepeatedTask_t * srt);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedRepeatedTask_t's "concatenate"
+ * attribute is set.
+ *
+ * @param srt the SedRepeatedTask_t structure.
+ *
+ * @return @c 1 (true) if this SedRepeatedTask_t's "concatenate" attribute has
+ * been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_isSetConcatenate(const SedRepeatedTask_t* srt);
 
 
 /**
@@ -1586,6 +1661,26 @@ SedRepeatedTask_setResetModel(SedRepeatedTask_t * srt, int resetModel);
 
 
 /**
+ * Sets the value of the "concatenate" attribute of this SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure.
+ *
+ * @param concatenate int value of the "concatenate" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_setConcatenate(SedRepeatedTask_t* srt, int concatenate);
+
+
+/**
  * Unsets the value of the "range" attribute of this SedRepeatedTask_t.
  *
  * @param srt the SedRepeatedTask_t structure.
@@ -1617,6 +1712,23 @@ SedRepeatedTask_unsetRangeId(SedRepeatedTask_t * srt);
 LIBSEDML_EXTERN
 int
 SedRepeatedTask_unsetResetModel(SedRepeatedTask_t * srt);
+
+
+/**
+ * Unsets the value of the "concatenate" attribute of this SedRepeatedTask_t.
+ *
+ * @param srt the SedRepeatedTask_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedRepeatedTask_t
+ */
+LIBSEDML_EXTERN
+int
+SedRepeatedTask_unsetConcatenate(SedRepeatedTask_t* srt);
 
 
 /**
