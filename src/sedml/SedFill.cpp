@@ -53,7 +53,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedFill::SedFill(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mColor ("")
-  , mSecondColor ("")
+  //, mSecondColor ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -65,7 +65,7 @@ SedFill::SedFill(unsigned int level, unsigned int version)
 SedFill::SedFill(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mColor ("")
-  , mSecondColor ("")
+  //, mSecondColor ("")
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -77,7 +77,7 @@ SedFill::SedFill(SedNamespaces *sedmlns)
 SedFill::SedFill(const SedFill& orig)
   : SedBase( orig )
   , mColor ( orig.mColor )
-  , mSecondColor ( orig.mSecondColor )
+  //, mSecondColor ( orig.mSecondColor )
 {
 }
 
@@ -92,7 +92,7 @@ SedFill::operator=(const SedFill& rhs)
   {
     SedBase::operator=(rhs);
     mColor = rhs.mColor;
-    mSecondColor = rhs.mSecondColor;
+    //mSecondColor = rhs.mSecondColor;
   }
 
   return *this;
@@ -130,11 +130,11 @@ SedFill::getColor() const
 /*
  * Returns the value of the "secondColor" attribute of this SedFill.
  */
-const std::string&
-SedFill::getSecondColor() const
-{
-  return mSecondColor;
-}
+//const std::string&
+//SedFill::getSecondColor() const
+//{
+//  return mSecondColor;
+//}
 
 
 /*
@@ -151,11 +151,11 @@ SedFill::isSetColor() const
  * Predicate returning @c true if this SedFill's "secondColor" attribute is
  * set.
  */
-bool
-SedFill::isSetSecondColor() const
-{
-  return (mSecondColor.empty() == false);
-}
+//bool
+//SedFill::isSetSecondColor() const
+//{
+//  return (mSecondColor.empty() == false);
+//}
 
 
 /*
@@ -172,12 +172,12 @@ SedFill::setColor(const std::string& color)
 /*
  * Sets the value of the "secondColor" attribute of this SedFill.
  */
-int
-SedFill::setSecondColor(const std::string& secondColor)
-{
-  mSecondColor = secondColor;
-  return LIBSEDML_OPERATION_SUCCESS;
-}
+//int
+//SedFill::setSecondColor(const std::string& secondColor)
+//{
+//  mSecondColor = secondColor;
+//  return LIBSEDML_OPERATION_SUCCESS;
+//}
 
 
 /*
@@ -202,20 +202,20 @@ SedFill::unsetColor()
 /*
  * Unsets the value of the "secondColor" attribute of this SedFill.
  */
-int
-SedFill::unsetSecondColor()
-{
-  mSecondColor.erase();
-
-  if (mSecondColor.empty() == true)
-  {
-    return LIBSEDML_OPERATION_SUCCESS;
-  }
-  else
-  {
-    return LIBSEDML_OPERATION_FAILED;
-  }
-}
+//int
+//SedFill::unsetSecondColor()
+//{
+//  mSecondColor.erase();
+//
+//  if (mSecondColor.empty() == true)
+//  {
+//    return LIBSEDML_OPERATION_SUCCESS;
+//  }
+//  else
+//  {
+//    return LIBSEDML_OPERATION_FAILED;
+//  }
+//}
 
 
 /*
@@ -394,11 +394,11 @@ SedFill::getAttribute(const std::string& attributeName,
     value = getColor();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
-  else if (attributeName == "secondColor")
-  {
-    value = getSecondColor();
-    return_value = LIBSEDML_OPERATION_SUCCESS;
-  }
+  //else if (attributeName == "secondColor")
+  //{
+  //  value = getSecondColor();
+  //  return_value = LIBSEDML_OPERATION_SUCCESS;
+  //}
 
   return return_value;
 }
@@ -422,10 +422,10 @@ SedFill::isSetAttribute(const std::string& attributeName) const
   {
     value = isSetColor();
   }
-  else if (attributeName == "secondColor")
-  {
-    value = isSetSecondColor();
-  }
+  //else if (attributeName == "secondColor")
+  //{
+  //  value = isSetSecondColor();
+  //}
 
   return value;
 }
@@ -517,10 +517,10 @@ SedFill::setAttribute(const std::string& attributeName,
   {
     return_value = setColor(value);
   }
-  else if (attributeName == "secondColor")
-  {
-    return_value = setSecondColor(value);
-  }
+  //else if (attributeName == "secondColor")
+  //{
+  //  return_value = setSecondColor(value);
+  //}
 
   return return_value;
 }
@@ -543,10 +543,10 @@ SedFill::unsetAttribute(const std::string& attributeName)
   {
     value = unsetColor();
   }
-  else if (attributeName == "secondColor")
-  {
-    value = unsetSecondColor();
-  }
+  //else if (attributeName == "secondColor")
+  //{
+  //  value = unsetSecondColor();
+  //}
 
   return value;
 }
@@ -568,7 +568,7 @@ SedFill::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   attributes.add("color");
 
-  attributes.add("secondColor");
+  //attributes.add("secondColor");
 }
 
 /** @endcond */
@@ -639,15 +639,15 @@ SedFill::readAttributes(
   // secondColor string (use = "optional" )
   // 
 
-  assigned = attributes.readInto("secondColor", mSecondColor);
+  //assigned = attributes.readInto("secondColor", mSecondColor);
 
-  if (assigned == true)
-  {
-    if (mSecondColor.empty() == true)
-    {
-      logEmptyString(mSecondColor, level, version, "<SedFill>");
-    }
-  }
+  //if (assigned == true)
+  //{
+  //  if (mSecondColor.empty() == true)
+  //  {
+  //    logEmptyString(mSecondColor, level, version, "<SedFill>");
+  //  }
+  //}
 }
 
 /** @endcond */
@@ -670,10 +670,10 @@ SedFill::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
     stream.writeAttribute("color", getPrefix(), mColor);
   }
 
-  if (isSetSecondColor() == true)
-  {
-    stream.writeAttribute("secondColor", getPrefix(), mSecondColor);
-  }
+  //if (isSetSecondColor() == true)
+  //{
+  //  stream.writeAttribute("secondColor", getPrefix(), mSecondColor);
+  //}
 }
 
 /** @endcond */
@@ -746,18 +746,18 @@ SedFill_getColor(const SedFill_t * sf)
 /*
  * Returns the value of the "secondColor" attribute of this SedFill_t.
  */
-LIBSEDML_EXTERN
-char *
-SedFill_getSecondColor(const SedFill_t * sf)
-{
-  if (sf == NULL)
-  {
-    return NULL;
-  }
-
-  return sf->getSecondColor().empty() ? NULL :
-    safe_strdup(sf->getSecondColor().c_str());
-}
+//LIBSEDML_EXTERN
+//char *
+//SedFill_getSecondColor(const SedFill_t * sf)
+//{
+//  if (sf == NULL)
+//  {
+//    return NULL;
+//  }
+//
+//  return sf->getSecondColor().empty() ? NULL :
+//    safe_strdup(sf->getSecondColor().c_str());
+//}
 
 
 /*
@@ -776,12 +776,12 @@ SedFill_isSetColor(const SedFill_t * sf)
  * Predicate returning @c 1 (true) if this SedFill_t's "secondColor" attribute
  * is set.
  */
-LIBSEDML_EXTERN
-int
-SedFill_isSetSecondColor(const SedFill_t * sf)
-{
-  return (sf != NULL) ? static_cast<int>(sf->isSetSecondColor()) : 0;
-}
+//LIBSEDML_EXTERN
+//int
+//SedFill_isSetSecondColor(const SedFill_t * sf)
+//{
+//  return (sf != NULL) ? static_cast<int>(sf->isSetSecondColor()) : 0;
+//}
 
 
 /*
@@ -798,13 +798,13 @@ SedFill_setColor(SedFill_t * sf, const char * color)
 /*
  * Sets the value of the "secondColor" attribute of this SedFill_t.
  */
-LIBSEDML_EXTERN
-int
-SedFill_setSecondColor(SedFill_t * sf, const char * secondColor)
-{
-  return (sf != NULL) ? sf->setSecondColor(secondColor) :
-    LIBSEDML_INVALID_OBJECT;
-}
+//LIBSEDML_EXTERN
+//int
+//SedFill_setSecondColor(SedFill_t * sf, const char * secondColor)
+//{
+//  return (sf != NULL) ? sf->setSecondColor(secondColor) :
+//    LIBSEDML_INVALID_OBJECT;
+//}
 
 
 /*
@@ -821,12 +821,12 @@ SedFill_unsetColor(SedFill_t * sf)
 /*
  * Unsets the value of the "secondColor" attribute of this SedFill_t.
  */
-LIBSEDML_EXTERN
-int
-SedFill_unsetSecondColor(SedFill_t * sf)
-{
-  return (sf != NULL) ? sf->unsetSecondColor() : LIBSEDML_INVALID_OBJECT;
-}
+//LIBSEDML_EXTERN
+//int
+//SedFill_unsetSecondColor(SedFill_t * sf)
+//{
+//  return (sf != NULL) ? sf->unsetSecondColor() : LIBSEDML_INVALID_OBJECT;
+//}
 
 
 /*
