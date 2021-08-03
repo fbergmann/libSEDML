@@ -428,7 +428,6 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedLine.h>
 %include <sedml/SedMarker.h>
 %include <sedml/SedFill.h>
-%include <sedml/SedDependentVariable.h>
 %include <sedml/SedAppliedDimension.h>
 %include <sedml/SedListOfAppliedDimensions.h>
 %include <sedml/SedDataRange.h>

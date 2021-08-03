@@ -214,9 +214,6 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_FILL:
       return SWIGTYPE_p_SedFill;
 
-    case SEDML_DEPENDENTVARIABLE:
-      return SWIGTYPE_p_SedDependentVariable;
-
     case SEDML_APPLIEDDIMENSION:
       return SWIGTYPE_p_SedAppliedDimension;
 
