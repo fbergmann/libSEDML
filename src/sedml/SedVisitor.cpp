@@ -598,16 +598,6 @@ SedVisitor::visit(const SedFill& x)
 
 
 /*
- * Visit the SedDependentVariable
- */
-bool
-SedVisitor::visit(const SedDependentVariable& x)
-{
-  return visit(static_cast<const SedBase&>(x));
-}
-
-
-/*
  * Visit the SedAppliedDimension
  */
 bool
@@ -1158,15 +1148,6 @@ SedVisitor::leave(const SedMarker& x)
  */
 void
 SedVisitor::leave(const SedFill& x)
-{
-}
-
-
-/*
- * Leave the SedDependentVariable
- */
-void
-SedVisitor::leave(const SedDependentVariable& x)
 {
 }
 

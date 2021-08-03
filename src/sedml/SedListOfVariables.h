@@ -308,23 +308,6 @@ public:
 
 
   /**
-   * Creates a new SedDependentVariable object, adds it to this SedListOfVariables
-   * object and returns the SedDependentVariable object created.
-   *
-   * @return a new SedDependentVariable object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addVariable(const SedVariable* object)
-   * @see get(const std::string& sid)
-   * @see get(unsigned int n)
-   * @see getNumVariables()
-   * @see remove(const std::string& sid)
-   * @see remove(unsigned int n)
-   */
-  SedDependentVariable* createDependentVariable();
-
-  /**
    * Get a SedVariable from the SedListOfVariables based on the TaskReference
    * to which it refers.
    *

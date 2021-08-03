@@ -111,7 +111,6 @@ class SedStyle;
 class SedLine;
 class SedMarker;
 class SedFill;
-class SedDependentVariable;
 class SedAppliedDimension;
 class SedDataRange;
 class SedShadedArea;
@@ -690,16 +689,6 @@ virtual bool visit (const SedMarker &x);
  * @param x the SedBase object to visit.
  */
 virtual bool visit (const SedFill &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to visit.
- */
-virtual bool visit (const SedDependentVariable &x);
 
 
 /**
@@ -1323,16 +1312,6 @@ virtual void leave (const SedMarker &x);
  * @param x the SedBase object to leave.
  */
 virtual void leave (const SedFill &x);
-
-
-/**
- * Interface method for using the <a target="_blank"
- * href="http://en.wikipedia.org/wiki/Design_pattern_(computer_science)"><i>Visitor
- * Pattern</i></a> to perform operations on SedBase objects.
- *
- * @param x the SedBase object to leave.
- */
-virtual void leave (const SedDependentVariable &x);
 
 
 /**

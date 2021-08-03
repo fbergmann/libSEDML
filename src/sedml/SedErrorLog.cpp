@@ -78,7 +78,7 @@ SedErrorLog& SedErrorLog::operator=(const SedErrorLog& other)
 {
   if (&other != this)
   {
-    XMLErrorLog::operator=(other);
+  XMLErrorLog::operator=(other);
   }
   return *this;
 }
@@ -88,7 +88,7 @@ SedErrorLog& SedErrorLog::operator=(const SedErrorLog& other)
 /*
  * Used by the Destructor to delete each item in mErrors.
  */
-struct Delete
+struct Delete : public unary_function<XMLError*, void>
 {
   void operator() (XMLError* error) { delete error; }
 };
