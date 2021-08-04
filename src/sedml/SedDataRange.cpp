@@ -53,7 +53,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedDataRange::SedDataRange(unsigned int level, unsigned int version)
   : SedRange(level, version)
-  , mSourceRef ("")
+  , mSourceReference ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -64,7 +64,7 @@ SedDataRange::SedDataRange(unsigned int level, unsigned int version)
  */
 SedDataRange::SedDataRange(SedNamespaces *sedmlns)
   : SedRange(sedmlns)
-  , mSourceRef ("")
+  , mSourceReference ("")
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -75,7 +75,7 @@ SedDataRange::SedDataRange(SedNamespaces *sedmlns)
  */
 SedDataRange::SedDataRange(const SedDataRange& orig)
   : SedRange( orig )
-  , mSourceRef ( orig.mSourceRef )
+  , mSourceReference ( orig.mSourceReference )
 {
 }
 
@@ -89,7 +89,7 @@ SedDataRange::operator=(const SedDataRange& rhs)
   if (&rhs != this)
   {
     SedRange::operator=(rhs);
-    mSourceRef = rhs.mSourceRef;
+    mSourceReference = rhs.mSourceReference;
   }
 
   return *this;
@@ -115,53 +115,53 @@ SedDataRange::~SedDataRange()
 
 
 /*
- * Returns the value of the "sourceRef" attribute of this SedDataRange.
+ * Returns the value of the "sourceReference" attribute of this SedDataRange.
  */
 const std::string&
-SedDataRange::getSourceRef() const
+SedDataRange::getSourceReference() const
 {
-  return mSourceRef;
+  return mSourceReference;
 }
 
 
 /*
- * Predicate returning @c true if this SedDataRange's "sourceRef" attribute is
+ * Predicate returning @c true if this SedDataRange's "sourceReference" attribute is
  * set.
  */
 bool
-SedDataRange::isSetSourceRef() const
+SedDataRange::isSetSourceReference() const
 {
-  return (mSourceRef.empty() == false);
+  return (mSourceReference.empty() == false);
 }
 
 
 /*
- * Sets the value of the "sourceRef" attribute of this SedDataRange.
+ * Sets the value of the "sourceReference" attribute of this SedDataRange.
  */
 int
-SedDataRange::setSourceRef(const std::string& sourceRef)
+SedDataRange::setSourceReference(const std::string& sourceReference)
 {
-  if (!(SyntaxChecker::isValidInternalSId(sourceRef)))
+  if (!(SyntaxChecker::isValidInternalSId(sourceReference)))
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mSourceRef = sourceRef;
+    mSourceReference = sourceReference;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Unsets the value of the "sourceRef" attribute of this SedDataRange.
+ * Unsets the value of the "sourceReference" attribute of this SedDataRange.
  */
 int
-SedDataRange::unsetSourceRef()
+SedDataRange::unsetSourceReference()
 {
-  mSourceRef.erase();
+  mSourceReference.erase();
 
-  if (mSourceRef.empty() == true)
+  if (mSourceReference.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -179,9 +179,9 @@ void
 SedDataRange::renameSIdRefs(const std::string& oldid,
                             const std::string& newid)
 {
-  if (isSetSourceRef() && mSourceRef == oldid)
+  if (isSetSourceReference() && mSourceReference == oldid)
   {
-    setSourceRef(newid);
+    setSourceReference(newid);
   }
 }
 
@@ -216,7 +216,7 @@ SedDataRange::hasRequiredAttributes() const
 {
   bool allPresent = SedRange::hasRequiredAttributes();
 
-  if (isSetSourceRef() == false)
+  if (isSetSourceReference() == false)
   {
     allPresent = false;
   }
@@ -359,9 +359,9 @@ SedDataRange::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "sourceRef")
+  if (attributeName == "sourceReference")
   {
-    value = getSourceRef();
+    value = getSourceReference();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -383,9 +383,9 @@ SedDataRange::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedRange::isSetAttribute(attributeName);
 
-  if (attributeName == "sourceRef")
+  if (attributeName == "sourceReference")
   {
-    value = isSetSourceRef();
+    value = isSetSourceReference();
   }
 
   return value;
@@ -475,9 +475,9 @@ SedDataRange::setAttribute(const std::string& attributeName,
 {
   int return_value = SedRange::setAttribute(attributeName, value);
 
-  if (attributeName == "sourceRef")
+  if (attributeName == "sourceReference")
   {
-    return_value = setSourceRef(value);
+    return_value = setSourceReference(value);
   }
 
   return return_value;
@@ -497,9 +497,9 @@ SedDataRange::unsetAttribute(const std::string& attributeName)
 {
   int value = SedRange::unsetAttribute(attributeName);
 
-  if (attributeName == "sourceRef")
+  if (attributeName == "sourceReference")
   {
-    value = unsetSourceRef();
+    value = unsetSourceReference();
   }
 
   return value;
@@ -540,7 +540,7 @@ SedDataRange::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedRange::addExpectedAttributes(attributes);
 
-  attributes.add("sourceRef");
+  attributes.add("sourceReference");
 }
 
 /** @endcond */
@@ -584,28 +584,28 @@ SedDataRange::readAttributes(
   }
 
   // 
-  // sourceRef SIdRef (use = "required" )
+  // sourceReference SIdRef (use = "required" )
   // 
 
-  assigned = attributes.readInto("sourceRef", mSourceRef);
+  assigned = attributes.readInto("sourceReference", mSourceReference);
 
   if (assigned == true)
   {
-    if (mSourceRef.empty() == true)
+    if (mSourceReference.empty() == true)
     {
-      logEmptyString(mSourceRef, level, version, "<SedDataRange>");
+      logEmptyString(mSourceReference, level, version, "<SedDataRange>");
     }
-    else if (SyntaxChecker::isValidSBMLSId(mSourceRef) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mSourceReference) == false)
     {
-      std::string msg = "The sourceRef attribute on the <" + getElementName() +
+      std::string msg = "The sourceReference attribute on the <" + getElementName() +
         ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
       }
 
-      msg += " is '" + mSourceRef + "', which does not conform to the syntax.";
-      logError(SedmlDataRangeSourceRefMustBeSId, level, version, msg,
+      msg += " is '" + mSourceReference + "', which does not conform to the syntax.";
+      logError(SedmlDataRangeSourceReferenceMustBeSId, level, version, msg,
         getLine(), getColumn());
     }
   }
@@ -613,7 +613,7 @@ SedDataRange::readAttributes(
   {
     if (log)
     {
-      std::string message = "Sedml attribute 'sourceRef' is missing from the "
+      std::string message = "Sedml attribute 'sourceReference' is missing from the "
         "<SedDataRange> element.";
       log->logError(SedmlDataRangeAllowedAttributes, level, version, message,
         getLine(), getColumn());
@@ -636,9 +636,9 @@ SedDataRange::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
 {
   SedRange::writeAttributes(stream);
 
-  if (isSetSourceRef() == true)
+  if (isSetSourceReference() == true)
   {
-    stream.writeAttribute("sourceRef", getPrefix(), mSourceRef);
+    stream.writeAttribute("sourceReference", getPrefix(), mSourceReference);
   }
 }
 
@@ -695,54 +695,54 @@ SedDataRange_free(SedDataRange_t* sdr)
 
 
 /*
- * Returns the value of the "sourceRef" attribute of this SedDataRange_t.
+ * Returns the value of the "sourceReference" attribute of this SedDataRange_t.
  */
 LIBSEDML_EXTERN
 char *
-SedDataRange_getSourceRef(const SedDataRange_t * sdr)
+SedDataRange_getSourceReference(const SedDataRange_t * sdr)
 {
   if (sdr == NULL)
   {
     return NULL;
   }
 
-  return sdr->getSourceRef().empty() ? NULL :
-    safe_strdup(sdr->getSourceRef().c_str());
+  return sdr->getSourceReference().empty() ? NULL :
+    safe_strdup(sdr->getSourceReference().c_str());
 }
 
 
 /*
- * Predicate returning @c 1 (true) if this SedDataRange_t's "sourceRef"
+ * Predicate returning @c 1 (true) if this SedDataRange_t's "sourceReference"
  * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedDataRange_isSetSourceRef(const SedDataRange_t * sdr)
+SedDataRange_isSetSourceReference(const SedDataRange_t * sdr)
 {
-  return (sdr != NULL) ? static_cast<int>(sdr->isSetSourceRef()) : 0;
+  return (sdr != NULL) ? static_cast<int>(sdr->isSetSourceReference()) : 0;
 }
 
 
 /*
- * Sets the value of the "sourceRef" attribute of this SedDataRange_t.
+ * Sets the value of the "sourceReference" attribute of this SedDataRange_t.
  */
 LIBSEDML_EXTERN
 int
-SedDataRange_setSourceRef(SedDataRange_t * sdr, const char * sourceRef)
+SedDataRange_setSourceReference(SedDataRange_t * sdr, const char * sourceReference)
 {
-  return (sdr != NULL) ? sdr->setSourceRef(sourceRef) :
+  return (sdr != NULL) ? sdr->setSourceReference(sourceReference) :
     LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Unsets the value of the "sourceRef" attribute of this SedDataRange_t.
+ * Unsets the value of the "sourceReference" attribute of this SedDataRange_t.
  */
 LIBSEDML_EXTERN
 int
-SedDataRange_unsetSourceRef(SedDataRange_t * sdr)
+SedDataRange_unsetSourceReference(SedDataRange_t * sdr)
 {
-  return (sdr != NULL) ? sdr->unsetSourceRef() : LIBSEDML_INVALID_OBJECT;
+  return (sdr != NULL) ? sdr->unsetSourceReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 

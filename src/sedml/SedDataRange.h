@@ -63,7 +63,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mSourceRef;
+  std::string mSourceReference;
 
   /** @endcond */
 
@@ -128,28 +128,28 @@ public:
 
 
   /**
-   * Returns the value of the "sourceRef" attribute of this SedDataRange.
+   * Returns the value of the "sourceReference" attribute of this SedDataRange.
    *
-   * @return the value of the "sourceRef" attribute of this SedDataRange as a
+   * @return the value of the "sourceReference" attribute of this SedDataRange as a
    * string.
    */
-  const std::string& getSourceRef() const;
+  const std::string& getSourceReference() const;
 
 
   /**
-   * Predicate returning @c true if this SedDataRange's "sourceRef" attribute
+   * Predicate returning @c true if this SedDataRange's "sourceReference" attribute
    * is set.
    *
-   * @return @c true if this SedDataRange's "sourceRef" attribute has been set,
+   * @return @c true if this SedDataRange's "sourceReference" attribute has been set,
    * otherwise @c false is returned.
    */
-  bool isSetSourceRef() const;
+  bool isSetSourceReference() const;
 
 
   /**
-   * Sets the value of the "sourceRef" attribute of this SedDataRange.
+   * Sets the value of the "sourceReference" attribute of this SedDataRange.
    *
-   * @param sourceRef std::string& value of the "sourceRef" attribute to be
+   * @param sourceReference std::string& value of the "sourceReference" attribute to be
    * set.
    *
    * @copydetails doc_returns_success_code
@@ -157,17 +157,17 @@ public:
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setSourceRef(const std::string& sourceRef);
+  int setSourceReference(const std::string& sourceReference);
 
 
   /**
-   * Unsets the value of the "sourceRef" attribute of this SedDataRange.
+   * Unsets the value of the "sourceReference" attribute of this SedDataRange.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetSourceRef();
+  int unsetSourceReference();
 
 
   /**
@@ -211,7 +211,7 @@ public:
    *
    *
    * @note The required attributes for the SedDataRange object are:
-   * @li "sourceRef"
+   * @li "sourceReference"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -620,11 +620,11 @@ SedDataRange_free(SedDataRange_t* sdr);
 
 
 /**
- * Returns the value of the "sourceRef" attribute of this SedDataRange_t.
+ * Returns the value of the "sourceReference" attribute of this SedDataRange_t.
  *
- * @param sdr the SedDataRange_t structure whose sourceRef is sought.
+ * @param sdr the SedDataRange_t structure whose sourceReference is sought.
  *
- * @return the value of the "sourceRef" attribute of this SedDataRange_t as a
+ * @return the value of the "sourceReference" attribute of this SedDataRange_t as a
  * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
@@ -633,31 +633,31 @@ SedDataRange_free(SedDataRange_t* sdr);
  */
 LIBSEDML_EXTERN
 char *
-SedDataRange_getSourceRef(const SedDataRange_t * sdr);
+SedDataRange_getSourceReference(const SedDataRange_t * sdr);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedDataRange_t's "sourceRef"
+ * Predicate returning @c 1 (true) if this SedDataRange_t's "sourceReference"
  * attribute is set.
  *
  * @param sdr the SedDataRange_t structure.
  *
- * @return @c 1 (true) if this SedDataRange_t's "sourceRef" attribute has been
+ * @return @c 1 (true) if this SedDataRange_t's "sourceReference" attribute has been
  * set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedDataRange_t
  */
 LIBSEDML_EXTERN
 int
-SedDataRange_isSetSourceRef(const SedDataRange_t * sdr);
+SedDataRange_isSetSourceReference(const SedDataRange_t * sdr);
 
 
 /**
- * Sets the value of the "sourceRef" attribute of this SedDataRange_t.
+ * Sets the value of the "sourceReference" attribute of this SedDataRange_t.
  *
  * @param sdr the SedDataRange_t structure.
  *
- * @param sourceRef const char * value of the "sourceRef" attribute to be set.
+ * @param sourceReference const char * value of the "sourceReference" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -669,11 +669,11 @@ SedDataRange_isSetSourceRef(const SedDataRange_t * sdr);
  */
 LIBSEDML_EXTERN
 int
-SedDataRange_setSourceRef(SedDataRange_t * sdr, const char * sourceRef);
+SedDataRange_setSourceReference(SedDataRange_t * sdr, const char * sourceReference);
 
 
 /**
- * Unsets the value of the "sourceRef" attribute of this SedDataRange_t.
+ * Unsets the value of the "sourceReference" attribute of this SedDataRange_t.
  *
  * @param sdr the SedDataRange_t structure.
  *
@@ -686,7 +686,7 @@ SedDataRange_setSourceRef(SedDataRange_t * sdr, const char * sourceRef);
  */
 LIBSEDML_EXTERN
 int
-SedDataRange_unsetSourceRef(SedDataRange_t * sdr);
+SedDataRange_unsetSourceReference(SedDataRange_t * sdr);
 
 
 /**
@@ -700,7 +700,7 @@ SedDataRange_unsetSourceRef(SedDataRange_t * sdr);
  *
  *
  * @note The required attributes for the SedDataRange_t object are:
- * @li "sourceRef"
+ * @li "sourceReference"
  *
  * @memberof SedDataRange_t
  */

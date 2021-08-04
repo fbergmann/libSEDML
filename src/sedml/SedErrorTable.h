@@ -4794,7 +4794,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <dataRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <dataRange> object must have the required attribute 'sedml:sourceRef'. "
+    "A <dataRange> object must have the required attribute 'sedml:sourceReference'. "
     "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <dataRange> object. ",
     { "L3V1 Sedml V1 Section"
@@ -4802,11 +4802,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25704
-  { SedmlDataRangeSourceRefMustBeSId,
-    "The attribute 'sourceRef' must point to SId object.",
+  { SedmlDataRangeSourceReferenceMustBeSId,
+    "The attribute 'sourceReference' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:sourceRef' of a <dataRange> object must "
+    "The value of the attribute 'sedml:sourceReference' of a <dataRange> object must "
     "be the identifier of an existing < object> defined in the enclosing "
     "<model> object.",
     { "L3V1 Sedml V1 Section"
