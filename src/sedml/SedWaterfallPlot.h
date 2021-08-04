@@ -63,7 +63,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mTaskRef;
+  std::string mTaskReference;
 
   /** @endcond */
 
@@ -128,45 +128,45 @@ public:
 
 
   /**
-   * Returns the value of the "taskRef" attribute of this SedWaterfallPlot.
+   * Returns the value of the "taskReference" attribute of this SedWaterfallPlot.
    *
-   * @return the value of the "taskRef" attribute of this SedWaterfallPlot as a
+   * @return the value of the "taskReference" attribute of this SedWaterfallPlot as a
    * string.
    */
-  const std::string& getTaskRef() const;
+  const std::string& getTaskReference() const;
 
 
   /**
-   * Predicate returning @c true if this SedWaterfallPlot's "taskRef" attribute
+   * Predicate returning @c true if this SedWaterfallPlot's "taskReference" attribute
    * is set.
    *
-   * @return @c true if this SedWaterfallPlot's "taskRef" attribute has been
+   * @return @c true if this SedWaterfallPlot's "taskReference" attribute has been
    * set, otherwise @c false is returned.
    */
-  bool isSetTaskRef() const;
+  bool isSetTaskReference() const;
 
 
   /**
-   * Sets the value of the "taskRef" attribute of this SedWaterfallPlot.
+   * Sets the value of the "taskReference" attribute of this SedWaterfallPlot.
    *
-   * @param taskRef std::string& value of the "taskRef" attribute to be set.
+   * @param taskReference std::string& value of the "taskReference" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setTaskRef(const std::string& taskRef);
+  int setTaskReference(const std::string& taskReference);
 
 
   /**
-   * Unsets the value of the "taskRef" attribute of this SedWaterfallPlot.
+   * Unsets the value of the "taskReference" attribute of this SedWaterfallPlot.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetTaskRef();
+  int unsetTaskReference();
 
 
   /**
@@ -210,7 +210,7 @@ public:
    *
    *
    * @note The required attributes for the SedWaterfallPlot object are:
-   * @li "taskRef"
+   * @li "taskReference"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -620,11 +620,11 @@ SedWaterfallPlot_free(SedWaterfallPlot_t* swp);
 
 
 /**
- * Returns the value of the "taskRef" attribute of this SedWaterfallPlot_t.
+ * Returns the value of the "taskReference" attribute of this SedWaterfallPlot_t.
  *
- * @param swp the SedWaterfallPlot_t structure whose taskRef is sought.
+ * @param swp the SedWaterfallPlot_t structure whose taskReference is sought.
  *
- * @return the value of the "taskRef" attribute of this SedWaterfallPlot_t as a
+ * @return the value of the "taskReference" attribute of this SedWaterfallPlot_t as a
  * pointer to a string.
  *
  * @copydetails doc_returned_owned_char
@@ -633,31 +633,31 @@ SedWaterfallPlot_free(SedWaterfallPlot_t* swp);
  */
 LIBSEDML_EXTERN
 char *
-SedWaterfallPlot_getTaskRef(const SedWaterfallPlot_t * swp);
+SedWaterfallPlot_getTaskReference(const SedWaterfallPlot_t * swp);
 
 
 /**
- * Predicate returning @c 1 (true) if this SedWaterfallPlot_t's "taskRef"
+ * Predicate returning @c 1 (true) if this SedWaterfallPlot_t's "taskReference"
  * attribute is set.
  *
  * @param swp the SedWaterfallPlot_t structure.
  *
- * @return @c 1 (true) if this SedWaterfallPlot_t's "taskRef" attribute has
+ * @return @c 1 (true) if this SedWaterfallPlot_t's "taskReference" attribute has
  * been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedWaterfallPlot_t
  */
 LIBSEDML_EXTERN
 int
-SedWaterfallPlot_isSetTaskRef(const SedWaterfallPlot_t * swp);
+SedWaterfallPlot_isSetTaskReference(const SedWaterfallPlot_t * swp);
 
 
 /**
- * Sets the value of the "taskRef" attribute of this SedWaterfallPlot_t.
+ * Sets the value of the "taskReference" attribute of this SedWaterfallPlot_t.
  *
  * @param swp the SedWaterfallPlot_t structure.
  *
- * @param taskRef const char * value of the "taskRef" attribute to be set.
+ * @param taskReference const char * value of the "taskReference" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -669,11 +669,11 @@ SedWaterfallPlot_isSetTaskRef(const SedWaterfallPlot_t * swp);
  */
 LIBSEDML_EXTERN
 int
-SedWaterfallPlot_setTaskRef(SedWaterfallPlot_t * swp, const char * taskRef);
+SedWaterfallPlot_setTaskReference(SedWaterfallPlot_t * swp, const char * taskReference);
 
 
 /**
- * Unsets the value of the "taskRef" attribute of this SedWaterfallPlot_t.
+ * Unsets the value of the "taskReference" attribute of this SedWaterfallPlot_t.
  *
  * @param swp the SedWaterfallPlot_t structure.
  *
@@ -686,7 +686,7 @@ SedWaterfallPlot_setTaskRef(SedWaterfallPlot_t * swp, const char * taskRef);
  */
 LIBSEDML_EXTERN
 int
-SedWaterfallPlot_unsetTaskRef(SedWaterfallPlot_t * swp);
+SedWaterfallPlot_unsetTaskReference(SedWaterfallPlot_t * swp);
 
 
 /**
@@ -700,7 +700,7 @@ SedWaterfallPlot_unsetTaskRef(SedWaterfallPlot_t * swp);
  *
  *
  * @note The required attributes for the SedWaterfallPlot_t object are:
- * @li "taskRef"
+ * @li "taskReference"
  *
  * @memberof SedWaterfallPlot_t
  */

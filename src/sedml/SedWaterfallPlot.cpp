@@ -53,7 +53,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
  */
 SedWaterfallPlot::SedWaterfallPlot(unsigned int level, unsigned int version)
   : SedPlot(level, version)
-  , mTaskRef ("")
+  , mTaskReference ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -65,7 +65,7 @@ SedWaterfallPlot::SedWaterfallPlot(unsigned int level, unsigned int version)
  */
 SedWaterfallPlot::SedWaterfallPlot(SedNamespaces *sedmlns)
   : SedPlot(sedmlns)
-  , mTaskRef ("")
+  , mTaskReference ("")
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -76,7 +76,7 @@ SedWaterfallPlot::SedWaterfallPlot(SedNamespaces *sedmlns)
  */
 SedWaterfallPlot::SedWaterfallPlot(const SedWaterfallPlot& orig)
   : SedPlot( orig )
-  , mTaskRef ( orig.mTaskRef )
+  , mTaskReference ( orig.mTaskReference )
 {
 }
 
@@ -90,7 +90,7 @@ SedWaterfallPlot::operator=(const SedWaterfallPlot& rhs)
   if (&rhs != this)
   {
     SedPlot::operator=(rhs);
-    mTaskRef = rhs.mTaskRef;
+    mTaskReference = rhs.mTaskReference;
   }
 
   return *this;
@@ -116,53 +116,53 @@ SedWaterfallPlot::~SedWaterfallPlot()
 
 
 /*
- * Returns the value of the "taskRef" attribute of this SedWaterfallPlot.
+ * Returns the value of the "taskReference" attribute of this SedWaterfallPlot.
  */
 const std::string&
-SedWaterfallPlot::getTaskRef() const
+SedWaterfallPlot::getTaskReference() const
 {
-  return mTaskRef;
+  return mTaskReference;
 }
 
 
 /*
- * Predicate returning @c true if this SedWaterfallPlot's "taskRef" attribute
+ * Predicate returning @c true if this SedWaterfallPlot's "taskReference" attribute
  * is set.
  */
 bool
-SedWaterfallPlot::isSetTaskRef() const
+SedWaterfallPlot::isSetTaskReference() const
 {
-  return (mTaskRef.empty() == false);
+  return (mTaskReference.empty() == false);
 }
 
 
 /*
- * Sets the value of the "taskRef" attribute of this SedWaterfallPlot.
+ * Sets the value of the "taskReference" attribute of this SedWaterfallPlot.
  */
 int
-SedWaterfallPlot::setTaskRef(const std::string& taskRef)
+SedWaterfallPlot::setTaskReference(const std::string& taskReference)
 {
-  if (!(SyntaxChecker::isValidInternalSId(taskRef)))
+  if (!(SyntaxChecker::isValidInternalSId(taskReference)))
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mTaskRef = taskRef;
+    mTaskReference = taskReference;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Unsets the value of the "taskRef" attribute of this SedWaterfallPlot.
+ * Unsets the value of the "taskReference" attribute of this SedWaterfallPlot.
  */
 int
-SedWaterfallPlot::unsetTaskRef()
+SedWaterfallPlot::unsetTaskReference()
 {
-  mTaskRef.erase();
+  mTaskReference.erase();
 
-  if (mTaskRef.empty() == true)
+  if (mTaskReference.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -180,9 +180,9 @@ void
 SedWaterfallPlot::renameSIdRefs(const std::string& oldid,
                                 const std::string& newid)
 {
-  if (isSetTaskRef() && mTaskRef == oldid)
+  if (isSetTaskReference() && mTaskReference == oldid)
   {
-    setTaskRef(newid);
+    setTaskReference(newid);
   }
 }
 
@@ -217,7 +217,7 @@ SedWaterfallPlot::hasRequiredAttributes() const
 {
   bool allPresent = SedPlot::hasRequiredAttributes();
 
-  if (isSetTaskRef() == false)
+  if (isSetTaskReference() == false)
   {
     allPresent = false;
   }
@@ -361,9 +361,9 @@ SedWaterfallPlot::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    value = getTaskRef();
+    value = getTaskReference();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -385,9 +385,9 @@ SedWaterfallPlot::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedPlot::isSetAttribute(attributeName);
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    value = isSetTaskRef();
+    value = isSetTaskReference();
   }
 
   return value;
@@ -477,9 +477,9 @@ SedWaterfallPlot::setAttribute(const std::string& attributeName,
 {
   int return_value = SedPlot::setAttribute(attributeName, value);
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    return_value = setTaskRef(value);
+    return_value = setTaskReference(value);
   }
 
   return return_value;
@@ -499,9 +499,9 @@ SedWaterfallPlot::unsetAttribute(const std::string& attributeName)
 {
   int value = SedPlot::unsetAttribute(attributeName);
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    value = unsetTaskRef();
+    value = unsetTaskReference();
   }
 
   return value;
@@ -542,7 +542,7 @@ SedWaterfallPlot::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedPlot::addExpectedAttributes(attributes);
 
-  attributes.add("taskRef");
+  attributes.add("taskReference");
 }
 
 /** @endcond */
@@ -586,28 +586,28 @@ SedWaterfallPlot::readAttributes(
   }
 
   // 
-  // taskRef SIdRef (use = "required" )
+  // taskReference SIdRef (use = "required" )
   // 
 
-  assigned = attributes.readInto("taskRef", mTaskRef);
+  assigned = attributes.readInto("taskReference", mTaskReference);
 
   if (assigned == true)
   {
-    if (mTaskRef.empty() == true)
+    if (mTaskReference.empty() == true)
     {
-      logEmptyString(mTaskRef, level, version, "<SedWaterfallPlot>");
+      logEmptyString(mTaskReference, level, version, "<SedWaterfallPlot>");
     }
-    else if (SyntaxChecker::isValidSBMLSId(mTaskRef) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mTaskReference) == false)
     {
-      std::string msg = "The taskRef attribute on the <" + getElementName() +
+      std::string msg = "The taskReference attribute on the <" + getElementName() +
         ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
       }
 
-      msg += " is '" + mTaskRef + "', which does not conform to the syntax.";
-      logError(SedmlWaterfallPlotTaskRefMustBeTask, level, version, msg,
+      msg += " is '" + mTaskReference + "', which does not conform to the syntax.";
+      logError(SedmlWaterfallPlotTaskReferenceMustBeTask, level, version, msg,
         getLine(), getColumn());
     }
   }
@@ -615,7 +615,7 @@ SedWaterfallPlot::readAttributes(
   {
     if (log)
     {
-      std::string message = "Sedml attribute 'taskRef' is missing from the "
+      std::string message = "Sedml attribute 'taskReference' is missing from the "
         "<SedWaterfallPlot> element.";
       log->logError(SedmlWaterfallPlotAllowedAttributes, level, version,
         message, getLine(), getColumn());
@@ -638,9 +638,9 @@ SedWaterfallPlot::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedPlot::writeAttributes(stream);
 
-  if (isSetTaskRef() == true)
+  if (isSetTaskReference() == true)
   {
-    stream.writeAttribute("taskRef", getPrefix(), mTaskRef);
+    stream.writeAttribute("taskReference", getPrefix(), mTaskReference);
   }
 }
 
@@ -697,53 +697,53 @@ SedWaterfallPlot_free(SedWaterfallPlot_t* swp)
 
 
 /*
- * Returns the value of the "taskRef" attribute of this SedWaterfallPlot_t.
+ * Returns the value of the "taskReference" attribute of this SedWaterfallPlot_t.
  */
 LIBSEDML_EXTERN
 char *
-SedWaterfallPlot_getTaskRef(const SedWaterfallPlot_t * swp)
+SedWaterfallPlot_getTaskReference(const SedWaterfallPlot_t * swp)
 {
   if (swp == NULL)
   {
     return NULL;
   }
 
-  return swp->getTaskRef().empty() ? NULL :
-    safe_strdup(swp->getTaskRef().c_str());
+  return swp->getTaskReference().empty() ? NULL :
+    safe_strdup(swp->getTaskReference().c_str());
 }
 
 
 /*
- * Predicate returning @c 1 (true) if this SedWaterfallPlot_t's "taskRef"
+ * Predicate returning @c 1 (true) if this SedWaterfallPlot_t's "taskReference"
  * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedWaterfallPlot_isSetTaskRef(const SedWaterfallPlot_t * swp)
+SedWaterfallPlot_isSetTaskReference(const SedWaterfallPlot_t * swp)
 {
-  return (swp != NULL) ? static_cast<int>(swp->isSetTaskRef()) : 0;
+  return (swp != NULL) ? static_cast<int>(swp->isSetTaskReference()) : 0;
 }
 
 
 /*
- * Sets the value of the "taskRef" attribute of this SedWaterfallPlot_t.
+ * Sets the value of the "taskReference" attribute of this SedWaterfallPlot_t.
  */
 LIBSEDML_EXTERN
 int
-SedWaterfallPlot_setTaskRef(SedWaterfallPlot_t * swp, const char * taskRef)
+SedWaterfallPlot_setTaskReference(SedWaterfallPlot_t * swp, const char * taskReference)
 {
-  return (swp != NULL) ? swp->setTaskRef(taskRef) : LIBSEDML_INVALID_OBJECT;
+  return (swp != NULL) ? swp->setTaskReference(taskReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Unsets the value of the "taskRef" attribute of this SedWaterfallPlot_t.
+ * Unsets the value of the "taskReference" attribute of this SedWaterfallPlot_t.
  */
 LIBSEDML_EXTERN
 int
-SedWaterfallPlot_unsetTaskRef(SedWaterfallPlot_t * swp)
+SedWaterfallPlot_unsetTaskReference(SedWaterfallPlot_t * swp)
 {
-  return (swp != NULL) ? swp->unsetTaskRef() : LIBSEDML_INVALID_OBJECT;
+  return (swp != NULL) ? swp->unsetTaskReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 

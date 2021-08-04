@@ -457,15 +457,15 @@ typedef enum
 , SedmlParameterEstimationResultPlotAllowedCoreAttributes      = 26001
 , SedmlParameterEstimationResultPlotAllowedCoreElements      = 26002
 , SedmlParameterEstimationResultPlotAllowedAttributes      = 26003
-, SedmlParameterEstimationResultPlotTaskRefMustBeTask      = 26004
+, SedmlParameterEstimationResultPlotTaskReferenceMustBeTask      = 26004
 , SedmlWaterfallPlotAllowedCoreAttributes      = 26101
 , SedmlWaterfallPlotAllowedCoreElements      = 26102
 , SedmlWaterfallPlotAllowedAttributes      = 26103
-, SedmlWaterfallPlotTaskRefMustBeTask      = 26104
+, SedmlWaterfallPlotTaskReferenceMustBeTask      = 26104
 , SedmlParameterEstimationReportAllowedCoreAttributes      = 26201
 , SedmlParameterEstimationReportAllowedCoreElements      = 26202
 , SedmlParameterEstimationReportAllowedAttributes      = 26203
-, SedmlParameterEstimationReportTaskRefMustBeTask      = 26204
+, SedmlParameterEstimationReportTaskReferenceMustBeTask      = 26204
 , SedUnknownCoreAttribute                  = 99994 /*!< Encountered an unknown attribute in the SED-ML Core namespace. */
 , SedCodesUpperBound                   = 99999 /*!< Upper boundary of libSEDML-specific diagnostic codes. */
 } SedErrorCode_t;

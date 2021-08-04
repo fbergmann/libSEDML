@@ -55,7 +55,7 @@ SedParameterEstimationReport::SedParameterEstimationReport(unsigned int level,
                                                            unsigned int
                                                              version)
   : SedOutput(level, version)
-  , mTaskRef ("")
+  , mTaskReference ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -68,7 +68,7 @@ SedParameterEstimationReport::SedParameterEstimationReport(unsigned int level,
 SedParameterEstimationReport::SedParameterEstimationReport(SedNamespaces
   *sedmlns)
   : SedOutput(sedmlns)
-  , mTaskRef ("")
+  , mTaskReference ("")
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -80,7 +80,7 @@ SedParameterEstimationReport::SedParameterEstimationReport(SedNamespaces
 SedParameterEstimationReport::SedParameterEstimationReport(const
   SedParameterEstimationReport& orig)
   : SedOutput( orig )
-  , mTaskRef ( orig.mTaskRef )
+  , mTaskReference ( orig.mTaskReference )
 {
 }
 
@@ -95,7 +95,7 @@ SedParameterEstimationReport::operator=(const SedParameterEstimationReport&
   if (&rhs != this)
   {
     SedOutput::operator=(rhs);
-    mTaskRef = rhs.mTaskRef;
+    mTaskReference = rhs.mTaskReference;
   }
 
   return *this;
@@ -121,56 +121,56 @@ SedParameterEstimationReport::~SedParameterEstimationReport()
 
 
 /*
- * Returns the value of the "taskRef" attribute of this
+ * Returns the value of the "taskReference" attribute of this
  * SedParameterEstimationReport.
  */
 const std::string&
-SedParameterEstimationReport::getTaskRef() const
+SedParameterEstimationReport::getTaskReference() const
 {
-  return mTaskRef;
+  return mTaskReference;
 }
 
 
 /*
- * Predicate returning @c true if this SedParameterEstimationReport's "taskRef"
+ * Predicate returning @c true if this SedParameterEstimationReport's "taskReference"
  * attribute is set.
  */
 bool
-SedParameterEstimationReport::isSetTaskRef() const
+SedParameterEstimationReport::isSetTaskReference() const
 {
-  return (mTaskRef.empty() == false);
+  return (mTaskReference.empty() == false);
 }
 
 
 /*
- * Sets the value of the "taskRef" attribute of this
+ * Sets the value of the "taskReference" attribute of this
  * SedParameterEstimationReport.
  */
 int
-SedParameterEstimationReport::setTaskRef(const std::string& taskRef)
+SedParameterEstimationReport::setTaskReference(const std::string& taskReference)
 {
-  if (!(SyntaxChecker::isValidInternalSId(taskRef)))
+  if (!(SyntaxChecker::isValidInternalSId(taskReference)))
   {
     return LIBSEDML_INVALID_ATTRIBUTE_VALUE;
   }
   else
   {
-    mTaskRef = taskRef;
+    mTaskReference = taskReference;
     return LIBSEDML_OPERATION_SUCCESS;
   }
 }
 
 
 /*
- * Unsets the value of the "taskRef" attribute of this
+ * Unsets the value of the "taskReference" attribute of this
  * SedParameterEstimationReport.
  */
 int
-SedParameterEstimationReport::unsetTaskRef()
+SedParameterEstimationReport::unsetTaskReference()
 {
-  mTaskRef.erase();
+  mTaskReference.erase();
 
-  if (mTaskRef.empty() == true)
+  if (mTaskReference.empty() == true)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -188,9 +188,9 @@ void
 SedParameterEstimationReport::renameSIdRefs(const std::string& oldid,
                                             const std::string& newid)
 {
-  if (isSetTaskRef() && mTaskRef == oldid)
+  if (isSetTaskReference() && mTaskReference == oldid)
   {
-    setTaskRef(newid);
+    setTaskReference(newid);
   }
 }
 
@@ -225,7 +225,7 @@ SedParameterEstimationReport::hasRequiredAttributes() const
 {
   bool allPresent = SedOutput::hasRequiredAttributes();
 
-  if (isSetTaskRef() == false)
+  if (isSetTaskReference() == false)
   {
     allPresent = false;
   }
@@ -374,9 +374,9 @@ SedParameterEstimationReport::getAttribute(const std::string& attributeName,
     return return_value;
   }
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    value = getTaskRef();
+    value = getTaskReference();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
 
@@ -399,9 +399,9 @@ SedParameterEstimationReport::isSetAttribute(const std::string& attributeName)
 {
   bool value = SedOutput::isSetAttribute(attributeName);
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    value = isSetTaskRef();
+    value = isSetTaskReference();
   }
 
   return value;
@@ -499,9 +499,9 @@ SedParameterEstimationReport::setAttribute(const std::string& attributeName,
 {
   int return_value = SedOutput::setAttribute(attributeName, value);
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    return_value = setTaskRef(value);
+    return_value = setTaskReference(value);
   }
 
   return return_value;
@@ -522,9 +522,9 @@ SedParameterEstimationReport::unsetAttribute(const std::string& attributeName)
 {
   int value = SedOutput::unsetAttribute(attributeName);
 
-  if (attributeName == "taskRef")
+  if (attributeName == "taskReference")
   {
-    value = unsetTaskRef();
+    value = unsetTaskReference();
   }
 
   return value;
@@ -565,7 +565,7 @@ SedParameterEstimationReport::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIF
 {
   SedOutput::addExpectedAttributes(attributes);
 
-  attributes.add("taskRef");
+  attributes.add("taskReference");
 }
 
 /** @endcond */
@@ -610,29 +610,29 @@ SedParameterEstimationReport::readAttributes(
   }
 
   // 
-  // taskRef SIdRef (use = "required" )
+  // taskReference SIdRef (use = "required" )
   // 
 
-  assigned = attributes.readInto("taskRef", mTaskRef);
+  assigned = attributes.readInto("taskReference", mTaskReference);
 
   if (assigned == true)
   {
-    if (mTaskRef.empty() == true)
+    if (mTaskReference.empty() == true)
     {
-      logEmptyString(mTaskRef, level, version,
+      logEmptyString(mTaskReference, level, version,
         "<SedParameterEstimationReport>");
     }
-    else if (SyntaxChecker::isValidSBMLSId(mTaskRef) == false)
+    else if (SyntaxChecker::isValidSBMLSId(mTaskReference) == false)
     {
-      std::string msg = "The taskRef attribute on the <" + getElementName() +
+      std::string msg = "The taskReference attribute on the <" + getElementName() +
         ">";
       if (isSetId())
       {
         msg += " with id '" + getId() + "'";
       }
 
-      msg += " is '" + mTaskRef + "', which does not conform to the syntax.";
-      logError(SedmlParameterEstimationReportTaskRefMustBeTask, level, version,
+      msg += " is '" + mTaskReference + "', which does not conform to the syntax.";
+      logError(SedmlParameterEstimationReportTaskReferenceMustBeTask, level, version,
         msg, getLine(), getColumn());
     }
   }
@@ -640,7 +640,7 @@ SedParameterEstimationReport::readAttributes(
   {
     if (log)
     {
-      std::string message = "Sedml attribute 'taskRef' is missing from the "
+      std::string message = "Sedml attribute 'taskReference' is missing from the "
         "<SedParameterEstimationReport> element.";
       log->logError(SedmlParameterEstimationReportAllowedAttributes, level,
         version, message, getLine(), getColumn());
@@ -663,9 +663,9 @@ SedParameterEstimationReport::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 {
   SedOutput::writeAttributes(stream);
 
-  if (isSetTaskRef() == true)
+  if (isSetTaskReference() == true)
   {
-    stream.writeAttribute("taskRef", getPrefix(), mTaskRef);
+    stream.writeAttribute("taskReference", getPrefix(), mTaskReference);
   }
 }
 
@@ -723,12 +723,12 @@ SedParameterEstimationReport_free(SedParameterEstimationReport_t* sper)
 
 
 /*
- * Returns the value of the "taskRef" attribute of this
+ * Returns the value of the "taskReference" attribute of this
  * SedParameterEstimationReport_t.
  */
 LIBSEDML_EXTERN
 char *
-SedParameterEstimationReport_getTaskRef(const SedParameterEstimationReport_t *
+SedParameterEstimationReport_getTaskReference(const SedParameterEstimationReport_t *
   sper)
 {
   if (sper == NULL)
@@ -736,47 +736,47 @@ SedParameterEstimationReport_getTaskRef(const SedParameterEstimationReport_t *
     return NULL;
   }
 
-  return sper->getTaskRef().empty() ? NULL :
-    safe_strdup(sper->getTaskRef().c_str());
+  return sper->getTaskReference().empty() ? NULL :
+    safe_strdup(sper->getTaskReference().c_str());
 }
 
 
 /*
  * Predicate returning @c 1 (true) if this SedParameterEstimationReport_t's
- * "taskRef" attribute is set.
+ * "taskReference" attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedParameterEstimationReport_isSetTaskRef(const SedParameterEstimationReport_t
+SedParameterEstimationReport_isSetTaskReference(const SedParameterEstimationReport_t
   * sper)
 {
-  return (sper != NULL) ? static_cast<int>(sper->isSetTaskRef()) : 0;
+  return (sper != NULL) ? static_cast<int>(sper->isSetTaskReference()) : 0;
 }
 
 
 /*
- * Sets the value of the "taskRef" attribute of this
+ * Sets the value of the "taskReference" attribute of this
  * SedParameterEstimationReport_t.
  */
 LIBSEDML_EXTERN
 int
-SedParameterEstimationReport_setTaskRef(SedParameterEstimationReport_t * sper,
-                                        const char * taskRef)
+SedParameterEstimationReport_setTaskReference(SedParameterEstimationReport_t * sper,
+                                        const char * taskReference)
 {
-  return (sper != NULL) ? sper->setTaskRef(taskRef) : LIBSEDML_INVALID_OBJECT;
+  return (sper != NULL) ? sper->setTaskReference(taskReference) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Unsets the value of the "taskRef" attribute of this
+ * Unsets the value of the "taskReference" attribute of this
  * SedParameterEstimationReport_t.
  */
 LIBSEDML_EXTERN
 int
-SedParameterEstimationReport_unsetTaskRef(SedParameterEstimationReport_t *
+SedParameterEstimationReport_unsetTaskReference(SedParameterEstimationReport_t *
   sper)
 {
-  return (sper != NULL) ? sper->unsetTaskRef() : LIBSEDML_INVALID_OBJECT;
+  return (sper != NULL) ? sper->unsetTaskReference() : LIBSEDML_INVALID_OBJECT;
 }
 
 
