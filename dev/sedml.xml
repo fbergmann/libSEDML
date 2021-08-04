@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package name="SEDML" fullname="SEDML" number="100" offset="100000" version="1" required="false">
-  <language name="SedML" baseClass="SedBase" documentClass="SedDocument" prefix="Sed" libraryName="LibSEDML"/>
+<package name="SEDML" fullname="SEDML" number="100" offset="100000" version="1" required="false" customCopyright="sedml_copyright.txt">
+  <language name="SedML" baseClass="SedBase" documentClass="SedDocument" prefix="Sed" libraryName="LibSEDML" annotationElementName="Annotation" topLevelElementName="Annotation" isPackage="false" uses_ASTNode="true" uses_XMLNode="true">
+    <library_version major="1" minor="0" revision="0"/>
+    <language_versions>
+      <version level="1" version="1" namespace="http://sed-ml.org/"/>
+    </language_versions>
+    <dependencies>
+      <dependency library_name="libnuml" prefix="NUML"/>
+    </dependencies>
+  </language>
   <versions>
     <pkgVersion level="1" version="1" pkg_version="1">
       <elements>
@@ -541,7 +549,6 @@
       <mappings>
         <mapping name="DimensionDescription" package="numl"/>
         <mapping name="SedBase"/>
-        <mapping name="DependentVariable"/>
       </mappings>
     </pkgVersion>
   </versions>
