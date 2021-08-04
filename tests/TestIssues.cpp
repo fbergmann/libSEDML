@@ -896,7 +896,7 @@ TEST_CASE("Reading dependent variable", "[sedml]")
     auto* dg = doc->getDataGenerator(3);
     REQUIRE(dg != NULL);
     REQUIRE(dg->getNumVariables() > 0);
-    auto* var = dynamic_cast<SedVariable*> (dg->getVariable(0));
+    auto* var = dg->getVariable(0);
     REQUIRE(var != NULL);
 
     REQUIRE(var->getTarget() == "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
