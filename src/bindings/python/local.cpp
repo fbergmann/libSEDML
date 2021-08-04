@@ -181,8 +181,8 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_ADJUSTABLE_PARAMETER:
       return SWIGTYPE_p_SedAdjustableParameter;
 
-    case SEDML_EXPERIMENT_REF:
-      return SWIGTYPE_p_SedExperimentRef;
+    case SEDML_EXPERIMENT_REFERENCE:
+      return SWIGTYPE_p_SedExperimentReference;
 
     case SEDML_FIT_EXPERIMENT:
       return SWIGTYPE_p_SedFitExperiment;
@@ -305,9 +305,9 @@ GetDowncastSwigType (SedBase* sb)
       {
          return SWIGTYPE_p_SedListOfAdjustableParameters;
       }
-      else if (name == "listOfExperimentRefs")
+      else if (name == "listOfExperimentReferences")
       {
-         return SWIGTYPE_p_SedListOfExperimentRefs;
+         return SWIGTYPE_p_SedListOfExperimentReferences;
       }
       else if (name == "listOfFitExperiments")
       {

@@ -488,10 +488,10 @@ SedVisitor::visit(const SedAdjustableParameter& x)
 
 
 /*
- * Visit the SedExperimentRef
+ * Visit the SedExperimentReference
  */
 bool
-SedVisitor::visit(const SedExperimentRef& x)
+SedVisitor::visit(const SedExperimentReference& x)
 {
   return visit(static_cast<const SedBase&>(x));
 }
@@ -1054,10 +1054,10 @@ SedVisitor::leave(const SedAdjustableParameter& x)
 
 
 /*
- * Leave the SedExperimentRef
+ * Leave the SedExperimentReference
  */
 void
-SedVisitor::leave(const SedExperimentRef& x)
+SedVisitor::leave(const SedExperimentReference& x)
 {
 }
 

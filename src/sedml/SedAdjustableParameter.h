@@ -52,7 +52,7 @@
 
 #include <sedml/SedBase.h>
 #include <sedml/SedBounds.h>
-#include <sedml/SedListOfExperimentRefs.h>
+#include <sedml/SedListOfExperimentReferences.h>
 #include <sbml/common/libsbml-namespace.h>
 
 
@@ -68,7 +68,7 @@ protected:
   double mInitialValue;
   bool mIsSetInitialValue;
   SedBounds* mBounds;
-  SedListOfExperimentRefs mExperimentRefs;
+  SedListOfExperimentReferences mExperimentReferences;
   std::string mModelReference;
   std::string mTarget;
 
@@ -331,120 +331,120 @@ public:
 
 
   /**
-   * Returns the SedListOfExperimentRefs from this SedAdjustableParameter.
+   * Returns the SedListOfExperimentReferences from this SedAdjustableParameter.
    *
-   * @return the SedListOfExperimentRefs from this SedAdjustableParameter.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getExperimentRef(unsigned int n)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
-   */
-  const SedListOfExperimentRefs* getListOfExperimentRefs() const;
-
-
-  /**
-   * Returns the SedListOfExperimentRefs from this SedAdjustableParameter.
-   *
-   * @return the SedListOfExperimentRefs from this SedAdjustableParameter.
+   * @return the SedListOfExperimentReferences from this SedAdjustableParameter.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getExperimentRef(unsigned int n)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getExperimentReference(unsigned int n)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
    */
-  SedListOfExperimentRefs* getListOfExperimentRefs();
+  const SedListOfExperimentReferences* getListOfExperimentReferences() const;
 
 
   /**
-   * Get a SedExperimentRef from the SedAdjustableParameter.
+   * Returns the SedListOfExperimentReferences from this SedAdjustableParameter.
    *
-   * @param n an unsigned int representing the index of the SedExperimentRef to
+   * @return the SedListOfExperimentReferences from this SedAdjustableParameter.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getExperimentReference(unsigned int n)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
+   */
+  SedListOfExperimentReferences* getListOfExperimentReferences();
+
+
+  /**
+   * Get a SedExperimentReference from the SedAdjustableParameter.
+   *
+   * @param n an unsigned int representing the index of the SedExperimentReference to
    * retrieve.
    *
-   * @return the nth SedExperimentRef in the SedListOfExperimentRefs within
+   * @return the nth SedExperimentReference in the SedListOfExperimentReferences within
    * this SedAdjustableParameter.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
    */
-  SedExperimentRef* getExperimentRef(unsigned int n);
+  SedExperimentReference* getExperimentReference(unsigned int n);
 
 
   /**
-   * Get a SedExperimentRef from the SedAdjustableParameter.
+   * Get a SedExperimentReference from the SedAdjustableParameter.
    *
-   * @param n an unsigned int representing the index of the SedExperimentRef to
+   * @param n an unsigned int representing the index of the SedExperimentReference to
    * retrieve.
    *
-   * @return the nth SedExperimentRef in the SedListOfExperimentRefs within
+   * @return the nth SedExperimentReference in the SedListOfExperimentReferences within
    * this SedAdjustableParameter.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
    */
-  const SedExperimentRef* getExperimentRef(unsigned int n) const;
+  const SedExperimentReference* getExperimentReference(unsigned int n) const;
 
 
   /**
-   * Get a SedExperimentRef from the SedAdjustableParameter based on the
+   * Get a SedExperimentReference from the SedAdjustableParameter based on the
    * ExperimentId to which it refers.
    *
    * @param sid a string representing the "experimentId" attribute of the
-   * SedExperimentRef object to retrieve.
+   * SedExperimentReference object to retrieve.
    *
-   * @return the first SedExperimentRef in this SedAdjustableParameter based on
-   * the given experimentId attribute or NULL if no such SedExperimentRef
+   * @return the first SedExperimentReference in this SedAdjustableParameter based on
+   * the given experimentId attribute or NULL if no such SedExperimentReference
    * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  const SedExperimentRef* getExperimentRefByExperimentId(const std::string&
+  const SedExperimentReference* getExperimentReferenceByExperimentId(const std::string&
     sid) const;
 
 
   /**
-   * Get a SedExperimentRef from the SedAdjustableParameter based on the
+   * Get a SedExperimentReference from the SedAdjustableParameter based on the
    * ExperimentId to which it refers.
    *
    * @param sid a string representing the "experimentId" attribute of the
-   * SedExperimentRef object to retrieve.
+   * SedExperimentReference object to retrieve.
    *
-   * @return the first SedExperimentRef in this SedAdjustableParameter based on
-   * the given experimentId attribute or NULL if no such SedExperimentRef
+   * @return the first SedExperimentReference in this SedAdjustableParameter based on
+   * the given experimentId attribute or NULL if no such SedExperimentReference
    * exists.
    *
    * @copydetails doc_returned_unowned_pointer
    */
-  SedExperimentRef* getExperimentRefByExperimentId(const std::string& sid);
+  SedExperimentReference* getExperimentReferenceByExperimentId(const std::string& sid);
 
 
   /**
-   * Adds a copy of the given SedExperimentRef to this SedAdjustableParameter.
+   * Adds a copy of the given SedExperimentReference to this SedAdjustableParameter.
    *
-   * @param ser the SedExperimentRef object to add.
+   * @param ser the SedExperimentReference object to add.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -457,71 +457,71 @@ public:
    *
    * @copydetails doc_note_object_is_copied
    *
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getExperimentRef(unsigned int n)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getExperimentReference(unsigned int n)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
    */
-  int addExperimentRef(const SedExperimentRef* ser);
+  int addExperimentReference(const SedExperimentReference* ser);
 
 
   /**
-   * Get the number of SedExperimentRef objects in this SedAdjustableParameter.
+   * Get the number of SedExperimentReference objects in this SedAdjustableParameter.
    *
-   * @return the number of SedExperimentRef objects in this
+   * @return the number of SedExperimentReference objects in this
    * SedAdjustableParameter.
    *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getExperimentRef(unsigned int n)
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getExperimentReference(unsigned int n)
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
    */
-  unsigned int getNumExperimentRefs() const;
+  unsigned int getNumExperimentReferences() const;
 
 
   /**
-   * Creates a new SedExperimentRef object, adds it to this
-   * SedAdjustableParameter object and returns the SedExperimentRef object
+   * Creates a new SedExperimentReference object, adds it to this
+   * SedAdjustableParameter object and returns the SedExperimentReference object
    * created.
    *
-   * @return a new SedExperimentRef object instance.
+   * @return a new SedExperimentReference object instance.
    *
    * @copydetails doc_returned_unowned_pointer
    *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see getExperimentRef(const std::string& sid)
-   * @see getExperimentRef(unsigned int n)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
-   * @see removeExperimentRef(unsigned int n)
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see getExperimentReference(const std::string& sid)
+   * @see getExperimentReference(unsigned int n)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
+   * @see removeExperimentReference(unsigned int n)
    */
-  SedExperimentRef* createExperimentRef();
+  SedExperimentReference* createExperimentReference();
 
 
   /**
-   * Removes the nth SedExperimentRef from this SedAdjustableParameter and
+   * Removes the nth SedExperimentReference from this SedAdjustableParameter and
    * returns a pointer to it.
    *
-   * @param n an unsigned int representing the index of the SedExperimentRef to
+   * @param n an unsigned int representing the index of the SedExperimentReference to
    * remove.
    *
-   * @return a pointer to the nth SedExperimentRef in this
+   * @return a pointer to the nth SedExperimentReference in this
    * SedAdjustableParameter.
    *
    * @copydetails doc_returned_owned_pointer
    *
-   * @see addExperimentRef(const SedExperimentRef* object)
-   * @see createExperimentRef()
-   * @see getExperimentRef(const std::string& sid)
-   * @see getExperimentRef(unsigned int n)
-   * @see getNumExperimentRefs()
-   * @see removeExperimentRef(const std::string& sid)
+   * @see addExperimentReference(const SedExperimentReference* object)
+   * @see createExperimentReference()
+   * @see getExperimentReference(const std::string& sid)
+   * @see getExperimentReference(unsigned int n)
+   * @see getNumExperimentReferences()
+   * @see removeExperimentReference(const std::string& sid)
    */
-  SedExperimentRef* removeExperimentRef(unsigned int n);
+  SedExperimentReference* removeExperimentReference(unsigned int n);
 
 
   /**
@@ -1429,41 +1429,41 @@ SedAdjustableParameter_unsetBounds(SedAdjustableParameter_t * sap);
 
 
 /**
- * Returns a ListOf_t * containing SedExperimentRef_t objects from this
+ * Returns a ListOf_t * containing SedExperimentReference_t objects from this
  * SedAdjustableParameter_t.
  *
  * @param sap the SedAdjustableParameter_t structure whose
- * SedListOfExperimentRefs is sought.
+ * SedListOfExperimentReferences is sought.
  *
- * @return the SedListOfExperimentRefs from this SedAdjustableParameter_t as a
+ * @return the SedListOfExperimentReferences from this SedAdjustableParameter_t as a
  * ListOf_t *.
  *
  * @copydetails doc_returned_unowned_pointer
  *
- * @see SedAdjustableParameter_addExperimentRef()
- * @see SedAdjustableParameter_createExperimentRef()
- * @see SedAdjustableParameter_getExperimentRefById()
- * @see SedAdjustableParameter_getExperimentRef()
- * @see SedAdjustableParameter_getNumExperimentRefs()
- * @see SedAdjustableParameter_removeExperimentRefById()
- * @see SedAdjustableParameter_removeExperimentRef()
+ * @see SedAdjustableParameter_addExperimentReference()
+ * @see SedAdjustableParameter_createExperimentReference()
+ * @see SedAdjustableParameter_getExperimentReferenceById()
+ * @see SedAdjustableParameter_getExperimentReference()
+ * @see SedAdjustableParameter_getNumExperimentReferences()
+ * @see SedAdjustableParameter_removeExperimentReferenceById()
+ * @see SedAdjustableParameter_removeExperimentReference()
  *
  * @memberof SedAdjustableParameter_t
  */
 LIBSEDML_EXTERN
 SedListOf_t*
-SedAdjustableParameter_getListOfExperimentRefs(SedAdjustableParameter_t* sap);
+SedAdjustableParameter_getListOfExperimentReferences(SedAdjustableParameter_t* sap);
 
 
 /**
- * Get a SedExperimentRef_t from the SedAdjustableParameter_t.
+ * Get a SedExperimentReference_t from the SedAdjustableParameter_t.
  *
  * @param sap the SedAdjustableParameter_t structure to search.
  *
- * @param n an unsigned int representing the index of the SedExperimentRef_t to
+ * @param n an unsigned int representing the index of the SedExperimentReference_t to
  * retrieve.
  *
- * @return the nth SedExperimentRef_t in the SedListOfExperimentRefs within
+ * @return the nth SedExperimentReference_t in the SedListOfExperimentReferences within
  * this SedAdjustableParameter.
  *
  * @copydetails doc_returned_unowned_pointer
@@ -1471,22 +1471,22 @@ SedAdjustableParameter_getListOfExperimentRefs(SedAdjustableParameter_t* sap);
  * @memberof SedAdjustableParameter_t
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_getExperimentRef(SedAdjustableParameter_t* sap,
+SedExperimentReference_t*
+SedAdjustableParameter_getExperimentReference(SedAdjustableParameter_t* sap,
                                         unsigned int n);
 
 
 /**
- * Get a SedExperimentRef_t from the SedAdjustableParameter_t based on the
+ * Get a SedExperimentReference_t from the SedAdjustableParameter_t based on the
  * ExperimentId to which it refers.
  *
  * @param sap the SedAdjustableParameter_t structure to search.
  *
  * @param sid a string representing the "experimentId" attribute of the
- * SedExperimentRef_t object to retrieve.
+ * SedExperimentReference_t object to retrieve.
  *
- * @return the first SedExperimentRef_t in this SedAdjustableParameter_t based
- * on the given experimentId attribute or NULL if no such SedExperimentRef_t
+ * @return the first SedExperimentReference_t in this SedAdjustableParameter_t based
+ * on the given experimentId attribute or NULL if no such SedExperimentReference_t
  * exists.
  *
  * @copydetails doc_returned_unowned_pointer
@@ -1494,21 +1494,21 @@ SedAdjustableParameter_getExperimentRef(SedAdjustableParameter_t* sap,
  * @memberof SedAdjustableParameter_t
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_getExperimentRefByExperimentId(
+SedExperimentReference_t*
+SedAdjustableParameter_getExperimentReferenceByExperimentId(
                                                       SedAdjustableParameter_t*
                                                         sap,
                                                       const char *sid);
 
 
 /**
- * Adds a copy of the given SedExperimentRef_t to this
+ * Adds a copy of the given SedExperimentReference_t to this
  * SedAdjustableParameter_t.
  *
  * @param sap the SedAdjustableParameter_t structure to which the
- * SedExperimentRef_t should be added.
+ * SedExperimentReference_t should be added.
  *
- * @param ser the SedExperimentRef_t object to add.
+ * @param ser the SedExperimentReference_t object to add.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -1523,55 +1523,55 @@ SedAdjustableParameter_getExperimentRefByExperimentId(
  */
 LIBSEDML_EXTERN
 int
-SedAdjustableParameter_addExperimentRef(SedAdjustableParameter_t* sap,
-                                        const SedExperimentRef_t* ser);
+SedAdjustableParameter_addExperimentReference(SedAdjustableParameter_t* sap,
+                                        const SedExperimentReference_t* ser);
 
 
 /**
- * Get the number of SedExperimentRef_t objects in this
+ * Get the number of SedExperimentReference_t objects in this
  * SedAdjustableParameter_t.
  *
  * @param sap the SedAdjustableParameter_t structure to query.
  *
- * @return the number of SedExperimentRef_t objects in this
+ * @return the number of SedExperimentReference_t objects in this
  * SedAdjustableParameter_t.
  *
  * @memberof SedAdjustableParameter_t
  */
 LIBSEDML_EXTERN
 unsigned int
-SedAdjustableParameter_getNumExperimentRefs(SedAdjustableParameter_t* sap);
+SedAdjustableParameter_getNumExperimentReferences(SedAdjustableParameter_t* sap);
 
 
 /**
- * Creates a new SedExperimentRef_t object, adds it to this
- * SedAdjustableParameter_t object and returns the SedExperimentRef_t object
+ * Creates a new SedExperimentReference_t object, adds it to this
+ * SedAdjustableParameter_t object and returns the SedExperimentReference_t object
  * created.
  *
  * @param sap the SedAdjustableParameter_t structure to which the
- * SedExperimentRef_t should be added.
+ * SedExperimentReference_t should be added.
  *
- * @return a new SedExperimentRef_t object instance.
+ * @return a new SedExperimentReference_t object instance.
  *
  * @copydetails doc_returned_unowned_pointer
  *
  * @memberof SedAdjustableParameter_t
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_createExperimentRef(SedAdjustableParameter_t* sap);
+SedExperimentReference_t*
+SedAdjustableParameter_createExperimentReference(SedAdjustableParameter_t* sap);
 
 
 /**
- * Removes the nth SedExperimentRef_t from this SedAdjustableParameter_t and
+ * Removes the nth SedExperimentReference_t from this SedAdjustableParameter_t and
  * returns a pointer to it.
  *
  * @param sap the SedAdjustableParameter_t structure to search.
  *
- * @param n an unsigned int representing the index of the SedExperimentRef_t to
+ * @param n an unsigned int representing the index of the SedExperimentReference_t to
  * remove.
  *
- * @return a pointer to the nth SedExperimentRef_t in this
+ * @return a pointer to the nth SedExperimentReference_t in this
  * SedAdjustableParameter_t.
  *
  * @copydetails doc_returned_owned_pointer
@@ -1579,8 +1579,8 @@ SedAdjustableParameter_createExperimentRef(SedAdjustableParameter_t* sap);
  * @memberof SedAdjustableParameter_t
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_removeExperimentRef(SedAdjustableParameter_t* sap,
+SedExperimentReference_t*
+SedAdjustableParameter_removeExperimentReference(SedAdjustableParameter_t* sap,
                                            unsigned int n);
 
 

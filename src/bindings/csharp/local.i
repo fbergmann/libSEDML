@@ -328,8 +328,8 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     case (int) libsedml.SEDML_ADJUSTABLE_PARAMETER:
       return new SedAdjustableParameter(cPtr, owner);
 
-    case (int) libsedml.SEDML_EXPERIMENT_REF:
-      return new SedExperimentRef(cPtr, owner);
+    case (int) libsedml.SEDML_EXPERIMENT_REFERENCE:
+      return new SedExperimentReference(cPtr, owner);
 
     case (int) libsedml.SEDML_FIT_EXPERIMENT:
       return new SedFitExperiment(cPtr, owner);
@@ -458,9 +458,9 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
       {
          return new SedListOfAdjustableParameters(cPtr, owner);
       }
-      else if (name == "listOfExperimentRefs")
+      else if (name == "listOfExperimentReferences")
       {
-         return new SedListOfExperimentRefs(cPtr, owner);
+         return new SedListOfExperimentReferences(cPtr, owner);
       }
       else if (name == "listOfFitExperiments")
       {
@@ -874,7 +874,7 @@ COVARIANT_RTYPE_CLONE(SedParameterEstimationTask)
 COVARIANT_RTYPE_CLONE(SedObjective)
 COVARIANT_RTYPE_CLONE(SedLeastSquareObjectiveFunction)
 COVARIANT_RTYPE_CLONE(SedAdjustableParameter)
-COVARIANT_RTYPE_CLONE(SedExperimentRef)
+COVARIANT_RTYPE_CLONE(SedExperimentReference)
 COVARIANT_RTYPE_CLONE(SedFitExperiment)
 COVARIANT_RTYPE_CLONE(SedFitMapping)
 COVARIANT_RTYPE_CLONE(SedScaling)
@@ -912,7 +912,7 @@ COVARIANT_RTYPE_CLONE(SedListOfDataDescriptions)
 COVARIANT_RTYPE_CLONE(SedListOfDataSources)
 COVARIANT_RTYPE_CLONE(SedListOfSlices)
 COVARIANT_RTYPE_CLONE(SedListOfAdjustableParameters)
-COVARIANT_RTYPE_CLONE(SedListOfExperimentRefs)
+COVARIANT_RTYPE_CLONE(SedListOfExperimentReferences)
 COVARIANT_RTYPE_CLONE(SedListOfFitExperiments)
 COVARIANT_RTYPE_CLONE(SedListOfFitMappings)
 COVARIANT_RTYPE_CLONE(SedListOfSubPlots)
@@ -985,7 +985,7 @@ COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfDataDescriptions)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfDataSources)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSlices)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfAdjustableParameters)
-COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentRefs)
+COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfExperimentReferences)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitExperiments)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfFitMappings)
 COVARIANT_RTYPE_LISTOF_GET_REMOVE(SedListOfSubPlots)
@@ -1168,7 +1168,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedDataRange)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDataSet)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDataSource)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDocument)
-SEDMLCONSTRUCTOR_EXCEPTION(SedExperimentRef)
+SEDMLCONSTRUCTOR_EXCEPTION(SedExperimentReference)
 SEDMLCONSTRUCTOR_EXCEPTION(SedFigure)
 SEDMLCONSTRUCTOR_EXCEPTION(SedFill)
 SEDMLCONSTRUCTOR_EXCEPTION(SedFitExperiment)
@@ -1185,7 +1185,7 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedListOfDataDescriptions)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfDataGenerators)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfDataSets)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfDataSources)
-SEDMLCONSTRUCTOR_EXCEPTION(SedListOfExperimentRefs)
+SEDMLCONSTRUCTOR_EXCEPTION(SedListOfExperimentReferences)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfFitExperiments)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfFitMappings)
 SEDMLCONSTRUCTOR_EXCEPTION(SedListOfModels)

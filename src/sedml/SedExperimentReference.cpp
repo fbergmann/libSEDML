@@ -1,6 +1,6 @@
 /**
- * @file SedExperimentRef.cpp
- * @brief Implementation of the SedExperimentRef class.
+ * @file SedExperimentReference.cpp
+ * @brief Implementation of the SedExperimentReference class.
  * @author DEVISER
  *
  * <!--------------------------------------------------------------------------
@@ -31,8 +31,8 @@
  * available online as http://sbml.org/software/libsbml/license.html
  * ------------------------------------------------------------------------ -->
  */
-#include <sedml/SedExperimentRef.h>
-#include <sedml/SedListOfExperimentRefs.h>
+#include <sedml/SedExperimentReference.h>
+#include <sedml/SedListOfExperimentReferences.h>
 #include <sbml/xml/XMLInputStream.h>
 
 
@@ -49,10 +49,10 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 
 /*
- * Creates a new SedExperimentRef using the given SED-ML Level and @ p version
+ * Creates a new SedExperimentReference using the given SED-ML Level and @ p version
  * values.
  */
-SedExperimentRef::SedExperimentRef(unsigned int level, unsigned int version)
+SedExperimentReference::SedExperimentReference(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mExperimentId ("")
 {
@@ -61,10 +61,10 @@ SedExperimentRef::SedExperimentRef(unsigned int level, unsigned int version)
 
 
 /*
- * Creates a new SedExperimentRef using the given SedNamespaces object @p
+ * Creates a new SedExperimentReference using the given SedNamespaces object @p
  * sedmlns.
  */
-SedExperimentRef::SedExperimentRef(SedNamespaces *sedmlns)
+SedExperimentReference::SedExperimentReference(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mExperimentId ("")
 {
@@ -73,9 +73,9 @@ SedExperimentRef::SedExperimentRef(SedNamespaces *sedmlns)
 
 
 /*
- * Copy constructor for SedExperimentRef.
+ * Copy constructor for SedExperimentReference.
  */
-SedExperimentRef::SedExperimentRef(const SedExperimentRef& orig)
+SedExperimentReference::SedExperimentReference(const SedExperimentReference& orig)
   : SedBase( orig )
   , mExperimentId ( orig.mExperimentId )
 {
@@ -83,10 +83,10 @@ SedExperimentRef::SedExperimentRef(const SedExperimentRef& orig)
 
 
 /*
- * Assignment operator for SedExperimentRef.
+ * Assignment operator for SedExperimentReference.
  */
-SedExperimentRef&
-SedExperimentRef::operator=(const SedExperimentRef& rhs)
+SedExperimentReference&
+SedExperimentReference::operator=(const SedExperimentReference& rhs)
 {
   if (&rhs != this)
   {
@@ -99,49 +99,49 @@ SedExperimentRef::operator=(const SedExperimentRef& rhs)
 
 
 /*
- * Creates and returns a deep copy of this SedExperimentRef object.
+ * Creates and returns a deep copy of this SedExperimentReference object.
  */
-SedExperimentRef*
-SedExperimentRef::clone() const
+SedExperimentReference*
+SedExperimentReference::clone() const
 {
-  return new SedExperimentRef(*this);
+  return new SedExperimentReference(*this);
 }
 
 
 /*
- * Destructor for SedExperimentRef.
+ * Destructor for SedExperimentReference.
  */
-SedExperimentRef::~SedExperimentRef()
+SedExperimentReference::~SedExperimentReference()
 {
 }
 
 
 /*
- * Returns the value of the "experimentId" attribute of this SedExperimentRef.
+ * Returns the value of the "experimentId" attribute of this SedExperimentReference.
  */
 const std::string&
-SedExperimentRef::getExperimentId() const
+SedExperimentReference::getExperimentId() const
 {
   return mExperimentId;
 }
 
 
 /*
- * Predicate returning @c true if this SedExperimentRef's "experimentId"
+ * Predicate returning @c true if this SedExperimentReference's "experimentId"
  * attribute is set.
  */
 bool
-SedExperimentRef::isSetExperimentId() const
+SedExperimentReference::isSetExperimentId() const
 {
   return (mExperimentId.empty() == false);
 }
 
 
 /*
- * Sets the value of the "experimentId" attribute of this SedExperimentRef.
+ * Sets the value of the "experimentId" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::setExperimentId(const std::string& experimentId)
+SedExperimentReference::setExperimentId(const std::string& experimentId)
 {
   if (!(SyntaxChecker::isValidInternalSId(experimentId)))
   {
@@ -156,10 +156,10 @@ SedExperimentRef::setExperimentId(const std::string& experimentId)
 
 
 /*
- * Unsets the value of the "experimentId" attribute of this SedExperimentRef.
+ * Unsets the value of the "experimentId" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::unsetExperimentId()
+SedExperimentReference::unsetExperimentId()
 {
   mExperimentId.erase();
 
@@ -178,7 +178,7 @@ SedExperimentRef::unsetExperimentId()
  * @copydoc doc_renamesidref_common
  */
 void
-SedExperimentRef::renameSIdRefs(const std::string& oldid,
+SedExperimentReference::renameSIdRefs(const std::string& oldid,
                                 const std::string& newid)
 {
   if (isSetExperimentId() && mExperimentId == oldid)
@@ -189,32 +189,32 @@ SedExperimentRef::renameSIdRefs(const std::string& oldid,
 
 
 /*
- * Returns the XML element name of this SedExperimentRef object.
+ * Returns the XML element name of this SedExperimentReference object.
  */
 const std::string&
-SedExperimentRef::getElementName() const
+SedExperimentReference::getElementName() const
 {
-  static const string name = "experimentRef";
+  static const string name = "experimentReference";
   return name;
 }
 
 
 /*
- * Returns the libSEDML type code for this SedExperimentRef object.
+ * Returns the libSEDML type code for this SedExperimentReference object.
  */
 int
-SedExperimentRef::getTypeCode() const
+SedExperimentReference::getTypeCode() const
 {
-  return SEDML_EXPERIMENT_REF;
+  return SEDML_EXPERIMENT_REFERENCE;
 }
 
 
 /*
  * Predicate returning @c true if all the required attributes for this
- * SedExperimentRef object have been set.
+ * SedExperimentReference object have been set.
  */
 bool
-SedExperimentRef::hasRequiredAttributes() const
+SedExperimentReference::hasRequiredAttributes() const
 {
   bool allPresent = true;
 
@@ -229,7 +229,7 @@ SedExperimentRef::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedExperimentRef::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
+SedExperimentReference::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeElements(stream);
@@ -245,7 +245,7 @@ SedExperimentRef::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Accepts the given SedVisitor
  */
 bool
-SedExperimentRef::accept(SedVisitor& v) const
+SedExperimentReference::accept(SedVisitor& v) const
 {
   return false;
 }
@@ -260,7 +260,7 @@ SedExperimentRef::accept(SedVisitor& v) const
  * Sets the parent SedDocument
  */
 void
-SedExperimentRef::setSedDocument(SedDocument* d)
+SedExperimentReference::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
 }
@@ -272,10 +272,10 @@ SedExperimentRef::setSedDocument(SedDocument* d)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Gets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::getAttribute(const std::string& attributeName,
+SedExperimentReference::getAttribute(const std::string& attributeName,
                                bool& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -290,10 +290,10 @@ SedExperimentRef::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Gets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::getAttribute(const std::string& attributeName,
+SedExperimentReference::getAttribute(const std::string& attributeName,
                                int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -308,10 +308,10 @@ SedExperimentRef::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Gets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::getAttribute(const std::string& attributeName,
+SedExperimentReference::getAttribute(const std::string& attributeName,
                                double& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -326,10 +326,10 @@ SedExperimentRef::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Gets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::getAttribute(const std::string& attributeName,
+SedExperimentReference::getAttribute(const std::string& attributeName,
                                unsigned int& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -344,10 +344,10 @@ SedExperimentRef::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Gets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Gets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::getAttribute(const std::string& attributeName,
+SedExperimentReference::getAttribute(const std::string& attributeName,
                                std::string& value) const
 {
   int return_value = SedBase::getAttribute(attributeName, value);
@@ -373,11 +373,11 @@ SedExperimentRef::getAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Predicate returning @c true if this SedExperimentRef's attribute
+ * Predicate returning @c true if this SedExperimentReference's attribute
  * "attributeName" is set.
  */
 bool
-SedExperimentRef::isSetAttribute(const std::string& attributeName) const
+SedExperimentReference::isSetAttribute(const std::string& attributeName) const
 {
   bool value = SedBase::isSetAttribute(attributeName);
 
@@ -396,10 +396,10 @@ SedExperimentRef::isSetAttribute(const std::string& attributeName) const
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Sets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::setAttribute(const std::string& attributeName, bool value)
+SedExperimentReference::setAttribute(const std::string& attributeName, bool value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
@@ -413,10 +413,10 @@ SedExperimentRef::setAttribute(const std::string& attributeName, bool value)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Sets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::setAttribute(const std::string& attributeName, int value)
+SedExperimentReference::setAttribute(const std::string& attributeName, int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
@@ -430,10 +430,10 @@ SedExperimentRef::setAttribute(const std::string& attributeName, int value)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Sets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::setAttribute(const std::string& attributeName, double value)
+SedExperimentReference::setAttribute(const std::string& attributeName, double value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
 
@@ -447,10 +447,10 @@ SedExperimentRef::setAttribute(const std::string& attributeName, double value)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Sets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::setAttribute(const std::string& attributeName,
+SedExperimentReference::setAttribute(const std::string& attributeName,
                                unsigned int value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -465,10 +465,10 @@ SedExperimentRef::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Sets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Sets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::setAttribute(const std::string& attributeName,
+SedExperimentReference::setAttribute(const std::string& attributeName,
                                const std::string& value)
 {
   int return_value = SedBase::setAttribute(attributeName, value);
@@ -488,10 +488,10 @@ SedExperimentRef::setAttribute(const std::string& attributeName,
 /** @cond doxygenLibSEDMLInternal */
 
 /*
- * Unsets the value of the "attributeName" attribute of this SedExperimentRef.
+ * Unsets the value of the "attributeName" attribute of this SedExperimentReference.
  */
 int
-SedExperimentRef::unsetAttribute(const std::string& attributeName)
+SedExperimentReference::unsetAttribute(const std::string& attributeName)
 {
   int value = SedBase::unsetAttribute(attributeName);
 
@@ -513,7 +513,7 @@ SedExperimentRef::unsetAttribute(const std::string& attributeName)
  * Adds the expected attributes for this element
  */
 void
-SedExperimentRef::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+SedExperimentReference::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   ExpectedAttributes& attributes)
 {
   SedBase::addExpectedAttributes(attributes);
@@ -531,7 +531,7 @@ SedExperimentRef::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
  * Reads the expected attributes into the member data variables
  */
 void
-SedExperimentRef::readAttributes(
+SedExperimentReference::readAttributes(
                                  const LIBSBML_CPP_NAMESPACE_QUALIFIER
                                    XMLAttributes& attributes,
                                  const LIBSBML_CPP_NAMESPACE_QUALIFIER
@@ -544,7 +544,7 @@ SedExperimentRef::readAttributes(
   SedErrorLog* log = getErrorLog();
 
   if (log && getParentSedObject() &&
-    static_cast<SedListOfExperimentRefs*>(getParentSedObject())->size() < 2)
+    static_cast<SedListOfExperimentReferences*>(getParentSedObject())->size() < 2)
   {
     numErrs = log->getNumErrors();
     for (int n = numErrs-1; n >= 0; n--)
@@ -553,7 +553,7 @@ SedExperimentRef::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlAdjustableParameterLOExperimentRefsAllowedCoreAttributes,
+        log->logError(SedmlAdjustableParameterLOExperimentReferencesAllowedCoreAttributes,
           level, version, details, getLine(), getColumn());
       }
     }
@@ -571,7 +571,7 @@ SedExperimentRef::readAttributes(
       {
         const std::string details = log->getError(n)->getMessage();
         log->remove(SedUnknownCoreAttribute);
-        log->logError(SedmlExperimentRefAllowedAttributes, level, version,
+        log->logError(SedmlExperimentReferenceAllowedAttributes, level, version,
           details, getLine(), getColumn());
       }
     }
@@ -587,7 +587,7 @@ SedExperimentRef::readAttributes(
   {
     if (mExperimentId.empty() == true)
     {
-      logEmptyString(mExperimentId, level, version, "<SedExperimentRef>");
+      logEmptyString(mExperimentId, level, version, "<SedExperimentReference>");
     }
     else if (SyntaxChecker::isValidSBMLSId(mExperimentId) == false)
     {
@@ -600,7 +600,7 @@ SedExperimentRef::readAttributes(
 
       msg += " is '" + mExperimentId + "', which does not conform to the "
         "syntax.";
-      logError(SedmlExperimentRefExperimentIdMustBeFitExperiment, level,
+      logError(SedmlExperimentReferenceExperimentIdMustBeFitExperiment, level,
         version, msg, getLine(), getColumn());
     }
   }
@@ -616,7 +616,7 @@ SedExperimentRef::readAttributes(
  * Writes the attributes to the stream
  */
 void
-SedExperimentRef::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
+SedExperimentReference::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   XMLOutputStream& stream) const
 {
   SedBase::writeAttributes(stream);
@@ -636,27 +636,27 @@ SedExperimentRef::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
 
 /*
- * Creates a new SedExperimentRef_t using the given SED-ML Level and @ p version
+ * Creates a new SedExperimentReference_t using the given SED-ML Level and @ p version
  * values.
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t *
-SedExperimentRef_create(unsigned int level, unsigned int version)
+SedExperimentReference_t *
+SedExperimentReference_create(unsigned int level, unsigned int version)
 {
-  return new SedExperimentRef(level, version);
+  return new SedExperimentReference(level, version);
 }
 
 
 /*
- * Creates and returns a deep copy of this SedExperimentRef_t object.
+ * Creates and returns a deep copy of this SedExperimentReference_t object.
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedExperimentRef_clone(const SedExperimentRef_t* ser)
+SedExperimentReference_t*
+SedExperimentReference_clone(const SedExperimentReference_t* ser)
 {
   if (ser != NULL)
   {
-    return static_cast<SedExperimentRef_t*>(ser->clone());
+    return static_cast<SedExperimentReference_t*>(ser->clone());
   }
   else
   {
@@ -666,11 +666,11 @@ SedExperimentRef_clone(const SedExperimentRef_t* ser)
 
 
 /*
- * Frees this SedExperimentRef_t object.
+ * Frees this SedExperimentReference_t object.
  */
 LIBSEDML_EXTERN
 void
-SedExperimentRef_free(SedExperimentRef_t* ser)
+SedExperimentReference_free(SedExperimentReference_t* ser)
 {
   if (ser != NULL)
   {
@@ -681,11 +681,11 @@ SedExperimentRef_free(SedExperimentRef_t* ser)
 
 /*
  * Returns the value of the "experimentId" attribute of this
- * SedExperimentRef_t.
+ * SedExperimentReference_t.
  */
 LIBSEDML_EXTERN
 char *
-SedExperimentRef_getExperimentId(const SedExperimentRef_t * ser)
+SedExperimentReference_getExperimentId(const SedExperimentReference_t * ser)
 {
   if (ser == NULL)
   {
@@ -698,23 +698,23 @@ SedExperimentRef_getExperimentId(const SedExperimentRef_t * ser)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedExperimentRef_t's "experimentId"
+ * Predicate returning @c 1 (true) if this SedExperimentReference_t's "experimentId"
  * attribute is set.
  */
 LIBSEDML_EXTERN
 int
-SedExperimentRef_isSetExperimentId(const SedExperimentRef_t * ser)
+SedExperimentReference_isSetExperimentId(const SedExperimentReference_t * ser)
 {
   return (ser != NULL) ? static_cast<int>(ser->isSetExperimentId()) : 0;
 }
 
 
 /*
- * Sets the value of the "experimentId" attribute of this SedExperimentRef_t.
+ * Sets the value of the "experimentId" attribute of this SedExperimentReference_t.
  */
 LIBSEDML_EXTERN
 int
-SedExperimentRef_setExperimentId(SedExperimentRef_t * ser,
+SedExperimentReference_setExperimentId(SedExperimentReference_t * ser,
                                  const char * experimentId)
 {
   return (ser != NULL) ? ser->setExperimentId(experimentId) :
@@ -723,11 +723,11 @@ SedExperimentRef_setExperimentId(SedExperimentRef_t * ser,
 
 
 /*
- * Unsets the value of the "experimentId" attribute of this SedExperimentRef_t.
+ * Unsets the value of the "experimentId" attribute of this SedExperimentReference_t.
  */
 LIBSEDML_EXTERN
 int
-SedExperimentRef_unsetExperimentId(SedExperimentRef_t * ser)
+SedExperimentReference_unsetExperimentId(SedExperimentReference_t * ser)
 {
   return (ser != NULL) ? ser->unsetExperimentId() : LIBSEDML_INVALID_OBJECT;
 }
@@ -735,11 +735,11 @@ SedExperimentRef_unsetExperimentId(SedExperimentRef_t * ser)
 
 /*
  * Predicate returning @c 1 (true) if all the required attributes for this
- * SedExperimentRef_t object have been set.
+ * SedExperimentReference_t object have been set.
  */
 LIBSEDML_EXTERN
 int
-SedExperimentRef_hasRequiredAttributes(const SedExperimentRef_t * ser)
+SedExperimentReference_hasRequiredAttributes(const SedExperimentReference_t * ser)
 {
   return (ser != NULL) ? static_cast<int>(ser->hasRequiredAttributes()) : 0;
 }

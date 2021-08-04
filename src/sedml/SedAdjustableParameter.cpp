@@ -58,7 +58,7 @@ SedAdjustableParameter::SedAdjustableParameter(unsigned int level,
   , mInitialValue (util_NaN())
   , mIsSetInitialValue (false)
   , mBounds (NULL)
-  , mExperimentRefs (level, version)
+  , mExperimentReferences (level, version)
   , mModelReference ("")
   , mTarget ("")
 {
@@ -76,7 +76,7 @@ SedAdjustableParameter::SedAdjustableParameter(SedNamespaces *sedmlns)
   , mInitialValue (util_NaN())
   , mIsSetInitialValue (false)
   , mBounds (NULL)
-  , mExperimentRefs (sedmlns)
+  , mExperimentReferences (sedmlns)
   , mModelReference ("")
   , mTarget ("")
 {
@@ -94,7 +94,7 @@ SedAdjustableParameter::SedAdjustableParameter(const SedAdjustableParameter&
   , mInitialValue ( orig.mInitialValue )
   , mIsSetInitialValue ( orig.mIsSetInitialValue )
   , mBounds ( NULL )
-  , mExperimentRefs ( orig.mExperimentRefs )
+  , mExperimentReferences ( orig.mExperimentReferences )
   , mModelReference ( orig.mModelReference )
   , mTarget ( orig.mTarget )
 {
@@ -118,7 +118,7 @@ SedAdjustableParameter::operator=(const SedAdjustableParameter& rhs)
     SedBase::operator=(rhs);
     mInitialValue = rhs.mInitialValue;
     mIsSetInitialValue = rhs.mIsSetInitialValue;
-    mExperimentRefs = rhs.mExperimentRefs;
+    mExperimentReferences = rhs.mExperimentReferences;
     mModelReference = rhs.mModelReference;
     mTarget = rhs.mTarget;
     delete mBounds;
@@ -420,73 +420,73 @@ SedAdjustableParameter::unsetBounds()
 
 
 /*
- * Returns the SedListOfExperimentRefs from this SedAdjustableParameter.
+ * Returns the SedListOfExperimentReferences from this SedAdjustableParameter.
  */
-const SedListOfExperimentRefs*
-SedAdjustableParameter::getListOfExperimentRefs() const
+const SedListOfExperimentReferences*
+SedAdjustableParameter::getListOfExperimentReferences() const
 {
-  return &mExperimentRefs;
+  return &mExperimentReferences;
 }
 
 
 /*
- * Returns the SedListOfExperimentRefs from this SedAdjustableParameter.
+ * Returns the SedListOfExperimentReferences from this SedAdjustableParameter.
  */
-SedListOfExperimentRefs*
-SedAdjustableParameter::getListOfExperimentRefs()
+SedListOfExperimentReferences*
+SedAdjustableParameter::getListOfExperimentReferences()
 {
-  return &mExperimentRefs;
+  return &mExperimentReferences;
 }
 
 
 /*
- * Get a SedExperimentRef from the SedAdjustableParameter.
+ * Get a SedExperimentReference from the SedAdjustableParameter.
  */
-SedExperimentRef*
-SedAdjustableParameter::getExperimentRef(unsigned int n)
+SedExperimentReference*
+SedAdjustableParameter::getExperimentReference(unsigned int n)
 {
-  return mExperimentRefs.get(n);
+  return mExperimentReferences.get(n);
 }
 
 
 /*
- * Get a SedExperimentRef from the SedAdjustableParameter.
+ * Get a SedExperimentReference from the SedAdjustableParameter.
  */
-const SedExperimentRef*
-SedAdjustableParameter::getExperimentRef(unsigned int n) const
+const SedExperimentReference*
+SedAdjustableParameter::getExperimentReference(unsigned int n) const
 {
-  return mExperimentRefs.get(n);
+  return mExperimentReferences.get(n);
 }
 
 
 /*
- * Get a SedExperimentRef from the SedAdjustableParameter based on the
+ * Get a SedExperimentReference from the SedAdjustableParameter based on the
  * ExperimentId to which it refers.
  */
-const SedExperimentRef*
-SedAdjustableParameter::getExperimentRefByExperimentId(const std::string& sid)
+const SedExperimentReference*
+SedAdjustableParameter::getExperimentReferenceByExperimentId(const std::string& sid)
   const
 {
-  return mExperimentRefs.getByExperimentId(sid);
+  return mExperimentReferences.getByExperimentId(sid);
 }
 
 
 /*
- * Get a SedExperimentRef from the SedAdjustableParameter based on the
+ * Get a SedExperimentReference from the SedAdjustableParameter based on the
  * ExperimentId to which it refers.
  */
-SedExperimentRef*
-SedAdjustableParameter::getExperimentRefByExperimentId(const std::string& sid)
+SedExperimentReference*
+SedAdjustableParameter::getExperimentReferenceByExperimentId(const std::string& sid)
 {
-  return mExperimentRefs.getByExperimentId(sid);
+  return mExperimentReferences.getByExperimentId(sid);
 }
 
 
 /*
- * Adds a copy of the given SedExperimentRef to this SedAdjustableParameter.
+ * Adds a copy of the given SedExperimentReference to this SedAdjustableParameter.
  */
 int
-SedAdjustableParameter::addExperimentRef(const SedExperimentRef* ser)
+SedAdjustableParameter::addExperimentReference(const SedExperimentReference* ser)
 {
   if (ser == NULL)
   {
@@ -511,34 +511,34 @@ SedAdjustableParameter::addExperimentRef(const SedExperimentRef* ser)
   }
   else
   {
-    return mExperimentRefs.append(ser);
+    return mExperimentReferences.append(ser);
   }
 }
 
 
 /*
- * Get the number of SedExperimentRef objects in this SedAdjustableParameter.
+ * Get the number of SedExperimentReference objects in this SedAdjustableParameter.
  */
 unsigned int
-SedAdjustableParameter::getNumExperimentRefs() const
+SedAdjustableParameter::getNumExperimentReferences() const
 {
-  return mExperimentRefs.size();
+  return mExperimentReferences.size();
 }
 
 
 /*
- * Creates a new SedExperimentRef object, adds it to this
- * SedAdjustableParameter object and returns the SedExperimentRef object
+ * Creates a new SedExperimentReference object, adds it to this
+ * SedAdjustableParameter object and returns the SedExperimentReference object
  * created.
  */
-SedExperimentRef*
-SedAdjustableParameter::createExperimentRef()
+SedExperimentReference*
+SedAdjustableParameter::createExperimentReference()
 {
-  SedExperimentRef* ser = NULL;
+  SedExperimentReference* ser = NULL;
 
   try
   {
-    ser = new SedExperimentRef(getSedNamespaces());
+    ser = new SedExperimentReference(getSedNamespaces());
   }
   catch (...)
   {
@@ -546,7 +546,7 @@ SedAdjustableParameter::createExperimentRef()
 
   if (ser != NULL)
   {
-    mExperimentRefs.appendAndOwn(ser);
+    mExperimentReferences.appendAndOwn(ser);
   }
 
   return ser;
@@ -554,13 +554,13 @@ SedAdjustableParameter::createExperimentRef()
 
 
 /*
- * Removes the nth SedExperimentRef from this SedAdjustableParameter and
+ * Removes the nth SedExperimentReference from this SedAdjustableParameter and
  * returns a pointer to it.
  */
-SedExperimentRef*
-SedAdjustableParameter::removeExperimentRef(unsigned int n)
+SedExperimentReference*
+SedAdjustableParameter::removeExperimentReference(unsigned int n)
 {
-  return mExperimentRefs.remove(n);
+  return mExperimentReferences.remove(n);
 }
 
 
@@ -647,9 +647,9 @@ SedAdjustableParameter::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER
     mBounds->write(stream);
   }
 
-  if (getNumExperimentRefs() > 0)
+  if (getNumExperimentReferences() > 0)
   {
-    mExperimentRefs.write(stream);
+    mExperimentReferences.write(stream);
   }
 }
 
@@ -687,7 +687,7 @@ SedAdjustableParameter::setSedDocument(SedDocument* d)
     mBounds->setSedDocument(d);
   }
 
-  mExperimentRefs.setSedDocument(d);
+  mExperimentReferences.setSedDocument(d);
 }
 
 /** @endcond */
@@ -709,7 +709,7 @@ SedAdjustableParameter::connectToChild()
     mBounds->connectToParent(this);
   }
 
-  mExperimentRefs.connectToParent(this);
+  mExperimentReferences.connectToParent(this);
 }
 
 /** @endcond */
@@ -1024,9 +1024,9 @@ SedAdjustableParameter::createChildObject(const std::string& elementName)
   {
     return createBounds();
   }
-  else if (elementName == "experimentRef")
+  else if (elementName == "experimentReference")
   {
-    return createExperimentRef();
+    return createExperimentReference();
   }
 
   return obj;
@@ -1049,10 +1049,10 @@ SedAdjustableParameter::addChildObject(const std::string& elementName,
   {
     return setBounds((const SedBounds*)(element));
   }
-  else if (elementName == "experimentRef" && element->getTypeCode() ==
-    SEDML_EXPERIMENT_REF)
+  else if (elementName == "experimentReference" && element->getTypeCode() ==
+    SEDML_EXPERIMENT_REFERENCE)
   {
-    return addExperimentRef((const SedExperimentRef*)(element));
+    return addExperimentReference((const SedExperimentReference*)(element));
   }
 
   return LIBSBML_OPERATION_FAILED;
@@ -1077,13 +1077,13 @@ SedAdjustableParameter::removeChildObject(const std::string& elementName,
     SedBounds * obj = mBounds;
     mBounds = NULL; return obj;
   }
-  else if (elementName == "experimentRef")
+  else if (elementName == "experimentReference")
   {
-    for (unsigned int i = 0; i < getNumExperimentRefs(); i++)
+    for (unsigned int i = 0; i < getNumExperimentReferences(); i++)
     {
-      if (getExperimentRef(i)->getId() == id)
+      if (getExperimentReference(i)->getId() == id)
       {
-        return removeExperimentRef(i);
+        return removeExperimentReference(i);
       }
     }
   }
@@ -1112,9 +1112,9 @@ SedAdjustableParameter::getNumObjects(const std::string& elementName)
       return 1;
     }
   }
-  else if (elementName == "experimentRef")
+  else if (elementName == "experimentReference")
   {
-    return getNumExperimentRefs();
+    return getNumExperimentReferences();
   }
 
   return n;
@@ -1139,9 +1139,9 @@ SedAdjustableParameter::getObject(const std::string& elementName,
   {
     return getBounds();
   }
-  else if (elementName == "experimentRef")
+  else if (elementName == "experimentReference")
   {
-    return getExperimentRef(index);
+    return getExperimentReference(index);
   }
 
   return obj;
@@ -1178,7 +1178,7 @@ SedAdjustableParameter::getElementBySId(const std::string& id)
     }
   }
 
-  obj = mExperimentRefs.getElementBySId(id);
+  obj = mExperimentReferences.getElementBySId(id);
 
   if (obj != NULL)
   {
@@ -1200,7 +1200,7 @@ SedAdjustableParameter::getAllElements(SedElementFilter* filter)
   List* sublist = NULL;
   SED_ADD_FILTERED_POINTER(ret, sublist, mBounds, filter);
 
-  SED_ADD_FILTERED_LIST(ret, sublist, mExperimentRefs, filter);
+  SED_ADD_FILTERED_LIST(ret, sublist, mExperimentReferences, filter);
 
   return ret;
 }
@@ -1232,15 +1232,15 @@ SedAdjustableParameter::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
     mBounds = new SedBounds(getSedNamespaces());
     obj = mBounds;
   }
-  else if (name == "listOfExperimentRefs")
+  else if (name == "listOfExperimentReferences")
   {
-    if (getErrorLog() && mExperimentRefs.size() != 0)
+    if (getErrorLog() && mExperimentReferences.size() != 0)
     {
       getErrorLog()->logError(SedmlAdjustableParameterAllowedElements,
         getLevel(), getVersion(), "", getLine(), getColumn());
     }
 
-    obj = &mExperimentRefs;
+    obj = &mExperimentReferences;
   }
 
   connectToChild();
@@ -1703,93 +1703,93 @@ SedAdjustableParameter_unsetBounds(SedAdjustableParameter_t * sap)
 
 
 /*
- * Returns a ListOf_t * containing SedExperimentRef_t objects from this
+ * Returns a ListOf_t * containing SedExperimentReference_t objects from this
  * SedAdjustableParameter_t.
  */
 LIBSEDML_EXTERN
 SedListOf_t*
-SedAdjustableParameter_getListOfExperimentRefs(SedAdjustableParameter_t* sap)
+SedAdjustableParameter_getListOfExperimentReferences(SedAdjustableParameter_t* sap)
 {
-  return (sap != NULL) ? sap->getListOfExperimentRefs() : NULL;
+  return (sap != NULL) ? sap->getListOfExperimentReferences() : NULL;
 }
 
 
 /*
- * Get a SedExperimentRef_t from the SedAdjustableParameter_t.
+ * Get a SedExperimentReference_t from the SedAdjustableParameter_t.
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_getExperimentRef(SedAdjustableParameter_t* sap,
+SedExperimentReference_t*
+SedAdjustableParameter_getExperimentReference(SedAdjustableParameter_t* sap,
                                         unsigned int n)
 {
-  return (sap != NULL) ? sap->getExperimentRef(n) : NULL;
+  return (sap != NULL) ? sap->getExperimentReference(n) : NULL;
 }
 
 
 /*
- * Get a SedExperimentRef_t from the SedAdjustableParameter_t based on the
+ * Get a SedExperimentReference_t from the SedAdjustableParameter_t based on the
  * ExperimentId to which it refers.
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_getExperimentRefByExperimentId(
+SedExperimentReference_t*
+SedAdjustableParameter_getExperimentReferenceByExperimentId(
                                                       SedAdjustableParameter_t*
                                                         sap,
                                                       const char *sid)
 {
   return (sap != NULL && sid != NULL) ?
-    sap->getExperimentRefByExperimentId(sid) : NULL;
+    sap->getExperimentReferenceByExperimentId(sid) : NULL;
 }
 
 
 /*
- * Adds a copy of the given SedExperimentRef_t to this
+ * Adds a copy of the given SedExperimentReference_t to this
  * SedAdjustableParameter_t.
  */
 LIBSEDML_EXTERN
 int
-SedAdjustableParameter_addExperimentRef(SedAdjustableParameter_t* sap,
-                                        const SedExperimentRef_t* ser)
+SedAdjustableParameter_addExperimentReference(SedAdjustableParameter_t* sap,
+                                        const SedExperimentReference_t* ser)
 {
-  return (sap != NULL) ? sap->addExperimentRef(ser) : LIBSEDML_INVALID_OBJECT;
+  return (sap != NULL) ? sap->addExperimentReference(ser) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Get the number of SedExperimentRef_t objects in this
+ * Get the number of SedExperimentReference_t objects in this
  * SedAdjustableParameter_t.
  */
 LIBSEDML_EXTERN
 unsigned int
-SedAdjustableParameter_getNumExperimentRefs(SedAdjustableParameter_t* sap)
+SedAdjustableParameter_getNumExperimentReferences(SedAdjustableParameter_t* sap)
 {
-  return (sap != NULL) ? sap->getNumExperimentRefs() : SEDML_INT_MAX;
+  return (sap != NULL) ? sap->getNumExperimentReferences() : SEDML_INT_MAX;
 }
 
 
 /*
- * Creates a new SedExperimentRef_t object, adds it to this
- * SedAdjustableParameter_t object and returns the SedExperimentRef_t object
+ * Creates a new SedExperimentReference_t object, adds it to this
+ * SedAdjustableParameter_t object and returns the SedExperimentReference_t object
  * created.
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_createExperimentRef(SedAdjustableParameter_t* sap)
+SedExperimentReference_t*
+SedAdjustableParameter_createExperimentReference(SedAdjustableParameter_t* sap)
 {
-  return (sap != NULL) ? sap->createExperimentRef() : NULL;
+  return (sap != NULL) ? sap->createExperimentReference() : NULL;
 }
 
 
 /*
- * Removes the nth SedExperimentRef_t from this SedAdjustableParameter_t and
+ * Removes the nth SedExperimentReference_t from this SedAdjustableParameter_t and
  * returns a pointer to it.
  */
 LIBSEDML_EXTERN
-SedExperimentRef_t*
-SedAdjustableParameter_removeExperimentRef(SedAdjustableParameter_t* sap,
+SedExperimentReference_t*
+SedAdjustableParameter_removeExperimentReference(SedAdjustableParameter_t* sap,
                                            unsigned int n)
 {
-  return (sap != NULL) ? sap->removeExperimentRef(n) : NULL;
+  return (sap != NULL) ? sap->removeExperimentReference(n) : NULL;
 }
 
 

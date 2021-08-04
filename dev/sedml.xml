@@ -347,12 +347,12 @@
           <attributes>
             <attribute name="initialValue" required="false" type="double" abstract="false"/>
             <attribute name="bounds" required="true" type="element" element="Bounds" abstract="false"/>
-            <attribute name="experimentSet" required="false" type="lo_element" element="ExperimentRef" abstract="false"/>
+            <attribute name="experimentSet" required="false" type="lo_element" element="ExperimentReference" abstract="false"/>
             <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
             <attribute name="target" required="true" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="ExperimentRef" typeCode="SEDML_EXPERIMENT_REF" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
+        <element name="ExperimentReference" typeCode="SEDML_EXPERIMENT_REFERENCE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="experimentId" required="true" type="SIdRef" element="FitExperiment" xmlName="experiment" abstract="false"/>
           </attributes>

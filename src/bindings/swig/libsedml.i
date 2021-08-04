@@ -412,8 +412,8 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedLeastSquareObjectiveFunction.h>
 %include <sedml/SedAdjustableParameter.h>
 %include <sedml/SedListOfAdjustableParameters.h>
-%include <sedml/SedExperimentRef.h>
-%include <sedml/SedListOfExperimentRefs.h>
+%include <sedml/SedExperimentReference.h>
+%include <sedml/SedListOfExperimentReferences.h>
 %include <sedml/SedFitExperiment.h>
 %include <sedml/SedListOfFitExperiments.h>
 %include <sedml/SedFitMapping.h>
