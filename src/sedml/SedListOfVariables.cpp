@@ -270,7 +270,7 @@ SedListOfVariables::isValidTypeForList(SedBase* item)
 {
   unsigned int tc = item->getTypeCode();
 
-  return ((tc == SEDML_VARIABLE));
+  return (tc == SEDML_VARIABLE);
 }
 
 /** @endcond */
