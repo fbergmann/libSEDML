@@ -320,12 +320,12 @@ TEST_CASE("create and add dependent variables", "[sedml]")
   var->setModelReference("task1");
   var->setSymbol("urn:sedml:time");
 
-  auto* var1 = dg->createDependentVariable();
+  auto* var1 = dg->createVariable();
   var1->setId("v1");
   var1->setModelReference("task1");
   var1->setTerm("urn:sedml:rateOfChange");
 
-  var1 = new SedDependentVariable(1,4);
+  var1 = new SedVariable(1,4);
   var1->setId("v2");
   var1->setModelReference("task1");
   var1->setTerm("urn:sedml:rateOfChange");
@@ -888,14 +888,15 @@ TEST_CASE("Reading dependent variable", "[sedml]")
   std::string fileName = getTestFile("/test-data/issue_140.sedml");
   SedDocument* doc = readSedMLFromFile(fileName.c_str());
   // 2 dependent variables are invalid here (missing term)
-  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 2); 
+  // (However, now that we've moved to Variables, we don't autogenerate that validation rule.
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0); 
 
   {
     REQUIRE(doc->getNumDataGenerators() > 3);
     auto* dg = doc->getDataGenerator(3);
     REQUIRE(dg != NULL);
     REQUIRE(dg->getNumVariables() > 0);
-    auto* var = dynamic_cast<SedDependentVariable*> (dg->getVariable(0));
+    auto* var = dg->getVariable(0);
     REQUIRE(var != NULL);
 
     REQUIRE(var->getTarget() == "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");

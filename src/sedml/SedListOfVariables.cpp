@@ -34,7 +34,7 @@
 #include <sedml/SedListOfVariables.h>
 #include <sbml/xml/XMLInputStream.h>
 
-#include <sedml/SedDependentVariable.h>
+#include <sedml/SedVariable.h>
 
 using namespace std;
 
@@ -260,32 +260,6 @@ SedListOfVariables::createVariable()
 }
 
 
-/*
- * Creates a new SedVariable object, adds it to this SedListOfVariables object
- * and returns the SedVariable object created.
- */
-SedDependentVariable*
-SedListOfVariables::createDependentVariable()
-{
-  SedDependentVariable* sv = NULL;
-
-  try
-  {
-    sv = new SedDependentVariable(getSedNamespaces());
-  }
-  catch (const SedConstructorException&)
-  {
-    return NULL;
-  }
-
-  if (sv != NULL)
-  {
-    appendAndOwn(sv);
-  }
-
-  return sv;
-}
-
 /** @cond doxygenLibSEDMLInternal */
 
 /*
@@ -296,7 +270,7 @@ SedListOfVariables::isValidTypeForList(SedBase* item)
 {
   unsigned int tc = item->getTypeCode();
 
-  return ((tc == SEDML_VARIABLE) || (tc == SEDML_DEPENDENTVARIABLE));
+  return (tc == SEDML_VARIABLE);
 }
 
 /** @endcond */
@@ -434,12 +408,6 @@ SedListOfVariables::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
   if (name == "variable")
   {
     object = new SedVariable(getSedNamespaces());
-    appendAndOwn(object);
-  }
-
-  if (name == "dependentVariable")
-  {
-    object = new SedDependentVariable(getSedNamespaces());
     appendAndOwn(object);
   }
 

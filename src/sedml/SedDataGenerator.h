@@ -426,24 +426,6 @@ public:
 
 
   /**
-   * Creates a new SedDependentVariable object, adds it to this SedDataGenerator object
-   * and returns the SedDependentVariable object created.
-   *
-   * @return a new SedDependentVariable object instance.
-   *
-   * @copydetails doc_returned_unowned_pointer
-   *
-   * @see addVariable(const SedVariable* object)
-   * @see getVariable(const std::string& sid)
-   * @see getVariable(unsigned int n)
-   * @see getNumVariables()
-   * @see removeVariable(const std::string& sid)
-   * @see removeVariable(unsigned int n)
-   */
-  SedDependentVariable* createDependentVariable();
-
-
-  /**
    * Removes the nth SedVariable from this SedDataGenerator and returns a
    * pointer to it.
    *

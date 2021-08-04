@@ -1690,7 +1690,7 @@ SedRepeatedTask::readAttributes(
       }
 
       msg += " is '" + mRange + "', which does not conform to the syntax.";
-      logError(SedmlRepeatedTaskRangeIdMustBeRange, level, version, msg,
+      logError(SedmlRepeatedTaskRangeMustBeRange, level, version, msg,
         getLine(), getColumn());
     }
   }

@@ -32,7 +32,7 @@
  * ------------------------------------------------------------------------ -->
  */
 #include <sedml/SedDataGenerator.h>
-#include <sedml/SedDependentVariable.h>
+#include <sedml/SedVariable.h>
 #include <sedml/SedListOfDataGenerators.h>
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/math/MathML.h>
@@ -399,33 +399,6 @@ SedDataGenerator::createVariable()
   return sv;
 }
 
-
-
-/*
- * Creates a new SedVariable object, adds it to this SedDataGenerator object
- * and returns the SedVariable object created.
- */
-SedDependentVariable*
-SedDataGenerator::createDependentVariable()
-{
-  SedDependentVariable* sv = NULL;
-
-  try
-  {
-    sv = new SedDependentVariable(getSedNamespaces());
-  }
-  catch (const SedConstructorException&)
-  {
-    return NULL;
-  }
-
-  if (sv != NULL)
-  {
-    mVariables.appendAndOwn(sv);
-  }
-
-  return sv;
-}
 
 
 /*
@@ -976,11 +949,6 @@ SedDataGenerator::createChildObject(const std::string& elementName)
     return createVariable();
   }
   
-  if (elementName == "dependentVariable")
-  {
-    return createDependentVariable();
-  }
-
   if (elementName == "parameter")
   {
     return createParameter();

@@ -60,9 +60,13 @@
           <attributes>
             <attribute name="symbol" required="false" type="string" abstract="false"/>
             <attribute name="target" required="false" type="string" abstract="false"/>
-            <attribute name="taskReference" required="false" type="SIdRef" element="Task" abstract="false"/>
+            <attribute name="taskReference" required="false" type="SIdRef" element="AbstractTask" abstract="false"/>
             <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
             <attribute name="appliedDimension" required="false" type="lo_element" element="AppliedDimension" abstract="false"/>
+            <attribute name="term" required="false" type="string" abstract="false"/>
+            <attribute name="symbol2" required="false" type="string" abstract="false"/>
+            <attribute name="target2" required="false" type="string" abstract="false"/>
+            <attribute name="dimensionTerm" required="false" type="string" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="appliedDimension" element="AppliedDimension" minNumChildren="0" maxNumChildren="0"/>
@@ -236,6 +240,11 @@
           <attributes>
             <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
             <attribute name="range" required="false" type="SIdRef" element="Range" abstract="false"/>
+            <attribute name="symbol" required="false" type="string" abstract="false"/>
+            <attribute name="target" required="false" type="string" abstract="false"/>
+            <attribute name="math" required="false" type="element" element="ASTNode*" abstract="false"/>
+            <attribute name="variable" required="false" type="lo_element" element="Variable" abstract="false"/>
+            <attribute name="parameter" required="false" type="lo_element" element="Parameter" abstract="false"/>
           </attributes>
         </element>
         <element name="UniformRange" typeCode="SEDML_RANGE_UNIFORMRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="uniformRange">
@@ -428,17 +437,10 @@
             <attribute name="secondColor" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
-        <element name="DependentVariable" typeCode="SEDML_DEPENDENTVARIABLE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Variable" abstract="false">
-          <attributes>
-            <attribute name="term" required="true" type="string" abstract="false"/>
-            <attribute name="target2" required="false" type="string" abstract="false"/>
-            <attribute name="symbol2" required="false" type="string" abstract="false"/>
-          </attributes>
-        </element>
         <element name="AppliedDimension" typeCode="SEDML_APPLIEDDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="target" required="false" type="SIdRef" element="SedBase" abstract="false"/>
-            <attribute name="dimensionTarget" required="false" type="SIdRef" abstract="false"/>
+            <attribute name="dimensionTarget" required="false" type="SIdRef" element="SedBase" abstract="false"/>
           </attributes>
         </element>
         <element name="DataRange" typeCode="SEDML_DATA_RANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false">

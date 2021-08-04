@@ -41,7 +41,7 @@
         <ci> S1 </ci>
       </math>
       <listOfVariables>
-        <dependentVariable id="S1" symbol="urn:sedml:symbol:rateOfChange" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S1&apos;]" taskReference="task0" modelReference="model0" symbol2="urn:sedml:symbol:time"/>
+        <variable id="S1" symbol="urn:sedml:symbol:rateOfChange" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S1&apos;]" taskReference="task0" modelReference="model0" symbol2="urn:sedml:symbol:time"/>
       </listOfVariables>
     </dataGenerator>
     <dataGenerator id="S2_roc" name="S2">
@@ -49,7 +49,7 @@
         <ci> S2 </ci>
       </math>
       <listOfVariables>
-        <dependentVariable id="S2" symbol="urn:sedml:symbol:rateOfChange" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S2&apos;]" taskReference="task0" modelReference="model0" symbol2="urn:sedml:symbol:time"/>
+        <variable id="S2" symbol="urn:sedml:symbol:rateOfChange" target="/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&apos;S2&apos;]" taskReference="task0" modelReference="model0" symbol2="urn:sedml:symbol:time"/>
       </listOfVariables>
     </dataGenerator>
   </listOfDataGenerators>

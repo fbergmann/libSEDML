@@ -59,6 +59,10 @@ SedVariable::SedVariable(unsigned int level, unsigned int version)
   , mTaskReference ("")
   , mModelReference ("")
   , mAppliedDimensions (level, version)
+  , mTerm ("")
+  , mSymbol2 ("")
+  , mTarget2 ("")
+  , mDimensionTerm ("")
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   connectToChild();
@@ -77,6 +81,10 @@ SedVariable::SedVariable(SedNamespaces *sedmlns)
   , mTaskReference ("")
   , mModelReference ("")
   , mAppliedDimensions (sedmlns)
+  , mTerm ("")
+  , mSymbol2 ("")
+  , mTarget2 ("")
+  , mDimensionTerm ("")
 {
   setElementNamespace(sedmlns->getURI());
   connectToChild();
@@ -95,6 +103,10 @@ SedVariable::SedVariable(const SedVariable& orig)
   , mTaskReference ( orig.mTaskReference )
   , mModelReference ( orig.mModelReference )
   , mAppliedDimensions ( orig.mAppliedDimensions )
+  , mTerm ( orig.mTerm )
+  , mSymbol2 ( orig.mSymbol2 )
+  , mTarget2 ( orig.mTarget2 )
+  , mDimensionTerm ( orig.mDimensionTerm )
 {
   connectToChild();
 }
@@ -114,6 +126,10 @@ SedVariable::operator=(const SedVariable& rhs)
     mTaskReference = rhs.mTaskReference;
     mModelReference = rhs.mModelReference;
     mAppliedDimensions = rhs.mAppliedDimensions;
+    mTerm = rhs.mTerm;
+    mSymbol2 = rhs.mSymbol2;
+    mTarget2 = rhs.mTarget2;
+    mDimensionTerm = rhs.mDimensionTerm;
     connectToChild();
   }
 
@@ -180,6 +196,46 @@ SedVariable::getModelReference() const
 
 
 /*
+ * Returns the value of the "term" attribute of this SedVariable.
+ */
+const std::string&
+SedVariable::getTerm() const
+{
+  return mTerm;
+}
+
+
+/*
+ * Returns the value of the "symbol2" attribute of this SedVariable.
+ */
+const std::string&
+SedVariable::getSymbol2() const
+{
+  return mSymbol2;
+}
+
+
+/*
+ * Returns the value of the "target2" attribute of this SedVariable.
+ */
+const std::string&
+SedVariable::getTarget2() const
+{
+  return mTarget2;
+}
+
+
+/*
+ * Returns the value of the "dimensionTerm" attribute of this SedVariable.
+ */
+const std::string&
+SedVariable::getDimensionTerm() const
+{
+  return mDimensionTerm;
+}
+
+
+/*
  * Predicate returning @c true if this SedVariable's "symbol" attribute is set.
  */
 bool
@@ -218,6 +274,49 @@ bool
 SedVariable::isSetModelReference() const
 {
   return (mModelReference.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedVariable's "term" attribute is set.
+ */
+bool
+SedVariable::isSetTerm() const
+{
+  return (mTerm.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedVariable's "symbol2" attribute is
+ * set.
+ */
+bool
+SedVariable::isSetSymbol2() const
+{
+  return (mSymbol2.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedVariable's "target2" attribute is
+ * set.
+ */
+bool
+SedVariable::isSetTarget2() const
+{
+  return (mTarget2.empty() == false);
+}
+
+
+/*
+ * Predicate returning @c true if this SedVariable's "dimensionTerm" attribute
+ * is set.
+ */
+bool
+SedVariable::isSetDimensionTerm() const
+{
+  return (mDimensionTerm.empty() == false);
 }
 
 
@@ -276,6 +375,50 @@ SedVariable::setModelReference(const std::string& modelReference)
     mModelReference = modelReference;
     return LIBSEDML_OPERATION_SUCCESS;
   }
+}
+
+
+/*
+ * Sets the value of the "term" attribute of this SedVariable.
+ */
+int
+SedVariable::setTerm(const std::string& term)
+{
+  mTerm = term;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "symbol2" attribute of this SedVariable.
+ */
+int
+SedVariable::setSymbol2(const std::string& symbol2)
+{
+  mSymbol2 = symbol2;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "target2" attribute of this SedVariable.
+ */
+int
+SedVariable::setTarget2(const std::string& target2)
+{
+  mTarget2 = target2;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "dimensionTerm" attribute of this SedVariable.
+ */
+int
+SedVariable::setDimensionTerm(const std::string& dimensionTerm)
+{
+  mDimensionTerm = dimensionTerm;
+  return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -356,6 +499,82 @@ SedVariable::unsetModelReference()
 
 
 /*
+ * Unsets the value of the "term" attribute of this SedVariable.
+ */
+int
+SedVariable::unsetTerm()
+{
+  mTerm.erase();
+
+  if (mTerm.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "symbol2" attribute of this SedVariable.
+ */
+int
+SedVariable::unsetSymbol2()
+{
+  mSymbol2.erase();
+
+  if (mSymbol2.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "target2" attribute of this SedVariable.
+ */
+int
+SedVariable::unsetTarget2()
+{
+  mTarget2.erase();
+
+  if (mTarget2.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "dimensionTerm" attribute of this SedVariable.
+ */
+int
+SedVariable::unsetDimensionTerm()
+{
+  mDimensionTerm.erase();
+
+  if (mDimensionTerm.empty() == true)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
  * Returns the SedListOfAppliedDimensions from this SedVariable.
  */
 const SedListOfAppliedDimensions*
@@ -396,8 +615,8 @@ SedVariable::getAppliedDimension(unsigned int n) const
 
 
 /*
- * Get a SedAppliedDimension from the SedVariable based on the Target to
- * which it refers.
+ * Get a SedAppliedDimension from the SedVariable based on the Target to which
+ * it refers.
  */
 const SedAppliedDimension*
 SedVariable::getAppliedDimensionByTarget(const std::string& sid) const
@@ -407,8 +626,8 @@ SedVariable::getAppliedDimensionByTarget(const std::string& sid) const
 
 
 /*
- * Get a SedAppliedDimension from the SedVariable based on the Target to
- * which it refers.
+ * Get a SedAppliedDimension from the SedVariable based on the Target to which
+ * it refers.
  */
 SedAppliedDimension*
 SedVariable::getAppliedDimensionByTarget(const std::string& sid)
@@ -418,20 +637,19 @@ SedVariable::getAppliedDimensionByTarget(const std::string& sid)
 
 
 /*
- * Get a SedAppliedDimension from the SedVariable based on the
- * DimensionTarget to which it refers.
+ * Get a SedAppliedDimension from the SedVariable based on the DimensionTarget
+ * to which it refers.
  */
 const SedAppliedDimension*
-SedVariable::getAppliedDimensionByDimensionTarget(const std::string& sid)
-  const
+SedVariable::getAppliedDimensionByDimensionTarget(const std::string& sid) const
 {
   return mAppliedDimensions.getByDimensionTarget(sid);
 }
 
 
 /*
- * Get a SedAppliedDimension from the SedVariable based on the
- * DimensionTarget to which it refers.
+ * Get a SedAppliedDimension from the SedVariable based on the DimensionTarget
+ * to which it refers.
  */
 SedAppliedDimension*
 SedVariable::getAppliedDimensionByDimensionTarget(const std::string& sid)
@@ -444,32 +662,32 @@ SedVariable::getAppliedDimensionByDimensionTarget(const std::string& sid)
  * Adds a copy of the given SedAppliedDimension to this SedVariable.
  */
 int
-SedVariable::addAppliedDimension(const SedAppliedDimension* srd)
+SedVariable::addAppliedDimension(const SedAppliedDimension* sad)
 {
-  if (srd == NULL)
+  if (sad == NULL)
   {
     return LIBSEDML_OPERATION_FAILED;
   }
-  else if (srd->hasRequiredAttributes() == false)
+  else if (sad->hasRequiredAttributes() == false)
   {
     return LIBSEDML_INVALID_OBJECT;
   }
-  else if (getLevel() != srd->getLevel())
+  else if (getLevel() != sad->getLevel())
   {
     return LIBSEDML_LEVEL_MISMATCH;
   }
-  else if (getVersion() != srd->getVersion())
+  else if (getVersion() != sad->getVersion())
   {
     return LIBSEDML_VERSION_MISMATCH;
   }
   else if (matchesRequiredSedNamespacesForAddition(static_cast<const
-    SedBase*>(srd)) == false)
+    SedBase*>(sad)) == false)
   {
     return LIBSEDML_NAMESPACES_MISMATCH;
   }
   else
   {
-    return mAppliedDimensions.append(srd);
+    return mAppliedDimensions.append(sad);
   }
 }
 
@@ -485,28 +703,28 @@ SedVariable::getNumAppliedDimensions() const
 
 
 /*
- * Creates a new SedAppliedDimension object, adds it to this SedVariable
- * object and returns the SedAppliedDimension object created.
+ * Creates a new SedAppliedDimension object, adds it to this SedVariable object
+ * and returns the SedAppliedDimension object created.
  */
 SedAppliedDimension*
 SedVariable::createAppliedDimension()
 {
-  SedAppliedDimension* srd = NULL;
+  SedAppliedDimension* sad = NULL;
 
   try
   {
-    srd = new SedAppliedDimension(getSedNamespaces());
+    sad = new SedAppliedDimension(getSedNamespaces());
   }
   catch (...)
   {
   }
 
-  if (srd != NULL)
+  if (sad != NULL)
   {
-    mAppliedDimensions.appendAndOwn(srd);
+    mAppliedDimensions.appendAndOwn(sad);
   }
 
-  return srd;
+  return sad;
 }
 
 
@@ -755,6 +973,26 @@ SedVariable::getAttribute(const std::string& attributeName,
     value = getModelReference();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "term")
+  {
+    value = getTerm();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "symbol2")
+  {
+    value = getSymbol2();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "target2")
+  {
+    value = getTarget2();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
+  else if (attributeName == "dimensionTerm")
+  {
+    value = getDimensionTerm();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -789,6 +1027,22 @@ SedVariable::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "modelReference")
   {
     value = isSetModelReference();
+  }
+  else if (attributeName == "term")
+  {
+    value = isSetTerm();
+  }
+  else if (attributeName == "symbol2")
+  {
+    value = isSetSymbol2();
+  }
+  else if (attributeName == "target2")
+  {
+    value = isSetTarget2();
+  }
+  else if (attributeName == "dimensionTerm")
+  {
+    value = isSetDimensionTerm();
   }
 
   return value;
@@ -894,6 +1148,22 @@ SedVariable::setAttribute(const std::string& attributeName,
   {
     return_value = setModelReference(value);
   }
+  else if (attributeName == "term")
+  {
+    return_value = setTerm(value);
+  }
+  else if (attributeName == "symbol2")
+  {
+    return_value = setSymbol2(value);
+  }
+  else if (attributeName == "target2")
+  {
+    return_value = setTarget2(value);
+  }
+  else if (attributeName == "dimensionTerm")
+  {
+    return_value = setDimensionTerm(value);
+  }
 
   return return_value;
 }
@@ -927,6 +1197,22 @@ SedVariable::unsetAttribute(const std::string& attributeName)
   else if (attributeName == "modelReference")
   {
     value = unsetModelReference();
+  }
+  else if (attributeName == "term")
+  {
+    value = unsetTerm();
+  }
+  else if (attributeName == "symbol2")
+  {
+    value = unsetSymbol2();
+  }
+  else if (attributeName == "target2")
+  {
+    value = unsetTarget2();
+  }
+  else if (attributeName == "dimensionTerm")
+  {
+    value = unsetDimensionTerm();
   }
 
   return value;
@@ -1144,6 +1430,14 @@ SedVariable::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   attributes.add("taskReference");
 
   attributes.add("modelReference");
+
+  attributes.add("term");
+
+  attributes.add("symbol2");
+
+  attributes.add("target2");
+
+  attributes.add("dimensionTerm");
 }
 
 /** @endcond */
@@ -1264,8 +1558,8 @@ SedVariable::readAttributes(
 
       msg += " is '" + mTaskReference + "', which does not conform to the "
         "syntax.";
-      logError(SedmlVariableTaskReferenceMustBeTask, level, version, msg,
-        getLine(), getColumn());
+      logError(SedmlVariableTaskReferenceMustBeAbstractTask, level, version,
+        msg, getLine(), getColumn());
     }
   }
 
@@ -1294,6 +1588,62 @@ SedVariable::readAttributes(
         "syntax.";
       logError(SedmlVariableModelReferenceMustBeModel, level, version, msg,
         getLine(), getColumn());
+    }
+  }
+
+  // 
+  // term string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("term", mTerm);
+
+  if (assigned == true)
+  {
+    if (mTerm.empty() == true)
+    {
+      logEmptyString(mTerm, level, version, "<SedVariable>");
+    }
+  }
+
+  // 
+  // symbol2 string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("symbol2", mSymbol2);
+
+  if (assigned == true)
+  {
+    if (mSymbol2.empty() == true)
+    {
+      logEmptyString(mSymbol2, level, version, "<SedVariable>");
+    }
+  }
+
+  // 
+  // target2 string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("target2", mTarget2);
+
+  if (assigned == true)
+  {
+    if (mTarget2.empty() == true)
+    {
+      logEmptyString(mTarget2, level, version, "<SedVariable>");
+    }
+  }
+
+  // 
+  // dimensionTerm string (use = "optional" )
+  // 
+
+  assigned = attributes.readInto("dimensionTerm", mDimensionTerm);
+
+  if (assigned == true)
+  {
+    if (mDimensionTerm.empty() == true)
+    {
+      logEmptyString(mDimensionTerm, level, version, "<SedVariable>");
     }
   }
 }
@@ -1331,6 +1681,26 @@ SedVariable::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (isSetModelReference() == true)
   {
     stream.writeAttribute("modelReference", getPrefix(), mModelReference);
+  }
+
+  if (isSetTerm() == true)
+  {
+    stream.writeAttribute("term", getPrefix(), mTerm);
+  }
+
+  if (isSetSymbol2() == true)
+  {
+    stream.writeAttribute("symbol2", getPrefix(), mSymbol2);
+  }
+
+  if (isSetTarget2() == true)
+  {
+    stream.writeAttribute("target2", getPrefix(), mTarget2);
+  }
+
+  if (isSetDimensionTerm() == true)
+  {
+    stream.writeAttribute("dimensionTerm", getPrefix(), mDimensionTerm);
   }
 }
 
@@ -1383,38 +1753,6 @@ SedVariable_free(SedVariable_t* sv)
   {
     delete sv;
   }
-}
-
-
-/*
- * Returns the value of the "id" attribute of this SedVariable_t.
- */
-LIBSEDML_EXTERN
-char *
-SedVariable_getId(const SedVariable_t * sv)
-{
-  if (sv == NULL)
-  {
-    return NULL;
-  }
-
-  return sv->getId().empty() ? NULL : safe_strdup(sv->getId().c_str());
-}
-
-
-/*
- * Returns the value of the "name" attribute of this SedVariable_t.
- */
-LIBSEDML_EXTERN
-char *
-SedVariable_getName(const SedVariable_t * sv)
-{
-  if (sv == NULL)
-  {
-    return NULL;
-  }
-
-  return sv->getName().empty() ? NULL : safe_strdup(sv->getName().c_str());
 }
 
 
@@ -1485,26 +1823,69 @@ SedVariable_getModelReference(const SedVariable_t * sv)
 
 
 /*
- * Predicate returning @c 1 (true) if this SedVariable_t's "id" attribute is
- * set.
+ * Returns the value of the "term" attribute of this SedVariable_t.
  */
 LIBSEDML_EXTERN
-int
-SedVariable_isSetId(const SedVariable_t * sv)
+char *
+SedVariable_getTerm(const SedVariable_t * sv)
 {
-  return (sv != NULL) ? static_cast<int>(sv->isSetId()) : 0;
+  if (sv == NULL)
+  {
+    return NULL;
+  }
+
+  return sv->getTerm().empty() ? NULL : safe_strdup(sv->getTerm().c_str());
 }
 
 
 /*
- * Predicate returning @c 1 (true) if this SedVariable_t's "name" attribute is
- * set.
+ * Returns the value of the "symbol2" attribute of this SedVariable_t.
  */
 LIBSEDML_EXTERN
-int
-SedVariable_isSetName(const SedVariable_t * sv)
+char *
+SedVariable_getSymbol2(const SedVariable_t * sv)
 {
-  return (sv != NULL) ? static_cast<int>(sv->isSetName()) : 0;
+  if (sv == NULL)
+  {
+    return NULL;
+  }
+
+  return sv->getSymbol2().empty() ? NULL :
+    safe_strdup(sv->getSymbol2().c_str());
+}
+
+
+/*
+ * Returns the value of the "target2" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedVariable_getTarget2(const SedVariable_t * sv)
+{
+  if (sv == NULL)
+  {
+    return NULL;
+  }
+
+  return sv->getTarget2().empty() ? NULL :
+    safe_strdup(sv->getTarget2().c_str());
+}
+
+
+/*
+ * Returns the value of the "dimensionTerm" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedVariable_getDimensionTerm(const SedVariable_t * sv)
+{
+  if (sv == NULL)
+  {
+    return NULL;
+  }
+
+  return sv->getDimensionTerm().empty() ? NULL :
+    safe_strdup(sv->getDimensionTerm().c_str());
 }
 
 
@@ -1557,24 +1938,50 @@ SedVariable_isSetModelReference(const SedVariable_t * sv)
 
 
 /*
- * Sets the value of the "id" attribute of this SedVariable_t.
+ * Predicate returning @c 1 (true) if this SedVariable_t's "term" attribute is
+ * set.
  */
 LIBSEDML_EXTERN
 int
-SedVariable_setId(SedVariable_t * sv, const char * id)
+SedVariable_isSetTerm(const SedVariable_t * sv)
 {
-  return (sv != NULL) ? sv->setId(id) : LIBSEDML_INVALID_OBJECT;
+  return (sv != NULL) ? static_cast<int>(sv->isSetTerm()) : 0;
 }
 
 
 /*
- * Sets the value of the "name" attribute of this SedVariable_t.
+ * Predicate returning @c 1 (true) if this SedVariable_t's "symbol2" attribute
+ * is set.
  */
 LIBSEDML_EXTERN
 int
-SedVariable_setName(SedVariable_t * sv, const char * name)
+SedVariable_isSetSymbol2(const SedVariable_t * sv)
 {
-  return (sv != NULL) ? sv->setName(name) : LIBSEDML_INVALID_OBJECT;
+  return (sv != NULL) ? static_cast<int>(sv->isSetSymbol2()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedVariable_t's "target2" attribute
+ * is set.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_isSetTarget2(const SedVariable_t * sv)
+{
+  return (sv != NULL) ? static_cast<int>(sv->isSetTarget2()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedVariable_t's "dimensionTerm"
+ * attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_isSetDimensionTerm(const SedVariable_t * sv)
+{
+  return (sv != NULL) ? static_cast<int>(sv->isSetDimensionTerm()) : 0;
 }
 
 
@@ -1625,24 +2032,47 @@ SedVariable_setModelReference(SedVariable_t * sv, const char * modelReference)
 
 
 /*
- * Unsets the value of the "id" attribute of this SedVariable_t.
+ * Sets the value of the "term" attribute of this SedVariable_t.
  */
 LIBSEDML_EXTERN
 int
-SedVariable_unsetId(SedVariable_t * sv)
+SedVariable_setTerm(SedVariable_t * sv, const char * term)
 {
-  return (sv != NULL) ? sv->unsetId() : LIBSEDML_INVALID_OBJECT;
+  return (sv != NULL) ? sv->setTerm(term) : LIBSEDML_INVALID_OBJECT;
 }
 
 
 /*
- * Unsets the value of the "name" attribute of this SedVariable_t.
+ * Sets the value of the "symbol2" attribute of this SedVariable_t.
  */
 LIBSEDML_EXTERN
 int
-SedVariable_unsetName(SedVariable_t * sv)
+SedVariable_setSymbol2(SedVariable_t * sv, const char * symbol2)
 {
-  return (sv != NULL) ? sv->unsetName() : LIBSEDML_INVALID_OBJECT;
+  return (sv != NULL) ? sv->setSymbol2(symbol2) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "target2" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_setTarget2(SedVariable_t * sv, const char * target2)
+{
+  return (sv != NULL) ? sv->setTarget2(target2) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "dimensionTerm" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_setDimensionTerm(SedVariable_t * sv, const char * dimensionTerm)
+{
+  return (sv != NULL) ? sv->setDimensionTerm(dimensionTerm) :
+    LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1691,6 +2121,50 @@ SedVariable_unsetModelReference(SedVariable_t * sv)
 
 
 /*
+ * Unsets the value of the "term" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_unsetTerm(SedVariable_t * sv)
+{
+  return (sv != NULL) ? sv->unsetTerm() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "symbol2" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_unsetSymbol2(SedVariable_t * sv)
+{
+  return (sv != NULL) ? sv->unsetSymbol2() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "target2" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_unsetTarget2(SedVariable_t * sv)
+{
+  return (sv != NULL) ? sv->unsetTarget2() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "dimensionTerm" attribute of this SedVariable_t.
+ */
+LIBSEDML_EXTERN
+int
+SedVariable_unsetDimensionTerm(SedVariable_t * sv)
+{
+  return (sv != NULL) ? sv->unsetDimensionTerm() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
  * Returns a ListOf_t * containing SedAppliedDimension_t objects from this
  * SedVariable_t.
  */
@@ -1733,7 +2207,7 @@ SedVariable_getAppliedDimensionByTarget(SedVariable_t* sv, const char *sid)
 LIBSEDML_EXTERN
 SedAppliedDimension_t*
 SedVariable_getAppliedDimensionByDimensionTarget(SedVariable_t* sv,
-                                                   const char *sid)
+                                                 const char *sid)
 {
   return (sv != NULL && sid != NULL) ?
     sv->getAppliedDimensionByDimensionTarget(sid) : NULL;
@@ -1746,10 +2220,9 @@ SedVariable_getAppliedDimensionByDimensionTarget(SedVariable_t* sv,
 LIBSEDML_EXTERN
 int
 SedVariable_addAppliedDimension(SedVariable_t* sv,
-                                  const SedAppliedDimension_t* srd)
+                                const SedAppliedDimension_t* sad)
 {
-  return (sv != NULL) ? sv->addAppliedDimension(srd) :
-    LIBSEDML_INVALID_OBJECT;
+  return (sv != NULL) ? sv->addAppliedDimension(sad) : LIBSEDML_INVALID_OBJECT;
 }
 
 
@@ -1777,8 +2250,8 @@ SedVariable_createAppliedDimension(SedVariable_t* sv)
 
 
 /*
- * Removes the nth SedAppliedDimension_t from this SedVariable_t and returns
- * a pointer to it.
+ * Removes the nth SedAppliedDimension_t from this SedVariable_t and returns a
+ * pointer to it.
  */
 LIBSEDML_EXTERN
 SedAppliedDimension_t*

@@ -361,9 +361,6 @@ SWIGCSHARP_IMTYPE_WSTRING(const char*)
     case (int) libsedml.SEDML_FILL:
       return new SedFill(cPtr, owner);
 
-    case (int) libsedml.SEDML_DEPENDENTVARIABLE:
-      return new SedDependentVariable(cPtr, owner);
-
     case (int) libsedml.SEDML_APPLIEDDIMENSION:
       return new SedAppliedDimension(cPtr, owner);
 
@@ -891,7 +888,6 @@ COVARIANT_RTYPE_CLONE(SedStyle)
 COVARIANT_RTYPE_CLONE(SedLine)
 COVARIANT_RTYPE_CLONE(SedMarker)
 COVARIANT_RTYPE_CLONE(SedFill)
-COVARIANT_RTYPE_CLONE(SedDependentVariable)
 COVARIANT_RTYPE_CLONE(SedAppliedDimension)
 COVARIANT_RTYPE_CLONE(SedDataRange)
 COVARIANT_RTYPE_CLONE(SedShadedArea)
@@ -1171,7 +1167,6 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedDataGenerator)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDataRange)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDataSet)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDataSource)
-SEDMLCONSTRUCTOR_EXCEPTION(SedDependentVariable)
 SEDMLCONSTRUCTOR_EXCEPTION(SedDocument)
 SEDMLCONSTRUCTOR_EXCEPTION(SedExperimentRef)
 SEDMLCONSTRUCTOR_EXCEPTION(SedFigure)
