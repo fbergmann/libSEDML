@@ -64,7 +64,7 @@ protected:
 
   /** @cond doxygenLibSEDMLInternal */
 
-  std::string mTaskRef;
+  std::string mTaskReference;
 
   /** @endcond */
 
@@ -133,48 +133,48 @@ public:
 
 
   /**
-   * Returns the value of the "taskRef" attribute of this
+   * Returns the value of the "taskReference" attribute of this
    * SedParameterEstimationResultPlot.
    *
-   * @return the value of the "taskRef" attribute of this
+   * @return the value of the "taskReference" attribute of this
    * SedParameterEstimationResultPlot as a string.
    */
-  const std::string& getTaskRef() const;
+  const std::string& getTaskReference() const;
 
 
   /**
    * Predicate returning @c true if this SedParameterEstimationResultPlot's
-   * "taskRef" attribute is set.
+   * "taskReference" attribute is set.
    *
-   * @return @c true if this SedParameterEstimationResultPlot's "taskRef"
+   * @return @c true if this SedParameterEstimationResultPlot's "taskReference"
    * attribute has been set, otherwise @c false is returned.
    */
-  bool isSetTaskRef() const;
+  bool isSetTaskReference() const;
 
 
   /**
-   * Sets the value of the "taskRef" attribute of this
+   * Sets the value of the "taskReference" attribute of this
    * SedParameterEstimationResultPlot.
    *
-   * @param taskRef std::string& value of the "taskRef" attribute to be set.
+   * @param taskReference std::string& value of the "taskReference" attribute to be set.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
    * OperationReturnValues_t}
    */
-  int setTaskRef(const std::string& taskRef);
+  int setTaskReference(const std::string& taskReference);
 
 
   /**
-   * Unsets the value of the "taskRef" attribute of this
+   * Unsets the value of the "taskReference" attribute of this
    * SedParameterEstimationResultPlot.
    *
    * @copydetails doc_returns_success_code
    * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
-  int unsetTaskRef();
+  int unsetTaskReference();
 
 
   /**
@@ -223,7 +223,7 @@ public:
    *
    * @note The required attributes for the SedParameterEstimationResultPlot
    * object are:
-   * @li "taskRef"
+   * @li "taskReference"
    */
   virtual bool hasRequiredAttributes() const;
 
@@ -647,13 +647,13 @@ SedParameterEstimationResultPlot_free(SedParameterEstimationResultPlot_t*
 
 
 /**
- * Returns the value of the "taskRef" attribute of this
+ * Returns the value of the "taskReference" attribute of this
  * SedParameterEstimationResultPlot_t.
  *
- * @param sperp the SedParameterEstimationResultPlot_t structure whose taskRef
+ * @param sperp the SedParameterEstimationResultPlot_t structure whose taskReference
  * is sought.
  *
- * @return the value of the "taskRef" attribute of this
+ * @return the value of the "taskReference" attribute of this
  * SedParameterEstimationResultPlot_t as a pointer to a string.
  *
  * @copydetails doc_returned_owned_char
@@ -662,34 +662,34 @@ SedParameterEstimationResultPlot_free(SedParameterEstimationResultPlot_t*
  */
 LIBSEDML_EXTERN
 char *
-SedParameterEstimationResultPlot_getTaskRef(const
+SedParameterEstimationResultPlot_getTaskReference(const
   SedParameterEstimationResultPlot_t * sperp);
 
 
 /**
  * Predicate returning @c 1 (true) if this SedParameterEstimationResultPlot_t's
- * "taskRef" attribute is set.
+ * "taskReference" attribute is set.
  *
  * @param sperp the SedParameterEstimationResultPlot_t structure.
  *
- * @return @c 1 (true) if this SedParameterEstimationResultPlot_t's "taskRef"
+ * @return @c 1 (true) if this SedParameterEstimationResultPlot_t's "taskReference"
  * attribute has been set, otherwise @c 0 (false) is returned.
  *
  * @memberof SedParameterEstimationResultPlot_t
  */
 LIBSEDML_EXTERN
 int
-SedParameterEstimationResultPlot_isSetTaskRef(const
+SedParameterEstimationResultPlot_isSetTaskReference(const
   SedParameterEstimationResultPlot_t * sperp);
 
 
 /**
- * Sets the value of the "taskRef" attribute of this
+ * Sets the value of the "taskReference" attribute of this
  * SedParameterEstimationResultPlot_t.
  *
  * @param sperp the SedParameterEstimationResultPlot_t structure.
  *
- * @param taskRef const char * value of the "taskRef" attribute to be set.
+ * @param taskReference const char * value of the "taskReference" attribute to be set.
  *
  * @copydetails doc_returns_success_code
  * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
@@ -701,14 +701,14 @@ SedParameterEstimationResultPlot_isSetTaskRef(const
  */
 LIBSEDML_EXTERN
 int
-SedParameterEstimationResultPlot_setTaskRef(
+SedParameterEstimationResultPlot_setTaskReference(
                                             SedParameterEstimationResultPlot_t
                                               * sperp,
-                                            const char * taskRef);
+                                            const char * taskReference);
 
 
 /**
- * Unsets the value of the "taskRef" attribute of this
+ * Unsets the value of the "taskReference" attribute of this
  * SedParameterEstimationResultPlot_t.
  *
  * @param sperp the SedParameterEstimationResultPlot_t structure.
@@ -722,7 +722,7 @@ SedParameterEstimationResultPlot_setTaskRef(
  */
 LIBSEDML_EXTERN
 int
-SedParameterEstimationResultPlot_unsetTaskRef(SedParameterEstimationResultPlot_t
+SedParameterEstimationResultPlot_unsetTaskReference(SedParameterEstimationResultPlot_t
   * sperp);
 
 
@@ -739,7 +739,7 @@ SedParameterEstimationResultPlot_unsetTaskRef(SedParameterEstimationResultPlot_t
  *
  * @note The required attributes for the SedParameterEstimationResultPlot_t
  * object are:
- * @li "taskRef"
+ * @li "taskReference"
  *
  * @memberof SedParameterEstimationResultPlot_t
  */
