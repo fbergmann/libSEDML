@@ -448,7 +448,7 @@ typedef enum
 , SedmlDataRangeAllowedCoreAttributes      = 25701
 , SedmlDataRangeAllowedCoreElements      = 25702
 , SedmlDataRangeAllowedAttributes      = 25703
-, SedmlDataRangeSourceRefMustBeSId      = 25704
+, SedmlDataRangeSourceReferenceMustBeSId      = 25704
 , SedmlShadedAreaAllowedCoreAttributes      = 25901
 , SedmlShadedAreaAllowedCoreElements      = 25902
 , SedmlShadedAreaAllowedAttributes      = 25903
