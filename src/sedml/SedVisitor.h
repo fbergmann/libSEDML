@@ -100,7 +100,7 @@ class SedParameterEstimationTask;
 class SedObjective;
 class SedLeastSquareObjectiveFunction;
 class SedAdjustableParameter;
-class SedExperimentRef;
+class SedExperimentReference;
 class SedFitExperiment;
 class SedFitMapping;
 class SedBounds;
@@ -588,7 +588,7 @@ virtual bool visit (const SedAdjustableParameter &x);
  *
  * @param x the SedBase object to visit.
  */
-virtual bool visit (const SedExperimentRef &x);
+virtual bool visit (const SedExperimentReference &x);
 
 
 /**
@@ -1211,7 +1211,7 @@ virtual void leave (const SedAdjustableParameter &x);
  *
  * @param x the SedBase object to leave.
  */
-virtual void leave (const SedExperimentRef &x);
+virtual void leave (const SedExperimentReference &x);
 
 
 /**

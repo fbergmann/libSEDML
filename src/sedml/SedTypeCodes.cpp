@@ -86,7 +86,7 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "Objective"
   , "LeastSquareObjectiveFunction"
   , "AdjustableParameter"
-  , "ExperimentRef"
+  , "ExperimentReference"
   , "FitExperiment"
   , "FitMapping"
   , "Bounds"

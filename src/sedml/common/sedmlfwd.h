@@ -101,7 +101,7 @@ typedef CLASS_OR_STRUCT SedParameterEstimationTask       SedParameterEstimationT
 typedef CLASS_OR_STRUCT SedObjective                     SedObjective_t;
 typedef CLASS_OR_STRUCT SedLeastSquareObjectiveFunction  SedLeastSquareObjectiveFunction_t;
 typedef CLASS_OR_STRUCT SedAdjustableParameter           SedAdjustableParameter_t;
-typedef CLASS_OR_STRUCT SedExperimentRef                 SedExperimentRef_t;
+typedef CLASS_OR_STRUCT SedExperimentReference                 SedExperimentReference_t;
 typedef CLASS_OR_STRUCT SedFitExperiment                 SedFitExperiment_t;
 typedef CLASS_OR_STRUCT SedFitMapping                    SedFitMapping_t;
 typedef CLASS_OR_STRUCT SedBounds                        SedBounds_t;

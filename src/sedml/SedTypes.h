@@ -86,7 +86,7 @@
 #include <sedml/SedObjective.h>
 #include <sedml/SedLeastSquareObjectiveFunction.h>
 #include <sedml/SedAdjustableParameter.h>
-#include <sedml/SedExperimentRef.h>
+#include <sedml/SedExperimentReference.h>
 #include <sedml/SedFitExperiment.h>
 #include <sedml/SedFitMapping.h>
 #include <sedml/SedBounds.h>

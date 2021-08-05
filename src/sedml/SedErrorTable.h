@@ -3687,7 +3687,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "An <adjustableParameter> object must contain one and only one instance of "
     "the SedBounds element, and may contain one and only one instance of the "
-    "<listOfExperimentRefs> element. No other elements from the SBML Level 3 "
+    "<listOfExperimentReferences> element. No other elements from the SBML Level 3 "
     "SED-ML namespaces are permitted on an <adjustableParameter> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -3728,71 +3728,71 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 24308
-  { SedmlAdjustableParameterLOExperimentRefsAllowedCoreElements,
-    "Core elements allowed on <listOfExperimentRefs>.",
+  { SedmlAdjustableParameterLOExperimentReferencesAllowedCoreElements,
+    "Core elements allowed on <listOfExperimentReferences>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "Apart from the general notes and annotations subobjects permitted on all "
-    "SBML objects, a <listOfExperimentRefs> container object may only contain "
-    "<experimentRef> objects.",
+    "SBML objects, a <listOfExperimentReferences> container object may only contain "
+    "<experimentReference> objects.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24309
-  { SedmlAdjustableParameterLOExperimentRefsAllowedCoreAttributes,
-    "Core attributes allowed on <listOfExperimentRefs>.",
+  { SedmlAdjustableParameterLOExperimentReferencesAllowedCoreAttributes,
+    "Core attributes allowed on <listOfExperimentReferences>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <listOfExperimentRefs> object may have the optional SBML Level 3 Core "
+    "A <listOfExperimentReferences> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on a <listOfExperimentRefs> object.",
+    "3 Core namespaces are permitted on a <listOfExperimentReferences> object.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24401
-  { SedmlExperimentRefAllowedCoreAttributes,
-    "Core attributes allowed on <experimentRef>.",
+  { SedmlExperimentReferenceAllowedCoreAttributes,
+    "Core attributes allowed on <experimentReference>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "An <experimentRef> object may have the optional SBML Level 3 Core "
+    "An <experimentReference> object may have the optional SBML Level 3 Core "
     "attributes 'metaid' and 'sboTerm'. No other attributes from the SBML Level "
-    "3 Core namespaces are permitted on an <experimentRef>.",
+    "3 Core namespaces are permitted on an <experimentReference>.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24402
-  { SedmlExperimentRefAllowedCoreElements,
-    "Core elements allowed on <experimentRef>.",
+  { SedmlExperimentReferenceAllowedCoreElements,
+    "Core elements allowed on <experimentReference>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "An <experimentRef> object may have the optional SBML Level 3 Core "
+    "An <experimentReference> object may have the optional SBML Level 3 Core "
     "subobjects for notes and annotations. No other elements from the SBML "
-    "Level 3 Core namespaces are permitted on an <experimentRef>.",
+    "Level 3 Core namespaces are permitted on an <experimentReference>.",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24403
-  { SedmlExperimentRefAllowedAttributes,
-    "Attributes allowed on <experimentRef>.",
+  { SedmlExperimentReferenceAllowedAttributes,
+    "Attributes allowed on <experimentReference>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "An <experimentRef> object may have the optional attribute "
+    "An <experimentReference> object may have the optional attribute "
     "'sedml:experimentId'. No other attributes from the SBML Level 3 SED-ML "
-    "namespaces are permitted on an <experimentRef> object. ",
+    "namespaces are permitted on an <experimentReference> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 24404
-  { SedmlExperimentRefExperimentIdMustBeFitExperiment,
+  { SedmlExperimentReferenceExperimentIdMustBeFitExperiment,
     "The attribute 'experimentId' must point to FitExperiment object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:experimentId' of an <experimentRef> "
+    "The value of the attribute 'sedml:experimentId' of an <experimentReference> "
     "object must be the identifier of an existing <fitExperiment> object "
     "defined in the enclosing <model> object.",
     { "L3V1 Sedml V1 Section"
