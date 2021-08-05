@@ -878,7 +878,7 @@ ExperimentType_isValidString(const char* code);
  */
 typedef enum
 {
-  SEDML_SCALETYPE_LIN           /*!< The sedml scaletype is @c "lin". */
+  SEDML_SCALETYPE_LINEAR           /*!< The sedml scaletype is @c "linear". */
 , SEDML_SCALETYPE_LOG           /*!< The sedml scaletype is @c "log". */
 , SEDML_SCALETYPE_LOG10         /*!< The sedml scaletype is @c "log10". */
 , SEDML_SCALETYPE_INVALID       /*!< Invalid ScaleType value. */
@@ -891,7 +891,7 @@ typedef enum
  * @param st the #ScaleType_t enumeration value to convert.
  *
  * @return A string corresponding to the given type:
- * "lin",
+ * "linear",
  * "log",
  * "log10",
  * "invalid ScaleType value",
@@ -919,8 +919,8 @@ ScaleType_toString(ScaleType_t st);
  * @return the corresponding #ScaleType_t or
  * @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t} if no match is found.
  *
- * @note The matching is case-sensitive: "lin" will return
- * @sbmlconstant{SEDML_SCALETYPE_LIN, ScaleType_t}, but "Lin" will return
+ * @note The matching is case-sensitive: "linear" will return
+ * @sbmlconstant{SEDML_SCALETYPE_LINEAR, ScaleType_t}, but "Linear" will return
  * @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t}.
  *
  * @if conly
@@ -939,7 +939,7 @@ ScaleType_fromString(const char* code);
  * @param st the #ScaleType_t enumeration to query.
  *
  * @return @c 1 (true) if the #ScaleType_t is
- * @sbmlconstant{SEDML_SCALETYPE_LIN, ScaleType_t},
+ * @sbmlconstant{SEDML_SCALETYPE_LINEAR, ScaleType_t},
  * @sbmlconstant{SEDML_SCALETYPE_LOG, ScaleType_t}, or
  * @sbmlconstant{SEDML_SCALETYPE_LOG10, ScaleType_t};
  * @c 0 (false) otherwise (including @sbmlconstant{SEDML_SCALETYPE_INVALID,
@@ -961,14 +961,14 @@ ScaleType_isValid(ScaleType_t st);
  * @param code the string to query.
  *
  * @return @c 1 (true) if the string is
- * "lin",
+ * "linear",
  * "log",
  * "log10", or
  * "invalid ScaleType value";
  * @c 0 (false) otherwise.
  *
- * @note The matching is case-sensitive: "lin" will return @c 1 (true), but
- * "Lin" will return @c 0 (false).
+ * @note The matching is case-sensitive: "linear" will return @c 1 (true), but
+ * "Linear" will return @c 0 (false).
  *
  * @if conly
  * @memberof Sedml_t

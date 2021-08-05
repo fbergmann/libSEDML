@@ -669,7 +669,7 @@ ExperimentType_isValidString(const char* code)
 static
 const char* SEDML_SCALE_TYPE_STRINGS[] =
 {
-  "lin"
+  "linear"
 , "log"
 , "log10"
 , "invalid ScaleType value"
@@ -683,7 +683,7 @@ LIBSEDML_EXTERN
 const char*
 ScaleType_toString(ScaleType_t st)
 {
-  int min = SEDML_SCALETYPE_LIN;
+  int min = SEDML_SCALETYPE_LINEAR;
   int max = SEDML_SCALETYPE_INVALID;
 
   if (st < min || st > max)
@@ -728,7 +728,7 @@ LIBSEDML_EXTERN
 int
 ScaleType_isValid(ScaleType_t st)
 {
-  int min = SEDML_SCALETYPE_LIN;
+  int min = SEDML_SCALETYPE_LINEAR;
   int max = SEDML_SCALETYPE_INVALID;
 
   if (st < min || st >= max)

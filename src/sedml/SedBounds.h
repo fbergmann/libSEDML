@@ -53,7 +53,7 @@
  * Level&nbsp;3 Version&nbsp;1 Sedml specification, the following are the
  * allowable values for "scale":
  * <ul>
- * <li> @c "lin", TODO:add description
+ * <li> @c "linear", TODO:add description
  *
  * <li> @c "log", TODO:add description
  *
@@ -184,7 +184,7 @@ public:
    * @copydetails doc_sedbounds_scale
    * @if clike The value is drawn from the enumeration @ref ScaleType_t @endif
    * The possible values returned by this method are:
-   * @li @sbmlconstant{SEDML_SCALETYPE_LIN, ScaleType_t}
+   * @li @sbmlconstant{SEDML_SCALETYPE_LINEAR, ScaleType_t}
    * @li @sbmlconstant{SEDML_SCALETYPE_LOG, ScaleType_t}
    * @li @sbmlconstant{SEDML_SCALETYPE_LOG10, ScaleType_t}
    * @li @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t}
@@ -199,7 +199,7 @@ public:
    *
    * @copydetails doc_sedbounds_scale
    * The possible values returned by this method are:
-   * @li @c "lin"
+   * @li @c "linear"
    * @li @c "log"
    * @li @c "log10"
    * @li @c "invalid ScaleType value"
@@ -792,7 +792,7 @@ SedBounds_getUpperBound(const SedBounds_t * sb);
  * @copydetails doc_sedbounds_scale
  * @if clike The value is drawn from the enumeration @ref ScaleType_t @endif
  * The possible values returned by this method are:
- * @li @sbmlconstant{SEDML_SCALETYPE_LIN, ScaleType_t}
+ * @li @sbmlconstant{SEDML_SCALETYPE_LINEAR, ScaleType_t}
  * @li @sbmlconstant{SEDML_SCALETYPE_LOG, ScaleType_t}
  * @li @sbmlconstant{SEDML_SCALETYPE_LOG10, ScaleType_t}
  * @li @sbmlconstant{SEDML_SCALETYPE_INVALID, ScaleType_t}
@@ -817,7 +817,7 @@ SedBounds_getScale(const SedBounds_t * sb);
  *
  * @copydetails doc_sedbounds_scale
  * The possible values returned by this method are:
- * @li @c "lin"
+ * @li @c "linear"
  * @li @c "log"
  * @li @c "log10"
  * @li @c "invalid ScaleType value"
