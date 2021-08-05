@@ -4794,7 +4794,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <dataRange>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <dataRange> object must have the required attribute 'sedml:sourceRef'. "
+    "A <dataRange> object must have the required attribute 'sedml:sourceReference'. "
     "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <dataRange> object. ",
     { "L3V1 Sedml V1 Section"
@@ -4802,11 +4802,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 25704
-  { SedmlDataRangeSourceRefMustBeSId,
-    "The attribute 'sourceRef' must point to SId object.",
+  { SedmlDataRangeSourceReferenceMustBeSId,
+    "The attribute 'sourceReference' must point to SId object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:sourceRef' of a <dataRange> object must "
+    "The value of the attribute 'sedml:sourceReference' of a <dataRange> object must "
     "be the identifier of an existing < object> defined in the enclosing "
     "<model> object.",
     { "L3V1 Sedml V1 Section"
@@ -4906,18 +4906,18 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <parameterEstimationResultPlot> object must have the required attribute "
-    "'sedml:taskRef'. No other attributes from the SBML Level 3 SED-ML "
+    "'sedml:taskReference'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <parameterEstimationResultPlot> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 26004
-  { SedmlParameterEstimationResultPlotTaskRefMustBeTask,
-    "The attribute 'taskRef' must point to Task object.",
+  { SedmlParameterEstimationResultPlotTaskReferenceMustBeTask,
+    "The attribute 'taskReference' must point to Task object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:taskRef' of a "
+    "The value of the attribute 'sedml:taskReference' of a "
     "<parameterEstimationResultPlot> object must be the identifier of an "
     "existing <task> object defined in the enclosing <model> object.",
     { "L3V1 Sedml V1 Section"
@@ -4953,7 +4953,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <waterfallPlot>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <waterfallPlot> object must have the required attribute 'sedml:taskRef'. "
+    "A <waterfallPlot> object must have the required attribute 'sedml:taskReference'. "
     "No other attributes from the SBML Level 3 SED-ML namespaces are permitted "
     "on a <waterfallPlot> object. ",
     { "L3V1 Sedml V1 Section"
@@ -4961,11 +4961,11 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
   },
 
   // 26104
-  { SedmlWaterfallPlotTaskRefMustBeTask,
-    "The attribute 'taskRef' must point to Task object.",
+  { SedmlWaterfallPlotTaskReferenceMustBeTask,
+    "The attribute 'taskReference' must point to Task object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:taskRef' of a <waterfallPlot> object "
+    "The value of the attribute 'sedml:taskReference' of a <waterfallPlot> object "
     "must be the identifier of an existing <task> object defined in the "
     "enclosing <model> object.",
     { "L3V1 Sedml V1 Section"
@@ -5002,18 +5002,18 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
     "A <parameterEstimationReport> object must have the required attribute "
-    "'sedml:taskRef'. No other attributes from the SBML Level 3 SED-ML "
+    "'sedml:taskReference'. No other attributes from the SBML Level 3 SED-ML "
     "namespaces are permitted on a <parameterEstimationReport> object. ",
     { "L3V1 Sedml V1 Section"
     }
   },
 
   // 26204
-  { SedmlParameterEstimationReportTaskRefMustBeTask,
-    "The attribute 'taskRef' must point to Task object.",
+  { SedmlParameterEstimationReportTaskReferenceMustBeTask,
+    "The attribute 'taskReference' must point to Task object.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "The value of the attribute 'sedml:taskRef' of a "
+    "The value of the attribute 'sedml:taskReference' of a "
     "<parameterEstimationReport> object must be the identifier of an existing "
     "<task> object defined in the enclosing <model> object.",
     { "L3V1 Sedml V1 Section"

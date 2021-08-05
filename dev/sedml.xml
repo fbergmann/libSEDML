@@ -456,7 +456,7 @@
         </element>
         <element name="ParameterEstimationResultPlot" typeCode="SEDML_PARAMETERESTIMATIONRESULTPLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Plot" abstract="false">
           <attributes>
-            <attribute name="taskRef" required="true" type="SIdRef" element="Task" abstract="false"/>
+            <attribute name="taskReference" required="true" type="SIdRef" element="Task" abstract="false"/>
           </attributes>
         </element>
         <element name="WaterfallPlot" typeCode="SEDML_WATERFALLPLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Plot" abstract="false">
