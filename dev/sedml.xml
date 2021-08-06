@@ -96,8 +96,8 @@
             <attribute name="initialTime" required="true" type="double" abstract="false"/>
             <attribute name="outputStartTime" required="true" type="double" abstract="false"/>
             <attribute name="outputEndTime" required="true" type="double" abstract="false"/>
-            <attribute name="numberOfPoints" required="false" type="int" abstract="false"/>
-            <attribute name="numberOfSteps" required="false" type="int" abstract="false"/>
+            <attribute name="numberOfPoints" required="false" type="positive int" abstract="false"/>
+            <attribute name="numberOfSteps" required="false" type="positive int" abstract="false"/>
           </attributes>
         </element>
         <element name="Algorithm" typeCode="SEDML_SIMULATION_ALGORITHM" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false" elementName="algorithm" additionalDecls="algorithm_headers.h" additionalDefs="algorithm_code.cpp">
@@ -251,9 +251,9 @@
           <attributes>
             <attribute name="start" required="true" type="double" abstract="false"/>
             <attribute name="end" required="true" type="double" abstract="false"/>
-            <attribute name="numberOfPoints" required="false" type="int" abstract="false"/>
+            <attribute name="numberOfPoints" required="false" type="positive int" abstract="false"/>
             <attribute name="type" required="true" type="string" abstract="false"/>
-            <attribute name="numberOfSteps" required="false" type="int" abstract="false"/>
+            <attribute name="numberOfSteps" required="false" type="positive int" abstract="false"/>
           </attributes>
         </element>
         <element name="VectorRange" typeCode="SEDML_RANGE_VECTORRANGE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Range" abstract="false" elementName="vectorRange">
