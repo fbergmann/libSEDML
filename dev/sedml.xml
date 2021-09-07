@@ -390,10 +390,10 @@
         <element name="SubPlot" typeCode="SEDML_SUBPLOT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="plot" required="true" type="SIdRef" element="Plot" abstract="false"/>
-            <attribute name="row" required="true" type="integer" abstract="false"/>
-            <attribute name="col" required="true" type="integer" abstract="false"/>
-            <attribute name="rowSpan" required="false" type="integer" abstract="false"/>
-            <attribute name="colSpan" required="false" type="integer" abstract="false"/>
+            <attribute name="row" required="true" type="positive integer" abstract="false"/>
+            <attribute name="col" required="true" type="positive integer" abstract="false"/>
+            <attribute name="rowSpan" required="false" type="positive integer" abstract="false"/>
+            <attribute name="colSpan" required="false" type="positive integer" abstract="false"/>
           </attributes>
         </element>
         <element name="Axis" typeCode="SEDML_AXIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="true" baseClass="SedBase" abstract="false">
@@ -456,17 +456,17 @@
         </element>
         <element name="ParameterEstimationResultPlot" typeCode="SEDML_PARAMETERESTIMATIONRESULTPLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Plot" abstract="false">
           <attributes>
-            <attribute name="taskReference" required="true" type="SIdRef" element="Task" abstract="false"/>
+            <attribute name="taskReference" required="true" type="SIdRef" element="ParameterEstimationTask" abstract="false"/>
           </attributes>
         </element>
         <element name="WaterfallPlot" typeCode="SEDML_WATERFALLPLOT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Plot" abstract="false">
           <attributes>
-            <attribute name="taskReference" required="true" type="SIdRef" element="Task" abstract="false"/>
+            <attribute name="taskReference" required="true" type="SIdRef" element="ParameterEstimationTask" abstract="false"/>
           </attributes>
         </element>
         <element name="ParameterEstimationReport" typeCode="SEDML_PARAMETERESTIMATIONREPORT" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Output" abstract="false">
           <attributes>
-            <attribute name="taskReference" required="true" type="SIdRef" element="Task" abstract="false"/>
+            <attribute name="taskReference" required="true" type="SIdRef" element="ParameterEstimationTask" abstract="false"/>
           </attributes>
         </element>
         <element name="Analysis" typeCode="SEDML_SIMULATION_ANALYSIS" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false"/>
