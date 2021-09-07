@@ -709,7 +709,7 @@ int SedBase::setName(const std::string& name)
 {
     if (name.empty())
     {
-        mId.erase();
+        mName.erase();
         return LIBSEDML_OPERATION_SUCCESS;
     }
     else if (!mNameAllowedPreV4 && getVersion() < 4 && getLevel() == 1)
