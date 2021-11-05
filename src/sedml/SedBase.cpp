@@ -1934,8 +1934,8 @@ SedBase::setSedNamespaces(SedNamespaces * sedmlns)
 void
 SedBase::setSedNamespacesAndOwn(SedNamespaces * sedmlns)
 {
-    libsbml::XMLNamespaces* names = mSedNamespaces->getNamespaces();
-    libsbml::XMLNamespaces* newnames = sedmlns->getNamespaces();
+    XMLNamespaces* names = mSedNamespaces->getNamespaces();
+    XMLNamespaces* newnames = sedmlns->getNamespaces();
     for (int name = 0; name < names->getNumNamespaces(); name++)
     {
         if (!names->getPrefix(name).empty())
