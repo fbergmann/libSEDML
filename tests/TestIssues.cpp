@@ -932,3 +932,45 @@ TEST_CASE("Create Analysis simulation", "[sedml]")
 
 }
 
+TEST_CASE("Don't quash extra namespaces on upleveling", "[sedml]")
+{
+    SedDocument doc(1, 3);
+    doc.getNamespaces()->add("http://test.org/uri", "test");
+    doc.setLevel(4);
+    REQUIRE(doc.getNamespaces()->getNumNamespaces() == 2);
+    CHECK(doc.getNamespaces()->getURI(1) == "http://test.org/uri");
+    CHECK(doc.getNamespaces()->getPrefix(1) == "test");
+
+}
+
+TEST_CASE("Redirect getLog for L1v4, 2d", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/logtest.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    SedOutput* out = doc->getOutput(0);
+    SedPlot2D* plot = static_cast<SedPlot2D*>(out);
+    REQUIRE(plot);
+    SedCurve* curve = static_cast<SedCurve*>(plot->getCurve(0));
+    REQUIRE(curve);
+    CHECK(curve->getLogX() == true);
+    CHECK(curve->getLogY() == false);
+    curve = static_cast<SedCurve*>(plot->getCurve(1));
+    REQUIRE(curve);
+    CHECK(curve->getLogX() == true);
+    CHECK(curve->getLogY() == true);
+}
+
+TEST_CASE("Redirect getLog for L1v4, 3d", "[sedml]")
+{
+    std::string fileName = getTestFile("/test-data/logtest3d.sedml");
+    SedDocument* doc = readSedMLFromFile(fileName.c_str());
+    SedOutput* out = doc->getOutput(0);
+    SedPlot3D* plot = static_cast<SedPlot3D*>(out);
+    REQUIRE(plot);
+    SedSurface* curve = static_cast<SedSurface*>(plot->getSurface(0));
+    REQUIRE(curve);
+    CHECK(curve->getLogX() == true);
+    CHECK(curve->getLogY() == false);
+    CHECK(curve->getLogZ() == true);
+}
+
