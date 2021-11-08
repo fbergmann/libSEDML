@@ -1934,11 +1934,23 @@ SedBase::setSedNamespaces(SedNamespaces * sedmlns)
 void
 SedBase::setSedNamespacesAndOwn(SedNamespaces * sedmlns)
 {
-  delete mSedNamespaces;
-  mSedNamespaces = sedmlns;
+    XMLNamespaces* names = mSedNamespaces->getNamespaces();
+    XMLNamespaces* newnames = sedmlns->getNamespaces();
+    for (int name = 0; name < names->getNumNamespaces(); name++)
+    {
+        if (!names->getPrefix(name).empty())
+        {
+            if (!newnames->containsUri(names->getURI(name)))
+            {
+                sedmlns->addNamespace(names->getURI(name), names->getPrefix(name));
+            }
+        }
+    }
+    delete mSedNamespaces;
+    mSedNamespaces = sedmlns;
 
-  if(sedmlns != NULL)
-    setElementNamespace(sedmlns->getURI());
+    if (sedmlns != NULL)
+        setElementNamespace(sedmlns->getURI());
 }
 
 

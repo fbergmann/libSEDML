@@ -33,6 +33,7 @@
  */
 #include <sedml/SedCurve.h>
 #include <sbml/xml/XMLInputStream.h>
+#include <sedml/SedPlot2D.h>
 
 
 using namespace std;
@@ -147,6 +148,42 @@ SedCurve::~SedCurve()
 bool
 SedCurve::getLogY() const
 {
+  if (getVersion() < 4)
+  {
+      return mLogY;
+  }
+  if (isSetLogY())
+  {
+      return mLogY;
+  }
+  const SedBase* parent = getParentSedObject();
+  if (parent)
+  {
+      parent = parent->getParentSedObject();
+  }
+  if (parent)
+  {
+      if (parent->getTypeCode() == SEDML_OUTPUT_PLOT2D)
+      {
+          const SedPlot2D* plot = static_cast<const SedPlot2D*>(parent);
+          if (plot)
+          {
+              const SedAxis* axis = plot->getYAxis();
+              if (getYAxis() == "right")
+              {
+                  axis = plot->getRightYAxis();
+              }
+              if (axis && axis->isSetType())
+              {
+                  return axis->getType() == SEDML_AXISTYPE_LOG10;
+              }
+              else
+              {
+                  return false;
+              }
+          }
+      }
+  }
   return mLogY;
 }
 
