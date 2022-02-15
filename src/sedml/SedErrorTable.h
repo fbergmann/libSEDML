@@ -4622,17 +4622,6 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     }
   },
 
-  //// 25405
-  //{ SedmlFillSecondColorMustBeString,
-  //  "The 'secondColor' attribute must be String.",
-  //  LIBSEDML_CAT_GENERAL_CONSISTENCY,
-  //  LIBSEDML_SEV_ERROR,
-  //  "The attribute 'sedml:secondColor' on a <fill> must have a value of data "
-  //  "type 'string'.",
-  //  { "L3V1 Sedml V1 Section"
-  //  }
-  //},
-
   // 25501
   { SedmlDependentVariableAllowedCoreAttributes,
     "Core attributes allowed on <dependentVariable>.",
