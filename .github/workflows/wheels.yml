@@ -40,11 +40,14 @@ jobs:
       with:
         submodules: true
 
+    - name: Copy setup.py
+      run: |
+        cp src/bindings/python/setup.py .
+
     - uses: pypa/cibuildwheel@v2.3.1
       env:
           CIBW_BUILD: ${{ matrix.python_version }}
           CIBW_ARCHS_MACOS: x86_64 arm64
-          CIBW_BEFORE_BUILD: bash -c "cp src/bindings/python/setup.py ."
 
     - name: Upload wheels
       uses: actions/upload-artifact@v2
