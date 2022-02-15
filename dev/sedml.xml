@@ -434,7 +434,6 @@
         <element name="Fill" typeCode="SEDML_FILL" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false">
           <attributes>
             <attribute name="color" required="true" type="string" abstract="false"/>
-            <attribute name="secondColor" required="false" type="string" abstract="false"/>
           </attributes>
         </element>
         <element name="AppliedDimension" typeCode="SEDML_APPLIEDDIMENSION" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="false">

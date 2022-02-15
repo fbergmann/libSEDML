@@ -4605,8 +4605,7 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     "Attributes allowed on <fill>.",
     LIBSEDML_CAT_GENERAL_CONSISTENCY,
     LIBSEDML_SEV_ERROR,
-    "A <fill> object must have the required attribute 'sedml:color', and may "
-    "have the optional attribute 'sedml:secondColor'. No other attributes from "
+    "A <fill> object must have the required attribute 'sedml:color'. No other attributes from "
     "the SBML Level 3 SED-ML namespaces are permitted on a <fill> object. ",
     { "L3V1 Sedml V1 Section"
     }
@@ -4619,17 +4618,6 @@ static const sedmlErrorTableEntry sedmlErrorTable[] =
     LIBSEDML_SEV_ERROR,
     "The attribute 'sedml:color' on a <fill> must have a value of data type "
     "'string'.",
-    { "L3V1 Sedml V1 Section"
-    }
-  },
-
-  // 25405
-  { SedmlFillSecondColorMustBeString,
-    "The 'secondColor' attribute must be String.",
-    LIBSEDML_CAT_GENERAL_CONSISTENCY,
-    LIBSEDML_SEV_ERROR,
-    "The attribute 'sedml:secondColor' on a <fill> must have a value of data "
-    "type 'string'.",
     { "L3V1 Sedml V1 Section"
     }
   },

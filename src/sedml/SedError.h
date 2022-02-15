@@ -433,7 +433,6 @@ typedef enum
 , SedmlFillAllowedCoreElements      = 25402
 , SedmlFillAllowedAttributes      = 25403
 , SedmlFillColorMustBeString      = 25404
-, SedmlFillSecondColorMustBeString      = 25405
 , SedmlDependentVariableAllowedCoreAttributes      = 25501
 , SedmlDependentVariableAllowedCoreElements      = 25502
 , SedmlDependentVariableAllowedAttributes      = 25503
