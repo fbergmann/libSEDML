@@ -24,7 +24,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         path: dist/*.tar.gz
-        name: sdist
+        name: libSEDML-sdist
   
   build_wheels:
     name: Wheel on ${{ matrix.os }} for ${{ matrix.python_version }}
@@ -53,6 +53,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: wheelhouse/*.whl
+        name: libSEDML-${{ matrix.os }}
         
   upload_all:
     needs: [build_wheels, make_sdist]
@@ -61,7 +62,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: artifact
+        name: libSEDML-sdist
         path: dist
 
     - uses: pypa/gh-action-pypi-publish@v1.4.2
