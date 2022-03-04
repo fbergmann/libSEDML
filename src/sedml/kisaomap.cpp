@@ -41,6 +41,10 @@
 #include <map>
 #include <string>
 
+#include <sedml/common/libsedml-namespace.h>
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
+
 std::map<int, std::string> g_kisaomap = {
    {654, "amount rate"},
    {386, "scaled preconditioned generalized minimal residual method"},
@@ -504,3 +508,6 @@ std::map<int, std::string> g_kisaomap = {
    {258, "neighbour distance"},
    {327, "maximum discrete number"},
 };
+
+
+LIBSEDML_CPP_NAMESPACE_END
