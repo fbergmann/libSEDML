@@ -64,6 +64,18 @@ jobs:
       with:
         name: libSEDML-sdist
         path: dist
+    - uses: actions/download-artifact@v2
+      with:
+        name: libSEDML-ubuntu-20.04
+        path: dist
+    - uses: actions/download-artifact@v2
+      with:
+        name: libSEDML-macos-10.15
+        path: dist
+    - uses: actions/download-artifact@v2
+      with:
+        name: libSEDML-windows-2019
+        path: dist
 
     - uses: pypa/gh-action-pypi-publish@v1.4.2
       with:
