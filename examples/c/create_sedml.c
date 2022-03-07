@@ -96,7 +96,7 @@ main (int argc, char* argv[])
   compute = SedModel_createComputeChange(model);
   SedChange_setTarget((SedChange_t*) compute, "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id=&quot;S2&quot;]/@initialConcentration");
   variable = SedComputeChange_createVariable(compute);
-  SedVariable_setId(variable, "S2");
+  SedBase_setId((SedBase_t *)variable, "S2");
   SedVariable_setModelReference(variable, "model1");
   SedVariable_setTarget(variable, "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S2']");
   SedComputeChange_setMath(compute, SBML_parseFormula("S2 / 2"));
@@ -124,8 +124,8 @@ main (int argc, char* argv[])
   SedDataGenerator_setId(dg, "time");
   SedDataGenerator_setName(dg, "time");
   variable = SedDataGenerator_createVariable(dg);
-  SedVariable_setId(variable, "v0");
-  SedVariable_setName(variable, "time");
+  SedBase_setId((SedBase_t *)variable, "v0");
+  SedBase_setName((SedBase_t *)variable, "time");
   SedVariable_setTaskReference(variable, "task1");
   SedVariable_setSymbol(variable, "urn:sedml:symbol:time");
   SedDataGenerator_setMath(dg, SBML_parseFormula("v0"));
@@ -135,8 +135,8 @@ main (int argc, char* argv[])
   SedDataGenerator_setId(dg, "S1");
   SedDataGenerator_setName(dg, "S1");
   variable = SedDataGenerator_createVariable(dg);
-  SedVariable_setId(variable, "v1");
-  SedVariable_setName(variable, "S1");
+  SedBase_setId((SedBase_t *)variable, "v1");
+  SedBase_setName((SedBase_t *)variable, "S1");
   SedVariable_setTaskReference(variable, "task1");
   SedVariable_setTarget(variable, "/sbml:sbml/sbml:model/sbml:listOfSpecies/sbml:species[@id='S1']");
   SedDataGenerator_setMath(dg, SBML_parseFormula("v1"));
