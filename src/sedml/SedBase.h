@@ -2792,6 +2792,150 @@ LIBSEDML_EXTERN
 int 
 SedBase_unsetUserData(SedBase_t* sb);
 
+
+/**
+ * Returns the value of the "id" attribute of this SedBase_t.
+ *
+ * @param element the SedBase_t structure whose id is sought.
+ *
+ * @return the value of the "id" attribute of this SedBase_t as a pointer
+ * to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+char *
+SedBase_getId(const SedBase_t * element);
+
+
+/**
+ * Returns the value of the "name" attribute of this SedBase_t.
+ *
+ * @param element the SedBase_t structure whose name is sought.
+ *
+ * @return the value of the "name" attribute of this SedBase_t as a
+ * pointer to a string.
+ *
+ * @copydetails doc_returned_owned_char
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+char *
+SedBase_getName(const SedBase_t * element);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedBase_t's "id" attribute is
+ * set.
+ *
+ * @param element the SedBase_t structure.
+ *
+ * @return @c 1 (true) if this SedBase_t's "id" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+int
+SedBase_isSetId(const SedBase_t * element);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedBase_t's "name" attribute
+ * is set.
+ *
+ * @param element the SedBase_t structure.
+ *
+ * @return @c 1 (true) if this SedBase_t's "name" attribute has been set,
+ * otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+int
+SedBase_isSetName(const SedBase_t * element);
+
+
+/**
+ * Sets the value of the "id" attribute of this SedBase_t.
+ *
+ * @param element the SedBase_t structure.
+ *
+ * @param id const char * value of the "id" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p id = @c NULL or an empty string is equivalent
+ * to calling SedBase_unsetId().
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+int
+SedBase_setId(SedBase_t * element, const char * id);
+
+
+/**
+ * Sets the value of the "name" attribute of this SedBase_t.
+ *
+ * @param element the SedBase_t structure.
+ *
+ * @param name const char * value of the "name" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * Calling this function with @p name = @c NULL or an empty string is
+ * equivalent to calling SedBase_unsetName().
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+int
+SedBase_setName(SedBase_t * element, const char * name);
+
+
+/**
+ * Unsets the value of the "id" attribute of this SedBase_t.
+ *
+ * @param element the SedBase_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+int
+SedBase_unsetId(SedBase_t * element);
+
+
+/**
+ * Unsets the value of the "name" attribute of this SedBase_t.
+ *
+ * @param element the SedBase_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedBase_t
+ */
+LIBSEDML_EXTERN
+int
+SedBase_unsetName(SedBase_t * element);
+
 END_C_DECLS
 LIBSEDML_CPP_NAMESPACE_END
 

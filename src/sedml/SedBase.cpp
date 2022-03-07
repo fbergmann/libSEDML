@@ -3762,6 +3762,107 @@ SedBase_getAllElements(SedBase_t* sb)
   return sb->getAllElements();
 }
 
+
+/*
+ * Returns the value of the "id" attribute of this SedBase_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedBase_getId(const SedBase_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getId().empty() ? NULL : safe_strdup(ss->getId().c_str());
+}
+
+
+/*
+ * Returns the value of the "name" attribute of this SedBase_t.
+ */
+LIBSEDML_EXTERN
+char *
+SedBase_getName(const SedBase_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return ss->getName().empty() ? NULL : safe_strdup(ss->getName().c_str());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedBase_t's "id" attribute is
+ * set.
+ */
+LIBSEDML_EXTERN
+int
+SedBase_isSetId(const SedBase_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetId()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedBase_t's "name" attribute
+ * is set.
+ */
+LIBSEDML_EXTERN
+int
+SedBase_isSetName(const SedBase_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetName()) : 0;
+}
+
+
+/*
+ * Sets the value of the "id" attribute of this SedBase_t.
+ */
+LIBSEDML_EXTERN
+int
+SedBase_setId(SedBase_t * ss, const char * id)
+{
+  return (ss != NULL) ? ss->setId(id) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Sets the value of the "name" attribute of this SedBase_t.
+ */
+LIBSEDML_EXTERN
+int
+SedBase_setName(SedBase_t * ss, const char * name)
+{
+  return (ss != NULL) ? ss->setName(name) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "id" attribute of this SedBase_t.
+ */
+LIBSEDML_EXTERN
+int
+SedBase_unsetId(SedBase_t * ss)
+{
+  return (ss != NULL) ? ss->unsetId() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "name" attribute of this SedBase_t.
+ */
+LIBSEDML_EXTERN
+int
+SedBase_unsetName(SedBase_t * ss)
+{
+  return (ss != NULL) ? ss->unsetName() : LIBSEDML_INVALID_OBJECT;
+}
+
+
 /** @endcond */
 
 LIBSEDML_CPP_NAMESPACE_END
