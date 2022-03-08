@@ -27,9 +27,13 @@ if (NOT ${LIBSBML_LIBRARY_NAME}_FOUND)
           /opt/lib/cmake
           /opt/local/lib/cmake
           /sw/lib/cmake
+          ${LIBSEDML_DEPENDENCY_DIR}
+          ${LIBSEDML_DEPENDENCY_DIR}/lib/cmake
+          ${LIBSEDML_DEPENDENCY_DIR}/lib64/cmake
           ${CONAN_LIB_DIRS_LIBSBML}
           ${CONAN_LIB_DIRS_LIBSBML}/cmake
           ${CONAN_LIB_DIRS_LIBSBML}/lib/cmake
+          ${CONAN_LIB_DIRS_LIBSBML}/lib64/cmake
   )
 endif()
 
@@ -94,6 +98,7 @@ find_library(LIBSBML_LIBRARY
           $ENV{LIBSBML_DIR}
           ${LIBSEDML_DEPENDENCY_DIR}
           ${LIBSEDML_DEPENDENCY_DIR}/lib
+          ${LIBSEDML_DEPENDENCY_DIR}/lib64
           ${CONAN_LIB_DIRS_LIBSBML}
           ~/Library/Frameworks
           /Library/Frameworks
