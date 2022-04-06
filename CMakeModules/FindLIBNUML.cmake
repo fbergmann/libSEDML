@@ -16,7 +16,11 @@ if (NOT LIBNUML_SHARED)
   set(LIBNUML_LIBRARY_NAME "${LIBNUML_LIBRARY_NAME}-static")
 endif()
 
-message (STATUS "Looking for ${LIBNUML_LIBRARY_NAME}")
+message (VERBOSE "Looking for ${LIBNUML_LIBRARY_NAME}")
+
+string(TOUPPER ${PROJECT_NAME} _UPPER_PROJECT_NAME)
+set(_PROJECT_DEPENDENCY_DIR ${_UPPER_PROJECT_NAME}_DEPENDENCY_DIR)
+
 
 find_package(${LIBNUML_LIBRARY_NAME} CONFIG QUIET)
 
@@ -28,6 +32,8 @@ if (NOT ${LIBNUML_LIBRARY_NAME}_FOUND)
           /opt/local/lib/cmake
           /sw/lib/cmake
           ${CONAN_LIB_DIRS_LIBNUML}/cmake
+          ${${_PROJECT_DEPENDENCY_DIR}}/lib/cmake
+          ${${_PROJECT_DEPENDENCY_DIR}}/lib64/cmake
   )
 endif()
 
@@ -57,14 +63,26 @@ if (${LIBNUML_LIBRARY_NAME}_FOUND)
     set(LIBNUML_LIBRARY ${LIBNUML_LIBRARY} ${LIBNUML_INTERFACE_LINK_LIBRARIES})
   endif (LIBNUML_INTERFACE_LINK_LIBRARIES)
 
+  foreach (library ${LIBSBML_INTERFACE_LINK_LIBRARIES})
+  
+    string(FIND "${library}" "::" index)
+
+    if (${index} GREATER 0)
+      # found dependent library
+      string(SUBSTRING "${library}" 0 ${index} DEPENDENT_NAME)
+      message(VERBOSE "Looking for dependent library: ${DEPENDENT_NAME}")
+      find_package(${DEPENDENT_NAME})
+    endif()
+  
+  endforeach()
 
 else()
 
 find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h
     PATHS $ENV{LIBNUML_DIR}/include
           $ENV{LIBNUML_DIR}
-          ${LIBSEDML_DEPENDENCY_DIR}
-          ${LIBSEDML_DEPENDENCY_DIR}/include
+          ${${_PROJECT_DEPENDENCY_DIR}}
+          ${${_PROJECT_DEPENDENCY_DIR}}/include
           ~/Library/Frameworks
           /Library/Frameworks
           /sw/include        # Fink
@@ -89,8 +107,8 @@ find_library(LIBNUML_LIBRARY
           libnuml
     PATHS $ENV{LIBNUML_DIR}/lib
           $ENV{LIBNUML_DIR}
-          ${LIBSEDML_DEPENDENCY_DIR}
-          ${LIBSEDML_DEPENDENCY_DIR}/lib
+          ${${_PROJECT_DEPENDENCY_DIR}}
+          ${${_PROJECT_DEPENDENCY_DIR}}/lib
           ${CONAN_LIB_DIRS_LIBNUML}
           ~/Library/Frameworks
           /Library/Frameworks
@@ -112,23 +130,36 @@ if (NOT LIBNUML_LIBRARY)
 endif (NOT LIBNUML_LIBRARY)
 
   add_library(${LIBNUML_LIBRARY_NAME} UNKNOWN IMPORTED)
-  set_target_properties(${LIBNUML_LIBRARY_NAME} PROPERTIES IMPORTED_LOCATION ${LIBNUML_LIBRARY})
+  set_target_properties(${LIBNUML_LIBRARY_NAME} PROPERTIES 
+      IMPORTED_LOCATION ${LIBNUML_LIBRARY}
+      INTERFACE_INCLUDE_DIRECTORIES ${LIBNUML_INCLUDE_DIR})
 
 endif()
 
+if (LIBNUML_INCLUDE_DIR AND EXISTS "${LIBNUML_INCLUDE_DIR}/numl/common/libnuml-version.h")
+
+file(STRINGS "${LIBNUML_INCLUDE_DIR}/numl/common/libnuml-version.h" numl_version_str
+REGEX "^#define[\t ]+LIBNUML_DOTTED_VERSION[\t ]+\".*\"")
+
+string(REGEX REPLACE "^#define[\t ]+LIBNUML_DOTTED_VERSION[\t ]+\"([^\"]*)\".*" "\\1"
+LIBNUML_VERSION "${numl_version_str}")
+unset(numl_version_str)
 
 
-set(LIBNUML_FOUND "NO")
-if(LIBNUML_LIBRARY)
-    if (LIBNUML_INCLUDE_DIR)
-        SET(LIBNUML_FOUND "YES")
-    endif(LIBNUML_INCLUDE_DIR)
-endif(LIBNUML_LIBRARY)
+endif()
+
+if ((WIN32 AND NOT CYGWIN) AND LIBSBML_FOUND AND LIBSBML_LIBRARY MATCHES "static")
+  set_target_properties(${LIBNUML_LIBRARY_NAME} PROPERTIES 
+     INTERFACE_COMPILE_DEFINITIONS "LIBNUML_STATIC=1;LIBNUML_EXPORTS"
+  )
+endif()
 
 # handle the QUIETLY and REQUIRED arguments and set LIBNUML_FOUND to TRUE if 
 # all listed variables are TRUE
 include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(LIBNUML DEFAULT_MSG LIBNUML_LIBRARY_NAME LIBNUML_LIBRARY LIBNUML_INCLUDE_DIR)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(LIBNUML 
+  VERSION_VAR LIBNUML_VERSION
+  REQUIRED_VARS LIBNUML_LIBRARY_NAME LIBNUML_LIBRARY LIBNUML_INCLUDE_DIR)
 
 mark_as_advanced(LIBNUML_INCLUDE_DIR LIBNUML_LIBRARY LIBNUML_LIBRARY_NAME)
 

@@ -40,8 +40,6 @@ file(GLOB H_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.h )
 
 set(TEST_FILES ${CPP_FILES} ${C_FILES} ${H_FILES})
 
-include_directories(${LIBNUML_INCLUDE_DIR})
-include_directories(${LIBSBML_INCLUDE_DIR})
 include_directories(BEFORE ${libsedml_SOURCE_DIR}/src)
 include_directories(BEFORE ${libsedml_BINARY_DIR}/src)
 include_directories(BEFORE ${libsedml_BINARY_DIR}/src/sedml/common)
