@@ -131,7 +131,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 
 class SedBase;
 
-class LIBSBML_EXTERN SedElementFilter
+class LIBSEDML_EXTERN SedElementFilter
 {
 public:
 
