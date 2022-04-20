@@ -253,10 +253,6 @@ class CMakeBuild(build_ext):
                        + [
                            '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
                            '-DLIBSBML_DEPENDENCY_DIR=' + dep_inst_dir,
-                           '-DLIBEXPAT_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           '-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'expat'),
-                           '-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           '-DLIBZ_LIBRARY=' + zlib,
                            '-DWITH_ZLIB=OFF',
                            '-DWITH_BZIP2=OFF',
                            '-DWITH_EXPAT=ON',
@@ -278,8 +274,6 @@ class CMakeBuild(build_ext):
                        + [
                            '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
                            '-DLIBNUML_DEPENDENCY_DIR=' + dep_inst_dir,
-                           '-DLIBEXPAT_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           '-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'expat'),
                            '-DLIBNUML_SHARED_VERSION=OFF',
                            '-DLIBNUML_SKIP_SHARED_LIBRARY=ON',
                        ]
@@ -310,21 +304,13 @@ class CMakeBuild(build_ext):
         
         if DEP_DIR:
           cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR)
-          cmake_args.append('-DLIBZ_INCLUDE_DIR=' + os.path.join(DEP_DIR, 'include'))
-          zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zlib')
-          if not zlib: 
-            zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zdll')
-
-          cmake_args.append('-DLIBZ_LIBRARY=' + zlib)
 
         if is_win_32:
           if DEP_DIR32:
             cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR32)
-            cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR32, 'include'))
         elif is_win:
           if DEP_DIR64:
             cmake_args.append('-DLIBSEDML_DEPENDENCY_DIR=' + DEP_DIR64)
-            cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR64, 'include'))
 
         os.chdir(build_temp)
         self.spawn(['cmake', SRC_DIR] + cmake_args)
