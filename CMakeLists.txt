@@ -38,43 +38,7 @@
 #
 ###############################################################################
 
-cmake_minimum_required(VERSION 2.8.12)
-project (libsedml)
-
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
-set(CMAKE_CXX_EXTENSIONS NO)
-
-SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/../conan_paths.cmake)
-if (NOT EXISTS ${CONAN_PATHS})
-SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/conan_paths.cmake)
-endif()
-
-if (EXISTS ${CONAN_PATHS})
-include (${CONAN_PATHS})
-endif()
-
-set (CONAN_BUILDINFO ${CMAKE_BINARY_DIR}/../conanbuildinfo.cmake)
-if (NOT EXISTS ${CONAN_BUILDINFO})
-set (CONAN_BUILDINFO ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-endif()
-
-if (EXISTS ${CONAN_BUILDINFO})
-include(${CONAN_BUILDINFO})
-conan_basic_setup()
-endif()
-
-include (CMakeTestCCompiler)
-include (CheckCSourceCompiles)
-include (CheckCXXSourceCompiles)
-include (CheckStructHasMember)
-include (CheckLibraryExists)
-include (CheckFunctionExists)
-include (CheckCCompilerFlag)
-include (CheckCSourceRuns)
-include (CheckSymbolExists)
-include (CheckTypeSize)
-include(GNUInstallDirs)
+cmake_minimum_required(VERSION 2.8.12...3.19.0)
 
 ###############################################################################
 #
@@ -108,6 +72,42 @@ set(LIBSEDML_VERSION "${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBS
 set(LIBSEDML_DOTTED_VERSION ${LIBSEDML_VERSION})
 set(PACKAGE_NAME "libSEDML")
 
+project (libsedml VERSION "${LIBSEDML_VERSION_MAJOR}.${LIBSEDML_VERSION_MINOR}.${LIBSEDML_VERSION_PATCH}"
+                  LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED YES)
+set(CMAKE_CXX_EXTENSIONS NO)
+
+SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/../conan_paths.cmake)
+if (NOT EXISTS ${CONAN_PATHS})
+SET (CONAN_PATHS ${CMAKE_BINARY_DIR}/conan_paths.cmake)
+endif()
+
+if (EXISTS ${CONAN_PATHS})
+include (${CONAN_PATHS})
+endif()
+
+set (CONAN_BUILDINFO ${CMAKE_BINARY_DIR}/../conanbuildinfo.cmake)
+if (NOT EXISTS ${CONAN_BUILDINFO})
+set (CONAN_BUILDINFO ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+endif()
+
+if (EXISTS ${CONAN_BUILDINFO})
+include(${CONAN_BUILDINFO})
+conan_basic_setup()
+endif()
+
+include (CMakeTestCXXCompiler)
+include (CheckCXXSourceCompiles)
+include (CheckStructHasMember)
+include (CheckLibraryExists)
+include (CheckFunctionExists)
+include (CheckCCompilerFlag)
+include (CheckCSourceRuns)
+include (CheckSymbolExists)
+include (CheckTypeSize)
+include(GNUInstallDirs)
 
 set(PACKAGE_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/cmake" CACHE PATH
     "Path into which the cmake config files should be installed")
@@ -250,6 +250,9 @@ if (LIBSEDML_DEPENDENCY_DIR AND EXISTS ${LIBSEDML_DEPENDENCY_DIR})
 endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
+# install libsedml find module so it can be found easily later
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/FindLIBSEDML.cmake" 
+        DESTINATION share/cmake/Modules)
 
 
 ###############################################################################
@@ -318,7 +321,7 @@ if(UNIX OR CYGWIN OR MINGW)
     set( MISC_PREFIX "${CMAKE_INSTALL_DATADIR}/libsedml/" )
     set(LIBSEDML_LIBRARY sedml)
 else()
-    set( MISC_PREFIX "." )
+    set( MISC_PREFIX "./" )
     set(PATH_SEP "\\")
     set(FILE_SEP ";")
     if(MINGW)
@@ -336,25 +339,6 @@ find_package(LIBSBML REQUIRED)
 find_package(LIBNUML REQUIRED)
 
 SET(LIBSEDML_LIBS ${LIBNUML_LIBRARY_NAME} ${LIBSBML_LIBRARY})
-
-set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
-if (WIN32 AND NOT CYGWIN)
-  if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
-    set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
-  else()
-    option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
-  endif()
-endif()
-
-set(LIBNUML_STATIC OFF CACHE BOOL "is libnuml statically compiled")
-if (WIN32 AND NOT CYGWIN)
-  if (LIBNUML_LIBRARY AND LIBNUML_LIBRARY MATCHES ".*-static*$")
-    set(LIBNUML_STATIC ON CACHE BOOL "is libnuml statically compiled")
-  else()
-    option(LIBNUML_STATIC "The LibNUML library was statically compiled" ON)
-  endif()
-endif()
-
 
 
 ###############################################################################
@@ -463,7 +447,7 @@ mark_as_advanced(CMAKE_INSTALL_LIBDIR)
 #
 
 set(USING_INTEL)
-if (WIN32 AND CMAKE_C_COMPILER AND ${CMAKE_C_COMPILER} MATCHES ".*icl.*$")
+if (WIN32 AND CMAKE_C_COMPILER AND CMAKE_C_COMPILER MATCHES ".*icl.*$")
   message(STATUS "Detected Intel Compiler")
   set(USING_INTEL TRUE)
 endif ()
@@ -536,23 +520,7 @@ else(UNIX)
     
     add_definitions(-DWIN32)
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
-
-  if (LIBSBML_STATIC)
-      add_definitions(-DLIBSBML_STATIC -DLIBLAX_STATIC)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_STATIC -DLIBLAX_STATIC")
-  else()
-      add_definitions(-DLIBSBML_EXPORTS -DLIBLAX_EXPORTS)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBSBML_EXPORTS -DLIBLAX_EXPORTS")
-  endif()
-
-  if (LIBNUML_STATIC)
-      add_definitions(-DLIBNUML_STATIC)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBNUML_STATIC")
-  else()
-      add_definitions(-DLIBNUML_EXPORTS)
-      set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLIBNUML_EXPORTS")
-  endif()
-  
+ 
     if(MSVC OR USING_INTEL)
       add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_NONSTDC_NO_DEPRECATE)
       set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -D_CRT_SECURE_NO_WARNINGS")
@@ -569,6 +537,7 @@ else(UNIX)
               endif(${flag_var} MATCHES "/MD")
           endforeach(flag_var)
       add_definitions( -D_MT)
+      set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
       endif(WITH_STATIC_RUNTIME)
 
       # CMake no longer creates PDB files for static libraries after 2.8.11

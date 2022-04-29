@@ -37,6 +37,7 @@
 
 #include <sedml/SedCurve.h>
 #include <sedml/SedShadedArea.h>
+#include <sedml/SedPlot.h>
 
 
 using namespace std;
@@ -157,7 +158,40 @@ SedAbstractCurve::~SedAbstractCurve()
 bool
 SedAbstractCurve::getLogX() const
 {
-  return mLogX;
+    if (getVersion() < 4)
+    {
+        return mLogX;
+    }
+    if (isSetLogX())
+    {
+        return mLogX;
+    }
+    const SedBase* parent = getParentSedObject();
+    if (parent) 
+    {
+        parent = parent->getParentSedObject();
+    }
+    if (parent)
+    {
+        if (parent->getTypeCode() == SEDML_OUTPUT_PLOT2D || 
+            parent->getTypeCode() == SEDML_OUTPUT_PLOT3D)
+        {
+            const SedPlot* plot = static_cast<const SedPlot*>(parent);
+            if (plot)
+            {
+                const SedAxis* axis = plot->getXAxis();
+                if (axis && axis->isSetType())
+                {
+                    return axis->getType() == SEDML_AXISTYPE_LOG10;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return mLogX;
 }
 
 

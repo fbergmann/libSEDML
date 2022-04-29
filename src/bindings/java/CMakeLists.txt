@@ -122,8 +122,6 @@ add_custom_target(binding_java_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libs
   
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
-include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 add_definitions(-DLIBSEDML_STATIC)
@@ -156,6 +154,10 @@ install(TARGETS binding_java_lib DESTINATION ${JAVA_PACKAGE_BIN_INSTALL_DIR} )
 
 target_link_libraries(binding_java_lib ${LIBSEDML_LIBRARY}-static )
 
+set(JAVA_COMPATIBILITY "" CACHE STRING
+  "Specify the source and target compatibility for the libsbml Java bindings (for example 1.7). Leave empty to remove the parameter altogether.")
+
+
 ADD_CUSTOM_COMMAND(	
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libsedmlj.jar
   COMMAND "${CMAKE_COMMAND}"
@@ -167,6 +169,7 @@ ADD_CUSTOM_COMMAND(
      -DSRC_DIRECTORY=\"${CMAKE_CURRENT_SOURCE_DIR}\"
      -DFILE_SEP=\"${FILE_SEP}\"
      -DPATH_SEP=${PATH_SEP}
+     -DCOMPATIBILIY=${JAVA_COMPATIBILITY}
      -P "${CMAKE_CURRENT_SOURCE_DIR}/compile-native-files.cmake"
   
   WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"

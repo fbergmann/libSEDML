@@ -41,40 +41,45 @@ file(GLOB_RECURSE SOURCE_FILES RELATIVE ${BIN_DIRECTORY} ${BIN_DIRECTORY}/java-f
 # convert paths
 set(NATIVE_FILES)
 foreach(javaFile ${SOURCE_FILES})
-	file(TO_NATIVE_PATH ${javaFile} temp)
-	set(NATIVE_FILES ${NATIVE_FILES} ${temp})
+  file(TO_NATIVE_PATH ${javaFile} temp)
+  set(NATIVE_FILES ${NATIVE_FILES} ${temp})
 endforeach()
 
 # delete file if it exists
 if (EXISTS ${BIN_DIRECTORY}/libsedml.jar)
-	file(REMOVE ${BIN_DIRECTORY}/libsedml.jar)	
+  file(REMOVE ${BIN_DIRECTORY}/libsedml.jar)  
 endif()
+
+SET (COMPATIBILITY_ARGS)
+if (COMPATIBILIY)
+SET (COMPATIBILITY_ARGS ${COMPATIBILITY_ARGS} -source ${COMPATIBILIY} -target ${COMPATIBILIY})
+endif()
+
 
 # compile files
 execute_process(
-	COMMAND "${Java_JAVAC_EXECUTABLE}"
-		 -source 1.6
-		 -target 1.6
-		 -d java-files
-		 ${NATIVE_FILES}	
-	WORKING_DIRECTORY "${BIN_DIRECTORY}"
+  COMMAND "${Java_JAVAC_EXECUTABLE}"
+     ${COMPATIBILITY_ARGS}
+     -d java-files
+     ${NATIVE_FILES}  
+  WORKING_DIRECTORY "${BIN_DIRECTORY}"
 )
 
 # enumerate class files
 file(GLOB_RECURSE CLASS_FILES RELATIVE ${BIN_DIRECTORY}/java-files ${BIN_DIRECTORY}/java-files/org/sedml/libsedml/*.class)
 set(NATIVE_CLASS_FILES)
 foreach(classFile ${CLASS_FILES})
-	file(TO_NATIVE_PATH ${classFile} temp)
-	set(NATIVE_CLASS_FILES ${NATIVE_CLASS_FILES} ${temp})
+  file(TO_NATIVE_PATH ${classFile} temp)
+  set(NATIVE_CLASS_FILES ${NATIVE_CLASS_FILES} ${temp})
 endforeach()
 
 # create jar
 execute_process(
-	COMMAND "${Java_JAR_EXECUTABLE}"
-		 -cvfm ..${PATH_SEP}libsedmlj.jar
-		 ../Manifest.txt
-		 ${NATIVE_CLASS_FILES}	
-	WORKING_DIRECTORY "${BIN_DIRECTORY}/java-files"
+  COMMAND "${Java_JAR_EXECUTABLE}"
+     -cvfm ..${PATH_SEP}libsedmlj.jar
+     ../Manifest.txt
+     ${NATIVE_CLASS_FILES}  
+  WORKING_DIRECTORY "${BIN_DIRECTORY}/java-files"
 )
 
 # # print variables for debug purposes 

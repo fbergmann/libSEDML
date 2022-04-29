@@ -145,8 +145,6 @@ file(APPEND "${CMAKE_CURRENT_BINARY_DIR}/LibSEDML.cpp" "\n\n")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
-include_directories(${LIBSBML_INCLUDE_DIR})
-include_directories(BEFORE ${LIBNUML_INCLUDE_DIR})
 include_directories(BEFORE ${CMAKE_CURRENT_SOURCE_DIR}/../../)
 include_directories(BEFORE ${CMAKE_CURRENT_BINARY_DIR}/../../)
 include_directories(BEFORE ${PERL_INCLUDE_PATH})

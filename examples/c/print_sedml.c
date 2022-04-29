@@ -35,6 +35,7 @@
 
 #include <stdio.h>
 #include <sedml/SedTypes.h>
+#include <sedml/SedTypeCodes.h>
 #include <sbml/math/FormulaFormatter.h>
 
 
@@ -112,7 +113,7 @@ main (int argc, char* argv[])
   {
     SedAbstractTask_t* abstractTask = SedDocument_getTask(doc, i);
     int typeCode = SedBase_getTypeCode((SedBase_t*)abstractTask);
-    if (typeCode == SEDML_TASK_SIMPLEREPEATEDTASK || typeCode == SEDML_TASK)
+    if (typeCode == SEDML_TASK)
     {
       SedTask_t* current =  (SedTask_t*)SedDocument_getTask(doc,i);
       printf("\tTask id=%s  model=%s sim=%s\n", 

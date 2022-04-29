@@ -32,13 +32,14 @@
 #
 ###############################################################################
 
+OPTION(BUILD_TESTS "Build unit tests" ON)
+if(BUILD_TESTS)
+
 file(GLOB CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp )
 file(GLOB H_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.h )
 
 set(TEST_FILES ${CPP_FILES} ${C_FILES} ${H_FILES})
 
-include_directories(${LIBNUML_INCLUDE_DIR})
-include_directories(${LIBSBML_INCLUDE_DIR})
 include_directories(BEFORE ${libsedml_SOURCE_DIR}/src)
 include_directories(BEFORE ${libsedml_BINARY_DIR}/src)
 include_directories(BEFORE ${libsedml_BINARY_DIR}/src/sedml/common)
@@ -61,3 +62,5 @@ target_link_libraries(test_sedml ${LIBSEDML_LIBRARY}-static ${EXTRA_LIBS})
 add_test(NAME test_sedml_run COMMAND "$<TARGET_FILE:test_sedml>")
 set_tests_properties(test_sedml_run PROPERTIES ENVIRONMENT 
 	"srcdir=${CMAKE_CURRENT_SOURCE_DIR}")
+  
+endif(BUILD_TESTS)
