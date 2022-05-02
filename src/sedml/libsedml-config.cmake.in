@@ -1,0 +1,29 @@
+get_filename_component(LIBSEDML_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(CMakeFindDependencyMacro)
+
+list(APPEND CMAKE_MODULE_PATH "@CMAKE_INSTALL_PREFIX@/share/cmake/Modules")
+
+set(LIBNUML_LIBRARY_NAME @LIBNUML_LIBRARY_NAME@)
+find_dependency(LIBNUML)
+
+set(LIBSBML_LIBRARY_NAME @LIBSBML_LIBRARY_NAME@)
+find_dependency(LIBSBML)
+
+foreach (library @EXTRA_LIBS@)
+
+  string(FIND "${library}" "::" index)
+
+  if (${index} GREATER 0)
+    # found dependent library
+    string(SUBSTRING "${library}" 0 ${index} DEPENDENT_NAME)
+    message(VERBOSE "Looking for dependent library: ${DEPENDENT_NAME}")
+    find_dependency(${DEPENDENT_NAME})
+  endif()
+
+endforeach()
+
+if(NOT TARGET @LIBSEDML_LIBRARY@)
+    include("${LIBSEDML_CMAKE_DIR}/@LIBSEDML_LIBRARY@-targets.cmake")
+endif()
+
+set(LIBSEDML_LIBRARIES @LIBSEDML_LIBRARY@)
