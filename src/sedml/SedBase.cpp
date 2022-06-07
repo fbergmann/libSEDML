@@ -2334,7 +2334,7 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
         if ( !stream.isGood() ) break;
 
-        checkSedListOfPopulated(object);
+        // checkSedListOfPopulated(object);
       }
       else if ( !( readOtherXML(stream)
                    || readAnnotation(stream)

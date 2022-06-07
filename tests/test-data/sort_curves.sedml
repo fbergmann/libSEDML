@@ -20,6 +20,7 @@
       <math xmlns="http://www.w3.org/1998/Math/MathML">
         <ci> task0_____time </ci>
       </math>
+      <listOfParameters/>
       <listOfVariables>
         <variable id="task0_____time" symbol="urn:sedml:symbol:time" taskReference="task0" modelReference="model0"/>
       </listOfVariables>
