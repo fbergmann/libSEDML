@@ -119,7 +119,7 @@ set(PROJECT_VERSION ${LIBSEDML_VERSION})
 
 # add make dist and make check target as they are already familiar for
 # everyone using the gnumake build
-add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
+# add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
 
 ###############################################################################
 #
