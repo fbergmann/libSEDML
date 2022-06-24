@@ -117,10 +117,6 @@ set(PACKAGE_CONFIG_DIR "${CMAKE_INSTALL_LIBDIR}/cmake" CACHE PATH
 # src/CMakeLists.txt
 set(PROJECT_VERSION ${LIBSEDML_VERSION})
 
-# add make dist and make check target as they are already familiar for
-# everyone using the gnumake build
-# add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
-
 ###############################################################################
 #
 # The next lines configure the parameters for packaging the binaries.
