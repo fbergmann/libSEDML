@@ -331,8 +331,12 @@ endif()
 #
 # Locate libsbml
 #
-find_package(LIBSBML REQUIRED)
-find_package(LIBNUML REQUIRED)
+if(NOT TARGET libsbml-static)
+   find_package(LIBSBML REQUIRED)
+endif()
+if(NOT TARGET libnuml)
+   find_package(LIBNUML REQUIRED)
+endif()
 
 SET(LIBSEDML_LIBS ${LIBNUML_LIBRARY_NAME} ${LIBSBML_LIBRARY})
 
@@ -387,10 +391,6 @@ if(WITH_ZLIB)
         if(UNIX)
             message(WARNING "The zlib library does not appear to be valid because it is missing certain required symbols. Please check that ${LIBZ_LIBRARY} is the zlib library. For details about the error, please see ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
         endif()
-    endif()
-
-    if(NOT EXISTS "${LIBZ_INCLUDE_DIR}/zlib.h")
-        message(FATAL_ERROR "The zlib include directory does not appear to be valid. It should contain the file zlib.h, but it does not.")
     endif()
 
 endif(WITH_ZLIB)
