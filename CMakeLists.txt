@@ -179,6 +179,12 @@ option(WITH_R        "Generate R language bindings"       OFF)
 option(WITH_OCTAVE   "Generate Octave language bindings." OFF)
 option(WITH_MATLAB   "Generate MATLAB language bindings." OFF)
 
+option(FIND_LIBSBML  "Search for the libsbml library (must set variables manually if off)." ON)
+mark_as_advanced(FIND_LIBSBML)
+option(FIND_LIBNUML  "Search for the libnuml library (must set variables manually if off)." ON)
+mark_as_advanced(FIND_LIBNUML)
+
+
 # Add an option to compile with all warnings shown
 option(WITH_WALL     "Compile with -Wall, so that the compiler will display all warnings." OFF)
 mark_as_advanced(WITH_WALL)
@@ -331,10 +337,10 @@ endif()
 #
 # Locate libsbml
 #
-if(NOT TARGET libsbml-static)
+if(FIND_LIBSBML)
    find_package(LIBSBML REQUIRED)
 endif()
-if(NOT TARGET libnuml)
+if(FIND_LIBNUML)
    find_package(LIBNUML REQUIRED)
 endif()
 
