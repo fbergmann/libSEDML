@@ -7,7 +7,9 @@ set(LIBNUML_LIBRARY_NAME @LIBNUML_LIBRARY_NAME@)
 find_dependency(LIBNUML)
 
 set(LIBSBML_LIBRARY_NAME @LIBSBML_LIBRARY_NAME@)
-find_dependency(LIBSBML)
+if (FIND_LIBSBML)
+  find_dependency(LIBSBML)
+endif()
 
 foreach (library @EXTRA_LIBS@)
 
