@@ -20,7 +20,7 @@
     </dataDescription>
   </listOfDataDescriptions>
   <listOfModels>
-    <model id="model1" language="urn:sedml:sbml" source="file.xml"/>
+    <model id="model1" language="urn:sedml:language:sbml" source="file.xml"/>
   </listOfModels>
   <listOfTasks>
     <parameterEstimationTask id="pe1">

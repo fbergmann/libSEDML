@@ -74,13 +74,13 @@ main (int argc, char* argv[])
   model = SedDocument_createModel(doc);
   SedModel_setId(model, "model1");
   SedModel_setSource(model, "file.xml");
-  SedModel_setLanguage(model, "urn:sedml:sbml");
+  SedModel_setLanguage(model, "urn:sedml:language:sbml");
 
   /* create a second model modifying a variable of that other sbml file */
   model = SedDocument_createModel(doc);
   SedModel_setId(model, "model2");
   SedModel_setSource(model, "model1");
-  SedModel_setLanguage(model, "urn:sedml:sbml");
+  SedModel_setLanguage(model, "urn:sedml:language:sbml");
 
   /* change a paramerter 'k' to 0.1 */
   change = SedModel_createChangeAttribute(model);

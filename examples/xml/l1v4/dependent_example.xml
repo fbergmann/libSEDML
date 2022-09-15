@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sedML xmlns="http://sed-ml.org/sed-ml/level1/version4" level="1" version="4">
   <listOfModels>
-    <model id="model1" language="urn:sedml:sbml" source="oscli.xml"/>
+    <model id="model1" language="urn:sedml:language:sbml" source="oscli.xml"/>
   </listOfModels>
   <listOfSimulations>
     <uniformTimeCourse id="sim1" initialTime="0" outputStartTime="0" outputEndTime="10" numberOfPoints="1000">

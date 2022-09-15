@@ -97,13 +97,13 @@ main (int argc, char* argv[])
     SedModel *model = doc.createModel();
     model->setId("model1");
     model->setSource("file.xml");
-    model->setLanguage("urn:sedml:sbml");
+    model->setLanguage("urn:sedml:language:sbml");
 
     // create a second model modifying a variable of that other sbml file
     model = doc.createModel();
     model->setId("model2");
     model->setSource("model1");
-    model->setLanguage("urn:sedml:sbml");
+    model->setLanguage("urn:sedml:language:sbml");
 
     // change a paramerter 'k' to 0.1
     SedChangeAttribute* change = model->createChangeAttribute();
