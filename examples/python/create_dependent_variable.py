@@ -10,7 +10,7 @@ def create_dependent_variable_example(file_name):
     model = doc.createModel()
     model.setId("model1")
     model.setSource("oscli.xml")
-    model.setLanguage("urn:sedml:sbml")
+    model.setLanguage("urn:sedml:language:sbml")
 
     # create simulation
     tc = doc.createUniformTimeCourse()
