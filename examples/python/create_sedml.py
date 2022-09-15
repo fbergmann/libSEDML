@@ -60,7 +60,7 @@ def main (args):
   model = doc.createModel()
   model.setId("model2")
   model.setSource("model1")
-  model.setLanguage("urn:sedml:sbml")
+  model.setLanguage("urn:sedml:language:sbml")
 
   # change a paramerter 'k' to 0.1
   change = model.createChangeAttribute()
