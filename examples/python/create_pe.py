@@ -153,7 +153,7 @@ def create_pe_example(file_name):
     model = doc.createModel()
     model.setId("model1")
     model.setSource("file.xml")
-    model.setLanguage("urn:sedml:sbml")
+    model.setLanguage("urn:sedml:language:sbml")
 
     create_data_description(doc)
 
