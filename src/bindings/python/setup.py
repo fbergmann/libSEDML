@@ -43,7 +43,18 @@ def get_python_include():
   dir = dir.replace('/local', '/')
   if exists(dir):
     return dir
-  return ''
+  return sysconfig.get_config_vars()['INCLUDEPY']
+
+def get_win_python_lib():
+  vars = sysconfig.get_config_vars()
+  for k in ['prefix', 'installed_base', 'installed_platbase']:
+    if k not in vars:
+      continue
+    path = os.path.join(vars[k], 'libs', 'python' + vars['py_version_nodot'] + '.lib')
+    if os.path.exists(path):
+      return path
+  return None
+
 
 def prepend_variables(args, variables):
   for var in variables: 
@@ -299,6 +310,10 @@ class CMakeBuild(build_ext):
 
         if not is_win:
           libsedml_args.append('-DPYTHON_USE_DYNAMIC_LOOKUP=ON')
+        else:
+          lib_path = get_win_python_lib()
+          if lib_path is not None:
+            libsedml_args.append('-DPYTHON_LIBRARY={0}'.format(lib_path))
 
         cmake_args = cmake_args + libsedml_args
         
