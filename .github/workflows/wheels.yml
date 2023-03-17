@@ -19,6 +19,7 @@ jobs:
     - name: Build SDist
       run: |
         cp src/bindings/python/setup.py .
+        cp src/bindings/python/MANIFEST.in .
         pipx run build --sdist
 
     - uses: actions/upload-artifact@v2
