@@ -1,0 +1,9 @@
+graft CMakeModules
+graft src
+graft submodules
+graft tests
+include VERSION.txt
+include CMakeLists.txt
+
+global-exclude *.py[cod]
+global-exclude .git
