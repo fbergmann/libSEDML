@@ -40,6 +40,9 @@
  
 #include <map>
 #include <string>
+#include "sedml/common/libsedml-version.h"
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
 
 std::map<int, std::string> g_kisaomap = {
    {0, "modelling and simulation algorithm"},
@@ -564,3 +567,5 @@ std::map<int, std::string> g_kisaomap = {
    {858, "variance ignoring NaN"},
    {859, "variance"},
 };
+LIBSEDML_CPP_NAMESPACE_END
+

@@ -53,6 +53,9 @@ kcpp.write("""
  
 #include <map>
 #include <string>
+#include "sedml/common/libsedml-version.h"
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
 
 std::map<int, std::string> g_kisaomap = {
 """)
@@ -75,5 +78,5 @@ for (k_id, k_name) in allterms:
     kcpp.write('   {' + str(k_id) + ', "' + k_name + '"},\n')
     print(k_id, k_name)
         
-kcpp.write("};\n")
+kcpp.write("};\nLIBSEDML_CPP_NAMESPACE_END\n\n")
 kcpp.close()
