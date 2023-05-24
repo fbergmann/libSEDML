@@ -65,6 +65,9 @@ with open('KISAO.csv', newline='') as csvfile:
             continue
         k_id = int(row[0].split("_")[-1])
         k_name = row[1]
+        if '"' in k_name:
+            k_name = k_name.replace('"', "'")
+            k_name = k_name.replace("\\", "")
         allterms.append((k_id, k_name))
 
 allterms.sort()
