@@ -36,7 +36,7 @@
         </element>
         <element name="Change" typeCode="SEDML_CHANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
           <attributes>
-            <attribute name="target" required="true" type="string" abstract="false"/>
+            <attribute name="target" required="false" type="string" abstract="false"/>
             <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
           </attributes>
           <concretes>
@@ -120,8 +120,8 @@
         </element>
         <element name="Task" typeCode="SEDML_TASK" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false" elementName="task">
           <attributes>
-            <attribute name="modelReference" required="true" type="SIdRef" element="Model" abstract="false"/>
-            <attribute name="simulationReference" required="true" type="SIdRef" element="Simulation" abstract="false"/>
+            <attribute name="modelReference" required="false" type="SIdRef" element="Model" abstract="false"/>
+            <attribute name="simulationReference" required="false" type="SIdRef" element="Simulation" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="task" element="Task" minNumChildren="0" maxNumChildren="0"/>
