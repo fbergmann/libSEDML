@@ -37,6 +37,7 @@
         <element name="Change" typeCode="SEDML_CHANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
           <attributes>
             <attribute name="target" required="true" type="string" abstract="false"/>
+            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="addXML" element="AddXML" minNumChildren="0" maxNumChildren="0"/>
@@ -109,6 +110,7 @@
         <element name="AbstractTask" typeCode="SEDML_SEDML_ABSTRACTTASK" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfTasks" listOfClassName="SedListOfTasks">
           <attributes>
             <attribute name="id" required="true" type="SId" abstract="false"/>
+            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
           </attributes>
           <concretes>
             <concrete name="task" element="Task" minNumChildren="0" maxNumChildren="0"/>
@@ -134,6 +136,9 @@
           </attributes>
         </element>
         <element name="Output" typeCode="SEDML_OUTPUT" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true" listOfName="listOfOutputs">
+          <attributes>
+            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
+          </attributes>
           <concretes>
             <concrete name="report" element="Report" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="plot2D" element="Plot2D" minNumChildren="0" maxNumChildren="0"/>
@@ -330,7 +335,6 @@
         </element>
         <element name="ParameterEstimationTask" typeCode="SEDML_TASK_PARAMETER_ESTIMATION" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="AbstractTask" abstract="false">
           <attributes>
-            <attribute name="algorithm" required="true" type="element" element="Algorithm" abstract="false"/>
             <attribute name="objective" required="true" type="element" element="Objective" abstract="true"/>
             <attribute name="adjustableParameter" required="true" type="lo_element" element="AdjustableParameter" abstract="false"/>
             <attribute name="fitExperiment" required="true" type="lo_element" element="FitExperiment" abstract="false"/>
