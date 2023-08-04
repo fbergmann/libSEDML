@@ -1,0 +1,12 @@
+<map id="SedOutput" name="SedOutput">
+<area shape="rect" id="node1" title=" " alt="" coords="251,80,335,107"/>
+<area shape="rect" id="node3" href="$d2/d8e/classSedFigure.html" title=" " alt="" coords="5,155,87,181"/>
+<area shape="rect" id="node4" href="$d3/d9d/classSedParameterEstimationReport.html" title=" " alt="" coords="111,155,315,181"/>
+<area shape="rect" id="node5" href="$d5/d21/classSedPlot.html" title=" " alt="" coords="339,155,407,181"/>
+<area shape="rect" id="node10" href="$d3/d01/classSedReport.html" title=" " alt="" coords="431,155,514,181"/>
+<area shape="rect" id="node2" href="$d9/dfe/classSedBase.html" title=" " alt="" coords="255,5,330,32"/>
+<area shape="rect" id="node6" href="$df/d64/classSedParameterEstimationResultPlot.html" title=" " alt="" coords="26,229,253,256"/>
+<area shape="rect" id="node7" href="$d2/d96/classSedPlot2D.html" title=" " alt="" coords="277,229,361,256"/>
+<area shape="rect" id="node8" href="$d8/d57/classSedPlot3D.html" title=" " alt="" coords="385,229,469,256"/>
+<area shape="rect" id="node9" href="$d9/d37/classSedWaterfallPlot.html" title=" " alt="" coords="493,229,612,256"/>
+</map>

@@ -1,0 +1,26 @@
+var classSedLine =
+[
+    [ "SedLine", "da/d91/classSedLine.html#af74f95b813616ee803557997a6bef406", null ],
+    [ "SedLine", "da/d91/classSedLine.html#a658a8f597d0509d0efccedf2a6f8ccad", null ],
+    [ "SedLine", "da/d91/classSedLine.html#ae12c919c9aa5627115f9dba13f8b4d26", null ],
+    [ "~SedLine", "da/d91/classSedLine.html#a6f165df90fb05840ad9edbe60dc15470", null ],
+    [ "clone", "da/d91/classSedLine.html#aaed1e86dfadd070b36cd4786713d8b36", null ],
+    [ "getColor", "da/d91/classSedLine.html#a77a7e404abb9987a50c9d5814042b61f", null ],
+    [ "getElementName", "da/d91/classSedLine.html#ab983e3114d4dfcb06e3b03b680ebdcd1", null ],
+    [ "getThickness", "da/d91/classSedLine.html#ae5c0310bbd502fc24090a945d42c3960", null ],
+    [ "getType", "da/d91/classSedLine.html#a7ccb30fe2781eb4c1e0e3b24f78716c5", null ],
+    [ "getTypeAsString", "da/d91/classSedLine.html#a4cc5cbbaac5e72cdf8f55b8f0dca179c", null ],
+    [ "getTypeCode", "da/d91/classSedLine.html#aca3e820b9c49232369ca57951608562e", null ],
+    [ "hasRequiredAttributes", "da/d91/classSedLine.html#a1c99c487ba4d740a4dd8e6f8bce26f74", null ],
+    [ "isSetColor", "da/d91/classSedLine.html#a6857a320c0ba64fe80c9bd0bac67bb03", null ],
+    [ "isSetThickness", "da/d91/classSedLine.html#adb7d455e865493ec791e41bb8ca11025", null ],
+    [ "isSetType", "da/d91/classSedLine.html#a46db57dd9b8b9d1a71bbcd317018d9ca", null ],
+    [ "operator=", "da/d91/classSedLine.html#a500dcc9287614db56ad4c2c41a2581a5", null ],
+    [ "setColor", "da/d91/classSedLine.html#a824aa10bbd0b31b637a19ca7598ec96c", null ],
+    [ "setThickness", "da/d91/classSedLine.html#ae11f49041bb654ad87d436d9a439106c", null ],
+    [ "setType", "da/d91/classSedLine.html#a06e0e375fa2b1399edfc38db39651e11", null ],
+    [ "setType", "da/d91/classSedLine.html#a5d059e73012fbd0953076b973d553863", null ],
+    [ "unsetColor", "da/d91/classSedLine.html#a8dd42d78a1052cbf5de29e2f9c0b446b", null ],
+    [ "unsetThickness", "da/d91/classSedLine.html#a0a49bc27000353b0289e1372592a6bed", null ],
+    [ "unsetType", "da/d91/classSedLine.html#ab36ab4b2c44836be7d6aa79e4648f632", null ]
+];

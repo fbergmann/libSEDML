@@ -1,0 +1,26 @@
+var classSedBounds =
+[
+    [ "SedBounds", "d2/d5d/classSedBounds.html#a989446d955b75c28e391a7f900faaf80", null ],
+    [ "SedBounds", "d2/d5d/classSedBounds.html#a6f2141054f6d136c32c5130bfe5f2af3", null ],
+    [ "SedBounds", "d2/d5d/classSedBounds.html#a624fee17ba10b829dc40aff8f76532a5", null ],
+    [ "~SedBounds", "d2/d5d/classSedBounds.html#a0ca9516349d28eb5413fcfcce9de8c4e", null ],
+    [ "clone", "d2/d5d/classSedBounds.html#a202a5c6fda0ee48cb6c0829f8c6f41cd", null ],
+    [ "getElementName", "d2/d5d/classSedBounds.html#ab02b5bb3360f32f90607f0b212b169b0", null ],
+    [ "getLowerBound", "d2/d5d/classSedBounds.html#ac32bd2635a9e0834e6a469c468250889", null ],
+    [ "getScale", "d2/d5d/classSedBounds.html#adcea2056f461d87ec5988c2626a57634", null ],
+    [ "getScaleAsString", "d2/d5d/classSedBounds.html#a027664be216c0e16bc08cf9d9b89e6db", null ],
+    [ "getTypeCode", "d2/d5d/classSedBounds.html#ab7f5dfd17c080ee0cec456962fd0033a", null ],
+    [ "getUpperBound", "d2/d5d/classSedBounds.html#ae107d4e34ba9f66883c4f4df858b78ed", null ],
+    [ "hasRequiredAttributes", "d2/d5d/classSedBounds.html#abd6bf43ba8af7cf27b72cb63eac62194", null ],
+    [ "isSetLowerBound", "d2/d5d/classSedBounds.html#a996cc68b7a84ca00e191b1c314e0b3fe", null ],
+    [ "isSetScale", "d2/d5d/classSedBounds.html#a51b3f5bd7df4d575e33f2b1ce490fa89", null ],
+    [ "isSetUpperBound", "d2/d5d/classSedBounds.html#a5e767cc89e81330a1b8d299fd56a1198", null ],
+    [ "operator=", "d2/d5d/classSedBounds.html#a4250b5c31b95cb3a418a7e50154a91a0", null ],
+    [ "setLowerBound", "d2/d5d/classSedBounds.html#a018f4e7c317990733ed4070da1ba8f18", null ],
+    [ "setScale", "d2/d5d/classSedBounds.html#a4cc78838eafed0f5c7330e34fe7cba2b", null ],
+    [ "setScale", "d2/d5d/classSedBounds.html#a071ce8355924242007c613ca62d5202f", null ],
+    [ "setUpperBound", "d2/d5d/classSedBounds.html#a45c0d0fc2e75f9e5580a384eff29e558", null ],
+    [ "unsetLowerBound", "d2/d5d/classSedBounds.html#acb3646af991f36d0838007eb49dcb0b8", null ],
+    [ "unsetScale", "d2/d5d/classSedBounds.html#ab3eb6b94f2362e4200583672483595c0", null ],
+    [ "unsetUpperBound", "d2/d5d/classSedBounds.html#ad7757941a7806e610f62c70b9431f18d", null ]
+];

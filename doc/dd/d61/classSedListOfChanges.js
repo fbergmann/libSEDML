@@ -1,0 +1,25 @@
+var classSedListOfChanges =
+[
+    [ "SedListOfChanges", "dd/d61/classSedListOfChanges.html#aecf61b6426f22d20a89eada2aa88f722", null ],
+    [ "SedListOfChanges", "dd/d61/classSedListOfChanges.html#a9b351999f4a744caa41d46087009a251", null ],
+    [ "SedListOfChanges", "dd/d61/classSedListOfChanges.html#a9b59fd9d042496c6fe47e45981716ee9", null ],
+    [ "~SedListOfChanges", "dd/d61/classSedListOfChanges.html#af0e13f7c907e77d8efce49ba22f16711", null ],
+    [ "addChange", "dd/d61/classSedListOfChanges.html#a5a4f204b242f9a63d515fafde32c5509", null ],
+    [ "clone", "dd/d61/classSedListOfChanges.html#ad13ab3adb2ac35fc885ba61f6bd9a5a1", null ],
+    [ "createAddXML", "dd/d61/classSedListOfChanges.html#a830abcfc7f6eb185fd53546dd152dac2", null ],
+    [ "createChangeAttribute", "dd/d61/classSedListOfChanges.html#a2d24e924bc94c12204d90a5e61ec7821", null ],
+    [ "createChangeXML", "dd/d61/classSedListOfChanges.html#a2f91167ff2c277b65c595c8a5a87b43d", null ],
+    [ "createComputeChange", "dd/d61/classSedListOfChanges.html#a24fb8ee5a87fc61d659b636cc5185f89", null ],
+    [ "createRemoveXML", "dd/d61/classSedListOfChanges.html#a7b09574290534848d4aeaff16b127761", null ],
+    [ "get", "dd/d61/classSedListOfChanges.html#a1fbeaf6b58d312dc3a0c76fc26d0c6fc", null ],
+    [ "get", "dd/d61/classSedListOfChanges.html#a3002df6941605f29f689939a6ef46248", null ],
+    [ "get", "dd/d61/classSedListOfChanges.html#a31f2965483f1ed2e58cd5e36473c03a4", null ],
+    [ "get", "dd/d61/classSedListOfChanges.html#ae36eb9e33a747ff55b1b92e11c875cb7", null ],
+    [ "getElementName", "dd/d61/classSedListOfChanges.html#a93784901b4ae5f5cd6ea1612a6b2bb76", null ],
+    [ "getItemTypeCode", "dd/d61/classSedListOfChanges.html#a32912a02a6a5673ddd70336666f2cf33", null ],
+    [ "getNumChanges", "dd/d61/classSedListOfChanges.html#a1cc7bea7ebdb0875ccaa86bf2d7cd10a", null ],
+    [ "getTypeCode", "dd/d61/classSedListOfChanges.html#a2e16713301e05981867ebb31e37bb70e", null ],
+    [ "operator=", "dd/d61/classSedListOfChanges.html#a6cfb62d3faff806839df4dc233f7b3e9", null ],
+    [ "remove", "dd/d61/classSedListOfChanges.html#a9660d4a2d9729101b128f216e8541777", null ],
+    [ "remove", "dd/d61/classSedListOfChanges.html#a7e8311e0bdd522b4bb79fea6450162a6", null ]
+];
