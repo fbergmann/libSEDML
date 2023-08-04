@@ -39,12 +39,23 @@ note the semicolon denoting the listing of several libraries. Of course you coul
 
 for linking against `expat` and indicating, that libSBML was compiled without compression.
 
+## Documentation
+API documentation is something to be added and pull requests are happily accepted to improve them. For now a basic doxygen file 
+is provided and documentation can be generated after checkout like so: 
+
+```bash
+PROJECT_NUMBER=2.0.32 doxygen -x libSEDML.doxyfile > Doxyfile && doxygen
+```
+
+This expands the version number in the doxygen file, creates a temporary `Doxyfile` and runs doxygen with it. After that the 
+generated documentation is available in the `./doc/html` folder.
+
 ## License
 
 This project is open source and freely available under the [Simplified BSD](http://opensource.org/licenses/BSD-2-Clause) license. Should that license not meet your needs, please contact me.
 
 
-Copyright (c) 2013-2021, Frank T. Bergmann  
+Copyright (c) 2013-2023, Frank T. Bergmann  
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
