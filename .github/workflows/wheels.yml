@@ -11,7 +11,7 @@ jobs:
     name: Make SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0  # Optional, use if you use setuptools_scm
         submodules: recursive  # Optional, use if you have submodules
@@ -22,7 +22,7 @@ jobs:
         cp src/bindings/python/MANIFEST.in .
         pipx run build --sdist
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         path: dist/*.tar.gz
         name: libSEDML-sdist
@@ -34,10 +34,10 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-20.04, windows-2019, macos-11]
-        python_version: ['cp37-*', 'cp38-*', 'cp39-*', 'cp310-*', 'cp311-*']
+        python_version: ['cp37-*', 'cp38-*', 'cp39-*', 'cp310-*', 'cp311-*', 'cp312-*']
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0  # Optional, use if you use setuptools_scm
         submodules: recursive  # Optional, use if you have submodules
@@ -46,40 +46,32 @@ jobs:
       run: |
         cp src/bindings/python/setup.py .
 
-    - uses: pypa/cibuildwheel@v2.11.2
+    - uses: pypa/cibuildwheel@v2.16.2
       env:
           CIBW_BUILD: ${{ matrix.python_version }}
           CIBW_ARCHS_MACOS: x86_64 arm64
 
     - name: Upload wheels
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         path: wheelhouse/*.whl
-        name: libSEDML-${{ matrix.os }}
+        name: libSEDML-wheels
         
   upload_all:
     needs: [build_wheels, make_sdist]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: libSEDML-sdist
         path: dist
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
-        name: libSEDML-ubuntu-20.04
-        path: dist
-    - uses: actions/download-artifact@v2
-      with:
-        name: libSEDML-macos-10.15
-        path: dist
-    - uses: actions/download-artifact@v2
-      with:
-        name: libSEDML-windows-2019
+        name: libSEDML-wheels
         path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.4.2
+    - uses: pypa/gh-action-pypi-publish@v1.8.10
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
