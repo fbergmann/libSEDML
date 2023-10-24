@@ -173,3 +173,7 @@ libsedml/_*
 examples/python/*.xml
 dev/temp_deviser_file.xml
 setup.py
+
+# documentation
+/doc/html/
+Doxyfile
