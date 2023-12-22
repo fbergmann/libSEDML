@@ -228,6 +228,9 @@
           </attributes>
         </element>
         <element name="Range" typeCode="SEDML_RANGE" hasListOf="true" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" minNumListOfChildren="0" maxNumListOfChildren="0" baseClass="SedBase" abstract="true">
+          <attributes>
+            <attribute name="algorithm" required="false" type="element" element="Algorithm" abstract="false"/>
+          </attributes>
           <concretes>
             <concrete name="uniformRange" element="UniformRange" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="vectorRange" element="VectorRange" minNumChildren="0" maxNumChildren="0"/>

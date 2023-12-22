@@ -38,6 +38,7 @@
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
+#include <sedml/SedAlgorithm.h>
 
 
 using namespace std;
@@ -59,6 +60,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mElementName("task")
+  , mAlgorithm (NULL)
 {
   mIdAllowedPreV4 = true;
   mNameAllowedPreV4 = true;
@@ -73,6 +75,7 @@ SedAbstractTask::SedAbstractTask(unsigned int level, unsigned int version)
 SedAbstractTask::SedAbstractTask(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mElementName("task")
+  , mAlgorithm (NULL)
 {
   setElementNamespace(sedmlns->getURI());
   mIdAllowedPreV4 = true;
@@ -86,7 +89,14 @@ SedAbstractTask::SedAbstractTask(SedNamespaces *sedmlns)
 SedAbstractTask::SedAbstractTask(const SedAbstractTask& orig)
   : SedBase( orig )
   , mElementName ( orig.mElementName )
+  , mAlgorithm (NULL)
 {
+    if (orig.mAlgorithm != NULL)
+    {
+        mAlgorithm = orig.mAlgorithm->clone();
+    }
+
+    connectToChild();
 }
 
 
@@ -100,6 +110,15 @@ SedAbstractTask::operator=(const SedAbstractTask& rhs)
   {
     SedBase::operator=(rhs);
     mElementName = rhs.mElementName;
+    delete mAlgorithm;
+    if (rhs.mAlgorithm != NULL)
+    {
+        mAlgorithm = rhs.mAlgorithm->clone();
+    }
+    else
+    {
+        mAlgorithm = NULL;
+    }
   }
 
   return *this;
@@ -121,6 +140,101 @@ SedAbstractTask::clone() const
  */
 SedAbstractTask::~SedAbstractTask()
 {
+    delete mAlgorithm;
+    mAlgorithm = NULL;
+}
+
+
+/*
+ * Returns the value of the "algorithm" element of this SedAbstractTask.
+ */
+const SedAlgorithm*
+SedAbstractTask::getAlgorithm() const
+{
+    return mAlgorithm;
+}
+
+
+/*
+ * Returns the value of the "algorithm" element of this SedAbstractTask.
+ */
+SedAlgorithm*
+SedAbstractTask::getAlgorithm()
+{
+    return mAlgorithm;
+}
+
+
+/*
+ * Predicate returning @c true if this SedAbstractTask's "algorithm" element is
+ * set.
+ */
+bool
+SedAbstractTask::isSetAlgorithm() const
+{
+    return (mAlgorithm != NULL);
+}
+
+
+/*
+ * Sets the value of the "algorithm" element of this SedAbstractTask.
+ */
+int
+SedAbstractTask::setAlgorithm(const SedAlgorithm* algorithm)
+{
+    if (mAlgorithm == algorithm)
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else if (algorithm == NULL)
+    {
+        delete mAlgorithm;
+        mAlgorithm = NULL;
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        delete mAlgorithm;
+        mAlgorithm = (algorithm != NULL) ? algorithm->clone() : NULL;
+        if (mAlgorithm != NULL)
+        {
+            mAlgorithm->connectToParent(this);
+        }
+
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+}
+
+
+/*
+ * Creates a new SedAlgorithm object, adds it to this SedAbstractTask object and
+ * returns the SedAlgorithm object created.
+ */
+SedAlgorithm*
+SedAbstractTask::createAlgorithm()
+{
+    if (mAlgorithm != NULL)
+    {
+        delete mAlgorithm;
+    }
+
+    mAlgorithm = new SedAlgorithm(getSedNamespaces());
+
+    connectToChild();
+
+    return mAlgorithm;
+}
+
+
+/*
+ * Unsets the value of the "algorithm" element of this SedAbstractTask.
+ */
+int
+SedAbstractTask::unsetAlgorithm()
+{
+    delete mAlgorithm;
+    mAlgorithm = NULL;
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -221,6 +335,13 @@ SedAbstractTask::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeElements(stream);
+
+  if (isSetAlgorithm() == true)
+  {
+      if (getLevel() > 1 || getVersion() >= 5) {
+          mAlgorithm->write(stream);
+      }
+  }
 }
 
 /** @endcond */
@@ -251,6 +372,31 @@ void
 SedAbstractTask::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
+
+  if (mAlgorithm != NULL)
+  {
+      mAlgorithm->setSedDocument(d);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Connects to child elements
+ */
+void
+SedAbstractTask::connectToChild()
+{
+    SedBase::connectToChild();
+
+    if (mAlgorithm != NULL)
+    {
+        mAlgorithm->connectToParent(this);
+    }
 }
 
 /** @endcond */
@@ -468,6 +614,203 @@ SedAbstractTask::unsetAttribute(const std::string& attributeName)
   int value = SedBase::unsetAttribute(attributeName);
 
   return value;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates and returns an new "elementName" object in this SedAbstractTask.
+ */
+SedBase*
+SedAbstractTask::createChildObject(const std::string& elementName)
+{
+    SedBase* obj = NULL;
+
+    if (elementName == "algorithm")
+    {
+        return createAlgorithm();
+    }
+
+    return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds a new "elementName" object to this SedAbstractTask.
+ */
+int
+SedAbstractTask::addChildObject(const std::string& elementName,
+    const SedBase* element)
+{
+    if (elementName == "algorithm" && element->getTypeCode() ==
+        SEDML_SIMULATION_ALGORITHM)
+    {
+        return setAlgorithm((const SedAlgorithm*)(element));
+    }
+
+    return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedAbstractTask.
+ */
+SedBase*
+SedAbstractTask::removeChildObject(const std::string& elementName,
+    const std::string& id)
+{
+    if (elementName == "algorithm")
+    {
+        SedAlgorithm* obj = mAlgorithm;
+        mAlgorithm = NULL; return obj;
+    }
+
+    return NULL;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the number of "elementName" in this SedAbstractTask.
+ */
+unsigned int
+SedAbstractTask::getNumObjects(const std::string& elementName)
+{
+    unsigned int n = 0;
+
+    if (elementName == "algorithm")
+    {
+        if (isSetAlgorithm())
+        {
+            return 1;
+        }
+    }
+
+    return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the nth object of "objectName" in this SedAbstractTask.
+ */
+SedBase*
+SedAbstractTask::getObject(const std::string& elementName, unsigned int index)
+{
+    SedBase* obj = NULL;
+
+    if (elementName == "algorithm")
+    {
+        return getAlgorithm();
+    }
+
+    return obj;
+}
+
+/** @endcond */
+
+
+/*
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
+ */
+SedBase*
+SedAbstractTask::getElementBySId(const std::string& id)
+{
+    if (id.empty())
+    {
+        return NULL;
+    }
+
+    SedBase* obj = NULL;
+
+    if (mAlgorithm != NULL)
+    {
+        if (mAlgorithm->getId() == id)
+        {
+            return mAlgorithm;
+        }
+
+        obj = mAlgorithm->getElementBySId(id);
+        if (obj != NULL)
+        {
+            return obj;
+        }
+    }
+
+    return obj;
+}
+
+
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedAbstractTask::getAllElements(SedElementFilter* filter)
+{
+    List* ret = new List();
+    List* sublist = NULL;
+    SED_ADD_FILTERED_POINTER(ret, sublist, mAlgorithm, filter);
+
+
+    return ret;
+}
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SedBase*
+SedAbstractTask::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream)
+{
+    SedBase* obj = NULL;
+
+    const std::string& name = stream.peek().getName();
+
+    if (name == "algorithm")
+    {
+        if (getErrorLog() && isSetAlgorithm())
+        {
+            getErrorLog()->logError(SedmlSimulationAllowedElements, getLevel(),
+                getVersion(), "", getLine(), getColumn());
+        }
+
+        delete mAlgorithm;
+        mAlgorithm = new SedAlgorithm(getSedNamespaces());
+        obj = mAlgorithm;
+    }
+
+    connectToChild();
+
+    return obj;
 }
 
 /** @endcond */
@@ -747,6 +1090,74 @@ int
 SedAbstractTask_unsetName(SedAbstractTask_t * sat)
 {
   return (sat != NULL) ? sat->unsetName() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns the value of the "algorithm" element of this SedAbstractTask_t.
+ */
+LIBSEDML_EXTERN
+const SedAlgorithm_t*
+SedSimulation_getAlgorithm(const SedAbstractTask_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return (SedAlgorithm_t*)(ss->getAlgorithm());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedAbstractTask_t's "algorithm"
+ * element is set.
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_isSetAlgorithm(const SedAbstractTask_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetAlgorithm()) : 0;
+}
+
+
+/*
+ * Sets the value of the "algorithm" element of this SedAbstractTask_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_setAlgorithm(SedAbstractTask_t * ss,
+                           const SedAlgorithm_t* algorithm)
+{
+  return (ss != NULL) ? ss->setAlgorithm(algorithm) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new SedAlgorithm_t object, adds it to this SedAbstractTask_t object
+ * and returns the SedAlgorithm_t object created.
+ */
+LIBSEDML_EXTERN
+SedAlgorithm_t*
+SedSimulation_createAlgorithm(SedAbstractTask_t* ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return (SedAlgorithm_t*)(ss->createAlgorithm());
+}
+
+
+/*
+ * Unsets the value of the "algorithm" element of this SedAbstractTask_t.
+ */
+LIBSEDML_EXTERN
+int
+SedSimulation_unsetAlgorithm(SedAbstractTask_t * ss)
+{
+  return (ss != NULL) ? ss->unsetAlgorithm() : LIBSEDML_INVALID_OBJECT;
 }
 
 

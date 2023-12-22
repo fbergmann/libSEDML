@@ -70,6 +70,7 @@ protected:
   /** @cond doxygenLibSEDMLInternal */
 
   std::string mElementName;
+  SedAlgorithm* mAlgorithm;
 
   /** @endcond */
 
@@ -129,6 +130,66 @@ public:
    * Destructor for SedOutput.
    */
   virtual ~SedOutput();
+
+
+  /**
+   * Returns the value of the "algorithm" element of this SedOutput.
+   *
+   * @return the value of the "algorithm" element of this SedOutput as a
+   * SedAlgorithm*.
+   */
+  const SedAlgorithm* getAlgorithm() const;
+
+
+  /**
+   * Returns the value of the "algorithm" element of this SedOutput.
+   *
+   * @return the value of the "algorithm" element of this SedOutput as a
+   * SedAlgorithm*.
+   */
+  SedAlgorithm* getAlgorithm();
+
+
+  /**
+   * Predicate returning @c true if this SedOutput's "algorithm" element is
+   * set.
+   *
+   * @return @c true if this SedOutput's "algorithm" element has been set,
+   * otherwise @c false is returned.
+   */
+  bool isSetAlgorithm() const;
+
+
+  /**
+   * Sets the value of the "algorithm" element of this SedOutput.
+   *
+   * @param algorithm SedAlgorithm* value of the "algorithm" element to be set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setAlgorithm(const SedAlgorithm* algorithm);
+
+
+  /**
+   * Creates a new SedAlgorithm object, adds it to this SedOutput object
+   * and returns the SedAlgorithm object created.
+   *
+   * @return a new SedAlgorithm object instance.
+   */
+  SedAlgorithm* createAlgorithm();
+
+
+  /**
+   * Unsets the value of the "algorithm" element of this SedOutput.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetAlgorithm();
 
 
   /**
@@ -263,7 +324,19 @@ public:
 
 
 
-  #ifndef SWIG
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Connects to child elements
+   */
+  virtual void connectToChild();
+
+  /** @endcond */
+
+
+
+
+#ifndef SWIG
 
 
 
@@ -498,10 +571,134 @@ public:
 
 
 
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Creates and returns an new "elementName" object in this SedOutput.
+   *
+   * @param elementName, the name of the element to create.
+   *
+   * @return pointer to the element created.
+   */
+  virtual SedBase* createChildObject(const std::string& elementName);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Adds a new "elementName" object to this SedOutput.
+   *
+   * @param elementName, the name of the element to create.
+   *
+   * @param element, pointer to the element to be added.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  virtual int addChildObject(const std::string& elementName,
+                             const SedBase* element);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Removes and returns the new "elementName" object with the given id in this
+   * SedOutput.
+   *
+   * @param elementName, the name of the element to remove.
+   *
+   * @param id, the id of the element to remove.
+   *
+   * @return pointer to the element removed.
+   */
+  virtual SedBase* removeChildObject(const std::string& elementName,
+                                     const std::string& id);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Returns the number of "elementName" in this SedOutput.
+   *
+   * @param elementName, the name of the element to get number of.
+   *
+   * @return unsigned int number of elements.
+   */
+  virtual unsigned int getNumObjects(const std::string& elementName);
+
+  /** @endcond */
+
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Returns the nth object of "objectName" in this SedOutput.
+   *
+   * @param elementName, the name of the element to get number of.
+   *
+   * @param index, unsigned int the index of the object to retrieve.
+   *
+   * @return pointer to the object.
+   */
+  virtual SedBase* getObject(const std::string& elementName,
+                             unsigned int index);
+
+  /** @endcond */
+
+
+
+
   #endif /* !SWIG */
 
 
+  /**
+   * Returns the first child element that has the given @p id in the model-wide
+   * SId namespace, or @c NULL if no such object is found.
+   *
+   * @param id a string representing the id attribute of the object to
+   * retrieve.
+   *
+   * @return a pointer to the SedBase element with the given @p id. If no such
+   * object is found, this method returns @c NULL.
+   */
+  virtual SedBase* getElementBySId(const std::string& id);
+
+  /**
+   * Returns a List of all child SedBase objects, including those nested to an
+   * arbitrary depth.
+   *
+   * @param filter an ElementFilter that may impose restrictions on the objects
+   * to be retrieved.
+   *
+   * @return a List pointer of pointers to all SedBase child objects with any
+   * restriction imposed.
+   */
+  virtual List* getAllElements(SedElementFilter * filter = NULL);
+  
 protected:
+
+
+  /** @cond doxygenLibSEDMLInternal */
+
+  /**
+   * Creates a new object from the next XMLToken on the XMLInputStream
+   */
+  virtual SedBase* createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream);
+
+  /** @endcond */
+
 
 
   /** @cond doxygenLibSEDMLInternal */
@@ -835,6 +1032,91 @@ SedOutput_unsetId(SedOutput_t * so);
 LIBSEDML_EXTERN
 int
 SedOutput_unsetName(SedOutput_t * so);
+
+
+/**
+ * Returns the value of the "algorithm" element of this SedOutput_t.
+ *
+ * @param ss the SedOutput_t structure whose algorithm is sought.
+ *
+ * @return the value of the "algorithm" element of this SedOutput_t as a
+ * SedAlgorithm*.
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+const SedAlgorithm_t*
+SedOutput_getAlgorithm(const SedOutput_t * ss);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedOutput_t's "algorithm"
+ * element is set.
+ *
+ * @param ss the SedOutput_t structure.
+ *
+ * @return @c 1 (true) if this SedOutput_t's "algorithm" element has been
+ * set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_isSetAlgorithm(const SedOutput_t * ss);
+
+
+/**
+ * Sets the value of the "algorithm" element of this SedOutput_t.
+ *
+ * @param ss the SedOutput_t structure.
+ *
+ * @param algorithm SedAlgorithm_t* value of the "algorithm" element to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_setAlgorithm(SedOutput_t * ss,
+                           const SedAlgorithm_t* algorithm);
+
+
+/**
+ * Creates a new SedAlgorithm_t object, adds it to this SedOutput_t object
+ * and returns the SedAlgorithm_t object created.
+ *
+ * @param ss the SedOutput_t structure to which the SedAlgorithm_t should
+ * be added.
+ *
+ * @return a new SedAlgorithm_t object instance.
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+SedAlgorithm_t*
+SedOutput_createAlgorithm(SedOutput_t* ss);
+
+
+/**
+ * Unsets the value of the "algorithm" element of this SedOutput_t.
+ *
+ * @param ss the SedOutput_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedOutput_t
+ */
+LIBSEDML_EXTERN
+int
+SedOutput_unsetAlgorithm(SedOutput_t * ss);
 
 
 /**

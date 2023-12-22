@@ -39,6 +39,7 @@
 #include <sedml/SedVectorRange.h>
 #include <sedml/SedFunctionalRange.h>
 #include <sedml/SedDataRange.h>
+#include <sedml/SedAlgorithm.h>
 
 
 using namespace std;
@@ -59,6 +60,7 @@ LIBSEDML_CPP_NAMESPACE_BEGIN
 SedRange::SedRange(unsigned int level, unsigned int version)
   : SedBase(level, version)
   , mElementName("range")
+  , mAlgorithm(NULL)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
   mIdAllowedPreV4 = true;
@@ -71,6 +73,7 @@ SedRange::SedRange(unsigned int level, unsigned int version)
 SedRange::SedRange(SedNamespaces *sedmlns)
   : SedBase(sedmlns)
   , mElementName("range")
+  , mAlgorithm(NULL)
 {
   setElementNamespace(sedmlns->getURI());
   mIdAllowedPreV4 = true;
@@ -83,7 +86,14 @@ SedRange::SedRange(SedNamespaces *sedmlns)
 SedRange::SedRange(const SedRange& orig)
   : SedBase( orig )
   , mElementName ( orig.mElementName )
+  , mAlgorithm(NULL)
 {
+    if (orig.mAlgorithm != NULL)
+    {
+        mAlgorithm = orig.mAlgorithm->clone();
+    }
+
+    connectToChild();
 }
 
 
@@ -97,6 +107,15 @@ SedRange::operator=(const SedRange& rhs)
   {
     SedBase::operator=(rhs);
     mElementName = rhs.mElementName;
+    delete mAlgorithm;
+    if (rhs.mAlgorithm != NULL)
+    {
+        mAlgorithm = rhs.mAlgorithm->clone();
+    }
+    else
+    {
+        mAlgorithm = NULL;
+    }
   }
 
   return *this;
@@ -118,6 +137,101 @@ SedRange::clone() const
  */
 SedRange::~SedRange()
 {
+    delete mAlgorithm;
+    mAlgorithm = NULL;
+}
+
+
+/*
+ * Returns the value of the "algorithm" element of this SedRange.
+ */
+const SedAlgorithm*
+SedRange::getAlgorithm() const
+{
+    return mAlgorithm;
+}
+
+
+/*
+ * Returns the value of the "algorithm" element of this SedRange.
+ */
+SedAlgorithm*
+SedRange::getAlgorithm()
+{
+    return mAlgorithm;
+}
+
+
+/*
+ * Predicate returning @c true if this SedRange's "algorithm" element is
+ * set.
+ */
+bool
+SedRange::isSetAlgorithm() const
+{
+    return (mAlgorithm != NULL);
+}
+
+
+/*
+ * Sets the value of the "algorithm" element of this SedRange.
+ */
+int
+SedRange::setAlgorithm(const SedAlgorithm* algorithm)
+{
+    if (mAlgorithm == algorithm)
+    {
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else if (algorithm == NULL)
+    {
+        delete mAlgorithm;
+        mAlgorithm = NULL;
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+    else
+    {
+        delete mAlgorithm;
+        mAlgorithm = (algorithm != NULL) ? algorithm->clone() : NULL;
+        if (mAlgorithm != NULL)
+        {
+            mAlgorithm->connectToParent(this);
+        }
+
+        return LIBSEDML_OPERATION_SUCCESS;
+    }
+}
+
+
+/*
+ * Creates a new SedAlgorithm object, adds it to this SedRange object and
+ * returns the SedAlgorithm object created.
+ */
+SedAlgorithm*
+SedRange::createAlgorithm()
+{
+    if (mAlgorithm != NULL)
+    {
+        delete mAlgorithm;
+    }
+
+    mAlgorithm = new SedAlgorithm(getSedNamespaces());
+
+    connectToChild();
+
+    return mAlgorithm;
+}
+
+
+/*
+ * Unsets the value of the "algorithm" element of this SedRange.
+ */
+int
+SedRange::unsetAlgorithm()
+{
+    delete mAlgorithm;
+    mAlgorithm = NULL;
+    return LIBSEDML_OPERATION_SUCCESS;
 }
 
 
@@ -229,6 +343,13 @@ SedRange::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   stream) const
 {
   SedBase::writeElements(stream);
+
+  if (isSetAlgorithm() == true)
+  {
+      if (getLevel() > 1 || getVersion() >= 5) {
+          mAlgorithm->write(stream);
+      }
+  }
 }
 
 /** @endcond */
@@ -259,6 +380,31 @@ void
 SedRange::setSedDocument(SedDocument* d)
 {
   SedBase::setSedDocument(d);
+
+  if (mAlgorithm != NULL)
+  {
+      mAlgorithm->setSedDocument(d);
+  }
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Connects to child elements
+ */
+void
+SedRange::connectToChild()
+{
+    SedBase::connectToChild();
+
+    if (mAlgorithm != NULL)
+    {
+        mAlgorithm->connectToParent(this);
+    }
 }
 
 /** @endcond */
@@ -502,6 +648,203 @@ SedRange::unsetAttribute(const std::string& attributeName)
 /** @cond doxygenLibSEDMLInternal */
 
 /*
+ * Creates and returns an new "elementName" object in this SedRange.
+ */
+SedBase*
+SedRange::createChildObject(const std::string& elementName)
+{
+    SedBase* obj = NULL;
+
+    if (elementName == "algorithm")
+    {
+        return createAlgorithm();
+    }
+
+    return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Adds a new "elementName" object to this SedRange.
+ */
+int
+SedRange::addChildObject(const std::string& elementName,
+    const SedBase* element)
+{
+    if (elementName == "algorithm" && element->getTypeCode() ==
+        SEDML_SIMULATION_ALGORITHM)
+    {
+        return setAlgorithm((const SedAlgorithm*)(element));
+    }
+
+    return LIBSBML_OPERATION_FAILED;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Removes and returns the new "elementName" object with the given id in this
+ * SedRange.
+ */
+SedBase*
+SedRange::removeChildObject(const std::string& elementName,
+    const std::string& id)
+{
+    if (elementName == "algorithm")
+    {
+        SedAlgorithm* obj = mAlgorithm;
+        mAlgorithm = NULL; return obj;
+    }
+
+    return NULL;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the number of "elementName" in this SedRange.
+ */
+unsigned int
+SedRange::getNumObjects(const std::string& elementName)
+{
+    unsigned int n = 0;
+
+    if (elementName == "algorithm")
+    {
+        if (isSetAlgorithm())
+        {
+            return 1;
+        }
+    }
+
+    return n;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Returns the nth object of "objectName" in this SedRange.
+ */
+SedBase*
+SedRange::getObject(const std::string& elementName, unsigned int index)
+{
+    SedBase* obj = NULL;
+
+    if (elementName == "algorithm")
+    {
+        return getAlgorithm();
+    }
+
+    return obj;
+}
+
+/** @endcond */
+
+
+/*
+ * Returns the first child element that has the given @p id in the model-wide
+ * SId namespace, or @c NULL if no such object is found.
+ */
+SedBase*
+SedRange::getElementBySId(const std::string& id)
+{
+    if (id.empty())
+    {
+        return NULL;
+    }
+
+    SedBase* obj = NULL;
+
+    if (mAlgorithm != NULL)
+    {
+        if (mAlgorithm->getId() == id)
+        {
+            return mAlgorithm;
+        }
+
+        obj = mAlgorithm->getElementBySId(id);
+        if (obj != NULL)
+        {
+            return obj;
+        }
+    }
+
+    return obj;
+}
+
+
+/*
+ * Returns a List of all child SedBase objects, including those nested to an
+ * arbitrary depth.
+ */
+List*
+SedRange::getAllElements(SedElementFilter* filter)
+{
+    List* ret = new List();
+    List* sublist = NULL;
+    SED_ADD_FILTERED_POINTER(ret, sublist, mAlgorithm, filter);
+
+
+    return ret;
+}
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
+ * Creates a new object from the next XMLToken on the XMLInputStream
+ */
+SedBase*
+SedRange::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&
+    stream)
+{
+    SedBase* obj = NULL;
+
+    const std::string& name = stream.peek().getName();
+
+    if (name == "algorithm")
+    {
+        if (getErrorLog() && isSetAlgorithm())
+        {
+            getErrorLog()->logError(SedmlSimulationAllowedElements, getLevel(),
+                getVersion(), "", getLine(), getColumn());
+        }
+
+        delete mAlgorithm;
+        mAlgorithm = new SedAlgorithm(getSedNamespaces());
+        obj = mAlgorithm;
+    }
+
+    connectToChild();
+
+    return obj;
+}
+
+/** @endcond */
+
+
+
+/** @cond doxygenLibSEDMLInternal */
+
+/*
  * Adds the expected attributes for this element
  */
 void
@@ -731,6 +1074,74 @@ int
 SedRange_unsetId(SedRange_t * sr)
 {
   return (sr != NULL) ? sr->unsetId() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Returns the value of the "algorithm" element of this SedRange_t.
+ */
+LIBSEDML_EXTERN
+const SedAlgorithm_t*
+SedRange_getAlgorithm(const SedRange_t * ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return (SedAlgorithm_t*)(ss->getAlgorithm());
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedRange_t's "algorithm"
+ * element is set.
+ */
+LIBSEDML_EXTERN
+int
+SedRange_isSetAlgorithm(const SedRange_t * ss)
+{
+  return (ss != NULL) ? static_cast<int>(ss->isSetAlgorithm()) : 0;
+}
+
+
+/*
+ * Sets the value of the "algorithm" element of this SedRange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedRange_setAlgorithm(SedRange_t * ss,
+                           const SedAlgorithm_t* algorithm)
+{
+  return (ss != NULL) ? ss->setAlgorithm(algorithm) : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Creates a new SedAlgorithm_t object, adds it to this SedRange_t object
+ * and returns the SedAlgorithm_t object created.
+ */
+LIBSEDML_EXTERN
+SedAlgorithm_t*
+SedRange_createAlgorithm(SedRange_t* ss)
+{
+  if (ss == NULL)
+  {
+    return NULL;
+  }
+
+  return (SedAlgorithm_t*)(ss->createAlgorithm());
+}
+
+
+/*
+ * Unsets the value of the "algorithm" element of this SedRange_t.
+ */
+LIBSEDML_EXTERN
+int
+SedRange_unsetAlgorithm(SedRange_t * ss)
+{
+  return (ss != NULL) ? ss->unsetAlgorithm() : LIBSEDML_INVALID_OBJECT;
 }
 
 
