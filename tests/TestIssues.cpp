@@ -144,6 +144,31 @@ TEST_CASE("Reading / Writing L1V4", "[sedml]")
   delete doc;
 }
 
+TEST_CASE("Reading / Writing L1V5", "[sedml]")
+{
+  std::string fileName = getTestFile("/test-data/noble_1962_local.sedml");
+  SedDocument* doc = readSedMLFromFile(fileName.c_str());
+  REQUIRE (doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+
+  
+  // convert to l1v5
+  doc->setLevel(1); doc->setVersion(5);
+
+  // write to string
+  SedWriter sw;
+  std::string l1v5 = sw.writeSedMLToStdString(doc);
+  REQUIRE(l1v5.find("version=\"5\"") != std::string::npos);
+
+  // don't need doc anymore
+  delete doc;
+
+  // read back
+  doc = readSedMLFromString(l1v5.c_str());
+  REQUIRE(doc->getNumErrors(LIBSEDML_SEV_ERROR) == 0);
+
+  delete doc;
+}
+
 TEST_CASE("Reading L1V4 curve should not require logY", "[sedml]")
 {
   std::string fileName = getTestFile("/test-data/issue_63.sedml");
