@@ -36,15 +36,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-11]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         python_version: ['cp39-*', 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*']
 
     steps:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0  # Optional, use if you use setuptools_scm
-        submodules: recursive  # Optional, use if you have submodules
 
+    - name: checkout needed submodules
+      run: | 
+        ./.ci/checkout-submodules.sh
+        
     - name: Copy setup.py
       run: |
         cp src/bindings/python/setup.py .
