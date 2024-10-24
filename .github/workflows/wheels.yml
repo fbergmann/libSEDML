@@ -45,9 +45,10 @@ jobs:
         fetch-depth: 0  # Optional, use if you use setuptools_scm
 
     - name: checkout needed submodules
+      shell: bash
       run: | 
         ./.ci/checkout-submodules.sh
-        
+
     - name: Copy setup.py
       run: |
         cp src/bindings/python/setup.py .
