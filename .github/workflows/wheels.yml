@@ -49,6 +49,11 @@ jobs:
       run: | 
         ./.ci/checkout-submodules.sh
 
+    - name: install swig on macos
+      if: matrix.os == 'macos-latest'
+      run: |
+        brew install swig
+
     - name: Copy setup.py
       run: |
         cp src/bindings/python/setup.py .
