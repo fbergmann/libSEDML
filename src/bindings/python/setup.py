@@ -385,5 +385,6 @@ setup(name             = "python-libsedml",
       ext_modules=[CMakeExtension('_libsedml')],
       cmdclass={
         'build_ext': CMakeBuild,
-      }
+      },
+      setup_requires=['cmake==3.31.6', 'swig==4.2.1']
 )
