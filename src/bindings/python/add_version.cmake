@@ -42,6 +42,7 @@ message ("Python: create 3.x version")
 
 file(READ ${CUR_BIN_DIRECTORY}/libsedml.py init_script)
 file(WRITE ${CUR_BIN_DIRECTORY}/libsedml2.py ${init_script})
+set(init3_script ${init_script})
 set(CLASSES_TO_UPDATE
   "SBase"
   "SedBase" 
