@@ -191,3 +191,27 @@ class AutoProperty(type):
         __metaclass__ = AutoProperty
     }
 }
+
+%extend SedNamespaces
+{
+    %pythoncode
+    {
+        __metaclass__ = AutoProperty
+    }
+}
+
+%extend SedNamespacesList
+{
+    %pythoncode
+    {
+        def __len__(self):
+           return self.getSize()
+        
+        def __getitem__(self, index):
+            return self.get(index)
+
+        def __iter__(self):
+            for i in range(self.getSize()):
+                yield self.get(i)        
+    }
+}
