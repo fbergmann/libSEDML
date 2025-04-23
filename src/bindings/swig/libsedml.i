@@ -76,6 +76,14 @@ LIBNUML_CPP_NAMESPACE_USE
 %import  sbml/xml/XMLExtern.h
 
 /**
+ *
+ * Includes a language specific interface file.
+ *
+ */
+
+%include local.i
+
+/**
  * Wraps List class by ListWrapper<TYPENAME> template class.
  * TYPENAME is replaced with a corresponding data type which is
  * stored in the List object (e.g. ModelCreator, CVTerm and ASTNode). 
@@ -90,14 +98,6 @@ LIBNUML_CPP_NAMESPACE_USE
 %template(SedNamespacesList)  ListWrapper<SedNamespaces>;
 %template(SedBaseList)        ListWrapper<SedBase>;
 %template(SBaseList)          ListWrapper<SBase>;
-
-/**
- *
- * Includes a language specific interface file.
- *
- */
-
-%include local.i
 
 /**
  * Unfortunately, SWIG makes no distinction between const and non-const
