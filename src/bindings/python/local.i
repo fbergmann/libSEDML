@@ -193,6 +193,27 @@ namespace std
 }*/
 
 
+
+%extend SedNamespacesList
+{
+  int __len__()
+  {
+    return self->getSize();
+  }
+
+    %pythoncode
+    {
+        
+        def __getitem__(self, index):
+            return self.get(index)
+
+        def __iter__(self):
+            for i in range(self.getSize()):
+                yield self.get(i)        
+    }
+}
+
+
 /**
  * Allows SedListOf objects:
  *
