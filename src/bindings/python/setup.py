@@ -372,12 +372,12 @@ setup(name             = "python-libsedml",
       description      = "LibSedML Python API",
       long_description = ("libSEDML is a library for reading, writing and "+
                           "manipulating SEDML.  It is written in ISO C and C++, supports "+
-                          "SEDML Levels 1, Version 1-3, and runs on Linux, Microsoft "+
+                          "SEDML Levels 1, Version 1-5, and runs on Linux, Microsoft "+
                           "Windows, and Apple MacOS X.  For more information "+
                           "about SEDML, please see http://sed-ml.org/."),
       license          = "BSD",
       author           = "Frank T. Bergmann",
-      author_email     = "fbergman@caltech.edu",
+      author_email     = "frank.bergmann@bioquant.uni-heidelberg.de",
       url              = "https://github.com/fbergmann/libSEDML",
       packages         = ["libsedml"],
       package_dir      = {'libsedml': 'libsedml'},

@@ -4,6 +4,8 @@ graft submodules
 graft tests
 include VERSION.txt
 include CMakeLists.txt
+include *.md 
+incldue LICENSE*
 
 global-exclude *.py[cod]
 global-exclude .git
