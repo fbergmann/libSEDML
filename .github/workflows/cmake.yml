@@ -24,6 +24,7 @@ jobs:
         fetch-depth: 0
     
     - name: checkout needed submodules
+      shell: bash
       run: | 
         ./.ci/checkout-submodules.sh
 
