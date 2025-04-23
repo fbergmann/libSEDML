@@ -55,7 +55,7 @@ foreach(CLASS ${CLASSES_TO_UPDATE})
   string(REPLACE 
     "class ${CLASS}(_object):"
     "class ${CLASS}(_object, metaclass=AutoProperty):"
-    init3_script ${init_script}
+    init3_script ${init3_script}
   )
 
   string(REPLACE 
