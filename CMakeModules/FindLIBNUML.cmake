@@ -34,6 +34,7 @@ if (NOT ${LIBNUML_LIBRARY_NAME}_FOUND)
           ${CONAN_LIB_DIRS_LIBNUML}/cmake
           ${${_PROJECT_DEPENDENCY_DIR}}/lib/cmake
           ${${_PROJECT_DEPENDENCY_DIR}}/lib64/cmake
+          CMAKE_FIND_ROOT_PATH_BOTH
   )
 endif()
 
@@ -90,7 +91,8 @@ find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h
           /opt/csw/include   # Blastwave
           /opt/include
           /usr/freeware/include
-    NO_DEFAULT_PATH)
+    NO_DEFAULT_PATH
+    CMAKE_FIND_ROOT_PATH_BOTH)
 
 if (NOT LIBNUML_INCLUDE_DIR)
     find_path(LIBNUML_INCLUDE_DIR numl/NMBase.h)
@@ -117,7 +119,8 @@ find_library(LIBNUML_LIBRARY
           /opt/csw/lib   # Blastwave
           /opt/lib
           /usr/freeware/lib64
-    NO_DEFAULT_PATH)
+    NO_DEFAULT_PATH
+    CMAKE_FIND_ROOT_PATH_BOTH)
 
 if (NOT LIBNUML_LIBRARY)
     find_library(LIBNUML_LIBRARY 

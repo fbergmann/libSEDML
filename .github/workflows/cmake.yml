@@ -19,10 +19,14 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Checkout submodules
-      run: git submodule update --init --recursive
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: checkout needed submodules
+      shell: bash
+      run: | 
+        ./.ci/checkout-submodules.sh
 
     - name: add SWIG to windows
       # this is separate from the SWIG download itself, because it needs to be added to the path also when SWIG is cached
@@ -163,7 +167,7 @@ jobs:
       run: cmake -E tar cvzf ../binaries_${{ matrix.os }}.tar.gz .
 
     - name: Upload
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v4
       with:
         path: ${{runner.workspace}}/build/binaries_${{ matrix.os }}.tar.gz
         name: binaries_${{ matrix.os }}.tar.gz

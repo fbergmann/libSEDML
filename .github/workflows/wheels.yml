@@ -11,10 +11,13 @@ jobs:
     name: Make SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
-        fetch-depth: 0  # Optional, use if you use setuptools_scm
-        submodules: recursive  # Optional, use if you have submodules
+        fetch-depth: 0
+    
+    - name: checkout needed submodules
+      run: | 
+        ./.ci/checkout-submodules.sh
 
     - name: Build SDist
       run: |
@@ -22,7 +25,7 @@ jobs:
         cp src/bindings/python/MANIFEST.in .
         pipx run build --sdist
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: dist/*.tar.gz
         name: libSEDML-sdist
@@ -30,57 +33,91 @@ jobs:
   build_wheels:
     name: Wheel on ${{ matrix.os }} for ${{ matrix.python_version }}
     runs-on: ${{ matrix.os }}
+    needs: [make_sdist]
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-20.04, windows-2019, macos-11]
-        python_version: ['cp37-*', 'cp38-*', 'cp39-*', 'cp310-*', 'cp311-*']
+        os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, macos-13, macos-latest]
+        python_version: ['cp39-*', 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*']
 
     steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 0  # Optional, use if you use setuptools_scm
-        submodules: recursive  # Optional, use if you have submodules
+    - uses: seanmiddleditch/gha-setup-ninja@master
 
-    - name: Copy setup.py
+    - name: Add msbuild to PATH (Windows)
+      if: matrix.os == 'windows-latest'
+      uses: ilammy/msvc-dev-cmd@v1
+
+    - name: Install cibuildwheel
       run: |
-        cp src/bindings/python/setup.py .
+        python -m pip install cibuildwheel==2.23.2 swig==4.2.1 cmake==3.31.6
 
-    - uses: pypa/cibuildwheel@v2.11.2
+        # print versions
+        python --version
+        cmake --version
+        swig -version
+
+    - name: Download sdist
+      uses: actions/download-artifact@v4
+      with:
+        name: libSEDML-sdist
+        path: .
+
+    - name: Unpack sdist
+      shell: bash
+      run: |
+        ls -la
+        tar zxf python_libsedml-*.tar.gz
+        mv python_libsedml-*/* .
+        rm -rf python_libsedml-*
+        ls -la
+
+
+    - name: Build wheels
       env:
-          CIBW_BUILD: ${{ matrix.python_version }}
-          CIBW_ARCHS_MACOS: x86_64 arm64
+        CIBW_BUILD: ${{ matrix.python_version }}
+        CIBW_SKIP: "*-musllinux* cp36-* cp37-* cp38-* *-win32"
+      run: |
+        python -m cibuildwheel --output-dir wheelhouse
 
     - name: Upload wheels
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         path: wheelhouse/*.whl
-        name: libSEDML-${{ matrix.os }}
-        
+        name: libSEDML-${{ matrix.os }}-${{ strategy.job-index }}
+    
+  merge_wheels:
+    needs: [build_wheels]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        pattern: libSEDML-*
+        path: dist
+    
+    - name: Move wheels from dist subfolder to dist folder
+      run: |
+        find dist -name "*.whl" -exec mv {} dist/ \;
+        find dist -name "*.tar.gz" -exec mv {} dist/ \;
+        find dist -type d -empty -delete
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: libSEDML-combined
+        path: dist
+          
+
   upload_all:
-    needs: [build_wheels, make_sdist]
+    needs: [merge_wheels]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v4
       with:
-        name: libSEDML-sdist
-        path: dist
-    - uses: actions/download-artifact@v2
-      with:
-        name: libSEDML-ubuntu-20.04
-        path: dist
-    - uses: actions/download-artifact@v2
-      with:
-        name: libSEDML-macos-10.15
-        path: dist
-    - uses: actions/download-artifact@v2
-      with:
-        name: libSEDML-windows-2019
+        name: libSEDML-combined
         path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.4.2
+    - uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
-        skip_existing: true
+

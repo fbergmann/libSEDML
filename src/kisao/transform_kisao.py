@@ -5,6 +5,9 @@ Created on Mon Jun 21 12:05:03 2021
 @author: Lucian
 """
 
+# The KISAO.csv file was taken from https://bioportal.bioontology.org/ontologies/KISAO and will need to be updated periodically.  When you do, run this python script to recreate the kisaomap.cpp file.
+
+
 import csv
 
 kcpp = open("../sedml/kisaomap.cpp", "w")
@@ -50,10 +53,14 @@ kcpp.write("""
  
 #include <map>
 #include <string>
+#include "sedml/common/libsedml-version.h"
+
+LIBSEDML_CPP_NAMESPACE_BEGIN
 
 std::map<int, std::string> g_kisaomap = {
 """)
 
+allterms = []
 with open('KISAO.csv', newline='') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
@@ -61,8 +68,15 @@ with open('KISAO.csv', newline='') as csvfile:
             continue
         k_id = int(row[0].split("_")[-1])
         k_name = row[1]
-        kcpp.write('   {' + str(k_id) + ', "' + k_name + '"},\n')
-        print(k_id, k_name)
+        if '"' in k_name:
+            k_name = k_name.replace('"', "'")
+            k_name = k_name.replace("\\", "")
+        allterms.append((k_id, k_name))
+
+allterms.sort()
+for (k_id, k_name) in allterms:
+    kcpp.write('   {' + str(k_id) + ', "' + k_name + '"},\n')
+    print(k_id, k_name)
         
-kcpp.write("};\n")
+kcpp.write("};\nLIBSEDML_CPP_NAMESPACE_END\n\n")
 kcpp.close()

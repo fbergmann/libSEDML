@@ -36,14 +36,17 @@ from os.path import abspath, exists, join, split
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
-def get_python_include(): 
-  dir = sysconfig.get_paths()['include']
-  if exists(dir):
-    return dir
-  dir = dir.replace('/local', '/')
-  if exists(dir):
-    return dir
+def get_python_include():
+  temp = os.getenv('PYTHON_INCLUDE_DIR')
+  if temp:
+    return temp
+
+  path = sysconfig.get_paths()['include']
+  if exists(path): 
+    return path
+  # for whatever reason 2.7 on centos returns a wrong path here 
   return sysconfig.get_config_vars()['INCLUDEPY']
+
 
 def get_win_python_lib():
   vars = sysconfig.get_config_vars()
@@ -382,5 +385,6 @@ setup(name             = "python-libsedml",
       ext_modules=[CMakeExtension('_libsedml')],
       cmdclass={
         'build_ext': CMakeBuild,
-      }
+      },
+      setup_requires=['cmake==3.31.6', 'swig==4.2.1']
 )
