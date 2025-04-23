@@ -28,3 +28,11 @@ Bug fixes:
 * numerous improvements
 
 Thanks of course to Sarah Keating, without whom the project would not have been possible, to Bertrand Moreau for helping to improve the CMake build and the Python Bindings.
+
+## libSEDML 2.0.33
+
+New Features
+
+* Support for SED-ML L1V5
+
+Thanks to Lucian for updating
