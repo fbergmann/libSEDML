@@ -389,7 +389,7 @@ if(WITH_ZLIB)
     add_definitions( -DUSE_ZLIB )
 
     # make sure that we have a valid zip library
-    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
+    check_library_exists(LIBZ_LIBRARY "gzopen" "" LIBZ_FOUND_SYMBOL)
     if(NOT LIBZ_FOUND_SYMBOL)
         # this is odd, but on windows this check always fails! must be a
         # bug in the current cmake version so for now only issue this
