@@ -389,7 +389,7 @@ if(WITH_ZLIB)
     add_definitions( -DUSE_ZLIB )
 
     # make sure that we have a valid zip library
-    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
+    check_library_exists(LIBZ_LIBRARY "gzopen" "" LIBZ_FOUND_SYMBOL)
     if(NOT LIBZ_FOUND_SYMBOL)
         # this is odd, but on windows this check always fails! must be a
         # bug in the current cmake version so for now only issue this
@@ -663,12 +663,9 @@ check_include_files (stdlib.h STDC_HEADERS)
 check_include_files (string.h STDC_HEADERS)
 
 set(WORDS_BIGENDIAN)
-if (UNIX)
-  include (TestBigEndian)
-  test_big_endian(WORDS_BIGENDIAN)
+if(CMAKE_C_BYTE_ORDER STREQUAL "BIG_ENDIAN")
+  set(WORDS_BIGENDIAN TRUE)
 else()
-  # test_big_endian seems to fail with nmake (VS 2010) on windows
-  # however, windows is always little endian, so catch this here
   set(WORDS_BIGENDIAN FALSE)
 endif()
 
