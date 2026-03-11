@@ -340,6 +340,11 @@ endif()
 if(FIND_LIBSBML)
    find_package(LIBSBML REQUIRED)
 endif()
+
+###############################################################################
+#
+# Locate libnuML
+#
 if(FIND_LIBNUML)
    find_package(LIBNUML REQUIRED)
 endif()
@@ -362,42 +367,23 @@ set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
 # Locate zlib
 #
 
-set(ZLIB_INITIAL_VALUE)
-find_library(LIBZ_LIBRARY
-    NAMES zdll.lib z zlib.lib
-    PATHS /usr/lib /usr/local/lib
-          ${LIBSEDML_DEPENDENCY_DIR}/lib
-    DOC "The file name of the zip compression library."
-    )
-
-if(EXISTS ${LIBZ_LIBRARY})
-    set(ZLIB_INITIAL_VALUE ON)
-else()
-    set(ZLIB_INITIAL_VALUE OFF)
+find_package(ZLIB QUIET)
+set(ZLIB_INITIAL_VALUE ON)
+if(NOT TARGET ZLIB::ZLIB)
+set(ZLIB_INITIAL_VALUE OFF)
 endif()
+
 option(WITH_ZLIB     "Enable the use of zip compression."    ${ZLIB_INITIAL_VALUE} )
 
+set(USE_ZLIB OFF)
 if(WITH_ZLIB)
 
-    find_path(LIBZ_INCLUDE_DIR
-        NAMES zlib.h zlib/zlib.h
-        PATHS /usr/include /usr/local/include
-              ${LIBSEDML_DEPENDENCY_DIR}/include
-        DOC "The directory containing the zlib include files."
-              )
+   
+  find_package(ZLIB REQUIRED)
 
-    add_definitions( -DUSE_ZLIB )
-
-    # make sure that we have a valid zip library
-    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
-    if(NOT LIBZ_FOUND_SYMBOL)
-        # this is odd, but on windows this check always fails! must be a
-        # bug in the current cmake version so for now only issue this
-        # warning on linux
-        if(UNIX)
-            message(WARNING "The zlib library does not appear to be valid because it is missing certain required symbols. Please check that ${LIBZ_LIBRARY} is the zlib library. For details about the error, please see ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
-        endif()
-    endif()
+  set(USE_ZLIB ON)
+  add_definitions( -DUSE_ZLIB )
+  list(APPEND SWIG_EXTRA_ARGS -DUSE_ZLIB)
 
 endif(WITH_ZLIB)
 

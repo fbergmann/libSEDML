@@ -73,7 +73,7 @@ jobs:
       - name: Build wheels
         env:
           CIBW_PLATFORM: pyodide
-          CIBW_BEFORE_BUILD_LINUX: 'pip install swig==4.4.1'
+          CIBW_BEFORE_BUILD: 'pip install swig==4.4.1'
         run: |
           python -m cibuildwheel --output-dir wheelhouse
 
