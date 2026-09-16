@@ -79,6 +79,18 @@ def main (args):
       if tc.isSetAlgorithm():
         kisaoid=tc.getAlgorithm().getKisaoID()
       print ("\tTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," numPoints=",tc.getNumberOfPoints()," kisao=",kisaoid,"\n")
+    elif current.getTypeCode() == libsedml.SEDML_SIMULATION_NONUNIFORMTIMECOURSE:
+      tc = current
+      kisaoid="none"
+      if tc.isSetAlgorithm():
+        kisaoid=tc.getAlgorithm().getKisaoID()
+      print ("\tNonUniformTimecourse id=", tc.getId()," start=",tc.getOutputStartTime()," end=",tc.getOutputEndTime()," kisao=",kisaoid,"\n")
+    elif current.getTypeCode() == libsedml.SEDML_SIMULATION_SPECIFICTIMECOURSE:
+      tc = current
+      kisaoid="none"
+      if tc.isSetAlgorithm():
+        kisaoid=tc.getAlgorithm().getKisaoID()
+      print ("\tSpecificTimecourse id=", tc.getId()," outputPoints=",tc.getOutputTimePointsVector()," kisao=",kisaoid,"\n")
     elif current.getTypeCode() == libsedml.SEDML_SIMULATION_STEADYSTATE:
       print ("\tSteadyState id=", current.getId(),"\n")
     elif current.getTypeCode() == libsedml.SEDML_SIMULATION_ONESTEP:
