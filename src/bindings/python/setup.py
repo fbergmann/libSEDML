@@ -391,9 +391,10 @@ setup(name             = "python-libsedml",
       description      = "LibSedML Python API",
       long_description = ("libSEDML is a library for reading, writing and "+
                           "manipulating SEDML.  It is written in ISO C and C++, supports "+
-                          "SEDML Levels 1, Version 1-5, and runs on Linux, Microsoft "+
+                          "SEDML Levels 1, Version 1-6, and runs on Linux, Microsoft "+
                           "Windows, and Apple MacOS X.  For more information "+
-                          "about SEDML, please see http://sed-ml.org/."),
+                          "about SEDML, please see <http://sed-ml.org/>."),
+      long_description_content_type="text/markdown",
       license          = "BSD",
       author           = "Frank T. Bergmann",
       author_email     = "frank.bergmann@bioquant.uni-heidelberg.de",
@@ -405,5 +406,5 @@ setup(name             = "python-libsedml",
       cmdclass={
         'build_ext': CMakeBuild,
       },
-      setup_requires=['cmake==3.31.6', 'swig==4.2.1']
+      setup_requires=['cmake', 'swig']
 )
