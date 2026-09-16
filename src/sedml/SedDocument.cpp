@@ -3280,8 +3280,10 @@ SedDocument::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
         xmlns.add(SEDML_XMLNS_L1V4);
       else if (getVersion() == 5)
         xmlns.add(SEDML_XMLNS_L1V5);
+      else if (getVersion() == 6)
+        xmlns.add(SEDML_XMLNS_L1V6);
       else
-        xmlns.add(SEDML_XMLNS_L1V5);
+        xmlns.add(SEDML_XMLNS_L1V6);
 
       mSedNamespaces->setNamespaces(&xmlns);
       thisNs =  const_cast<LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces *>(getNamespaces());
@@ -3298,8 +3300,10 @@ SedDocument::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
         thisNs->add(SEDML_XMLNS_L1V4);
       else if (getVersion() == 5)
         thisNs->add(SEDML_XMLNS_L1V5);
+      else if (getVersion() == 6)
+        thisNs->add(SEDML_XMLNS_L1V6);
       else
-        thisNs->add(SEDML_XMLNS_L1V5);
+        thisNs->add(SEDML_XMLNS_L1V6);
     }
   else
     {

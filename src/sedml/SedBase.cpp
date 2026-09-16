@@ -2233,7 +2233,12 @@ SedBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
         if (i > -1)
         {
           std::string uri = xmlns->getURI(i);
-          if (uri == SEDML_XMLNS_L1V1 || uri == SEDML_XMLNS_L1V2 || uri == SEDML_XMLNS_L1V3 || uri == SEDML_XMLNS_L1V4 || uri == SEDML_XMLNS_L1V5)
+          if (uri == SEDML_XMLNS_L1V1 
+            || uri == SEDML_XMLNS_L1V2 
+            || uri == SEDML_XMLNS_L1V3 
+            || uri == SEDML_XMLNS_L1V4 
+            || uri == SEDML_XMLNS_L1V5 
+            || uri == SEDML_XMLNS_L1V6)
           {
             error = false;
           }
