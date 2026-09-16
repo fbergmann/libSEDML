@@ -136,6 +136,8 @@ COVARIANT_RTYPE_CLONE(SedVariable)
 COVARIANT_RTYPE_CLONE(SedParameter)
 COVARIANT_RTYPE_CLONE(SedSimulation)
 COVARIANT_RTYPE_CLONE(SedUniformTimeCourse)
+COVARIANT_RTYPE_CLONE(SedNonUniformTimeCourse)
+COVARIANT_RTYPE_CLONE(SedSpecificTimeCourse)
 COVARIANT_RTYPE_CLONE(SedAlgorithm)
 COVARIANT_RTYPE_CLONE(SedAbstractTask)
 COVARIANT_RTYPE_CLONE(SedTask)
@@ -467,6 +469,8 @@ SEDMLCONSTRUCTOR_EXCEPTION(SedSurface)
 SEDMLCONSTRUCTOR_EXCEPTION(SedTask)
 SEDMLCONSTRUCTOR_EXCEPTION(SedUniformRange)
 SEDMLCONSTRUCTOR_EXCEPTION(SedUniformTimeCourse)
+SEDMLCONSTRUCTOR_EXCEPTION(SedNonUniformTimeCourse)
+SEDMLCONSTRUCTOR_EXCEPTION(SedSpecificTimeCourse)
 SEDMLCONSTRUCTOR_EXCEPTION(SedVariable)
 SEDMLCONSTRUCTOR_EXCEPTION(SedVectorRange)
 SEDMLCONSTRUCTOR_EXCEPTION(SedWaterfallPlot)
@@ -600,6 +604,12 @@ SEDMLCONSTRUCTOR_EXCEPTION(XMLTriple)
 
     case (int) libsedml.SEDML_SIMULATION_UNIFORMTIMECOURSE:
       return new SedUniformTimeCourse(cPtr, owner);
+
+    case (int) libsedml.SEDML_SIMULATION_NONUNIFORMTIMECOURSE:
+      return new SedNonUniformTimeCourse(cPtr, owner);
+
+    case (int) libsedml.SEDML_SIMULATION_SPECIFICTIMECOURSE:
+      return new SedSpecificTimeCourse(cPtr, owner);
 
     case (int) libsedml.SEDML_SIMULATION_ALGORITHM:
       return new SedAlgorithm(cPtr, owner);

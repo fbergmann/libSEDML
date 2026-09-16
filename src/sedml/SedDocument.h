@@ -1132,6 +1132,42 @@ public:
 
 
   /**
+   * Creates a new SedNonUniformTimeCourse object, adds it to this SedDocument
+   * object and returns the SedNonUniformTimeCourse object created.
+   *
+   * @return a new SedNonUniformTimeCourse object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedNonUniformTimeCourse* createNonUniformTimeCourse();
+
+
+  /**
+   * Creates a new SedSpecificTimeCourse object, adds it to this SedDocument
+   * object and returns the SedSpecificTimeCourse object created.
+   *
+   * @return a new SedSpecificTimeCourse object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see getSimulation(const std::string& sid)
+   * @see getSimulation(unsigned int n)
+   * @see getNumSimulations()
+   * @see removeSimulation(const std::string& sid)
+   * @see removeSimulation(unsigned int n)
+   */
+  SedSpecificTimeCourse* createSpecificTimeCourse();
+
+
+  /**
    * Removes the nth SedSimulation from this SedDocument and returns a pointer
    * to it.
    *

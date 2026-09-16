@@ -52,6 +52,8 @@
 #include <sedml/SedParameter.h>
 #include <sedml/SedSimulation.h>
 #include <sedml/SedUniformTimeCourse.h>
+#include <sedml/SedNonUniformTimeCourse.h>
+#include <sedml/SedSpecificTimeCourse.h>
 #include <sedml/SedAlgorithm.h>
 #include <sedml/SedAbstractTask.h>
 #include <sedml/SedTask.h>

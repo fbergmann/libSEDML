@@ -62,6 +62,8 @@ class SedUniformTimeCourse;
 class SedOneStep;
 class SedSteadyState;
 class SedAnalysis;
+class SedNonUniformTimeCourse;
+class SedSpecificTimeCourse;
 
 class LIBSEDML_EXTERN SedListOfSimulations : public SedListOf
 {
@@ -365,6 +367,44 @@ public:
    * @see remove(unsigned int n)
    */
   SedAnalysis* createAnalysis();
+
+
+  /**
+   * Creates a new SedNonUniformTimeCourse object, adds it to this
+   * SedListOfSimulations object and returns the SedNonUniformTimeCourse object
+   * created.
+   *
+   * @return a new SedNonUniformTimeCourse object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSimulations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
+   */
+  SedNonUniformTimeCourse* createNonUniformTimeCourse();
+
+
+  /**
+   * Creates a new SedSpecificTimeCourse object, adds it to this
+   * SedListOfSimulations object and returns the SedSpecificTimeCourse object
+   * created.
+   *
+   * @return a new SedSpecificTimeCourse object instance.
+   *
+   * @copydetails doc_returned_unowned_pointer
+   *
+   * @see addSimulation(const SedSimulation* object)
+   * @see get(const std::string& sid)
+   * @see get(unsigned int n)
+   * @see getNumSimulations()
+   * @see remove(const std::string& sid)
+   * @see remove(unsigned int n)
+   */
+  SedSpecificTimeCourse* createSpecificTimeCourse();
 
 
   /**

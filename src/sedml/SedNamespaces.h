@@ -49,12 +49,13 @@
 namespace LIBSEDML_CPP_NAMESPACE 
 {
   const unsigned int SEDML_DEFAULT_LEVEL   = 1;
-  const unsigned int SEDML_DEFAULT_VERSION = 5;
+  const unsigned int SEDML_DEFAULT_VERSION = 6;
   const char* const SEDML_XMLNS_L1V1   = "http://sed-ml.org/";
   const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/version2";
   const char* const SEDML_XMLNS_L1V3   = "http://sed-ml.org/sed-ml/level1/version3";
   const char* const SEDML_XMLNS_L1V4   = "http://sed-ml.org/sed-ml/level1/version4";
   const char* const SEDML_XMLNS_L1V5   = "http://sed-ml.org/sed-ml/level1/version5";
+  const char* const SEDML_XMLNS_L1V6   = "http://sed-ml.org/sed-ml/level1/version6";
 }
 #else
 static const unsigned int SEDML_DEFAULT_LEVEL   = 1;
@@ -64,6 +65,7 @@ static const char* const SEDML_XMLNS_L1V2   = "http://sed-ml.org/sed-ml/level1/v
 static const char* const SEDML_XMLNS_L1V3   = "http://sed-ml.org/sed-ml/level1/version3";
 static const char* const SEDML_XMLNS_L1V4   = "http://sed-ml.org/sed-ml/level1/version4";
 static const char* const SEDML_XMLNS_L1V5   = "http://sed-ml.org/sed-ml/level1/version5";
+static const char* const SEDML_XMLNS_L1V6   = "http://sed-ml.org/sed-ml/level1/version6";
 #endif
 
 #ifdef __cplusplus

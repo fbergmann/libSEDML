@@ -76,6 +76,12 @@ GetDowncastSwigType (SedBase* sb)
     case SEDML_SIMULATION_UNIFORMTIMECOURSE:
       return SWIGTYPE_p_SedUniformTimeCourse;
 
+    case SEDML_SIMULATION_NONUNIFORMTIMECOURSE:
+      return SWIGTYPE_p_SedNonUniformTimeCourse;
+
+    case SEDML_SIMULATION_SPECIFICTIMECOURSE:
+      return SWIGTYPE_p_SedSpecificTimeCourse;
+
     case SEDML_SIMULATION_ALGORITHM:
       return SWIGTYPE_p_SedAlgorithm;
 

@@ -79,6 +79,9 @@ SedNamespaces::initSedNamespace()
     case 5:
       mNamespaces->add(SEDML_XMLNS_L1V5);
       break;
+    case 6:
+      mNamespaces->add(SEDML_XMLNS_L1V6);
+      break;
     }
     break;
   }
@@ -133,6 +136,7 @@ SedNamespaces::getSupportedNamespaces()
   result->add(new SedNamespaces(1,3));
   result->add(new SedNamespaces(1,4));
   result->add(new SedNamespaces(1,5));
+  result->add(new SedNamespaces(1,6));
   return result;
 }
 
@@ -207,6 +211,9 @@ SedNamespaces::getSedNamespaceURI(unsigned int level,
       break;
     case 5:
       uri = SEDML_XMLNS_L1V5;
+      break;
+    case 6:
+      uri = SEDML_XMLNS_L1V6;
       break;
     }
     break;
@@ -371,6 +378,12 @@ SedNamespaces::isValidCombination()
       declaredURI.assign(SEDML_XMLNS_L1V5);
     }
 
+    if (xmlns->hasURI(SEDML_XMLNS_L1V6))
+    {
+      ++numNS;
+      declaredURI.assign(SEDML_XMLNS_L1V6);
+    }
+
     // checks if the SED-ML Namespace is explicitly defined.
     for (int i=0; i < xmlns->getLength(); i++)
     {
@@ -439,6 +452,17 @@ SedNamespaces::isValidCombination()
           if (sedmlDeclared)
           {
             if (declaredURI != string(SEDML_XMLNS_L1V5))
+            {
+              valid = false;
+            }
+          }
+          break;
+        case 6:
+          // the namespaces contains the sedml namespaces
+          // check it is the correct ns for the level/version
+          if (sedmlDeclared)
+          {
+            if (declaredURI != string(SEDML_XMLNS_L1V6))
             {
               valid = false;
             }

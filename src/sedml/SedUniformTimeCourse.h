@@ -71,6 +71,8 @@ protected:
   bool mIsSetOutputEndTime;
   int mNumberOfSteps;
   bool mIsSetNumberOfSteps;
+  double mTimeInterval;
+  bool mIsSetTimeInterval;
 
   /** @endcond */
 
@@ -185,6 +187,15 @@ public:
 
 
   /**
+   * Returns the value of the "timeInterval" attribute of this
+   * SedUniformTimeCourse.
+   *
+   * @return the value of the "timeInterval" attribute of this
+   * SedUniformTimeCourse as a double.
+   */
+  double getTimeInterval() const;
+
+  /**
    * Predicate returning @c true if this SedUniformTimeCourse's "initialTime"
    * attribute is set.
    *
@@ -232,6 +243,16 @@ public:
    * has been set, otherwise @c false is returned.
    */
   bool isSetNumberOfSteps() const;
+
+
+  /**
+   * Predicate returning @c true if this SedUniformTimeCourse's "timeInterval"
+   * attribute is set.
+   *
+   * @return @c true if this SedUniformTimeCourse's "timeInterval" attribute
+   * has been set, otherwise @c false is returned.
+   */
+  bool isSetTimeInterval() const;
 
 
   /**
@@ -308,6 +329,21 @@ public:
 
 
   /**
+   * Sets the value of the "timeInterval" attribute of this
+   * SedUniformTimeCourse.
+   *
+   * @param timeInterval double value of the "timeInterval" attribute to be
+   * set.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+   * OperationReturnValues_t}
+   */
+  int setTimeInterval(double timeInterval);
+
+
+  /**
    * Unsets the value of the "initialTime" attribute of this
    * SedUniformTimeCourse.
    *
@@ -360,6 +396,17 @@ public:
    * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
    */
   int unsetNumberOfSteps();
+
+
+  /**
+   * Unsets the value of the "timeInterval" attribute of this
+   * SedUniformTimeCourse.
+   *
+   * @copydetails doc_returns_success_code
+   * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+   * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+   */
+  int unsetTimeInterval();
 
 
   /**
@@ -904,6 +951,23 @@ SedUniformTimeCourse_getNumberOfSteps(const SedUniformTimeCourse_t * sutc);
 
 
 /**
+ * Returns the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t.
+ *
+ * @param sutc the SedUniformTimeCourse_t structure whose timeInterval is
+ * sought.
+ *
+ * @return the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t as a double.
+ *
+ * @memberof SedUniformTimeCourse_t
+ */
+LIBSEDML_EXTERN
+double
+SedUniformTimeCourse_getTimeInterval(const SedUniformTimeCourse_t * sutc);
+
+
+/**
  * Predicate returning @c 1 (true) if this SedUniformTimeCourse_t's
  * "initialTime" attribute is set.
  *
@@ -981,6 +1045,22 @@ SedUniformTimeCourse_isSetNumberOfPoints(const SedUniformTimeCourse_t * sutc);
 LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_isSetNumberOfSteps(const SedUniformTimeCourse_t * sutc);
+
+
+/**
+ * Predicate returning @c 1 (true) if this SedUniformTimeCourse_t's
+ * "timeInterval" attribute is set.
+ *
+ * @param sutc the SedUniformTimeCourse_t structure.
+ *
+ * @return @c 1 (true) if this SedUniformTimeCourse_t's "timeInterval"
+ * attribute has been set, otherwise @c 0 (false) is returned.
+ *
+ * @memberof SedUniformTimeCourse_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformTimeCourse_isSetTimeInterval(const SedUniformTimeCourse_t * sutc);
 
 
 /**
@@ -1096,6 +1176,28 @@ SedUniformTimeCourse_setNumberOfSteps(SedUniformTimeCourse_t * sutc,
 
 
 /**
+ * Sets the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t.
+ *
+ * @param sutc the SedUniformTimeCourse_t structure.
+ *
+ * @param timeInterval double value of the "timeInterval" attribute to be set.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_ATTRIBUTE_VALUE,
+ * OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedUniformTimeCourse_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformTimeCourse_setTimeInterval(SedUniformTimeCourse_t * sutc,
+                                     double timeInterval);
+
+
+/**
  * Unsets the value of the "initialTime" attribute of this
  * SedUniformTimeCourse_t.
  *
@@ -1183,6 +1285,24 @@ SedUniformTimeCourse_unsetNumberOfPoints(SedUniformTimeCourse_t * sutc);
 LIBSEDML_EXTERN
 int
 SedUniformTimeCourse_unsetNumberOfSteps(SedUniformTimeCourse_t * sutc);
+
+
+/**
+ * Unsets the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t.
+ *
+ * @param sutc the SedUniformTimeCourse_t structure.
+ *
+ * @copydetails doc_returns_success_code
+ * @li @sedmlconstant{LIBSEDML_OPERATION_SUCCESS, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_OPERATION_FAILED, OperationReturnValues_t}
+ * @li @sedmlconstant{LIBSEDML_INVALID_OBJECT, OperationReturnValues_t}
+ *
+ * @memberof SedUniformTimeCourse_t
+ */
+LIBSEDML_EXTERN
+int
+SedUniformTimeCourse_unsetTimeInterval(SedUniformTimeCourse_t * sutc);
 
 
 /**

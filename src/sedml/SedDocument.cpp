@@ -38,6 +38,8 @@
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
 #include <sedml/SedAnalysis.h>
+#include <sedml/SedNonUniformTimeCourse.h>
+#include <sedml/SedSpecificTimeCourse.h>
 #include <sedml/SedTask.h>
 #include <sedml/SedRepeatedTask.h>
 #include <sedml/SedParameterEstimationTask.h>
@@ -985,6 +987,57 @@ SedDocument::createAnalysis()
     }
 
     return sss;
+}
+
+/*
+ * Creates a new SedNonUniformTimeCourse object, adds it to this SedDocument
+ * object and returns the SedNonUniformTimeCourse object created.
+ */
+SedNonUniformTimeCourse*
+SedDocument::createNonUniformTimeCourse()
+{
+  SedNonUniformTimeCourse* snutc = NULL;
+
+  try
+  {
+    snutc = new SedNonUniformTimeCourse(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (snutc != NULL)
+  {
+    mSimulations.appendAndOwn(snutc);
+  }
+
+  return snutc;
+}
+
+
+/*
+ * Creates a new SedSpecificTimeCourse object, adds it to this SedDocument
+ * object and returns the SedSpecificTimeCourse object created.
+ */
+SedSpecificTimeCourse*
+SedDocument::createSpecificTimeCourse()
+{
+  SedSpecificTimeCourse* sstc = NULL;
+
+  try
+  {
+    sstc = new SedSpecificTimeCourse(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sstc != NULL)
+  {
+    mSimulations.appendAndOwn(sstc);
+  }
+
+  return sstc;
 }
 
 
@@ -2397,6 +2450,15 @@ SedDocument::createChildObject(const std::string& elementName)
   {
       return createAnalysis();
   }
+  else if (elementName == "nonUniformTimeCourse")
+  {
+    return createNonUniformTimeCourse();
+  }
+  else if (elementName == "specificTimeCourse")
+  {
+    return createSpecificTimeCourse();
+  }
+
   else if (elementName == "task")
   {
     return createTask();
@@ -2488,6 +2550,16 @@ SedDocument::addChildObject(const std::string& elementName,
   {
       return addSimulation((const SedSimulation*)(element));
   }
+  else if (elementName == "nonUniformTimeCourse" && element->getTypeCode() ==
+    SEDML_SIMULATION_NONUNIFORMTIMECOURSE)
+  {
+    return addSimulation((const SedSimulation*)(element));
+  }
+  else if (elementName == "specificTimeCourse" && element->getTypeCode() ==
+    SEDML_SIMULATION_SPECIFICTIMECOURSE)
+  {
+    return addSimulation((const SedSimulation*)(element));
+  }
   else if (elementName == "task" && element->getTypeCode() == SEDML_TASK)
   {
     return addTask((const SedAbstractTask*)(element));
@@ -2565,7 +2637,7 @@ SedDocument::removeChildObject(const std::string& elementName,
   {
     return removeModel(id);
   }
-  else if (elementName == "uniformTimeCourse")
+  else if (elementName == "uniformTimeCourse" || elementName == "nonUniformTimeCourse" || elementName == "specificTimeCOurse")
   {
     return removeSimulation(id);
   }

@@ -90,6 +90,8 @@
             <concrete name="oneStep" element="OneStep" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="steadyState" element="SteadyState" minNumChildren="0" maxNumChildren="0"/>
             <concrete name="analysis" element="Analysis" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="nonUniformTimeCourse" element="NonUniformTimeCourse" minNumChildren="0" maxNumChildren="0"/>
+            <concrete name="specificTimeCourse" element="SpecificTimeCourse" minNumChildren="0" maxNumChildren="0"/>
           </concretes>
         </element>
         <element name="UniformTimeCourse" typeCode="SEDML_SIMULATION_UNIFORMTIMECOURSE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="uniformTimeCourse">
@@ -99,6 +101,20 @@
             <attribute name="outputEndTime" required="true" type="double" abstract="false"/>
             <attribute name="numberOfPoints" required="false" type="positive int" abstract="false"/>
             <attribute name="numberOfSteps" required="false" type="positive int" abstract="false"/>
+            <attribute name="timeInterval" required="false" type="double" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="NonUniformTimeCourse" typeCode="SEDML_SIMULATION_NONUNIFORMTIMECOURSE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="nonUniformTimeCourse">
+          <attributes>
+            <attribute name="initialTime" required="true" type="double" abstract="false"/>
+            <attribute name="outputStartTime" required="true" type="double" abstract="false"/>
+            <attribute name="outputEndTime" required="true" type="double" abstract="false"/>
+          </attributes>
+        </element>
+        <element name="SpecificTimeCourse" typeCode="SEDML_SIMULATION_SPECIFICTIMECOURSE" hasListOf="false" hasChildren="false" hasMath="false" childrenOverwriteElementName="false" baseClass="Simulation" abstract="false" elementName="specificTimeCourse">
+          <attributes>
+            <attribute name="initialTime" required="true" type="double" abstract="false"/>
+            <attribute name="outputTimePoints" required="true" type="string" abstract="false"/>
           </attributes>
         </element>
         <element name="Algorithm" typeCode="SEDML_SIMULATION_ALGORITHM" hasListOf="false" hasChildren="true" hasMath="false" childrenOverwriteElementName="false" baseClass="SedBase" abstract="false" elementName="algorithm" additionalDecls="algorithm_headers.h" additionalDefs="algorithm_code.cpp">

@@ -38,6 +38,8 @@
 #include <sedml/SedOneStep.h>
 #include <sedml/SedSteadyState.h>
 #include <sedml/SedAnalysis.h>
+#include <sedml/SedNonUniformTimeCourse.h>
+#include <sedml/SedSpecificTimeCourse.h>
 
 
 using namespace std;
@@ -348,6 +350,60 @@ SedListOfSimulations::createAnalysis()
 
 
 /*
+ * Creates a new SedNonUniformTimeCourse object, adds it to this
+ * SedListOfSimulations object and returns the SedNonUniformTimeCourse object
+ * created.
+ */
+SedNonUniformTimeCourse*
+SedListOfSimulations::createNonUniformTimeCourse()
+{
+  SedNonUniformTimeCourse* snutc = NULL;
+
+  try
+  {
+    snutc = new SedNonUniformTimeCourse(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (snutc != NULL)
+  {
+    appendAndOwn(snutc);
+  }
+
+  return snutc;
+}
+
+
+/*
+ * Creates a new SedSpecificTimeCourse object, adds it to this
+ * SedListOfSimulations object and returns the SedSpecificTimeCourse object
+ * created.
+ */
+SedSpecificTimeCourse*
+SedListOfSimulations::createSpecificTimeCourse()
+{
+  SedSpecificTimeCourse* sstc = NULL;
+
+  try
+  {
+    sstc = new SedSpecificTimeCourse(getSedNamespaces());
+  }
+  catch (...)
+  {
+  }
+
+  if (sstc != NULL)
+  {
+    appendAndOwn(sstc);
+  }
+
+  return sstc;
+}
+
+
+/*
  * Returns the XML element name of this SedListOfSimulations object.
  */
 const std::string&
@@ -418,8 +474,20 @@ SedListOfSimulations::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER
 
   if (name == "analysis")
   {
-      object = new SedAnalysis(getSedNamespaces());
-      appendAndOwn(object);
+    object = new SedAnalysis(getSedNamespaces());
+    appendAndOwn(object);
+  }
+
+  if (name == "nonUniformTimeCourse")
+  {
+    object = new SedNonUniformTimeCourse(getSedNamespaces());
+    appendAndOwn(object);
+  }
+
+  if (name == "specificTimeCourse")
+  {
+    object = new SedSpecificTimeCourse(getSedNamespaces());
+    appendAndOwn(object);
   }
 
   return object;
@@ -442,7 +510,9 @@ SedListOfSimulations::isValidTypeForList(SedBase* item)
   return ((tc == SEDML_SIMULATION_UNIFORMTIMECOURSE) 
       ||  (tc == SEDML_SIMULATION_ONESTEP) 
       ||  (tc == SEDML_SIMULATION_STEADYSTATE)
-      ||  (tc == SEDML_SIMULATION_ANALYSIS));
+      ||  (tc == SEDML_SIMULATION_ANALYSIS) 
+      ||  (tc == SEDML_SIMULATION_NONUNIFORMTIMECOURSE)
+      ||  (tc == SEDML_SIMULATION_SPECIFICTIMECOURSE));
 }
 
 /** @endcond */

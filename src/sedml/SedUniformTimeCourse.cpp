@@ -62,6 +62,8 @@ SedUniformTimeCourse::SedUniformTimeCourse(unsigned int level,
   , mIsSetOutputEndTime (false)
   , mNumberOfSteps (SEDML_INT_MAX)
   , mIsSetNumberOfSteps (false)
+  , mTimeInterval (util_NaN())
+  , mIsSetTimeInterval (false)
 {
   setSedNamespacesAndOwn(new SedNamespaces(level, version));
 }
@@ -81,6 +83,8 @@ SedUniformTimeCourse::SedUniformTimeCourse(SedNamespaces *sedmlns)
   , mIsSetOutputEndTime (false)
   , mNumberOfSteps (SEDML_INT_MAX)
   , mIsSetNumberOfSteps (false)
+  , mTimeInterval (util_NaN())
+  , mIsSetTimeInterval (false)
 {
   setElementNamespace(sedmlns->getURI());
 }
@@ -99,6 +103,8 @@ SedUniformTimeCourse::SedUniformTimeCourse(const SedUniformTimeCourse& orig)
   , mIsSetOutputEndTime ( orig.mIsSetOutputEndTime )
   , mNumberOfSteps ( orig.mNumberOfSteps )
   , mIsSetNumberOfSteps ( orig.mIsSetNumberOfSteps )
+  , mTimeInterval ( orig.mTimeInterval )
+  , mIsSetTimeInterval ( orig.mIsSetTimeInterval )
 {
 }
 
@@ -120,6 +126,8 @@ SedUniformTimeCourse::operator=(const SedUniformTimeCourse& rhs)
     mIsSetOutputEndTime = rhs.mIsSetOutputEndTime;
     mNumberOfSteps = rhs.mNumberOfSteps;
     mIsSetNumberOfSteps = rhs.mIsSetNumberOfSteps;
+    mTimeInterval = rhs.mTimeInterval;
+    mIsSetTimeInterval = rhs.mIsSetTimeInterval;
   }
 
   return *this;
@@ -200,6 +208,17 @@ SedUniformTimeCourse::getNumberOfSteps() const
 
 
 /*
+ * Returns the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse.
+ */
+double
+SedUniformTimeCourse::getTimeInterval() const
+{
+  return mTimeInterval;
+}
+
+
+/*
  * Predicate returning @c true if this SedUniformTimeCourse's "initialTime"
  * attribute is set.
  */
@@ -251,6 +270,17 @@ bool
 SedUniformTimeCourse::isSetNumberOfSteps() const
 {
   return mIsSetNumberOfSteps;
+}
+
+
+/*
+ * Predicate returning @c true if this SedUniformTimeCourse's "timeInterval"
+ * attribute is set.
+ */
+bool
+SedUniformTimeCourse::isSetTimeInterval() const
+{
+  return mIsSetTimeInterval;
 }
 
 
@@ -314,6 +344,18 @@ SedUniformTimeCourse::setNumberOfSteps(int numberOfSteps)
 {
   mNumberOfSteps = numberOfSteps;
   mIsSetNumberOfSteps = true;
+  return LIBSEDML_OPERATION_SUCCESS;
+}
+
+
+/*
+ * Sets the value of the "timeInterval" attribute of this SedUniformTimeCourse.
+ */
+int
+SedUniformTimeCourse::setTimeInterval(double timeInterval)
+{
+  mTimeInterval = timeInterval;
+  mIsSetTimeInterval = true;
   return LIBSEDML_OPERATION_SUCCESS;
 }
 
@@ -413,6 +455,27 @@ SedUniformTimeCourse::unsetNumberOfSteps()
   mIsSetNumberOfSteps = false;
 
   if (isSetNumberOfSteps() == false)
+  {
+    return LIBSEDML_OPERATION_SUCCESS;
+  }
+  else
+  {
+    return LIBSEDML_OPERATION_FAILED;
+  }
+}
+
+
+/*
+ * Unsets the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse.
+ */
+int
+SedUniformTimeCourse::unsetTimeInterval()
+{
+  mTimeInterval = util_NaN();
+  mIsSetTimeInterval = false;
+
+  if (isSetTimeInterval() == false)
   {
     return LIBSEDML_OPERATION_SUCCESS;
   }
@@ -600,6 +663,11 @@ SedUniformTimeCourse::getAttribute(const std::string& attributeName,
     value = getOutputEndTime();
     return_value = LIBSEDML_OPERATION_SUCCESS;
   }
+  else if (attributeName == "timeInterval")
+  {
+    value = getTimeInterval();
+    return_value = LIBSEDML_OPERATION_SUCCESS;
+  }
 
   return return_value;
 }
@@ -672,6 +740,10 @@ SedUniformTimeCourse::isSetAttribute(const std::string& attributeName) const
   else if (attributeName == "numberOfPoints" || attributeName == "numberOfSteps")
   {
     value = isSetNumberOfSteps();
+  }
+  else if (attributeName == "timeInterval")
+  {
+    value = isSetTimeInterval();
   }
 
   return value;
@@ -871,6 +943,8 @@ SedUniformTimeCourse::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
   if (getVersion() >= 4 || getLevel() > 1) {
       attributes.add("numberOfSteps");
   }
+  
+  attributes.add("timeInterval");
 }
 
 /** @endcond */
@@ -1018,6 +1092,26 @@ SedUniformTimeCourse::readAttributes(
         version, message, getLine(), getColumn());
     }
   }
+
+  // 
+  // timeInterval double (use = "optional" )
+  // 
+
+  numErrs = log ? log->getNumErrors() : 0;
+  mIsSetTimeInterval = attributes.readInto("timeInterval", mTimeInterval);
+
+  if ( mIsSetTimeInterval == false && log)
+  {
+    if (log && log->getNumErrors() == numErrs + 1 &&
+      log->contains(XMLAttributeTypeMismatch))
+    {
+      log->remove(XMLAttributeTypeMismatch);
+      std::string message = "Sedml attribute 'timeInterval' from the "
+        "<SedUniformTimeCourse> element must be a double.";
+      log->logError(SedUnknown, level, version, message, getLine(),
+        getColumn());
+    }
+  }
 }
 
 /** @endcond */
@@ -1058,6 +1152,11 @@ SedUniformTimeCourse::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER
       else {
           stream.writeAttribute("numberOfPoints", getPrefix(), mNumberOfSteps);
       }
+  }
+  
+  if (isSetTimeInterval() == true)
+  {
+    stream.writeAttribute("timeInterval", getPrefix(), mTimeInterval);
   }
 }
 
@@ -1174,6 +1273,18 @@ SedUniformTimeCourse_getNumberOfSteps(const SedUniformTimeCourse_t * sutc)
 
 
 /*
+ * Returns the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t.
+ */
+LIBSEDML_EXTERN
+double
+SedUniformTimeCourse_getTimeInterval(const SedUniformTimeCourse_t * sutc)
+{
+  return (sutc != NULL) ? sutc->getTimeInterval() : util_NaN();
+}
+
+
+/*
  * Predicate returning @c 1 (true) if this SedUniformTimeCourse_t's
  * "initialTime" attribute is set.
  */
@@ -1230,6 +1341,18 @@ int
 SedUniformTimeCourse_isSetNumberOfSteps(const SedUniformTimeCourse_t * sutc)
 {
   return (sutc != NULL) ? static_cast<int>(sutc->isSetNumberOfSteps()) : 0;
+}
+
+
+/*
+ * Predicate returning @c 1 (true) if this SedUniformTimeCourse_t's
+ * "timeInterval" attribute is set.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformTimeCourse_isSetTimeInterval(const SedUniformTimeCourse_t * sutc)
+{
+  return (sutc != NULL) ? static_cast<int>(sutc->isSetTimeInterval()) : 0;
 }
 
 
@@ -1304,6 +1427,20 @@ SedUniformTimeCourse_setNumberOfSteps(SedUniformTimeCourse_t * sutc,
 
 
 /*
+ * Sets the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformTimeCourse_setTimeInterval(SedUniformTimeCourse_t * sutc,
+                                     double timeInterval)
+{
+  return (sutc != NULL) ? sutc->setTimeInterval(timeInterval) :
+    LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
  * Unsets the value of the "initialTime" attribute of this
  * SedUniformTimeCourse_t.
  */
@@ -1362,6 +1499,18 @@ int
 SedUniformTimeCourse_unsetNumberOfSteps(SedUniformTimeCourse_t * sutc)
 {
   return (sutc != NULL) ? sutc->unsetNumberOfSteps() : LIBSEDML_INVALID_OBJECT;
+}
+
+
+/*
+ * Unsets the value of the "timeInterval" attribute of this
+ * SedUniformTimeCourse_t.
+ */
+LIBSEDML_EXTERN
+int
+SedUniformTimeCourse_unsetTimeInterval(SedUniformTimeCourse_t * sutc)
+{
+  return (sutc != NULL) ? sutc->unsetTimeInterval() : LIBSEDML_INVALID_OBJECT;
 }
 
 

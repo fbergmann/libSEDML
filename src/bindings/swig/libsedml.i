@@ -364,6 +364,8 @@ typedef std::vector<SedError> SedErrorStdVector;
 %include <sedml/SedSimulation.h>
 %include <sedml/SedListOfSimulations.h>
 %include <sedml/SedUniformTimeCourse.h>
+%include <sedml/SedNonUniformTimeCourse.h>
+%include <sedml/SedSpecificTimeCourse.h>
 %include <sedml/SedAlgorithm.h>
 %include <sedml/SedAbstractTask.h>
 %include <sedml/SedListOfTasks.h>

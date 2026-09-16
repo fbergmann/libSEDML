@@ -67,6 +67,8 @@ typedef CLASS_OR_STRUCT SedVariable                      SedVariable_t;
 typedef CLASS_OR_STRUCT SedParameter                     SedParameter_t;
 typedef CLASS_OR_STRUCT SedSimulation                    SedSimulation_t;
 typedef CLASS_OR_STRUCT SedUniformTimeCourse             SedUniformTimeCourse_t;
+typedef CLASS_OR_STRUCT SedNonUniformTimeCourse          SedNonUniformTimeCourse_t;
+typedef CLASS_OR_STRUCT SedSpecificTimeCourse            SedSpecificTimeCourse_t;
 typedef CLASS_OR_STRUCT SedAlgorithm                     SedAlgorithm_t;
 typedef CLASS_OR_STRUCT SedAnalysis                      SedAnalysis_t;
 typedef CLASS_OR_STRUCT SedAbstractTask                  SedAbstractTask_t;
@@ -101,7 +103,7 @@ typedef CLASS_OR_STRUCT SedParameterEstimationTask       SedParameterEstimationT
 typedef CLASS_OR_STRUCT SedObjective                     SedObjective_t;
 typedef CLASS_OR_STRUCT SedLeastSquareObjectiveFunction  SedLeastSquareObjectiveFunction_t;
 typedef CLASS_OR_STRUCT SedAdjustableParameter           SedAdjustableParameter_t;
-typedef CLASS_OR_STRUCT SedExperimentReference                 SedExperimentReference_t;
+typedef CLASS_OR_STRUCT SedExperimentReference           SedExperimentReference_t;
 typedef CLASS_OR_STRUCT SedFitExperiment                 SedFitExperiment_t;
 typedef CLASS_OR_STRUCT SedFitMapping                    SedFitMapping_t;
 typedef CLASS_OR_STRUCT SedBounds                        SedBounds_t;

@@ -104,6 +104,8 @@ const char* SEDML_TYPE_CODE_STRINGS[] =
   , "WaterfallPlot"
   , "ParameterEstimationReport"
   , "SedListOf"
+  , "NonUniformTimeCourse"
+  , "SpecificTimeCourse"
 };
 
 
