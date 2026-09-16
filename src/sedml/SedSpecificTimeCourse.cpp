@@ -625,7 +625,7 @@ SedSpecificTimeCourse::unsetAttribute(const std::string& attributeName)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedSpecificTimeCourse::createObject(XMLInputStream& stream)
+SedSpecificTimeCourse::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   SedBase* obj = SedSimulation::createObject(stream);
 
@@ -644,7 +644,7 @@ SedSpecificTimeCourse::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedSpecificTimeCourse::addExpectedAttributes(ExpectedAttributes& attributes)
+SedSpecificTimeCourse::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes)
 {
   SedSimulation::addExpectedAttributes(attributes);
 
@@ -663,8 +663,8 @@ SedSpecificTimeCourse::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedSpecificTimeCourse::readAttributes(const XMLAttributes& attributes,
-                                      const ExpectedAttributes&
+SedSpecificTimeCourse::readAttributes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes,
+                                      const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
                                         expectedAttributes)
 {
   unsigned int level = getLevel();
@@ -754,7 +754,7 @@ SedSpecificTimeCourse::readAttributes(const XMLAttributes& attributes,
  * Writes the attributes to the stream
  */
 void
-SedSpecificTimeCourse::writeAttributes(XMLOutputStream& stream) const
+SedSpecificTimeCourse::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   SedSimulation::writeAttributes(stream);
 

@@ -36,3 +36,8 @@ New Features
 * Support for SED-ML L1V5
 
 Thanks to Lucian for updating
+
+## libSEDML 2.0.34
+
+Support for L1V6
+

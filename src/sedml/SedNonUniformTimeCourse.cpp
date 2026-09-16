@@ -361,7 +361,7 @@ SedNonUniformTimeCourse::hasRequiredAttributes() const
  * Write any contained elements
  */
 void
-SedNonUniformTimeCourse::writeElements(XMLOutputStream& stream) const
+SedNonUniformTimeCourse::writeElements(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   SedSimulation::writeElements(stream);
 }
@@ -692,7 +692,7 @@ SedNonUniformTimeCourse::unsetAttribute(const std::string& attributeName)
  * Creates a new object from the next XMLToken on the XMLInputStream
  */
 SedBase*
-SedNonUniformTimeCourse::createObject(XMLInputStream& stream)
+SedNonUniformTimeCourse::createObject(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   SedBase* obj = SedSimulation::createObject(stream);
 
@@ -711,7 +711,7 @@ SedNonUniformTimeCourse::createObject(XMLInputStream& stream)
  * Adds the expected attributes for this element
  */
 void
-SedNonUniformTimeCourse::addExpectedAttributes(ExpectedAttributes& attributes)
+SedNonUniformTimeCourse::addExpectedAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes& attributes)
 {
   SedSimulation::addExpectedAttributes(attributes);
 
@@ -732,8 +732,8 @@ SedNonUniformTimeCourse::addExpectedAttributes(ExpectedAttributes& attributes)
  * Reads the expected attributes into the member data variables
  */
 void
-SedNonUniformTimeCourse::readAttributes(const XMLAttributes& attributes,
-                                        const ExpectedAttributes&
+SedNonUniformTimeCourse::readAttributes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes,
+                                        const LIBSBML_CPP_NAMESPACE_QUALIFIER ExpectedAttributes&
                                           expectedAttributes)
 {
   unsigned int level = getLevel();
@@ -853,7 +853,7 @@ SedNonUniformTimeCourse::readAttributes(const XMLAttributes& attributes,
  * Writes the attributes to the stream
  */
 void
-SedNonUniformTimeCourse::writeAttributes(XMLOutputStream& stream) const
+SedNonUniformTimeCourse::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   SedSimulation::writeAttributes(stream);
 

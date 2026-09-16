@@ -44,7 +44,7 @@ API documentation is something to be added and pull requests are happily accepte
 is provided and documentation can be generated after checkout like so: 
 
 ```bash
-PROJECT_NUMBER=2.0.33 doxygen -x libSEDML.doxyfile > Doxyfile && doxygen
+PROJECT_NUMBER=2.0.34 doxygen -x libSEDML.doxyfile > Doxyfile && doxygen
 ```
 
 This expands the version number in the doxygen file, creates a temporary `Doxyfile` and runs doxygen with it. After that the 
