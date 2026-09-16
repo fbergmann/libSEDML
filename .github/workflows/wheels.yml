@@ -89,7 +89,7 @@ jobs:
         CIBW_BUILD: ${{ matrix.python_version }}
         CIBW_ARCHS_MACOS: x86_64 arm64
         CIBW_BEFORE_BUILD_LINUX: "pip install -U swig"
-        CIBW_SKIP: "*-musllinux* cp38-*  cp39-* *-win32"
+        CIBW_SKIP: "*-musllinux*  cp39-* *-win32"
       run: |
         python -m cibuildwheel --output-dir wheelhouse
 
