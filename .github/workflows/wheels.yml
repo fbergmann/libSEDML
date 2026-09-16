@@ -71,7 +71,10 @@ jobs:
       id: artifact-name
       shell: bash
       run: |
-        python_tag="${CIBW_BUILD%-*}"
+        ver="${{ matrix.python_version }}"
+        ver=${ver#cp}
+        ver=${ver%%-*}
+        python_tag="${ver:0:1}.${ver:1}"
         echo "name=libSEDML-${{ matrix.os }}-${python_tag}-${{ strategy.job-index }}" >> $GITHUB_OUTPUT
 
     - name: Unpack sdist
